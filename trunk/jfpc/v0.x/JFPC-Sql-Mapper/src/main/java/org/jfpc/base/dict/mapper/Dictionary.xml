@@ -1,0 +1,60 @@
+﻿<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 数据字典管理 --> 
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='org.jfpc.base.dict.dao.DictionaryDao'>
+
+	<!-- 查询全体数据信息  -->
+    <select id='getDictionaryDefault' parameterType='DictionaryDBO' resultType='DictionaryDBO'>
+         SELECT * FROM ms01_data_dictionar
+        WHERE ddd_del_flag != '1'
+         <if test=" puk_id != null and puk_id !='' "><!-- 系统数据唯一识别ID（固定主键） -->
+             AND puk_id = #{puk_id}
+         </if>
+         <if test=" k01_max_type_id != null and k01_max_type_id !='' "><!-- 大分类ID -->
+             AND k01_max_type_id = #{k01_max_type_id}
+         </if>
+         <if test=" k02_middle_type_id != null and k02_middle_type_id !='' "><!-- 中分类ID -->
+             AND k02_middle_type_id = #{k02_middle_type_id}
+         </if>
+         <if test=" k03_small_type_id != null and k03_small_type_id !='' "><!-- 小分类ID -->
+             AND k03_small_type_id = #{k03_small_type_id}
+         </if>
+         <if test=" eb_ext5 != null and eb_ext5 !='' "><!-- 小分类ID -->
+             AND eb_ext5 = #{eb_ext5}
+         </if>
+    </select>
+    
+    <!-- 获得字典名称  -->
+    <select id='getDictionaryName' parameterType='String' resultType='String'>
+        SELECT k03_small_type_id from ms01_data_dictionar WHERE puk_id = #{puk_id} and ddd_del_flag = #{ddd_del_flag}
+    </select>	
+
+	<!-- 任意表，查询全体数据信息 -->
+    <select id='getDictionaryOnAnyTable' parameterType='FrameworkData' resultType='FrameworkData'>
+        SELECT * FROM ${tablename}
+        WHERE ddd_del_flag != '1'
+            <if test=" puk_id != null and puk_id !='' "><!-- 大分类ID -->
+                AND puk_id = #{puk_id}
+            </if>
+            <if test=" fb_bak1 != null and fb_bak1 !='' "><!-- 大分类ID -->
+                AND ${fb_bak1} = #{eb_ext1}
+            </if>
+            <if test=" fb_bak2 != null and fb_bak2 !='' "><!-- 中分类ID -->
+                AND ${fb_bak2} = #{eb_ext2}
+            </if>
+            <if test=" fb_bak3 != null and fb_bak3 !='' "><!-- 小分类ID -->
+                AND ${fb_bak3} = #{eb_ext3}
+            </if>
+            <if test=" eb_ext5 != null and eb_ext5 !='' "><!-- 小分类ID -->
+             AND eb_ext5 = #{eb_ext5}
+         </if>
+    </select>
+	<!-- 任意表，根据ID获得名称 -->
+    <select id='getNameOnAnyTable' parameterType='FrameworkData' resultType='String'>
+        SELECT ${fb_bak1} FROM ${tablename}
+        WHERE puk_id = #{puk_id}
+    </select>
+</mapper>

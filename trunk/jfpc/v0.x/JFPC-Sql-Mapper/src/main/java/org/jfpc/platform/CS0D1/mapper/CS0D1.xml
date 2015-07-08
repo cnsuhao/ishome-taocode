@@ -1,0 +1,357 @@
+﻿<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 内部消息 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='org.jfpc.platform.CS0D1.dao.CS0D1Dao'>
+    <!-- 表字段信息  -->
+    <sql id='tableColumns'>
+        puk,k01_qyid,k02_fjrid,k03_sjrid,f01_fjrnc,f02_sjrnc,f03_bt,f04_jjd,f05_zyd,bbb,fb1,fb2,fb3,fb4,fb5,eb1,eb2,eb3,eb4,eb5,ggg,ddd,cc1,cc2,uu1,uu2
+    </sql>
+
+    <!-- 根据条件更新所有记录 -->
+    <update id='doUpdateAll' parameterType='CS0D1DBO'>
+        UPDATE cs0d1 SET  uu1 = #{uuu} <!-- 更新时间、更新者 -->
+        <if test=" k01_qyid != null and k01_qyid !='' "><!-- 企业ID -->
+            ,k01_qyid = #{k01_qyid}
+        </if>
+        <if test=" k02_fjrid != null and k02_fjrid !='' "><!-- 发件人ID -->
+            ,k02_fjrid = #{k02_fjrid}
+        </if>
+        <if test=" k03_sjrid != null and k03_sjrid !='' "><!-- 收件人ID -->
+            ,k03_sjrid = #{k03_sjrid}
+        </if>
+        <if test=" f01_fjrnc != null and f01_fjrnc !='' "><!-- 发件人昵称 -->
+            ,f01_fjrnc = #{f01_fjrnc}
+        </if>
+        <if test=" f02_sjrnc != null and f02_sjrnc !='' "><!-- 收件人昵称 -->
+            ,f02_sjrnc = #{f02_sjrnc}
+        </if>
+        <if test=" f03_bt != null and f03_bt !='' "><!-- 标题 -->
+            ,f03_bt = #{f03_bt}
+        </if>
+        <if test=" f04_jjd != null and f04_jjd !='' "><!-- 紧急度 -->
+            ,f04_jjd = #{f04_jjd}
+        </if>
+        <if test=" f05_zyd != null and f05_zyd !='' "><!-- 重要度 -->
+            ,f05_zyd = #{f05_zyd}
+        </if>
+        <if test=" bbb != null and bbb !='' "><!-- 消息内容 -->
+            ,bbb = #{bbb}
+        </if>
+        <if test=" fb1 != null and fb1 !='' "><!-- 备用1 -->
+            ,fb1 = #{fb1}
+        </if>
+        <if test=" fb2 != null and fb2 !='' "><!-- 备用2 -->
+            ,fb2 = #{fb2}
+        </if>
+        <if test=" fb3 != null and fb3 !='' "><!-- 备用3 -->
+            ,fb3 = #{fb3}
+        </if>
+        <if test=" fb4 != null and fb4 !='' "><!-- 备用4 -->
+            ,fb4 = #{fb4}
+        </if>
+        <if test=" fb5 != null and fb5 !='' "><!-- 备用5 -->
+            ,fb5 = #{fb5}
+        </if>
+        <if test=" eb1 != null and eb1 !='' "><!-- 扩展1 -->
+            ,eb1 = #{eb1}
+        </if>
+        <if test=" eb2 != null and eb2 !='' "><!-- 扩展2 -->
+            ,eb2 = #{eb2}
+        </if>
+        <if test=" eb3 != null and eb3 !='' "><!-- 扩展3 -->
+            ,eb3 = #{eb3}
+        </if>
+        <if test=" eb4 != null and eb4 !='' "><!-- 扩展4 -->
+            ,eb4 = #{eb4}
+        </if>
+        <if test=" eb5 != null and eb5 !='' "><!-- 扩展5 -->
+            ,eb5 = #{eb5}
+        </if>
+        <if test=" ggg != null and ggg !='' "><!-- 所在组织 -->
+            ,ggg = #{ggg}
+        </if>
+        <if test=" ddd != null and ddd !='' "><!-- 有效标识 -->
+            ,ddd = #{ddd}
+        </if>
+        <if test=" cc1 != null and cc1 !='' "><!-- 发送时间 -->
+            ,cc1 = #{cc1}
+        </if>
+        <if test=" cc2 != null and cc2 !='' "><!-- 创建者 -->
+            ,cc2 = #{cc2}
+        </if>
+        <if test=" uu2 != null and uu2 !='' "><!-- 最后更新者 -->
+            ,uu2 = #{uu2}
+        </if>
+        <trim prefix='WHERE' prefixOverrides='AND |OR '>
+            <if test=" puk != null and puk !='' "><!-- 系统数据唯一识别ID（固定主键） -->
+                AND puk = #{puk}
+            </if>
+            <if test=" k01_qyid != null and k01_qyid !='' "><!-- 企业ID -->
+                AND k01_qyid = #{k01_qyid}
+            </if>
+            <if test=" k02_fjrid != null and k02_fjrid !='' "><!-- 发件人ID -->
+                AND k02_fjrid = #{k02_fjrid}
+            </if>
+            <if test=" k03_sjrid != null and k03_sjrid !='' "><!-- 收件人ID -->
+                AND k03_sjrid = #{k03_sjrid}
+            </if>
+            <if test=" f01_fjrnc != null and f01_fjrnc !='' "><!-- 发件人昵称 -->
+                AND f01_fjrnc = #{f01_fjrnc}
+            </if>
+            <if test=" f02_sjrnc != null and f02_sjrnc !='' "><!-- 收件人昵称 -->
+                AND f02_sjrnc = #{f02_sjrnc}
+            </if>
+            <if test=" f03_bt != null and f03_bt !='' "><!-- 标题 -->
+                AND f03_bt = #{f03_bt}
+            </if>
+            <if test=" f04_jjd != null and f04_jjd !='' "><!-- 紧急度 -->
+                AND f04_jjd = #{f04_jjd}
+            </if>
+            <if test=" f05_zyd != null and f05_zyd !='' "><!-- 重要度 -->
+                AND f05_zyd = #{f05_zyd}
+            </if>
+            <if test=" bbb != null and bbb !='' "><!-- 消息内容 -->
+                AND bbb = #{bbb}
+            </if>
+            <if test=" fb1 != null and fb1 !='' "><!-- 备用1 -->
+                AND fb1 = #{fb1}
+            </if>
+            <if test=" fb2 != null and fb2 !='' "><!-- 备用2 -->
+                AND fb2 = #{fb2}
+            </if>
+            <if test=" fb3 != null and fb3 !='' "><!-- 备用3 -->
+                AND fb3 = #{fb3}
+            </if>
+            <if test=" fb4 != null and fb4 !='' "><!-- 备用4 -->
+                AND fb4 = #{fb4}
+            </if>
+            <if test=" fb5 != null and fb5 !='' "><!-- 备用5 -->
+                AND fb5 = #{fb5}
+            </if>
+            <if test=" eb1 != null and eb1 !='' "><!-- 扩展1 -->
+                AND eb1 = #{eb1}
+            </if>
+            <if test=" eb2 != null and eb2 !='' "><!-- 扩展2 -->
+                AND eb2 = #{eb2}
+            </if>
+            <if test=" eb3 != null and eb3 !='' "><!-- 扩展3 -->
+                AND eb3 = #{eb3}
+            </if>
+            <if test=" eb4 != null and eb4 !='' "><!-- 扩展4 -->
+                AND eb4 = #{eb4}
+            </if>
+            <if test=" eb5 != null and eb5 !='' "><!-- 扩展5 -->
+                AND eb5 = #{eb5}
+            </if>
+            <if test=" ggg != null and ggg !='' "><!-- 所在组织 -->
+                AND ggg = #{ggg}
+            </if>
+            <if test=" ddd != null and ddd !='' "><!-- 有效标识 -->
+                AND ddd = #{ddd}
+            </if>
+            <if test=" cc1 != null and cc1 !='' "><!-- 发送时间 -->
+                AND cc1 = #{cc1}
+            </if>
+            <if test=" cc2 != null and cc2 !='' "><!-- 创建者 -->
+                AND cc2 = #{cc2}
+            </if>
+            <if test=" uu1 != null and uu1 !='' "><!-- 最后更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+            <if test=" uu2 != null and uu2 !='' "><!-- 最后更新者 -->
+                AND uu2 = #{uu2}
+            </if>
+        </trim>
+    </update>
+    <!-- 查询分页数据信息  -->
+    <select id='doSelectPage' parameterType='CS0D1DBO' resultType='CS0D1DBO'>
+        SELECT <include refid='tableColumns'/> FROM cs0d1
+        <trim prefix='WHERE' prefixOverrides='AND |OR '>
+            <if test=" puk != null and puk !='' "><!-- 系统数据唯一识别ID（固定主键） -->
+                AND puk = #{puk}
+            </if>
+            <if test=" k01_qyid != null and k01_qyid !='' "><!-- 企业ID -->
+                AND k01_qyid = #{k01_qyid}
+            </if>
+            <if test=" k02_fjrid != null and k02_fjrid !='' "><!-- 发件人ID -->
+                AND k02_fjrid = #{k02_fjrid}
+            </if>
+            <if test=" k03_sjrid != null and k03_sjrid !='' "><!-- 收件人ID -->
+                AND k03_sjrid = #{k03_sjrid}
+            </if>
+            <if test=" f01_fjrnc != null and f01_fjrnc !='' "><!-- 发件人昵称 -->
+                AND f01_fjrnc = #{f01_fjrnc}
+            </if>
+            <if test=" f02_sjrnc != null and f02_sjrnc !='' "><!-- 收件人昵称 -->
+                AND f02_sjrnc = #{f02_sjrnc}
+            </if>
+            <if test=" f03_bt != null and f03_bt !='' "><!-- 标题 -->
+                AND f03_bt = #{f03_bt}
+            </if>
+            <if test=" f04_jjd != null and f04_jjd !='' "><!-- 紧急度 -->
+                AND f04_jjd = #{f04_jjd}
+            </if>
+            <if test=" f05_zyd != null and f05_zyd !='' "><!-- 重要度 -->
+                AND f05_zyd = #{f05_zyd}
+            </if>
+            <if test=" bbb != null and bbb !='' "><!-- 消息内容 -->
+                AND bbb = #{bbb}
+            </if>
+            <if test=" fb1 != null and fb1 !='' "><!-- 备用1 -->
+                AND fb1 = #{fb1}
+            </if>
+            <if test=" fb2 != null and fb2 !='' "><!-- 备用2 -->
+                AND fb2 = #{fb2}
+            </if>
+            <if test=" fb3 != null and fb3 !='' "><!-- 备用3 -->
+                AND fb3 = #{fb3}
+            </if>
+            <if test=" fb4 != null and fb4 !='' "><!-- 备用4 -->
+                AND fb4 = #{fb4}
+            </if>
+            <if test=" fb5 != null and fb5 !='' "><!-- 备用5 -->
+                AND fb5 = #{fb5}
+            </if>
+            <if test=" eb1 != null and eb1 !='' "><!-- 扩展1 -->
+                AND eb1 = #{eb1}
+            </if>
+            <if test=" eb2 != null and eb2 !='' "><!-- 扩展2 -->
+                AND eb2 = #{eb2}
+            </if>
+            <if test=" eb3 != null and eb3 !='' "><!-- 扩展3 -->
+                AND eb3 = #{eb3}
+            </if>
+            <if test=" eb4 != null and eb4 !='' "><!-- 扩展4 -->
+                AND eb4 = #{eb4}
+            </if>
+            <if test=" eb5 != null and eb5 !='' "><!-- 扩展5 -->
+                AND eb5 = #{eb5}
+            </if>
+            <if test=" ggg != null and ggg !='' "><!-- 所在组织 -->
+                AND ggg = #{ggg}
+            </if>
+            <if test=" ddd != null and ddd !='' "><!-- 有效标识 -->
+                AND ddd = #{ddd}
+            </if>
+            <if test=" cc1 != null and cc1 !='' "><!-- 发送时间 -->
+                AND cc1 = #{cc1}
+            </if>
+            <if test=" cc2 != null and cc2 !='' "><!-- 创建者 -->
+                AND cc2 = #{cc2}
+            </if>
+            <if test=" uu1 != null and uu1 !='' "><!-- 最后更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+            <if test=" uu2 != null and uu2 !='' "><!-- 最后更新者 -->
+                AND uu2 = #{uu2}
+            </if>
+        </trim>
+    </select>
+
+    <!-- 插入一条数据 -->
+    <insert id='doInsert' parameterType='CS0D1DBO'>
+        INSERT INTO cs0d1
+          ( <include refid='tableColumns'/>) 
+        VALUES 
+          ( #{puk},#{k01_qyid},#{k02_fjrid},#{k03_sjrid},#{f01_fjrnc},#{f02_sjrnc},#{f03_bt},#{f04_jjd},#{f05_zyd},#{bbb},#{fb1},#{fb2},#{fb3},#{fb4},#{fb5},#{eb1},#{eb2},#{eb3},#{eb4},#{eb5},#{ggg},#{ddd},#{cc1},#{cc2},#{uu1},#{uu2} )
+    </insert>
+    <!-- 修改一条数据 -->
+    <update id='doUpdate' parameterType='CS0D1DBO'>
+        UPDATE cs0d1 SET uu1 = #{uuu} <!-- 更新时间、更新者 -->
+        <if test=" k01_qyid != null and k01_qyid !='' "><!-- 企业ID -->
+            ,k01_qyid = #{k01_qyid}
+        </if>
+        <if test=" k02_fjrid != null and k02_fjrid !='' "><!-- 发件人ID -->
+            ,k02_fjrid = #{k02_fjrid}
+        </if>
+        <if test=" k03_sjrid != null and k03_sjrid !='' "><!-- 收件人ID -->
+            ,k03_sjrid = #{k03_sjrid}
+        </if>
+        <if test=" f01_fjrnc != null and f01_fjrnc !='' "><!-- 发件人昵称 -->
+            ,f01_fjrnc = #{f01_fjrnc}
+        </if>
+        <if test=" f02_sjrnc != null and f02_sjrnc !='' "><!-- 收件人昵称 -->
+            ,f02_sjrnc = #{f02_sjrnc}
+        </if>
+        <if test=" f03_bt != null and f03_bt !='' "><!-- 标题 -->
+            ,f03_bt = #{f03_bt}
+        </if>
+        <if test=" f04_jjd != null and f04_jjd !='' "><!-- 紧急度 -->
+            ,f04_jjd = #{f04_jjd}
+        </if>
+        <if test=" f05_zyd != null and f05_zyd !='' "><!-- 重要度 -->
+            ,f05_zyd = #{f05_zyd}
+        </if>
+        <if test=" bbb != null and bbb !='' "><!-- 消息内容 -->
+            ,bbb = #{bbb}
+        </if>
+        <if test=" fb1 != null and fb1 !='' "><!-- 备用1 -->
+            ,fb1 = #{fb1}
+        </if>
+        <if test=" fb2 != null and fb2 !='' "><!-- 备用2 -->
+            ,fb2 = #{fb2}
+        </if>
+        <if test=" fb3 != null and fb3 !='' "><!-- 备用3 -->
+            ,fb3 = #{fb3}
+        </if>
+        <if test=" fb4 != null and fb4 !='' "><!-- 备用4 -->
+            ,fb4 = #{fb4}
+        </if>
+        <if test=" fb5 != null and fb5 !='' "><!-- 备用5 -->
+            ,fb5 = #{fb5}
+        </if>
+        <if test=" eb1 != null and eb1 !='' "><!-- 扩展1 -->
+            ,eb1 = #{eb1}
+        </if>
+        <if test=" eb2 != null and eb2 !='' "><!-- 扩展2 -->
+            ,eb2 = #{eb2}
+        </if>
+        <if test=" eb3 != null and eb3 !='' "><!-- 扩展3 -->
+            ,eb3 = #{eb3}
+        </if>
+        <if test=" eb4 != null and eb4 !='' "><!-- 扩展4 -->
+            ,eb4 = #{eb4}
+        </if>
+        <if test=" eb5 != null and eb5 !='' "><!-- 扩展5 -->
+            ,eb5 = #{eb5}
+        </if>
+        <if test=" ggg != null and ggg !='' "><!-- 所在组织 -->
+            ,ggg = #{ggg}
+        </if>
+        <if test=" ddd != null and ddd !='' "><!-- 有效标识 -->
+            ,ddd = #{ddd}
+        </if>
+        <if test=" cc1 != null and cc1 !='' "><!-- 发送时间 -->
+            ,cc1 = #{cc1}
+        </if>
+        <if test=" cc2 != null and cc2 !='' "><!-- 创建者 -->
+            ,cc2 = #{cc2}
+        </if>
+        <if test=" uu2 != null and uu2 !='' "><!-- 最后更新者 -->
+            ,uu2 = #{uu2}
+        </if>
+        WHERE puk = #{puk} and uu1 = #{uu1}
+    </update>
+    <!-- 逻辑删除一条数据 -->
+    <delete id='toDelete' parameterType='CS0D1DBO'>
+        UPDATE cs0d1 SET ddd='1', uu1 = #{uuu}, uu2 = #{uu2} WHERE puk = #{puk}
+            <if test=" uu1 != null and uu1 !='' "><!-- 最后更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+    </delete>
+    <!-- 物理删除一条数据 -->
+    <delete id='doDelete' parameterType='CS0D1DBO'>
+        DELETE FROM cs0d1 WHERE puk = #{puk} and uu1 = #{uu1}
+            <if test=" uu1 != null and uu1 !='' "><!-- 最后更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+    </delete>
+    <!-- 查询一条数据  -->
+    <select id='doRead' parameterType='CS0D1DBO' resultType='CS0D1DBO'>
+        SELECT <include refid='tableColumns'/> FROM cs0d1 WHERE puk = #{puk} AND ddd = #{ddd} 
+    </select>
+
+</mapper>

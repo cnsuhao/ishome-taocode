@@ -1,0 +1,33 @@
+<?xml version="1.0" standalone="yes"?>
+<DocumentElement>
+  <Config>
+    <Puk>0</Puk>
+    <Key>1.0-01.txt</Key>
+    <Value>0</Value>
+  </Config>
+  <Config>
+    <Puk>1</Puk>
+    <Key>1.0-02.txt</Key>
+    <Value>0</Value>
+  </Config>
+  <Config>
+    <Puk>2</Puk>
+    <Key>1.1-01.txt</Key>
+    <Value>0</Value>
+  </Config>
+  <Config>
+    <Puk>3</Puk>
+    <Key>1.1-02.txt</Key>
+    <Value>0</Value>
+  </Config>
+  <Config>
+    <Puk>4</Puk>
+    <Key>1.2-01.txt</Key>
+    <Value>0</Value>
+  </Config>
+  <Config>
+    <Puk>5</Puk>
+    <Key>1.2-02.txt</Key>
+    <Value>0</Value>
+  </Config>
+</DocumentElement>

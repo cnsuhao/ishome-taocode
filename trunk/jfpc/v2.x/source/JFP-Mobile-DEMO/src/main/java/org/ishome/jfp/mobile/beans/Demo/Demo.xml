@@ -1,0 +1,113 @@
+﻿<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 对接失败信息日志 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='org.ishome.jfp.beans.AccessFaultLog.AccessFaultLogDao'>
+    <!-- 表字段信息  -->
+    <sql id='tableColumns'>
+        error_id,error_meta_id,type,description,state,hos_id,create_time
+    </sql>
+
+    <!-- 查询分页数据信息  -->
+    <select id='doSelectPage' parameterType='AccessFaultLogDBO' resultType='AccessFaultLogDBO'>
+        SELECT <include refid='tableColumns'/> FROM access_fault_log
+        WHERE 1 = 1 
+        <if test=" errorId != null and errorId !='' "><!-- 主键 -->
+            AND error_id = #{errorId}
+        </if>
+        <if test=" errorMetaId != null and errorMetaId !='' "><!-- 错误类型ID,从元数据表(metadata)里选择 -->
+            AND error_meta_id = #{errorMetaId}
+        </if>
+        <if test=" type != null and type !='' "><!-- 科室医生类型：0科室 1医生 -->
+            AND type = #{type}
+        </if>
+        <if test=" description != null and description !='' "><!-- 错误描述 -->
+            AND description = #{description}
+        </if>
+        <if test=" state != null and state !='' "><!-- 错误来源,0 本地检索 1 对接 -->
+            AND state = #{state}
+        </if>
+        <if test=" hosId != null and hosId !='' "><!-- 医院ID -->
+            AND hos_id = #{hosId}
+        </if>
+        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+            AND create_time = #{createTime}
+        </if>
+    </select>
+
+    <!-- 插入一条数据 -->
+    <insert id='doInsert' parameterType='AccessFaultLogDBO'>
+        INSERT INTO access_fault_log
+          ( <include refid='tableColumns'/>) 
+        VALUES 
+          ( #{errorId},#{errorMetaId},#{type},#{description},#{state},#{hosId},${createTime} )
+    </insert>
+    <!-- 修改一条数据 -->
+    <update id='doUpdate' parameterType='AccessFaultLogDBO'>
+        UPDATE access_fault_log SET error_id = #{errorId}
+        <if test=" errorMetaId != null and errorMetaId !='' "><!-- 错误类型ID,从元数据表(metadata)里选择 -->
+            ,error_meta_id = #{errorMetaId}
+        </if>
+        <if test=" type != null and type !='' "><!-- 科室医生类型：0科室 1医生 -->
+            ,type = #{type}
+        </if>
+        <if test=" description != null and description !='' "><!-- 错误描述 -->
+            ,description = #{description}
+        </if>
+        <if test=" state != null and state !='' "><!-- 错误来源,0 本地检索 1 对接 -->
+            ,state = #{state}
+        </if>
+        <if test=" hosId != null and hosId !='' "><!-- 医院ID -->
+            ,hos_id = #{hosId}
+        </if>
+        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+            ,create_time = #{createTime}
+        </if>
+        WHERE puk = #{puk} 
+    </update>
+    <!-- 逻辑删除一条数据 -->
+    <delete id='toDelete' parameterType='AccessFaultLogDBO'>
+        DELETE FROM access_fault_log WHERE 1 = 1
+        	<if test=" errorId != null and errorId !='' ">
+                error_id = #{errorId}
+            </if>
+            <if test=" errorMetaId != null and errorMetaId !='' "><!-- 错误类型ID,从元数据表(metadata)里选择 -->
+                AND error_meta_id = #{errorMetaId}
+            </if>
+            <if test=" hosId != null and hosId !='' "><!-- 医院ID -->
+                AND hos_id = #{hosId}
+            </if>
+    </delete>
+    <!-- 物理删除一条数据 -->
+    <delete id='doDelete' parameterType='AccessFaultLogDBO'>
+        DELETE FROM access_fault_log WHERE 1 = 1
+        	<if test=" errorId != null and errorId !='' ">
+                error_id = #{errorId}
+            </if>
+            <if test=" errorMetaId != null and errorMetaId !='' "><!-- 错误类型ID,从元数据表(metadata)里选择 -->
+                AND error_meta_id = #{errorMetaId}
+            </if>
+            <if test=" hosId != null and hosId !='' "><!-- 医院ID -->
+                AND hos_id = #{hosId}
+            </if>
+    </delete>
+    <!-- 查询一条数据  -->
+    <select id='doRead' parameterType='AccessFaultLogDBO' resultType='AccessFaultLogDBO'>
+        SELECT <include refid='tableColumns'/> FROM access_fault_log WHERE puk = #{puk}
+            <if test=" errorId != null and errorId !='' "><!-- 主键 -->
+                AND error_id = #{errorId}
+            </if>
+            <if test=" errorMetaId != null and errorMetaId !='' "><!-- 错误类型ID,从元数据表(metadata)里选择 -->
+                AND error_meta_id = #{errorMetaId}
+            </if>
+            <if test=" hosId != null and hosId !='' "><!-- 医院ID -->
+                AND hos_id = #{hosId}
+            </if>
+            <if test=" ddd != null and ddd !='' "><!-- 最后更新时间 -->
+                AND ddd = #{ddd}
+            </if>
+    </select>
+
+</mapper>

@@ -1,0 +1,513 @@
+﻿<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 企业人员基本信息 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='org.jfpc.beans.platform.CS1B2.CS1B2Dao'>
+    <!-- 表字段信息  -->
+    <sql id='tableColumns'>
+        puk,f01_xm,f02_xb,f03_csrq,f04_smrz_jg,f05_smrz_xm,f06_smrz_sfz,f07_stzk,f08_gzzk,f09_hyzk,f10_zzmm,f11_dqjzdz,f12_hkszd,f13_jjlxr_xm,f14_jjlxr_dh,f15_yddh,f16_bgdh,f17_zzdh,f18_xl,f19_qq,f20_mail,bbb,fb1,fb2,fb3,fb4,fb5,eb1,eb2,eb3,eb4,eb5,ggg,ppp,ddd,cc1,cc2,uu1,uu2
+    </sql>
+
+    <!-- 根据条件更新所有记录 -->
+    <update id='doUpdateAll' parameterType='CS1B2DBO'>
+        UPDATE cs1b2 SET  uu1 = #{uuu} <!-- 更新时间、更新者 -->
+        <if test=" f01_xm != null and f01_xm !='' "><!-- 姓名 -->
+            ,f01_xm = #{f01_xm}
+        </if>
+        <if test=" f02_xb != null and f02_xb !='' "><!-- 性别 -->
+            ,f02_xb = #{f02_xb}
+        </if>
+        <if test=" f03_csrq != null and f03_csrq !='' "><!-- 出生日期 -->
+            ,f03_csrq = #{f03_csrq}
+        </if>
+        <if test=" f04_smrz_jg != null and f04_smrz_jg !='' "><!-- 实名认证结果状态 -->
+            ,f04_smrz_jg = #{f04_smrz_jg}
+        </if>
+        <if test=" f05_smrz_xm != null and f05_smrz_xm !='' "><!-- 实名认证（姓名） -->
+            ,f05_smrz_xm = #{f05_smrz_xm}
+        </if>
+        <if test=" f06_smrz_sfz != null and f06_smrz_sfz !='' "><!-- 实名认证（身份证ID） -->
+            ,f06_smrz_sfz = #{f06_smrz_sfz}
+        </if>
+        <if test=" f07_stzk != null and f07_stzk !='' "><!-- 身体状况 -->
+            ,f07_stzk = #{f07_stzk}
+        </if>
+        <if test=" f08_gzzk != null and f08_gzzk !='' "><!-- 工作状况 -->
+            ,f08_gzzk = #{f08_gzzk}
+        </if>
+        <if test=" f09_hyzk != null and f09_hyzk !='' "><!-- 婚姻状况 -->
+            ,f09_hyzk = #{f09_hyzk}
+        </if>
+        <if test=" f10_zzmm != null and f10_zzmm !='' "><!-- 政治面貌 -->
+            ,f10_zzmm = #{f10_zzmm}
+        </if>
+        <if test=" f11_dqjzdz != null and f11_dqjzdz !='' "><!-- 当前居住地址 -->
+            ,f11_dqjzdz = #{f11_dqjzdz}
+        </if>
+        <if test=" f12_hkszd != null and f12_hkszd !='' "><!-- 户口所在地 -->
+            ,f12_hkszd = #{f12_hkszd}
+        </if>
+        <if test=" f13_jjlxr_xm != null and f13_jjlxr_xm !='' "><!-- 紧急联系人姓名 -->
+            ,f13_jjlxr_xm = #{f13_jjlxr_xm}
+        </if>
+        <if test=" f14_jjlxr_dh != null and f14_jjlxr_dh !='' "><!-- 紧急联系人电话 -->
+            ,f14_jjlxr_dh = #{f14_jjlxr_dh}
+        </if>
+        <if test=" f15_yddh != null and f15_yddh !='' "><!-- 移动电话 -->
+            ,f15_yddh = #{f15_yddh}
+        </if>
+        <if test=" f16_bgdh != null and f16_bgdh !='' "><!-- 办公电话 -->
+            ,f16_bgdh = #{f16_bgdh}
+        </if>
+        <if test=" f17_zzdh != null and f17_zzdh !='' "><!-- 住宅电话 -->
+            ,f17_zzdh = #{f17_zzdh}
+        </if>
+        <if test=" f18_xl != null and f18_xl !='' "><!-- 学历 -->
+            ,f18_xl = #{f18_xl}
+        </if>
+        <if test=" f19_qq != null and f19_qq !='' "><!-- QQ -->
+            ,f19_qq = #{f19_qq}
+        </if>
+        <if test=" f20_mail != null and f20_mail !='' "><!-- 邮件 -->
+            ,f20_mail = #{f20_mail}
+        </if>
+        <if test=" bbb != null and bbb !='' "><!-- 公司简介 -->
+            ,bbb = #{bbb}
+        </if>
+        <if test=" fb1 != null and fb1 !='' "><!-- 备用1 -->
+            ,fb1 = #{fb1}
+        </if>
+        <if test=" fb2 != null and fb2 !='' "><!-- 备用2 -->
+            ,fb2 = #{fb2}
+        </if>
+        <if test=" fb3 != null and fb3 !='' "><!-- 备用3 -->
+            ,fb3 = #{fb3}
+        </if>
+        <if test=" fb4 != null and fb4 !='' "><!-- 备用4 -->
+            ,fb4 = #{fb4}
+        </if>
+        <if test=" fb5 != null and fb5 !='' "><!-- 备用5 -->
+            ,fb5 = #{fb5}
+        </if>
+        <if test=" eb1 != null and eb1 !='' "><!-- 扩展1 -->
+            ,eb1 = #{eb1}
+        </if>
+        <if test=" eb2 != null and eb2 !='' "><!-- 扩展2 -->
+            ,eb2 = #{eb2}
+        </if>
+        <if test=" eb3 != null and eb3 !='' "><!-- 扩展3 -->
+            ,eb3 = #{eb3}
+        </if>
+        <if test=" eb4 != null and eb4 !='' "><!-- 扩展4 -->
+            ,eb4 = #{eb4}
+        </if>
+        <if test=" eb5 != null and eb5 !='' "><!-- 扩展5 -->
+            ,eb5 = #{eb5}
+        </if>
+        <if test=" ggg != null and ggg !='' "><!-- 所在组织 -->
+            ,ggg = #{ggg}
+        </if>
+        <if test=" ppp != null and ppp !='' "><!-- 企业ID -->
+            ,ppp = #{ppp}
+        </if>
+        <if test=" ddd != null and ddd !='' "><!-- 有效标识 -->
+            ,ddd = #{ddd}
+        </if>
+        <if test=" cc1 != null and cc1 !='' "><!-- 创建时间 -->
+            ,cc1 = #{cc1}
+        </if>
+        <if test=" cc2 != null and cc2 !='' "><!-- 创建者 -->
+            ,cc2 = #{cc2}
+        </if>
+        <if test=" uu2 != null and uu2 !='' "><!-- 最后更新者 -->
+            ,uu2 = #{uu2}
+        </if>
+        <trim prefix='WHERE' prefixOverrides='AND |OR '>
+            <if test=" puk != null and puk !='' "><!-- 系统数据唯一识别ID（固定主键） -->
+                AND puk = #{puk}
+            </if>
+            <if test=" f01_xm != null and f01_xm !='' "><!-- 姓名 -->
+                AND f01_xm = #{f01_xm}
+            </if>
+            <if test=" f02_xb != null and f02_xb !='' "><!-- 性别 -->
+                AND f02_xb = #{f02_xb}
+            </if>
+            <if test=" f03_csrq != null and f03_csrq !='' "><!-- 出生日期 -->
+                AND f03_csrq = #{f03_csrq}
+            </if>
+            <if test=" f04_smrz_jg != null and f04_smrz_jg !='' "><!-- 实名认证结果状态 -->
+                AND f04_smrz_jg = #{f04_smrz_jg}
+            </if>
+            <if test=" f05_smrz_xm != null and f05_smrz_xm !='' "><!-- 实名认证（姓名） -->
+                AND f05_smrz_xm = #{f05_smrz_xm}
+            </if>
+            <if test=" f06_smrz_sfz != null and f06_smrz_sfz !='' "><!-- 实名认证（身份证ID） -->
+                AND f06_smrz_sfz = #{f06_smrz_sfz}
+            </if>
+            <if test=" f07_stzk != null and f07_stzk !='' "><!-- 身体状况 -->
+                AND f07_stzk = #{f07_stzk}
+            </if>
+            <if test=" f08_gzzk != null and f08_gzzk !='' "><!-- 工作状况 -->
+                AND f08_gzzk = #{f08_gzzk}
+            </if>
+            <if test=" f09_hyzk != null and f09_hyzk !='' "><!-- 婚姻状况 -->
+                AND f09_hyzk = #{f09_hyzk}
+            </if>
+            <if test=" f10_zzmm != null and f10_zzmm !='' "><!-- 政治面貌 -->
+                AND f10_zzmm = #{f10_zzmm}
+            </if>
+            <if test=" f11_dqjzdz != null and f11_dqjzdz !='' "><!-- 当前居住地址 -->
+                AND f11_dqjzdz = #{f11_dqjzdz}
+            </if>
+            <if test=" f12_hkszd != null and f12_hkszd !='' "><!-- 户口所在地 -->
+                AND f12_hkszd = #{f12_hkszd}
+            </if>
+            <if test=" f13_jjlxr_xm != null and f13_jjlxr_xm !='' "><!-- 紧急联系人姓名 -->
+                AND f13_jjlxr_xm = #{f13_jjlxr_xm}
+            </if>
+            <if test=" f14_jjlxr_dh != null and f14_jjlxr_dh !='' "><!-- 紧急联系人电话 -->
+                AND f14_jjlxr_dh = #{f14_jjlxr_dh}
+            </if>
+            <if test=" f15_yddh != null and f15_yddh !='' "><!-- 移动电话 -->
+                AND f15_yddh = #{f15_yddh}
+            </if>
+            <if test=" f16_bgdh != null and f16_bgdh !='' "><!-- 办公电话 -->
+                AND f16_bgdh = #{f16_bgdh}
+            </if>
+            <if test=" f17_zzdh != null and f17_zzdh !='' "><!-- 住宅电话 -->
+                AND f17_zzdh = #{f17_zzdh}
+            </if>
+            <if test=" f18_xl != null and f18_xl !='' "><!-- 学历 -->
+                AND f18_xl = #{f18_xl}
+            </if>
+            <if test=" f19_qq != null and f19_qq !='' "><!-- QQ -->
+                AND f19_qq = #{f19_qq}
+            </if>
+            <if test=" f20_mail != null and f20_mail !='' "><!-- 邮件 -->
+                AND f20_mail = #{f20_mail}
+            </if>
+            <if test=" bbb != null and bbb !='' "><!-- 公司简介 -->
+                AND bbb = #{bbb}
+            </if>
+            <if test=" fb1 != null and fb1 !='' "><!-- 备用1 -->
+                AND fb1 = #{fb1}
+            </if>
+            <if test=" fb2 != null and fb2 !='' "><!-- 备用2 -->
+                AND fb2 = #{fb2}
+            </if>
+            <if test=" fb3 != null and fb3 !='' "><!-- 备用3 -->
+                AND fb3 = #{fb3}
+            </if>
+            <if test=" fb4 != null and fb4 !='' "><!-- 备用4 -->
+                AND fb4 = #{fb4}
+            </if>
+            <if test=" fb5 != null and fb5 !='' "><!-- 备用5 -->
+                AND fb5 = #{fb5}
+            </if>
+            <if test=" eb1 != null and eb1 !='' "><!-- 扩展1 -->
+                AND eb1 = #{eb1}
+            </if>
+            <if test=" eb2 != null and eb2 !='' "><!-- 扩展2 -->
+                AND eb2 = #{eb2}
+            </if>
+            <if test=" eb3 != null and eb3 !='' "><!-- 扩展3 -->
+                AND eb3 = #{eb3}
+            </if>
+            <if test=" eb4 != null and eb4 !='' "><!-- 扩展4 -->
+                AND eb4 = #{eb4}
+            </if>
+            <if test=" eb5 != null and eb5 !='' "><!-- 扩展5 -->
+                AND eb5 = #{eb5}
+            </if>
+            <if test=" ggg != null and ggg !='' "><!-- 所在组织 -->
+                AND ggg = #{ggg}
+            </if>
+            <if test=" ppp != null and ppp !='' "><!-- 企业ID -->
+                AND ppp = #{ppp}
+            </if>
+            <if test=" ddd != null and ddd !='' "><!-- 有效标识 -->
+                AND ddd = #{ddd}
+            </if>
+            <if test=" cc1 != null and cc1 !='' "><!-- 创建时间 -->
+                AND cc1 = #{cc1}
+            </if>
+            <if test=" cc2 != null and cc2 !='' "><!-- 创建者 -->
+                AND cc2 = #{cc2}
+            </if>
+            <if test=" uu1 != null and uu1 !='' "><!-- 最后更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+            <if test=" uu2 != null and uu2 !='' "><!-- 最后更新者 -->
+                AND uu2 = #{uu2}
+            </if>
+        </trim>
+    </update>
+    <!-- 查询分页数据信息  -->
+    <select id='doSelectPage' parameterType='CS1B2DBO' resultType='CS1B2DBO'>
+        SELECT <include refid='tableColumns'/> FROM cs1b2
+        <trim prefix='WHERE' prefixOverrides='AND |OR '>
+            <if test=" puk != null and puk !='' "><!-- 系统数据唯一识别ID（固定主键） -->
+                AND puk = #{puk}
+            </if>
+            <if test=" f01_xm != null and f01_xm !='' "><!-- 姓名 -->
+                AND f01_xm = #{f01_xm}
+            </if>
+            <if test=" f02_xb != null and f02_xb !='' "><!-- 性别 -->
+                AND f02_xb = #{f02_xb}
+            </if>
+            <if test=" f03_csrq != null and f03_csrq !='' "><!-- 出生日期 -->
+                AND f03_csrq = #{f03_csrq}
+            </if>
+            <if test=" f04_smrz_jg != null and f04_smrz_jg !='' "><!-- 实名认证结果状态 -->
+                AND f04_smrz_jg = #{f04_smrz_jg}
+            </if>
+            <if test=" f05_smrz_xm != null and f05_smrz_xm !='' "><!-- 实名认证（姓名） -->
+                AND f05_smrz_xm = #{f05_smrz_xm}
+            </if>
+            <if test=" f06_smrz_sfz != null and f06_smrz_sfz !='' "><!-- 实名认证（身份证ID） -->
+                AND f06_smrz_sfz = #{f06_smrz_sfz}
+            </if>
+            <if test=" f07_stzk != null and f07_stzk !='' "><!-- 身体状况 -->
+                AND f07_stzk = #{f07_stzk}
+            </if>
+            <if test=" f08_gzzk != null and f08_gzzk !='' "><!-- 工作状况 -->
+                AND f08_gzzk = #{f08_gzzk}
+            </if>
+            <if test=" f09_hyzk != null and f09_hyzk !='' "><!-- 婚姻状况 -->
+                AND f09_hyzk = #{f09_hyzk}
+            </if>
+            <if test=" f10_zzmm != null and f10_zzmm !='' "><!-- 政治面貌 -->
+                AND f10_zzmm = #{f10_zzmm}
+            </if>
+            <if test=" f11_dqjzdz != null and f11_dqjzdz !='' "><!-- 当前居住地址 -->
+                AND f11_dqjzdz = #{f11_dqjzdz}
+            </if>
+            <if test=" f12_hkszd != null and f12_hkszd !='' "><!-- 户口所在地 -->
+                AND f12_hkszd = #{f12_hkszd}
+            </if>
+            <if test=" f13_jjlxr_xm != null and f13_jjlxr_xm !='' "><!-- 紧急联系人姓名 -->
+                AND f13_jjlxr_xm = #{f13_jjlxr_xm}
+            </if>
+            <if test=" f14_jjlxr_dh != null and f14_jjlxr_dh !='' "><!-- 紧急联系人电话 -->
+                AND f14_jjlxr_dh = #{f14_jjlxr_dh}
+            </if>
+            <if test=" f15_yddh != null and f15_yddh !='' "><!-- 移动电话 -->
+                AND f15_yddh = #{f15_yddh}
+            </if>
+            <if test=" f16_bgdh != null and f16_bgdh !='' "><!-- 办公电话 -->
+                AND f16_bgdh = #{f16_bgdh}
+            </if>
+            <if test=" f17_zzdh != null and f17_zzdh !='' "><!-- 住宅电话 -->
+                AND f17_zzdh = #{f17_zzdh}
+            </if>
+            <if test=" f18_xl != null and f18_xl !='' "><!-- 学历 -->
+                AND f18_xl = #{f18_xl}
+            </if>
+            <if test=" f19_qq != null and f19_qq !='' "><!-- QQ -->
+                AND f19_qq = #{f19_qq}
+            </if>
+            <if test=" f20_mail != null and f20_mail !='' "><!-- 邮件 -->
+                AND f20_mail = #{f20_mail}
+            </if>
+            <if test=" bbb != null and bbb !='' "><!-- 公司简介 -->
+                AND bbb = #{bbb}
+            </if>
+            <if test=" fb1 != null and fb1 !='' "><!-- 备用1 -->
+                AND fb1 = #{fb1}
+            </if>
+            <if test=" fb2 != null and fb2 !='' "><!-- 备用2 -->
+                AND fb2 = #{fb2}
+            </if>
+            <if test=" fb3 != null and fb3 !='' "><!-- 备用3 -->
+                AND fb3 = #{fb3}
+            </if>
+            <if test=" fb4 != null and fb4 !='' "><!-- 备用4 -->
+                AND fb4 = #{fb4}
+            </if>
+            <if test=" fb5 != null and fb5 !='' "><!-- 备用5 -->
+                AND fb5 = #{fb5}
+            </if>
+            <if test=" eb1 != null and eb1 !='' "><!-- 扩展1 -->
+                AND eb1 = #{eb1}
+            </if>
+            <if test=" eb2 != null and eb2 !='' "><!-- 扩展2 -->
+                AND eb2 = #{eb2}
+            </if>
+            <if test=" eb3 != null and eb3 !='' "><!-- 扩展3 -->
+                AND eb3 = #{eb3}
+            </if>
+            <if test=" eb4 != null and eb4 !='' "><!-- 扩展4 -->
+                AND eb4 = #{eb4}
+            </if>
+            <if test=" eb5 != null and eb5 !='' "><!-- 扩展5 -->
+                AND eb5 = #{eb5}
+            </if>
+            <if test=" ggg != null and ggg !='' "><!-- 所在组织 -->
+                AND ggg = #{ggg}
+            </if>
+            <if test=" ppp != null and ppp !='' "><!-- 企业ID -->
+                AND ppp = #{ppp}
+            </if>
+            <if test=" ddd != null and ddd !='' "><!-- 有效标识 -->
+                AND ddd = #{ddd}
+            </if>
+            <if test=" cc1 != null and cc1 !='' "><!-- 创建时间 -->
+                AND cc1 = #{cc1}
+            </if>
+            <if test=" cc2 != null and cc2 !='' "><!-- 创建者 -->
+                AND cc2 = #{cc2}
+            </if>
+            <if test=" uu1 != null and uu1 !='' "><!-- 最后更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+            <if test=" uu2 != null and uu2 !='' "><!-- 最后更新者 -->
+                AND uu2 = #{uu2}
+            </if>
+        </trim>
+    </select>
+
+    <!-- 插入一条数据 -->
+    <insert id='doInsert' parameterType='CS1B2DBO'>
+        INSERT INTO cs1b2
+          ( <include refid='tableColumns'/>) 
+        VALUES 
+          ( #{puk},#{f01_xm},#{f02_xb},#{f03_csrq},#{f04_smrz_jg},#{f05_smrz_xm},#{f06_smrz_sfz},#{f07_stzk},#{f08_gzzk},#{f09_hyzk},#{f10_zzmm},#{f11_dqjzdz},#{f12_hkszd},#{f13_jjlxr_xm},#{f14_jjlxr_dh},#{f15_yddh},#{f16_bgdh},#{f17_zzdh},#{f18_xl},#{f19_qq},#{f20_mail},#{bbb},#{fb1},#{fb2},#{fb3},#{fb4},#{fb5},#{eb1},#{eb2},#{eb3},#{eb4},#{eb5},#{ggg},#{ppp},#{ddd},#{cc1},#{cc2},#{uu1},#{uu2} )
+    </insert>
+    <!-- 修改一条数据 -->
+    <update id='doUpdate' parameterType='CS1B2DBO'>
+        UPDATE cs1b2 SET uu1 = #{uuu} <!-- 更新时间、更新者 -->
+        <if test=" f01_xm != null and f01_xm !='' "><!-- 姓名 -->
+            ,f01_xm = #{f01_xm}
+        </if>
+        <if test=" f02_xb != null and f02_xb !='' "><!-- 性别 -->
+            ,f02_xb = #{f02_xb}
+        </if>
+        <if test=" f03_csrq != null and f03_csrq !='' "><!-- 出生日期 -->
+            ,f03_csrq = #{f03_csrq}
+        </if>
+        <if test=" f04_smrz_jg != null and f04_smrz_jg !='' "><!-- 实名认证结果状态 -->
+            ,f04_smrz_jg = #{f04_smrz_jg}
+        </if>
+        <if test=" f05_smrz_xm != null and f05_smrz_xm !='' "><!-- 实名认证（姓名） -->
+            ,f05_smrz_xm = #{f05_smrz_xm}
+        </if>
+        <if test=" f06_smrz_sfz != null and f06_smrz_sfz !='' "><!-- 实名认证（身份证ID） -->
+            ,f06_smrz_sfz = #{f06_smrz_sfz}
+        </if>
+        <if test=" f07_stzk != null and f07_stzk !='' "><!-- 身体状况 -->
+            ,f07_stzk = #{f07_stzk}
+        </if>
+        <if test=" f08_gzzk != null and f08_gzzk !='' "><!-- 工作状况 -->
+            ,f08_gzzk = #{f08_gzzk}
+        </if>
+        <if test=" f09_hyzk != null and f09_hyzk !='' "><!-- 婚姻状况 -->
+            ,f09_hyzk = #{f09_hyzk}
+        </if>
+        <if test=" f10_zzmm != null and f10_zzmm !='' "><!-- 政治面貌 -->
+            ,f10_zzmm = #{f10_zzmm}
+        </if>
+        <if test=" f11_dqjzdz != null and f11_dqjzdz !='' "><!-- 当前居住地址 -->
+            ,f11_dqjzdz = #{f11_dqjzdz}
+        </if>
+        <if test=" f12_hkszd != null and f12_hkszd !='' "><!-- 户口所在地 -->
+            ,f12_hkszd = #{f12_hkszd}
+        </if>
+        <if test=" f13_jjlxr_xm != null and f13_jjlxr_xm !='' "><!-- 紧急联系人姓名 -->
+            ,f13_jjlxr_xm = #{f13_jjlxr_xm}
+        </if>
+        <if test=" f14_jjlxr_dh != null and f14_jjlxr_dh !='' "><!-- 紧急联系人电话 -->
+            ,f14_jjlxr_dh = #{f14_jjlxr_dh}
+        </if>
+        <if test=" f15_yddh != null and f15_yddh !='' "><!-- 移动电话 -->
+            ,f15_yddh = #{f15_yddh}
+        </if>
+        <if test=" f16_bgdh != null and f16_bgdh !='' "><!-- 办公电话 -->
+            ,f16_bgdh = #{f16_bgdh}
+        </if>
+        <if test=" f17_zzdh != null and f17_zzdh !='' "><!-- 住宅电话 -->
+            ,f17_zzdh = #{f17_zzdh}
+        </if>
+        <if test=" f18_xl != null and f18_xl !='' "><!-- 学历 -->
+            ,f18_xl = #{f18_xl}
+        </if>
+        <if test=" f19_qq != null and f19_qq !='' "><!-- QQ -->
+            ,f19_qq = #{f19_qq}
+        </if>
+        <if test=" f20_mail != null and f20_mail !='' "><!-- 邮件 -->
+            ,f20_mail = #{f20_mail}
+        </if>
+        <if test=" bbb != null and bbb !='' "><!-- 公司简介 -->
+            ,bbb = #{bbb}
+        </if>
+        <if test=" fb1 != null and fb1 !='' "><!-- 备用1 -->
+            ,fb1 = #{fb1}
+        </if>
+        <if test=" fb2 != null and fb2 !='' "><!-- 备用2 -->
+            ,fb2 = #{fb2}
+        </if>
+        <if test=" fb3 != null and fb3 !='' "><!-- 备用3 -->
+            ,fb3 = #{fb3}
+        </if>
+        <if test=" fb4 != null and fb4 !='' "><!-- 备用4 -->
+            ,fb4 = #{fb4}
+        </if>
+        <if test=" fb5 != null and fb5 !='' "><!-- 备用5 -->
+            ,fb5 = #{fb5}
+        </if>
+        <if test=" eb1 != null and eb1 !='' "><!-- 扩展1 -->
+            ,eb1 = #{eb1}
+        </if>
+        <if test=" eb2 != null and eb2 !='' "><!-- 扩展2 -->
+            ,eb2 = #{eb2}
+        </if>
+        <if test=" eb3 != null and eb3 !='' "><!-- 扩展3 -->
+            ,eb3 = #{eb3}
+        </if>
+        <if test=" eb4 != null and eb4 !='' "><!-- 扩展4 -->
+            ,eb4 = #{eb4}
+        </if>
+        <if test=" eb5 != null and eb5 !='' "><!-- 扩展5 -->
+            ,eb5 = #{eb5}
+        </if>
+        <if test=" ggg != null and ggg !='' "><!-- 所在组织 -->
+            ,ggg = #{ggg}
+        </if>
+        <if test=" ppp != null and ppp !='' "><!-- 企业ID -->
+            ,ppp = #{ppp}
+        </if>
+        <if test=" ddd != null and ddd !='' "><!-- 有效标识 -->
+            ,ddd = #{ddd}
+        </if>
+        <if test=" cc1 != null and cc1 !='' "><!-- 创建时间 -->
+            ,cc1 = #{cc1}
+        </if>
+        <if test=" cc2 != null and cc2 !='' "><!-- 创建者 -->
+            ,cc2 = #{cc2}
+        </if>
+        <if test=" uu2 != null and uu2 !='' "><!-- 最后更新者 -->
+            ,uu2 = #{uu2}
+        </if>
+        WHERE puk = #{puk} and uu1 = #{uu1}
+    </update>
+    <!-- 逻辑删除一条数据 -->
+    <delete id='toDelete' parameterType='CS1B2DBO'>
+        UPDATE cs1b2 SET ddd='1', uu1 = #{uuu}, uu2 = #{uu2} WHERE puk = #{puk}
+            <if test=" uu1 != null and uu1 !='' "><!-- 最后更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+    </delete>
+    <!-- 物理删除一条数据 -->
+    <delete id='doDelete' parameterType='CS1B2DBO'>
+        DELETE FROM cs1b2 WHERE puk = #{puk} and uu1 = #{uu1}
+            <if test=" uu1 != null and uu1 !='' "><!-- 最后更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+    </delete>
+    <!-- 查询一条数据  -->
+    <select id='doRead' parameterType='CS1B2DBO' resultType='CS1B2DBO'>
+        SELECT <include refid='tableColumns'/> FROM cs1b2 WHERE puk = #{puk} AND ddd = #{ddd} 
+    </select>
+
+</mapper>

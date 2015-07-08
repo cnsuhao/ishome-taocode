@@ -1,0 +1,41 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.jfpc</groupId>
+  <artifactId>JFPC-Common</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  
+  <properties>
+
+		<!-- Generic properties -->
+		<java.version>1.7</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+		<!-- Spring -->
+		<spring-framework.version>3.2.8.RELEASE</spring-framework.version>
+		
+		
+		<org.aspectj.version>1.7.4</org.aspectj.version>		
+		<jackson.version>1.9.10</jackson.version>		
+		<!-- Logging -->
+		<logback.version>1.0.13</logback.version>
+		<slf4j.version>1.7.6</slf4j.version>
+
+		<!-- Test -->
+		<junit.version>4.11</junit.version>
+
+	</properties>
+	  
+  <dependencies>
+  	<dependency>
+  		<groupId>org.jfpc</groupId>
+  		<artifactId>JFPC-Sql-Mapper</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.jfpc</groupId>
+  		<artifactId>JFPC-Bean</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  </dependencies>
+</project>

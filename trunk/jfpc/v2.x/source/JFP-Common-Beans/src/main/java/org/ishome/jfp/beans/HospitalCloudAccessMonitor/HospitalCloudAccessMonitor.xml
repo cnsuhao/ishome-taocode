@@ -1,0 +1,470 @@
+﻿<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 医院云平台对接监控表 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='org.ishome.jfp.beans.HospitalCloudAccessMonitor.HospitalCloudAccessMonitorDao'>
+    <!-- 表字段信息  -->
+    <sql id='tableColumns'>
+        id,hos_id,hos_name,addr_province,addr_city,admin_name,admin_phone,app_version,app_use_date,app_sec_level,encrypt_flag,failed_cnt,access_flag,status,primary_key,app_token,pkg_url,fb1,fb2,fb3,fb4,fb5,eb1,eb2,eb3,eb4,eb5,good_id,cmy_id,is_deleted,create_time,creator,update_time,updator
+    </sql>
+
+    <!-- 根据条件更新所有记录 -->
+    <update id='doUpdateAll' parameterType='HospitalCloudAccessMonitorDBO'>
+        UPDATE hospital_cloud_access_monitor SET id = #{id}
+        <if test=" hosId != null and hosId !='' "><!-- 医院ID -->
+            ,hos_id = #{hosId}
+        </if>
+        <if test=" hosName != null and hosName !='' "><!-- 医院名称 -->
+            ,hos_name = #{hosName}
+        </if>
+        <if test=" addrProvince != null and addrProvince !='' "><!-- 所在省 -->
+            ,addr_province = #{addrProvince}
+        </if>
+        <if test=" addrCity != null and addrCity !='' "><!-- 所在市 -->
+            ,addr_city = #{addrCity}
+        </if>
+        <if test=" adminName != null and adminName !='' "><!-- 管理员姓名 -->
+            ,admin_name = #{adminName}
+        </if>
+        <if test=" adminPhone != null and adminPhone !='' "><!-- 管理员电话 -->
+            ,admin_phone = #{adminPhone}
+        </if>
+        <if test=" appVersion != null and appVersion !='' "><!-- 运行版本 -->
+            ,app_version = #{appVersion}
+        </if>
+        <if test=" appUseDate != null and appUseDate !='' "><!-- 版本发行日期 -->
+            ,app_use_date = #{appUseDate}
+        </if>
+        <if test=" appSecLevel != null and appSecLevel !='' "><!-- 安全等级 -->
+            ,app_sec_level = #{appSecLevel}
+        </if>
+        <if test=" encryptFlag != null and encryptFlag !='' "><!-- 加密状态 -->
+            ,encrypt_flag = #{encryptFlag}
+        </if>
+        <if test=" failedCnt != null and failedCnt !='' "><!-- 异常次数 -->
+            ,failed_cnt = #{failedCnt}
+        </if>
+        <if test=" accessFlag != null and accessFlag !='' "><!-- 心跳检查状态 -->
+            ,access_flag = #{accessFlag}
+        </if>
+        <if test=" status != null and status !='' "><!-- 业务运行状态 -->
+            ,status = #{status}
+        </if>
+        <if test=" primaryKey != null and primaryKey !='' "><!-- 对接验证KEY(私钥） -->
+            ,primary_key = #{primaryKey}
+        </if>
+        <if test=" appToken != null and appToken !='' "><!-- 当前令牌值 -->
+            ,app_token = #{appToken}
+        </if>
+        <if test=" pkgUrl != null and pkgUrl !='' "><!-- 对接程序包文件下载完整路径 -->
+            ,pkg_url = #{pkgUrl}
+        </if>
+        <if test=" fb1 != null and fb1 !='' "><!-- 令牌值最后更新时间 -->
+            ,fb1 = #{fb1}
+        </if>
+        <if test=" fb2 != null and fb2 !='' "><!-- 备用2 -->
+            ,fb2 = #{fb2}
+        </if>
+        <if test=" fb3 != null and fb3 !='' "><!-- 数据同步运行状态 -->
+            ,fb3 = #{fb3}
+        </if>
+        <if test=" fb4 != null and fb4 !='' "><!-- 备用4 -->
+            ,fb4 = #{fb4}
+        </if>
+        <if test=" fb5 != null and fb5 !='' "><!-- 备用5 -->
+            ,fb5 = #{fb5}
+        </if>
+        <if test=" eb1 != null and eb1 !='' "><!-- 扩展1 -->
+            ,eb1 = #{eb1}
+        </if>
+        <if test=" eb2 != null and eb2 !='' "><!-- 扩展2 -->
+            ,eb2 = #{eb2}
+        </if>
+        <if test=" eb3 != null and eb3 !='' "><!-- 扩展3 -->
+            ,eb3 = #{eb3}
+        </if>
+        <if test=" eb4 != null and eb4 !='' "><!-- 扩展4 -->
+            ,eb4 = #{eb4}
+        </if>
+        <if test=" eb5 != null and eb5 !='' "><!-- 扩展5 -->
+            ,eb5 = #{eb5}
+        </if>
+        <if test=" goodId != null and goodId !='' "><!-- 产品ID -->
+            ,good_id = #{goodId}
+        </if>
+        <if test=" cmyId != null and cmyId !='' "><!-- 企业ID -->
+            ,cmy_id = #{cmyId}
+        </if>
+        <if test=" isDeleted != null and isDeleted !='' "><!-- 有效标识 -->
+            ,is_deleted = #{isDeleted}
+        </if>
+        <if test=" createTime != null and createTime !='' "><!-- 开通日期 -->
+            ,create_time = #{createTime}
+        </if>
+        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+            ,creator = #{creator}
+        </if>
+        <if test=" updateTime != null and updateTime !='' "><!-- 最新对接时间 -->
+            ,update_time = #{updateTime}
+        </if>
+        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+            ,updator = #{updator}
+        </if>
+        WHERE 1 = 1 
+            <if test=" id != null and id !='' "><!-- 数据识别ID -->
+                AND id = #{id}
+            </if>
+            <if test=" hosId != null and hosId !='' "><!-- 医院ID -->
+                AND hos_id = #{hosId}
+            </if>
+            <if test=" hosName != null and hosName !='' "><!-- 医院名称 -->
+                AND hos_name = #{hosName}
+            </if>
+            <if test=" addrProvince != null and addrProvince !='' "><!-- 所在省 -->
+                AND addr_province = #{addrProvince}
+            </if>
+            <if test=" addrCity != null and addrCity !='' "><!-- 所在市 -->
+                AND addr_city = #{addrCity}
+            </if>
+            <if test=" adminName != null and adminName !='' "><!-- 管理员姓名 -->
+                AND admin_name = #{adminName}
+            </if>
+            <if test=" adminPhone != null and adminPhone !='' "><!-- 管理员电话 -->
+                AND admin_phone = #{adminPhone}
+            </if>
+            <if test=" appVersion != null and appVersion !='' "><!-- 运行版本 -->
+                AND app_version = #{appVersion}
+            </if>
+            <if test=" appUseDate != null and appUseDate !='' "><!-- 版本发行日期 -->
+                AND app_use_date = #{appUseDate}
+            </if>
+            <if test=" appSecLevel != null and appSecLevel !='' "><!-- 安全等级 -->
+                AND app_sec_level = #{appSecLevel}
+            </if>
+            <if test=" encryptFlag != null and encryptFlag !='' "><!-- 加密状态 -->
+                AND encrypt_flag = #{encryptFlag}
+            </if>
+            <if test=" failedCnt != null and failedCnt !='' "><!-- 异常次数 -->
+                AND failed_cnt = #{failedCnt}
+            </if>
+            <if test=" accessFlag != null and accessFlag !='' "><!-- 心跳检查状态 -->
+                AND access_flag = #{accessFlag}
+            </if>
+            <if test=" status != null and status !='' "><!-- 业务运行状态 -->
+                AND status = #{status}
+            </if>
+            <if test=" primaryKey != null and primaryKey !='' "><!-- 对接验证KEY(私钥） -->
+                AND primary_key = #{primaryKey}
+            </if>
+            <if test=" appToken != null and appToken !='' "><!-- 当前令牌值 -->
+                AND app_token = #{appToken}
+            </if>
+            <if test=" pkgUrl != null and pkgUrl !='' "><!-- 对接程序包文件下载完整路径 -->
+                AND pkg_url = #{pkgUrl}
+            </if>
+            <if test=" fb1 != null and fb1 !='' "><!-- 令牌值最后更新时间 -->
+                AND fb1 = #{fb1}
+            </if>
+            <if test=" fb2 != null and fb2 !='' "><!-- 备用2 -->
+                AND fb2 = #{fb2}
+            </if>
+            <if test=" fb3 != null and fb3 !='' "><!-- 数据同步运行状态 -->
+                AND fb3 = #{fb3}
+            </if>
+            <if test=" fb4 != null and fb4 !='' "><!-- 备用4 -->
+                AND fb4 = #{fb4}
+            </if>
+            <if test=" fb5 != null and fb5 !='' "><!-- 备用5 -->
+                AND fb5 = #{fb5}
+            </if>
+            <if test=" eb1 != null and eb1 !='' "><!-- 扩展1 -->
+                AND eb1 = #{eb1}
+            </if>
+            <if test=" eb2 != null and eb2 !='' "><!-- 扩展2 -->
+                AND eb2 = #{eb2}
+            </if>
+            <if test=" eb3 != null and eb3 !='' "><!-- 扩展3 -->
+                AND eb3 = #{eb3}
+            </if>
+            <if test=" eb4 != null and eb4 !='' "><!-- 扩展4 -->
+                AND eb4 = #{eb4}
+            </if>
+            <if test=" eb5 != null and eb5 !='' "><!-- 扩展5 -->
+                AND eb5 = #{eb5}
+            </if>
+            <if test=" goodId != null and goodId !='' "><!-- 产品ID -->
+                AND good_id = #{goodId}
+            </if>
+            <if test=" cmyId != null and cmyId !='' "><!-- 企业ID -->
+                AND cmy_id = #{cmyId}
+            </if>
+            <if test=" isDeleted != null and isDeleted !='' "><!-- 有效标识 -->
+                AND is_deleted = #{isDeleted}
+            </if>
+            <if test=" createTime != null and createTime !='' "><!-- 开通日期 -->
+                AND create_time = #{createTime}
+            </if>
+            <if test=" creator != null and creator !='' "><!-- 创建者 -->
+                AND creator = #{creator}
+            </if>
+            <if test=" updateTime != null and updateTime !='' "><!-- 最新对接时间 -->
+                AND update_time = #{updateTime}
+            </if>
+            <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+                AND updator = #{updator}
+            </if>
+    </update>
+    <!-- 查询分页数据信息  -->
+    <select id='doSelectPage' parameterType='HospitalCloudAccessMonitorDBO' resultType='HospitalCloudAccessMonitorDBO'>
+        SELECT <include refid='tableColumns'/> FROM hospital_cloud_access_monitor
+        WHERE 1 = 1 
+        <if test=" id != null and id !='' "><!-- 数据识别ID -->
+            AND id = #{id}
+        </if>
+        <if test=" hosId != null and hosId !='' "><!-- 医院ID -->
+            AND hos_id = #{hosId}
+        </if>
+        <if test=" hosName != null and hosName !='' "><!-- 医院名称 -->
+            AND hos_name = #{hosName}
+        </if>
+        <if test=" addrProvince != null and addrProvince !='' "><!-- 所在省 -->
+            AND addr_province = #{addrProvince}
+        </if>
+        <if test=" addrCity != null and addrCity !='' "><!-- 所在市 -->
+            AND addr_city = #{addrCity}
+        </if>
+        <if test=" adminName != null and adminName !='' "><!-- 管理员姓名 -->
+            AND admin_name = #{adminName}
+        </if>
+        <if test=" adminPhone != null and adminPhone !='' "><!-- 管理员电话 -->
+            AND admin_phone = #{adminPhone}
+        </if>
+        <if test=" appVersion != null and appVersion !='' "><!-- 运行版本 -->
+            AND app_version = #{appVersion}
+        </if>
+        <if test=" appUseDate != null and appUseDate !='' "><!-- 版本发行日期 -->
+            AND app_use_date = #{appUseDate}
+        </if>
+        <if test=" appSecLevel != null and appSecLevel !='' "><!-- 安全等级 -->
+            AND app_sec_level = #{appSecLevel}
+        </if>
+        <if test=" encryptFlag != null and encryptFlag !='' "><!-- 加密状态 -->
+            AND encrypt_flag = #{encryptFlag}
+        </if>
+        <if test=" failedCnt != null and failedCnt !='' "><!-- 异常次数 -->
+            AND failed_cnt = #{failedCnt}
+        </if>
+        <if test=" accessFlag != null and accessFlag !='' "><!-- 心跳检查状态 -->
+            AND access_flag = #{accessFlag}
+        </if>
+        <if test=" status != null and status !='' "><!-- 业务运行状态 -->
+            AND status = #{status}
+        </if>
+        <if test=" primaryKey != null and primaryKey !='' "><!-- 对接验证KEY(私钥） -->
+            AND primary_key = #{primaryKey}
+        </if>
+        <if test=" appToken != null and appToken !='' "><!-- 当前令牌值 -->
+            AND app_token = #{appToken}
+        </if>
+        <if test=" pkgUrl != null and pkgUrl !='' "><!-- 对接程序包文件下载完整路径 -->
+            AND pkg_url = #{pkgUrl}
+        </if>
+        <if test=" fb1 != null and fb1 !='' "><!-- 令牌值最后更新时间 -->
+            AND fb1 = #{fb1}
+        </if>
+        <if test=" fb2 != null and fb2 !='' "><!-- 备用2 -->
+            AND fb2 = #{fb2}
+        </if>
+        <if test=" fb3 != null and fb3 !='' "><!-- 数据同步运行状态 -->
+            AND fb3 = #{fb3}
+        </if>
+        <if test=" fb4 != null and fb4 !='' "><!-- 备用4 -->
+            AND fb4 = #{fb4}
+        </if>
+        <if test=" fb5 != null and fb5 !='' "><!-- 备用5 -->
+            AND fb5 = #{fb5}
+        </if>
+        <if test=" eb1 != null and eb1 !='' "><!-- 扩展1 -->
+            AND eb1 = #{eb1}
+        </if>
+        <if test=" eb2 != null and eb2 !='' "><!-- 扩展2 -->
+            AND eb2 = #{eb2}
+        </if>
+        <if test=" eb3 != null and eb3 !='' "><!-- 扩展3 -->
+            AND eb3 = #{eb3}
+        </if>
+        <if test=" eb4 != null and eb4 !='' "><!-- 扩展4 -->
+            AND eb4 = #{eb4}
+        </if>
+        <if test=" eb5 != null and eb5 !='' "><!-- 扩展5 -->
+            AND eb5 = #{eb5}
+        </if>
+        <if test=" goodId != null and goodId !='' "><!-- 产品ID -->
+            AND good_id = #{goodId}
+        </if>
+        <if test=" cmyId != null and cmyId !='' "><!-- 企业ID -->
+            AND cmy_id = #{cmyId}
+        </if>
+        <if test=" isDeleted != null and isDeleted !='' "><!-- 有效标识 -->
+            AND is_deleted = #{isDeleted}
+        </if>
+        <if test=" createTime != null and createTime !='' "><!-- 开通日期 -->
+            AND create_time = #{createTime}
+        </if>
+        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+            AND creator = #{creator}
+        </if>
+        <if test=" updateTime != null and updateTime !='' "><!-- 最新对接时间 -->
+            AND update_time = #{updateTime}
+        </if>
+        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+            AND updator = #{updator}
+        </if>
+    </select>
+
+    <!-- 插入一条数据 -->
+    <insert id='doInsert' parameterType='HospitalCloudAccessMonitorDBO'>
+        INSERT INTO hospital_cloud_access_monitor
+          ( <include refid='tableColumns'/>) 
+        VALUES 
+          ( #{id},#{hosId},#{hosName},#{addrProvince},#{addrCity},#{adminName},#{adminPhone},#{appVersion},#{appUseDate},#{appSecLevel},#{encryptFlag},#{failedCnt},#{accessFlag},#{status},#{primaryKey},#{appToken},#{pkgUrl},#{fb1},#{fb2},#{fb3},#{fb4},#{fb5},#{eb1},#{eb2},#{eb3},#{eb4},#{eb5},#{goodId},#{cmyId},#{isDeleted},#{createTime},#{creator},#{updateTime},#{updator} )
+    </insert>
+    <!-- 修改一条数据 -->
+    <update id='doUpdate' parameterType='HospitalCloudAccessMonitorDBO'>
+        UPDATE hospital_cloud_access_monitor SET id = #{id}
+        <if test=" hosId != null and hosId !='' "><!-- 医院ID -->
+            ,hos_id = #{hosId}
+        </if>
+        <if test=" hosName != null and hosName !='' "><!-- 医院名称 -->
+            ,hos_name = #{hosName}
+        </if>
+        <if test=" addrProvince != null and addrProvince !='' "><!-- 所在省 -->
+            ,addr_province = #{addrProvince}
+        </if>
+        <if test=" addrCity != null and addrCity !='' "><!-- 所在市 -->
+            ,addr_city = #{addrCity}
+        </if>
+        <if test=" adminName != null and adminName !='' "><!-- 管理员姓名 -->
+            ,admin_name = #{adminName}
+        </if>
+        <if test=" adminPhone != null and adminPhone !='' "><!-- 管理员电话 -->
+            ,admin_phone = #{adminPhone}
+        </if>
+        <if test=" appVersion != null and appVersion !='' "><!-- 运行版本 -->
+            ,app_version = #{appVersion}
+        </if>
+        <if test=" appUseDate != null and appUseDate !='' "><!-- 版本发行日期 -->
+            ,app_use_date = #{appUseDate}
+        </if>
+        <if test=" appSecLevel != null and appSecLevel !='' "><!-- 安全等级 -->
+            ,app_sec_level = #{appSecLevel}
+        </if>
+        <if test=" encryptFlag != null and encryptFlag !='' "><!-- 加密状态 -->
+            ,encrypt_flag = #{encryptFlag}
+        </if>
+        <if test=" failedCnt != null and failedCnt !='' "><!-- 异常次数 -->
+            ,failed_cnt = #{failedCnt}
+        </if>
+        <if test=" accessFlag != null and accessFlag !='' "><!-- 心跳检查状态 -->
+            ,access_flag = #{accessFlag}
+        </if>
+        <if test=" status != null and status !='' "><!-- 业务运行状态 -->
+            ,status = #{status}
+        </if>
+        <if test=" primaryKey != null and primaryKey !='' "><!-- 对接验证KEY(私钥） -->
+            ,primary_key = #{primaryKey}
+        </if>
+        <if test=" appToken != null and appToken !='' "><!-- 当前令牌值 -->
+            ,app_token = #{appToken}
+        </if>
+        <if test=" pkgUrl != null and pkgUrl !='' "><!-- 对接程序包文件下载完整路径 -->
+            ,pkg_url = #{pkgUrl}
+        </if>
+        <if test=" fb1 != null and fb1 !='' "><!-- 令牌值最后更新时间 -->
+            ,fb1 = #{fb1}
+        </if>
+        <if test=" fb2 != null and fb2 !='' "><!-- 备用2 -->
+            ,fb2 = #{fb2}
+        </if>
+        <if test=" fb3 != null and fb3 !='' "><!-- 数据同步运行状态 -->
+            ,fb3 = #{fb3}
+        </if>
+        <if test=" fb4 != null and fb4 !='' "><!-- 备用4 -->
+            ,fb4 = #{fb4}
+        </if>
+        <if test=" fb5 != null and fb5 !='' "><!-- 备用5 -->
+            ,fb5 = #{fb5}
+        </if>
+        <if test=" eb1 != null and eb1 !='' "><!-- 扩展1 -->
+            ,eb1 = #{eb1}
+        </if>
+        <if test=" eb2 != null and eb2 !='' "><!-- 扩展2 -->
+            ,eb2 = #{eb2}
+        </if>
+        <if test=" eb3 != null and eb3 !='' "><!-- 扩展3 -->
+            ,eb3 = #{eb3}
+        </if>
+        <if test=" eb4 != null and eb4 !='' "><!-- 扩展4 -->
+            ,eb4 = #{eb4}
+        </if>
+        <if test=" eb5 != null and eb5 !='' "><!-- 扩展5 -->
+            ,eb5 = #{eb5}
+        </if>
+        <if test=" goodId != null and goodId !='' "><!-- 产品ID -->
+            ,good_id = #{goodId}
+        </if>
+        <if test=" cmyId != null and cmyId !='' "><!-- 企业ID -->
+            ,cmy_id = #{cmyId}
+        </if>
+        <if test=" isDeleted != null and isDeleted !='' "><!-- 有效标识 -->
+            ,is_deleted = #{isDeleted}
+        </if>
+        <if test=" createTime != null and createTime !='' "><!-- 开通日期 -->
+            ,create_time = #{createTime}
+        </if>
+        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+            ,creator = #{creator}
+        </if>
+        <if test=" updateTime != null and updateTime !='' "><!-- 最新对接时间 -->
+            ,update_time = #{updateTime}
+        </if>
+        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+            ,updator = #{updator}
+        </if>
+        WHERE id = #{id}
+    </update>
+    <!-- 逻辑删除一条数据 -->
+    <delete id='toDelete' parameterType='HospitalCloudAccessMonitorDBO'>
+        DELETE FROM hospital_cloud_access_monitor WHERE 1 = 1
+            <if test=" id != null and id !='' "><!-- 数据识别ID -->
+                AND id = #{id}
+            </if>
+            <if test=" hosId != null and hosId !='' "><!-- 医院ID -->
+                AND hos_id = #{hosId}
+            </if>
+    </delete>
+    <!-- 物理删除一条数据 -->
+    <delete id='doDelete' parameterType='HospitalCloudAccessMonitorDBO'>
+        DELETE FROM hospital_cloud_access_monitor WHERE 1 = 1
+            <if test=" id != null and id !='' "><!-- 数据识别ID -->
+                AND id = #{id}
+            </if>
+            <if test=" hosId != null and hosId !='' "><!-- 医院ID -->
+                AND hos_id = #{hosId}
+            </if>
+    </delete>
+    <!-- 查询一条数据  -->
+    <select id='doRead' parameterType='HospitalCloudAccessMonitorDBO' resultType='HospitalCloudAccessMonitorDBO'>
+        SELECT <include refid='tableColumns'/> FROM hospital_cloud_access_monitor WHERE 1 = 1
+            <if test=" id != null and id !='' "><!-- 数据识别ID -->
+                AND id = #{id}
+            </if>
+            <if test=" hosId != null and hosId !='' "><!-- 医院ID -->
+                AND hos_id = #{hosId}
+            </if>
+    </select>
+
+
+</mapper>

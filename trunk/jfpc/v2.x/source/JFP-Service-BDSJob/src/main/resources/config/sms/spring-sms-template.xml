@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='GB2312'?>
+<!-- 定义各种启动部署初始化工具 -->
+<beans xmlns='http://www.springframework.org/schema/beans'
+	xmlns:mvc='http://www.springframework.org/schema/mvc' 
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xmlns:p='http://www.springframework.org/schema/p'
+	xmlns:context='http://www.springframework.org/schema/context' 
+	xmlns:cache='http://www.springframework.org/schema/cache'
+	xmlns:tx='http://www.springframework.org/schema/tx'
+	xmlns:aop='http://www.springframework.org/schema/aop'
+	xmlns:rabbit='http://www.springframework.org/schema/rabbit'	
+	xsi:schemaLocation='
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		http://www.springframework.org/schema/jdbc 
+		http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd
+		'>
+		
+	<!-- 对接中心参数配置 -->
+	<bean id='myTemplateConfig' class='org.ishome.jfp.framework.sms.SMSTemplateConfig'>
+		
+        <!-- 短信发送模版-->
+        <property name='templateConfig'>
+        	<map>
+        		<!-- 停诊通知-->
+        		<entry key="TZTZ" 			value="【恒生芸泰】尊敬的用户，%s掌医APP很抱歉的通知您，您预约的%s %s 医生的 %s排班，因医院停诊被取消，请到医院窗口办理退款等相关业务。如有疑问请联系%s。" />	
+        		<!-- 注册黑名单-->
+        		<entry key="ZHHMD" 			value="【恒生芸泰】尊敬的用户，%s掌医APP提醒您，由于您的账户%s，系统根据手机挂号规则对您的APP挂号行为进行限制，%s后将自动解除限制，如有疑问请联系%s。" />	
+        		<!-- 预约挂号通知 -->  
+        		<entry key="YYGHTZ" 		value="【恒生芸泰】您已经在%s的%s成功挂号%s医生。请您在%s准时去医院检查。" />	
+        		<!-- 前置机监控 -->  
+        		<entry key="QZJJK" 			value="【恒生芸泰】%s管理员，掌医APP云监控系统提醒您，贵方前置机系统已经中断运行超过%s分钟，请及时处理。" />	
+        		<!-- 验证码 -->  
+        		<entry key="YZM" 			value="【恒生芸泰】验证码%s，%s掌医APP提醒您，有效时间为%s分钟。如有疑问请联系%s。" />	
+            	<!-- 活动 -->  
+            	<entry key="HD" 			value="【恒生芸泰】尊敬的用户，%s。退订回N" />	
+            </map>
+        </property>
+	</bean>
+	
+	
+</beans>

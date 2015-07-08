@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<beans xmlns='http://www.springframework.org/schema/beans'
+	xmlns:mvc='http://www.springframework.org/schema/mvc' 
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xmlns:p='http://www.springframework.org/schema/p'
+	xmlns:context='http://www.springframework.org/schema/context' 
+	xmlns:cache='http://www.springframework.org/schema/cache'
+	xmlns:tx='http://www.springframework.org/schema/tx'
+	xmlns:aop='http://www.springframework.org/schema/aop'
+	xmlns:rabbit='http://www.springframework.org/schema/rabbit'	
+	xsi:schemaLocation='
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		http://www.springframework.org/schema/jdbc 
+		http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd
+		'>
+
+	<!-- ********************************************************************** -->
+	
+	<!--注册数据库的连接信息 -->
+	<bean id='mysqlDataSourcePre' class='org.apache.commons.dbcp.BasicDataSource' destroy-method='close'>
+		<property name='driverClassName' value='com.mysql.jdbc.Driver' />
+		 <!-- 医院前置机数据库 -->
+		<!-- <property name='url' value='jdbc:mysql://127.0.0.1:3306/xh_his?characterEncoding=UTF-8' />
+		<property name='username' value='root' />
+		<property name='password' value='zaq12wsx' /> -->
+         <!-- 医院前置机数据库 -->
+        <!-- 
+		<property name='url' value='jdbc:mysql://127.0.0.1:3306/pre_med?characterEncoding=UTF-8' />
+		<property name='username' value='root' />
+		<property name='password' value='root' /> -->
+
+	    <!-- 医院前置机数据库 -->
+	    <property name='url' value='jdbc:mysql://10.160.29.186:3306/pre_med?characterEncoding=UTF-8' />
+		<property name='username' value='pre_med' />
+		<property name='password' value='pre_med' />  
+		
+		<!-- 	
+		<property name='url' value='jdbc:mysql://127.0.0.1:3306/test_med?characterEncoding=UTF-8' />
+		<property name='username' value='root' />
+		<property name='password' value='root' /> 
+		-->
+		
+        <!--initialSize: 初始化连接-->    
+        <property name="initialSize" value="10"/>  
+		<!--maxActive: 最大连接数量-->    
+        <property name="maxActive" value="20"/>  
+        <!--minIdle: 最小空闲连接-->    
+        <property name="minIdle" value="10"/>  
+        <!--maxIdle: 最大空闲连接-->    
+        <property name="maxIdle" value="10"/> 
+         
+        <!-- 连接被泄露时是否打印 -->  
+        <property name="logAbandoned" value="true"/>  
+        <!--removeAbandoned: 打开自动释放未被使用的连接-->    
+        <property name="removeAbandoned"  value="true"/> 
+        <!--removeAbandonedTimeout: 超时时间(以秒数为单位)-->    
+        <property name="removeAbandonedTimeout" value="5"/>  
+        <!--maxWait: 超时等待时间以毫秒为单位 1000等于60秒-->  
+        <property name="maxWait" value="100"/>  
+        <!-- 在空闲连接回收器线程运行期间休眠的时间值,以毫秒为单位. -->  
+        <property name="timeBetweenEvictionRunsMillis" value="10000"/>  
+        <!--  在每次空闲连接回收器线程(如果有)运行时检查的连接数量 -->  
+        <property name="numTestsPerEvictionRun" value="10"/>  
+        <!-- 1000 * 60 * 30  连接在池中保持空闲而不被空闲连接回收器线程-->  
+        <property name="minEvictableIdleTimeMillis" value="10000"/>  
+		
+		<!-- 验证连接是否可用，使用的SQL语句 -->
+        <property name="validationQuery" value="SELECT 1"/>
+        <!-- 指明连接是否被空闲连接回收器(如果有)进行检验.如果检测失败,则连接将被从池中去除 --> 
+        <property name="testWhileIdle" value="true"/> 
+        <!-- 借出连接时不要测试，否则很影响性能 -->
+        <property name="testOnBorrow" value="true"/> 
+	</bean>
+	
+	<!-- 配置mybatis的sqlsessionFactory -->
+	<!-- mybatis-spring -->
+	<bean id='sqlSessionFactoryPre' class='org.ishome.jfp.framework.support.MySqlSessionFactorySupport'>
+		<property name='dataSource' ref='mysqlDataSourcePre' />
+		<property name='configLocation' value='classpath:config/db/mybatis.xml' />
+		<property name='mapperLocations'>
+			<list>
+				<value>classpath*:/com/xiehe/his/beans/**/*.xml</value>
+				<value>classpath*:/com/hundsun/med/beans/**/*.xml</value>
+		 	</list>
+		</property>
+	</bean>
+	
+	<!-- 批量SqlSession -->
+	<bean id='mySqlSessionPre' class='org.mybatis.spring.SqlSessionTemplate' scope="prototype">
+		<!-- 构造参数，自动关闭sqlSession -->
+		<constructor-arg index='0' ref='sqlSessionFactoryPre' />
+		<constructor-arg index='1' value='SIMPLE' />
+	</bean>	
+	
+	<!-- ********************************************************************** -->
+	<!-- 开启Spring的事务处理 -->
+	<bean id='transactionManagerPre' class='org.springframework.jdbc.datasource.DataSourceTransactionManager'>
+		<property name='dataSource' ref='mysqlDataSourcePre' />
+	</bean>
+	
+	<tx:annotation-driven transaction-manager="transactionManagerPre" proxy-target-class="true"/>  
+		
+</beans>

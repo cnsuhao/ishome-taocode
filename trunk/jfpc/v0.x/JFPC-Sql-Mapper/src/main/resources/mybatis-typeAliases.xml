@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Bean实体别名 -->
+	<typeAliases>
+		<typeAlias alias='FrameworkData' type='org.jfpc.base.bean.FrameworkDataBean'/>
+		<typeAlias alias='DictionaryDBO' type='org.jfpc.base.dict.dbo.DictionaryDBO'/>
+		<typeAlias alias='LoginerData' 	 type='org.jfpc.base.login.bean.LoginerBean'/>
+				
+<!-- 允许登录用户 -->
+<typeAlias alias='MSSUUDBO' type='org.jfpc.platform.MSSUU.dbo.MSSUUDBO'/>
+<!-- 页面功能按钮定义 -->
+<typeAlias alias='MS0A4DBO' type='org.jfpc.platform.MS0A4.dbo.MS0A4DBO'/>
+<!-- 页面定义 -->
+<typeAlias alias='MS0A3DBO' type='org.jfpc.platform.MS0A3.dbo.MS0A3DBO'/>
+<!-- 机能模块定义 -->
+<typeAlias alias='MS0A2DBO' type='org.jfpc.platform.MS0A2.dbo.MS0A2DBO'/>
+<!-- 系统菜单定义 -->
+<typeAlias alias='MS0A1DBO' type='org.jfpc.platform.MS0A1.dbo.MS0A1DBO'/>
+<!-- TOKEN存放表 -->
+<typeAlias alias='CSSTTDBO' type='org.jfpc.platform.CSSTT.dbo.CSSTTDBO'/>
+<!-- 用户登录日志 -->
+<typeAlias alias='CSSLLDBO' type='org.jfpc.platform.CSSLL.dbo.CSSLLDBO'/>
+<!-- 动态页面定义 -->
+<typeAlias alias='MS0A5DBO' type='org.jfpc.platform.MS0A5.dbo.MS0A5DBO'/>
+<!-- 内部消息 -->
+<typeAlias alias='CS0D1DBO' type='org.jfpc.platform.CS0D1.dbo.CS0D1DBO'/>
+<!-- 系统动态 -->
+<typeAlias alias='CSSGGDBO' type='org.jfpc.platform.CSSGG.dbo.CSSGGDBO'/>
+<!-- 系统公告 -->
+<typeAlias alias='MS0C1DBO' type='org.jfpc.platform.MS0C1.dbo.MS0C1DBO'/>
+
+
+
+
+
+
+
+
+
+
+	</typeAliases>

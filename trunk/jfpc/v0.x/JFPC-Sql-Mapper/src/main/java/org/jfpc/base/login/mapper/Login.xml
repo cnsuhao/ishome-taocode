@@ -1,0 +1,68 @@
+﻿<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 角色功能权限 --> 
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='org.jfpc.base.login.dao.LoginDao'>
+
+    <!-- 获得产品安全码 -->
+    <select id='loadSecurityCode' resultType='hashmap'>
+		SELECT puk as securityCode FROM mssuu
+    </select>
+    <!-- 用户登陆  -->
+    <select id='readLoginer' parameterType='LoginerData' resultType='LoginerData'>
+		SELECT 
+			puk as userName,bbb as passWord,
+			fb1 as companyId,fb2 as productId,fb4 as verCode,
+			eb3 as activeType,eb4 as useType,eb5 as userType
+		FROM mssuu 
+		WHERE fb1 = #{userName}
+    </select>
+    
+    <!-- 记录用户登录  -->
+    <insert id='doLoginToken' parameterType='LoginerData'>
+        INSERT INTO csstt
+          ( puk,bbb,fb1,fb2,fb3,cc1) 
+        VALUES 
+          ( #{securityCode},#{token},#{productId},#{userName},#{companyId},#{loginTime})
+    </insert>
+    <insert id='doLoginLog' parameterType='LoginerData'>
+        INSERT INTO cssll
+          ( puk,fb1,fb2,fb3,fb4,fb5,cc1) 
+        VALUES 
+          ( #{securityCode},#{verCode},#{userName},#{companyId},#{useType},#{loginUrl},#{loginTime})
+    </insert>
+    
+    <!-- 检查用户登录  -->
+    <select id='checkLogIn' parameterType='LoginerData' resultType='LoginerData'>
+		SELECT bbb as token FROM csstt WHERE  fb2 = #{userName}  order by cc1 DESC
+    </select>
+    
+    <!-- 清空用户登录  -->
+    <delete id='doLogOut' parameterType='LoginerData'>
+        DELETE FROM csstt
+        <trim prefix='WHERE' prefixOverrides='AND |OR '>
+	        <if test=" userName != null and userName !='' ">
+          		AND fb2 = #{userName}
+	        </if>
+	        <if test=" token != null and token !='' ">
+	            AND bbb = #{token}
+	        </if>
+        </trim>
+    </delete>
+
+
+
+
+
+
+
+
+	<!-- 用户登陆  -->
+    <select id='getCompanyLoginer' parameterType='string' resultType='hashmap'>
+		SELECT *
+		FROM mssuu 
+		WHERE puk = #{puk}
+    </select>
+</mapper>
