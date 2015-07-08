@@ -1,0 +1,19 @@
+﻿<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 推送表 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='org.ishome.jfp.beans.push.PushDao'>
+
+    <!-- 获得用户ID  -->
+    <select id='getPhoneUserId' parameterType='PhoneUserDBO' resultType='PhoneUserDBO'>
+        SELECT * FROM phone_user WHERE hos_id = #{hosId} AND mobile_phone = #{mobilePhone} ORDER BY create_time DESC LIMIT 1
+    </select>
+
+ 	<!-- 获得用户终端类型  -->
+    <select id='getPhoneUserTerminalType' parameterType='PhoneUserTerminalDBO' resultType='PhoneUserTerminalDBO'>
+        SELECT * FROM phone_user_terminal WHERE US_ID = #{usId} AND HOS_ID = #{hosId}
+    </select>
+
+</mapper>

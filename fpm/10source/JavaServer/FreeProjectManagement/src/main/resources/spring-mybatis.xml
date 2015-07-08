@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<beans:beans xmlns='http://www.springframework.org/schema/mvc'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xmlns:beans='http://www.springframework.org/schema/beans'
+	xmlns:context='http://www.springframework.org/schema/context'
+	xsi:schemaLocation='http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd'>
+<!--注册数据库的连接信息 -->
+	<context:property-placeholder location='classpath:jdbc.properties' />
+	<!-- 数据源配置 -->
+	<beans:bean id='dataSource' class='com.mchange.v2.c3p0.ComboPooledDataSource' destroy-method='close'>
+		<!-- Base Setting -->
+		<beans:property name='driverClass' value='${work.driverClassName}' />
+		<beans:property name='jdbcUrl' value='${work.url}' />
+		<beans:property name='user' value='${work.username}' />
+		<beans:property name='password' value='${work.password}' />
+		<beans:property name='minPoolSize' value='${work.minPoolSize}'/>
+		<beans:property name='maxPoolSize' value='${work.maxPoolSize}'/>
+		<beans:property name='maxIdleTime' value='${work.maxIdleTime}'/>
+		<!-- Ext Setting -->
+		<beans:property name='acquireIncrement' value='2'/>
+		<beans:property name='maxStatements' value='0'/>
+		<beans:property name='initialPoolSize' value='2'/>
+		<beans:property name='idleConnectionTestPeriod' value='1800'/>
+		<beans:property name='acquireRetryAttempts' value='30'/>
+		<beans:property name='breakAfterAcquireFailure' value='true'/>
+		<beans:property name='testConnectionOnCheckout' value='false'/>
+	</beans:bean>
+
+	<!-- 开启Spring的事务处理 -->
+	<beans:bean id='sqlSessionFactory' class='org.mybatis.spring.SqlSessionFactoryBean'>
+		<beans:property name='dataSource' ref='dataSource' />
+		<beans:property name='configLocation' value='classpath:mybatis.xml' />
+		<!-- org.isotope.fpm.bussness.PE0101.mapper -->
+		<beans:property name='mapperLocations' value='classpath*:org/isotope/**/**/**/mapper/*.xml' />
+	</beans:bean>
+	
+	<!-- 管理工具运行权限CREAT建库/INIT初始化数据/BUILD重构/NONE无操作 -->
+	<!-- 配置数据库初始化 -->
+	<beans:bean class='org.isotope.fpm.framework.db.bean.DBConfigBean'>
+		<beans:property name='errorGoon' value='true' />
+		<beans:property name='sqlLocations'  value='classpath*:org/isotope/fpm/**/sql/*.sql' />
+		<beans:property name='dataLocations' value='classpath*:org/isotope/fpm/**/data/*.dat' />
+	</beans:bean>
+	
+	<!-- 开启Spring的事务处理 -->
+	<beans:bean id='transactionManager' class='org.springframework.jdbc.datasource.DataSourceTransactionManager'>
+		<beans:property name='dataSource' ref='dataSource' />
+	</beans:bean>
+	<!-- 批量SqlSession -->
+	<beans:bean id='sqlSession' class='org.mybatis.spring.SqlSessionTemplate'>
+		<!--构造参数，自动关闭sqlSession -->
+		<beans:constructor-arg index='0' ref='sqlSessionFactory' />
+		<beans:constructor-arg index='1' value='BATCH' />
+	</beans:bean>
+	
+</beans:beans>

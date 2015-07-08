@@ -1,0 +1,7 @@
+E:\JFPC\40开发代码\trunk\CAPC-SQLFiles\CAPC-SQLFiles\bin\Debug\CAPC-SQLFiles.exe
+E:\JFPC\40开发代码\trunk\CAPC-SQLFiles\CAPC-SQLFiles\bin\Debug\CAPC-SQLFiles.pdb
+E:\JFPC\40开发代码\trunk\CAPC-SQLFiles\CAPC-SQLFiles\obj\x86\Debug\CAPC_SQLFiles.DatabaseConf.resources
+E:\JFPC\40开发代码\trunk\CAPC-SQLFiles\CAPC-SQLFiles\obj\x86\Debug\CAPC_SQLFiles.Properties.Resources.resources
+E:\JFPC\40开发代码\trunk\CAPC-SQLFiles\CAPC-SQLFiles\obj\x86\Debug\CAPC-SQLFiles.csproj.GenerateResource.Cache
+E:\JFPC\40开发代码\trunk\CAPC-SQLFiles\CAPC-SQLFiles\obj\x86\Debug\CAPC-SQLFiles.exe
+E:\JFPC\40开发代码\trunk\CAPC-SQLFiles\CAPC-SQLFiles\obj\x86\Debug\CAPC-SQLFiles.pdb

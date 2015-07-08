@@ -1,0 +1,11 @@
+﻿<UserControl x:Class="FPM.Framework.SF.SF0502"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" Loaded="UserControl_Loaded">
+    
+    <Grid x:Name="LayoutRoot" Background="White">
+        <TextBlock Grid.Column="1" Name="OnTimeMessage" Text="2012/1/14 这个一个系统提示 " VerticalAlignment="Center"  Margin="10,6,20,6" />
+    </Grid>
+</UserControl>

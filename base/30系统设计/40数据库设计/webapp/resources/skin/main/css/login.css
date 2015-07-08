@@ -1,0 +1,26 @@
+@charset "utf-8";
+/* CSS Document */
+
+.login{top: 37px; right: 30px; width: 240px; height: 310px; padding: 30px; background:rgba(255, 255, 255, 0.5) none repeat scroll 0 0 !important; filter:Alpha(opacity=50); background:#fff;}
+.login h2{font: normal 18px "Microsoft YaHei"; color: #34516a; margin-top: 20px;}
+.login-main{height: 450px;}
+.login-nav{margin-top: -20px;}
+.login-banner, .login-banner2{background: #6b8aa9 url(../images/login_banner.jpg) center 0 no-repeat; height: 50px; padding-top: 400px; padding-left: 50px;}
+.login-banner2{background: #8bb3b6 url(../images/login_banner2.jpg) center 0 no-repeat;}
+.login-banner, .login-banner a, .login-banner a:visited, .login-banner2, .login-banner2 a, .login-banner2 a:visited{color: #fff;}
+.login-banner a:hover, .login-banner2 a:hover{color: #00428e;}
+
+.mTop18{margin-top: 18px;}
+.mTop10{margin-top: 10px;}
+.login-btn{border-radius: 6px; border:none; background: #3f86bd; height: 42px; width: 100%; font-size: 18px; color: #fff; cursor: pointer;}
+.borderLabel{position:relative;}
+.borderLabel input{width: 205px; height: 40px; border-radius: 6px; border: 1px solid #fff; padding-left: 35px; background:#fff url(../images/icon.png) no-repeat;}
+.borderLabel input.user{background-position: 10px 11px;}
+.borderLabel input.pass{background-position: 10px -25px;}
+.borderLabel input.code{background-position: 10px -54px; width: 100px;}
+.borderLabel:focus, .borderLabel input:hover{border: 1px solid #697b88;}
+.lInput{position: absolute; left: 35px; top: 0px; color: #d3d5db;}
+
+.login-tab{top: 37px; right: 30px; list-style: none; z-index: 2;}
+.login-tab li{float: left; width: 150px; background: #fff; height: 35px; line-height: 35px; cursor: pointer; color: #898989; text-align: center; font-size: 14px;}
+.login-tab li.current{background: #3f86bd; color: #fff;}

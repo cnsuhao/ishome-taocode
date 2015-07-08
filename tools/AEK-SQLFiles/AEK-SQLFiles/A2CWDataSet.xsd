@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="A2CWDataSet" targetNamespace="http://tempuri.org/A2CWDataSet.xsd" xmlns:mstns="http://tempuri.org/A2CWDataSet.xsd" xmlns="http://tempuri.org/A2CWDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="A2CWDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="A2CWDataSet" msprop:Generator_UserDSName="A2CWDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Configs" msprop:Generator_TableClassName="ConfigsDataTable" msprop:Generator_TableVarName="tableConfigs" msprop:Generator_RowChangedName="ConfigsRowChanged" msprop:Generator_TablePropName="Configs" msprop:Generator_RowDeletingName="ConfigsRowDeleting" msprop:Generator_RowChangingName="ConfigsRowChanging" msprop:Generator_RowEvHandlerName="ConfigsRowChangeEventHandler" msprop:Generator_RowDeletedName="ConfigsRowDeleted" msprop:Generator_RowClassName="ConfigsRow" msprop:Generator_UserTableName="Configs" msprop:Generator_RowEvArgName="ConfigsRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Key" msprop:Generator_ColumnVarNameInTable="columnKey" msprop:Generator_ColumnPropNameInRow="Key" msprop:Generator_ColumnPropNameInTable="KeyColumn" msprop:Generator_UserColumnName="Key" type="xs:string" />
+              <xs:element name="Value" msprop:Generator_ColumnVarNameInTable="columnValue" msprop:Generator_ColumnPropNameInRow="Value" msprop:Generator_ColumnPropNameInTable="ValueColumn" msprop:Generator_UserColumnName="Value" type="xs:string" minOccurs="0" />
+              <xs:element name="Ext" msprop:Generator_ColumnVarNameInTable="columnExt" msprop:Generator_ColumnPropNameInRow="Ext" msprop:Generator_ColumnPropNameInTable="ExtColumn" msprop:Generator_UserColumnName="Ext" type="xs:int" minOccurs="0" />
+              <xs:element name="LastTime" msprop:Generator_ColumnVarNameInTable="columnLastTime" msprop:Generator_ColumnPropNameInRow="LastTime" msprop:Generator_ColumnPropNameInTable="LastTimeColumn" msprop:Generator_UserColumnName="LastTime" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Configs" />
+      <xs:field xpath="mstns:Key" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

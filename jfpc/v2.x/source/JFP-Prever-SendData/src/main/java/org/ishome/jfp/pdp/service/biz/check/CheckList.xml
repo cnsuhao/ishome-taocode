@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+	<soap:Body>
+		<ns2:GetPatientJCSheetResponse
+			xmlns:ns2="http://interfaces.webservice.heletianxia.com/">
+			<Response>
+				<ResultCode>0</ResultCode>
+				<JCSheets>
+					<JCSheet>
+						<PatientId>A000968614</PatientId>
+						<PatName>纪淑艳</PatName>
+						<Sex>女</Sex>
+						<ReqNo>451443</ReqNo>
+						<ItemClass />
+						<ItemSubClass>彩超/胎儿常规及脐动脉血流</ItemSubClass>
+						<Status>已打印</Status>
+						<DocName>胡愔</DocName>
+						<Diagnostic>孕12+周</Diagnostic>
+						<SendDocName>胡愔</SendDocName>
+						<AuditDocName />
+						<DeptName>妇科门诊</DeptName>
+						<CheckTime>2014-04-28</CheckTime>
+						<ReportTime>2014-04-28</ReportTime>
+						<ReceiveTime />
+						<CollectTime />
+					</JCSheet>
+				</JCSheets>
+				<ErrorMsg>成功</ErrorMsg>
+				<State>0</State>
+			</Response>
+		</ns2:GetPatientJCSheetResponse>
+	</soap:Body>
+</soap:Envelope>

@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="FreeProjectManagement.BM.BM0101"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="620" d:DesignWidth="900" xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk">
+    
+    <Grid x:Name="LayoutRoot" Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="294*" />
+            <RowDefinition Height="326*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="556*" />
+            <ColumnDefinition Width="344*" />
+        </Grid.ColumnDefinitions>
+        <sdk:Label Height="28" HorizontalAlignment="Left" Margin="97,97,0,0" Name="label1" VerticalAlignment="Top" Width="120" Content="系统菜单" />
+        <sdk:Label Grid.Column="1" Height="28" HorizontalAlignment="Left" Margin="124,125,0,0" Name="label2" VerticalAlignment="Top" Width="120" Content="日历提醒" />
+        <sdk:Label Grid.Row="1" Height="28" HorizontalAlignment="Left" Margin="97,58,0,0" Name="label3" VerticalAlignment="Top" Width="120" Content="邮件内容" />
+        <sdk:Label Grid.Column="1" Grid.Row="1" Height="28" HorizontalAlignment="Left" Margin="128,82,0,0" Name="label4" VerticalAlignment="Top" Width="120" Content="待办事项" />
+    </Grid>
+</UserControl>

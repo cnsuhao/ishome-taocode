@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+	<soap:Body>
+		<ns2:GetPatientJCSheetDetailResponse
+			xmlns:ns2="http://interfaces.webservice.heletianxia.com/">
+			<Response>
+				<ResultCode>0</ResultCode>
+				<JCSheetDetail>
+					<Description>双肾缩小 双肾弥漫性病变&#xD;
+						注：请保存好报告，遗失不补！
+					</Description>
+					<Impression>\* *\\*超声所见:*\ 肝脏大小形态正常，实质回声均匀，门脉不宽 \0 \0
+						胆囊不大，壁不厚，囊内透声可，胆总管不扩张 \0 \0 胰腺大小形态及回声未见明显异常 \0 \0 脾不厚，回声均匀 \0 \0
+						右肾大小8.0x2.7cm，皮质厚0.45cm，左肾大小7.3x3.5cm，皮质厚0.47cm \0 \0
+						双肾结构欠清，实质回声增强，CDFI:肾内血流信号略减少，双侧肾盂肾盏 \0 未见扩张 \0 \0 CDFI：（-）
+						\0\*超声提示:*\ 双肾缩小 双肾弥漫性病变 \0 \0注：请保存好报告，遗失不补！</Impression>
+				</JCSheetDetail>
+				<ErrorMsg>成功</ErrorMsg>
+			</Response>
+		</ns2:GetPatientJCSheetDetailResponse>
+	</soap:Body>
+</soap:Envelope>

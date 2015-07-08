@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Bean实体别名 -->
+	<typeAliases>
+		<typeAlias alias='FrameworkData' type='org.jfpc.base.bean.FrameworkDataBean'/>
+		<typeAlias alias='DictionaryDBO' type='org.jfpc.base.dict.dbo.DictionaryDBO'/>
+		<typeAlias alias='LoginerData' 	 type='org.jfpc.base.login.bean.LoginerBean'/>		
+	</typeAliases>

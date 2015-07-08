@@ -1,0 +1,14 @@
+﻿<UserControl x:Class="FPM.Framework.Background"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:wpfx="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit/extended" 
+             mc:Ignorable="d" Loaded="UserControl_Loaded" xmlns:my="clr-namespace:FPM.Framework">
+        
+    <wpfx:BusyIndicator Name="InitContral" IsBusy="False" BusyContent="系统加载中，请稍后..." >
+        <Grid Height="670" Width="1000" x:Name="RootLayoutRoot">
+            <my:Login Loaded="Login_Loaded" />
+        </Grid>
+    </wpfx:BusyIndicator>
+</UserControl>

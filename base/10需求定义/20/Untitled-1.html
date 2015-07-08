@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+
+    <script type="text/javascript">
+	function showMenu(bizId){
+		if(bizId=='') return;
+		document.blankForm.action=bizId;
+		blankForm.submit();
+		//onout(ulid);
+	}
+
+	//画面给予系统框架迁移
+	//actionpath 当前操作跳转地址
+	//returnpath 跳转后页面回调地址
+	function toTargetForm(actionpath,returnpath){
+		document.blankForm.pageid.value=returnpath;
+		document.blankForm.action=actionpath;
+		blankForm.submit();
+	}	
+	
+	function onover(obj){
+       document.getElementById(obj).style.display='block';
+    }
+
+    function onout(obj){
+        document.getElementById(obj).style.display='none';
+    }
+    
+    function body_onload(){
+        showForm('blankForm','/WMMN/F.go');
+        resizeIFrame();
+    }
+    
+    function resizeIFrame(){
+    	var screen_width = window.screen.width ;
+    	var screen_heigh = window.screen.height ;
+    	var cur_height = 436;
+    	if(screen_width == 1024 && screen_heigh==768){
+    		cur_height = 436;
+    	}else if(screen_width == 1152 && screen_heigh==864){
+    		cur_height = 516;
+    	}else if(screen_width == 1280 && screen_heigh==720){
+    		cur_height = 380;
+    	}else if(screen_width == 1280 && screen_heigh==768){
+    		cur_height = 436;
+    	}else if(screen_width == 1280 && screen_heigh==800){
+    		cur_height = 460;
+    	}else if(screen_width == 1280 && screen_heigh==960){
+    		cur_height = 610;
+    	}else if(screen_width == 1280 && screen_heigh==1024){
+    		cur_height = 690;
+    	}else if(screen_width == 1360 && screen_heigh==768){
+    		cur_height = 436;
+    	}else if(screen_width == 1366 && screen_heigh==768){
+    		cur_height = 436;
+    	}else if(screen_width == 1600 && screen_heigh==900){
+    		cur_height = 560;
+    	}else if(screen_width == 1600 && screen_heigh==1024){
+    		cur_height = 690;
+    	}else if(screen_width == 1600 && screen_heigh==1200){
+    		cur_height = 740;
+    	}else if(screen_width == 1600 && screen_heigh==1050){
+    		cur_height = 718;
+    	}else if(screen_width == 1920 && screen_heigh==1080){
+    		cur_height = 708;
+    	}else if(screen_width == 1920 && screen_heigh==1200){
+    		cur_height = 708;
+    	}
+    	main_iframe.height = cur_height;
+    }
+    
+	</script>
+
+
+</head>
+ <body>
+
+  <form action="" id="blankForm" name="blankForm" target="BizFrame" method="post">  												
+	<input type="hidden" name="LoginUrl" id="LoginUrl" value="">
+	<input type="hidden" name="eb5" id="eb5" value="">
+	<input type="hidden" name="pageid" id="pageid" value="WM.QT">	
+	<input type="hidden" name="listParams" id="listParams" value="">	
+  </form>
+
+
+ <table width="100%" border="1"  style="background:#F8F8F8; border-top:1px solid #D8D8D8; border-left:1px solid #D8D8D8; border-right:1px solid #D8D8D8; border-bottom:1px solid #D8D8D8;">
+   <tr>
+     <td colspan="2"><table width="100%" border="1">
+  <tr>
+    <td width="240">JFPC</td>
+    <td><table width="100%" border="1">
+      <tr>
+        <td colspan="2">登录用户名</td>
+        <td width="21%">设置 换肤</td>
+        <td width="22%">&nbsp;</td>
+      </tr>
+      <tr>
+        <td width="21%">首页</td>
+        <td colspan="3">提示信息</td>
+        </tr>
+    </table></td>
+    <td width="300"><table width="100%" border="1">
+      <tr>
+        <td>手机版</td>
+        <td>反馈建议</td>
+        <td>帮助中心</td>
+        <td>退出</td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+    </table></td>
+  </tr>
+</table></td>
+   </tr>
+   <tr>
+     <td width="210"><table width="210" border="1">
+  <tr>
+    <td height="207">
+      <table width="100%" height="200" border="1">
+        <tr>
+          <td><p>48*48</p></td>
+          <td>&nbsp;</td>
+          <td><input type="button" value="快捷图标" onclick="showMenu('http://www.163.com','')" /></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td><p>48*48</p></td>
+          <td><input type="button" name="button" id="button" value="提交"   onclick="showMenu('http://www.163.com','')" /></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td><p>48*48</p></td>
+        </tr>
+      </table></td>
+  </tr>
+  <tr>
+    <td>菜单</td>
+  </tr>
+  <tr>
+    <td>应用</td>
+  </tr>
+</table></td>
+     <td><iframe src="javascript:'';"  width="100%" height="100%" frameborder="no" border="0" marginwidth="0" marginheight="0" allowtransparency="yes" id="BizFrame" name="BizFrame"></iframe>
+</td>
+   </tr>
+ </table>
+  
+ </body>
+</html>

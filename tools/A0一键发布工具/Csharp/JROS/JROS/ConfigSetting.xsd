@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ConfigSetting" targetNamespace="http://tempuri.org/ConfigSetting.xsd" xmlns:mstns="http://tempuri.org/ConfigSetting.xsd" xmlns="http://tempuri.org/ConfigSetting.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ConfigSetting" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="ConfigSetting" msprop:Generator_UserDSName="ConfigSetting">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Config" msprop:Generator_TableClassName="ConfigDataTable" msprop:Generator_TableVarName="tableConfig" msprop:Generator_TablePropName="Config" msprop:Generator_RowDeletingName="ConfigRowDeleting" msprop:Generator_UserTableName="Config" msprop:Generator_RowChangingName="ConfigRowChanging" msprop:Generator_RowEvHandlerName="ConfigRowChangeEventHandler" msprop:Generator_RowDeletedName="ConfigRowDeleted" msprop:Generator_RowEvArgName="ConfigRowChangeEvent" msprop:Generator_RowChangedName="ConfigRowChanged" msprop:Generator_RowClassName="ConfigRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Puk" msprop:Generator_ColumnVarNameInTable="columnPuk" msprop:Generator_ColumnPropNameInRow="Puk" msprop:Generator_ColumnPropNameInTable="PukColumn" msprop:Generator_UserColumnName="Puk" type="xs:int" minOccurs="0" />
+              <xs:element name="Meno" msprop:Generator_ColumnVarNameInTable="columnMeno" msprop:Generator_ColumnPropNameInRow="Meno" msprop:Generator_ColumnPropNameInTable="MenoColumn" msprop:Generator_UserColumnName="Meno" type="xs:string" minOccurs="0" />
+              <xs:element name="Key" msprop:Generator_ColumnVarNameInTable="columnKey" msprop:Generator_ColumnPropNameInRow="Key" msprop:Generator_ColumnPropNameInTable="KeyColumn" msprop:Generator_UserColumnName="Key" type="xs:string" minOccurs="0" />
+              <xs:element name="Value" msprop:Generator_ColumnVarNameInTable="columnValue" msprop:Generator_ColumnPropNameInRow="Value" msprop:Generator_ColumnPropNameInTable="ValueColumn" msprop:Generator_UserColumnName="Value" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

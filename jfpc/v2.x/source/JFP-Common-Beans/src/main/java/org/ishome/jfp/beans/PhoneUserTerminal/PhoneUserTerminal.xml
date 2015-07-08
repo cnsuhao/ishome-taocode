@@ -1,0 +1,124 @@
+﻿<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 用户终端表 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='org.ishome.jfp.beans.PhoneUserTerminal.PhoneUserTerminalDao'>
+    <!-- 表字段信息  -->
+    <sql id='tableColumns'>
+        us_id,hos_id,terminal_type,token,push_token,update_time
+    </sql>
+
+    <!-- 根据条件更新所有记录 -->
+    <update id='doUpdateAll' parameterType='PhoneUserTerminalDBO'>
+        UPDATE phone_user_terminal SET us_id = #{usId}
+        <if test=" hosId != null and hosId !='' "><!-- 医院ID -->
+            ,hos_id = #{hosId}
+        </if>
+        <if test=" terminalType != null and terminalType !='' "><!-- 终端类型：android:1,ios:2 -->
+            ,terminal_type = #{terminalType}
+        </if>
+        <if test=" token != null and token !='' "><!-- 手机的唯一标识 -->
+            ,token = #{token}
+        </if>
+        <if test=" pushToken != null and pushToken !='' "><!-- IOS推送token -->
+            ,push_token = #{pushToken}
+        </if>
+        <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+            ,update_time = #{updateTime}
+        </if>
+        WHERE 1 = 1 
+            <if test=" usId != null and usId !='' "><!-- 用户ID -->
+                AND us_id = #{usId}
+            </if>
+            <if test=" hosId != null and hosId !='' "><!-- 医院ID -->
+                AND hos_id = #{hosId}
+            </if>
+            <if test=" terminalType != null and terminalType !='' "><!-- 终端类型：android:1,ios:2 -->
+                AND terminal_type = #{terminalType}
+            </if>
+            <if test=" token != null and token !='' "><!-- 手机的唯一标识 -->
+                AND token = #{token}
+            </if>
+            <if test=" pushToken != null and pushToken !='' "><!-- IOS推送token -->
+                AND push_token = #{pushToken}
+            </if>
+            <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+                AND update_time = #{updateTime}
+            </if>
+    </update>
+    <!-- 查询分页数据信息  -->
+    <select id='doSelectPage' parameterType='PhoneUserTerminalDBO' resultType='PhoneUserTerminalDBO'>
+        SELECT <include refid='tableColumns'/> FROM phone_user_terminal
+        WHERE 1 = 1 
+        <if test=" usId != null and usId !='' "><!-- 用户ID -->
+            AND us_id = #{usId}
+        </if>
+        <if test=" hosId != null and hosId !='' "><!-- 医院ID -->
+            AND hos_id = #{hosId}
+        </if>
+        <if test=" terminalType != null and terminalType !='' "><!-- 终端类型：android:1,ios:2 -->
+            AND terminal_type = #{terminalType}
+        </if>
+        <if test=" token != null and token !='' "><!-- 手机的唯一标识 -->
+            AND token = #{token}
+        </if>
+        <if test=" pushToken != null and pushToken !='' "><!-- IOS推送token -->
+            AND push_token = #{pushToken}
+        </if>
+        <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+            AND update_time = #{updateTime}
+        </if>
+    </select>
+
+    <!-- 插入一条数据 -->
+    <insert id='doInsert' parameterType='PhoneUserTerminalDBO'>
+        INSERT INTO phone_user_terminal
+          ( <include refid='tableColumns'/>) 
+        VALUES 
+          ( #{usId},#{hosId},#{terminalType},#{token},#{pushToken},#{updateTime} )
+    </insert>
+    <!-- 修改一条数据 -->
+    <update id='doUpdate' parameterType='PhoneUserTerminalDBO'>
+        UPDATE phone_user_terminal SET us_id = #{usId}
+        <if test=" hosId != null and hosId !='' "><!-- 医院ID -->
+            ,hos_id = #{hosId}
+        </if>
+        <if test=" terminalType != null and terminalType !='' "><!-- 终端类型：android:1,ios:2 -->
+            ,terminal_type = #{terminalType}
+        </if>
+        <if test=" token != null and token !='' "><!-- 手机的唯一标识 -->
+            ,token = #{token}
+        </if>
+        <if test=" pushToken != null and pushToken !='' "><!-- IOS推送token -->
+            ,push_token = #{pushToken}
+        </if>
+        <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+            ,update_time = #{updateTime}
+        </if>
+        WHERE us_id = #{usId} 
+    </update>
+    <!-- 逻辑删除一条数据 -->
+    <delete id='toDelete' parameterType='PhoneUserTerminalDBO'>
+        DELETE FROM phone_user_terminal WHERE us_id = #{usId}
+            <if test=" hosId != null and hosId !='' "><!-- 医院ID -->
+                AND hos_id = #{hosId}
+            </if>
+    </delete>
+    <!-- 物理删除一条数据 -->
+    <delete id='doDelete' parameterType='PhoneUserTerminalDBO'>
+        DELETE FROM phone_user_terminal WHERE us_id = #{usId}
+            <if test=" hosId != null and hosId !='' "><!-- 医院ID -->
+                AND hos_id = #{hosId}
+            </if>
+    </delete>
+    <!-- 查询一条数据  -->
+    <select id='doRead' parameterType='PhoneUserTerminalDBO' resultType='PhoneUserTerminalDBO'>
+        SELECT <include refid='tableColumns'/> FROM phone_user_terminal WHERE us_id = #{usId}
+            <if test=" hosId != null and hosId !='' "><!-- 医院ID -->
+                AND hos_id = #{hosId}
+            </if>
+    </select>
+
+</mapper>

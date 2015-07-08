@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="FPM.Framework.SF.SF0101"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit"
+    xmlns:my="clr-namespace:FPM.Framework.SF"
+    mc:Ignorable="d" Loaded="UserControl_Loaded">
+
+    <Grid x:Name="LayoutRoot" Background="Gainsboro">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="34" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="91" />
+            <ColumnDefinition Width="900*" />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="1" Margin="0,0,0,1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="250" />
+            </Grid.ColumnDefinitions>
+            <my:SF0201 />
+            <my:SF0202 Grid.Column="1"/>
+        </Grid>
+        <Grid Grid.RowSpan="3" Margin="0,0,1,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="132" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="90" />
+            </Grid.RowDefinitions>
+            <my:SF0301/>
+            <my:SF0302 Grid.Row="1" Margin="0,1,0,1" />
+            <my:SF0303 Grid.Row="2" />
+        </Grid>
+        <Grid Grid.Column="1" Grid.Row="2" Margin="0,1,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="180" />
+                <ColumnDefinition Width="546*" />
+                <ColumnDefinition Width="120" />
+            </Grid.ColumnDefinitions>
+            <my:SF0501 />
+            <my:SF0502 Grid.Column="1" Margin="1,0,1,0" />
+            <my:SF0503 Grid.Column="2" />
+        </Grid>
+        <my:SF0401 Grid.Column="1" Grid.Row="1" />
+        <my:SF0402 Grid.Column="1" Grid.Row="1" x:Name="PopupListForm" Visibility="Hidden"/>
+        <my:SF0403 Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,10" Visibility="Hidden"/>
+    </Grid>
+</UserControl>
