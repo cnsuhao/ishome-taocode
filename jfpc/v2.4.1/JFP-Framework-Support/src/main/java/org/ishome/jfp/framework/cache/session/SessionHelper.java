@@ -1,6 +1,6 @@
 package org.ishome.jfp.framework.cache.session;
 
-import org.ishome.jfp.framework.cache.ICatchService;
+import org.ishome.jfp.framework.cache.ICacheService;
 import org.ishome.jfp.framework.utils.BeanFactoryHelper;
 
 /**
@@ -13,7 +13,7 @@ public class SessionHelper {
 	
 	public static final String SESSION_SERVICE_NAME = "mySessionService";
 
-	public static ICatchService getMqService() {
+	public static ICacheService getMqService() {
 		return BeanFactoryHelper.getBean(SESSION_SERVICE_NAME);
 	}
 
