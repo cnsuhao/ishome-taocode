@@ -2,7 +2,7 @@ package org.ishome.jfp.framework.push;
 
 import org.ishome.jfp.framework.beands.common.RedisChannelConfigBean;
 import org.ishome.jfp.framework.beands.pub.PushBean;
-import org.ishome.jfp.framework.cache.ICatchService;
+import org.ishome.jfp.framework.cache.ICacheService;
 import org.ishome.jfp.framework.constants.ISFrameworkConstants;
 import org.ishome.jfp.framework.constants.pub.ISPushMessageConstant;
 import org.ishome.jfp.framework.support.ISPhonePushSupport;
@@ -35,13 +35,13 @@ public class UserPushSendServiceImpl extends PushChannelConfig implements ISFram
 		this.redisConfig = redisConfig;
 	}
 
-	ICatchService catchService;
+	ICacheService catchService;
 
-	public ICatchService getCatchService() {
+	public ICacheService getCatchService() {
 		return catchService;
 	}
 
-	public void setCatchService(ICatchService catchService) {
+	public void setCatchService(ICacheService catchService) {
 		this.catchService = catchService;
 	}
 

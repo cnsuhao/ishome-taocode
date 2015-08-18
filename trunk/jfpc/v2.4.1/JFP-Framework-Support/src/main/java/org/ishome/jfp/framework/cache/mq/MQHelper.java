@@ -1,6 +1,6 @@
 package org.ishome.jfp.framework.cache.mq;
 
-import org.ishome.jfp.framework.cache.ICatchService;
+import org.ishome.jfp.framework.cache.ICacheService;
 import org.ishome.jfp.framework.utils.BeanFactoryHelper;
 
 /**
@@ -13,7 +13,7 @@ public class MQHelper {
 	
 	public static final String MQ_SERVICE_NAME = "myMqService";
 
-	public static ICatchService getMqService() {
+	public static ICacheService getMqService() {
 		return BeanFactoryHelper.getBean(MQ_SERVICE_NAME);
 	}
 

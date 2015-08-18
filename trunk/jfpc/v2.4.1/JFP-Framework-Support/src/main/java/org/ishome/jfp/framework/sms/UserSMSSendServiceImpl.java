@@ -2,7 +2,7 @@ package org.ishome.jfp.framework.sms;
 
 import org.ishome.jfp.framework.beands.common.RedisChannelConfigBean;
 import org.ishome.jfp.framework.beands.pub.SMSBean;
-import org.ishome.jfp.framework.cache.ICatchService;
+import org.ishome.jfp.framework.cache.ICacheService;
 import org.ishome.jfp.framework.constants.ISFrameworkConstants;
 import org.ishome.jfp.framework.support.ISSMSSupport;
 import org.ishome.jfp.framework.utils.EmptyHelper;
@@ -42,13 +42,13 @@ public class UserSMSSendServiceImpl extends SMSChannelConfig implements ISSMSSup
 		this.redisConfig = redisConfig;
 	}
 
-	ICatchService catchService;
+	ICacheService catchService;
 
-	public ICatchService getCatchService() {
+	public ICacheService getCatchService() {
 		return catchService;
 	}
 
-	public void setCatchService(ICatchService catchService) {
+	public void setCatchService(ICacheService catchService) {
 		this.catchService = catchService;
 	}
 

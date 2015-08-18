@@ -6,7 +6,7 @@ package org.ishome.jfp.framework.cache;
  * @version 2.0.0
  * @since 2.0.0 2015/1/19
  */
-public interface ICatchService extends ISessionService {
+public interface ICacheService extends ISessionService {
 	////////////////////数据缓存////////////////////////////////
 	/**
 	 * 保存数据到缓存中心
