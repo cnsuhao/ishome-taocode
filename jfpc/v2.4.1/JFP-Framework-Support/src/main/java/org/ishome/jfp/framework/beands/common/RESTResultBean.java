@@ -34,7 +34,7 @@ public class RESTResultBean extends ObjectBean implements ISFrameworkConstants {
 	/**
 	 * 提示信息
 	 */
-	private String message = MESSAGE_WAITING;// 对接返回信息 空:正确 其他：对应对接方错误描述
+	private String message = MESSAGE_PROC_WAITING;// 对接返回信息 空:正确 其他：对应对接方错误描述
 
 	/**
 	 * 返回结果
