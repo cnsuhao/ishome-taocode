@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import org.ishome.jfp.framework.beands.common.RedisChannelConfigBean;
 import org.ishome.jfp.framework.utils.EmptyHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +20,7 @@ import redis.clients.util.Pool;
  * @author fucy
  * @version 2.3.0 2015/6/11
  * @since 2.3.0
+ * @see RedisChannelConfigBean
  */
 public class JedisUtil {
 	private static final Logger logger = LoggerFactory.getLogger(JedisUtil.class);

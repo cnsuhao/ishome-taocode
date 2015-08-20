@@ -41,9 +41,9 @@ public interface ISFrameworkConstants {
 	public static String Public_Key_Cryptography = "";
 
 	public final static String SYSTEM_ERROR_CODE = "9999";
-	public final static String SYSTEM_ERROR_MESSAGE = "都什么年代了，网络还不通~";
-	public final static String JOB_MESSAGE_ERROR = "我正在被网络折磨，求拯救！";
-	public static final String MESSAGE_WAITING="请求正在处理中";
+	public final static String MESSAGE_ERROR_SYSTEM = "都什么年代了，网络还不通~";
+	public final static String MESSAGE_ERROR_SYNC = "我正在被网络折磨，求拯救！";
+	public static final String MESSAGE_PROC_WAITING="请求正在处理中";
 	public final static String TREE_LEVEL_TAG = "@@";
 
 	public final static String undefined = "undefined";
