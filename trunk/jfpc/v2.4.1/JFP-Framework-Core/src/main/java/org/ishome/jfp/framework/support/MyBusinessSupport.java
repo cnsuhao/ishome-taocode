@@ -25,7 +25,7 @@ public class MyBusinessSupport implements ISFrameworkConstants, ISModelConstants
 	/**
 	 * 提示信息
 	 */
-	protected String returnMessage = JOB_MESSAGE_ERROR;//
+	protected String returnMessage = MESSAGE_ERROR_SYNC;//
 	/**
 	 * 接口返回的数据
 	 */
