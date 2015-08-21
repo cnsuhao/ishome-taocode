@@ -1,0 +1,248 @@
+﻿<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 科室表 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='com.hundsun.his.beans.Department.DepartmentDao'>
+    <!-- 表字段信息  -->
+    <sql id='tableColumns'>
+        dept_id,hos_id,par_dept_id,name,tel_no,remark,resume,detail,addr,state,dept_type,reminder,priority,access_dept_id,update_time
+    </sql>
+
+	<!-- 获取当前医院的科室信息 -->
+    <select id='getAccessDeptId' parameterType='DepartmentDBO' resultType='DepartmentDBO'>
+        SELECT * FROM department 
+        WHERE hos_id= #{hosId} AND access_dept_id IS NOT NULL
+ 	</select>
+	<!-- 将待对接的医院的全部科室状态state置为-2 表示未对接  -->
+	<update id='delDepartment' parameterType='DepartmentDBO'>
+        UPDATE department SET state = -2
+        WHERE hos_id = #{hosId} AND access_dept_id IS NOT NULL 
+        <if test=" state == -1 ">
+           AND 1=0 
+        </if>
+    </update>
+    <!-- 查询分页数据信息  -->
+    <select id='doSelectPage' parameterType='DepartmentDBO' resultType='DepartmentDBO'>
+        SELECT <include refid='tableColumns'/> FROM department
+        WHERE 1 = 1 
+        <if test=" deptId != null and deptId !='' "><!-- 科室ID -->
+            AND dept_id = #{deptId}
+        </if>
+        <if test=" hosId != null and hosId !='' "><!-- 所属医院ID -->
+            AND hos_id = #{hosId}
+        </if>
+        <if test=" parDeptId != null and parDeptId !='' "><!-- 父科室ID -->
+            AND par_dept_id = #{parDeptId}
+        </if>
+        <if test=" name != null and name !='' "><!-- 科室名 -->
+            AND name = #{name}
+        </if>
+        <if test=" telNo != null and telNo !='' "><!-- 门诊电话 -->
+            AND tel_no = #{telNo}
+        </if>
+        <if test=" remark != null and remark !='' "><!-- 备注 -->
+            AND remark = #{remark}
+        </if>
+        <if test=" resume != null and resume !='' "><!-- 科室简介 -->
+            AND resume = #{resume}
+        </if>
+        <if test=" detail != null and detail !='' "><!-- 科室详细介绍 -->
+            AND detail = #{detail}
+        </if>
+        <if test=" addr != null and addr !='' "><!-- 科室位置 -->
+            AND addr = #{addr}
+        </if>
+        <if test=" state != null and state !='' "><!-- 状态：冻结(0)，有效(1)，撤销(2)，删除(-1)等 -->
+            AND state = #{state}
+        </if>
+        <if test=" deptType != null and deptType !='' "><!-- 科室类型 0门诊科室 1 住院等其他科室 -->
+            AND dept_type = #{deptType}
+        </if>
+        <if test=" reminder != null and reminder !='' "><!-- 温馨提醒 -->
+            AND reminder = #{reminder}
+        </if>
+        <if test=" priority != null and priority !='' "><!-- 更新时间，用于科室置顶排序 -->
+            AND priority = #{priority}
+        </if>
+        <if test=" accessDeptId != null and accessDeptId !='' "><!-- HIS系统科室ID -->
+            AND access_dept_id = #{accessDeptId}
+        </if>
+        <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+            AND update_time = ${updateTime}
+        </if>
+    </select>
+
+    <!-- 插入一条数据 -->
+    <insert id='doInsert' parameterType='DepartmentDBO'>
+        INSERT INTO department
+          ( <include refid='tableColumns'/>) 
+        VALUES 
+          ( #{deptId},#{hosId},#{parDeptId},#{name},#{telNo},#{remark},#{resume},#{detail},#{addr},#{state},#{deptType},#{reminder},#{priority},#{accessDeptId},#{updateTime} )
+    </insert>
+    <!-- 修改一条数据 -->
+    <update id='doUpdate' parameterType='DepartmentDBO'>
+        UPDATE department SET dept_id = #{deptId} 
+        <if test=" hosId != null and hosId !='' "><!-- 所属医院ID -->
+            ,hos_id = #{hosId}
+        </if>
+        <if test=" parDeptId != null and parDeptId !='' "><!-- 父科室ID -->
+            ,par_dept_id = #{parDeptId}
+        </if>
+        <if test=" name != null and name !='' "><!-- 科室名 -->
+            ,name = #{name}
+        </if>
+        <if test=" telNo != null and telNo !='' "><!-- 门诊电话 -->
+            ,tel_no = #{telNo}
+        </if>
+        <if test=" remark != null and remark !='' "><!-- 备注 -->
+            ,remark = #{remark}
+        </if>
+        <if test=" resume != null and resume !='' "><!-- 科室简介 -->
+            ,resume = #{resume}
+        </if>
+        <if test=" detail != null and detail !='' "><!-- 科室详细介绍 -->
+            ,detail = #{detail}
+        </if>
+        <if test=" addr != null and addr !='' "><!-- 科室位置 -->
+            ,addr = #{addr}
+        </if>
+        <if test=" state != null and state !='' "><!-- 状态：冻结(0)，有效(1)，撤销(2)，删除(-1)等 -->
+            ,state = #{state}
+        </if>
+        <if test=" deptType != null and deptType !='' "><!-- 科室类型 0门诊科室 1 住院等其他科室 -->
+            ,dept_type = #{deptType}
+        </if>
+        <if test=" reminder != null and reminder !='' "><!-- 温馨提醒 -->
+            ,reminder = #{reminder}
+        </if>
+        <if test=" priority != null and priority !='' "><!-- 更新时间，用于科室置顶排序 -->
+            ,priority = #{priority}
+        </if>
+        <if test=" accessDeptId != null and accessDeptId !='' "><!-- HIS系统科室ID -->
+            ,access_dept_id = #{accessDeptId}
+        </if>
+        <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+            ,update_time = ${updateTime}
+        </if>
+        WHERE dept_id = #{deptId} 
+        <if test=" accessDeptId != null and accessDeptId !='' "><!-- HIS系统科室ID -->
+            AND access_dept_id = #{accessDeptId}
+        </if>
+    </update>
+    <!-- 修改一条数据 -->
+    <update id='doUpdateByAccess' parameterType='DepartmentDBO'>
+        UPDATE department SET dept_id = #{deptId} 
+        <if test=" hosId != null and hosId !='' "><!-- 所属医院ID -->
+            ,hos_id = #{hosId}
+        </if>
+        <if test=" parDeptId != null and parDeptId !='' "><!-- 父科室ID -->
+            ,par_dept_id = #{parDeptId}
+        </if>
+        <if test=" name != null and name !='' "><!-- 科室名 -->
+            ,name = #{name}
+        </if>
+        <if test=" telNo != null and telNo !='' "><!-- 门诊电话 -->
+            ,tel_no = #{telNo}
+        </if>
+        <if test=" remark != null and remark !='' "><!-- 备注 -->
+            ,remark = #{remark}
+        </if>
+        <if test=" resume != null and resume !='' "><!-- 科室简介 -->
+            ,resume = #{resume}
+        </if>
+        <if test=" detail != null and detail !='' "><!-- 科室详细介绍 -->
+            ,detail = #{detail}
+        </if>
+        <if test=" addr != null and addr !='' "><!-- 科室位置 -->
+            ,addr = #{addr}
+        </if>
+        <!-- 状态：冻结(0)，有效(1)，撤销(2)，删除(-1)等 -->
+            ,state = #{state}
+        <!-- 科室类型 0门诊科室 1 住院等其他科室 -->
+            ,dept_type = #{deptType}
+        <if test=" accessDeptId != null and accessDeptId !='' "><!-- HIS系统科室ID -->
+            ,access_dept_id = #{accessDeptId}
+        </if>
+        <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+            ,update_time = #{updateTime}
+        </if>
+        WHERE hos_id = #{hosId} 
+        <if test=" accessDeptId != null and accessDeptId !='' "><!-- 对接医院Id -->
+            AND access_dept_id = #{accessDeptId}
+        </if>
+    </update>
+    <!-- 修改一条数据 -->
+    <update id='doUpdateByName' parameterType='DepartmentDBO'>
+        UPDATE department SET dept_id = #{deptId} 
+        <if test=" hosId != null and hosId !='' "><!-- 所属医院ID -->
+            ,hos_id = #{hosId}
+        </if>
+        <if test=" parDeptId != null and parDeptId !='' "><!-- 父科室ID -->
+            ,par_dept_id = #{parDeptId}
+        </if>
+        <if test=" name != null and name !='' "><!-- 科室名 -->
+            ,name = #{name}
+        </if>
+        <if test=" telNo != null and telNo !='' "><!-- 门诊电话 -->
+            ,tel_no = #{telNo}
+        </if>
+        <if test=" remark != null and remark !='' "><!-- 备注 -->
+            ,remark = #{remark}
+        </if>
+        <if test=" resume != null and resume !='' "><!-- 科室简介 -->
+            ,resume = #{resume}
+        </if>
+        <if test=" detail != null and detail !='' "><!-- 科室详细介绍 -->
+            ,detail = #{detail}
+        </if>
+        <if test=" addr != null and addr !='' "><!-- 科室位置 -->
+            ,addr = #{addr}
+        </if>
+        <!-- 状态：冻结(0)，有效(1)，撤销(2)，删除(-1)等 -->
+            ,state = #{state}
+       
+        <if test=" accessDeptId != null and accessDeptId !='' "><!-- HIS系统科室ID -->
+            ,access_dept_id = #{accessDeptId}
+        </if>
+        <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+            ,update_time = #{updateTime}
+        </if>
+        WHERE hos_id = #{hosId} 
+        <if test=" name != null and name !='' "><!-- 科室名 -->
+            AND name = #{name}
+        </if>
+    </update>
+    <!-- 逻辑删除一条数据 -->
+    <delete id='toDelete' parameterType='DepartmentDBO'>
+        UPDATE department SET state= -1 WHERE dept_id = #{deptId}
+            <if test=" hosId != null and hosId !='' "><!-- 所属医院ID -->
+                AND hos_id = #{hosId}
+            </if>
+            <if test=" parDeptId != null and parDeptId !='' "><!-- 父科室ID -->
+                AND par_dept_id = #{parDeptId}
+            </if>
+    </delete>
+    <!-- 物理删除一条数据 -->
+    <delete id='doDelete' parameterType='DepartmentDBO'>
+        DELETE FROM department WHERE dept_id = #{deptId}
+            <if test=" hosId != null and hosId !='' "><!-- 所属医院ID -->
+                AND hos_id = #{hosId}
+            </if>
+            <if test=" parDeptId != null and parDeptId !='' "><!-- 父科室ID -->
+                AND par_dept_id = #{parDeptId}
+            </if>
+    </delete>
+    <!-- 查询一条数据  -->
+    <select id='doRead' parameterType='DepartmentDBO' resultType='DepartmentDBO'>
+        SELECT <include refid='tableColumns'/> FROM department WHERE dept_id = #{deptId}
+            <if test=" hosId != null and hosId !='' "><!-- 所属医院ID -->
+                AND hos_id = #{hosId}
+            </if>
+            <if test=" parDeptId != null and parDeptId !='' "><!-- 父科室ID -->
+                AND par_dept_id = #{parDeptId}
+            </if>
+    </select>
+
+</mapper>

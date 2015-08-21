@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- 定义各种启动部署初始化工具 -->
+<beans xmlns='http://www.springframework.org/schema/beans'
+	xmlns:mvc='http://www.springframework.org/schema/mvc' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xmlns:context='http://www.springframework.org/schema/context' xmlns:tx='http://www.springframework.org/schema/tx'
+	xmlns:aop='http://www.springframework.org/schema/aop'
+	xsi:schemaLocation='
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		http://www.springframework.org/schema/jdbc 
+		http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd
+		'>
+	
+	<!-- 系统消息队列 -->
+	<bean id='myMedMqService' class='com.hundsun.med.framework.mq.map.MyMaps'>	
+	</bean>
+		
+	<!-- 对接中心参数配置 -->
+	<bean id='myCloundDataReceiveAPI' class='com.hundsun.med.hdp.conf.CloundApiConfig'>
+		<!-- 医院对接ID -->
+		<property name='hospitalId' value='2c9082834cc77afb014ccad1c68b0015'/>
+		<!-- 创建日期YYYYMMDD -->
+		<property name='creatingDate' value='20150420'/>		
+		<!-- 服务器地址，如果不是跟路径部署，需要添加工程名称，末尾不要'/'符号 -->
+		<property name='serverUrl' value='http://127.0.0.1:8888'/><!--   -->
+        <!-- <property name='serverUrl' value='http://123.56.3.239:8888/HS'/>   -->
+        <!--<property name='serverUrl' value='http://192.168.1.129:8888'/>  -->
+		<!-- 云端服务接口地址 -->
+		<property name='cloundApiConfig'>
+			<!-- ISJobConstants -->
+			<!-- /{hosId}/{bizName} -->
+            <map>   
+            	<!-- 前置机对接接口，下行业务 -->          	
+            	<entry key='sync' 			value='/v200/hos/sync' />				<!-- 数据对接 -->            	
+            	<entry key='biz' 			value='/v205/hos/biz' />				<!-- 日常业务对接 -->            	
+            	<!-- 前置机对接接口，处理结果回传业务 -->
+            	<entry key='synccheck' 		value='/v200/hos/synccheck' />  		<!-- 数据对接校验 --> 
+            	<entry key='bizresult' 		value='/v205/hos/bizresult' /> 			<!-- 日常业务结果回传 --> 
+            	<!-- 前置机开放接口，上行业务 -->
+            	<entry key='clound'	 		value='/v210/hos/clound' /> 			<!-- 云端业务请求 -->
+            </map>
+        </property>
+         <!-- 日常监控业务 IAccessTypeConstants下行业务-->
+        <property name='monitorConfig'>
+        	<map>
+        		<entry key="Department" 			value="DepartmentBusinessImpl" />			<!-- 科室(手动) -->           	
+				<entry key="Doctor" 				value="DoctorBusinessImpl" />				<!-- 医生(手动) -->            	
+            	<entry key="Scheduling" 			value="SchedulingBusinessImpl" />  			<!-- 排班(手动) --> 
+            	
+            	<entry key="PatientCheck" 			value="PatientCheckBusinessImpl" ></entry>			<!-- 患者校验	 -->  
+            	   
+            	<entry key="RemainQuery" 			value="RemainQueryBusinessImpl" />			<!-- 余号查询（科室） -->   
+            	<entry key="TimeSlotRemainQuery" 	value="TimeSlotRemainQueryBusinessImpl" />	<!-- 余号查询（某科室可用时间段） -->  
+            	 
+            	<entry key="StopDiagnosis" 			value="StopDiagnosisBusinessImpl" />		<!-- 停诊 -->   
+            	<entry key="ChangeDiagnosis" 		value="ChangeDiagnosisBusinessImpl" />		<!-- 换诊 -->   
+            	
+            	<entry key="OrderRegister" 			value="OrderRegisterBusinessImpl" />		<!-- 预约挂号 -->   
+            	<entry key="PayRegister" 			value="PayRegisterBusinessImpl" />			<!-- 挂号支付确认 -->   
+            	<entry key="CancelRegister" 		value="CancelRegisterBusinessImpl" />		<!-- 取消挂号 --> 
+            	  
+            	<entry key="PatientQueue" 			value="PatientQueueBusinessImpl" />			<!-- 获取患者排队状态列表 -->   
+            	<entry key="PatientQueueView" 		value="PatientQueueViewBusinessImpl" />		<!-- 获取患者排队状态详细 -->  
+            	 
+            	<entry key="CheckSheetList" 		value="CheckSheetListBusinessImpl" />		<!-- 检查一览 -->   
+            	<entry key="CheckSheetView" 		value="CheckSheetViewBusinessImpl" />		<!-- 检查详情 --> 
+            	<entry key="ExamineSheetList" 		value="ExamineSheetListBusinessImpl" />		<!-- 检验一览 -->   
+            	<entry key="ExamineSheetView" 		value="ExamineSheetViewBusinessImpl" />     <!-- 检验详情 -->
+            	  
+            	<entry key="PhysicalList" 			value="PhysicalListBusinessImpl" />			<!-- 体检一览 -->     
+            	<entry key="PhysicalView" 			value="PhysicalViewBusinessImpl" />			<!-- 体检详情 --> 
+            	  
+            	<entry key="Health" 				value="HealthBusinessImpl" />				<!-- 健康档案 --> 
+ 
+            	<entry key="PatientPayResult" 		value="PatientPayResultBusinessImpl" />		<!-- 用户支付结果通知医院 -->   
+            	<entry key="PatientPayList" 		value="PatientPayListBusinessImpl" />		<!-- 用户缴费内容查询（一览） -->  
+            	 
+            	<entry key="FeesHistoryList" 		value="FeesHistoryListBusinessImpl" />		<!-- 在院历史查询 -->   
+            	<entry key="FeesList" 				value="FeesListBusinessImpl" />				<!-- 费用列表信息 -->   
+            	<entry key="FeesView" 				value="FeesViewBusinessImpl" />				<!-- 费用明细信息 --> 
+            	  
+            	<entry key="GoodList" 				value="GoodListBusinessImpl" />				<!-- 商品查询 -->   
+            	<entry key="GoodOrder" 				value="GoodOrderBusinessImpl" />			<!-- 订单创建 -->   
+            	<entry key="GoodOrderPay" 			value="GoodOrderPayBusinessImpl" />			<!-- 订单支付 -->   
+            	<entry key="GoodOrderList" 			value="GoodOrderListBusinessImpl" />		<!-- 订单信息查询 -->   
+            	  
+            	<!-- v2.1.1 --> 
+            	<entry key="CreatPatientCard" 		value="CreatPatientCardBusinessImpl" />		<!-- 创建就诊卡 -->    
+            	<entry key="DiagnosisPriceList" 	value="DiagnosisPriceListBusinessImpl" />	<!-- 诊疗项目查询 -->    
+            	<entry key="DiagnosisPriceView" 	value="DiagnosisPriceViewBusinessImpl" />	<!-- 诊疗项目明细 -->    
+            	<entry key="DrugGroupPriceList" 	value="DrugGroupPriceListBusinessImpl" />	<!-- 药品组项目查询 -->    
+            	<entry key="DrugGroupPriceView" 	value="DrugGroupPriceViewBusinessImpl" />	<!-- 药品组项目明细 -->    
+            	<entry key="DrugPriceList" 			value="DrugPriceListBusinessImpl" />		<!-- 药品价格 -->    
+
+            	<!-- v2.1.2 --> 
+            	<entry key='CreatPhoneUser' 		value='CreatPhoneUserBusinessImpl' />		<!-- 创建手机用户 --> 
+            	<entry key='CreatUserPatient' 		value='CreatUserPatientBusinessImpl' />		<!-- 创建患者 -->     
+            	<entry key='DeleteUserPatient' 		value='DeleteUserPatientBusinessImpl' />	<!-- 删除患者 -->    
+            	<entry key='ListUserPatient' 		value='ListUserPatientBusinessImpl' />		<!-- 患者列表 -->  
+            	<entry key='ReadPhoneUser' 		    value='ReadPhoneUserBusinessImpl' />		<!-- 读取手机用户 -->    
+            	<entry key='ReadUserPatient' 		value='ReadUserPatientBusinessImpl' />		<!-- 读取患者信息 -->  
+            	<entry key='UpdatePhoneUser' 		value='UpdatePhoneUserBusinessImpl' />		<!-- 更新用户 -->    
+            	<entry key='UpdateUserPatient' 		value='UpdateUserPatientBusinessImpl' />		<!-- 更新患者 -->    
+
+            </map>
+        </property>
+	</bean>
+	
+	<!-- 总管理类 如果将lazy-init='false'那么容器启动就会执行调度程序  -->
+    <bean id='startQuertz' lazy-init='false' autowire='no' class='org.springframework.scheduling.quartz.SchedulerFactoryBean'>
+        <property name='triggers'>
+            <!-- 需要监听的用户队列 -->
+            <list>
+            	<!-- 对接业务 -->
+                <!--<ref bean='departmentDataSyncServiceMonitorCronTrigger'/> -->
+                <!--<ref bean='doctorDataSyncServiceMonitorCronTrigger'/>
+                <ref bean='schedulingDataSyncServiceMonitorCronTrigger'/> -->
+                <!-- 心跳业务 -->
+                <!-- <ref bean='hospitalHeartControllerMonitorCronTrigger'/>    -->
+                <!-- 日常业务 -->
+                <!--  -->
+                <ref bean='hospitalBusinessControllerMonitorCronTrigger'/>
+            </list>
+        </property>
+    </bean>
+		
+	<!-- 对接监控定时器 begin -->
+	<import resource='spring-job-*.xml' />
+	
+	
+</beans>

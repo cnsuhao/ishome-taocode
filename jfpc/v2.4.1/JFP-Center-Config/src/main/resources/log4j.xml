@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+	<!-- Appenders -->
+	<appender name="FILE" class="org.apache.log4j.RollingFileAppender">
+		<param name="file" value="../logs/access_HDS.log" />
+		<param name="append" value="true" />
+		<param name="encoding" value="UTF-8" />  
+		<param name="maxFileSize" value="100MB" />
+		<param name="maxBackupIndex" value="10" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name='ConversionPattern' value='[%-5p][%d{yyyy/MM/dd HH:mm:ss}][%l][%m]%n' />
+		</layout>
+	</appender>			
+	
+	<appender name="DayAppender" class="org.apache.log4j.DailyRollingFileAppender">    
+        <param name="File" value="../logs/ERROR.log" />     
+        <param name="DatePattern" value="'.'yyyyMMdd'.log'" />     
+        <layout class="org.apache.log4j.PatternLayout">    
+			<param name='ConversionPattern' value='[%-5p][%d{yyyy/MM/dd HH:mm:ss}][%l][%m]%n' />
+        </layout>  
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMax" value="ERROR" />
+			<param name="LevelMin" value="ERROR" />
+		</filter>   
+    </appender>  
+    
+    
+	<appender name="MyFrame" class="org.jfpc.framework.log.MyLoggerAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name='ConversionPattern' value='[%-5p][%d{yyyy/MM/dd HH:mm:ss}][%l][%m]%n' />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMax" value="OFF" />
+			<param name="LevelMin" value="ERROR" />
+		</filter>
+	</appender>
+		
+	<appender name="Console" class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.out" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name='ConversionPattern' value='[%-5p][%d{yyyy/MM/dd HH:mm:ss}][%l][%m]%n' />
+		</layout>
+	</appender>
+	
+	<!-- Application Loggers -->
+	<logger name="com.hundsun.med">
+		<level value="ERROR" />
+	</logger>
+	<logger name="com.hundsun.med.hds">
+		<level value="ERROR" />
+	</logger>
+	<logger name="com.hundsun.med.framework.job">
+		<level value="ERROR" />
+	</logger>
+	<logger name="com.hundsun.med.framework.utils">
+		<level value="ERROR" />
+	</logger>
+	<logger name="com.hundsun.med.hds.api.impl">
+		<level value="ERROR" />
+	</logger>
+	<logger name="org.apache.http.impl">
+		<level value="ERROR" />
+	</logger>
+	
+	<!-- 3rdparty Loggers -->
+	<logger name="org.springframework.core">
+		<level value="ERROR" />
+	</logger>
+	<logger name="org.springframework.beans">
+		<level value="ERROR" />
+	</logger>	
+	<logger name="org.springframework.context">
+		<level value="ERROR" />
+	</logger>
+
+	<logger name="org.springframework.web">
+		<level value="ERROR" />
+	</logger>
+	
+	<logger name="org.springframework.aop">
+		<level value="ERROR" />
+	</logger>
+	
+	<logger name="org.apache.commons">
+		<level value="ERROR" />
+	</logger>
+	<logger name="org.mybatis.spring">
+		<level value="ERROR" />
+	</logger>
+	
+	<logger name="org.apache">
+		<level value="ERROR" />
+	</logger>
+	<logger name="org.quartz">
+		<level value="ERROR" />
+	</logger>
+	<logger name="org.springframework">
+		<level value="ERROR" />
+	</logger>
+	
+	<!-- Root Logger -->
+	<root>
+		<appender-ref ref="FILE" />
+		<appender-ref ref="Console" />
+	</root>
+</log4j:configuration>

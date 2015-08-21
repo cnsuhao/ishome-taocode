@@ -1,0 +1,211 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 医院云平台对接规则表 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='com.hundsun.med.beans.HospitalCloudAccessRule.HospitalCloudAccessRuleDao'>
+    <!-- 表字段信息  -->
+    <sql id='tableColumns'>
+        rule_id,hos_id,module_type,access_type,access_flag,concurrency,fb3,is_deleted,create_time,creator,update_time,updator
+    </sql>
+
+    <!-- 根据条件更新所有记录 -->
+    <update id='doUpdateAll' parameterType='HospitalCloudAccessRuleDBO'>
+        UPDATE hospital_cloud_access_rule SET uu1 = #{uuu} <!-- 更新时间、更新者 -->
+        <if test=" ruleId != null and ruleId !='' "><!-- 数据识别ID -->
+            ,rule_id = #{ruleId}
+        </if>
+        <if test=" hosId != null and hosId !='' "><!-- 医院ID -->
+            ,hos_id = #{hosId}
+        </if>
+        <if test=" moduleType != null and moduleType !='' "><!-- 对接模块类型 -->
+            ,module_type = #{moduleType}
+        </if>
+        <if test=" accessType != null and accessType !='' "><!-- 对接模块类别 -->
+            ,access_type = #{accessType}
+        </if>
+        <if test=" accessFlag != null and accessFlag !='' "><!-- 对接模块开关 -->
+            ,access_flag = #{accessFlag}
+        </if>
+        <if test=" concurrency != null and concurrency !='' "><!-- 每秒钟数据处理量 -->
+            ,concurrency = #{concurrency}
+        </if>
+        <if test=" fb3 != null and fb3 !='' "><!-- 加密状态 -->
+            ,fb3 = #{fb3}
+        </if>
+        <if test=" isDeleted != null and isDeleted !='' "><!-- 有效标识 -->
+            ,is_deleted = #{isDeleted}
+        </if>
+        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+            ,create_time = #{createTime}
+        </if>
+        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+            ,creator = #{creator}
+        </if>
+        <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+            ,update_time = #{updateTime}
+        </if>
+        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+            ,updator = #{updator}
+        </if>
+        WHERE 1 = 1 
+            <if test=" ruleId != null and ruleId !='' "><!-- 数据识别ID -->
+                AND rule_id = #{ruleId}
+            </if>
+            <if test=" hosId != null and hosId !='' "><!-- 医院ID -->
+                AND hos_id = #{hosId}
+            </if>
+            <if test=" moduleType != null and moduleType !='' "><!-- 对接模块类型 -->
+                AND module_type = #{moduleType}
+            </if>
+            <if test=" accessType != null and accessType !='' "><!-- 对接模块类别 -->
+                AND access_type = #{accessType}
+            </if>
+            <if test=" accessFlag != null and accessFlag !='' "><!-- 对接模块开关 -->
+                AND access_flag = #{accessFlag}
+            </if>
+            <if test=" concurrency != null and concurrency !='' "><!-- 每秒钟数据处理量 -->
+                AND concurrency = #{concurrency}
+            </if>
+            <if test=" fb3 != null and fb3 !='' "><!-- 加密状态 -->
+                AND fb3 = #{fb3}
+            </if>
+            <if test=" isDeleted != null and isDeleted !='' "><!-- 有效标识 -->
+                AND is_deleted = #{isDeleted}
+            </if>
+            <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+                AND create_time = #{createTime}
+            </if>
+            <if test=" creator != null and creator !='' "><!-- 创建者 -->
+                AND creator = #{creator}
+            </if>
+            <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+                AND update_time = #{updateTime}
+            </if>
+            <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+                AND updator = #{updator}
+            </if>
+    </update>
+    <!-- 查询分页数据信息  -->
+    <select id='doSelectPage' parameterType='HospitalCloudAccessRuleDBO' resultType='HospitalCloudAccessRuleDBO'>
+        SELECT eb3,<include refid='tableColumns'/> FROM hospital_cloud_access_rule
+        WHERE 1 = 1 
+        <if test=" ruleId != null and ruleId !='' "><!-- 数据识别ID -->
+            AND rule_id = #{ruleId}
+        </if>
+        <if test=" hosId != null and hosId !='' "><!-- 医院ID -->
+            AND hos_id = #{hosId}
+        </if>
+        <if test=" moduleType != null and moduleType !='' "><!-- 对接模块类型 -->
+            AND module_type = #{moduleType}
+        </if>
+        <if test=" accessType != null and accessType !='' "><!-- 对接模块类别 -->
+            AND access_type = #{accessType}
+        </if>
+        <if test=" accessFlag != null and accessFlag !='' "><!-- 对接模块开关 -->
+            AND access_flag = #{accessFlag}
+        </if>
+        <if test=" concurrency != null and concurrency !='' "><!-- 每秒钟数据处理量 -->
+            AND concurrency = #{concurrency}
+        </if>
+        <if test=" fb3 != null and fb3 !='' "><!-- 加密状态 -->
+            AND fb3 = #{fb3}
+        </if>
+        <if test=" isDeleted != null and isDeleted !='' "><!-- 有效标识 -->
+            AND is_deleted = #{isDeleted}
+        </if>
+        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+            AND create_time = #{createTime}
+        </if>
+        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+            AND creator = #{creator}
+        </if>
+        <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+            AND update_time = #{updateTime}
+        </if>
+        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+            AND updator = #{updator}
+        </if>
+    </select>
+
+    <!-- 插入一条数据 -->
+    <insert id='doInsert' parameterType='HospitalCloudAccessRuleDBO'>
+        INSERT INTO hospital_cloud_access_rule
+          ( <include refid='tableColumns'/>) 
+        VALUES 
+          ( #{ruleId},#{hosId},#{moduleType},#{accessType},#{accessFlag},#{concurrency},#{fb3},#{isDeleted},#{createTime},#{creator},#{updateTime},#{updator} )
+    </insert>
+    <!-- 修改一条数据 -->
+    <update id='doUpdate' parameterType='HospitalCloudAccessRuleDBO'>
+        UPDATE hospital_cloud_access_rule SET uu1 = #{uuu} <!-- 更新时间、更新者 -->
+        <if test=" ruleId != null and ruleId !='' "><!-- 数据识别ID -->
+            ,rule_id = #{ruleId}
+        </if>
+        <if test=" hosId != null and hosId !='' "><!-- 医院ID -->
+            ,hos_id = #{hosId}
+        </if>
+        <if test=" moduleType != null and moduleType !='' "><!-- 对接模块类型 -->
+            ,module_type = #{moduleType}
+        </if>
+        <if test=" accessType != null and accessType !='' "><!-- 对接模块类别 -->
+            ,access_type = #{accessType}
+        </if>
+        <if test=" accessFlag != null and accessFlag !='' "><!-- 对接模块开关 -->
+            ,access_flag = #{accessFlag}
+        </if>
+        <if test=" concurrency != null and concurrency !='' "><!-- 每秒钟数据处理量 -->
+            ,concurrency = #{concurrency}
+        </if>
+        <if test=" fb3 != null and fb3 !='' "><!-- 加密状态 -->
+            ,fb3 = #{fb3}
+        </if>
+        <if test=" isDeleted != null and isDeleted !='' "><!-- 有效标识 -->
+            ,is_deleted = #{isDeleted}
+        </if>
+        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+            ,create_time = #{createTime}
+        </if>
+        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+            ,creator = #{creator}
+        </if>
+        <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+            ,update_time = #{updateTime}
+        </if>
+        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+            ,updator = #{updator}
+        </if>
+        WHERE puk = #{puk} 
+    </update>
+    <!-- 逻辑删除一条数据 -->
+    <delete id='toDelete' parameterType='HospitalCloudAccessRuleDBO'>
+        UPDATE hospital_cloud_access_rule SET ddd='1', uu1 = #{uuu}, uu2 = #{uu2} WHERE puk = #{puk}
+            <if test=" ruleId != null and ruleId !='' "><!-- 数据识别ID -->
+                AND rule_id = #{ruleId}
+            </if>
+            <if test=" hosId != null and hosId !='' "><!-- 医院ID -->
+                AND hos_id = #{hosId}
+            </if>
+    </delete>
+    <!-- 物理删除一条数据 -->
+    <delete id='doDelete' parameterType='HospitalCloudAccessRuleDBO'>
+        DELETE FROM hospital_cloud_access_rule WHERE puk = #{puk}
+            <if test=" ruleId != null and ruleId !='' "><!-- 数据识别ID -->
+                AND rule_id = #{ruleId}
+            </if>
+            <if test=" hosId != null and hosId !='' "><!-- 医院ID -->
+                AND hos_id = #{hosId}
+            </if>
+    </delete>
+    <!-- 查询一条数据  -->
+    <select id='doRead' parameterType='HospitalCloudAccessRuleDBO' resultType='HospitalCloudAccessRuleDBO'>
+        SELECT <include refid='tableColumns'/> FROM hospital_cloud_access_rule WHERE puk = #{puk}
+            <if test=" ruleId != null and ruleId !='' "><!-- 数据识别ID -->
+                AND rule_id = #{ruleId}
+            </if>
+            <if test=" hosId != null and hosId !='' "><!-- 医院ID -->
+                AND hos_id = #{hosId}
+            </if>
+    </select>
+
+</mapper>
