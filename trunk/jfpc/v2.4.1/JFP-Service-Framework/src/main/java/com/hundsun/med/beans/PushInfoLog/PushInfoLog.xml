@@ -1,0 +1,229 @@
+﻿<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 推送信息日志表 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='com.hundsun.med.beans.PushInfoLog.PushInfoLogDao'>
+    <!-- 表字段信息  -->
+    <sql id='tableColumns'>
+        ps_log_id,ps_id,us_id,user_type,send_time,month_date,is_pushed,title,msg_content,ps_temp_id,hos_id,task_type,https_url,img_url
+    </sql>
+
+    <!-- 根据条件更新所有记录 -->
+    <update id='doUpdateAll' parameterType='PushInfoLogDBO'>
+        UPDATE push_info_log SET ps_log_id = #{psLogId}
+        <if test=" psId != null and psId !='' "><!-- 推送信息ID -->
+            ,ps_id = #{psId}
+        </if>
+        <if test=" usId != null and usId !='' "><!-- 手机用户ID -->
+            ,us_id = #{usId}
+        </if>
+        <if test=" userType != null and userType !='' "><!-- 用户类型(1：医院员工;0或者null：患者用户) -->
+            ,user_type = #{userType}
+        </if>
+        <if test=" sendTime != null and sendTime !='' "><!-- 发送时间 -->
+            ,send_time = #{sendTime}
+        </if>
+        <if test=" monthDate != null and monthDate !='' "><!--  -->
+            ,month_date = #{monthDate}
+        </if>
+        <if test=" isPushed != null and isPushed !='' "><!-- 是否发送成功:2处理中;1成功;0失败 -->
+            ,is_pushed = #{isPushed}
+        </if>
+        <if test=" title != null and title !='' "><!-- 发送的标题 -->
+            ,title = #{title}
+        </if>
+        <if test=" msgContent != null and msgContent !='' "><!-- 发送的内容 -->
+            ,msg_content = #{msgContent}
+        </if>
+        <if test=" psTempId != null and psTempId !='' "><!-- 控制唯一对应临时表数据 -->
+            ,ps_temp_id = #{psTempId}
+        </if>
+        <if test=" hosId != null and hosId !='' "><!-- 医院ID -->
+            ,hos_id = #{hosId}
+        </if>
+        <if test=" taskType != null and taskType !='' "><!-- 推送类型(0：文本型；1：网页型) -->
+            ,task_type = #{taskType}
+        </if>
+        <if test=" httpsUrl != null and httpsUrl !='' "><!-- 网页型HTTPS链接 -->
+            ,https_url = #{httpsUrl}
+        </if>
+        <if test=" imgUrl != null and imgUrl !='' "><!-- 网页型图片链接 -->
+            ,img_url = #{imgUrl}
+        </if>
+        WHERE 1 = 1 
+            <if test=" psLogId != null and psLogId !='' "><!-- 推送日志ID -->
+                AND ps_log_id = #{psLogId}
+            </if>
+            <if test=" psId != null and psId !='' "><!-- 推送信息ID -->
+                AND ps_id = #{psId}
+            </if>
+            <if test=" usId != null and usId !='' "><!-- 手机用户ID -->
+                AND us_id = #{usId}
+            </if>
+            <if test=" userType != null and userType !='' "><!-- 用户类型(1：医院员工;0或者null：患者用户) -->
+                AND user_type = #{userType}
+            </if>
+            <if test=" sendTime != null and sendTime !='' "><!-- 发送时间 -->
+                AND send_time = #{sendTime}
+            </if>
+            <if test=" monthDate != null and monthDate !='' "><!--  -->
+                AND month_date = #{monthDate}
+            </if>
+            <if test=" isPushed != null and isPushed !='' "><!-- 是否发送成功:2处理中;1成功;0失败 -->
+                AND is_pushed = #{isPushed}
+            </if>
+            <if test=" title != null and title !='' "><!-- 发送的标题 -->
+                AND title = #{title}
+            </if>
+            <if test=" msgContent != null and msgContent !='' "><!-- 发送的内容 -->
+                AND msg_content = #{msgContent}
+            </if>
+            <if test=" psTempId != null and psTempId !='' "><!-- 控制唯一对应临时表数据 -->
+                AND ps_temp_id = #{psTempId}
+            </if>
+            <if test=" hosId != null and hosId !='' "><!-- 医院ID -->
+                AND hos_id = #{hosId}
+            </if>
+            <if test=" taskType != null and taskType !='' "><!-- 推送类型(0：文本型；1：网页型) -->
+                AND task_type = #{taskType}
+            </if>
+            <if test=" httpsUrl != null and httpsUrl !='' "><!-- 网页型HTTPS链接 -->
+                AND https_url = #{httpsUrl}
+            </if>
+            <if test=" imgUrl != null and imgUrl !='' "><!-- 网页型图片链接 -->
+                AND img_url = #{imgUrl}
+            </if>
+    </update>
+    <!-- 查询分页数据信息  -->
+    <select id='doSelectPage' parameterType='PushInfoLogDBO' resultType='PushInfoLogDBO'>
+        SELECT <include refid='tableColumns'/> FROM push_info_log
+        WHERE 1 = 1 
+        <if test=" psLogId != null and psLogId !='' "><!-- 推送日志ID -->
+            AND ps_log_id = #{psLogId}
+        </if>
+        <if test=" psId != null and psId !='' "><!-- 推送信息ID -->
+            AND ps_id = #{psId}
+        </if>
+        <if test=" usId != null and usId !='' "><!-- 手机用户ID -->
+            AND us_id = #{usId}
+        </if>
+        <if test=" userType != null and userType !='' "><!-- 用户类型(1：医院员工;0或者null：患者用户) -->
+            AND user_type = #{userType}
+        </if>
+        <if test=" sendTime != null and sendTime !='' "><!-- 发送时间 -->
+            AND send_time = #{sendTime}
+        </if>
+        <if test=" monthDate != null and monthDate !='' "><!--  -->
+            AND month_date = #{monthDate}
+        </if>
+        <if test=" isPushed != null and isPushed !='' "><!-- 是否发送成功:2处理中;1成功;0失败 -->
+            AND is_pushed = #{isPushed}
+        </if>
+        <if test=" title != null and title !='' "><!-- 发送的标题 -->
+            AND title = #{title}
+        </if>
+        <if test=" msgContent != null and msgContent !='' "><!-- 发送的内容 -->
+            AND msg_content = #{msgContent}
+        </if>
+        <if test=" psTempId != null and psTempId !='' "><!-- 控制唯一对应临时表数据 -->
+            AND ps_temp_id = #{psTempId}
+        </if>
+        <if test=" hosId != null and hosId !='' "><!-- 医院ID -->
+            AND hos_id = #{hosId}
+        </if>
+        <if test=" taskType != null and taskType !='' "><!-- 推送类型(0：文本型；1：网页型) -->
+            AND task_type = #{taskType}
+        </if>
+        <if test=" httpsUrl != null and httpsUrl !='' "><!-- 网页型HTTPS链接 -->
+            AND https_url = #{httpsUrl}
+        </if>
+        <if test=" imgUrl != null and imgUrl !='' "><!-- 网页型图片链接 -->
+            AND img_url = #{imgUrl}
+        </if>
+    </select>
+
+    <!-- 插入一条数据 -->
+    <insert id='doInsert' parameterType='PushInfoLogDBO'>
+        INSERT INTO push_info_log
+          ( <include refid='tableColumns'/>) 
+        VALUES 
+          ( #{psLogId},#{psId},#{usId},#{userType},#{sendTime},#{monthDate},#{isPushed},#{title},#{msgContent},#{psTempId},#{hosId},#{taskType},#{httpsUrl},#{imgUrl} )
+    </insert>
+    <!-- 修改一条数据 -->
+    <update id='doUpdate' parameterType='PushInfoLogDBO'>
+        UPDATE push_info_log SET ps_log_id = #{psLogId}
+        <if test=" psId != null and psId !='' "><!-- 推送信息ID -->
+            ,ps_id = #{psId}
+        </if>
+        <if test=" usId != null and usId !='' "><!-- 手机用户ID -->
+            ,us_id = #{usId}
+        </if>
+        <if test=" userType != null and userType !='' "><!-- 用户类型(1：医院员工;0或者null：患者用户) -->
+            ,user_type = #{userType}
+        </if>
+        <if test=" sendTime != null and sendTime !='' "><!-- 发送时间 -->
+            ,send_time = #{sendTime}
+        </if>
+        <if test=" monthDate != null and monthDate !='' "><!--  -->
+            ,month_date = #{monthDate}
+        </if>
+        <if test=" isPushed != null and isPushed !='' "><!-- 是否发送成功:2处理中;1成功;0失败 -->
+            ,is_pushed = #{isPushed}
+        </if>
+        <if test=" title != null and title !='' "><!-- 发送的标题 -->
+            ,title = #{title}
+        </if>
+        <if test=" msgContent != null and msgContent !='' "><!-- 发送的内容 -->
+            ,msg_content = #{msgContent}
+        </if>
+        <if test=" psTempId != null and psTempId !='' "><!-- 控制唯一对应临时表数据 -->
+            ,ps_temp_id = #{psTempId}
+        </if>
+        <if test=" hosId != null and hosId !='' "><!-- 医院ID -->
+            ,hos_id = #{hosId}
+        </if>
+        <if test=" taskType != null and taskType !='' "><!-- 推送类型(0：文本型；1：网页型) -->
+            ,task_type = #{taskType}
+        </if>
+        <if test=" httpsUrl != null and httpsUrl !='' "><!-- 网页型HTTPS链接 -->
+            ,https_url = #{httpsUrl}
+        </if>
+        <if test=" imgUrl != null and imgUrl !='' "><!-- 网页型图片链接 -->
+            ,img_url = #{imgUrl}
+        </if>
+        WHERE ps_log_id = #{psLogId}
+    </update>
+    <!-- 逻辑删除一条数据 -->
+    <delete id='toDelete' parameterType='PushInfoLogDBO'>
+        DELETE FROM push_info_log WHERE ps_log_id = #{psLogId}
+            <if test=" psId != null and psId !='' "><!-- 推送信息ID -->
+                AND ps_id = #{psId}
+            </if>
+            <if test=" usId != null and usId !='' "><!-- 手机用户ID -->
+                AND us_id = #{usId}
+            </if>
+    </delete>
+    <!-- 物理删除一条数据 -->
+    <delete id='doDelete' parameterType='PushInfoLogDBO'>
+        DELETE FROM push_info_log WHERE ps_log_id = #{psLogId}
+            <if test=" psId != null and psId !='' "><!-- 推送信息ID -->
+                AND ps_id = #{psId}
+            </if>
+            <if test=" usId != null and usId !='' "><!-- 手机用户ID -->
+                AND us_id = #{usId}
+            </if>
+    </delete>
+    <!-- 查询一条数据  -->
+    <select id='doRead' parameterType='PushInfoLogDBO' resultType='PushInfoLogDBO'>
+        SELECT <include refid='tableColumns'/> FROM push_info_log WHERE ps_log_id = #{psLogId}
+            <if test=" psId != null and psId !='' "><!-- 推送信息ID -->
+                AND ps_id = #{psId}
+            </if>
+            <if test=" usId != null and usId !='' "><!-- 手机用户ID -->
+                AND us_id = #{usId}
+            </if>
+    </select>
+
+</mapper>

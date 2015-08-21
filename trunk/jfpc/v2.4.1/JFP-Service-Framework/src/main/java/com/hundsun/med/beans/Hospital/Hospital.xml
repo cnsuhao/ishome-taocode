@@ -1,0 +1,373 @@
+﻿<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 医院表  -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='com.hundsun.med.beans.Hospital.HospitalDao'>
+    <!-- 表字段信息  -->
+    <sql id='tableColumns'>
+        hos_id,par_hos_id,name,resc_code,unify_code,addr,nature,hos_level,tel_phone,web_site,summary,remark,contacter,contact_phone,traffic,pic_id,planegraph_id,create_time,reg_type,reg_tel,longitude,latitude,location,is_group,logo,hos_code
+    </sql>
+
+    <!-- 根据条件更新所有记录 -->
+    <update id='doUpdateAll' parameterType='HospitalDBO'>
+        UPDATE hospital SET hos_id = #{hosId}
+        <if test=" parHosId != null and parHosId !='' "><!-- 父医院ID -->
+            ,par_hos_id = #{parHosId}
+        </if>
+        <if test=" name != null and name !='' "><!-- 医院名称 -->
+            ,name = #{name}
+        </if>
+        <if test=" rescCode != null and rescCode !='' "><!-- 用于权限判断字段前缀为RESC_* -->
+            ,resc_code = #{rescCode}
+        </if>
+        <if test=" unifyCode != null and unifyCode !='' "><!-- 由卫生局统一下发编号 -->
+            ,unify_code = #{unifyCode}
+        </if>
+        <if test=" addr != null and addr !='' "><!-- 医院地址 -->
+            ,addr = #{addr}
+        </if>
+        <if test=" nature != null and nature !='' "><!-- 医院等级(三甲医院) -->
+            ,nature = #{nature}
+        </if>
+        <if test=" hosLevel != null and hosLevel !='' "><!-- 医院行政级别 -->
+            ,hos_level = #{hosLevel}
+        </if>
+        <if test=" telPhone != null and telPhone !='' "><!-- 联系电话 -->
+            ,tel_phone = #{telPhone}
+        </if>
+        <if test=" webSite != null and webSite !='' "><!-- 医院网址 -->
+            ,web_site = #{webSite}
+        </if>
+        <if test=" summary != null and summary !='' "><!-- 医院简介 -->
+            ,summary = #{summary}
+        </if>
+        <if test=" remark != null and remark !='' "><!-- 备注 -->
+            ,remark = #{remark}
+        </if>
+        <if test=" contacter != null and contacter !='' "><!-- 联系人 -->
+            ,contacter = #{contacter}
+        </if>
+        <if test=" contactPhone != null and contactPhone !='' "><!-- 联系人电话 -->
+            ,contact_phone = #{contactPhone}
+        </if>
+        <if test=" traffic != null and traffic !='' "><!-- 附近交通 -->
+            ,traffic = #{traffic}
+        </if>
+        <if test=" picId != null and picId !='' "><!-- 图片ID -->
+            ,pic_id = #{picId}
+        </if>
+        <if test=" planegraphId != null and planegraphId !='' "><!-- 医院平面图ID -->
+            ,planegraph_id = #{planegraphId}
+        </if>
+        <if test=" createTime != null and createTime !='' "><!-- 创建或更新时间 -->
+            ,create_time = #{createTime}
+        </if>
+        <if test=" regType != null and regType !='' "><!-- 是否电话预约：在线预约(0)，电话预约(1) -->
+            ,reg_type = #{regType}
+        </if>
+        <if test=" regTel != null and regTel !='' "><!-- 预约电话 -->
+            ,reg_tel = #{regTel}
+        </if>
+        <if test=" longitude != null and longitude !='' "><!-- 经度 -->
+            ,longitude = #{longitude}
+        </if>
+        <if test=" latitude != null and latitude !='' "><!-- 纬度 -->
+            ,latitude = #{latitude}
+        </if>
+        <if test=" location != null and location !='' "><!-- 所在城市 -->
+            ,location = #{location}
+        </if>
+        <if test=" isGroup != null and isGroup !='' "><!-- 标识该医院是否集团医院 -->
+            ,is_group = #{isGroup}
+        </if>
+        <if test=" logo != null and logo !='' "><!-- LOGO的图片文件URL -->
+            ,logo = #{logo}
+        </if>
+        <if test=" hosCode != null and hosCode !='' "><!-- HIS系统医院ID -->
+            ,hos_code = #{hosCode}
+        </if>
+        WHERE 1 = 1 
+            <if test=" hosId != null and hosId !='' "><!-- 医院ID -->
+                AND hos_id = #{hosId}
+            </if>
+            <if test=" parHosId != null and parHosId !='' "><!-- 父医院ID -->
+                AND par_hos_id = #{parHosId}
+            </if>
+            <if test=" name != null and name !='' "><!-- 医院名称 -->
+                AND name = #{name}
+            </if>
+            <if test=" rescCode != null and rescCode !='' "><!-- 用于权限判断字段前缀为RESC_* -->
+                AND resc_code = #{rescCode}
+            </if>
+            <if test=" unifyCode != null and unifyCode !='' "><!-- 由卫生局统一下发编号 -->
+                AND unify_code = #{unifyCode}
+            </if>
+            <if test=" addr != null and addr !='' "><!-- 医院地址 -->
+                AND addr = #{addr}
+            </if>
+            <if test=" nature != null and nature !='' "><!-- 医院等级(三甲医院) -->
+                AND nature = #{nature}
+            </if>
+            <if test=" hosLevel != null and hosLevel !='' "><!-- 医院行政级别 -->
+                AND hos_level = #{hosLevel}
+            </if>
+            <if test=" telPhone != null and telPhone !='' "><!-- 联系电话 -->
+                AND tel_phone = #{telPhone}
+            </if>
+            <if test=" webSite != null and webSite !='' "><!-- 医院网址 -->
+                AND web_site = #{webSite}
+            </if>
+            <if test=" summary != null and summary !='' "><!-- 医院简介 -->
+                AND summary = #{summary}
+            </if>
+            <if test=" remark != null and remark !='' "><!-- 备注 -->
+                AND remark = #{remark}
+            </if>
+            <if test=" contacter != null and contacter !='' "><!-- 联系人 -->
+                AND contacter = #{contacter}
+            </if>
+            <if test=" contactPhone != null and contactPhone !='' "><!-- 联系人电话 -->
+                AND contact_phone = #{contactPhone}
+            </if>
+            <if test=" traffic != null and traffic !='' "><!-- 附近交通 -->
+                AND traffic = #{traffic}
+            </if>
+            <if test=" picId != null and picId !='' "><!-- 图片ID -->
+                AND pic_id = #{picId}
+            </if>
+            <if test=" planegraphId != null and planegraphId !='' "><!-- 医院平面图ID -->
+                AND planegraph_id = #{planegraphId}
+            </if>
+            <if test=" createTime != null and createTime !='' "><!-- 创建或更新时间 -->
+                AND create_time = #{createTime}
+            </if>
+            <if test=" regType != null and regType !='' "><!-- 是否电话预约：在线预约(0)，电话预约(1) -->
+                AND reg_type = #{regType}
+            </if>
+            <if test=" regTel != null and regTel !='' "><!-- 预约电话 -->
+                AND reg_tel = #{regTel}
+            </if>
+            <if test=" longitude != null and longitude !='' "><!-- 经度 -->
+                AND longitude = #{longitude}
+            </if>
+            <if test=" latitude != null and latitude !='' "><!-- 纬度 -->
+                AND latitude = #{latitude}
+            </if>
+            <if test=" location != null and location !='' "><!-- 所在城市 -->
+                AND location = #{location}
+            </if>
+            <if test=" isGroup != null and isGroup !='' "><!-- 标识该医院是否集团医院 -->
+                AND is_group = #{isGroup}
+            </if>
+            <if test=" logo != null and logo !='' "><!-- LOGO的图片文件URL -->
+                AND logo = #{logo}
+            </if>
+            <if test=" hosCode != null and hosCode !='' "><!-- HIS系统医院ID -->
+                AND hos_code = #{hosCode}
+            </if>
+    </update>
+    <!-- 查询分页数据信息  -->
+    <select id='doSelectPage' parameterType='HospitalDBO' resultType='HospitalDBO'>
+        SELECT <include refid='tableColumns'/> FROM hospital
+        WHERE 1 = 1 
+        <if test=" hosId != null and hosId !='' "><!-- 医院ID -->
+            AND hos_id = #{hosId}
+        </if>
+        <if test=" parHosId != null and parHosId !='' "><!-- 父医院ID -->
+            AND par_hos_id = #{parHosId}
+        </if>
+        <if test=" name != null and name !='' "><!-- 医院名称 -->
+            AND name = #{name}
+        </if>
+        <if test=" rescCode != null and rescCode !='' "><!-- 用于权限判断字段前缀为RESC_* -->
+            AND resc_code = #{rescCode}
+        </if>
+        <if test=" unifyCode != null and unifyCode !='' "><!-- 由卫生局统一下发编号 -->
+            AND unify_code = #{unifyCode}
+        </if>
+        <if test=" addr != null and addr !='' "><!-- 医院地址 -->
+            AND addr = #{addr}
+        </if>
+        <if test=" nature != null and nature !='' "><!-- 医院等级(三甲医院) -->
+            AND nature = #{nature}
+        </if>
+        <if test=" hosLevel != null and hosLevel !='' "><!-- 医院行政级别 -->
+            AND hos_level = #{hosLevel}
+        </if>
+        <if test=" telPhone != null and telPhone !='' "><!-- 联系电话 -->
+            AND tel_phone = #{telPhone}
+        </if>
+        <if test=" webSite != null and webSite !='' "><!-- 医院网址 -->
+            AND web_site = #{webSite}
+        </if>
+        <if test=" summary != null and summary !='' "><!-- 医院简介 -->
+            AND summary = #{summary}
+        </if>
+        <if test=" remark != null and remark !='' "><!-- 备注 -->
+            AND remark = #{remark}
+        </if>
+        <if test=" contacter != null and contacter !='' "><!-- 联系人 -->
+            AND contacter = #{contacter}
+        </if>
+        <if test=" contactPhone != null and contactPhone !='' "><!-- 联系人电话 -->
+            AND contact_phone = #{contactPhone}
+        </if>
+        <if test=" traffic != null and traffic !='' "><!-- 附近交通 -->
+            AND traffic = #{traffic}
+        </if>
+        <if test=" picId != null and picId !='' "><!-- 图片ID -->
+            AND pic_id = #{picId}
+        </if>
+        <if test=" planegraphId != null and planegraphId !='' "><!-- 医院平面图ID -->
+            AND planegraph_id = #{planegraphId}
+        </if>
+        <if test=" createTime != null and createTime !='' "><!-- 创建或更新时间 -->
+            AND create_time = #{createTime}
+        </if>
+        <if test=" regType != null and regType !='' "><!-- 是否电话预约：在线预约(0)，电话预约(1) -->
+            AND reg_type = #{regType}
+        </if>
+        <if test=" regTel != null and regTel !='' "><!-- 预约电话 -->
+            AND reg_tel = #{regTel}
+        </if>
+        <if test=" longitude != null and longitude !='' "><!-- 经度 -->
+            AND longitude = #{longitude}
+        </if>
+        <if test=" latitude != null and latitude !='' "><!-- 纬度 -->
+            AND latitude = #{latitude}
+        </if>
+        <if test=" location != null and location !='' "><!-- 所在城市 -->
+            AND location = #{location}
+        </if>
+        <if test=" isGroup != null and isGroup !='' "><!-- 标识该医院是否集团医院 -->
+            AND is_group = #{isGroup}
+        </if>
+        <if test=" logo != null and logo !='' "><!-- LOGO的图片文件URL -->
+            AND logo = #{logo}
+        </if>
+        <if test=" hosCode != null and hosCode !='' "><!-- HIS系统医院ID -->
+            AND hos_code = #{hosCode}
+        </if>
+    </select>
+
+    <!-- 插入一条数据 -->
+    <insert id='doInsert' parameterType='HospitalDBO'>
+        INSERT INTO hospital
+          ( <include refid='tableColumns'/>) 
+        VALUES 
+          ( #{hosId},#{parHosId},#{name},#{rescCode},#{unifyCode},#{addr},#{nature},#{hosLevel},#{telPhone},#{webSite},#{summary},#{remark},#{contacter},#{contactPhone},#{traffic},#{picId},#{planegraphId},#{createTime},#{regType},#{regTel},#{longitude},#{latitude},#{location},#{isGroup},#{logo},#{hosCode} )
+    </insert>
+    <!-- 修改一条数据 -->
+    <update id='doUpdate' parameterType='HospitalDBO'>
+        UPDATE hospital SET hos_id = #{hosId}
+        <if test=" parHosId != null and parHosId !='' "><!-- 父医院ID -->
+            ,par_hos_id = #{parHosId}
+        </if>
+        <if test=" name != null and name !='' "><!-- 医院名称 -->
+            ,name = #{name}
+        </if>
+        <if test=" rescCode != null and rescCode !='' "><!-- 用于权限判断字段前缀为RESC_* -->
+            ,resc_code = #{rescCode}
+        </if>
+        <if test=" unifyCode != null and unifyCode !='' "><!-- 由卫生局统一下发编号 -->
+            ,unify_code = #{unifyCode}
+        </if>
+        <if test=" addr != null and addr !='' "><!-- 医院地址 -->
+            ,addr = #{addr}
+        </if>
+        <if test=" nature != null and nature !='' "><!-- 医院等级(三甲医院) -->
+            ,nature = #{nature}
+        </if>
+        <if test=" hosLevel != null and hosLevel !='' "><!-- 医院行政级别 -->
+            ,hos_level = #{hosLevel}
+        </if>
+        <if test=" telPhone != null and telPhone !='' "><!-- 联系电话 -->
+            ,tel_phone = #{telPhone}
+        </if>
+        <if test=" webSite != null and webSite !='' "><!-- 医院网址 -->
+            ,web_site = #{webSite}
+        </if>
+        <if test=" summary != null and summary !='' "><!-- 医院简介 -->
+            ,summary = #{summary}
+        </if>
+        <if test=" remark != null and remark !='' "><!-- 备注 -->
+            ,remark = #{remark}
+        </if>
+        <if test=" contacter != null and contacter !='' "><!-- 联系人 -->
+            ,contacter = #{contacter}
+        </if>
+        <if test=" contactPhone != null and contactPhone !='' "><!-- 联系人电话 -->
+            ,contact_phone = #{contactPhone}
+        </if>
+        <if test=" traffic != null and traffic !='' "><!-- 附近交通 -->
+            ,traffic = #{traffic}
+        </if>
+        <if test=" picId != null and picId !='' "><!-- 图片ID -->
+            ,pic_id = #{picId}
+        </if>
+        <if test=" planegraphId != null and planegraphId !='' "><!-- 医院平面图ID -->
+            ,planegraph_id = #{planegraphId}
+        </if>
+        <if test=" createTime != null and createTime !='' "><!-- 创建或更新时间 -->
+            ,create_time = #{createTime}
+        </if>
+        <if test=" regType != null and regType !='' "><!-- 是否电话预约：在线预约(0)，电话预约(1) -->
+            ,reg_type = #{regType}
+        </if>
+        <if test=" regTel != null and regTel !='' "><!-- 预约电话 -->
+            ,reg_tel = #{regTel}
+        </if>
+        <if test=" longitude != null and longitude !='' "><!-- 经度 -->
+            ,longitude = #{longitude}
+        </if>
+        <if test=" latitude != null and latitude !='' "><!-- 纬度 -->
+            ,latitude = #{latitude}
+        </if>
+        <if test=" location != null and location !='' "><!-- 所在城市 -->
+            ,location = #{location}
+        </if>
+        <if test=" isGroup != null and isGroup !='' "><!-- 标识该医院是否集团医院 -->
+            ,is_group = #{isGroup}
+        </if>
+        <if test=" logo != null and logo !='' "><!-- LOGO的图片文件URL -->
+            ,logo = #{logo}
+        </if>
+        <if test=" hosCode != null and hosCode !='' "><!-- HIS系统医院ID -->
+            ,hos_code = #{hosCode}
+        </if>
+        WHERE hos_id = #{hosId}
+    </update>
+    <!-- 逻辑删除一条数据 -->
+    <delete id='toDelete' parameterType='HospitalDBO'>
+        DELETE FROM hospital WHERE hos_id = #{hosId}
+            <if test=" parHosId != null and parHosId !='' "><!-- 父医院ID -->
+                AND par_hos_id = #{parHosId}
+            </if>
+            <if test=" rescCode != null and rescCode !='' "><!-- 用于权限判断字段前缀为RESC_* -->
+                AND resc_code = #{rescCode}
+            </if>
+    </delete>
+    <!-- 物理删除一条数据 -->
+    <delete id='doDelete' parameterType='HospitalDBO'>
+        DELETE FROM hospital WHERE hos_id = #{hosId}
+            <if test=" parHosId != null and parHosId !='' "><!-- 父医院ID -->
+                AND par_hos_id = #{parHosId}
+            </if>
+            <if test=" rescCode != null and rescCode !='' "><!-- 用于权限判断字段前缀为RESC_* -->
+                AND resc_code = #{rescCode}
+            </if>
+    </delete>
+    <!-- 查询一条数据  -->
+    <select id='doRead' parameterType='HospitalDBO' resultType='HospitalDBO'>
+        SELECT <include refid='tableColumns'/> FROM hospital WHERE hos_id = #{hosId}
+            <if test=" parHosId != null and parHosId !='' "><!-- 父医院ID -->
+                AND par_hos_id = #{parHosId}
+            </if>
+            <if test=" rescCode != null and rescCode !='' "><!-- 用于权限判断字段前缀为RESC_* -->
+                AND resc_code = #{rescCode}
+            </if>
+    </select>
+
+</mapper>

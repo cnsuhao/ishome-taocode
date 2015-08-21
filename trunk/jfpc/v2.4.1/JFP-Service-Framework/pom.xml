@@ -1,0 +1,49 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>HS-MED</groupId>
+    <artifactId>HS-MED-MobileService-Framework</artifactId>
+    <version>2.3.3-RELEASE</version>
+	
+	<dependencies>
+    	<dependency>
+    		<groupId>HS-MED</groupId>
+    		<artifactId>HS-MED-Framework-Common</artifactId>
+    		<version>2.3.3-RELEASE</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>HS-MED</groupId>
+    		<artifactId>HS-MED-Framework-SecurityAlgorithm</artifactId>
+    		<version>2.3.3-RELEASE</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>HS-MED</groupId>
+    		<artifactId>HS-MED-Framework-Support</artifactId>
+    		<version>2.3.3-RELEASE</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>HS-MED</groupId>
+    		<artifactId>HS-MED-Framework-Beans</artifactId>
+    		<version>2.3.2-RELEASE</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>HS-MED</groupId>
+    		<artifactId>HS-MED-Framework-Core</artifactId>
+    		<version>2.3.3-RELEASE</version>
+    	</dependency>
+	</dependencies>
+	
+	<distributionManagement>  
+	  <repository>  
+	    <id>Releases</id>  
+	    <url>http://121.43.186.82:8081/nexus/content/repositories/releases/</url>  
+	  </repository>  
+	  <snapshotRepository>  
+	    <id>Snapshots</id>  
+	    <url>http://121.43.186.82:8081/nexus/content/repositories/snapshots/</url>  
+	  </snapshotRepository>  
+	</distributionManagement> 
+  
+</project>
