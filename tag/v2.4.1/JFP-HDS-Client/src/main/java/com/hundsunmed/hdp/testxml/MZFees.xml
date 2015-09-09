@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+   <soap:Body>
+      <ns2:GetPatientMzChargesResponse xmlns:ns2="http://interfaces.webservice.heletianxia.com/">
+         <Response>
+            <ResultCode>0</ResultCode>
+            <PatientId>A000009709</PatientId>
+            <PatName>郭德伶</PatName>
+            <visit_name>2010-12-25 14:26:28</visit_name>
+            <Charges>
+               <Charge>
+                  <ItemName>间接喉镜检查</ItemName>
+                  <Charges>2.0</Charges>
+                  <DeptName></DeptName>
+               </Charge>
+               <Charge>
+                  <ItemName>耳鼻喉综合治疗台/进口</ItemName>
+                  <Charges>4.0</Charges>
+                  <DeptName></DeptName>
+               </Charge>
+               <Charge>
+                  <ItemName>空气压缩雾化泵</ItemName>
+                  <Charges>80.0</Charges>
+                  <DeptName></DeptName>
+               </Charge>
+               <Charge>
+                  <ItemName>一次性雾化吸入咀（空气压缩雾化泵专用）</ItemName>
+                  <Charges>0.88</Charges>
+                  <DeptName></DeptName>
+               </Charge>
+               <Charge>
+                  <ItemName>庆大霉素注射液</ItemName>
+                  <Charges>6.5</Charges>
+                  <DeptName></DeptName>
+               </Charge>
+               <Charge>
+                  <ItemName>地塞米松磷酸钠注射液</ItemName>
+                  <Charges>5.1</Charges>
+                  <DeptName></DeptName>
+               </Charge>
+               <Charge>
+                  <ItemName>盐酸克林霉素棕榈酸酯分散片</ItemName>
+                  <Charges>112.38</Charges>
+                  <DeptName></DeptName>
+               </Charge>
+            </Charges>
+            <ErrorMsg>成功</ErrorMsg>
+         </Response>
+      </ns2:GetPatientMzChargesResponse>
+   </soap:Body>
+</soap:Envelope>
