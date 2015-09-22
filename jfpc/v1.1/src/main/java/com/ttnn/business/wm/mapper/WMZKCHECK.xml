@@ -1,0 +1,316 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 总控监管数据 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='com.ttnn.business.wm.dao.WMZKCHECKDao'>
+	<!-- 查询该系统下的所有会员 -->
+	<!-- f01客户ID f02会员登录ID f03会员姓名 f04通道ID f05开始日期 f06 终了日期 -->
+	<select id='doSelectPageHY' parameterType='FrameworkData'
+		resultType='FrameworkData'>
+		SELECT 
+			a.puk,a.f04,
+			(SELECT f04 FROM wmui01 WHERE puk = a.k01) as k01,
+			(SELECT f01 FROM wmuip1 WHERE puk = a.k02) as k02,
+			a.k03,
+			a.f08,a.f09,a.f10,a.fb1,a.cc1
+		FROM wmui01 a ,csss01 b,cssr01 c,wmbm01 d
+		WHERE a.eb5=b.puk
+		AND a.puk = c.puk
+		AND a.puk = d.k01
+		AND b.eb5 = #{eb5}
+		AND a.ddd != '1'
+		AND b.ddd != '1'
+		<if test=" f01 != null and f01 !='' ">
+			AND b.k02 = #{f01}
+		</if>
+		<if test=" f02 != null and f02 !='' ">
+			AND c.f03 LIKE '%'|| #{f02} ||'%' 
+		</if>
+		<if test=" f03 != null and f03 !='' ">
+			AND a.f04 LIKE '%'|| #{f03} ||'%' 
+		</if>
+		<if test=" f04 != null and f04 !='' ">
+			AND d.k03 = #{f04}
+		</if>
+		<if test=" f05 != null and f05 !='' ">
+			<![CDATA[	AND DATE_FORMAT(STR_TO_DATE(a.cc1, '%Y/%m/%d'), '%Y/%m/%d') >= #{f05} ]]>
+		</if>
+		<if test=" f06 != null and f06 !='' ">
+			<![CDATA[	AND DATE_FORMAT(STR_TO_DATE(a.cc1, '%Y/%m/%d'), '%Y/%m/%d') <= #{f06} ]]>
+		</if>
+	</select>
+
+	<!-- 查询该系统下的所有通道 -->
+	<!-- f01客户ID f02会员登录ID f03会员姓名 f04通道ID f05开始日期 f06 终了日期 -->
+	<select id='doSelectPageTD' parameterType='FrameworkData'
+		resultType='FrameworkData'>
+		select a.f03,a.f15, a.f16,a.f17,a.f19,a.fb1,
+		b.k01,b.k02,b.f07,a.puk,b.k03,a.cc1
+		from wmbma1 a ,csss01 b
+		WHERE a.eb5=b.puk 	
+		AND a.ddd != '1'
+		AND b.ddd != '1'
+		AND b.eb5 = #{eb5}	
+ 		<if test=" k01!= null and k01 !='' "> 
+ 			AND b.k01 = #{k01} 
+		</if> 
+ 		<if test=" k02!= null and k02!='' ">
+ 			AND b.k02 = #{k01} 
+		</if> 
+		<if test=" f07 != null and f07!='' ">
+			AND b.f07 = #{f07} 
+ 		</if> 
+ 		<if test=" k03 != null and k03!='' ">
+			AND b.k03 = #{k03} 
+ 		</if> 
+ 		<if test=" f04!= null and f04!='' ">
+			AND a.puk = #{f04} 
+ 		</if> 
+		
+<!-- 		<if test=" f04 != null and f04 !='' "> -->
+<!-- 			AND a.puk = #{f04} -->
+<!-- 		</if> -->
+<!-- 		<if test=" f05 != null and f05 !='' "> -->
+<!-- 			<![CDATA[	AND DATE_FORMAT(STR_TO_DATE(a.cc1, '%Y/%m/%d'), '%Y/%m/%d') >= #{f05} ]]> -->
+<!-- 		</if> -->
+<!-- 		<if test=" f06 != null and f06 !='' "> -->
+<!-- 			<![CDATA[	AND DATE_FORMAT(STR_TO_DATE(a.cc1, '%Y/%m/%d'), '%Y/%m/%d') <= #{f06} ]]> -->
+<!-- 		</if> -->
+	</select>
+
+	<!-- 查询该系统下的所有用户费率 -->
+	<!-- f01客户ID f02会员登录ID f03会员姓名 f04通道ID f05开始日期 f06 终了日期 -->
+	<select id='doSelectPageFL' parameterType='FrameworkData'
+		resultType='FrameworkData'>
+		select b.k02,c.f04,a.fb1, a.f15, a.f16,a.f17,a.f19,a.fb4,a.puk,b.puk as
+		k01,b.k01 as fb2,a.cc1
+		from wmbm01 a ,csss01 b ,wmui01 c,cssr01 d,wmbma1 e
+		where a.eb5=b.puk
+		and a.k01 = c.puk and a.k01 = d.puk and b.eb5 = #{eb5}
+		AND a.ddd != '1'
+		AND b.ddd != '1'
+		and a.k03=e.puk
+		<if test=" k01 != null and k01 !='' ">
+			AND b.k01 = #{k01}
+		</if>
+		<if test=" k02 != null and k02 !='' ">
+			AND b.k02 = #{k02}
+		</if>
+		<if test=" f04 != null and f04 !='' ">
+			AND c.f04 = #{f04}
+		</if>
+		<if test=" fb1 != null and fb1 !='' ">
+			AND a.k03 = #{fb1}
+		</if>		
+<!-- 		<if test=" f02 != null and f02 !='' "> -->
+<!-- 			AND d.f03 LIKE '%'|| #{f02} ||'%'  -->
+<!-- 		</if> -->
+<!-- 		<if test=" f03 != null and f03 !='' "> -->
+<!-- 			AND c.f04  LIKE '%'|| #{f03} ||'%'  -->
+<!-- 		</if> -->
+<!-- 		<if test=" f04 != null and f04 !='' "> -->
+<!-- 			AND a.k03 = #{f04} -->
+<!-- 		</if> -->
+<!-- 		<if test=" f05 != null and f05 !='' "> -->
+<!-- 			<![CDATA[	AND DATE_FORMAT(STR_TO_DATE(a.cc1, '%Y/%m/%d'), '%Y/%m/%d') >= #{f05} ]]> -->
+<!-- 		</if> -->
+<!-- 		<if test=" f06 != null and f06 !='' "> -->
+<!-- 			<![CDATA[	AND DATE_FORMAT(STR_TO_DATE(a.cc1, '%Y/%m/%d'), '%Y/%m/%d') <= #{f06} ]]> -->
+<!-- 		</if> -->
+	</select>
+
+	<!-- 查询该系统下的所有用户对账单 -->
+	<!-- f01客户ID f02会员登录ID f03会员姓名 f04通道ID f05开始日期 f06 终了日期 -->
+	<select id='doSelectPageDZ' parameterType='FrameworkData'
+		resultType='FrameworkData'>
+		SELECT 
+			a.puk,a.f03,a.f04,a.f01,a.f18,a.eb2,a.f06,a.cc1
+		FROM
+		 	wmbm02 a ,csss01 b,cssr01 c,wmbm01 d,wmui01 e
+		WHERE a.eb5=b.puk 	
+			AND a.k01 = e.puk
+			AND e.puk = c.puk
+			AND e.puk = d.k01
+			AND b.eb5 = #{eb5}	
+			AND a.ddd != '1'
+			AND b.ddd != '1'
+		<if test=" f01 != null and f01 !='' ">
+			AND b.k02 = #{f01}
+		</if>
+		<if test=" f02 != null and f02 !='' ">
+			AND c.f03 LIKE '%'|| #{f02} ||'%' 
+		</if>
+		<if test=" f03 != null and f03 !='' ">
+			AND e.f04  LIKE '%'|| #{f03} ||'%' 
+		</if>
+		<if test=" f04 != null and f04 !='' ">
+			AND d.k03 = #{f04}
+		</if>
+		<if test=" f05 != null and f05 !='' ">
+			<![CDATA[	AND DATE_FORMAT(STR_TO_DATE(a.cc1, '%Y/%m/%d'), '%Y/%m/%d') >= #{f05} ]]>
+		</if>
+		<if test=" f06 != null and f06 !='' ">
+			<![CDATA[	AND DATE_FORMAT(STR_TO_DATE(a.cc1, '%Y/%m/%d'), '%Y/%m/%d') <= #{f06} ]]>
+		</if>
+		
+		UNION
+		
+		SELECT
+			a.puk,a.f03,a.f04,a.f01,a.f18,a.eb2,a.f06,a.cc1
+		FROM 
+			wmbm03 a ,csss01 b,cssr01 c,wmbm01 d,wmui01 e
+		WHERE a.eb5=b.puk 	
+			AND a.k01 = e.puk
+			AND e.puk = c.puk
+			AND e.puk = d.k01
+			AND b.eb5 = #{eb5}	
+			AND a.ddd != '1'
+			AND b.ddd != '1'
+		<if test=" f01 != null and f01 !='' ">
+			AND b.k02 = #{f01}
+		</if>
+		<if test=" f02 != null and f02 !='' ">
+			AND c.f03 LIKE '%'|| #{f02} ||'%' 
+		</if>
+		<if test=" f03 != null and f03 !='' ">
+			AND e.f04  LIKE '%'|| #{f03} ||'%' 
+		</if>
+		<if test=" f04 != null and f04 !='' ">
+			AND d.k03 = #{f04}
+		</if>
+		<if test=" f05 != null and f05 !='' ">
+			<![CDATA[	AND DATE_FORMAT(STR_TO_DATE(a.cc1, '%Y/%m/%d'), '%Y/%m/%d') >= #{f05} ]]>
+		</if>
+		<if test=" f06 != null and f06 !='' ">
+			<![CDATA[	AND DATE_FORMAT(STR_TO_DATE(a.cc1, '%Y/%m/%d'), '%Y/%m/%d') <= #{f06} ]]>
+		</if>
+	</select>
+
+	<!-- 查询该系统下的所有用户充值记录 -->
+	<select id='doSelectPageCZ' parameterType='FrameworkData'
+		resultType='FrameworkData'>
+		SELECT 
+			a.puk,a.f03,a.f04,a.f01,a.f18,a.eb2,a.f06,a.cc1
+		FROM
+		 	wmbm02 a ,csss01 b,cssr01 c,wmbm01 d,wmui01 e
+		WHERE a.eb5=b.puk 	
+			AND a.k01 = e.puk
+			AND e.puk = c.puk
+			AND e.puk = d.k01
+			AND b.eb5 = #{eb5}	
+			AND a.ddd != '1'
+			AND b.ddd != '1'
+		<if test=" f01 != null and f01 !='' ">
+			AND b.k02 = #{f01}
+		</if>
+		<if test=" f02 != null and f02 !='' ">
+			AND c.f03 LIKE '%'|| #{f02} ||'%' 
+		</if>
+		<if test=" f03 != null and f03 !='' ">
+			AND e.f04  LIKE '%'|| #{f03} ||'%' 
+		</if>
+		<if test=" f04 != null and f04 !='' ">
+			AND d.k03 = #{f04}
+		</if>
+		<if test=" f05 != null and f05 !='' ">
+			<![CDATA[	AND DATE_FORMAT(STR_TO_DATE(a.cc1, '%Y/%m/%d'), '%Y/%m/%d') >= #{f05} ]]>
+		</if>
+		<if test=" f06 != null and f06 !='' ">
+			<![CDATA[	AND DATE_FORMAT(STR_TO_DATE(a.cc1, '%Y/%m/%d'), '%Y/%m/%d') <= #{f06} ]]>
+		</if>
+	</select>
+
+	<!-- 查询该系统下的所有用户记录 -->
+	<select id='doSelectPageTX' parameterType='FrameworkData'
+		resultType='FrameworkData'>
+		SELECT
+			a.puk,a.f03,a.f04,a.f01,a.f18,a.eb2,a.f06,a.cc1
+		FROM 
+			wmbm03 a ,csss01 b,cssr01 c,wmbm01 d,wmui01 e
+		WHERE a.eb5=b.puk 	
+			AND a.k01 = e.puk
+			AND e.puk = c.puk
+			AND e.puk = d.k01
+			AND b.eb5 = #{eb5}	
+			AND a.ddd != '1'
+			AND b.ddd != '1'
+		<if test=" f01 != null and f01 !='' ">
+			AND b.k02 = #{f01}
+		</if>
+		<if test=" f02 != null and f02 !='' ">
+			AND c.f03 LIKE '%'|| #{f02} ||'%' 
+		</if>
+		<if test=" f03 != null and f03 !='' ">
+			AND e.f04  LIKE '%'|| #{f03} ||'%' 
+		</if>
+		<if test=" f04 != null and f04 !='' ">
+			AND d.k03 = #{f04}
+		</if>
+		<if test=" f05 != null and f05 !='' ">
+			<![CDATA[	AND DATE_FORMAT(STR_TO_DATE(a.cc1, '%Y/%m/%d'), '%Y/%m/%d') >= #{f05} ]]>
+		</if>
+		<if test=" f06 != null and f06 !='' ">
+			<![CDATA[	AND DATE_FORMAT(STR_TO_DATE(a.cc1, '%Y/%m/%d'), '%Y/%m/%d') <= #{f06} ]]>
+		</if>
+	</select>
+
+	<!-- 查询该系统下的所有用户佣金记录 -->
+	<select id='doSelectPageYJ' parameterType='FrameworkData'
+		resultType='FrameworkData'>
+		SELECT 
+			a.puk,a.k01,e.f04,a.f01,a.f08,a.f02,a.cc1
+		FROM 
+			wmbm04 a ,csss01 b,cssr01 c,wmbm01 d,wmui01 e
+		WHERE a.eb5=b.puk 	
+			AND a.k03 = e.puk
+			AND e.puk = c.puk
+			AND e.puk = d.k01
+			AND b.eb5 = #{eb5}	
+			AND a.ddd != '1'
+			AND b.ddd != '1'
+		<if test=" f01 != null and f01 !='' ">
+			AND b.k02 = #{f01}
+		</if>
+		<if test=" f02 != null and f02 !='' ">
+			AND c.f03 LIKE '%'|| #{f02} ||'%' 
+		</if>
+		<if test=" f03 != null and f03 !='' ">
+			AND e.f04  LIKE '%'|| #{f03} ||'%' 
+		</if>
+		<if test=" f04 != null and f04 !='' ">
+			AND d.k03 = #{f04}
+		</if>
+		<if test=" f05 != null and f05 !='' ">
+			<![CDATA[	AND DATE_FORMAT(STR_TO_DATE(a.cc1, '%Y/%m/%d'), '%Y/%m/%d') >= #{f05} ]]>
+		</if>
+		<if test=" f06 != null and f06 !='' ">
+			<![CDATA[	AND DATE_FORMAT(STR_TO_DATE(a.cc1, '%Y/%m/%d'), '%Y/%m/%d') <= #{f06} ]]>
+		</if>
+		<!-- select a.puk,a.k01,c.f04,a.f01,a.f08,a.f02,a.cc1 -->
+		<!-- from wmbm04 a ,csss01 b,wmui01 c -->
+		<!-- where a.eb5=b.puk and a.k01 = c.puk and b.eb5 = #{eb5} -->
+	</select>
+
+	<!-- 查询该系统下的所有系统公告 -->
+	<select id='doSelectPageGG' parameterType='FrameworkData'
+		resultType='FrameworkData'>
+		SELECT * from cssm01 WHERE eb5 =#{eb5}
+	</select>
+
+	<!--读取显示公告内容 -->
+	<select id='doReadGG' parameterType='FrameworkData' resultType='FrameworkData'>
+		SELECT * from cssm01 WHERE f01=#{f01} and puk=#{puk}
+	</select>
+
+
+	<!-- 查询一条数据 -->
+	<select id='doRead' parameterType='FrameworkData' resultType='FrameworkData'>
+		SELECT a.f01,a.f02,a.f03,a.f04,a.f05,a.f06,a.f07,a.f08,a.f09,a.f10,
+		a.f11,a.f12,a.f13,a.f14,a.f15,a.f16,a.f17,b.f10 AS f18,b.f12 AS f19
+		FROM wmss01 a,csss01 b WHERE b.puk=#{puk} AND b.eb5 =#{eb5}
+	</select>
+
+
+</mapper>

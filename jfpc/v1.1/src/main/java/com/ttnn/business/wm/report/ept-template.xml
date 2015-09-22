@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="gbk"?>
+<template version="1.0">
+
+	<!-- 工作簿输出基本定义 -->
+	<sheet name="s1" numIndex="0" title="测试sheet1" />
+
+	<repeatcell sheetName="s1" pojoName="test1" startRowNumber="3">
+		<cell columnNumber="0" propertyName="name"/>
+		<cell columnNumber="1" propertyName="value"/>
+	</repeatcell>
+	
+</template>

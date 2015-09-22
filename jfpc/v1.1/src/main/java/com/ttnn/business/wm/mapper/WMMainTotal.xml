@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 贷付宝后台数据统计服务 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<!-- F01登录会员id，F02会员名字，F03通道id，F04时间 ，F05日期格式化标准（年月日%Y/%m/%d年月%Y/%m）-->
+<mapper namespace='com.ttnn.business.wm.dao.WMMainTotalDao'>
+    
+    <!-- 后台首页统计 -->
+    <select id='doTotlaHT' parameterType='FrameworkData' resultType='FrameworkData'>
+	    SELECT  
+	    	csss01.puk
+	    	,csss01.k01
+	    	,csss01.k02
+	    	,csss01.k03
+	    	,0 f01
+	    	,0 f02
+			,(SELECT COUNT(wmbm02.puk) FROM wmbm02 WHERE wmbm02.eb5 = csss01.puk AND wmbm02.f06 = '2' AND wmbm02.ddd != '1' AND DATE_FORMAT(STR_TO_DATE(wmbm02.cc1, '%Y/%m/%d'), '%Y/%m/%d') = DATE_FORMAT(NOW(), '%Y/%m/%d')) f03
+			,IFNULL((SELECT SUM(wmbm02.f07) FROM wmbm02 WHERE wmbm02.eb5 = csss01.puk AND wmbm02.f06 = '2' AND wmbm02.ddd != '1' AND DATE_FORMAT(STR_TO_DATE(wmbm02.cc1, '%Y/%m/%d'), '%Y/%m/%d') = DATE_FORMAT(NOW(), '%Y/%m/%d')),0) f04
+			,(SELECT COUNT(wmbm03.puk) FROM wmbm03 WHERE wmbm03.eb5 = csss01.puk AND wmbm03.ddd != '1' AND DATE_FORMAT(STR_TO_DATE(wmbm03.cc1, '%Y/%m/%d'), '%Y/%m/%d') = DATE_FORMAT(NOW(), '%Y/%m/%d')) f05
+			,IFNULL((SELECT SUM(wmbm03.f07) FROM wmbm03 WHERE wmbm03.eb5 = csss01.puk AND wmbm03.ddd != '1' AND DATE_FORMAT(STR_TO_DATE(wmbm03.cc1, '%Y/%m/%d'), '%Y/%m/%d') = DATE_FORMAT(NOW(), '%Y/%m/%d')),0) f06
+			,(SELECT COUNT(wmbm04.puk) FROM wmbm04 WHERE wmbm04.eb5 = csss01.puk AND wmbm04.fb1 = '1' AND wmbm04.ddd != '1' AND DATE_FORMAT(STR_TO_DATE(wmbm04.cc1, '%Y/%m/%d'), '%Y/%m/%d') = DATE_FORMAT(NOW(), '%Y/%m/%d')) f07
+			,IFNULL((SELECT SUM(wmbm04.f07) FROM wmbm04 WHERE wmbm04.eb5 = csss01.puk AND wmbm04.fb1 = '1' AND wmbm04.ddd != '1' AND DATE_FORMAT(STR_TO_DATE(wmbm04.cc1, '%Y/%m/%d'), '%Y/%m/%d') = DATE_FORMAT(NOW(), '%Y/%m/%d')),0) f08
+			,DATE_FORMAT(NOW(), '%Y/%m/%d %T') f09
+			,IFNULL((SELECT SUM(wmbm01.fb2) FROM wmbm01 WHERE wmbm01.eb5 = csss01.puk AND wmbm01.ddd != '1' AND wmbm01.ddd != '1'),0) f10
+			,IFNULL((SELECT SUM(wmbm01.fb3) FROM wmbm01 WHERE wmbm01.eb5 = csss01.puk AND wmbm01.ddd != '1' AND wmbm01.ddd != '1'),0) f11
+			,IFNULL((SELECT SUM(wmbm01.fb5) FROM wmbm01 WHERE wmbm01.eb5 = csss01.puk AND wmbm01.ddd != '1' AND wmbm01.ddd != '1'),0) f12
+			,(SELECT COUNT(wmbma1.puk) FROM wmbma1 WHERE wmbma1.eb5 = csss01.puk AND wmbma1.ddd != '1') f13
+			,0 f14
+			,0 f15
+			,(SELECT COUNT(wmui01.puk) FROM wmui01 WHERE wmui01.eb5 = csss01.puk AND wmui01.ddd != '1') f16
+			,(SELECT COUNT(wmui01.puk) FROM wmui01 WHERE wmui01.eb5 = csss01.puk AND wmui01.ddd != '1' AND DATE_FORMAT(STR_TO_DATE(wmui01.cc1, '%Y/%m/%d'), '%Y/%m/%d') = DATE_FORMAT(NOW(), '%Y/%m/%d')) f17
+			,(SELECT COUNT(wmui01.puk) FROM wmui01 WHERE wmui01.k02 = 'DFB_QT_VIP_1' AND wmui01.eb5 = csss01.puk AND wmui01.ddd != '1') f18
+			,(SELECT COUNT(wmui01.puk) FROM wmui01 WHERE wmui01.k02 = 'DFB_QT_VIP_1' AND wmui01.eb5 = csss01.puk AND wmui01.ddd != '1' AND DATE_FORMAT(STR_TO_DATE(wmui01.cc1, '%Y/%m/%d'), '%Y/%m/%d') = DATE_FORMAT(NOW(), '%Y/%m/%d')) f19
+			,(SELECT COUNT(wmbs01.puk) FROM wmbs01 WHERE wmbs01.eb5 = csss01.puk AND wmbs01.ddd != '1') fb1
+			,(SELECT COUNT(wmbs01.puk) FROM wmbs01 WHERE wmbs01.eb5 = csss01.puk AND wmbs01.ddd != '1' AND DATE_FORMAT(STR_TO_DATE(wmbs01.cc1, '%Y/%m/%d'), '%Y/%m/%d') = DATE_FORMAT(NOW(), '%Y/%m/%d')) fb2			
+		FROM csss01
+		WHERE
+			csss01.puk = #{puk}
+    </select>
+    
+      <!-- 佣金记录统计 -->
+    <select id='doTotlaZK' parameterType='FrameworkData' resultType='FrameworkData'>
+	    SELECT  
+	    	csss01.puk
+	    	,csss01.k01
+	    	,csss01.k02
+	    	,csss01.k03
+	    	,0 f01
+	    	,0 f02
+			,(SELECT COUNT(wmbm02.puk) FROM wmbm02 WHERE wmbm02.eb5 IN (SELECT puk FROM csss01 WHERE eb5 = csss01.puk) AND wmbm02.f06 = '2' AND wmbm02.ddd != '1' AND DATE_FORMAT(STR_TO_DATE(wmbm02.cc1, '%Y/%m/%d'), '%Y/%m/%d') = DATE_FORMAT(NOW(), '%Y/%m/%d')) f03
+			,IFNULL((SELECT SUM(wmbm02.f07) FROM wmbm02 WHERE wmbm02.eb5 IN (SELECT puk FROM csss01 WHERE eb5 = csss01.puk) AND wmbm02.f06 = '2' AND wmbm02.ddd != '1' AND DATE_FORMAT(STR_TO_DATE(wmbm02.cc1, '%Y/%m/%d'), '%Y/%m/%d') = DATE_FORMAT(NOW(), '%Y/%m/%d')),0) f04
+			,(SELECT COUNT(wmbm03.puk) FROM wmbm03 WHERE wmbm03.eb5 IN (SELECT puk FROM csss01 WHERE eb5 = csss01.puk) AND wmbm03.ddd != '1' AND DATE_FORMAT(STR_TO_DATE(wmbm03.cc1, '%Y/%m/%d'), '%Y/%m/%d') = DATE_FORMAT(NOW(), '%Y/%m/%d')) f05
+			,IFNULL((SELECT SUM(wmbm03.f07) FROM wmbm03 WHERE wmbm03.eb5 IN (SELECT puk FROM csss01 WHERE eb5 = csss01.puk) AND wmbm03.ddd != '1' AND DATE_FORMAT(STR_TO_DATE(wmbm03.cc1, '%Y/%m/%d'), '%Y/%m/%d') = DATE_FORMAT(NOW(), '%Y/%m/%d')),0) f06
+			,(SELECT COUNT(wmbm04.puk) FROM wmbm04 WHERE wmbm04.eb5 IN (SELECT puk FROM csss01 WHERE eb5 = csss01.puk) AND wmbm04.fb1 = '1' AND wmbm04.ddd != '1' AND DATE_FORMAT(STR_TO_DATE(wmbm04.cc1, '%Y/%m/%d'), '%Y/%m/%d') = DATE_FORMAT(NOW(), '%Y/%m/%d')) f07
+			,IFNULL((SELECT SUM(wmbm04.f07) FROM wmbm04 WHERE wmbm04.eb5 IN (SELECT puk FROM csss01 WHERE eb5 = csss01.puk) AND wmbm04.fb1 = '1' AND wmbm04.ddd != '1' AND DATE_FORMAT(STR_TO_DATE(wmbm04.cc1, '%Y/%m/%d'), '%Y/%m/%d') = DATE_FORMAT(NOW(), '%Y/%m/%d')),0) f08
+			,DATE_FORMAT(NOW(), '%Y/%m/%d %T') f09
+			,IFNULL((SELECT SUM(wmbm01.fb2) FROM wmbm01 WHERE wmbm01.eb5 IN (SELECT puk FROM csss01 WHERE eb5 = csss01.puk) AND wmbm01.ddd != '1' AND wmbm01.ddd != '1'),0) f10
+			,IFNULL((SELECT SUM(wmbm01.fb3) FROM wmbm01 WHERE wmbm01.eb5 IN (SELECT puk FROM csss01 WHERE eb5 = csss01.puk) AND wmbm01.ddd != '1' AND wmbm01.ddd != '1'),0) f11
+			,IFNULL((SELECT SUM(wmbm01.fb5) FROM wmbm01 WHERE wmbm01.eb5 IN (SELECT puk FROM csss01 WHERE eb5 = csss01.puk) AND wmbm01.ddd != '1' AND wmbm01.ddd != '1'),0) f12
+			,(SELECT COUNT(wmbma1.puk) FROM wmbma1 WHERE wmbma1.eb5 = csss01.puk AND wmbma1.ddd != '1') f13
+			,(SELECT COUNT(csss01.puk) FROM csss01 WHERE csss01.eb5 = csss01.puk AND csss01.ddd != '1') f14
+			,(SELECT COUNT(csss01.puk) FROM csss01 WHERE csss01.eb5 = csss01.puk AND csss01.ddd != '1' AND DATE_FORMAT(STR_TO_DATE(csss01.cc1, '%Y/%m/%d'), '%Y/%m/%d') = DATE_FORMAT(NOW(), '%Y/%m/%d')) f15
+			,(SELECT COUNT(wmui01.puk) FROM wmui01 WHERE wmui01.eb5 IN (SELECT puk FROM csss01 WHERE eb5 = csss01.puk) AND wmui01.ddd != '1') f16
+			,(SELECT COUNT(wmui01.puk) FROM wmui01 WHERE wmui01.eb5 IN (SELECT puk FROM csss01 WHERE eb5 = csss01.puk) AND wmui01.ddd != '1' AND DATE_FORMAT(STR_TO_DATE(wmui01.cc1, '%Y/%m/%d'), '%Y/%m/%d') = DATE_FORMAT(NOW(), '%Y/%m/%d')) f17
+			,(SELECT COUNT(wmui01.puk) FROM wmui01 WHERE wmui01.k02 = 'DFB_QT_VIP_1' AND wmui01.eb5 IN (SELECT puk FROM csss01 WHERE eb5 = csss01.puk) AND wmui01.ddd != '1') f18
+			,(SELECT COUNT(wmui01.puk) FROM wmui01 WHERE wmui01.k02 = 'DFB_QT_VIP_1' AND wmui01.eb5 IN (SELECT puk FROM csss01 WHERE eb5 = csss01.puk) AND wmui01.ddd != '1' AND DATE_FORMAT(STR_TO_DATE(wmui01.cc1, '%Y/%m/%d'), '%Y/%m/%d') = DATE_FORMAT(NOW(), '%Y/%m/%d')) f19
+			,(SELECT COUNT(wmbs01.puk) FROM wmbs01 WHERE wmbs01.eb5 IN (SELECT puk FROM csss01 WHERE eb5 = csss01.puk) AND wmbs01.ddd != '1') fb1
+			,(SELECT COUNT(wmbs01.puk) FROM wmbs01 WHERE wmbs01.eb5 IN (SELECT puk FROM csss01 WHERE eb5 = csss01.puk) AND wmbs01.ddd != '1' AND DATE_FORMAT(STR_TO_DATE(wmbs01.cc1, '%Y/%m/%d'), '%Y/%m/%d') = DATE_FORMAT(NOW(), '%Y/%m/%d')) fb2
+		FROM csss01
+		WHERE
+			csss01.puk = #{eb5}
+    </select>
+</mapper>

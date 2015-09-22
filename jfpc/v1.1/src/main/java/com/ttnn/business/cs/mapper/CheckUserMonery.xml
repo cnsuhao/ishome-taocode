@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 用户组定义 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='com.ttnn.business.cs.dao.CheckUserMoneyDao'>
+
+    
+    <!-- 对账 -->    
+<select id="doSelectPageCheck" resultType="java.util.Map" parameterType='FrameworkData'>
+     select fb1,f07 ,'1' as bbb, eb2,f15,fb2,cc1 from wmbm03 where k01 = #{k01}  and f06 = '2' 
+union 
+select fb1 ,f07 , '0' , eb2 ,f15 ,fb2 ,cc1  from wmbm02 where k01 = #{k01} and 
+
+f06 = "2"
+ </select>
+</mapper>

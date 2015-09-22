@@ -1,0 +1,16 @@
+
+INSERT INTO `cssr03` VALUES ('DFB_ZK_ADMIN_GROUP', 'DFB_ZK_ADMIN_GROUP', null, null, '贷付宝总控管理用户管理用户', 'WM.ZK', null, null, null, null, null, null, null, null, null, null, 'TTNN_DFB', '0', '2013/5/1 17:14:13', 'Spook', '2013/8/1 17:14:13', 'Spook');
+INSERT INTO `cssr03` VALUES ('DFB_ZK_SELL_GROUP', 'DFB_ZK_SELL_GROUP', null, null, '贷付宝总控销售经理', 'WM.ZK', null, null, null, null, null, null, null, null, null, null, 'TTNN_DFB', '0', '2013/5/1 17:14:13', 'Spook', '2013/8/1 17:14:13', 'Spook');
+INSERT INTO `cssr03` VALUES ('TTNN_PT_ADMIN', 'TTNN_PT_ADMIN', null, null, '云端管理用户', 'YD', null, null, null, null, null, null, null, null, null, null, 'TTNN_PT', '0', '2013/5/1 17:14:13', 'Spook', '2013/8/1 17:14:13', 'Spook');
+INSERT INTO `cssr03` VALUES ('TTNN_PT_SS', 'TTNN_PT_SS', null, null, '云端产品实施经理', 'YD', null, null, null, null, null, null, null, null, null, null, 'TTNN_PT', '0', '2013/5/1 17:14:13', 'Spook', '2013/8/1 17:14:13', 'Spook');
+INSERT INTO `cssr03` VALUES ('TTNN_PT_XS', 'TTNN_PT_XS', null, null, '云端产品销售经理', 'YD', null, null, null, null, null, null, null, null, null, null, 'TTNN_PT', '0', '2013/5/1 17:14:13', 'Spook', '2013/8/1 17:14:13', 'Spook');
+INSERT INTO `cssr03` VALUES ('DFB_QT_ADMIN_GROUP', 'DFB_QT_ADMIN_GROUP', null, null, '贷付宝前台管理用户', 'WM.QT', null, null, null, null, null, null, null, null, null, null, 'TTNN_DFB', '0', '2013/5/1 17:14:13', 'Spook', '2013/8/1 17:14:13', 'Spook');
+INSERT INTO `cssr03` VALUES ('DFB_QT_VIP_GROUP', 'DFB_QT_VIP_GROUP', null, null, '贷付宝前台VIP用户', 'WM.QT', null, null, null, null, null, null, null, null, null, null, 'TTNN_DFB', '0', '2013/5/1 17:14:13', 'Spook', '2013/8/1 17:14:13', 'Spook');
+INSERT INTO `cssr03` VALUES ('DFB_HT_ADMIN_GROUP', 'DFB_HT_ADMIN_GROUP', null, null, '贷付宝后台管理用户', 'WM.HT', null, null, null, null, null, null, null, null, null, null, 'TTNN_DFB', '0', '2013/5/1 17:14:13', 'Spook', '2013/8/1 17:14:13', 'Spook');
+INSERT INTO `cssr03` VALUES ('DFB_HT_BIZ_GROUP', 'DFB_HT_BIZ_GROUP', null, null, '贷付宝后台股那里用户', 'WM.HT', null, null, null, null, null, null, null, null, null, null, 'TTNN_DFB', '0', '2013/5/1 17:14:13', 'Spook', '2013/8/1 17:14:13', 'Spook');
+
+INSERT INTO `csspr1` VALUES ('DFB_HT_ADMIN', 'DFB_HT_ADMIN_GROUP', null, 'N', 'N', 'N', 'N', 'N', null, null, null, null, 'TTNN_DFB', '0', '2013/5/1 17:14:13', 'Spook', '2013/8/1 17:14:13', 'Spook');
+INSERT INTO `csspr1` VALUES ('DFB_QT_ADMIN', 'DFB_QT_ADMIN_GROUP', null, 'N', 'N', 'N', 'N', 'N', null, null, null, null, 'TTNN_DFB', '0', '2013/5/1 17:14:13', 'Spook', '2013/8/1 17:14:13', 'Spook');
+INSERT INTO `csspr1` VALUES ('DFB_ZK_ADMIN', 'DFB_ZK_ADMIN_GROUP', null, 'N', 'N', 'N', 'N', 'N', null, null, null, null, 'TTNN_DFB', '0', '2013/5/1 17:14:13', 'Spook', '2013/8/1 17:14:13', 'Spook');
+INSERT INTO `csspr1` VALUES ('TTNN_PT_ADMIN', 'TTNN_PT_ADMIN', null, 'N', 'N', 'N', 'N', 'N', null, null, null, null, 'TTNN_PT', '0', '2013/5/1 17:14:13', 'Spook', '2013/8/1 17:14:13', 'Spook');
+

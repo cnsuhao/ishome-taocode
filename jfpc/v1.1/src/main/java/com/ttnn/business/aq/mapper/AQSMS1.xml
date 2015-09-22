@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 实名认证 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='com.ttnn.business.aq.dao.AQSMSDao'>
+   <select id='doFindyh' parameterType='FrameworkData' resultType='FrameworkData'> 
+        SELECT * FROM cssr01,wmui01 
+ 		WHERE cssr01.puk=#{f03} and cssr01.puk=wmui01.puk and wmui01.ddd !='1' and wmui01.eb5=#{eb5} 
+	</select> 
+	 <update id='doUpdate1' parameterType='FrameworkData'>
+	UPDATE wmui01 SET uu1 = #{uu1} ,f03 =#{f03} ,f04 =#{f04} ,f05 = #{f05} ,f06 = #{f06} ,ddd = '0' where puk = #{puk}
+	 </update> 
+	  <!-- 插入一条数据 -->
+    <insert id='doInsert1' parameterType='FrameworkData'>
+        INSERT INTO cssp01
+        (puk,f01,f12,f16,f17,f18,fb1,fb2,fb3)
+         VALUES 
+         (#{puk},#{f01},#{f12},#{f16},#{f17},#{f18},#{fb1},#{fb2},#{fb3})
+    </insert>
+</mapper>

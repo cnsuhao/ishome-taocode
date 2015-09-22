@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 系统画面菜单 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='com.ttnn.business.cs.dao.MenuDao'>
+    <select id="findTree" parameterType='FrameworkData'  resultType="com.ttnn.framework.page.util.MyMap" >
+    
+    select A.id, A.pId,A.name, case WHEN ISNULL(k01) then "false" else "true" end    as checked   from (
+
+SELECT k01 as id ,IF(k03='',0,k03) as pId ,CONCAT('"',k02,'"') as name ,f04 as od
+
+ FROM cssb03  where  f05=#{f05} and fb1 in (1,2) 
+)A   left join   (select k01 from cssb03 where puk in(
+select k01 from cssr04 where puk=#{puk} and ddd='0' ))B
+ on A.id = B.k01 order by od
+    
+    
+    </select>
+    
+    <!-- 修改权限时，先删除未有的权限 -->
+   <update id="deteteUserGroupRight" parameterType='FrameworkData'  >
+        update cssr04 set ddd = '1' where puk = #{puk} 
+        and k01 in (
+           select k01 from (
+            select k01 from cssr04  where puk = #{puk}  and k01 not in(select puk from cssb03 where k01 in
+             <foreach item="tag" collection="list" open="(" close=")" separator=" ,">
+           ${tag} 
+     
+  </foreach>
+            
+               and f05=#{f05} )
+            ) temp )
+            
+   </update>
+   
+   <update id="modifyUserGroupRight" parameterType='FrameworkData'>
+           update cssr04 set ddd = '0' where puk = #{puk} 
+           and k01 in(
+           select k01 from (
+           select k01 from cssr04 where puk = #{puk}  and k01  in(select puk from cssb03 where k01 in 
+           
+           <foreach item="tag" collection="list" open="(" close=")" separator=" ,">
+           ${tag} 
+     
+  </foreach>
+           
+           
+           
+             and f05=#{f05} )
+           ) temp )
+           
+   </update>
+    
+    <!-- 添加新的权限 -->
+    <insert id="insertUserGroupRight" parameterType='FrameworkData' >
+   
+   insert into cssr04(puk,k01,eb5)
+ select #{puk},puk,#{eb5} from cssb03 where k01 in (
+  select   k01 from  
+  <foreach item="tag" collection="list" open="(" close=")" separator=" union all ">
+       select ${tag} as k01 from dual
+     
+  </foreach>
+  
+  
+  A) and f05=#{f05}  and puk not in( select k01 from cssr04 where puk=#{puk})
+   
+    
+            
+    </insert>
+    
+    
+    
+    <select id="selectUserInGroup" parameterType='FrameworkData' resultType="hashmap">
+      select csspr1.k01 as groups from csspr1 inner join cssr01 on cssr01.puk = csspr1.puk and cssr01.puk=#{puk}
+    </select>
+     
+    
+    
+</mapper>

@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 数据字典管理 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='com.ttnn.business.wm.dao.WMLoginDao'>
+
+	<!-- 根据用户ID获得功能快捷菜单（顶部）[CSSP11]  -->
+    <select id='inMySystem' parameterType='FrameworkData' resultType='FrameworkData'>
+		SELECT 
+    		*
+		FROM 
+			csss01
+		WHERE 
+			ddd != '1' AND
+		   	k02 = #{k02}
+    </select>
+
+	<!-- 用户登录  -->
+    <select id='getMySystem' parameterType='FrameworkData' resultType='FrameworkData'>
+		SELECT 
+    		cssr01.*
+		FROM 
+			cssr01 
+		WHERE 
+			cssr01.ddd != '1' AND 
+		   	cssr01.eb5 = #{eb5} AND 
+	   		cssr01.f03 = #{f03} AND 
+			cssr01.f04 = #{f04}
+		limit 1
+    </select>
+    
+    <!-- 根据用户ID获得功能快捷菜单（顶部）[CSSP11]  -->
+    <select id='getMyTopMenu' parameterType='FrameworkData' resultType='FrameworkData'>
+        SELECT cssb03.* FROM cssb03,cssp11 
+			WHERE 
+			cssb03.puk = cssp11.k01 AND 
+			cssb03.eb5 = cssp11.eb5 AND 
+			cssb03.ddd != '1' AND 
+			cssp11.ddd != '1' AND 
+			cssp11.eb5 = #{eb5} AND 
+			cssp11.puk = #{puk}
+    </select>
+    
+     <!-- 根据用户ID获得全部业务菜单（左上侧）[CSSPR1\CSSR04\CSSR02]  -->
+    <select id='getMyRool' parameterType='FrameworkData' resultType='FrameworkData'>
+        SELECT
+		*
+		FROM
+			(SELECT cssb03.* FROM cssb03,cssr04,csspr1 
+			WHERE 
+			cssb03.puk = cssr04.k01 AND 
+			cssr04.puk = csspr1.k01 AND 
+			cssb03.eb5 = csspr1.eb5 AND 
+			cssr04.eb5 = csspr1.eb5 AND 
+			cssb03.ddd != '1' AND 
+			cssr04.ddd != '1' AND 
+			csspr1.ddd != '1' AND 
+			cssb03.f05 = #{f02} AND 
+			cssb03.eb5 = #{eb5} AND 
+			csspr1.puk = #{puk}
+			UNION
+			SELECT cssb03.* FROM cssb03,cssr02,csspr1 
+			WHERE 
+			cssb03.puk = cssr02.k01 AND 
+			cssr02.puk = csspr1.k01 AND 
+			cssb03.eb5 = csspr1.eb5 AND 
+			cssr02.k02 = csspr1.eb5 AND 
+			cssb03.ddd != '1' AND 
+			cssr02.ddd != '1' AND 
+			csspr1.ddd != '1' AND
+			cssb03.f05 = #{f02} AND 
+			cssb03.eb5 = #{eb5} AND 
+			csspr1.puk = #{puk}
+			) menus 
+		WHERE fb1='1' or fb1='2'
+		ORDER BY f04 
+    </select>
+    
+    <!-- 超级用户获得全部业务菜单（左上侧）[CSSPR1\CSSR04\CSSR02]  -->
+    <select id='getAllMyRool' parameterType='FrameworkData' resultType='FrameworkData'>
+       SELECT * 
+			FROM cssb03
+	   WHERE ddd != '1' AND 
+			eb5 = #{eb5} AND
+			f05 = #{f02} AND 
+			(fb1='1' or fb1='2')
+	   ORDER BY f04 
+    </select>
+    
+     <!-- 根据用户ID获得应用菜单（左下侧）[CSSP12\YDYY01]  -->
+    <select id='getMyApp' parameterType='FrameworkData' resultType='FrameworkData'>
+        SELECT cssb03.* FROM cssb03,cssp12
+			WHERE 
+			cssb03.puk = cssp12.k01 AND 
+			cssb03.eb5 = cssp12.eb5 AND 
+			cssb03.ddd != '1' AND 
+			cssp12.ddd != '1' AND 
+			cssp12.eb5 = #{eb5} AND 
+			cssp12.puk = #{puk}
+    </select>
+
+</mapper>

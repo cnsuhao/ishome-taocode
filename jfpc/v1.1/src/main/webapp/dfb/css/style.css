@@ -1,0 +1,62 @@
+@charset "utf-8";
+/* CSS Document */
+
+.warp_position{ border-bottom:1px  dashed #d8d7d8; font-size:12px; padding:8px 5px 3px; margin:0 0 15px 0;}
+
+.con{ padding:0 0 40px 0; }
+.con1{ padding:0 5px; }
+.con2{ padding:0 5px; font-size:16px; line-height:28px; }
+.con_f1{float:left; background:url(../Images/08.jpg) left top no-repeat; padding:0 27px 0 0; width:323px; height:151px;}
+.con_f2{float:left; background:url(../Images/09.jpg) left top no-repeat; padding:0 27px 0 0; width:323px; height:151px;}
+.con_f3{float: right; background:url(../Images/10.jpg) left top no-repeat;  width:323px; height:151px;}
+.con_tline{ border-bottom:2px solid #e6e6e6; padding:0 5px 10px; height:45px; margin:0 0 10px 0;}
+.con_tline1{ border-bottom:2px solid #e6e6e6; padding:0 5px 10px; height:60px; margin:0 0 5px 0; text-align:center;}
+.con_tline2{ font-size:12px; color:#a6a6a6; padding:0 10px 10px;}
+.con_tline1_title{ font-size:26px; font-weight:bold; padding:10px 0 10px 0;}
+.con_title{ float:left; width:500px; font-size:24px; font-weight:bold; padding:15px 0 5px 0; }
+.con_an{ float:right; width:500px; text-align:right;}
+.con_tu{ padding:10px 5px;}
+.con_tu_fonts{font-size:18px; font-weight:bold; color:#01447c;}
+.con_dai{ float:left; width:117px; height:77px; background:url(../Images/14.jpg) left top no-repeat;}
+.con_dai_con{ float:right; padding:0 0 0 20px ; width:880px;}
+.con_dai_con ul{}
+.con_dai_con ul li{ list-style: disc inside;}
+.con_characte{ padding:0 15px 30px; text-align:center;}
+.con_characte_fonts{ font-size:20px; font-weight:bold; color:#2a2a2a; padding:0 0 18px 0;}
+.con_characte_con{ padding:0 20px;}
+.con_characte1{ float:left; width:244px; border-right: 1px dashed #969696; background:url(../Images/15.jpg) center top no-repeat; padding:180px 0 10px;}
+.con_characte2{ float:left; width:244px; border-right: 1px dashed #969696; background:url(../Images/16.jpg) center top no-repeat; padding:180px 0 10px;}
+.con_characte3{ float:left; width:244px; border-right: 1px dashed #969696; background:url(../Images/17.jpg) center top no-repeat; padding:180px 0 10px;}
+.con_characte4{ float: right; width:244px; background:url(../Images/18.jpg) center top no-repeat; padding:180px 0 10px;}
+.con_gy{ padding:0 0 10px 0;}
+.con_gy_lie{}
+.con_gy_lie ul{}
+.con_gy_lie ul li{ list-style:disc inside; border-bottom:1px dashed #969696;  padding:5px 10px; line-height:30px; }
+.con_gy_lie span{ float: right; color: #b1b1b1; width:100px;}
+.con_join{ padding:10px 33px 20px;}
+.con_join_k1{ float:left; width:294px; background:#e8e7e7; border:1px solid #cecdcd; padding:5px 5px 10px; text-align:center; margin:0 20px 0 0;}
+.con_join_k2{ float: right; width:294px; background:#e8e7e7; border:1px solid #cecdcd; padding:5px 5px 10px; text-align:center }
+.con_jion_fonts{ color:#04589e; padding:15px;}
+.con_join a:link{ font-size:20px; font-weight:bold; color:#04589e; padding:15px;}
+.con_join a:visited{ font-size:20px; font-weight:bold; color:#04589e; padding:15px;}
+.con_join a:hover{ font-size:20px; font-weight:bold; color:#eb6100; padding:15px;}
+.con_join a:active{ font-size:20px; font-weight:bold; color:#eb6100; padding:15px;}
+.con_cus{ padding:0 5px 10px;}
+.con_cus_qq{ padding:10px 0;}
+.con_cus_fonts{ font-size:24px; font-weight:bold; padding:10px 0;}
+.con_cus_line{ border-bottom:1px dashed #969696; margin:10px 0;}
+.con_cus_ln{ padding:0 0 10px;}
+.con_cus_bank{ float:left; width:427px; padding:10px 0 10px 10px ; margin:0 0 0 5px; border-bottom:1px dashed #969696; line-height:30px;}
+.con_cus_bank1{ float: right; width:427px;  padding:10px 0 10px 10px ; margin:0 0 0 5px; border-bottom:1px dashed #969696; line-height:30px;}
+.infor_wb{ width:300px; height:26px; border:1px solid #6297c4; padding:2px;}
+.infor_an{ background:#428bca; width:110px; height:5px; border:1px solid #357ebd; text-align:center; padding:5px 0 20px;}
+.infor_line{ border-bottom:1px solid #999; width:100%;}
+a.anniu:link{ font-weight:bold; color:#FFF;}
+a.anniu:visited{ font-weight:bold; color:#FFF;}
+a.anniu:hover{ font-weight:bold; color:#FFF;}
+a.anniu:active{ font-weight:bold; color:#FFF;}
+
+.pack{ border-top:1px solid #969696; border-left:1px solid #969696;}
+.pack1{ border-bottom:1px solid #969696; border-right:1px solid #969696;}
+
+.complete{ padding:200px 100px; color:#04589e; font-weight:bold; font-size:20px;}

@@ -1,0 +1,273 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 充值记录查询 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='com.ttnn.business.wm.dao.WMQTJLCXDao'>
+
+	<!-- 下线一览 -->
+	<select id='doSelectPageFACTD' parameterType='FrameworkData'
+		resultType='FrameworkData'>
+		SELECT b.puk,a.puk as k01, a.uu1 ,a.k03,a.f05 ,a.f06 ,a.f15 , a.f16 , a.f17 , a.f18 , a.f19 , a.bbb ,a.eb3,a.eb4,
+		a.fb1,a.cc1
+		FROM wmbm01 a
+		LEFT JOIN wmbm01 b
+		ON a.k03 = b.k03
+		AND b.k01 = #{k01}
+		WHERE
+		a.eb5 = #{eb5}
+		AND a.ddd != '1'
+		AND a.k01 = #{k03}
+	</select>
+
+	<!-- 下线一览 -->
+	<select id='doSelectPageHY' parameterType='FrameworkData'
+		resultType='FrameworkData'>
+		SELECT
+		wmui01.puk,wmui01.f04,wmuip1.f01,wmui01.cc1,cssr01.f03,cssr01.ddd,wmui01.fb4
+		FROM wmui01,wmuip1,cssr01
+		WHERE
+		wmui01.k02 = wmuip1.puk AND
+		wmui01.puk = cssr01.puk AND
+		wmui01.ddd != '1' AND
+		wmui01.eb5 = #{eb5} AND
+		wmui01.k01 = #{k01} AND
+		wmui01.k02 = #{k02}
+		
+		<if test=" puk != null and puk !='' "><!-- 用户ID -->
+			AND wmui01.puk = #{puk}
+		</if>
+		<if test=" f04 != null and f04 !='' "><!-- 用户姓名 -->
+			AND wmui01.f04 = #{f04}
+		</if>
+		<if test=" f03 != null and f03 !='' "><!-- 会员名 -->
+			AND cssr01.f03 = #{f03}
+		</if>
+		<if test=" fb4 != null and fb4 !='' "><!-- 状态 -->
+			AND wmui01.fb4 = #{fb4}
+		</if>
+		
+		<if test=" f05 != null and f05 !='' ">
+			<![CDATA[	AND str_to_date(cc1, '%Y/%m/%d') >= #{f05} ]]>
+		</if>
+		<if test=" f06 != null and f06 !='' ">
+			<![CDATA[	AND str_to_date(cc1, '%Y/%m/%d') <= #{f06} ]]>
+		</if>
+		
+	</select>
+	<!-- 佣金记录查询 -->
+	<select id='doSelectPageCommission' parameterType='FrameworkData'
+		resultType='FrameworkData'>
+		SELECT
+		wmbm04.puk,wmbm04.k01,wmbm04.f08,wmbm04.f02,wmbm04.uu1,wmbm04.cc1,wmui01.f04
+		as f04
+		FROM wmui01,wmbm04 WHERE wmui01.puk=wmbm04.k03 and wmbm04.ddd != '1' and wmbm04.fb1 = '1' and
+		wmbm04.eb5 = #{eb5} and wmbm04.k03=#{k03}
+		<if test=" f02 != null and f02 !='' "><!-- 用户ID -->
+			AND wmbm04.f02 = #{f02}
+		</if>
+		<if test=" eb2 != null and eb2 !='' "><!-- 用户ID -->
+			AND wmbm04.eb2 = #{eb2}
+		</if>
+		<if test=" f03 != null and f03 !='' "><!-- 用户ID -->
+			AND wmbm04.f03 = #{f03}
+		</if>
+	</select>
+	<!-- 下线支付通道查询 -->
+	<select id='doSelectPagePayChannel' parameterType='FrameworkData'
+		resultType='FrameworkData'>
+		SELECT wmui01.puk as puk,wmbm01.k01 as k01,wmui01.f04 as f04,wmbm01.fb1 as fb1,wmbm01.f19 as f19, wmbm01.bbb as bbb,
+		wmbm01.f05 as f05,wmbm01.f06 as f06,wmbm01.f15 as f15,wmbm01.f16 as
+		f16,wmbm01.eb3 eb3,wmbm01.eb4 eb4,wmbm01.f17 as f17,wmbm01.cc1 as cc1,wmbm01.puk as f07,wmbm01.uu1 as uu1
+		FROM wmbm01,wmui01
+		WHERE wmbm01.k01=wmui01.puk and wmbm01.ddd != '1' and wmbm01.eb5 = #{eb5}
+		and wmbm01.k02 =#{k01}
+	</select>
+	<!-- 下线充值记录查询 -->
+	<select id='doSelectPagePayFor' parameterType='FrameworkData'
+		resultType='FrameworkData'>
+		SELECT wmbm02.puk,wmbm02.fb1,wmbm02.f07,wmbm02.cc1,wmbm02.f06,wmbm02.f18,cssr01.f03 FROM wmbm02,wmui01,cssr01
+		WHERE wmui01.k01=#{k01} and
+		 wmui01.puk=cssr01.puk  and
+     wmui01.puk=wmbm02.k01  and
+     wmbm02.ddd != '1'      and 
+     wmbm02.eb5 = #{eb5}  
+        <if test=" puk !=null and puk !='' ">
+		 AND  wmbm02.puk = #{puk}             <!-- 订单号 -->
+		</if>
+		<if test=" fb1 !=null and fb1 !=''">
+		  AND wmbm02.fb1 = #{fb1}  <!-- 通道名称 -->
+		</if>
+		
+		<if test=" f06 !=null and f06 !=''">
+		  AND wmbm02.f06 = #{f06}   <!-- 状态 -->
+		</if>
+         
+         <if test=" f02 != null and f02 !='' ">
+			<![CDATA[	AND str_to_date(cc1, '%Y/%m/%d') >= #{f02} ]]>
+		</if>
+		<if test=" f03 != null and f03 !='' ">
+			<![CDATA[	AND str_to_date(cc1, '%Y/%m/%d') <= #{f03} ]]>
+		</if>
+	</select>
+	<!-- 下线提现记录查询 -->
+	<select id='doSelectPagePullCash' parameterType='FrameworkData'
+		resultType='FrameworkData'>
+		SELECT wmbm03.* FROM wmbm03,wmui01
+		WHERE wmui01.k01=#{k01} and wmbm03.ddd != '1' and wmbm03.eb5 = #{eb5} and
+		wmui01.puk=wmbm03.k01
+		
+		<if test=" puk !=null and puk !='' ">
+		 AND  wmbm03.puk = #{puk}
+		</if>
+		<if test=" f06 !=null and f06 !=''">
+		  AND wmbm03.f06 = #{f06}
+		</if>
+	    <if test=" fb1 !=null and fb1 !=''">
+		  AND wmbm03.fb1 = #{fb1}
+		</if>
+		<if test=" f02 != null and f02 !='' ">
+			<![CDATA[	AND str_to_date(cc1, '%Y/%m/%d') >= #{f02} ]]>
+		</if>
+		<if test=" f03 != null and f03 !='' ">
+			<![CDATA[	AND str_to_date(cc1, '%Y/%m/%d') <= #{f03} ]]>
+		</if>
+		
+	</select>
+	<!-- 查询会员银行卡 -->
+	<select id='doSelectPageYHK' parameterType='FrameworkData'
+		resultType='FrameworkData'>
+		SELECT wmbs01.* FROM wmbs01,wmui01 WHERE wmui01.k01=#{k01} and
+		wmui01.puk=wmbs01.k01
+		and wmbs01.ddd != '1' and wmbs01.eb5 = #{eb5}
+	</select>
+
+	<!-- 充值记录查询 -->
+	<select id='doSelectPageCZJYJL' parameterType='FrameworkData'
+		resultType='FrameworkData'>
+		SELECT *
+		FROM wmbm02
+		WHERE ddd != '1'
+		AND eb5 = #{eb5}
+		<if test=" puk !=null and puk !='' ">
+		 AND  puk = #{puk}
+		</if>
+		<if test=" fb1 !=null and fb1 !=''">
+		  AND fb1 = #{fb1}
+		</if>
+		
+		<if test=" f06 !=null and f06 !=''">
+		  AND f06 = #{f06}
+		</if>
+		<if test=" f01 != null and f01 !='' "><!-- 用户ID -->
+			AND k01 = #{f01}
+		</if>
+		<if test=" eb1 != null and eb1 !='' "><!-- 用户ID -->
+			AND eb1 = #{eb1}
+		</if>
+		<if test=" f02 != null and f02 !='' ">
+			<![CDATA[	AND str_to_date(cc1, '%Y/%m/%d') >= #{f02} ]]>
+		</if>
+		<if test=" f03 != null and f03 !='' ">
+			<![CDATA[	AND str_to_date(cc1, '%Y/%m/%d') <= #{f03} ]]>
+		</if>
+	</select>
+
+	<!-- 提现记录查询 -->
+	<select id='doSelectPageTXJYJL' parameterType='FrameworkData'
+		resultType='FrameworkData'>
+		SELECT *
+		FROM wmbm03
+		WHERE ddd != '1'
+		AND eb5 = #{eb5}
+		<if test=" puk !=null and puk !='' ">
+		 AND  puk = #{puk}
+		</if>
+		<if test=" f06 !=null and f06 !=''">
+		  AND f06 = #{f06}
+		</if>
+		<if test=" fb1 !=null and fb1 !=''">
+		  AND fb1 = #{fb1}
+		</if>
+		<if test=" k01 != null and k01 !='' "><!-- 用户ID -->
+			AND k01 = #{k01}
+		</if>
+		<if test=" f02 != null and f02 !='' ">
+			<![CDATA[	AND str_to_date(cc1, '%Y/%m/%d') >= #{f02} ]]>
+		</if>
+		<if test=" f03 != null and f03 !='' ">
+			<![CDATA[	AND str_to_date(cc1, '%Y/%m/%d') <= #{f03} ]]>
+		</if>
+	</select>
+
+	<!-- 交易查询记录 -->
+	<select id='doSelectPageYJJSJL' parameterType='FrameworkData'
+		resultType='FrameworkData'>
+		SELECT *
+		FROM wmbm05
+		WHERE ddd != '1'
+		AND eb5 = #{eb5}
+		<if test=" k01 != null and k01 !='' "><!-- 用户ID -->
+			AND k01 = #{k01}
+		</if>
+		<if test="f06 != null and f06 !='' ">
+		   AND f06 =  #{f06}
+		</if>
+		
+		<if test=" f02 != null and f02 !='' ">
+			<![CDATA[	AND str_to_date(cc1, '%Y/%m/%d') >= #{f02} ]]>
+		</if>
+		<if test=" f03 != null and f03 !='' ">
+			<![CDATA[	AND str_to_date(cc1, '%Y/%m/%d') <= #{f03} ]]>
+		</if>
+	</select>
+
+	<!--对账单 -->
+	<select id='doSelectPageDZD' parameterType='FrameworkData'
+		resultType='FrameworkData'>
+		SELECT *
+		FROM
+		(SELECT *,'wmbm02' as tablename
+		FROM wmbm02
+		UNION
+		SELECT *,'wmbm03' as tablename
+		FROM wmbm03) myjy
+		WHERE
+		ddd != '1'
+		AND k01 = #{k01}
+		AND eb5 = #{eb5}
+		<if test=" f01 != null and f01 !='' "><!-- 用户ID -->
+			AND k02 = #{f01}
+		</if>
+		<if test=" f02 != null and f02 !='' ">
+			<![CDATA[	AND str_to_date(cc1, '%Y/%m/%d') >= #{f02} ]]>
+		</if>
+		<if test=" f03 != null and f03 !='' ">
+			<![CDATA[	AND str_to_date(cc1, '%Y/%m/%d') <= #{f03} ]]>
+		</if>
+	</select>
+	
+<!-- 	查询下线提现对应充值记录 -->
+       <select id='doSelectPageTC' parameterType='FrameworkData'
+		resultType='FrameworkData'>
+		SELECT wmbm02.puk as puk ,
+		wmbm02.fb1 as fb1, 
+		wmbm02.f07 as f07,
+		wmbm02.eb2 as eb2,
+		wmbm02.f18 as f18 ,
+		wmbm02.cc1 as cc1,
+		wmbm02.bbb as bbb,
+		wmbm02.f06 as f06,
+		cssr01.f03 as f03 
+		FROM wmbm02,cssr01 
+		where wmbm02.k02=#{k02}  and
+		wmbm02.f06=#{f06}        and
+		wmbm02.eb1= #{eb1}       and
+		wmbm02.k01=cssr01.puk    and
+		wmbm02.k01=#{k01}        and
+	    wmbm02.ddd != '1'        and 
+	    wmbm02.eb5 = #{eb5}
+	</select>
+	
+</mapper>

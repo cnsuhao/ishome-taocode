@@ -1,0 +1,292 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 贷付宝后台数据统计服务 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<!-- F01登录会员id，F02会员名字，F03通道id，F04时间 ，F05日期格式化标准（年月日%Y/%m/%d年月%Y/%m）-->
+<mapper namespace='com.ttnn.business.wm.dao.WMHTMXDao'>
+
+    <!-- 交易记录统计 -->
+    <select id='doSelectPageJYMX' parameterType='FrameworkData' resultType='FrameworkData'>
+    	SELECT *
+    	FROM
+    		(
+    			SELECT 
+    				wmbm02.puk as puk,
+    				
+    				wmbm02.k01 as k01,
+    				wmbm02.k02 as k02,
+    				wmbm02.f01 as f01,
+    				wmui01.f04 as f02,
+    				wmbm02.f05 as f05,
+    				wmbm02.f07 as f07,
+    				wmbm02.f08 as f08,
+    				wmbm02.f10 as f10,
+    				wmbm02.f18 as f18,
+    				
+					wmui01.fb1 as fb1,
+
+    				cssr01.f03 AS eb1,
+    				wmui01.f04 AS eb2,
+    				wmbm02.k02 AS eb3,
+    				wmbm02.cc1 AS eb4,
+    				wmbm02.eb5 AS eb5,
+					str_to_date(wmbm02.cc1, #{f05}) AS cc1
+    			FROM wmbm02,wmui01,cssr01
+    			WHERE
+    				wmbm02.k01 = wmui01.puk and
+    				wmbm02.k01 = cssr01.puk and
+    				cssr01.ddd != '1' and
+    				wmui01.ddd != '1' and
+    				wmbm02.ddd != '1' 
+    		) total_jy
+    	WHERE
+    		eb5 = #{eb5}
+    	<if test=" f01 != null and f01 !='' "><!-- 登录会员id -->
+                AND eb1 = #{f01}
+        </if>
+    	<if test=" f02 != null and f02 !='' "><!-- 会员名字 -->
+                AND eb2 = #{f02}
+        </if>
+    	<!-- <if test=" f04 != null and f04 !='' ">通道id
+                AND eb3 = #{f04}
+        </if> -->
+        <if test=" f04 != null and f04 !='' ">
+			<![CDATA[	AND str_to_date(eb4, '%Y/%m/%d') >= #{f04} ]]>
+		</if>
+		<if test=" f06 != null and f06 !='' ">
+			<![CDATA[	AND str_to_date(eb4, '%Y/%m/%d') <= #{f06} ]]>
+		</if>
+    </select>
+
+	<!-- 充值记录统计 -->
+    <select id='doSelectPageCZMX' parameterType='FrameworkData' resultType='FrameworkData'>
+        SELECT *
+    	FROM
+    		(
+    			SELECT 
+    				wmbm02.puk as puk,
+    				
+    				wmbm02.k01 as k01,
+    				wmbm02.k02 as k02,
+    				wmbm02.f01 as f01,
+    				wmui01.f04 as f02,
+    				wmbm02.f05 as f05,
+    				wmbm02.f06 as f06,
+    				wmbm02.f07 as f07,
+    				wmbm02.f08 as f08,
+    				wmbm02.f10 as f10,
+    				wmbm02.f18 as f18,
+    				wmbm02.f17 as f17,
+					wmbm02.fb1 as fb1,
+					wmbm02.eb1 as f20,
+
+    				cssr01.f03 AS eb1,
+    				wmui01.f04 AS eb2,
+    				wmbm02.k02 AS eb3,
+    				wmbm02.cc1 AS eb4,
+    				wmbm02.eb5 AS eb5,
+					str_to_date(wmbm02.cc1, #{f05}) AS cc1
+    			FROM wmbm02,wmui01,cssr01
+    			WHERE
+    				wmbm02.k01 = wmui01.puk and
+    				wmbm02.k01 = cssr01.puk and
+    				cssr01.ddd != '1' and
+    				wmui01.ddd != '1' and
+    				wmbm02.ddd != '1' 
+    		) total_jy
+    	WHERE
+    		eb5 = #{eb5}
+    	<if test=" f01 != null and f01 !='' "><!-- 登录会员id -->
+                AND eb1 = #{f01}
+        </if>
+    	<if test=" f02 != null and f02 !='' "><!-- 会员名字 -->
+                AND eb2 = #{f02}
+        </if>
+        <if test=" f20 != null and f20 !='' "><!-- 会员名字 -->
+                AND f20 = #{f20}
+        </if>
+    	<!-- <if test=" f04 != null and f04 !='' ">通道id
+                AND eb3 = #{f04}
+        </if> -->
+        <if test=" f04 != null and f04 !='' ">
+			<![CDATA[	AND str_to_date(eb4, '%Y/%m/%d') >= #{f04} ]]>
+		</if>
+		<if test=" f06 != null and f06 !='' ">
+			<![CDATA[	AND str_to_date(eb4, '%Y/%m/%d') <= #{f06} ]]>
+		</if>
+		
+		<if test=" puk != null and puk !='' "><!-- 登录会员id -->
+                AND puk = #{puk}
+        </if>
+    	<if test=" fb1 != null and fb1 !='' "><!-- 会员名字 -->
+                AND fb1 = #{fb1}
+        </if>
+    </select>
+    
+    <!-- 提现记录统计 -->
+    <select id='doSelectPageTXMX' parameterType='FrameworkData' resultType='FrameworkData'>
+        SELECT *
+    	FROM
+    		(
+    			SELECT 
+    				wmbm03.puk as puk,
+    				
+    				wmbm03.k01 as k01,
+    				wmbm03.k02 as k02,
+    				wmbm03.f01 as f01,
+    				
+    				wmbm03.f03 as f03,
+    				wmbm03.f04 as f04,
+    				
+    				
+    				wmui01.f04 as f02,
+    				wmbm03.f05 as f05,
+    				wmbm03.f06 as f06,
+    				wmbm03.f07 as f07,
+    				wmbm03.f08 as f08,
+    				wmbm03.f10 as f10,
+    				wmbm03.f18 as f18,
+    				
+					wmbm03.fb1 as fb1,
+
+    				cssr01.f03 AS eb1,
+    				wmui01.f04 AS eb2,
+    				wmbm03.k02 AS eb3,
+    				wmbm03.cc1 AS eb4,
+    				wmbm03.eb5 AS eb5,
+					str_to_date(wmbm03.cc1, #{f05}) AS cc1
+    			FROM wmbm03,wmui01,cssr01
+    			WHERE
+    				wmbm03.k01 = wmui01.puk and
+    				wmbm03.k01 = cssr01.puk and
+    				cssr01.ddd != '1' and
+    				wmui01.ddd != '1' and
+    				wmbm03.ddd != '1' 
+    		) total_jy
+    	WHERE
+    		eb5 = #{eb5}
+    	<if test=" f01 != null and f01 !='' "><!-- 登录会员id -->
+                AND eb1 = #{f01}
+        </if>
+    	<if test=" f02 != null and f02 !='' "><!-- 会员名字 -->
+                AND eb2 = #{f02}
+        </if>
+    	<!-- <if test=" f04 != null and f04 !='' ">通道id
+                AND eb3 = #{f04}
+        </if> -->
+        <if test=" f04 != null and f04 !='' ">
+			<![CDATA[	AND str_to_date(eb4, '%Y/%m/%d') >= #{f04} ]]>
+		</if>
+		<if test=" f06 != null and f06 !='' ">
+			<![CDATA[	AND str_to_date(eb4, '%Y/%m/%d') <= #{f06} ]]>
+		</if>
+		
+		<if test=" puk != null and puk !='' "><!-- 登录会员id -->
+                AND puk = #{puk}
+        </if>
+    	<if test=" fb1 != null and fb1 !='' "><!-- 会员名字 -->
+                AND f04 = #{fb1}
+        </if>
+        <if test=" f03 != null and f03 !='' "><!-- 会员名字 -->
+                AND f03 = #{f03}
+        </if>
+         <if test=" fb2 != null and fb2 !='' "><!-- 会员名字 -->
+                AND f01 = #{fb2}
+        </if>
+    </select>
+    
+    <!-- 佣金记录统计 -->
+    <select id='doSelectPageYJMX' parameterType='FrameworkData' resultType='FrameworkData'>
+       SELECT *
+    	FROM
+    		(
+    			SELECT 
+    				wmbm04.puk as puk,
+    				
+    				wmbm04.k03 as k01,
+    				wmbm04.f01 as f01,
+    				wmbm04.f02 as f02,
+    				wmbm04.f03 as f03,
+    				wmbm04.f08 as f08,
+    				
+					wmui01.fb1 as fb1,
+
+						wmbm04.k01 as bbb,
+
+    				cssr01.f03 AS eb1,
+    				wmui01.f04 AS eb2,
+    				wmbm04.k02 AS eb3,
+    				wmbm04.cc1 AS eb4,
+    				wmbm04.eb5 AS eb5,
+    				str_to_date(wmbm04.cc1, #{f05}) AS cc1
+    			FROM wmbm04,wmui01,cssr01
+    			WHERE
+    				wmbm04.k03 = wmui01.puk and
+    				wmbm04.k03 = cssr01.puk and
+    				wmbm04.k01 = '0' and
+    				cssr01.ddd != '1' and
+    				wmui01.ddd != '1' and
+    				wmbm04.ddd != '1'
+    				
+    			UNION
+    			
+    			SELECT 
+    				wmbm04.puk as puk,
+    				
+    				wmbm04.k03 as k01,
+    				wmbm04.f01 as f01,
+    				wmbm04.f02 as f02,
+    				wmbm04.f03 as f03,
+    				wmbm04.f08 as f08,
+    				
+					wmui01.fb1 as fb1,
+
+						wmbm04.k01 as bbb,
+
+    				cssr01.f03 AS eb1,
+    				wmui01.f04 AS eb2,
+    				wmbm04.k02 AS eb3,
+    				wmbm04.cc1 AS eb4,
+    				wmbm04.eb5 AS eb5,
+    				str_to_date(wmbm04.cc1, #{f05}) AS cc1
+    			FROM wmbm04,wmui01,cssr01
+    			WHERE
+    				wmbm04.k03 = wmui01.puk and
+    				wmbm04.k03 = cssr01.puk and
+    				wmbm04.k01 = '1' and
+    				cssr01.ddd != '1' and
+    				wmui01.ddd != '1' and
+    				wmbm04.ddd != '1'
+    				 
+    		) total_jy
+    	WHERE
+    		eb5 = #{eb5}
+    	<if test=" f01 != null and f01 !='' "><!-- 登录会员id -->
+                AND eb1 = #{f01}
+        </if>
+    	<if test=" f02 != null and f02 !='' "><!-- 会员名字 -->
+                AND eb2 = #{f02}
+        </if>
+    	<!-- <if test=" f04 != null and f04 !='' ">通道id
+                AND eb3 = #{f04}
+        </if> -->
+        <if test=" f04 != null and f04 !='' ">
+			<![CDATA[	AND str_to_date(eb4, '%Y/%m/%d') >= #{f04} ]]>
+		</if>
+		<if test=" f06 != null and f06 !='' ">
+			<![CDATA[	AND str_to_date(eb4, '%Y/%m/%d') <= #{f06} ]]>
+		</if>
+		
+		<if test=" fb1 != null and fb1 !='' "><!-- 会员名字 -->
+                AND f02 = #{fb1}
+        </if>
+        <if test=" f03 != null and f03 !='' "><!-- 会员名字 -->
+                AND f03 = #{f03}
+        </if>
+         <if test=" bbb != null and bbb !='' "><!-- 会员名字 -->
+                AND bbb = #{bbb}
+        </if>
+    </select>
+</mapper>

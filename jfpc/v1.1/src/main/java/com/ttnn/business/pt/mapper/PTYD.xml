@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 总控监管数据 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='com.ttnn.business.pt.biz.PTYDDao'>
+    
+    <!-- 表字段信息  -->
+    <sql id='tableColumns'>
+        puk,k01,k02,k03,f01,f02,bbb,fb1,fb2,fb3,fb4,fb5,eb1,eb2,eb3,eb4,eb5,ddd,cc1,cc2,uu1,uu2
+    </sql>
+    
+    <!-- 产品信息查询一条数据  -->
+    <select id='doFindList1' parameterType='FrameworkData' resultType='FrameworkData'>
+        SELECT * FROM ptcp01 WHERE puk = #{puk} AND k03 = #{k03} 
+    </select>
+     
+     <!-- 产品功能信息查询一条数据  -->
+    <select id='doFindList2' parameterType='FrameworkData' resultType='FrameworkData'>
+        SELECT * FROM ptcp02 WHERE puk = #{puk} AND f01 = #{f01} 
+    </select>
+    
+    <!-- 产品销售套餐分类查询一条数据  -->
+    <select id='doFindList3' parameterType='FrameworkData' resultType='FrameworkData'>
+        SELECT * FROM ptcp03 WHERE puk = #{puk} AND f01 = #{f01} 
+    </select>
+    
+    <!-- 系统公告查询一条数据  -->
+    <select id='doFindList4' parameterType='FrameworkData' resultType='FrameworkData'>
+        SELECT * FROM cssm01 WHERE f02 = #{f02}
+    </select>
+    
+    
+</mapper>

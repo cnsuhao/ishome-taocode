@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 用户信息 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='com.ttnn.business.wm.dao.TotalDao'>
+
+
+  <select id="doSelectRecharge" parameterType='FrameworkData' resultType='FrameworkData'>
+    select sum(a.f07) f07,sum(a.f18) f18,a.cc1 cc1,b.f04 f04  from wmbm02 a,wmui01 b where b.puk = a.k01 
+    group by a.k01 
+  </select>
+  
+  
+  <select id="doSelectWithdraw" parameterType='FrameworkData' resultType='FrameworkData'>
+    select sum(a.f07) f07,sum(a.f18) f18,a.cc1 cc1,b.f04 f04  from wmbm03 a,wmui01 b where b.puk = a.k01 
+    group by a.k01 
+  </select>
+  
+  <select id="doSelectCommission" parameterType='FrameworkData' resultType='FrameworkData'>
+    select sum(a.f08) f08,a.cc1 cc1,b.f04 f04  from wmbm04 a,wmui01 b where b.puk = a.k01 
+    group by a.k01 
+  </select>
+  
+    
+</mapper>

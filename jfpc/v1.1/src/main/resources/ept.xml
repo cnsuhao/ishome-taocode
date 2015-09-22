@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="GBK"?>
+<ept>
+	<!-- 参数定义 -->
+	<configs 
+		templateVersion="1.0"
+		encodingLanguage="utf-8"
+		commitNumber="100"
+		defaultTemplate="ept-default-template.xml"/>	
+	<!-- 容器定义 参考IContainer.java DataContainer.java 在校验成功后调用-->
+	<containers>
+		<container name="container" className="com.ttnn.framework.ept.container.DefaultDataContainer" />
+	</containers>
+	<converts>
+		<convert name="convert" className="com.ttnn.framework.ept.convert.DefaultDataConvert" />
+	</converts>
+	<!-- 提示信息定义 -->
+	<messages>
+		<!-- 基本信息 -->
+		<message name="importSuccess" value="EXCEL数据成功导入数据库！" />
+		<message name="importFail" value="EXCEL数据导入失败！" />
+		<message name="importConfirm" value="EXCEL数据校验完成，是否开始导入！" />
+		<message name="exportSuccess" value="EXCEL数据成功导出！" />
+		<message name="exportFail" value="EXCEL数据导出失败！" />
+		<message name="exportConfirm" value="EXCEL数据筛选完成，是否开始导出！" />
+		<!-- 配置信息 -->
+		<message name="templateError" value="EPT模版配置文件读取发生错误！" />
+		<message name="narmalError" value="文档数据在单元格【{0}】【{1}】发生基本读取错误" />
+		<message name="validateError" value="文档数据在单元格【{0}】【{1}】发生校验错误" />
+		<message name="templateError" value="EPT业务模版【{0}】读取发生错误！" />
+		<!-- 参考校验器定义提示信息 -->
+		<message name="validateLength1" value="单元格数据【{0}】【{1}】长度不合法，应该在【{2}】字节以内" />		
+		<message name="validateLength2" value="单元格数据【{0}】【{1}】长度不合法，应该在【{2}】和【{3}】字节之间" />			
+		<message name="validateNull" value="单元格数据【{0}】【{1}】内容为空，应该填入内容" />	
+		<message name="validateType" value="单元格数据【{0}】【{1}】内容类型不合法，应该为【{2}】" />		
+	</messages>
+	<!-- 校验器定义 参考EPTIValidate.java，在数据读取后调用-->
+	<validators>
+		<!-- 使用半角#分割(例如：5#20) -->
+		<validate name="length" className="com.ttnn.framework.ept.validate.LengthValidator" message="validateLength1;validateLength2"/>
+		<validate name="null" className="com.ttnn.framework.ept.validate.NullValidator" message="validateNull"/>
+		<validate name="type" className="com.ttnn.framework.ept.validate.TypeValidator" message="validateType"/>
+	</validators>
+</ept>

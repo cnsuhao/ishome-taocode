@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template version="1.3">
+	<!-- 输出基本模版(读取可以忽略) -->
+	<!-- 目前版本仅仅支持一个文件操作 -->
+	<book name="book" template="EPT-read.xls" title="测试模版"/>
+	<!-- 工作簿输出基本定义(读取可以忽略book属性，保持为空白) -->
+	<sheet name="s1" numIndex="0" title="测试sheet1" book="book"/>
+	<sheet name="s2" numIndex="0" title="测试sheet2" book="book"/>
+	<!-- operationType：0插入，1更新，2查询 -->
+	<!-- parameterType : class;map -->
+	<pojo name="test" beanCalss="TESTBean" daoCalss="TESTDao" parameterType="class" sqlMap="test" operationType="0">
+		<convert name="cv1" className="convert" />
+		<convert name="cv2" className="convert" />
+		<container name="ct1" className="container" />
+		<container name="ct2" className="container" />
+	</pojo>
+	<pojo name="testt" beanCalss="TESTBean" daoCalss="TESTDao" parameterType="class" sqlMap="test" operationType="0">
+		<convert name="cv1" className="convert" />
+		<convert name="cv2" className="convert" />
+		<container name="ct1" className="container" />
+		<container name="ct2" className="container" />
+	</pojo>
+	<pojo name="test1" beanCalss="TESTBean" daoCalss="TESTDao" parameterType="class" sqlMap="test1" operationType="0">
+		<convert name="cv1" className="convert" />
+		<convert name="cv2" className="convert" />
+		<container name="ct1" className="container" />
+		<container name="ct2" className="container" />
+	</pojo>
+	<pojo name="test2" beanCalss="TESTBean" daoCalss="TESTDao" parameterType="map" sqlMap="test2" operationType="0">
+		<convert name="cv1" className="convert" />
+		<convert name="cv2" className="convert" />
+		<container name="ct1" className="container" />
+		<container name="ct2" className="container" />
+	</pojo>
+	<!-- cell相关操作以pojoName为Map的关键字，请不要多个重复定义 -->
+	<!-- 行号和列号从0开始计算 -->
+	<!-- 一次操作 -->
+	<oncecell name="oc1" sheetName="s1" pojoName="test">
+		<cell name="21" rowNumber="1" columnNumber="0" beanName="name" daoName="name">		
+			<validate name="length" value="1#20"/>
+			<validate name="null" value=""/>
+			<validate name="type" value="String"/>
+		</cell>
+	</oncecell>
+	<oncecell name="oc2" sheetName="s2" pojoName="testt">
+		<cell name="22" rowNumber="2" columnNumber="1" beanName="name" daoName="name">		
+			<validate name="length" value="1#20"/>
+			<validate name="null" value=""/>
+			<validate name="type" value="String"/>
+		</cell>
+	</oncecell>
+	<!-- 多次操作 -->
+	<!-- 循环数据判断第一个出现repeat参数行数据为空的时候停止循环-->
+	<!--     输出时候同一行定义只处理同一个SQLID操作结果-->
+	<!--     输出时候如果原有模版为空，rowNum代表开始输出的第一行 -->
+	<!--     输出时候如果原有模版不为空，rowNum代表开始输出的数据模版行。改行会被复制格式-->
+	<repeatcell name="rc1" sheetName="s1" pojoName="test1" startRowNumber="3">
+		<cell name="41" columnNumber="0" beanName="name" daoName="name">		
+			<validate name="length" value="1#20"/>
+			<validate name="null" value=""/>
+			<validate name="type" value="String"/>
+		</cell>
+		<cell name="42" columnNumber="1" beanName="value" daoName="value">		
+			<validate name="length" value="1#20"/>
+			<validate name="null" value=""/>
+			<validate name="type" value="String"/>
+		</cell>
+	</repeatcell>
+	<repeatcell name="rc2" sheetName="s2" pojoName="test2" startRowNumber="11">
+		<cell name="51" columnNumber="0" beanName="name" daoName="name">		
+			<validate name="length" value="1#20"/>
+			<validate name="null" value=""/>
+			<validate name="type" value="String"/>
+		</cell>
+		<cell name="52" columnNumber="1" beanName="value" daoName="value">		
+			<validate name="length" value="1#20"/>
+			<validate name="null" value=""/>
+			<validate name="type" value="String"/>
+		</cell>
+	</repeatcell>
+</template>

@@ -1,0 +1,25 @@
+INSERT INTO `cssr04` VALUES ('DFB_ZK_ADMIN_GROUP', 'WMZK8000', null, 'N', 'N', 'N', 'N', 'N', null, null, null, null, 'TTNN_DFB', '0', '2013/5/1 17:14:13', 'Spook', null, null);
+INSERT INTO `cssr04` VALUES ('DFB_ZK_ADMIN_GROUP', 'WMZK8200', null, 'N', 'N', 'N', 'N', 'N', null, null, null, null, 'TTNN_DFB', '0', '2013/5/1 17:14:13', 'Spook', null, null);
+INSERT INTO `cssr04` VALUES ('DFB_ZK_ADMIN_GROUP', 'WMZK8300', null, 'N', 'N', 'N', 'N', 'N', null, null, null, null, 'TTNN_DFB', '0', '2013/5/1 17:14:13', 'Spook', null, null);
+
+INSERT INTO `cssr04` VALUES ('DFB_ZK_SELL_GROUP', 'WMZK8000', null, 'N', 'N', 'N', 'N', 'N', null, null, null, null, 'TTNN_DFB', '0', '2013/5/1 17:14:13', 'Spook', null, null);
+INSERT INTO `cssr04` VALUES ('DFB_ZK_SELL_GROUP', 'WMZK8200', null, 'N', 'N', 'N', 'N', 'N', null, null, null, null, 'TTNN_DFB', '0', '2013/5/1 17:14:13', 'Spook', null, null);
+INSERT INTO `cssr04` VALUES ('DFB_ZK_SELL_GROUP', 'WMZK8300', null, 'N', 'N', 'N', 'N', 'N', null, null, null, null, 'TTNN_DFB', '0', '2013/5/1 17:14:13', 'Spook', null, null);
+
+INSERT INTO `cssr04` VALUES ('DFB_HT_ADMIN_GROUP', 'WMHT8000', null, 'N', 'N', 'N', 'N', 'N', null, null, null, null, 'TTNN_DFB', '0', '2013/5/1 17:14:13', 'Spook', null, null);
+INSERT INTO `cssr04` VALUES ('DFB_HT_ADMIN_GROUP', 'WMHT8200', null, 'N', 'N', 'N', 'N', 'N', null, null, null, null, 'TTNN_DFB', '0', '2013/5/1 17:14:13', 'Spook', null, null);
+INSERT INTO `cssr04` VALUES ('DFB_HT_ADMIN_GROUP', 'WMHT8300', null, 'N', 'N', 'N', 'N', 'N', null, null, null, null, 'TTNN_DFB', '0', '2013/5/1 17:14:13', 'Spook', null, null);
+
+INSERT INTO `cssr04` VALUES ('DFB_HT_BIZ_GROUP', 'WMHT8000', null, 'N', 'N', 'N', 'N', 'N', null, null, null, null, 'TTNN_DFB', '0', '2013/5/1 17:14:13', 'Spook', null, null);
+INSERT INTO `cssr04` VALUES ('DFB_HT_BIZ_GROUP', 'WMHT8200', null, 'N', 'N', 'N', 'N', 'N', null, null, null, null, 'TTNN_DFB', '0', '2013/5/1 17:14:13', 'Spook', null, null);
+INSERT INTO `cssr04` VALUES ('DFB_HT_BIZ_GROUP', 'WMHT8300', null, 'N', 'N', 'N', 'N', 'N', null, null, null, null, 'TTNN_DFB', '0', '2013/5/1 17:14:13', 'Spook', null, null);
+
+INSERT INTO `cssr04` VALUES ('DFB_QT_ADMIN_GROUP', 'WMQT8000', null, 'N', 'N', 'N', 'N', 'N', null, null, null, null, 'TTNN_DFB', '0', '2013/5/1 17:14:13', 'Spook', null, null);
+INSERT INTO `cssr04` VALUES ('DFB_QT_ADMIN_GROUP', 'WMQT8100', null, 'N', 'N', 'N', 'N', 'N', null, null, null, null, 'TTNN_DFB', '0', '2013/5/1 17:14:13', 'Spook', null, null);
+INSERT INTO `cssr04` VALUES ('DFB_QT_ADMIN_GROUP', 'WMQT8200', null, 'N', 'N', 'N', 'N', 'N', null, null, null, null, 'TTNN_DFB', '0', '2013/5/1 17:14:13', 'Spook', null, null);
+INSERT INTO `cssr04` VALUES ('DFB_QT_ADMIN_GROUP', 'WMQT8300', null, 'N', 'N', 'N', 'N', 'N', null, null, null, null, 'TTNN_DFB', '0', '2013/5/1 17:14:13', 'Spook', null, null);
+
+INSERT INTO `cssr04` VALUES ('DFB_QT_VIP_GROUP', 'WMQT8000', null, 'N', 'N', 'N', 'N', 'N', null, null, null, null, 'TTNN_DFB', '0', '2013/5/1 17:14:13', 'Spook', null, null);
+INSERT INTO `cssr04` VALUES ('DFB_QT_VIP_GROUP', 'WMQT8100', null, 'N', 'N', 'N', 'N', 'N', null, null, null, null, 'TTNN_DFB', '0', '2013/5/1 17:14:13', 'Spook', null, null);
+INSERT INTO `cssr04` VALUES ('DFB_QT_VIP_GROUP', 'WMQT8200', null, 'N', 'N', 'N', 'N', 'N', null, null, null, null, 'TTNN_DFB', '0', '2013/5/1 17:14:13', 'Spook', null, null);
+INSERT INTO `cssr04` VALUES ('DFB_QT_VIP_GROUP', 'WMQT8300', null, 'N', 'N', 'N', 'N', 'N', null, null, null, null, 'TTNN_DFB', '0', '2013/5/1 17:14:13', 'Spook', null, null);

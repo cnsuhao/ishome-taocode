@@ -1,0 +1,23 @@
+@charset "utf-8";
+/* CSS Document */
+
+*{ padding:0; margin:0; border:0;}
+body{ font-size:14px; font-family:Arial, "黑体","微软雅黑";}
+pic{padding:0; margin:0; border:0;}
+
+
+
+.head{ background: url(/resources/img/wm/bg.jpg) left top repeat-x; height:68px;  }
+.head_page{ width:1024px; margin:0 auto;}
+.head_logo{ float:left; padding:6px 0 0 24px;}
+.warp{width:1024px; margin:0 auto;}
+.warp_con{ padding:140px 100px;}
+.warp_con a:link{ color:#2765a4; text-decoration:none; }
+.warp_con a:visited{color:#2765a4; text-decoration:none; }
+.warp_con a:hover{color:#2765a4; text-decoration: underline; }
+.warp_con a:active{color:#2765a4; text-decoration:underline; }
+
+.warp_con .y1{ float:left; width:221px; height:242px; font-size:18px; font-weight:bold; color:#2765a4; padding:0 80px 0 0;}
+.warp_con .yp{ padding:0 0 30px 0;}
+.warp_con .yf{ text-align:center;}
+.warp_con .y2{ float:right; width:221px; height:242px; font-size:18px; font-weight:bold; color:#2765a4; }

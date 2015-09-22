@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 贷付宝后台数据统计服务 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='com.ttnn.business.wm.dao.WMQTCZTXDao'>
+
+	<!-- 下线一览 -->
+	<select id='doRead' parameterType='FrameworkData'
+		resultType='FrameworkData'>
+		SELECT 
+			wmbm01.puk,wmbm01.k01,wmbm01.k02,wmbm01.k03,
+			wmbm01.f05,wmbm01.f06,
+			IFNULL(wmbma201.f15,IFNULL(wmbma200.f15,wmbm01.f15)) f15,wmbm01.f15 f15555,
+			IFNULL(wmbma201.f16,IFNULL(wmbma200.f16,wmbm01.f16)) f16,wmbm01.f16 f1666,
+			wmbm01.f17,
+			wmbm01.f18,wmbm01.f19,wmbm01.bbb,
+			wmbm01.fb1,wmbm01.fb2,wmbm01.fb3,wmbm01.fb4,wmbm01.fb5,
+			wmbm01.eb1,wmbm01.eb2,wmbm01.eb3,wmbm01.eb4,wmbm01.eb5,
+			wmbm01.ddd,wmbm01.cc1,wmbm01.cc2,wmbm01.uu1,wmbm01.uu2
+		FROM wmbm01
+			LEFT JOIN wmbma2 wmbma201 ON wmbma201.k01 = wmbm01.puk AND wmbma201.k02 = '1'
+				AND DATE_FORMAT(STR_TO_DATE(wmbma201.f01, '%Y/%m/%d'), '%Y/%m/%d') = DATE_FORMAT(NOW(), '%Y/%m/%d')
+				AND DATE_FORMAT(STR_TO_DATE(wmbma201.f04, '%Y/%m/%d %H:%i:%S'), '%T') >= DATE_FORMAT(NOW(), '%T')
+				AND DATE_FORMAT(NOW(), '%T') >= DATE_FORMAT(STR_TO_DATE(wmbma201.f03, '%T'), '%Y/%m/%d')
+			LEFT JOIN wmbma2 wmbma200 ON wmbma200.k01 = wmbma200.puk AND wmbma200.k02 = '0'
+				AND DATE_FORMAT(STR_TO_DATE(wmbma200.f01, '%Y/%m/%d'), '%Y/%m/%d') = DATE_FORMAT(NOW(), '%Y/%m/%d')
+				AND DATE_FORMAT(STR_TO_DATE(wmbma201.f04, '%Y/%m/%d %H:%i:%S'), '%T') >= DATE_FORMAT(NOW(), '%T')
+				AND DATE_FORMAT(NOW(), '%T') >= DATE_FORMAT(STR_TO_DATE(wmbma201.f03, '%T'), '%Y/%m/%d')
+		WHERE
+			wmbm01.puk = #{puk}
+	</select>
+
+    <!-- 反向更新所有为提现的充值记录 -->
+    <update id='doUpdateCZWithTX' parameterType='FrameworkData'>
+    	UPDATE wmbm02
+    	SET  uu1 = #{uuu}, uu2 = #{uu2}, <!-- 更新时间、更新者 -->
+    		eb1 = #{eb1}
+    	WHERE
+    		k01 = #{k01} AND k02 = #{k02} AND f06 = '2' AND (eb1 = '' OR eb1 = null)
+    </update>
+    
+     <!-- 佣金结算更新 -->
+    <update id='doUpdateYJWithJS' parameterType='FrameworkData'>
+    	UPDATE wmbm04
+    	SET  uu1 = #{uuu}, uu2 = #{uu2}, <!-- 更新时间、更新者 -->
+    		f02 = '1', f03 = #{f03}
+    	WHERE
+    		k03 = #{k03} AND eb2 = #{eb2} AND f02 = '0'  AND (f03 = '' OR f03 = null)
+    </update>
+</mapper>

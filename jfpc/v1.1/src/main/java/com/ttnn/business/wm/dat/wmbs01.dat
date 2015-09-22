@@ -1,0 +1,2 @@
+INSERT INTO `wmbs01` VALUES ('0', 'DFB_QT_ADMIN', '1001 1001 1001 1002 1003', 'zftd', '贷付宝', '中国银行', '杭州下沙中国银行', '浙江省', '杭州市', null, null, null, '2', null, null, null, null, null, null, null, null, null, null, null, 'TTNN_DFB', '0', '2013/5/1 17:14:13', 'Spook', null, null);
+INSERT INTO `wmbs01` VALUES ('1', 'DFB_QT_ADMIN', '2001 2001 2001 2002 2003', 'yltd', '贷付宝', '工商银行', '杭州下沙工商银行', '浙江省', '杭州市', null, null, null, '2', null, null, null, null, null, null, null, null, null, null, null, 'TTNN_DFB', '0', '2013/5/1 17:14:13', 'Spook', null, null);
