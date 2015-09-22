@@ -1,0 +1,26 @@
+﻿<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 用户菜单 --> 
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='org.jfpc.common.menu.MenuDao'>
+
+    <!-- 用户菜单  -->
+    <select id='loadMenu' parameterType='MenuData' resultType='MenuData'>
+		SELECT * 
+		FROM ms0a1,
+		 (SELECT k01_glsjid AS user_menu_id FROM mssrr ,
+		   (SELECT k01_glsjid AS user_menu_rool FROM mssrr 
+		   WHERE k02_ywqfgjz = 'MS1C4' AND puk = #{puk}) user_group
+		  WHERE mssrr.k02_ywqfgjz = 'MS1C7' AND mssrr.puk = user_group.user_menu_rool) user_menu
+		WHERE ms0a1.puk = user_menu.user_menu_id AND ms0a1.ddd != '1'
+        <if test=" k01_xsfcdid != null and k01_xsfcdid !='' "><!-- 父菜单ID -->
+            AND k01_xsfcdid = #{k01_xsfcdid}
+        </if>
+        <if test=" f06_cddj != null and f06_cddj !='' "><!-- 菜单等级 -->
+            AND f06_cddj = #{f06_cddj}
+        </if>
+		ORDER BY ms0a1.f05_plsx
+    </select>
+</mapper>

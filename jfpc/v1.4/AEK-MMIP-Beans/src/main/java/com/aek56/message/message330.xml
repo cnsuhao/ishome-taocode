@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='GB2312'?>
+<messages>
+	<common>
+		<!-- 供应商基础信息维护 -->
+		<message k03_mbbh='330100021' bbb='添加成功！' />
+        <message k03_mbbh='330100022' bbb='添加失败！' />
+        <message k03_mbbh='330100023' bbb='修改成功！' />
+        <message k03_mbbh='330100024' bbb='修改失败！' />
+        <message k03_mbbh='330100031' bbb='删除成功！' />
+        <message k03_mbbh='330100032' bbb='删除失败！' />
+	</common>
+</messages>

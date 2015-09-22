@@ -1,0 +1,50 @@
+﻿<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 供应商营业执照 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='com.aek56.qt.gys.GCT.GCTDao'>
+    <!-- 查询未推送的注册证列表  -->
+    <select id='doSelectPageUnsentZcz' parameterType='MGTA_CJYLQXZCZDBO' resultType='MGAAC_YLQXZCZDBO'>
+        <![CDATA[   SELECT t1.puk,t1.p01_gysid,t1.p02_zjbs,t1.k01_zczid,t1.k02_zj68bh,t1.k03_zj123lb,t1.k04_scqyid,t1.f01_zczzwmc,t1.f02_zczywmc,t1.f03_cpzwmc,t1.f04_cpywmc,t1.f05_fzgjmc,
+        t1.f06_fzdwmc,t1.f07_fzrq,t1.f08_yxnx,t1.f09_yxksrq,t1.f10_yxzzrq,t1.f11_shzt,t1.f12_yqbz,t1.f13_yqzh,t1.f14_yqsj,t1.f15_sfty,t1.f16_jkbz,t1.f17_cpzxbzbh,
+        t1.f18_cpxnjgjzc,t1.f19_cpsyfw,t1.f20_cpjjz,t1.f21_zcdzszgj,t1.f22_zcdljgid,t1.f23_zcdljgmc,t1.f24_shfwjgid,t1.f25_shfwjgmc,t1.f26_shfwrx,t1.f27_shfwdz,
+        t1.f28_wlwjbcwz,t1.f29_zysx,t1.f30_bz,t1.f31_scqyzzjgdm,t1.f32_scqyzwmc,t1.f33_scqydz,t1.f34_scqyyb,t1.f35_scqydhhm,t1.f36_scqyywmc,t1.f37_scqypym,
+        t1.f38_scqylxrxm,t1.f39_scqylxraqyx,t1.f40_scqylxrdh,t1.f41_sfgq,t1.f42_fzdwid,t1.f43,t1.f44,t1.f45,t1.bbb,t1.fb1,t1.fb2,t1.fb3,t1.fb4,t1.fb5,t1.eb2,
+        t1.ggg,t1.ppp,t1.ddd,t1.cc1,t1.cc2,t1.uu1,datediff(t1.f10_yxzzrq, #{eb1}) > 0 AS eb1
+        FROM mgaac_ylqxzcz t1
+		WHERE t1.p01_gysid = #{p01_gysid} AND t1.ddd != '1' AND t1.puk NOT IN (
+		    SELECT t2.puk FROM mgta_cjylqxzcz t2 WHERE t2.p01_gysid = #{p01_gysid} AND t2.p03_yyid = #{p03_yyid} AND t2.ddd != '1'
+		) ]]>
+    </select>
+    
+    <!-- 查询业务员以及其是否勾选状态 -->
+    <select id='getYwyAndState' parameterType='MGT5_XSRYWTSDBO' resultType='MSSUUDBO'>
+        SELECT t1.puk, t1.f01_yhxm, ISNULL(t2.puk) AS eb5
+		FROM mssuu t1 LEFT JOIN mgt5_xsrywts t2 ON (t1.puk = t2.f09 AND t2.p01_yyid = #{p01_yyid} AND t2.k01_gysid = #{k01_gysid} AND t2.ddd != '1')
+		WHERE t1.k01_ssqyid = #{k01_gysid} AND t1.ddd != '1'
+    </select>
+    <!-- 获取推送的所有证书 -->
+    <select id="getMyAllZs" parameterType='MGA1_YYZZDBO' resultType='MGA1_YYZZDBO'>
+        SELECT yyzz.puk, 1 AS eb1 FROM mga1_yyzz yyzz WHERE yyzz.k01_gysid = #{k01_gysid} AND yyzz.ddd != '1'
+		UNION
+		SELECT jyxkz.puk, 2 AS eb1 FROM mga2_jyxkz jyxkz WHERE jyxkz.k01_gysid = #{k01_gysid} AND jyxkz.ddd != '1'
+		UNION
+		SELECT swdjz.puk, 3 AS eb1 FROM mga3_gsswdjz swdjz WHERE swdjz.k01_gysid = #{k01_gysid} AND swdjz.ddd != '1'
+		UNION
+		SELECT jxsqs.puk, 4 AS eb1 FROM mga4_jxsqs jxsqs WHERE jxsqs.k01_gysid = #{k01_gysid} AND jxsqs.puk IN (
+		    SELECT sqszcz.puk FROM mgad_sqsglzczxx sqszcz WHERE sqszcz.k02_zczid IN (#{eb1}) AND sqszcz.k01_gysid = #{k01_gysid}
+		)
+		UNION
+		SELECT wts.puk, 5 AS eb1 FROM mga5_xsrywts wts WHERE wts.f11 = #{eb2} AND wts.k01_gysid = #{k01_gysid}
+		UNION
+		SELECT cns.puk, 6 AS eb1 FROM mga6_shfwcns cns WHERE cns.f10 = #{eb2} AND cns.k01_gysid = #{k01_gysid}
+		UNION
+		SELECT cjyyzz.puk, 7 AS eb1 FROM mga8c_yyzz cjyyzz WHERE cjyyzz.k01_gysid = #{k01_gysid} AND cjyyzz.k02_sccj_qyid IN (
+		    SELECT zcz.k04_scqyid FROM mgaac_ylqxzcz zcz WHERE zcz.puk IN (#{eb1}) AND zcz.p01_gysid = #{k01_gysid})
+		UNION
+		SELECT cjscxkz.puk, 8 AS eb8 FROM mga9c_scxkz cjscxkz WHERE cjscxkz.k01_gysid = #{k01_gysid} AND cjscxkz.k02_sccj_qyid IN (
+		    SELECT zcz.k04_scqyid FROM mgaac_ylqxzcz zcz WHERE zcz.puk IN (#{eb1}) AND zcz.p01_gysid = #{k01_gysid})
+    </select>
+</mapper>

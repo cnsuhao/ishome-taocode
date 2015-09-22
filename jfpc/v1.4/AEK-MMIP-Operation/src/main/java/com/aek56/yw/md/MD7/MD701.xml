@@ -1,0 +1,43 @@
+﻿<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 注册证信息 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='com.aek56.yw.md.MD7.MD701Dao'>
+    <!-- 表字段信息  -->
+    <sql id='tableColumns'>
+        puk,k01_zchwym,k02_zj68bh,k03_zj123lb,k04_scqyid,f01_zczzwmc,f02_zczywmc,f03_cpzwmc,f04_cpywmc,f05_fzgjmc,f06_fzdwmc,f07_fzrq,f08_yxnx,f09_yxksrq,f10_yxzzrq,f11_shzt,f12_yqbz,f13_yqzh,f14_yqsj,f15_sfty,f16_jkbz,f17_cpzxbzbh,f18_cpxnjgjzc,f19_cpsyfw,f20_cpjjz,f21_zcdzszgj,f22_zcdljgid,f23_zcdljgmc,f24_shfwjgid,f25_shfwjgmc,f26_shfwrx,f27_shfwdz,f28_wlwjbcwz,f29_zysx,f30_bz,f31_scqyzzjgdm,f32_scqyzwmc,f33_scqydz,f34_scqyyb,f35_scqydhhm,f36_scqyywmc,f37_scqypym,f38_scqylxrxm,f39_scqylxraqyx,f40_scqylxrdh,f41_sfgq,f42_fzdwid,f43,f44,f45,bbb,fb1,fb2,fb3,fb4,fb5,eb1,eb2,eb3,eb4,eb5,ggg,ppp,ddd,cc1,cc2,uu1,uu2
+    </sql>
+
+    <!-- 查询分页数据信息  -->
+    <select id='doSelectPage' parameterType='MDG_ZCZXXDBO' resultType='MDG_ZCZXXDBO'>
+        SELECT <include refid='tableColumns'/> FROM mdg_zczxx
+        <trim prefix='WHERE' prefixOverrides='AND |OR '>
+            AND ddd != 1
+            <if test=" f01_zczzwmc != null and f01_zczzwmc !='' "><!-- 注册号 -->
+                AND INSTR(f01_zczzwmc,#{f01_zczzwmc})>0
+            </if>
+            <if test=" f03_cpzwmc != null and f03_cpzwmc !='' "><!-- 产品中文名称 -->
+                AND INSTR(f03_cpzwmc,#{f03_cpzwmc})>0
+            </if>
+            <if test=" f11_shzt != null and f11_shzt !='' "><!-- 审核状态 -->
+                AND f11_shzt = #{f11_shzt}
+            </if>
+            <if test=" f32_scqyzwmc != null and f32_scqyzwmc !='' "><!-- 生产企业中文名称 -->
+                AND INSTR(f32_scqyzwmc,#{f32_scqyzwmc})>0
+            </if>
+            <if test=" eb5 == 0 "><!-- 查询正常证书 -->
+                <![CDATA[AND datediff(f10_yxzzrq,#{f10_yxzzrq}) > 90]]>
+            </if>
+            <if test=" eb5 == 1 "><!-- 查询过期证书 -->
+                <![CDATA[AND datediff(f10_yxzzrq,#{f10_yxzzrq}) <= 0]]>
+            </if>
+            <if test=" eb5 == 2 "><!-- 查询三个月内过期证书 -->
+                <![CDATA[
+                    AND datediff(f10_yxzzrq,#{f10_yxzzrq}) > 0 AND datediff(f10_yxzzrq,#{f10_yxzzrq}) <= 90
+                ]]>
+            </if>
+        </trim>
+    </select>
+</mapper>

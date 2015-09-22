@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<taglib version="2.0" xmlns="http://java.sun.com/xml/ns/j2ee"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee web-jsptaglibrary_2_0.xsd"> 
+   <tlibversion>1.0</tlibversion> 
+   <jspversion>2.0</jspversion> 
+  <tag> 
+    <name>page</name> 
+    <tagclass>org.jfpc.framework.page.PageTag</tagclass> 
+    
+    <attribute>
+     <name>pageVo</name>
+     <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+     <name>onClick</name>
+    </attribute>
+    <attribute>
+     <name>pageLimit</name>
+    </attribute>
+    
+  </tag>
+             
+</taglib> 

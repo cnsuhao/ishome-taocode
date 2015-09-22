@@ -1,0 +1,93 @@
+﻿<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 供应商经营范围 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='com.aek56.qt.gys.MGYS1.MGYS1Dao'>
+
+ 	<select id='loadAllJYFW' parameterType='MGYS1_JYFWDBO' resultType='hashmap'>
+	   SELECT *	
+	   FROM			
+	        ( SELECT DISTINCT
+		        k01_dflid AS id, 
+		        '' AS pId, 
+		        n01_dflmc AS name
+			FROM md1_qyjyfw 
+	 		UNION
+	        SELECT DISTINCT
+		        k02_zflid AS id, 
+		        k01_dflid AS pId, 
+		        n02_zflmc AS name
+			FROM md1_qyjyfw 
+	 		UNION
+	        SELECT 
+		        puk AS id, 
+		        k02_zflid AS pId, 
+		        f01_zdmc AS name
+			FROM md1_qyjyfw ) 
+		a
+		ORDER BY id
+    </select>
+    
+    <select id='loadAllJYFW123' parameterType='MGYS1_JYFWDBO' resultType='hashmap'>
+	   SELECT *	
+	   FROM			
+	        ( SELECT DISTINCT
+		        k03_xflid AS id, 
+		        '' AS pId, 
+		        n03_xflmc AS name
+			FROM md1_qyjyfw 
+	 		UNION
+	        SELECT 
+		        puk AS id, 
+		        k03_xflid AS pId, 
+		        f01_zdmc AS name
+			FROM md1_qyjyfw ) 
+		a
+		ORDER BY id
+    </select>
+
+    <!-- 表字段信息  -->
+    <sql id='tableColumns'>
+        puk,p01_gys_qyid,k01_dflid,k02_zflid,k03_xflid,f01_zdmc,f02_pxwz,n01_dflmc,n02_zflmc,n03_xflmc,bbb,fb1,fb2,fb3,fb4,fb5,eb1,eb2,eb3,eb4,eb5,ggg,ppp,ddd,cc1,cc2,uu1,uu2
+    </sql>
+    <!-- 经营范围68码树状图查询  -->
+    <select id='doSearch68Tree' parameterType='MGYS1_JYFWDBO' resultType='java.util.HashMap'>
+        SELECT t1.k01_dflid AS id, t1.k01_dflid AS name, 1 AS lev, 0 AS pId, 0 AS pname, 0 AS flname, 0 AS flid,0 AS dflname, 0 AS pxwz,
+		(SELECT COUNT(*) FROM mgys1_jyfw t4 WHERE t4.p01_gys_qyid = #{p01_gys_qyid} AND t4.puk LIKE CONCAT(t1.k01_dflid, '%')) AS checked
+		FROM md1_qyjyfw t1 GROUP BY t1.k01_dflid
+		UNION
+		SELECT t2.k02_zflid AS id, t2.n02_zflmc AS name, 2 AS lev, t2.k01_dflid AS pId, 0 AS pname, 0 AS flname, 0 AS flid,0 AS dflname, 0 AS pxwz,
+		(SELECT COUNT(*) FROM mgys1_jyfw t4 WHERE t4.p01_gys_qyid = #{p01_gys_qyid} AND t4.puk LIKE CONCAT(t2.k02_zflid, '%')) AS checked
+		FROM md1_qyjyfw t2 GROUP BY t2.k02_zflid
+		UNION
+		SELECT t3.puk AS id, t3.f01_zdmc AS name, 3 AS lev, t3.k02_zflid AS pId, t3.n02_zflmc AS pname, t3.n03_xflmc AS flname, t3.k03_xflid AS flid,t3.n01_dflmc AS dflname, t3.f02_pxwz AS pxwz,
+		(SELECT COUNT(*) FROM mgys1_jyfw t4 WHERE t4.p01_gys_qyid = #{p01_gys_qyid} AND t4.puk = t3.puk) AS checked
+		FROM md1_qyjyfw t3
+    </select>
+    <!-- 经营范围分类树状图查询  -->
+    <select id='doSearchFlTree' parameterType='MGYS1_JYFWDBO' resultType='java.util.HashMap'>
+        SELECT t1.k03_xflid AS id, t1.n03_xflmc AS name, 1 AS lev, 0 AS pId, 0 AS pname, 0 AS flname, 0 AS flid,0 AS dflname, 0 AS pxwz,
+		(SELECT COUNT(*) FROM mgys1_jyfw t4 WHERE t4.p01_gys_qyid = #{p01_gys_qyid} AND t4.k03_xflid = t1.k03_xflid) AS checked
+		FROM md1_qyjyfw t1 GROUP BY t1.k03_xflid
+		UNION
+		SELECT t2.k02_zflid AS id, t2.n02_zflmc AS name, 2 AS lev, t2.k03_xflid AS pId, 0 AS pname, 0 AS flname, 0 AS flid,0 AS dflname, 0 AS pxwz,
+		(SELECT COUNT(*) FROM mgys1_jyfw t4 WHERE t4.p01_gys_qyid = #{p01_gys_qyid} AND t4.puk LIKE CONCAT(t2.k02_zflid, '%')) AS checked
+		FROM md1_qyjyfw t2 GROUP BY t2.k02_zflid
+		UNION
+		SELECT t3.puk AS id, t3.f01_zdmc AS name, 3 AS lev, t3.k02_zflid AS pId, t3.n02_zflmc AS pname, t3.n03_xflmc AS flname, t3.k03_xflid AS flid,t3.n01_dflmc AS dflname, t3.f02_pxwz AS pxwz,
+		(SELECT COUNT(*) FROM mgys1_jyfw t4 WHERE t4.p01_gys_qyid = #{p01_gys_qyid} AND t4.puk = t3.puk) AS checked
+		FROM md1_qyjyfw t3
+    </select>
+    <!-- 物理删除一条数据 -->
+    <delete id='doDelete' parameterType='MGYS1_JYFWDBO'>
+        DELETE FROM mgys1_jyfw WHERE
+            <if test=" p01_gys_qyid != null and p01_gys_qyid !='' "><!-- 供应商企业ID -->
+                p01_gys_qyid = #{p01_gys_qyid}
+            </if>
+            <if test=" uu1 != null and uu1 !='' "><!-- 最后更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+    </delete>
+</mapper>

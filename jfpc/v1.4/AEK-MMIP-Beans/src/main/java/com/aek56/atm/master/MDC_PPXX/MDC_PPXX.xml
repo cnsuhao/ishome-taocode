@@ -1,0 +1,564 @@
+﻿<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 品牌信息 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='com.aek56.atm.master.MDC_PPXX.MDC_PPXXDao'>
+    <!-- 表字段信息  -->
+    <sql id='tableColumns'>
+        puk,k01_csid,k02,k03,f01_ppqc,f02_ppqcpym,f03_ppzl,f04_ppzmd,f05_ppsshj,f06_pply,f07_ppsmzq,f08_ppnwx,f09_ppssxy,f10_ppfzr,f11_shfwrx,f12_ssgj,f13_logo_url,f14_csqm,f15_csqmpym,f16,f17,f18,f19,f20,bbb,fb1,fb2,fb3,fb4,fb5,eb1,eb2,eb3,eb4,eb5,ggg,ppp,ddd,cc1,cc2,uu1,uu2
+    </sql>
+
+    <!-- 根据条件更新所有记录 -->
+    <update id='doUpdateAll' parameterType='MDC_PPXXDBO'>
+        UPDATE mdc_ppxx SET  uu1 = #{uuu} <!-- 更新时间、更新者 -->
+        <if test=" k01_csid != null and k01_csid !='' "><!-- 厂商ID -->
+            ,k01_csid = #{k01_csid}
+        </if>
+        <if test=" k02 != null and k02 !='' "><!-- 主键2 -->
+            ,k02 = #{k02}
+        </if>
+        <if test=" k03 != null and k03 !='' "><!-- 主键3 -->
+            ,k03 = #{k03}
+        </if>
+        <if test=" f01_ppqc != null and f01_ppqc !='' "><!-- 品牌全称 -->
+            ,f01_ppqc = #{f01_ppqc}
+        </if>
+        <if test=" f02_ppqcpym != null and f02_ppqcpym !='' "><!-- 品牌全称拼音码 -->
+            ,f02_ppqcpym = #{f02_ppqcpym}
+        </if>
+        <if test=" f03_ppzl != null and f03_ppzl !='' "><!-- 品牌种类 -->
+            ,f03_ppzl = #{f03_ppzl}
+        </if>
+        <if test=" f04_ppzmd != null and f04_ppzmd !='' "><!-- 品牌知名度 -->
+            ,f04_ppzmd = #{f04_ppzmd}
+        </if>
+        <if test=" f05_ppsshj != null and f05_ppsshj !='' "><!-- 品牌所属环节 -->
+            ,f05_ppsshj = #{f05_ppsshj}
+        </if>
+        <if test=" f06_pply != null and f06_pply !='' "><!-- 品牌来源 -->
+            ,f06_pply = #{f06_pply}
+        </if>
+        <if test=" f07_ppsmzq != null and f07_ppsmzq !='' "><!-- 品牌生命周期 -->
+            ,f07_ppsmzq = #{f07_ppsmzq}
+        </if>
+        <if test=" f08_ppnwx != null and f08_ppnwx !='' "><!-- 品牌内外销 -->
+            ,f08_ppnwx = #{f08_ppnwx}
+        </if>
+        <if test=" f09_ppssxy != null and f09_ppssxy !='' "><!-- 品牌所属行业 -->
+            ,f09_ppssxy = #{f09_ppssxy}
+        </if>
+        <if test=" f10_ppfzr != null and f10_ppfzr !='' "><!-- 品牌负责人 -->
+            ,f10_ppfzr = #{f10_ppfzr}
+        </if>
+        <if test=" f11_shfwrx != null and f11_shfwrx !='' "><!-- 售后服务热线 -->
+            ,f11_shfwrx = #{f11_shfwrx}
+        </if>
+        <if test=" f12_ssgj != null and f12_ssgj !='' "><!-- 所属国家 -->
+            ,f12_ssgj = #{f12_ssgj}
+        </if>
+        <if test=" f13_logo_url != null and f13_logo_url !='' "><!-- 品牌LOGO -->
+            ,f13_logo_url = #{f13_logo_url}
+        </if>
+        <if test=" f14_csqm != null and f14_csqm !='' "><!-- 厂商全名 -->
+            ,f14_csqm = #{f14_csqm}
+        </if>
+        <if test=" f15_csqmpym != null and f15_csqmpym !='' "><!-- 厂商全名拼音码 -->
+            ,f15_csqmpym = #{f15_csqmpym}
+        </if>
+        <if test=" f16 != null and f16 !='' "><!-- 厂家地址 -->
+            ,f16 = #{f16}
+        </if>
+        <if test=" f17 != null and f17 !='' "><!-- 厂家负责人 -->
+            ,f17 = #{f17}
+        </if>
+        <if test=" f18 != null and f18 !='' "><!-- 字段18 -->
+            ,f18 = #{f18}
+        </if>
+        <if test=" f19 != null and f19 !='' "><!-- 字段19 -->
+            ,f19 = #{f19}
+        </if>
+        <if test=" f20 != null and f20 !='' "><!-- 字段20 -->
+            ,f20 = #{f20}
+        </if>
+        <if test=" bbb != null and bbb !='' "><!-- 备注说明 -->
+            ,bbb = #{bbb}
+        </if>
+        <if test=" fb1 != null and fb1 !='' "><!-- 备用1 -->
+            ,fb1 = #{fb1}
+        </if>
+        <if test=" fb2 != null and fb2 !='' "><!-- 备用2 -->
+            ,fb2 = #{fb2}
+        </if>
+        <if test=" fb3 != null and fb3 !='' "><!-- 备用3 -->
+            ,fb3 = #{fb3}
+        </if>
+        <if test=" fb4 != null and fb4 !='' "><!-- 备用4 -->
+            ,fb4 = #{fb4}
+        </if>
+        <if test=" fb5 != null and fb5 !='' "><!-- 备用5 -->
+            ,fb5 = #{fb5}
+        </if>
+        <if test=" eb1 != null and eb1 !='' "><!-- 扩展1 -->
+            ,eb1 = #{eb1}
+        </if>
+        <if test=" eb2 != null and eb2 !='' "><!-- 扩展2 -->
+            ,eb2 = #{eb2}
+        </if>
+        <if test=" eb3 != null and eb3 !='' "><!-- 扩展3 -->
+            ,eb3 = #{eb3}
+        </if>
+        <if test=" eb4 != null and eb4 !='' "><!-- 扩展4 -->
+            ,eb4 = #{eb4}
+        </if>
+        <if test=" eb5 != null and eb5 !='' "><!-- 扩展5 -->
+            ,eb5 = #{eb5}
+        </if>
+        <if test=" ggg != null and ggg !='' "><!-- 所在组织 -->
+            ,ggg = #{ggg}
+        </if>
+        <if test=" ppp != null and ppp !='' "><!-- 企业ID -->
+            ,ppp = #{ppp}
+        </if>
+        <if test=" ddd != null and ddd !='' "><!-- 有效标识 -->
+            ,ddd = #{ddd}
+        </if>
+        <if test=" cc1 != null and cc1 !='' "><!-- 创建时间 -->
+            ,cc1 = #{cc1}
+        </if>
+        <if test=" cc2 != null and cc2 !='' "><!-- 创建者 -->
+            ,cc2 = #{cc2}
+        </if>
+        <if test=" uu2 != null and uu2 !='' "><!-- 最后更新者 -->
+            ,uu2 = #{uu2}
+        </if>
+        <trim prefix='WHERE' prefixOverrides='AND |OR '>
+            <if test=" puk != null and puk !='' "><!-- 品牌ID -->
+                AND puk = #{puk}
+            </if>
+            <if test=" k01_csid != null and k01_csid !='' "><!-- 厂商ID -->
+                AND k01_csid = #{k01_csid}
+            </if>
+            <if test=" k02 != null and k02 !='' "><!-- 主键2 -->
+                AND k02 = #{k02}
+            </if>
+            <if test=" k03 != null and k03 !='' "><!-- 主键3 -->
+                AND k03 = #{k03}
+            </if>
+            <if test=" f01_ppqc != null and f01_ppqc !='' "><!-- 品牌全称 -->
+                AND f01_ppqc = #{f01_ppqc}
+            </if>
+            <if test=" f02_ppqcpym != null and f02_ppqcpym !='' "><!-- 品牌全称拼音码 -->
+                AND f02_ppqcpym = #{f02_ppqcpym}
+            </if>
+            <if test=" f03_ppzl != null and f03_ppzl !='' "><!-- 品牌种类 -->
+                AND f03_ppzl = #{f03_ppzl}
+            </if>
+            <if test=" f04_ppzmd != null and f04_ppzmd !='' "><!-- 品牌知名度 -->
+                AND f04_ppzmd = #{f04_ppzmd}
+            </if>
+            <if test=" f05_ppsshj != null and f05_ppsshj !='' "><!-- 品牌所属环节 -->
+                AND f05_ppsshj = #{f05_ppsshj}
+            </if>
+            <if test=" f06_pply != null and f06_pply !='' "><!-- 品牌来源 -->
+                AND f06_pply = #{f06_pply}
+            </if>
+            <if test=" f07_ppsmzq != null and f07_ppsmzq !='' "><!-- 品牌生命周期 -->
+                AND f07_ppsmzq = #{f07_ppsmzq}
+            </if>
+            <if test=" f08_ppnwx != null and f08_ppnwx !='' "><!-- 品牌内外销 -->
+                AND f08_ppnwx = #{f08_ppnwx}
+            </if>
+            <if test=" f09_ppssxy != null and f09_ppssxy !='' "><!-- 品牌所属行业 -->
+                AND f09_ppssxy = #{f09_ppssxy}
+            </if>
+            <if test=" f10_ppfzr != null and f10_ppfzr !='' "><!-- 品牌负责人 -->
+                AND f10_ppfzr = #{f10_ppfzr}
+            </if>
+            <if test=" f11_shfwrx != null and f11_shfwrx !='' "><!-- 售后服务热线 -->
+                AND f11_shfwrx = #{f11_shfwrx}
+            </if>
+            <if test=" f12_ssgj != null and f12_ssgj !='' "><!-- 所属国家 -->
+                AND f12_ssgj = #{f12_ssgj}
+            </if>
+            <if test=" f13_logo_url != null and f13_logo_url !='' "><!-- 品牌LOGO -->
+                AND f13_logo_url = #{f13_logo_url}
+            </if>
+            <if test=" f14_csqm != null and f14_csqm !='' "><!-- 厂商全名 -->
+                AND f14_csqm = #{f14_csqm}
+            </if>
+            <if test=" f15_csqmpym != null and f15_csqmpym !='' "><!-- 厂商全名拼音码 -->
+                AND f15_csqmpym = #{f15_csqmpym}
+            </if>
+            <if test=" f16 != null and f16 !='' "><!-- 厂家地址 -->
+                AND f16 = #{f16}
+            </if>
+            <if test=" f17 != null and f17 !='' "><!-- 厂家负责人 -->
+                AND f17 = #{f17}
+            </if>
+            <if test=" f18 != null and f18 !='' "><!-- 字段18 -->
+                AND f18 = #{f18}
+            </if>
+            <if test=" f19 != null and f19 !='' "><!-- 字段19 -->
+                AND f19 = #{f19}
+            </if>
+            <if test=" f20 != null and f20 !='' "><!-- 字段20 -->
+                AND f20 = #{f20}
+            </if>
+            <if test=" bbb != null and bbb !='' "><!-- 备注说明 -->
+                AND bbb = #{bbb}
+            </if>
+            <if test=" fb1 != null and fb1 !='' "><!-- 备用1 -->
+                AND fb1 = #{fb1}
+            </if>
+            <if test=" fb2 != null and fb2 !='' "><!-- 备用2 -->
+                AND fb2 = #{fb2}
+            </if>
+            <if test=" fb3 != null and fb3 !='' "><!-- 备用3 -->
+                AND fb3 = #{fb3}
+            </if>
+            <if test=" fb4 != null and fb4 !='' "><!-- 备用4 -->
+                AND fb4 = #{fb4}
+            </if>
+            <if test=" fb5 != null and fb5 !='' "><!-- 备用5 -->
+                AND fb5 = #{fb5}
+            </if>
+            <if test=" eb1 != null and eb1 !='' "><!-- 扩展1 -->
+                AND eb1 = #{eb1}
+            </if>
+            <if test=" eb2 != null and eb2 !='' "><!-- 扩展2 -->
+                AND eb2 = #{eb2}
+            </if>
+            <if test=" eb3 != null and eb3 !='' "><!-- 扩展3 -->
+                AND eb3 = #{eb3}
+            </if>
+            <if test=" eb4 != null and eb4 !='' "><!-- 扩展4 -->
+                AND eb4 = #{eb4}
+            </if>
+            <if test=" eb5 != null and eb5 !='' "><!-- 扩展5 -->
+                AND eb5 = #{eb5}
+            </if>
+            <if test=" ggg != null and ggg !='' "><!-- 所在组织 -->
+                AND ggg = #{ggg}
+            </if>
+            <if test=" ppp != null and ppp !='' "><!-- 企业ID -->
+                AND ppp = #{ppp}
+            </if>
+            <if test=" ddd != null and ddd !='' "><!-- 有效标识 -->
+                AND ddd = #{ddd}
+            </if>
+            <if test=" cc1 != null and cc1 !='' "><!-- 创建时间 -->
+                AND cc1 = #{cc1}
+            </if>
+            <if test=" cc2 != null and cc2 !='' "><!-- 创建者 -->
+                AND cc2 = #{cc2}
+            </if>
+            <if test=" uu1 != null and uu1 !='' "><!-- 最后更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+            <if test=" uu2 != null and uu2 !='' "><!-- 最后更新者 -->
+                AND uu2 = #{uu2}
+            </if>
+        </trim>
+    </update>
+    <!-- 查询分页数据信息  -->
+    <select id='doSelectPage' parameterType='MDC_PPXXDBO' resultType='MDC_PPXXDBO'>
+        SELECT <include refid='tableColumns'/> FROM mdc_ppxx
+        <trim prefix='WHERE' prefixOverrides='AND |OR '>
+            <if test=" puk != null and puk !='' "><!-- 品牌ID -->
+                AND puk = #{puk}
+            </if>
+            <if test=" k01_csid != null and k01_csid !='' "><!-- 厂商ID -->
+                AND k01_csid = #{k01_csid}
+            </if>
+            <if test=" k02 != null and k02 !='' "><!-- 主键2 -->
+                AND k02 = #{k02}
+            </if>
+            <if test=" k03 != null and k03 !='' "><!-- 主键3 -->
+                AND k03 = #{k03}
+            </if>
+            <if test=" f01_ppqc != null and f01_ppqc !='' "><!-- 品牌全称 -->
+                AND f01_ppqc = #{f01_ppqc}
+            </if>
+            <if test=" f02_ppqcpym != null and f02_ppqcpym !='' "><!-- 品牌全称拼音码 -->
+                AND f02_ppqcpym = #{f02_ppqcpym}
+            </if>
+            <if test=" f03_ppzl != null and f03_ppzl !='' "><!-- 品牌种类 -->
+                AND f03_ppzl = #{f03_ppzl}
+            </if>
+            <if test=" f04_ppzmd != null and f04_ppzmd !='' "><!-- 品牌知名度 -->
+                AND f04_ppzmd = #{f04_ppzmd}
+            </if>
+            <if test=" f05_ppsshj != null and f05_ppsshj !='' "><!-- 品牌所属环节 -->
+                AND f05_ppsshj = #{f05_ppsshj}
+            </if>
+            <if test=" f06_pply != null and f06_pply !='' "><!-- 品牌来源 -->
+                AND f06_pply = #{f06_pply}
+            </if>
+            <if test=" f07_ppsmzq != null and f07_ppsmzq !='' "><!-- 品牌生命周期 -->
+                AND f07_ppsmzq = #{f07_ppsmzq}
+            </if>
+            <if test=" f08_ppnwx != null and f08_ppnwx !='' "><!-- 品牌内外销 -->
+                AND f08_ppnwx = #{f08_ppnwx}
+            </if>
+            <if test=" f09_ppssxy != null and f09_ppssxy !='' "><!-- 品牌所属行业 -->
+                AND f09_ppssxy = #{f09_ppssxy}
+            </if>
+            <if test=" f10_ppfzr != null and f10_ppfzr !='' "><!-- 品牌负责人 -->
+                AND f10_ppfzr = #{f10_ppfzr}
+            </if>
+            <if test=" f11_shfwrx != null and f11_shfwrx !='' "><!-- 售后服务热线 -->
+                AND f11_shfwrx = #{f11_shfwrx}
+            </if>
+            <if test=" f12_ssgj != null and f12_ssgj !='' "><!-- 所属国家 -->
+                AND f12_ssgj = #{f12_ssgj}
+            </if>
+            <if test=" f13_logo_url != null and f13_logo_url !='' "><!-- 品牌LOGO -->
+                AND f13_logo_url = #{f13_logo_url}
+            </if>
+            <if test=" f14_csqm != null and f14_csqm !='' "><!-- 厂商全名 -->
+                AND f14_csqm = #{f14_csqm}
+            </if>
+            <if test=" f15_csqmpym != null and f15_csqmpym !='' "><!-- 厂商全名拼音码 -->
+                AND f15_csqmpym = #{f15_csqmpym}
+            </if>
+            <if test=" f16 != null and f16 !='' "><!-- 厂家地址 -->
+                AND f16 = #{f16}
+            </if>
+            <if test=" f17 != null and f17 !='' "><!-- 厂家负责人 -->
+                AND f17 = #{f17}
+            </if>
+            <if test=" f18 != null and f18 !='' "><!-- 字段18 -->
+                AND f18 = #{f18}
+            </if>
+            <if test=" f19 != null and f19 !='' "><!-- 字段19 -->
+                AND f19 = #{f19}
+            </if>
+            <if test=" f20 != null and f20 !='' "><!-- 字段20 -->
+                AND f20 = #{f20}
+            </if>
+            <if test=" bbb != null and bbb !='' "><!-- 备注说明 -->
+                AND bbb = #{bbb}
+            </if>
+            <if test=" fb1 != null and fb1 !='' "><!-- 备用1 -->
+                AND fb1 = #{fb1}
+            </if>
+            <if test=" fb2 != null and fb2 !='' "><!-- 备用2 -->
+                AND fb2 = #{fb2}
+            </if>
+            <if test=" fb3 != null and fb3 !='' "><!-- 备用3 -->
+                AND fb3 = #{fb3}
+            </if>
+            <if test=" fb4 != null and fb4 !='' "><!-- 备用4 -->
+                AND fb4 = #{fb4}
+            </if>
+            <if test=" fb5 != null and fb5 !='' "><!-- 备用5 -->
+                AND fb5 = #{fb5}
+            </if>
+            <if test=" eb1 != null and eb1 !='' "><!-- 扩展1 -->
+                AND eb1 = #{eb1}
+            </if>
+            <if test=" eb2 != null and eb2 !='' "><!-- 扩展2 -->
+                AND eb2 = #{eb2}
+            </if>
+            <if test=" eb3 != null and eb3 !='' "><!-- 扩展3 -->
+                AND eb3 = #{eb3}
+            </if>
+            <if test=" eb4 != null and eb4 !='' "><!-- 扩展4 -->
+                AND eb4 = #{eb4}
+            </if>
+            <if test=" eb5 != null and eb5 !='' "><!-- 扩展5 -->
+                AND eb5 = #{eb5}
+            </if>
+            <if test=" ggg != null and ggg !='' "><!-- 所在组织 -->
+                AND ggg = #{ggg}
+            </if>
+            <if test=" ppp != null and ppp !='' "><!-- 企业ID -->
+                AND ppp = #{ppp}
+            </if>
+            <if test=" ddd != null and ddd !='' "><!-- 有效标识 -->
+                AND ddd = #{ddd}
+            </if>
+            <if test=" cc1 != null and cc1 !='' "><!-- 创建时间 -->
+                AND cc1 = #{cc1}
+            </if>
+            <if test=" cc2 != null and cc2 !='' "><!-- 创建者 -->
+                AND cc2 = #{cc2}
+            </if>
+            <if test=" uu1 != null and uu1 !='' "><!-- 最后更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+            <if test=" uu2 != null and uu2 !='' "><!-- 最后更新者 -->
+                AND uu2 = #{uu2}
+            </if>
+        </trim>
+    </select>
+
+    <!-- 插入一条数据 -->
+    <insert id='doInsert' parameterType='MDC_PPXXDBO'>
+        INSERT INTO mdc_ppxx
+          ( <include refid='tableColumns'/>) 
+        VALUES 
+          ( #{puk},#{k01_csid},#{k02},#{k03},#{f01_ppqc},#{f02_ppqcpym},#{f03_ppzl},#{f04_ppzmd},#{f05_ppsshj},#{f06_pply},#{f07_ppsmzq},#{f08_ppnwx},#{f09_ppssxy},#{f10_ppfzr},#{f11_shfwrx},#{f12_ssgj},#{f13_logo_url},#{f14_csqm},#{f15_csqmpym},#{f16},#{f17},#{f18},#{f19},#{f20},#{bbb},#{fb1},#{fb2},#{fb3},#{fb4},#{fb5},#{eb1},#{eb2},#{eb3},#{eb4},#{eb5},#{ggg},#{ppp},#{ddd},#{cc1},#{cc2},#{uu1},#{uu2} )
+    </insert>
+    <!-- 修改一条数据 -->
+    <update id='doUpdate' parameterType='MDC_PPXXDBO'>
+        UPDATE mdc_ppxx SET uu1 = #{uuu} <!-- 更新时间、更新者 -->
+        <if test=" k01_csid != null and k01_csid !='' "><!-- 厂商ID -->
+            ,k01_csid = #{k01_csid}
+        </if>
+        <if test=" k02 != null and k02 !='' "><!-- 主键2 -->
+            ,k02 = #{k02}
+        </if>
+        <if test=" k03 != null and k03 !='' "><!-- 主键3 -->
+            ,k03 = #{k03}
+        </if>
+        <if test=" f01_ppqc != null and f01_ppqc !='' "><!-- 品牌全称 -->
+            ,f01_ppqc = #{f01_ppqc}
+        </if>
+        <if test=" f02_ppqcpym != null and f02_ppqcpym !='' "><!-- 品牌全称拼音码 -->
+            ,f02_ppqcpym = #{f02_ppqcpym}
+        </if>
+        <if test=" f03_ppzl != null and f03_ppzl !='' "><!-- 品牌种类 -->
+            ,f03_ppzl = #{f03_ppzl}
+        </if>
+        <if test=" f04_ppzmd != null and f04_ppzmd !='' "><!-- 品牌知名度 -->
+            ,f04_ppzmd = #{f04_ppzmd}
+        </if>
+        <if test=" f05_ppsshj != null and f05_ppsshj !='' "><!-- 品牌所属环节 -->
+            ,f05_ppsshj = #{f05_ppsshj}
+        </if>
+        <if test=" f06_pply != null and f06_pply !='' "><!-- 品牌来源 -->
+            ,f06_pply = #{f06_pply}
+        </if>
+        <if test=" f07_ppsmzq != null and f07_ppsmzq !='' "><!-- 品牌生命周期 -->
+            ,f07_ppsmzq = #{f07_ppsmzq}
+        </if>
+        <if test=" f08_ppnwx != null and f08_ppnwx !='' "><!-- 品牌内外销 -->
+            ,f08_ppnwx = #{f08_ppnwx}
+        </if>
+        <if test=" f09_ppssxy != null and f09_ppssxy !='' "><!-- 品牌所属行业 -->
+            ,f09_ppssxy = #{f09_ppssxy}
+        </if>
+        <if test=" f10_ppfzr != null and f10_ppfzr !='' "><!-- 品牌负责人 -->
+            ,f10_ppfzr = #{f10_ppfzr}
+        </if>
+        <if test=" f11_shfwrx != null and f11_shfwrx !='' "><!-- 售后服务热线 -->
+            ,f11_shfwrx = #{f11_shfwrx}
+        </if>
+        <if test=" f12_ssgj != null and f12_ssgj !='' "><!-- 所属国家 -->
+            ,f12_ssgj = #{f12_ssgj}
+        </if>
+        <if test=" f13_logo_url != null and f13_logo_url !='' "><!-- 品牌LOGO -->
+            ,f13_logo_url = #{f13_logo_url}
+        </if>
+        <if test=" f14_csqm != null and f14_csqm !='' "><!-- 厂商全名 -->
+            ,f14_csqm = #{f14_csqm}
+        </if>
+        <if test=" f15_csqmpym != null and f15_csqmpym !='' "><!-- 厂商全名拼音码 -->
+            ,f15_csqmpym = #{f15_csqmpym}
+        </if>
+        <if test=" f16 != null and f16 !='' "><!-- 厂家地址 -->
+            ,f16 = #{f16}
+        </if>
+        <if test=" f17 != null and f17 !='' "><!-- 厂家负责人 -->
+            ,f17 = #{f17}
+        </if>
+        <if test=" f18 != null and f18 !='' "><!-- 字段18 -->
+            ,f18 = #{f18}
+        </if>
+        <if test=" f19 != null and f19 !='' "><!-- 字段19 -->
+            ,f19 = #{f19}
+        </if>
+        <if test=" f20 != null and f20 !='' "><!-- 字段20 -->
+            ,f20 = #{f20}
+        </if>
+        <if test=" bbb != null and bbb !='' "><!-- 备注说明 -->
+            ,bbb = #{bbb}
+        </if>
+        <if test=" fb1 != null and fb1 !='' "><!-- 备用1 -->
+            ,fb1 = #{fb1}
+        </if>
+        <if test=" fb2 != null and fb2 !='' "><!-- 备用2 -->
+            ,fb2 = #{fb2}
+        </if>
+        <if test=" fb3 != null and fb3 !='' "><!-- 备用3 -->
+            ,fb3 = #{fb3}
+        </if>
+        <if test=" fb4 != null and fb4 !='' "><!-- 备用4 -->
+            ,fb4 = #{fb4}
+        </if>
+        <if test=" fb5 != null and fb5 !='' "><!-- 备用5 -->
+            ,fb5 = #{fb5}
+        </if>
+        <if test=" eb1 != null and eb1 !='' "><!-- 扩展1 -->
+            ,eb1 = #{eb1}
+        </if>
+        <if test=" eb2 != null and eb2 !='' "><!-- 扩展2 -->
+            ,eb2 = #{eb2}
+        </if>
+        <if test=" eb3 != null and eb3 !='' "><!-- 扩展3 -->
+            ,eb3 = #{eb3}
+        </if>
+        <if test=" eb4 != null and eb4 !='' "><!-- 扩展4 -->
+            ,eb4 = #{eb4}
+        </if>
+        <if test=" eb5 != null and eb5 !='' "><!-- 扩展5 -->
+            ,eb5 = #{eb5}
+        </if>
+        <if test=" ggg != null and ggg !='' "><!-- 所在组织 -->
+            ,ggg = #{ggg}
+        </if>
+        <if test=" ppp != null and ppp !='' "><!-- 企业ID -->
+            ,ppp = #{ppp}
+        </if>
+        <if test=" ddd != null and ddd !='' "><!-- 有效标识 -->
+            ,ddd = #{ddd}
+        </if>
+        <if test=" cc1 != null and cc1 !='' "><!-- 创建时间 -->
+            ,cc1 = #{cc1}
+        </if>
+        <if test=" cc2 != null and cc2 !='' "><!-- 创建者 -->
+            ,cc2 = #{cc2}
+        </if>
+        <if test=" uu2 != null and uu2 !='' "><!-- 最后更新者 -->
+            ,uu2 = #{uu2}
+        </if>
+        WHERE puk = #{puk}
+            <if test=" uu1 != null and uu1 !='' "><!-- 最后更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+    </update>
+    <!-- 逻辑删除一条数据 -->
+    <delete id='toDelete' parameterType='MDC_PPXXDBO'>
+        UPDATE mdc_ppxx SET ddd='1', uu1 = #{uuu}, uu2 = #{uu2} WHERE puk = #{puk}
+            <if test=" k01_csid != null and k01_csid !='' "><!-- 厂商ID -->
+                AND k01_csid = #{k01_csid}
+            </if>
+            <if test=" uu1 != null and uu1 !='' "><!-- 最后更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+    </delete>
+    <!-- 物理删除一条数据 -->
+    <delete id='doDelete' parameterType='MDC_PPXXDBO'>
+        DELETE FROM mdc_ppxx WHERE puk = #{puk}
+            <if test=" k01_csid != null and k01_csid !='' "><!-- 厂商ID -->
+                AND k01_csid = #{k01_csid}
+            </if>
+            <if test=" uu1 != null and uu1 !='' "><!-- 最后更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+    </delete>
+    <!-- 查询一条数据  -->
+    <select id='doRead' parameterType='MDC_PPXXDBO' resultType='MDC_PPXXDBO'>
+        SELECT <include refid='tableColumns'/> FROM mdc_ppxx WHERE puk = #{puk}
+            <if test=" k01_csid != null and k01_csid !='' "><!-- 厂商ID -->
+                AND k01_csid = #{k01_csid}
+            </if>
+            <if test=" ddd != null and ddd !='' "><!-- 最后更新时间 -->
+                AND ddd = #{ddd}
+            </if>
+    </select>
+
+</mapper>

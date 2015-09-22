@@ -1,0 +1,26 @@
+﻿<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 品牌关联供应商信息 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='com.aek56.yw.md.MDC.MDCDao'>  
+    <!-- 表字段信息  -->
+    <sql id='tableColumns'>
+        puk,k01_zjjgdm,k02,k03,f01_qyqc,f02_qcpym,f03_gwdz,f04_clrq,f05_zczbwy,f06_frxm,f07_frsfzid,f08_fkfs,f09_khyx,f10_khyxzh,f11_szs,f12_szds,f13_szqx,f14_szxxdz,f15_bgxxdz,f16_lxdh,f17_czhm,f18_pzbm,f19_logo_url,f20_qyjyxkzbh,f21_qyjyxkzksrq,f22_qyjyxkzzlrq,f23_qygsswdjzksrq,f24_qygsswdjzzlrq,f25_qyyyzzksrq,f26_qyyyzzzlrq,f27_qyszgj,f28_qygsswdjzbh,f29_qyyyzzbh,f30_lxrxm,f31_lxraqyx,f32_lxrdh,f33_qyjyxkz,f34_qygsswdjz,f35_qyyyzz,f36_zdlbs,f37_jyxkz_pic,f38_gsswdjz_pic,f39_yyzz_pic,f40,bbb,fb1,fb2,fb3,fb4,fb5,eb1,eb2,eb3,eb4,eb5,ggg,ppp,ddd,cc1,cc2,uu1,uu2
+    </sql>
+    <!-- 查询一条数据  -->
+    <select id='doSelectPage' parameterType='FrameworkData' resultType='FrameworkData'>
+        SELECT <include refid='tableColumns'/> FROM mdd_ppgysxx WHERE puk = #{puk}
+            <if test=" k01_gyid != null and k01_gyid !='' "><!-- 供应商ID -->
+                AND k01_gyid = #{k01_gyid}
+            </if>
+            <if test=" k02_qylb != null and k02_qylb !='' "><!-- 企业类别 -->
+                AND k02_qylb = #{k02_qylb}
+            </if>
+            <if test=" ddd != null and ddd !='' "><!-- 最后更新时间 -->
+                AND ddd = #{ddd}
+            </if>
+    </select>
+
+</mapper>

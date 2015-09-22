@@ -1,0 +1,227 @@
+.header{
+	height: 60px;
+	background-color: #656565;
+}
+.content{
+	text-align: center;
+}
+.container{
+	width: 1024px;
+	margin: 0 auto;
+	text-align: left;
+	text-align: center;
+}
+/*选项卡*/
+.tabMod{
+	width: 670px;
+	margin: 0 auto;
+	margin-top: 32px;
+	text-align: left;
+}
+.tabMod ul,.tabMod li{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.tabMod .tabNav{
+	position: relative;
+	top: 1px;
+	z-index: 10;
+}
+.tabMod .tabNavItem{
+	float: left;
+	height: 50px;
+	line-height: 50px;
+	font-size: 24px; 
+	border: 1px solid #cbcbcb;
+	margin-right: 15px;
+	background-color: #f1f1f1;
+	padding:0 20px;
+}
+.tabMod .tabNavItem>a{
+	display: block;
+	height: 100%;
+	color:#656565;
+}
+.tabMod .tabNavItem.active{
+	background-color: #fff;
+	border-bottom-color: #fff;
+}
+.tabMod .tabNavTips{
+	float: right;
+	margin-top: 30px;
+	color:#989898;
+	padding: 0 10px;
+}
+.tabMod .tabBd{
+	border: 1px solid #cbcbcb;
+	padding: 20px;
+}
+/*表单*/
+.formMod{
+	/*padding: 20px;*/
+}
+.formMod .formItem{
+	padding: 0 40px 0 100px;
+	position: relative;
+	height: 32px;
+	margin-bottom: 15px;
+}
+.formMod .formItem>.formLable{
+	position: absolute;
+	width: 95px;
+	height: 100%;
+	line-height: 40px;
+	top:0;
+	left:0;
+	text-align: right;
+}
+.formMod .formItem>.formConStatus{
+	width: 40px;
+	height: 100%;
+	position: absolute;
+	top:0;
+	right:0;
+}
+/*验证码*/
+.validCode .formText{
+	width: 120px;
+}
+.validCode .formItem{
+	display: inline-block;
+	*zoom:1;
+	_display:inline;
+	width: 120px;
+	vertical-align: baseline;
+	float: left;
+}
+.validCode .formBtn{
+	float: left;
+}
+/*文本框*/
+.formText{
+	height: 16px;
+	line-height: 16px;
+	padding: 12px 10px;
+	width: 466px;
+}
+.formText[readonly]{
+	background-color: #eee;
+}
+/*按钮*/
+.formBtn{
+	border: 0;
+	height: 40px;
+	border-radius: 3px;
+	line-height: 40px;
+	padding: 0 15px;
+	background-color: #989898;
+	color: #fff;
+}
+.regMod .formBtn{
+	font-size: 14px;
+	min-width: 120px;
+	text-align: center;
+}
+/*医院选择*/
+.selHospWarp{
+	/*width: 700px;*/
+	/*height: 480px;*/
+	font-size: 14px;
+}
+.selHospWarp>div{
+	display: none;
+}
+.selHospWarp>div.show{
+	display: block;
+}
+.selHospWarp .tips{
+	padding-bottom: 10px;
+}
+.pacList{
+	text-align: left;
+}
+.pacList .pacItem{
+	font-size: 16px;
+	text-align: left;
+	padding:.3em .5em;
+	display: inline-block;
+	border-radius: .2em;
+	cursor: pointer;
+}
+.pacList .pacItem:hover{
+	background-color: #ddd;
+}
+/*面包屑*/
+.breadCrumb{
+	float: left;
+	height: 20px;
+	padding-left:30px;
+}
+.breadCrumb span.bread-item{
+	display: inline-block;
+	*zoom:1;
+	_display:inline;
+	margin-right: 10px;
+	border: 1px solid #ccc;
+	padding: .2em .5em;
+	border-radius: 1.6em;
+	text-indent: 3px;
+	background-color: #ddd;
+	color: #222;
+	cursor: pointer;
+	/*position: relative;*/
+}
+.breadCrumb span.bread-item:after {
+	display: inline;
+	content: 'X';
+	padding: 0 5px;
+	color: #999;
+	position: relative;
+	right: -.2em;
+}
+/*.breadCrumb span.bread-item:last-child:after{
+	display: none;
+}*/
+/* 注册图标 */
+.statusIcon{
+	display: inline-block;
+	*zoom:1;
+	_display: inline;
+	height: 16px;
+	width: 16px;
+	vertical-align: middle;
+	background-image: url(../images/regicon.png);
+}
+/*警告*/
+.statusIcon.war{
+	background-position: 0 0;
+}
+/*错误*/
+.statusIcon.err{
+	background-position: 0 -14px;
+}
+/*错误*/
+.statusIcon.suc{
+	background-position: 0 -29px;
+}
+/*loading*/
+.statusIcon.loading{
+	background-image: url(../images/loading.gif);
+}
+/*刷新*/
+.statusIcon.refresh{
+	background-position: 0 -45px;
+}
+/*ajax验证div*/
+.ajaxStatus{
+	position: absolute;
+	right:15px;
+	top:50%;
+	height: 16px;
+	margin-top: -8px;
+}
+.ajaxStatus .statusText{
+	padding-left: 5px;
+	color:#999;
+}

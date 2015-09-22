@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE configuration PUBLIC '-//ibatis.apache.org//DTD Config 3.0//EN'
+'http://ibatis.apache.org/dtd/ibatis-3-config.dtd'>
+<configuration>
+	<!-- 这些是极其重要的调整，它们会修改MyBatis在运行时的行为方式。 -->
+	<settings>
+		<!-- 这个配置使全局的映射器启用或禁用缓存。 -->
+		<setting name='cacheEnabled' value='false'/>
+		<!-- 全局启用或禁用延迟加载。当禁用时，所有关联对象都会即时加载。 -->
+		<!--setting name='lazyLoadingEnabled' value='true'/-->
+		<!-- 当启用时，有延迟加载属性的对象在被调用时将会完全加载任意属性。否则，每种属性将会按需要加载。 -->
+		<!--setting name='aggressiveLazyLoading' value='true'/-->
+		<!-- 允许或不允许多种结果集从一个单独的语句中返回（需要适合的驱动）。 -->
+		<!--setting name='multipleResultSetsEnabled' value='true'/-->
+		<!-- 使用列标签代替列名。不同的驱动在这方面表现不同。参考驱动文档或充分测试两种方法来决定所使用的驱动。 -->
+		<!--setting name='useColumnLabel' value='false'/-->
+		<!-- 允许JDBC支持生成的键。需要适合的驱动。如果设置为true则这个设置强制生成的键被使用，尽管一些驱动拒绝兼容但仍然有效（比如Derby）。 -->
+		<!--setting name='useGeneratedKeys' value='false'/-->
+		<!-- 指定MyBatis如何自动映射列到字段/属性。PARTIAL只会自动映射简单，没有嵌套的结果。FULL会自动映射任意复杂的结果（嵌套的或其他情况）。 -->
+		<!--setting name='autoMappingBehavior' value='PARTIAL'/-->
+		<!-- 配置默认的执行器。SIMPLE执行器没有什么特别之处。REUSE执行器重用预处理语句。BATCH执行器重用语句和批量更新 -->
+		<!--setting name='defaultExecutorType' value='BATCH'/-->
+		<!-- 设置超时时间，它决定驱动等待一个数据库响应的时间。 -->
+		<!--setting name='defaultStatementTimeout' value='3000'/-->
+	</settings>	
+	
+	<!-- Bean实体别名 -->
+	<typeAliases>
+		<typeAlias alias='FrameworkData' type='org.jfpc.framework.bean.FrameworkDataBean'/>
+		<typeAlias alias='LoginerData' 	 type='org.jfpc.framework.bean.LoginerBean'/>		
+		<typeAlias alias='DictionaryData' type='org.jfpc.common.dict.DictionaryBean'/>
+		<typeAlias alias='MenuData' 	 type='org.jfpc.common.menu.MenuBean'/>	
+
+<!-- 国家机关单位 -->
+<typeAlias alias='MS5D1DBO' type='org.jfpc.beans.platform.MS5D1.MS5D1DBO'/>
+<!-- 问卷调查 -->
+<typeAlias alias='MS0M7DBO' type='org.jfpc.beans.platform.MS0M7.MS0M7DBO'/>
+<!-- 用户问卷答案 -->
+<typeAlias alias='CS0M8DBO' type='org.jfpc.beans.platform.CS0M8.CS0M8DBO'/>
+<!-- 会员应用开通信息 -->
+<typeAlias alias='CS2A4DBO' type='org.jfpc.beans.platform.CS2A4.CS2A4DBO'/>
+<!-- 内部消息 -->
+<typeAlias alias='CS0D1DBO' type='org.jfpc.beans.platform.CS0D1.CS0D1DBO'/>
+<!-- 业务日志 -->
+<typeAlias alias='CS0E1DBO' type='org.jfpc.beans.platform.CS0E1.CS0E1DBO'/>
+<!-- 警告异常日志 -->
+<typeAlias alias='CS0E2DBO' type='org.jfpc.beans.platform.CS0E2.CS0E2DBO'/>
+<!-- 文章评价 -->
+<typeAlias alias='CS0M5DBO' type='org.jfpc.beans.platform.CS0M5.CS0M5DBO'/>
+<!-- 文章评价人 -->
+<typeAlias alias='CS0M6DBO' type='org.jfpc.beans.platform.CS0M6.CS0M6DBO'/>
+<!-- 企业人员基本信息 -->
+<typeAlias alias='CS1B2DBO' type='org.jfpc.beans.platform.CS1B2.CS1B2DBO'/>
+<!-- 系统动态 -->
+<typeAlias alias='CSSGGDBO' type='org.jfpc.beans.platform.CSSGG.CSSGGDBO'/>
+<!-- 用户登录日志 -->
+<typeAlias alias='CSSLLDBO' type='org.jfpc.beans.platform.CSSLL.CSSLLDBO'/>
+<!-- TOKEN存放表 -->
+<typeAlias alias='CSSTTDBO' type='org.jfpc.beans.platform.CSSTT.CSSTTDBO'/>
+<!-- 系统菜单定义 -->
+<typeAlias alias='MS0A1DBO' type='org.jfpc.beans.platform.MS0A1.MS0A1DBO'/>
+<!-- 机能模块定义 -->
+<typeAlias alias='MS0A2DBO' type='org.jfpc.beans.platform.MS0A2.MS0A2DBO'/>
+<!-- 业务功能定义 -->
+<typeAlias alias='MS0A3DBO' type='org.jfpc.beans.platform.MS0A3.MS0A3DBO'/>
+<!-- 页面定义 -->
+<typeAlias alias='MS0A4DBO' type='org.jfpc.beans.platform.MS0A4.MS0A4DBO'/>
+<!-- 页面功能按钮定义 -->
+<typeAlias alias='MS0A5DBO' type='org.jfpc.beans.platform.MS0A5.MS0A5DBO'/>
+<!-- 动态页面定义 -->
+<typeAlias alias='MS0AADBO' type='org.jfpc.beans.platform.MS0AA.MS0AADBO'/>
+<!-- 系统公告 -->
+<typeAlias alias='MS0C1DBO' type='org.jfpc.beans.platform.MS0C1.MS0C1DBO'/>
+<!-- 数据字典管理 -->
+<typeAlias alias='MS0M1DBO' type='org.jfpc.beans.platform.MS0M1.MS0M1DBO'/>
+<!-- 帮助信息表 -->
+<typeAlias alias='MS0M2DBO' type='org.jfpc.beans.platform.MS0M2.MS0M2DBO'/>
+<!-- 帮助信息意见评价 -->
+<typeAlias alias='MS0M3DBO' type='org.jfpc.beans.platform.MS0M3.MS0M3DBO'/>
+<!-- 文章信息 -->
+<typeAlias alias='MS0M4DBO' type='org.jfpc.beans.platform.MS0M4.MS0M4DBO'/>
+<!-- 企业基本信息 -->
+<typeAlias alias='MS1A1DBO' type='org.jfpc.beans.platform.MS1A1.MS1A1DBO'/>
+<!-- 企业扩展信息 -->
+<typeAlias alias='MS1AADBO' type='org.jfpc.beans.platform.MS1AA.MS1AADBO'/>
+<!-- 登录用户临时授权 -->
+<typeAlias alias='MS1C1DBO' type='org.jfpc.beans.platform.MS1C1.MS1C1DBO'/>
+<!-- 企业组织机构定义 -->
+<typeAlias alias='MS1C2DBO' type='org.jfpc.beans.platform.MS1C2.MS1C2DBO'/>
+<!-- 企业组织机构角色定义 -->
+<typeAlias alias='MS1C5DBO' type='org.jfpc.beans.platform.MS1C5.MS1C5DBO'/>
+<!-- 短信网关信息 -->
+<typeAlias alias='MS3C1DBO' type='org.jfpc.beans.platform.MS3C1.MS3C1DBO'/>
+<!-- 发送短信信息 -->
+<typeAlias alias='MS3C2DBO' type='org.jfpc.beans.platform.MS3C2.MS3C2DBO'/>
+<!-- 用户留言表 -->
+<typeAlias alias='MS3H1DBO' type='org.jfpc.beans.platform.MS3H1.MS3H1DBO'/>
+<!-- 留言回复表 -->
+<typeAlias alias='MS3H2DBO' type='org.jfpc.beans.platform.MS3H2.MS3H2DBO'/>
+<!-- 系统配置信息 -->
+<typeAlias alias='MSSCCDBO' type='org.jfpc.beans.platform.MSSCC.MSSCCDBO'/>
+<!-- 资源路径表 -->
+<typeAlias alias='MSSDDDBO' type='org.jfpc.beans.platform.MSSDD.MSSDDDBO'/>
+<!-- 主键关联表 -->
+<typeAlias alias='MSSKKDBO' type='org.jfpc.beans.platform.MSSKK.MSSKKDBO'/>
+<!-- 角色关联表 -->
+<typeAlias alias='MSSRRDBO' type='org.jfpc.beans.platform.MSSRR.MSSRRDBO'/>
+<!-- 用户基本信息 -->
+<typeAlias alias='MSSUUDBO' type='org.jfpc.beans.platform.MSSUU.MSSUUDBO'/>
+<!-- 好友分组 -->
+<typeAlias alias='CS2B1DBO' type='org.jfpc.beans.platform.CS2B1.CS2B1DBO'/>
+<!-- 好友信息 -->
+<typeAlias alias='CS2B2DBO' type='org.jfpc.beans.platform.CS2B2.CS2B2DBO'/>
+<!-- 短信与邮件模版 -->
+<typeAlias alias='MMMSSDBO' type='org.jfpc.beans.platform.MMMSS.MMMSSDBO'/>
+
+	</typeAliases>
+	
+    <!-- 无论是MyBatis在预处理语句中设置一个参数，还是从结果集中取出一个值时，类型处理器被用来将获取的值以合适的方式转换成Java类型。 -->
+    <!--typeHandlers>
+		<typeHandler javaType='String' jdbcType='VARCHAR' handler='com.ttnn.framework.mybatis.MyFrameworkTypeHandler'/>
+	</typeHandlers-->
+	
+	<!-- 
+		MyBatis每次创建结果对象新的实例时，它使用一个ObjectFactory实例来完成。如果参数映射存在，默认的ObjectFactory不比使用默认构造方法
+		或带参数的构造方法实例化目标类做的工作多。
+	 -->
+	<!--objectFactory type='com.ttnn.framework.mybatis.MyFrameworkObjectFactory'>
+		<property name='someProperty' value='100'/>
+	</objectFactory-->
+	<!-- 
+		MyBatis允许你在某一点拦截已映射语句执行的调用。默认情况下，MyBatis允许使用插件来拦截方法调用：
+		 Executor
+				(update, query, flushStatements, commit, rollback, getTransaction, close, isClosed)
+		 ParameterHandler
+				(getParameterObject, setParameters)
+		 ResultSetHandler
+				(handleResultSets, handleOutputParameters)
+		 StatementHandler
+				(prepare, parameterize, batch, update, query)	
+	
+ 	-->
+	<plugins>
+		<plugin interceptor='org.jfpc.framework.mybatis.plugin.MyFrameworkQueryPlugin'/>
+	<!--	<plugin interceptor='org.jfpc.framework.mybatis.plugin.MyFrameworkUpdatePlugin'/> -->
+		
+	</plugins>
+</configuration>

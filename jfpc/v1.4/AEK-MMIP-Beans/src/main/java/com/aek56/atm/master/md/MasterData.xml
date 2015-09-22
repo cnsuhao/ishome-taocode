@@ -1,0 +1,48 @@
+﻿<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 主数据检索 --> 
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='com.aek56.atm.master.md.MasterDataDao'>
+
+    <!-- 主数据模糊查询  -->
+    <select id='getTop10' parameterType='hashmap' resultType='hashmap'>
+		SELECT ${tablename}		 
+		WHERE ddd != '1'
+		AND INSTR(ggg,#{ggg})>0
+		ORDER BY cc1
+		LIMIT ${limit}
+    </select>
+    
+    <select id='getMaster' parameterType='hashmap' resultType='hashmap'>
+		SELECT ${tablename}		 
+		WHERE puk = #{puk}
+    </select>
+    
+    <select id='getMasterAll' parameterType='hashmap' resultType='hashmap'>
+		SELECT ${tablename} LIMIT ${page},${limit}
+    </select>
+    
+    <select id='getMasterData' parameterType='hashmap' resultType='hashmap'>
+		SELECT ${tablename}		 
+		LIMIT ${page},${limit}
+    </select>
+    
+    <select id='getMasterCount' parameterType='hashmap' resultType='hashmap'>
+		SELECT 
+			(SELECT COUNT(puk) FROM md1_qyjyfw ) md1_qyjyfw
+			,(SELECT COUNT(puk) FROM md2_gysxx ) md2_gysxx
+			,(SELECT COUNT(puk) FROM md3_yyxx ) md3_yyxx
+			,(SELECT COUNT(puk) FROM md4_csxx ) md4_csxx
+			,(SELECT COUNT(puk) FROM md5_xzjgdw ) md5_xzjgdw
+			,(SELECT COUNT(puk) FROM md6_cpxx ) md6_cpxx
+			,(SELECT COUNT(puk) FROM md7_cpggxx ) md7_cpggxx
+			,(SELECT COUNT(puk) FROM mda_cpxxx ) mda_cpxxx
+			,(SELECT COUNT(puk) FROM mdb_cpxflxx ) mdb_cpxflxx
+			,(SELECT COUNT(puk) FROM mdc_ppxx ) mdc_ppxx
+			,(SELECT COUNT(puk) FROM mdd_ppgysxx ) mdd_ppgysxx
+			,(SELECT COUNT(puk) FROM mde_ysxx ) mde_ysxx
+			,(SELECT COUNT(puk) FROM mdg_zczxx ) mdg_zczxx
+    </select>
+</mapper>

@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 供应商添加厂商信息 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='com.aek56.atm.company.cmp.CompanyDao'>
+    
+    
+    <!-- 内部消息数目 -->
+    <select id='loadMyMessage' parameterType='String' resultType='FrameworkData'>
+    	<![CDATA[ 
+	    	SELECT 
+	    		IFNULL((SELECT COUNT(puk) FROM CS0D1 WHERE fb4='1' AND eb5 = #{puk}),'0') as eb1
+		 ]]>
+    </select>
+    
+</mapper>

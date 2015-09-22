@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Bean实体别名 -->
+	<typeAliases>
+		<typeAlias alias='FrameworkData' type='org.jfpc.framework.bean.FrameworkDataBean'/>
+		<typeAlias alias='LoginerData' 	 type='org.jfpc.framework.bean.LoginerBean'/>		
+		<typeAlias alias='DictionaryDBO' type='org.jfpc.common.dict.DictionaryDBO'/>
+<!-- 国家机关单位 -->
+<typeAlias alias='MS5D1DBO' type='org.jfpc.beans.platform.MS5D1.MS5D1DBO'/>
+<!-- 内部消息 -->
+<typeAlias alias='CS0D1DBO' type='org.jfpc.beans.platform.CS0D1.CS0D1DBO'/>
+<!-- 业务日志 -->
+<typeAlias alias='CS0E1DBO' type='org.jfpc.beans.platform.CS0E1.CS0E1DBO'/>
+<!-- 警告异常日志 -->
+<typeAlias alias='CS0E2DBO' type='org.jfpc.beans.platform.CS0E2.CS0E2DBO'/>
+<!-- 文章评价 -->
+<typeAlias alias='CS0M5DBO' type='org.jfpc.beans.platform.CS0M5.CS0M5DBO'/>
+<!-- 文章评价人 -->
+<typeAlias alias='CS0M6DBO' type='org.jfpc.beans.platform.CS0M6.CS0M6DBO'/>
+<!-- 企业人员基本信息 -->
+<typeAlias alias='CS1B2DBO' type='org.jfpc.beans.platform.CS1B2.CS1B2DBO'/>
+<!-- 系统动态 -->
+<typeAlias alias='CSSGGDBO' type='org.jfpc.beans.platform.CSSGG.CSSGGDBO'/>
+<!-- 用户登录日志 -->
+<typeAlias alias='CSSLLDBO' type='org.jfpc.beans.platform.CSSLL.CSSLLDBO'/>
+<!-- TOKEN存放表 -->
+<typeAlias alias='CSSTTDBO' type='org.jfpc.beans.platform.CSSTT.CSSTTDBO'/>
+<!-- 系统菜单定义 -->
+<typeAlias alias='MS0A1DBO' type='org.jfpc.beans.platform.MS0A1.MS0A1DBO'/>
+<!-- 机能模块定义 -->
+<typeAlias alias='MS0A2DBO' type='org.jfpc.beans.platform.MS0A2.MS0A2DBO'/>
+<!-- 业务功能定义 -->
+<typeAlias alias='MS0A3DBO' type='org.jfpc.beans.platform.MS0A3.MS0A3DBO'/>
+<!-- 页面定义 -->
+<typeAlias alias='MS0A4DBO' type='org.jfpc.beans.platform.MS0A4.MS0A4DBO'/>
+<!-- 页面功能按钮定义 -->
+<typeAlias alias='MS0A5DBO' type='org.jfpc.beans.platform.MS0A5.MS0A5DBO'/>
+<!-- 动态页面定义 -->
+<typeAlias alias='MS0AADBO' type='org.jfpc.beans.platform.MS0AA.MS0AADBO'/>
+<!-- 系统公告 -->
+<typeAlias alias='MS0C1DBO' type='org.jfpc.beans.platform.MS0C1.MS0C1DBO'/>
+<!-- 数据字典管理 -->
+<typeAlias alias='MS0M1DBO' type='org.jfpc.beans.platform.MS0M1.MS0M1DBO'/>
+<!-- 帮助信息表 -->
+<typeAlias alias='MS0M2DBO' type='org.jfpc.beans.platform.MS0M2.MS0M2DBO'/>
+<!-- 帮助信息意见评价 -->
+<typeAlias alias='MS0M3DBO' type='org.jfpc.beans.platform.MS0M3.MS0M3DBO'/>
+<!-- 文章信息 -->
+<typeAlias alias='MS0M4DBO' type='org.jfpc.beans.platform.MS0M4.MS0M4DBO'/>
+<!-- 企业基本信息 -->
+<typeAlias alias='MS1A1DBO' type='org.jfpc.beans.platform.MS1A1.MS1A1DBO'/>
+<!-- 企业扩展信息 -->
+<typeAlias alias='MS1AADBO' type='org.jfpc.beans.platform.MS1AA.MS1AADBO'/>
+<!-- 登录用户临时授权 -->
+<typeAlias alias='MS1C1DBO' type='org.jfpc.beans.platform.MS1C1.MS1C1DBO'/>
+<!-- 企业组织机构定义 -->
+<typeAlias alias='MS1C2DBO' type='org.jfpc.beans.platform.MS1C2.MS1C2DBO'/>
+<!-- 企业组织机构角色定义 -->
+<typeAlias alias='MS1C5DBO' type='org.jfpc.beans.platform.MS1C5.MS1C5DBO'/>
+<!-- 短信网关信息 -->
+<typeAlias alias='MS3C1DBO' type='org.jfpc.beans.platform.MS3C1.MS3C1DBO'/>
+<!-- 发送短信信息 -->
+<typeAlias alias='MS3C2DBO' type='org.jfpc.beans.platform.MS3C2.MS3C2DBO'/>
+<!-- 用户留言表 -->
+<typeAlias alias='MS3H1DBO' type='org.jfpc.beans.platform.MS3H1.MS3H1DBO'/>
+<!-- 留言回复表 -->
+<typeAlias alias='MS3H2DBO' type='org.jfpc.beans.platform.MS3H2.MS3H2DBO'/>
+<!-- 系统配置信息 -->
+<typeAlias alias='MSSCCDBO' type='org.jfpc.beans.platform.MSSCC.MSSCCDBO'/>
+<!-- 资源路径表 -->
+<typeAlias alias='MSSDDDBO' type='org.jfpc.beans.platform.MSSDD.MSSDDDBO'/>
+<!-- 主键关联表 -->
+<typeAlias alias='MSSKKDBO' type='org.jfpc.beans.platform.MSSKK.MSSKKDBO'/>
+<!-- 角色关联表 -->
+<typeAlias alias='MSSRRDBO' type='org.jfpc.beans.platform.MSSRR.MSSRRDBO'/>
+<!-- 用户基本信息 -->
+<typeAlias alias='MSSUUDBO' type='org.jfpc.beans.platform.MSSUU.MSSUUDBO'/>
+<!-- 好友分组 -->
+<typeAlias alias='CS2B1DBO' type='org.jfpc.beans.platform.CS2B1.CS2B1DBO'/>
+<!-- 好友信息 -->
+<typeAlias alias='CS2B2DBO' type='org.jfpc.beans.platform.CS2B2.CS2B2DBO'/>
+<!-- 短信与邮件模版 -->
+<typeAlias alias='MMMSSDBO' type='org.jfpc.beans.platform.MMMSS.MMMSSDBO'/>
+<!-- 会员应用开通信息 -->
+<typeAlias alias='CS2A4DBO' type='org.jfpc.beans.platform.CS2A4.CS2A4DBO'/>
+<!-- 问卷调查 -->
+<typeAlias alias='MS0M7DBO' type='org.jfpc.beans.platform.MS0M7.MS0M7DBO'/>
+<!-- 用户问卷答案 -->
+<typeAlias alias='CS0M8DBO' type='org.jfpc.beans.platform.CS0M8.CS0M8DBO'/>
+
+
+
+
+
+	</typeAliases>

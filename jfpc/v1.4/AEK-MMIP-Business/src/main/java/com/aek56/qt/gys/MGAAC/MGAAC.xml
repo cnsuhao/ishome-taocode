@@ -1,0 +1,44 @@
+﻿<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 厂家医疗器械注册证 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='com.aek56.qt.gys.MGAAC.MGAACDao'>
+    <!-- 表字段信息  -->
+    <sql id='tableColumns'>
+        puk,p01_gysid,p02_zjbs,k01_zczid,k02_zj68bh,k03_zj123lb,k04_scqyid,f01_zczzwmc,f02_zczywmc,f03_cpzwmc,f04_cpywmc,f05_fzgjmc,f06_fzdwmc,f07_fzrq,f08_yxnx,f09_yxksrq,f10_yxzzrq,f11_shzt,f12_yqbz,f13_yqzh,f14_yqsj,f15_sfty,f16_jkbz,f17_cpzxbzbh,f18_cpxnjgjzc,f19_cpsyfw,f20_cpjjz,f21_zcdzszgj,f22_zcdljgid,f23_zcdljgmc,f24_shfwjgid,f25_shfwjgmc,f26_shfwrx,f27_shfwdz,f28_wlwjbcwz,f29_zysx,f30_bz,f31_scqyzzjgdm,f32_scqyzwmc,f33_scqydz,f34_scqyyb,f35_scqydhhm,f36_scqyywmc,f37_scqypym,f38_scqylxrxm,f39_scqylxraqyx,f40_scqylxrdh,f41_sfgq,f42_fzdwid,f43,f44,f45,bbb,fb1,fb2,fb3,fb4,fb5,eb1,eb2,eb3,eb4,eb5,ggg,ppp,ddd,cc1,cc2,uu1,uu2
+    </sql>
+
+    <!-- 查询注册证一览（带厂家证书和授权书维护状态）  -->
+    <select id='doSelectPage' parameterType='MGAAC_YLQXZCZDBO' resultType='MGAAC_YLQXZCZDBO'>
+        SELECT t1.puk,t1.p01_gysid,t1.p02_zjbs,t1.k01_zczid,t1.k02_zj68bh,t1.k03_zj123lb,t1.k04_scqyid,t1.f01_zczzwmc,t1.f02_zczywmc,t1.f03_cpzwmc,t1.f04_cpywmc,t1.f05_fzgjmc,
+        t1.f06_fzdwmc,t1.f07_fzrq,t1.f08_yxnx,t1.f09_yxksrq,t1.f10_yxzzrq,t1.f11_shzt,t1.f12_yqbz,t1.f13_yqzh,t1.f14_yqsj,t1.f15_sfty,t1.f16_jkbz,t1.f17_cpzxbzbh,
+        t1.f18_cpxnjgjzc,t1.f19_cpsyfw,t1.f20_cpjjz,t1.f21_zcdzszgj,t1.f22_zcdljgid,t1.f23_zcdljgmc,t1.f24_shfwjgid,t1.f25_shfwjgmc,t1.f26_shfwrx,t1.f27_shfwdz,
+        t1.f28_wlwjbcwz,t1.f29_zysx,t1.f30_bz,t1.f31_scqyzzjgdm,t1.f32_scqyzwmc,t1.f33_scqydz,t1.f34_scqyyb,t1.f35_scqydhhm,t1.f36_scqyywmc,t1.f37_scqypym,
+        t1.f38_scqylxrxm,t1.f39_scqylxraqyx,t1.f40_scqylxrdh,t1.f41_sfgq,t1.f42_fzdwid,t1.f43,t1.f44,t1.f45,t1.bbb,t1.fb1,t1.fb2,t1.fb3,t1.fb4,t1.fb5,t1.eb1,t1.eb2,
+        t1.ggg,t1.ppp,t1.ddd,t1.cc1,t1.cc2,t1.uu1,t1.uu2,ISNULL(t2.puk) AS eb3, ISNULL(t3.puk) AS eb4, ISNULL(t4.puk) AS eb5
+		FROM mgaac_ylqxzcz t1 LEFT JOIN mga8c_yyzz t2 ON (t1.k04_scqyid = t2.k02_sccj_qyid AND t1.p01_gysid = t2.k01_gysid)
+		LEFT JOIN mga9c_scxkz t3 ON (t1.k04_scqyid = t3.k02_sccj_qyid AND t1.p01_gysid = t3.k01_gysid)
+		LEFT JOIN mgad_sqsglzczxx t4 ON (t1.puk = t4.k02_zczid AND t1.p01_gysid = t4.k01_gysid)
+		WHERE t1.p01_gysid = #{p01_gysid } AND t1.ddd != '1'
+		<if test=" f01_zczzwmc != null and f01_zczzwmc !='' "><!-- 注册证编号 -->
+            AND (INSTR(t1.f01_zczzwmc,#{f01_zczzwmc})>0 OR
+            INSTR(t1.f03_cpzwmc,#{f01_zczzwmc})>0 OR
+            INSTR(t1.f32_scqyzwmc,#{f01_zczzwmc})>0)
+        </if>
+		GROUP BY t1.puk
+    </select>
+    <!-- 查询各个证书数量 -->
+    <select id='doCountAllZs' parameterType='MGAAC_YLQXZCZDBO' resultType='hashmap'>
+        SELECT COUNT(t1.puk) AS num, 'zczCount' AS type FROM mgaac_ylqxzcz t1 WHERE t1.p01_gysid = #{p01_gysid} AND t1.ddd != '1'
+		UNION
+		SELECT COUNT(t2.puk) AS num, 'cjCount' AS type FROM mgys2_gystjcsxx t2 WHERE t2.p01_gysid = #{p01_gysid} AND t2.ddd != '1'
+		UNION
+		SELECT COUNT(t3.puk) AS num, 'sqsCount' AS type FROM mga4_jxsqs t3 WHERE t3.k01_gysid = #{p01_gysid} AND t3.ddd != '1'
+		UNION
+		SELECT COUNT(t4.puk) AS num, 'wtsCount' AS type FROM mga5_xsrywts t4 WHERE t4.k01_gysid = #{p01_gysid} AND t4.ddd != '1'
+		UNION
+		SELECT COUNT(t5.puk) AS num, 'cnsCount' AS type FROM mga6_shfwcns t5 WHERE t5.k01_gysid = #{p01_gysid} AND t5.ddd != '1'
+    </select>
+</mapper>

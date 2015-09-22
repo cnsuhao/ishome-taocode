@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title></title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link rel="stylesheet" type="text/css" href="/css/base.css">
+<link rel="stylesheet" type="text/css" href="/css/supplier_cert.css">
+<link rel="stylesheet" href="/css/jquery.mCustomScrollbar.css">
+<script src="/js/jquery.js"></script>
+<script src="/js/jquery.mousewheel.js"></script>
+<script src="/js/jquery.mCustomScrollbar.js"></script>
+<script src="/js/jq.ui.js"></script>
+<script src="/js/tableFixed.min.js"></script>
+<script>
+//获取url中的参数
+//console.log(getUrlParam("id"));
+$(function(){
+	resetText();
+	$(".textTips").input();
+	hoverTable(".hoverTable",true,true);
+	$("body").mCustomScrollbar({theme:"minimal"});
+	$(".select").uiSelect();
+	var certId=parent.document.getElementById("listId").value;
+    getHospitalInfo();
+	getHospitalCert(1);//总注册证
+	getHospitalCert(2);//已选注册证
+
+
+	var $allList = $("#allList").on('click', '.optBtn', function(){
+		$(this).text("删除").closest('tr').prependTo($alreadyList);
+	});
+
+
+	var $alreadyList = $("#alreadyList").on('click', '.optBtn', function(){
+		$(this).text("添加").closest('tr').prependTo($allList);
+	});
+	
+});
+
+//得到医院信息
+function getHospitalInfo(){
+		ajax("/ajax/json.php?t="+Math.random(),{"act":"hospitalinfo"},function(data){
+			$("#yui-u-logo").text(data.hospitalName.substr(0,1));
+			$("#yui-h-name").text(data.hospitalName)
+			$("#userName").text(data.userName);
+			$("#phone").text(data.phone);
+			$("#alreadyRegisterCount").text(data.alreadyRegisterCount);
+			$("#allRegisterCount").text(data.allRegisterCount);
+			$("#overdueCount").text(data.overdueCount);
+		});
+	}
+
+ function change(){
+    	alert($("option:selected",this).val(),1);
+    }
+
+
+//添加或删除
+function delOrEdit(area1,area2,text){
+	$(area1).find(".optBtn").click(function(){
+			var tr=$(this).closest('tr');
+			var firstTr=$(area2).find("tr").eq(0);
+			console.log(firstTr.html());
+			tr.find('.optBtn').text(text);
+			if(firstTr.length>0){
+				tr.insertBefore(firstTr);
+			}else{
+				$(area2).append(tr);
+			}
+		});
+}
+
+
+
+
+ //得到证件
+ function getHospitalCert(parm){
+ 	ajax("/ajax/json.php?t="+Math.random(),{"act":"list"},function(data){
+	var html = "";
+	var optLink=parm==1?'添加':'删除'
+			$.each(data.list,function(index, item){
+				html +='<tr>'
+						+'<td>国食药监械（准）字2010第201231号（更）'+index+'</td>'
+						+'<td>远端保护器</td>'
+						+'<td>2010-5至2014-5</td>'
+						+'<td class="optTd"><img src="/images/icon/t-view.png" align="absmiddle"> 查看 <a class="optBtn">'+optLink+'</a></td>'
+						+'</tr>';
+			});
+			if(parm==1){
+ 				$("#allList").html(html);
+ 				//添加按钮
+ 	        }else{
+ 	        	$("#alreadyList").html(html);
+ 	        	
+ 	        }
+			hoverTable(".hoverTable",true,false);
+	 	})
+
+ }
+
+</script>
+</head>
+<body class="whiteBg">
+<div class="contnet">
+	<div class="hospitalInfoBox lFloat">
+		<span class="mlogo mlogo-min lFloat" id="yui-u-logo"></span>
+		<div class="hospitalInfoText">
+				<span id="yui-h-name" class="font14" ></span><br />
+				<img src="/images/icon/t-call.png" align="absmiddle"><span class="gray"><span id="userName"></span> <span id="phone"></span></span>
+		</div>
+	</div>
+	<div class="hospitalBox gray lFloat leftLine" align="center" >
+		<span class="font20" id="alreadyRegisterCount"></span><br />已推送注册证
+	</div>
+	<div class="hospitalBox gray lFloat " align="center">
+		<span class="font20" id="allRegisterCount"></span><br /> 我的全部注册证
+	</div>
+	<div class="hospitalOvTip lFloat">
+		医院已接受的注册证，有<span class="font20 gray" id="overdueCount"></span>本已过期 <a href="" class="btn">去处理</a>
+	</div>
+	<div class="clear"></div>
+	<div class="rFloat mTop10" style="margin-right:10px;">
+		<div class="select {onchange:change}">
+		<select name="" id="">
+			<option value="1">注册证号</option>
+			<option value="2">供应商</option>
+		</select>
+		</div>
+		<div class="select {onchange:change}">
+		<select name="" id="">
+			<option value="3">产品</option>
+		</select>
+		</div>
+		<input type="text" class="text textTips {text:'请输入内容'}" name="11" value="">
+		<a href="#" class="btn">搜索</a>
+	</div>
+	<div class="clear"></div>
+	<div class="font20">待选注册证</div>
+	<div class="tablelist mTop10" style="height:200px;">
+		<table class="table hoverTable" width="100%" cellspacing="0" cellpadding="0" border="0">
+			<thead>
+				<tr>
+					<th width="40%">医疗器械注册证号</th>
+					<th>注册证名称</th>
+					<th>有效期</th>
+					<th width="10%">&nbsp;</th>
+				</tr>
+			</thead>
+			<tbody id="allList">
+			</tbody>
+		</table>
+		<div class="pages"></div>
+	</div>
+	<div class="font20 mTop10">已选注册证</div>
+	<div class="tablelist mTop10" style="height:200px;">
+		<table class="table hoverTable" width="100%" cellspacing="0" cellpadding="0" border="0">
+			<thead>
+				<tr>
+					
+					<th width="40%">医疗器械注册证号</th>
+					<th>注册证名称</th>
+					<th>有效期</th>
+					<th width="10%">&nbsp;</th>
+				</tr>
+			</thead>
+			<tbody id="alreadyList">
+				
+			</tbody>
+		</table>
+		<div class="pages"></div>
+	</div>
+	<div class="font20 mTop10">选择委托人员/业务员</div>
+	<ul class="pubicYUIList mTop10 clearfix liSpan">
+		<li>
+			<label><input type="checkbox" align="absmiddle" /> 张山</label> &nbsp;&nbsp;
+			<img src="/images/icon/t-view.png" align="absmiddle" > 看图
+		</li>
+		<li>
+			<label><input type="checkbox" align="absmiddle" /> 张山</label> &nbsp;&nbsp;
+			<img src="/images/icon/t-view.png" align="absmiddle" > 看图
+		</li>
+		<li>
+			<label><input type="checkbox" align="absmiddle" /> 张山</label> &nbsp;&nbsp;
+			<img src="/images/icon/t-view.png" align="absmiddle" > 看图
+		</li>
+		<li>
+			<label><input type="checkbox" align="absmiddle" /> 张山</label> &nbsp;&nbsp;
+			<img src="/images/icon/t-view.png" align="absmiddle" > 看图
+		</li>
+		<li>
+			<label><input type="checkbox" align="absmiddle" /> 张山</label> &nbsp;&nbsp;
+			<img src="/images/icon/t-view.png" align="absmiddle" > 看图
+		</li>
+		<li>
+			<label><input type="checkbox" align="absmiddle" /> 张山</label> &nbsp;&nbsp;
+			<img src="/images/icon/t-view.png" align="absmiddle" > 看图
+		</li>
+		<li>
+			<label><input type="checkbox" align="absmiddle" /> 张山</label> &nbsp;&nbsp;
+			<img src="/images/icon/t-view.png" align="absmiddle" > 看图
+		</li>
+	</ul>
+	<div style="text-align:right;padding:20px;"><a class="btn">推送</a></div>
+</div>
+</body>
+</html>

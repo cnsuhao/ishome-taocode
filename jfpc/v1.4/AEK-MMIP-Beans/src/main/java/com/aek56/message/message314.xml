@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='GB2312'?>
+<messages>
+	<common>
+	   <!-- 前台成员管理 begin-->
+		<message k03_mbbh='314020411' bbb='用户名已经存在！' />
+		<message k03_mbbh='314020412' bbb='添加成员成功！' />
+		<message k03_mbbh='314020413' bbb='添加失败，请稍后再试！' />
+		
+		<message k03_mbbh='314020421' bbb='删除成功！' />
+		<message k03_mbbh='314020422' bbb='删除失败！' />
+		
+		<message k03_mbbh='314020431' bbb='获取成员信息成功！' />
+		<message k03_mbbh='314020432' bbb='获取成员信息失败！' />
+		
+		<message k03_mbbh='314020441' bbb='修改成员信息成功！' />
+		<message k03_mbbh='314020442' bbb='修改成员信息失败！' />
+		
+		<message k03_mbbh='314020451' bbb='角色修改成功！' />
+		<message k03_mbbh='314020452' bbb='角色修改失败！' />				
+		<!-- 前台成员管理 end-->
+		
+		<!-- 医院信息修改begin-->
+		<message k03_mbbh='314020501' bbb='编辑企业信息成功！' />
+		<message k03_mbbh='314020502' bbb='编辑企业信息失败！' />		
+		<!-- 医院信息修改END -->
+		
+		<!-- 个人账户管理begin -->
+		<message k03_mbbh='314020531' bbb='验证码已经过期，请重新操作！' />
+		<message k03_mbbh='314020532' bbb='验证码错误，请重新操作！' />
+		<message k03_mbbh='314020533' bbb='更改成功！' />	
+		<message k03_mbbh='314020534' bbb='更改失败！' />
+		
+		<message k03_mbbh='314020541' bbb='原密码输入不正确！' />
+		<message k03_mbbh='314020542' bbb='请输入原密码！' />
+		<message k03_mbbh='314020543' bbb='修改密码成功！' />
+		<message k03_mbbh='314020544' bbb='修改密码失败！' />
+		
+		<message k03_mbbh='314020521' bbb='验证码错误！' />
+		<message k03_mbbh='314020522' bbb='原手机号码不正确！' />
+		
+		<message k03_mbbh='314020551' bbb='验证码错误！' />
+		<message k03_mbbh='314020552' bbb='邮箱设置成功！' />
+		<message k03_mbbh='314020553' bbb='邮箱设置失败！' />		
+		<!-- 个人账户管理 end-->
+	</common>
+</messages>

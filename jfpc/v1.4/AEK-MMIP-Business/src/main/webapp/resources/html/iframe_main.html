@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title></title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link rel="stylesheet" type="text/css" href="/css/base.css">
+<link rel="stylesheet" type="text/css" href="/css/jquery.mCustomScrollbar.css">
+<script src="/js/jquery.js"></script>
+<script src="/js/jquery.mousewheel.js"></script>
+<script src="/js/jquery.mCustomScrollbar.js"></script>
+<script src="/js/function.js"></script>
+<script src="/js/jq.ui.js"></script>
+<script src="/js/tableFixed.min.js"></script>
+<script>
+var skinCss = "";
+if($.cookie("userType") == 1)
+	skinCss = "<link rel=\"stylesheet\" type=\"text/css\" href=\"/css/hospital_cert.css\">";
+else
+	skinCss = "<link rel=\"stylesheet\" type=\"text/css\" href=\"/css/supplier_cert.css\">";
+$("head").append(skinCss);
+</script>
+</head>
+<body>
+<div class="contnet" id="yui-contentBox">
+	<div class="boxContentRight rFloat">
+		<script src="/js/usinfo.js"></script>
+	</div>
+	<div class="boxContent boxContentLeft">
+		<ul class="subNav subNavLH clearfix2">
+			<li><a href="javascript:void(0);" onclick="ajaxPage('main.html');" class="active">待审核供应商</a></li>
+			<li><a href="javascript:void(0);" onclick="ajaxPage('cert.html');">待审核换证信息</a></li>
+			<li><a href="javascript:void(0);" onclick="ajaxPage('');">已过期证件</a></li>
+		</ul>
+		<table class="table" width="100%" cellspacing="0" cellpadding="0" border="0">
+			<tbody>
+				<tr>
+					<td width="8%" class="center"><sapn class="mlogo">浙</sapn></td>
+					<td><a href="javascript:showLayer('/hospital/sup_look.html?id=1', 500, true);">浙江省医疗器械有限公司</a><br /><img src="/images/icon/tb_3.png" align="absmiddle" /> 张小花 15837599483</td>
+					<td class="center">
+						<span class="font16">邀请你将我司证件通过爱医康管理</span><br />
+						<img src="/images/icon/tb_1.png" align="absmiddle" /> <span class="gray">及时更新</span>&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/icon/tb_2.png" align="absmiddle" /> <span class="gray">证件齐全</span>
+					</td>
+					<td class="gray" width="10%">2014-11-07</td>
+				</tr>
+				<tr>
+					<td class="center"><sapn class="mlogo">浙</sapn></td>
+					<td><a href="javascript:showLayer('/hospital/sup_look.html?id=2', 500, true);">浙江省医疗器械有限公司</a><br /><img src="/images/icon/tb_3.png" align="absmiddle" /> 张小花 15837599483</td>
+					<td class="center">
+						<span class="font16">邀请你将我司证件通过爱医康管理</span><br />
+						<img src="/images/icon/tb_1.png" align="absmiddle" /> <span class="gray">及时更新</span>&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/icon/tb_2.png" align="absmiddle" /> <span class="gray">证件齐全</span>
+					</td>
+					<td class="gray">2014-11-07</td>
+				</tr>
+				<tr>
+					<td class="center"><sapn class="mlogo">浙</sapn></td>
+					<td><a href="javascript:showLayer('/hospital/sup_look.html?id=3', 500, true);">浙江省医疗器械有限公司</a><br /><img src="/images/icon/tb_3.png" align="absmiddle" /> 张小花 15837599483</td>
+					<td class="center">
+						<span class="font16">邀请你将我司证件通过爱医康管理</span><br />
+						<img src="/images/icon/tb_1.png" align="absmiddle" /> <span class="gray">及时更新</span>&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/icon/tb_2.png" align="absmiddle" /> <span class="gray">证件齐全</span>
+					</td>
+					<td class="gray">2014-11-07</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+</body>
+</html>

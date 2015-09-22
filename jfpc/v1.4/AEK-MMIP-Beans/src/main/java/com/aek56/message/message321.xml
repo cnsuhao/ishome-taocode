@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='GB2312'?>
+<messages>
+	<common>
+		<message k03_mbbh='322003021' bbb='操作成功！' />
+		<message k03_mbbh='322003022' bbb='操作失败！' />
+		
+		<message k03_mbbh='322003031' bbb='提醒成功！' />
+		<message k03_mbbh='322003032' bbb='提醒失败！' />		
+	</common>
+</messages>

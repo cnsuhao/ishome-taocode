@@ -1,0 +1,555 @@
+﻿<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 医生信息 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='com.aek56.atm.master.MDE_YSXX.MDE_YSXXDao'>
+    <!-- 表字段信息  -->
+    <sql id='tableColumns'>
+        puk,k01_yyid,k02_ksid,k03_sfzhm,f01_yyxm,f02_yyxmpym,f03_csnyr,f04_xx,f05_yslb,f06_xb,f07_ksmc,f08_yymc,f09,f10,f11,f12,f13,f14,f15,f16,f17,f18,f19,f20,bbb,fb1,fb2,fb3,fb4,fb5,eb1,eb2,eb3,eb4,eb5,ggg,ppp,ddd,cc1,cc2,uu1,uu2
+    </sql>
+
+    <!-- 根据条件更新所有记录 -->
+    <update id='doUpdateAll' parameterType='MDE_YSXXDBO'>
+        UPDATE mde_ysxx SET  uu1 = #{uuu} <!-- 更新时间、更新者 -->
+        <if test=" k01_yyid != null and k01_yyid !='' "><!-- 医院ID -->
+            ,k01_yyid = #{k01_yyid}
+        </if>
+        <if test=" k02_ksid != null and k02_ksid !='' "><!-- 科室ID -->
+            ,k02_ksid = #{k02_ksid}
+        </if>
+        <if test=" k03_sfzhm != null and k03_sfzhm !='' "><!-- 身份证号码 -->
+            ,k03_sfzhm = #{k03_sfzhm}
+        </if>
+        <if test=" f01_yyxm != null and f01_yyxm !='' "><!-- 医生姓名 -->
+            ,f01_yyxm = #{f01_yyxm}
+        </if>
+        <if test=" f02_yyxmpym != null and f02_yyxmpym !='' "><!-- 医生姓名简拼 -->
+            ,f02_yyxmpym = #{f02_yyxmpym}
+        </if>
+        <if test=" f03_csnyr != null and f03_csnyr !='' "><!-- 出生年月 -->
+            ,f03_csnyr = #{f03_csnyr}
+        </if>
+        <if test=" f04_xx != null and f04_xx !='' "><!-- 血型 -->
+            ,f04_xx = #{f04_xx}
+        </if>
+        <if test=" f05_yslb != null and f05_yslb !='' "><!-- 医生类别 -->
+            ,f05_yslb = #{f05_yslb}
+        </if>
+        <if test=" f06_xb != null and f06_xb !='' "><!-- 性别 -->
+            ,f06_xb = #{f06_xb}
+        </if>
+        <if test=" f07_ksmc != null and f07_ksmc !='' "><!-- 科室名称 -->
+            ,f07_ksmc = #{f07_ksmc}
+        </if>
+        <if test=" f08_yymc != null and f08_yymc !='' "><!-- 医院名称 -->
+            ,f08_yymc = #{f08_yymc}
+        </if>
+        <if test=" f09 != null and f09 !='' "><!-- 字段9 -->
+            ,f09 = #{f09}
+        </if>
+        <if test=" f10 != null and f10 !='' "><!-- 字段10 -->
+            ,f10 = #{f10}
+        </if>
+        <if test=" f11 != null and f11 !='' "><!-- 字段11 -->
+            ,f11 = #{f11}
+        </if>
+        <if test=" f12 != null and f12 !='' "><!-- 字段12 -->
+            ,f12 = #{f12}
+        </if>
+        <if test=" f13 != null and f13 !='' "><!-- 字段13 -->
+            ,f13 = #{f13}
+        </if>
+        <if test=" f14 != null and f14 !='' "><!-- 字段14 -->
+            ,f14 = #{f14}
+        </if>
+        <if test=" f15 != null and f15 !='' "><!-- 字段15 -->
+            ,f15 = #{f15}
+        </if>
+        <if test=" f16 != null and f16 !='' "><!-- 字段16 -->
+            ,f16 = #{f16}
+        </if>
+        <if test=" f17 != null and f17 !='' "><!-- 字段17 -->
+            ,f17 = #{f17}
+        </if>
+        <if test=" f18 != null and f18 !='' "><!-- 字段18 -->
+            ,f18 = #{f18}
+        </if>
+        <if test=" f19 != null and f19 !='' "><!-- 字段19 -->
+            ,f19 = #{f19}
+        </if>
+        <if test=" f20 != null and f20 !='' "><!-- 字段20 -->
+            ,f20 = #{f20}
+        </if>
+        <if test=" bbb != null and bbb !='' "><!-- 备注说明 -->
+            ,bbb = #{bbb}
+        </if>
+        <if test=" fb1 != null and fb1 !='' "><!-- 备用1 -->
+            ,fb1 = #{fb1}
+        </if>
+        <if test=" fb2 != null and fb2 !='' "><!-- 备用2 -->
+            ,fb2 = #{fb2}
+        </if>
+        <if test=" fb3 != null and fb3 !='' "><!-- 备用3 -->
+            ,fb3 = #{fb3}
+        </if>
+        <if test=" fb4 != null and fb4 !='' "><!-- 备用4 -->
+            ,fb4 = #{fb4}
+        </if>
+        <if test=" fb5 != null and fb5 !='' "><!-- 备用5 -->
+            ,fb5 = #{fb5}
+        </if>
+        <if test=" eb1 != null and eb1 !='' "><!-- 扩展1 -->
+            ,eb1 = #{eb1}
+        </if>
+        <if test=" eb2 != null and eb2 !='' "><!-- 扩展2 -->
+            ,eb2 = #{eb2}
+        </if>
+        <if test=" eb3 != null and eb3 !='' "><!-- 扩展3 -->
+            ,eb3 = #{eb3}
+        </if>
+        <if test=" eb4 != null and eb4 !='' "><!-- 扩展4 -->
+            ,eb4 = #{eb4}
+        </if>
+        <if test=" eb5 != null and eb5 !='' "><!-- 扩展5 -->
+            ,eb5 = #{eb5}
+        </if>
+        <if test=" ggg != null and ggg !='' "><!-- 所在组织 -->
+            ,ggg = #{ggg}
+        </if>
+        <if test=" ppp != null and ppp !='' "><!-- 企业ID -->
+            ,ppp = #{ppp}
+        </if>
+        <if test=" ddd != null and ddd !='' "><!-- 有效标识 -->
+            ,ddd = #{ddd}
+        </if>
+        <if test=" cc1 != null and cc1 !='' "><!-- 创建时间 -->
+            ,cc1 = #{cc1}
+        </if>
+        <if test=" cc2 != null and cc2 !='' "><!-- 创建者 -->
+            ,cc2 = #{cc2}
+        </if>
+        <if test=" uu2 != null and uu2 !='' "><!-- 最后更新者 -->
+            ,uu2 = #{uu2}
+        </if>
+        <trim prefix='WHERE' prefixOverrides='AND |OR '>
+            <if test=" puk != null and puk !='' "><!-- 医生ID -->
+                AND puk = #{puk}
+            </if>
+            <if test=" k01_yyid != null and k01_yyid !='' "><!-- 医院ID -->
+                AND k01_yyid = #{k01_yyid}
+            </if>
+            <if test=" k02_ksid != null and k02_ksid !='' "><!-- 科室ID -->
+                AND k02_ksid = #{k02_ksid}
+            </if>
+            <if test=" k03_sfzhm != null and k03_sfzhm !='' "><!-- 身份证号码 -->
+                AND k03_sfzhm = #{k03_sfzhm}
+            </if>
+            <if test=" f01_yyxm != null and f01_yyxm !='' "><!-- 医生姓名 -->
+                AND f01_yyxm = #{f01_yyxm}
+            </if>
+            <if test=" f02_yyxmpym != null and f02_yyxmpym !='' "><!-- 医生姓名简拼 -->
+                AND f02_yyxmpym = #{f02_yyxmpym}
+            </if>
+            <if test=" f03_csnyr != null and f03_csnyr !='' "><!-- 出生年月 -->
+                AND f03_csnyr = #{f03_csnyr}
+            </if>
+            <if test=" f04_xx != null and f04_xx !='' "><!-- 血型 -->
+                AND f04_xx = #{f04_xx}
+            </if>
+            <if test=" f05_yslb != null and f05_yslb !='' "><!-- 医生类别 -->
+                AND f05_yslb = #{f05_yslb}
+            </if>
+            <if test=" f06_xb != null and f06_xb !='' "><!-- 性别 -->
+                AND f06_xb = #{f06_xb}
+            </if>
+            <if test=" f07_ksmc != null and f07_ksmc !='' "><!-- 科室名称 -->
+                AND f07_ksmc = #{f07_ksmc}
+            </if>
+            <if test=" f08_yymc != null and f08_yymc !='' "><!-- 医院名称 -->
+                AND f08_yymc = #{f08_yymc}
+            </if>
+            <if test=" f09 != null and f09 !='' "><!-- 字段9 -->
+                AND f09 = #{f09}
+            </if>
+            <if test=" f10 != null and f10 !='' "><!-- 字段10 -->
+                AND f10 = #{f10}
+            </if>
+            <if test=" f11 != null and f11 !='' "><!-- 字段11 -->
+                AND f11 = #{f11}
+            </if>
+            <if test=" f12 != null and f12 !='' "><!-- 字段12 -->
+                AND f12 = #{f12}
+            </if>
+            <if test=" f13 != null and f13 !='' "><!-- 字段13 -->
+                AND f13 = #{f13}
+            </if>
+            <if test=" f14 != null and f14 !='' "><!-- 字段14 -->
+                AND f14 = #{f14}
+            </if>
+            <if test=" f15 != null and f15 !='' "><!-- 字段15 -->
+                AND f15 = #{f15}
+            </if>
+            <if test=" f16 != null and f16 !='' "><!-- 字段16 -->
+                AND f16 = #{f16}
+            </if>
+            <if test=" f17 != null and f17 !='' "><!-- 字段17 -->
+                AND f17 = #{f17}
+            </if>
+            <if test=" f18 != null and f18 !='' "><!-- 字段18 -->
+                AND f18 = #{f18}
+            </if>
+            <if test=" f19 != null and f19 !='' "><!-- 字段19 -->
+                AND f19 = #{f19}
+            </if>
+            <if test=" f20 != null and f20 !='' "><!-- 字段20 -->
+                AND f20 = #{f20}
+            </if>
+            <if test=" bbb != null and bbb !='' "><!-- 备注说明 -->
+                AND bbb = #{bbb}
+            </if>
+            <if test=" fb1 != null and fb1 !='' "><!-- 备用1 -->
+                AND fb1 = #{fb1}
+            </if>
+            <if test=" fb2 != null and fb2 !='' "><!-- 备用2 -->
+                AND fb2 = #{fb2}
+            </if>
+            <if test=" fb3 != null and fb3 !='' "><!-- 备用3 -->
+                AND fb3 = #{fb3}
+            </if>
+            <if test=" fb4 != null and fb4 !='' "><!-- 备用4 -->
+                AND fb4 = #{fb4}
+            </if>
+            <if test=" fb5 != null and fb5 !='' "><!-- 备用5 -->
+                AND fb5 = #{fb5}
+            </if>
+            <if test=" eb1 != null and eb1 !='' "><!-- 扩展1 -->
+                AND eb1 = #{eb1}
+            </if>
+            <if test=" eb2 != null and eb2 !='' "><!-- 扩展2 -->
+                AND eb2 = #{eb2}
+            </if>
+            <if test=" eb3 != null and eb3 !='' "><!-- 扩展3 -->
+                AND eb3 = #{eb3}
+            </if>
+            <if test=" eb4 != null and eb4 !='' "><!-- 扩展4 -->
+                AND eb4 = #{eb4}
+            </if>
+            <if test=" eb5 != null and eb5 !='' "><!-- 扩展5 -->
+                AND eb5 = #{eb5}
+            </if>
+            <if test=" ggg != null and ggg !='' "><!-- 所在组织 -->
+                AND ggg = #{ggg}
+            </if>
+            <if test=" ppp != null and ppp !='' "><!-- 企业ID -->
+                AND ppp = #{ppp}
+            </if>
+            <if test=" ddd != null and ddd !='' "><!-- 有效标识 -->
+                AND ddd = #{ddd}
+            </if>
+            <if test=" cc1 != null and cc1 !='' "><!-- 创建时间 -->
+                AND cc1 = #{cc1}
+            </if>
+            <if test=" cc2 != null and cc2 !='' "><!-- 创建者 -->
+                AND cc2 = #{cc2}
+            </if>
+            <if test=" uu1 != null and uu1 !='' "><!-- 最后更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+            <if test=" uu2 != null and uu2 !='' "><!-- 最后更新者 -->
+                AND uu2 = #{uu2}
+            </if>
+        </trim>
+    </update>
+    <!-- 查询分页数据信息  -->
+    <select id='doSelectPage' parameterType='MDE_YSXXDBO' resultType='MDE_YSXXDBO'>
+        SELECT <include refid='tableColumns'/> FROM mde_ysxx
+        <trim prefix='WHERE' prefixOverrides='AND |OR '>
+            <if test=" puk != null and puk !='' "><!-- 医生ID -->
+                AND puk = #{puk}
+            </if>
+            <if test=" k01_yyid != null and k01_yyid !='' "><!-- 医院ID -->
+                AND k01_yyid = #{k01_yyid}
+            </if>
+            <if test=" k02_ksid != null and k02_ksid !='' "><!-- 科室ID -->
+                AND k02_ksid = #{k02_ksid}
+            </if>
+            <if test=" k03_sfzhm != null and k03_sfzhm !='' "><!-- 身份证号码 -->
+                AND k03_sfzhm = #{k03_sfzhm}
+            </if>
+            <if test=" f01_yyxm != null and f01_yyxm !='' "><!-- 医生姓名 -->
+                AND f01_yyxm = #{f01_yyxm}
+            </if>
+            <if test=" f02_yyxmpym != null and f02_yyxmpym !='' "><!-- 医生姓名简拼 -->
+                AND f02_yyxmpym = #{f02_yyxmpym}
+            </if>
+            <if test=" f03_csnyr != null and f03_csnyr !='' "><!-- 出生年月 -->
+                AND f03_csnyr = #{f03_csnyr}
+            </if>
+            <if test=" f04_xx != null and f04_xx !='' "><!-- 血型 -->
+                AND f04_xx = #{f04_xx}
+            </if>
+            <if test=" f05_yslb != null and f05_yslb !='' "><!-- 医生类别 -->
+                AND f05_yslb = #{f05_yslb}
+            </if>
+            <if test=" f06_xb != null and f06_xb !='' "><!-- 性别 -->
+                AND f06_xb = #{f06_xb}
+            </if>
+            <if test=" f07_ksmc != null and f07_ksmc !='' "><!-- 科室名称 -->
+                AND f07_ksmc = #{f07_ksmc}
+            </if>
+            <if test=" f08_yymc != null and f08_yymc !='' "><!-- 医院名称 -->
+                AND f08_yymc = #{f08_yymc}
+            </if>
+            <if test=" f09 != null and f09 !='' "><!-- 字段9 -->
+                AND f09 = #{f09}
+            </if>
+            <if test=" f10 != null and f10 !='' "><!-- 字段10 -->
+                AND f10 = #{f10}
+            </if>
+            <if test=" f11 != null and f11 !='' "><!-- 字段11 -->
+                AND f11 = #{f11}
+            </if>
+            <if test=" f12 != null and f12 !='' "><!-- 字段12 -->
+                AND f12 = #{f12}
+            </if>
+            <if test=" f13 != null and f13 !='' "><!-- 字段13 -->
+                AND f13 = #{f13}
+            </if>
+            <if test=" f14 != null and f14 !='' "><!-- 字段14 -->
+                AND f14 = #{f14}
+            </if>
+            <if test=" f15 != null and f15 !='' "><!-- 字段15 -->
+                AND f15 = #{f15}
+            </if>
+            <if test=" f16 != null and f16 !='' "><!-- 字段16 -->
+                AND f16 = #{f16}
+            </if>
+            <if test=" f17 != null and f17 !='' "><!-- 字段17 -->
+                AND f17 = #{f17}
+            </if>
+            <if test=" f18 != null and f18 !='' "><!-- 字段18 -->
+                AND f18 = #{f18}
+            </if>
+            <if test=" f19 != null and f19 !='' "><!-- 字段19 -->
+                AND f19 = #{f19}
+            </if>
+            <if test=" f20 != null and f20 !='' "><!-- 字段20 -->
+                AND f20 = #{f20}
+            </if>
+            <if test=" bbb != null and bbb !='' "><!-- 备注说明 -->
+                AND bbb = #{bbb}
+            </if>
+            <if test=" fb1 != null and fb1 !='' "><!-- 备用1 -->
+                AND fb1 = #{fb1}
+            </if>
+            <if test=" fb2 != null and fb2 !='' "><!-- 备用2 -->
+                AND fb2 = #{fb2}
+            </if>
+            <if test=" fb3 != null and fb3 !='' "><!-- 备用3 -->
+                AND fb3 = #{fb3}
+            </if>
+            <if test=" fb4 != null and fb4 !='' "><!-- 备用4 -->
+                AND fb4 = #{fb4}
+            </if>
+            <if test=" fb5 != null and fb5 !='' "><!-- 备用5 -->
+                AND fb5 = #{fb5}
+            </if>
+            <if test=" eb1 != null and eb1 !='' "><!-- 扩展1 -->
+                AND eb1 = #{eb1}
+            </if>
+            <if test=" eb2 != null and eb2 !='' "><!-- 扩展2 -->
+                AND eb2 = #{eb2}
+            </if>
+            <if test=" eb3 != null and eb3 !='' "><!-- 扩展3 -->
+                AND eb3 = #{eb3}
+            </if>
+            <if test=" eb4 != null and eb4 !='' "><!-- 扩展4 -->
+                AND eb4 = #{eb4}
+            </if>
+            <if test=" eb5 != null and eb5 !='' "><!-- 扩展5 -->
+                AND eb5 = #{eb5}
+            </if>
+            <if test=" ggg != null and ggg !='' "><!-- 所在组织 -->
+                AND ggg = #{ggg}
+            </if>
+            <if test=" ppp != null and ppp !='' "><!-- 企业ID -->
+                AND ppp = #{ppp}
+            </if>
+            <if test=" ddd != null and ddd !='' "><!-- 有效标识 -->
+                AND ddd = #{ddd}
+            </if>
+            <if test=" cc1 != null and cc1 !='' "><!-- 创建时间 -->
+                AND cc1 = #{cc1}
+            </if>
+            <if test=" cc2 != null and cc2 !='' "><!-- 创建者 -->
+                AND cc2 = #{cc2}
+            </if>
+            <if test=" uu1 != null and uu1 !='' "><!-- 最后更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+            <if test=" uu2 != null and uu2 !='' "><!-- 最后更新者 -->
+                AND uu2 = #{uu2}
+            </if>
+        </trim>
+    </select>
+
+    <!-- 插入一条数据 -->
+    <insert id='doInsert' parameterType='MDE_YSXXDBO'>
+        INSERT INTO mde_ysxx
+          ( <include refid='tableColumns'/>) 
+        VALUES 
+          ( #{puk},#{k01_yyid},#{k02_ksid},#{k03_sfzhm},#{f01_yyxm},#{f02_yyxmpym},#{f03_csnyr},#{f04_xx},#{f05_yslb},#{f06_xb},#{f07_ksmc},#{f08_yymc},#{f09},#{f10},#{f11},#{f12},#{f13},#{f14},#{f15},#{f16},#{f17},#{f18},#{f19},#{f20},#{bbb},#{fb1},#{fb2},#{fb3},#{fb4},#{fb5},#{eb1},#{eb2},#{eb3},#{eb4},#{eb5},#{ggg},#{ppp},#{ddd},#{cc1},#{cc2},#{uu1},#{uu2} )
+    </insert>
+    <!-- 修改一条数据 -->
+    <update id='doUpdate' parameterType='MDE_YSXXDBO'>
+        UPDATE mde_ysxx SET uu1 = #{uuu} <!-- 更新时间、更新者 -->
+        <if test=" k01_yyid != null and k01_yyid !='' "><!-- 医院ID -->
+            ,k01_yyid = #{k01_yyid}
+        </if>
+        <if test=" k02_ksid != null and k02_ksid !='' "><!-- 科室ID -->
+            ,k02_ksid = #{k02_ksid}
+        </if>
+        <if test=" k03_sfzhm != null and k03_sfzhm !='' "><!-- 身份证号码 -->
+            ,k03_sfzhm = #{k03_sfzhm}
+        </if>
+        <if test=" f01_yyxm != null and f01_yyxm !='' "><!-- 医生姓名 -->
+            ,f01_yyxm = #{f01_yyxm}
+        </if>
+        <if test=" f02_yyxmpym != null and f02_yyxmpym !='' "><!-- 医生姓名简拼 -->
+            ,f02_yyxmpym = #{f02_yyxmpym}
+        </if>
+        <if test=" f03_csnyr != null and f03_csnyr !='' "><!-- 出生年月 -->
+            ,f03_csnyr = #{f03_csnyr}
+        </if>
+        <if test=" f04_xx != null and f04_xx !='' "><!-- 血型 -->
+            ,f04_xx = #{f04_xx}
+        </if>
+        <if test=" f05_yslb != null and f05_yslb !='' "><!-- 医生类别 -->
+            ,f05_yslb = #{f05_yslb}
+        </if>
+        <if test=" f06_xb != null and f06_xb !='' "><!-- 性别 -->
+            ,f06_xb = #{f06_xb}
+        </if>
+        <if test=" f07_ksmc != null and f07_ksmc !='' "><!-- 科室名称 -->
+            ,f07_ksmc = #{f07_ksmc}
+        </if>
+        <if test=" f08_yymc != null and f08_yymc !='' "><!-- 医院名称 -->
+            ,f08_yymc = #{f08_yymc}
+        </if>
+        <if test=" f09 != null and f09 !='' "><!-- 字段9 -->
+            ,f09 = #{f09}
+        </if>
+        <if test=" f10 != null and f10 !='' "><!-- 字段10 -->
+            ,f10 = #{f10}
+        </if>
+        <if test=" f11 != null and f11 !='' "><!-- 字段11 -->
+            ,f11 = #{f11}
+        </if>
+        <if test=" f12 != null and f12 !='' "><!-- 字段12 -->
+            ,f12 = #{f12}
+        </if>
+        <if test=" f13 != null and f13 !='' "><!-- 字段13 -->
+            ,f13 = #{f13}
+        </if>
+        <if test=" f14 != null and f14 !='' "><!-- 字段14 -->
+            ,f14 = #{f14}
+        </if>
+        <if test=" f15 != null and f15 !='' "><!-- 字段15 -->
+            ,f15 = #{f15}
+        </if>
+        <if test=" f16 != null and f16 !='' "><!-- 字段16 -->
+            ,f16 = #{f16}
+        </if>
+        <if test=" f17 != null and f17 !='' "><!-- 字段17 -->
+            ,f17 = #{f17}
+        </if>
+        <if test=" f18 != null and f18 !='' "><!-- 字段18 -->
+            ,f18 = #{f18}
+        </if>
+        <if test=" f19 != null and f19 !='' "><!-- 字段19 -->
+            ,f19 = #{f19}
+        </if>
+        <if test=" f20 != null and f20 !='' "><!-- 字段20 -->
+            ,f20 = #{f20}
+        </if>
+        <if test=" bbb != null and bbb !='' "><!-- 备注说明 -->
+            ,bbb = #{bbb}
+        </if>
+        <if test=" fb1 != null and fb1 !='' "><!-- 备用1 -->
+            ,fb1 = #{fb1}
+        </if>
+        <if test=" fb2 != null and fb2 !='' "><!-- 备用2 -->
+            ,fb2 = #{fb2}
+        </if>
+        <if test=" fb3 != null and fb3 !='' "><!-- 备用3 -->
+            ,fb3 = #{fb3}
+        </if>
+        <if test=" fb4 != null and fb4 !='' "><!-- 备用4 -->
+            ,fb4 = #{fb4}
+        </if>
+        <if test=" fb5 != null and fb5 !='' "><!-- 备用5 -->
+            ,fb5 = #{fb5}
+        </if>
+        <if test=" eb1 != null and eb1 !='' "><!-- 扩展1 -->
+            ,eb1 = #{eb1}
+        </if>
+        <if test=" eb2 != null and eb2 !='' "><!-- 扩展2 -->
+            ,eb2 = #{eb2}
+        </if>
+        <if test=" eb3 != null and eb3 !='' "><!-- 扩展3 -->
+            ,eb3 = #{eb3}
+        </if>
+        <if test=" eb4 != null and eb4 !='' "><!-- 扩展4 -->
+            ,eb4 = #{eb4}
+        </if>
+        <if test=" eb5 != null and eb5 !='' "><!-- 扩展5 -->
+            ,eb5 = #{eb5}
+        </if>
+        <if test=" ggg != null and ggg !='' "><!-- 所在组织 -->
+            ,ggg = #{ggg}
+        </if>
+        <if test=" ppp != null and ppp !='' "><!-- 企业ID -->
+            ,ppp = #{ppp}
+        </if>
+        <if test=" ddd != null and ddd !='' "><!-- 有效标识 -->
+            ,ddd = #{ddd}
+        </if>
+        <if test=" cc1 != null and cc1 !='' "><!-- 创建时间 -->
+            ,cc1 = #{cc1}
+        </if>
+        <if test=" cc2 != null and cc2 !='' "><!-- 创建者 -->
+            ,cc2 = #{cc2}
+        </if>
+        <if test=" uu2 != null and uu2 !='' "><!-- 最后更新者 -->
+            ,uu2 = #{uu2}
+        </if>
+        WHERE puk = #{puk}
+            <if test=" uu1 != null and uu1 !='' "><!-- 最后更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+    </update>
+    <!-- 逻辑删除一条数据 -->
+    <delete id='toDelete' parameterType='MDE_YSXXDBO'>
+        UPDATE mde_ysxx SET ddd='1', uu1 = #{uuu}, uu2 = #{uu2} WHERE puk = #{puk}
+            <if test=" uu1 != null and uu1 !='' "><!-- 最后更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+    </delete>
+    <!-- 物理删除一条数据 -->
+    <delete id='doDelete' parameterType='MDE_YSXXDBO'>
+        DELETE FROM mde_ysxx WHERE puk = #{puk}
+            <if test=" uu1 != null and uu1 !='' "><!-- 最后更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+    </delete>
+    <!-- 查询一条数据  -->
+    <select id='doRead' parameterType='MDE_YSXXDBO' resultType='MDE_YSXXDBO'>
+        SELECT <include refid='tableColumns'/> FROM mde_ysxx WHERE puk = #{puk}
+            <if test=" ddd != null and ddd !='' "><!-- 最后更新时间 -->
+                AND ddd = #{ddd}
+            </if>
+    </select>
+
+</mapper>

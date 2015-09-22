@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='GB2312'?>
+<messages>
+	<common>
+	   <!-- 基本证书 -->
+		<message k03_mbbh='311010101' bbb='修改成功！' />
+		<message k03_mbbh='311010102' bbb='修改失败！' />
+		<message k03_mbbh='311040021' bbb='添加成功！' />
+		<message k03_mbbh='311040022' bbb='添加失败！' />
+		<message k03_mbbh='311040023' bbb='修改成功！' />
+        <message k03_mbbh='311040024' bbb='修改失败！' />
+        <message k03_mbbh='311040025' bbb='删除成功！' />
+        <message k03_mbbh='311040026' bbb='删除失败！' />
+        <!-- 委托书 -->
+        <message k03_mbbh='311050021' bbb='添加成功！' />
+        <message k03_mbbh='311050022' bbb='添加失败！' />
+        <message k03_mbbh='311050023' bbb='修改成功！' />
+        <message k03_mbbh='311050024' bbb='修改失败！' />
+        <message k03_mbbh='311050031' bbb='删除成功！' />
+        <message k03_mbbh='311050032' bbb='删除失败！' />
+        <!-- 承诺书 -->
+        <message k03_mbbh='311060011' bbb='添加成功！' />
+        <message k03_mbbh='311060012' bbb='添加失败！' />
+        <message k03_mbbh='311060013' bbb='修改成功！' />
+        <message k03_mbbh='311060014' bbb='修改失败！' />
+        <message k03_mbbh='311050031' bbb='删除成功！' />
+        <message k03_mbbh='311050032' bbb='删除失败！' />
+        <!-- 注册证 -->
+        <message k03_mbbh='3111000021' bbb='保存成功！' />
+        <message k03_mbbh='3111000022' bbb='保存失败！' />
+        <message k03_mbbh='3111000031' bbb='删除成功！' />
+        <message k03_mbbh='3111000032' bbb='删除失败！' />
+	</common>
+</messages>

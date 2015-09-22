@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title></title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link rel="stylesheet" type="text/css" href="/css/base.css">
+<script src="/js/jquery.js"></script>
+<script src="/js/jquery.mousewheel.js"></script>
+<script src="/js/jquery.mCustomScrollbar.js"></script>
+<script src="/js/jq.ui.js"></script>
+<script>
+$(function(){
+	resetText();
+	$(".textTips").input();
+})
+</script>
+</head>
+<body class="whiteBg">
+<div class="formTitle">添加供应商</div>
+<ul class="ulFrm">
+	<li>
+		<span class="label labelW100 labelRight"><em class="red">*</em> 供应商名称：</span>
+		<input type="text" name="supplierName" id="supplierName" size="50" value="" arrow="true" class="text textTips {text:'输入供应商全称'}" />
+	</li>
+	<li>
+		<span class="label labelW100 labelRight">联系人：</span>
+		<input type="text" name="supplierName" id="supplierName" size="50" value="" class="text" />
+	</li>
+	<li>
+		<span class="label labelW100 labelRight"><em class="red">*</em> 手机号码：</span>
+		<input type="text" name="supplierName" id="supplierName" size="50" value="" class="text" />
+	</li>
+	<li>
+		<span class="label labelW100 labelRight" style="vertical-align:top;">邀请内容：</span>
+		<textarea class="textarea readonly" readonly="readonly" rows="4" cols="48">为便于管理我院证件，邀请你注册爱医康帐号后，将相关证件推送至杭州市第一人民医院！</textarea>
+	</li>
+	<li class="p105">
+		<input type="submit" id="submit" name="submit" value="添加保存" class="btn" />
+	</li>
+</ul>
+</body>
+</html>

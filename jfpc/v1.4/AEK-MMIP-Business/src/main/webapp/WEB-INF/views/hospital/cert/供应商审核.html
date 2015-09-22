@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title></title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link rel="stylesheet" type="text/css" href="/css/base.css">
+<link rel="stylesheet" type="text/css" href="/css/hospital_cert.css">
+<link rel="stylesheet" href="/css/jquery.mCustomScrollbar.css">
+<script src="/js/jquery.js"></script>
+<script src="/js/jquery.mousewheel.js"></script>
+<script src="/js/jquery.mCustomScrollbar.js"></script>
+<script src="/js/jquery.jcarousellite.min.js"></script>
+<script src="/js/tableFixed.min.js"></script>
+<script src="/js/jq.ui.js"></script>
+<script src="/js/function.js"></script>
+<script>
+//getUrlParam("id");
+$(function(){
+	$("body").mCustomScrollbar({theme:"minimal"});
+	resetText();
+	$(".textTips").input();
+	$(".carousel").jCarouselLite({
+        btnNext: ".jcnext",
+        btnPrev: ".jcprev",
+        visible: 4,
+        circular: false,
+        scroll: 3
+    });
+    hoverTable(".hoverTable",true,true);
+});
+</script>
+</head>
+<body class="whiteBg">
+	<div class="formTitle">待审核供应商</div>
+	<div class="boxPContent">
+		<div class="supLookBox lFloat">
+			<span class="mlogo lFloat" id="yui-supplier-logo">华</span>
+			<div class="lookSuplierInfo">
+				<h3>华东医药有限公司器械分公司</h3>
+				<p class="mTop10 gray">
+					<img src="/images/icon/tb_m_1.png" align="absmiddle" /> 马甜甜 16879588454 0571－88567869<br />
+					<img src="/images/icon/tb_m_2.png" align="absmiddle" /> 浙江省杭州市上城区上城区中河中路281号908室<br />
+					<img src="/images/icon/tb_m_3.png" align="absmiddle" /> <span class="inlineBlock w360">专用消毒设备、高频手术和电凝设备、医用冷冻设备、医用冷藏设备、医用低温设备</span>
+				</p>
+			</div>
+		</div>
+		<div class="supLookCertBox">
+			<div class="custom-container fraction">
+		        <a href="#" class="jcprev">&lsaquo;</a>
+		        <div class="carousel">
+		            <ul>
+		                <li>
+		                	<div class="uploadBox uploadW80">
+								<div class="uploadBtn"></div>
+								<div class="uploadImg"><img src="/images/noImg.png"></div>
+								<div class="uploadBoxText">营业执照</div>
+							</div>
+							<p>2010-6至2020-5</p>
+		                </li>
+		                <li>
+		                	<div class="uploadBox uploadW80">
+								<div class="uploadBtn"></div>
+								<div class="uploadImg"><img src="/images/noImg.png"></div>
+								<div class="uploadBoxText">经营许可证</div>
+							</div>
+							<p>2010-6至2020-5</p>
+		                </li>
+		                <li>
+		                	<div class="uploadBox uploadW80">
+								<div class="uploadBtn"></div>
+								<div class="uploadImg"><img src="/images/noImg.png"></div>
+								<div class="uploadBoxText">税务登记证</div>
+							</div>
+							<p>2010-6至2020-5</p>
+		                </li>
+		                <li>
+		                	<div class="uploadBox uploadW80">
+								<div class="uploadBtn"></div>
+								<div class="uploadImg"><img src="/images/noImg.png"></div>
+								<div class="uploadBoxText">委托授权书</div>
+							</div>
+							<p>2010-6至2020-5</p>
+		                </li>
+		                <li>
+		                	<div class="uploadBox uploadW80">
+								<div class="uploadBtn"></div>
+								<div class="uploadImg"><img src="/images/noImg.png"></div>
+								<div class="uploadBoxText">营业执照</div>
+							</div>
+							<p>2010-6至2020-5</p>
+		                </li>
+		                <li>
+		                	<div class="uploadBox uploadW80">
+								<div class="uploadBtn"></div>
+								<div class="uploadImg"><img src="/images/noImg.png"></div>
+								<div class="uploadBoxText">经营许可证</div>
+							</div>
+							<p>2010-6至2020-5</p>
+		                </li>
+		                <li>
+		                	<div class="uploadBox uploadW80">
+								<div class="uploadBtn"></div>
+								<div class="uploadImg"><img src="/images/noImg.png"></div>
+								<div class="uploadBoxText">税务登记证</div>
+							</div>
+							<p>2010-6至2020-5</p>
+		                </li>
+		                <li>
+		                	<div class="uploadBox uploadW80">
+								<div class="uploadBtn"></div>
+								<div class="uploadImg"><img src="/images/noImg.png"></div>
+								<div class="uploadBoxText">委托授权书</div>
+							</div>
+							<p>2010-6至2020-5</p>
+		                </li>
+		            </ul>
+		        </div>
+		        <a href="#" class="jcnext">&rsaquo;</a>
+		        <div class="clear"></div>
+		    </div>
+		</div>
+		<div class="rFloat">
+			<input type="text" name="keyWords" id="keyWords" size="30" class="text textTips {text:'请输入注册证号或产品名称'}" copy="search" />
+			<input type="button" icon="search">
+			<a href="javascript:supplierValid();" class="btn">通过</a>&nbsp;&nbsp;<a href="javascript:void(0);" onclick="supplierAudit(this);" gid="1" class="btn dislabel">拒绝</a>
+		</div>
+		<div class="formTitle mTop10">医疗器械注册证</div>
+		<table class="table hoverTable" width="100%" cellspacing="0" cellpadding="0" border="0">
+				<thead>
+					<tr>
+						<th width="6%"></th>
+						<th>医疗器械注册证</th>
+						<th>注册证产品名称</th>
+						<th width="10%">有效期</th>
+						<th width="10%">操作</th>
+					</tr>
+				</thead>
+				<tbody id="list">
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>
