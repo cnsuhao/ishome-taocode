@@ -1,0 +1,506 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 用户信息 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='com.ttnn.business.wm.dao.WMUI01Dao'>
+    <!-- 表字段信息  -->
+    <sql id='tableColumns'>
+        puk,k01,k02,k03,f01,f02,f03,f04,f05,f06,f07,f08,f09,f10,f11,f12,f13,f14,f15,f16,f17,bbb,fb1,fb2,fb3,fb4,fb5,eb1,eb2,eb3,eb4,eb5,ddd,cc1,cc2,uu1,uu2
+    </sql>
+
+    <!-- 批量插入  -->
+    <insert id='doBatchInsert' parameterType='FrameworkData'>
+        INSERT INTO wmui01 ( <include refid='tableColumns'/> ) VALUES 
+            <foreach collection='list' item='item' separator=','>
+                ( #{item.puk},#{item.k01},#{item.k02},#{item.k03},#{item.f01},#{item.f02},#{item.f03},#{item.f04},#{item.f05},#{item.f06},#{item.f07},#{item.f08},#{item.f09},#{item.f10},#{item.f11},#{item.f12},#{item.f13},#{item.f14},#{item.f15},#{item.f16},#{item.f17},#{item.bbb},#{item.fb1},#{item.fb2},#{item.fb3},#{item.fb4},#{item.fb5},#{item.eb1},#{item.eb2},#{item.eb3},#{item.eb4},#{item.eb5},#{item.ddd},#{item.cc1},#{item.cc2},#{item.uu1},#{item.uu2} )
+            </foreach>
+    </insert>
+    <!-- 批量删除  -->
+    <delete id='doBatchDelete' parameterType='FrameworkData'>
+        DELETE FROM wmui01 WHERE puk IN 
+            <foreach collection='list' item='item' open='(' separator=',' close=')'>
+                #{item.puk}
+            </foreach>
+    </delete>
+
+    <!-- 根据条件更新所有记录 -->
+    <update id='doUpdateAll' parameterType='FrameworkData'>
+        UPDATE wmui01 SET  uu1 = #{uuu} <!-- 更新时间、更新者 -->
+        <if test=" k01 != null and k01 !='' "><!-- 上级用户ID -->
+            ,k01 = #{k01}
+        </if>
+        <if test=" k02 != null and k02 !='' "><!-- 账户种类 -->
+            ,k02 = #{k02}
+        </if>
+        <if test=" k03 != null and k03 !='' "><!-- 提成种类 -->
+            ,k03 = #{k03}
+        </if>
+        <if test=" f01 != null and f01 !='' "><!-- 账户余额（总数） -->
+            ,f01 = #{f01}
+        </if>
+        <if test=" f02 != null and f02 !='' "><!-- 未结算佣金总额 -->
+            ,f02 = #{f02}
+        </if>
+        <if test=" f03 != null and f03 !='' "><!-- 默认银行账户ID -->
+            ,f03 = #{f03}
+        </if>
+        <if test=" f04 != null and f04 !='' "><!-- 实名认证姓名 -->
+            ,f04 = #{f04}
+        </if>
+        <if test=" f05 != null and f05 !='' "><!-- 实名认证手机号 -->
+            ,f05 = #{f05}
+        </if>
+        <if test=" f06 != null and f06 !='' "><!-- 安全验证提醒文字 -->
+            ,f06 = #{f06}
+        </if>
+        <if test=" f07 != null and f07 !='' "><!-- 下线人数 -->
+            ,f07 = #{f07}
+        </if>
+        <if test=" f08 != null and f08 !='' "><!-- 充值次数 -->
+            ,f08 = #{f08}
+        </if>
+        <if test=" f09 != null and f09 !='' "><!-- 银行卡数目 -->
+            ,f09 = #{f09}
+        </if>
+        <if test=" f10 != null and f10 !='' "><!-- 提现次数 -->
+            ,f10 = #{f10}
+        </if>
+        <if test=" f11 != null and f11 !='' "><!-- 密保提示问题 -->
+            ,f11 = #{f11}
+        </if>
+        <if test=" f12 != null and f12 !='' "><!-- 密保提示答案 -->
+            ,f12 = #{f12}
+        </if>
+        <if test=" f13 != null and f13 !='' "><!-- 安全密码 -->
+            ,f13 = #{f13}
+        </if>
+        <if test=" f14 != null and f14 !='' "><!-- 二次登录密码 -->
+            ,f14 = #{f14}
+        </if>
+        <if test=" f15 != null and f15 !='' "><!-- 密码控件 -->
+            ,f15 = #{f15}
+        </if>
+        <if test=" f16 != null and f16 !='' "><!-- 数字证书 -->
+            ,f16 = #{f16}
+        </if>
+        <if test=" f17 != null and f17 !='' "><!-- 密码卡 -->
+            ,f17 = #{f17}
+        </if>
+        <if test=" bbb != null and bbb !='' "><!-- 备注说明 -->
+            ,bbb = #{bbb}
+        </if>
+        <if test=" fb1 != null and fb1 !='' "><!-- 用户信用等级 -->
+            ,fb1 = #{fb1}
+        </if>
+        <if test=" fb2 != null and fb2 !='' "><!-- VIP终止日期 -->
+            ,fb2 = #{fb2}
+        </if>
+        <if test=" fb3 != null and fb3 !='' "><!-- 备用3 -->
+            ,fb3 = #{fb3}
+        </if>
+        <if test=" fb4 != null and fb4 !='' "><!-- 备用4 -->
+            ,fb4 = #{fb4}
+        </if>
+        <if test=" fb5 != null and fb5 !='' "><!-- 备用5 -->
+            ,fb5 = #{fb5}
+        </if>
+        <if test=" eb1 != null and eb1 !='' "><!-- 扩展1 -->
+            ,eb1 = #{eb1}
+        </if>
+        <if test=" eb2 != null and eb2 !='' "><!-- 扩展2 -->
+            ,eb2 = #{eb2}
+        </if>
+        <if test=" eb3 != null and eb3 !='' "><!-- 扩展3 -->
+            ,eb3 = #{eb3}
+        </if>
+        <if test=" eb4 != null and eb4 !='' "><!-- 扩展4 -->
+            ,eb4 = #{eb4}
+        </if>
+        <if test=" eb5 != null and eb5 !='' "><!-- 业务系统ID(合作客户ID) -->
+            ,eb5 = #{eb5}
+        </if>
+        <if test=" ddd != null and ddd !='' "><!-- 有效标识 -->
+            ,ddd = #{ddd}
+        </if>
+        <if test=" cc1 != null and cc1 !='' "><!-- 创建时间 -->
+            ,cc1 = #{cc1}
+        </if>
+        <if test=" cc2 != null and cc2 !='' "><!-- 创建者 -->
+            ,cc2 = #{cc2}
+        </if>
+        <if test=" uu2 != null and uu2 !='' "><!-- 更新者 -->
+            ,uu2 = #{uu2}
+        </if>
+        <trim prefix='WHERE' prefixOverrides='AND |OR '>
+            <if test=" puk != null and puk !='' "><!-- 用户ID -->
+                AND puk = #{puk}
+            </if>
+            <if test=" k01 != null and k01 !='' "><!-- 上级用户ID -->
+                AND k01 = #{k01}
+            </if>
+            <if test=" k02 != null and k02 !='' "><!-- 账户种类 -->
+                AND k02 = #{k02}
+            </if>
+            <if test=" k03 != null and k03 !='' "><!-- 提成种类 -->
+                AND k03 = #{k03}
+            </if>
+            <if test=" f01 != null and f01 !='' "><!-- 账户余额（总数） -->
+                AND f01 = #{f01}
+            </if>
+            <if test=" f02 != null and f02 !='' "><!-- 未结算佣金总额 -->
+                AND f02 = #{f02}
+            </if>
+            <if test=" f03 != null and f03 !='' "><!-- 默认银行账户ID -->
+                AND f03 = #{f03}
+            </if>
+            <if test=" f04 != null and f04 !='' "><!-- 实名认证姓名 -->
+                AND f04 = #{f04}
+            </if>
+            <if test=" f05 != null and f05 !='' "><!-- 实名认证手机号 -->
+                AND f05 = #{f05}
+            </if>
+            <if test=" f06 != null and f06 !='' "><!-- 安全验证提醒文字 -->
+                AND f06 = #{f06}
+            </if>
+            <if test=" f07 != null and f07 !='' "><!-- 下线人数 -->
+                AND f07 = #{f07}
+            </if>
+            <if test=" f08 != null and f08 !='' "><!-- 充值次数 -->
+                AND f08 = #{f08}
+            </if>
+            <if test=" f09 != null and f09 !='' "><!-- 银行卡数目 -->
+                AND f09 = #{f09}
+            </if>
+            <if test=" f10 != null and f10 !='' "><!-- 提现次数 -->
+                AND f10 = #{f10}
+            </if>
+            <if test=" f11 != null and f11 !='' "><!-- 密保提示问题 -->
+                AND f11 = #{f11}
+            </if>
+            <if test=" f12 != null and f12 !='' "><!-- 密保提示答案 -->
+                AND f12 = #{f12}
+            </if>
+            <if test=" f13 != null and f13 !='' "><!-- 安全密码 -->
+                AND f13 = #{f13}
+            </if>
+            <if test=" f14 != null and f14 !='' "><!-- 二次登录密码 -->
+                AND f14 = #{f14}
+            </if>
+            <if test=" f15 != null and f15 !='' "><!-- 密码控件 -->
+                AND f15 = #{f15}
+            </if>
+            <if test=" f16 != null and f16 !='' "><!-- 数字证书 -->
+                AND f16 = #{f16}
+            </if>
+            <if test=" f17 != null and f17 !='' "><!-- 密码卡 -->
+                AND f17 = #{f17}
+            </if>
+            <if test=" bbb != null and bbb !='' "><!-- 备注说明 -->
+                AND bbb = #{bbb}
+            </if>
+            <if test=" fb1 != null and fb1 !='' "><!-- 用户信用等级 -->
+                AND fb1 = #{fb1}
+            </if>
+            <if test=" fb2 != null and fb2 !='' "><!-- VIP终止日期 -->
+                AND fb2 = #{fb2}
+            </if>
+            <if test=" fb3 != null and fb3 !='' "><!-- 备用3 -->
+                AND fb3 = #{fb3}
+            </if>
+            <if test=" fb4 != null and fb4 !='' "><!-- 备用4 -->
+                AND fb4 = #{fb4}
+            </if>
+            <if test=" fb5 != null and fb5 !='' "><!-- 备用5 -->
+                AND fb5 = #{fb5}
+            </if>
+            <if test=" eb1 != null and eb1 !='' "><!-- 扩展1 -->
+                AND eb1 = #{eb1}
+            </if>
+            <if test=" eb2 != null and eb2 !='' "><!-- 扩展2 -->
+                AND eb2 = #{eb2}
+            </if>
+            <if test=" eb3 != null and eb3 !='' "><!-- 扩展3 -->
+                AND eb3 = #{eb3}
+            </if>
+            <if test=" eb4 != null and eb4 !='' "><!-- 扩展4 -->
+                AND eb4 = #{eb4}
+            </if>
+            <if test=" eb5 != null and eb5 !='' "><!-- 业务系统ID(合作客户ID) -->
+                AND eb5 = #{eb5}
+            </if>
+            <if test=" ddd != null and ddd !='' "><!-- 有效标识 -->
+                AND ddd = #{ddd}
+            </if>
+            <if test=" cc1 != null and cc1 !='' "><!-- 创建时间 -->
+                AND cc1 = #{cc1}
+            </if>
+            <if test=" cc2 != null and cc2 !='' "><!-- 创建者 -->
+                AND cc2 = #{cc2}
+            </if>
+            <if test=" uu1 != null and uu1 !='' "><!-- 更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+            <if test=" uu2 != null and uu2 !='' "><!-- 更新者 -->
+                AND uu2 = #{uu2}
+            </if>
+        </trim>
+    </update>
+    <!-- 查询全体数据信息  -->
+    <select id='doFindList' parameterType='FrameworkData' resultType='FrameworkData'>
+        SELECT <include refid='tableColumns'/> FROM wmui01 WHERE ddd != '1' and eb5 = #{eb5}
+          <if test=" puk != null and puk !='' "><!-- 用户ID -->
+                AND puk = #{puk}
+            </if>
+        
+    </select>
+    <!-- 查询分页数据信息  -->
+    <select id='doSelectPage' parameterType='FrameworkData' resultType='FrameworkData'>
+        SELECT <include refid='tableColumns'/> FROM wmui01
+        <trim prefix='WHERE' prefixOverrides='AND |OR '>
+            <if test=" puk != null and puk !='' "><!-- 用户ID -->
+                AND puk = #{puk}
+            </if>
+            <if test=" k01 != null and k01 !='' "><!-- 上级用户ID -->
+                AND k01 = #{k01}
+            </if>
+            <if test=" k02 != null and k02 !='' "><!-- 账户种类 -->
+                AND k02 = #{k02}
+            </if>
+            <if test=" k03 != null and k03 !='' "><!-- 提成种类 -->
+                AND k03 = #{k03}
+            </if>
+            <if test=" f01 != null and f01 !='' "><!-- 账户余额（总数） -->
+                AND f01 = #{f01}
+            </if>
+            <if test=" f02 != null and f02 !='' "><!-- 未结算佣金总额 -->
+                AND f02 = #{f02}
+            </if>
+            <if test=" f03 != null and f03 !='' "><!-- 默认银行账户ID -->
+                AND f03 = #{f03}
+            </if>
+            <if test=" f04 != null and f04 !='' "><!-- 实名认证姓名 -->
+                AND f04 = #{f04}
+            </if>
+            <if test=" f05 != null and f05 !='' "><!-- 实名认证手机号 -->
+                AND f05 = #{f05}
+            </if>
+            <if test=" f06 != null and f06 !='' "><!-- 安全验证提醒文字 -->
+                AND f06 = #{f06}
+            </if>
+            <if test=" f07 != null and f07 !='' "><!-- 下线人数 -->
+                AND f07 = #{f07}
+            </if>
+            <if test=" f08 != null and f08 !='' "><!-- 充值次数 -->
+                AND f08 = #{f08}
+            </if>
+            <if test=" f09 != null and f09 !='' "><!-- 银行卡数目 -->
+                AND f09 = #{f09}
+            </if>
+            <if test=" f10 != null and f10 !='' "><!-- 提现次数 -->
+                AND f10 = #{f10}
+            </if>
+            <if test=" f11 != null and f11 !='' "><!-- 密保提示问题 -->
+                AND f11 = #{f11}
+            </if>
+            <if test=" f12 != null and f12 !='' "><!-- 密保提示答案 -->
+                AND f12 = #{f12}
+            </if>
+            <if test=" f13 != null and f13 !='' "><!-- 安全密码 -->
+                AND f13 = #{f13}
+            </if>
+            <if test=" f14 != null and f14 !='' "><!-- 二次登录密码 -->
+                AND f14 = #{f14}
+            </if>
+            <if test=" f15 != null and f15 !='' "><!-- 密码控件 -->
+                AND f15 = #{f15}
+            </if>
+            <if test=" f16 != null and f16 !='' "><!-- 数字证书 -->
+                AND f16 = #{f16}
+            </if>
+            <if test=" f17 != null and f17 !='' "><!-- 密码卡 -->
+                AND f17 = #{f17}
+            </if>
+            <if test=" bbb != null and bbb !='' "><!-- 备注说明 -->
+                AND bbb = #{bbb}
+            </if>
+            <if test=" fb1 != null and fb1 !='' "><!-- 用户信用等级 -->
+                AND fb1 = #{fb1}
+            </if>
+            <if test=" fb2 != null and fb2 !='' "><!-- VIP终止日期 -->
+                AND fb2 = #{fb2}
+            </if>
+            <if test=" fb3 != null and fb3 !='' "><!-- 备用3 -->
+                AND fb3 = #{fb3}
+            </if>
+            <if test=" fb4 != null and fb4 !='' "><!-- 备用4 -->
+                AND fb4 = #{fb4}
+            </if>
+            <if test=" fb5 != null and fb5 !='' "><!-- 备用5 -->
+                AND fb5 = #{fb5}
+            </if>
+            <if test=" eb1 != null and eb1 !='' "><!-- 扩展1 -->
+                AND eb1 = #{eb1}
+            </if>
+            <if test=" eb2 != null and eb2 !='' "><!-- 扩展2 -->
+                AND eb2 = #{eb2}
+            </if>
+            <if test=" eb3 != null and eb3 !='' "><!-- 扩展3 -->
+                AND eb3 = #{eb3}
+            </if>
+            <if test=" eb4 != null and eb4 !='' "><!-- 扩展4 -->
+                AND eb4 = #{eb4}
+            </if>
+            <if test=" eb5 != null and eb5 !='' "><!-- 业务系统ID(合作客户ID) -->
+                AND eb5 = #{eb5}
+            </if>
+            <if test=" ddd != null and ddd !='' "><!-- 有效标识 -->
+                AND ddd = #{ddd}
+            </if>
+            <if test=" cc1 != null and cc1 !='' "><!-- 创建时间 -->
+                AND cc1 = #{cc1}
+            </if>
+            <if test=" cc2 != null and cc2 !='' "><!-- 创建者 -->
+                AND cc2 = #{cc2}
+            </if>
+            <if test=" uu1 != null and uu1 !='' "><!-- 更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+            <if test=" uu2 != null and uu2 !='' "><!-- 更新者 -->
+                AND uu2 = #{uu2}
+            </if>
+        </trim>
+    </select>
+
+    <!-- 插入一条数据 -->
+    <insert id='doInsert' parameterType='FrameworkData'>
+        INSERT INTO wmui01
+          ( <include refid='tableColumns'/>) 
+        VALUES 
+          ( #{puk},#{k01},#{k02},#{k03},#{f01},#{f02},#{f03},#{f04},#{f05},#{f06},#{f07},#{f08},#{f09},#{f10},#{f11},#{f12},#{f13},#{f14},#{f15},#{f16},#{f17},#{bbb},#{fb1},#{fb2},#{fb3},#{fb4},#{fb5},#{eb1},#{eb2},#{eb3},#{eb4},#{eb5},#{ddd},#{cc1},#{cc2},#{uu1},#{uu2} )
+    </insert>
+    <!-- 修改一条数据 -->
+    <update id='doUpdate' parameterType='FrameworkData'>
+        UPDATE wmui01 SET uu1 = #{uuu} <!-- 更新时间、更新者 -->
+        <if test=" k01 != null and k01 !='' "><!-- 上级用户ID -->
+            ,k01 = #{k01}
+        </if>
+        <if test=" k02 != null and k02 !='' "><!-- 账户种类 -->
+            ,k02 = #{k02}
+        </if>
+        <if test=" k03 != null and k03 !='' "><!-- 提成种类 -->
+            ,k03 = #{k03}
+        </if>
+        <if test=" f01 != null and f01 !='' "><!-- 账户余额（总数） -->
+            ,f01 = #{f01}
+        </if>
+        <if test=" f02 != null and f02 !='' "><!-- 未结算佣金总额 -->
+            ,f02 = #{f02}
+        </if>
+        <if test=" f03 != null and f03 !='' "><!-- 默认银行账户ID -->
+            ,f03 = #{f03}
+        </if>
+        <if test=" f04 != null and f04 !='' "><!-- 实名认证姓名 -->
+            ,f04 = #{f04}
+        </if>
+        <if test=" f05 != null and f05 !='' "><!-- 实名认证手机号 -->
+            ,f05 = #{f05}
+        </if>
+        <if test=" f06 != null and f06 !='' "><!-- 安全验证提醒文字 -->
+            ,f06 = #{f06}
+        </if>
+        <if test=" f07 != null and f07 !='' "><!-- 下线人数 -->
+            ,f07 = #{f07}
+        </if>
+        <if test=" f08 != null and f08 !='' "><!-- 充值次数 -->
+            ,f08 = #{f08}
+        </if>
+        <if test=" f09 != null and f09 !='' "><!-- 银行卡数目 -->
+            ,f09 = #{f09}
+        </if>
+        <if test=" f10 != null and f10 !='' "><!-- 提现次数 -->
+            ,f10 = #{f10}
+        </if>
+        <if test=" f11 != null and f11 !='' "><!-- 密保提示问题 -->
+            ,f11 = #{f11}
+        </if>
+        <if test=" f12 != null and f12 !='' "><!-- 密保提示答案 -->
+            ,f12 = #{f12}
+        </if>
+        <if test=" f13 != null and f13 !='' "><!-- 安全密码 -->
+            ,f13 = #{f13}
+        </if>
+        <if test=" f14 != null and f14 !='' "><!-- 二次登录密码 -->
+            ,f14 = #{f14}
+        </if>
+        <if test=" f15 != null and f15 !='' "><!-- 密码控件 -->
+            ,f15 = #{f15}
+        </if>
+        <if test=" f16 != null and f16 !='' "><!-- 数字证书 -->
+            ,f16 = #{f16}
+        </if>
+        <if test=" f17 != null and f17 !='' "><!-- 密码卡 -->
+            ,f17 = #{f17}
+        </if>
+        <if test=" bbb != null and bbb !='' "><!-- 备注说明 -->
+            ,bbb = #{bbb}
+        </if>
+        <if test=" fb1 != null and fb1 !='' "><!-- 用户信用等级 -->
+            ,fb1 = #{fb1}
+        </if>
+        <if test=" fb2 != null and fb2 !='' "><!-- VIP终止日期 -->
+            ,fb2 = #{fb2}
+        </if>
+        <if test=" fb3 != null and fb3 !='' "><!-- 备用3 -->
+            ,fb3 = #{fb3}
+        </if>
+        <if test=" fb4 != null and fb4 !='' "><!-- 备用4 -->
+            ,fb4 = #{fb4}
+        </if>
+        <if test=" fb5 != null and fb5 !='' "><!-- 备用5 -->
+            ,fb5 = #{fb5}
+        </if>
+        <if test=" eb1 != null and eb1 !='' "><!-- 扩展1 -->
+            ,eb1 = #{eb1}
+        </if>
+        <if test=" eb2 != null and eb2 !='' "><!-- 扩展2 -->
+            ,eb2 = #{eb2}
+        </if>
+        <if test=" eb3 != null and eb3 !='' "><!-- 扩展3 -->
+            ,eb3 = #{eb3}
+        </if>
+        <if test=" eb4 != null and eb4 !='' "><!-- 扩展4 -->
+            ,eb4 = #{eb4}
+        </if>
+        <if test=" eb5 != null and eb5 !='' "><!-- 业务系统ID(合作客户ID) -->
+            ,eb5 = #{eb5}
+        </if>
+        <if test=" ddd != null and ddd !='' "><!-- 有效标识 -->
+            ,ddd = #{ddd}
+        </if>
+        <if test=" cc1 != null and cc1 !='' "><!-- 创建时间 -->
+            ,cc1 = #{cc1}
+        </if>
+        <if test=" cc2 != null and cc2 !='' "><!-- 创建者 -->
+            ,cc2 = #{cc2}
+        </if>
+        <if test=" uu2 != null and uu2 !='' "><!-- 更新者 -->
+            ,uu2 = #{uu2}
+        </if>
+        WHERE puk = #{puk} and uu1 = #{uu1}
+    </update>
+    <!-- 删除一条数据 -->
+    <delete id='toDelete' parameterType='FrameworkData'>
+        UPDATE wmui01 SET ddd='1', uu1 = #{uuu}, uu2 = #{uu2} WHERE puk = #{puk} and uu1 = #{uu1}
+    </delete>
+    <!-- 删除一条数据 -->
+    <delete id='doDelete' parameterType='FrameworkData'>
+        DELETE FROM wmui01 WHERE puk = #{puk} and uu1 = #{uu1}
+    </delete>
+    <!-- 查询一条数据  -->
+    <select id='doRead' parameterType='FrameworkData' resultType='FrameworkData'>
+        SELECT <include refid='tableColumns'/> FROM wmui01 WHERE puk = #{puk} AND ddd = #{ddd} 
+    </select>
+
+</mapper>

@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 充值记录查询 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='com.ttnn.business.wm.dao.WMHTZHYWDao'>
+
+	<!-- 下线一览 -->
+	<select id='doSelectPageFPTD' parameterType='FrameworkData'
+		resultType='FrameworkData'>
+		SELECT b.puk ,a.puk as k03,a.f03,a.f04,a.f13 ,a.f14 ,a.f15 , a.f16 , a.f17 , a.f18 , a.f19 , a.bbb ,a.eb1,a.eb2,
+		a.fb1,a.cc1
+		FROM wmbma1 a
+		LEFT JOIN wmbm01 b
+		ON a.puk = b.k03
+		AND b.k01 = #{k01}
+		WHERE
+		a.eb5 = #{eb5}
+		AND a.ddd != '1'
+	</select>
+	
+	<select id='doSelectPageSjtd' parameterType='FrameworkData'
+		resultType='FrameworkData'>
+		SELECT b.puk as puk  ,a.puk as k03,a.fb1 f03,a.k03 f04,a.f05 f13 ,a.k01 f14 ,a.f15 , a.f16 , a.f17 , a.f18 , a.f19 , a.bbb ,a.eb3 eb1,a.eb4 eb2,
+		a.fb1,a.cc1
+		FROM wmbm01 a left join wmbm01 b
+		on a.k01 = b.k02 and a.k01 =#{k02} and b.k01 =#{k01} and a.k03 = b.k03
+		where 
+		a.eb5 = #{eb5}
+		AND a.ddd != '1' and a.k01 =#{k02}
+	</select>
+	
+	
+	
+</mapper>

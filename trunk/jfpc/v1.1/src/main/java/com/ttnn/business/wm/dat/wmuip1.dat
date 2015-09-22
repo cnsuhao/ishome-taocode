@@ -1,0 +1,2 @@
+INSERT INTO `wmuip1` VALUES ('DFB_QT_VIP_0', '1', '终端会员', 'DFB_QT_VIP_GROUP', '0', '0', '1', '0', null, null, null, null, null, null, null, null, null, null, 'TTNN_DFB', '0', '2013/5/1 17:14:13', 'Spook', '2013/8/1 17:14:13', 'Spook');
+INSERT INTO `wmuip1` VALUES ('DFB_QT_VIP_1', '2', '代理商', 'DFB_QT_ADMIN_GROUP', '10', '80', '0', '0', null, null, null, null, null, null, null, null, null, null, 'TTNN_DFB', '0', '2013/5/1 17:14:13', 'Spook', '2013/8/1 17:14:13', 'Spook');

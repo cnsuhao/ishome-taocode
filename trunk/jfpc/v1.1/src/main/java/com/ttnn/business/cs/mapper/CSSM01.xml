@@ -1,0 +1,310 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 系统公告 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='com.ttnn.business.cs.dao.CSSM01Dao'>
+    <!-- 表字段信息  -->
+    <sql id='tableColumns'>
+        puk,f01,f02,f03,f04,bbb,fb1,fb2,fb3,fb4,fb5,eb1,eb2,eb3,eb4,eb5,ddd,cc1,cc2,uu1,uu2
+    </sql>
+
+    <!-- 批量插入  -->
+    <insert id='doBatchInsert' parameterType='FrameworkData'>
+        INSERT INTO cssm01 ( <include refid='tableColumns'/> ) VALUES 
+            <foreach collection='list' item='item' separator=','>
+                ( #{item.puk},#{item.f01},#{item.f02},#{item.f03},#{item.f04},#{item.bbb},#{item.fb1},#{item.fb2},#{item.fb3},#{item.fb4},#{item.fb5},#{item.eb1},#{item.eb2},#{item.eb3},#{item.eb4},#{item.eb5},#{item.ddd},#{item.cc1},#{item.cc2},#{item.uu1},#{item.uu2} )
+            </foreach>
+    </insert>
+    <!-- 批量删除  -->
+    <delete id='doBatchDelete' parameterType='FrameworkData'>
+        DELETE FROM cssm01 WHERE puk IN 
+            <foreach collection='list' item='item' open='(' separator=',' close=')'>
+                #{item.puk}
+            </foreach>
+    </delete>
+
+    <!-- 根据条件更新所有记录 -->
+    <update id='doUpdateAll' parameterType='FrameworkData'>
+        UPDATE cssm01 SET  uu1 = #{uuu} <!-- 更新时间、更新者 -->
+        <if test=" f01 != null and f01 !='' "><!-- 标题 -->
+            ,f01 = #{f01}
+        </if>
+        <if test=" f02 != null and f02 !='' "><!-- 开始时间 -->
+            ,f02 = #{f02}
+        </if>
+        <if test=" f03 != null and f03 !='' "><!-- 终了时间 -->
+            ,f03 = #{f03}
+        </if>
+        <if test=" f04 != null and f04 !='' "><!-- 排列顺序 -->
+            ,f04 = #{f04}
+        </if>
+        <if test=" bbb != null and bbb !='' "><!-- 内容 -->
+            ,bbb = #{bbb}
+        </if>
+        <if test=" fb1 != null and fb1 !='' "><!-- 级别 -->
+            ,fb1 = #{fb1}
+        </if>
+        <if test=" fb2 != null and fb2 !='' "><!-- 备用2 -->
+            ,fb2 = #{fb2}
+        </if>
+        <if test=" fb3 != null and fb3 !='' "><!-- 备用3 -->
+            ,fb3 = #{fb3}
+        </if>
+        <if test=" fb4 != null and fb4 !='' "><!-- 备用4 -->
+            ,fb4 = #{fb4}
+        </if>
+        <if test=" fb5 != null and fb5 !='' "><!-- 备用5 -->
+            ,fb5 = #{fb5}
+        </if>
+        <if test=" eb1 != null and eb1 !='' "><!-- 扩展1 -->
+            ,eb1 = #{eb1}
+        </if>
+        <if test=" eb2 != null and eb2 !='' "><!-- 扩展2 -->
+            ,eb2 = #{eb2}
+        </if>
+        <if test=" eb3 != null and eb3 !='' "><!-- 扩展3 -->
+            ,eb3 = #{eb3}
+        </if>
+        <if test=" eb4 != null and eb4 !='' "><!-- 扩展4 -->
+            ,eb4 = #{eb4}
+        </if>
+        <if test=" eb5 != null and eb5 !='' "><!-- 业务系统ID -->
+            ,eb5 = #{eb5}
+        </if>
+        <if test=" ddd != null and ddd !='' "><!-- 有效标识 -->
+            ,ddd = #{ddd}
+        </if>
+        <if test=" cc1 != null and cc1 !='' "><!-- 创建时间 -->
+            ,cc1 = #{cc1}
+        </if>
+        <if test=" cc2 != null and cc2 !='' "><!-- 创建者 -->
+            ,cc2 = #{cc2}
+        </if>
+        <if test=" uu2 != null and uu2 !='' "><!-- 更新者 -->
+            ,uu2 = #{uu2}
+        </if>
+        <trim prefix='WHERE' prefixOverrides='AND |OR '>
+            <if test=" puk != null and puk !='' "><!-- 系统数据唯一识别ID（固定主键） -->
+                AND puk = #{puk}
+            </if>
+            <if test=" f01 != null and f01 !='' "><!-- 标题 -->
+                AND f01 = #{f01}
+            </if>
+            <if test=" f02 != null and f02 !='' "><!-- 开始时间 -->
+                AND f02 = #{f02}
+            </if>
+            <if test=" f03 != null and f03 !='' "><!-- 终了时间 -->
+                AND f03 = #{f03}
+            </if>
+            <if test=" f04 != null and f04 !='' "><!-- 排列顺序 -->
+                AND f04 = #{f04}
+            </if>
+            <if test=" bbb != null and bbb !='' "><!-- 内容 -->
+                AND bbb = #{bbb}
+            </if>
+            <if test=" fb1 != null and fb1 !='' "><!-- 级别 -->
+                AND fb1 = #{fb1}
+            </if>
+            <if test=" fb2 != null and fb2 !='' "><!-- 备用2 -->
+                AND fb2 = #{fb2}
+            </if>
+            <if test=" fb3 != null and fb3 !='' "><!-- 备用3 -->
+                AND fb3 = #{fb3}
+            </if>
+            <if test=" fb4 != null and fb4 !='' "><!-- 备用4 -->
+                AND fb4 = #{fb4}
+            </if>
+            <if test=" fb5 != null and fb5 !='' "><!-- 备用5 -->
+                AND fb5 = #{fb5}
+            </if>
+            <if test=" eb1 != null and eb1 !='' "><!-- 扩展1 -->
+                AND eb1 = #{eb1}
+            </if>
+            <if test=" eb2 != null and eb2 !='' "><!-- 扩展2 -->
+                AND eb2 = #{eb2}
+            </if>
+            <if test=" eb3 != null and eb3 !='' "><!-- 扩展3 -->
+                AND eb3 = #{eb3}
+            </if>
+            <if test=" eb4 != null and eb4 !='' "><!-- 扩展4 -->
+                AND eb4 = #{eb4}
+            </if>
+            <if test=" eb5 != null and eb5 !='' "><!-- 业务系统ID -->
+                AND eb5 = #{eb5}
+            </if>
+            <if test=" ddd != null and ddd !='' "><!-- 有效标识 -->
+                AND ddd = #{ddd}
+            </if>
+            <if test=" cc1 != null and cc1 !='' "><!-- 创建时间 -->
+                AND cc1 = #{cc1}
+            </if>
+            <if test=" cc2 != null and cc2 !='' "><!-- 创建者 -->
+                AND cc2 = #{cc2}
+            </if>
+            <if test=" uu1 != null and uu1 !='' "><!-- 更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+            <if test=" uu2 != null and uu2 !='' "><!-- 更新者 -->
+                AND uu2 = #{uu2}
+            </if>
+        </trim>
+    </update>
+    <!-- 查询全体数据信息  -->
+    <select id='doFindList' parameterType='FrameworkData' resultType='FrameworkData'>
+        SELECT <include refid='tableColumns'/> FROM cssm01 WHERE ddd != '1' and eb5 = #{eb5}
+    </select>
+    <!-- 查询分页数据信息  -->
+    <select id='doSelectPage' parameterType='FrameworkData' resultType='FrameworkData'>
+        SELECT <include refid='tableColumns'/> FROM cssm01
+        <trim prefix='WHERE' prefixOverrides='AND |OR '>
+            <if test=" puk != null and puk !='' "><!-- 系统数据唯一识别ID（固定主键） -->
+                AND puk = #{puk}
+            </if>
+            <if test=" f01 != null and f01 !='' "><!-- 标题 -->
+                AND f01 = #{f01}
+            </if>
+            <if test=" f02 != null and f02 !='' "><!-- 开始时间 -->
+                AND f02 = #{f02}
+            </if>
+            <if test=" f03 != null and f03 !='' "><!-- 终了时间 -->
+                AND f03 = #{f03}
+            </if>
+            <if test=" f04 != null and f04 !='' "><!-- 排列顺序 -->
+                AND f04 = #{f04}
+            </if>
+            <if test=" bbb != null and bbb !='' "><!-- 内容 -->
+                AND bbb = #{bbb}
+            </if>
+            <if test=" fb1 != null and fb1 !='' "><!-- 级别 -->
+                AND fb1 = #{fb1}
+            </if>
+            <if test=" fb2 != null and fb2 !='' "><!-- 备用2 -->
+                AND fb2 = #{fb2}
+            </if>
+            <if test=" fb3 != null and fb3 !='' "><!-- 备用3 -->
+                AND fb3 = #{fb3}
+            </if>
+            <if test=" fb4 != null and fb4 !='' "><!-- 备用4 -->
+                AND fb4 = #{fb4}
+            </if>
+            <if test=" fb5 != null and fb5 !='' "><!-- 备用5 -->
+                AND fb5 = #{fb5}
+            </if>
+            <if test=" eb1 != null and eb1 !='' "><!-- 扩展1 -->
+                AND eb1 = #{eb1}
+            </if>
+            <if test=" eb2 != null and eb2 !='' "><!-- 扩展2 -->
+                AND eb2 = #{eb2}
+            </if>
+            <if test=" eb3 != null and eb3 !='' "><!-- 扩展3 -->
+                AND eb3 = #{eb3}
+            </if>
+            <if test=" eb4 != null and eb4 !='' "><!-- 扩展4 -->
+                AND eb4 = #{eb4}
+            </if>
+            <if test=" eb5 != null and eb5 !='' "><!-- 业务系统ID -->
+                AND eb5 = #{eb5}
+            </if>
+            <if test=" ddd != null and ddd !='' "><!-- 有效标识 -->
+                AND ddd = #{ddd}
+            </if>
+            <if test=" cc1 != null and cc1 !='' "><!-- 创建时间 -->
+                AND cc1 = #{cc1}
+            </if>
+            <if test=" cc2 != null and cc2 !='' "><!-- 创建者 -->
+                AND cc2 = #{cc2}
+            </if>
+            <if test=" uu1 != null and uu1 !='' "><!-- 更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+            <if test=" uu2 != null and uu2 !='' "><!-- 更新者 -->
+                AND uu2 = #{uu2}
+            </if>
+        </trim>
+    </select>
+
+    <!-- 插入一条数据 -->
+    <insert id='doInsert' parameterType='FrameworkData'>
+        INSERT INTO cssm01
+          ( <include refid='tableColumns'/>) 
+        VALUES 
+          ( #{puk},#{f01},#{f02},#{f03},#{f04},#{bbb},#{fb1},#{fb2},#{fb3},#{fb4},#{fb5},#{eb1},#{eb2},#{eb3},#{eb4},#{eb5},#{ddd},#{cc1},#{cc2},#{uu1},#{uu2} )
+    </insert>
+    <!-- 修改一条数据 -->
+    <update id='doUpdate' parameterType='FrameworkData'>
+        UPDATE cssm01 SET uu1 = #{uuu} <!-- 更新时间、更新者 -->
+        <if test=" f01 != null and f01 !='' "><!-- 标题 -->
+            ,f01 = #{f01}
+        </if>
+        <if test=" f02 != null and f02 !='' "><!-- 开始时间 -->
+            ,f02 = #{f02}
+        </if>
+        <if test=" f03 != null and f03 !='' "><!-- 终了时间 -->
+            ,f03 = #{f03}
+        </if>
+        <if test=" f04 != null and f04 !='' "><!-- 排列顺序 -->
+            ,f04 = #{f04}
+        </if>
+        <if test=" bbb != null and bbb !='' "><!-- 内容 -->
+            ,bbb = #{bbb}
+        </if>
+        <if test=" fb1 != null and fb1 !='' "><!-- 级别 -->
+            ,fb1 = #{fb1}
+        </if>
+        <if test=" fb2 != null and fb2 !='' "><!-- 备用2 -->
+            ,fb2 = #{fb2}
+        </if>
+        <if test=" fb3 != null and fb3 !='' "><!-- 备用3 -->
+            ,fb3 = #{fb3}
+        </if>
+        <if test=" fb4 != null and fb4 !='' "><!-- 备用4 -->
+            ,fb4 = #{fb4}
+        </if>
+        <if test=" fb5 != null and fb5 !='' "><!-- 备用5 -->
+            ,fb5 = #{fb5}
+        </if>
+        <if test=" eb1 != null and eb1 !='' "><!-- 扩展1 -->
+            ,eb1 = #{eb1}
+        </if>
+        <if test=" eb2 != null and eb2 !='' "><!-- 扩展2 -->
+            ,eb2 = #{eb2}
+        </if>
+        <if test=" eb3 != null and eb3 !='' "><!-- 扩展3 -->
+            ,eb3 = #{eb3}
+        </if>
+        <if test=" eb4 != null and eb4 !='' "><!-- 扩展4 -->
+            ,eb4 = #{eb4}
+        </if>
+        <if test=" eb5 != null and eb5 !='' "><!-- 业务系统ID -->
+            ,eb5 = #{eb5}
+        </if>
+        <if test=" ddd != null and ddd !='' "><!-- 有效标识 -->
+            ,ddd = #{ddd}
+        </if>
+        <if test=" cc1 != null and cc1 !='' "><!-- 创建时间 -->
+            ,cc1 = #{cc1}
+        </if>
+        <if test=" cc2 != null and cc2 !='' "><!-- 创建者 -->
+            ,cc2 = #{cc2}
+        </if>
+        <if test=" uu2 != null and uu2 !='' "><!-- 更新者 -->
+            ,uu2 = #{uu2}
+        </if>
+        WHERE puk = #{puk} and uu1 = #{uu1}
+    </update>
+    <!-- 删除一条数据 -->
+    <delete id='toDelete' parameterType='FrameworkData'>
+        UPDATE cssm01 SET ddd='1', uu1 = #{uuu}, uu2 = #{uu2} WHERE puk = #{puk} and uu1 = #{uu1}
+    </delete>
+    <!-- 删除一条数据 -->
+    <delete id='doDelete' parameterType='FrameworkData'>
+        DELETE FROM cssm01 WHERE puk = #{puk}
+    </delete>
+    <!-- 查询一条数据  -->
+    <select id='doRead' parameterType='FrameworkData' resultType='FrameworkData'>
+        SELECT <include refid='tableColumns'/> FROM cssm01 WHERE puk = #{puk} AND ddd = #{ddd} 
+    </select>
+
+</mapper>

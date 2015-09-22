@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 佣金结算 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='com.ttnn.business.wm.dao.WMYJJSDao'>
+     <!-- 佣金总和 -->
+     <insert id='dozonghe' parameterType='FrameworkData' >
+       INSERT INTO wmbm05(puk,k01,f01,fb1,eb5,cc1,cc2) SELECT #{puk}, k03,SUM(f08),COUNT(f08),#{eb5},#{cc1},#{cc2} from wmbm04 where wmbm04.k03=#{k03}
+    </insert>
+    <!-- 佣金条数 -->
+<!--     <insert id='dozongshu' parameterType='FrameworkData' > -->
+<!--      INSERT INTO wmbm05(puk,fb1) SELECT #{puk},COUNT(f08) FROM wmbm04 -->
+<!--     </insert> -->
+     <!-- 改变结算状态 -->
+      <update id='dogai' parameterType='FrameworkData'>
+        UPDATE wmbm04 SET f02="1"  WHERE f02="0"
+    </update>
+    
+</mapper>

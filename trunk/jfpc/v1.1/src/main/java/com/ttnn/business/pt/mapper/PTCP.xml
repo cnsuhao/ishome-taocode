@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+    
+<!-- 查询各产品的四种销售部套餐 -->
+<mapper namespace='com.ttnn.business.aq.dao.PTCPDao'>
+ <!-- 表字段信息  -->
+    <sql id='tableColumns'>
+        puk,k01,k02,k03,f01,f02,bbb,fb1,fb2,fb3,fb4,fb5,eb1,eb2,eb3,eb4,eb5,ddd,cc1,cc2,uu1,uu2
+    </sql>
+
+  <select id='doSelectPT' parameterType='FrameworkData' resultType='FrameworkData'>
+        SELECT f01,puk,k01 FROM ptcp03 WHERE k01=#{k01} group by f01
+  </select>
+<!-- 查询各产品的对应套餐的功能-->  
+  <select id="doSelectGN" parameterType='FrameworkData' resultType='FrameworkData'>
+  	SELECT a.puk,a.f01,a.k02,a.f03,a.f04,a.f05,a.bbb,a.fb2,b.k01 FROM ptcp02 a,ptcp04 b WHERE a.puk 
+ 	in(SELECT k02 FROM ptcp04 WHERE k01=#{k01}) group by f01 
+<!--  	 	SELECT a.*,b.k01 FROM ptcp02 a,ptcp04 b WHERE a.puk  -->
+<!--  	in(SELECT k02 FROM ptcp04 WHERE k01=#{k01}) group by f01 -->
+  </select>  
+<!-- 功能查询 -->
+  <select id="doSelectCPGN" parameterType='FrameworkData' resultType='FrameworkData'>
+       select s.f04,s.fb2,s.f01, s.fb3, IFNULL(s.fb2,0)*IFNULL(s.fb3,0)AS eb2,
+	IFNULL(s.f04,0)+IFNULL(s.fb2,0) as eb1 from  ptcp02  s 
+     where puk IN (SELECT k02 FROM ptcp04 WHERE k01=#{k01})
+  </select>
+
+<!-- 查询管理员 -->  
+<select id="doReadC" parameterType='FrameworkData' resultType='FrameworkData'>
+ SELECT * from cssr01 where f03=#{f03}
+</select>
+  
+<select id="do1SelectCP" parameterType='FrameworkData' resultType='FrameworkData' > 
+SELECT ptcp02.puk,ptcp02.f01,
+(SELECT ptcp04.k02 from ptcp04 WHERE ptcp04.k03 = ptcp02.puk AND ptcp04.k01 = ptcp02.eb1 AND ptcp04.k02 = '0') eb1,
+(SELECT ptcp04.k02 from ptcp04 WHERE ptcp04.k03 = ptcp02.puk AND ptcp04.k01 = ptcp02.eb1 AND ptcp04.k02 = '1') eb2,
+(SELECT ptcp04.k02 from ptcp04 WHERE ptcp04.k03 = ptcp02.puk AND ptcp04.k01 = ptcp02.eb1 AND ptcp04.k02 = '2') eb3,
+(SELECT ptcp04.k02 from ptcp04 WHERE ptcp04.k03 = ptcp02.puk AND ptcp04.k01 = ptcp02.eb1 AND ptcp04.k02 = '3') eb4
+from ptcp02
+WHERE ptcp02.eb1 =#{eb1} 
+ </select>
+ 
+ <select id="doRead1" parameterType='FrameworkData' resultType='FrameworkData'>
+ SELECT f01 FROM ptcp03 WHERE puk=#{puk} AND  k01=#{k01}
+ </select>
+ <!-- 插入系统数据 -->
+    <insert id='do2InsertPt' parameterType='FrameworkData'>
+        INSERT INTO csss01
+          ( <include refid='tableColumns'/>) 
+        VALUES 
+          ( #{puk},#{k01},#{k02},#{k03},#{f01},#{f02},#{bbb},#{fb1},#{fb2},#{fb3},#{fb4},#{fb5},#{eb1},#{eb2},#{eb3},#{eb4},#{eb5},#{ddd},#{cc1},#{cc2},#{uu1},#{uu2} )
+    </insert>  
+    
+    <!-- 插入管理员一条数据 -->
+    <insert id='do3InsertPt' parameterType='FrameworkData'>
+        INSERT INTO cssr01
+          ( puk,f01,f02,f03,f04,f05,f06,bbb,fb1,fb2,fb3,fb4,fb5,eb1,eb2,eb3,eb4,eb5,ddd,cc1,cc2,uu1,uu2) 
+        VALUES 
+          ( #{puk},#{f01},#{f02},#{f03},#{f04},#{f05},#{f06},#{bbb},#{fb1},#{fb2},#{fb3},#{fb4},#{fb5},#{eb1},#{eb2},#{eb3},#{eb4},#{eb5},#{ddd},#{cc1},#{cc2},#{uu1},#{uu2} )
+    </insert>  
+
+
+</mapper>

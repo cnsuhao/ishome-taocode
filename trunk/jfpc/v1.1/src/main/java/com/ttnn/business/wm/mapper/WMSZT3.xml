@@ -1,0 +1,325 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 支付通道 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='com.ttnn.business.wm.dao.WMSZT3Dao'>
+    <!-- 表字段信息  -->
+    <sql id='tableColumns'>
+        puk,k01,k02,k03,f05,f06,f15,f16,f17,f18,f19,bbb,fb1,fb2,fb3,fb4,fb5,eb1,eb2,eb3,eb4,eb5,ddd,cc1,cc2,uu1,uu2
+    </sql>
+
+    <!-- 批量插入  -->
+    <insert id='doBatchInsert' parameterType='FrameworkData'>
+        INSERT INTO   ( <include refid='tableColumns'/> ) VALUES 
+            <foreach collection='list' item='item' separator=','>
+                ( #{item.puk},#{item.k01},#{item.k02},#{item.k03},#{item.f05},#{item.f06},#{item.f15},#{item.f16},#{item.f17},#{item.f18},#{item.f19},#{item.bbb},#{item.fb1},#{item.fb2},#{item.fb3},#{item.fb4},#{item.fb5},#{item.eb1},#{item.eb2},#{item.eb3},#{item.eb4},#{item.eb5},#{item.ddd},#{item.cc1},#{item.cc2},#{item.uu1},#{item.uu2} )
+            </foreach>
+    </insert>
+    <!-- 批量删除  -->
+    <delete id='doBatchDelete' parameterType='FrameworkData'>
+        DELETE FROM wmbm01 WHERE puk IN 
+            <foreach collection='list' item='item' open='(' separator=',' close=')'>
+                #{item.puk}
+            </foreach>
+    </delete>
+
+    <!-- 根据条件更新所有记录 -->
+    <update id='doUpdateAll' parameterType='FrameworkData'>
+        UPDATE wmbm01 SET  uu1 = #{uuu} <!-- 更新时间、更新者 -->
+        <if test=" k01 != null and k01 !='' "><!-- 用户ID -->
+            ,k01 = #{k01}
+        </if>
+        <if test=" k02 != null and k02 !='' "><!-- 上级用户ID -->
+            ,k02 = #{k02}
+        </if>
+        <if test=" k03 != null and k03 !='' "><!-- 通道ID -->
+            ,k03 = #{k03}
+        </if>
+        <if test=" f05 != null and f05 !='' "><!-- 充值手续费率定义类型（百分比/固定值） -->
+            ,f05 = #{f05}
+        </if>
+        <if test=" f06 != null and f06 !='' "><!-- 提现手续费率定义类型（百分比/固定值） -->
+            ,f06 = #{f06}
+        </if>
+        <if test=" f15 != null and f15 !='' "><!-- 充值手续费数量 -->
+            ,f15 = #{f15}
+        </if>
+        <if test=" f16 != null and f16 !='' "><!-- 提现手续费数量 -->
+            ,f16 = #{f16}
+        </if>
+        <if test=" f17 != null and f17 !='' "><!-- 提现最大金额 -->
+            ,f17 = #{f17}
+        </if>
+        <if test=" f18 != null and f18 !='' "><!-- 种类所属 -->
+            ,f18 = #{f18}
+        </if>
+        <if test=" f19 != null and f19 !='' "><!-- 结算说明 -->
+            ,f19 = #{f19}
+        </if>
+        <if test=" bbb != null and bbb !='' "><!-- 通道说明 -->
+            ,bbb = #{bbb}
+        </if>
+        <if test=" fb1 != null and fb1 !='' "><!-- 备用1 -->
+            ,fb1 = #{fb1}
+        </if>
+        <if test=" fb2 != null and fb2 !='' "><!-- 备用2 -->
+            ,fb2 = #{fb2}
+        </if>
+        <if test=" fb3 != null and fb3 !='' "><!-- 备用3 -->
+            ,fb3 = #{fb3}
+        </if>
+        <if test=" fb4 != null and fb4 !='' "><!-- 备用4 -->
+            ,fb4 = #{fb4}
+        </if>
+        <if test=" fb5 != null and fb5 !='' "><!-- 备用5 -->
+            ,fb5 = #{fb5}
+        </if>
+        <if test=" eb1 != null and eb1 !='' "><!-- 扩展1 -->
+            ,eb1 = #{eb1}
+        </if>
+        <if test=" eb2 != null and eb2 !='' "><!-- 扩展2 -->
+            ,eb2 = #{eb2}
+        </if>
+        <if test=" eb3 != null and eb3 !='' "><!-- 扩展3 -->
+            ,eb3 = #{eb3}
+        </if>
+        <if test=" eb4 != null and eb4 !='' "><!-- 扩展4 -->
+            ,eb4 = #{eb4}
+        </if>
+        <if test=" eb5 != null and eb5 !='' "><!-- 业务系统ID(合作客户ID) -->
+            ,eb5 = #{eb5}
+        </if>
+        <if test=" ddd != null and ddd !='' "><!-- 有效标识 -->
+            ,ddd = #{ddd}
+        </if>
+        <if test=" cc1 != null and cc1 !='' "><!-- 创建时间 -->
+            ,cc1 = #{cc1}
+        </if>
+        <if test=" cc2 != null and cc2 !='' "><!-- 创建者 -->
+            ,cc2 = #{cc2}
+        </if>
+        <if test=" uu2 != null and uu2 !='' "><!-- 更新者 -->
+            ,uu2 = #{uu2}
+        </if>
+        <trim prefix='WHERE' prefixOverrides='AND |OR '>
+            <if test=" puk != null and puk !='' "><!-- 操作流水号 -->
+                AND puk = #{puk}
+            </if>
+            <if test=" k01 != null and k01 !='' "><!-- 用户ID -->
+                AND k01 = #{k01}
+            </if>
+            <if test=" k02 != null and k02 !='' "><!-- 上级用户ID -->
+                AND k02 = #{k02}
+            </if>
+            <if test=" k03 != null and k03 !='' "><!-- 通道ID -->
+                AND k03 = #{k03}
+            </if>
+            <if test=" f05 != null and f05 !='' "><!-- 充值手续费率定义类型（百分比/固定值） -->
+                AND f05 = #{f05}
+            </if>
+            <if test=" f06 != null and f06 !='' "><!-- 提现手续费率定义类型（百分比/固定值） -->
+                AND f06 = #{f06}
+            </if>
+            <if test=" f15 != null and f15 !='' "><!-- 充值手续费数量 -->
+                AND f15 = #{f15}
+            </if>
+            <if test=" f16 != null and f16 !='' "><!-- 提现手续费数量 -->
+                AND f16 = #{f16}
+            </if>
+            <if test=" f17 != null and f17 !='' "><!-- 提现最大金额 -->
+                AND f17 = #{f17}
+            </if>
+            <if test=" f18 != null and f18 !='' "><!-- 种类所属 -->
+                AND f18 = #{f18}
+            </if>
+            <if test=" f19 != null and f19 !='' "><!-- 结算说明 -->
+                AND f19 = #{f19}
+            </if>
+            <if test=" bbb != null and bbb !='' "><!-- 通道说明 -->
+                AND bbb = #{bbb}
+            </if>
+            <if test=" fb1 != null and fb1 !='' "><!-- 备用1 -->
+                AND fb1 = #{fb1}
+            </if>
+            <if test=" fb2 != null and fb2 !='' "><!-- 备用2 -->
+                AND fb2 = #{fb2}
+            </if>
+            <if test=" fb3 != null and fb3 !='' "><!-- 备用3 -->
+                AND fb3 = #{fb3}
+            </if>
+            <if test=" fb4 != null and fb4 !='' "><!-- 备用4 -->
+                AND fb4 = #{fb4}
+            </if>
+            <if test=" fb5 != null and fb5 !='' "><!-- 备用5 -->
+                AND fb5 = #{fb5}
+            </if>
+            <if test=" eb1 != null and eb1 !='' "><!-- 扩展1 -->
+                AND eb1 = #{eb1}
+            </if>
+            <if test=" eb2 != null and eb2 !='' "><!-- 扩展2 -->
+                AND eb2 = #{eb2}
+            </if>
+            <if test=" eb3 != null and eb3 !='' "><!-- 扩展3 -->
+                AND eb3 = #{eb3}
+            </if>
+            <if test=" eb4 != null and eb4 !='' "><!-- 扩展4 -->
+                AND eb4 = #{eb4}
+            </if>
+            <if test=" eb5 != null and eb5 !='' "><!-- 业务系统ID(合作客户ID) -->
+                AND eb5 = #{eb5}
+            </if>
+            <if test=" ddd != null and ddd !='' "><!-- 有效标识 -->
+                AND ddd = #{ddd}
+            </if>
+            <if test=" cc1 != null and cc1 !='' "><!-- 创建时间 -->
+                AND cc1 = #{cc1}
+            </if>
+            <if test=" cc2 != null and cc2 !='' "><!-- 创建者 -->
+                AND cc2 = #{cc2}
+            </if>
+            <if test=" uu1 != null and uu1 !='' "><!-- 更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+            <if test=" uu2 != null and uu2 !='' "><!-- 更新者 -->
+                AND uu2 = #{uu2}
+            </if>
+        </trim>
+    </update>
+    <!-- 查询全体数据信息  -->
+    <select id='doFindList' parameterType='FrameworkData' resultType='FrameworkData'>
+        SELECT <include refid='tableColumns'/> FROM wmbm01 WHERE ddd != '1' and eb5 = #{eb5}
+    </select>
+    <!-- 查询分页数据信息  -->
+    <select id='doSelectPage' parameterType='FrameworkData' resultType='FrameworkData'>
+        select * from (SELECT  
+        a.puk puk,a.k01 k01,c.f04 f04,(select d.f04 from wmui01 d where d.puk = c.k01) k02,b.f03 f03,
+        a.f15 f15,a.f16 f16,a.eb3 eb3,a.eb4 eb4,a.f17 f17,a.uu1 uu1,c.f01 f01, a.cc1 cc1,d.f03 f05
+      FROM wmbm01 a ,wmbma1 b ,wmui01 c,cssr01 d
+     
+         WHERE  a.k03 = b.puk and a.k01 = c.puk and c.puk = d.puk and a.eb5 = #{eb5}) userinfo
+         
+         <trim prefix='WHERE' prefixOverrides='AND |OR '>
+          <if test="k01 != null and k01 !='' ">
+            and k01=#{k01}
+        </if>
+        
+        <if test=" f03 != null and f03 !='' "><!-- 业务系统ID -->
+                AND f03 like CONCAT('%',#{f03},'%')
+            </if>
+             <if test=" f04 != null and f04 !='' "><!-- 业务系统ID -->
+                AND f04 like CONCAT('%',#{f04},'%')
+            </if>
+            <if test=" f05 != null and f05 !='' "><!-- 业务系统ID -->
+                AND f03 like CONCAT('%',#{f05},'%')
+            </if>
+            
+              <if test=" k02 != null and k02 !='' "><!-- 业务系统ID -->
+                AND k02 like CONCAT('%',#{k02},'%')
+            </if>
+         </trim>  
+        
+    </select>
+
+    <!-- 插入一条数据 -->
+    <insert id='doInsert' parameterType='FrameworkData'>
+        INSERT INTO wmbm01
+          ( <include refid='tableColumns'/>) 
+        VALUES 
+          ( #{puk},#{k01},#{k02},#{k03},#{f05},#{f06},#{f15},#{f16},#{f17},#{f18},#{f19},#{bbb},#{fb1},#{fb2},#{fb3},#{fb4},#{fb5},#{eb1},#{eb2},#{eb3},#{eb4},#{eb5},#{ddd},#{cc1},#{cc2},#{uu1},#{uu2} )
+    </insert>
+    <!-- 修改一条数据 -->
+    <update id='doUpdate' parameterType='FrameworkData'>
+        UPDATE wmbm01 SET uu1 = #{uuu} <!-- 更新时间、更新者 -->
+        <if test=" k01 != null and k01 !='' "><!-- 用户ID -->
+            ,k01 = #{k01}
+        </if>
+        <if test=" k02 != null and k02 !='' "><!-- 上级用户ID -->
+            ,k02 = #{k02}
+        </if>
+        <if test=" k03 != null and k03 !='' "><!-- 通道ID -->
+            ,k03 = #{k03}
+        </if>
+        <if test=" f05 != null and f05 !='' "><!-- 充值手续费率定义类型（百分比/固定值） -->
+            ,f05 = #{f05}
+        </if>
+        <if test=" f06 != null and f06 !='' "><!-- 提现手续费率定义类型（百分比/固定值） -->
+            ,f06 = #{f06}
+        </if>
+        <if test=" f15 != null and f15 !='' "><!-- 充值手续费数量 -->
+            ,f15 = #{f15}
+        </if>
+        <if test=" f16 != null and f16 !='' "><!-- 提现手续费数量 -->
+            ,f16 = #{f16}
+        </if>
+        <if test=" f17 != null and f17 !='' "><!-- 提现最大金额 -->
+            ,f17 = #{f17}
+        </if>
+        <if test=" f18 != null and f18 !='' "><!-- 种类所属 -->
+            ,f18 = #{f18}
+        </if>
+        <if test=" f19 != null and f19 !='' "><!-- 结算说明 -->
+            ,f19 = #{f19}
+        </if>
+        <if test=" bbb != null and bbb !='' "><!-- 通道说明 -->
+            ,bbb = #{bbb}
+        </if>
+        <if test=" fb1 != null and fb1 !='' "><!-- 备用1 -->
+            ,fb1 = #{fb1}
+        </if>
+        <if test=" fb2 != null and fb2 !='' "><!-- 备用2 -->
+            ,fb2 = #{fb2}
+        </if>
+        <if test=" fb3 != null and fb3 !='' "><!-- 备用3 -->
+            ,fb3 = #{fb3}
+        </if>
+        <if test=" fb4 != null and fb4 !='' "><!-- 备用4 -->
+            ,fb4 = #{fb4}
+        </if>
+        <if test=" fb5 != null and fb5 !='' "><!-- 备用5 -->
+            ,fb5 = #{fb5}
+        </if>
+        <if test=" eb1 != null and eb1 !='' "><!-- 扩展1 -->
+            ,eb1 = #{eb1}
+        </if>
+        <if test=" eb2 != null and eb2 !='' "><!-- 扩展2 -->
+            ,eb2 = #{eb2}
+        </if>
+        <if test=" eb3 != null and eb3 !='' "><!-- 扩展3 -->
+            ,eb3 = #{eb3}
+        </if>
+        <if test=" eb4 != null and eb4 !='' "><!-- 扩展4 -->
+            ,eb4 = #{eb4}
+        </if>
+        <if test=" eb5 != null and eb5 !='' "><!-- 业务系统ID(合作客户ID) -->
+            ,eb5 = #{eb5}
+        </if>
+        <if test=" ddd != null and ddd !='' "><!-- 有效标识 -->
+            ,ddd = #{ddd}
+        </if>
+        <if test=" cc1 != null and cc1 !='' "><!-- 创建时间 -->
+            ,cc1 = #{cc1}
+        </if>
+        <if test=" cc2 != null and cc2 !='' "><!-- 创建者 -->
+            ,cc2 = #{cc2}
+        </if>
+        <if test=" uu2 != null and uu2 !='' "><!-- 更新者 -->
+            ,uu2 = #{uu2}
+        </if>
+        WHERE puk = #{puk} and uu1 = #{uu1}
+    </update>
+    <!-- 删除一条数据 -->
+    <delete id='toDelete' parameterType='FrameworkData'>
+        UPDATE wmbm01 SET ddd='1', uu1 = #{uuu}, uu2 = #{uu2} WHERE puk = #{puk} and uu1 = #{uu1}
+    </delete>
+    <!-- 删除一条数据 -->
+    <delete id='doDelete' parameterType='FrameworkData'>
+        DELETE FROM wmbm01 WHERE puk = #{puk} and uu1 = #{uu1}
+    </delete>
+    <!-- 查询一条数据  -->
+    <select id='doRead' parameterType='FrameworkData' resultType='FrameworkData'>
+        SELECT <include refid='tableColumns'/> FROM wmbm01 WHERE puk = #{puk} AND ddd = #{ddd} 
+    </select>
+
+</mapper>

@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 添加下线时下拉类表框 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='com.ttnn.business.wm.dao.WMQTTJXXDao'>
+     <!-- 查询用户数据信息  -->
+    <select id='doFind' parameterType='FrameworkData' resultType='FrameworkData'>
+       SELECT puk,f01,f02 FROM wmuip1 WHERE f05='1' AND eb5='TTNN_DFB' ORDER BY f06
+    </select>
+     <!-- 查询个人通道 -->
+    <select id='doFindMyzfTD' parameterType='FrameworkData' resultType='FrameworkData'>
+       select * from wmbm01  where  k01 = #{k01} AND ddd != '1'
+       <if test=" k03 != null and k03 !='' "><!-- 系统通道ID -->
+			AND k03 = #{k03}
+		</if>
+    </select>
+     <!-- 分配通道 -->
+    <select id='doFind2' parameterType='FrameworkData' resultType='FrameworkData'>
+       select  * from wmbm01  where k03=#{k03}
+    </select>
+    
+    <!-- 查询未被分配的通道 -->
+    <select id="doSelectUnDis" parameterType='FrameworkData' resultType='FrameworkData'>
+    select *  from wmbm01 where k01 =#{k02}
+   and k03 not in (
+   select k03 from wmbm01 where k01 = #{k01}
+   )
+    
+    </select>
+    
+    
+</mapper>

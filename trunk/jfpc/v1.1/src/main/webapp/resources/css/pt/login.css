@@ -1,0 +1,135 @@
+
+/* CSS Document*/
+	body {
+	font-family: Microsoft YaHei;
+	background:#F0F0F0;
+}
+.cont-login {
+	position: absolute;
+	width:600px;
+	left:50%;
+	top:50%;
+	margin-left:-300px;
+	margin-top:-220px;
+}
+.list-login .p_login {
+	text-align:left;
+	font-size:24px;
+	overflow:hidden;
+}
+.loginper {
+	height:50px;
+	background:#01A4B7;
+}
+.cont-lohj {
+	width:598px;
+	margin:0 auto;
+	border-left:1px solid #ddd;
+	border-right:1px solid #ddd;
+	border-bottom:1px solid #ddd;
+	color:#989898;
+	background:#fff;
+	padding-top:20px;
+}
+.logonki {
+	width:340px;
+	margin:0 auto;
+	padding-top:20px;
+	overflow:hidden;
+}
+.logonki>ul{
+	overflow:hidden;
+}
+.logonki ul li {
+	float:left;
+}
+.logonki ul li input {
+	width:210px;
+	height:30px;
+	border:1px solid #ddd;
+	padding:2px 4px;
+}
+.logonki ul li:nth-child(3) {
+	margin-left:20px;
+	line-height:29px;
+}
+.logonki .onea {
+	text-align:right;
+	width:60px;
+	line-height:29px;
+	color: #000;
+}
+#yzm {
+	width:100px;
+}
+#vcode {
+	vertical-align:bottom;
+	height:25px;
+	margin-left:10px;
+	width:100px;
+}
+.gare {
+	margin-left:60px;
+	margin-bottom:30px;
+}
+.leat {
+	color:#fff;
+	margin-left:20px;
+	line-height:50px;
+}
+.date {
+	padding:5px 0;
+}
+
+.input-login{
+	border:0;
+	width:80px;
+	height:40px;
+	color:#FFF;
+	background-color:#01A4B7;
+	font-size:20px;
+}
+.input-login:hover{
+	border:0;
+	color:#FFF;
+	background-color:#007E8D;
+}
+.main-content-title{
+	padding:0 10px;
+}
+
+.btn-l {
+	display: inline-block;
+	padding: 6px 12px;
+	margin-bottom: 0;
+	font-size: 14px;
+	font-weight: normal;
+	line-height: 1.428571429;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	cursor: pointer;
+	border:none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+}
+.btn-l:hover, .btn-l:focus {
+	color: #333333;
+	text-decoration: none;
+}
+.btn-primary-l {
+	color: #ffffff;
+	background-color:#01A4B7;
+}
+.btn-primary-l:hover, .btn-primary-l:focus, .btn-primary-l:active, .btn-primary-l.active-l, .open .dropdown-toggle.btn-primary-l {
+	color: #ffffff;
+	background-color:#007E8D;
+}
+.btn-lg-l{
+	padding: 10px 16px;
+	font-size: 18px;
+	line-height: 1.33;
+}

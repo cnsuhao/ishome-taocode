@@ -1,0 +1,256 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 贷付宝后台数据统计服务 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<!-- F01登录会员id，F02会员名字，F03通道id，F04时间 ，F05日期格式化标准（年月日%Y/%m/%d年月%Y/%m）-->
+<mapper namespace='com.ttnn.business.wm.dao.WMHTTotalDao'>
+
+    <!-- 交易记录统计 -->
+    <select id='doSelectPageJY' parameterType='FrameworkData' resultType='FrameworkData'>
+    	SELECT cc1 as f01 ,eb1,f02,fb1,sum(f07) as f07, sum(f18) as f18
+    	FROM
+    		(
+    			SELECT 
+    				wmbm02.puk as puk,
+    				
+    				wmbm02.k01 as k01,
+    				wmbm02.k02 as k02,
+    				wmbm02.f01 as f01,
+    				wmui01.f04 as f02,
+    				wmbm02.f05 as f05,
+    				wmbm02.f07 as f07,
+    				wmbm02.f08 as f08,
+    				wmbm02.f10 as f10,
+    				wmbm02.f18 as f18,
+    				
+					wmui01.fb1 as fb1,
+
+    				cssr01.f03 AS eb1,
+    				wmui01.f04 AS eb2,
+    				wmbm02.k02 AS eb3,
+    				wmbm02.cc1 AS eb4,
+    				wmbm02.eb5 AS eb5,
+					str_to_date(wmbm02.cc1, #{f05}) AS cc1
+    			FROM wmbm02,wmui01,cssr01
+    			WHERE
+    				wmbm02.k01 = wmui01.puk and
+    				wmbm02.k01 = cssr01.puk and
+    				cssr01.ddd != '1' and
+    				wmui01.ddd != '1' and
+    				wmbm02.ddd != '1' 
+    		) total_jy
+    	WHERE
+    		eb5 = #{eb5}
+    	<if test=" f01 != null and f01 !='' "><!-- 登录会员id -->
+                AND eb1 = #{f01}
+        </if>
+    	<if test=" f02 != null and f02 !='' "><!-- 会员名字 -->
+                AND eb2 = #{f02}
+        </if>
+    	<if test=" f04 != null and f04 !='' "><!-- 通道id-->
+                AND eb3 = #{f04}
+        </if>
+        <if test=" f05 != null and f05 !='' ">
+			<![CDATA[	AND str_to_date(eb4, '%Y/%m/%d') >= #{f05} ]]>
+		</if>
+		<if test=" f06 != null and f06 !='' ">
+			<![CDATA[	AND str_to_date(eb4, '%Y/%m/%d') <= #{f06} ]]>
+		</if>
+        
+        GROUP BY f02,cc1,k01
+    </select>
+
+	<!-- 充值记录统计 -->
+    <select id='doSelectPageCZ' parameterType='FrameworkData' resultType='FrameworkData'>
+        SELECT cc1 as f01 ,eb1,f02,fb1,sum(f07) as f07, sum(f18) as f18
+    	FROM
+    		(
+    			SELECT 
+    				wmbm02.puk as puk,
+    				
+    				wmbm02.k01 as k01,
+    				wmbm02.k02 as k02,
+    				wmbm02.f01 as f01,
+    				wmui01.f04 as f02,
+    				wmbm02.f05 as f05,
+    				wmbm02.f07 as f07,
+    				wmbm02.f08 as f08,
+    				wmbm02.f10 as f10,
+    				wmbm02.f18 as f18,
+    				
+					wmui01.fb1 as fb1,
+
+    				cssr01.f03 AS eb1,
+    				wmui01.f04 AS eb2,
+    				wmbm02.k02 AS eb3,
+    				wmbm02.cc1 AS eb4,
+    				wmbm02.eb5 AS eb5,
+					DATE_FORMAT(wmbm02.cc1, #{f05}) AS cc1
+    			FROM wmbm02,wmui01,cssr01
+    			WHERE
+    				wmbm02.k01 = wmui01.puk and
+    				wmbm02.k01 = cssr01.puk and
+    				cssr01.ddd != '1' and
+    				wmui01.ddd != '1' and
+    				wmbm02.ddd != '1' and 
+    				wmbm02.f06 ='2'
+    		) total_jy
+    	WHERE
+    		eb5 = #{eb5}
+    	<if test=" f01 != null and f01 !='' "><!-- 登录会员id -->
+                AND eb1 = #{f01}
+        </if>
+    	<if test=" f02 != null and f02 !='' "><!-- 会员名字 -->
+                AND eb2 = #{f02}
+        </if>
+    	<!-- <if test=" f04 != null and f04 !='' ">通道id
+                AND eb3 = #{f04}
+        </if> -->
+        <if test=" f04 != null and f04 !='' ">
+			<![CDATA[	AND str_to_date(eb4, '%Y/%m/%d') >= #{f04} ]]>
+		</if>
+		<if test=" f06 != null and f06 !='' ">
+			<![CDATA[	AND str_to_date(eb4, '%Y/%m/%d') <= #{f06} ]]>
+		</if>
+        GROUP BY cc1,k01
+    </select>
+    
+    <!-- 提现记录统计 -->
+    <select id='doSelectPageTX' parameterType='FrameworkData' resultType='FrameworkData'>
+        SELECT cc1 as f01 ,eb1,f02,fb1,sum(f07) as f07, sum(f18) as f18
+    	FROM
+    		(
+    			SELECT 
+    				wmbm03.puk as puk,
+    				
+    				wmbm03.k01 as k01,
+    				wmbm03.k02 as k02,
+    				wmbm03.f01 as f01,
+    				wmui01.f04 as f02,
+    				wmbm03.f05 as f05,
+    				wmbm03.f07 as f07,
+    				wmbm03.f08 as f08,
+    				wmbm03.f10 as f10,
+    				wmbm03.f18 as f18,
+    				
+					wmui01.fb1 as fb1,
+
+    				cssr01.f03 AS eb1,
+    				wmui01.f04 AS eb2,
+    				wmbm03.k02 AS eb3,
+    				wmbm03.cc1 AS eb4,
+    				wmbm03.eb5 AS eb5,
+					DATE_FORMAT(wmbm03.cc1, #{f05}) AS cc1
+    			FROM wmbm03,wmui01,cssr01
+    			WHERE
+    				wmbm03.k01 = wmui01.puk and
+    				wmbm03.k01 = cssr01.puk and
+    				cssr01.ddd != '1' and
+    				wmui01.ddd != '1' and
+    				wmbm03.ddd != '1' and 
+    				wmbm03.f06 ='2'
+    		) total_jy
+    	WHERE
+    		eb5 = #{eb5}
+    	<if test=" f01 != null and f01 !='' "><!-- 登录会员id -->
+                AND eb1 = #{f01}
+        </if>
+    	<if test=" f02 != null and f02 !='' "><!-- 会员名字 -->
+                AND eb2 = #{f02}
+        </if>
+    	<!-- <if test=" f04 != null and f04 !='' ">通道id
+                AND eb3 = #{f04}
+        </if> -->
+        <if test=" f04 != null and f04 !='' ">
+			<![CDATA[	AND str_to_date(eb4, '%Y/%m/%d') >= #{f04} ]]>
+		</if>
+		<if test=" f06 != null and f06 !='' ">
+			<![CDATA[	AND str_to_date(eb4, '%Y/%m/%d') <= #{f06} ]]>
+		</if>
+        GROUP BY cc1,k01
+    </select>
+    
+    <!-- 佣金记录统计 -->
+    <select id='doSelectPageYJ' parameterType='FrameworkData' resultType='FrameworkData'>
+        SELECT cc1 as f01 ,f02,fb1,sum(f08) as f08
+    	FROM
+    		(
+    			SELECT 
+    				wmbm04.puk as puk,
+    				
+    				wmbm04.k03 as k01,
+    				wmbm04.f01 as f01,
+    				wmui01.f04 as f02,
+    				wmbm04.f08 as f08,
+    				
+					wmui01.fb1 as fb1,
+
+						wmbm04.k01 as type,
+
+    				cssr01.f03 AS eb1,
+    				wmui01.f04 AS eb2,
+    				wmbm04.k02 AS eb3,
+    				wmbm04.cc1 AS eb4,
+    				wmbm04.eb5 AS eb5,
+    				DATE_FORMAT(wmbm04.cc1, #{f05}) AS cc1
+    			FROM wmbm04,wmui01,cssr01
+    			WHERE
+    				wmbm04.k03 = wmui01.puk and
+    				wmbm04.k03 = cssr01.puk and
+    				wmbm04.k01 = '0' and
+    				cssr01.ddd != '1' and
+    				wmui01.ddd != '1' and
+    				wmbm04.ddd != '1'
+    				
+    			UNION
+    			
+    			SELECT 
+    				wmbm04.puk as puk,
+    				
+    				wmbm04.k03 as k01,
+    				wmbm04.f01 as f01,
+    				wmui01.f04 as f02,
+    				wmbm04.f08 as f08,
+    				
+					wmui01.fb1 as fb1,
+
+						wmbm04.k01 as type,
+
+    				cssr01.f03 AS eb1,
+    				wmui01.f04 AS eb2,
+    				wmbm04.k02 AS eb3,
+    				wmbm04.cc1 AS eb4,
+    				wmbm04.eb5 AS eb5,
+    				DATE_FORMAT(wmbm04.cc1, #{f05}) AS cc1
+    			FROM wmbm04,wmui01,cssr01
+    			WHERE
+    				wmbm04.k03 = wmui01.puk and
+    				wmbm04.k03 = cssr01.puk and
+    				wmbm04.k01 = '1' and
+    				cssr01.ddd != '1' and
+    				wmui01.ddd != '1' and
+    				wmbm04.ddd != '1'
+    				 
+    		) total_jy
+    	WHERE
+    		eb5 = #{eb5}
+    	<if test=" f01 != null and f01 !='' "><!-- 登录会员id -->
+                AND eb1 = #{f01}
+        </if>
+    	<if test=" f02 != null and f02 !='' "><!-- 会员名字 -->
+                AND eb2 = #{f02}
+        </if>
+    	<!-- <if test=" f04 != null and f04 !='' ">通道id
+                AND eb3 = #{f04}
+        </if> -->
+        <if test=" f04 != null and f04 !='' ">
+			<![CDATA[	AND str_to_date(eb4, '%Y/%m/%d') >= #{f04} ]]>
+		</if>
+		<if test=" f06 != null and f06 !='' ">
+			<![CDATA[	AND str_to_date(eb4, '%Y/%m/%d') <= #{f06} ]]>
+		</if>
+        GROUP BY cc1,k01
+    </select>
+</mapper>

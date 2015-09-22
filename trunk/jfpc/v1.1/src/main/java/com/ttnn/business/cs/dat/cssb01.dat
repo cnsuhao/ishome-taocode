@@ -1,0 +1,3 @@
+INSERT INTO cssb01 (puk,k01,k02,k03,f01,f02,f03,f04,f05,bbb,eb5) VALUES('DFB.XTFL.1','DFB','DFB.XTFL','','前台','贷付宝','用户组系统分类','','1','贷付宝.用户组系统分类.前台','TTNN_DFB');
+INSERT INTO cssb01 (puk,k01,k02,k03,f01,f02,f03,f04,f05,bbb,eb5) VALUES('DFB.XTFL.2','DFB','DFB.XTFL','','后台','贷付宝','用户组系统分类','','2','贷付宝.用户组系统分类.后台','TTNN_DFB');
+INSERT INTO cssb01 (puk,k01,k02,k03,f01,f02,f03,f04,f05,bbb,eb5) VALUES('DFB.XTFL.3','DFB','DFB.XTFL','','总控','贷付宝','用户组系统分类','','3','贷付宝.用户组系统分类.总控','TTNN_DFB');

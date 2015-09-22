@@ -1,0 +1,20 @@
+INSERT INTO cssb03 (puk,k01,k02,k03,f01,f02,f03,f04,f05,f06,bbb,fb1,eb5) VALUES('WMQT8000','8000','安全中心','','安全中心','','','8000','WM.QT','','','1','TTNN_DFB');
+INSERT INTO cssb03 (puk,k01,k02,k03,f01,f02,f03,f04,f05,f06,bbb,fb1,eb5) VALUES('WMQT8100','8100','实名认证','8000','实名认证','','/AQSMS1/H.go','8100','WM.QT','','','2','TTNN_DFB');
+INSERT INTO cssb03 (puk,k01,k02,k03,f01,f02,f03,f04,f05,f06,bbb,fb1,eb5) VALUES('WMQT8200','8200','密码管理','8000','密码管理',' ','/AQMM/H.go','8200','WM.QT','','','2','TTNN_DFB');
+INSERT INTO cssb03 (puk,k01,k02,k03,f01,f02,f03,f04,f05,f06,bbb,fb1,eb5) VALUES('WMQT8300','8300','证书管理','8000','证书管理一览与删除','','','8300','WM.QT','','','2','');
+INSERT INTO cssb03 (puk,k01,k02,k03,f01,f02,f03,f04,f05,f06,bbb,fb1,eb5) VALUES('WMQT8310','8310','','8000','证书管理创建','','','8310','WM.QT','','','0','');
+INSERT INTO cssb03 (puk,k01,k02,k03,f01,f02,f03,f04,f05,f06,bbb,fb1,eb5) VALUES('WMQT8320','8320','','8000','证书安装成功过渡页面','','','8320','WM.QT','','','0','');
+
+
+INSERT INTO cssb03 (puk,k01,k02,k03,f01,f02,f03,f04,f05,f06,bbb,fb1,eb5) VALUES('WMHT8000','8000','安全中心','','安全中心','','','8000','WM.HT','','','1','TTNN_DFB');
+INSERT INTO cssb03 (puk,k01,k02,k03,f01,f02,f03,f04,f05,f06,bbb,fb1,eb5) VALUES('WMHT8200','8200','密码管理','8000','密码管理',' ','/AQMM/H.go','8200','WM.HT','','','2','TTNN_DFB');
+INSERT INTO cssb03 (puk,k01,k02,k03,f01,f02,f03,f04,f05,f06,bbb,fb1,eb5) VALUES('WMHT8300','8300','证书管理','8000','证书管理一览与删除','','','8300','WM.HT','','','2','');
+INSERT INTO cssb03 (puk,k01,k02,k03,f01,f02,f03,f04,f05,f06,bbb,fb1,eb5) VALUES('WMHT8310','8310','','8000','证书管理创建','','','8310','WM.HT','','','0','');
+INSERT INTO cssb03 (puk,k01,k02,k03,f01,f02,f03,f04,f05,f06,bbb,fb1,eb5) VALUES('WMHT8320','8320','','8000','证书安装成功过渡页面','','','8320','WM.HT','','','0','');
+
+
+INSERT INTO cssb03 (puk,k01,k02,k03,f01,f02,f03,f04,f05,f06,bbb,fb1,eb5) VALUES('WMZK8000','8000','安全中心','','安全中心','','','8000','WM.ZK','','','1','TTNN_DFB');
+INSERT INTO cssb03 (puk,k01,k02,k03,f01,f02,f03,f04,f05,f06,bbb,fb1,eb5) VALUES('WMZK8200','8200','密码管理','8000','密码管理',' ','/AQMM/H.go','8200','WM.ZK','','','2','TTNN_DFB');
+INSERT INTO cssb03 (puk,k01,k02,k03,f01,f02,f03,f04,f05,f06,bbb,fb1,eb5) VALUES('WMZK8300','8300','证书管理','8000','证书管理一览与删除','','','8300','WM.ZK','','','2','TTNN_DFB');
+INSERT INTO cssb03 (puk,k01,k02,k03,f01,f02,f03,f04,f05,f06,bbb,fb1,eb5) VALUES('WMZK8310','8310','','8000','证书管理创建','','','8310','WM.ZK','','','0','TTNN_DFB');
+INSERT INTO cssb03 (puk,k01,k02,k03,f01,f02,f03,f04,f05,f06,bbb,fb1,eb5) VALUES('WMZK8320','8320','','8000','证书安装成功过渡页面','','','8320','WM.ZK','','','0','TTNN_DFB');

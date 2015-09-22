@@ -1,0 +1,179 @@
+.form-main{
+	font-size:12px;
+	color:#333333;
+	margin:0 auto;
+	text-align:center;
+	clear:both;
+	padding:30px;
+	
+}
+.form-item{
+	vertical-align:middle;
+	clear:both;
+	margin-top:20px;
+}
+.form-item-blank{
+	margin-left:92px;
+	width:540px;
+	height:80px;
+	background:#f5f5f5;
+}
+.form-label{
+	float:left;
+	width:80px;
+	height:30px;
+	line-height:30px;
+	text-align:right;
+	padding-right:12px;
+}
+.form-input{
+	float:left;
+	line-height:30px;
+}
+.form-input-one{
+	width:120px;
+}
+.form-input-two{
+	width:420px;
+}
+.form-input table{
+	
+}
+.form-input table tr{
+}
+.form-input table tr td{
+	text-align:left;
+	border-top:1px silver solid;
+}
+.form-input-two table{
+	width:100%;
+}
+.form-input-two table tr{
+	border:none;
+}
+.form-input-two table tr td{
+	width:20%;
+}
+.form-select{
+    height:25px;
+	width:97px;
+	padding:2px;
+}
+.form-input-date{
+    height:21px;
+	width:120px;
+}
+.form-input-text{
+	border:1px silver solid;
+	width:290px;
+	height:30px;
+	line-height:30px;
+	padding:0 4px;
+}
+.form-input-textarea{
+	border:1px silver solid;
+	width:290px;
+	padding:0 4px;
+}
+.form-input-item{
+	color:green;
+	display:block;
+	width:290px;
+	height:25px;
+	line-height:25px;
+	padding:0 4px;
+}
+.form-input-item1{
+	color:green;
+	display:block;
+	width:540px;
+	line-height:25px;
+	padding:0 4px;
+}
+.form-input-img{
+	max-height:300px;
+	min-height:100px;
+	padding:0 4px;
+}
+.form-input-checkbox{
+	width:13px;
+	height:13px;
+	line-height:13px;
+	margin-right:2px;
+	vertical-align:-2px;
+	*vertical-align:middle;
+	_vertical-align:3px;
+}
+.form-input-button{
+    padding:6px 16px;
+	background:#349d73;
+	border:none; color:#fff;
+}
+.form-input-button:hover{
+    padding:6px 16px;
+	background:#136c48;
+	border:none;
+}
+.form-input-button1{
+    padding:6px 16px;
+	background:#d4d4d4;
+	border:none; color:#000;
+}
+.form-input-button1:hover{
+    padding:6px 16px;
+	background:#c2c2c2;
+	border:none;
+}
+.form-amend{
+	float:left;
+	width:80px;
+	height:25px;
+	line-height:25px;
+	text-align:left;
+	padding-right:12px;
+}
+.form-tip{
+	padding-left:10px;
+}
+.form-addbox{
+	float:left;
+}
+.form-showbox{
+	background:#F5F5F5;
+	width:460px;
+	padding:5px;
+}
+
+.form-showbox-title-node{
+	width:120px;
+	float:left;
+}
+
+.form-showbox-item{
+	clear:left;
+}
+
+
+#navigation {
+	width:200px;
+	font-family:Arial;
+}
+#navigation ul li ul {
+	list-style-type:none;
+	margin:0px;
+	padding:0px 0px 0px 0px;
+	width:150px;
+	border:1px solid #999;
+	position:absolute;
+	background:#FFF;
+}
+#navigation ul li ul li {
+	margin-top:10px;
+	margin-left:10px;
+}
+#navigation ul li ul.myHide {
+	display:none;
+}
+#navigation ul li ul.myShow {
+	display:block;
+}

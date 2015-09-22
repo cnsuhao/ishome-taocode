@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 系统公告 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='com.ttnn.business.wm.dao.WMFZGLDao'>
+
+
+	<!-- 查询用户登录日志 -->
+	<select id='doSelectPageTD' parameterType='FrameworkData'
+		resultType='FrameworkData'>
+		SELECT b.puk,b.f03,a.puk as fb3, a.f03 as fb1,
+		b.f05 ,b.f06 ,b.f15 , b.f16 , b.f17 , b.f18 , b.f19 , b.bbb ,b.eb1,b.eb2,
+		a.cc1,b.uu1
+		FROM wmbma1 a
+		LEFT JOIN wmbma1 b ON a.puk = b.fb3 AND b.eb5 = #{puk}
+		WHERE
+		a.eb5 = #{eb5}
+		AND a.ddd != '1'	
+	</select>
+
+
+	<!-- 查询用户登录日志 -->
+	<select id='doSelectPageRZ' parameterType='FrameworkData'
+		resultType='FrameworkData'>
+		SELECT a.k01 as k03,a.fb2,a.eb2,a.cc1, b.k01,b.k02,b.f07 
+		FROM cssl11 a,csss01 b 
+		WHERE a.eb5=b.puk and  b.eb5 = #{eb5}		 
+		<if test=" f07 != null and f07 !='' "> 
+			AND b.f07 = #{f07}
+		</if>
+		<if test=" k01 != null and k01 !='' "> 
+			AND b.k01 = #{k01}
+		</if>
+		<if test=" k02 != null and k02 !='' "> 
+			AND b.k02 = #{k02}
+		</if>
+		<if test=" f10 != null and f10 !='' "> 
+			AND b.f10 = #{f10}
+		</if>			
+	</select>
+  
+  	<!-- 系统分站查询 -->
+	<select id='doSelectPageFZ' parameterType='FrameworkData'
+		resultType='FrameworkData'>
+			SELECT  k01, k02, f07, f08,f12, f01,f10,
+			eb1,puk,uu1 from csss01 where ddd!='1' AND eb5=#{eb5}
+		<if test=" f07 != null and f07 !='' "> 
+			AND f07 = #{f07}
+		</if>
+		<if test=" k01 != null and k01 !='' "> 
+			AND k01 = #{k01}
+		</if>
+		<if test=" k02 != null and k02 !='' "> 
+			AND k02 = #{k02}
+		</if>
+		<if test=" f10 != null and f10 !='' "> 
+			AND f10 = #{f10}
+		</if>			
+	</select>
+		
+	
+	<!-- 查询超级管理员 -->
+	<select id='doSelectPageGL' parameterType='FrameworkData'
+		resultType='FrameworkData'>
+		select f01,f03,f06,fb1,fb2,puk,uu1 FROM cssr01 where ddd='0' AND eb5 IN
+		 (select puk from csss01 
+		 where eb5=#{eb5}
+		 <if test=" f07 != null and f07 !='' "> 
+			AND f07 = #{f07}
+		</if>
+		<if test=" k01 != null and k01 !='' "> 
+			AND k01 = #{k01}
+		</if>
+		<if test=" k02 != null and k02 !='' "> 
+			AND k02 = #{k02}
+		</if>
+		<if test=" f10 != null and f10 !='' "> 
+			AND f10 = #{f10}
+		</if>			
+		 )		
+	</select>
+	
+	<!-- 系统分站查询 -->
+	<select id='doSelectPageXT' parameterType='FrameworkData'
+		resultType='FrameworkData'>
+<!-- 			SELECT * from csss01 where eb5=#{eb5} -->
+		SELECT * from csss01 where eb5=#{eb5}
+		<if test=" f07 != null and f07 !='' "> 
+			AND f07 = #{f07}
+		</if>
+		<if test=" k01 != null and k01 !='' "> 
+			AND k01 = #{k01}
+		</if>
+		<if test=" k02 != null and k02 !='' "> 
+			AND k02 = #{k02}
+		</if>
+		<if test=" f10 != null and f10 !='' "> 
+			AND f10 = #{f10}
+		</if>	
+		group by eb5		
+	</select>
+	
+</mapper>
