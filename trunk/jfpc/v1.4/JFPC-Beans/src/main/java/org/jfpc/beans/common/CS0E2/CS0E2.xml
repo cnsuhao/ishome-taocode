@@ -1,0 +1,279 @@
+﻿<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 警告异常日志 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='org.jfpc.beans.common.CS0E2.CS0E2Dao'>
+    <!-- 表字段信息  -->
+    <sql id='tableColumns'>
+        puk,bbb,fb1,fb2,fb3,fb4,fb5,eb1,eb2,eb3,eb4,eb5,ggg,ppp,ddd,cc1,cc2,uu1,uu2
+    </sql>
+
+    <!-- 根据条件更新所有记录 -->
+    <update id='doUpdateAll' parameterType='CS0E2DBO'>
+        UPDATE cs0e2 SET  uu1 = #{uuu} <!-- 更新时间、更新者 -->
+        <if test=" bbb != null and bbb !='' "><!-- 日志内容 -->
+            ,bbb = #{bbb}
+        </if>
+        <if test=" fb1 != null and fb1 !='' "><!-- 产品ID -->
+            ,fb1 = #{fb1}
+        </if>
+        <if test=" fb2 != null and fb2 !='' "><!-- 用户ID -->
+            ,fb2 = #{fb2}
+        </if>
+        <if test=" fb3 != null and fb3 !='' "><!-- 业务识别ID -->
+            ,fb3 = #{fb3}
+        </if>
+        <if test=" fb4 != null and fb4 !='' "><!-- 业务类名称 -->
+            ,fb4 = #{fb4}
+        </if>
+        <if test=" fb5 != null and fb5 !='' "><!-- 业务方法名称 -->
+            ,fb5 = #{fb5}
+        </if>
+        <if test=" eb1 != null and eb1 !='' "><!-- 日志等级 -->
+            ,eb1 = #{eb1}
+        </if>
+        <if test=" eb2 != null and eb2 !='' "><!-- 扩展2 -->
+            ,eb2 = #{eb2}
+        </if>
+        <if test=" eb3 != null and eb3 !='' "><!-- 扩展3 -->
+            ,eb3 = #{eb3}
+        </if>
+        <if test=" eb4 != null and eb4 !='' "><!-- 扩展4 -->
+            ,eb4 = #{eb4}
+        </if>
+        <if test=" eb5 != null and eb5 !='' "><!-- 扩展5 -->
+            ,eb5 = #{eb5}
+        </if>
+        <if test=" ggg != null and ggg !='' "><!-- 所在组织 -->
+            ,ggg = #{ggg}
+        </if>
+        <if test=" ppp != null and ppp !='' "><!-- 企业ID -->
+            ,ppp = #{ppp}
+        </if>
+        <if test=" ddd != null and ddd !='' "><!-- 有效标识 -->
+            ,ddd = #{ddd}
+        </if>
+        <if test=" cc1 != null and cc1 !='' "><!-- 创建时间 -->
+            ,cc1 = #{cc1}
+        </if>
+        <if test=" cc2 != null and cc2 !='' "><!-- 创建者 -->
+            ,cc2 = #{cc2}
+        </if>
+        <if test=" uu2 != null and uu2 !='' "><!-- 最后更新者 -->
+            ,uu2 = #{uu2}
+        </if>
+        <trim prefix='WHERE' prefixOverrides='AND |OR '>
+            <if test=" puk != null and puk !='' "><!-- 系统数据唯一识别ID（固定主键） -->
+                AND puk = #{puk}
+            </if>
+            <if test=" bbb != null and bbb !='' "><!-- 日志内容 -->
+                AND bbb = #{bbb}
+            </if>
+            <if test=" fb1 != null and fb1 !='' "><!-- 产品ID -->
+                AND fb1 = #{fb1}
+            </if>
+            <if test=" fb2 != null and fb2 !='' "><!-- 用户ID -->
+                AND fb2 = #{fb2}
+            </if>
+            <if test=" fb3 != null and fb3 !='' "><!-- 业务识别ID -->
+                AND fb3 = #{fb3}
+            </if>
+            <if test=" fb4 != null and fb4 !='' "><!-- 业务类名称 -->
+                AND fb4 = #{fb4}
+            </if>
+            <if test=" fb5 != null and fb5 !='' "><!-- 业务方法名称 -->
+                AND fb5 = #{fb5}
+            </if>
+            <if test=" eb1 != null and eb1 !='' "><!-- 日志等级 -->
+                AND eb1 = #{eb1}
+            </if>
+            <if test=" eb2 != null and eb2 !='' "><!-- 扩展2 -->
+                AND eb2 = #{eb2}
+            </if>
+            <if test=" eb3 != null and eb3 !='' "><!-- 扩展3 -->
+                AND eb3 = #{eb3}
+            </if>
+            <if test=" eb4 != null and eb4 !='' "><!-- 扩展4 -->
+                AND eb4 = #{eb4}
+            </if>
+            <if test=" eb5 != null and eb5 !='' "><!-- 扩展5 -->
+                AND eb5 = #{eb5}
+            </if>
+            <if test=" ggg != null and ggg !='' "><!-- 所在组织 -->
+                AND ggg = #{ggg}
+            </if>
+            <if test=" ppp != null and ppp !='' "><!-- 企业ID -->
+                AND ppp = #{ppp}
+            </if>
+            <if test=" ddd != null and ddd !='' "><!-- 有效标识 -->
+                AND ddd = #{ddd}
+            </if>
+            <if test=" cc1 != null and cc1 !='' "><!-- 创建时间 -->
+                AND cc1 = #{cc1}
+            </if>
+            <if test=" cc2 != null and cc2 !='' "><!-- 创建者 -->
+                AND cc2 = #{cc2}
+            </if>
+            <if test=" uu1 != null and uu1 !='' "><!-- 最后更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+            <if test=" uu2 != null and uu2 !='' "><!-- 最后更新者 -->
+                AND uu2 = #{uu2}
+            </if>
+        </trim>
+    </update>
+    <!-- 查询分页数据信息  -->
+    <select id='doSelectPage' parameterType='CS0E2DBO' resultType='CS0E2DBO'>
+        SELECT <include refid='tableColumns'/> FROM cs0e2
+        <trim prefix='WHERE' prefixOverrides='AND |OR '>
+            <if test=" puk != null and puk !='' "><!-- 系统数据唯一识别ID（固定主键） -->
+                AND puk = #{puk}
+            </if>
+            <if test=" bbb != null and bbb !='' "><!-- 日志内容 -->
+                AND bbb = #{bbb}
+            </if>
+            <if test=" fb1 != null and fb1 !='' "><!-- 产品ID -->
+                AND fb1 = #{fb1}
+            </if>
+            <if test=" fb2 != null and fb2 !='' "><!-- 用户ID -->
+                AND fb2 = #{fb2}
+            </if>
+            <if test=" fb3 != null and fb3 !='' "><!-- 业务识别ID -->
+                AND fb3 = #{fb3}
+            </if>
+            <if test=" fb4 != null and fb4 !='' "><!-- 业务类名称 -->
+                AND fb4 = #{fb4}
+            </if>
+            <if test=" fb5 != null and fb5 !='' "><!-- 业务方法名称 -->
+                AND fb5 = #{fb5}
+            </if>
+            <if test=" eb1 != null and eb1 !='' "><!-- 日志等级 -->
+                AND eb1 = #{eb1}
+            </if>
+            <if test=" eb2 != null and eb2 !='' "><!-- 扩展2 -->
+                AND eb2 = #{eb2}
+            </if>
+            <if test=" eb3 != null and eb3 !='' "><!-- 扩展3 -->
+                AND eb3 = #{eb3}
+            </if>
+            <if test=" eb4 != null and eb4 !='' "><!-- 扩展4 -->
+                AND eb4 = #{eb4}
+            </if>
+            <if test=" eb5 != null and eb5 !='' "><!-- 扩展5 -->
+                AND eb5 = #{eb5}
+            </if>
+            <if test=" ggg != null and ggg !='' "><!-- 所在组织 -->
+                AND ggg = #{ggg}
+            </if>
+            <if test=" ppp != null and ppp !='' "><!-- 企业ID -->
+                AND ppp = #{ppp}
+            </if>
+            <if test=" ddd != null and ddd !='' "><!-- 有效标识 -->
+                AND ddd = #{ddd}
+            </if>
+            <if test=" cc1 != null and cc1 !='' "><!-- 创建时间 -->
+                AND cc1 = #{cc1}
+            </if>
+            <if test=" cc2 != null and cc2 !='' "><!-- 创建者 -->
+                AND cc2 = #{cc2}
+            </if>
+            <if test=" uu1 != null and uu1 !='' "><!-- 最后更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+            <if test=" uu2 != null and uu2 !='' "><!-- 最后更新者 -->
+                AND uu2 = #{uu2}
+            </if>
+        </trim>
+    </select>
+
+    <!-- 插入一条数据 -->
+    <insert id='doInsert' parameterType='CS0E2DBO'>
+        INSERT INTO cs0e2
+          ( <include refid='tableColumns'/>) 
+        VALUES 
+          ( #{puk},#{bbb},#{fb1},#{fb2},#{fb3},#{fb4},#{fb5},#{eb1},#{eb2},#{eb3},#{eb4},#{eb5},#{ggg},#{ppp},#{ddd},#{cc1},#{cc2},#{uu1},#{uu2} )
+    </insert>
+    <!-- 修改一条数据 -->
+    <update id='doUpdate' parameterType='CS0E2DBO'>
+        UPDATE cs0e2 SET uu1 = #{uuu} <!-- 更新时间、更新者 -->
+        <if test=" bbb != null and bbb !='' "><!-- 日志内容 -->
+            ,bbb = #{bbb}
+        </if>
+        <if test=" fb1 != null and fb1 !='' "><!-- 产品ID -->
+            ,fb1 = #{fb1}
+        </if>
+        <if test=" fb2 != null and fb2 !='' "><!-- 用户ID -->
+            ,fb2 = #{fb2}
+        </if>
+        <if test=" fb3 != null and fb3 !='' "><!-- 业务识别ID -->
+            ,fb3 = #{fb3}
+        </if>
+        <if test=" fb4 != null and fb4 !='' "><!-- 业务类名称 -->
+            ,fb4 = #{fb4}
+        </if>
+        <if test=" fb5 != null and fb5 !='' "><!-- 业务方法名称 -->
+            ,fb5 = #{fb5}
+        </if>
+        <if test=" eb1 != null and eb1 !='' "><!-- 日志等级 -->
+            ,eb1 = #{eb1}
+        </if>
+        <if test=" eb2 != null and eb2 !='' "><!-- 扩展2 -->
+            ,eb2 = #{eb2}
+        </if>
+        <if test=" eb3 != null and eb3 !='' "><!-- 扩展3 -->
+            ,eb3 = #{eb3}
+        </if>
+        <if test=" eb4 != null and eb4 !='' "><!-- 扩展4 -->
+            ,eb4 = #{eb4}
+        </if>
+        <if test=" eb5 != null and eb5 !='' "><!-- 扩展5 -->
+            ,eb5 = #{eb5}
+        </if>
+        <if test=" ggg != null and ggg !='' "><!-- 所在组织 -->
+            ,ggg = #{ggg}
+        </if>
+        <if test=" ppp != null and ppp !='' "><!-- 企业ID -->
+            ,ppp = #{ppp}
+        </if>
+        <if test=" ddd != null and ddd !='' "><!-- 有效标识 -->
+            ,ddd = #{ddd}
+        </if>
+        <if test=" cc1 != null and cc1 !='' "><!-- 创建时间 -->
+            ,cc1 = #{cc1}
+        </if>
+        <if test=" cc2 != null and cc2 !='' "><!-- 创建者 -->
+            ,cc2 = #{cc2}
+        </if>
+        <if test=" uu2 != null and uu2 !='' "><!-- 最后更新者 -->
+            ,uu2 = #{uu2}
+        </if>
+        WHERE puk = #{puk}
+            <if test=" uu1 != null and uu1 !='' "><!-- 最后更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+    </update>
+    <!-- 逻辑删除一条数据 -->
+    <delete id='toDelete' parameterType='CS0E2DBO'>
+        UPDATE cs0e2 SET ddd='1', uu1 = #{uuu}, uu2 = #{uu2} WHERE puk = #{puk}
+            <if test=" uu1 != null and uu1 !='' "><!-- 最后更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+    </delete>
+    <!-- 物理删除一条数据 -->
+    <delete id='doDelete' parameterType='CS0E2DBO'>
+        DELETE FROM cs0e2 WHERE puk = #{puk}
+            <if test=" uu1 != null and uu1 !='' "><!-- 最后更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+    </delete>
+    <!-- 查询一条数据  -->
+    <select id='doRead' parameterType='CS0E2DBO' resultType='CS0E2DBO'>
+        SELECT <include refid='tableColumns'/> FROM cs0e2 WHERE puk = #{puk}
+            <if test=" ddd != null and ddd !='' "><!-- 最后更新时间 -->
+                AND ddd = #{ddd}
+            </if>
+    </select>
+
+</mapper>

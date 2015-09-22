@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='GB2312'?>
+<messages>
+	<common>
+		<message k03_mbbh='1' bbb='当前系统繁忙，请稍后再试。或者刷新页面后，重新提交。' />
+		<message k03_mbbh='9' bbb='登录失效，请重新登录' />
+		<message k03_mbbh='9990' bbb='登录成功' />
+		<message k03_mbbh='9991' bbb='当前用户不存在' />
+		<message k03_mbbh='9992' bbb='密码错误，请重新输入' />
+		<message k03_mbbh='9981' bbb='您输入手机号码存在多个绑定，请使用帐号登录!' />
+		<message k03_mbbh='9982' bbb='您输入邮件地址存在多个绑定，请使用帐号登录!' />
+		<message k03_mbbh='9983' bbb='您输入用户名存在多个，请联系管理员解决!' />
+	</common>
+</messages>

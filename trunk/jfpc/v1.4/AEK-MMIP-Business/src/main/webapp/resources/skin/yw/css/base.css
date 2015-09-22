@@ -1,0 +1,227 @@
+/* 让列表转行*/
+.table-responsive>.table>thead>tr>th, .table-responsive>.table>tbody>tr>th, .table-responsive>.table>tfoot>tr>th, .table-responsive>.table>thead>tr>td, .table-responsive>.table>tbody>tr>td, .table-responsive>.table>tfoot>tr>td {
+white-space: nowrap;}
+.table-responsive>.table-bordered>thead>tr>th:last-child, .table-responsive>.table-bordered>tbody>tr>th:last-child, .table-responsive>.table-bordered>tfoot>tr>th:last-child, .table-responsive>.table-bordered>thead>tr>td:last-child, .table-responsive>.table-bordered>tbody>tr>td:last-child, .table-responsive>.table-bordered>tfoot>tr>td:last-child {
+border-right: 0;}
+.table-responsive {width: 100%;margin-bottom: 15px;overflow-x: auto;overflow-y: hidden;-webkit-overflow-scrolling: touch;-ms-overflow-style: -ms-autohiding-scrollbar;border: 1px solid #ddd;}
+.table-responsive>.table {margin-bottom: 0;}
+.table-responsive>.table-bordered {margin: -1px;border-right: 0;}
+/* 工具*/
+.tools-group{
+	padding-top:10px;
+}
+.f24{
+	font-size: 24px;
+}
+/* 必填 */
+em{
+	color:red;
+	padding-right: 10px;
+}
+/* margin */
+.mt20{
+	margin-top: 20px;
+}  
+.mb20{
+	margin-bottom: 20px;
+}
+.mb40{
+	margin-bottom: 40px;
+}
+.ml10{
+	margin-left: 10px;
+}
+.mr10{
+	margin-right: 10px;
+}
+.ml20{
+	margin-left: 20px;
+}
+/*  */
+.relative{
+	position: relative;
+}
+.tc{
+	text-align: center;
+}
+.tr{
+	text-align: right;
+}
+.gray-box{
+	border: 1px solid #e1e1e8;
+	background-color: #f7f7f9;
+}
+img.smImg{
+	height: 100px;
+	width:100px;
+}
+.f12{
+	font-size: 12px;
+}
+.cRed{
+	color:red;
+}
+.cWhite{
+	color:white;
+}
+.fl-l{
+	float: left;
+}
+.bottomFixed{
+	position: fixed;
+	width: 100%;
+	bottom: 0;
+}
+.text-warp{
+	white-space: normal !important;	
+}
+/* table-content{} */
+.table-content{
+	height: 500px;
+	overflow: auto;
+}
+/* 满屏自动大小 */
+html.autoSize,html.autoSize body{
+	width: 100%;
+	height: 100%;
+}
+/*基础表单*/
+.form-edit{min-width: 700px; max-width: 900px; margin:auto;}
+.form-edit>.form-group{padding-left: 0px;}
+.form-edit .col-xs-1, .form-edit .col-sm-1, .form-edit .col-md-1, .form-edit .col-lg-1, .form-edit .col-xs-2, .form-edit .col-sm-2, .form-edit .col-md-2, .form-edit .col-lg-2, .form-edit .col-xs-3, .form-edit .col-sm-3, .form-edit .col-md-3, .form-edit .col-lg-3, .form-edit .col-xs-4, .form-edit .col-sm-4, .form-edit .col-md-4, .form-edit .col-lg-4, .form-edit .col-xs-5, .form-edit .col-sm-5, .form-edit .col-md-5, .form-edit .col-lg-5, .form-edit .col-xs-6, .form-edit .col-sm-6, .form-edit .col-md-6, .form-edit .col-lg-6, .form-edit .col-xs-7, .form-edit .col-sm-7, .form-edit .col-md-7, .form-edit .col-lg-7, .form-edit .col-xs-8, .form-edit .col-sm-8, .form-edit .col-md-8, .form-edit .col-lg-8, .form-edit .col-xs-9, .form-edit .col-sm-9, .form-edit .col-md-9, .form-edit .col-lg-9, .form-edit .col-xs-10, .form-edit .col-sm-10, .form-edit .col-md-10, .form-edit .col-lg-10, .form-edit .col-xs-11, .form-edit .col-sm-11, .form-edit .col-md-11, .form-edit .col-lg-11, .form-edit .col-xs-12, .form-edit .col-sm-12, .form-edit .col-md-12, .form-edit .col-lg-12{
+	padding-left: 0;
+}
+.form-read .table-title{border-top: 1px solid #dedede;}
+.form-read .label-title{border-right: 1px solid #dedede; }
+.form-read .label-content{ text-align: left; margin-left: 10px;}
+.form-read>.form-group{ margin-bottom: 0px; border-bottom: 1px solid #dedede;}
+.form-read>.btn-form-group{ border:0px;padding-top: 10px; background-color: #fffbfb;}
+.form-read>.form-group label{padding-bottom: 10px;}
+.form-mod{
+	height: 100%;
+	width: 100%;
+	position: relative;
+	display: block;
+}
+.form-mod>.form-bd{
+	position: absolute;
+	top:0;
+	bottom: 50px;
+	width: 100%;
+	overflow: auto;
+}
+.form-mod>.form-ft{
+	position: absolute;
+	height: 50px;
+	width: 100%;
+	bottom: 0;
+	line-height: 50px;
+	text-align: right;
+}
+/*筛选form*/
+.form-search>.form-group{ margin-right: 15px;}
+.form-edit .file-bottom{margin-top: 15px;}
+/* 地址选择 */
+.addr-mod .form-control{
+	width: auto;
+	display: inline-block;
+	margin-bottom: 10px;
+}
+/* 主框架加载状态 */
+.frameStatus{
+	margin-top: 10px;
+	height: 16px;
+	width: 16px;
+	background: url(../images/loading2.gif);
+	float: right;
+	margin-right: 20px;
+	/*display: none;*/
+}
+.frameStatus.show{
+	-webkit-transform:scale(1);
+	-moz-transform:scale(1);
+	transform:scale(1);
+}
+/* .msgTips */
+.msgTips{
+	position: absolute;
+	top:10px;
+	left:50%;
+	margin-left:-50px; 
+	padding: 2px 10px;
+	border-radius: 3px;
+	background-color: #d9edf7;
+	text-shadow: 1px 1px 1px #fff;
+	transition: color background .5s;
+	-moz-transition: color background .5s;	/* Firefox 4 */
+	-webkit-transition: color background .5s;	/* Safari 和 Chrome */
+	-o-transition: color background .5s;	/* Opera */
+}
+.msgTips-loading{
+	display: inline-block;
+	vertical-align: middle;
+	height: 16px;
+	width: 16px;
+	background-image: url(../images/loading.gif);
+}
+.msgTips>.msgTips-text{  
+	padding-left:5px;
+}
+.msgTips.success{
+	background-color: #dff0d8;
+}
+.msgTips.warning{
+	background-color: #fcf8e3;
+}
+.msgTips.error{
+	background-color: #f2dede;
+}
+/*表格底部操作按钮*/
+.table-bottom-opt-btn{ text-align: center; margin:10px 0px;}
+/*分页*/
+.pagination {display: inline-block; vertical-align:middle;}
+.pagination-sm > li > a, .pagination-sm > li > span { padding: 1px 5px; font-size: 12px;}
+.pagination-sm > li:first-child > a, .pagination-sm > li:first-child > span {border-bottom-left-radius: 3px; border-top-left-radius: 3px;}
+.pagination-sm > li:last-child > a, .pagination-sm > li:last-child > span {border-top-right-radius: 3px; border-bottom-right-radius: 3px;}
+.pagination-count{display: inline-block; vertical-align:middle; margin-right:10px;}
+/*审核对比*/
+.inv-list,.inv-list li{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.inv-list li{
+	margin: 10px;
+}
+.inv-list .inv-content{
+	padding: 5px;
+	margin-right: 10px;
+	border-top: 1px solid #e5e5e5;
+	float: left;
+}
+.contrast-mod{
+	width: 790px;
+	margin: 0 auto;
+}
+.contrast-mod .title .inv-content{
+	border-top:0;
+	font-weight: 700;
+}
+.contrast-mod .th{
+	width: 170px;
+	font-weight: 700;
+	text-align: right;
+}
+.contrast-mod .cot{
+	width: 280px;
+}
+.contrast-mod .msg{
+	width:750px;
+}
+.inv-item.diff{
+	background-color: #ddd;
+}
+/*form-group-sm 下按钮修正*/
+.form-group-sm .input-group .btn{
+	padding: 4px 10px;
+}

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Bean实体别名 -->
+	<typeAliases>
+
+		<typeAlias alias='FrameworkData' type='org.jfpc.framework.bean.FrameworkDataBean'/>
+		<typeAlias alias='LoginerData' 	 type='org.jfpc.framework.bean.LoginerBean'/>		
+		<typeAlias alias='DictionaryDBO' type='org.jfpc.common.dict.DictionaryDBO'/>
+		
+		
+<!-- Need to Copy Into Config XML(mybatis.xml) file -->
+<!-- 企业经营范围 -->
+<typeAlias alias='CZS0_GYS_JYFWDBO' type='com.aek56.atm.credentials.CZS0_GYS_JYFW.CZS0_GYS_JYFWDBO'/>
+
+<!-- Need to Copy Into Config XML(mybatis.xml) file -->
+<!-- 企业资料历史记录 -->
+<typeAlias alias='CKS0_QYZLLSDBO' type='com.aek56.atm.credentials.CKS0_QYZLLS.CKS0_QYZLLSDBO'/>
+<!-- Need to Copy Into Config XML(mybatis.xml) file -->
+<!-- 企业证件历史记录-->
+<typeAlias alias='CKS1_QYZJLSDBO' type='com.aek56.atm.credentials.CKS1_QYZJLS.CKS1_QYZJLSDBO'/>
+<!-- Need to Copy Into Config XML(mybatis.xml) file -->
+<!-- 企业资料（基本信息、证件信息） -->
+<typeAlias alias='MMU_XTZSJDBO' type='com.aek56.atm.credentials.MMU_XTZSJ.MMU_XTZSJDBO'/>
+<!-- Need to Copy Into Config XML(mybatis.xml) file -->
+<!-- 企业资料审核表 -->
+<typeAlias alias='CKS0_QYZLSHDBO' type='com.aek56.atm.credentials.CKS0_QYZLSH.CKS0_QYZLSHDBO'/>
+<!-- Need to Copy Into Config XML(mybatis.xml) file -->
+<!-- 企业证件审核表 -->
+<typeAlias alias='CKS1_QYZJSHDBO' type='com.aek56.atm.credentials.CKS1_QYZJSH.CKS1_QYZJSHDBO'/>
+<!-- Need to Copy Into Config XML(mybatis.xml) file -->
+<!-- 收货地址 -->
+<typeAlias alias='MOT1_SHDZDBO' type='com.aek56.atm.credentials.MOT1_SHDZ.MOT1_SHDZDBO'/>
+<!-- Need to Copy Into Config XML(mybatis.xml) file -->
+<!-- 医院供应商信息 -->
+<typeAlias alias='MYG0_YYGYSXXDBO' type='com.aek56.atm.credentials.MYG0_YYGYSXX.MYG0_YYGYSXXDBO'/>
+<!-- Need to Copy Into Config XML(mybatis.xml) file -->
+<!-- 供应商提供医院营业执照 -->
+<typeAlias alias='MYG1_GYS_YYZZDBO' type='com.aek56.atm.credentials.MYG1_GYS_YYZZ.MYG1_GYS_YYZZDBO'/>
+<!-- Need to Copy Into Config XML(mybatis.xml) file -->
+<!-- 供应商提供医院经营许可证 -->
+<typeAlias alias='MYG2_GYS_JYXKZDBO' type='com.aek56.atm.credentials.MYG2_GYS_JYXKZ.MYG2_GYS_JYXKZDBO'/>
+<!-- Need to Copy Into Config XML(mybatis.xml) file -->
+<!-- 供应商提供医院经营许可证 -->
+<typeAlias alias='MYG3_GYS_GSSWDJZDBO' type='com.aek56.atm.credentials.MYG3_GYS_GSSWDJZ.MYG3_GYS_GSSWDJZDBO'/>
+<!-- Need to Copy Into Config XML(mybatis.xml) file -->
+<!-- 供应商提供医院经销授权书 -->
+<typeAlias alias='MYG4_GYS_JXSQSDBO' type='com.aek56.atm.credentials.MYG4_GYS_JXSQS.MYG4_GYS_JXSQSDBO'/>
+<!-- Need to Copy Into Config XML(mybatis.xml) file -->
+<!-- 供应商提供医院销售人员委托书 -->
+<typeAlias alias='MYG5_GYS_XSRYWTSDBO' type='com.aek56.atm.credentials.MYG5_GYS_XSRYWTS.MYG5_GYS_XSRYWTSDBO'/>
+<!-- Need to Copy Into Config XML(mybatis.xml) file -->
+<!-- 供应商提供医院售后服务承诺书 -->
+<typeAlias alias='MYG6_GYS_SHFWCNSDBO' type='com.aek56.atm.credentials.MYG6_GYS_SHFWCNS.MYG6_GYS_SHFWCNSDBO'/>
+<!-- Need to Copy Into Config XML(mybatis.xml) file -->
+<!-- 供应商提供医院厂家营业执照 -->
+<typeAlias alias='MYG7_CJ_YYZZDBO' type='com.aek56.atm.credentials.MYG7_CJ_YYZZ.MYG7_CJ_YYZZDBO'/>
+<!-- Need to Copy Into Config XML(mybatis.xml) file -->
+<!-- 供应商提供医院厂家生产许可证 -->
+<typeAlias alias='MYG8_CJ_SCXKZDBO' type='com.aek56.atm.credentials.MYG8_CJ_SCXKZ.MYG8_CJ_SCXKZDBO'/>
+<!-- Need to Copy Into Config XML(mybatis.xml) file -->
+<!-- 供应商提供医院厂家医疗器械注册证 -->
+<typeAlias alias='MYG9_CJ_SPZCZDBO' type='com.aek56.atm.credentials.MYG9_CJ_SPZCZ.MYG9_CJ_SPZCZDBO'/>
+<!-- Need to Copy Into Config XML(mybatis.xml) file -->
+<!-- 供应商营业执照 -->
+<typeAlias alias='MZS1_GYS_YYZZDBO' type='com.aek56.atm.credentials.MZS1_GYS_YYZZ.MZS1_GYS_YYZZDBO'/>
+<!-- Need to Copy Into Config XML(mybatis.xml) file -->
+<!-- 供应商经营许可证 -->
+<typeAlias alias='MZS2_GYS_JYXKZDBO' type='com.aek56.atm.credentials.MZS2_GYS_JYXKZ.MZS2_GYS_JYXKZDBO'/>
+<!-- Need to Copy Into Config XML(mybatis.xml) file -->
+<!-- 供应商工商税务登记证 -->
+<typeAlias alias='MZS3_GYS_GSSWDJZDBO' type='com.aek56.atm.credentials.MZS3_GYS_GSSWDJZ.MZS3_GYS_GSSWDJZDBO'/>
+<!-- Need to Copy Into Config XML(mybatis.xml) file -->
+<!-- 供应商经销授权书 -->
+<typeAlias alias='MZS4_GYS_JXSQSDBO' type='com.aek56.atm.credentials.MZS4_GYS_JXSQS.MZS4_GYS_JXSQSDBO'/>
+<!-- Need to Copy Into Config XML(mybatis.xml) file -->
+<!-- 供应商销售人员委托书 -->
+<typeAlias alias='MZS5_GYS_XSRYWTSDBO' type='com.aek56.atm.credentials.MZS5_GYS_XSRYWTS.MZS5_GYS_XSRYWTSDBO'/>
+<!-- Need to Copy Into Config XML(mybatis.xml) file -->
+<!-- 供应商售后服务承诺书 -->
+<typeAlias alias='MZS6_GYS_SHFWCNSDBO' type='com.aek56.atm.credentials.MZS6_GYS_SHFWCNS.MZS6_GYS_SHFWCNSDBO'/>
+<!-- Need to Copy Into Config XML(mybatis.xml) file -->
+<!-- 厂家营业执照 -->
+<typeAlias alias='MZS7_CJ_YYZZDBO' type='com.aek56.atm.credentials.MZS7_CJ_YYZZ.MZS7_CJ_YYZZDBO'/>
+<!-- Need to Copy Into Config XML(mybatis.xml) file -->
+<!-- 厂家生产许可证 -->
+<typeAlias alias='MZS8_CJ_SCXKZDBO' type='com.aek56.atm.credentials.MZS8_CJ_SCXKZ.MZS8_CJ_SCXKZDBO'/>
+<!-- Need to Copy Into Config XML(mybatis.xml) file -->
+<!-- 厂家医疗器械注册证 -->
+<typeAlias alias='MZS9_CJ_SPZCZDBO' type='com.aek56.atm.credentials.MZS9_CJ_SPZCZ.MZS9_CJ_SPZCZDBO'/>
+<!-- 会员应用开通信息 -->
+<typeAlias alias='SZ_YWY_YY_GLDBO' type='org.jfpc.beans.platform.SZ_YWY_YY_GL.SZ_YWY_YY_GLDBO'/>
+<!-- Need to Copy Into Config XML(mybatis.xml) file -->
+<!-- 供应商证件信息 -->
+<typeAlias alias='MZSX_GYS_ZJXXDBO' type='com.aek56.atm.credentials.MZSX_GYS_ZJXXDBO'/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	</typeAliases>

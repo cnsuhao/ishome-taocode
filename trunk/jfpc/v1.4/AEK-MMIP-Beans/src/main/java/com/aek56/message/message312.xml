@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='GB2312'?>
+<messages>
+	<common>
+	   <!-- 注册证推送 -->
+		<message k03_mbbh='3120090201' bbb='推送成功！' />
+		<message k03_mbbh='3120090202' bbb='推送失败！' />
+	</common>
+</messages>

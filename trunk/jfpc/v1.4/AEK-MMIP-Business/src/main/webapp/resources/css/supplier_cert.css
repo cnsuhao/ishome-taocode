@@ -1,0 +1,33 @@
+.userBox{border:1px solid #ccc; margin-right: 10px; padding: 20px; background: #fff;}
+.gray{ color: gray;}
+.userInfoBoxText{margin-left: 90px; line-height: 20px;}
+.userRemind{list-style: none; margin-top: 20px; border-top: 1px solid #ccc; padding-top: 20px; line-height: 26px; color: #666;}
+.userRemind li{float: left; width: 33%; text-align: center; height: 80px; border-right:1px solid #ccc; padding-top: 20px;}
+.userRemind li.noLine{border-right: none; height: 100px; padding-top: 0;}
+.tableListImg{ list-style: none;}
+.tableListImg li{ margin: 0px;padding:5px; float: left;}
+.tableListImg li img{ border-radius: 5px;}
+.liSpan li{margin: 0px; padding-right:30px;}
+.hospitalInfoBox{width: 230px;}
+.hospitalInfoText{margin-left: 55px;line-height: 25px;}
+.hospitalBox{width: 110px;border-right: 1px solid #ccc;}
+.leftLine{border-left: 1px solid #ccc;}
+.hospitalOvTip{margin-left: 10px; line-height: 40px;}
+.baseLogo{width: 120px; text-align: center; }
+.baseLogoTip{line-height: 80px;}
+.supplierBaseInfoBox{border-top: 1px solid #ccc; margin-top: 50px;}
+.businesScopeBox{ width: 520px; height: 100px; cursor: pointer;background-color: #f1f1f1}
+.mRight{ margin-right: 30px;}
+.listOrder{display:-moz-inline-stack; -moz-box-align:center; display:inline-block; +display:inline; zoom:1;}
+.listOrder strong{vertical-align: middle;}
+.listOrder span{display: inline-block; margin-right: 10px; vertical-align:middle; cursor: pointer;}
+.listOrder span.active{background: #ccc; color: #fff; padding: 5px;}
+.listOrder em{font-style: normal;}
+.regImgList {list-style:none; width:520px;}
+.regImgList li{float:left;margin:0 5px 5px 0;}
+.imgDel{position:absolute;top:5px;right:5px; background: url(../images/icon/i_del.png) no-repeat; display:block; width:14px; height:14px;}
+
+.titleMark{ font-size: 12px;margin-left: 15px;}
+.correction{margin:6px 30px 0 0;}
+.w300{width: 300px; vertical-align: top;}
+.WT300{width: 260px;}

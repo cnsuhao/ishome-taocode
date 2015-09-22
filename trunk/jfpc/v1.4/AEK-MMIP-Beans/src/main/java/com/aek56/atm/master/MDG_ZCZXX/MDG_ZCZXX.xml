@@ -1,0 +1,867 @@
+﻿<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 注册证信息 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='com.aek56.atm.master.MDG_ZCZXX.MDG_ZCZXXDao'>
+    <!-- 表字段信息  -->
+    <sql id='tableColumns'>
+        puk,k01_zchwym,k02_zj68bh,k03_zj123lb,k04_scqyid,f01_zczzwmc,f02_zczywmc,f03_cpzwmc,f04_cpywmc,f05_fzgjmc,f06_fzdwmc,f07_fzrq,f08_yxnx,f09_yxksrq,f10_yxzzrq,f11_shzt,f12_yqbz,f13_yqzh,f14_yqsj,f15_sfty,f16_jkbz,f17_cpzxbzbh,f18_cpxnjgjzc,f19_cpsyfw,f20_cpjjz,f21_zcdzszgj,f22_zcdljgid,f23_zcdljgmc,f24_shfwjgid,f25_shfwjgmc,f26_shfwrx,f27_shfwdz,f28_wlwjbcwz,f29_zysx,f30_bz,f31_scqyzzjgdm,f32_scqyzwmc,f33_scqydz,f34_scqyyb,f35_scqydhhm,f36_scqyywmc,f37_scqypym,f38_scqylxrxm,f39_scqylxraqyx,f40_scqylxrdh,f41_sfgq,f42_fzdwid,f43,f44,f45,bbb,fb1,fb2,fb3,fb4,fb5,eb1,eb2,eb3,eb4,eb5,ggg,ppp,ddd,cc1,cc2,uu1,uu2
+    </sql>
+
+    <!-- 根据条件更新所有记录 -->
+    <update id='doUpdateAll' parameterType='MDG_ZCZXXDBO'>
+        UPDATE mdg_zczxx SET  uu1 = #{uuu} <!-- 更新时间、更新者 -->
+        <if test=" k01_zchwym != null and k01_zchwym !='' "><!-- 证件号唯一码（业务主键） -->
+            ,k01_zchwym = #{k01_zchwym}
+        </if>
+        <if test=" k02_zj68bh != null and k02_zj68bh !='' "><!-- 证件68码 -->
+            ,k02_zj68bh = #{k02_zj68bh}
+        </if>
+        <if test=" k03_zj123lb != null and k03_zj123lb !='' "><!-- 证件类别（I\II\III） -->
+            ,k03_zj123lb = #{k03_zj123lb}
+        </if>
+        <if test=" k04_scqyid != null and k04_scqyid !='' "><!-- 生产企业ID -->
+            ,k04_scqyid = #{k04_scqyid}
+        </if>
+        <if test=" f01_zczzwmc != null and f01_zczzwmc !='' "><!-- 注册号 -->
+            ,f01_zczzwmc = #{f01_zczzwmc}
+        </if>
+        <if test=" f02_zczywmc != null and f02_zczywmc !='' "><!-- 注册证英文名称（REG.NO） -->
+            ,f02_zczywmc = #{f02_zczywmc}
+        </if>
+        <if test=" f03_cpzwmc != null and f03_cpzwmc !='' "><!-- 产品中文名称 -->
+            ,f03_cpzwmc = #{f03_cpzwmc}
+        </if>
+        <if test=" f04_cpywmc != null and f04_cpywmc !='' "><!-- 产品英文名称 -->
+            ,f04_cpywmc = #{f04_cpywmc}
+        </if>
+        <if test=" f05_fzgjmc != null and f05_fzgjmc !='' "><!-- 发证国家名称 -->
+            ,f05_fzgjmc = #{f05_fzgjmc}
+        </if>
+        <if test=" f06_fzdwmc != null and f06_fzdwmc !='' "><!-- 发证单位名称 -->
+            ,f06_fzdwmc = #{f06_fzdwmc}
+        </if>
+        <if test=" f07_fzrq != null and f07_fzrq !='' "><!-- 发证日期 -->
+            ,f07_fzrq = #{f07_fzrq}
+        </if>
+        <if test=" f08_yxnx != null and f08_yxnx !='' "><!-- 有效年限 -->
+            ,f08_yxnx = #{f08_yxnx}
+        </if>
+        <if test=" f09_yxksrq != null and f09_yxksrq !='' "><!-- 有效开始日期 -->
+            ,f09_yxksrq = #{f09_yxksrq}
+        </if>
+        <if test=" f10_yxzzrq != null and f10_yxzzrq !='' "><!-- 有效终止日期 -->
+            ,f10_yxzzrq = #{f10_yxzzrq}
+        </if>
+        <if test=" f11_shzt != null and f11_shzt !='' "><!-- 审核状态 -->
+            ,f11_shzt = #{f11_shzt}
+        </if>
+        <if test=" f12_yqbz != null and f12_yqbz !='' "><!-- 延期标志 -->
+            ,f12_yqbz = #{f12_yqbz}
+        </if>
+        <if test=" f13_yqzh != null and f13_yqzh !='' "><!-- 延期证号 -->
+            ,f13_yqzh = #{f13_yqzh}
+        </if>
+        <if test=" f14_yqsj != null and f14_yqsj !='' "><!-- 延期时间 -->
+            ,f14_yqsj = #{f14_yqsj}
+        </if>
+        <if test=" f15_sfty != null and f15_sfty !='' "><!-- 是否停用 -->
+            ,f15_sfty = #{f15_sfty}
+        </if>
+        <if test=" f16_jkbz != null and f16_jkbz !='' "><!-- 进口标志 -->
+            ,f16_jkbz = #{f16_jkbz}
+        </if>
+        <if test=" f17_cpzxbzbh != null and f17_cpzxbzbh !='' "><!-- 产品执行标准编号 -->
+            ,f17_cpzxbzbh = #{f17_cpzxbzbh}
+        </if>
+        <if test=" f18_cpxnjgjzc != null and f18_cpxnjgjzc !='' "><!-- 产品性能结构及组成 -->
+            ,f18_cpxnjgjzc = #{f18_cpxnjgjzc}
+        </if>
+        <if test=" f19_cpsyfw != null and f19_cpsyfw !='' "><!-- 产品适用范围 -->
+            ,f19_cpsyfw = #{f19_cpsyfw}
+        </if>
+        <if test=" f20_cpjjz != null and f20_cpjjz !='' "><!-- 产品禁忌症 -->
+            ,f20_cpjjz = #{f20_cpjjz}
+        </if>
+        <if test=" f21_zcdzszgj != null and f21_zcdzszgj !='' "><!-- 注册地址所在国家 -->
+            ,f21_zcdzszgj = #{f21_zcdzszgj}
+        </if>
+        <if test=" f22_zcdljgid != null and f22_zcdljgid !='' "><!-- 注册代理机构ID -->
+            ,f22_zcdljgid = #{f22_zcdljgid}
+        </if>
+        <if test=" f23_zcdljgmc != null and f23_zcdljgmc !='' "><!-- 注册代理机构名称 -->
+            ,f23_zcdljgmc = #{f23_zcdljgmc}
+        </if>
+        <if test=" f24_shfwjgid != null and f24_shfwjgid !='' "><!-- 售后服务机构ID -->
+            ,f24_shfwjgid = #{f24_shfwjgid}
+        </if>
+        <if test=" f25_shfwjgmc != null and f25_shfwjgmc !='' "><!-- 售后服务机构名称 -->
+            ,f25_shfwjgmc = #{f25_shfwjgmc}
+        </if>
+        <if test=" f26_shfwrx != null and f26_shfwrx !='' "><!-- 售后服务热线 -->
+            ,f26_shfwrx = #{f26_shfwrx}
+        </if>
+        <if test=" f27_shfwdz != null and f27_shfwdz !='' "><!-- 售后服务地址 -->
+            ,f27_shfwdz = #{f27_shfwdz}
+        </if>
+        <if test=" f28_wlwjbcwz != null and f28_wlwjbcwz !='' "><!-- 物理文件保存位置 -->
+            ,f28_wlwjbcwz = #{f28_wlwjbcwz}
+        </if>
+        <if test=" f29_zysx != null and f29_zysx !='' "><!-- 注意事项 -->
+            ,f29_zysx = #{f29_zysx}
+        </if>
+        <if test=" f30_bz != null and f30_bz !='' "><!-- 备注 -->
+            ,f30_bz = #{f30_bz}
+        </if>
+        <if test=" f31_scqyzzjgdm != null and f31_scqyzzjgdm !='' "><!-- 生产企业组织机构代码 -->
+            ,f31_scqyzzjgdm = #{f31_scqyzzjgdm}
+        </if>
+        <if test=" f32_scqyzwmc != null and f32_scqyzwmc !='' "><!-- 生产企业中文名称 -->
+            ,f32_scqyzwmc = #{f32_scqyzwmc}
+        </if>
+        <if test=" f33_scqydz != null and f33_scqydz !='' "><!-- 生产企业地址 -->
+            ,f33_scqydz = #{f33_scqydz}
+        </if>
+        <if test=" f34_scqyyb != null and f34_scqyyb !='' "><!-- 生产企业邮编 -->
+            ,f34_scqyyb = #{f34_scqyyb}
+        </if>
+        <if test=" f35_scqydhhm != null and f35_scqydhhm !='' "><!-- 生产企业电话号码 -->
+            ,f35_scqydhhm = #{f35_scqydhhm}
+        </if>
+        <if test=" f36_scqyywmc != null and f36_scqyywmc !='' "><!-- 生产企业英文名称 -->
+            ,f36_scqyywmc = #{f36_scqyywmc}
+        </if>
+        <if test=" f37_scqypym != null and f37_scqypym !='' "><!-- 生产企业拼音码 -->
+            ,f37_scqypym = #{f37_scqypym}
+        </if>
+        <if test=" f38_scqylxrxm != null and f38_scqylxrxm !='' "><!-- 生产企业联系人姓名 -->
+            ,f38_scqylxrxm = #{f38_scqylxrxm}
+        </if>
+        <if test=" f39_scqylxraqyx != null and f39_scqylxraqyx !='' "><!-- 生产企业联系人安全邮箱 -->
+            ,f39_scqylxraqyx = #{f39_scqylxraqyx}
+        </if>
+        <if test=" f40_scqylxrdh != null and f40_scqylxrdh !='' "><!-- 生产企业联系人电话 -->
+            ,f40_scqylxrdh = #{f40_scqylxrdh}
+        </if>
+        <if test=" f41_sfgq != null and f41_sfgq !='' "><!-- 是否过期 -->
+            ,f41_sfgq = #{f41_sfgq}
+        </if>
+        <if test=" f42_fzdwid != null and f42_fzdwid !='' "><!-- 发证单位ID -->
+            ,f42_fzdwid = #{f42_fzdwid}
+        </if>
+        <if test=" f43 != null and f43 !='' "><!-- 字段43 -->
+            ,f43 = #{f43}
+        </if>
+        <if test=" f44 != null and f44 !='' "><!-- 字段44 -->
+            ,f44 = #{f44}
+        </if>
+        <if test=" f45 != null and f45 !='' "><!-- 字段45 -->
+            ,f45 = #{f45}
+        </if>
+        <if test=" bbb != null and bbb !='' "><!-- 文件图片保存地址URL -->
+            ,bbb = #{bbb}
+        </if>
+        <if test=" fb1 != null and fb1 !='' "><!-- 备用1 -->
+            ,fb1 = #{fb1}
+        </if>
+        <if test=" fb2 != null and fb2 !='' "><!-- 备用2 -->
+            ,fb2 = #{fb2}
+        </if>
+        <if test=" fb3 != null and fb3 !='' "><!-- 备用3 -->
+            ,fb3 = #{fb3}
+        </if>
+        <if test=" fb4 != null and fb4 !='' "><!-- 备用4 -->
+            ,fb4 = #{fb4}
+        </if>
+        <if test=" fb5 != null and fb5 !='' "><!-- 备用5 -->
+            ,fb5 = #{fb5}
+        </if>
+        <if test=" eb1 != null and eb1 !='' "><!-- 扩展1 -->
+            ,eb1 = #{eb1}
+        </if>
+        <if test=" eb2 != null and eb2 !='' "><!-- 扩展2 -->
+            ,eb2 = #{eb2}
+        </if>
+        <if test=" eb3 != null and eb3 !='' "><!-- 扩展3 -->
+            ,eb3 = #{eb3}
+        </if>
+        <if test=" eb4 != null and eb4 !='' "><!-- 扩展4 -->
+            ,eb4 = #{eb4}
+        </if>
+        <if test=" eb5 != null and eb5 !='' "><!-- 扩展5 -->
+            ,eb5 = #{eb5}
+        </if>
+        <if test=" ggg != null and ggg !='' "><!-- 所在组织 -->
+            ,ggg = #{ggg}
+        </if>
+        <if test=" ppp != null and ppp !='' "><!-- 企业ID -->
+            ,ppp = #{ppp}
+        </if>
+        <if test=" ddd != null and ddd !='' "><!-- 有效标识 -->
+            ,ddd = #{ddd}
+        </if>
+        <if test=" cc1 != null and cc1 !='' "><!-- 创建时间 -->
+            ,cc1 = #{cc1}
+        </if>
+        <if test=" cc2 != null and cc2 !='' "><!-- 创建者 -->
+            ,cc2 = #{cc2}
+        </if>
+        <if test=" uu2 != null and uu2 !='' "><!-- 最后更新者 -->
+            ,uu2 = #{uu2}
+        </if>
+        <trim prefix='WHERE' prefixOverrides='AND |OR '>
+            <if test=" puk != null and puk !='' "><!-- 注册证ID（数据ID） -->
+                AND puk = #{puk}
+            </if>
+            <if test=" k01_zchwym != null and k01_zchwym !='' "><!-- 证件号唯一码（业务主键） -->
+                AND k01_zchwym = #{k01_zchwym}
+            </if>
+            <if test=" k02_zj68bh != null and k02_zj68bh !='' "><!-- 证件68码 -->
+                AND k02_zj68bh = #{k02_zj68bh}
+            </if>
+            <if test=" k03_zj123lb != null and k03_zj123lb !='' "><!-- 证件类别（I\II\III） -->
+                AND k03_zj123lb = #{k03_zj123lb}
+            </if>
+            <if test=" k04_scqyid != null and k04_scqyid !='' "><!-- 生产企业ID -->
+                AND k04_scqyid = #{k04_scqyid}
+            </if>
+            <if test=" f01_zczzwmc != null and f01_zczzwmc !='' "><!-- 注册号 -->
+                AND f01_zczzwmc = #{f01_zczzwmc}
+            </if>
+            <if test=" f02_zczywmc != null and f02_zczywmc !='' "><!-- 注册证英文名称（REG.NO） -->
+                AND f02_zczywmc = #{f02_zczywmc}
+            </if>
+            <if test=" f03_cpzwmc != null and f03_cpzwmc !='' "><!-- 产品中文名称 -->
+                AND f03_cpzwmc = #{f03_cpzwmc}
+            </if>
+            <if test=" f04_cpywmc != null and f04_cpywmc !='' "><!-- 产品英文名称 -->
+                AND f04_cpywmc = #{f04_cpywmc}
+            </if>
+            <if test=" f05_fzgjmc != null and f05_fzgjmc !='' "><!-- 发证国家名称 -->
+                AND f05_fzgjmc = #{f05_fzgjmc}
+            </if>
+            <if test=" f06_fzdwmc != null and f06_fzdwmc !='' "><!-- 发证单位名称 -->
+                AND f06_fzdwmc = #{f06_fzdwmc}
+            </if>
+            <if test=" f07_fzrq != null and f07_fzrq !='' "><!-- 发证日期 -->
+                AND f07_fzrq = #{f07_fzrq}
+            </if>
+            <if test=" f08_yxnx != null and f08_yxnx !='' "><!-- 有效年限 -->
+                AND f08_yxnx = #{f08_yxnx}
+            </if>
+            <if test=" f09_yxksrq != null and f09_yxksrq !='' "><!-- 有效开始日期 -->
+                AND f09_yxksrq = #{f09_yxksrq}
+            </if>
+            <if test=" f10_yxzzrq != null and f10_yxzzrq !='' "><!-- 有效终止日期 -->
+                AND f10_yxzzrq = #{f10_yxzzrq}
+            </if>
+            <if test=" f11_shzt != null and f11_shzt !='' "><!-- 审核状态 -->
+                AND f11_shzt = #{f11_shzt}
+            </if>
+            <if test=" f12_yqbz != null and f12_yqbz !='' "><!-- 延期标志 -->
+                AND f12_yqbz = #{f12_yqbz}
+            </if>
+            <if test=" f13_yqzh != null and f13_yqzh !='' "><!-- 延期证号 -->
+                AND f13_yqzh = #{f13_yqzh}
+            </if>
+            <if test=" f14_yqsj != null and f14_yqsj !='' "><!-- 延期时间 -->
+                AND f14_yqsj = #{f14_yqsj}
+            </if>
+            <if test=" f15_sfty != null and f15_sfty !='' "><!-- 是否停用 -->
+                AND f15_sfty = #{f15_sfty}
+            </if>
+            <if test=" f16_jkbz != null and f16_jkbz !='' "><!-- 进口标志 -->
+                AND f16_jkbz = #{f16_jkbz}
+            </if>
+            <if test=" f17_cpzxbzbh != null and f17_cpzxbzbh !='' "><!-- 产品执行标准编号 -->
+                AND f17_cpzxbzbh = #{f17_cpzxbzbh}
+            </if>
+            <if test=" f18_cpxnjgjzc != null and f18_cpxnjgjzc !='' "><!-- 产品性能结构及组成 -->
+                AND f18_cpxnjgjzc = #{f18_cpxnjgjzc}
+            </if>
+            <if test=" f19_cpsyfw != null and f19_cpsyfw !='' "><!-- 产品适用范围 -->
+                AND f19_cpsyfw = #{f19_cpsyfw}
+            </if>
+            <if test=" f20_cpjjz != null and f20_cpjjz !='' "><!-- 产品禁忌症 -->
+                AND f20_cpjjz = #{f20_cpjjz}
+            </if>
+            <if test=" f21_zcdzszgj != null and f21_zcdzszgj !='' "><!-- 注册地址所在国家 -->
+                AND f21_zcdzszgj = #{f21_zcdzszgj}
+            </if>
+            <if test=" f22_zcdljgid != null and f22_zcdljgid !='' "><!-- 注册代理机构ID -->
+                AND f22_zcdljgid = #{f22_zcdljgid}
+            </if>
+            <if test=" f23_zcdljgmc != null and f23_zcdljgmc !='' "><!-- 注册代理机构名称 -->
+                AND f23_zcdljgmc = #{f23_zcdljgmc}
+            </if>
+            <if test=" f24_shfwjgid != null and f24_shfwjgid !='' "><!-- 售后服务机构ID -->
+                AND f24_shfwjgid = #{f24_shfwjgid}
+            </if>
+            <if test=" f25_shfwjgmc != null and f25_shfwjgmc !='' "><!-- 售后服务机构名称 -->
+                AND f25_shfwjgmc = #{f25_shfwjgmc}
+            </if>
+            <if test=" f26_shfwrx != null and f26_shfwrx !='' "><!-- 售后服务热线 -->
+                AND f26_shfwrx = #{f26_shfwrx}
+            </if>
+            <if test=" f27_shfwdz != null and f27_shfwdz !='' "><!-- 售后服务地址 -->
+                AND f27_shfwdz = #{f27_shfwdz}
+            </if>
+            <if test=" f28_wlwjbcwz != null and f28_wlwjbcwz !='' "><!-- 物理文件保存位置 -->
+                AND f28_wlwjbcwz = #{f28_wlwjbcwz}
+            </if>
+            <if test=" f29_zysx != null and f29_zysx !='' "><!-- 注意事项 -->
+                AND f29_zysx = #{f29_zysx}
+            </if>
+            <if test=" f30_bz != null and f30_bz !='' "><!-- 备注 -->
+                AND f30_bz = #{f30_bz}
+            </if>
+            <if test=" f31_scqyzzjgdm != null and f31_scqyzzjgdm !='' "><!-- 生产企业组织机构代码 -->
+                AND f31_scqyzzjgdm = #{f31_scqyzzjgdm}
+            </if>
+            <if test=" f32_scqyzwmc != null and f32_scqyzwmc !='' "><!-- 生产企业中文名称 -->
+                AND f32_scqyzwmc = #{f32_scqyzwmc}
+            </if>
+            <if test=" f33_scqydz != null and f33_scqydz !='' "><!-- 生产企业地址 -->
+                AND f33_scqydz = #{f33_scqydz}
+            </if>
+            <if test=" f34_scqyyb != null and f34_scqyyb !='' "><!-- 生产企业邮编 -->
+                AND f34_scqyyb = #{f34_scqyyb}
+            </if>
+            <if test=" f35_scqydhhm != null and f35_scqydhhm !='' "><!-- 生产企业电话号码 -->
+                AND f35_scqydhhm = #{f35_scqydhhm}
+            </if>
+            <if test=" f36_scqyywmc != null and f36_scqyywmc !='' "><!-- 生产企业英文名称 -->
+                AND f36_scqyywmc = #{f36_scqyywmc}
+            </if>
+            <if test=" f37_scqypym != null and f37_scqypym !='' "><!-- 生产企业拼音码 -->
+                AND f37_scqypym = #{f37_scqypym}
+            </if>
+            <if test=" f38_scqylxrxm != null and f38_scqylxrxm !='' "><!-- 生产企业联系人姓名 -->
+                AND f38_scqylxrxm = #{f38_scqylxrxm}
+            </if>
+            <if test=" f39_scqylxraqyx != null and f39_scqylxraqyx !='' "><!-- 生产企业联系人安全邮箱 -->
+                AND f39_scqylxraqyx = #{f39_scqylxraqyx}
+            </if>
+            <if test=" f40_scqylxrdh != null and f40_scqylxrdh !='' "><!-- 生产企业联系人电话 -->
+                AND f40_scqylxrdh = #{f40_scqylxrdh}
+            </if>
+            <if test=" f41_sfgq != null and f41_sfgq !='' "><!-- 是否过期 -->
+                AND f41_sfgq = #{f41_sfgq}
+            </if>
+            <if test=" f42_fzdwid != null and f42_fzdwid !='' "><!-- 发证单位ID -->
+                AND f42_fzdwid = #{f42_fzdwid}
+            </if>
+            <if test=" f43 != null and f43 !='' "><!-- 字段43 -->
+                AND f43 = #{f43}
+            </if>
+            <if test=" f44 != null and f44 !='' "><!-- 字段44 -->
+                AND f44 = #{f44}
+            </if>
+            <if test=" f45 != null and f45 !='' "><!-- 字段45 -->
+                AND f45 = #{f45}
+            </if>
+            <if test=" bbb != null and bbb !='' "><!-- 文件图片保存地址URL -->
+                AND bbb = #{bbb}
+            </if>
+            <if test=" fb1 != null and fb1 !='' "><!-- 备用1 -->
+                AND fb1 = #{fb1}
+            </if>
+            <if test=" fb2 != null and fb2 !='' "><!-- 备用2 -->
+                AND fb2 = #{fb2}
+            </if>
+            <if test=" fb3 != null and fb3 !='' "><!-- 备用3 -->
+                AND fb3 = #{fb3}
+            </if>
+            <if test=" fb4 != null and fb4 !='' "><!-- 备用4 -->
+                AND fb4 = #{fb4}
+            </if>
+            <if test=" fb5 != null and fb5 !='' "><!-- 备用5 -->
+                AND fb5 = #{fb5}
+            </if>
+            <if test=" eb1 != null and eb1 !='' "><!-- 扩展1 -->
+                AND eb1 = #{eb1}
+            </if>
+            <if test=" eb2 != null and eb2 !='' "><!-- 扩展2 -->
+                AND eb2 = #{eb2}
+            </if>
+            <if test=" eb3 != null and eb3 !='' "><!-- 扩展3 -->
+                AND eb3 = #{eb3}
+            </if>
+            <if test=" eb4 != null and eb4 !='' "><!-- 扩展4 -->
+                AND eb4 = #{eb4}
+            </if>
+            <if test=" eb5 != null and eb5 !='' "><!-- 扩展5 -->
+                AND eb5 = #{eb5}
+            </if>
+            <if test=" ggg != null and ggg !='' "><!-- 所在组织 -->
+                AND ggg = #{ggg}
+            </if>
+            <if test=" ppp != null and ppp !='' "><!-- 企业ID -->
+                AND ppp = #{ppp}
+            </if>
+            <if test=" ddd != null and ddd !='' "><!-- 有效标识 -->
+                AND ddd = #{ddd}
+            </if>
+            <if test=" cc1 != null and cc1 !='' "><!-- 创建时间 -->
+                AND cc1 = #{cc1}
+            </if>
+            <if test=" cc2 != null and cc2 !='' "><!-- 创建者 -->
+                AND cc2 = #{cc2}
+            </if>
+            <if test=" uu1 != null and uu1 !='' "><!-- 最后更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+            <if test=" uu2 != null and uu2 !='' "><!-- 最后更新者 -->
+                AND uu2 = #{uu2}
+            </if>
+        </trim>
+    </update>
+    <!-- 查询分页数据信息  -->
+    <select id='doSelectPage' parameterType='MDG_ZCZXXDBO' resultType='MDG_ZCZXXDBO'>
+        SELECT <include refid='tableColumns'/> FROM mdg_zczxx
+        <trim prefix='WHERE' prefixOverrides='AND |OR '>
+            <if test=" puk != null and puk !='' "><!-- 注册证ID（数据ID） -->
+                AND puk = #{puk}
+            </if>
+            <if test=" k01_zchwym != null and k01_zchwym !='' "><!-- 证件号唯一码（业务主键） -->
+                AND k01_zchwym = #{k01_zchwym}
+            </if>
+            <if test=" k02_zj68bh != null and k02_zj68bh !='' "><!-- 证件68码 -->
+                AND k02_zj68bh = #{k02_zj68bh}
+            </if>
+            <if test=" k03_zj123lb != null and k03_zj123lb !='' "><!-- 证件类别（I\II\III） -->
+                AND k03_zj123lb = #{k03_zj123lb}
+            </if>
+            <if test=" k04_scqyid != null and k04_scqyid !='' "><!-- 生产企业ID -->
+                AND k04_scqyid = #{k04_scqyid}
+            </if>
+            <if test=" f01_zczzwmc != null and f01_zczzwmc !='' "><!-- 注册号 -->
+                AND f01_zczzwmc = #{f01_zczzwmc}
+            </if>
+            <if test=" f02_zczywmc != null and f02_zczywmc !='' "><!-- 注册证英文名称（REG.NO） -->
+                AND f02_zczywmc = #{f02_zczywmc}
+            </if>
+            <if test=" f03_cpzwmc != null and f03_cpzwmc !='' "><!-- 产品中文名称 -->
+                AND f03_cpzwmc = #{f03_cpzwmc}
+            </if>
+            <if test=" f04_cpywmc != null and f04_cpywmc !='' "><!-- 产品英文名称 -->
+                AND f04_cpywmc = #{f04_cpywmc}
+            </if>
+            <if test=" f05_fzgjmc != null and f05_fzgjmc !='' "><!-- 发证国家名称 -->
+                AND f05_fzgjmc = #{f05_fzgjmc}
+            </if>
+            <if test=" f06_fzdwmc != null and f06_fzdwmc !='' "><!-- 发证单位名称 -->
+                AND f06_fzdwmc = #{f06_fzdwmc}
+            </if>
+            <if test=" f07_fzrq != null and f07_fzrq !='' "><!-- 发证日期 -->
+                AND f07_fzrq = #{f07_fzrq}
+            </if>
+            <if test=" f08_yxnx != null and f08_yxnx !='' "><!-- 有效年限 -->
+                AND f08_yxnx = #{f08_yxnx}
+            </if>
+            <if test=" f09_yxksrq != null and f09_yxksrq !='' "><!-- 有效开始日期 -->
+                AND f09_yxksrq = #{f09_yxksrq}
+            </if>
+            <if test=" f10_yxzzrq != null and f10_yxzzrq !='' "><!-- 有效终止日期 -->
+                AND f10_yxzzrq = #{f10_yxzzrq}
+            </if>
+            <if test=" f11_shzt != null and f11_shzt !='' "><!-- 审核状态 -->
+                AND f11_shzt = #{f11_shzt}
+            </if>
+            <if test=" f12_yqbz != null and f12_yqbz !='' "><!-- 延期标志 -->
+                AND f12_yqbz = #{f12_yqbz}
+            </if>
+            <if test=" f13_yqzh != null and f13_yqzh !='' "><!-- 延期证号 -->
+                AND f13_yqzh = #{f13_yqzh}
+            </if>
+            <if test=" f14_yqsj != null and f14_yqsj !='' "><!-- 延期时间 -->
+                AND f14_yqsj = #{f14_yqsj}
+            </if>
+            <if test=" f15_sfty != null and f15_sfty !='' "><!-- 是否停用 -->
+                AND f15_sfty = #{f15_sfty}
+            </if>
+            <if test=" f16_jkbz != null and f16_jkbz !='' "><!-- 进口标志 -->
+                AND f16_jkbz = #{f16_jkbz}
+            </if>
+            <if test=" f17_cpzxbzbh != null and f17_cpzxbzbh !='' "><!-- 产品执行标准编号 -->
+                AND f17_cpzxbzbh = #{f17_cpzxbzbh}
+            </if>
+            <if test=" f18_cpxnjgjzc != null and f18_cpxnjgjzc !='' "><!-- 产品性能结构及组成 -->
+                AND f18_cpxnjgjzc = #{f18_cpxnjgjzc}
+            </if>
+            <if test=" f19_cpsyfw != null and f19_cpsyfw !='' "><!-- 产品适用范围 -->
+                AND f19_cpsyfw = #{f19_cpsyfw}
+            </if>
+            <if test=" f20_cpjjz != null and f20_cpjjz !='' "><!-- 产品禁忌症 -->
+                AND f20_cpjjz = #{f20_cpjjz}
+            </if>
+            <if test=" f21_zcdzszgj != null and f21_zcdzszgj !='' "><!-- 注册地址所在国家 -->
+                AND f21_zcdzszgj = #{f21_zcdzszgj}
+            </if>
+            <if test=" f22_zcdljgid != null and f22_zcdljgid !='' "><!-- 注册代理机构ID -->
+                AND f22_zcdljgid = #{f22_zcdljgid}
+            </if>
+            <if test=" f23_zcdljgmc != null and f23_zcdljgmc !='' "><!-- 注册代理机构名称 -->
+                AND f23_zcdljgmc = #{f23_zcdljgmc}
+            </if>
+            <if test=" f24_shfwjgid != null and f24_shfwjgid !='' "><!-- 售后服务机构ID -->
+                AND f24_shfwjgid = #{f24_shfwjgid}
+            </if>
+            <if test=" f25_shfwjgmc != null and f25_shfwjgmc !='' "><!-- 售后服务机构名称 -->
+                AND f25_shfwjgmc = #{f25_shfwjgmc}
+            </if>
+            <if test=" f26_shfwrx != null and f26_shfwrx !='' "><!-- 售后服务热线 -->
+                AND f26_shfwrx = #{f26_shfwrx}
+            </if>
+            <if test=" f27_shfwdz != null and f27_shfwdz !='' "><!-- 售后服务地址 -->
+                AND f27_shfwdz = #{f27_shfwdz}
+            </if>
+            <if test=" f28_wlwjbcwz != null and f28_wlwjbcwz !='' "><!-- 物理文件保存位置 -->
+                AND f28_wlwjbcwz = #{f28_wlwjbcwz}
+            </if>
+            <if test=" f29_zysx != null and f29_zysx !='' "><!-- 注意事项 -->
+                AND f29_zysx = #{f29_zysx}
+            </if>
+            <if test=" f30_bz != null and f30_bz !='' "><!-- 备注 -->
+                AND f30_bz = #{f30_bz}
+            </if>
+            <if test=" f31_scqyzzjgdm != null and f31_scqyzzjgdm !='' "><!-- 生产企业组织机构代码 -->
+                AND f31_scqyzzjgdm = #{f31_scqyzzjgdm}
+            </if>
+            <if test=" f32_scqyzwmc != null and f32_scqyzwmc !='' "><!-- 生产企业中文名称 -->
+                AND f32_scqyzwmc = #{f32_scqyzwmc}
+            </if>
+            <if test=" f33_scqydz != null and f33_scqydz !='' "><!-- 生产企业地址 -->
+                AND f33_scqydz = #{f33_scqydz}
+            </if>
+            <if test=" f34_scqyyb != null and f34_scqyyb !='' "><!-- 生产企业邮编 -->
+                AND f34_scqyyb = #{f34_scqyyb}
+            </if>
+            <if test=" f35_scqydhhm != null and f35_scqydhhm !='' "><!-- 生产企业电话号码 -->
+                AND f35_scqydhhm = #{f35_scqydhhm}
+            </if>
+            <if test=" f36_scqyywmc != null and f36_scqyywmc !='' "><!-- 生产企业英文名称 -->
+                AND f36_scqyywmc = #{f36_scqyywmc}
+            </if>
+            <if test=" f37_scqypym != null and f37_scqypym !='' "><!-- 生产企业拼音码 -->
+                AND f37_scqypym = #{f37_scqypym}
+            </if>
+            <if test=" f38_scqylxrxm != null and f38_scqylxrxm !='' "><!-- 生产企业联系人姓名 -->
+                AND f38_scqylxrxm = #{f38_scqylxrxm}
+            </if>
+            <if test=" f39_scqylxraqyx != null and f39_scqylxraqyx !='' "><!-- 生产企业联系人安全邮箱 -->
+                AND f39_scqylxraqyx = #{f39_scqylxraqyx}
+            </if>
+            <if test=" f40_scqylxrdh != null and f40_scqylxrdh !='' "><!-- 生产企业联系人电话 -->
+                AND f40_scqylxrdh = #{f40_scqylxrdh}
+            </if>
+            <if test=" f41_sfgq != null and f41_sfgq !='' "><!-- 是否过期 -->
+                AND f41_sfgq = #{f41_sfgq}
+            </if>
+            <if test=" f42_fzdwid != null and f42_fzdwid !='' "><!-- 发证单位ID -->
+                AND f42_fzdwid = #{f42_fzdwid}
+            </if>
+            <if test=" f43 != null and f43 !='' "><!-- 字段43 -->
+                AND f43 = #{f43}
+            </if>
+            <if test=" f44 != null and f44 !='' "><!-- 字段44 -->
+                AND f44 = #{f44}
+            </if>
+            <if test=" f45 != null and f45 !='' "><!-- 字段45 -->
+                AND f45 = #{f45}
+            </if>
+            <if test=" bbb != null and bbb !='' "><!-- 文件图片保存地址URL -->
+                AND bbb = #{bbb}
+            </if>
+            <if test=" fb1 != null and fb1 !='' "><!-- 备用1 -->
+                AND fb1 = #{fb1}
+            </if>
+            <if test=" fb2 != null and fb2 !='' "><!-- 备用2 -->
+                AND fb2 = #{fb2}
+            </if>
+            <if test=" fb3 != null and fb3 !='' "><!-- 备用3 -->
+                AND fb3 = #{fb3}
+            </if>
+            <if test=" fb4 != null and fb4 !='' "><!-- 备用4 -->
+                AND fb4 = #{fb4}
+            </if>
+            <if test=" fb5 != null and fb5 !='' "><!-- 备用5 -->
+                AND fb5 = #{fb5}
+            </if>
+            <if test=" eb1 != null and eb1 !='' "><!-- 扩展1 -->
+                AND eb1 = #{eb1}
+            </if>
+            <if test=" eb2 != null and eb2 !='' "><!-- 扩展2 -->
+                AND eb2 = #{eb2}
+            </if>
+            <if test=" eb3 != null and eb3 !='' "><!-- 扩展3 -->
+                AND eb3 = #{eb3}
+            </if>
+            <if test=" eb4 != null and eb4 !='' "><!-- 扩展4 -->
+                AND eb4 = #{eb4}
+            </if>
+            <if test=" eb5 != null and eb5 !='' "><!-- 扩展5 -->
+                AND eb5 = #{eb5}
+            </if>
+            <if test=" ggg != null and ggg !='' "><!-- 所在组织 -->
+                AND ggg = #{ggg}
+            </if>
+            <if test=" ppp != null and ppp !='' "><!-- 企业ID -->
+                AND ppp = #{ppp}
+            </if>
+            <if test=" ddd != null and ddd !='' "><!-- 有效标识 -->
+                AND ddd = #{ddd}
+            </if>
+            <if test=" cc1 != null and cc1 !='' "><!-- 创建时间 -->
+                AND cc1 = #{cc1}
+            </if>
+            <if test=" cc2 != null and cc2 !='' "><!-- 创建者 -->
+                AND cc2 = #{cc2}
+            </if>
+            <if test=" uu1 != null and uu1 !='' "><!-- 最后更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+            <if test=" uu2 != null and uu2 !='' "><!-- 最后更新者 -->
+                AND uu2 = #{uu2}
+            </if>
+        </trim>
+    </select>
+
+    <!-- 插入一条数据 -->
+    <insert id='doInsert' parameterType='MDG_ZCZXXDBO'>
+        INSERT INTO mdg_zczxx
+          ( <include refid='tableColumns'/>) 
+        VALUES 
+          ( #{puk},#{k01_zchwym},#{k02_zj68bh},#{k03_zj123lb},#{k04_scqyid},#{f01_zczzwmc},#{f02_zczywmc},#{f03_cpzwmc},#{f04_cpywmc},#{f05_fzgjmc},#{f06_fzdwmc},#{f07_fzrq},#{f08_yxnx},#{f09_yxksrq},#{f10_yxzzrq},#{f11_shzt},#{f12_yqbz},#{f13_yqzh},#{f14_yqsj},#{f15_sfty},#{f16_jkbz},#{f17_cpzxbzbh},#{f18_cpxnjgjzc},#{f19_cpsyfw},#{f20_cpjjz},#{f21_zcdzszgj},#{f22_zcdljgid},#{f23_zcdljgmc},#{f24_shfwjgid},#{f25_shfwjgmc},#{f26_shfwrx},#{f27_shfwdz},#{f28_wlwjbcwz},#{f29_zysx},#{f30_bz},#{f31_scqyzzjgdm},#{f32_scqyzwmc},#{f33_scqydz},#{f34_scqyyb},#{f35_scqydhhm},#{f36_scqyywmc},#{f37_scqypym},#{f38_scqylxrxm},#{f39_scqylxraqyx},#{f40_scqylxrdh},#{f41_sfgq},#{f42_fzdwid},#{f43},#{f44},#{f45},#{bbb},#{fb1},#{fb2},#{fb3},#{fb4},#{fb5},#{eb1},#{eb2},#{eb3},#{eb4},#{eb5},#{ggg},#{ppp},#{ddd},#{cc1},#{cc2},#{uu1},#{uu2} )
+    </insert>
+    <!-- 修改一条数据 -->
+    <update id='doUpdate' parameterType='MDG_ZCZXXDBO'>
+        UPDATE mdg_zczxx SET uu1 = #{uuu} <!-- 更新时间、更新者 -->
+        <if test=" k01_zchwym != null and k01_zchwym !='' "><!-- 证件号唯一码（业务主键） -->
+            ,k01_zchwym = #{k01_zchwym}
+        </if>
+        <if test=" k02_zj68bh != null and k02_zj68bh !='' "><!-- 证件68码 -->
+            ,k02_zj68bh = #{k02_zj68bh}
+        </if>
+        <if test=" k03_zj123lb != null and k03_zj123lb !='' "><!-- 证件类别（I\II\III） -->
+            ,k03_zj123lb = #{k03_zj123lb}
+        </if>
+        <if test=" k04_scqyid != null and k04_scqyid !='' "><!-- 生产企业ID -->
+            ,k04_scqyid = #{k04_scqyid}
+        </if>
+        <if test=" f01_zczzwmc != null and f01_zczzwmc !='' "><!-- 注册号 -->
+            ,f01_zczzwmc = #{f01_zczzwmc}
+        </if>
+        <if test=" f02_zczywmc != null and f02_zczywmc !='' "><!-- 注册证英文名称（REG.NO） -->
+            ,f02_zczywmc = #{f02_zczywmc}
+        </if>
+        <if test=" f03_cpzwmc != null and f03_cpzwmc !='' "><!-- 产品中文名称 -->
+            ,f03_cpzwmc = #{f03_cpzwmc}
+        </if>
+        <if test=" f04_cpywmc != null and f04_cpywmc !='' "><!-- 产品英文名称 -->
+            ,f04_cpywmc = #{f04_cpywmc}
+        </if>
+        <if test=" f05_fzgjmc != null and f05_fzgjmc !='' "><!-- 发证国家名称 -->
+            ,f05_fzgjmc = #{f05_fzgjmc}
+        </if>
+        <if test=" f06_fzdwmc != null and f06_fzdwmc !='' "><!-- 发证单位名称 -->
+            ,f06_fzdwmc = #{f06_fzdwmc}
+        </if>
+        <if test=" f07_fzrq != null and f07_fzrq !='' "><!-- 发证日期 -->
+            ,f07_fzrq = #{f07_fzrq}
+        </if>
+        <if test=" f08_yxnx != null and f08_yxnx !='' "><!-- 有效年限 -->
+            ,f08_yxnx = #{f08_yxnx}
+        </if>
+        <if test=" f09_yxksrq != null and f09_yxksrq !='' "><!-- 有效开始日期 -->
+            ,f09_yxksrq = #{f09_yxksrq}
+        </if>
+        <if test=" f10_yxzzrq != null and f10_yxzzrq !='' "><!-- 有效终止日期 -->
+            ,f10_yxzzrq = #{f10_yxzzrq}
+        </if>
+        <if test=" f11_shzt != null and f11_shzt !='' "><!-- 审核状态 -->
+            ,f11_shzt = #{f11_shzt}
+        </if>
+        <if test=" f12_yqbz != null and f12_yqbz !='' "><!-- 延期标志 -->
+            ,f12_yqbz = #{f12_yqbz}
+        </if>
+        <if test=" f13_yqzh != null and f13_yqzh !='' "><!-- 延期证号 -->
+            ,f13_yqzh = #{f13_yqzh}
+        </if>
+        <if test=" f14_yqsj != null and f14_yqsj !='' "><!-- 延期时间 -->
+            ,f14_yqsj = #{f14_yqsj}
+        </if>
+        <if test=" f15_sfty != null and f15_sfty !='' "><!-- 是否停用 -->
+            ,f15_sfty = #{f15_sfty}
+        </if>
+        <if test=" f16_jkbz != null and f16_jkbz !='' "><!-- 进口标志 -->
+            ,f16_jkbz = #{f16_jkbz}
+        </if>
+        <if test=" f17_cpzxbzbh != null and f17_cpzxbzbh !='' "><!-- 产品执行标准编号 -->
+            ,f17_cpzxbzbh = #{f17_cpzxbzbh}
+        </if>
+        <if test=" f18_cpxnjgjzc != null and f18_cpxnjgjzc !='' "><!-- 产品性能结构及组成 -->
+            ,f18_cpxnjgjzc = #{f18_cpxnjgjzc}
+        </if>
+        <if test=" f19_cpsyfw != null and f19_cpsyfw !='' "><!-- 产品适用范围 -->
+            ,f19_cpsyfw = #{f19_cpsyfw}
+        </if>
+        <if test=" f20_cpjjz != null and f20_cpjjz !='' "><!-- 产品禁忌症 -->
+            ,f20_cpjjz = #{f20_cpjjz}
+        </if>
+        <if test=" f21_zcdzszgj != null and f21_zcdzszgj !='' "><!-- 注册地址所在国家 -->
+            ,f21_zcdzszgj = #{f21_zcdzszgj}
+        </if>
+        <if test=" f22_zcdljgid != null and f22_zcdljgid !='' "><!-- 注册代理机构ID -->
+            ,f22_zcdljgid = #{f22_zcdljgid}
+        </if>
+        <if test=" f23_zcdljgmc != null and f23_zcdljgmc !='' "><!-- 注册代理机构名称 -->
+            ,f23_zcdljgmc = #{f23_zcdljgmc}
+        </if>
+        <if test=" f24_shfwjgid != null and f24_shfwjgid !='' "><!-- 售后服务机构ID -->
+            ,f24_shfwjgid = #{f24_shfwjgid}
+        </if>
+        <if test=" f25_shfwjgmc != null and f25_shfwjgmc !='' "><!-- 售后服务机构名称 -->
+            ,f25_shfwjgmc = #{f25_shfwjgmc}
+        </if>
+        <if test=" f26_shfwrx != null and f26_shfwrx !='' "><!-- 售后服务热线 -->
+            ,f26_shfwrx = #{f26_shfwrx}
+        </if>
+        <if test=" f27_shfwdz != null and f27_shfwdz !='' "><!-- 售后服务地址 -->
+            ,f27_shfwdz = #{f27_shfwdz}
+        </if>
+        <if test=" f28_wlwjbcwz != null and f28_wlwjbcwz !='' "><!-- 物理文件保存位置 -->
+            ,f28_wlwjbcwz = #{f28_wlwjbcwz}
+        </if>
+        <if test=" f29_zysx != null and f29_zysx !='' "><!-- 注意事项 -->
+            ,f29_zysx = #{f29_zysx}
+        </if>
+        <if test=" f30_bz != null and f30_bz !='' "><!-- 备注 -->
+            ,f30_bz = #{f30_bz}
+        </if>
+        <if test=" f31_scqyzzjgdm != null and f31_scqyzzjgdm !='' "><!-- 生产企业组织机构代码 -->
+            ,f31_scqyzzjgdm = #{f31_scqyzzjgdm}
+        </if>
+        <if test=" f32_scqyzwmc != null and f32_scqyzwmc !='' "><!-- 生产企业中文名称 -->
+            ,f32_scqyzwmc = #{f32_scqyzwmc}
+        </if>
+        <if test=" f33_scqydz != null and f33_scqydz !='' "><!-- 生产企业地址 -->
+            ,f33_scqydz = #{f33_scqydz}
+        </if>
+        <if test=" f34_scqyyb != null and f34_scqyyb !='' "><!-- 生产企业邮编 -->
+            ,f34_scqyyb = #{f34_scqyyb}
+        </if>
+        <if test=" f35_scqydhhm != null and f35_scqydhhm !='' "><!-- 生产企业电话号码 -->
+            ,f35_scqydhhm = #{f35_scqydhhm}
+        </if>
+        <if test=" f36_scqyywmc != null and f36_scqyywmc !='' "><!-- 生产企业英文名称 -->
+            ,f36_scqyywmc = #{f36_scqyywmc}
+        </if>
+        <if test=" f37_scqypym != null and f37_scqypym !='' "><!-- 生产企业拼音码 -->
+            ,f37_scqypym = #{f37_scqypym}
+        </if>
+        <if test=" f38_scqylxrxm != null and f38_scqylxrxm !='' "><!-- 生产企业联系人姓名 -->
+            ,f38_scqylxrxm = #{f38_scqylxrxm}
+        </if>
+        <if test=" f39_scqylxraqyx != null and f39_scqylxraqyx !='' "><!-- 生产企业联系人安全邮箱 -->
+            ,f39_scqylxraqyx = #{f39_scqylxraqyx}
+        </if>
+        <if test=" f40_scqylxrdh != null and f40_scqylxrdh !='' "><!-- 生产企业联系人电话 -->
+            ,f40_scqylxrdh = #{f40_scqylxrdh}
+        </if>
+        <if test=" f41_sfgq != null and f41_sfgq !='' "><!-- 是否过期 -->
+            ,f41_sfgq = #{f41_sfgq}
+        </if>
+        <if test=" f42_fzdwid != null and f42_fzdwid !='' "><!-- 发证单位ID -->
+            ,f42_fzdwid = #{f42_fzdwid}
+        </if>
+        <if test=" f43 != null and f43 !='' "><!-- 字段43 -->
+            ,f43 = #{f43}
+        </if>
+        <if test=" f44 != null and f44 !='' "><!-- 字段44 -->
+            ,f44 = #{f44}
+        </if>
+        <if test=" f45 != null and f45 !='' "><!-- 字段45 -->
+            ,f45 = #{f45}
+        </if>
+        <if test=" bbb != null and bbb !='' "><!-- 文件图片保存地址URL -->
+            ,bbb = #{bbb}
+        </if>
+        <if test=" fb1 != null and fb1 !='' "><!-- 备用1 -->
+            ,fb1 = #{fb1}
+        </if>
+        <if test=" fb2 != null and fb2 !='' "><!-- 备用2 -->
+            ,fb2 = #{fb2}
+        </if>
+        <if test=" fb3 != null and fb3 !='' "><!-- 备用3 -->
+            ,fb3 = #{fb3}
+        </if>
+        <if test=" fb4 != null and fb4 !='' "><!-- 备用4 -->
+            ,fb4 = #{fb4}
+        </if>
+        <if test=" fb5 != null and fb5 !='' "><!-- 备用5 -->
+            ,fb5 = #{fb5}
+        </if>
+        <if test=" eb1 != null and eb1 !='' "><!-- 扩展1 -->
+            ,eb1 = #{eb1}
+        </if>
+        <if test=" eb2 != null and eb2 !='' "><!-- 扩展2 -->
+            ,eb2 = #{eb2}
+        </if>
+        <if test=" eb3 != null and eb3 !='' "><!-- 扩展3 -->
+            ,eb3 = #{eb3}
+        </if>
+        <if test=" eb4 != null and eb4 !='' "><!-- 扩展4 -->
+            ,eb4 = #{eb4}
+        </if>
+        <if test=" eb5 != null and eb5 !='' "><!-- 扩展5 -->
+            ,eb5 = #{eb5}
+        </if>
+        <if test=" ggg != null and ggg !='' "><!-- 所在组织 -->
+            ,ggg = #{ggg}
+        </if>
+        <if test=" ppp != null and ppp !='' "><!-- 企业ID -->
+            ,ppp = #{ppp}
+        </if>
+        <if test=" ddd != null and ddd !='' "><!-- 有效标识 -->
+            ,ddd = #{ddd}
+        </if>
+        <if test=" cc1 != null and cc1 !='' "><!-- 创建时间 -->
+            ,cc1 = #{cc1}
+        </if>
+        <if test=" cc2 != null and cc2 !='' "><!-- 创建者 -->
+            ,cc2 = #{cc2}
+        </if>
+        <if test=" uu2 != null and uu2 !='' "><!-- 最后更新者 -->
+            ,uu2 = #{uu2}
+        </if>
+        WHERE puk = #{puk}
+            <if test=" uu1 != null and uu1 !='' "><!-- 最后更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+    </update>
+    <!-- 逻辑删除一条数据 -->
+    <delete id='toDelete' parameterType='MDG_ZCZXXDBO'>
+        UPDATE mdg_zczxx SET ddd='1', uu1 = #{uuu}, uu2 = #{uu2} WHERE puk = #{puk}
+            <if test=" uu1 != null and uu1 !='' "><!-- 最后更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+    </delete>
+    <!-- 物理删除一条数据 -->
+    <delete id='doDelete' parameterType='MDG_ZCZXXDBO'>
+        DELETE FROM mdg_zczxx WHERE puk = #{puk}
+            <if test=" uu1 != null and uu1 !='' "><!-- 最后更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+    </delete>
+    <!-- 查询一条数据  -->
+    <select id='doRead' parameterType='MDG_ZCZXXDBO' resultType='MDG_ZCZXXDBO'>
+        SELECT <include refid='tableColumns'/> FROM mdg_zczxx WHERE puk = #{puk}
+            <if test=" ddd != null and ddd !='' "><!-- 最后更新时间 -->
+                AND ddd = #{ddd}
+            </if>
+    </select>
+
+</mapper>

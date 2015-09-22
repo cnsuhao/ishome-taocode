@@ -1,0 +1,375 @@
+﻿<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 数据字典管理 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='org.jfpc.beans.common.MS0M1.MS0M1Dao'>
+    <!-- 表字段信息  -->
+    <sql id='tableColumns'>
+        puk,k01_dflid,k02_zflid,k03_xflid,f01_zdmc,f02_pxwz,n01_dflmc,n02_zflmc,n03_xflmc,bbb,fb1,fb2,fb3,fb4,fb5,eb1,eb2,eb3,eb4,eb5,ggg,ppp,ddd,cc1,cc2,uu1,uu2
+    </sql>
+
+    <!-- 根据条件更新所有记录 -->
+    <update id='doUpdateAll' parameterType='MS0M1DBO'>
+        UPDATE ms0m1 SET  uu1 = #{uuu} <!-- 更新时间、更新者 -->
+        <if test=" k01_dflid != null and k01_dflid !='' "><!-- 大分类ID -->
+            ,k01_dflid = #{k01_dflid}
+        </if>
+        <if test=" k02_zflid != null and k02_zflid !='' "><!-- 中分类ID -->
+            ,k02_zflid = #{k02_zflid}
+        </if>
+        <if test=" k03_xflid != null and k03_xflid !='' "><!-- 小分类ID -->
+            ,k03_xflid = #{k03_xflid}
+        </if>
+        <if test=" f01_zdmc != null and f01_zdmc !='' "><!-- 字典名称 -->
+            ,f01_zdmc = #{f01_zdmc}
+        </if>
+        <if test=" f02_pxwz != null and f02_pxwz !='' "><!-- 排序位置 -->
+            ,f02_pxwz = #{f02_pxwz}
+        </if>
+        <if test=" n01_dflmc != null and n01_dflmc !='' "><!-- 大分类名称 -->
+            ,n01_dflmc = #{n01_dflmc}
+        </if>
+        <if test=" n02_zflmc != null and n02_zflmc !='' "><!-- 中分类名称 -->
+            ,n02_zflmc = #{n02_zflmc}
+        </if>
+        <if test=" n03_xflmc != null and n03_xflmc !='' "><!-- 小分类名称 -->
+            ,n03_xflmc = #{n03_xflmc}
+        </if>
+        <if test=" bbb != null and bbb !='' "><!-- 备注说明 -->
+            ,bbb = #{bbb}
+        </if>
+        <if test=" fb1 != null and fb1 !='' "><!-- 备用1 -->
+            ,fb1 = #{fb1}
+        </if>
+        <if test=" fb2 != null and fb2 !='' "><!-- 备用2 -->
+            ,fb2 = #{fb2}
+        </if>
+        <if test=" fb3 != null and fb3 !='' "><!-- 备用3 -->
+            ,fb3 = #{fb3}
+        </if>
+        <if test=" fb4 != null and fb4 !='' "><!-- 备用4 -->
+            ,fb4 = #{fb4}
+        </if>
+        <if test=" fb5 != null and fb5 !='' "><!-- 备用5 -->
+            ,fb5 = #{fb5}
+        </if>
+        <if test=" eb1 != null and eb1 !='' "><!-- 扩展1 -->
+            ,eb1 = #{eb1}
+        </if>
+        <if test=" eb2 != null and eb2 !='' "><!-- 扩展2 -->
+            ,eb2 = #{eb2}
+        </if>
+        <if test=" eb3 != null and eb3 !='' "><!-- 扩展3 -->
+            ,eb3 = #{eb3}
+        </if>
+        <if test=" eb4 != null and eb4 !='' "><!-- 扩展4 -->
+            ,eb4 = #{eb4}
+        </if>
+        <if test=" eb5 != null and eb5 !='' "><!-- 扩展5 -->
+            ,eb5 = #{eb5}
+        </if>
+        <if test=" ggg != null and ggg !='' "><!-- 字典分类标识 -->
+            ,ggg = #{ggg}
+        </if>
+        <if test=" ppp != null and ppp !='' "><!-- 企业ID -->
+            ,ppp = #{ppp}
+        </if>
+        <if test=" ddd != null and ddd !='' "><!-- 有效标识 -->
+            ,ddd = #{ddd}
+        </if>
+        <if test=" cc1 != null and cc1 !='' "><!-- 创建时间 -->
+            ,cc1 = #{cc1}
+        </if>
+        <if test=" cc2 != null and cc2 !='' "><!-- 创建者 -->
+            ,cc2 = #{cc2}
+        </if>
+        <if test=" uu2 != null and uu2 !='' "><!-- 最后更新者 -->
+            ,uu2 = #{uu2}
+        </if>
+        <trim prefix='WHERE' prefixOverrides='AND |OR '>
+            <if test=" puk != null and puk !='' "><!-- 系统数据唯一识别ID（固定主键） -->
+                AND puk = #{puk}
+            </if>
+            <if test=" k01_dflid != null and k01_dflid !='' "><!-- 大分类ID -->
+                AND k01_dflid = #{k01_dflid}
+            </if>
+            <if test=" k02_zflid != null and k02_zflid !='' "><!-- 中分类ID -->
+                AND k02_zflid = #{k02_zflid}
+            </if>
+            <if test=" k03_xflid != null and k03_xflid !='' "><!-- 小分类ID -->
+                AND k03_xflid = #{k03_xflid}
+            </if>
+            <if test=" f01_zdmc != null and f01_zdmc !='' "><!-- 字典名称 -->
+                AND f01_zdmc = #{f01_zdmc}
+            </if>
+            <if test=" f02_pxwz != null and f02_pxwz !='' "><!-- 排序位置 -->
+                AND f02_pxwz = #{f02_pxwz}
+            </if>
+            <if test=" n01_dflmc != null and n01_dflmc !='' "><!-- 大分类名称 -->
+                AND n01_dflmc = #{n01_dflmc}
+            </if>
+            <if test=" n02_zflmc != null and n02_zflmc !='' "><!-- 中分类名称 -->
+                AND n02_zflmc = #{n02_zflmc}
+            </if>
+            <if test=" n03_xflmc != null and n03_xflmc !='' "><!-- 小分类名称 -->
+                AND n03_xflmc = #{n03_xflmc}
+            </if>
+            <if test=" bbb != null and bbb !='' "><!-- 备注说明 -->
+                AND bbb = #{bbb}
+            </if>
+            <if test=" fb1 != null and fb1 !='' "><!-- 备用1 -->
+                AND fb1 = #{fb1}
+            </if>
+            <if test=" fb2 != null and fb2 !='' "><!-- 备用2 -->
+                AND fb2 = #{fb2}
+            </if>
+            <if test=" fb3 != null and fb3 !='' "><!-- 备用3 -->
+                AND fb3 = #{fb3}
+            </if>
+            <if test=" fb4 != null and fb4 !='' "><!-- 备用4 -->
+                AND fb4 = #{fb4}
+            </if>
+            <if test=" fb5 != null and fb5 !='' "><!-- 备用5 -->
+                AND fb5 = #{fb5}
+            </if>
+            <if test=" eb1 != null and eb1 !='' "><!-- 扩展1 -->
+                AND eb1 = #{eb1}
+            </if>
+            <if test=" eb2 != null and eb2 !='' "><!-- 扩展2 -->
+                AND eb2 = #{eb2}
+            </if>
+            <if test=" eb3 != null and eb3 !='' "><!-- 扩展3 -->
+                AND eb3 = #{eb3}
+            </if>
+            <if test=" eb4 != null and eb4 !='' "><!-- 扩展4 -->
+                AND eb4 = #{eb4}
+            </if>
+            <if test=" eb5 != null and eb5 !='' "><!-- 扩展5 -->
+                AND eb5 = #{eb5}
+            </if>
+            <if test=" ggg != null and ggg !='' "><!-- 字典分类标识 -->
+                AND ggg = #{ggg}
+            </if>
+            <if test=" ppp != null and ppp !='' "><!-- 企业ID -->
+                AND ppp = #{ppp}
+            </if>
+            <if test=" ddd != null and ddd !='' "><!-- 有效标识 -->
+                AND ddd = #{ddd}
+            </if>
+            <if test=" cc1 != null and cc1 !='' "><!-- 创建时间 -->
+                AND cc1 = #{cc1}
+            </if>
+            <if test=" cc2 != null and cc2 !='' "><!-- 创建者 -->
+                AND cc2 = #{cc2}
+            </if>
+            <if test=" uu1 != null and uu1 !='' "><!-- 最后更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+            <if test=" uu2 != null and uu2 !='' "><!-- 最后更新者 -->
+                AND uu2 = #{uu2}
+            </if>
+        </trim>
+    </update>
+    <!-- 查询分页数据信息  -->
+    <select id='doSelectPage' parameterType='MS0M1DBO' resultType='MS0M1DBO'>
+        SELECT <include refid='tableColumns'/> FROM ms0m1
+        <trim prefix='WHERE' prefixOverrides='AND |OR '>
+            <if test=" puk != null and puk !='' "><!-- 系统数据唯一识别ID（固定主键） -->
+                AND puk = #{puk}
+            </if>
+            <if test=" k01_dflid != null and k01_dflid !='' "><!-- 大分类ID -->
+                AND k01_dflid = #{k01_dflid}
+            </if>
+            <if test=" k02_zflid != null and k02_zflid !='' "><!-- 中分类ID -->
+                AND k02_zflid = #{k02_zflid}
+            </if>
+            <if test=" k03_xflid != null and k03_xflid !='' "><!-- 小分类ID -->
+                AND k03_xflid = #{k03_xflid}
+            </if>
+            <if test=" f01_zdmc != null and f01_zdmc !='' "><!-- 字典名称 -->
+                AND f01_zdmc = #{f01_zdmc}
+            </if>
+            <if test=" f02_pxwz != null and f02_pxwz !='' "><!-- 排序位置 -->
+                AND f02_pxwz = #{f02_pxwz}
+            </if>
+            <if test=" n01_dflmc != null and n01_dflmc !='' "><!-- 大分类名称 -->
+                AND n01_dflmc = #{n01_dflmc}
+            </if>
+            <if test=" n02_zflmc != null and n02_zflmc !='' "><!-- 中分类名称 -->
+                AND n02_zflmc = #{n02_zflmc}
+            </if>
+            <if test=" n03_xflmc != null and n03_xflmc !='' "><!-- 小分类名称 -->
+                AND n03_xflmc = #{n03_xflmc}
+            </if>
+            <if test=" bbb != null and bbb !='' "><!-- 备注说明 -->
+                AND bbb = #{bbb}
+            </if>
+            <if test=" fb1 != null and fb1 !='' "><!-- 备用1 -->
+                AND fb1 = #{fb1}
+            </if>
+            <if test=" fb2 != null and fb2 !='' "><!-- 备用2 -->
+                AND fb2 = #{fb2}
+            </if>
+            <if test=" fb3 != null and fb3 !='' "><!-- 备用3 -->
+                AND fb3 = #{fb3}
+            </if>
+            <if test=" fb4 != null and fb4 !='' "><!-- 备用4 -->
+                AND fb4 = #{fb4}
+            </if>
+            <if test=" fb5 != null and fb5 !='' "><!-- 备用5 -->
+                AND fb5 = #{fb5}
+            </if>
+            <if test=" eb1 != null and eb1 !='' "><!-- 扩展1 -->
+                AND eb1 = #{eb1}
+            </if>
+            <if test=" eb2 != null and eb2 !='' "><!-- 扩展2 -->
+                AND eb2 = #{eb2}
+            </if>
+            <if test=" eb3 != null and eb3 !='' "><!-- 扩展3 -->
+                AND eb3 = #{eb3}
+            </if>
+            <if test=" eb4 != null and eb4 !='' "><!-- 扩展4 -->
+                AND eb4 = #{eb4}
+            </if>
+            <if test=" eb5 != null and eb5 !='' "><!-- 扩展5 -->
+                AND eb5 = #{eb5}
+            </if>
+            <if test=" ggg != null and ggg !='' "><!-- 字典分类标识 -->
+                AND ggg = #{ggg}
+            </if>
+            <if test=" ppp != null and ppp !='' "><!-- 企业ID -->
+                AND ppp = #{ppp}
+            </if>
+            <if test=" ddd != null and ddd !='' "><!-- 有效标识 -->
+                AND ddd = #{ddd}
+            </if>
+            <if test=" cc1 != null and cc1 !='' "><!-- 创建时间 -->
+                AND cc1 = #{cc1}
+            </if>
+            <if test=" cc2 != null and cc2 !='' "><!-- 创建者 -->
+                AND cc2 = #{cc2}
+            </if>
+            <if test=" uu1 != null and uu1 !='' "><!-- 最后更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+            <if test=" uu2 != null and uu2 !='' "><!-- 最后更新者 -->
+                AND uu2 = #{uu2}
+            </if>
+        </trim>
+    </select>
+
+    <!-- 插入一条数据 -->
+    <insert id='doInsert' parameterType='MS0M1DBO'>
+        INSERT INTO ms0m1
+          ( <include refid='tableColumns'/>) 
+        VALUES 
+          ( #{puk},#{k01_dflid},#{k02_zflid},#{k03_xflid},#{f01_zdmc},#{f02_pxwz},#{n01_dflmc},#{n02_zflmc},#{n03_xflmc},#{bbb},#{fb1},#{fb2},#{fb3},#{fb4},#{fb5},#{eb1},#{eb2},#{eb3},#{eb4},#{eb5},#{ggg},#{ppp},#{ddd},#{cc1},#{cc2},#{uu1},#{uu2} )
+    </insert>
+    <!-- 修改一条数据 -->
+    <update id='doUpdate' parameterType='MS0M1DBO'>
+        UPDATE ms0m1 SET uu1 = #{uuu} <!-- 更新时间、更新者 -->
+        <if test=" k01_dflid != null and k01_dflid !='' "><!-- 大分类ID -->
+            ,k01_dflid = #{k01_dflid}
+        </if>
+        <if test=" k02_zflid != null and k02_zflid !='' "><!-- 中分类ID -->
+            ,k02_zflid = #{k02_zflid}
+        </if>
+        <if test=" k03_xflid != null and k03_xflid !='' "><!-- 小分类ID -->
+            ,k03_xflid = #{k03_xflid}
+        </if>
+        <if test=" f01_zdmc != null and f01_zdmc !='' "><!-- 字典名称 -->
+            ,f01_zdmc = #{f01_zdmc}
+        </if>
+        <if test=" f02_pxwz != null and f02_pxwz !='' "><!-- 排序位置 -->
+            ,f02_pxwz = #{f02_pxwz}
+        </if>
+        <if test=" n01_dflmc != null and n01_dflmc !='' "><!-- 大分类名称 -->
+            ,n01_dflmc = #{n01_dflmc}
+        </if>
+        <if test=" n02_zflmc != null and n02_zflmc !='' "><!-- 中分类名称 -->
+            ,n02_zflmc = #{n02_zflmc}
+        </if>
+        <if test=" n03_xflmc != null and n03_xflmc !='' "><!-- 小分类名称 -->
+            ,n03_xflmc = #{n03_xflmc}
+        </if>
+        <if test=" bbb != null and bbb !='' "><!-- 备注说明 -->
+            ,bbb = #{bbb}
+        </if>
+        <if test=" fb1 != null and fb1 !='' "><!-- 备用1 -->
+            ,fb1 = #{fb1}
+        </if>
+        <if test=" fb2 != null and fb2 !='' "><!-- 备用2 -->
+            ,fb2 = #{fb2}
+        </if>
+        <if test=" fb3 != null and fb3 !='' "><!-- 备用3 -->
+            ,fb3 = #{fb3}
+        </if>
+        <if test=" fb4 != null and fb4 !='' "><!-- 备用4 -->
+            ,fb4 = #{fb4}
+        </if>
+        <if test=" fb5 != null and fb5 !='' "><!-- 备用5 -->
+            ,fb5 = #{fb5}
+        </if>
+        <if test=" eb1 != null and eb1 !='' "><!-- 扩展1 -->
+            ,eb1 = #{eb1}
+        </if>
+        <if test=" eb2 != null and eb2 !='' "><!-- 扩展2 -->
+            ,eb2 = #{eb2}
+        </if>
+        <if test=" eb3 != null and eb3 !='' "><!-- 扩展3 -->
+            ,eb3 = #{eb3}
+        </if>
+        <if test=" eb4 != null and eb4 !='' "><!-- 扩展4 -->
+            ,eb4 = #{eb4}
+        </if>
+        <if test=" eb5 != null and eb5 !='' "><!-- 扩展5 -->
+            ,eb5 = #{eb5}
+        </if>
+        <if test=" ggg != null and ggg !='' "><!-- 字典分类标识 -->
+            ,ggg = #{ggg}
+        </if>
+        <if test=" ppp != null and ppp !='' "><!-- 企业ID -->
+            ,ppp = #{ppp}
+        </if>
+        <if test=" ddd != null and ddd !='' "><!-- 有效标识 -->
+            ,ddd = #{ddd}
+        </if>
+        <if test=" cc1 != null and cc1 !='' "><!-- 创建时间 -->
+            ,cc1 = #{cc1}
+        </if>
+        <if test=" cc2 != null and cc2 !='' "><!-- 创建者 -->
+            ,cc2 = #{cc2}
+        </if>
+        <if test=" uu2 != null and uu2 !='' "><!-- 最后更新者 -->
+            ,uu2 = #{uu2}
+        </if>
+        WHERE puk = #{puk}
+            <if test=" uu1 != null and uu1 !='' "><!-- 最后更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+    </update>
+    <!-- 逻辑删除一条数据 -->
+    <delete id='toDelete' parameterType='MS0M1DBO'>
+        UPDATE ms0m1 SET ddd='1', uu1 = #{uuu}, uu2 = #{uu2} WHERE puk = #{puk}
+            <if test=" uu1 != null and uu1 !='' "><!-- 最后更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+    </delete>
+    <!-- 物理删除一条数据 -->
+    <delete id='doDelete' parameterType='MS0M1DBO'>
+        DELETE FROM ms0m1 WHERE puk = #{puk}
+            <if test=" uu1 != null and uu1 !='' "><!-- 最后更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+    </delete>
+    <!-- 查询一条数据  -->
+    <select id='doRead' parameterType='MS0M1DBO' resultType='MS0M1DBO'>
+        SELECT <include refid='tableColumns'/> FROM ms0m1 WHERE puk = #{puk}
+            <if test=" ddd != null and ddd !='' "><!-- 最后更新时间 -->
+                AND ddd = #{ddd}
+            </if>
+    </select>
+
+</mapper>

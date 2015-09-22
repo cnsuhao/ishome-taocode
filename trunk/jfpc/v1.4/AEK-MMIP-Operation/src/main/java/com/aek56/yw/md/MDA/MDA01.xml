@@ -1,0 +1,41 @@
+﻿<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 产品线信息 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='com.aek56.yw.md.MDA.MDA01Dao'>
+    <!-- 表字段信息  -->
+    <sql id='tableColumns'>
+        puk,k01_csid,k02_cpxlb,k03,f01_zwmc,f02_ywmc,f03_zwmcpym,f04_ywmcsx,f05_zwms,f06_ywms,f07_jzkm,f08_zdhcd,f09_cpxcd,f10_mjfs,f11,f12,f13,f14,f15,f16,f17,f18,f19,f20,bbb,fb1,fb2,fb3,fb4,fb5,eb1,eb2,eb3,eb4,eb5,ggg,ppp,ddd,cc1,cc2,uu1,uu2
+    </sql>
+
+    <!-- 查询分页数据信息  -->
+    <select id='doSelectPage' parameterType='MDA_CPXXXDBO' resultType='MDA_CPXXXDBO'>
+        SELECT <include refid='tableColumns'/> FROM mda_cpxxx t
+        <trim prefix='WHERE' prefixOverrides='AND |OR '>
+            <if test=" f11 != null and f11 !='' "><!-- 厂商ID -->
+                AND INSTR(f11,#{f11})>0
+            </if>
+            <if test=" f01_zwmc != null and f01_zwmc !='' "><!-- 产品线中文名称 -->
+                AND INSTR(f01_zwmc,#{f01_zwmc})>0
+            </if>
+        </trim>
+    </select>
+    
+    <!-- 逻辑删除数据 -->
+    <delete id='toDeleteCpxfl' parameterType='MDB_CPXFLXXDBO'>
+        UPDATE mdb_cpxflxx SET ddd='1', uu1 = #{uuu}, uu2 = #{uu2}
+        <trim prefix='WHERE' prefixOverrides='AND |OR '>
+            <if test=" puk != null and puk !='' "><!-- 产品线分类ID -->
+                AND puk = #{puk}
+            </if>
+            <if test=" k01_scxid != null and k01_scxid !='' "><!-- 产品线ID -->
+                AND k01_scxid = #{k01_scxid}
+            </if>
+            <if test=" k02_csid != null and k02_csid !='' "><!-- 厂商ID -->
+                AND k02_csid = #{k02_csid}
+            </if>
+        </trim>
+    </delete>
+</mapper>

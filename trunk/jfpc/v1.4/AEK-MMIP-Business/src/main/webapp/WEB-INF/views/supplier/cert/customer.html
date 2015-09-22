@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title></title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link rel="stylesheet" type="text/css" href="/css/base.css">
+<link rel="stylesheet" type="text/css" href="/css/jquery.mCustomScrollbar.css">
+<script src="/js/jquery.js"></script>
+<script src="/js/jquery.mousewheel.js"></script>
+<script src="/js/jquery.mCustomScrollbar.js"></script>
+<script src="/js/function.js"></script>
+<script src="/js/jq.ui.js"></script>
+<script src="/js/tableFixed.min.js"></script>
+<script>
+var skinCss = "";
+if($.cookie("userType") == 1)
+	skinCss = "<link rel=\"stylesheet\" type=\"text/css\" href=\"/css/hospital_cert.css\">";
+else
+	skinCss = "<link rel=\"stylesheet\" type=\"text/css\" href=\"/css/supplier_cert.css\">";
+$("head").append(skinCss);
+$(function(){
+	$(".textTips").input();
+	resetText();
+	hoverTable(".hoverTable",true,false);
+	//排序
+
+	$("#group>span").click(function(){
+		$("#group>span").removeClass("groupLableSel");
+		$(this).addClass("groupLableSel");
+		getCustomerList($(this).attr(""));
+	});
+})
+
+
+
+function getCustomerList(Parameters){
+	ajax("/ajax/json.php?t="+Math.random(),{"act":"list"},function(data){
+		var html = "";
+		$.each(data.list,function(index, item){
+			html +='<tr>'
+						+'<td class="center"><sapn class="mlogo">浙</sapn></td>'
+						+'<td><a href="javascript:showLayer("/hospital/sup_look.html?id=3", 500, true);">浙江省医疗器械有限公司</a>'+'<br /><img src="/images/icon/tb_3.png" align="absmiddle" /> 张小花 15837599483 0571－88567869</td>'
+						+'<td class="center">'
+							+'<ul class="pubicYUIList mTop10 clearfix tableListImg">'
+								+'<li><img src="" width="50" height="50"><br/><span>营业执照</span></li>'
+								+'<li><img src="" width="50" height="50"><br/><span>经营许可证</span></li>'
+								+'<li><img src="" width="50" height="50"><br/><span>注册证(43)</span></li>'
+								+'<li><img src="" width="50" height="50"><br/><span>税务登记证</span></li>'
+								+'<li><img src="" width="50" height="50"><br/><span>厂商营业执照</span></li>'
+								+'<li><img src="" width="50" height="50"><br/><span>厂商生产许可证</span></li>'
+								+'<li><img src="" width="50" height="50"><br/><span>授权书(2)</span></li>'
+								+'<li><img src="" width="50" height="50"><br/><span>委托书(2)</span></li>'
+								+'<li><img src="" width="50" height="50"><br/><span>承诺书(2)</span></li>'
+							+'</ul>'
+						+'</td>'
+						+'<td class="gray"><a class="pushCert"  href="javascript:showLayer(\'push.html\', 900, true);" >推送证书</a>'+' &nbsp;解除关系</td>'
+					+'</tr>';
+		});
+		
+		$("#list").html(html);
+		hoverTable(".hoverTable",true,false);
+		//点击推送证书
+		$(".pushCert").click(function(){
+			$("#listId").val("123")
+			//$("#listId").val($(this).attr("id"));
+		});
+
+	});
+}
+
+function onSearch(){
+	var parm1=$(".groupLableSel").attr("id");
+	var parm2=$("#hospitalName").val();
+	var parms={groupBy:parm1,hospitalName:parm2};
+	getCustomerList(parms);
+}
+
+
+</script>
+</head>
+<body onload="getCustomerList()">
+<input type="hidden" id="listId" />
+<div class="contnet" id="yui-contentBox">
+	<div class="boxContent">
+		<div style="border-bottom:1px solid #ccc;padding-bottom:10px;position:relative">
+			<a href="javascript:showLayer('hospital_add.html', 500, true);" class="btn">添加医院</a>
+			<span class="font14 group" style="position:absolute;right:0px" id="group">
+				排序：
+				<span class="groupLableSel" id="">首字母</span>&nbsp;&nbsp;&nbsp;
+				<span>添加时间</span>&nbsp;&nbsp;&nbsp;
+				<span>已添加未注册<span id="count">(4)</span></span>&nbsp;&nbsp;&nbsp;
+				<input id="hospitalName" type="text" class="text textTips {text:'请输入医院名称'}"  name="11" value="">
+				<a href="#" class="btn" onclick="javascript:onSearch()"; >搜索</a>
+			</span>
+			<div class="clear"></div>
+		</div>
+		
+		<div class="tablelist" style="height:400px;">
+			<table class="table hoverTable" width="100%" cellspacing="0" cellpadding="0" border="0">
+				<thead>
+					<tr>
+						<th width="8%"></th>
+						<th width="22%"></th>
+						<th></th>
+						<th width="10%"></th>
+					</tr>
+				</thead>
+				<tbody id="list">
+				</tbody>
+			</table>
+			<script>getCustomerList();</script>
+		</div>
+	</div>
+</div>
+</body>
+</html>

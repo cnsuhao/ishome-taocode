@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='GB2312'?>
+<messages>
+	<common>
+	   <!-- 后台主数据注册证维护 -->
+		<message k03_mbbh='3911800031' bbb='注册证添加成功！' />
+		<message k03_mbbh='3911800032' bbb='注册证添加失败！' />
+		<message k03_mbbh='3911800033' bbb='注册证编辑成功！' />
+        <message k03_mbbh='3911800034' bbb='注册证编辑失败！' />
+        <message k03_mbbh='3911800061' bbb='注册证删除成功！' />
+        <message k03_mbbh='3911800062' bbb='注册证删除失败！' />
+        
+        <!-- 后台主数据规格维护 -->
+        <message k03_mbbh='391080021' bbb='规格添加成功！' />
+        <message k03_mbbh='391080022' bbb='规格添加失败！' />
+        <message k03_mbbh='391080023' bbb='规格编辑成功！' />
+        <message k03_mbbh='391080024' bbb='规格编辑失败！' />
+        <message k03_mbbh='391080031' bbb='规格删除成功！' />
+        <message k03_mbbh='391080032' bbb='规格删除失败！' />
+        
+        <!-- 后台主数据产品线维护 -->
+        <message k03_mbbh='391110021' bbb='产品线添加成功！' />
+        <message k03_mbbh='391110022' bbb='产品线添加失败！' />
+        <message k03_mbbh='391110023' bbb='产品线编辑成功！' />
+        <message k03_mbbh='391110024' bbb='产品线编辑失败！' />
+        <message k03_mbbh='391110031' bbb='产品线删除成功！' />
+        <message k03_mbbh='391110032' bbb='产品线删除失败！' />
+        
+        <!-- 后台主数据维护 -->
+        <message k03_mbbh='391110021' bbb='产品线添加成功！' />
+        <message k03_mbbh='391110022' bbb='产品线添加失败！' />
+        <message k03_mbbh='391110023' bbb='产品线编辑成功！' />
+        <message k03_mbbh='391110024' bbb='产品线编辑失败！' />
+        <message k03_mbbh='391110031' bbb='产品线删除成功！' />
+        <message k03_mbbh='391110032' bbb='产品线删除失败！' />
+        
+        <!-- 后台主数据注册证审核 -->
+        <message k03_mbbh='392070021' bbb='注册证审核成功！' />
+        <message k03_mbbh='392070022' bbb='注册证审核失败！' />
+	</common>
+</messages>

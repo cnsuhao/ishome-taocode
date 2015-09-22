@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title></title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link rel="stylesheet" type="text/css" href="/css/base.css">
+<link rel="stylesheet" href="/css/jquery.mCustomScrollbar.css">
+<link rel="stylesheet" type="text/css" href="/css/swfupload.css" />
+<script src="/js/jquery.js"></script>
+<script src="/js/swfupload.js"></script>
+<script src="/js/swfupload.queue.js"></script>
+<script src="/js/fileprogress.js"></script>
+<script src="/js/handlers.js"></script>
+<script src="/js/jquery.mousewheel.js"></script>
+<script src="/js/jquery.mCustomScrollbar.js"></script>
+<script src="/js/jquery.jcarousellite.min.js"></script>
+<script src="/js/function.js"></script>
+<script src="/js/jq.ui.js"></script>
+<script src="/js/tableFixed.min.js"></script>
+<script>
+$(function(){
+	hoverTable(".hoverTable",true);
+	$("body").mCustomScrollbar({theme:"minimal"});
+	resetText();
+	$(".textTips").input();
+    $(".checkbox").checkbox();
+    $(".tag").uiSwitch();
+	$(".uploadBox").hoverUpload();
+	$(".carousel").jCarouselLite({
+        btnNext: ".jcnext",
+        btnPrev: ".jcprev",
+        visible: 4,
+        circular: false,
+        scroll: 3
+    });
+    var settings = {
+        post:"/?a=img",
+        size:"1000",
+        type:"*.jpg;*.gif;*.bmp;*.png",
+        type_description:"所有图片",
+        id:'tag_0',
+        success:uploadSuccess_1
+    };
+    var swfu = loadUpload(settings);
+	new inputTips("#info","/ajax/json.php?act=inputText&t=" + Math.random(), 5, "#returnId", 139, null,true);
+})
+function uploadSuccess_1(file, serverData) {
+    var serverData = serverData.toJSON();
+    alert(serverData.msg,1);
+    $("#gsyPhoto_1").attr('src',serverData.img);
+    $("#gsyImg_1").val(serverData.id);
+}
+</script>
+</head>
+<body>
+<div class="contnet">
+	<div class="boxContent">
+		<sapn class="mlogo">术</sapn> <sapn class="mlogo mlogo-max">术</sapn> <sapn class="mlogo mlogo-min">术</sapn> <a href="" class="mlogo mlogo-min"></a>
+		<a href="#" class="yuiAdd"></a>
+		<a href="javascript:showLayer('2.html', 500);">添加</a>
+		<a href="javascript:showLayer('2.html', 300);">添加</a>
+		<a href="javascript:top.showWindow('夺顶替','adfadsds', 500);">查看</a>
+		<div><a href="javascript:void(0);" gid="21" onclick="audit(this);">审核</a></div>
+		<a href="javascript:msg();">短信发送</a>
+		<div class="tablelist" style="height:200px;">
+			<table class="table tableBorder hoverTable" width="100%" cellspacing="0" id="tableid" cellpadding="0" border="0">
+				<thead>
+					<tr>
+						<th>1212</th>
+						<th>2112</th>
+						<th>1212</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>1212</td>
+						<td>2112</td>
+						<td>1212</td>
+					</tr>
+					<tr>
+						<td>1212</td>
+						<td>2112</td>
+						<td>1212</td>
+					</tr>
+					<tr>
+						<td>1212</td>
+						<td>2112</td>
+						<td>1212</td>
+					</tr>
+					<tr>
+						<td>1212</td>
+						<td>2112</td>
+						<td>1212</td>
+					</tr>
+					<tr>
+						<td>1212</td>
+						<td>2112</td>
+						<td>1212</td>
+					</tr>
+					<tr>
+						<td>1212</td>
+						<td>2112</td>
+						<td>1212</td>
+					</tr>
+					<tr>
+						<td>1212</td>
+						<td>2112</td>
+						<td>1212</td>
+					</tr>
+					<tr>
+						<td>1212</td>
+						<td>2112</td>
+						<td>1212</td>
+					</tr>
+					<tr>
+						<td>1212</td>
+						<td>2112</td>
+						<td>1212</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<br />
+		<table class="table" width="100%" cellspacing="0" cellpadding="0" border="0">
+			<thead>
+				<tr>
+					<th>1212</th>
+					<th>2112</th>
+					<th>1212</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>1212</td>
+					<td>2112</td>
+					<td>1212</td>
+				</tr>
+				<tr>
+					<td>1212</td>
+					<td>2112</td>
+					<td>1212</td>
+				</tr>
+				<tr>
+					<td>1212</td>
+					<td>2112</td>
+					<td>1212</td>
+				</tr>
+			</tbody>
+		</table>
+		<br />
+		<table class="tableCert" width="100%" cellspacing="0" cellpadding="0" border="0">
+			<thead>
+				<tr>
+					<th>1212</th>
+					<th>2112</th>
+					<th>1212</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>1212</td>
+					<td>2112</td>
+					<td>1212</td>
+				</tr>
+				<tr>
+					<td>1212</td>
+					<td>2112</td>
+					<td>1212</td>
+				</tr>
+				<tr>
+					<td>1212</td>
+					<td>2112</td>
+					<td>1212</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<ul class="publicYUCList clearfix">
+	    	<li>
+	    		<img src="/images/noImg.png">
+	    		<div class="dataMdofiy">
+	    			<a href="" class="edit">编辑</a> <a href="" class="del">删除</a>
+	    		</div>
+	    	</li>
+	    	<li>
+	    		<img src="/images/noImg.png">
+	    		<div class="dataMdofiy">
+	    			<a href="" class="edit">编辑</a> <a href="" class="del">删除</a>
+	    		</div>
+	    	</li>
+	    	<li>
+	    		<img src="/images/noImg.png">
+	    		<div class="dataMdofiy">
+	    			<a href="" class="edit">编辑</a> <a href="" class="del">删除</a>
+	    		</div>
+	    	</li>
+	    </ul>
+	    <br />
+	    <ul class="pubicYUIList clearfix">
+	    	<li>
+	    		<sapn class="mlogo">术</sapn>
+	    		<div class="dataMdofiy">
+	    			<a href="" class="edit">编辑</a><br /><a href="" class="del">删除</a>
+	    		</div>
+	    	</li>
+	    	<li>
+	    		<sapn class="mlogo">术</sapn>
+	    		<div class="dataMdofiy">
+	    			<a href="" class="edit">编辑</a><br /><a href="" class="del">删除</a>
+	    		</div>
+	    	</li>
+	    	<li>
+	    		<sapn class="mlogo">术</sapn>
+	    		<div class="dataMdofiy">
+	    			<a href="" class="edit">编辑</a><br /><a href="" class="del">删除</a>
+	    		</div>
+	    	</li>
+	    </ul>
+
+		<ul class="ulFrm">
+			<li>
+				<span class="label">标题</span>
+				<input type="text" class="text textTips {text:'请输入内容'}" copy="search" name="11" value="">
+				<input type="button" icon="search">
+			</li>
+			<li>
+				<span class="label labelW80">标题</span>
+				<input type="text" id="info" name="info" class="text" arrow="true" value="" />
+				选中返回Id：<input type="text" disabled="disabled" id="returnId" />
+			</li>
+			<li>
+				<span class="label labelW100">标题</span>
+				<input type="text" class="text" name="" value="">
+			</li>
+			<li>
+				<span class="label labelW100 labelRight">标题</span>
+				<input type="text" class="text" name="" value="">
+			</li>
+			<li class="p105"><input type="button" class="btn dislabel" value="拒绝"></li>
+		</ul>
+		<button class="btn">通过</button>
+		<input type="button" class="btn dislabel" value="拒绝">
+		<!-- <input type="button" class="btn maxBtn" value="全部通过">
+		<input type="button" class="btn dislabel maxBtn" value="全部拒绝"> -->
+		<a href="" class="btn maxBtn">全部通过</a>
+		<a href="" class="btn dislabel maxBtn">全部拒绝</a>
+		<input type="checkbox" class="checkbox" value="">
+		<div class="uploadBox uploadW100">
+			<a href="#" class="showGlass"></a>
+			<div class="uploadBtn">
+				<div><em id="tag_0"></em></div>
+			</div>
+			<div class="uploadImg"><img src="/images/noImg.png"></div>
+			<div class="uploadBoxText">营业执照</div>
+		</div>
+		<div class="uploadBox uploadW200">
+			<a href="#" class="showGlass"></a>
+			<div class="uploadBtn">
+				<div><em></em></div>
+			</div>
+			<div class="uploadImg"><img src="/images/noImg.png"></div>
+			<div class="uploadBoxText">税务登记证</div>
+		</div>
+		<div class="tagBox">
+			<div class="tag {movetag:'span',showtag:'.tagBox .tagNav',addsclass:'tagnSelect',addtclass:'tagSelect',time:9999999}"> 
+				<span class="tagSelect">tabs 1</span>
+				<span>tabs 2</span>
+				<span>tabs 3</span>
+				<span>tabs 4</span>
+			</div>
+			<div class="tagBox">
+				<div class="tagNav tagnSelect">11</div>
+				<div class="tagNav">22</div>
+				<div class="tagNav">33</div>
+				<div class="tagNav">44</div>
+			</div>
+		</div>
+		<div class="custom-container fraction">
+	        <a href="#" class="jcprev">&lsaquo;</a>
+	        <div class="carousel">
+	            <ul>
+	                <li><img src="image/1.jpg"></li>
+	                <li><img src="image/2.jpg"></li>
+	                <li><img src="image/3.jpg"></li>
+	                <li><img src="image/4.jpg"></li>
+	                <li><img src="image/5.jpg"></li>
+	                <li><img src="image/6.jpg"></li>
+	                <li><img src="image/7.jpg"></li>
+	                <li><img src="image/8.jpg"></li>
+	                <li><img src="image/9.jpg"></li>
+	                <li><img src="image/10.jpg"></li>
+	            </ul>
+	        </div>
+	        <a href="#" class="jcnext">&rsaquo;</a>
+	        <div class="clear"></div>
+	    </div>
+	</div>
+</div>
+</body>
+</html>

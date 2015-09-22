@@ -1,0 +1,600 @@
+﻿<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 供应商添加产品线信息 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='com.aek56.atm.company.MGYS8_GYSTJCPXXX.MGYS8_GYSTJCPXXXDao'>
+    <!-- 表字段信息  -->
+    <sql id='tableColumns'>
+        puk,p11_gysid,n01_cpxjc,n02_cpxjp,k01_csid,k02_cpxlb,k03,f01_zwmc,f02_ywmc,f03_zwmcpym,f04_ywmcsx,f05_zwms,f06_ywms,f07_jzkm,f08_zdhcd,f09_cpxcd,f10_mjfs,f11,f12,f13,f14,f15,f16,f17,f18,f19,f20,bbb,fb1,fb2,fb3,fb4,fb5,eb1,eb2,eb3,eb4,eb5,ggg,ppp,ddd,cc1,cc2,uu1,uu2
+    </sql>
+
+    <!-- 根据条件更新所有记录 -->
+    <update id='doUpdateAll' parameterType='MGYS8_GYSTJCPXXXDBO'>
+        UPDATE mgys8_gystjcpxxx SET  uu1 = #{uuu} <!-- 更新时间、更新者 -->
+        <if test=" p11_gysid != null and p11_gysid !='' "><!-- 供应商ID -->
+            ,p11_gysid = #{p11_gysid}
+        </if>
+        <if test=" n01_cpxjc != null and n01_cpxjc !='' "><!-- 产品线简称 -->
+            ,n01_cpxjc = #{n01_cpxjc}
+        </if>
+        <if test=" n02_cpxjp != null and n02_cpxjp !='' "><!-- 产品线简拼 -->
+            ,n02_cpxjp = #{n02_cpxjp}
+        </if>
+        <if test=" k01_csid != null and k01_csid !='' "><!-- 厂商ID -->
+            ,k01_csid = #{k01_csid}
+        </if>
+        <if test=" k02_cpxlb != null and k02_cpxlb !='' "><!-- 产品线类别 -->
+            ,k02_cpxlb = #{k02_cpxlb}
+        </if>
+        <if test=" k03 != null and k03 !='' "><!-- 主键3 -->
+            ,k03 = #{k03}
+        </if>
+        <if test=" f01_zwmc != null and f01_zwmc !='' "><!-- 产品线中文名称 -->
+            ,f01_zwmc = #{f01_zwmc}
+        </if>
+        <if test=" f02_ywmc != null and f02_ywmc !='' "><!-- 产品线英文名称 -->
+            ,f02_ywmc = #{f02_ywmc}
+        </if>
+        <if test=" f03_zwmcpym != null and f03_zwmcpym !='' "><!-- 产品线中文名称拼音码 -->
+            ,f03_zwmcpym = #{f03_zwmcpym}
+        </if>
+        <if test=" f04_ywmcsx != null and f04_ywmcsx !='' "><!-- 产品线英文名称缩写 -->
+            ,f04_ywmcsx = #{f04_ywmcsx}
+        </if>
+        <if test=" f05_zwms != null and f05_zwms !='' "><!-- 产品线中文描述 -->
+            ,f05_zwms = #{f05_zwms}
+        </if>
+        <if test=" f06_ywms != null and f06_ywms !='' "><!-- 产品线英文描述 -->
+            ,f06_ywms = #{f06_ywms}
+        </if>
+        <if test=" f07_jzkm != null and f07_jzkm !='' "><!-- 节奏快慢（字段保留待用） -->
+            ,f07_jzkm = #{f07_jzkm}
+        </if>
+        <if test=" f08_zdhcd != null and f08_zdhcd !='' "><!-- 自动化程度（字段保留待用） -->
+            ,f08_zdhcd = #{f08_zdhcd}
+        </if>
+        <if test=" f09_cpxcd != null and f09_cpxcd !='' "><!-- 产品线长度（米）（字段保留待用） -->
+            ,f09_cpxcd = #{f09_cpxcd}
+        </if>
+        <if test=" f10_mjfs != null and f10_mjfs !='' "><!-- 灭菌方式（字段保留待用） -->
+            ,f10_mjfs = #{f10_mjfs}
+        </if>
+        <if test=" f11 != null and f11 !='' "><!-- 字段11 -->
+            ,f11 = #{f11}
+        </if>
+        <if test=" f12 != null and f12 !='' "><!-- 字段12 -->
+            ,f12 = #{f12}
+        </if>
+        <if test=" f13 != null and f13 !='' "><!-- 字段13 -->
+            ,f13 = #{f13}
+        </if>
+        <if test=" f14 != null and f14 !='' "><!-- 字段14 -->
+            ,f14 = #{f14}
+        </if>
+        <if test=" f15 != null and f15 !='' "><!-- 字段15 -->
+            ,f15 = #{f15}
+        </if>
+        <if test=" f16 != null and f16 !='' "><!-- 字段16 -->
+            ,f16 = #{f16}
+        </if>
+        <if test=" f17 != null and f17 !='' "><!-- 字段17 -->
+            ,f17 = #{f17}
+        </if>
+        <if test=" f18 != null and f18 !='' "><!-- 字段18 -->
+            ,f18 = #{f18}
+        </if>
+        <if test=" f19 != null and f19 !='' "><!-- 字段19 -->
+            ,f19 = #{f19}
+        </if>
+        <if test=" f20 != null and f20 !='' "><!-- 字段20 -->
+            ,f20 = #{f20}
+        </if>
+        <if test=" bbb != null and bbb !='' "><!-- 备注说明 -->
+            ,bbb = #{bbb}
+        </if>
+        <if test=" fb1 != null and fb1 !='' "><!-- 备用1 -->
+            ,fb1 = #{fb1}
+        </if>
+        <if test=" fb2 != null and fb2 !='' "><!-- 备用2 -->
+            ,fb2 = #{fb2}
+        </if>
+        <if test=" fb3 != null and fb3 !='' "><!-- 备用3 -->
+            ,fb3 = #{fb3}
+        </if>
+        <if test=" fb4 != null and fb4 !='' "><!-- 备用4 -->
+            ,fb4 = #{fb4}
+        </if>
+        <if test=" fb5 != null and fb5 !='' "><!-- 备用5 -->
+            ,fb5 = #{fb5}
+        </if>
+        <if test=" eb1 != null and eb1 !='' "><!-- 扩展1 -->
+            ,eb1 = #{eb1}
+        </if>
+        <if test=" eb2 != null and eb2 !='' "><!-- 扩展2 -->
+            ,eb2 = #{eb2}
+        </if>
+        <if test=" eb3 != null and eb3 !='' "><!-- 扩展3 -->
+            ,eb3 = #{eb3}
+        </if>
+        <if test=" eb4 != null and eb4 !='' "><!-- 扩展4 -->
+            ,eb4 = #{eb4}
+        </if>
+        <if test=" eb5 != null and eb5 !='' "><!-- 扩展5 -->
+            ,eb5 = #{eb5}
+        </if>
+        <if test=" ggg != null and ggg !='' "><!-- 所在组织 -->
+            ,ggg = #{ggg}
+        </if>
+        <if test=" ppp != null and ppp !='' "><!-- 企业ID -->
+            ,ppp = #{ppp}
+        </if>
+        <if test=" ddd != null and ddd !='' "><!-- 有效标识 -->
+            ,ddd = #{ddd}
+        </if>
+        <if test=" cc1 != null and cc1 !='' "><!-- 创建时间 -->
+            ,cc1 = #{cc1}
+        </if>
+        <if test=" cc2 != null and cc2 !='' "><!-- 创建者 -->
+            ,cc2 = #{cc2}
+        </if>
+        <if test=" uu2 != null and uu2 !='' "><!-- 最后更新者 -->
+            ,uu2 = #{uu2}
+        </if>
+        <trim prefix='WHERE' prefixOverrides='AND |OR '>
+            <if test=" puk != null and puk !='' "><!-- 产品线ID -->
+                AND puk = #{puk}
+            </if>
+            <if test=" p11_gysid != null and p11_gysid !='' "><!-- 供应商ID -->
+                AND p11_gysid = #{p11_gysid}
+            </if>
+            <if test=" n01_cpxjc != null and n01_cpxjc !='' "><!-- 产品线简称 -->
+                AND n01_cpxjc = #{n01_cpxjc}
+            </if>
+            <if test=" n02_cpxjp != null and n02_cpxjp !='' "><!-- 产品线简拼 -->
+                AND n02_cpxjp = #{n02_cpxjp}
+            </if>
+            <if test=" k01_csid != null and k01_csid !='' "><!-- 厂商ID -->
+                AND k01_csid = #{k01_csid}
+            </if>
+            <if test=" k02_cpxlb != null and k02_cpxlb !='' "><!-- 产品线类别 -->
+                AND k02_cpxlb = #{k02_cpxlb}
+            </if>
+            <if test=" k03 != null and k03 !='' "><!-- 主键3 -->
+                AND k03 = #{k03}
+            </if>
+            <if test=" f01_zwmc != null and f01_zwmc !='' "><!-- 产品线中文名称 -->
+                AND f01_zwmc = #{f01_zwmc}
+            </if>
+            <if test=" f02_ywmc != null and f02_ywmc !='' "><!-- 产品线英文名称 -->
+                AND f02_ywmc = #{f02_ywmc}
+            </if>
+            <if test=" f03_zwmcpym != null and f03_zwmcpym !='' "><!-- 产品线中文名称拼音码 -->
+                AND f03_zwmcpym = #{f03_zwmcpym}
+            </if>
+            <if test=" f04_ywmcsx != null and f04_ywmcsx !='' "><!-- 产品线英文名称缩写 -->
+                AND f04_ywmcsx = #{f04_ywmcsx}
+            </if>
+            <if test=" f05_zwms != null and f05_zwms !='' "><!-- 产品线中文描述 -->
+                AND f05_zwms = #{f05_zwms}
+            </if>
+            <if test=" f06_ywms != null and f06_ywms !='' "><!-- 产品线英文描述 -->
+                AND f06_ywms = #{f06_ywms}
+            </if>
+            <if test=" f07_jzkm != null and f07_jzkm !='' "><!-- 节奏快慢（字段保留待用） -->
+                AND f07_jzkm = #{f07_jzkm}
+            </if>
+            <if test=" f08_zdhcd != null and f08_zdhcd !='' "><!-- 自动化程度（字段保留待用） -->
+                AND f08_zdhcd = #{f08_zdhcd}
+            </if>
+            <if test=" f09_cpxcd != null and f09_cpxcd !='' "><!-- 产品线长度（米）（字段保留待用） -->
+                AND f09_cpxcd = #{f09_cpxcd}
+            </if>
+            <if test=" f10_mjfs != null and f10_mjfs !='' "><!-- 灭菌方式（字段保留待用） -->
+                AND f10_mjfs = #{f10_mjfs}
+            </if>
+            <if test=" f11 != null and f11 !='' "><!-- 字段11 -->
+                AND f11 = #{f11}
+            </if>
+            <if test=" f12 != null and f12 !='' "><!-- 字段12 -->
+                AND f12 = #{f12}
+            </if>
+            <if test=" f13 != null and f13 !='' "><!-- 字段13 -->
+                AND f13 = #{f13}
+            </if>
+            <if test=" f14 != null and f14 !='' "><!-- 字段14 -->
+                AND f14 = #{f14}
+            </if>
+            <if test=" f15 != null and f15 !='' "><!-- 字段15 -->
+                AND f15 = #{f15}
+            </if>
+            <if test=" f16 != null and f16 !='' "><!-- 字段16 -->
+                AND f16 = #{f16}
+            </if>
+            <if test=" f17 != null and f17 !='' "><!-- 字段17 -->
+                AND f17 = #{f17}
+            </if>
+            <if test=" f18 != null and f18 !='' "><!-- 字段18 -->
+                AND f18 = #{f18}
+            </if>
+            <if test=" f19 != null and f19 !='' "><!-- 字段19 -->
+                AND f19 = #{f19}
+            </if>
+            <if test=" f20 != null and f20 !='' "><!-- 字段20 -->
+                AND f20 = #{f20}
+            </if>
+            <if test=" bbb != null and bbb !='' "><!-- 备注说明 -->
+                AND bbb = #{bbb}
+            </if>
+            <if test=" fb1 != null and fb1 !='' "><!-- 备用1 -->
+                AND fb1 = #{fb1}
+            </if>
+            <if test=" fb2 != null and fb2 !='' "><!-- 备用2 -->
+                AND fb2 = #{fb2}
+            </if>
+            <if test=" fb3 != null and fb3 !='' "><!-- 备用3 -->
+                AND fb3 = #{fb3}
+            </if>
+            <if test=" fb4 != null and fb4 !='' "><!-- 备用4 -->
+                AND fb4 = #{fb4}
+            </if>
+            <if test=" fb5 != null and fb5 !='' "><!-- 备用5 -->
+                AND fb5 = #{fb5}
+            </if>
+            <if test=" eb1 != null and eb1 !='' "><!-- 扩展1 -->
+                AND eb1 = #{eb1}
+            </if>
+            <if test=" eb2 != null and eb2 !='' "><!-- 扩展2 -->
+                AND eb2 = #{eb2}
+            </if>
+            <if test=" eb3 != null and eb3 !='' "><!-- 扩展3 -->
+                AND eb3 = #{eb3}
+            </if>
+            <if test=" eb4 != null and eb4 !='' "><!-- 扩展4 -->
+                AND eb4 = #{eb4}
+            </if>
+            <if test=" eb5 != null and eb5 !='' "><!-- 扩展5 -->
+                AND eb5 = #{eb5}
+            </if>
+            <if test=" ggg != null and ggg !='' "><!-- 所在组织 -->
+                AND ggg = #{ggg}
+            </if>
+            <if test=" ppp != null and ppp !='' "><!-- 企业ID -->
+                AND ppp = #{ppp}
+            </if>
+            <if test=" ddd != null and ddd !='' "><!-- 有效标识 -->
+                AND ddd = #{ddd}
+            </if>
+            <if test=" cc1 != null and cc1 !='' "><!-- 创建时间 -->
+                AND cc1 = #{cc1}
+            </if>
+            <if test=" cc2 != null and cc2 !='' "><!-- 创建者 -->
+                AND cc2 = #{cc2}
+            </if>
+            <if test=" uu1 != null and uu1 !='' "><!-- 最后更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+            <if test=" uu2 != null and uu2 !='' "><!-- 最后更新者 -->
+                AND uu2 = #{uu2}
+            </if>
+        </trim>
+    </update>
+    <!-- 查询分页数据信息  -->
+    <select id='doSelectPage' parameterType='MGYS8_GYSTJCPXXXDBO' resultType='MGYS8_GYSTJCPXXXDBO'>
+        SELECT <include refid='tableColumns'/> FROM mgys8_gystjcpxxx
+        <trim prefix='WHERE' prefixOverrides='AND |OR '>
+            <if test=" puk != null and puk !='' "><!-- 产品线ID -->
+                AND puk = #{puk}
+            </if>
+            <if test=" p11_gysid != null and p11_gysid !='' "><!-- 供应商ID -->
+                AND p11_gysid = #{p11_gysid}
+            </if>
+            <if test=" n01_cpxjc != null and n01_cpxjc !='' "><!-- 产品线简称 -->
+                AND n01_cpxjc = #{n01_cpxjc}
+            </if>
+            <if test=" n02_cpxjp != null and n02_cpxjp !='' "><!-- 产品线简拼 -->
+                AND n02_cpxjp = #{n02_cpxjp}
+            </if>
+            <if test=" k01_csid != null and k01_csid !='' "><!-- 厂商ID -->
+                AND k01_csid = #{k01_csid}
+            </if>
+            <if test=" k02_cpxlb != null and k02_cpxlb !='' "><!-- 产品线类别 -->
+                AND k02_cpxlb = #{k02_cpxlb}
+            </if>
+            <if test=" k03 != null and k03 !='' "><!-- 主键3 -->
+                AND k03 = #{k03}
+            </if>
+            <if test=" f01_zwmc != null and f01_zwmc !='' "><!-- 产品线中文名称 -->
+                AND f01_zwmc = #{f01_zwmc}
+            </if>
+            <if test=" f02_ywmc != null and f02_ywmc !='' "><!-- 产品线英文名称 -->
+                AND f02_ywmc = #{f02_ywmc}
+            </if>
+            <if test=" f03_zwmcpym != null and f03_zwmcpym !='' "><!-- 产品线中文名称拼音码 -->
+                AND f03_zwmcpym = #{f03_zwmcpym}
+            </if>
+            <if test=" f04_ywmcsx != null and f04_ywmcsx !='' "><!-- 产品线英文名称缩写 -->
+                AND f04_ywmcsx = #{f04_ywmcsx}
+            </if>
+            <if test=" f05_zwms != null and f05_zwms !='' "><!-- 产品线中文描述 -->
+                AND f05_zwms = #{f05_zwms}
+            </if>
+            <if test=" f06_ywms != null and f06_ywms !='' "><!-- 产品线英文描述 -->
+                AND f06_ywms = #{f06_ywms}
+            </if>
+            <if test=" f07_jzkm != null and f07_jzkm !='' "><!-- 节奏快慢（字段保留待用） -->
+                AND f07_jzkm = #{f07_jzkm}
+            </if>
+            <if test=" f08_zdhcd != null and f08_zdhcd !='' "><!-- 自动化程度（字段保留待用） -->
+                AND f08_zdhcd = #{f08_zdhcd}
+            </if>
+            <if test=" f09_cpxcd != null and f09_cpxcd !='' "><!-- 产品线长度（米）（字段保留待用） -->
+                AND f09_cpxcd = #{f09_cpxcd}
+            </if>
+            <if test=" f10_mjfs != null and f10_mjfs !='' "><!-- 灭菌方式（字段保留待用） -->
+                AND f10_mjfs = #{f10_mjfs}
+            </if>
+            <if test=" f11 != null and f11 !='' "><!-- 字段11 -->
+                AND f11 = #{f11}
+            </if>
+            <if test=" f12 != null and f12 !='' "><!-- 字段12 -->
+                AND f12 = #{f12}
+            </if>
+            <if test=" f13 != null and f13 !='' "><!-- 字段13 -->
+                AND f13 = #{f13}
+            </if>
+            <if test=" f14 != null and f14 !='' "><!-- 字段14 -->
+                AND f14 = #{f14}
+            </if>
+            <if test=" f15 != null and f15 !='' "><!-- 字段15 -->
+                AND f15 = #{f15}
+            </if>
+            <if test=" f16 != null and f16 !='' "><!-- 字段16 -->
+                AND f16 = #{f16}
+            </if>
+            <if test=" f17 != null and f17 !='' "><!-- 字段17 -->
+                AND f17 = #{f17}
+            </if>
+            <if test=" f18 != null and f18 !='' "><!-- 字段18 -->
+                AND f18 = #{f18}
+            </if>
+            <if test=" f19 != null and f19 !='' "><!-- 字段19 -->
+                AND f19 = #{f19}
+            </if>
+            <if test=" f20 != null and f20 !='' "><!-- 字段20 -->
+                AND f20 = #{f20}
+            </if>
+            <if test=" bbb != null and bbb !='' "><!-- 备注说明 -->
+                AND bbb = #{bbb}
+            </if>
+            <if test=" fb1 != null and fb1 !='' "><!-- 备用1 -->
+                AND fb1 = #{fb1}
+            </if>
+            <if test=" fb2 != null and fb2 !='' "><!-- 备用2 -->
+                AND fb2 = #{fb2}
+            </if>
+            <if test=" fb3 != null and fb3 !='' "><!-- 备用3 -->
+                AND fb3 = #{fb3}
+            </if>
+            <if test=" fb4 != null and fb4 !='' "><!-- 备用4 -->
+                AND fb4 = #{fb4}
+            </if>
+            <if test=" fb5 != null and fb5 !='' "><!-- 备用5 -->
+                AND fb5 = #{fb5}
+            </if>
+            <if test=" eb1 != null and eb1 !='' "><!-- 扩展1 -->
+                AND eb1 = #{eb1}
+            </if>
+            <if test=" eb2 != null and eb2 !='' "><!-- 扩展2 -->
+                AND eb2 = #{eb2}
+            </if>
+            <if test=" eb3 != null and eb3 !='' "><!-- 扩展3 -->
+                AND eb3 = #{eb3}
+            </if>
+            <if test=" eb4 != null and eb4 !='' "><!-- 扩展4 -->
+                AND eb4 = #{eb4}
+            </if>
+            <if test=" eb5 != null and eb5 !='' "><!-- 扩展5 -->
+                AND eb5 = #{eb5}
+            </if>
+            <if test=" ggg != null and ggg !='' "><!-- 所在组织 -->
+                AND ggg = #{ggg}
+            </if>
+            <if test=" ppp != null and ppp !='' "><!-- 企业ID -->
+                AND ppp = #{ppp}
+            </if>
+            <if test=" ddd != null and ddd !='' "><!-- 有效标识 -->
+                AND ddd = #{ddd}
+            </if>
+            <if test=" cc1 != null and cc1 !='' "><!-- 创建时间 -->
+                AND cc1 = #{cc1}
+            </if>
+            <if test=" cc2 != null and cc2 !='' "><!-- 创建者 -->
+                AND cc2 = #{cc2}
+            </if>
+            <if test=" uu1 != null and uu1 !='' "><!-- 最后更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+            <if test=" uu2 != null and uu2 !='' "><!-- 最后更新者 -->
+                AND uu2 = #{uu2}
+            </if>
+        </trim>
+    </select>
+
+    <!-- 插入一条数据 -->
+    <insert id='doInsert' parameterType='MGYS8_GYSTJCPXXXDBO'>
+        INSERT INTO mgys8_gystjcpxxx
+          ( <include refid='tableColumns'/>) 
+        VALUES 
+          ( #{puk},#{p11_gysid},#{n01_cpxjc},#{n02_cpxjp},#{k01_csid},#{k02_cpxlb},#{k03},#{f01_zwmc},#{f02_ywmc},#{f03_zwmcpym},#{f04_ywmcsx},#{f05_zwms},#{f06_ywms},#{f07_jzkm},#{f08_zdhcd},#{f09_cpxcd},#{f10_mjfs},#{f11},#{f12},#{f13},#{f14},#{f15},#{f16},#{f17},#{f18},#{f19},#{f20},#{bbb},#{fb1},#{fb2},#{fb3},#{fb4},#{fb5},#{eb1},#{eb2},#{eb3},#{eb4},#{eb5},#{ggg},#{ppp},#{ddd},#{cc1},#{cc2},#{uu1},#{uu2} )
+    </insert>
+    <!-- 修改一条数据 -->
+    <update id='doUpdate' parameterType='MGYS8_GYSTJCPXXXDBO'>
+        UPDATE mgys8_gystjcpxxx SET uu1 = #{uuu} <!-- 更新时间、更新者 -->
+        <if test=" p11_gysid != null and p11_gysid !='' "><!-- 供应商ID -->
+            ,p11_gysid = #{p11_gysid}
+        </if>
+        <if test=" n01_cpxjc != null and n01_cpxjc !='' "><!-- 产品线简称 -->
+            ,n01_cpxjc = #{n01_cpxjc}
+        </if>
+        <if test=" n02_cpxjp != null and n02_cpxjp !='' "><!-- 产品线简拼 -->
+            ,n02_cpxjp = #{n02_cpxjp}
+        </if>
+        <if test=" k01_csid != null and k01_csid !='' "><!-- 厂商ID -->
+            ,k01_csid = #{k01_csid}
+        </if>
+        <if test=" k02_cpxlb != null and k02_cpxlb !='' "><!-- 产品线类别 -->
+            ,k02_cpxlb = #{k02_cpxlb}
+        </if>
+        <if test=" k03 != null and k03 !='' "><!-- 主键3 -->
+            ,k03 = #{k03}
+        </if>
+        <if test=" f01_zwmc != null and f01_zwmc !='' "><!-- 产品线中文名称 -->
+            ,f01_zwmc = #{f01_zwmc}
+        </if>
+        <if test=" f02_ywmc != null and f02_ywmc !='' "><!-- 产品线英文名称 -->
+            ,f02_ywmc = #{f02_ywmc}
+        </if>
+        <if test=" f03_zwmcpym != null and f03_zwmcpym !='' "><!-- 产品线中文名称拼音码 -->
+            ,f03_zwmcpym = #{f03_zwmcpym}
+        </if>
+        <if test=" f04_ywmcsx != null and f04_ywmcsx !='' "><!-- 产品线英文名称缩写 -->
+            ,f04_ywmcsx = #{f04_ywmcsx}
+        </if>
+        <if test=" f05_zwms != null and f05_zwms !='' "><!-- 产品线中文描述 -->
+            ,f05_zwms = #{f05_zwms}
+        </if>
+        <if test=" f06_ywms != null and f06_ywms !='' "><!-- 产品线英文描述 -->
+            ,f06_ywms = #{f06_ywms}
+        </if>
+        <if test=" f07_jzkm != null and f07_jzkm !='' "><!-- 节奏快慢（字段保留待用） -->
+            ,f07_jzkm = #{f07_jzkm}
+        </if>
+        <if test=" f08_zdhcd != null and f08_zdhcd !='' "><!-- 自动化程度（字段保留待用） -->
+            ,f08_zdhcd = #{f08_zdhcd}
+        </if>
+        <if test=" f09_cpxcd != null and f09_cpxcd !='' "><!-- 产品线长度（米）（字段保留待用） -->
+            ,f09_cpxcd = #{f09_cpxcd}
+        </if>
+        <if test=" f10_mjfs != null and f10_mjfs !='' "><!-- 灭菌方式（字段保留待用） -->
+            ,f10_mjfs = #{f10_mjfs}
+        </if>
+        <if test=" f11 != null and f11 !='' "><!-- 字段11 -->
+            ,f11 = #{f11}
+        </if>
+        <if test=" f12 != null and f12 !='' "><!-- 字段12 -->
+            ,f12 = #{f12}
+        </if>
+        <if test=" f13 != null and f13 !='' "><!-- 字段13 -->
+            ,f13 = #{f13}
+        </if>
+        <if test=" f14 != null and f14 !='' "><!-- 字段14 -->
+            ,f14 = #{f14}
+        </if>
+        <if test=" f15 != null and f15 !='' "><!-- 字段15 -->
+            ,f15 = #{f15}
+        </if>
+        <if test=" f16 != null and f16 !='' "><!-- 字段16 -->
+            ,f16 = #{f16}
+        </if>
+        <if test=" f17 != null and f17 !='' "><!-- 字段17 -->
+            ,f17 = #{f17}
+        </if>
+        <if test=" f18 != null and f18 !='' "><!-- 字段18 -->
+            ,f18 = #{f18}
+        </if>
+        <if test=" f19 != null and f19 !='' "><!-- 字段19 -->
+            ,f19 = #{f19}
+        </if>
+        <if test=" f20 != null and f20 !='' "><!-- 字段20 -->
+            ,f20 = #{f20}
+        </if>
+        <if test=" bbb != null and bbb !='' "><!-- 备注说明 -->
+            ,bbb = #{bbb}
+        </if>
+        <if test=" fb1 != null and fb1 !='' "><!-- 备用1 -->
+            ,fb1 = #{fb1}
+        </if>
+        <if test=" fb2 != null and fb2 !='' "><!-- 备用2 -->
+            ,fb2 = #{fb2}
+        </if>
+        <if test=" fb3 != null and fb3 !='' "><!-- 备用3 -->
+            ,fb3 = #{fb3}
+        </if>
+        <if test=" fb4 != null and fb4 !='' "><!-- 备用4 -->
+            ,fb4 = #{fb4}
+        </if>
+        <if test=" fb5 != null and fb5 !='' "><!-- 备用5 -->
+            ,fb5 = #{fb5}
+        </if>
+        <if test=" eb1 != null and eb1 !='' "><!-- 扩展1 -->
+            ,eb1 = #{eb1}
+        </if>
+        <if test=" eb2 != null and eb2 !='' "><!-- 扩展2 -->
+            ,eb2 = #{eb2}
+        </if>
+        <if test=" eb3 != null and eb3 !='' "><!-- 扩展3 -->
+            ,eb3 = #{eb3}
+        </if>
+        <if test=" eb4 != null and eb4 !='' "><!-- 扩展4 -->
+            ,eb4 = #{eb4}
+        </if>
+        <if test=" eb5 != null and eb5 !='' "><!-- 扩展5 -->
+            ,eb5 = #{eb5}
+        </if>
+        <if test=" ggg != null and ggg !='' "><!-- 所在组织 -->
+            ,ggg = #{ggg}
+        </if>
+        <if test=" ppp != null and ppp !='' "><!-- 企业ID -->
+            ,ppp = #{ppp}
+        </if>
+        <if test=" ddd != null and ddd !='' "><!-- 有效标识 -->
+            ,ddd = #{ddd}
+        </if>
+        <if test=" cc1 != null and cc1 !='' "><!-- 创建时间 -->
+            ,cc1 = #{cc1}
+        </if>
+        <if test=" cc2 != null and cc2 !='' "><!-- 创建者 -->
+            ,cc2 = #{cc2}
+        </if>
+        <if test=" uu2 != null and uu2 !='' "><!-- 最后更新者 -->
+            ,uu2 = #{uu2}
+        </if>
+        WHERE puk = #{puk}
+                <if test=" uu1 != null and uu1 !='' "><!-- 最后更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+    </update>
+    <!-- 逻辑删除一条数据 -->
+    <delete id='toDelete' parameterType='MGYS8_GYSTJCPXXXDBO'>
+        UPDATE mgys8_gystjcpxxx SET ddd='1', uu1 = #{uuu}, uu2 = #{uu2} WHERE puk = #{puk}
+            <if test=" p11_gysid != null and p11_gysid !='' "><!-- 供应商ID -->
+                AND p11_gysid = #{p11_gysid}
+            </if>
+            <if test=" uu1 != null and uu1 !='' "><!-- 最后更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+    </delete>
+    <!-- 物理删除一条数据 -->
+    <delete id='doDelete' parameterType='MGYS8_GYSTJCPXXXDBO'>
+        DELETE FROM mgys8_gystjcpxxx WHERE puk = #{puk}
+            <if test=" p11_gysid != null and p11_gysid !='' "><!-- 供应商ID -->
+                AND p11_gysid = #{p11_gysid}
+            </if>
+            <if test=" uu1 != null and uu1 !='' "><!-- 最后更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+    </delete>
+    <!-- 查询一条数据  -->
+    <select id='doRead' parameterType='MGYS8_GYSTJCPXXXDBO' resultType='MGYS8_GYSTJCPXXXDBO'>
+        SELECT <include refid='tableColumns'/> FROM mgys8_gystjcpxxx WHERE puk = #{puk}
+            <if test=" p11_gysid != null and p11_gysid !='' "><!-- 供应商ID -->
+                AND p11_gysid = #{p11_gysid}
+            </if>
+            <if test=" ddd != null and ddd !='' "><!-- 最后更新时间 -->
+                AND ddd = #{ddd}
+            </if>
+    </select>
+
+</mapper>

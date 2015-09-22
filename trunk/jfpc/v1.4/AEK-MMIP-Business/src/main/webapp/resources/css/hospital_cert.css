@@ -1,0 +1,67 @@
+.userBox{border:1px solid #ccc; margin-right: 10px; padding: 20px; background: #fff;}
+.gray{ color: gray;}
+.userInfoBoxText{margin-left: 55px; line-height: 20px; font-size: 14px;}
+.userRemind{list-style: none; margin:10px 0 20px; border-top: 1px solid #ccc; padding-top: 15px; line-height: 26px; color: #666;}
+.userRemind li{float: left;  margin-right: 20px;}
+.userRemind li.noMar{margin-right: 0;}
+.tableListImg{list-style: none;}
+.tableListImg li{ margin: 0px;padding:5px; float: left; text-align:center;}
+.tableListImg li img{border-radius: 8px; border:1px solid #ccc; width: 50px; height: 50px;}
+.liSpan li{margin: 0px; padding-right:30px;}
+.hospitalInfoBox{width: 230px;}
+.hospitalInfoText{margin-left: 55px;line-height: 25px;}
+.hospitalBox{width: 110px;border-right: 1px solid #ccc;}
+.leftLine{border-left: 1px solid #ccc;}
+.hospitalOvTip{margin-left: 10px; line-height: 40px;}
+.baseLogo{width: 120px; text-align: center; }
+.baseLogoTip{line-height: 80px;}
+.supplierBaseInfoBox{border-top: 1px solid #ccc; margin-top: 50px;}
+.businesScopeBox{ width: 520px; height: 100px; cursor: pointer;background-color: #f1f1f1}
+.lableTop{ vertical-align: top;}
+.mRight{ margin-right: 30px;}
+.certificateBox{ display: inline-block;}
+
+.certCountNum, .orderCountNum{display: inline-block; width: 100%;}
+.certCountNum, .orderCountNum{line-height: 26px;}
+.certCountNum span{display: inline-block; width: 31%; float: left; margin-right: 8px;}
+.certCountNum em, .orderCountNum em{font-style: normal; background: #f1f1f1; padding:3px 5px; border-radius: 4px;}
+.orderCountNum span{width:40%; display:-moz-inline-stack; -moz-box-align:center; display:inline-block; +display:inline; zoom:1; vertical-align:middle;}
+
+.indexFormSearch{text-align: center; padding: 27px 0 26px;}
+.orderTotal{list-style: none; display: inline-block; width: 100%; margin-top: 20px;}
+.orderTotal dt, .orderTotal dd{float: left;}
+.orderTotal dt{width: 30%; font-size: 14px; padding-top: 30px;}
+.orderTotal dd{width: 70%;}
+.orderTotal dt strong{font-size: 24px; text-decoration: underline; vertical-align: middle;}
+
+.supLookBox{width: 380px;}
+.lookSuplierInfo{margin-left: 45px; line-height: 20px;}
+.lookSuplierInfo2{margin-left: 60px;}
+.supLookCertBox{margin-left: 400px; text-align:right;}
+.w300{width: 300px; vertical-align: top;}
+.WT300{width: 300px;}
+
+.listOrder{display:-moz-inline-stack; -moz-box-align:center; display:inline-block; +display:inline; zoom:1;}
+.listOrder strong{vertical-align: middle;}
+.listOrder span{display: inline-block; margin-right: 10px; vertical-align:middle; cursor: pointer;}
+.listOrder span.active{background: #ccc; color: #fff; padding: 5px;}
+.listOrder em{font-style: normal;}
+
+.plasticBox{border-left: 1px solid #ccc; padding-left: 30px; margin-left: 20px; position: relative;}
+.plasticContentBox{background: url(../images/plastic_content_bg.png) no-repeat; width: 804px; height: 200px;}
+.yuan, .yuanLine, .yuanOver{border:1px solid #666; background: #666; border-radius: 20px; width: 20px; height: 20px; display: inline-block; position: absolute; left: -12px;}
+.yuan, .yuanLine{top: 32%;}
+.yuanOver{bottom: 0;}
+.yuanLine{background: #fff;}
+.sanJiao{background: url(../images/san.png) no-repeat; width: 14px; height: 11px; position: absolute; left: -8px; bottom: 20px; display: inline-block;}
+.plasticLine{height: 80px; width: 1px; overflow: hidden; text-indent: -9999px; line-height: 0; border-left: 1px solid #fff; position: absolute; left: -1px; top: 0;}
+.plasticName{padding:8px 10px; background: #ccc; height: 135px; width: 10px; float: left; word-wrap: break-word; word-break: break-all;}
+.plasticContent{margin-left: 30px; padding: 10px; line-height: 20px;}
+.plasticContent h3{font-size: 14px; font-weight: normal;}
+
+.plasticCertList{list-style: none;}
+.plasticCertList li{float: left; margin-right: 10px; text-align: center; line-height: 24px;}
+.plasticHosBox{height: 20px; padding-top: 20px;}
+
+.matchImg{height:320px; overflow:hidden; overflow-y: auto;}
+.matchImg img{display:block;vertical-align:middle; border:none; margin-bottom:10px;}

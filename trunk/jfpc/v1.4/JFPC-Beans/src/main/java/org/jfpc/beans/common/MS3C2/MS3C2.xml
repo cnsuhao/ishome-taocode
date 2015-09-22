@@ -1,0 +1,363 @@
+﻿<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 发送短信信息 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='org.jfpc.beans.common.MS3C2.MS3C2Dao'>
+    <!-- 表字段信息  -->
+    <sql id='tableColumns'>
+        puk,k01_ywbsid,k02_sjhm,k03_dxwgid,f01_wgzt,f02_fszt,f03_dxnr,f04_wgfhzt,bbb,fb1,fb2,fb3,fb4,fb5,eb1,eb2,eb3,eb4,eb5,ggg,ppp,ddd,cc1,cc2,uu1,uu2
+    </sql>
+
+    <!-- 根据条件更新所有记录 -->
+    <update id='doUpdateAll' parameterType='MS3C2DBO'>
+        UPDATE ms3c2 SET  uu1 = #{uuu} <!-- 更新时间、更新者 -->
+        <if test=" k01_ywbsid != null and k01_ywbsid !='' "><!-- 业务标识ID -->
+            ,k01_ywbsid = #{k01_ywbsid}
+        </if>
+        <if test=" k02_sjhm != null and k02_sjhm !='' "><!-- 手机号码 -->
+            ,k02_sjhm = #{k02_sjhm}
+        </if>
+        <if test=" k03_dxwgid != null and k03_dxwgid !='' "><!-- 短信网关ID -->
+            ,k03_dxwgid = #{k03_dxwgid}
+        </if>
+        <if test=" f01_wgzt != null and f01_wgzt !='' "><!-- 网关状态 -->
+            ,f01_wgzt = #{f01_wgzt}
+        </if>
+        <if test=" f02_fszt != null and f02_fszt !='' "><!-- 发送状态 -->
+            ,f02_fszt = #{f02_fszt}
+        </if>
+        <if test=" f03_dxnr != null and f03_dxnr !='' "><!-- 短信内容 -->
+            ,f03_dxnr = #{f03_dxnr}
+        </if>
+        <if test=" f04_wgfhzt != null and f04_wgfhzt !='' "><!-- 网关服务返回状态 -->
+            ,f04_wgfhzt = #{f04_wgfhzt}
+        </if>
+        <if test=" bbb != null and bbb !='' "><!-- 网关服务返回内容 -->
+            ,bbb = #{bbb}
+        </if>
+        <if test=" fb1 != null and fb1 !='' "><!-- 发件人企业简称 -->
+            ,fb1 = #{fb1}
+        </if>
+        <if test=" fb2 != null and fb2 !='' "><!-- 发件人企业全称 -->
+            ,fb2 = #{fb2}
+        </if>
+        <if test=" fb3 != null and fb3 !='' "><!-- 业务标识ID -->
+            ,fb3 = #{fb3}
+        </if>
+        <if test=" fb4 != null and fb4 !='' "><!-- 模版ID -->
+            ,fb4 = #{fb4}
+        </if>
+        <if test=" fb5 != null and fb5 !='' "><!-- 备用5 -->
+            ,fb5 = #{fb5}
+        </if>
+        <if test=" eb1 != null and eb1 !='' "><!-- 发件人昵称 -->
+            ,eb1 = #{eb1}
+        </if>
+        <if test=" eb2 != null and eb2 !='' "><!-- 收件人昵称 -->
+            ,eb2 = #{eb2}
+        </if>
+        <if test=" eb3 != null and eb3 !='' "><!-- 发件人ID -->
+            ,eb3 = #{eb3}
+        </if>
+        <if test=" eb4 != null and eb4 !='' "><!-- 收件人ID -->
+            ,eb4 = #{eb4}
+        </if>
+        <if test=" eb5 != null and eb5 !='' "><!-- 收件企业ID -->
+            ,eb5 = #{eb5}
+        </if>
+        <if test=" ggg != null and ggg !='' "><!-- 发送企业ID -->
+            ,ggg = #{ggg}
+        </if>
+        <if test=" ppp != null and ppp !='' "><!-- 企业ID -->
+            ,ppp = #{ppp}
+        </if>
+        <if test=" ddd != null and ddd !='' "><!-- 有效标识 -->
+            ,ddd = #{ddd}
+        </if>
+        <if test=" cc1 != null and cc1 !='' "><!-- 创建时间 -->
+            ,cc1 = #{cc1}
+        </if>
+        <if test=" cc2 != null and cc2 !='' "><!-- 创建者 -->
+            ,cc2 = #{cc2}
+        </if>
+        <if test=" uu2 != null and uu2 !='' "><!-- 最后更新者 -->
+            ,uu2 = #{uu2}
+        </if>
+        <trim prefix='WHERE' prefixOverrides='AND |OR '>
+            <if test=" puk != null and puk !='' "><!-- 系统数据唯一识别ID（固定主键） -->
+                AND puk = #{puk}
+            </if>
+            <if test=" k01_ywbsid != null and k01_ywbsid !='' "><!-- 业务标识ID -->
+                AND k01_ywbsid = #{k01_ywbsid}
+            </if>
+            <if test=" k02_sjhm != null and k02_sjhm !='' "><!-- 手机号码 -->
+                AND k02_sjhm = #{k02_sjhm}
+            </if>
+            <if test=" k03_dxwgid != null and k03_dxwgid !='' "><!-- 短信网关ID -->
+                AND k03_dxwgid = #{k03_dxwgid}
+            </if>
+            <if test=" f01_wgzt != null and f01_wgzt !='' "><!-- 网关状态 -->
+                AND f01_wgzt = #{f01_wgzt}
+            </if>
+            <if test=" f02_fszt != null and f02_fszt !='' "><!-- 发送状态 -->
+                AND f02_fszt = #{f02_fszt}
+            </if>
+            <if test=" f03_dxnr != null and f03_dxnr !='' "><!-- 短信内容 -->
+                AND f03_dxnr = #{f03_dxnr}
+            </if>
+            <if test=" f04_wgfhzt != null and f04_wgfhzt !='' "><!-- 网关服务返回状态 -->
+                AND f04_wgfhzt = #{f04_wgfhzt}
+            </if>
+            <if test=" bbb != null and bbb !='' "><!-- 网关服务返回内容 -->
+                AND bbb = #{bbb}
+            </if>
+            <if test=" fb1 != null and fb1 !='' "><!-- 发件人企业简称 -->
+                AND fb1 = #{fb1}
+            </if>
+            <if test=" fb2 != null and fb2 !='' "><!-- 发件人企业全称 -->
+                AND fb2 = #{fb2}
+            </if>
+            <if test=" fb3 != null and fb3 !='' "><!-- 业务标识ID -->
+                AND fb3 = #{fb3}
+            </if>
+            <if test=" fb4 != null and fb4 !='' "><!-- 模版ID -->
+                AND fb4 = #{fb4}
+            </if>
+            <if test=" fb5 != null and fb5 !='' "><!-- 备用5 -->
+                AND fb5 = #{fb5}
+            </if>
+            <if test=" eb1 != null and eb1 !='' "><!-- 发件人昵称 -->
+                AND eb1 = #{eb1}
+            </if>
+            <if test=" eb2 != null and eb2 !='' "><!-- 收件人昵称 -->
+                AND eb2 = #{eb2}
+            </if>
+            <if test=" eb3 != null and eb3 !='' "><!-- 发件人ID -->
+                AND eb3 = #{eb3}
+            </if>
+            <if test=" eb4 != null and eb4 !='' "><!-- 收件人ID -->
+                AND eb4 = #{eb4}
+            </if>
+            <if test=" eb5 != null and eb5 !='' "><!-- 收件企业ID -->
+                AND eb5 = #{eb5}
+            </if>
+            <if test=" ggg != null and ggg !='' "><!-- 发送企业ID -->
+                AND ggg = #{ggg}
+            </if>
+            <if test=" ppp != null and ppp !='' "><!-- 企业ID -->
+                AND ppp = #{ppp}
+            </if>
+            <if test=" ddd != null and ddd !='' "><!-- 有效标识 -->
+                AND ddd = #{ddd}
+            </if>
+            <if test=" cc1 != null and cc1 !='' "><!-- 创建时间 -->
+                AND cc1 = #{cc1}
+            </if>
+            <if test=" cc2 != null and cc2 !='' "><!-- 创建者 -->
+                AND cc2 = #{cc2}
+            </if>
+            <if test=" uu1 != null and uu1 !='' "><!-- 最后更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+            <if test=" uu2 != null and uu2 !='' "><!-- 最后更新者 -->
+                AND uu2 = #{uu2}
+            </if>
+        </trim>
+    </update>
+    <!-- 查询分页数据信息  -->
+    <select id='doSelectPage' parameterType='MS3C2DBO' resultType='MS3C2DBO'>
+        SELECT <include refid='tableColumns'/> FROM ms3c2
+        <trim prefix='WHERE' prefixOverrides='AND |OR '>
+            <if test=" puk != null and puk !='' "><!-- 系统数据唯一识别ID（固定主键） -->
+                AND puk = #{puk}
+            </if>
+            <if test=" k01_ywbsid != null and k01_ywbsid !='' "><!-- 业务标识ID -->
+                AND k01_ywbsid = #{k01_ywbsid}
+            </if>
+            <if test=" k02_sjhm != null and k02_sjhm !='' "><!-- 手机号码 -->
+                AND k02_sjhm = #{k02_sjhm}
+            </if>
+            <if test=" k03_dxwgid != null and k03_dxwgid !='' "><!-- 短信网关ID -->
+                AND k03_dxwgid = #{k03_dxwgid}
+            </if>
+            <if test=" f01_wgzt != null and f01_wgzt !='' "><!-- 网关状态 -->
+                AND f01_wgzt = #{f01_wgzt}
+            </if>
+            <if test=" f02_fszt != null and f02_fszt !='' "><!-- 发送状态 -->
+                AND f02_fszt = #{f02_fszt}
+            </if>
+            <if test=" f03_dxnr != null and f03_dxnr !='' "><!-- 短信内容 -->
+                AND f03_dxnr = #{f03_dxnr}
+            </if>
+            <if test=" f04_wgfhzt != null and f04_wgfhzt !='' "><!-- 网关服务返回状态 -->
+                AND f04_wgfhzt = #{f04_wgfhzt}
+            </if>
+            <if test=" bbb != null and bbb !='' "><!-- 网关服务返回内容 -->
+                AND bbb = #{bbb}
+            </if>
+            <if test=" fb1 != null and fb1 !='' "><!-- 发件人企业简称 -->
+                AND fb1 = #{fb1}
+            </if>
+            <if test=" fb2 != null and fb2 !='' "><!-- 发件人企业全称 -->
+                AND fb2 = #{fb2}
+            </if>
+            <if test=" fb3 != null and fb3 !='' "><!-- 业务标识ID -->
+                AND fb3 = #{fb3}
+            </if>
+            <if test=" fb4 != null and fb4 !='' "><!-- 模版ID -->
+                AND fb4 = #{fb4}
+            </if>
+            <if test=" fb5 != null and fb5 !='' "><!-- 备用5 -->
+                AND fb5 = #{fb5}
+            </if>
+            <if test=" eb1 != null and eb1 !='' "><!-- 发件人昵称 -->
+                AND eb1 = #{eb1}
+            </if>
+            <if test=" eb2 != null and eb2 !='' "><!-- 收件人昵称 -->
+                AND eb2 = #{eb2}
+            </if>
+            <if test=" eb3 != null and eb3 !='' "><!-- 发件人ID -->
+                AND eb3 = #{eb3}
+            </if>
+            <if test=" eb4 != null and eb4 !='' "><!-- 收件人ID -->
+                AND eb4 = #{eb4}
+            </if>
+            <if test=" eb5 != null and eb5 !='' "><!-- 收件企业ID -->
+                AND eb5 = #{eb5}
+            </if>
+            <if test=" ggg != null and ggg !='' "><!-- 发送企业ID -->
+                AND ggg = #{ggg}
+            </if>
+            <if test=" ppp != null and ppp !='' "><!-- 企业ID -->
+                AND ppp = #{ppp}
+            </if>
+            <if test=" ddd != null and ddd !='' "><!-- 有效标识 -->
+                AND ddd = #{ddd}
+            </if>
+            <if test=" cc1 != null and cc1 !='' "><!-- 创建时间 -->
+                AND cc1 = #{cc1}
+            </if>
+            <if test=" cc2 != null and cc2 !='' "><!-- 创建者 -->
+                AND cc2 = #{cc2}
+            </if>
+            <if test=" uu1 != null and uu1 !='' "><!-- 最后更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+            <if test=" uu2 != null and uu2 !='' "><!-- 最后更新者 -->
+                AND uu2 = #{uu2}
+            </if>
+        </trim>
+    </select>
+
+    <!-- 插入一条数据 -->
+    <insert id='doInsert' parameterType='MS3C2DBO'>
+        INSERT INTO ms3c2
+          ( <include refid='tableColumns'/>) 
+        VALUES 
+          ( #{puk},#{k01_ywbsid},#{k02_sjhm},#{k03_dxwgid},#{f01_wgzt},#{f02_fszt},#{f03_dxnr},#{f04_wgfhzt},#{bbb},#{fb1},#{fb2},#{fb3},#{fb4},#{fb5},#{eb1},#{eb2},#{eb3},#{eb4},#{eb5},#{ggg},#{ppp},#{ddd},#{cc1},#{cc2},#{uu1},#{uu2} )
+    </insert>
+    <!-- 修改一条数据 -->
+    <update id='doUpdate' parameterType='MS3C2DBO'>
+        UPDATE ms3c2 SET uu1 = #{uuu} <!-- 更新时间、更新者 -->
+        <if test=" k01_ywbsid != null and k01_ywbsid !='' "><!-- 业务标识ID -->
+            ,k01_ywbsid = #{k01_ywbsid}
+        </if>
+        <if test=" k02_sjhm != null and k02_sjhm !='' "><!-- 手机号码 -->
+            ,k02_sjhm = #{k02_sjhm}
+        </if>
+        <if test=" k03_dxwgid != null and k03_dxwgid !='' "><!-- 短信网关ID -->
+            ,k03_dxwgid = #{k03_dxwgid}
+        </if>
+        <if test=" f01_wgzt != null and f01_wgzt !='' "><!-- 网关状态 -->
+            ,f01_wgzt = #{f01_wgzt}
+        </if>
+        <if test=" f02_fszt != null and f02_fszt !='' "><!-- 发送状态 -->
+            ,f02_fszt = #{f02_fszt}
+        </if>
+        <if test=" f03_dxnr != null and f03_dxnr !='' "><!-- 短信内容 -->
+            ,f03_dxnr = #{f03_dxnr}
+        </if>
+        <if test=" f04_wgfhzt != null and f04_wgfhzt !='' "><!-- 网关服务返回状态 -->
+            ,f04_wgfhzt = #{f04_wgfhzt}
+        </if>
+        <if test=" bbb != null and bbb !='' "><!-- 网关服务返回内容 -->
+            ,bbb = #{bbb}
+        </if>
+        <if test=" fb1 != null and fb1 !='' "><!-- 发件人企业简称 -->
+            ,fb1 = #{fb1}
+        </if>
+        <if test=" fb2 != null and fb2 !='' "><!-- 发件人企业全称 -->
+            ,fb2 = #{fb2}
+        </if>
+        <if test=" fb3 != null and fb3 !='' "><!-- 业务标识ID -->
+            ,fb3 = #{fb3}
+        </if>
+        <if test=" fb4 != null and fb4 !='' "><!-- 模版ID -->
+            ,fb4 = #{fb4}
+        </if>
+        <if test=" fb5 != null and fb5 !='' "><!-- 备用5 -->
+            ,fb5 = #{fb5}
+        </if>
+        <if test=" eb1 != null and eb1 !='' "><!-- 发件人昵称 -->
+            ,eb1 = #{eb1}
+        </if>
+        <if test=" eb2 != null and eb2 !='' "><!-- 收件人昵称 -->
+            ,eb2 = #{eb2}
+        </if>
+        <if test=" eb3 != null and eb3 !='' "><!-- 发件人ID -->
+            ,eb3 = #{eb3}
+        </if>
+        <if test=" eb4 != null and eb4 !='' "><!-- 收件人ID -->
+            ,eb4 = #{eb4}
+        </if>
+        <if test=" eb5 != null and eb5 !='' "><!-- 收件企业ID -->
+            ,eb5 = #{eb5}
+        </if>
+        <if test=" ggg != null and ggg !='' "><!-- 发送企业ID -->
+            ,ggg = #{ggg}
+        </if>
+        <if test=" ppp != null and ppp !='' "><!-- 企业ID -->
+            ,ppp = #{ppp}
+        </if>
+        <if test=" ddd != null and ddd !='' "><!-- 有效标识 -->
+            ,ddd = #{ddd}
+        </if>
+        <if test=" cc1 != null and cc1 !='' "><!-- 创建时间 -->
+            ,cc1 = #{cc1}
+        </if>
+        <if test=" cc2 != null and cc2 !='' "><!-- 创建者 -->
+            ,cc2 = #{cc2}
+        </if>
+        <if test=" uu2 != null and uu2 !='' "><!-- 最后更新者 -->
+            ,uu2 = #{uu2}
+        </if>
+        WHERE puk = #{puk}
+            <if test=" uu1 != null and uu1 !='' "><!-- 最后更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+    </update>
+    <!-- 逻辑删除一条数据 -->
+    <delete id='toDelete' parameterType='MS3C2DBO'>
+        UPDATE ms3c2 SET ddd='1', uu1 = #{uuu}, uu2 = #{uu2} WHERE puk = #{puk}
+            <if test=" uu1 != null and uu1 !='' "><!-- 最后更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+    </delete>
+    <!-- 物理删除一条数据 -->
+    <delete id='doDelete' parameterType='MS3C2DBO'>
+        DELETE FROM ms3c2 WHERE puk = #{puk}
+            <if test=" uu1 != null and uu1 !='' "><!-- 最后更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+    </delete>
+    <!-- 查询一条数据  -->
+    <select id='doRead' parameterType='MS3C2DBO' resultType='MS3C2DBO'>
+        SELECT <include refid='tableColumns'/> FROM ms3c2 WHERE puk = #{puk}
+            <if test=" ddd != null and ddd !='' "><!-- 最后更新时间 -->
+                AND ddd = #{ddd}
+            </if>
+    </select>
+
+</mapper>

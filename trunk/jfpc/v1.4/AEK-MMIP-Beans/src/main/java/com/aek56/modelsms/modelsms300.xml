@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='GB2312'?>
+<sms>
+	<common>
+		<sms k03_mbbh='3003003' bbb='{0}通知贵公司使用爱医康证件管理平台{1}维护三证相关资料，请尽快维护，以备检查。客服热线：{2}' />
+		<sms k03_mbbh='ZNX.SGY' bbb='【您的注册证资料存在三个月内过期，请尽快更新】' />
+		<sms k03_mbbh='ZNX.YGQ' bbb='【您的注册证资料存在过期行为，请立刻更新】' />
+	</common>
+</sms>

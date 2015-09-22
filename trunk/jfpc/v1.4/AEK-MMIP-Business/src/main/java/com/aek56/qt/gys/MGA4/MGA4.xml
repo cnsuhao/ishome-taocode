@@ -1,0 +1,43 @@
+﻿<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 供应商经销授权书 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='com.aek56.qt.gys.MGA4.MGA4Dao'>
+    <!-- 表字段信息  -->
+    <sql id='tableColumns'>
+        puk,k01_gysid,k02_zjbh,k03_zjlb,f01_fzdwmc,f02_fzrq,f03_yxnx,f04_yxksrq,f05_yxzzrq,f06_shzt,f07,f08,f09,f10,f11,f12,f13,f14,f15,f16,f17,f18,f19_wlwjbcwz,f20_sfty,bbb,fb1,fb2,fb3,fb4,fb5,eb1,eb2,eb3,eb4,eb5,ggg,ppp,ddd,cc1,cc2,uu1,uu2
+    </sql>
+    
+    <!-- 查询注册证列表并判断是否已经和该授权书关联 -->
+    <select id='doSelectPage' parameterType='MGAAC_YLQXZCZDBO' resultType='MGAAC_YLQXZCZDBO'>
+        SELECT t1.puk,t1.p01_gysid,t1.p02_zjbs,t1.k01_zczid,t1.k02_zj68bh,t1.k03_zj123lb,t1.k04_scqyid,t1.f01_zczzwmc,t1.f02_zczywmc,t1.f03_cpzwmc,t1.f04_cpywmc,t1.f05_fzgjmc,
+        t1.f06_fzdwmc,t1.f07_fzrq,t1.f08_yxnx,t1.f09_yxksrq,t1.f10_yxzzrq,t1.f11_shzt,t1.f12_yqbz,t1.f13_yqzh,t1.f14_yqsj,t1.f15_sfty,t1.f16_jkbz,t1.f17_cpzxbzbh,
+        t1.f18_cpxnjgjzc,t1.f19_cpsyfw,t1.f20_cpjjz,t1.f21_zcdzszgj,t1.f22_zcdljgid,t1.f23_zcdljgmc,t1.f24_shfwjgid,t1.f25_shfwjgmc,t1.f26_shfwrx,t1.f27_shfwdz,
+        t1.f28_wlwjbcwz,t1.f29_zysx,t1.f30_bz,t1.f31_scqyzzjgdm,t1.f32_scqyzwmc,t1.f33_scqydz,t1.f34_scqyyb,t1.f35_scqydhhm,t1.f36_scqyywmc,t1.f37_scqypym,
+        t1.f38_scqylxrxm,t1.f39_scqylxraqyx,t1.f40_scqylxrdh,t1.f41_sfgq,t1.f42_fzdwid,t1.f43,t1.f44,t1.f45,t1.bbb,t1.fb1,t1.fb2,t1.fb3,t1.fb4,t1.fb5,t1.eb1,t1.eb2,
+        t1.ggg,t1.ppp,t1.ddd,t1.cc1,t1.cc2,t1.uu1,t1.uu2,ISNULL(t2.puk) AS eb1
+        FROM mgaac_ylqxzcz t1 LEFT JOIN mgad_sqsglzczxx t2 ON (t1.puk = t2.k02_zczid AND t2.k01_gysid = #{p01_gysid} AND t2.puk = #{eb5})
+        WHERE t1.p01_gysid = #{p01_gysid}
+    </select>
+    <!-- 查询已经关联授权书的注册证 -->
+    <select id='getAlreadyAddZcz' parameterType='MGAAC_YLQXZCZDBO' resultType='MGAAC_YLQXZCZDBO'>
+        select * FROM mgaac_ylqxzcz t1 WHERE t1.p01_gysid = #{p01_gysid} and t1.puk in(
+		    SELECT t2.k02_zczid from mgad_sqsglzczxx t2 WHERE t2.puk = #{eb5} and t2.k01_gysid=#{p01_gysid}
+		)
+    </select>
+    <!-- 物理删除授权书和注册证关联表数据 -->
+    <delete id='doDelete' parameterType='MGAD_SQSGLZCZXXDBO'>
+        DELETE FROM mgad_sqsglzczxx WHERE 
+            <if test=" puk != null and puk !='' "><!-- 授权书ID -->
+                puk = #{puk}
+            </if>
+            <if test=" k01_gysid != null and k01_gysid !='' "><!-- 供应商企业ID -->
+                AND k01_gysid = #{k01_gysid}
+            </if>
+            <if test=" k02_zczid != null and k02_zczid !='' "><!-- 注册证ID -->
+                AND k02_zczid = #{k02_zczid}
+            </if>
+    </delete>
+</mapper>

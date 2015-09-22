@@ -1,0 +1,244 @@
+.header{
+	height: 60px;
+	background-color: #656565;
+}
+.content{
+	text-align: center;
+}
+.container{
+	width: 1024px;
+	margin: 0 auto;
+	text-align: left;
+}
+/*閫夐」鍗�/
+.tabMod{
+	width: 670px;
+	margin: 0 auto;
+	margin-top: 32px;
+	text-align: left;
+}
+.tabMod .tabNav{
+	position: relative;
+	top: 1px;
+	z-index: 10;
+}
+.tabMod .tabNavItem{
+	float: left;
+	height: 50px;
+	line-height: 50px;
+	font-size: 24px; 
+	border: 1px solid #cbcbcb;
+	margin-right: 15px;
+	background-color: #f1f1f1;
+	padding:0 20px;
+}
+.tabMod .tabNavItem>a{
+	display: block;
+	height: 100%;
+	color:#656565;
+}
+.tabMod .tabNavItem.active{
+	background-color: #fff;
+	border-bottom-color: #fff;
+}
+.tabMod .tabNavTips{
+	float: right;
+	margin-top: 30px;
+	color:#989898;
+	padding: 0 10px;
+}
+.tabMod .tabBd{
+	border: 1px solid #cbcbcb;
+	padding: 20px;
+}
+/*楠岃瘉鐮�/
+.validCode .formText{
+	width: 100px;
+}
+.validCode .formItem{
+	display: inline-block;
+	*zoom:1;
+	_display:inline;
+	width: 120px;
+	vertical-align: baseline;
+	float: left;
+}
+.validCode .formBtn{
+	float: left;
+}
+/*鏂囨湰妗�/
+.formText{
+	height: 16px;
+	line-height: 16px;
+	padding: 12px 10px;
+	width: 466px;
+}
+.formText[readonly]{
+	background-color: #eee;
+}
+/*鎸夐挳*/
+.formBtn{
+	border: 0;
+	height: 30px;
+	border-radius: 3px;
+	line-height: 30px;
+	padding: 0 15px;
+	background-color: #989898;
+	color: #fff;
+}
+.regMod .formBtn{
+	font-size: 14px;
+	min-width: 120px;
+	text-align: center;
+}
+/* 娉ㄥ唽鍥炬爣 */
+.statusIcon{
+	display: inline-block;
+	*zoom:1;
+	_display: inline;
+	height: 15px;
+	width: 15px;
+	vertical-align: middle;
+	background-image: url(../images/regicon.png);
+}
+.statusIcon.lab{
+	position: absolute;
+	top: 50%;
+	margin-top: -8px;
+	right: 5px;
+}
+/*璀﹀憡*/
+.statusIcon.war{
+	background-position: 0 0;
+}
+/*閿欒*/
+.statusIcon.err{
+	background-position: 0 -14px;
+}
+/*閿欒*/
+.statusIcon.suc{
+	background-position: 0 -29px;
+}
+/*loading*/
+.statusIcon.loading{
+	background-image: url(../images/loading.gif);
+}
+/*鍒锋柊*/
+.statusIcon.refresh{
+	background-position: 0 -45px;
+}
+/*ajax楠岃瘉div*/
+.ajaxStatus{
+	position: absolute;
+	right:15px;
+	top:50%;
+	height: 16px;
+	margin-top: -8px;
+}
+.ajaxStatus .statusText{
+	padding-left: 5px;
+	color:#999;
+}
+/*閿欒鎻愮ず*/
+.errorMsg{
+	padding: 10px;
+	background-color: #f1f1f1;
+	border: 1px solid #ccc;
+}
+/*findPwd*/
+.wireBox.findPwd .wireBoxBd{
+	padding: 0;
+}
+.wireBox.findPwd{
+	width: 400px;
+}
+/*鐧婚檰*/
+.wireBox{
+	padding: 15px;
+	display: inline-block;
+	*zoom:1;
+	_display:inline;
+	border: 1px solid #ccc;
+}
+.wireBox>.wireBoxHd{
+	padding: 10px 0 20px 0;
+	font-size: 24px;
+	border-bottom: 2px solid #ccc;
+}
+.wireBox>.wireBoxBd{
+	padding: 20px 40px 0 40px;
+}
+.wireBox>.wireBoxFt{
+	padding: 10px;
+	border-top: 1px solid #ccc;
+}
+.wireBox>.wireBoxBd .inputGroup{
+	padding-left:35px;
+	position: relative;
+}
+.wireBox>.wireBoxBd .inputGroup>.wireIcon{
+	width: 38px;
+	height:34px;
+	position: absolute;
+	left:0;
+	top:0;
+	border: 1px solid #c4c4c4;
+	background-color: #f1f1f1;
+	z-index: 10;
+	border-radius: 6px 0 0 6px;
+}
+.wireBox>.wireBoxBd input.text{
+	width: 250px;
+	height: 28px;
+	line-height: 20px;
+	text-indent: 10px;
+}
+.wireBox>.wireBoxBd .btn{
+	/*width: 100%;*/
+	height: 40px;
+	/*line-height: 40px;*/
+}
+.wireBox>.wireBoxBd .lInput{
+	left: 10px !important;
+}
+.wireBox>.wireBoxBd .text{
+/*	height: 24px;
+	line-height: 24px;*/
+	width: 250px;
+}
+.textRight{
+	text-align: right;
+}
+/*淇℃伅鎻愮ず*/
+.tipsIconMod{
+	text-align: center;
+	margin-bottom: 15px;
+}
+.tipsIconMod .tipsIcon{
+	width: 100px;
+	height: 100px;
+	background-image: url(../images/tipsIconSuc.png);
+	margin: 0 auto;
+}
+.tipsIconMod .tipsText{
+	font-size: 20px;
+	margin-bottom: 15px;
+}
+.vCode{
+	display: inline-block;
+	*zoom:1;
+	_display:inline;
+	width: 107px;
+	height: 34px;
+	vertical-align: middle;
+}
+.vCode img{
+	width: 50px;
+	height: 34px;
+	float: left;
+}
+.vCode a{
+	display: block;
+	float: left;
+	margin-left: 5px;
+}

@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- 定义各种启动部署初始化工具 -->
+<beans xmlns='http://www.springframework.org/schema/beans'
+	xmlns:mvc='http://www.springframework.org/schema/mvc' 
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xmlns:p='http://www.springframework.org/schema/p'
+	xmlns:context='http://www.springframework.org/schema/context' 
+	xmlns:cache='http://www.springframework.org/schema/cache'
+	xmlns:tx='http://www.springframework.org/schema/tx'
+	xmlns:aop='http://www.springframework.org/schema/aop'
+	xmlns:rabbit='http://www.springframework.org/schema/rabbit'	
+	xsi:schemaLocation='
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/jdbc 
+		http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+		'>
+	
+	<bean class="org.jfpc.common.mail.MailService">  
+        <!-- 服务器 -->
+        <property name="host" value="smtp.exmail.qq.com"/>
+        <!-- 端口号 -->
+        <property name="port" value="587" /> 
+        <property name="defaultEncoding" value="UTF-8"/> 
+        <!-- 用户名 --> 
+        <property name="username" value="service@aek56.com"/>  
+        <!--  密码   -->
+        <property name="password" value="aek56.yxl"/>  
+         <!-- SMTP服务器验证 -->
+        <property name="javaMailProperties">
+            <props>
+                <!-- 验证身份 -->
+                <prop key="mail.smtp.auth">true</prop>
+           </props>
+        </property>
+    </bean> 
+	
+</beans>

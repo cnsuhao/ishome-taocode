@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='GB2312'?>
+<messages>
+	<common>
+		<message k03_mbbh='310220030' bbb='客户添加成功，是否推送证件？' />
+		<message k03_mbbh='310220031' bbb='客户邀请发送已经成功！' />
+		
+		<!-- 供应商基础信息维护 -->
+		<message k03_mbbh='310100011' bbb='保存成功！' />
+        <message k03_mbbh='310100012' bbb='保存失败！' />
+        <!-- 供应商经营范围维护 -->
+        <message k03_mbbh='310110021' bbb='保存成功！' />
+        <message k03_mbbh='310110022' bbb='保存失败！' />
+	</common>
+</messages>

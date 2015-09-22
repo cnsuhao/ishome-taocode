@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='GB2312'?>
+<messages>
+	<common>
+		<message k03_mbbh='321010031' bbb='删除成功！' />
+		<message k03_mbbh='321010032' bbb='删除失败！' />
+
+		<message k03_mbbh='321020031' bbb='删除成功！' />
+		<message k03_mbbh='321020032' bbb='删除失败！' />
+		
+		<message k03_mbbh='321030031' bbb='删除成功！' />
+		<message k03_mbbh='321030032' bbb='删除失败！' />
+		
+		<message k03_mbbh='321040031' bbb='删除成功！' />
+		<message k03_mbbh='321040032' bbb='删除失败！' />
+		
+		<message k03_mbbh='321050031' bbb='删除成功！' />
+		<message k03_mbbh='321050032' bbb='删除失败！' />
+		
+		<message k03_mbbh='321060031' bbb='删除成功！' />
+		<message k03_mbbh='321060032' bbb='删除失败！' />
+		
+		<message k03_mbbh='321080031' bbb='删除成功！' />
+		<message k03_mbbh='321080032' bbb='删除失败！' />
+		
+		<message k03_mbbh='321090031' bbb='删除成功！' />
+		<message k03_mbbh='321090032' bbb='删除失败！' />
+		
+		<message k03_mbbh='321100031' bbb='删除成功！' />
+		<message k03_mbbh='321100032' bbb='删除失败！' />
+		
+		<message k03_mbbh='320110041' bbb='成功与供应商解除关系！' />
+		<message k03_mbbh='320110042' bbb='与供应商解除关系失败！' />
+		
+		<message k03_mbbh='320110051' bbb='提醒成功!' />
+		<message k03_mbbh='320110052' bbb='提醒失败!' />	
+		
+		<message k03_mbbh='320110031' bbb='添加供应商成功!' />
+		<message k03_mbbh='320110032' bbb='添加供应商失败!' />
+	</common>
+</messages>

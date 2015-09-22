@@ -1,0 +1,429 @@
+﻿<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 系统菜单定义 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='org.jfpc.beans.common.MS0A1.MS0A1Dao'>
+    <!-- 表字段信息  -->
+    <sql id='tableColumns'>
+        puk,k01_xsfcdid,k02_cpid,k03_jnmkid,k04_ymid,f01_cdbh,f02_cdmc,f03_cdbbh,f04_cdurl,f05_plsx,f06_cddj,f07_xtburl,bbb,fb1,fb2,fb3,fb4,fb5,eb1,eb2,eb3,eb4,eb5,ggg,ppp,ddd,cc1,cc2,uu1,uu2
+    </sql>
+
+    <!-- 根据条件更新所有记录 -->
+    <update id='doUpdateAll' parameterType='MS0A1DBO'>
+        UPDATE ms0a1 SET  uu1 = #{uuu} <!-- 更新时间、更新者 -->
+        <if test=" k01_xsfcdid != null and k01_xsfcdid !='' "><!-- 显示父菜单ID -->
+            ,k01_xsfcdid = #{k01_xsfcdid}
+        </if>
+        <if test=" k02_cpid != null and k02_cpid !='' "><!-- 产品ID -->
+            ,k02_cpid = #{k02_cpid}
+        </if>
+        <if test=" k03_jnmkid != null and k03_jnmkid !='' "><!-- 机能模块ID -->
+            ,k03_jnmkid = #{k03_jnmkid}
+        </if>
+        <if test=" k04_ymid != null and k04_ymid !='' "><!-- 页面ID -->
+            ,k04_ymid = #{k04_ymid}
+        </if>
+        <if test=" f01_cdbh != null and f01_cdbh !='' "><!-- 菜单编号 -->
+            ,f01_cdbh = #{f01_cdbh}
+        </if>
+        <if test=" f02_cdmc != null and f02_cdmc !='' "><!-- 菜单名称 -->
+            ,f02_cdmc = #{f02_cdmc}
+        </if>
+        <if test=" f03_cdbbh != null and f03_cdbbh !='' "><!-- 菜单版本号 -->
+            ,f03_cdbbh = #{f03_cdbbh}
+        </if>
+        <if test=" f04_cdurl != null and f04_cdurl !='' "><!-- 菜单URL -->
+            ,f04_cdurl = #{f04_cdurl}
+        </if>
+        <if test=" f05_plsx != null and f05_plsx !='' "><!-- 排列顺序 -->
+            ,f05_plsx = #{f05_plsx}
+        </if>
+        <if test=" f06_cddj != null and f06_cddj !='' "><!-- 菜单等级 -->
+            ,f06_cddj = #{f06_cddj}
+        </if>
+        <if test=" f07_xtburl != null and f07_xtburl !='' "><!-- 小图标URL -->
+            ,f07_xtburl = #{f07_xtburl}
+        </if>
+        <if test=" bbb != null and bbb !='' "><!-- 备注说明 -->
+            ,bbb = #{bbb}
+        </if>
+        <if test=" fb1 != null and fb1 !='' "><!-- 菜单分类 -->
+            ,fb1 = #{fb1}
+        </if>
+        <if test=" fb2 != null and fb2 !='' "><!-- 备用2 -->
+            ,fb2 = #{fb2}
+        </if>
+        <if test=" fb3 != null and fb3 !='' "><!-- 备用3 -->
+            ,fb3 = #{fb3}
+        </if>
+        <if test=" fb4 != null and fb4 !='' "><!-- 备用4 -->
+            ,fb4 = #{fb4}
+        </if>
+        <if test=" fb5 != null and fb5 !='' "><!-- 备用5 -->
+            ,fb5 = #{fb5}
+        </if>
+        <if test=" eb1 != null and eb1 !='' "><!-- 扩展1 -->
+            ,eb1 = #{eb1}
+        </if>
+        <if test=" eb2 != null and eb2 !='' "><!-- 扩展2 -->
+            ,eb2 = #{eb2}
+        </if>
+        <if test=" eb3 != null and eb3 !='' "><!-- 扩展3 -->
+            ,eb3 = #{eb3}
+        </if>
+        <if test=" eb4 != null and eb4 !='' "><!-- 扩展4 -->
+            ,eb4 = #{eb4}
+        </if>
+        <if test=" eb5 != null and eb5 !='' "><!-- 扩展5 -->
+            ,eb5 = #{eb5}
+        </if>
+        <if test=" ggg != null and ggg !='' "><!-- 所在组织 -->
+            ,ggg = #{ggg}
+        </if>
+        <if test=" ppp != null and ppp !='' "><!-- 企业ID -->
+            ,ppp = #{ppp}
+        </if>
+        <if test=" ddd != null and ddd !='' "><!-- 有效标识 -->
+            ,ddd = #{ddd}
+        </if>
+        <if test=" cc1 != null and cc1 !='' "><!-- 创建时间 -->
+            ,cc1 = #{cc1}
+        </if>
+        <if test=" cc2 != null and cc2 !='' "><!-- 创建者 -->
+            ,cc2 = #{cc2}
+        </if>
+        <if test=" uu2 != null and uu2 !='' "><!-- 最后更新者 -->
+            ,uu2 = #{uu2}
+        </if>
+        <trim prefix='WHERE' prefixOverrides='AND |OR '>
+            <if test=" puk != null and puk !='' "><!-- 菜单ID -->
+                AND puk = #{puk}
+            </if>
+            <if test=" k01_xsfcdid != null and k01_xsfcdid !='' "><!-- 显示父菜单ID -->
+                AND k01_xsfcdid = #{k01_xsfcdid}
+            </if>
+            <if test=" k02_cpid != null and k02_cpid !='' "><!-- 产品ID -->
+                AND k02_cpid = #{k02_cpid}
+            </if>
+            <if test=" k03_jnmkid != null and k03_jnmkid !='' "><!-- 机能模块ID -->
+                AND k03_jnmkid = #{k03_jnmkid}
+            </if>
+            <if test=" k04_ymid != null and k04_ymid !='' "><!-- 页面ID -->
+                AND k04_ymid = #{k04_ymid}
+            </if>
+            <if test=" f01_cdbh != null and f01_cdbh !='' "><!-- 菜单编号 -->
+                AND f01_cdbh = #{f01_cdbh}
+            </if>
+            <if test=" f02_cdmc != null and f02_cdmc !='' "><!-- 菜单名称 -->
+                AND f02_cdmc = #{f02_cdmc}
+            </if>
+            <if test=" f03_cdbbh != null and f03_cdbbh !='' "><!-- 菜单版本号 -->
+                AND f03_cdbbh = #{f03_cdbbh}
+            </if>
+            <if test=" f04_cdurl != null and f04_cdurl !='' "><!-- 菜单URL -->
+                AND f04_cdurl = #{f04_cdurl}
+            </if>
+            <if test=" f05_plsx != null and f05_plsx !='' "><!-- 排列顺序 -->
+                AND f05_plsx = #{f05_plsx}
+            </if>
+            <if test=" f06_cddj != null and f06_cddj !='' "><!-- 菜单等级 -->
+                AND f06_cddj = #{f06_cddj}
+            </if>
+            <if test=" f07_xtburl != null and f07_xtburl !='' "><!-- 小图标URL -->
+                AND f07_xtburl = #{f07_xtburl}
+            </if>
+            <if test=" bbb != null and bbb !='' "><!-- 备注说明 -->
+                AND bbb = #{bbb}
+            </if>
+            <if test=" fb1 != null and fb1 !='' "><!-- 菜单分类 -->
+                AND fb1 = #{fb1}
+            </if>
+            <if test=" fb2 != null and fb2 !='' "><!-- 备用2 -->
+                AND fb2 = #{fb2}
+            </if>
+            <if test=" fb3 != null and fb3 !='' "><!-- 备用3 -->
+                AND fb3 = #{fb3}
+            </if>
+            <if test=" fb4 != null and fb4 !='' "><!-- 备用4 -->
+                AND fb4 = #{fb4}
+            </if>
+            <if test=" fb5 != null and fb5 !='' "><!-- 备用5 -->
+                AND fb5 = #{fb5}
+            </if>
+            <if test=" eb1 != null and eb1 !='' "><!-- 扩展1 -->
+                AND eb1 = #{eb1}
+            </if>
+            <if test=" eb2 != null and eb2 !='' "><!-- 扩展2 -->
+                AND eb2 = #{eb2}
+            </if>
+            <if test=" eb3 != null and eb3 !='' "><!-- 扩展3 -->
+                AND eb3 = #{eb3}
+            </if>
+            <if test=" eb4 != null and eb4 !='' "><!-- 扩展4 -->
+                AND eb4 = #{eb4}
+            </if>
+            <if test=" eb5 != null and eb5 !='' "><!-- 扩展5 -->
+                AND eb5 = #{eb5}
+            </if>
+            <if test=" ggg != null and ggg !='' "><!-- 所在组织 -->
+                AND ggg = #{ggg}
+            </if>
+            <if test=" ppp != null and ppp !='' "><!-- 企业ID -->
+                AND ppp = #{ppp}
+            </if>
+            <if test=" ddd != null and ddd !='' "><!-- 有效标识 -->
+                AND ddd = #{ddd}
+            </if>
+            <if test=" cc1 != null and cc1 !='' "><!-- 创建时间 -->
+                AND cc1 = #{cc1}
+            </if>
+            <if test=" cc2 != null and cc2 !='' "><!-- 创建者 -->
+                AND cc2 = #{cc2}
+            </if>
+            <if test=" uu1 != null and uu1 !='' "><!-- 最后更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+            <if test=" uu2 != null and uu2 !='' "><!-- 最后更新者 -->
+                AND uu2 = #{uu2}
+            </if>
+        </trim>
+    </update>
+    <!-- 查询分页数据信息  -->
+    <select id='doSelectPage' parameterType='MS0A1DBO' resultType='MS0A1DBO'>
+        SELECT <include refid='tableColumns'/> FROM ms0a1
+        <trim prefix='WHERE' prefixOverrides='AND |OR '>
+            <if test=" puk != null and puk !='' "><!-- 菜单ID -->
+                AND puk = #{puk}
+            </if>
+            <if test=" k01_xsfcdid != null and k01_xsfcdid !='' "><!-- 显示父菜单ID -->
+                AND k01_xsfcdid = #{k01_xsfcdid}
+            </if>
+            <if test=" k02_cpid != null and k02_cpid !='' "><!-- 产品ID -->
+                AND k02_cpid = #{k02_cpid}
+            </if>
+            <if test=" k03_jnmkid != null and k03_jnmkid !='' "><!-- 机能模块ID -->
+                AND k03_jnmkid = #{k03_jnmkid}
+            </if>
+            <if test=" k04_ymid != null and k04_ymid !='' "><!-- 页面ID -->
+                AND k04_ymid = #{k04_ymid}
+            </if>
+            <if test=" f01_cdbh != null and f01_cdbh !='' "><!-- 菜单编号 -->
+                AND f01_cdbh = #{f01_cdbh}
+            </if>
+            <if test=" f02_cdmc != null and f02_cdmc !='' "><!-- 菜单名称 -->
+                AND f02_cdmc = #{f02_cdmc}
+            </if>
+            <if test=" f03_cdbbh != null and f03_cdbbh !='' "><!-- 菜单版本号 -->
+                AND f03_cdbbh = #{f03_cdbbh}
+            </if>
+            <if test=" f04_cdurl != null and f04_cdurl !='' "><!-- 菜单URL -->
+                AND f04_cdurl = #{f04_cdurl}
+            </if>
+            <if test=" f05_plsx != null and f05_plsx !='' "><!-- 排列顺序 -->
+                AND f05_plsx = #{f05_plsx}
+            </if>
+            <if test=" f06_cddj != null and f06_cddj !='' "><!-- 菜单等级 -->
+                AND f06_cddj = #{f06_cddj}
+            </if>
+            <if test=" f07_xtburl != null and f07_xtburl !='' "><!-- 小图标URL -->
+                AND f07_xtburl = #{f07_xtburl}
+            </if>
+            <if test=" bbb != null and bbb !='' "><!-- 备注说明 -->
+                AND bbb = #{bbb}
+            </if>
+            <if test=" fb1 != null and fb1 !='' "><!-- 菜单分类 -->
+                AND fb1 = #{fb1}
+            </if>
+            <if test=" fb2 != null and fb2 !='' "><!-- 备用2 -->
+                AND fb2 = #{fb2}
+            </if>
+            <if test=" fb3 != null and fb3 !='' "><!-- 备用3 -->
+                AND fb3 = #{fb3}
+            </if>
+            <if test=" fb4 != null and fb4 !='' "><!-- 备用4 -->
+                AND fb4 = #{fb4}
+            </if>
+            <if test=" fb5 != null and fb5 !='' "><!-- 备用5 -->
+                AND fb5 = #{fb5}
+            </if>
+            <if test=" eb1 != null and eb1 !='' "><!-- 扩展1 -->
+                AND eb1 = #{eb1}
+            </if>
+            <if test=" eb2 != null and eb2 !='' "><!-- 扩展2 -->
+                AND eb2 = #{eb2}
+            </if>
+            <if test=" eb3 != null and eb3 !='' "><!-- 扩展3 -->
+                AND eb3 = #{eb3}
+            </if>
+            <if test=" eb4 != null and eb4 !='' "><!-- 扩展4 -->
+                AND eb4 = #{eb4}
+            </if>
+            <if test=" eb5 != null and eb5 !='' "><!-- 扩展5 -->
+                AND eb5 = #{eb5}
+            </if>
+            <if test=" ggg != null and ggg !='' "><!-- 所在组织 -->
+                AND ggg = #{ggg}
+            </if>
+            <if test=" ppp != null and ppp !='' "><!-- 企业ID -->
+                AND ppp = #{ppp}
+            </if>
+            <if test=" ddd != null and ddd !='' "><!-- 有效标识 -->
+                AND ddd = #{ddd}
+            </if>
+            <if test=" cc1 != null and cc1 !='' "><!-- 创建时间 -->
+                AND cc1 = #{cc1}
+            </if>
+            <if test=" cc2 != null and cc2 !='' "><!-- 创建者 -->
+                AND cc2 = #{cc2}
+            </if>
+            <if test=" uu1 != null and uu1 !='' "><!-- 最后更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+            <if test=" uu2 != null and uu2 !='' "><!-- 最后更新者 -->
+                AND uu2 = #{uu2}
+            </if>
+        </trim>
+    </select>
+
+    <!-- 插入一条数据 -->
+    <insert id='doInsert' parameterType='MS0A1DBO'>
+        INSERT INTO ms0a1
+          ( <include refid='tableColumns'/>) 
+        VALUES 
+          ( #{puk},#{k01_xsfcdid},#{k02_cpid},#{k03_jnmkid},#{k04_ymid},#{f01_cdbh},#{f02_cdmc},#{f03_cdbbh},#{f04_cdurl},#{f05_plsx},#{f06_cddj},#{f07_xtburl},#{bbb},#{fb1},#{fb2},#{fb3},#{fb4},#{fb5},#{eb1},#{eb2},#{eb3},#{eb4},#{eb5},#{ggg},#{ppp},#{ddd},#{cc1},#{cc2},#{uu1},#{uu2} )
+    </insert>
+    <!-- 修改一条数据 -->
+    <update id='doUpdate' parameterType='MS0A1DBO'>
+        UPDATE ms0a1 SET uu1 = #{uuu} <!-- 更新时间、更新者 -->
+        <if test=" k01_xsfcdid != null and k01_xsfcdid !='' "><!-- 显示父菜单ID -->
+            ,k01_xsfcdid = #{k01_xsfcdid}
+        </if>
+        <if test=" k02_cpid != null and k02_cpid !='' "><!-- 产品ID -->
+            ,k02_cpid = #{k02_cpid}
+        </if>
+        <if test=" k03_jnmkid != null and k03_jnmkid !='' "><!-- 机能模块ID -->
+            ,k03_jnmkid = #{k03_jnmkid}
+        </if>
+        <if test=" k04_ymid != null and k04_ymid !='' "><!-- 页面ID -->
+            ,k04_ymid = #{k04_ymid}
+        </if>
+        <if test=" f01_cdbh != null and f01_cdbh !='' "><!-- 菜单编号 -->
+            ,f01_cdbh = #{f01_cdbh}
+        </if>
+        <if test=" f02_cdmc != null and f02_cdmc !='' "><!-- 菜单名称 -->
+            ,f02_cdmc = #{f02_cdmc}
+        </if>
+        <if test=" f03_cdbbh != null and f03_cdbbh !='' "><!-- 菜单版本号 -->
+            ,f03_cdbbh = #{f03_cdbbh}
+        </if>
+        <if test=" f04_cdurl != null and f04_cdurl !='' "><!-- 菜单URL -->
+            ,f04_cdurl = #{f04_cdurl}
+        </if>
+        <if test=" f05_plsx != null and f05_plsx !='' "><!-- 排列顺序 -->
+            ,f05_plsx = #{f05_plsx}
+        </if>
+        <if test=" f06_cddj != null and f06_cddj !='' "><!-- 菜单等级 -->
+            ,f06_cddj = #{f06_cddj}
+        </if>
+        <if test=" f07_xtburl != null and f07_xtburl !='' "><!-- 小图标URL -->
+            ,f07_xtburl = #{f07_xtburl}
+        </if>
+        <if test=" bbb != null and bbb !='' "><!-- 备注说明 -->
+            ,bbb = #{bbb}
+        </if>
+        <if test=" fb1 != null and fb1 !='' "><!-- 菜单分类 -->
+            ,fb1 = #{fb1}
+        </if>
+        <if test=" fb2 != null and fb2 !='' "><!-- 备用2 -->
+            ,fb2 = #{fb2}
+        </if>
+        <if test=" fb3 != null and fb3 !='' "><!-- 备用3 -->
+            ,fb3 = #{fb3}
+        </if>
+        <if test=" fb4 != null and fb4 !='' "><!-- 备用4 -->
+            ,fb4 = #{fb4}
+        </if>
+        <if test=" fb5 != null and fb5 !='' "><!-- 备用5 -->
+            ,fb5 = #{fb5}
+        </if>
+        <if test=" eb1 != null and eb1 !='' "><!-- 扩展1 -->
+            ,eb1 = #{eb1}
+        </if>
+        <if test=" eb2 != null and eb2 !='' "><!-- 扩展2 -->
+            ,eb2 = #{eb2}
+        </if>
+        <if test=" eb3 != null and eb3 !='' "><!-- 扩展3 -->
+            ,eb3 = #{eb3}
+        </if>
+        <if test=" eb4 != null and eb4 !='' "><!-- 扩展4 -->
+            ,eb4 = #{eb4}
+        </if>
+        <if test=" eb5 != null and eb5 !='' "><!-- 扩展5 -->
+            ,eb5 = #{eb5}
+        </if>
+        <if test=" ggg != null and ggg !='' "><!-- 所在组织 -->
+            ,ggg = #{ggg}
+        </if>
+        <if test=" ppp != null and ppp !='' "><!-- 企业ID -->
+            ,ppp = #{ppp}
+        </if>
+        <if test=" ddd != null and ddd !='' "><!-- 有效标识 -->
+            ,ddd = #{ddd}
+        </if>
+        <if test=" cc1 != null and cc1 !='' "><!-- 创建时间 -->
+            ,cc1 = #{cc1}
+        </if>
+        <if test=" cc2 != null and cc2 !='' "><!-- 创建者 -->
+            ,cc2 = #{cc2}
+        </if>
+        <if test=" uu2 != null and uu2 !='' "><!-- 最后更新者 -->
+            ,uu2 = #{uu2}
+        </if>
+        WHERE puk = #{puk}
+            <if test=" uu1 != null and uu1 !='' "><!-- 最后更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+    </update>
+    <!-- 逻辑删除一条数据 -->
+    <delete id='toDelete' parameterType='MS0A1DBO'>
+        UPDATE ms0a1 SET ddd='1', uu1 = #{uuu}, uu2 = #{uu2} WHERE puk = #{puk}
+            <if test=" k01_xsfcdid != null and k01_xsfcdid !='' "><!-- 显示父菜单ID -->
+                AND k01_xsfcdid = #{k01_xsfcdid}
+            </if>
+            <if test=" k02_cpid != null and k02_cpid !='' "><!-- 产品ID -->
+                AND k02_cpid = #{k02_cpid}
+            </if>
+            <if test=" uu1 != null and uu1 !='' "><!-- 最后更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+    </delete>
+    <!-- 物理删除一条数据 -->
+    <delete id='doDelete' parameterType='MS0A1DBO'>
+        DELETE FROM ms0a1 WHERE puk = #{puk}
+            <if test=" k01_xsfcdid != null and k01_xsfcdid !='' "><!-- 显示父菜单ID -->
+                AND k01_xsfcdid = #{k01_xsfcdid}
+            </if>
+            <if test=" k02_cpid != null and k02_cpid !='' "><!-- 产品ID -->
+                AND k02_cpid = #{k02_cpid}
+            </if>
+            <if test=" uu1 != null and uu1 !='' "><!-- 最后更新时间 -->
+                AND uu1 = #{uu1}
+            </if>
+    </delete>
+    <!-- 查询一条数据  -->
+    <select id='doRead' parameterType='MS0A1DBO' resultType='MS0A1DBO'>
+        SELECT <include refid='tableColumns'/> FROM ms0a1 WHERE puk = #{puk}
+            <if test=" k01_xsfcdid != null and k01_xsfcdid !='' "><!-- 显示父菜单ID -->
+                AND k01_xsfcdid = #{k01_xsfcdid}
+            </if>
+            <if test=" k02_cpid != null and k02_cpid !='' "><!-- 产品ID -->
+                AND k02_cpid = #{k02_cpid}
+            </if>
+            <if test=" ddd != null and ddd !='' "><!-- 最后更新时间 -->
+                AND ddd = #{ddd}
+            </if>
+    </select>
+
+</mapper>
