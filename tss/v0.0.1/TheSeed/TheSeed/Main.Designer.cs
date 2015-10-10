@@ -35,6 +35,7 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
+            this.ConfigBTN = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button3
@@ -100,11 +101,22 @@
             this.button7.Text = "连载更新";
             this.button7.UseVisualStyleBackColor = true;
             // 
+            // ConfigBTN
+            // 
+            this.ConfigBTN.Location = new System.Drawing.Point(159, 310);
+            this.ConfigBTN.Name = "ConfigBTN";
+            this.ConfigBTN.Size = new System.Drawing.Size(75, 23);
+            this.ConfigBTN.TabIndex = 4;
+            this.ConfigBTN.Text = "系统设置";
+            this.ConfigBTN.UseVisualStyleBackColor = true;
+            this.ConfigBTN.Click += new System.EventHandler(this.ConfigBTN_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(265, 308);
+            this.ClientSize = new System.Drawing.Size(265, 345);
+            this.Controls.Add(this.ConfigBTN);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button1);
@@ -116,6 +128,7 @@
             this.MinimizeBox = false;
             this.Name = "Main";
             this.Text = "The Seed Share Ver 0.01";
+            this.Load += new System.EventHandler(this.Main_Load);
             this.ResumeLayout(false);
 
         }
@@ -129,6 +142,7 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button ConfigBTN;
     }
 }
 

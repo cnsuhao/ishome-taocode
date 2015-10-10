@@ -10,31 +10,28 @@ using System.Windows.Forms;
 
 namespace TheSeed
 {
-    public partial class SystemDesine : Form
+    public partial class Login : Form
     {
-        public SystemDesine()
+        public Login()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void LoginBTN_Click(object sender, EventArgs e)
         {
-
+            SystemParam.Login = true;
+            this.Close();
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void ConfigBTN_Click(object sender, EventArgs e)
         {
-
+            ConfigSet c = new ConfigSet();
+            c.ShowDialog(this);
         }
 
-        private void SystemDesine_Load(object sender, EventArgs e)
+        private void Login_Load(object sender, EventArgs e)
         {
             this.Icon = Properties.Resources.TSS;
-        }
-
-        private void button14_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

@@ -37,6 +37,7 @@
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.Name = "TypeCreat";
             this.Text = "类别创建";
+            this.Load += new System.EventHandler(this.TypeCreat_Load);
             this.ResumeLayout(false);
 
         }

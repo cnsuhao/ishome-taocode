@@ -30,13 +30,14 @@
         {
             this.SuspendLayout();
             // 
-            // Creat
+            // SeedCreat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(624, 373);
-            this.Name = "Creat";
+            this.Name = "SeedCreat";
             this.Text = "资源发布编辑";
+            this.Load += new System.EventHandler(this.SeedCreat_Load);
             this.ResumeLayout(false);
 
         }

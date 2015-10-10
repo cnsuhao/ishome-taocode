@@ -32,8 +32,10 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.button7 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
@@ -53,10 +55,16 @@
             this.button21 = new System.Windows.Forms.Button();
             this.button20 = new System.Windows.Forms.Button();
             this.button19 = new System.Windows.Forms.Button();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.button22 = new System.Windows.Forms.Button();
+            this.button23 = new System.Windows.Forms.Button();
+            this.button24 = new System.Windows.Forms.Button();
+            this.button25 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -89,6 +97,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.checkBox2);
             this.groupBox1.Controls.Add(this.button3);
             this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.button7);
@@ -99,6 +108,18 @@
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "常规发布";
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Checked = true;
+            this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox2.Location = new System.Drawing.Point(175, 74);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(96, 16);
+            this.checkBox2.TabIndex = 3;
+            this.checkBox2.Text = "分类可以订阅";
+            this.checkBox2.UseVisualStyleBackColor = true;
             // 
             // button7
             // 
@@ -111,6 +132,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.checkBox1);
             this.groupBox2.Controls.Add(this.button4);
             this.groupBox2.Controls.Add(this.button5);
             this.groupBox2.Controls.Add(this.button6);
@@ -120,6 +142,18 @@
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "连载发布";
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Checked = true;
+            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox1.Location = new System.Drawing.Point(181, 74);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(96, 16);
+            this.checkBox1.TabIndex = 2;
+            this.checkBox1.Text = "剧集可以订阅";
+            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // button4
             // 
@@ -171,7 +205,7 @@
             // 
             // button18
             // 
-            this.button18.Location = new System.Drawing.Point(321, 188);
+            this.button18.Location = new System.Drawing.Point(320, 149);
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(107, 23);
             this.button18.TabIndex = 4;
@@ -180,7 +214,7 @@
             // 
             // button17
             // 
-            this.button17.Location = new System.Drawing.Point(454, 154);
+            this.button17.Location = new System.Drawing.Point(456, 188);
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(107, 23);
             this.button17.TabIndex = 4;
@@ -189,7 +223,7 @@
             // 
             // button16
             // 
-            this.button16.Location = new System.Drawing.Point(318, 154);
+            this.button16.Location = new System.Drawing.Point(320, 188);
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(107, 23);
             this.button16.TabIndex = 4;
@@ -198,7 +232,7 @@
             // 
             // button15
             // 
-            this.button15.Location = new System.Drawing.Point(184, 154);
+            this.button15.Location = new System.Drawing.Point(186, 188);
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(107, 23);
             this.button15.TabIndex = 4;
@@ -207,12 +241,13 @@
             // 
             // button14
             // 
-            this.button14.Location = new System.Drawing.Point(254, 113);
+            this.button14.Location = new System.Drawing.Point(254, 111);
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(268, 23);
             this.button14.TabIndex = 3;
-            this.button14.Text = "更新我的关注";
+            this.button14.Text = "更新我关注资源";
             this.button14.UseVisualStyleBackColor = true;
+            this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
             // button12
             // 
@@ -307,21 +342,75 @@
             this.button19.Text = "百度云";
             this.button19.UseVisualStyleBackColor = true;
             // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.button25);
+            this.groupBox5.Controls.Add(this.button24);
+            this.groupBox5.Controls.Add(this.button23);
+            this.groupBox5.Controls.Add(this.button22);
+            this.groupBox5.Location = new System.Drawing.Point(22, 521);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(612, 152);
+            this.groupBox5.TabIndex = 5;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "更新关注";
+            // 
+            // button22
+            // 
+            this.button22.Location = new System.Drawing.Point(18, 30);
+            this.button22.Name = "button22";
+            this.button22.Size = new System.Drawing.Size(143, 23);
+            this.button22.TabIndex = 0;
+            this.button22.Text = "获取我的关注";
+            this.button22.UseVisualStyleBackColor = true;
+            // 
+            // button23
+            // 
+            this.button23.Location = new System.Drawing.Point(104, 59);
+            this.button23.Name = "button23";
+            this.button23.Size = new System.Drawing.Size(156, 23);
+            this.button23.TabIndex = 1;
+            this.button23.Text = "获取最新10条";
+            this.button23.UseVisualStyleBackColor = true;
+            // 
+            // button24
+            // 
+            this.button24.Location = new System.Drawing.Point(186, 88);
+            this.button24.Name = "button24";
+            this.button24.Size = new System.Drawing.Size(156, 23);
+            this.button24.TabIndex = 1;
+            this.button24.Text = "获取关注分类";
+            this.button24.UseVisualStyleBackColor = true;
+            // 
+            // button25
+            // 
+            this.button25.Location = new System.Drawing.Point(254, 123);
+            this.button25.Name = "button25";
+            this.button25.Size = new System.Drawing.Size(156, 23);
+            this.button25.TabIndex = 1;
+            this.button25.Text = "获取关注剧集";
+            this.button25.UseVisualStyleBackColor = true;
+            // 
             // SystemDesine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(660, 533);
+            this.ClientSize = new System.Drawing.Size(660, 685);
+            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "SystemDesine";
             this.Text = "系统设计";
+            this.Load += new System.EventHandler(this.SystemDesine_Load);
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -353,5 +442,12 @@
         private System.Windows.Forms.Button button21;
         private System.Windows.Forms.Button button20;
         private System.Windows.Forms.Button button19;
+        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Button button25;
+        private System.Windows.Forms.Button button24;
+        private System.Windows.Forms.Button button23;
+        private System.Windows.Forms.Button button22;
     }
 }
