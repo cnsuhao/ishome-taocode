@@ -16,5 +16,29 @@ namespace TheSeed
         {
             InitializeComponent();
         }
+
+        private void ConfigSet_Load(object sender, EventArgs e)
+        {
+            this.Icon = Properties.Resources.TSS;
+
+            SavePath.Text = Application.StartupPath;
+
+            if (SystemParam.Login == false)
+            {
+                NeedAdminBTN.Visible = false;
+                ChangePasswordBTN.Visible = false;
+            }
+        }
+
+        private void SavePathBTN_Click(object sender, EventArgs e)
+        {
+            folderBrowserDialog.ShowDialog(this);
+            SavePath.Text = folderBrowserDialog.SelectedPath;
+        }
+
+        private void UploadConfigBTN_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

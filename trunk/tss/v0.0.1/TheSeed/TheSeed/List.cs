@@ -21,5 +21,10 @@ namespace TheSeed
         {
 
         }
+
+        private void List_Load(object sender, EventArgs e)
+        {
+            this.Icon = Properties.Resources.TSS;
+        }
     }
 }

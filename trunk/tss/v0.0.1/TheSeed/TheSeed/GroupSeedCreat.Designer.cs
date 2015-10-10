@@ -28,9 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // GroupSeedCreat
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "GroupSeedCreat";
             this.Text = "GroupSeedCreat";
+            this.Load += new System.EventHandler(this.GroupSeedCreat_Load);
+            this.ResumeLayout(false);
+
         }
 
         #endregion

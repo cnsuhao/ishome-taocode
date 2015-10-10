@@ -31,13 +31,13 @@
             this.button1 = new System.Windows.Forms.Button();
             this.NamTBX = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.TypeCBX = new System.Windows.Forms.ComboBox();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.TypeCBX = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -74,14 +74,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(641, 208);
             this.dataGridView1.TabIndex = 2;
             // 
-            // TypeCBX
-            // 
-            this.TypeCBX.FormattingEnabled = true;
-            this.TypeCBX.Location = new System.Drawing.Point(312, 12);
-            this.TypeCBX.Name = "TypeCBX";
-            this.TypeCBX.Size = new System.Drawing.Size(63, 20);
-            this.TypeCBX.TabIndex = 3;
-            // 
             // Column1
             // 
             this.Column1.HeaderText = "Column1";
@@ -112,6 +104,14 @@
             this.Column6.HeaderText = "Column6";
             this.Column6.Name = "Column6";
             // 
+            // TypeCBX
+            // 
+            this.TypeCBX.FormattingEnabled = true;
+            this.TypeCBX.Location = new System.Drawing.Point(312, 12);
+            this.TypeCBX.Name = "TypeCBX";
+            this.TypeCBX.Size = new System.Drawing.Size(63, 20);
+            this.TypeCBX.TabIndex = 3;
+            // 
             // List
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -123,6 +123,7 @@
             this.Controls.Add(this.button1);
             this.Name = "List";
             this.Text = "资源一览";
+            this.Load += new System.EventHandler(this.List_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

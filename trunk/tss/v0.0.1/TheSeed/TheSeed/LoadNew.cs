@@ -16,5 +16,10 @@ namespace TheSeed
         {
             InitializeComponent();
         }
+
+        private void LoadNew_Load(object sender, EventArgs e)
+        {
+            this.Icon = Properties.Resources.TSS;
+        }
     }
 }
