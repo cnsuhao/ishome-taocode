@@ -20,5 +20,15 @@ namespace TheSeed
         {
             return true;
         }
+
+        public static Boolean LoadMyOrderTypes()
+        {
+            return true;
+        }
+
+        public static Boolean SaveMyOrderTypes()
+        {
+            return true;
+        }
     }
 }

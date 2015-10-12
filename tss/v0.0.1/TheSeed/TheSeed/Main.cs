@@ -54,5 +54,41 @@ namespace TheSeed
             ConfigSet c = new ConfigSet();
             c.ShowDialog(this);
         }
+
+        private void LoadNewBTN_Click(object sender, EventArgs e)
+        {
+            LoadNew l = new LoadNew();
+            l.ShowDialog(this);
+        }
+
+        private void ResourceListBTN_Click(object sender, EventArgs e)
+        {
+            ResourceList rl = new ResourceList();
+            rl.ShowDialog(this);
+        }
+
+        private void ResourceCreatBTN_Click(object sender, EventArgs e)
+        {
+            ResourceCreat rc = new ResourceCreat();
+            rc.ShowDialog(this);
+        }
+
+        private void SeriesCreatBTN_Click(object sender, EventArgs e)
+        {
+            SeriesCreat sc = new SeriesCreat();
+            sc.ShowDialog(this);
+        }
+
+        private void TypeCreatBTN_Click(object sender, EventArgs e)
+        {
+            TypeCreat tc = new TypeCreat();
+            tc.ShowDialog(this);
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            MyNeed mn = new MyNeed();
+            mn.ShowDialog(this);
+        }
     }
 }

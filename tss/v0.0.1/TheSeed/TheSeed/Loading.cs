@@ -29,58 +29,90 @@ namespace TheSeed
             timer.Stop();
 
             #region 读取配置文件 
-            LoadPB.Value = 5;
-            Thread.Sleep(500);
+            LoadPB.Value = 10;
+            MessageLBL.Text = "读取配置文件";
+            MessageLBL.Refresh();
+            Thread.Sleep(1000);
             ConfigUtils.LoadConfigFile();
 
             //获得系统基本配置文件
-            LoadPB.Value = 10;
-            Thread.Sleep(500);
-            ConfigUtils.LoadBaseConfig();
-
-            //获得个人关注
+            MessageLBL.Text = "读取系统基本配置";
             LoadPB.Value = 15;
-            Thread.Sleep(500);
+            MessageLBL.Refresh();
+            Thread.Sleep(1000);
+            ConfigUtils.LoadBaseConfig();
+            //Application.DoEvent();
+            //获得个人关注
+            MessageLBL.Text = "读取个人关注";
+            LoadPB.Value = 20;
+            MessageLBL.Refresh();
+            Thread.Sleep(1000);
             ConfigUtils.LoadMyConfig();
             #endregion
 
-            #region 连接服务器获取更新
+            #region 连接服务器获取更新TOP10
             //获取今日资源更新信息
-            LoadPB.Value = 20;
-            Thread.Sleep(500);
+            MessageLBL.Text = "连接服务器获取更新";
+            LoadPB.Value = 25;
+            MessageLBL.Refresh();
+            Thread.Sleep(1000);
             ResourceUtils.LoadNewResources();
 
             //根据我的关注获取分类信息
-            LoadPB.Value = 30;
-            Thread.Sleep(500);
+            MessageLBL.Text = "获取分类信息";
+            LoadPB.Value = 35;
+            MessageLBL.Refresh();
+            Thread.Sleep(1000);
             TypeUtils.LoadNewTypes();
 
+            //根据我的关注获取分类信息
+            MessageLBL.Text = "获取我关注的分类信息";
+            LoadPB.Value = 45;
+            MessageLBL.Refresh();
+            Thread.Sleep(1000);
+            TypeUtils.LoadMyOrderTypes();
+
             //根据我的关注获得剧集信息
-            LoadPB.Value = 50;
-            Thread.Sleep(500);
-            SeriesUtils.LoadNewSeriess();
+            MessageLBL.Text = "获得我关注的剧集信息";
+            LoadPB.Value = 55;
+            MessageLBL.Refresh();
+            Thread.Sleep(1000);
+            SeriesUtils.LoadMyOrderSeriess();
             #endregion
 
             #region 保存最新内容到本地
             //保存分类信息
-            LoadPB.Value = 70;
-            Thread.Sleep(500);
+            MessageLBL.Text = "保存最新分类信息";
+            LoadPB.Value = 65;
+            MessageLBL.Refresh();
+            Thread.Sleep(1000);
+            TypeUtils.SaveNewTypes();
+
+            //保存分类信息
+            MessageLBL.Text = "保存最新资源信息";
+            LoadPB.Value = 75;
+            MessageLBL.Refresh();
+            Thread.Sleep(1000);
             ResourceUtils.SaveNewResources();
 
-            //保存资源信息
-            LoadPB.Value = 80;
-            Thread.Sleep(500);
-            TypeUtils.SaveNewTypes();
-            
+            //保存分类资源信息
+            MessageLBL.Text = "保存我关注的分类资源信息";
+            LoadPB.Value = 85;
+            MessageLBL.Refresh();
+            Thread.Sleep(1000);
+            TypeUtils.SaveMyOrderTypes();
+
             //保存关注剧集信息
-            LoadPB.Value = 90;
-            Thread.Sleep(500);
-            SeriesUtils.SaveNewSeriess();
+            MessageLBL.Text = "保存我关注的剧集资源信息";
+            LoadPB.Value = 95;
+            MessageLBL.Refresh();
+            Thread.Sleep(1000);
+            SeriesUtils.SaveMyOrderSeriess();
             #endregion
 
             #region 加载成功
-            LoadPB.Value = 100;
-            Thread.Sleep(1000);
+            MessageLBL.Text = "完成最后加载内容...";
+            MessageLBL.Refresh();
             SystemParam.NetConnect = true;
             #endregion
 

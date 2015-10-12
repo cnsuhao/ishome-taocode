@@ -28,33 +28,40 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.components = new System.ComponentModel.Container();
+            this.MessageLBL = new System.Windows.Forms.Label();
+            this.LoadPB = new System.Windows.Forms.ProgressBar();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
-            // label1
+            // MessageLBL
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 47);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(119, 12);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "系统初始化进行中...";
+            this.MessageLBL.AutoSize = true;
+            this.MessageLBL.Location = new System.Drawing.Point(12, 47);
+            this.MessageLBL.Name = "MessageLBL";
+            this.MessageLBL.Size = new System.Drawing.Size(119, 12);
+            this.MessageLBL.TabIndex = 3;
+            this.MessageLBL.Text = "系统初始化进行中...";
             // 
-            // progressBar1
+            // LoadPB
             // 
-            this.progressBar1.Location = new System.Drawing.Point(12, 12);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(485, 21);
-            this.progressBar1.TabIndex = 2;
+            this.LoadPB.Location = new System.Drawing.Point(12, 12);
+            this.LoadPB.Name = "LoadPB";
+            this.LoadPB.Size = new System.Drawing.Size(485, 21);
+            this.LoadPB.TabIndex = 2;
+            // 
+            // timer
+            // 
+            this.timer.Interval = 1000;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // LoadNew
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(509, 71);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.progressBar1);
+            this.Controls.Add(this.MessageLBL);
+            this.Controls.Add(this.LoadPB);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "LoadNew";
@@ -67,7 +74,8 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Label MessageLBL;
+        private System.Windows.Forms.ProgressBar LoadPB;
+        private System.Windows.Forms.Timer timer;
     }
 }

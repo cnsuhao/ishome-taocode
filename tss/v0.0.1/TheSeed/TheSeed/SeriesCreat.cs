@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace TheSeed
 {
-    public partial class LoadAll : Form
+    public partial class SeriesCreat : Form
     {
-        public LoadAll()
+        public SeriesCreat()
         {
             InitializeComponent();
-        }
-
-        private void LoadAll_Load(object sender, EventArgs e)
-        {
-            this.Icon = Properties.Resources.TSS;
         }
     }
 }
