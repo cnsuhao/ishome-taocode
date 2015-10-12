@@ -56,10 +56,10 @@
             this.button20 = new System.Windows.Forms.Button();
             this.button19 = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.button22 = new System.Windows.Forms.Button();
-            this.button23 = new System.Windows.Forms.Button();
-            this.button24 = new System.Windows.Forms.Button();
             this.button25 = new System.Windows.Forms.Button();
+            this.button24 = new System.Windows.Forms.Button();
+            this.button23 = new System.Windows.Forms.Button();
+            this.button22 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -330,7 +330,7 @@
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(75, 23);
             this.button20.TabIndex = 0;
-            this.button20.Text = "JSON";
+            this.button20.Text = "XML";
             this.button20.UseVisualStyleBackColor = true;
             // 
             // button19
@@ -355,23 +355,14 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "更新关注";
             // 
-            // button22
+            // button25
             // 
-            this.button22.Location = new System.Drawing.Point(18, 30);
-            this.button22.Name = "button22";
-            this.button22.Size = new System.Drawing.Size(143, 23);
-            this.button22.TabIndex = 0;
-            this.button22.Text = "获取我的关注";
-            this.button22.UseVisualStyleBackColor = true;
-            // 
-            // button23
-            // 
-            this.button23.Location = new System.Drawing.Point(104, 59);
-            this.button23.Name = "button23";
-            this.button23.Size = new System.Drawing.Size(156, 23);
-            this.button23.TabIndex = 1;
-            this.button23.Text = "获取最新10条";
-            this.button23.UseVisualStyleBackColor = true;
+            this.button25.Location = new System.Drawing.Point(254, 123);
+            this.button25.Name = "button25";
+            this.button25.Size = new System.Drawing.Size(156, 23);
+            this.button25.TabIndex = 1;
+            this.button25.Text = "获取关注剧集";
+            this.button25.UseVisualStyleBackColor = true;
             // 
             // button24
             // 
@@ -382,14 +373,23 @@
             this.button24.Text = "获取关注分类";
             this.button24.UseVisualStyleBackColor = true;
             // 
-            // button25
+            // button23
             // 
-            this.button25.Location = new System.Drawing.Point(254, 123);
-            this.button25.Name = "button25";
-            this.button25.Size = new System.Drawing.Size(156, 23);
-            this.button25.TabIndex = 1;
-            this.button25.Text = "获取关注剧集";
-            this.button25.UseVisualStyleBackColor = true;
+            this.button23.Location = new System.Drawing.Point(104, 59);
+            this.button23.Name = "button23";
+            this.button23.Size = new System.Drawing.Size(156, 23);
+            this.button23.TabIndex = 1;
+            this.button23.Text = "获取最新10条";
+            this.button23.UseVisualStyleBackColor = true;
+            // 
+            // button22
+            // 
+            this.button22.Location = new System.Drawing.Point(18, 30);
+            this.button22.Name = "button22";
+            this.button22.Size = new System.Drawing.Size(143, 23);
+            this.button22.TabIndex = 0;
+            this.button22.Text = "获取我的关注";
+            this.button22.UseVisualStyleBackColor = true;
             // 
             // SystemDesine
             // 

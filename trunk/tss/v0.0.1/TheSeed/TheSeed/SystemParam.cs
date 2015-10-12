@@ -17,7 +17,7 @@ namespace TheSeed
         /// </summary>
         public static Boolean NetConnect { get; set; }
 
-        
+        #region 系统运行参数
         /// <summary>
         /// 管理员权限
         /// </summary>
@@ -39,8 +39,10 @@ namespace TheSeed
         /// 我的关注
         /// </summary>
         public static List<String> MyOrder { get; set; }
+        #endregion
 
+        #region 用户个人参数
 
-
+        #endregion
     }
 }

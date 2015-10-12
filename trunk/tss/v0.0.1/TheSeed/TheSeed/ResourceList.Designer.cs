@@ -1,6 +1,6 @@
 ﻿namespace TheSeed
 {
-    partial class List
+    partial class ResourceList
     {
         /// <summary>
         /// Required designer variable.

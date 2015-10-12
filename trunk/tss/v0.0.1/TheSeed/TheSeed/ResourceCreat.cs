@@ -10,19 +10,14 @@ using System.Windows.Forms;
 
 namespace TheSeed
 {
-    public partial class List : Form
+    public partial class ResourceCreat : Form
     {
-        public List()
+        public ResourceCreat()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void List_Load(object sender, EventArgs e)
+        private void SeedCreat_Load(object sender, EventArgs e)
         {
             this.Icon = Properties.Resources.TSS;
         }

@@ -13,7 +13,17 @@ namespace TheSeed
             return true;
         }
 
-        public static Boolean LoadNewSeriess()
+        public static Boolean LoadMyOrderSeriess()
+        {
+            return true;
+        }
+
+        public static Boolean LoadMyorderSeriess()
+        {
+            return true;
+        }
+
+        public static Boolean SaveMyOrderSeriess()
         {
             return true;
         }

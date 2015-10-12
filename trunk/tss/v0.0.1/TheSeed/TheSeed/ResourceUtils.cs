@@ -11,6 +11,10 @@ namespace TheSeed
     /// </summary>
     class ResourceUtils
     {
+        /// <summary>
+        /// 获得最新资源
+        /// </summary>
+        /// <returns></returns>
         public static Boolean SaveNewResources()
         {
             return true;
