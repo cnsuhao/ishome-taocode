@@ -451,9 +451,9 @@ namespace TheSeed {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public TypeRow FindByBM(string BM) {
+            public TypeRow FindByNR(string NR) {
                 return ((TypeRow)(this.Rows.Find(new object[] {
-                            BM})));
+                            NR})));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -485,10 +485,11 @@ namespace TheSeed {
                 this.columnNR = new global::System.Data.DataColumn("NR", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnNR);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnBM}, true));
+                                this.columnNR}, true));
                 this.columnBM.AllowDBNull = false;
-                this.columnBM.Unique = true;
                 this.columnBM.Caption = "编码";
+                this.columnNR.AllowDBNull = false;
+                this.columnNR.Unique = true;
                 this.columnNR.Caption = "内容";
             }
             
@@ -625,7 +626,7 @@ namespace TheSeed {
             
             private global::System.Data.DataColumn columnUUID;
             
-            private global::System.Data.DataColumn columnZYMC;
+            private global::System.Data.DataColumn columnMC;
             
             private global::System.Data.DataColumn columnXZDZ;
             
@@ -690,9 +691,9 @@ namespace TheSeed {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn ZYMCColumn {
+            public global::System.Data.DataColumn MCColumn {
                 get {
-                    return this.columnZYMC;
+                    return this.columnMC;
                 }
             }
             
@@ -813,11 +814,11 @@ namespace TheSeed {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ResourceRow AddResourceRow(string UUID, string ZYMC, string XZDZ, string ZYFJ, string YYZL, string ZM, string FXDQ, string LB, string FXRQ, string PC, string SPCC, string SJRQ) {
+            public ResourceRow AddResourceRow(string UUID, string MC, string XZDZ, string ZYFJ, string YYZL, string ZM, string FXDQ, string LB, string FXRQ, string PC, string SPCC, string SJRQ) {
                 ResourceRow rowResourceRow = ((ResourceRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         UUID,
-                        ZYMC,
+                        MC,
                         XZDZ,
                         ZYFJ,
                         YYZL,
@@ -858,7 +859,7 @@ namespace TheSeed {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             internal void InitVars() {
                 this.columnUUID = base.Columns["UUID"];
-                this.columnZYMC = base.Columns["ZYMC"];
+                this.columnMC = base.Columns["MC"];
                 this.columnXZDZ = base.Columns["XZDZ"];
                 this.columnZYFJ = base.Columns["ZYFJ"];
                 this.columnYYZL = base.Columns["YYZL"];
@@ -876,8 +877,8 @@ namespace TheSeed {
             private void InitClass() {
                 this.columnUUID = new global::System.Data.DataColumn("UUID", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnUUID);
-                this.columnZYMC = new global::System.Data.DataColumn("ZYMC", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnZYMC);
+                this.columnMC = new global::System.Data.DataColumn("MC", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMC);
                 this.columnXZDZ = new global::System.Data.DataColumn("XZDZ", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnXZDZ);
                 this.columnZYFJ = new global::System.Data.DataColumn("ZYFJ", typeof(string), null, global::System.Data.MappingType.Element);
@@ -903,7 +904,7 @@ namespace TheSeed {
                 this.columnUUID.AllowDBNull = false;
                 this.columnUUID.Unique = true;
                 this.columnUUID.Caption = "资源识别码";
-                this.columnZYMC.Caption = "资源名称";
+                this.columnMC.Caption = "资源名称";
                 this.columnXZDZ.Caption = "下载地址";
                 this.columnZYFJ.Caption = "资源附件";
                 this.columnYYZL.Caption = "语言种类";
@@ -1049,7 +1050,7 @@ namespace TheSeed {
             
             private global::System.Data.DataColumn columnUUID;
             
-            private global::System.Data.DataColumn columnJJMC;
+            private global::System.Data.DataColumn columnMC;
             
             private global::System.Data.DataColumn columnZJS;
             
@@ -1058,6 +1059,16 @@ namespace TheSeed {
             private global::System.Data.DataColumn columnGXJS;
             
             private global::System.Data.DataColumn columnGXJM;
+            
+            private global::System.Data.DataColumn columnFXRQ;
+            
+            private global::System.Data.DataColumn columnYYZL;
+            
+            private global::System.Data.DataColumn columnZM;
+            
+            private global::System.Data.DataColumn columnFXDQ;
+            
+            private global::System.Data.DataColumn columnLB;
             
             private global::System.Data.DataColumn columnZYXXXX;
             
@@ -1104,9 +1115,9 @@ namespace TheSeed {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn JJMCColumn {
+            public global::System.Data.DataColumn MCColumn {
                 get {
-                    return this.columnJJMC;
+                    return this.columnMC;
                 }
             }
             
@@ -1139,6 +1150,46 @@ namespace TheSeed {
             public global::System.Data.DataColumn GXJMColumn {
                 get {
                     return this.columnGXJM;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn FXRQColumn {
+                get {
+                    return this.columnFXRQ;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn YYZLColumn {
+                get {
+                    return this.columnYYZL;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ZMColumn {
+                get {
+                    return this.columnZM;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn FXDQColumn {
+                get {
+                    return this.columnFXDQ;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn LBColumn {
+                get {
+                    return this.columnLB;
                 }
             }
             
@@ -1187,15 +1238,20 @@ namespace TheSeed {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public SeriesRow AddSeriesRow(string UUID, string JJMC, string ZJS, string WJZT, string GXJS, string GXJM, string ZYXXXX) {
+            public SeriesRow AddSeriesRow(string UUID, string MC, string ZJS, string WJZT, string GXJS, string GXJM, string FXRQ, string YYZL, string ZM, string FXDQ, string LB, string ZYXXXX) {
                 SeriesRow rowSeriesRow = ((SeriesRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         UUID,
-                        JJMC,
+                        MC,
                         ZJS,
                         WJZT,
                         GXJS,
                         GXJM,
+                        FXRQ,
+                        YYZL,
+                        ZM,
+                        FXDQ,
+                        LB,
                         ZYXXXX};
                 rowSeriesRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowSeriesRow);
@@ -1227,11 +1283,16 @@ namespace TheSeed {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             internal void InitVars() {
                 this.columnUUID = base.Columns["UUID"];
-                this.columnJJMC = base.Columns["JJMC"];
+                this.columnMC = base.Columns["MC"];
                 this.columnZJS = base.Columns["ZJS"];
                 this.columnWJZT = base.Columns["WJZT"];
                 this.columnGXJS = base.Columns["GXJS"];
                 this.columnGXJM = base.Columns["GXJM"];
+                this.columnFXRQ = base.Columns["FXRQ"];
+                this.columnYYZL = base.Columns["YYZL"];
+                this.columnZM = base.Columns["ZM"];
+                this.columnFXDQ = base.Columns["FXDQ"];
+                this.columnLB = base.Columns["LB"];
                 this.columnZYXXXX = base.Columns["ZYXXXX"];
             }
             
@@ -1240,8 +1301,8 @@ namespace TheSeed {
             private void InitClass() {
                 this.columnUUID = new global::System.Data.DataColumn("UUID", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnUUID);
-                this.columnJJMC = new global::System.Data.DataColumn("JJMC", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnJJMC);
+                this.columnMC = new global::System.Data.DataColumn("MC", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMC);
                 this.columnZJS = new global::System.Data.DataColumn("ZJS", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnZJS);
                 this.columnWJZT = new global::System.Data.DataColumn("WJZT", typeof(string), null, global::System.Data.MappingType.Element);
@@ -1250,17 +1311,32 @@ namespace TheSeed {
                 base.Columns.Add(this.columnGXJS);
                 this.columnGXJM = new global::System.Data.DataColumn("GXJM", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnGXJM);
+                this.columnFXRQ = new global::System.Data.DataColumn("FXRQ", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFXRQ);
+                this.columnYYZL = new global::System.Data.DataColumn("YYZL", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnYYZL);
+                this.columnZM = new global::System.Data.DataColumn("ZM", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnZM);
+                this.columnFXDQ = new global::System.Data.DataColumn("FXDQ", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFXDQ);
+                this.columnLB = new global::System.Data.DataColumn("LB", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnLB);
                 this.columnZYXXXX = new global::System.Data.DataColumn("ZYXXXX", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnZYXXXX);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnUUID}, true));
                 this.columnUUID.AllowDBNull = false;
                 this.columnUUID.Unique = true;
-                this.columnJJMC.Caption = "剧集名称";
+                this.columnMC.Caption = "剧集名称";
                 this.columnZJS.Caption = "总季数";
                 this.columnWJZT.Caption = "完结状态";
                 this.columnGXJS.Caption = "当前更新季数";
                 this.columnGXJM.Caption = "当前更新集目";
+                this.columnFXRQ.Caption = "发行日期";
+                this.columnYYZL.Caption = "语言种类";
+                this.columnZM.Caption = "字幕";
+                this.columnFXDQ.Caption = "发行地区";
+                this.columnLB.Caption = "类别";
                 this.columnZYXXXX.Caption = "资源详细信息";
             }
             
@@ -1417,28 +1493,11 @@ namespace TheSeed {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string NR {
                 get {
-                    try {
-                        return ((string)(this[this.tableType.NRColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("表“Type”中列“NR”的值为 DBNull。", e);
-                    }
+                    return ((string)(this[this.tableType.NRColumn]));
                 }
                 set {
                     this[this.tableType.NRColumn] = value;
                 }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsNRNull() {
-                return this.IsNull(this.tableType.NRColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetNRNull() {
-                this[this.tableType.NRColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -1469,17 +1528,17 @@ namespace TheSeed {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string ZYMC {
+            public string MC {
                 get {
                     try {
-                        return ((string)(this[this.tableResource.ZYMCColumn]));
+                        return ((string)(this[this.tableResource.MCColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("表“Resource”中列“ZYMC”的值为 DBNull。", e);
+                        throw new global::System.Data.StrongTypingException("表“Resource”中列“MC”的值为 DBNull。", e);
                     }
                 }
                 set {
-                    this[this.tableResource.ZYMCColumn] = value;
+                    this[this.tableResource.MCColumn] = value;
                 }
             }
             
@@ -1645,14 +1704,14 @@ namespace TheSeed {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsZYMCNull() {
-                return this.IsNull(this.tableResource.ZYMCColumn);
+            public bool IsMCNull() {
+                return this.IsNull(this.tableResource.MCColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetZYMCNull() {
-                this[this.tableResource.ZYMCColumn] = global::System.Convert.DBNull;
+            public void SetMCNull() {
+                this[this.tableResource.MCColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1803,17 +1862,17 @@ namespace TheSeed {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string JJMC {
+            public string MC {
                 get {
                     try {
-                        return ((string)(this[this.tableSeries.JJMCColumn]));
+                        return ((string)(this[this.tableSeries.MCColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("表“Series”中列“JJMC”的值为 DBNull。", e);
+                        throw new global::System.Data.StrongTypingException("表“Series”中列“MC”的值为 DBNull。", e);
                     }
                 }
                 set {
-                    this[this.tableSeries.JJMCColumn] = value;
+                    this[this.tableSeries.MCColumn] = value;
                 }
             }
             
@@ -1883,6 +1942,86 @@ namespace TheSeed {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string FXRQ {
+                get {
+                    try {
+                        return ((string)(this[this.tableSeries.FXRQColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("表“Series”中列“FXRQ”的值为 DBNull。", e);
+                    }
+                }
+                set {
+                    this[this.tableSeries.FXRQColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string YYZL {
+                get {
+                    try {
+                        return ((string)(this[this.tableSeries.YYZLColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("表“Series”中列“YYZL”的值为 DBNull。", e);
+                    }
+                }
+                set {
+                    this[this.tableSeries.YYZLColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string ZM {
+                get {
+                    try {
+                        return ((string)(this[this.tableSeries.ZMColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("表“Series”中列“ZM”的值为 DBNull。", e);
+                    }
+                }
+                set {
+                    this[this.tableSeries.ZMColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string FXDQ {
+                get {
+                    try {
+                        return ((string)(this[this.tableSeries.FXDQColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("表“Series”中列“FXDQ”的值为 DBNull。", e);
+                    }
+                }
+                set {
+                    this[this.tableSeries.FXDQColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string LB {
+                get {
+                    try {
+                        return ((string)(this[this.tableSeries.LBColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("表“Series”中列“LB”的值为 DBNull。", e);
+                    }
+                }
+                set {
+                    this[this.tableSeries.LBColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string ZYXXXX {
                 get {
                     try {
@@ -1899,14 +2038,14 @@ namespace TheSeed {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsJJMCNull() {
-                return this.IsNull(this.tableSeries.JJMCColumn);
+            public bool IsMCNull() {
+                return this.IsNull(this.tableSeries.MCColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetJJMCNull() {
-                this[this.tableSeries.JJMCColumn] = global::System.Convert.DBNull;
+            public void SetMCNull() {
+                this[this.tableSeries.MCColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1955,6 +2094,66 @@ namespace TheSeed {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetGXJMNull() {
                 this[this.tableSeries.GXJMColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsFXRQNull() {
+                return this.IsNull(this.tableSeries.FXRQColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetFXRQNull() {
+                this[this.tableSeries.FXRQColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsYYZLNull() {
+                return this.IsNull(this.tableSeries.YYZLColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetYYZLNull() {
+                this[this.tableSeries.YYZLColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsZMNull() {
+                return this.IsNull(this.tableSeries.ZMColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetZMNull() {
+                this[this.tableSeries.ZMColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsFXDQNull() {
+                return this.IsNull(this.tableSeries.FXDQColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetFXDQNull() {
+                this[this.tableSeries.FXDQColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsLBNull() {
+                return this.IsNull(this.tableSeries.LBColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetLBNull() {
+                this[this.tableSeries.LBColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

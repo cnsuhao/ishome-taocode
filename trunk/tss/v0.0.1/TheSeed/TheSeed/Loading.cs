@@ -63,7 +63,7 @@ namespace TheSeed
             LoadPB.Value = 35;
             MessageLBL.Refresh();
             Thread.Sleep(1000);
-            TypeUtils.LoadNewTypes();
+            TypeUtils.LoadAllTypes();
 
             //根据我的关注获取分类信息
             MessageLBL.Text = "获取我关注的分类信息";
@@ -82,11 +82,11 @@ namespace TheSeed
 
             #region 保存最新内容到本地
             //保存分类信息
-            MessageLBL.Text = "保存最新分类信息";
+            MessageLBL.Text = "保存分类信息";
             LoadPB.Value = 65;
             MessageLBL.Refresh();
             Thread.Sleep(1000);
-            TypeUtils.SaveNewTypes();
+            TypeUtils.SaveAllTypes();
 
             //保存分类信息
             MessageLBL.Text = "保存最新资源信息";

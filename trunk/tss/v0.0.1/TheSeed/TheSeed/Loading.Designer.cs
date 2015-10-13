@@ -32,7 +32,6 @@
             this.LoadPB = new System.Windows.Forms.ProgressBar();
             this.MessageLBL = new System.Windows.Forms.Label();
             this.timer = new System.Windows.Forms.Timer(this.components);
-            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // LoadPB
@@ -46,7 +45,7 @@
             // 
             this.MessageLBL.Location = new System.Drawing.Point(13, 48);
             this.MessageLBL.Name = "MessageLBL";
-            this.MessageLBL.Size = new System.Drawing.Size(414, 21);
+            this.MessageLBL.Size = new System.Drawing.Size(485, 15);
             this.MessageLBL.TabIndex = 1;
             this.MessageLBL.Text = "系统初始化进行中...";
             // 
@@ -55,27 +54,17 @@
             this.timer.Interval = 1000;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(445, 48);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // Loading
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(513, 72);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.MessageLBL);
             this.Controls.Add(this.LoadPB);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Loading";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "初始化";
             this.Load += new System.EventHandler(this.Loading_Load);
             this.ResumeLayout(false);
@@ -87,6 +76,5 @@
         private System.Windows.Forms.ProgressBar LoadPB;
         private System.Windows.Forms.Label MessageLBL;
         private System.Windows.Forms.Timer timer;
-        private System.Windows.Forms.Button button1;
     }
 }

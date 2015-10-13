@@ -8,6 +8,7 @@ namespace TheSeed
 {
     class SeriesUtils
     {
+        public static DataSet.SeriesDataTable Series { get; set; }
         public static Boolean SaveNewSeriess()
         {
             return true;

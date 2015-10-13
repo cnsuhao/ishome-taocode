@@ -99,7 +99,7 @@
             // 
             // ConfigBTN
             // 
-            this.ConfigBTN.Location = new System.Drawing.Point(159, 310);
+            this.ConfigBTN.Location = new System.Drawing.Point(159, 305);
             this.ConfigBTN.Name = "ConfigBTN";
             this.ConfigBTN.Size = new System.Drawing.Size(75, 23);
             this.ConfigBTN.TabIndex = 4;
@@ -122,6 +122,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Main";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "The Seed Share Ver 0.01";
             this.Load += new System.EventHandler(this.Main_Load);
             this.ResumeLayout(false);

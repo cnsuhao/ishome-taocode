@@ -65,6 +65,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "LoadNew";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "获取更新";
             this.Load += new System.EventHandler(this.LoadNew_Load);
             this.ResumeLayout(false);
