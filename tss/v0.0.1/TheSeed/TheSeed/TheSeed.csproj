@@ -105,18 +105,18 @@
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
     <Compile Include="ResourceUtils.cs" />
+    <Compile Include="SeriesList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SeriesList.Designer.cs">
+      <DependentUpon>SeriesList.cs</DependentUpon>
+    </Compile>
     <Compile Include="SeriesUtils.cs" />
     <Compile Include="SystemDesine.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="SystemDesine.Designer.cs">
       <DependentUpon>SystemDesine.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GroupSeedCreat.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GroupSeedCreat.Designer.cs">
-      <DependentUpon>GroupSeedCreat.cs</DependentUpon>
     </Compile>
     <Compile Include="MyNeed.cs">
       <SubType>Form</SubType>
@@ -155,9 +155,6 @@
     <EmbeddedResource Include="ConfigSet.resx">
       <DependentUpon>ConfigSet.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GroupSeedCreat.resx">
-      <DependentUpon>GroupSeedCreat.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="LoadNew.resx">
       <DependentUpon>LoadNew.cs</DependentUpon>
     </EmbeddedResource>
@@ -169,6 +166,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SeriesCreat.resx">
       <DependentUpon>SeriesCreat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SeriesList.resx">
+      <DependentUpon>SeriesList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SystemDesine.resx">
       <DependentUpon>SystemDesine.cs</DependentUpon>

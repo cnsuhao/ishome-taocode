@@ -16,5 +16,17 @@ namespace TheSeed
         {
             InitializeComponent();
         }
+
+        private void SeriesCreat_Load(object sender, EventArgs e)
+        {
+            this.Icon = Properties.Resources.TSS;
+        }
+
+        private void CreatResourceBTN_Click(object sender, EventArgs e)
+        {
+            ResourceCreat rc = new ResourceCreat();
+            rc.SeriesType = true;
+            rc.ShowDialog(this);
+        }
     }
 }

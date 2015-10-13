@@ -10,14 +10,14 @@ using System.Windows.Forms;
 
 namespace TheSeed
 {
-    public partial class GroupSeedCreat : Form
+    public partial class SeriesList : Form
     {
-        public GroupSeedCreat()
+        public SeriesList()
         {
             InitializeComponent();
         }
 
-        private void GroupSeedCreat_Load(object sender, EventArgs e)
+        private void SeriesList_Load(object sender, EventArgs e)
         {
             this.Icon = Properties.Resources.TSS;
         }

@@ -47,6 +47,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MyNeed";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "我的关注";
             this.Load += new System.EventHandler(this.MyNeed_Load);
             this.ResumeLayout(false);

@@ -16,7 +16,7 @@
           <xs:complexType>
             <xs:sequence>
               <xs:element name="BM" msdata:Caption="编码" msprop:Generator_ColumnVarNameInTable="columnBM" msprop:Generator_ColumnPropNameInRow="BM" msprop:Generator_ColumnPropNameInTable="BMColumn" msprop:Generator_UserColumnName="BM" type="xs:string" />
-              <xs:element name="NR" msdata:Caption="内容" msprop:Generator_ColumnVarNameInTable="columnNR" msprop:Generator_ColumnPropNameInRow="NR" msprop:Generator_ColumnPropNameInTable="NRColumn" msprop:Generator_UserColumnName="NR" type="xs:string" minOccurs="0" />
+              <xs:element name="NR" msdata:Caption="内容" msprop:Generator_ColumnVarNameInTable="columnNR" msprop:Generator_ColumnPropNameInRow="NR" msprop:Generator_ColumnPropNameInTable="NRColumn" msprop:Generator_UserColumnName="NR" type="xs:string" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -24,7 +24,7 @@
           <xs:complexType>
             <xs:sequence>
               <xs:element name="UUID" msdata:Caption="资源识别码" msprop:Generator_ColumnVarNameInTable="columnUUID" msprop:Generator_ColumnPropNameInRow="UUID" msprop:Generator_ColumnPropNameInTable="UUIDColumn" msprop:Generator_UserColumnName="UUID" type="xs:string" />
-              <xs:element name="ZYMC" msdata:Caption="资源名称" msprop:Generator_ColumnVarNameInTable="columnZYMC" msprop:Generator_ColumnPropNameInRow="ZYMC" msprop:Generator_ColumnPropNameInTable="ZYMCColumn" msprop:Generator_UserColumnName="ZYMC" type="xs:string" minOccurs="0" />
+              <xs:element name="MC" msdata:Caption="资源名称" msprop:Generator_ColumnVarNameInTable="columnMC" msprop:Generator_ColumnPropNameInRow="MC" msprop:Generator_ColumnPropNameInTable="MCColumn" msprop:Generator_UserColumnName="MC" type="xs:string" minOccurs="0" />
               <xs:element name="XZDZ" msdata:Caption="下载地址" msprop:Generator_ColumnVarNameInTable="columnXZDZ" msprop:Generator_ColumnPropNameInRow="XZDZ" msprop:Generator_ColumnPropNameInTable="XZDZColumn" msprop:Generator_UserColumnName="XZDZ" type="xs:string" minOccurs="0" />
               <xs:element name="ZYFJ" msdata:Caption="资源附件" msprop:Generator_ColumnVarNameInTable="columnZYFJ" msprop:Generator_ColumnPropNameInRow="ZYFJ" msprop:Generator_ColumnPropNameInTable="ZYFJColumn" msprop:Generator_UserColumnName="ZYFJ" type="xs:string" minOccurs="0" />
               <xs:element name="YYZL" msdata:Caption="语言种类" msprop:Generator_ColumnVarNameInTable="columnYYZL" msprop:Generator_ColumnPropNameInRow="YYZL" msprop:Generator_ColumnPropNameInTable="YYZLColumn" msprop:Generator_UserColumnName="YYZL" type="xs:string" minOccurs="0" />
@@ -42,11 +42,16 @@
           <xs:complexType>
             <xs:sequence>
               <xs:element name="UUID" msprop:Generator_ColumnVarNameInTable="columnUUID" msprop:Generator_ColumnPropNameInRow="UUID" msprop:Generator_ColumnPropNameInTable="UUIDColumn" msprop:Generator_UserColumnName="UUID" type="xs:string" />
-              <xs:element name="JJMC" msdata:Caption="剧集名称" msprop:Generator_ColumnVarNameInTable="columnJJMC" msprop:Generator_ColumnPropNameInRow="JJMC" msprop:Generator_ColumnPropNameInTable="JJMCColumn" msprop:Generator_UserColumnName="JJMC" type="xs:string" minOccurs="0" />
+              <xs:element name="MC" msdata:Caption="剧集名称" msprop:Generator_ColumnVarNameInTable="columnMC" msprop:Generator_ColumnPropNameInRow="MC" msprop:Generator_ColumnPropNameInTable="MCColumn" msprop:Generator_UserColumnName="MC" type="xs:string" minOccurs="0" />
               <xs:element name="ZJS" msdata:Caption="总季数" msprop:Generator_ColumnVarNameInTable="columnZJS" msprop:Generator_ColumnPropNameInRow="ZJS" msprop:Generator_ColumnPropNameInTable="ZJSColumn" msprop:Generator_UserColumnName="ZJS" type="xs:string" minOccurs="0" />
               <xs:element name="WJZT" msdata:Caption="完结状态" msprop:Generator_ColumnVarNameInTable="columnWJZT" msprop:Generator_ColumnPropNameInRow="WJZT" msprop:Generator_ColumnPropNameInTable="WJZTColumn" msprop:Generator_UserColumnName="WJZT" type="xs:string" minOccurs="0" />
               <xs:element name="GXJS" msdata:Caption="当前更新季数" msprop:Generator_ColumnVarNameInTable="columnGXJS" msprop:Generator_ColumnPropNameInRow="GXJS" msprop:Generator_ColumnPropNameInTable="GXJSColumn" msprop:Generator_UserColumnName="GXJS" type="xs:string" minOccurs="0" />
               <xs:element name="GXJM" msdata:Caption="当前更新集目" msprop:Generator_ColumnVarNameInTable="columnGXJM" msprop:Generator_ColumnPropNameInRow="GXJM" msprop:Generator_ColumnPropNameInTable="GXJMColumn" msprop:Generator_UserColumnName="GXJM" type="xs:string" minOccurs="0" />
+              <xs:element name="FXRQ" msdata:Caption="发行日期" msprop:Generator_ColumnVarNameInTable="columnFXRQ" msprop:Generator_ColumnPropNameInRow="FXRQ" msprop:Generator_ColumnPropNameInTable="FXRQColumn" msprop:Generator_UserColumnName="FXRQ" type="xs:string" minOccurs="0" />
+              <xs:element name="YYZL" msdata:Caption="语言种类" msprop:Generator_ColumnVarNameInTable="columnYYZL" msprop:Generator_ColumnPropNameInRow="YYZL" msprop:Generator_ColumnPropNameInTable="YYZLColumn" msprop:Generator_UserColumnName="YYZL" type="xs:string" minOccurs="0" />
+              <xs:element name="ZM" msdata:Caption="字幕" msprop:Generator_ColumnVarNameInTable="columnZM" msprop:Generator_ColumnPropNameInRow="ZM" msprop:Generator_ColumnPropNameInTable="ZMColumn" msprop:Generator_UserColumnName="ZM" type="xs:string" minOccurs="0" />
+              <xs:element name="FXDQ" msdata:Caption="发行地区" msprop:Generator_ColumnVarNameInTable="columnFXDQ" msprop:Generator_ColumnPropNameInRow="FXDQ" msprop:Generator_ColumnPropNameInTable="FXDQColumn" msprop:Generator_UserColumnName="FXDQ" type="xs:string" minOccurs="0" />
+              <xs:element name="LB" msdata:Caption="类别" msprop:Generator_ColumnVarNameInTable="columnLB" msprop:Generator_ColumnPropNameInRow="LB" msprop:Generator_ColumnPropNameInTable="LBColumn" msprop:Generator_UserColumnName="LB" type="xs:string" minOccurs="0" />
               <xs:element name="ZYXXXX" msdata:Caption="资源详细信息" msprop:Generator_ColumnVarNameInTable="columnZYXXXX" msprop:Generator_ColumnPropNameInRow="ZYXXXX" msprop:Generator_ColumnPropNameInTable="ZYXXXXColumn" msprop:Generator_UserColumnName="ZYXXXX" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
@@ -55,7 +60,7 @@
     </xs:complexType>
     <xs:unique name="Constraint1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:Type" />
-      <xs:field xpath="mstns:BM" />
+      <xs:field xpath="mstns:NR" />
     </xs:unique>
     <xs:unique name="Resource_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:Resource" />

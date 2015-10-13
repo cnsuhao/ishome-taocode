@@ -11,6 +11,7 @@ namespace TheSeed
     /// </summary>
     class ResourceUtils
     {
+        public static DataSet.ResourceDataTable Series { get; set; }
         /// <summary>
         /// 获得最新资源
         /// </summary>
