@@ -85,7 +85,7 @@ namespace TheSeed
             MessageLBL.Text = "加载成功";
             LoadPB.Value = 95;
             Thread.Sleep(1000);
-            SystemParam.NetConnect = true;
+            ConfigUtils.NetConnect = true;
 
             this.Close();
         }

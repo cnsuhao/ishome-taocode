@@ -19,7 +19,7 @@ namespace TheSeed
 
         private void LoginBTN_Click(object sender, EventArgs e)
         {
-            SystemParam.Login = true;
+            ConfigUtils.Login = true;
             this.Close();
         }
 

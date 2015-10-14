@@ -60,6 +60,7 @@
             this.button24 = new System.Windows.Forms.Button();
             this.button23 = new System.Windows.Forms.Button();
             this.button22 = new System.Windows.Forms.Button();
+            this.button26 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -344,6 +345,7 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.button26);
             this.groupBox5.Controls.Add(this.button25);
             this.groupBox5.Controls.Add(this.button24);
             this.groupBox5.Controls.Add(this.button23);
@@ -375,7 +377,7 @@
             // 
             // button23
             // 
-            this.button23.Location = new System.Drawing.Point(104, 59);
+            this.button23.Location = new System.Drawing.Point(298, 59);
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(156, 23);
             this.button23.TabIndex = 1;
@@ -390,6 +392,15 @@
             this.button22.TabIndex = 0;
             this.button22.Text = "获取我的关注";
             this.button22.UseVisualStyleBackColor = true;
+            // 
+            // button26
+            // 
+            this.button26.Location = new System.Drawing.Point(115, 59);
+            this.button26.Name = "button26";
+            this.button26.Size = new System.Drawing.Size(156, 23);
+            this.button26.TabIndex = 2;
+            this.button26.Text = "获取最新分类信息";
+            this.button26.UseVisualStyleBackColor = true;
             // 
             // SystemDesine
             // 
@@ -450,5 +461,6 @@
         private System.Windows.Forms.Button button24;
         private System.Windows.Forms.Button button23;
         private System.Windows.Forms.Button button22;
+        private System.Windows.Forms.Button button26;
     }
 }

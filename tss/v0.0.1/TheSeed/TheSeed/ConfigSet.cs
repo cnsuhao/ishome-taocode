@@ -21,9 +21,9 @@ namespace TheSeed
         {
             this.Icon = Properties.Resources.TSS;
 
-            SavePath.Text = Application.StartupPath;
+            DataFileSavePath.Text = Application.StartupPath;
 
-            if (SystemParam.Login == false)
+            if (ConfigUtils.Login == false)
             {
                 NeedAdminBTN.Visible = false;
                 ChangePasswordBTN.Visible = false;
@@ -33,7 +33,7 @@ namespace TheSeed
         private void SavePathBTN_Click(object sender, EventArgs e)
         {
             folderBrowserDialog.ShowDialog(this);
-            SavePath.Text = folderBrowserDialog.SelectedPath;
+            DataFileSavePath.Text = folderBrowserDialog.SelectedPath;
         }
 
         private void UploadConfigBTN_Click(object sender, EventArgs e)
