@@ -27,6 +27,12 @@ namespace TheSeed
         /// <param name="TypeStruct"></param>
         /// <returns></returns>
         Boolean CreatType(String TypeStruct);
+        /// <summary>
+        /// 创建分类
+        /// </summary>
+        /// <param name="Name"></param>
+        /// <returns></returns>
+        Boolean DeleteType(String Name);
         #endregion
 
         #region 资源
@@ -69,6 +75,12 @@ namespace TheSeed
         /// <param name="SeriesID"></param>
         /// <returns></returns>
         Boolean DeleteSeries(String SeriesID);
+        /// <summary>
+        /// 资源一览
+        /// </summary>
+        /// <param name="DateTime"></param>
+        /// <returns></returns>
+        List<String> ListSeriesResource(String SeriesResourceID, String DateTime);
         /// <summary>
         /// 发布剧集资源
         /// </summary>
@@ -129,12 +141,22 @@ namespace TheSeed
             throw new NotImplementedException();
         }
 
+        public bool DeleteType(string Name)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<string> ListResource(string DateTime)
         {
             throw new NotImplementedException();
         }
 
         public List<string> ListSeries(string DateTime)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<string> ListSeriesResource(string SeriesResourceID, string DateTime)
         {
             throw new NotImplementedException();
         }
@@ -190,12 +212,22 @@ namespace TheSeed
             throw new NotImplementedException();
         }
 
+        public bool DeleteType(string Name)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<string> ListResource(string DateTime)
         {
             throw new NotImplementedException();
         }
 
         public List<string> ListSeries(string DateTime)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<string> ListSeriesResource(string SeriesResourceID, string DateTime)
         {
             throw new NotImplementedException();
         }
