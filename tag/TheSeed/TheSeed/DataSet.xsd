@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DataSet" targetNamespace="http://tempuri.org/DataSet.xsd" xmlns:mstns="http://tempuri.org/DataSet.xsd" xmlns="http://tempuri.org/DataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DataSet" msprop:Generator_UserDSName="DataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Type" msprop:Generator_TableClassName="TypeDataTable" msprop:Generator_TableVarName="tableType" msprop:Generator_RowChangedName="TypeRowChanged" msprop:Generator_TablePropName="Type" msprop:Generator_RowDeletingName="TypeRowDeleting" msprop:Generator_RowChangingName="TypeRowChanging" msprop:Generator_RowEvHandlerName="TypeRowChangeEventHandler" msprop:Generator_RowDeletedName="TypeRowDeleted" msprop:Generator_RowClassName="TypeRow" msprop:Generator_UserTableName="Type" msprop:Generator_RowEvArgName="TypeRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="BM" msdata:Caption="编码" msprop:Generator_ColumnVarNameInTable="columnBM" msprop:Generator_ColumnPropNameInRow="BM" msprop:Generator_ColumnPropNameInTable="BMColumn" msprop:Generator_UserColumnName="BM" type="xs:string" />
+              <xs:element name="NR" msdata:Caption="内容" msprop:Generator_ColumnVarNameInTable="columnNR" msprop:Generator_ColumnPropNameInRow="NR" msprop:Generator_ColumnPropNameInTable="NRColumn" msprop:Generator_UserColumnName="NR" type="xs:string" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Resource" msprop:Generator_TableClassName="ResourceDataTable" msprop:Generator_TableVarName="tableResource" msprop:Generator_RowChangedName="ResourceRowChanged" msprop:Generator_TablePropName="Resource" msprop:Generator_RowDeletingName="ResourceRowDeleting" msprop:Generator_RowChangingName="ResourceRowChanging" msprop:Generator_RowEvHandlerName="ResourceRowChangeEventHandler" msprop:Generator_RowDeletedName="ResourceRowDeleted" msprop:Generator_RowClassName="ResourceRow" msprop:Generator_UserTableName="Resource" msprop:Generator_RowEvArgName="ResourceRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="UUID" msdata:Caption="资源识别码" msprop:Generator_ColumnVarNameInTable="columnUUID" msprop:Generator_ColumnPropNameInRow="UUID" msprop:Generator_ColumnPropNameInTable="UUIDColumn" msprop:Generator_UserColumnName="UUID" type="xs:string" />
+              <xs:element name="MC" msdata:Caption="资源名称" msprop:Generator_ColumnVarNameInTable="columnMC" msprop:Generator_ColumnPropNameInRow="MC" msprop:Generator_ColumnPropNameInTable="MCColumn" msprop:Generator_UserColumnName="MC" type="xs:string" minOccurs="0" />
+              <xs:element name="XZDZ" msdata:Caption="下载地址" msprop:Generator_ColumnVarNameInTable="columnXZDZ" msprop:Generator_ColumnPropNameInRow="XZDZ" msprop:Generator_ColumnPropNameInTable="XZDZColumn" msprop:Generator_UserColumnName="XZDZ" type="xs:string" minOccurs="0" />
+              <xs:element name="ZYFJ" msdata:Caption="资源附件" msprop:Generator_ColumnVarNameInTable="columnZYFJ" msprop:Generator_ColumnPropNameInRow="ZYFJ" msprop:Generator_ColumnPropNameInTable="ZYFJColumn" msprop:Generator_UserColumnName="ZYFJ" type="xs:string" minOccurs="0" />
+              <xs:element name="YYZL" msdata:Caption="语言种类" msprop:Generator_ColumnVarNameInTable="columnYYZL" msprop:Generator_ColumnPropNameInRow="YYZL" msprop:Generator_ColumnPropNameInTable="YYZLColumn" msprop:Generator_UserColumnName="YYZL" type="xs:string" minOccurs="0" />
+              <xs:element name="ZM" msdata:Caption="字幕" msprop:Generator_ColumnVarNameInTable="columnZM" msprop:Generator_ColumnPropNameInRow="ZM" msprop:Generator_ColumnPropNameInTable="ZMColumn" msprop:Generator_UserColumnName="ZM" type="xs:string" minOccurs="0" />
+              <xs:element name="FXDQ" msdata:Caption="发行地区" msprop:Generator_ColumnVarNameInTable="columnFXDQ" msprop:Generator_ColumnPropNameInRow="FXDQ" msprop:Generator_ColumnPropNameInTable="FXDQColumn" msprop:Generator_UserColumnName="FXDQ" type="xs:string" minOccurs="0" />
+              <xs:element name="LB" msdata:Caption="类别" msprop:Generator_ColumnVarNameInTable="columnLB" msprop:Generator_ColumnPropNameInRow="LB" msprop:Generator_ColumnPropNameInTable="LBColumn" msprop:Generator_UserColumnName="LB" type="xs:string" minOccurs="0" />
+              <xs:element name="FXRQ" msdata:Caption="发行日期" msprop:Generator_ColumnVarNameInTable="columnFXRQ" msprop:Generator_ColumnPropNameInRow="FXRQ" msprop:Generator_ColumnPropNameInTable="FXRQColumn" msprop:Generator_UserColumnName="FXRQ" type="xs:string" minOccurs="0" />
+              <xs:element name="PC" msdata:Caption="片长" msprop:Generator_ColumnVarNameInTable="columnPC" msprop:Generator_ColumnPropNameInRow="PC" msprop:Generator_ColumnPropNameInTable="PCColumn" msprop:Generator_UserColumnName="PC" type="xs:string" minOccurs="0" />
+              <xs:element name="SPCC" msdata:Caption="视频尺寸" msprop:Generator_ColumnVarNameInTable="columnSPCC" msprop:Generator_ColumnPropNameInRow="SPCC" msprop:Generator_ColumnPropNameInTable="SPCCColumn" msprop:Generator_UserColumnName="SPCC" type="xs:string" minOccurs="0" />
+              <xs:element name="SJRQ" msdata:Caption="收集日期" msprop:Generator_ColumnVarNameInTable="columnSJRQ" msprop:Generator_ColumnPropNameInRow="SJRQ" msprop:Generator_ColumnPropNameInTable="SJRQColumn" msprop:Generator_UserColumnName="SJRQ" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Series" msprop:Generator_TableClassName="SeriesDataTable" msprop:Generator_TableVarName="tableSeries" msprop:Generator_RowChangedName="SeriesRowChanged" msprop:Generator_TablePropName="Series" msprop:Generator_RowDeletingName="SeriesRowDeleting" msprop:Generator_RowChangingName="SeriesRowChanging" msprop:Generator_RowEvHandlerName="SeriesRowChangeEventHandler" msprop:Generator_RowDeletedName="SeriesRowDeleted" msprop:Generator_RowClassName="SeriesRow" msprop:Generator_UserTableName="Series" msprop:Generator_RowEvArgName="SeriesRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="UUID" msprop:Generator_ColumnVarNameInTable="columnUUID" msprop:Generator_ColumnPropNameInRow="UUID" msprop:Generator_ColumnPropNameInTable="UUIDColumn" msprop:Generator_UserColumnName="UUID" type="xs:string" />
+              <xs:element name="MC" msdata:Caption="剧集名称" msprop:Generator_ColumnVarNameInTable="columnMC" msprop:Generator_ColumnPropNameInRow="MC" msprop:Generator_ColumnPropNameInTable="MCColumn" msprop:Generator_UserColumnName="MC" type="xs:string" minOccurs="0" />
+              <xs:element name="ZJS" msdata:Caption="总季数" msprop:Generator_ColumnVarNameInTable="columnZJS" msprop:Generator_ColumnPropNameInRow="ZJS" msprop:Generator_ColumnPropNameInTable="ZJSColumn" msprop:Generator_UserColumnName="ZJS" type="xs:string" minOccurs="0" />
+              <xs:element name="WJZT" msdata:Caption="完结状态" msprop:Generator_ColumnVarNameInTable="columnWJZT" msprop:Generator_ColumnPropNameInRow="WJZT" msprop:Generator_ColumnPropNameInTable="WJZTColumn" msprop:Generator_UserColumnName="WJZT" type="xs:string" minOccurs="0" />
+              <xs:element name="GXJS" msdata:Caption="当前更新季数" msprop:Generator_ColumnVarNameInTable="columnGXJS" msprop:Generator_ColumnPropNameInRow="GXJS" msprop:Generator_ColumnPropNameInTable="GXJSColumn" msprop:Generator_UserColumnName="GXJS" type="xs:string" minOccurs="0" />
+              <xs:element name="GXJM" msdata:Caption="当前更新集目" msprop:Generator_ColumnVarNameInTable="columnGXJM" msprop:Generator_ColumnPropNameInRow="GXJM" msprop:Generator_ColumnPropNameInTable="GXJMColumn" msprop:Generator_UserColumnName="GXJM" type="xs:string" minOccurs="0" />
+              <xs:element name="FXRQ" msdata:Caption="发行日期" msprop:Generator_ColumnVarNameInTable="columnFXRQ" msprop:Generator_ColumnPropNameInRow="FXRQ" msprop:Generator_ColumnPropNameInTable="FXRQColumn" msprop:Generator_UserColumnName="FXRQ" type="xs:string" minOccurs="0" />
+              <xs:element name="YYZL" msdata:Caption="语言种类" msprop:Generator_ColumnVarNameInTable="columnYYZL" msprop:Generator_ColumnPropNameInRow="YYZL" msprop:Generator_ColumnPropNameInTable="YYZLColumn" msprop:Generator_UserColumnName="YYZL" type="xs:string" minOccurs="0" />
+              <xs:element name="ZM" msdata:Caption="字幕" msprop:Generator_ColumnVarNameInTable="columnZM" msprop:Generator_ColumnPropNameInRow="ZM" msprop:Generator_ColumnPropNameInTable="ZMColumn" msprop:Generator_UserColumnName="ZM" type="xs:string" minOccurs="0" />
+              <xs:element name="FXDQ" msdata:Caption="发行地区" msprop:Generator_ColumnVarNameInTable="columnFXDQ" msprop:Generator_ColumnPropNameInRow="FXDQ" msprop:Generator_ColumnPropNameInTable="FXDQColumn" msprop:Generator_UserColumnName="FXDQ" type="xs:string" minOccurs="0" />
+              <xs:element name="LB" msdata:Caption="类别" msprop:Generator_ColumnVarNameInTable="columnLB" msprop:Generator_ColumnPropNameInRow="LB" msprop:Generator_ColumnPropNameInTable="LBColumn" msprop:Generator_UserColumnName="LB" type="xs:string" minOccurs="0" />
+              <xs:element name="ZYXXXX" msdata:Caption="资源详细信息" msprop:Generator_ColumnVarNameInTable="columnZYXXXX" msprop:Generator_ColumnPropNameInRow="ZYXXXX" msprop:Generator_ColumnPropNameInTable="ZYXXXXColumn" msprop:Generator_UserColumnName="ZYXXXX" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Config" msprop:Generator_TableClassName="ConfigDataTable" msprop:Generator_TableVarName="tableConfig" msprop:Generator_TablePropName="Config" msprop:Generator_RowDeletingName="ConfigRowDeleting" msprop:Generator_RowChangingName="ConfigRowChanging" msprop:Generator_RowEvHandlerName="ConfigRowChangeEventHandler" msprop:Generator_RowDeletedName="ConfigRowDeleted" msprop:Generator_UserTableName="Config" msprop:Generator_RowChangedName="ConfigRowChanged" msprop:Generator_RowEvArgName="ConfigRowChangeEvent" msprop:Generator_RowClassName="ConfigRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="FirstServerAdress" msprop:Generator_ColumnVarNameInTable="columnFirstServerAdress" msprop:Generator_ColumnPropNameInRow="FirstServerAdress" msprop:Generator_ColumnPropNameInTable="FirstServerAdressColumn" msprop:Generator_UserColumnName="FirstServerAdress" type="xs:string" minOccurs="0" />
+              <xs:element name="SecondServerAdress" msprop:Generator_ColumnVarNameInTable="columnSecondServerAdress" msprop:Generator_ColumnPropNameInRow="SecondServerAdress" msprop:Generator_ColumnPropNameInTable="SecondServerAdressColumn" msprop:Generator_UserColumnName="SecondServerAdress" type="xs:string" minOccurs="0" />
+              <xs:element name="DataFileSavePath" msprop:Generator_ColumnVarNameInTable="columnDataFileSavePath" msprop:Generator_ColumnPropNameInRow="DataFileSavePath" msprop:Generator_ColumnPropNameInTable="DataFileSavePathColumn" msprop:Generator_UserColumnName="DataFileSavePath" type="xs:string" minOccurs="0" />
+              <xs:element name="AdminRool" msprop:Generator_ColumnVarNameInTable="columnAdminRool" msprop:Generator_ColumnPropNameInRow="AdminRool" msprop:Generator_ColumnPropNameInTable="AdminRoolColumn" msprop:Generator_UserColumnName="AdminRool" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="MyOrderResource" msprop:Generator_TableClassName="MyOrderResourceDataTable" msprop:Generator_TableVarName="tableMyOrderResource" msprop:Generator_TablePropName="MyOrderResource" msprop:Generator_RowDeletingName="MyOrderResourceRowDeleting" msprop:Generator_RowChangingName="MyOrderResourceRowChanging" msprop:Generator_RowEvHandlerName="MyOrderResourceRowChangeEventHandler" msprop:Generator_RowDeletedName="MyOrderResourceRowDeleted" msprop:Generator_UserTableName="MyOrderResource" msprop:Generator_RowChangedName="MyOrderResourceRowChanged" msprop:Generator_RowEvArgName="MyOrderResourceRowChangeEvent" msprop:Generator_RowClassName="MyOrderResourceRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ResourceTypeBM" msprop:Generator_ColumnVarNameInTable="columnResourceTypeBM" msprop:Generator_ColumnPropNameInRow="ResourceTypeBM" msprop:Generator_ColumnPropNameInTable="ResourceTypeBMColumn" msprop:Generator_UserColumnName="ResourceTypeBM" type="xs:string" minOccurs="0" />
+              <xs:element name="ResourceTypeNR" msprop:Generator_ColumnVarNameInTable="columnResourceTypeNR" msprop:Generator_ColumnPropNameInRow="ResourceTypeNR" msprop:Generator_ColumnPropNameInTable="ResourceTypeNRColumn" msprop:Generator_UserColumnName="ResourceTypeNR" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="MyOrderSeries" msprop:Generator_TableClassName="MyOrderSeriesDataTable" msprop:Generator_TableVarName="tableMyOrderSeries" msprop:Generator_TablePropName="MyOrderSeries" msprop:Generator_RowDeletingName="MyOrderSeriesRowDeleting" msprop:Generator_RowChangingName="MyOrderSeriesRowChanging" msprop:Generator_RowEvHandlerName="MyOrderSeriesRowChangeEventHandler" msprop:Generator_RowDeletedName="MyOrderSeriesRowDeleted" msprop:Generator_UserTableName="MyOrderSeries" msprop:Generator_RowChangedName="MyOrderSeriesRowChanged" msprop:Generator_RowEvArgName="MyOrderSeriesRowChangeEvent" msprop:Generator_RowClassName="MyOrderSeriesRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="SeriesUUID" msdata:Caption="ResourceTypeBM" msprop:Generator_ColumnVarNameInTable="columnSeriesUUID" msprop:Generator_ColumnPropNameInRow="SeriesUUID" msprop:Generator_ColumnPropNameInTable="SeriesUUIDColumn" msprop:Generator_UserColumnName="SeriesUUID" type="xs:string" minOccurs="0" />
+              <xs:element name="SeriesMC" msdata:Caption="ResourceTypeNR" msprop:Generator_ColumnVarNameInTable="columnSeriesMC" msprop:Generator_ColumnPropNameInRow="SeriesMC" msprop:Generator_ColumnPropNameInTable="SeriesMCColumn" msprop:Generator_UserColumnName="SeriesMC" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Type" />
+      <xs:field xpath="mstns:NR" />
+    </xs:unique>
+    <xs:unique name="Resource_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Resource" />
+      <xs:field xpath="mstns:UUID" />
+    </xs:unique>
+    <xs:unique name="Series_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Series" />
+      <xs:field xpath="mstns:UUID" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>
