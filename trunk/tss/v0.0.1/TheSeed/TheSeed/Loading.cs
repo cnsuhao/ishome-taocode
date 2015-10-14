@@ -113,7 +113,7 @@ namespace TheSeed
             #region 加载成功
             MessageLBL.Text = "完成最后加载内容...";
             MessageLBL.Refresh();
-            SystemParam.NetConnect = true;
+            ConfigUtils.NetConnect = true;
             #endregion
 
             this.Close();

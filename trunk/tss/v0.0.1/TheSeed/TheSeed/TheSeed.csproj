@@ -68,6 +68,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CloundProtocolUtils.cs" />
     <Compile Include="ConfigSet.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -80,6 +81,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="DataSourceUtils.cs" />
+    <Compile Include="FilePathUtils.cs" />
     <Compile Include="LoadNew.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -144,7 +147,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SystemParam.cs" />
     <Compile Include="TypeCreat.cs">
       <SubType>Form</SubType>
     </Compile>

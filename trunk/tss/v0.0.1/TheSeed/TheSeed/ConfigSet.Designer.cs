@@ -32,7 +32,7 @@
             this.SecondServerAdress = new System.Windows.Forms.TextBox();
             this.NeedAdminBTN = new System.Windows.Forms.Button();
             this.ChangePasswordBTN = new System.Windows.Forms.Button();
-            this.SavePath = new System.Windows.Forms.TextBox();
+            this.DataFileSavePath = new System.Windows.Forms.TextBox();
             this.SavePathBTN = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -50,7 +50,7 @@
             // 
             // SecondServerAdress
             // 
-            this.SecondServerAdress.Location = new System.Drawing.Point(40, 230);
+            this.SecondServerAdress.Location = new System.Drawing.Point(40, 136);
             this.SecondServerAdress.Name = "SecondServerAdress";
             this.SecondServerAdress.Size = new System.Drawing.Size(419, 21);
             this.SecondServerAdress.TabIndex = 3;
@@ -66,23 +66,23 @@
             // 
             // ChangePasswordBTN
             // 
-            this.ChangePasswordBTN.Location = new System.Drawing.Point(117, 165);
+            this.ChangePasswordBTN.Location = new System.Drawing.Point(78, 177);
             this.ChangePasswordBTN.Name = "ChangePasswordBTN";
             this.ChangePasswordBTN.Size = new System.Drawing.Size(157, 37);
             this.ChangePasswordBTN.TabIndex = 6;
             this.ChangePasswordBTN.Text = "修改密码";
             this.ChangePasswordBTN.UseVisualStyleBackColor = true;
             // 
-            // SavePath
+            // DataFileSavePath
             // 
-            this.SavePath.Location = new System.Drawing.Point(40, 131);
-            this.SavePath.Name = "SavePath";
-            this.SavePath.Size = new System.Drawing.Size(380, 21);
-            this.SavePath.TabIndex = 2;
+            this.DataFileSavePath.Location = new System.Drawing.Point(40, 254);
+            this.DataFileSavePath.Name = "DataFileSavePath";
+            this.DataFileSavePath.Size = new System.Drawing.Size(380, 21);
+            this.DataFileSavePath.TabIndex = 2;
             // 
             // SavePathBTN
             // 
-            this.SavePathBTN.Location = new System.Drawing.Point(428, 129);
+            this.SavePathBTN.Location = new System.Drawing.Point(428, 252);
             this.SavePathBTN.Name = "SavePathBTN";
             this.SavePathBTN.Size = new System.Drawing.Size(31, 23);
             this.SavePathBTN.TabIndex = 4;
@@ -93,7 +93,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 206);
+            this.label1.Location = new System.Drawing.Point(12, 112);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(89, 12);
             this.label1.TabIndex = 5;
@@ -102,7 +102,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(14, 106);
+            this.label2.Location = new System.Drawing.Point(14, 229);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(101, 12);
             this.label2.TabIndex = 6;
@@ -119,7 +119,7 @@
             // 
             // UploadConfigBTN
             // 
-            this.UploadConfigBTN.Location = new System.Drawing.Point(302, 165);
+            this.UploadConfigBTN.Location = new System.Drawing.Point(263, 177);
             this.UploadConfigBTN.Name = "UploadConfigBTN";
             this.UploadConfigBTN.Size = new System.Drawing.Size(157, 37);
             this.UploadConfigBTN.TabIndex = 6;
@@ -132,12 +132,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(484, 261);
+            this.ClientSize = new System.Drawing.Size(484, 292);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.SavePathBTN);
-            this.Controls.Add(this.SavePath);
+            this.Controls.Add(this.DataFileSavePath);
             this.Controls.Add(this.UploadConfigBTN);
             this.Controls.Add(this.ChangePasswordBTN);
             this.Controls.Add(this.NeedAdminBTN);
@@ -161,7 +161,7 @@
         private System.Windows.Forms.TextBox SecondServerAdress;
         private System.Windows.Forms.Button NeedAdminBTN;
         private System.Windows.Forms.Button ChangePasswordBTN;
-        private System.Windows.Forms.TextBox SavePath;
+        private System.Windows.Forms.TextBox DataFileSavePath;
         private System.Windows.Forms.Button SavePathBTN;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;

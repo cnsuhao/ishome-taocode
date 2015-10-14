@@ -32,20 +32,18 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.MC = new System.Windows.Forms.TextBox();
             this.UUID = new System.Windows.Forms.TextBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.listBox2 = new System.Windows.Forms.ListBox();
-            this.listBox3 = new System.Windows.Forms.ListBox();
-            this.listBox4 = new System.Windows.Forms.ListBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.GXJM = new System.Windows.Forms.TextBox();
             this.GXJS = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.LB = new System.Windows.Forms.ListBox();
+            this.FXDQ = new System.Windows.Forms.ListBox();
+            this.ZM = new System.Windows.Forms.ListBox();
+            this.YYZL = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // button1
@@ -84,54 +82,6 @@
             this.UUID.Size = new System.Drawing.Size(239, 21);
             this.UUID.TabIndex = 5;
             this.UUID.Text = "资源代码";
-            // 
-            // listBox1
-            // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 12;
-            this.listBox1.Items.AddRange(new object[] {
-            "语言"});
-            this.listBox1.Location = new System.Drawing.Point(13, 198);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.listBox1.Size = new System.Drawing.Size(129, 88);
-            this.listBox1.TabIndex = 9;
-            // 
-            // listBox2
-            // 
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.ItemHeight = 12;
-            this.listBox2.Items.AddRange(new object[] {
-            "字幕"});
-            this.listBox2.Location = new System.Drawing.Point(161, 198);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.listBox2.Size = new System.Drawing.Size(129, 88);
-            this.listBox2.TabIndex = 9;
-            // 
-            // listBox3
-            // 
-            this.listBox3.FormattingEnabled = true;
-            this.listBox3.ItemHeight = 12;
-            this.listBox3.Items.AddRange(new object[] {
-            "发行地区"});
-            this.listBox3.Location = new System.Drawing.Point(309, 198);
-            this.listBox3.Name = "listBox3";
-            this.listBox3.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.listBox3.Size = new System.Drawing.Size(129, 88);
-            this.listBox3.TabIndex = 9;
-            // 
-            // listBox4
-            // 
-            this.listBox4.FormattingEnabled = true;
-            this.listBox4.ItemHeight = 12;
-            this.listBox4.Items.AddRange(new object[] {
-            "类别"});
-            this.listBox4.Location = new System.Drawing.Point(457, 198);
-            this.listBox4.Name = "listBox4";
-            this.listBox4.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.listBox4.Size = new System.Drawing.Size(129, 88);
-            this.listBox4.TabIndex = 9;
             // 
             // textBox2
             // 
@@ -183,15 +133,6 @@
             this.textBox4.TabIndex = 15;
             this.textBox4.Text = "收集日期";
             // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(556, 338);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(8, 8);
-            this.dataGridView1.TabIndex = 16;
-            // 
             // GXJM
             // 
             this.GXJM.Location = new System.Drawing.Point(403, 12);
@@ -210,24 +151,71 @@
             this.GXJS.Text = "当前更新季数";
             this.GXJS.Visible = false;
             // 
+            // LB
+            // 
+            this.LB.FormattingEnabled = true;
+            this.LB.ItemHeight = 12;
+            this.LB.Items.AddRange(new object[] {
+            "类别"});
+            this.LB.Location = new System.Drawing.Point(457, 201);
+            this.LB.Name = "LB";
+            this.LB.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.LB.Size = new System.Drawing.Size(129, 88);
+            this.LB.TabIndex = 35;
+            // 
+            // FXDQ
+            // 
+            this.FXDQ.FormattingEnabled = true;
+            this.FXDQ.ItemHeight = 12;
+            this.FXDQ.Items.AddRange(new object[] {
+            "发行地区"});
+            this.FXDQ.Location = new System.Drawing.Point(309, 201);
+            this.FXDQ.Name = "FXDQ";
+            this.FXDQ.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.FXDQ.Size = new System.Drawing.Size(129, 88);
+            this.FXDQ.TabIndex = 36;
+            // 
+            // ZM
+            // 
+            this.ZM.FormattingEnabled = true;
+            this.ZM.ItemHeight = 12;
+            this.ZM.Items.AddRange(new object[] {
+            "字幕"});
+            this.ZM.Location = new System.Drawing.Point(161, 201);
+            this.ZM.Name = "ZM";
+            this.ZM.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.ZM.Size = new System.Drawing.Size(129, 88);
+            this.ZM.TabIndex = 37;
+            // 
+            // YYZL
+            // 
+            this.YYZL.FormattingEnabled = true;
+            this.YYZL.ItemHeight = 12;
+            this.YYZL.Items.AddRange(new object[] {
+            "语言"});
+            this.YYZL.Location = new System.Drawing.Point(13, 201);
+            this.YYZL.Name = "YYZL";
+            this.YYZL.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.YYZL.Size = new System.Drawing.Size(129, 88);
+            this.YYZL.TabIndex = 38;
+            // 
             // ResourceCreat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(603, 339);
+            this.ClientSize = new System.Drawing.Size(603, 324);
+            this.Controls.Add(this.LB);
+            this.Controls.Add(this.FXDQ);
+            this.Controls.Add(this.ZM);
+            this.Controls.Add(this.YYZL);
             this.Controls.Add(this.GXJM);
             this.Controls.Add(this.GXJS);
-            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.textBox4);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.listBox4);
-            this.Controls.Add(this.listBox3);
-            this.Controls.Add(this.listBox2);
-            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.MC);
@@ -238,7 +226,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "资源发布编辑";
             this.Load += new System.EventHandler(this.SeedCreat_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -250,18 +237,17 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox MC;
         private System.Windows.Forms.TextBox UUID;
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.ListBox listBox2;
-        private System.Windows.Forms.ListBox listBox3;
-        private System.Windows.Forms.ListBox listBox4;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.TextBox GXJM;
         private System.Windows.Forms.TextBox GXJS;
+        private System.Windows.Forms.ListBox LB;
+        private System.Windows.Forms.ListBox FXDQ;
+        private System.Windows.Forms.ListBox ZM;
+        private System.Windows.Forms.ListBox YYZL;
     }
 }

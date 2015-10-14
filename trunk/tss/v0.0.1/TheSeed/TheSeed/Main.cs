@@ -23,18 +23,18 @@ namespace TheSeed
 
             this.Hide();
             //加载初始化
-            if (SystemParam.Login == false)
+            if (ConfigUtils.Login == false)
             {
                 Login l = new Login();
                 l.ShowDialog(this);
             }
             //用户登录
-            if (SystemParam.Login == true)
+            if (ConfigUtils.Login == true)
             {
                 //初始化
                 Loading ld = new Loading();
                 ld.ShowDialog(this);
-                if (SystemParam.NetConnect == true)
+                if (ConfigUtils.NetConnect == true)
                 {
                     this.Show();
                 }

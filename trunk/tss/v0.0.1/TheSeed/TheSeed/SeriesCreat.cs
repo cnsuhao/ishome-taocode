@@ -20,6 +20,9 @@ namespace TheSeed
         private void SeriesCreat_Load(object sender, EventArgs e)
         {
             this.Icon = Properties.Resources.TSS;
+
+            LB.Items.Add("1"); LB.Items.Add("2"); LB.Items.Add("3"); LB.Items.Add("4");
+
         }
 
         private void CreatResourceBTN_Click(object sender, EventArgs e)
