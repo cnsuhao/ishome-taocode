@@ -4,6 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+/// <summary>
+/// TSS资源分析
+/// 作者：同位素
+/// 时间：2015/10/1
+/// </summary>
 namespace TheSeed
 {
     /// <summary>
@@ -13,25 +18,43 @@ namespace TheSeed
     {
         #region 本地路径
         /// <summary>
+        /// 临时
+        /// </summary>
+        public static String LOCAL_TEMP = "tmp";
+
+        /// <summary>
+        /// 文件类型
+        /// </summary>
+        public static String LOCAL_FILE_TYPE = ".dat";
+
+        /// <summary>
         /// 系统配置
         /// </summary>
-        public static String LOCAL_CFG = "//cfg";
+        public static String LOCAL_CFG = "cfg";
+        /// <summary>
+        /// 系统分类
+        /// </summary>
+        public static string LOCAL_TYPE = "type";
         /// <summary>
         /// 运行参数
         /// </summary>
-        public static String LOCAL_CFG_SYS = LOCAL_CFG + "//sys";
+        public static String LOCAL_CFG_SYS = LOCAL_CFG + @"\sys";
         /// <summary>
         /// 个人参数
         /// </summary>
-        public static String LOCAL_CFG_USR = LOCAL_CFG + "//usr";
+        public static String LOCAL_CFG_USR = LOCAL_CFG + @"\usr";
         /// <summary>
         /// 资源路径
         /// </summary>
-        public static String LOCAL_RES = "res";
+        public static String LOCAL_RES = @"\res";
+        /// <summary>
+        /// 文件类型
+        /// </summary>
+        public static String LOCAL_RES_TOP = @"\top";
         /// <summary>
         /// 剧集路径
         /// </summary>
-        public static String LOCAL_SER = "ser";
+        public static String LOCAL_SER = @"\ser";
         #endregion
 
 

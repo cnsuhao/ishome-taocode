@@ -77,6 +77,7 @@
             // 
             this.DataFileSavePath.Location = new System.Drawing.Point(40, 254);
             this.DataFileSavePath.Name = "DataFileSavePath";
+            this.DataFileSavePath.ReadOnly = true;
             this.DataFileSavePath.Size = new System.Drawing.Size(380, 21);
             this.DataFileSavePath.TabIndex = 2;
             // 
@@ -123,9 +124,8 @@
             this.UploadConfigBTN.Name = "UploadConfigBTN";
             this.UploadConfigBTN.Size = new System.Drawing.Size(157, 37);
             this.UploadConfigBTN.TabIndex = 6;
-            this.UploadConfigBTN.Text = "上传配置";
+            this.UploadConfigBTN.Text = "保存配置";
             this.UploadConfigBTN.UseVisualStyleBackColor = true;
-            this.UploadConfigBTN.Visible = false;
             this.UploadConfigBTN.Click += new System.EventHandler(this.UploadConfigBTN_Click);
             // 
             // ConfigSet
