@@ -4,6 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+/// <summary>
+/// TSS资源分析
+/// 作者：同位素
+/// 时间：2015/10/1
+/// </summary>
 namespace TheSeed
 {
     static class Program

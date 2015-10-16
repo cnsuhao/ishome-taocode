@@ -56,7 +56,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Config" msprop:Generator_TableClassName="ConfigDataTable" msprop:Generator_TableVarName="tableConfig" msprop:Generator_TablePropName="Config" msprop:Generator_RowDeletingName="ConfigRowDeleting" msprop:Generator_RowChangingName="ConfigRowChanging" msprop:Generator_RowEvHandlerName="ConfigRowChangeEventHandler" msprop:Generator_RowDeletedName="ConfigRowDeleted" msprop:Generator_UserTableName="Config" msprop:Generator_RowChangedName="ConfigRowChanged" msprop:Generator_RowEvArgName="ConfigRowChangeEvent" msprop:Generator_RowClassName="ConfigRow">
+        <xs:element name="Config1" msprop:Generator_TableClassName="Config1DataTable" msprop:Generator_TableVarName="tableConfig1" msprop:Generator_TablePropName="Config1" msprop:Generator_RowDeletingName="Config1RowDeleting" msprop:Generator_RowChangingName="Config1RowChanging" msprop:Generator_RowEvHandlerName="Config1RowChangeEventHandler" msprop:Generator_RowDeletedName="Config1RowDeleted" msprop:Generator_UserTableName="Config1" msprop:Generator_RowChangedName="Config1RowChanged" msprop:Generator_RowEvArgName="Config1RowChangeEvent" msprop:Generator_RowClassName="Config1Row">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="FirstServerAdress" msprop:Generator_ColumnVarNameInTable="columnFirstServerAdress" msprop:Generator_ColumnPropNameInRow="FirstServerAdress" msprop:Generator_ColumnPropNameInTable="FirstServerAdressColumn" msprop:Generator_UserColumnName="FirstServerAdress" type="xs:string" minOccurs="0" />
@@ -69,16 +69,25 @@
         <xs:element name="MyOrderResource" msprop:Generator_TableClassName="MyOrderResourceDataTable" msprop:Generator_TableVarName="tableMyOrderResource" msprop:Generator_TablePropName="MyOrderResource" msprop:Generator_RowDeletingName="MyOrderResourceRowDeleting" msprop:Generator_RowChangingName="MyOrderResourceRowChanging" msprop:Generator_RowEvHandlerName="MyOrderResourceRowChangeEventHandler" msprop:Generator_RowDeletedName="MyOrderResourceRowDeleted" msprop:Generator_UserTableName="MyOrderResource" msprop:Generator_RowChangedName="MyOrderResourceRowChanged" msprop:Generator_RowEvArgName="MyOrderResourceRowChangeEvent" msprop:Generator_RowClassName="MyOrderResourceRow">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="ResourceTypeBM" msprop:Generator_ColumnVarNameInTable="columnResourceTypeBM" msprop:Generator_ColumnPropNameInRow="ResourceTypeBM" msprop:Generator_ColumnPropNameInTable="ResourceTypeBMColumn" msprop:Generator_UserColumnName="ResourceTypeBM" type="xs:string" minOccurs="0" />
-              <xs:element name="ResourceTypeNR" msprop:Generator_ColumnVarNameInTable="columnResourceTypeNR" msprop:Generator_ColumnPropNameInRow="ResourceTypeNR" msprop:Generator_ColumnPropNameInTable="ResourceTypeNRColumn" msprop:Generator_UserColumnName="ResourceTypeNR" type="xs:string" minOccurs="0" />
+              <xs:element name="ResourceTypeID" msprop:Generator_ColumnVarNameInTable="columnResourceTypeID" msprop:Generator_ColumnPropNameInRow="ResourceTypeID" msprop:Generator_ColumnPropNameInTable="ResourceTypeIDColumn" msprop:Generator_UserColumnName="ResourceTypeID" type="xs:string" minOccurs="0" />
+              <xs:element name="ResourceTypeValue" msprop:Generator_ColumnVarNameInTable="columnResourceTypeValue" msprop:Generator_ColumnPropNameInRow="ResourceTypeValue" msprop:Generator_ColumnPropNameInTable="ResourceTypeValueColumn" msprop:Generator_UserColumnName="ResourceTypeValue" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
         <xs:element name="MyOrderSeries" msprop:Generator_TableClassName="MyOrderSeriesDataTable" msprop:Generator_TableVarName="tableMyOrderSeries" msprop:Generator_TablePropName="MyOrderSeries" msprop:Generator_RowDeletingName="MyOrderSeriesRowDeleting" msprop:Generator_RowChangingName="MyOrderSeriesRowChanging" msprop:Generator_RowEvHandlerName="MyOrderSeriesRowChangeEventHandler" msprop:Generator_RowDeletedName="MyOrderSeriesRowDeleted" msprop:Generator_UserTableName="MyOrderSeries" msprop:Generator_RowChangedName="MyOrderSeriesRowChanged" msprop:Generator_RowEvArgName="MyOrderSeriesRowChangeEvent" msprop:Generator_RowClassName="MyOrderSeriesRow">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="SeriesUUID" msdata:Caption="ResourceTypeBM" msprop:Generator_ColumnVarNameInTable="columnSeriesUUID" msprop:Generator_ColumnPropNameInRow="SeriesUUID" msprop:Generator_ColumnPropNameInTable="SeriesUUIDColumn" msprop:Generator_UserColumnName="SeriesUUID" type="xs:string" minOccurs="0" />
-              <xs:element name="SeriesMC" msdata:Caption="ResourceTypeNR" msprop:Generator_ColumnVarNameInTable="columnSeriesMC" msprop:Generator_ColumnPropNameInRow="SeriesMC" msprop:Generator_ColumnPropNameInTable="SeriesMCColumn" msprop:Generator_UserColumnName="SeriesMC" type="xs:string" minOccurs="0" />
+              <xs:element name="SeriesID" msdata:Caption="ResourceTypeBM" msprop:Generator_ColumnVarNameInTable="columnSeriesID" msprop:Generator_ColumnPropNameInRow="SeriesID" msprop:Generator_ColumnPropNameInTable="SeriesIDColumn" msprop:Generator_UserColumnName="SeriesID" type="xs:string" minOccurs="0" />
+              <xs:element name="SeriesValue" msdata:Caption="ResourceTypeNR" msprop:Generator_ColumnVarNameInTable="columnSeriesValue" msprop:Generator_ColumnPropNameInRow="SeriesValue" msprop:Generator_ColumnPropNameInTable="SeriesValueColumn" msprop:Generator_UserColumnName="SeriesValue" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Config" msprop:Generator_TableClassName="ConfigDataTable" msprop:Generator_TableVarName="tableConfig" msprop:Generator_RowChangedName="ConfigRowChanged" msprop:Generator_TablePropName="Config" msprop:Generator_RowDeletingName="ConfigRowDeleting" msprop:Generator_RowChangingName="ConfigRowChanging" msprop:Generator_RowEvHandlerName="ConfigRowChangeEventHandler" msprop:Generator_RowDeletedName="ConfigRowDeleted" msprop:Generator_RowClassName="ConfigRow" msprop:Generator_UserTableName="Config" msprop:Generator_RowEvArgName="ConfigRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Key" msprop:Generator_ColumnVarNameInTable="columnKey" msprop:Generator_ColumnPropNameInRow="Key" msprop:Generator_ColumnPropNameInTable="KeyColumn" msprop:Generator_UserColumnName="Key" type="xs:string" />
+              <xs:element name="Value" msprop:Generator_ColumnVarNameInTable="columnValue" msprop:Generator_ColumnPropNameInRow="Value" msprop:Generator_ColumnPropNameInTable="ValueColumn" msprop:Generator_UserColumnName="Value" type="xs:string" minOccurs="0" />
+              <xs:element name="Type" msprop:Generator_ColumnVarNameInTable="columnType" msprop:Generator_ColumnPropNameInRow="Type" msprop:Generator_ColumnPropNameInTable="TypeColumn" msprop:Generator_UserColumnName="Type" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -95,6 +104,10 @@
     <xs:unique name="Series_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:Series" />
       <xs:field xpath="mstns:UUID" />
+    </xs:unique>
+    <xs:unique name="Config_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Config" />
+      <xs:field xpath="mstns:Key" />
     </xs:unique>
   </xs:element>
 </xs:schema>

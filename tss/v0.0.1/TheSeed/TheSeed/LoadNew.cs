@@ -9,6 +9,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+/// <summary>
+/// TSS资源分析
+/// 作者：同位素
+/// 时间：2015/10/1
+/// </summary>
 namespace TheSeed
 {
     public partial class LoadNew : Form
@@ -51,13 +56,13 @@ namespace TheSeed
             MessageLBL.Text = "获取今日资源更新信息";
             LoadPB.Value = 40;
             Thread.Sleep(2000);
-            ResourceUtils.LoadNewResources();
+            ResourceUtils.LoadResourcesTop10();
 
             //保存最新内容到本地
             MessageLBL.Text = "保存最新内容到本地";
             LoadPB.Value = 50;
             Thread.Sleep(2000);
-            ResourceUtils.SaveNewResources();
+            ResourceUtils.SaveResourcesTop10();
 
             //根据我的关注获取分类信息
             MessageLBL.Text = "获取我关注的分类信息";

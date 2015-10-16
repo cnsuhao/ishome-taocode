@@ -76,7 +76,6 @@
             this.button1.TabIndex = 0;
             this.button1.Text = "月份";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
@@ -164,7 +163,6 @@
             this.button4.TabIndex = 1;
             this.button4.Text = "名称";
             this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button5
             // 
@@ -248,7 +246,6 @@
             this.button14.TabIndex = 3;
             this.button14.Text = "更新我关注资源";
             this.button14.UseVisualStyleBackColor = true;
-            this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
             // button12
             // 
