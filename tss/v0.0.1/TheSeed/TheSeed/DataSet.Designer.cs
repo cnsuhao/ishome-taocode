@@ -30,8 +30,6 @@ namespace TheSeed {
         
         private SeriesDataTable tableSeries;
         
-        private Config1DataTable tableConfig1;
-        
         private MyOrderResourceDataTable tableMyOrderResource;
         
         private MyOrderSeriesDataTable tableMyOrderSeries;
@@ -74,9 +72,6 @@ namespace TheSeed {
                 }
                 if ((ds.Tables["Series"] != null)) {
                     base.Tables.Add(new SeriesDataTable(ds.Tables["Series"]));
-                }
-                if ((ds.Tables["Config1"] != null)) {
-                    base.Tables.Add(new Config1DataTable(ds.Tables["Config1"]));
                 }
                 if ((ds.Tables["MyOrderResource"] != null)) {
                     base.Tables.Add(new MyOrderResourceDataTable(ds.Tables["MyOrderResource"]));
@@ -132,16 +127,6 @@ namespace TheSeed {
         public SeriesDataTable Series {
             get {
                 return this.tableSeries;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Browsable(false)]
-        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public Config1DataTable Config1 {
-            get {
-                return this.tableConfig1;
             }
         }
         
@@ -251,9 +236,6 @@ namespace TheSeed {
                 if ((ds.Tables["Series"] != null)) {
                     base.Tables.Add(new SeriesDataTable(ds.Tables["Series"]));
                 }
-                if ((ds.Tables["Config1"] != null)) {
-                    base.Tables.Add(new Config1DataTable(ds.Tables["Config1"]));
-                }
                 if ((ds.Tables["MyOrderResource"] != null)) {
                     base.Tables.Add(new MyOrderResourceDataTable(ds.Tables["MyOrderResource"]));
                 }
@@ -314,12 +296,6 @@ namespace TheSeed {
                     this.tableSeries.InitVars();
                 }
             }
-            this.tableConfig1 = ((Config1DataTable)(base.Tables["Config1"]));
-            if ((initTable == true)) {
-                if ((this.tableConfig1 != null)) {
-                    this.tableConfig1.InitVars();
-                }
-            }
             this.tableMyOrderResource = ((MyOrderResourceDataTable)(base.Tables["MyOrderResource"]));
             if ((initTable == true)) {
                 if ((this.tableMyOrderResource != null)) {
@@ -354,8 +330,6 @@ namespace TheSeed {
             base.Tables.Add(this.tableResource);
             this.tableSeries = new SeriesDataTable();
             base.Tables.Add(this.tableSeries);
-            this.tableConfig1 = new Config1DataTable();
-            base.Tables.Add(this.tableConfig1);
             this.tableMyOrderResource = new MyOrderResourceDataTable();
             base.Tables.Add(this.tableMyOrderResource);
             this.tableMyOrderSeries = new MyOrderSeriesDataTable();
@@ -379,12 +353,6 @@ namespace TheSeed {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private bool ShouldSerializeSeries() {
-            return false;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private bool ShouldSerializeConfig1() {
             return false;
         }
         
@@ -471,9 +439,6 @@ namespace TheSeed {
         public delegate void SeriesRowChangeEventHandler(object sender, SeriesRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public delegate void Config1RowChangeEventHandler(object sender, Config1RowChangeEvent e);
-        
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public delegate void MyOrderResourceRowChangeEventHandler(object sender, MyOrderResourceRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -492,6 +457,8 @@ namespace TheSeed {
             private global::System.Data.DataColumn columnBM;
             
             private global::System.Data.DataColumn columnNR;
+            
+            private global::System.Data.DataColumn columnCreatDateTime;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -544,6 +511,14 @@ namespace TheSeed {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn CreatDateTimeColumn {
+                get {
+                    return this.columnCreatDateTime;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -579,11 +554,12 @@ namespace TheSeed {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public TypeRow AddTypeRow(string BM, string NR) {
+            public TypeRow AddTypeRow(string BM, string NR, string CreatDateTime) {
                 TypeRow rowTypeRow = ((TypeRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         BM,
-                        NR};
+                        NR,
+                        CreatDateTime};
                 rowTypeRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowTypeRow);
                 return rowTypeRow;
@@ -615,6 +591,7 @@ namespace TheSeed {
             internal void InitVars() {
                 this.columnBM = base.Columns["BM"];
                 this.columnNR = base.Columns["NR"];
+                this.columnCreatDateTime = base.Columns["CreatDateTime"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -624,6 +601,8 @@ namespace TheSeed {
                 base.Columns.Add(this.columnBM);
                 this.columnNR = new global::System.Data.DataColumn("NR", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnNR);
+                this.columnCreatDateTime = new global::System.Data.DataColumn("CreatDateTime", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCreatDateTime);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnNR}, true));
                 this.columnBM.AllowDBNull = false;
@@ -786,7 +765,9 @@ namespace TheSeed {
             
             private global::System.Data.DataColumn columnSPCC;
             
-            private global::System.Data.DataColumn columnSJRQ;
+            private global::System.Data.DataColumn columnCreatDateTime;
+            
+            private global::System.Data.DataColumn columnUpdateDateTime;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -911,9 +892,17 @@ namespace TheSeed {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn SJRQColumn {
+            public global::System.Data.DataColumn CreatDateTimeColumn {
                 get {
-                    return this.columnSJRQ;
+                    return this.columnCreatDateTime;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn UpdateDateTimeColumn {
+                get {
+                    return this.columnUpdateDateTime;
                 }
             }
             
@@ -954,7 +943,7 @@ namespace TheSeed {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ResourceRow AddResourceRow(string UUID, string MC, string XZDZ, string ZYFJ, string YYZL, string ZM, string FXDQ, string LB, string FXRQ, string PC, string SPCC, string SJRQ) {
+            public ResourceRow AddResourceRow(string UUID, string MC, string XZDZ, string ZYFJ, string YYZL, string ZM, string FXDQ, string LB, string FXRQ, string PC, string SPCC, string CreatDateTime, string UpdateDateTime) {
                 ResourceRow rowResourceRow = ((ResourceRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         UUID,
@@ -968,7 +957,8 @@ namespace TheSeed {
                         FXRQ,
                         PC,
                         SPCC,
-                        SJRQ};
+                        CreatDateTime,
+                        UpdateDateTime};
                 rowResourceRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowResourceRow);
                 return rowResourceRow;
@@ -1009,7 +999,8 @@ namespace TheSeed {
                 this.columnFXRQ = base.Columns["FXRQ"];
                 this.columnPC = base.Columns["PC"];
                 this.columnSPCC = base.Columns["SPCC"];
-                this.columnSJRQ = base.Columns["SJRQ"];
+                this.columnCreatDateTime = base.Columns["CreatDateTime"];
+                this.columnUpdateDateTime = base.Columns["UpdateDateTime"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1037,8 +1028,10 @@ namespace TheSeed {
                 base.Columns.Add(this.columnPC);
                 this.columnSPCC = new global::System.Data.DataColumn("SPCC", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSPCC);
-                this.columnSJRQ = new global::System.Data.DataColumn("SJRQ", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnSJRQ);
+                this.columnCreatDateTime = new global::System.Data.DataColumn("CreatDateTime", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCreatDateTime);
+                this.columnUpdateDateTime = new global::System.Data.DataColumn("UpdateDateTime", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUpdateDateTime);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnUUID}, true));
                 this.columnUUID.AllowDBNull = false;
@@ -1054,7 +1047,6 @@ namespace TheSeed {
                 this.columnFXRQ.Caption = "发行日期";
                 this.columnPC.Caption = "片长";
                 this.columnSPCC.Caption = "视频尺寸";
-                this.columnSJRQ.Caption = "收集日期";
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1212,6 +1204,10 @@ namespace TheSeed {
             
             private global::System.Data.DataColumn columnZYXXXX;
             
+            private global::System.Data.DataColumn columnCreatDateTime;
+            
+            private global::System.Data.DataColumn columnUpdateDateTime;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public SeriesDataTable() {
@@ -1343,6 +1339,22 @@ namespace TheSeed {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn CreatDateTimeColumn {
+                get {
+                    return this.columnCreatDateTime;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn UpdateDateTimeColumn {
+                get {
+                    return this.columnUpdateDateTime;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1378,7 +1390,7 @@ namespace TheSeed {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public SeriesRow AddSeriesRow(string UUID, string MC, string ZJS, string WJZT, string GXJS, string GXJM, string FXRQ, string YYZL, string ZM, string FXDQ, string LB, string ZYXXXX) {
+            public SeriesRow AddSeriesRow(string UUID, string MC, string ZJS, string WJZT, string GXJS, string GXJM, string FXRQ, string YYZL, string ZM, string FXDQ, string LB, string ZYXXXX, string CreatDateTime, string UpdateDateTime) {
                 SeriesRow rowSeriesRow = ((SeriesRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         UUID,
@@ -1392,7 +1404,9 @@ namespace TheSeed {
                         ZM,
                         FXDQ,
                         LB,
-                        ZYXXXX};
+                        ZYXXXX,
+                        CreatDateTime,
+                        UpdateDateTime};
                 rowSeriesRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowSeriesRow);
                 return rowSeriesRow;
@@ -1434,6 +1448,8 @@ namespace TheSeed {
                 this.columnFXDQ = base.Columns["FXDQ"];
                 this.columnLB = base.Columns["LB"];
                 this.columnZYXXXX = base.Columns["ZYXXXX"];
+                this.columnCreatDateTime = base.Columns["CreatDateTime"];
+                this.columnUpdateDateTime = base.Columns["UpdateDateTime"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1463,6 +1479,10 @@ namespace TheSeed {
                 base.Columns.Add(this.columnLB);
                 this.columnZYXXXX = new global::System.Data.DataColumn("ZYXXXX", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnZYXXXX);
+                this.columnCreatDateTime = new global::System.Data.DataColumn("CreatDateTime", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCreatDateTime);
+                this.columnUpdateDateTime = new global::System.Data.DataColumn("UpdateDateTime", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUpdateDateTime);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnUUID}, true));
                 this.columnUUID.AllowDBNull = false;
@@ -1609,300 +1629,13 @@ namespace TheSeed {
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class Config1DataTable : global::System.Data.TypedTableBase<Config1Row> {
-            
-            private global::System.Data.DataColumn columnFirstServerAdress;
-            
-            private global::System.Data.DataColumn columnSecondServerAdress;
-            
-            private global::System.Data.DataColumn columnDataFileSavePath;
-            
-            private global::System.Data.DataColumn columnAdminRool;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public Config1DataTable() {
-                this.TableName = "Config1";
-                this.BeginInit();
-                this.InitClass();
-                this.EndInit();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal Config1DataTable(global::System.Data.DataTable table) {
-                this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                    this.CaseSensitive = table.CaseSensitive;
-                }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                    this.Locale = table.Locale;
-                }
-                if ((table.Namespace != table.DataSet.Namespace)) {
-                    this.Namespace = table.Namespace;
-                }
-                this.Prefix = table.Prefix;
-                this.MinimumCapacity = table.MinimumCapacity;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected Config1DataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
-                this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn FirstServerAdressColumn {
-                get {
-                    return this.columnFirstServerAdress;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn SecondServerAdressColumn {
-                get {
-                    return this.columnSecondServerAdress;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn DataFileSavePathColumn {
-                get {
-                    return this.columnDataFileSavePath;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn AdminRoolColumn {
-                get {
-                    return this.columnAdminRool;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
-                    return this.Rows.Count;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public Config1Row this[int index] {
-                get {
-                    return ((Config1Row)(this.Rows[index]));
-                }
-            }
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event Config1RowChangeEventHandler Config1RowChanging;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event Config1RowChangeEventHandler Config1RowChanged;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event Config1RowChangeEventHandler Config1RowDeleting;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event Config1RowChangeEventHandler Config1RowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void AddConfig1Row(Config1Row row) {
-                this.Rows.Add(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public Config1Row AddConfig1Row(string FirstServerAdress, string SecondServerAdress, string DataFileSavePath, string AdminRool) {
-                Config1Row rowConfig1Row = ((Config1Row)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        FirstServerAdress,
-                        SecondServerAdress,
-                        DataFileSavePath,
-                        AdminRool};
-                rowConfig1Row.ItemArray = columnValuesArray;
-                this.Rows.Add(rowConfig1Row);
-                return rowConfig1Row;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public override global::System.Data.DataTable Clone() {
-                Config1DataTable cln = ((Config1DataTable)(base.Clone()));
-                cln.InitVars();
-                return cln;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Data.DataTable CreateInstance() {
-                return new Config1DataTable();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal void InitVars() {
-                this.columnFirstServerAdress = base.Columns["FirstServerAdress"];
-                this.columnSecondServerAdress = base.Columns["SecondServerAdress"];
-                this.columnDataFileSavePath = base.Columns["DataFileSavePath"];
-                this.columnAdminRool = base.Columns["AdminRool"];
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            private void InitClass() {
-                this.columnFirstServerAdress = new global::System.Data.DataColumn("FirstServerAdress", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnFirstServerAdress);
-                this.columnSecondServerAdress = new global::System.Data.DataColumn("SecondServerAdress", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnSecondServerAdress);
-                this.columnDataFileSavePath = new global::System.Data.DataColumn("DataFileSavePath", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnDataFileSavePath);
-                this.columnAdminRool = new global::System.Data.DataColumn("AdminRool", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnAdminRool);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public Config1Row NewConfig1Row() {
-                return ((Config1Row)(this.NewRow()));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new Config1Row(builder);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Type GetRowType() {
-                return typeof(Config1Row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanged(e);
-                if ((this.Config1RowChanged != null)) {
-                    this.Config1RowChanged(this, new Config1RowChangeEvent(((Config1Row)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanging(e);
-                if ((this.Config1RowChanging != null)) {
-                    this.Config1RowChanging(this, new Config1RowChangeEvent(((Config1Row)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleted(e);
-                if ((this.Config1RowDeleted != null)) {
-                    this.Config1RowDeleted(this, new Config1RowChangeEvent(((Config1Row)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleting(e);
-                if ((this.Config1RowDeleting != null)) {
-                    this.Config1RowDeleting(this, new Config1RowChangeEvent(((Config1Row)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void RemoveConfig1Row(Config1Row row) {
-                this.Rows.Remove(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DataSet ds = new DataSet();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-                any1.MinOccurs = new decimal(0);
-                any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-                any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute1.Name = "namespace";
-                attribute1.FixedValue = ds.Namespace;
-                type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "Config1DataTable";
-                type.Attributes.Add(attribute2);
-                type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
-                        dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                            s2.SetLength(0);
-                            schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
-                                s1.Position = 0;
-                                s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
-                                if ((s1.Position == s1.Length)) {
-                                    return type;
-                                }
-                            }
-                        }
-                    }
-                    finally {
-                        if ((s1 != null)) {
-                            s1.Close();
-                        }
-                        if ((s2 != null)) {
-                            s2.Close();
-                        }
-                    }
-                }
-                xs.Add(dsSchema);
-                return type;
-            }
-        }
-        
-        /// <summary>
-        ///Represents the strongly named DataTable class.
-        ///</summary>
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class MyOrderResourceDataTable : global::System.Data.TypedTableBase<MyOrderResourceRow> {
             
             private global::System.Data.DataColumn columnResourceTypeID;
             
             private global::System.Data.DataColumn columnResourceTypeValue;
+            
+            private global::System.Data.DataColumn columnCreatDateTime;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -1955,6 +1688,14 @@ namespace TheSeed {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn CreatDateTimeColumn {
+                get {
+                    return this.columnCreatDateTime;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1990,11 +1731,12 @@ namespace TheSeed {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public MyOrderResourceRow AddMyOrderResourceRow(string ResourceTypeID, string ResourceTypeValue) {
+            public MyOrderResourceRow AddMyOrderResourceRow(string ResourceTypeID, string ResourceTypeValue, string CreatDateTime) {
                 MyOrderResourceRow rowMyOrderResourceRow = ((MyOrderResourceRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         ResourceTypeID,
-                        ResourceTypeValue};
+                        ResourceTypeValue,
+                        CreatDateTime};
                 rowMyOrderResourceRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowMyOrderResourceRow);
                 return rowMyOrderResourceRow;
@@ -2019,6 +1761,7 @@ namespace TheSeed {
             internal void InitVars() {
                 this.columnResourceTypeID = base.Columns["ResourceTypeID"];
                 this.columnResourceTypeValue = base.Columns["ResourceTypeValue"];
+                this.columnCreatDateTime = base.Columns["CreatDateTime"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2028,6 +1771,8 @@ namespace TheSeed {
                 base.Columns.Add(this.columnResourceTypeID);
                 this.columnResourceTypeValue = new global::System.Data.DataColumn("ResourceTypeValue", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnResourceTypeValue);
+                this.columnCreatDateTime = new global::System.Data.DataColumn("CreatDateTime", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCreatDateTime);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2165,6 +1910,8 @@ namespace TheSeed {
             
             private global::System.Data.DataColumn columnSeriesValue;
             
+            private global::System.Data.DataColumn columnCreatDateTime;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public MyOrderSeriesDataTable() {
@@ -2216,6 +1963,14 @@ namespace TheSeed {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn CreatDateTimeColumn {
+                get {
+                    return this.columnCreatDateTime;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -2251,11 +2006,12 @@ namespace TheSeed {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public MyOrderSeriesRow AddMyOrderSeriesRow(string SeriesID, string SeriesValue) {
+            public MyOrderSeriesRow AddMyOrderSeriesRow(string SeriesID, string SeriesValue, string CreatDateTime) {
                 MyOrderSeriesRow rowMyOrderSeriesRow = ((MyOrderSeriesRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         SeriesID,
-                        SeriesValue};
+                        SeriesValue,
+                        CreatDateTime};
                 rowMyOrderSeriesRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowMyOrderSeriesRow);
                 return rowMyOrderSeriesRow;
@@ -2280,6 +2036,7 @@ namespace TheSeed {
             internal void InitVars() {
                 this.columnSeriesID = base.Columns["SeriesID"];
                 this.columnSeriesValue = base.Columns["SeriesValue"];
+                this.columnCreatDateTime = base.Columns["CreatDateTime"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2289,6 +2046,8 @@ namespace TheSeed {
                 base.Columns.Add(this.columnSeriesID);
                 this.columnSeriesValue = new global::System.Data.DataColumn("SeriesValue", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSeriesValue);
+                this.columnCreatDateTime = new global::System.Data.DataColumn("CreatDateTime", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCreatDateTime);
                 this.columnSeriesID.Caption = "ResourceTypeBM";
                 this.columnSeriesValue.Caption = "ResourceTypeNR";
             }
@@ -2430,6 +2189,8 @@ namespace TheSeed {
             
             private global::System.Data.DataColumn columnType;
             
+            private global::System.Data.DataColumn columnCreatDateTime;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public ConfigDataTable() {
@@ -2489,6 +2250,14 @@ namespace TheSeed {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn CreatDateTimeColumn {
+                get {
+                    return this.columnCreatDateTime;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -2524,12 +2293,13 @@ namespace TheSeed {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ConfigRow AddConfigRow(string Key, string Value, string Type) {
+            public ConfigRow AddConfigRow(string Key, string Value, string Type, string CreatDateTime) {
                 ConfigRow rowConfigRow = ((ConfigRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Key,
                         Value,
-                        Type};
+                        Type,
+                        CreatDateTime};
                 rowConfigRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowConfigRow);
                 return rowConfigRow;
@@ -2562,6 +2332,7 @@ namespace TheSeed {
                 this.columnKey = base.Columns["Key"];
                 this.columnValue = base.Columns["Value"];
                 this.columnType = base.Columns["Type"];
+                this.columnCreatDateTime = base.Columns["CreatDateTime"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2573,6 +2344,8 @@ namespace TheSeed {
                 base.Columns.Add(this.columnValue);
                 this.columnType = new global::System.Data.DataColumn("Type", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnType);
+                this.columnCreatDateTime = new global::System.Data.DataColumn("CreatDateTime", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCreatDateTime);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnKey}, true));
                 this.columnKey.AllowDBNull = false;
@@ -2737,6 +2510,34 @@ namespace TheSeed {
                 set {
                     this[this.tableType.NRColumn] = value;
                 }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string CreatDateTime {
+                get {
+                    try {
+                        return ((string)(this[this.tableType.CreatDateTimeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("表“Type”中列“CreatDateTime”的值为 DBNull。", e);
+                    }
+                }
+                set {
+                    this[this.tableType.CreatDateTimeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsCreatDateTimeNull() {
+                return this.IsNull(this.tableType.CreatDateTimeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetCreatDateTimeNull() {
+                this[this.tableType.CreatDateTimeColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -2927,17 +2728,33 @@ namespace TheSeed {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string SJRQ {
+            public string CreatDateTime {
                 get {
                     try {
-                        return ((string)(this[this.tableResource.SJRQColumn]));
+                        return ((string)(this[this.tableResource.CreatDateTimeColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("表“Resource”中列“SJRQ”的值为 DBNull。", e);
+                        throw new global::System.Data.StrongTypingException("表“Resource”中列“CreatDateTime”的值为 DBNull。", e);
                     }
                 }
                 set {
-                    this[this.tableResource.SJRQColumn] = value;
+                    this[this.tableResource.CreatDateTimeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string UpdateDateTime {
+                get {
+                    try {
+                        return ((string)(this[this.tableResource.UpdateDateTimeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("表“Resource”中列“UpdateDateTime”的值为 DBNull。", e);
+                    }
+                }
+                set {
+                    this[this.tableResource.UpdateDateTimeColumn] = value;
                 }
             }
             
@@ -3063,14 +2880,26 @@ namespace TheSeed {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsSJRQNull() {
-                return this.IsNull(this.tableResource.SJRQColumn);
+            public bool IsCreatDateTimeNull() {
+                return this.IsNull(this.tableResource.CreatDateTimeColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetSJRQNull() {
-                this[this.tableResource.SJRQColumn] = global::System.Convert.DBNull;
+            public void SetCreatDateTimeNull() {
+                this[this.tableResource.CreatDateTimeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsUpdateDateTimeNull() {
+                return this.IsNull(this.tableResource.UpdateDateTimeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetUpdateDateTimeNull() {
+                this[this.tableResource.UpdateDateTimeColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -3277,6 +3106,38 @@ namespace TheSeed {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string CreatDateTime {
+                get {
+                    try {
+                        return ((string)(this[this.tableSeries.CreatDateTimeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("表“Series”中列“CreatDateTime”的值为 DBNull。", e);
+                    }
+                }
+                set {
+                    this[this.tableSeries.CreatDateTimeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string UpdateDateTime {
+                get {
+                    try {
+                        return ((string)(this[this.tableSeries.UpdateDateTimeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("表“Series”中列“UpdateDateTime”的值为 DBNull。", e);
+                    }
+                }
+                set {
+                    this[this.tableSeries.UpdateDateTimeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsMCNull() {
                 return this.IsNull(this.tableSeries.MCColumn);
             }
@@ -3406,132 +3267,29 @@ namespace TheSeed {
             public void SetZYXXXXNull() {
                 this[this.tableSeries.ZYXXXXColumn] = global::System.Convert.DBNull;
             }
-        }
-        
-        /// <summary>
-        ///Represents strongly named DataRow class.
-        ///</summary>
-        public partial class Config1Row : global::System.Data.DataRow {
-            
-            private Config1DataTable tableConfig1;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal Config1Row(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tableConfig1 = ((Config1DataTable)(this.Table));
+            public bool IsCreatDateTimeNull() {
+                return this.IsNull(this.tableSeries.CreatDateTimeColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string FirstServerAdress {
-                get {
-                    try {
-                        return ((string)(this[this.tableConfig1.FirstServerAdressColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("表“Config1”中列“FirstServerAdress”的值为 DBNull。", e);
-                    }
-                }
-                set {
-                    this[this.tableConfig1.FirstServerAdressColumn] = value;
-                }
+            public void SetCreatDateTimeNull() {
+                this[this.tableSeries.CreatDateTimeColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string SecondServerAdress {
-                get {
-                    try {
-                        return ((string)(this[this.tableConfig1.SecondServerAdressColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("表“Config1”中列“SecondServerAdress”的值为 DBNull。", e);
-                    }
-                }
-                set {
-                    this[this.tableConfig1.SecondServerAdressColumn] = value;
-                }
+            public bool IsUpdateDateTimeNull() {
+                return this.IsNull(this.tableSeries.UpdateDateTimeColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string DataFileSavePath {
-                get {
-                    try {
-                        return ((string)(this[this.tableConfig1.DataFileSavePathColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("表“Config1”中列“DataFileSavePath”的值为 DBNull。", e);
-                    }
-                }
-                set {
-                    this[this.tableConfig1.DataFileSavePathColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string AdminRool {
-                get {
-                    try {
-                        return ((string)(this[this.tableConfig1.AdminRoolColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("表“Config1”中列“AdminRool”的值为 DBNull。", e);
-                    }
-                }
-                set {
-                    this[this.tableConfig1.AdminRoolColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsFirstServerAdressNull() {
-                return this.IsNull(this.tableConfig1.FirstServerAdressColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetFirstServerAdressNull() {
-                this[this.tableConfig1.FirstServerAdressColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsSecondServerAdressNull() {
-                return this.IsNull(this.tableConfig1.SecondServerAdressColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetSecondServerAdressNull() {
-                this[this.tableConfig1.SecondServerAdressColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsDataFileSavePathNull() {
-                return this.IsNull(this.tableConfig1.DataFileSavePathColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetDataFileSavePathNull() {
-                this[this.tableConfig1.DataFileSavePathColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsAdminRoolNull() {
-                return this.IsNull(this.tableConfig1.AdminRoolColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetAdminRoolNull() {
-                this[this.tableConfig1.AdminRoolColumn] = global::System.Convert.DBNull;
+            public void SetUpdateDateTimeNull() {
+                this[this.tableSeries.UpdateDateTimeColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -3583,6 +3341,22 @@ namespace TheSeed {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string CreatDateTime {
+                get {
+                    try {
+                        return ((string)(this[this.tableMyOrderResource.CreatDateTimeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("表“MyOrderResource”中列“CreatDateTime”的值为 DBNull。", e);
+                    }
+                }
+                set {
+                    this[this.tableMyOrderResource.CreatDateTimeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsResourceTypeIDNull() {
                 return this.IsNull(this.tableMyOrderResource.ResourceTypeIDColumn);
             }
@@ -3603,6 +3377,18 @@ namespace TheSeed {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetResourceTypeValueNull() {
                 this[this.tableMyOrderResource.ResourceTypeValueColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsCreatDateTimeNull() {
+                return this.IsNull(this.tableMyOrderResource.CreatDateTimeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetCreatDateTimeNull() {
+                this[this.tableMyOrderResource.CreatDateTimeColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -3654,6 +3440,22 @@ namespace TheSeed {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string CreatDateTime {
+                get {
+                    try {
+                        return ((string)(this[this.tableMyOrderSeries.CreatDateTimeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("表“MyOrderSeries”中列“CreatDateTime”的值为 DBNull。", e);
+                    }
+                }
+                set {
+                    this[this.tableMyOrderSeries.CreatDateTimeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsSeriesIDNull() {
                 return this.IsNull(this.tableMyOrderSeries.SeriesIDColumn);
             }
@@ -3674,6 +3476,18 @@ namespace TheSeed {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetSeriesValueNull() {
                 this[this.tableMyOrderSeries.SeriesValueColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsCreatDateTimeNull() {
+                return this.IsNull(this.tableMyOrderSeries.CreatDateTimeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetCreatDateTimeNull() {
+                this[this.tableMyOrderSeries.CreatDateTimeColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -3736,6 +3550,22 @@ namespace TheSeed {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string CreatDateTime {
+                get {
+                    try {
+                        return ((string)(this[this.tableConfig.CreatDateTimeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("表“Config”中列“CreatDateTime”的值为 DBNull。", e);
+                    }
+                }
+                set {
+                    this[this.tableConfig.CreatDateTimeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsValueNull() {
                 return this.IsNull(this.tableConfig.ValueColumn);
             }
@@ -3756,6 +3586,18 @@ namespace TheSeed {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetTypeNull() {
                 this[this.tableConfig.TypeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsCreatDateTimeNull() {
+                return this.IsNull(this.tableConfig.CreatDateTimeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetCreatDateTimeNull() {
+                this[this.tableConfig.CreatDateTimeColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -3847,40 +3689,6 @@ namespace TheSeed {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public SeriesRow Row {
-                get {
-                    return this.eventRow;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataRowAction Action {
-                get {
-                    return this.eventAction;
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Row event argument class
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public class Config1RowChangeEvent : global::System.EventArgs {
-            
-            private Config1Row eventRow;
-            
-            private global::System.Data.DataRowAction eventAction;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public Config1RowChangeEvent(Config1Row row, global::System.Data.DataRowAction action) {
-                this.eventRow = row;
-                this.eventAction = action;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public Config1Row Row {
                 get {
                     return this.eventRow;
                 }

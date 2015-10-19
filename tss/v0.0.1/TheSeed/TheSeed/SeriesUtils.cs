@@ -24,11 +24,6 @@ namespace TheSeed
             return true;
         }
 
-        public static Boolean LoadMyorderSeriess()
-        {
-            return true;
-        }
-
         public static Boolean SaveMyOrderSeriess()
         {
             return true;
