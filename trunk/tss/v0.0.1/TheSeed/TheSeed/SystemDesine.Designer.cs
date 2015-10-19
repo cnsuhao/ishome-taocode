@@ -56,11 +56,11 @@
             this.button20 = new System.Windows.Forms.Button();
             this.button19 = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.button26 = new System.Windows.Forms.Button();
             this.button25 = new System.Windows.Forms.Button();
             this.button24 = new System.Windows.Forms.Button();
             this.button23 = new System.Windows.Forms.Button();
             this.button22 = new System.Windows.Forms.Button();
-            this.button26 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -83,7 +83,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 1;
-            this.button2.Text = "字母";
+            this.button2.Text = "字母/日";
             this.button2.UseVisualStyleBackColor = true;
             // 
             // button3
@@ -170,7 +170,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 23);
             this.button5.TabIndex = 1;
-            this.button5.Text = "字母";
+            this.button5.Text = "字母/日";
             this.button5.UseVisualStyleBackColor = true;
             // 
             // button6
@@ -354,6 +354,15 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "更新关注";
             // 
+            // button26
+            // 
+            this.button26.Location = new System.Drawing.Point(115, 59);
+            this.button26.Name = "button26";
+            this.button26.Size = new System.Drawing.Size(156, 23);
+            this.button26.TabIndex = 2;
+            this.button26.Text = "获取最新分类信息";
+            this.button26.UseVisualStyleBackColor = true;
+            // 
             // button25
             // 
             this.button25.Location = new System.Drawing.Point(254, 123);
@@ -389,15 +398,6 @@
             this.button22.TabIndex = 0;
             this.button22.Text = "获取我的关注";
             this.button22.UseVisualStyleBackColor = true;
-            // 
-            // button26
-            // 
-            this.button26.Location = new System.Drawing.Point(115, 59);
-            this.button26.Name = "button26";
-            this.button26.Size = new System.Drawing.Size(156, 23);
-            this.button26.TabIndex = 2;
-            this.button26.Text = "获取最新分类信息";
-            this.button26.UseVisualStyleBackColor = true;
             // 
             // SystemDesine
             // 

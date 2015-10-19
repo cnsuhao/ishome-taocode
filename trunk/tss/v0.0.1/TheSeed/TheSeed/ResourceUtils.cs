@@ -35,7 +35,7 @@ namespace TheSeed
             return true;
         }
         /// <summary>
-         /// 获得最新资源
+         /// 获得最新资源（本地展示）
          /// </summary>
          /// <returns></returns>
         public static Boolean ReadResourcesTop10()
