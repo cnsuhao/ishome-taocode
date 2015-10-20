@@ -124,7 +124,7 @@
             this.UploadConfigBTN.Name = "UploadConfigBTN";
             this.UploadConfigBTN.Size = new System.Drawing.Size(157, 37);
             this.UploadConfigBTN.TabIndex = 6;
-            this.UploadConfigBTN.Text = "保存配置";
+            this.UploadConfigBTN.Text = "保存并关闭";
             this.UploadConfigBTN.UseVisualStyleBackColor = true;
             this.UploadConfigBTN.Click += new System.EventHandler(this.UploadConfigBTN_Click);
             // 
@@ -149,6 +149,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "系统配置";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ConfigSet_FormClosing);
             this.Load += new System.EventHandler(this.ConfigSet_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

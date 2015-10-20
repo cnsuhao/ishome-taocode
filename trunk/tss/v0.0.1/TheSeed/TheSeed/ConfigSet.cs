@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -47,14 +48,53 @@ namespace TheSeed
         private void SavePathBTN_Click(object sender, EventArgs e)
         {
             folderBrowserDialog.ShowDialog(this);
-            DataFileSavePath.Text = folderBrowserDialog.SelectedPath;
+            DataFileSavePath.Text = folderBrowserDialog.SelectedPath;           
         }
 
         private void UploadConfigBTN_Click(object sender, EventArgs e)
         {
-
+            SaveConfig();
 
             //TODO 2.0云化版本处理
+
+            this.Close();
+        }
+        private void SaveConfig()
+        {
+            if (Directory.Exists(DataFileSavePath.Text) == false)
+            {
+                if (DialogResult.Cancel == MessageBox.Show("当前路径不存在，是否创建？", "保存路径设定", MessageBoxButtons.OKCancel, MessageBoxIcon.Question))
+                    return;
+            }
+            //保存配置信息
+            ConfigUtils.DataFileSavePath = DataFileSavePath.Text;
+            ConfigUtils.FirstServerAdress = FirstServerAdress.Text;
+            ConfigUtils.SecondServerAdress = SecondServerAdress.Text;
+            // 初始化路径配置信息
+            ConfigUtils.InitSavePath();
+            // 保存默认配置文件
+            ConfigUtils.SaveConfigFile();
+            //保存服务器配置文件
+            ConfigUtils.SaveSysConfig();
+        }
+        private void ConfigSet_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (Directory.Exists(DataFileSavePath.Text) == false)
+            {
+                DialogResult r = MessageBox.Show("当前配置没有正常保存，保存退出（Y）关闭程序（N）继续配置（）？", "基本设置", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (DialogResult.Yes == r)
+                {
+                    SaveConfig();                    
+                }
+                else if (DialogResult.No == r)
+                {
+                    Application.Exit();
+                }
+                else
+                {
+                    e.Cancel = true;
+                }
+            }
         }
     }
 }

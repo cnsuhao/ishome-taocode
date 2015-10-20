@@ -40,7 +40,7 @@
             this.UserID.Name = "UserID";
             this.UserID.Size = new System.Drawing.Size(194, 21);
             this.UserID.TabIndex = 0;
-            this.UserID.Text = "请输入用户名";
+            this.UserID.Text = "请输入密码";
             // 
             // Password
             // 
@@ -48,11 +48,11 @@
             this.Password.Name = "Password";
             this.Password.Size = new System.Drawing.Size(194, 21);
             this.Password.TabIndex = 1;
-            this.Password.Text = "请输入密码";
+            this.Password.Text = "请再次输入密码";
             // 
             // LoginBTN
             // 
-            this.LoginBTN.Location = new System.Drawing.Point(41, 118);
+            this.LoginBTN.Location = new System.Drawing.Point(41, 133);
             this.LoginBTN.Name = "LoginBTN";
             this.LoginBTN.Size = new System.Drawing.Size(194, 38);
             this.LoginBTN.TabIndex = 2;

@@ -39,13 +39,13 @@ namespace TheSeed
                 //初始化
                 Loading ld = new Loading();
                 ld.ShowDialog(this);
-                if (ConfigUtils.NetConnect == true)
+               // if (ConfigUtils.NetConnect == true)
                 {
                     this.Show();
                 }
-                else
+              //  else
                 {
-                    this.Close();
+              //      this.Close();
                 }
             }
             else

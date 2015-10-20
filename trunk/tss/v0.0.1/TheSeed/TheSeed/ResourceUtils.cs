@@ -22,7 +22,7 @@ namespace TheSeed
         /// 最新资源信息清单（Top10）
         /// </summary>
         public static DataSet.ResourceDataTable ResourceTop10 { get; set; }
-        public static String ResourceTop10File = ConfigUtils.DataFileSavePath + @"\" + FilePathUtils.LOCAL_CFG + FilePathUtils.LOCAL_RES + FilePathUtils.LOCAL_RES_TOP + FilePathUtils.LOCAL_FILE_TYPE;
+        public static String ResourceTop10File = ConfigUtils.DataFileSavePath + @"\" + FilePathUtils.LOCAL_RES + FilePathUtils.LOCAL_RES_TOP + FilePathUtils.LOCAL_FILE_TYPE;
 
         /// <summary>
         /// 获得最新资源
@@ -50,9 +50,21 @@ namespace TheSeed
         {
             //获取网络通信
             List<String> items = ConfigUtils.ServerProtocol.ListResourceTop10();
-            File.WriteAllLines(FilePathUtils.LOCAL_TEMP + FilePathUtils.LOCAL_FILE_TYPE, items, Encoding.UTF8);
             ResourceTop10 = new DataSet.ResourceDataTable();
-            ResourceTop10.ReadXml(FilePathUtils.LOCAL_TEMP + FilePathUtils.LOCAL_FILE_TYPE);
+            DataSet.ResourceDataTable TempResource = null;
+            foreach (String item in items)
+            {
+                try
+                {
+                    File.WriteAllText(FilePathUtils.LOCAL_TEMP + FilePathUtils.LOCAL_FILE_TYPE, item, Encoding.UTF8);
+                    TempResource = new DataSet.ResourceDataTable();
+                    TempResource.ReadXml(FilePathUtils.LOCAL_TEMP + FilePathUtils.LOCAL_FILE_TYPE);
+                    ResourceTop10.Merge(TempResource);
+                }
+                catch (Exception)
+                {
+                }
+            }
             
             return true;
         }
