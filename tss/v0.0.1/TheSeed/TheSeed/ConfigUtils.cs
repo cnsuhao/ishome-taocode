@@ -54,10 +54,32 @@ namespace TheSeed
         public static DataSet.MyOrderResourceDataTable MyOrderResource { get; set; }
         public static DataSet.MyOrderSeriesDataTable MyOrderSeries { get; set; }
         #endregion
-
-
-
+        
         public static String ConfigFile = Application.StartupPath + @"\" + FilePathUtils.LOCAL_CFG + FilePathUtils.LOCAL_FILE_TYPE;
+
+        public static Boolean CheckConfigFile()
+        {
+            //检查本地资源路径合法性
+            return Directory.Exists(ConfigFile);
+        }
+
+        /// <summary>
+        /// 初始化配置路径
+        /// </summary>
+        /// <returns></returns>
+        public static Boolean InitSavePath()
+        {
+            Directory.CreateDirectory(ConfigUtils.DataFileSavePath);
+
+            Directory.CreateDirectory(ConfigUtils.DataFileSavePath + @"\" + FilePathUtils.LOCAL_CFG);
+            //Directory.CreateDirectory(ConfigUtils.DataFileSavePath + @"\" + FilePathUtils.LOCAL_CFG + FilePathUtils.LOCAL_CFG_SYS);
+            //Directory.CreateDirectory(ConfigUtils.DataFileSavePath + @"\" + FilePathUtils.LOCAL_CFG + FilePathUtils.LOCAL_CFG_USR);
+
+            Directory.CreateDirectory(ConfigUtils.DataFileSavePath + @"\" + FilePathUtils.LOCAL_RES);
+            Directory.CreateDirectory(ConfigUtils.DataFileSavePath + @"\" + FilePathUtils.LOCAL_SER);
+
+            return true;
+        }
 
         //config/conf.dat
         /// <summary>
@@ -80,17 +102,27 @@ namespace TheSeed
                 //创建配置文件
                 File.WriteAllText(ConfigFile, DataFileSavePath, Encoding.UTF8);
             }
-            //检查本地资源路径合法性
-            if (Directory.Exists(ConfigUtils.DataFileSavePath) == false)
-                return false;
 
             //加载网络连接
             ServerProtocol = new FTPCloundProtocolUtils();
             NetConnect = ServerProtocol.ConnectSetver();
 
+            SysConfigFileName = DataFileSavePath + @"\" + FilePathUtils.LOCAL_CFG + FilePathUtils.LOCAL_CFG_SYS + FilePathUtils.LOCAL_FILE_TYPE;
+            UsrConfigFileName = DataFileSavePath + @"\" + FilePathUtils.LOCAL_CFG + FilePathUtils.LOCAL_CFG_USR + FilePathUtils.LOCAL_FILE_TYPE;
+
+            //检查本地资源路径合法性
+            if (Directory.Exists(ConfigUtils.DataFileSavePath) == false)
+            {
+                return false;
+            }
+
             return true;
         }
 
+        /// <summary>
+        /// 保存默认配置文件
+        /// </summary>
+        /// <returns></returns>
         public static Boolean SaveConfigFile()
         {
             //创建配置文件
@@ -98,7 +130,7 @@ namespace TheSeed
             return true;
         }
 
-        public static String SysConfigFile = DataFileSavePath + @"\" + FilePathUtils.LOCAL_CFG + FilePathUtils.LOCAL_CFG_SYS + FilePathUtils.LOCAL_FILE_TYPE;
+        public static String SysConfigFileName { get; set; }
 
         /// <summary>
         /// 加载系统配置文件
@@ -107,15 +139,17 @@ namespace TheSeed
         public static Boolean LoadSysConfig()
         {
             //纯粹文本格式
-            if (File.Exists(SysConfigFile))
+            if (File.Exists(SysConfigFileName))
             {
                 //本地保存路径
-                String[] FileValue = File.ReadAllLines(SysConfigFile, Encoding.UTF8);
+                String[] FileValue = File.ReadAllLines(SysConfigFileName, Encoding.UTF8);
                 FirstServerAdress = FileValue[0];
                 SecondServerAdress = FileValue[1];
+
+                return true;
             }
 
-            return true;
+            return false;
         }
 
         /// <summary>
@@ -123,13 +157,17 @@ namespace TheSeed
         /// </summary>
         /// <param name="FileValue"></param>
         /// <returns></returns>
-        public static Boolean SaveSysConfig(String[] FileValue)
+        public static Boolean SaveSysConfig()
         {
-            File.WriteAllLines(SysConfigFile, FileValue, Encoding.UTF8);
+            SysConfigFileName = DataFileSavePath + @"\" + FilePathUtils.LOCAL_CFG + FilePathUtils.LOCAL_CFG_SYS + FilePathUtils.LOCAL_FILE_TYPE;
+            UsrConfigFileName = DataFileSavePath + @"\" + FilePathUtils.LOCAL_CFG + FilePathUtils.LOCAL_CFG_USR + FilePathUtils.LOCAL_FILE_TYPE;
+
+            String[] FileValue = { FirstServerAdress, SecondServerAdress };
+            File.WriteAllLines(SysConfigFileName, FileValue, Encoding.UTF8);
             return true;
         }
 
-        public static String UsrConfigFile = DataFileSavePath + @"\" + FilePathUtils.LOCAL_CFG + FilePathUtils.LOCAL_CFG_USR + FilePathUtils.LOCAL_FILE_TYPE;
+        public static String UsrConfigFileName { get; set; }
         /// <summary>
         /// 加载用户配置文件
         /// </summary>
@@ -137,7 +175,9 @@ namespace TheSeed
         public static Boolean LoadUsrConfig()
         {
             DataSet.ConfigDataTable UserOrders = new DataSet.ConfigDataTable();
-            UserOrders.ReadXml(UsrConfigFile);
+            if (File.Exists(UsrConfigFileName) == false)
+                return false;
+            UserOrders.ReadXml(UsrConfigFileName);
 
             MyOrderResource = new DataSet.MyOrderResourceDataTable();
             MyOrderSeries = new DataSet.MyOrderSeriesDataTable();
@@ -168,7 +208,7 @@ namespace TheSeed
         /// <returns></returns>
         public static Boolean SaveUsrConfig(DataSet.ConfigDataTable UserOrders)
         {
-            UserOrders.WriteXml(UsrConfigFile);
+            UserOrders.WriteXml(UsrConfigFileName);
             return true;
         }
     }

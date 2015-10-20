@@ -20,6 +20,7 @@ namespace TheSeed
         public static DataSet.TypeDataTable Types { get; set; }
         public static String TypeFile = ConfigUtils.DataFileSavePath + @"\" + FilePathUtils.LOCAL_CFG + FilePathUtils.LOCAL_CFG_SYS + FilePathUtils.LOCAL_TYPE + FilePathUtils.LOCAL_FILE_TYPE;
         private static Dictionary<String,String> DownloadOrderResouces { get; set; }
+
         /// <summary>
         /// 保存所有分类信息到文件
         /// </summary>
@@ -29,6 +30,7 @@ namespace TheSeed
             Types.WriteXml(TypeFile);
             return true;
         }
+
         /// <summary>
         /// 从文件里面读取所有分类信息
         /// </summary>
@@ -39,6 +41,7 @@ namespace TheSeed
             Types.ReadXml(TypeFile);
             return true;
         }
+
         /// <summary>
         /// 从云端加载全部属性信息
         /// </summary>
@@ -47,10 +50,20 @@ namespace TheSeed
         {
             //云端获取所有分类信息
             List<String> items = ConfigUtils.ServerProtocol.ListType("DateTime");
-            File.WriteAllLines(FilePathUtils.LOCAL_TEMP + FilePathUtils.LOCAL_FILE_TYPE, items, Encoding.UTF8);
-            Types = new DataSet.TypeDataTable();
-            //加载全部分类
-            Types.ReadXml(FilePathUtils.LOCAL_TEMP + FilePathUtils.LOCAL_FILE_TYPE);
+            DataSet.TypeDataTable TempType = null;
+            foreach (String item in items)
+            {
+                try
+                {
+                    File.WriteAllText(FilePathUtils.LOCAL_TEMP + FilePathUtils.LOCAL_FILE_TYPE, item, Encoding.UTF8);
+                    TempType = new DataSet.TypeDataTable();
+                    TempType.ReadXml(FilePathUtils.LOCAL_TEMP + FilePathUtils.LOCAL_FILE_TYPE);
+                    Types.Merge(TempType);
+                }
+                catch (Exception)
+                {
+                }
+            }
             return true;
         }
 
@@ -78,10 +91,7 @@ namespace TheSeed
             //加载全部分类
             DataSet.TypeDataTable TempTypes = new DataSet.TypeDataTable();
             TempTypes.ReadXml(FilePathUtils.LOCAL_TYPE + FilePathUtils.LOCAL_TEMP + FilePathUtils.LOCAL_FILE_TYPE);
-            foreach (DataSet.TypeRow item in TempTypes)
-            {
-                Types.AddTypeRow(item);
-            }
+            Types.Merge(TempTypes);
             return true;
         }
 
@@ -95,7 +105,27 @@ namespace TheSeed
             DataSet.TypeRow[] NewType = (DataSet.TypeRow[])Types.Select("CreatDateTime = MAX(CreatDateTime)");
             //读取最新数据
             List<String> items = ConfigUtils.ServerProtocol.ListType(NewType[0].CreatDateTime);
+            DataSet.TypeDataTable TempType = null;
+            foreach (String item in items)
+            {
+                try
+                {
+                    File.WriteAllText(FilePathUtils.LOCAL_TEMP + FilePathUtils.LOCAL_FILE_TYPE, item, Encoding.UTF8);
+                    TempType = new DataSet.TypeDataTable();
+                    TempType.ReadXml(FilePathUtils.LOCAL_TEMP + FilePathUtils.LOCAL_FILE_TYPE);
+                    Types.Merge(TempType);
+                }
+                catch (Exception)
+                {
+                }
+            }
+
+
             File.WriteAllLines(FilePathUtils.LOCAL_TYPE + FilePathUtils.LOCAL_TEMP + FilePathUtils.LOCAL_FILE_TYPE, items, Encoding.UTF8);
+
+
+
+
 
             return true;
         }
@@ -117,6 +147,9 @@ namespace TheSeed
                 if (LastPath <= Int32.Parse(NowPath))
                     LastPath = Int32.Parse(NowPath);
             }
+
+            if (DownloadOrderResouces == null)
+                DownloadOrderResouces = new Dictionary<string, string>();
 
             //获取云端资源数据更新日期（文件列表）
             List<String> CloundPaths = ConfigUtils.ServerProtocol.ListResourcePath(LastPath.ToString());
@@ -153,8 +186,6 @@ namespace TheSeed
                     {
                         String FileResource = FilePathResource + @"\" + ResouseItem;
                         File.Create(FileResource);
-                        if (DownloadOrderResouces == null)
-                            DownloadOrderResouces = new Dictionary<string, string>();
 
                         //保存到更新清单
                         NowResouseItem = NowResouseItems.NewConfigRow();

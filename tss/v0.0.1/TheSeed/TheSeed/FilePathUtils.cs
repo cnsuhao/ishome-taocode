@@ -20,7 +20,7 @@ namespace TheSeed
         /// <summary>
         /// 临时
         /// </summary>
-        public static String LOCAL_TEMP = "tmp";
+        public static String LOCAL_TEMP = @"D:\tmp";
 
         /// <summary>
         /// 文件类型
@@ -36,13 +36,17 @@ namespace TheSeed
         /// </summary>
         public static string LOCAL_TYPE = "type";
         /// <summary>
+        /// 管理员
+        /// </summary>
+        public static String LOCAL_ADMIN_SYS = @"\admin";
+        /// <summary>
         /// 运行参数
         /// </summary>
-        public static String LOCAL_CFG_SYS = LOCAL_CFG + @"\sys";
+        public static String LOCAL_CFG_SYS = @"\sys";
         /// <summary>
         /// 个人参数
         /// </summary>
-        public static String LOCAL_CFG_USR = LOCAL_CFG + @"\usr";
+        public static String LOCAL_CFG_USR = @"\usr";
         /// <summary>
         /// 资源路径
         /// </summary>

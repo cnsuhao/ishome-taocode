@@ -80,6 +80,7 @@
             this.ViewBTN.TabIndex = 3;
             this.ViewBTN.Text = "查看";
             this.ViewBTN.UseVisualStyleBackColor = true;
+            this.ViewBTN.Click += new System.EventHandler(this.ViewBTN_Click);
             // 
             // TypeCreat
             // 

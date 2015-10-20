@@ -175,7 +175,7 @@ namespace TheSeed
     {
         public bool ConnectSetver()
         {
-            throw new NotImplementedException();
+            return false;
         }
 
         public bool CreatResource(string ResourceStruct, string ResourcePath)
@@ -225,12 +225,13 @@ namespace TheSeed
 
         public List<string> ListResourcePath(string DateTime)
         {
-            throw new NotImplementedException();
+            return new
+                 List<string>();
         }
 
         public List<string> ListResourceTop10()
         {
-            throw new NotImplementedException();
+            return new List<string>();
         }
 
         public Dictionary<string, string> ListSeries(string DateTime)
@@ -250,7 +251,8 @@ namespace TheSeed
 
         public List<string> ListType(string DateTime)
         {
-            throw new NotImplementedException();
+            return new List<string>();
+                 
         }
 
         public string ReadResource(string ResourceID, string ResourcePath)

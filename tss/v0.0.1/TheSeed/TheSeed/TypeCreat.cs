@@ -43,23 +43,32 @@ namespace TheSeed
             TypeUtils.LoadAllTypes();
             //查看是否存在
             DataSet.TypeRow tr = TypeUtils.Types.FindByNR(NR.Text);
-            if (tr == null)
-                MessageBox.Show("该分类不存在");
+            if (tr == null || tr.IsNull("NR") == true)
+                return true;
             else
-                return false;
-            return true;
+                MessageBox.Show("该分类已经存在！");
+            return false;
         }
         private void Save_Click(object sender, EventArgs e)
         {
             if (TypeCheck() == true)
             {
                 DataSet.TypeRow tr = TypeUtils.Types.NewTypeRow();
+                tr.NR = NR.Text;
+                tr.BM = Guid.NewGuid().ToString("N");
+                tr.CreatDateTime = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+
                 //发行到服务中心
-               if( TypeUtils.CreatNewType(tr))
+               if ( TypeUtils.CreatNewType(tr))
                     MessageBox.Show("创建成功");
                else
                     MessageBox.Show("创建失败，请稍后再试。");
             }
+        }
+
+        private void ViewBTN_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
