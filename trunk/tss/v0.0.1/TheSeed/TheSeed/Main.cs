@@ -62,7 +62,7 @@ namespace TheSeed
 
         private void LoadNewBTN_Click(object sender, EventArgs e)
         {
-            LoadNew l = new LoadNew();
+            Loading l = new Loading();
             l.ShowDialog(this);
         }
 

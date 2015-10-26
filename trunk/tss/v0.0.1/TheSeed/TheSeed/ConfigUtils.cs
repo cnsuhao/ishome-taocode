@@ -81,6 +81,17 @@ namespace TheSeed
             return true;
         }
 
+        /// <summary>
+        /// 保存默认配置文件
+        /// </summary>
+        /// <returns></returns>
+        public static Boolean SaveConfigFile()
+        {
+            //创建配置文件
+            File.WriteAllText(ConfigFile, DataFileSavePath, Encoding.UTF8);
+            return true;
+        }
+
         //config/conf.dat
         /// <summary>
         /// 加载系统配置文件
@@ -119,19 +130,19 @@ namespace TheSeed
             return true;
         }
 
-        public static Boolean LoadServerListConfig()
-        {
-            return true;
-        }
-
         /// <summary>
-        /// 保存默认配置文件
+        /// 获得服务器清单列表
         /// </summary>
         /// <returns></returns>
-        public static Boolean SaveConfigFile()
+        public static Boolean LoadServerListConfig()
         {
-            //创建配置文件
-            File.WriteAllText(ConfigFile, DataFileSavePath, Encoding.UTF8);
+            #region 获得网络数据
+
+            #endregion
+
+            #region 保存到本地
+
+            #endregion
             return true;
         }
 

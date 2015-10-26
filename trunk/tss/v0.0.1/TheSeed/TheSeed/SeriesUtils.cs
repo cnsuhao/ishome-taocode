@@ -24,6 +24,13 @@ namespace TheSeed
             //按照年/月/日.XML格式保存（文件内保存左右资源信息列表）
             //按天保存更新剧集清单
             //根据本地清单获取最新发布（7天内）
+            #region 获得网络数据
+
+            #endregion
+
+            #region 保存到本地
+
+            #endregion
             return true;
         }
         /// <summary>
