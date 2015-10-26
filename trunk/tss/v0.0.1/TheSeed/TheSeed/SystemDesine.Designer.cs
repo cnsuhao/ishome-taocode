@@ -61,16 +61,22 @@
             this.button24 = new System.Windows.Forms.Button();
             this.button23 = new System.Windows.Forms.Button();
             this.button22 = new System.Windows.Forms.Button();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.button27 = new System.Windows.Forms.Button();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.button28 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
+            this.groupBox6.SuspendLayout();
+            this.groupBox7.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(34, 70);
+            this.button1.Location = new System.Drawing.Point(34, 48);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 0;
@@ -79,7 +85,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(86, 113);
+            this.button2.Location = new System.Drawing.Point(86, 75);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 1;
@@ -88,7 +94,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(216, 157);
+            this.button3.Location = new System.Drawing.Point(133, 104);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 1;
@@ -102,9 +108,9 @@
             this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.button7);
             this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Location = new System.Drawing.Point(22, 12);
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(297, 198);
+            this.groupBox1.Size = new System.Drawing.Size(303, 192);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "常规发布";
@@ -114,7 +120,7 @@
             this.checkBox2.AutoSize = true;
             this.checkBox2.Checked = true;
             this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox2.Location = new System.Drawing.Point(175, 74);
+            this.checkBox2.Location = new System.Drawing.Point(175, 52);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(96, 16);
             this.checkBox2.TabIndex = 3;
@@ -136,9 +142,9 @@
             this.groupBox2.Controls.Add(this.button4);
             this.groupBox2.Controls.Add(this.button5);
             this.groupBox2.Controls.Add(this.button6);
-            this.groupBox2.Location = new System.Drawing.Point(337, 12);
+            this.groupBox2.Location = new System.Drawing.Point(321, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(297, 198);
+            this.groupBox2.Size = new System.Drawing.Size(303, 192);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "连载发布";
@@ -148,7 +154,7 @@
             this.checkBox1.AutoSize = true;
             this.checkBox1.Checked = true;
             this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Location = new System.Drawing.Point(181, 74);
+            this.checkBox1.Location = new System.Drawing.Point(187, 55);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(96, 16);
             this.checkBox1.TabIndex = 2;
@@ -157,7 +163,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(216, 157);
+            this.button4.Location = new System.Drawing.Point(106, 104);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 1;
@@ -166,7 +172,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(41, 70);
+            this.button5.Location = new System.Drawing.Point(41, 64);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 23);
             this.button5.TabIndex = 1;
@@ -195,7 +201,7 @@
             this.groupBox3.Controls.Add(this.button13);
             this.groupBox3.Controls.Add(this.button9);
             this.groupBox3.Controls.Add(this.button8);
-            this.groupBox3.Location = new System.Drawing.Point(22, 217);
+            this.groupBox3.Location = new System.Drawing.Point(12, 273);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(612, 235);
             this.groupBox3.TabIndex = 3;
@@ -306,7 +312,7 @@
             this.groupBox4.Controls.Add(this.button21);
             this.groupBox4.Controls.Add(this.button20);
             this.groupBox4.Controls.Add(this.button19);
-            this.groupBox4.Location = new System.Drawing.Point(22, 458);
+            this.groupBox4.Location = new System.Drawing.Point(12, 514);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(612, 57);
             this.groupBox4.TabIndex = 4;
@@ -337,7 +343,7 @@
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(75, 23);
             this.button19.TabIndex = 0;
-            this.button19.Text = "百度云";
+            this.button19.Text = "FTP/百度云";
             this.button19.UseVisualStyleBackColor = true;
             // 
             // groupBox5
@@ -347,7 +353,7 @@
             this.groupBox5.Controls.Add(this.button24);
             this.groupBox5.Controls.Add(this.button23);
             this.groupBox5.Controls.Add(this.button22);
-            this.groupBox5.Location = new System.Drawing.Point(22, 521);
+            this.groupBox5.Location = new System.Drawing.Point(12, 577);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(612, 152);
             this.groupBox5.TabIndex = 5;
@@ -399,11 +405,51 @@
             this.button22.Text = "获取我的关注";
             this.button22.UseVisualStyleBackColor = true;
             // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.button27);
+            this.groupBox6.Location = new System.Drawing.Point(12, 210);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(303, 57);
+            this.groupBox6.TabIndex = 6;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "本地文件保存";
+            // 
+            // button27
+            // 
+            this.button27.Location = new System.Drawing.Point(34, 21);
+            this.button27.Name = "button27";
+            this.button27.Size = new System.Drawing.Size(225, 23);
+            this.button27.TabIndex = 0;
+            this.button27.Text = "按日分割，单一文件";
+            this.button27.UseVisualStyleBackColor = true;
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.button28);
+            this.groupBox7.Location = new System.Drawing.Point(321, 210);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(303, 57);
+            this.groupBox7.TabIndex = 6;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "云端文件保存";
+            // 
+            // button28
+            // 
+            this.button28.Location = new System.Drawing.Point(40, 21);
+            this.button28.Name = "button28";
+            this.button28.Size = new System.Drawing.Size(225, 23);
+            this.button28.TabIndex = 0;
+            this.button28.Text = "按日分类，多个文件";
+            this.button28.UseVisualStyleBackColor = true;
+            // 
             // SystemDesine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(660, 685);
+            this.ClientSize = new System.Drawing.Size(636, 741);
+            this.Controls.Add(this.groupBox7);
+            this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
@@ -420,6 +466,8 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox7.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -459,5 +507,9 @@
         private System.Windows.Forms.Button button23;
         private System.Windows.Forms.Button button22;
         private System.Windows.Forms.Button button26;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.Button button27;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.Button button28;
     }
 }

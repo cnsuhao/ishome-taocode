@@ -20,6 +20,35 @@ namespace TheSeed
         public static DataSet.TypeDataTable Types { get; set; }
         public static String TypeFile = ConfigUtils.DataFileSavePath + @"\" + FilePathUtils.LOCAL_CFG + FilePathUtils.LOCAL_CFG_SYS + FilePathUtils.LOCAL_TYPE + FilePathUtils.LOCAL_FILE_TYPE;
         private static Dictionary<String,String> DownloadOrderResouces { get; set; }
+        /// <summary>
+        /// 从云端加载全部属性信息
+        /// </summary>
+        /// <returns></returns>
+        public static Boolean LoadAllTypes()
+        {
+            //初始化
+            Types = new DataSet.TypeDataTable();
+            DataSet.TypeDataTable TempType = null;//临时变量
+            //云端获取所有分类信息
+            List<String> items = ConfigUtils.ServerProtocol.ListType("");
+            //数据整理
+            foreach (String item in items)
+            {
+                try
+                {
+                    //保存到临时文件
+                    File.WriteAllText(FilePathUtils.LOCAL_TEMP + FilePathUtils.LOCAL_FILE_TYPE, item, Encoding.UTF8);
+                    TempType = new DataSet.TypeDataTable();
+                    TempType.ReadXml(FilePathUtils.LOCAL_TEMP + FilePathUtils.LOCAL_FILE_TYPE);
+                    //保存到本地
+                    Types.Merge(TempType);
+                }
+                catch (Exception)
+                {
+                }
+            }
+            return true;
+        }
 
         /// <summary>
         /// 保存所有分类信息到文件
@@ -40,32 +69,7 @@ namespace TheSeed
             Types = new DataSet.TypeDataTable();
             Types.ReadXml(TypeFile);
             return true;
-        }
-
-        /// <summary>
-        /// 从云端加载全部属性信息
-        /// </summary>
-        /// <returns></returns>
-        public static Boolean LoadAllTypes()
-        {
-            //云端获取所有分类信息
-            List<String> items = ConfigUtils.ServerProtocol.ListType("DateTime");
-            DataSet.TypeDataTable TempType = null;
-            foreach (String item in items)
-            {
-                try
-                {
-                    File.WriteAllText(FilePathUtils.LOCAL_TEMP + FilePathUtils.LOCAL_FILE_TYPE, item, Encoding.UTF8);
-                    TempType = new DataSet.TypeDataTable();
-                    TempType.ReadXml(FilePathUtils.LOCAL_TEMP + FilePathUtils.LOCAL_FILE_TYPE);
-                    Types.Merge(TempType);
-                }
-                catch (Exception)
-                {
-                }
-            }
-            return true;
-        }
+        }                
 
         /// <summary>
         /// 创建新的分类到云端
@@ -86,17 +90,8 @@ namespace TheSeed
             return true;
         }
 
-        public static Boolean SaveNewTypes()
-        {
-            //加载全部分类
-            DataSet.TypeDataTable TempTypes = new DataSet.TypeDataTable();
-            TempTypes.ReadXml(FilePathUtils.LOCAL_TYPE + FilePathUtils.LOCAL_TEMP + FilePathUtils.LOCAL_FILE_TYPE);
-            Types.Merge(TempTypes);
-            return true;
-        }
-
         /// <summary>
-        /// 获取最新分类信息
+        /// 从云端获取最新分类信息
         /// </summary>
         /// <returns></returns>
         public static Boolean LoadNewTypes()
@@ -119,16 +114,14 @@ namespace TheSeed
                 {
                 }
             }
-
-
-            File.WriteAllLines(FilePathUtils.LOCAL_TYPE + FilePathUtils.LOCAL_TEMP + FilePathUtils.LOCAL_FILE_TYPE, items, Encoding.UTF8);
-
-
-
-
-
+            //本地保存
+            SaveAllTypes();
             return true;
         }
+
+
+
+
 
         /// <summary>
         /// 加载我订阅的分类资源

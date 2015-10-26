@@ -15,10 +15,15 @@ namespace TheSeed
     interface TSSProtocol
     {
         /// <summary>
-        /// 连接云服务器
+        /// 连接主服务器
         /// </summary>
         /// <returns></returns>
-        Boolean ConnectSetver();
+        Boolean ConnectServer();        
+        /// <summary>
+        /// 获取资源服务器清单
+        /// </summary>
+        /// <returns></returns>
+        List<String> ListServer();
 
         #region 分类
         /// <summary>
@@ -173,7 +178,7 @@ namespace TheSeed
     /// </summary>
     class FTPCloundProtocolUtils : TSSProtocol
     {
-        public bool ConnectSetver()
+        public bool ConnectServer()
         {
             return false;
         }
@@ -245,6 +250,11 @@ namespace TheSeed
         }
 
         public Dictionary<string, string> ListSeriesResource(string SeriesResourceID, string DateTime)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<string> ListServer()
         {
             throw new NotImplementedException();
         }
