@@ -52,7 +52,7 @@ namespace TheSeed
         /// <returns></returns>
         public static Boolean LoadResourcesTop10()
         {
-            //获取网络通信
+            #region 获得网络数据
             List<String> items = ConfigUtils.ServerProtocol.ListResourceTop10();
             ResourceTop10 = new DataSet.ResourceDataTable();
             DataSet.ResourceDataTable TempResource = null;
@@ -69,8 +69,10 @@ namespace TheSeed
                 {
                 }
             }
-            
-            return true;
+            #endregion
+
+            //保存到本地
+            return SaveResourcesTop10();
         }
 
         /// <summary>
@@ -81,7 +83,13 @@ namespace TheSeed
         public static Boolean LoadAllResources(String DateTime)
         {
             //按照年/月/日.XML格式保存（文件内保存左右资源信息列表）
+            #region 获得网络数据
 
+            #endregion
+
+            #region 保存到本地
+
+            #endregion
 
 
             return true;

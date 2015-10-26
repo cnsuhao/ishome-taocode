@@ -85,12 +85,6 @@
     </Compile>
     <Compile Include="DataSourceUtils.cs" />
     <Compile Include="FilePathUtils.cs" />
-    <Compile Include="LoadNew.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="LoadNew.Designer.cs">
-      <DependentUpon>LoadNew.cs</DependentUpon>
-    </Compile>
     <Compile Include="SeriesCreat.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -158,9 +152,6 @@
     <Compile Include="TypeUtils.cs" />
     <EmbeddedResource Include="ConfigSet.resx">
       <DependentUpon>ConfigSet.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="LoadNew.resx">
-      <DependentUpon>LoadNew.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Loading.resx">
       <DependentUpon>Loading.cs</DependentUpon>

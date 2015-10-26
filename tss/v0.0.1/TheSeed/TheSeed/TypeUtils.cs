@@ -26,6 +26,7 @@ namespace TheSeed
         /// <returns></returns>
         public static Boolean LoadAllTypes()
         {
+            #region 获得网络数据
             //初始化
             Types = new DataSet.TypeDataTable();
             DataSet.TypeDataTable TempType = null;//临时变量
@@ -47,7 +48,10 @@ namespace TheSeed
                 {
                 }
             }
-            return true;
+            #endregion
+
+            //保存到本地
+            return SaveAllTypes();
         }
 
         /// <summary>
@@ -114,9 +118,8 @@ namespace TheSeed
                 {
                 }
             }
-            //本地保存
-            SaveAllTypes();
-            return true;
+            //本地保存            
+            return SaveAllTypes();
         }
 
 
@@ -202,7 +205,7 @@ namespace TheSeed
                 NowResouseItems.WriteXml(ItemsFilePathForResouseList);
             }
 
-            return true;
+            return SaveMyOrderTypes();
         }
         // foreach (KeyValuePair<String, String> Resouses in CloundPathItems)
         /// <summary>
