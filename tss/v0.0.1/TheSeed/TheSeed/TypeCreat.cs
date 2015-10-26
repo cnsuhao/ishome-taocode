@@ -32,6 +32,8 @@ namespace TheSeed
         {
             //获取分类列表
             TypeUtils.LoadAllTypes();
+            //保存分类列表
+            TypeUtils.SaveAllTypes();
             //查看是否存在
             DataSet.TypeRow tr = TypeUtils.Types.FindByNR(NR.Text);
             if (tr == null)
@@ -41,6 +43,8 @@ namespace TheSeed
         {
             //获取分类列表
             TypeUtils.LoadAllTypes();
+            //保存分类列表
+            TypeUtils.SaveAllTypes();
             //查看是否存在
             DataSet.TypeRow tr = TypeUtils.Types.FindByNR(NR.Text);
             if (tr == null || tr.IsNull("NR") == true)

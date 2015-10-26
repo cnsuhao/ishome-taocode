@@ -46,6 +46,10 @@ namespace TheSeed
             return true;
         }
 
+        /// <summary>
+        /// 更新热播（最新Top10）
+        /// </summary>
+        /// <returns></returns>
         public static Boolean LoadResourcesTop10()
         {
             //获取网络通信
@@ -66,6 +70,20 @@ namespace TheSeed
                 }
             }
             
+            return true;
+        }
+
+        /// <summary>
+        /// 获得每日资源列表（全体）
+        /// </summary>
+        /// <param name="DateTime"></param>
+        /// <returns></returns>
+        public static Boolean LoadAllResources(String DateTime)
+        {
+            //按照年/月/日.XML格式保存（文件内保存左右资源信息列表）
+
+
+
             return true;
         }
     }

@@ -105,7 +105,7 @@ namespace TheSeed
 
             //加载网络连接
             ServerProtocol = new FTPCloundProtocolUtils();
-            NetConnect = ServerProtocol.ConnectSetver();
+            NetConnect = ServerProtocol.ConnectServer();
 
             SysConfigFileName = DataFileSavePath + @"\" + FilePathUtils.LOCAL_CFG + FilePathUtils.LOCAL_CFG_SYS + FilePathUtils.LOCAL_FILE_TYPE;
             UsrConfigFileName = DataFileSavePath + @"\" + FilePathUtils.LOCAL_CFG + FilePathUtils.LOCAL_CFG_USR + FilePathUtils.LOCAL_FILE_TYPE;
@@ -116,6 +116,11 @@ namespace TheSeed
                 return false;
             }
 
+            return true;
+        }
+
+        public static Boolean LoadServerListConfig()
+        {
             return true;
         }
 
