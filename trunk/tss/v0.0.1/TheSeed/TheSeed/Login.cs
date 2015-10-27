@@ -83,6 +83,12 @@ namespace TheSeed
 
         public String UserIDConfig { get; set; }
         public String PasswordConfig { get; set; }
-        public String AdminConfigFile { get; set; }        
+        public String AdminConfigFile { get; set; }
+
+        private void SystemDesineBTN_Click(object sender, EventArgs e)
+        {
+            SystemDesine s = new SystemDesine();
+            s.ShowDialog(this);
+        }
     }
 }

@@ -70,6 +70,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataUtils.cs" />
     <Compile Include="ProtocolUtils.cs" />
     <Compile Include="ConfigSet.cs">
       <SubType>Form</SubType>

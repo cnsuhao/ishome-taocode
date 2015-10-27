@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -65,6 +64,10 @@
             this.button27 = new System.Windows.Forms.Button();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.button28 = new System.Windows.Forms.Button();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.button31 = new System.Windows.Forms.Button();
+            this.button30 = new System.Windows.Forms.Button();
+            this.button29 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -72,20 +75,12 @@
             this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox7.SuspendLayout();
+            this.groupBox8.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(34, 48);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "月份";
-            this.button1.UseVisualStyleBackColor = true;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(86, 75);
+            this.button2.Location = new System.Drawing.Point(59, 61);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 1;
@@ -94,11 +89,11 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(133, 104);
+            this.button3.Location = new System.Drawing.Point(86, 104);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 1;
-            this.button3.Text = "资源";
+            this.button3.Text = "资源文件";
             this.button3.UseVisualStyleBackColor = true;
             // 
             // groupBox1
@@ -107,10 +102,9 @@
             this.groupBox1.Controls.Add(this.button3);
             this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.button7);
-            this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(303, 192);
+            this.groupBox1.Size = new System.Drawing.Size(303, 146);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "常规发布";
@@ -120,7 +114,7 @@
             this.checkBox2.AutoSize = true;
             this.checkBox2.Checked = true;
             this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox2.Location = new System.Drawing.Point(175, 52);
+            this.checkBox2.Location = new System.Drawing.Point(175, 65);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(96, 16);
             this.checkBox2.TabIndex = 3;
@@ -144,7 +138,7 @@
             this.groupBox2.Controls.Add(this.button6);
             this.groupBox2.Location = new System.Drawing.Point(321, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(303, 192);
+            this.groupBox2.Size = new System.Drawing.Size(303, 146);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "连载发布";
@@ -154,7 +148,7 @@
             this.checkBox1.AutoSize = true;
             this.checkBox1.Checked = true;
             this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Location = new System.Drawing.Point(187, 55);
+            this.checkBox1.Location = new System.Drawing.Point(188, 68);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(96, 16);
             this.checkBox1.TabIndex = 2;
@@ -167,16 +161,16 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 1;
-            this.button4.Text = "名称";
+            this.button4.Text = "季集文件";
             this.button4.UseVisualStyleBackColor = true;
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(41, 64);
+            this.button5.Location = new System.Drawing.Point(51, 61);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 23);
             this.button5.TabIndex = 1;
-            this.button5.Text = "字母/日";
+            this.button5.Text = "剧集";
             this.button5.UseVisualStyleBackColor = true;
             // 
             // button6
@@ -201,7 +195,7 @@
             this.groupBox3.Controls.Add(this.button13);
             this.groupBox3.Controls.Add(this.button9);
             this.groupBox3.Controls.Add(this.button8);
-            this.groupBox3.Location = new System.Drawing.Point(12, 273);
+            this.groupBox3.Location = new System.Drawing.Point(12, 222);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(612, 235);
             this.groupBox3.TabIndex = 3;
@@ -312,12 +306,12 @@
             this.groupBox4.Controls.Add(this.button21);
             this.groupBox4.Controls.Add(this.button20);
             this.groupBox4.Controls.Add(this.button19);
-            this.groupBox4.Location = new System.Drawing.Point(12, 514);
+            this.groupBox4.Location = new System.Drawing.Point(12, 463);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(612, 57);
             this.groupBox4.TabIndex = 4;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "协议算法";
+            this.groupBox4.Text = "TSS资源发布算法";
             // 
             // button21
             // 
@@ -408,7 +402,7 @@
             // groupBox6
             // 
             this.groupBox6.Controls.Add(this.button27);
-            this.groupBox6.Location = new System.Drawing.Point(12, 210);
+            this.groupBox6.Location = new System.Drawing.Point(12, 159);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(303, 57);
             this.groupBox6.TabIndex = 6;
@@ -417,17 +411,17 @@
             // 
             // button27
             // 
-            this.button27.Location = new System.Drawing.Point(34, 21);
+            this.button27.Location = new System.Drawing.Point(6, 21);
             this.button27.Name = "button27";
-            this.button27.Size = new System.Drawing.Size(225, 23);
+            this.button27.Size = new System.Drawing.Size(291, 23);
             this.button27.TabIndex = 0;
-            this.button27.Text = "按日分割，单一文件";
+            this.button27.Text = "按资源剧集目录，按年目录，日文件保存";
             this.button27.UseVisualStyleBackColor = true;
             // 
             // groupBox7
             // 
             this.groupBox7.Controls.Add(this.button28);
-            this.groupBox7.Location = new System.Drawing.Point(321, 210);
+            this.groupBox7.Location = new System.Drawing.Point(321, 159);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(303, 57);
             this.groupBox7.TabIndex = 6;
@@ -436,18 +430,58 @@
             // 
             // button28
             // 
-            this.button28.Location = new System.Drawing.Point(40, 21);
+            this.button28.Location = new System.Drawing.Point(9, 21);
             this.button28.Name = "button28";
-            this.button28.Size = new System.Drawing.Size(225, 23);
+            this.button28.Size = new System.Drawing.Size(286, 23);
             this.button28.TabIndex = 0;
-            this.button28.Text = "按日分类，多个文件";
+            this.button28.Text = "按资源剧集目录，按年日目录，多个文件";
             this.button28.UseVisualStyleBackColor = true;
+            // 
+            // groupBox8
+            // 
+            this.groupBox8.Controls.Add(this.button31);
+            this.groupBox8.Controls.Add(this.button30);
+            this.groupBox8.Controls.Add(this.button29);
+            this.groupBox8.Location = new System.Drawing.Point(12, 527);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(612, 44);
+            this.groupBox8.TabIndex = 8;
+            this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "视频文件存储";
+            // 
+            // button31
+            // 
+            this.button31.Location = new System.Drawing.Point(429, 15);
+            this.button31.Name = "button31";
+            this.button31.Size = new System.Drawing.Size(75, 23);
+            this.button31.TabIndex = 2;
+            this.button31.Text = "流媒体播放";
+            this.button31.UseVisualStyleBackColor = true;
+            // 
+            // button30
+            // 
+            this.button30.Location = new System.Drawing.Point(320, 15);
+            this.button30.Name = "button30";
+            this.button30.Size = new System.Drawing.Size(90, 23);
+            this.button30.TabIndex = 1;
+            this.button30.Text = "TSS视频分享协议";
+            this.button30.UseVisualStyleBackColor = true;
+            // 
+            // button29
+            // 
+            this.button29.Location = new System.Drawing.Point(86, 15);
+            this.button29.Name = "button29";
+            this.button29.Size = new System.Drawing.Size(217, 23);
+            this.button29.TabIndex = 0;
+            this.button29.Text = "碎片化切割（5M、10M、15M、20M）";
+            this.button29.UseVisualStyleBackColor = true;
             // 
             // SystemDesine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(636, 741);
+            this.Controls.Add(this.groupBox8);
             this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.groupBox5);
@@ -455,9 +489,11 @@
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "SystemDesine";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "系统设计";
+            this.Text = "The Seed Share 系统设计 0.1";
             this.Load += new System.EventHandler(this.SystemDesine_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -468,13 +504,12 @@
             this.groupBox5.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
             this.groupBox7.ResumeLayout(false);
+            this.groupBox8.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -511,5 +546,9 @@
         private System.Windows.Forms.Button button27;
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.Button button28;
+        private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.Button button31;
+        private System.Windows.Forms.Button button30;
+        private System.Windows.Forms.Button button29;
     }
 }

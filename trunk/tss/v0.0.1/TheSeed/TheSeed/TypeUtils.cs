@@ -29,25 +29,8 @@ namespace TheSeed
             #region 获得网络数据
             //初始化
             Types = new DataSet.TypeDataTable();
-            DataSet.TypeDataTable TempType = null;//临时变量
             //云端获取所有分类信息
-            List<String> items = ConfigUtils.ServerProtocol.ListType("");
-            //数据整理
-            foreach (String item in items)
-            {
-                try
-                {
-                    //保存到临时文件
-                    File.WriteAllText(FilePathUtils.LOCAL_TEMP + FilePathUtils.LOCAL_FILE_TYPE, item, Encoding.UTF8);
-                    TempType = new DataSet.TypeDataTable();
-                    TempType.ReadXml(FilePathUtils.LOCAL_TEMP + FilePathUtils.LOCAL_FILE_TYPE);
-                    //保存到本地
-                    Types.Merge(TempType);
-                }
-                catch (Exception)
-                {
-                }
-            }
+            DataUtils.Arrange(Types, ConfigUtils.ServerProtocol.ListType(""));
             #endregion
 
             //保存到本地
@@ -103,28 +86,10 @@ namespace TheSeed
             //确定时间点
             DataSet.TypeRow[] NewType = (DataSet.TypeRow[])Types.Select("CreatDateTime = MAX(CreatDateTime)");
             //读取最新数据
-            List<String> items = ConfigUtils.ServerProtocol.ListType(NewType[0].CreatDateTime);
-            DataSet.TypeDataTable TempType = null;
-            foreach (String item in items)
-            {
-                try
-                {
-                    File.WriteAllText(FilePathUtils.LOCAL_TEMP + FilePathUtils.LOCAL_FILE_TYPE, item, Encoding.UTF8);
-                    TempType = new DataSet.TypeDataTable();
-                    TempType.ReadXml(FilePathUtils.LOCAL_TEMP + FilePathUtils.LOCAL_FILE_TYPE);
-                    Types.Merge(TempType);
-                }
-                catch (Exception)
-                {
-                }
-            }
+            DataUtils.Arrange(Types, ConfigUtils.ServerProtocol.ListType(NewType[0].CreatDateTime));
             //本地保存            
             return SaveAllTypes();
         }
-
-
-
-
 
         /// <summary>
         /// 加载我订阅的分类资源

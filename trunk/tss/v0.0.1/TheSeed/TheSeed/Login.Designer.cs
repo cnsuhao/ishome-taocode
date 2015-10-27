@@ -32,6 +32,7 @@
             this.Password = new System.Windows.Forms.TextBox();
             this.LoginBTN = new System.Windows.Forms.Button();
             this.ConfigBTN = new System.Windows.Forms.Button();
+            this.SystemDesineBTN = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // UserID
@@ -70,11 +71,22 @@
             this.ConfigBTN.UseVisualStyleBackColor = true;
             this.ConfigBTN.Click += new System.EventHandler(this.ConfigBTN_Click);
             // 
+            // SystemDesineBTN
+            // 
+            this.SystemDesineBTN.Location = new System.Drawing.Point(41, 216);
+            this.SystemDesineBTN.Name = "SystemDesineBTN";
+            this.SystemDesineBTN.Size = new System.Drawing.Size(75, 23);
+            this.SystemDesineBTN.TabIndex = 4;
+            this.SystemDesineBTN.Text = "系统设计";
+            this.SystemDesineBTN.UseVisualStyleBackColor = true;
+            this.SystemDesineBTN.Click += new System.EventHandler(this.SystemDesineBTN_Click);
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(275, 261);
+            this.Controls.Add(this.SystemDesineBTN);
             this.Controls.Add(this.ConfigBTN);
             this.Controls.Add(this.LoginBTN);
             this.Controls.Add(this.Password);
@@ -96,5 +108,6 @@
         private System.Windows.Forms.TextBox Password;
         private System.Windows.Forms.Button LoginBTN;
         private System.Windows.Forms.Button ConfigBTN;
+        private System.Windows.Forms.Button SystemDesineBTN;
     }
 }
