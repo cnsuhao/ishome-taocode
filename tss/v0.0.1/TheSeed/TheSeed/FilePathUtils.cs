@@ -43,6 +43,11 @@ namespace TheSeed
         /// 运行参数
         /// </summary>
         public static String LOCAL_CFG_SYS = @"\sys";
+        
+        /// <summary>
+        /// 运行参数
+        /// </summary>
+        public static String LOCAL_CFG_SER = @"\ser";
         /// <summary>
         /// 个人参数
         /// </summary>

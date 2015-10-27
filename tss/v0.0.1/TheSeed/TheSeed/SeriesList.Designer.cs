@@ -133,6 +133,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SeriesList";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "剧集一览";
             this.Load += new System.EventHandler(this.SeriesList_Load);
             ((System.ComponentModel.ISupportInitialize)(this.SeriesLists)).EndInit();

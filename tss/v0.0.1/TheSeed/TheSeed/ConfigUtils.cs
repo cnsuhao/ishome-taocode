@@ -49,9 +49,12 @@ namespace TheSeed
 
         #region 用户个人参数
         /// <summary>
-        /// 我的关注<MyOrderResource><MyOrderSeries>
+        /// 我的关注<MyOrderResource>
         /// </summary>
         public static DataSet.MyOrderResourceDataTable MyOrderResource { get; set; }
+        /// <summary>
+        /// 我的订阅<MyOrderSeries>
+        /// </summary>
         public static DataSet.MyOrderSeriesDataTable MyOrderSeries { get; set; }
         #endregion
         
@@ -120,6 +123,8 @@ namespace TheSeed
 
             SysConfigFileName = DataFileSavePath + @"\" + FilePathUtils.LOCAL_CFG + FilePathUtils.LOCAL_CFG_SYS + FilePathUtils.LOCAL_FILE_TYPE;
             UsrConfigFileName = DataFileSavePath + @"\" + FilePathUtils.LOCAL_CFG + FilePathUtils.LOCAL_CFG_USR + FilePathUtils.LOCAL_FILE_TYPE;
+            ServerConfigFileName = DataFileSavePath + @"\" + FilePathUtils.LOCAL_CFG + FilePathUtils.LOCAL_CFG_SER + FilePathUtils.LOCAL_FILE_TYPE;
+            ResourceTop10FileName = ConfigUtils.DataFileSavePath + @"\" + FilePathUtils.LOCAL_RES + FilePathUtils.LOCAL_RES_TOP + FilePathUtils.LOCAL_FILE_TYPE;
 
             //检查本地资源路径合法性
             if (Directory.Exists(ConfigUtils.DataFileSavePath) == false)
@@ -129,23 +134,23 @@ namespace TheSeed
 
             return true;
         }
-
+       
+        public static DataSet.ConfigDataTable ServerList { get; set; }
         /// <summary>
         /// 获得服务器清单列表
         /// </summary>
         /// <returns></returns>
         public static Boolean LoadServerListConfig()
         {
-            #region 获得网络数据
-
-            #endregion
-
-            #region 保存到本地
-
-            #endregion
+            ServerList = new DataSet.ConfigDataTable();
+            DataUtils.Arrange(ServerList, ServerProtocol.ListServer());
+            return SaveServerListConfig();
+        }
+        public static Boolean SaveServerListConfig()
+        {
+            ServerList.WriteXml(UsrConfigFileName);
             return true;
         }
-
         public static String SysConfigFileName { get; set; }
 
         /// <summary>
@@ -177,6 +182,8 @@ namespace TheSeed
         {
             SysConfigFileName = DataFileSavePath + @"\" + FilePathUtils.LOCAL_CFG + FilePathUtils.LOCAL_CFG_SYS + FilePathUtils.LOCAL_FILE_TYPE;
             UsrConfigFileName = DataFileSavePath + @"\" + FilePathUtils.LOCAL_CFG + FilePathUtils.LOCAL_CFG_USR + FilePathUtils.LOCAL_FILE_TYPE;
+            ServerConfigFileName = DataFileSavePath + @"\" + FilePathUtils.LOCAL_CFG + FilePathUtils.LOCAL_CFG_SER + FilePathUtils.LOCAL_FILE_TYPE;
+            ResourceTop10FileName = ConfigUtils.DataFileSavePath + @"\" + FilePathUtils.LOCAL_RES + FilePathUtils.LOCAL_RES_TOP + FilePathUtils.LOCAL_FILE_TYPE;
 
             String[] FileValue = { FirstServerAdress, SecondServerAdress };
             File.WriteAllLines(SysConfigFileName, FileValue, Encoding.UTF8);
@@ -184,6 +191,9 @@ namespace TheSeed
         }
 
         public static String UsrConfigFileName { get; set; }
+        public static String ServerConfigFileName { get; set; }
+        public static String ResourceTop10FileName { get; set; }
+
         /// <summary>
         /// 加载用户配置文件
         /// </summary>

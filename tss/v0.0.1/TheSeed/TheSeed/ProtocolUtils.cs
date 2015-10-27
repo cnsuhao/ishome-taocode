@@ -20,7 +20,7 @@ namespace TheSeed
         /// <returns></returns>
         Boolean ConnectServer();        
         /// <summary>
-        /// 获取资源服务器清单
+        /// 获取资源服务器清单(FTP、网盘)
         /// </summary>
         /// <returns></returns>
         List<String> ListServer();
@@ -54,7 +54,7 @@ namespace TheSeed
         /// <returns></returns>
         List<String> ListResourceTop10();
         /// <summary>
-        /// 资源目录一览
+        /// 资源目录一览<ListResource>
         /// </summary>
         /// <param name="DateTime"></param>
         /// <returns></returns>
