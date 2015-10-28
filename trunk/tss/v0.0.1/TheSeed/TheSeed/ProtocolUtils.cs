@@ -36,14 +36,23 @@ namespace TheSeed
         /// 创建分类
         /// </summary>
         /// <param name="TypeStruct"></param>
+        /// <param name="TypeFilePath"></param>
         /// <returns></returns>
-        Boolean CreatType(String TypeStruct);
+        Boolean CreatType(String TypeStruct, String TypeFilePath);
         /// <summary>
         /// 创建分类
         /// </summary>
-        /// <param name="Name"></param>
+        /// <param name="TypeID"></param>
+        /// <param name="TypeFilePath"></param>
         /// <returns></returns>
-        Boolean DeleteType(String Name);
+        Boolean DeleteType(String TypeID, String TypeFilePath);
+        /// <summary>
+        /// 获取分类
+        /// </summary>
+        /// <param name="TypeID"></param>
+        /// <param name="TypeFilePath"></param>
+        /// <returns></returns>
+        String ReadType(String TypeID, String TypeFilePath);
         #endregion
 
         #region 资源
@@ -58,7 +67,7 @@ namespace TheSeed
         /// </summary>
         /// <param name="DateTime"></param>
         /// <returns></returns>
-        List<String> ListResourcePath(String DateTime);
+        List<String> ListResourceFilePath(String DateTime);
         /// <summary>
         /// 资源目录一览
         /// </summary>
@@ -69,23 +78,23 @@ namespace TheSeed
         /// 发布资源
         /// </summary>
         /// <param name="ResourceStruct"></param>
-        /// <param name="ResourcePath"></param>
+        /// <param name="ResourceFilePath">文件名称(资源名称/内容标题)</param>
         /// <returns></returns>
-        Boolean CreatResource(String ResourceStruct, String ResourcePath);
+        Boolean CreatResource(String ResourceStruct, String ResourceFilePath);
         /// <summary>
         /// 删除资源
         /// </summary>
         /// <param name="ResourceID"></param>
-        /// <param name="ResourcePath"></param>
+        /// <param name="ResourceFilePath">文件名称(资源名称/内容标题</param>
         /// <returns></returns>
-        Boolean DeleteResource(String ResourceID, String ResourcePath);
+        Boolean DeleteResource(String ResourceID, String ResourceFilePath);
         /// <summary>
         /// 读取资源
         /// </summary>
         /// <param name="ResourceID"></param>
-        /// <param name="ResourcePath"></param>
+        /// <param name="ResourceFilePath">文件名称(资源名称/内容标题</param>
         /// <returns></returns>
-        String ReadResource(String ResourceID,String ResourcePath);
+        String ReadResource(String ResourceID,String ResourceFilePath);
         #endregion
 
         #region 剧集
@@ -94,7 +103,7 @@ namespace TheSeed
         /// </summary>
         /// <param name="DateTime"></param>
         /// <returns></returns>
-        List<String> ListSeriesPath(String DateTime);
+        List<String> ListSeriesFilePath(String DateTime);
         /// <summary>
         /// 剧集一览
         /// </summary>
@@ -105,23 +114,23 @@ namespace TheSeed
         /// 发布剧集
         /// </summary>
         /// <param name="SeriesStruct"></param>
-        /// <param name="SeriesPath"></param>
+        /// <param name="SeriesFilePath">文件名称(资源名称/内容标题</param>
         /// <returns></returns>
-        Boolean CreatSeries(String SeriesStruct, String SeriesPath);
+        Boolean CreatSeries(String SeriesStruct, String SeriesFilePath);
         /// <summary>
         /// 删除剧集
         /// </summary>
         /// <param name="SeriesID"></param>
-        /// <param name="SeriesPath"></param>
+        /// <param name="SeriesFilePath">文件名称(资源名称/内容标题</param>
         /// <returns></returns>
-        Boolean DeleteSeries(String SeriesID, String SeriesPath);
+        Boolean DeleteSeries(String SeriesID, String SeriesFilePath);
         /// <summary>
         /// 读取剧集
         /// </summary>
         /// <param name="SeriesID"></param>
-        /// <param name="SeriesPath"></param>
+        /// <param name="SeriesFilePath">文件名称(资源名称/内容标题</param>
         /// <returns></returns>
-        String ReadSeries(String SeriesID, String SeriesPath);
+        String ReadSeries(String SeriesID, String SeriesFilePath);
         /// <summary>
         /// 剧集资源一览
         /// </summary>
@@ -132,23 +141,23 @@ namespace TheSeed
         /// 发布剧集资源
         /// </summary>
         /// <param name="SeriesResourceStruct"></param>
-        /// <param name="SeriesResourcePath"></param>
+        /// <param name="SeriesResourceFilePath">文件名称(资源名称/内容标题</param>
         /// <returns></returns>
-        Boolean CreatSeriesResource(String SeriesResourceStruct, String SeriesResourcePath);
+        Boolean CreatSeriesResource(String SeriesResourceStruct, String SeriesResourceFilePath);
         /// <summary>
         /// 删除剧集资源
         /// </summary>
         /// <param name="SeriesResourceID"></param>
-        /// <param name="SeriesResourcePath"></param>
+        /// <param name="SeriesResourceFilePath">文件名称(资源名称/内容标题</param>
         /// <returns></returns>
-        Boolean DeleteSeriesResource(String SeriesResourceID, String SeriesResourcePath);
+        Boolean DeleteSeriesResource(String SeriesResourceID, String SeriesResourceFilePath);
         /// <summary>
         /// 读取剧集资源
         /// </summary>
         /// <param name="SeriesResourceID"></param>
-        /// <param name="SeriesResourcePath"></param>
+        /// <param name="SeriesResourceFilePath">文件名称(资源名称/内容标题</param>
         /// <returns></returns>
-        String ReadSeriesResource(String SeriesResourceID, String SeriesResourcePath);
+        String ReadSeriesResource(String SeriesResourceID, String SeriesResourceFilePath);
 
         /// <summary>
         /// 保存用户关注配置文件（2.0版本实现）
@@ -158,19 +167,160 @@ namespace TheSeed
         #endregion
     }
 
+    //DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
+
     /// <summary>
     /// 本地协议实现
     /// </summary>
-    static class LoaclProtocolUtils
+    class LoaclProtocolUtils : TSSProtocol
     {
-        public static Boolean ConnectSetver()
+        public Boolean ConnectServer()
         {
             //检查本地资源路径合法性
             if (Directory.Exists(ConfigUtils.DataFileSavePath) == false)
                 return false;
             return true;
         }
-        
+
+        private Boolean CreatResourceFilePath()
+        {
+            ResourcePath = ConfigUtils.DataFileSavePath + "Server" + FilePathUtils.LOCAL_RES + @"\" + DateTime.Now.ToString("yyyy");
+            Directory.CreateDirectory(ResourcePath);
+            return true;
+        }
+
+
+        private Boolean CreatSeriesFilePath(String SeriesName)
+        {
+            SeriesPath = ConfigUtils.DataFileSavePath + "Server" + FilePathUtils.LOCAL_RES + @"\" + DateTime.Now.ToString("yyyy") + @"\" + SeriesName;
+            Directory.CreateDirectory(SeriesPath);
+            return true;
+        }
+
+        public String TypePath { get; set; }
+        public String ResourcePath { get; set; }
+        public String SeriesPath { get; set; }
+
+        public Boolean CreatResource(String ResourceStruct, String ResourceFilePath)
+        {
+            //创建路径
+            CreatResourceFilePath();
+            //创建文件
+            File.WriteAllText(ResourcePath + @"\" + ResourceFilePath + FilePathUtils.LOCAL_FILE_TYPE, ResourceStruct, Encoding.UTF8);
+            return true;
+        }
+
+        public Boolean CreatSeries(String SeriesStruct, String SeriesFilePath)
+        {
+            //创建路径
+            CreatSeriesFilePath(SeriesFilePath);
+            //创建文件
+            File.WriteAllText(SeriesPath + @"\" + SeriesFilePath + FilePathUtils.LOCAL_FILE_TYPE, SeriesStruct, Encoding.UTF8);
+            return true;
+        }
+
+        public Boolean CreatSeriesResource(String SeriesResourceStruct, String SeriesResourceFilePath)
+        {
+            //创建文件
+            File.WriteAllText(SeriesPath + @"\" + SeriesResourceFilePath + FilePathUtils.LOCAL_FILE_TYPE, SeriesResourceStruct, Encoding.UTF8);
+            return true;
+        }
+
+        public Boolean CreatType(String TypeStruct, String TypeFilePath)
+        {
+            TypePath = ConfigUtils.DataFileSavePath + @"Server\" + FilePathUtils.LOCAL_TYPE;
+            Directory.CreateDirectory(TypePath);
+            File.WriteAllText(TypePath + @"\" + TypeFilePath + FilePathUtils.LOCAL_FILE_TYPE, TypeStruct, Encoding.UTF8);
+            return true;
+        }
+
+        public Boolean DeleteType(String TypeID, String TypeFilePath)
+        {
+            String FileName = ConfigUtils.DataFileSavePath + @"Server\" + FilePathUtils.LOCAL_TYPE + TypeFilePath + @"\" + TypeID + FilePathUtils.LOCAL_FILE_TYPE;
+            File.Delete(FileName);
+            return true;
+        }
+        public Boolean DeleteResource(String ResourceID, String ResourceFilePath)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Boolean DeleteSeries(String SeriesID, String SeriesFilePath)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Boolean DeleteSeriesResource(String SeriesResourceID, String SeriesResourceFilePath)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Boolean DeleteType(String Name)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Dictionary<String, String> ListResource(String DateTime)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<String> ListResourceFilePath(String DateTime)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<String> ListResourceTop10()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Dictionary<String, String> ListSeries(String DateTime)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<String> ListSeriesFilePath(String DateTime)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Dictionary<String, String> ListSeriesResource(String SeriesResourceID, String DateTime)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<String> ListServer()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<String> ListType(String DateTime)
+        {
+            throw new NotImplementedException();
+        }
+
+        public String ReadResource(String ResourceID, String ResourceFilePath)
+        {
+            throw new NotImplementedException();
+        }
+
+        public String ReadSeries(String SeriesID, String SeriesFilePath)
+        {
+            throw new NotImplementedException();
+        }
+
+        public String ReadSeriesResource(String SeriesResourceID, String SeriesResourceFilePath)
+        {
+            throw new NotImplementedException();
+        }
+
+        public String ReadType(String TypeID, String TypeFilePath)
+        {
+            String FileName = ConfigUtils.DataFileSavePath + @"Server\" + FilePathUtils.LOCAL_TYPE + TypeFilePath + @"\" + TypeID + FilePathUtils.LOCAL_FILE_TYPE;
+            return File.ReadAllText(FileName, Encoding.UTF8);
+        }
+
     }
 
     /// <summary>
@@ -183,99 +333,114 @@ namespace TheSeed
             return false;
         }
 
-        public bool CreatResource(string ResourceStruct, string ResourcePath)
+        public bool CreatResource(String ResourceStruct, String ResourceFilePath)
         {
             throw new NotImplementedException();
         }
 
-        public bool CreatSeries(string SeriesStruct, string SeriesPath)
+        public bool CreatSeries(String SeriesStruct, String SeriesFilePath)
         {
             throw new NotImplementedException();
         }
 
-        public bool CreatSeriesResource(string SeriesResourceStruct, string SeriesResourcePath)
+        public bool CreatSeriesResource(String SeriesResourceStruct, String SeriesResourceFilePath)
         {
             throw new NotImplementedException();
         }
 
-        public bool CreatType(string TypeStruct)
+        public bool CreatType(String TypeStruct)
         {
             throw new NotImplementedException();
         }
 
-        public bool DeleteResource(string ResourceID, string ResourcePath)
+        public bool CreatType(String TypeStruct, String TypeFilePath)
         {
             throw new NotImplementedException();
         }
 
-        public bool DeleteSeries(string SeriesID, string SeriesPath)
+        public bool DeleteResource(String ResourceID, String ResourceFilePath)
         {
             throw new NotImplementedException();
         }
 
-        public bool DeleteSeriesResource(string SeriesResourceID, string SeriesResourcePath)
+        public bool DeleteSeries(String SeriesID, String SeriesFilePath)
         {
             throw new NotImplementedException();
         }
 
-        public bool DeleteType(string Name)
+        public bool DeleteSeriesResource(String SeriesResourceID, String SeriesResourceFilePath)
         {
             throw new NotImplementedException();
         }
 
-        public Dictionary<string, string> ListResource(string DateTime)
+        public bool DeleteType(String Name)
         {
             throw new NotImplementedException();
         }
 
-        public List<string> ListResourcePath(string DateTime)
+        public bool DeleteType(String TypeID, String TypeFilePath)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Dictionary<String, String> ListResource(String DateTime)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<String> ListResourceFilePath(String DateTime)
         {
             return new
-                 List<string>();
+                 List<String>();
         }
 
-        public List<string> ListResourceTop10()
+        public List<String> ListResourceTop10()
         {
-            return new List<string>();
+            return new List<String>();
         }
 
-        public Dictionary<string, string> ListSeries(string DateTime)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<string> ListSeriesPath(string DateTime)
+        public Dictionary<String, String> ListSeries(String DateTime)
         {
             throw new NotImplementedException();
         }
 
-        public Dictionary<string, string> ListSeriesResource(string SeriesResourceID, string DateTime)
+        public List<String> ListSeriesFilePath(String DateTime)
         {
             throw new NotImplementedException();
         }
 
-        public List<string> ListServer()
+        public Dictionary<String, String> ListSeriesResource(String SeriesResourceID, String DateTime)
         {
             throw new NotImplementedException();
         }
 
-        public List<string> ListType(string DateTime)
+        public List<String> ListServer()
         {
-            return new List<string>();
+            throw new NotImplementedException();
+        }
+
+        public List<String> ListType(String DateTime)
+        {
+            return new List<String>();
                  
         }
 
-        public string ReadResource(string ResourceID, string ResourcePath)
+        public String ReadResource(String ResourceID, String ResourceFilePath)
         {
             throw new NotImplementedException();
         }
 
-        public string ReadSeries(string SeriesID, string SeriesPath)
+        public String ReadSeries(String SeriesID, String SeriesFilePath)
         {
             throw new NotImplementedException();
         }
 
-        public string ReadSeriesResource(string SeriesResourceID, string SeriesResourcePath)
+        public String ReadSeriesResource(String SeriesResourceID, String SeriesResourceFilePath)
+        {
+            throw new NotImplementedException();
+        }
+
+        public String ReadType(String TypeID, String TypeFilePath)
         {
             throw new NotImplementedException();
         }

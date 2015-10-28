@@ -65,12 +65,12 @@ namespace TheSeed
                 MessageLBL.Text = "获取最新资源信息";
                 LoadPB.Value = 50;
                 Thread.Sleep(2000);
-                ResourceUtils.LoadAllResources("");
+                ResourceUtils.LoadAllResources();
 
                 MessageLBL.Text = "获取最新剧集信息";
                 LoadPB.Value = 60;
                 Thread.Sleep(2000);
-                SeriesUtils.LoadAllSeries("");
+                SeriesUtils.LoadAllSeries();
                 #endregion
                 
                 #region 更新个人订阅
