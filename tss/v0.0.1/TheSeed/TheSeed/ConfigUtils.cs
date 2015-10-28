@@ -136,6 +136,7 @@ namespace TheSeed
         }
        
         public static DataSet.ConfigDataTable ServerList { get; set; }
+
         /// <summary>
         /// 获得服务器清单列表
         /// </summary>
@@ -151,6 +152,7 @@ namespace TheSeed
             ServerList.WriteXml(UsrConfigFileName);
             return true;
         }
+
         public static String SysConfigFileName { get; set; }
 
         /// <summary>

@@ -73,7 +73,7 @@ namespace TheSeed
             NewType.AddTypeRow(tr);
             NewType.WriteXml(FilePathUtils.LOCAL_TEMP + FilePathUtils.LOCAL_FILE_TYPE);
             String TypeStruct = File.ReadAllText(FilePathUtils.LOCAL_TEMP + FilePathUtils.LOCAL_FILE_TYPE);
-            ConfigUtils.ServerProtocol.CreatType(TypeStruct);
+            ConfigUtils.ServerProtocol.CreatType(TypeStruct,tr.BM);
             return true;
         }
 
@@ -113,7 +113,7 @@ namespace TheSeed
                 DownloadOrderResouces = new Dictionary<string, string>();
 
             //获取云端资源数据更新日期（文件列表）
-            List<String> CloundPaths = ConfigUtils.ServerProtocol.ListResourcePath(LastPath.ToString());
+            List<String> CloundPaths = ConfigUtils.ServerProtocol.ListResourceFilePath(LastPath.ToString());
             foreach (String item in CloundPaths)
             {
                 //item = yyyyMMdd
@@ -123,7 +123,7 @@ namespace TheSeed
                 String FilePathResource = ConfigUtils.DataFileSavePath + FilePathUtils.LOCAL_RES + @"\" + item.Substring(0, 3) + @"\" + item.Substring(4, 2) + @"\" + item.Substring(6, 2);
                 Directory.CreateDirectory(FilePathResource);
                 //获取云端资源列表判断时间）
-                List<String> CloundItems = ConfigUtils.ServerProtocol.ListResourcePath(LastPath.ToString());
+                List<String> CloundItems = ConfigUtils.ServerProtocol.ListResourceFilePath(LastPath.ToString());
 
                 DataSet.ConfigDataTable NowResouseItems = null;
                 DataSet.ConfigRow NowResouseItem = null;

@@ -76,7 +76,7 @@ namespace TheSeed
             #endregion
 
             #region 获得网络数据
-            List<String> CloundPaths = ConfigUtils.ServerProtocol.ListResourcePath(LastPath.ToString());
+            List<String> CloundPaths = ConfigUtils.ServerProtocol.ListResourceFilePath(LastPath.ToString());
             #endregion
 
             #region 保存到本地
