@@ -13,9 +13,10 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPubSub;
 
 /**
- * 推送通道队列设置
+ * Redis操作工具类
  * 
  * @author fucy
+ * @version 2.4.1 2015/11/9
  * @version 2.3.0 2015/6/11
  * @since 2.3.0
  * @see RedisChannelConfigBean
@@ -64,7 +65,12 @@ public class JedisUtil {
 		if (jedis != null)
 			jedisPool.returnBrokenJedis(jedis);
 	}
-
+	
+	public boolean clear(){
+		getJedis().flushAll();
+		return true;
+	}
+	
 	/**
 	 * 缓存数据拷贝
 	 * 
