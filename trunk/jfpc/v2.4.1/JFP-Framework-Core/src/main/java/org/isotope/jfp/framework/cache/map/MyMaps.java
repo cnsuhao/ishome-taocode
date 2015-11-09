@@ -5,11 +5,21 @@ import java.util.HashMap;
 
 import org.isotope.jfp.framework.cache.ICacheService;
 
+/**
+ * 本地缓存
+ * 
+ *
+ */
 @SuppressWarnings("unchecked")
 public class MyMaps implements ICacheService {
 
 	HashMap<String, Object> cache = new HashMap<String, Object>();
-
+	@Override
+	public boolean clear(){
+		cache.clear();
+		return true;
+	}
+	
 	@Override
 	public boolean putObject(String key, Object value) {
 		cache.put(key, value);
