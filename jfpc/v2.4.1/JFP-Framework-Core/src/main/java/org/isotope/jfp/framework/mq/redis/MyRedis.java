@@ -12,7 +12,8 @@ import com.alibaba.fastjson.JSON;
 /**
  * Redis缓存实现
  * 
- * @author 20150728
+ * @version 2.4.1 2015/11/9
+ * @since 20150728
  *
  */
 public class MyRedis implements ICacheService, ISFrameworkConstants {
@@ -20,7 +21,6 @@ public class MyRedis implements ICacheService, ISFrameworkConstants {
 	public MyRedis() {
 
 	}
-
 	public MyRedis(JedisUtil jedisUtil) {
 		this.jedisUtil = jedisUtil;
 	}
@@ -80,6 +80,12 @@ public class MyRedis implements ICacheService, ISFrameworkConstants {
 		// }
 	}
 
+	@Override
+	public boolean clear(){
+		jedisUtil.clear();
+		return true;
+	}
+	
 	@Override
 	public boolean putObject(String key, Object value) {
 		jedisUtil.add(key, getStringToRedis(value), waitTime);
