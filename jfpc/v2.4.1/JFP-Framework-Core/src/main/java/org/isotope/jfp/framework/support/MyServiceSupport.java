@@ -135,7 +135,7 @@ public class MyServiceSupport implements ISFrameworkConstants, ISDBConstants {
 	 * @param formParamPageModel
 	 * @return
 	 */
-	public List<FrameworkDataBean> doSelectData(MyDataBaseObjectSupport formParamBean) {
+	public List<? extends FrameworkDataBean> doSelectData(MyDataBaseObjectSupport formParamBean) {
 		return doSelectData(formParamBean, true, true);
 	}
 
@@ -145,7 +145,7 @@ public class MyServiceSupport implements ISFrameworkConstants, ISDBConstants {
 	 * @param formParamPageModel
 	 * @return
 	 */
-	public List<FrameworkDataBean> doSelectData(MyDataBaseObjectSupport formParamBean, boolean ppp) {
+	public List<? extends FrameworkDataBean> doSelectData(MyDataBaseObjectSupport formParamBean, boolean ppp) {
 		return doSelectData(formParamBean, ppp, true);
 	}
 
@@ -155,7 +155,7 @@ public class MyServiceSupport implements ISFrameworkConstants, ISDBConstants {
 	 * @param formParamPageModel
 	 * @return
 	 */
-	public List<FrameworkDataBean> doSelectData(MyDataBaseObjectSupport formParamBean, boolean ppp, boolean ddd) {
+	public List<? extends FrameworkDataBean> doSelectData(MyDataBaseObjectSupport formParamBean, boolean ppp, boolean ddd) {
 		// // 设定企业ID
 		// if (ppp && StringUtils.isEmpty(formParamBean.getPpp()))
 		// formParamBean.setPpp(getCompanyId());
