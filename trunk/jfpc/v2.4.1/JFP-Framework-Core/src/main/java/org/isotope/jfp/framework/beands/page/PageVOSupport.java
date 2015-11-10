@@ -45,7 +45,7 @@ public class PageVOSupport extends ObjectBean {
 	/**
 	 * 页面一览数据
 	 */
-	private List<FrameworkDataBean> pageListData;
+	private List<? extends FrameworkDataBean> pageListData;
 
 	/**
 	 * 页面检索参数
@@ -95,11 +95,11 @@ public class PageVOSupport extends ObjectBean {
 		this.resultCount = resultCount;
 	}
 
-	public List<FrameworkDataBean> getPageListData() {
+	public List<? extends FrameworkDataBean> getPageListData() {
 		return pageListData;
 	}
 
-	public void setPageListData(List<FrameworkDataBean> objectData) {
+	public void setPageListData(List<? extends FrameworkDataBean> objectData) {
 		this.pageListData = objectData;
 	}
 
