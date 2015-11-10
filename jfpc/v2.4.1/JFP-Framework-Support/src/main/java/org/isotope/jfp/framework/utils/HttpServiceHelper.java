@@ -6,16 +6,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.http.HttpEntity;
-import org.apache.http.HttpHost;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.conn.routing.HttpRoute;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.isotope.jfp.framework.beands.ObjectBean;
@@ -27,6 +25,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @author Spook
  * @since 0.1.0
+ * @version 2.4.1.2014/11/10
  * @version 0.1.0 2014/2/8
  * 
  */
@@ -48,6 +47,32 @@ public class HttpServiceHelper {
 
 	public static final String ENCODE_DEFAULT = "UTF-8";
 
+	public static String doHttpGET(String serviceURL) throws Exception {
+		logger.info("=====>>>>>接口请求<<<<<=====" + serviceURL);
+		// CloseableHttpClient httpclient = HttpClients.createDefault();
+		RequestConfig defaultRequestConfig = RequestConfig.custom().setSocketTimeout(waitTimeMinute * 1000).setConnectTimeout(waitTimeMinute * 1000).setConnectionRequestTimeout(waitTimeMinute * 1000).setStaleConnectionCheckEnabled(true).build();
+		CloseableHttpClient httpclient = HttpClients.custom().setDefaultRequestConfig(defaultRequestConfig).build();
+		try {
+			HttpGet httpGet = new HttpGet(serviceURL);
+
+			// 设定传输编码
+
+			CloseableHttpResponse response = httpclient.execute(httpGet);
+			int status = response.getStatusLine().getStatusCode();
+			if (status >= 200 && status < 300) {
+				HttpEntity entity = response.getEntity();
+				if (entity != null)
+					return EntityUtils.toString(entity, ENCODE_DEFAULT);
+			} else {
+				throw new Exception("服务请求异常: " + status+",【URL="+serviceURL+"】");
+			}
+		} finally {
+			httpclient.close();
+		}
+		return "";
+	}
+	
+	
 	/**
 	 * 以简单属性参数请求提交服务
 	 * 
