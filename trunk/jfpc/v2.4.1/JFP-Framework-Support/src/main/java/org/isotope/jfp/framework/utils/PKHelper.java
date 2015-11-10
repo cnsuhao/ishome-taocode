@@ -11,21 +11,31 @@ import org.isotope.jfp.framework.constants.ISFrameworkConstants;
  * 系统唯一识别ID
  * 
  * @author Spook
+ * @version 2.4.1 2015/11/10
  * @since 0.1.0
  * @version 0.1.0 2014/2/8
  */
 public class PKHelper implements ISFrameworkConstants {
+	private static String pattern = "yyyyMMddHHmmss";
 	
+	public static String getPattern() {
+		return PKHelper.pattern;
+	}
+
+	public static void setPattern(String pattern) {
+		PKHelper.pattern = pattern;
+	}
+
 	/**
 	 * 机器编号
 	 */
-	private static String machinecode = "1";
-	public static String getMachinecode() {
-		return machinecode;
+	private static String machineCode = "1";
+	public static String getMachineCode() {
+		return PKHelper.machineCode;
 	}
 
-	public static void setMachinecode(String machinecode) {
-		PKHelper.machinecode = machinecode;
+	public static void setMachineCode(String machineCode) {
+		PKHelper.machineCode = machineCode;
 	}
 
 	private static long systemTimeMillis = 0l;
@@ -43,7 +53,17 @@ public class PKHelper implements ISFrameworkConstants {
 			e.printStackTrace();
 		}
 	}
-		
+	
+	/**
+	 * 系统时间戳
+	 * 
+	 * @return
+	 */
+	public static long currentTime() {
+		SimpleDateFormat format = new SimpleDateFormat(pattern);
+		return Long.parseLong(format.format(new Date()));
+	}
+	
 	/**
 	 * 系统时间戳
 	 * 
@@ -52,7 +72,8 @@ public class PKHelper implements ISFrameworkConstants {
 	public static long currentTime(String pattern) {
 		SimpleDateFormat format = new SimpleDateFormat(pattern);
 		return Long.parseLong(format.format(new Date()));
-	}
+	}	
+	
 	/**
 	 * 获得一个数据记录的主键Key<br>
 	 * 时间+序号
@@ -61,15 +82,16 @@ public class PKHelper implements ISFrameworkConstants {
 	 */
 	public synchronized static String creatBarCodeKey() {
 		//日期+（小时分钟）+流水号
-		primaryUniqueKey = new StringBuilder(12);
-		long currentTimeMillis = currentTime("yyMMddHHmm");// currentTimeMillis
+		primaryUniqueKey = new StringBuilder(15);
+		long currentTimeMillis = currentTime(pattern);// currentTimeMillis
 		// 同步判定
 		if (currentTimeMillis > systemTimeMillis) {
-			synchronizedNum = 10l;
+			synchronizedNum = 1l;
 			systemTimeMillis = currentTimeMillis;
 		} else {
 			synchronizedNum++;
 		}
+		primaryUniqueKey.append(machineCode);
 		primaryUniqueKey.append(systemTimeMillis);
 		primaryUniqueKey.append(synchronizedNum);
 		return primaryUniqueKey.toString();
@@ -91,13 +113,11 @@ public class PKHelper implements ISFrameworkConstants {
 		} else {
 			synchronizedNum++;
 		}
-		primaryUniqueKey.append(machinecode);
+		primaryUniqueKey.append(machineCode);
 		primaryUniqueKey.append(systemTimeMillis);
 		primaryUniqueKey.append(synchronizedNum);
 		return primaryUniqueKey.toString();
-	}
-	
-	
+	}	
 	
 	/**
 	 * 获得一个UUID<br>
