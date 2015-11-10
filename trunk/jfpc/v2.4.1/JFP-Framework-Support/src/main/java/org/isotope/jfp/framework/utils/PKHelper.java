@@ -29,7 +29,7 @@ public class PKHelper implements ISFrameworkConstants {
 	/**
 	 * 机器编号
 	 */
-	private static String machineCode = "1";
+	private static String machineCode = "";
 	public static String getMachineCode() {
 		return PKHelper.machineCode;
 	}
