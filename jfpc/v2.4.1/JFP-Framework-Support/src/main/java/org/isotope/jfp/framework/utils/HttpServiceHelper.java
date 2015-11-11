@@ -1,9 +1,13 @@
 package org.isotope.jfp.framework.utils;
 
 import java.lang.reflect.Method;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import javax.net.ssl.SSLContext;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
@@ -12,9 +16,12 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.ssl.SSLContextBuilder;
+import org.apache.http.ssl.TrustStrategy;
 import org.apache.http.util.EntityUtils;
 import org.isotope.jfp.framework.beands.ObjectBean;
 import org.slf4j.Logger;
@@ -31,13 +38,38 @@ import org.slf4j.LoggerFactory;
  */
 public class HttpServiceHelper {
 	private static Logger logger = LoggerFactory.getLogger(HttpServiceHelper.class);
-	public static int waitTimeMinute = 15;	
+	public static int waitTimeMinute = 15;
+
 	public static int getWaitTimeMinute() {
 		return waitTimeMinute;
 	}
 
 	public static void setWaitTimeMinute(int waitTimeMinute) {
 		HttpServiceHelper.waitTimeMinute = waitTimeMinute;
+	}
+
+	/**
+	 * 获取client对象
+	 * 
+	 * @return
+	 */
+	protected CloseableHttpClient getClient(String url) {
+		if (url.indexOf("https") != -1) {
+			try {
+				SSLContext sslContext = new SSLContextBuilder().loadTrustMaterial(null, new TrustStrategy() {
+					// 信任所有证书
+					public boolean isTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+						return true;
+					}
+				}).build();
+				SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslContext);
+				CloseableHttpClient httpclient = HttpClients.custom().setSSLSocketFactory(sslsf).build();
+				return httpclient;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return HttpClients.createDefault();
 	}
 
 	/**
@@ -49,8 +81,9 @@ public class HttpServiceHelper {
 
 	public static String doHttpGET(String serviceURL) throws Exception {
 		logger.info("=====>>>>>接口请求<<<<<=====" + serviceURL);
-		// CloseableHttpClient httpclient = HttpClients.createDefault();
-		RequestConfig defaultRequestConfig = RequestConfig.custom().setSocketTimeout(waitTimeMinute * 1000).setConnectTimeout(waitTimeMinute * 1000).setConnectionRequestTimeout(waitTimeMinute * 1000).setStaleConnectionCheckEnabled(true).build();
+		RequestConfig defaultRequestConfig = RequestConfig.custom().setSocketTimeout(waitTimeMinute * 1000)
+				.setConnectTimeout(waitTimeMinute * 1000).setConnectionRequestTimeout(waitTimeMinute * 1000)
+				.setStaleConnectionCheckEnabled(true).build();
 		CloseableHttpClient httpclient = HttpClients.custom().setDefaultRequestConfig(defaultRequestConfig).build();
 		try {
 			HttpGet httpGet = new HttpGet(serviceURL);
@@ -64,15 +97,14 @@ public class HttpServiceHelper {
 				if (entity != null)
 					return EntityUtils.toString(entity, ENCODE_DEFAULT);
 			} else {
-				throw new Exception("服务请求异常: " + status+",【URL="+serviceURL+"】");
+				throw new Exception("服务请求异常: " + status + ",【URL=" + serviceURL + "】");
 			}
 		} finally {
 			httpclient.close();
 		}
 		return "";
 	}
-	
-	
+
 	/**
 	 * 以简单属性参数请求提交服务
 	 * 
@@ -84,17 +116,20 @@ public class HttpServiceHelper {
 	public static String doHttpPOST(String serviceURL, ObjectBean param) throws Exception {
 		// CloseableHttpClient httpclient = HttpClients.createDefault();
 
-		RequestConfig defaultRequestConfig = RequestConfig.custom().setSocketTimeout(waitTimeMinute * 1000).setConnectTimeout(waitTimeMinute * 1000).setConnectionRequestTimeout(waitTimeMinute * 1000).setStaleConnectionCheckEnabled(true).build();
-//TODO
-		//		PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager();
-//		// Increase max total connection to 200
-//		cm.setMaxTotal(200);
-//		// Increase default max connection per route to 20
-//		cm.setDefaultMaxPerRoute(20);
-//		// Increase max connections for localhost:80 to 50
-//		HttpHost localhost = new HttpHost("locahost", 80);
-//		cm.setMaxPerRoute(new HttpRoute(localhost), 50);
-		
+		RequestConfig defaultRequestConfig = RequestConfig.custom().setSocketTimeout(waitTimeMinute * 1000)
+				.setConnectTimeout(waitTimeMinute * 1000).setConnectionRequestTimeout(waitTimeMinute * 1000)
+				.setStaleConnectionCheckEnabled(true).build();
+		// TODO
+		// PoolingHttpClientConnectionManager cm = new
+		// PoolingHttpClientConnectionManager();
+		// // Increase max total connection to 200
+		// cm.setMaxTotal(200);
+		// // Increase default max connection per route to 20
+		// cm.setDefaultMaxPerRoute(20);
+		// // Increase max connections for localhost:80 to 50
+		// HttpHost localhost = new HttpHost("locahost", 80);
+		// cm.setMaxPerRoute(new HttpRoute(localhost), 50);
+
 		CloseableHttpClient httpclient = HttpClients.custom().setDefaultRequestConfig(defaultRequestConfig).build();
 
 		try {
@@ -136,7 +171,7 @@ public class HttpServiceHelper {
 				if (entity != null)
 					return EntityUtils.toString(entity, ENCODE_DEFAULT);
 			} else {
-				throw new Exception("服务请求异常: " + status+",【URL="+serviceURL+"】");
+				throw new Exception("服务请求异常: " + status + ",【URL=" + serviceURL + "】");
 			}
 		} finally {
 			httpclient.close();
@@ -155,8 +190,9 @@ public class HttpServiceHelper {
 	 */
 	public static String doHttpPOST(String serviceURL, String jsonString) throws Exception {
 		logger.info("=====>>>>>接口请求<<<<<=====" + serviceURL);
-		// CloseableHttpClient httpclient = HttpClients.createDefault();
-		RequestConfig defaultRequestConfig = RequestConfig.custom().setSocketTimeout(waitTimeMinute * 1000).setConnectTimeout(waitTimeMinute * 1000).setConnectionRequestTimeout(waitTimeMinute * 1000).setStaleConnectionCheckEnabled(true).build();
+		RequestConfig defaultRequestConfig = RequestConfig.custom().setSocketTimeout(waitTimeMinute * 1000)
+				.setConnectTimeout(waitTimeMinute * 1000).setConnectionRequestTimeout(waitTimeMinute * 1000)
+				.setStaleConnectionCheckEnabled(true).build();
 		CloseableHttpClient httpclient = HttpClients.custom().setDefaultRequestConfig(defaultRequestConfig).build();
 
 		try {
@@ -170,13 +206,6 @@ public class HttpServiceHelper {
 			// 设定传输编码
 			httpPost.setEntity(new UrlEncodedFormEntity(nvps, ENCODE_DEFAULT));
 
-			// FileBody fileBody = new FileBody(new File("/home/sendpix0.jpg"));
-			// StringBody stringBody = new StringBody("文件的描述");
-			// MultipartEntity entity = new MultipartEntity();
-			// entity.addPart("file", fileBody);
-			// entity.addPart("desc", stringBody);
-			// post.setEntity(entity);
-
 			CloseableHttpResponse response = httpclient.execute(httpPost);
 			int status = response.getStatusLine().getStatusCode();
 			if (status >= 200 && status < 300) {
@@ -184,7 +213,7 @@ public class HttpServiceHelper {
 				if (entity != null)
 					return EntityUtils.toString(entity, ENCODE_DEFAULT);
 			} else {
-				throw new Exception("服务请求异常: " + status+",【URL="+serviceURL+"】");
+				throw new Exception("服务请求异常: " + status + ",【URL=" + serviceURL + "】");
 			}
 		} finally {
 			httpclient.close();
@@ -198,23 +227,23 @@ public class HttpServiceHelper {
 	 * @see #POST_PARAM
 	 * @param serviceid
 	 * @param jsonString
-	 * @param param 额外扩展参数定义
+	 * @param param
+	 *            额外扩展参数定义
 	 * @return
 	 * @throws Exception
 	 */
-	public static String doHttpPOST(String serviceURL, String jsonString, Map<String, String> param) throws Exception {
+	public static String doHttpPOST(String serviceURL, Map<String, String> param) throws Exception {
 		logger.info("=====>>>>>接口请求<<<<<=====" + serviceURL);
 		// CloseableHttpClient httpclient = HttpClients.createDefault();
-		RequestConfig defaultRequestConfig = RequestConfig.custom().setSocketTimeout(waitTimeMinute * 1000).setConnectTimeout(waitTimeMinute * 1000).setConnectionRequestTimeout(waitTimeMinute * 1000).setStaleConnectionCheckEnabled(true).build();
+		RequestConfig defaultRequestConfig = RequestConfig.custom().setSocketTimeout(waitTimeMinute * 1000)
+				.setConnectTimeout(waitTimeMinute * 1000).setConnectionRequestTimeout(waitTimeMinute * 1000)
+				.setStaleConnectionCheckEnabled(true).build();
 		CloseableHttpClient httpclient = HttpClients.custom().setDefaultRequestConfig(defaultRequestConfig).build();
 
 		try {
 			HttpPost httpPost = new HttpPost(serviceURL);
 
 			List<NameValuePair> nvps = new ArrayList<NameValuePair>();
-
-			// 参数翻转
-			nvps.add(new BasicNameValuePair(POST_PARAM, jsonString));
 
 			// 额外参数
 			if (param != null) {
@@ -226,13 +255,6 @@ public class HttpServiceHelper {
 			// 设定传输编码
 			httpPost.setEntity(new UrlEncodedFormEntity(nvps, ENCODE_DEFAULT));
 
-			// FileBody fileBody = new FileBody(new File("/home/sendpix0.jpg"));
-			// StringBody stringBody = new StringBody("文件的描述");
-			// MultipartEntity entity = new MultipartEntity();
-			// entity.addPart("file", fileBody);
-			// entity.addPart("desc", stringBody);
-			// post.setEntity(entity);
-
 			CloseableHttpResponse response = httpclient.execute(httpPost);
 			int status = response.getStatusLine().getStatusCode();
 			if (status >= 200 && status < 300) {
@@ -240,11 +262,27 @@ public class HttpServiceHelper {
 				if (entity != null)
 					return EntityUtils.toString(entity, ENCODE_DEFAULT);
 			} else {
-				throw new Exception("服务请求异常: " + status+",【URL="+serviceURL+"】");
+				throw new Exception("服务请求异常: " + status + ",【URL=" + serviceURL + "】");
 			}
 		} finally {
 			httpclient.close();
 		}
 		return "";
+	}
+
+	/**
+	 * 将全部参数以JSON字符串形式发送，接口如直接接受
+	 * 
+	 * @see #POST_PARAM
+	 * @param serviceid
+	 * @param jsonString
+	 * @param param
+	 *            额外扩展参数定义
+	 * @return
+	 * @throws Exception
+	 */
+	public static String doHttpPOST(String serviceURL, String jsonString, Map<String, String> param) throws Exception {
+		param.put(POST_PARAM, jsonString);
+		return doHttpPOST(serviceURL, param);
 	}
 }
