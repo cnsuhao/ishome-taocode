@@ -2,6 +2,7 @@ package org.isotope.jfp.framework.support;
 
 import javax.annotation.Resource;
 
+import org.isotope.jfp.framework.biz.ISTask;
 import org.isotope.jfp.framework.cache.ICacheService;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.constants.pub.ISJobConstants;
@@ -14,7 +15,7 @@ import org.isotope.jfp.framework.utils.EmptyHelper;
  * @version 2.4.1.20151110
  * @since 2.4.1
  */
-public class MyJobSupport implements ISJobConstants, ISFrameworkConstants {
+public class MyJobSupport implements ISJobConstants, ISFrameworkConstants, ISTask {
 
 	// 缓存队列
 	@Resource
@@ -23,19 +24,23 @@ public class MyJobSupport implements ISJobConstants, ISFrameworkConstants {
 	/**
 	 * 进程阻塞时间（分钟）
 	 */
-	private int waitTimeMinute = 30;
-
+	protected int waitTimeMinute = 30;
+	/**
+	 * 进程阻塞时间（秒）
+	 */
+	protected int waitTimeSecond = 60 * 30;
 	/**
 	 * 任务Key
 	 */
-	private String jobKey = "JOBKEY";
+	protected String jobKey = "JOBKEY";
 
 	public int getWaitTimeMinute() {
 		return waitTimeMinute;
 	}
 
 	public void setWaitTimeMinute(int waitTimeMinute) {
-		this.waitTimeMinute = waitTimeMinute;
+		this.waitTimeMinute = 60 * waitTimeMinute;
+		this.waitTimeSecond = 60 * this.waitTimeMinute; 
 	}
 
 	public String getJobKey() {
@@ -52,7 +57,7 @@ public class MyJobSupport implements ISJobConstants, ISFrameworkConstants {
 	 * @param jobName
 	 */
 	protected boolean startLock() {
-		myMqService.putObject(jobKey, JOB_FLAG_RUNNING, 60 * waitTimeMinute, false);
+		myMqService.putObject(jobKey, JOB_FLAG_RUNNING, waitTimeSecond, false);
 		return true;
 	}
 
@@ -71,7 +76,7 @@ public class MyJobSupport implements ISJobConstants, ISFrameworkConstants {
 	 * @param jobName
 	 */
 	protected boolean errorLock() {
-		myMqService.putObject(jobKey, JOB_FLAG_ERROR, 15, false);
+		myMqService.putObject(jobKey, JOB_FLAG_ERROR, waitTimeSecond, false);
 		return true;
 	}
 
@@ -81,7 +86,23 @@ public class MyJobSupport implements ISJobConstants, ISFrameworkConstants {
 	 * @param jobName
 	 */
 	protected boolean endLock() {
-		myMqService.putObject(jobKey, JOB_FLAG_SUCCESS, 15, false);
+		myMqService.putObject(jobKey, JOB_FLAG_SUCCESS, waitTimeSecond, false);
 		return true;
+	}
+	
+	/**
+	 * 业务处理(重复运行)
+	 */
+	@Override
+	public boolean doProcessRepeat() throws Exception {
+		return false;
+	}
+
+	/**
+	 * 业务处理(运行一次)
+	 */
+	@Override
+	public boolean doProcessOnce(Object param) throws Exception {
+		return false;
 	}
 }
