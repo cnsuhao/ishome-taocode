@@ -18,5 +18,5 @@ public interface ISTask {
 	/**
 	 * 业务处理(运行一次)
 	 */
-	boolean doProcessOnce(String hosId) throws Exception;
+	boolean doProcessOnce(Object param) throws Exception;
 }
