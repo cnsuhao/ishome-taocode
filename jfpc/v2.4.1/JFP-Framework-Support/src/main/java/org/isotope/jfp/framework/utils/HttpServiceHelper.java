@@ -11,15 +11,21 @@ import javax.net.ssl.SSLContext;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
+import org.apache.http.client.CookieStore;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.cookie.BasicClientCookie2;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.BasicHttpContext;
+import org.apache.http.protocol.HttpContext;
 import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.http.ssl.TrustStrategy;
 import org.apache.http.util.EntityUtils;
@@ -80,6 +86,15 @@ public class HttpServiceHelper {
 	public static final String ENCODE_DEFAULT = "UTF-8";
 
 	public static String doHttpGET(String serviceURL) throws Exception {
+		return doHttpGET(serviceURL, null, null);
+	}
+
+	public static String doHttpGET(String serviceURL, Map<String, String> headers) throws Exception {
+		return doHttpGET(serviceURL, headers, null);
+	}
+
+	public static String doHttpGET(String serviceURL, Map<String, String> headers, Map<String, String> cookies)
+			throws Exception {
 		logger.info("=====>>>>>接口请求<<<<<=====" + serviceURL);
 		RequestConfig defaultRequestConfig = RequestConfig.custom().setSocketTimeout(waitTimeMinute * 1000)
 				.setConnectTimeout(waitTimeMinute * 1000).setConnectionRequestTimeout(waitTimeMinute * 1000)
@@ -87,10 +102,30 @@ public class HttpServiceHelper {
 		CloseableHttpClient httpclient = HttpClients.custom().setDefaultRequestConfig(defaultRequestConfig).build();
 		try {
 			HttpGet httpGet = new HttpGet(serviceURL);
-
 			// 设定传输编码
+			// 设定请求头
+			if (headers != null) {
+				for (Map.Entry<String, String> entry : headers.entrySet()) {
+					httpGet.setHeader(entry.getKey(), entry.getValue());
+				}
+			}
+			// 设定传输编码
+			CloseableHttpResponse response;
 
-			CloseableHttpResponse response = httpclient.execute(httpGet);
+			// 设置cookie
+			if (cookies != null && cookies.size() > 0) {
+				// 创建上下文环境
+				HttpContext context = new BasicHttpContext();
+				CookieStore cookieStore = new BasicCookieStore();
+				for (Map.Entry<String, String> entry : cookies.entrySet()) {
+					cookieStore.addCookie(new BasicClientCookie2(entry.getKey(), entry.getValue()));
+				}
+				context.setAttribute(HttpClientContext.COOKIE_STORE, cookieStore);
+				response = httpclient.execute(httpGet, context);
+			} else {
+				response = httpclient.execute(httpGet);
+			}
+
 			int status = response.getStatusLine().getStatusCode();
 			if (status >= 200 && status < 300) {
 				HttpEntity entity = response.getEntity();
@@ -232,7 +267,22 @@ public class HttpServiceHelper {
 	 * @return
 	 * @throws Exception
 	 */
+	public static String doHttpPOST(String serviceURL, String jsonString, Map<String, String> param) throws Exception {
+		param.put(POST_PARAM, jsonString);
+		return doHttpPOST(serviceURL, param, null, null);
+	}
+
 	public static String doHttpPOST(String serviceURL, Map<String, String> param) throws Exception {
+		return doHttpPOST(serviceURL, param, null, null);
+	}
+
+	public static String doHttpPOST(String serviceURL, Map<String, String> param, Map<String, String> headers)
+			throws Exception {
+		return doHttpPOST(serviceURL, param, null, null);
+	}
+
+	public static String doHttpPOST(String serviceURL, Map<String, String> param, Map<String, String> headers,
+			Map<String, String> cookies) throws Exception {
 		logger.info("=====>>>>>接口请求<<<<<=====" + serviceURL);
 		// CloseableHttpClient httpclient = HttpClients.createDefault();
 		RequestConfig defaultRequestConfig = RequestConfig.custom().setSocketTimeout(waitTimeMinute * 1000)
@@ -255,7 +305,28 @@ public class HttpServiceHelper {
 			// 设定传输编码
 			httpPost.setEntity(new UrlEncodedFormEntity(nvps, ENCODE_DEFAULT));
 
-			CloseableHttpResponse response = httpclient.execute(httpPost);
+			// 设定请求头
+			if (headers != null) {
+				for (Map.Entry<String, String> entry : param.entrySet()) {
+					httpPost.setHeader(entry.getKey(), entry.getValue());
+				}
+			}
+
+			CloseableHttpResponse response;
+
+			// 设置cookie
+			if (cookies != null && cookies.size() > 0) {
+				// 创建上下文环境
+				HttpContext context = new BasicHttpContext();
+				CookieStore cookieStore = new BasicCookieStore();
+				for (Map.Entry<String, String> entry : param.entrySet()) {
+					cookieStore.addCookie(new BasicClientCookie2(entry.getKey(), entry.getValue()));
+				}
+				context.setAttribute(HttpClientContext.COOKIE_STORE, cookieStore);
+				response = httpclient.execute(httpPost, context);
+			} else {
+				response = httpclient.execute(httpPost);
+			}
 			int status = response.getStatusLine().getStatusCode();
 			if (status >= 200 && status < 300) {
 				HttpEntity entity = response.getEntity();
@@ -270,19 +341,4 @@ public class HttpServiceHelper {
 		return "";
 	}
 
-	/**
-	 * 将全部参数以JSON字符串形式发送，接口如直接接受
-	 * 
-	 * @see #POST_PARAM
-	 * @param serviceid
-	 * @param jsonString
-	 * @param param
-	 *            额外扩展参数定义
-	 * @return
-	 * @throws Exception
-	 */
-	public static String doHttpPOST(String serviceURL, String jsonString, Map<String, String> param) throws Exception {
-		param.put(POST_PARAM, jsonString);
-		return doHttpPOST(serviceURL, param);
-	}
 }
