@@ -13,7 +13,7 @@ public class RandomHelper {
 	public static void main(String[] args) {
 		for (int i = 0; i < 10; i++)
 			// nextDouble
-			System.out.println(strCompletion(20,"0",nextCode(12)).length());
+			System.out.println(nextCode(8));
 	}
 	
 	/**

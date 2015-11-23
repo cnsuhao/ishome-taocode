@@ -95,7 +95,7 @@ public class HttpServiceHelper {
 
 	public static String doHttpGET(String serviceURL, Map<String, String> headers, Map<String, String> cookies)
 			throws Exception {
-		logger.info("=====>>>>>接口请求<<<<<=====" + serviceURL);
+		logger.debug("=====>>>>>接口请求<<<<<=====" + serviceURL);
 		RequestConfig defaultRequestConfig = RequestConfig.custom().setSocketTimeout(waitTimeMinute * 1000)
 				.setConnectTimeout(waitTimeMinute * 1000).setConnectionRequestTimeout(waitTimeMinute * 1000)
 				.setStaleConnectionCheckEnabled(true).build();
@@ -224,7 +224,7 @@ public class HttpServiceHelper {
 	 * @throws Exception
 	 */
 	public static String doHttpPOST(String serviceURL, String jsonString) throws Exception {
-		logger.info("=====>>>>>接口请求<<<<<=====" + serviceURL);
+		logger.debug("=====>>>>>接口请求<<<<<=====" + serviceURL);
 		RequestConfig defaultRequestConfig = RequestConfig.custom().setSocketTimeout(waitTimeMinute * 1000)
 				.setConnectTimeout(waitTimeMinute * 1000).setConnectionRequestTimeout(waitTimeMinute * 1000)
 				.setStaleConnectionCheckEnabled(true).build();
@@ -283,7 +283,7 @@ public class HttpServiceHelper {
 
 	public static String doHttpPOST(String serviceURL, Map<String, String> param, Map<String, String> headers,
 			Map<String, String> cookies) throws Exception {
-		logger.info("=====>>>>>接口请求<<<<<=====" + serviceURL);
+		logger.debug("=====>>>>>接口请求<<<<<=====" + serviceURL);
 		// CloseableHttpClient httpclient = HttpClients.createDefault();
 		RequestConfig defaultRequestConfig = RequestConfig.custom().setSocketTimeout(waitTimeMinute * 1000)
 				.setConnectTimeout(waitTimeMinute * 1000).setConnectionRequestTimeout(waitTimeMinute * 1000)
