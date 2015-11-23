@@ -24,7 +24,7 @@ public class MyJobSupport implements ISJobConstants, ISFrameworkConstants, ISTas
 	/**
 	 * 进程阻塞时间（分钟）
 	 */
-	protected int waitTimeMinute = 15;
+	protected int waitTimeMinute = 10;
 	/**
 	 * 进程阻塞时间（秒）
 	 */
