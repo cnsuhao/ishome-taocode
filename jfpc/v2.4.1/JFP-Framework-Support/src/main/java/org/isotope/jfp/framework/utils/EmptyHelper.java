@@ -25,7 +25,6 @@ public class EmptyHelper implements ISFrameworkConstants{
      *
      * @param str  the String to check, may be null
      * @return <code>true</code> if the String is null, empty or whitespace
-     * @since 2.0
      */
     public static boolean isBlank(String str) {
         int strLen;
@@ -58,7 +57,6 @@ public class EmptyHelper implements ISFrameworkConstants{
 	 * that commonly deals with Strings but generally has to iterate over
 	 * Objects since attributes may e.g. be primitive value objects as well.
 	 * @param str the candidate String
-	 * @since 3.2.1
 	 */
 	public static boolean isEmpty(Object str) {
 		return (str == null || "".equals(str));
@@ -99,7 +97,6 @@ public class EmptyHelper implements ISFrameworkConstants{
      *
      * @param str  the String to check, may be null
      * @return <code>true</code> if the String is null, empty or whitespace
-     * @since 2.0
      */
     public static boolean isNotBlank(String str) {
     	return !isBlank(str);
@@ -123,7 +120,6 @@ public class EmptyHelper implements ISFrameworkConstants{
 	 * that commonly deals with Strings but generally has to iterate over
 	 * Objects since attributes may e.g. be primitive value objects as well.
 	 * @param str the candidate String
-	 * @since 3.2.1
 	 */
 	public static boolean isNotEmpty(Object str) {
 		 return !isEmpty(str);

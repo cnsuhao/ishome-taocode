@@ -9,12 +9,7 @@ package org.isotope.jfp.framework.cache;
  * @since 2.0.0 2015/1/19
  */
 public interface ICacheService extends ISessionService {
-	//////////////////// 数据缓存////////////////////////////////
-	/**
-	 * 清空所有缓存
-	 * @return
-	 */
-	public boolean clear();
+
 	//////////////////// 数据缓存////////////////////////////////
 	/**
 	 * 保存数据到缓存中心 <br>

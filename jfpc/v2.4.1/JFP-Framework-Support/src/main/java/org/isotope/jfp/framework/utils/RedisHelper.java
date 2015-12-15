@@ -1,8 +1,14 @@
 package org.isotope.jfp.framework.utils;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 
 import com.alibaba.fastjson.JSON;
+
+import redis.clients.jedis.HostAndPort;
+import redis.clients.jedis.JedisCluster;
 
 /**
  * 缓存数据对象与字符串转换
@@ -17,6 +23,23 @@ public class RedisHelper implements ISFrameworkConstants {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+	    Set<HostAndPort> jedisClusterNodes = new HashSet<HostAndPort>();
+	    jedisClusterNodes.add(new HostAndPort("172.16.2.201", 7000));  
+        jedisClusterNodes.add(new HostAndPort("172.16.2.201", 7001));  
+        jedisClusterNodes.add(new HostAndPort("172.16.2.201", 7002));  
+        jedisClusterNodes.add(new HostAndPort("172.16.2.202", 7000));  
+        jedisClusterNodes.add(new HostAndPort("172.16.2.202", 7001));  
+        jedisClusterNodes.add(new HostAndPort("172.16.2.201", 7002));  
+        jedisClusterNodes.add(new HostAndPort("172.16.2.203", 7000));  
+        jedisClusterNodes.add(new HostAndPort("172.16.2.203", 7001)); 
+	    
+	    JedisCluster jc = new JedisCluster(jedisClusterNodes);  
+	    System.out.println( DateHelper.currentTimestamp());
+	    for(int i=0;i<100;i++){
+	        System.out.println(jc.get("EITSP:EITSP"+i));	    
+	    }
+	    System.out.println( DateHelper.currentTimestamp());
+	    
 //		String str = "aa//bb//cc//dd";
 //		System.out.println(str.substring(0,str.indexOf("//")));
 //		System.out.println(str.substring(str.indexOf("//")+2));
