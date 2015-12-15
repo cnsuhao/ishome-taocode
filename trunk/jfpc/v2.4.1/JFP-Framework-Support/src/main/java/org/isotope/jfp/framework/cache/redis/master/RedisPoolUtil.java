@@ -1,8 +1,16 @@
-package org.isotope.jfp.framework.cache.utils.redis;
+package org.isotope.jfp.framework.cache.redis.master;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.util.Pool;
-
+/**
+ * Redis操作工具类
+ * 
+ * @author fucy
+ * @version 2.4.1 2015/11/9
+ * @version 2.3.0 2015/6/11
+ * @since 2.3.0
+ * @see RedisChannelConfigBean
+ */
 public class RedisPoolUtil {
 	public static final String BEAN_NAME = "redisPoolUtil";
 	
@@ -27,8 +35,6 @@ public class RedisPoolUtil {
 			try {
 				jedis = jedisPool.getResource();
 			} catch (Exception e) {
-				if (jedis != null)
-					returnBrokenJedis(jedis);
 				e.printStackTrace();
 				try {
 					switch (failedNum) {
@@ -63,7 +69,6 @@ public class RedisPoolUtil {
 		try {
 			jedis = jedisPool.getResource();
 		} catch (Exception e) {
-			returnBrokenJedis(jedis);
 			e.printStackTrace();
 			try {
 				Thread.sleep(500);
@@ -73,24 +78,5 @@ public class RedisPoolUtil {
 			}
 		}
 		return jedis;
-	}
-
-	/**
-	 * return jedis to pool
-	 * 
-	 * @param jedis
-	 */
-	public void returnJedis(Jedis jedis) {
-		jedisPool.returnResource(jedis);
-	}
-
-	/**
-	 * return broken jedis to pool
-	 * 
-	 * @param jedis
-	 */
-	public void returnBrokenJedis(Jedis jedis) {
-		if (jedis != null)
-			jedisPool.returnBrokenResource(jedis);
 	}
 }
