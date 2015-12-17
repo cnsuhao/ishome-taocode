@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.isotope.jfp.framework.support.ISJedisSupport;
-import org.isotope.jfp.framework.utils.BeanFactoryHelper;
 import org.isotope.jfp.framework.utils.EmptyHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,13 +29,13 @@ public class JedisMasterUtil implements ISJedisSupport {
     }
 
     public JedisMasterUtil(RedisPoolUtil jedisPool) {
-        this.jedisPool = jedisPool;
+        this.redisPool = jedisPool;
     }
 
     /**
      * Redis服务器定义
      */
-    private RedisPoolUtil jedisPool;
+    private RedisPoolUtil redisPool;
 
     /*
      * (non-Javadoc)
@@ -44,8 +43,8 @@ public class JedisMasterUtil implements ISJedisSupport {
      * @see org.isotope.jfp.framework.cache.utils.redis.Jedis#getJedisPool()
      */
 
-    public RedisPoolUtil getJedisPool() {
-        return jedisPool;
+    public RedisPoolUtil getRedisPool() {
+        return redisPool;
     }
 
     /*
@@ -55,10 +54,8 @@ public class JedisMasterUtil implements ISJedisSupport {
      * isotope.jfp.framework.cache.utils.redis.RedisPoolUtil)
      */
 
-    public void setJedisPool(RedisPoolUtil jedisPool) {
-        if (jedisPool == null)
-            jedisPool = BeanFactoryHelper.getBean(RedisPoolUtil.BEAN_NAME);
-        this.jedisPool = jedisPool;
+    public void setRedisPool(RedisPoolUtil jedisPool) {
+        this.redisPool = jedisPool;
     }
 
     /*
@@ -68,7 +65,7 @@ public class JedisMasterUtil implements ISJedisSupport {
      */
 
     public Jedis getJedis() {
-        return jedisPool.getJedis(3);
+        return redisPool.getJedis(0);
     }
 
     /*
@@ -369,7 +366,7 @@ public class JedisMasterUtil implements ISJedisSupport {
                     jedis.expire(key, expireTime);
             } catch (Exception e) {
                 logger.error("add key[" + key + "] to redis error[" + failedNum + "] ", e);
-                add(key, value, expireTime, failedNum++);
+                add(key, value, expireTime, ++failedNum);
             } finally {
                 close(jedis);
             }

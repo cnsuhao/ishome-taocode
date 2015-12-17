@@ -40,8 +40,10 @@ import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.http.ssl.TrustStrategy;
 import org.apache.http.util.EntityUtils;
 import org.isotope.jfp.framework.beands.ObjectBean;
+import org.isotope.jfp.framework.beands.net.HttpProxyBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 /**
  * API请求通信
@@ -52,6 +54,7 @@ import org.slf4j.LoggerFactory;
  * @version 0.1.0 2014/2/8
  * 
  */
+@Service("HttpService")
 public class HttpServiceUtil {
 	private Logger logger = LoggerFactory.getLogger(HttpServiceUtil.class);
 	public int waitTimeMinute = 15;
@@ -62,6 +65,16 @@ public class HttpServiceUtil {
 
 	public void setWaitTimeMinute(int waitTimeMinute) {
 		this.waitTimeMinute = waitTimeMinute;
+	}
+	
+	private List<HttpProxyBean> proxys;
+
+	public List<HttpProxyBean> getProxys() {
+		return proxys;
+	}
+
+	public void setProxys(List<HttpProxyBean> proxys) {
+		this.proxys = proxys;
 	}
 
 	/**
@@ -82,7 +95,7 @@ public class HttpServiceUtil {
 	 */
 	public final String POST_PARAM = "jsonData";
 
-	public final String ENCODE_DEFAULT = "UTF-8";
+	public static final String ENCODE_DEFAULT = "UTF-8";
 
 	public String doHttpGET(String serviceURL) throws Exception {
 		return doHttpGET(serviceURL, null);
@@ -208,14 +221,14 @@ public class HttpServiceUtil {
 		return "";
 	}
 
-	public void main(String[] args) throws Exception {
+	public static void main(String[] args) throws Exception {
 
 		// 创建HttpClientBuilder
 		HttpClientBuilder httpClientBuilder = HttpClientBuilder.create();
 		// HttpClient
 		CloseableHttpClient closeableHttpClient = httpClientBuilder.build();
 
-		HttpHost proxy = new HttpHost("127.0.0.1", 808, "http");
+		HttpHost proxy = new HttpHost("27.221.31.66", 8080, "http");
 		RequestConfig config = RequestConfig.custom().setProxy(proxy).build();
 		HttpGet httpPost = new HttpGet("http://news.163.com");
 		httpPost.setConfig(config);
@@ -225,10 +238,11 @@ public class HttpServiceUtil {
 		proxyAuth.processChallenge(new BasicHeader(AUTH.PROXY_AUTH, "BASIC realm=default"));
 		BasicAuthCache authCache = new BasicAuthCache();
 		authCache.put(proxy, proxyAuth);
-		CredentialsProvider credsProvider = new BasicCredentialsProvider();
-		credsProvider.setCredentials(new AuthScope(proxy), new UsernamePasswordCredentials("fcy", "fcy"));
-		context.setAuthCache(authCache);
-		context.setCredentialsProvider(credsProvider);
+		
+//		CredentialsProvider credsProvider = new BasicCredentialsProvider();
+//		credsProvider.setCredentials(new AuthScope(proxy), new UsernamePasswordCredentials("fcy", "fcy"));
+//		context.setAuthCache(authCache);
+//		context.setCredentialsProvider(credsProvider);
 
 		CloseableHttpResponse response = closeableHttpClient.execute(httpPost, context);
 		int status = response.getStatusLine().getStatusCode();
