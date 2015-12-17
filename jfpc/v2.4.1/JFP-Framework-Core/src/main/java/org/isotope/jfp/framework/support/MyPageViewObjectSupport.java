@@ -1,6 +1,6 @@
 package org.isotope.jfp.framework.support;
 
-import org.isotope.jfp.framework.beands.common.FrameworkDataBean;
+import org.isotope.jfp.framework.beans.common.FrameworkDataBean;
 
 
 /**

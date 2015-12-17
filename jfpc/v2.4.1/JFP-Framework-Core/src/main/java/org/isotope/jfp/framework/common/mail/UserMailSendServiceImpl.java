@@ -1,6 +1,6 @@
 package org.isotope.jfp.framework.common.mail;
 
-import org.isotope.jfp.framework.beands.pub.MailBean;
+import org.isotope.jfp.framework.beans.pub.MailBean;
 import org.isotope.jfp.framework.common.CommonChannelConfig;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.constants.pub.ISMailConstants;

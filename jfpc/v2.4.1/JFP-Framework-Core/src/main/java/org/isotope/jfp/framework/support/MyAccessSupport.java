@@ -1,7 +1,7 @@
 package org.isotope.jfp.framework.support;
 
-import org.isotope.jfp.framework.beands.access.BaseHAO;
-import org.isotope.jfp.framework.beands.common.RESTResultBean;
+import org.isotope.jfp.framework.beans.access.BaseHAO;
+import org.isotope.jfp.framework.beans.common.RESTResultBean;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.key.common.BussinessKeyService;
 import org.isotope.jfp.framework.utils.EmptyHelper;

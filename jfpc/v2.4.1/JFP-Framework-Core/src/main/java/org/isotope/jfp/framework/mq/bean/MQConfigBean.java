@@ -1,6 +1,6 @@
 package org.isotope.jfp.framework.mq.bean;
 
-import org.isotope.jfp.framework.beands.ObjectBean;
+import org.isotope.jfp.framework.beans.ObjectBean;
 
 /**
  * MQ配置信息

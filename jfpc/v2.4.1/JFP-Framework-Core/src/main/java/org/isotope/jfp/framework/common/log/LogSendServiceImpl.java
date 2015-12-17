@@ -1,6 +1,6 @@
 package org.isotope.jfp.framework.common.log;
 
-import org.isotope.jfp.framework.beands.pub.LogBean;
+import org.isotope.jfp.framework.beans.pub.LogBean;
 import org.isotope.jfp.framework.common.CommonChannelConfig;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.constants.pub.ISLogConstants;
