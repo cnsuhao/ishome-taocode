@@ -11,7 +11,7 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
-import org.isotope.jfp.framework.beands.ObjectBean;
+import org.isotope.jfp.framework.beans.ObjectBean;
 
 /**
  * 基于XML配置文件，映射内容到Bean

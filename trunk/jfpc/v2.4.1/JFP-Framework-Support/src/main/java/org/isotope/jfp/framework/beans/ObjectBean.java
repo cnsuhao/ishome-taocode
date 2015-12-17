@@ -1,4 +1,4 @@
-package org.isotope.jfp.framework.beands;
+package org.isotope.jfp.framework.beans;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.isotope.jfp.framework.utils.DateHelper;

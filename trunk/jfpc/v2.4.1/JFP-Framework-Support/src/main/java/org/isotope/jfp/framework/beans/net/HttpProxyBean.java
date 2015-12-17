@@ -1,6 +1,6 @@
-package org.isotope.jfp.framework.beands.net;
+package org.isotope.jfp.framework.beans.net;
 
-import org.isotope.jfp.framework.beands.ObjectBean;
+import org.isotope.jfp.framework.beans.ObjectBean;
 
 /**
  * HTTP代理

@@ -2,7 +2,7 @@ package org.isotope.jfp.framework.support;
 
 import java.util.List;
 
-import org.isotope.jfp.framework.beands.ObjectBean;
+import org.isotope.jfp.framework.beans.ObjectBean;
 
 
 /**

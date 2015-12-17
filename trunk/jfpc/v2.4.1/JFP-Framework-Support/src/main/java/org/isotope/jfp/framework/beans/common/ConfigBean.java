@@ -1,8 +1,8 @@
-package org.isotope.jfp.framework.beands.common;
+package org.isotope.jfp.framework.beans.common;
 
 import javax.inject.Named;
 
-import org.isotope.jfp.framework.beands.ObjectBean;
+import org.isotope.jfp.framework.beans.ObjectBean;
 
 /**
  * 参数配置信息

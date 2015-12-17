@@ -1,4 +1,4 @@
-package org.isotope.jfp.framework.beands.pub;
+package org.isotope.jfp.framework.beans.pub;
 
 import javax.inject.Named;
 

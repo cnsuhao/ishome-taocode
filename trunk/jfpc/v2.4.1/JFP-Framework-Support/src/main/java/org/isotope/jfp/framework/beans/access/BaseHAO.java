@@ -1,6 +1,6 @@
-package org.isotope.jfp.framework.beands.access;
+package org.isotope.jfp.framework.beans.access;
 
-import org.isotope.jfp.framework.beands.pub.MobileBean;
+import org.isotope.jfp.framework.beans.pub.MobileBean;
 import org.isotope.jfp.framework.utils.PKHelper;
 
 /**

@@ -29,7 +29,7 @@ import org.apache.http.protocol.HttpContext;
 import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.http.ssl.TrustStrategy;
 import org.apache.http.util.EntityUtils;
-import org.isotope.jfp.framework.beands.ObjectBean;
+import org.isotope.jfp.framework.beans.ObjectBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,6 +1,6 @@
 package org.isotope.jfp.framework.support.common;
 
-import org.isotope.jfp.framework.beands.pub.PushBean;
+import org.isotope.jfp.framework.beans.pub.PushBean;
 
 /**
  * 手机推送

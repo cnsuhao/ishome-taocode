@@ -1,6 +1,6 @@
 package org.isotope.jfp.framework.support.common;
 
-import org.isotope.jfp.framework.beands.pub.LogBean;
+import org.isotope.jfp.framework.beans.pub.LogBean;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 
 /**
