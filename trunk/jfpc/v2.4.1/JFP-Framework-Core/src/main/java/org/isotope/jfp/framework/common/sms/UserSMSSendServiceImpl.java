@@ -1,6 +1,6 @@
 package org.isotope.jfp.framework.common.sms;
 
-import org.isotope.jfp.framework.beands.pub.SMSBean;
+import org.isotope.jfp.framework.beans.pub.SMSBean;
 import org.isotope.jfp.framework.common.CommonChannelConfig;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.constants.pub.ISSMSConstants;

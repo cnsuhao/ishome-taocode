@@ -1,6 +1,6 @@
 package org.isotope.jfp.framework.common.push;
 
-import org.isotope.jfp.framework.beands.pub.PushBean;
+import org.isotope.jfp.framework.beans.pub.PushBean;
 import org.isotope.jfp.framework.common.CommonChannelConfig;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.constants.pub.ISPushConstant;

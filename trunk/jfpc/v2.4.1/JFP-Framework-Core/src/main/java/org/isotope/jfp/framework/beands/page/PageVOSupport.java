@@ -5,8 +5,8 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.isotope.jfp.framework.beands.ObjectBean;
-import org.isotope.jfp.framework.beands.common.FrameworkDataBean;
+import org.isotope.jfp.framework.beans.ObjectBean;
+import org.isotope.jfp.framework.beans.common.FrameworkDataBean;
 import org.isotope.jfp.framework.mybatis.plugin.dialect.DefaultDialect;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
