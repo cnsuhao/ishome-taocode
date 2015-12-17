@@ -14,7 +14,7 @@ import org.isotope.jfp.framework.cache.ICacheService;
 public class MyMaps implements ICacheService {
 
 	HashMap<String, Object> cache = new HashMap<String, Object>();
-	@Override
+	
 	public boolean clear(){
 		cache.clear();
 		return true;

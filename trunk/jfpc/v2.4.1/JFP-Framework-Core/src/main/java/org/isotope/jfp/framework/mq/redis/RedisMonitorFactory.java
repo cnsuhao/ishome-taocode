@@ -2,7 +2,7 @@ package org.isotope.jfp.framework.mq.redis;
 
 import java.util.ArrayList;
 
-import org.isotope.jfp.framework.cache.utils.redis.RedisPoolUtil;
+import org.isotope.jfp.framework.cache.redis.master.RedisPoolUtil;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.mq.redis.support.RedisChannelServiceThreadSupport;
 import org.isotope.jfp.framework.utils.EmptyHelper;

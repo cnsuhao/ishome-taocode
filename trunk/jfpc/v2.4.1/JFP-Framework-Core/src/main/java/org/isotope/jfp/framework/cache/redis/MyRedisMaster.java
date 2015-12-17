@@ -1,32 +1,34 @@
-package org.isotope.jfp.framework.mq.redis;
+package org.isotope.jfp.framework.cache.redis;
 
 import java.util.List;
 
 import org.isotope.jfp.framework.cache.ICacheService;
-import org.isotope.jfp.framework.cache.utils.redis.JedisUtil;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
+import org.isotope.jfp.framework.support.ISJedisSupport;
 import org.isotope.jfp.framework.utils.EmptyHelper;
 
 import com.alibaba.fastjson.JSON;
 
 /**
- * Redis缓存实现
+ * Redis缓存实现<br>
+ * 面向开发人员使用
  * 
+ * @version 2.4.2 2015/12/10
  * @version 2.4.1 2015/11/9
  * @since 20150728
  *
  */
-public class MyRedis implements ICacheService, ISFrameworkConstants {
+public class MyRedisMaster implements ICacheService, ISFrameworkConstants {
 
-	public MyRedis() {
+	public MyRedisMaster() {
 
 	}
-	public MyRedis(JedisUtil jedisUtil) {
-		this.jedisUtil = jedisUtil;
+	public MyRedisMaster(ISJedisSupport jedisSupport) {
+		this.jedisSupport = jedisSupport;
 	}
 
-	public MyRedis(JedisUtil jedisUtil, int waitTime) {
-		this.jedisUtil = jedisUtil;
+	public MyRedisMaster(ISJedisSupport jedisSupport, int waitTime) {
+		this.jedisSupport = jedisSupport;
 		this.waitTime = waitTime;
 	}
 
@@ -40,17 +42,15 @@ public class MyRedis implements ICacheService, ISFrameworkConstants {
 		this.waitTime = waitTime;
 	}
 
-	JedisUtil jedisUtil;
+	ISJedisSupport jedisSupport;
 
-	public JedisUtil getjedisUtil() {
-		return jedisUtil;
-	}
-
-	public void setjedisUtil(JedisUtil jedisUtil) {
-		this.jedisUtil = jedisUtil;
-	}
-
-	/**
+	public ISJedisSupport getJedisSupport() {
+        return jedisSupport;
+    }
+    public void setJedisSupport(ISJedisSupport jedisSupport) {
+        this.jedisSupport = jedisSupport;
+    }
+    /**
 	 * @param args
 	 */
 	public static void main(String[] args) {
@@ -79,21 +79,15 @@ public class MyRedis implements ICacheService, ISFrameworkConstants {
 		// e.printStackTrace();
 		// }
 	}
-
-	@Override
-	public boolean clear(){
-		jedisUtil.clear();
-		return true;
-	}
 	
 	@Override
 	public boolean putObject(String key, Object value) {
-		jedisUtil.add(key, getStringToRedis(value), waitTime);
+		jedisSupport.add(key, getStringToRedis(value), waitTime);
 		return false;
 	}
 
 	public boolean putObject(String key, Object value, int expireTimeWithSecond, boolean translation) {
-		jedisUtil.add(key, getStringToRedis(value, translation), expireTimeWithSecond);
+		jedisSupport.add(key, getStringToRedis(value, translation), expireTimeWithSecond);
 		return false;
 	}
 
@@ -152,27 +146,27 @@ public class MyRedis implements ICacheService, ISFrameworkConstants {
 
 	@Override
 	public Object getObject(String key) {
-		return getClassFromRedis(jedisUtil.get(key));
+		return getClassFromRedis(jedisSupport.get(key));
 	}
 
 	@Override
 	public Object getObject(String key, boolean translation) {
-		return getClassFromRedis(jedisUtil.get(key), translation);
+		return getClassFromRedis(jedisSupport.get(key), translation);
 	}
 
 	@Override
 	public Object deleteObject(String key) {
-		return getClassFromRedis(jedisUtil.del(key));
+		return getClassFromRedis(jedisSupport.del(key));
 	}
 
 	@Override
 	public Object deleteObject(String key, boolean translation) {
-		return getClassFromRedis(jedisUtil.del(key), translation);
+		return getClassFromRedis(jedisSupport.del(key), translation);
 	}
 
 	@Override
 	public List<String> getAllObjectInMap(String key) {
-		return jedisUtil.hset(key);
+		return jedisSupport.hset(key);
 	}
 
 	/**
@@ -182,12 +176,12 @@ public class MyRedis implements ICacheService, ISFrameworkConstants {
 	 * @return
 	 */
 	public boolean addObjectInMap(String rkey, String mkey, Object value) {
-		return jedisUtil.hset(rkey, mkey, getStringToRedis(value));
+		return jedisSupport.hset(rkey, mkey, getStringToRedis(value));
 	}
 
 	@Override
 	public boolean addObjectInMap(String rkey, String mkey, Object value, boolean translation) {
-		return jedisUtil.hset(rkey, mkey, getStringToRedis(value, translation));
+		return jedisSupport.hset(rkey, mkey, getStringToRedis(value, translation));
 	}
 
 	/**
@@ -197,13 +191,13 @@ public class MyRedis implements ICacheService, ISFrameworkConstants {
 	 * @return
 	 */
 	public Object removeObjectInMap(String rkey, String mkey) {
-		String value = jedisUtil.hdel(rkey, mkey);
+		String value = jedisSupport.hdel(rkey, mkey);
 		return getClassFromRedis(value);
 	}
 
 	@Override
 	public Object removeObjectInMap(String rkey, String mkey, boolean translation) {
-		String value = jedisUtil.hdel(rkey, mkey);
+		String value = jedisSupport.hdel(rkey, mkey);
 		return getClassFromRedis(value, translation);
 	}
 
@@ -214,35 +208,35 @@ public class MyRedis implements ICacheService, ISFrameworkConstants {
 	 * @return
 	 */
 	public Object findObjectInMap(String rkey, String mkey) {
-		String value = jedisUtil.hget(rkey, mkey);
+		String value = jedisSupport.hget(rkey, mkey);
 		return getClassFromRedis(value);
 	}
 
 	@Override
 	public Object findObjectInMap(String rkey, String mkey, boolean translation) {
-		String value = jedisUtil.hget(rkey, mkey);
+		String value = jedisSupport.hget(rkey, mkey);
 		return getClassFromRedis(value, translation);
 	}
 
 	@Override
 	public long sizeOfMap(String key) {
-		return jedisUtil.hlen(key);
+		return jedisSupport.hlen(key);
 	}
 
 	@Override
 	public long sizeOfList(String key) {
-		return jedisUtil.llen(key);
+		return jedisSupport.llen(key);
 	}
 
 	@Override
 	public boolean offerObjectInList(String key, Object value) {
-		jedisUtil.listAdd(key, getStringToRedis(value));
+		jedisSupport.listAdd(key, getStringToRedis(value));
 		return true;
 	}
 
 	@Override
 	public boolean offerObjectInList(String key, Object value, boolean translation) {
-		jedisUtil.listAdd(key, getStringToRedis(value, translation));
+		jedisSupport.listAdd(key, getStringToRedis(value, translation));
 		return true;
 	}
 
@@ -254,7 +248,7 @@ public class MyRedis implements ICacheService, ISFrameworkConstants {
 	 */
 	@Override
 	public Object peekFirstObjectInList(String key) {
-		return jedisUtil.blistPop(key, waitTime);
+		return jedisSupport.blistPop(key, waitTime);
 	}
 
 	/**
@@ -265,19 +259,19 @@ public class MyRedis implements ICacheService, ISFrameworkConstants {
 	 */
 	@Override
 	public Object peekFirstObjectInList(String key, boolean translation) {
-		String value = jedisUtil.blistPop(key, waitTime);
+		String value = jedisSupport.blistPop(key, waitTime);
 		return getClassFromRedis(value, translation);
 	}
 
 	@Override
 	public Object pollFirstObjectInList(String key) {
-		String value = jedisUtil.listPop(key);
+		String value = jedisSupport.listPop(key);
 		return getClassFromRedis(value);
 	}
 
 	@Override
 	public Object pollFirstObjectInList(String key, boolean translation) {
-		String value = jedisUtil.listPop(key);
+		String value = jedisSupport.listPop(key);
 		return getClassFromRedis(value, translation);
 	}
 
