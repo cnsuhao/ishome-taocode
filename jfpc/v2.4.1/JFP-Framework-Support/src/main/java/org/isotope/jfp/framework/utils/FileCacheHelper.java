@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
-import org.isotope.jfp.framework.beands.common.FrameworkDataBean;
+import org.isotope.jfp.framework.beans.common.FrameworkDataBean;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 
 /**

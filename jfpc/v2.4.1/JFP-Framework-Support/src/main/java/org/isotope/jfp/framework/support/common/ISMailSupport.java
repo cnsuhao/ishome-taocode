@@ -1,6 +1,6 @@
 package org.isotope.jfp.framework.support.common;
 
-import org.isotope.jfp.framework.beands.pub.MailBean;
+import org.isotope.jfp.framework.beans.pub.MailBean;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 
 /**

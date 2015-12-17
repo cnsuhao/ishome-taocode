@@ -1,6 +1,6 @@
-package org.isotope.jfp.framework.beands.pub;
+package org.isotope.jfp.framework.beans.pub;
 
-import org.isotope.jfp.framework.beands.common.FrameworkDataBean;
+import org.isotope.jfp.framework.beans.common.FrameworkDataBean;
 
 /**
  * 短信接口Bean

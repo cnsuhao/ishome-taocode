@@ -1,11 +1,11 @@
-package org.isotope.jfp.framework.beands.common;
+package org.isotope.jfp.framework.beans.common;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Named;
 
-import org.isotope.jfp.framework.beands.ObjectBean;
+import org.isotope.jfp.framework.beans.ObjectBean;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 
 import com.alibaba.fastjson.JSONArray;

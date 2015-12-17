@@ -1,4 +1,4 @@
-package org.isotope.jfp.framework.beands;
+package org.isotope.jfp.framework.beans;
 
 /**
  * 基础属性定义类，系统底层属性控制
