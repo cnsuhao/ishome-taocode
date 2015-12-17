@@ -27,13 +27,13 @@ public interface ISDatabaseSupport extends ISFrameworkConstants {
 	 * @param formParam
 	 * @return
 	 */
-	List<FrameworkDataBean> doSelectPage(PageVOSupport formParam);
+	List<? extends FrameworkDataBean> doSelectPage(PageVOSupport formParam);
 	/**
 	 * 全体查询
 	 * @param formParam
 	 * @return
 	 */
-	List<FrameworkDataBean> doSelectPage(MyDataBaseObjectSupport paramBean);
+	List<? extends FrameworkDataBean> doSelectPage(MyDataBaseObjectSupport paramBean);
 	///////////////////////////////////// 增删改查（CRUD）///////////////////////////////////
 
 	/**

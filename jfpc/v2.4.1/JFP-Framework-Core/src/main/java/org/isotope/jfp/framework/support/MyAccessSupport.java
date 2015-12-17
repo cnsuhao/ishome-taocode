@@ -5,7 +5,6 @@ import org.isotope.jfp.framework.beands.common.RESTResultBean;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.key.common.BussinessKeyService;
 import org.isotope.jfp.framework.utils.EmptyHelper;
-import org.isotope.jfp.framework.utils.HttpServiceHelper;
 import org.isotope.jfp.framework.utils.RedisHelper;
 
 import com.alibaba.fastjson.JSON;
@@ -27,14 +26,14 @@ public class MyAccessSupport implements ISFrameworkConstants {
 
 	public static final String TIMEOUT_MESSAGE = "网络访问超时";
 	public static final String SUCCESS_MESSAGE = "处理成功";
-	public static int waitTimeMinute = 15;
+	public int waitTimeMinute = 15;
 
 	public int getWaitTimeMinute() {
 		return waitTimeMinute;
 	}
 
 	public void setWaitTimeMinute(int waitTimeMinute) {
-		HttpServiceHelper.waitTimeMinute = waitTimeMinute;
+		this.waitTimeMinute = waitTimeMinute;
 	}
 
 	// /////////////////////////////////////////////////////////////////////////////
