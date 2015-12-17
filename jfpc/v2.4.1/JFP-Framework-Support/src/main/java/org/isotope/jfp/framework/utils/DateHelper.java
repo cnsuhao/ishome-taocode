@@ -1,8 +1,12 @@
 package org.isotope.jfp.framework.utils;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.regex.Pattern;
 
 /**
  * 日期格式化
@@ -12,7 +16,47 @@ import java.util.Date;
  * @version 0.1.0 2014/2/8
  */
 public class DateHelper {
-
+	/**
+     * 返回日期格式的字符串
+     * @param dateStr
+     * @param format
+     * @return
+     */
+    public static String formatDateBySpecified(String dateStr,String format){        
+    	HashMap<String, String> dateRegFormat = new HashMap<String, String>();   
+    	//\w{3}\s\w{3}\s\d{2}\s\d{2}:\d{2}:\d{2}\s+\w+\s+\d{4}
+    	dateRegFormat.put("\\w{3}\\s\\w{3}\\s\\d{2}\\s\\d{2}:\\d{2}:\\d{2}\\s+\\w+\\s+\\d{4}", "EEE MMM dd HH:mm:ss Z yyyy");
+    	dateRegFormat.put("\\d{4}年\\d{1,2}月\\d{1,2}日", "yyyy年MM月dd");
+    	dateRegFormat.put("\\d{4}-\\d{1,2}-\\d{1,2}", "yyyy-MM-dd");
+    	dateRegFormat.put("\\d{4}-\\d{1,2}-\\d{1,2}\\s\\d{2}:\\d{2}:\\d{2}\\.\\d{6}", "yyyy-MM-dd"); //2007-01-29 00:00:00.000000
+    	//Jul 20, 2015 12:00:00 AM
+    	dateRegFormat.put("\\w{3}\\s\\w{1,2},\\s\\d{4}\\s\\d{2}:\\d{2}:\\d{2}\\s\\w{2}", "MMM dd, yyyy hh:mm:ss a");
+    	//1999-12-08T00:00:00
+    	dateRegFormat.put("\\d{4}-\\d{1,2}-\\d{1,2}T\\d{2}:\\d{2}:\\d{2}", "yyyy-MM-dd'T'HH:mm:ss");//
+    	//20151112
+    	dateRegFormat.put("\\d{8}","yyyyMMdd");
+    	DateFormat ress_form = new SimpleDateFormat(format);
+    	String strSuccess= null;   
+    	DateFormat oldForm = null;
+    	try {       
+    		for (String key : dateRegFormat.keySet()) {      
+    			if (Pattern.compile(key).matcher(dateStr).matches()) {  
+    					if("\\w{3}\\s\\w{3}\\s\\d{2}\\s\\d{2}:\\d{2}:\\d{2}\\s+\\w+\\s+\\d{4}".equals(key)){
+    						oldForm = new SimpleDateFormat(dateRegFormat.get(key),Locale.UK);
+    					}else if("\\w{3}\\s\\w{1,2},\\s\\d{4}\\s\\d{2}:\\d{2}:\\d{2}\\s\\w{2}".equals(key)){
+    						oldForm = new SimpleDateFormat(dateRegFormat.get(key),Locale.ENGLISH);
+    					}else{
+    						oldForm = new SimpleDateFormat(dateRegFormat.get(key));
+    					}
+    					strSuccess = ress_form.format(oldForm.parse(dateStr));
+    				break;         
+    				}      
+    			} 
+    	}catch(Exception e){
+    		return null;
+    	}
+		return strSuccess;  
+    }
     /**
      * 系统时间戳
      * 

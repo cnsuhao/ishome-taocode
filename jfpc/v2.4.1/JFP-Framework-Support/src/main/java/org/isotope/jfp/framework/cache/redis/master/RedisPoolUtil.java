@@ -26,7 +26,7 @@ public class RedisPoolUtil {
 	 * @return
 	 */
 	public Jedis getJedis() {
-		return getJedis(3);
+		return getJedis(0);
 	}
 
 	public Jedis getJedis(int failedNum) {

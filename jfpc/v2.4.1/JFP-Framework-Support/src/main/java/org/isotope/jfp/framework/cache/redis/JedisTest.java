@@ -10,7 +10,7 @@ import redis.clients.jedis.JedisCluster;
 public class JedisTest {
     public static void main(String[] args) {
 
-        Jedis jedis = new Jedis("127.0.0.1", 6379);
+        Jedis jedis = new Jedis("172.16.2.200", 6379);
         jedis.connect();
         int i = 0;
         boolean a = true;
@@ -23,7 +23,7 @@ public class JedisTest {
             } catch (Exception e) {
                 e.printStackTrace();
                 try {
-                    jedis = new Jedis("127.0.0.1", 6379);
+                    jedis = new Jedis("172.16.2.200", 6379);
                     jedis.connect();
                 } catch (Exception ex) {
 
