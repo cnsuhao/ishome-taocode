@@ -20,6 +20,9 @@ public class MyJobSupport implements ISJobConstants, ISFrameworkConstants, ISTas
 	// 缓存队列
 	@Resource
 	protected ICacheService myMqService;
+	// 缓存队列
+	@Resource
+	protected MyHttpServiceSupport myHttpService;
 
 	/**
 	 * 进程阻塞时间（分钟）
