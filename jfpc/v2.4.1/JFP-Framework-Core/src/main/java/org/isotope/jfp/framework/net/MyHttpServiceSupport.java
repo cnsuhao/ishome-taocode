@@ -44,7 +44,6 @@ import org.springframework.stereotype.Service;
  * @version 0.1.0 2014/2/8
  * 
  */
-@Service("HttpService")
 public class MyHttpServiceSupport {
 	private Logger logger = LoggerFactory.getLogger(MyHttpServiceSupport.class);
 	private int waitTimeMinute = 15;
