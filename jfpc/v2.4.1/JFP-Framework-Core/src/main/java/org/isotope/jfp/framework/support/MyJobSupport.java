@@ -6,6 +6,8 @@ import org.isotope.jfp.framework.biz.ISTask;
 import org.isotope.jfp.framework.cache.ICacheService;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.constants.pub.ISJobConstants;
+import org.isotope.jfp.framework.net.ISHttpProxy;
+import org.isotope.jfp.framework.net.MyHttpServiceSupport;
 import org.isotope.jfp.framework.utils.EmptyHelper;
 
 /**
@@ -23,7 +25,9 @@ public class MyJobSupport implements ISJobConstants, ISFrameworkConstants, ISTas
 	// 缓存队列
 	@Resource
 	protected MyHttpServiceSupport myHttpService;
-
+	public void setHttpProxy(ISHttpProxy httpProxy) {
+		myHttpService.setHttpProxy(httpProxy);
+	}
 	/**
 	 * 进程阻塞时间（分钟）
 	 */
