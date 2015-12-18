@@ -1,7 +1,5 @@
 package org.isotope.jfp.framework.support;
 
-import javax.annotation.Resource;
-
 import org.isotope.jfp.framework.biz.ISTask;
 import org.isotope.jfp.framework.cache.ICacheService;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
@@ -19,12 +17,17 @@ import org.isotope.jfp.framework.utils.EmptyHelper;
  */
 public class MyJobSupport implements ISJobConstants, ISFrameworkConstants, ISTask {
 
-	// 缓存队列
-	@Resource
+	// 缓存队列	
 	protected ICacheService myMqService;
-	// 缓存队列
-	@Resource
-	protected MyHttpServiceSupport myHttpService;
+	public ICacheService getMqService() {
+		return myMqService;
+	}
+
+	public void setMqService(ICacheService mqService) {
+		this.myMqService = mqService;
+	}
+	// 缓存队列	
+	protected MyHttpServiceSupport myHttpService = new MyHttpServiceSupport();
 	public void setHttpProxy(ISHttpProxy httpProxy) {
 		myHttpService.setHttpProxy(httpProxy);
 	}
