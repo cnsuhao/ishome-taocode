@@ -1,4 +1,4 @@
-package org.isotope.jfp.framework.support;
+package org.isotope.jfp.framework.net;
 
 import java.lang.reflect.Method;
 import java.security.cert.CertificateException;
@@ -12,11 +12,7 @@ import javax.net.ssl.SSLContext;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
 import org.apache.http.NameValuePair;
-import org.apache.http.auth.AUTH;
-import org.apache.http.auth.AuthScope;
-import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.CookieStore;
-import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -25,14 +21,9 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.cookie.Cookie;
-import org.apache.http.impl.auth.BasicScheme;
-import org.apache.http.impl.client.BasicAuthCache;
 import org.apache.http.impl.client.BasicCookieStore;
-import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
@@ -40,7 +31,6 @@ import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.http.ssl.TrustStrategy;
 import org.apache.http.util.EntityUtils;
 import org.isotope.jfp.framework.beans.ObjectBean;
-import org.isotope.jfp.framework.beans.net.HttpProxyBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -57,7 +47,7 @@ import org.springframework.stereotype.Service;
 @Service("HttpService")
 public class MyHttpServiceSupport {
 	private Logger logger = LoggerFactory.getLogger(MyHttpServiceSupport.class);
-	public int waitTimeMinute = 15;
+	private int waitTimeMinute = 15;
 
 	public int getWaitTimeMinute() {
 		return waitTimeMinute;
@@ -66,20 +56,21 @@ public class MyHttpServiceSupport {
 	public void setWaitTimeMinute(int waitTimeMinute) {
 		this.waitTimeMinute = waitTimeMinute;
 	}
-	
-	HttpProxyBean httpProxy;
-	public HttpProxyBean getHttpProxy() {
+
+	private ISHttpProxy httpProxy;
+
+	public ISHttpProxy getHttpProxy() {
 		return httpProxy;
 	}
 
-	public void setHttpProxy(HttpProxyBean httpProxy) {
+	public void setHttpProxy(ISHttpProxy httpProxy) {
 		this.httpProxy = httpProxy;
 	}
 
 	/**
 	 * 请求过程中使用的cookies内容
 	 */
-	List<Cookie> curCookies = new ArrayList<Cookie>();
+	private List<Cookie> curCookies = new ArrayList<Cookie>();
 
 	public List<Cookie> getCookies() {
 		return curCookies;
@@ -116,6 +107,11 @@ public class MyHttpServiceSupport {
 			CloseableHttpResponse response;
 			// 创建上下文环境
 			HttpContext context = new BasicHttpContext();
+
+			if (httpProxy != null) {
+				context = httpProxy.loadHttpProxy().getHttpContext();
+			}
+
 			CookieStore cookieStore = new BasicCookieStore();
 			// 设置cookie
 			if (curCookies != null && curCookies.size() > 0) {
@@ -188,10 +184,27 @@ public class MyHttpServiceSupport {
 			// 设定传输编码
 			httpPost.setEntity(new UrlEncodedFormEntity(nvps, ENCODE_DEFAULT));
 
-			CloseableHttpResponse response = httpclient.execute(httpPost);
+			CloseableHttpResponse response;
 			// 创建上下文环境
 			HttpContext context = new BasicHttpContext();
+
+			if (httpProxy != null) {
+				context = httpProxy.loadHttpProxy().getHttpContext();
+			}
+
 			CookieStore cookieStore = new BasicCookieStore();
+			// 设置cookie
+			if (curCookies != null && curCookies.size() > 0) {
+				for (Cookie cookie : curCookies) {
+					cookieStore.addCookie(cookie);
+				}
+			}
+
+			context.setAttribute(HttpClientContext.COOKIE_STORE, cookieStore);
+			response = httpclient.execute(httpPost, context);
+			// 创建上下文环境
+			context = new BasicHttpContext();
+			cookieStore = new BasicCookieStore();
 			// 设置cookie
 			if (curCookies != null && curCookies.size() > 0) {
 				for (Cookie cookie : curCookies) {
@@ -222,28 +235,55 @@ public class MyHttpServiceSupport {
 
 	public static void main(String[] args) throws Exception {
 
+		// HttpHost proxy = new HttpHost("27.221.31.66", 8080, "http");
+		// RequestConfig config =
+		// RequestConfig.custom().setProxy(proxy).build();
+
+		// HttpClientContext context = HttpClientContext.create();
+		// BasicScheme proxyAuth = new BasicScheme();
+		// proxyAuth.processChallenge(new BasicHeader(AUTH.PROXY_AUTH, "BASIC
+		// realm=default"));
+		// BasicAuthCache authCache = new BasicAuthCache();
+		// authCache.put(proxy, proxyAuth);
+		// CredentialsProvider credsProvider = new BasicCredentialsProvider();
+		// credsProvider.setCredentials(new AuthScope(proxy), new
+		// UsernamePasswordCredentials("fcy", "fcy"));
+		// context.setAuthCache(authCache);
+		// context.setCredentialsProvider(credsProvider);
+		//
+		//
+		// httpPost.setConfig(config);
+
+		String serviceURL = "http://mail.163.com";
+		int waitTimeMinute = 15;
 		// 创建HttpClientBuilder
 		HttpClientBuilder httpClientBuilder = HttpClientBuilder.create();
+		HttpHost proxy = new HttpHost("27.221.31.66", 8080, "http");
+		RequestConfig defaultRequestConfig = RequestConfig.custom().setSocketTimeout(waitTimeMinute * 1000)
+				.setConnectTimeout(waitTimeMinute * 1000).setConnectionRequestTimeout(waitTimeMinute * 1000)
+				.setProxy(proxy).setStaleConnectionCheckEnabled(true).build();
+		httpClientBuilder.setDefaultRequestConfig(defaultRequestConfig);
+
+		if (serviceURL.indexOf("https") != -1) {
+			try {
+				SSLContext sslContext = new SSLContextBuilder().loadTrustMaterial(null, new TrustStrategy() {
+					// 信任所有证书
+					public boolean isTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+						return true;
+					}
+				}).build();
+				SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslContext);
+
+				httpClientBuilder.setSSLSocketFactory(sslsf);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		// HttpClient
 		CloseableHttpClient closeableHttpClient = httpClientBuilder.build();
 
-		HttpHost proxy = new HttpHost("27.221.31.66", 8080, "http");
-		RequestConfig config = RequestConfig.custom().setProxy(proxy).build();
-		HttpGet httpPost = new HttpGet("http://news.163.com");
-		httpPost.setConfig(config);
-
-		HttpClientContext context = HttpClientContext.create();
-		BasicScheme proxyAuth = new BasicScheme();
-		proxyAuth.processChallenge(new BasicHeader(AUTH.PROXY_AUTH, "BASIC realm=default"));
-		BasicAuthCache authCache = new BasicAuthCache();
-		authCache.put(proxy, proxyAuth);
-		
-//		CredentialsProvider credsProvider = new BasicCredentialsProvider();
-//		credsProvider.setCredentials(new AuthScope(proxy), new UsernamePasswordCredentials("fcy", "fcy"));
-//		context.setAuthCache(authCache);
-//		context.setCredentialsProvider(credsProvider);
-
-		CloseableHttpResponse response = closeableHttpClient.execute(httpPost, context);
+		HttpGet httpPost = new HttpGet("http://mail.163.com");
+		CloseableHttpResponse response = closeableHttpClient.execute(httpPost);
 		int status = response.getStatusLine().getStatusCode();
 		if (status >= 200 && status < 300) {
 			HttpEntity entity = response.getEntity();
@@ -261,10 +301,20 @@ public class MyHttpServiceSupport {
 	 * @return
 	 */
 	protected CloseableHttpClient getCloseableHttpClient(String serviceURL) {
+		// 创建HttpClientBuilder
+		HttpClientBuilder httpClientBuilder = HttpClientBuilder.create();
 
-		RequestConfig defaultRequestConfig = RequestConfig.custom().setSocketTimeout(waitTimeMinute * 1000)
-				.setConnectTimeout(waitTimeMinute * 1000).setConnectionRequestTimeout(waitTimeMinute * 1000)
-				.setStaleConnectionCheckEnabled(true).build();
+		RequestConfig.Builder requestConfigBuilder = RequestConfig.custom();
+		requestConfigBuilder.setSocketTimeout(waitTimeMinute * 1000);
+		requestConfigBuilder.setConnectTimeout(waitTimeMinute * 1000);
+		requestConfigBuilder.setConnectionRequestTimeout(waitTimeMinute * 1000);
+		requestConfigBuilder.setStaleConnectionCheckEnabled(true);
+		// 代理httpProxy
+		if (httpProxy != null) {
+			requestConfigBuilder.setProxy(httpProxy.loadHttpProxy().getHttpProxy());
+		}
+
+		httpClientBuilder.setDefaultRequestConfig(requestConfigBuilder.build());
 		if (serviceURL.indexOf("https") != -1) {
 			try {
 				SSLContext sslContext = new SSLContextBuilder().loadTrustMaterial(null, new TrustStrategy() {
@@ -274,14 +324,13 @@ public class MyHttpServiceSupport {
 					}
 				}).build();
 				SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslContext);
-				CloseableHttpClient httpclient = HttpClients.custom().setDefaultRequestConfig(defaultRequestConfig)
-						.setSSLSocketFactory(sslsf).build();
-				return httpclient;
+
+				httpClientBuilder.setSSLSocketFactory(sslsf);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		return HttpClients.custom().setDefaultRequestConfig(defaultRequestConfig).build();
+		return httpClientBuilder.build();
 	}
 
 	/**
@@ -306,8 +355,24 @@ public class MyHttpServiceSupport {
 
 			// 设定传输编码
 			httpPost.setEntity(new UrlEncodedFormEntity(nvps, ENCODE_DEFAULT));
+			CloseableHttpResponse response;
+			// 创建上下文环境
+			HttpContext context = new BasicHttpContext();
 
-			CloseableHttpResponse response = httpclient.execute(httpPost);
+			if (httpProxy != null) {
+				context = httpProxy.loadHttpProxy().getHttpContext();
+			}
+
+			CookieStore cookieStore = new BasicCookieStore();
+			// 设置cookie
+			if (curCookies != null && curCookies.size() > 0) {
+				for (Cookie cookie : curCookies) {
+					cookieStore.addCookie(cookie);
+				}
+			}
+
+			context.setAttribute(HttpClientContext.COOKIE_STORE, cookieStore);
+			response = httpclient.execute(httpPost, context);
 			int status = response.getStatusLine().getStatusCode();
 			if (status >= 200 && status < 300) {
 				HttpEntity entity = response.getEntity();
@@ -342,7 +407,8 @@ public class MyHttpServiceSupport {
 		return doHttpPOST(serviceURL, param, null);
 	}
 
-	public String doHttpPOST(String serviceURL, Map<String, String> param, Map<String, String> headers) throws Exception {
+	public String doHttpPOST(String serviceURL, Map<String, String> param, Map<String, String> headers)
+			throws Exception {
 		logger.debug("=====>>>>>接口请求<<<<<=====" + serviceURL);
 		CloseableHttpClient httpclient = getCloseableHttpClient(serviceURL);
 		try {
@@ -370,6 +436,11 @@ public class MyHttpServiceSupport {
 			CloseableHttpResponse response;
 			// 创建上下文环境
 			HttpContext context = new BasicHttpContext();
+
+			if (httpProxy != null) {
+				context = httpProxy.loadHttpProxy().getHttpContext();
+			}
+
 			CookieStore cookieStore = new BasicCookieStore();
 			// 设置cookie
 			if (curCookies != null && curCookies.size() > 0) {
