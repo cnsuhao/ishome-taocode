@@ -31,9 +31,9 @@ import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.http.ssl.TrustStrategy;
 import org.apache.http.util.EntityUtils;
 import org.isotope.jfp.framework.beans.ObjectBean;
+import org.isotope.jfp.framework.beans.net.HttpProxyBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
 
 /**
  * API请求通信
@@ -66,6 +66,12 @@ public class MyHttpServiceSupport {
 		this.httpProxy = httpProxy;
 	}
 
+	public boolean removeHttpProxy(HttpProxyBean proxy) {
+		if (this.httpProxy != null)
+			return this.httpProxy.removeHttpProxy(proxy);
+		return false;
+	}
+
 	/**
 	 * 请求过程中使用的cookies内容
 	 */
@@ -91,7 +97,7 @@ public class MyHttpServiceSupport {
 	}
 
 	public String doHttpGET(String serviceURL, Map<String, String> headers) throws Exception {
-		logger.debug("=====>>>>>接口请求<<<<<=====" + serviceURL);
+		// logger.debug("=====>>>>>接口请求<<<<<=====" + serviceURL);
 		CloseableHttpClient httpclient = getCloseableHttpClient(serviceURL);
 		try {
 			HttpGet httpGet = new HttpGet(serviceURL);
@@ -107,8 +113,8 @@ public class MyHttpServiceSupport {
 			// 创建上下文环境
 			HttpContext context = new BasicHttpContext();
 
-			if (httpProxy != null) {
-				context = httpProxy.loadHttpProxy().getHttpContext();
+			if (currentHttpProxy != null) {
+				context = currentHttpProxy.getHttpContext();
 			}
 
 			CookieStore cookieStore = new BasicCookieStore();
@@ -174,7 +180,7 @@ public class MyHttpServiceSupport {
 							else
 								nvps.add(new BasicNameValuePair(name, "" + value));
 						} catch (Exception e) {
-							System.err.println(e.getMessage());
+							logger.error(e.getMessage());
 						}
 					}
 				}
@@ -187,8 +193,8 @@ public class MyHttpServiceSupport {
 			// 创建上下文环境
 			HttpContext context = new BasicHttpContext();
 
-			if (httpProxy != null) {
-				context = httpProxy.loadHttpProxy().getHttpContext();
+			if (currentHttpProxy != null) {
+				context = currentHttpProxy.getHttpContext();
 			}
 
 			CookieStore cookieStore = new BasicCookieStore();
@@ -294,6 +300,16 @@ public class MyHttpServiceSupport {
 
 	}
 
+	private HttpProxyBean currentHttpProxy;
+
+	public HttpProxyBean getCurrentHttpProxy() {
+		return currentHttpProxy;
+	}
+
+	public void setCurrentHttpProxy(HttpProxyBean currentHttpProxy) {
+		this.currentHttpProxy = currentHttpProxy;
+	}
+
 	/**
 	 * 获取client对象
 	 * 
@@ -310,7 +326,8 @@ public class MyHttpServiceSupport {
 		requestConfigBuilder.setStaleConnectionCheckEnabled(true);
 		// 代理httpProxy
 		if (httpProxy != null) {
-			requestConfigBuilder.setProxy(httpProxy.loadHttpProxy().getHttpProxy());
+			currentHttpProxy = httpProxy.loadHttpProxy();
+			requestConfigBuilder.setProxy(currentHttpProxy.getHttpProxy());
 		}
 
 		httpClientBuilder.setDefaultRequestConfig(requestConfigBuilder.build());
@@ -342,7 +359,7 @@ public class MyHttpServiceSupport {
 	 * @throws Exception
 	 */
 	public String doHttpPOST(String serviceURL, String jsonString) throws Exception {
-		logger.debug("=====>>>>>接口请求<<<<<=====" + serviceURL);
+		// logger.debug("=====>>>>>接口请求<<<<<=====" + serviceURL);
 		CloseableHttpClient httpclient = getCloseableHttpClient(serviceURL);
 		try {
 			HttpPost httpPost = new HttpPost(serviceURL);
@@ -358,8 +375,8 @@ public class MyHttpServiceSupport {
 			// 创建上下文环境
 			HttpContext context = new BasicHttpContext();
 
-			if (httpProxy != null) {
-				context = httpProxy.loadHttpProxy().getHttpContext();
+			if (currentHttpProxy != null) {
+				context = currentHttpProxy.getHttpContext();
 			}
 
 			CookieStore cookieStore = new BasicCookieStore();
@@ -408,7 +425,7 @@ public class MyHttpServiceSupport {
 
 	public String doHttpPOST(String serviceURL, Map<String, String> param, Map<String, String> headers)
 			throws Exception {
-		logger.debug("=====>>>>>接口请求<<<<<=====" + serviceURL);
+		// logger.debug("=====>>>>>接口请求<<<<<=====" + serviceURL);
 		CloseableHttpClient httpclient = getCloseableHttpClient(serviceURL);
 		try {
 			HttpPost httpPost = new HttpPost(serviceURL);
@@ -436,8 +453,8 @@ public class MyHttpServiceSupport {
 			// 创建上下文环境
 			HttpContext context = new BasicHttpContext();
 
-			if (httpProxy != null) {
-				context = httpProxy.loadHttpProxy().getHttpContext();
+			if (currentHttpProxy != null) {
+				context = currentHttpProxy.getHttpContext();
 			}
 
 			CookieStore cookieStore = new BasicCookieStore();
