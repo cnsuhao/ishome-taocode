@@ -15,4 +15,6 @@ public interface ISHttpProxy {
 	 * @return
 	 */
 	public HttpProxyBean loadHttpProxy() ;
+	
+	public boolean removeHttpProxy(HttpProxyBean httpProxy);
 }

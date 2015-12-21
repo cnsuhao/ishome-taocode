@@ -1,5 +1,6 @@
 package org.isotope.jfp.framework.support;
 
+import org.isotope.jfp.framework.beans.net.HttpProxyBean;
 import org.isotope.jfp.framework.biz.ISTask;
 import org.isotope.jfp.framework.cache.ICacheService;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
@@ -17,8 +18,9 @@ import org.isotope.jfp.framework.utils.EmptyHelper;
  */
 public class MyJobSupport implements ISJobConstants, ISFrameworkConstants, ISTask {
 
-	// 缓存队列	
+	// 缓存队列
 	protected ICacheService myMqService;
+
 	public ICacheService getMqService() {
 		return myMqService;
 	}
@@ -26,11 +28,24 @@ public class MyJobSupport implements ISJobConstants, ISFrameworkConstants, ISTas
 	public void setMqService(ICacheService mqService) {
 		this.myMqService = mqService;
 	}
-	// 缓存队列	
+
+	// 缓存队列
 	protected MyHttpServiceSupport myHttpService = new MyHttpServiceSupport();
+
 	public void setHttpProxy(ISHttpProxy httpProxy) {
 		myHttpService.setHttpProxy(httpProxy);
 	}
+
+	public ISHttpProxy getHttpProxy() {
+		return myHttpService.getHttpProxy();
+	}
+
+	public boolean removeHttpProxy(HttpProxyBean httpProxy) {
+		if (myHttpService != null)
+			return myHttpService.removeHttpProxy(httpProxy);
+		return false;
+	}
+
 	/**
 	 * 进程阻塞时间（分钟）
 	 */
@@ -50,7 +65,7 @@ public class MyJobSupport implements ISJobConstants, ISFrameworkConstants, ISTas
 
 	public void setWaitTimeMinute(int waitTimeMinute) {
 		this.waitTimeMinute = 60 * waitTimeMinute;
-		this.waitTimeSecond = 60 * this.waitTimeMinute; 
+		this.waitTimeSecond = 60 * this.waitTimeMinute;
 	}
 
 	public String getJobKey() {
@@ -99,7 +114,7 @@ public class MyJobSupport implements ISJobConstants, ISFrameworkConstants, ISTas
 		myMqService.putObject(jobKey, JOB_FLAG_SUCCESS, waitTimeSecond, false);
 		return true;
 	}
-	
+
 	/**
 	 * 业务处理(重复运行)
 	 */
