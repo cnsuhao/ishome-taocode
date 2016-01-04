@@ -96,7 +96,10 @@ public interface ISFrameworkConstants {
 	public final static String COLON = ":";
 	 
 	public final static String SEMICOLON = ";";// semicolon
-
+	public final static String QUOTES = "'";// semicolon
+	public final static String AND = "&";// semicolon
+	public final static String QUMARK = "?";// semicolon
+	
 	public static final String BACKSLASH = "/";// backslash
 	public static final String BACKSLASH2 = "//";// backslash
 	public static final String FILE_URI = "file://";// FILE_URI
