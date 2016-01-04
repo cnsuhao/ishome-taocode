@@ -51,10 +51,12 @@ public class RedisPoolUtil {
 						return null;
 					}
 					getJedis(++failedNum);
-				} catch (InterruptedException e1) {
-					e1.printStackTrace();
+				} catch (Exception e1) {
+					throw new RuntimeException("Redis connect fail");
 				}
 			}
+		}else {
+			throw new RuntimeException("Redis connect fail");
 		}
 		return jedis;
 	}
@@ -69,12 +71,11 @@ public class RedisPoolUtil {
 		try {
 			jedis = jedisPool.getResource();
 		} catch (Exception e) {
-			e.printStackTrace();
 			try {
 				Thread.sleep(500);
 				bgetJedis();
-			} catch (InterruptedException e1) {
-				e1.printStackTrace();
+			} catch (Exception e1) {
+				throw new RuntimeException("Redis connect fail");
 			}
 		}
 		return jedis;
