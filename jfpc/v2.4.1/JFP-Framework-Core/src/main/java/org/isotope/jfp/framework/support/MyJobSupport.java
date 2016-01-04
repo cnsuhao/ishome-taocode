@@ -32,6 +32,14 @@ public class MyJobSupport implements ISJobConstants, ISFrameworkConstants, ISTas
 	// 缓存队列
 	protected MyHttpServiceSupport myHttpService = new MyHttpServiceSupport();
 
+	public MyHttpServiceSupport getHttpService() {
+		return myHttpService;
+	}
+
+	public void setHttpService(MyHttpServiceSupport myHttpService) {
+		this.myHttpService = myHttpService;
+	}
+
 	public void setHttpProxy(ISHttpProxy httpProxy) {
 		myHttpService.setHttpProxy(httpProxy);
 	}
