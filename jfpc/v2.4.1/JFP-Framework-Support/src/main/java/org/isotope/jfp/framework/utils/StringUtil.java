@@ -25,6 +25,23 @@ public class StringUtil {
 	private static String specifiedregEx = "[`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？]";
 
 	/**
+	 * 数据补全
+	 * @param length
+	 * @param use
+	 * @param had
+	 * @return
+	 */
+	public static String strCompletion(int length, String use, String had) {
+		StringBuilder sb = new StringBuilder();
+		sb.append(had);
+		while (sb.length() < length) {
+			sb.insert(0, use);
+		}
+
+		return sb.toString();
+	}
+	
+	/**
 	 * 特殊字符处理
 	 * 
 	 * @param content
