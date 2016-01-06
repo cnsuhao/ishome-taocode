@@ -58,23 +58,32 @@ public class MyJobSupport implements ISJobConstants, ISFrameworkConstants, ISTas
 	 * 进程阻塞时间（分钟）
 	 */
 	protected int waitTimeMinute = 10;
-	/**
-	 * 进程阻塞时间（秒）
-	 */
-	protected int waitTimeSecond = 60 * waitTimeMinute;
-	/**
-	 * 任务Key
-	 */
-	protected String jobKey = "JOBKEY";
 
 	public int getWaitTimeMinute() {
 		return waitTimeMinute;
 	}
 
 	public void setWaitTimeMinute(int waitTimeMinute) {
-		this.waitTimeMinute = 60 * waitTimeMinute;
+		this.waitTimeMinute = waitTimeMinute;
 		this.waitTimeSecond = 60 * this.waitTimeMinute;
 	}
+	
+	/**
+	 * 进程阻塞时间（秒）
+	 */
+	protected int waitTimeSecond = 60 * waitTimeMinute;
+	public int getWaitTimeSecond() {
+		return waitTimeSecond;
+	}
+
+	public void setWaitTimeSecond(int waitTimeSecond) {
+		this.waitTimeSecond = waitTimeSecond;
+	}
+
+	/**
+	 * 任务Key
+	 */
+	protected String jobKey = "JOBKEY";
 
 	public String getJobKey() {
 		return jobKey;
