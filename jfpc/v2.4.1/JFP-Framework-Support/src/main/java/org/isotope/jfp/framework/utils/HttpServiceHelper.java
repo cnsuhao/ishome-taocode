@@ -35,7 +35,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * API请求通信
- * 
+ * User-Agent: Apache-HttpClient/4.5 (Java/1.7.0_51)
  * @author Spook
  * @since 0.1.0
  * @version 2.4.1.2014/11/10

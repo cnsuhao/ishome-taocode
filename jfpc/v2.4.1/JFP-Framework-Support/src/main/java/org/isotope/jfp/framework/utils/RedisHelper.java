@@ -1,14 +1,10 @@
 package org.isotope.jfp.framework.utils;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 
 import com.alibaba.fastjson.JSON;
 
-import redis.clients.jedis.HostAndPort;
-import redis.clients.jedis.JedisCluster;
+import redis.clients.jedis.Jedis;
 
 /**
  * 缓存数据对象与字符串转换
@@ -19,54 +15,44 @@ import redis.clients.jedis.JedisCluster;
  * 
  */
 public class RedisHelper implements ISFrameworkConstants {
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-	    Set<HostAndPort> jedisClusterNodes = new HashSet<HostAndPort>();
-	    jedisClusterNodes.add(new HostAndPort("172.16.2.201", 7000));  
-        jedisClusterNodes.add(new HostAndPort("172.16.2.201", 7001));  
-        jedisClusterNodes.add(new HostAndPort("172.16.2.201", 7002));  
-        jedisClusterNodes.add(new HostAndPort("172.16.2.202", 7000));  
-        jedisClusterNodes.add(new HostAndPort("172.16.2.202", 7001));  
-        jedisClusterNodes.add(new HostAndPort("172.16.2.201", 7002));  
-        jedisClusterNodes.add(new HostAndPort("172.16.2.203", 7000));  
-        jedisClusterNodes.add(new HostAndPort("172.16.2.203", 7001)); 
-	    
-	    JedisCluster jc = new JedisCluster(jedisClusterNodes);  
-	    System.out.println( DateHelper.currentTimestamp());
-	    for(int i=0;i<100;i++){
-	        System.out.println(jc.get("EITSP:EITSP"+i));	    
-	    }
-	    System.out.println( DateHelper.currentTimestamp());
-	    
-//		String str = "aa//bb//cc//dd";
-//		System.out.println(str.substring(0,str.indexOf("//")));
-//		System.out.println(str.substring(str.indexOf("//")+2));
-		// List<Object> vs = new ArrayList<Object>();
-		// Object value = new RESTResultBean();
-		// vs.add(new RESTResultBean());
-		// vs.add(new RESTResultBean());
-		// vs.add(new RESTResultBean());
-		// vs.add(new RESTResultBean());
-		// System.out.println(getStringToRedis(value));
-		// System.out.println(vs.getClass().getName() + BACKSLASH2 +
-		// JSONArray.toJSONString(vs));
-		//
-		// System.out.println((getStringToRedis(value)).split(BACKSLASH2)[0]);
-		// System.out.println((getStringToRedis(value)).split(BACKSLASH2)[1]);
-		// String[] values = (vs.getClass().getName() + BACKSLASH2 +
-		// JSONArray.toJSONString(vs)).split(BACKSLASH2);
-		// try {
-		// Object a = JSON.parseObject(values[1], Class.forName(values[0]));
-		// System.out.println(a);
-		// } catch (ClassNotFoundException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
+
+	public static void copy(Jedis jd, String oldKey, String newKey, boolean retain) {
+		copy(jd, oldKey, newKey, retain, Integer.MAX_VALUE);
 	}
 
-	
+	public static void copy(Jedis jd, String oldKey, String newKey, boolean retain, int num) {
+		String value;
+		long size = jd.llen(oldKey);
+		if (num < size)
+			size = num;
+		for (int i = 0; i < size; i++) {
+			try {
+				value = jd.lpop(oldKey);
+				if (EmptyHelper.isEmpty(value))
+					break;
+				if (retain)
+					jd.rpush(oldKey, value);
+				jd.rpush(newKey, value);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public static void copy(Jedis oldJedis, String oldKey, Jedis newJedis, String newKey, boolean retain) {
+		String value;
+		long size = oldJedis.llen(oldKey);
+		for (int i = 0; i < size; i++) {
+			try {
+				value = oldJedis.lpop(oldKey);
+				if (retain)
+					oldJedis.rpush(oldKey, value);
+				newJedis.rpush(newKey, value);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
 
 	/**
 	 * 实例化对象
@@ -98,7 +84,7 @@ public class RedisHelper implements ISFrameworkConstants {
 	 * @return
 	 */
 	public static Object getClassFromRedis(String value) {
-		return getClassFromRedis(value,true);
+		return getClassFromRedis(value, true);
 	}
 
 	public static Object getClassFromRedis(String value, boolean translation) {
@@ -108,8 +94,8 @@ public class RedisHelper implements ISFrameworkConstants {
 			if (value.indexOf(BACKSLASH2) < 0)
 				return (String) value;
 			String[] values = new String[2];
-			values[0] = value.substring(0,value.indexOf("//"));
-			values[1] = value.substring(value.indexOf("//")+2);
+			values[0] = value.substring(0, value.indexOf("//"));
+			values[1] = value.substring(value.indexOf("//") + 2);
 			try {
 				return JSON.parseObject(values[1], Class.forName(values[0]));
 			} catch (Exception e) {
@@ -120,6 +106,5 @@ public class RedisHelper implements ISFrameworkConstants {
 			return value;
 		}
 	}
-
 
 }
