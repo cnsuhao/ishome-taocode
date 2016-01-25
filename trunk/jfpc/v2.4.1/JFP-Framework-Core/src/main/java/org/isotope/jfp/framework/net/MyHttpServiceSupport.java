@@ -72,6 +72,16 @@ public class MyHttpServiceSupport {
 		return false;
 	}
 
+	private HttpProxyBean currentHttpProxy;
+
+	public HttpProxyBean getCurrentHttpProxy() {
+		return currentHttpProxy;
+	}
+
+	public void setCurrentHttpProxy(HttpProxyBean currentHttpProxy) {
+		this.currentHttpProxy = currentHttpProxy;
+	}
+
 	/**
 	 * 请求过程中使用的cookies内容
 	 */
@@ -239,7 +249,19 @@ public class MyHttpServiceSupport {
 	}
 
 	public static void main(String[] args) throws Exception {
+		MyHttpServiceSupport mh = new MyHttpServiceSupport();
+		
+		HttpProxyBean currentHttpProxy = new HttpProxyBean();
+		currentHttpProxy.setHost("58.252.7.125");
+		currentHttpProxy.setPort(8000);
 
+		mh.setCurrentHttpProxy(currentHttpProxy);
+		
+		
+		
+		System.out.println(mh.doHttpGET("mail.163.com"));
+		
+		
 		// HttpHost proxy = new HttpHost("27.221.31.66", 8080, "http");
 		// RequestConfig config =
 		// RequestConfig.custom().setProxy(proxy).build();
@@ -259,55 +281,45 @@ public class MyHttpServiceSupport {
 		//
 		// httpPost.setConfig(config);
 
-		String serviceURL = "http://mail.163.com";
-		int waitTimeMinute = 15;
-		// 创建HttpClientBuilder
-		HttpClientBuilder httpClientBuilder = HttpClientBuilder.create();
-		HttpHost proxy = new HttpHost("27.221.31.66", 8080, "http");
-		RequestConfig defaultRequestConfig = RequestConfig.custom().setSocketTimeout(waitTimeMinute * 1000)
-				.setConnectTimeout(waitTimeMinute * 1000).setConnectionRequestTimeout(waitTimeMinute * 1000)
-				.setProxy(proxy).setStaleConnectionCheckEnabled(true).build();
-		httpClientBuilder.setDefaultRequestConfig(defaultRequestConfig);
+//		String serviceURL = "http://mail.163.com";
+//		int waitTimeMinute = 15;
+//		// 创建HttpClientBuilder
+//		HttpClientBuilder httpClientBuilder = HttpClientBuilder.create();
+//		HttpHost proxy = new HttpHost("27.221.31.66", 8080, "http");
+//		RequestConfig defaultRequestConfig = RequestConfig.custom().setSocketTimeout(waitTimeMinute * 1000)
+//				.setConnectTimeout(waitTimeMinute * 1000).setConnectionRequestTimeout(waitTimeMinute * 1000)
+//				.setProxy(proxy).setStaleConnectionCheckEnabled(true).build();
+//		httpClientBuilder.setDefaultRequestConfig(defaultRequestConfig);
+//
+//		if (serviceURL.indexOf("https") != -1) {
+//			try {
+//				SSLContext sslContext = new SSLContextBuilder().loadTrustMaterial(null, new TrustStrategy() {
+//					// 信任所有证书
+//					public boolean isTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+//						return true;
+//					}
+//				}).build();
+//				SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslContext);
+//
+//				httpClientBuilder.setSSLSocketFactory(sslsf);
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//		}
+//		// HttpClient
+//		CloseableHttpClient closeableHttpClient = httpClientBuilder.build();
+//
+//		HttpGet httpPost = new HttpGet("http://mail.163.com");
+//		CloseableHttpResponse response = closeableHttpClient.execute(httpPost);
+//		int status = response.getStatusLine().getStatusCode();
+//		if (status >= 200 && status < 300) {
+//			HttpEntity entity = response.getEntity();
+//			if (entity != null)
+//				System.out.println(EntityUtils.toString(entity, ENCODE_DEFAULT));
+//		} else {
+//			throw new Exception("服务请求异常: " + status);
+//		}
 
-		if (serviceURL.indexOf("https") != -1) {
-			try {
-				SSLContext sslContext = new SSLContextBuilder().loadTrustMaterial(null, new TrustStrategy() {
-					// 信任所有证书
-					public boolean isTrusted(X509Certificate[] chain, String authType) throws CertificateException {
-						return true;
-					}
-				}).build();
-				SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslContext);
-
-				httpClientBuilder.setSSLSocketFactory(sslsf);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		// HttpClient
-		CloseableHttpClient closeableHttpClient = httpClientBuilder.build();
-
-		HttpGet httpPost = new HttpGet("http://mail.163.com");
-		CloseableHttpResponse response = closeableHttpClient.execute(httpPost);
-		int status = response.getStatusLine().getStatusCode();
-		if (status >= 200 && status < 300) {
-			HttpEntity entity = response.getEntity();
-			if (entity != null)
-				System.out.println(EntityUtils.toString(entity, ENCODE_DEFAULT));
-		} else {
-			throw new Exception("服务请求异常: " + status);
-		}
-
-	}
-
-	private HttpProxyBean currentHttpProxy;
-
-	public HttpProxyBean getCurrentHttpProxy() {
-		return currentHttpProxy;
-	}
-
-	public void setCurrentHttpProxy(HttpProxyBean currentHttpProxy) {
-		this.currentHttpProxy = currentHttpProxy;
 	}
 
 	/**
