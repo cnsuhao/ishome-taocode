@@ -31,7 +31,7 @@ public class StringUtil {
 	 * @param had
 	 * @return
 	 */
-	public static String strCompletion(int length, String use, String had) {
+	public static String completion(int length, String use, String had) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(had);
 		while (sb.length() < length) {

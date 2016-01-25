@@ -50,15 +50,6 @@ public class JedisClusterUtil implements ISJedisSupport,ISFrameworkConstants {
             jedisClusterNodes.add(new HostAndPort(hps[0], Integer.parseInt(hps[1])));
         }
 
-//        jedisClusterNodes.add(new HostAndPort("172.16.2.201", 7000));
-//        jedisClusterNodes.add(new HostAndPort("172.16.2.201", 7001));
-//        jedisClusterNodes.add(new HostAndPort("172.16.2.201", 7002));
-//        jedisClusterNodes.add(new HostAndPort("172.16.2.202", 7000));
-//        jedisClusterNodes.add(new HostAndPort("172.16.2.202", 7001));
-//        jedisClusterNodes.add(new HostAndPort("172.16.2.201", 7002));
-//        jedisClusterNodes.add(new HostAndPort("172.16.2.203", 7000));
-//        jedisClusterNodes.add(new HostAndPort("172.16.2.203", 7001));
-
         jedisCluster = new JedisCluster(jedisClusterNodes);
     }
 
@@ -70,86 +61,6 @@ public class JedisClusterUtil implements ISJedisSupport,ISFrameworkConstants {
     public JedisCluster getJedisCluster() {
 
         return jedisCluster;
-    }
-
-    /**
-     * 缓存数据拷贝
-     * 
-     * @param oldKey
-     *            原始键值名称
-     * @param newKey
-     *            新的键值名称
-     * @param retain
-     *            是否保留(true保留数据，顺序在末尾)
-     */
-    public void copy(String oldKey, String newKey, boolean retain) {
-        copy(getJedisCluster(), oldKey, newKey, retain, Integer.MAX_VALUE);
-    }
-
-    /**
-     * 缓存数据拷贝
-     * 
-     * @param jd
-     *            缓存服务连接
-     * @param oldKey
-     *            原始键值名称
-     * @param newKey
-     *            新的键值名称
-     * @param retain
-     *            是否保留(true保留数据，顺序在末尾)
-     */
-    public void copy(JedisCluster jd, String oldKey, String newKey, boolean retain) {
-        copy(jd, oldKey, newKey, retain, Integer.MAX_VALUE);
-    }
-
-    public void copy(String oldKey, String newKey, boolean retain, int num) {
-        copy(getJedisCluster(), oldKey, newKey, retain, num);
-    }
-
-    public void copy(JedisCluster jd, String oldKey, String newKey, boolean retain, int num) {
-        String value;
-        long size = jd.llen(oldKey);
-        if (num < size)
-            size = num;
-        for (int i = 0; i < size; i++) {
-            try {
-                value = jd.lpop(oldKey);
-                if (EmptyHelper.isEmpty(value))
-                    break;
-                if (retain)
-                    jd.rpush(oldKey, value);
-                jd.rpush(newKey, value);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    /**
-     * 缓存数据拷贝
-     * 
-     * @param jd
-     *            缓存服务连接
-     * @param oldKey
-     *            原始键值名称
-     * @param newKey
-     *            新的键值名称
-     * @param retain
-     *            是否保留(true保留数据，顺序在末尾)
-     */
-    public void copy(JedisCluster oldJedisCluster, String oldKey, JedisCluster newJedisCluster, String newKey, boolean retain) {
-        String value;
-        long size = oldJedisCluster.llen(oldKey);
-        for (int i = 0; i < size; i++) {
-            try {
-                value = oldJedisCluster.lpop(oldKey);
-                if (retain)
-                    oldJedisCluster.rpush(oldKey, value);
-                newJedisCluster.rpush(newKey, value);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
     }
 
     public String get(String key) {
