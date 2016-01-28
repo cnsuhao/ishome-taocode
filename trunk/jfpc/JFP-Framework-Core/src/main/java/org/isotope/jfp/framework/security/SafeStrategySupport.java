@@ -22,7 +22,7 @@ import redis.clients.jedis.Jedis;
  * @author ISHome
  * @since 2.4.2 2016/1/6
  * @version 2.4.3 2016/1/28
- * @version 2.4.2 2016/1/6 * 
+ * @version 2.4.2 2016/1/6
  */
 public class SafeStrategySupport extends HandlerInterceptorAdapter implements ISFrameworkConstants {
 	public final static String FIREWALL_CONFIG = "FIREWALL:CONFIG";
