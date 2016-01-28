@@ -1,0 +1,145 @@
+﻿<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 企业基本信息(数据采集) -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='com.upg.ceci.beans.CeciCorpBase.CeciCorpBaseDao'>
+    <!-- 表字段信息  -->
+    <sql id='tableColumns'>
+        corp_id,t_date,controller,corp_name,artificial_person,corp_bln,corp_type,corp_bs,corp_rc,corp_pc,currency_code,corp_edate,corp_addr,corp_rdate,corp_ddate,register_org,approval_date,approval_status,industry_category,org_id,tax_id,company_id,zhejiang_id,get_date,res_date,canc_date,quantum_id
+    </sql>
+    
+    <!-- 查询分页数据信息  -->
+    <select id='doSelectPage' parameterType='CeciCorpBaseDBO' resultType='CeciCorpBaseDBO'>
+        SELECT <include refid='tableColumns'/> FROM ceci_corp_base
+        WHERE corp_bln = #{corpBln}
+    </select>
+    <!-- 重命名当前表 -->
+    <insert id='reNameTable' parameterType='CeciCorpBaseDBO'>
+    	RENAME TABLE ceci_corp_base TO ceci_corp_base_${tableName}
+    </insert>
+    <!-- 创建新表 -->
+    <insert id='creatTable' parameterType='CeciCorpBaseDBO'>
+		CREATE TABLE `ceci_corp_base` (
+		  `t_date` datetime DEFAULT NULL COMMENT '变动日期',
+		  `corp_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '企业编号',
+		  `controller` int(11) DEFAULT NULL COMMENT '控制人编号',
+		  `corp_name` varchar(100) DEFAULT NULL COMMENT '企业名称',
+		  `artificial_person` varchar(50) DEFAULT NULL COMMENT '企业法人',
+		  `corp_bln` varchar(100) DEFAULT NULL COMMENT '营业执照号码',
+		  `corp_type` varchar(255) DEFAULT NULL COMMENT '公司类型',
+		  `corp_bs` varchar(2000) DEFAULT NULL COMMENT '经营范围',
+		  `corp_rc` decimal(20,4) DEFAULT NULL COMMENT '注册资本（万元）',
+		  `corp_pc` decimal(20,4) DEFAULT NULL COMMENT '实收资本',
+		  `currency_code` varchar(10) DEFAULT NULL COMMENT '货币代码',
+		  `corp_edate` date DEFAULT NULL COMMENT '企业成立日期',
+		  `corp_addr` varchar(500) DEFAULT NULL COMMENT '注册地址',
+		  `corp_rdate` date DEFAULT NULL COMMENT '注册登记日期',
+		  `corp_ddate` date DEFAULT NULL COMMENT '注册登记到期日',
+		  `register_org` varchar(100) DEFAULT NULL COMMENT '登记机关',
+		  `approval_date` date DEFAULT NULL COMMENT '核准日期',
+		  `approval_status` varchar(50) DEFAULT NULL COMMENT '核准状态',
+		  `industry_category` varchar(6) DEFAULT NULL COMMENT '行业分类',
+		  `org_id` varchar(20) DEFAULT NULL COMMENT '组织机构代码',
+		  `tax_id` varchar(20) DEFAULT NULL COMMENT '税务登记证号',
+		  `company_ID` varchar(300) DEFAULT NULL COMMENT '工商总局企业ID',
+		  `zhejiang_id` char(100) DEFAULT NULL COMMENT '浙江企业id',
+		  `get_date` date DEFAULT NULL COMMENT '抓取日期',
+		  `res_date` varchar(100) DEFAULT NULL COMMENT '数据来源',
+		  `canc_date` date DEFAULT NULL COMMENT '注销日期',
+		  `quantum_id` varchar(255) DEFAULT NULL COMMENT '量子id',
+		  PRIMARY KEY (`corp_id`)
+		) COMMENT='企业基本信息_产品部';
+	</insert>
+
+    <!-- 插入一条数据 -->
+    <insert id='doInsert' parameterType='CeciCorpBaseDBO'>
+        INSERT INTO ${tableName}
+          ( <include refid='tableColumns'/>) 
+        VALUES 
+          ( #{corpId},#{tDate},#{controller},#{corpName},#{artificialPerson},#{corpBln},#{corpType},#{corpBs},#{corpRc},#{corpPc},#{currencyCode},#{corpEdate},#{corpAddr},#{corpRdate},#{corpDdate},#{registerOrg},#{approvalDate},#{approvalStatus},#{industryCategory},#{orgId},#{taxId},#{companyId},#{zhejiangId},#{getDate},#{resDate},#{cancDate},#{quantumId} )
+    </insert>
+    
+    <!-- 修改一条数据 -->
+    <update id='doUpdate' parameterType='CeciCorpBaseDBO'>
+        UPDATE ceci_corp_base SET corp_bln = #{corpBln}
+        <if test=" tDate != null and tDate !='' "><!-- 变动日期 -->
+            ,t_date = #{tDate}
+        </if>
+        <if test=" controller != null and controller !='' "><!-- 控制人编号 -->
+            ,controller = #{controller}
+        </if>
+        <if test=" corpName != null and corpName !='' "><!-- 企业名称 -->
+            ,corp_name = #{corpName}
+        </if>
+        <if test=" artificialPerson != null and artificialPerson !='' "><!-- 企业法人 -->
+            ,artificial_person = #{artificialPerson}
+        </if>
+        <if test=" corpType != null and corpType !='' "><!-- 公司类型 -->
+            ,corp_type = #{corpType}
+        </if>
+        <if test=" corpBs != null and corpBs !='' "><!-- 经营范围 -->
+            ,corp_bs = #{corpBs}
+        </if>
+        <if test=" corpRc != null and corpRc !='' "><!-- 注册资本（万元） -->
+            ,corp_rc = #{corpRc}
+        </if>
+        <if test=" corpPc != null and corpPc !='' "><!-- 实收资本 -->
+            ,corp_pc = #{corpPc}
+        </if>
+        <if test=" currencyCode != null and currencyCode !='' "><!-- 货币代码 -->
+            ,currency_code = #{currencyCode}
+        </if>
+        <if test=" corpEdate != null and corpEdate !='' "><!-- 企业成立日期 -->
+            ,corp_edate = #{corpEdate}
+        </if>
+        <if test=" corpAddr != null and corpAddr !='' "><!-- 注册地址 -->
+            ,corp_addr = #{corpAddr}
+        </if>
+        <if test=" corpRdate != null and corpRdate !='' "><!-- 注册登记日期 -->
+            ,corp_rdate = #{corpRdate}
+        </if>
+        <if test=" corpDdate != null and corpDdate !='' "><!-- 注册登记到期日 -->
+            ,corp_ddate = #{corpDdate}
+        </if>
+        <if test=" registerOrg != null and registerOrg !='' "><!-- 登记机关 -->
+            ,register_org = #{registerOrg}
+        </if>
+        <if test=" approvalDate != null and approvalDate !='' "><!-- 核准日期 -->
+            ,approval_date = #{approvalDate}
+        </if>
+        <if test=" approvalStatus != null and approvalStatus !='' "><!-- 核准状态 -->
+            ,approval_status = #{approvalStatus}
+        </if>
+        <if test=" industryCategory != null and industryCategory !='' "><!-- 行业分类 -->
+            ,industry_category = #{industryCategory}
+        </if>
+        <if test=" orgId != null and orgId !='' "><!-- 组织机构代码 -->
+            ,org_id = #{orgId}
+        </if>
+        <if test=" taxId != null and taxId !='' "><!-- 税务登记证号 -->
+            ,tax_id = #{taxId}
+        </if>
+        <if test=" companyId != null and companyId !='' "><!-- 工商总局企业ID -->
+            ,company_id = #{companyId}
+        </if>
+        <if test=" zhejiangId != null and zhejiangId !='' "><!-- 浙江企业id -->
+            ,zhejiang_id = #{zhejiangId}
+        </if>
+        <if test=" getDate != null and getDate !='' "><!-- 抓取日期 -->
+            ,get_date = #{getDate}
+        </if>
+        <if test=" resDate != null and resDate !='' "><!-- 数据来源 -->
+            ,res_date = #{resDate}
+        </if>
+        <if test=" cancDate != null and cancDate !='' "><!-- 注销日期 -->
+            ,canc_date = #{cancDate}
+        </if>
+        <if test=" quantumId != null and quantumId !='' "><!-- 量子id -->
+            ,quantum_id = #{quantumId}
+        </if>
+        WHERE corp_bln = #{corpBln}
+    </update>
+   
+</mapper>
