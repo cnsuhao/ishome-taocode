@@ -1,0 +1,31 @@
+﻿<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 网页解析模版 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='com.upg.ceci.beans.CeciAnalysisTemplate.CeciAnalysisTemplateDao'>
+    <!-- 表字段信息  -->
+    <sql id='tableColumns'>
+        id,area_code,key_reg,val_reg,data_row,title_row,data_col_count,tab_id,tag,selector,type,request_info_id,xml_code,clazz,template_type
+    </sql>
+    
+    <!-- 查询分页数据信息  -->
+    <select id='doSelectPage' parameterType='CeciAnalysisTemplateDBO' resultType='CeciAnalysisTemplateDBO'>
+        SELECT <include refid='tableColumns'/> FROM ceci_analysis_template
+        WHERE 1 = 1 
+        <if test=" id != null and id !='' "><!-- 主键ID -->
+            AND id = #{id}
+        </if>
+        
+        <if test=" requestInfoId != null and requestInfoId !='' "><!-- 请求信息id -->
+            AND request_info_id = #{requestInfoId}
+        </if>
+        
+        <if test=" areaCode != null and areaCode !='' "><!-- 区域代码 -->
+            AND area_code = #{areaCode}
+        </if>
+        ORDER BY request_info_id
+    </select>
+
+</mapper>

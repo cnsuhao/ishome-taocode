@@ -1,0 +1,33 @@
+﻿<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 抓取地址配置 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='com.upg.ceci.beans.CeciRequestInfo.CeciRequestInfoDao'>
+    <!-- 表字段信息  -->
+    <sql id='tableColumns'>
+        id,area_code,host,rurl,is_cookie,cookie_domen,cookie_path,mode_type,mode_type_desc,request_type,info_type,params,sub_id
+    </sql>
+    
+    <!-- 查询分页数据信息  -->
+    <select id='doSelectPage' parameterType='CeciRequestInfoDBO' resultType='CeciRequestInfoDBO'>
+        SELECT <include refid='tableColumns'/> FROM ceci_request_info
+        WHERE 1 = 1 
+        <if test=" id != null and id !='' "><!-- 主键ID -->
+            AND id = #{id}
+        </if>
+        <if test=" areaCode != null and areaCode !='' "><!-- 区域码 -->
+            AND area_code = #{areaCode}
+        </if>        
+        <if test=" infoType != null and infoType !='' "><!-- 信息类型 -->
+            AND info_type = #{infoType}
+        </if>
+        <if test=" subId != null and subId !='' "><!-- 子类请求ID -->
+            AND sub_id = #{subId}
+        </if>
+        ORDER BY mode_type
+    </select>
+    
+
+</mapper>
