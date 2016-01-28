@@ -1,36 +1,61 @@
 package org.isotope.jfp.framework.security;
 
-import java.io.UnsupportedEncodingException;
-import java.net.InetAddress;
-import java.net.URLDecoder;
-import java.net.UnknownHostException;
-import java.util.Map;
+import java.util.Calendar;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang3.StringUtils;
-import org.isotope.jfp.framework.cache.ICacheService;
+import org.isotope.jfp.framework.cache.redis.master.JedisMasterUtil;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.utils.EmptyHelper;
+import org.isotope.jfp.framework.utils.HttpRequestHelper;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+
+import com.alibaba.fastjson.JSONArray;
+
+import redis.clients.jedis.Jedis;
 
 /**
  * IP安全策略
  * 
- * @author fucy
+ * @author ISHome
  * @since 2.4.2 2016/1/6
- * @version 2.4.2 2016/1/6
- *
+ * @version 2.4.3 2016/1/28
+ * @version 2.4.2 2016/1/6 * 
  */
 public class SafeStrategySupport extends HandlerInterceptorAdapter implements ISFrameworkConstants {
+	public final static String FIREWALL_CONFIG = "FIREWALL:CONFIG";
+	public final static String FIREWALL_PATH_MESSAGE = "FIREWALL:MESSAGE";
+
+	// 最小时间（基数）：最小时间（基数时间）：最大时间（基数的倍数）
+	public void setConfigNum(String configNum) {
+		try {
+			String[] cs = configNum.split(COLON);
+			size = Integer.parseInt(cs[0]);
+			waitTimeSecond = Integer.parseInt(cs[1]);
+			maxSize = Integer.parseInt(cs[2]);
+		} catch (Exception e) {
+		}
+	}
+
 	/**
 	 * Redis缓存
 	 */
 	@Resource
-	protected ICacheService cacheService;
-	protected int size = 600;
+	protected JedisMasterUtil jedisMasterUtil;
+
+	public Jedis getJedis() {
+		Jedis cacheService;
+		{
+			cacheService = jedisMasterUtil.getJedis();
+			cacheService.select(4);// 黑名单
+		}
+		return cacheService;
+	}
+
+	protected int size = 300;
+	protected int maxSize = 12;
 	/**
 	 * 进程阻塞时间（秒）
 	 */
@@ -44,52 +69,154 @@ public class SafeStrategySupport extends HandlerInterceptorAdapter implements IS
 		this.waitTimeSecond = waitTimeSecond;
 	}
 
+	protected JSONArray paths = new JSONArray();
+
+	public static void main(String[] args) throws Exception {
+	}
+
+	protected String message = "暂未找到相关内容！";
+
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		String ipAddress = getIpAddr(request);
-		String lastTime = (String) cacheService.getObject(ipAddress);
-		if (EmptyHelper.isEmpty(lastTime)) {
-			// IP:频率:拉黑次数
-			cacheService.putObject(ipAddress, System.currentTimeMillis() + DOWN_LINE + 1 + DOWN_LINE + 1, size, false);
-		} else {
-			String[] last = lastTime.split(DOWN_LINE);
-			long lsp = Long.parseLong(last[0]);
-			int nsp = Integer.parseInt(last[1]);
-			int hsp = Integer.parseInt(last[2]);
-			long sp = System.currentTimeMillis() - lsp;
+		try {
+			int min = Calendar.getInstance().get(Calendar.MINUTE);
+			int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+			int sec = Calendar.getInstance().get(Calendar.SECOND);
+			Jedis fireWall = getJedis();
+			// 每3分钟更新一次
+			if (min % 3 == 0 && sec < 15) {
+				// 提示信息
+				String msg = (String) fireWall.get(FIREWALL_PATH_MESSAGE);
+				if (EmptyHelper.isNotEmpty(msg))
+					message = msg;
+				// 拦截参数
+				String config = (String) fireWall.get(FIREWALL_CONFIG);
+				if (EmptyHelper.isNotEmpty(config))
+					setConfigNum(config);
+			}
+			String requestPath = request.getRequestURI();
+			String ipAddress = HttpRequestHelper.getIpAddr(request);
+			// ipAddress = "177.85.92.136";
+			String requestIpKey = "REQUEST_IP:" + ipAddress;
+			String lastTime = (String) fireWall.get(requestIpKey);
 
-			// 策略1、1秒内不能访问2次
-			if (sp <= 1000 * waitTimeSecond * hsp) {
-				hsp = hsp + 1;
-				cacheService.putObject(ipAddress, System.currentTimeMillis() + DOWN_LINE + (1) + DOWN_LINE + hsp,
-						size * hsp, false);
-				// throw new CustomException("It'sAjoke!!!");
-				goBack(request, response);
-				return false;
+			// 检查黑白名单
+			{
+				String safeIp = (String) fireWall.get("SAFETY_IP:" + ipAddress);
+				if (EmptyHelper.isNotEmpty(safeIp)) {
+					return true;
+				}
+				String dangerIp = (String) fireWall.get("DANGER_IP:" + ipAddress);
+				if (EmptyHelper.isNotEmpty(dangerIp)) {
+					goBack(request, response);
+					return false;
+				}
+				String path = (String) fireWall.get("SAFE_PATH:" + requestPath);
+				if (EmptyHelper.isEmpty(path) == true) {
+					return true;
+				}
 			}
-			// 策略2、5秒内不能访问3次
-			if (nsp >= 3 && sp <= 5000 * waitTimeSecond * hsp) {
-				// 黑名单检测
-				hsp = hsp + 1;
-				cacheService.putObject(ipAddress, System.currentTimeMillis() + DOWN_LINE + (1) + DOWN_LINE + hsp,
-						size * hsp, false);
-				// throw new CustomException("It'sAjoke!!!");
-				goBack(request, response);
-				return false;
+
+			if (EmptyHelper.isEmpty(lastTime)) {
+				// IP:频率:拉黑次数
+				fireWall.set(requestIpKey, System.currentTimeMillis() + DOWN_LINE + 1 + DOWN_LINE + 1 + DOWN_LINE
+						+ System.currentTimeMillis());
+				// 设定时间
+				fireWall.expire(requestIpKey, size);
+			} else {
+				// 开始拦截
+				{
+					String[] last = lastTime.split(DOWN_LINE);
+					long lsp = Long.parseLong(last[0]);// 最后请求时间
+					int nsp = Integer.parseInt(last[1]);// 请求次数
+					int hsp = Integer.parseInt(last[2]);// 拒绝次数
+					long fsp = Long.parseLong(last[3]);// 最后拦截时间
+					long sp = System.currentTimeMillis() - lsp;// 间隔时间
+					long ssp = System.currentTimeMillis() - fsp;// 统计间隔时间
+
+					// 策略1、1秒内不能访问2次
+					if (nsp >= 4 * waitTimeSecond && sp <= 1000 * waitTimeSecond * hsp) {
+						if (hsp <= maxSize)
+							hsp = hsp + 1;
+						fireWall.set(requestIpKey, System.currentTimeMillis() + DOWN_LINE + 1 + DOWN_LINE + hsp
+								+ DOWN_LINE + System.currentTimeMillis());
+						fireWall.expire(requestIpKey, size * hsp);
+						goBack(request, response);
+						return false;
+					}
+					// 策略2、5秒内不能访问3次，强制初始化规则
+					if (nsp >= 15 * waitTimeSecond && ssp <= 5000 * waitTimeSecond * hsp) {
+						// 黑名单检测
+						if (hsp <= maxSize)
+							hsp = hsp + 1;
+						fireWall.set(requestIpKey, System.currentTimeMillis() + DOWN_LINE + 1 + DOWN_LINE + hsp
+								+ DOWN_LINE + System.currentTimeMillis());
+						fireWall.expire(requestIpKey, size * hsp);
+						goBack(request, response);
+						return false;
+					}
+					// 策略3、累积请求次数
+					if (nsp >= 80 && ssp >= 1000 * 60 * 60 * waitTimeSecond * hsp) {
+						// 用户ID判断
+						if (EmptyHelper.isEmpty(request.getParameter("UserID"))
+								|| EmptyHelper.isEmpty(request.getParameter("userid"))) {
+							// 强制拉黑
+							fireWall.set("DANGER_IP:" + ipAddress, "" + lsp);
+							goBack(request, response);
+							return false;
+						} else if (nsp >= 150) {
+							// 黑名单检测
+							if (hsp <= maxSize)
+								hsp = hsp + 1;
+
+							fireWall.set(requestIpKey, System.currentTimeMillis() + DOWN_LINE + 1 + DOWN_LINE + hsp
+									+ DOWN_LINE + System.currentTimeMillis());
+							fireWall.expire(requestIpKey, size * hsp);
+							goBack(request, response);
+							return false;
+						} else if ((hour > 7 && hour < 22) == false) {
+							// 黑名单检测
+							if (hsp <= maxSize)
+								hsp = hsp + 1;
+
+							// 强制拉黑
+							fireWall.set("DANGER_IP:" + ipAddress, "" + lsp);
+							goBack(request, response);
+							return false;
+						}
+					}
+					// 策略4、拉黑次数超过，将继续放大
+					if (hsp >= maxSize) {
+						fireWall.set(requestIpKey, System.currentTimeMillis() + DOWN_LINE + 1 + DOWN_LINE + hsp
+								+ DOWN_LINE + System.currentTimeMillis());
+						fireWall.expire(requestIpKey, size * waitTimeSecond * hsp);
+						goBack(request, response);
+						return false;
+					}
+					fireWall.set(requestIpKey,
+							System.currentTimeMillis() + DOWN_LINE + (nsp + 1) + DOWN_LINE + hsp + DOWN_LINE + fsp);
+					fireWall.expire(requestIpKey, size * hsp);
+				}
 			}
-			cacheService.putObject(ipAddress, System.currentTimeMillis() + DOWN_LINE + (nsp + 1) + DOWN_LINE + hsp,
-					size * hsp, false);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return true;
 	}
+
+	public static final String ENCODE = "UTF-8";
 
 	public void goBack(HttpServletRequest request, HttpServletResponse response) {
 		try {
 
 			// 销毁session
-			request.getSession().invalidate();
-			response.sendRedirect("/It'sAjoke!!!");
-			response.sendError(200);
+			// request.getSession().invalidate();
+			// response.sendRedirect("/joke.html");
+			// response.sendError(503);
+			response.setCharacterEncoding(ENCODE);
+			response.setContentType("text/html;charset=UTF-8");
+			response.getOutputStream().write(message.getBytes());
 			// 形式： sendError(int errnum
 			// )说明：用来向客户端发送错误信息，这对调试程序有很大帮助。常用的常量级错误代码有：
 			// SC_CONTINUE， 状态码是100，表示客户端无法连接。
@@ -117,96 +244,5 @@ public class SafeStrategySupport extends HandlerInterceptorAdapter implements IS
 			// SC_PHOXY_AUTHENTICATION_REQUIRED,状态码是407，表示客户端必须先向代理验证。
 		} catch (Exception e) {
 		}
-	}
-
-	public static String getIpAddr(HttpServletRequest request) {
-		String ipAddress = null;
-		try {
-			ipAddress = request.getHeader("X-Real-IP");
-			if (ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
-				ipAddress = request.getHeader("x-real-ip");
-			} else if (ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
-				ipAddress = request.getHeader("x-forwarded-for");
-			} else if (ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
-				ipAddress = request.getHeader("Proxy-Client-IP");
-			} else if (ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
-				ipAddress = request.getHeader("WL-Proxy-Client-IP");
-			} else if (ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
-				ipAddress = request.getRemoteAddr();
-				if (ipAddress.equals("127.0.0.1")) {
-					// 根据网卡取本机配置的IP
-					InetAddress inet = null;
-					try {
-						inet = InetAddress.getLocalHost();
-					} catch (UnknownHostException e) {
-						e.printStackTrace();
-					}
-					ipAddress = inet.getHostAddress();
-				}
-
-			}
-
-			// 对于通过多个代理的情况，第一个IP为客户端真实IP,多个IP按照','分割
-			if (ipAddress != null && ipAddress.length() > 15) { // "***.***.***.***".length()
-																// = 15
-				if (ipAddress.indexOf(",") > 0) {
-					ipAddress = ipAddress.substring(0, ipAddress.indexOf(","));
-				}
-			}
-		} catch (Exception e) {
-
-		}
-
-		return ipAddress;
-	}
-
-	/**
-	 * 字符转码
-	 * 
-	 * @param source
-	 * @param distCharSet
-	 * @return
-	 * @throws UnsupportedEncodingException
-	 *             创建日期：2015年5月11日 修改说明：
-	 * @author niezhegang
-	 */
-	private String transcode(String source, String distCharSet) throws Exception {
-		String ret = source;
-		if (StringUtils.isNotBlank(ret)) {
-			ret = URLDecoder.decode(source, distCharSet);
-			ret = new String(ret.getBytes("iso-8859-1"), "UTF-8");
-		}
-		return ret;
-	}
-
-	/**
-	 * 字符转码
-	 * 
-	 * @param request
-	 * @param distCharSet
-	 * @return
-	 * @throws UnsupportedEncodingException
-	 *             创建日期：2015年5月11日 修改说明：
-	 * @author niezhegang
-	 */
-	public String transcode(HttpServletRequest request, String distCharSet) throws Exception {
-		// 获得 POST参数
-		Map<String, String[]> params = request.getParameterMap();
-		String queryString = "";
-		try {
-			for (String key : params.keySet()) {
-				String[] values = params.get(key);
-				for (int i = 0; i < values.length; i++) {
-					String value = values[i];
-					queryString = queryString + key + "=" + transcode(value, distCharSet);
-					if (i != 0)
-						queryString = queryString + ",";
-				}
-			}
-		} catch (Exception e) {
-
-		}
-
-		return queryString;
 	}
 }

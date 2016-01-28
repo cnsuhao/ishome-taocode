@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.isotope.jfp.framework.security.value.RSASecurityHelper;
  
-/** *//** 
+/** 
 *   
 *   使用Junit4 来进行单元测试。
 * @version 1.0 
