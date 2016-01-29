@@ -32,7 +32,7 @@
 	    <constructor-arg index="2" value="6379" type="int" />
 	    <constructor-arg index="3" value="10000" type="int" />
 	    <constructor-arg index="4" value="ImxV@ly1D4bBtGwv" type="String" />
-	    <constructor-arg index="5" value="0" type="int" />
+	    <constructor-arg index="5" value="3" type="int" />
 	</bean>
 	
 	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">  
