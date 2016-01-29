@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.isotope.jfp.dwc.business.job.AJobServiceSupport;
 import org.isotope.jfp.framework.cache.ICacheService;
+import org.isotope.jfp.framework.cache.redis.master.JedisMasterUtil;
 import org.isotope.jfp.framework.utils.BeanFactoryHelper;
 import org.isotope.jfp.framework.utils.EmptyHelper;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import redis.clients.jedis.Jedis;
 
 /**
  * 分布式网络爬虫服务端 Distributed Web Crawler
@@ -29,7 +32,7 @@ public class DistributedServerController {
 	protected JobConfig config;
 
 	@RequestMapping(value = "/09001010", method = RequestMethod.GET)
-	public ModelAndView capInit(HttpServletRequest request) {
+	public ModelAndView m09001010GET(HttpServletRequest request) {
 		ModelAndView model = new ModelAndView("DWC/09001010");
 		model.addObject("TASK:TYPE", "");// 任务运行状态
 		model.addObject("FTP:PATH", "");// 上传路径
@@ -39,8 +42,10 @@ public class DistributedServerController {
 		return model;
 	}
 
+	static int size = 678;
+
 	@RequestMapping(value = "/09001010/{key}", method = RequestMethod.GET)
-	public ModelAndView loadConfig(@PathVariable String key) {
+	public ModelAndView m09001010GETKey(@PathVariable String key) {
 		ModelAndView model = new ModelAndView("DWC/09001010");
 
 		String job = config.getJob(key);
@@ -50,9 +55,35 @@ public class DistributedServerController {
 		AJobServiceSupport jobService = BeanFactoryHelper.getBean(job);
 		// 安全限定
 		if (key.equals(jobService.getJobKey())) {
+			jobService.setMqService(mq);
 			jobService.loadJobCongig(model);
 		}
 
+		return model;
+	}
+
+	@Resource
+	protected JedisMasterUtil jedisMasterUtil;
+
+	public Jedis getJedis() {
+		return jedisMasterUtil.getJedis();
+	}
+
+	@RequestMapping(value = "/09001010/{key}", method = RequestMethod.POST)
+	public ModelAndView m09001010POST(@PathVariable String key, String FTP_PATH, String TASK_INVEL, int MAX_NUM) {
+		ModelAndView model = new ModelAndView("DWC/09001010");
+
+		model.addObject("FTP_PATH", mq.putObject("FTP:PATH:" + key, FTP_PATH, 0, false));
+		model.addObject("TASK_INVEL", mq.putObject("TASK:INVEL:" + key, TASK_INVEL, 0, false));
+
+		Jedis jedis = jedisMasterUtil.getJedis();
+
+		for (int i = 0; i < MAX_NUM; i = i + size)
+			jedis.rpush("PAGE:NUM:" + key, "" +(i + 1));
+
+		model.addObject("HTTP_URL", jedis.llen("PAGE:NUM:" + key));
+		
+		model.addObject("FILE_NAME", "" + key);
 		return model;
 	}
 
