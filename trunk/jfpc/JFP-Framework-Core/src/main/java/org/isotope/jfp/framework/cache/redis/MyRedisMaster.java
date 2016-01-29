@@ -83,12 +83,12 @@ public class MyRedisMaster implements ICacheService, ISFrameworkConstants {
 	@Override
 	public boolean putObject(String key, Object value) {
 		jedisSupport.add(key, getStringToRedis(value), waitTime);
-		return false;
+		return true;
 	}
 
 	public boolean putObject(String key, Object value, int expireTimeWithSecond, boolean translation) {
 		jedisSupport.add(key, getStringToRedis(value, translation), expireTimeWithSecond);
-		return false;
+		return true;
 	}
 
 	/**
