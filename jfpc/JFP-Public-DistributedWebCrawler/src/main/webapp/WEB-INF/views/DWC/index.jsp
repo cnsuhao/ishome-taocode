@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico"  media="screen"/>
 <meta charset="utf-8">
 <title>Welcome</title>
 <script type="text/javascript">
@@ -14,7 +15,9 @@
  <H3>* Distributed Web Crawler</H3><BR>
 
 	<form method="POST" enctype="multipart/form-data" action="/09001000">
-		文件上传读取测试<input type="file" name="file"><input type="submit" value="Upload">
+		文件上传读取测试<br>
+		文件名称<input type="input" name="fileName">文件路径
+		<input type="file" name="file"><input type="submit" value="Upload">
 	</form>
 </body>
 </html>
