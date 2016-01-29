@@ -3,6 +3,7 @@ package org.isotope.jfp.dwc.business.job;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.isotope.jfp.dwc.business.DistributedServerController;
 import org.isotope.jfp.framework.support.MyJobSupport;
 import org.isotope.jfp.framework.utils.EmptyHelper;
 import org.isotope.jfp.framework.utils.StringUtil;
@@ -42,17 +43,24 @@ public class AJobServiceSupport extends MyJobSupport {
 		model.addObject("FTP_PATH", myMqService.getObject("FTP:PATH:" + jobKey, false));
 		model.addObject("TASK_INVEL", myMqService.getObject("TASK:INVEL:" + jobKey, false));
 		String page_num = (String) myMqService.pollFirstObjectInList("PAGE:NUM:" + jobKey, false);
-		if (EmptyHelper.isEmpty(page_num))
+		if (EmptyHelper.isEmpty(page_num)){
+			model.addObject("HTTP_URL", "http://www.baidu.com");
+			model.addObject("TASK_TYPE", "1");
+			model.addObject("FILE_NAME", "");
 			return;
+		}
 		int now = Integer.parseInt(page_num);
 		if (stop == true) {
 			model.addObject("HTTP_URL", "http://www.baidu.com");
+			model.addObject("TASK_TYPE", "1");
 		} else {
-			if (now % size == (size - 1)) {
-				model.addObject("HTTP_URL", "http://www.baidu.com");
+			if (now % DistributedServerController.NUM_SIZE == (DistributedServerController.NUM_SIZE - 1)) {
+				model.addObject("HTTP_URL", getServerURL(now));
+				model.addObject("TASK_TYPE", "1");
 				stop = true;
 			} else {
 				model.addObject("HTTP_URL", getServerURL(now));
+				model.addObject("TASK_TYPE", "0");
 				myMqService.offerObjectInList("PAGE:NUM:" + jobKey, "" + (now + 1), false);
 			}
 		}

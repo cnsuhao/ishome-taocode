@@ -34,15 +34,15 @@ public class DistributedServerController {
 	@RequestMapping(value = "/09001010", method = RequestMethod.GET)
 	public ModelAndView m09001010GET(HttpServletRequest request) {
 		ModelAndView model = new ModelAndView("DWC/09001010");
-		model.addObject("TASK:TYPE", "");// 任务运行状态
-		model.addObject("FTP:PATH", "");// 上传路径
-		model.addObject("TASK:INVEL", "");// 任务间隔时间
-		model.addObject("HTTP:URL", "");// 抓取地址
-		model.addObject("FILE:NAME", "");// 回传文件名称
+		model.addObject("TASK_TYPE", "");// 任务运行状态
+		model.addObject("FTP_PATH", "");// 上传路径
+		model.addObject("TASK_INVEL", "");// 任务间隔时间
+		model.addObject("HTTP_URL", "");// 抓取地址
+		model.addObject("FILE_NAME", "");// 回传文件名称
 		return model;
 	}
 
-	static int size = 678;
+	public static final int NUM_SIZE = 678;
 
 	@RequestMapping(value = "/09001010/{key}", method = RequestMethod.GET)
 	public ModelAndView m09001010GETKey(@PathVariable String key) {
@@ -70,19 +70,19 @@ public class DistributedServerController {
 	}
 
 	@RequestMapping(value = "/09001010/{key}", method = RequestMethod.POST)
-	public ModelAndView m09001010POST(@PathVariable String key, String FTP_PATH, String TASK_INVEL, int MAX_NUM) {
+	public ModelAndView m09001010POST(@PathVariable String key, String TASK_TYPE,String FTP_PATH, String TASK_INVEL, int MAX_NUM) {
 		ModelAndView model = new ModelAndView("DWC/09001010");
-
+		model.addObject("TASK_TYPE", mq.putObject("FTP:PATH:" + key, TASK_TYPE, 0, false));// 任务运行状态
 		model.addObject("FTP_PATH", mq.putObject("FTP:PATH:" + key, FTP_PATH, 0, false));
 		model.addObject("TASK_INVEL", mq.putObject("TASK:INVEL:" + key, TASK_INVEL, 0, false));
 
 		Jedis jedis = jedisMasterUtil.getJedis();
 
-		for (int i = 0; i < MAX_NUM; i = i + size)
-			jedis.rpush("PAGE:NUM:" + key, "" +(i + 1));
+		for (int i = 0; i < MAX_NUM; i = i + NUM_SIZE)
+			jedis.rpush("PAGE:NUM:" + key, "" + (i + 1));
 
 		model.addObject("HTTP_URL", jedis.llen("PAGE:NUM:" + key));
-		
+
 		model.addObject("FILE_NAME", "" + key);
 		return model;
 	}
