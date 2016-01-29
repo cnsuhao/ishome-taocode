@@ -41,6 +41,8 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 
+	<resources location="favicon.ico" mapping="favicon.ico"/>
+
 	<beans:import resource='classpath:config/spring.xml' />
 
 </beans:beans>
