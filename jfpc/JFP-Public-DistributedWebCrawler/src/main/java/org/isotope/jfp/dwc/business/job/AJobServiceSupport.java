@@ -13,7 +13,6 @@ public class AJobServiceSupport extends MyJobSupport {
 
 	ArrayList<Integer> pages = new ArrayList<Integer>();
 	static int MAX = 63186722;// 63147989
-	static int size = 678;
 
 	public static void main(String[] args) throws Exception {
 
@@ -40,23 +39,23 @@ public class AJobServiceSupport extends MyJobSupport {
 	}
 
 	public void loadJobCongig(ModelAndView model) {
-		model.addObject("FTP:PATH", myMqService.getObject(jobKey + ":FTP:PATH", false));
-		model.addObject("TASK:INVEL", myMqService.getObject(jobKey + ":TASK:INVEL", false));
-		String page_num = (String) myMqService.pollFirstObjectInList(jobKey + ":PAGE:NUM", false);
+		model.addObject("FTP_PATH", myMqService.getObject("FTP:PATH:" + jobKey, false));
+		model.addObject("TASK_INVEL", myMqService.getObject("TASK:INVEL:" + jobKey, false));
+		String page_num = (String) myMqService.pollFirstObjectInList("PAGE:NUM:" + jobKey, false);
 		if (EmptyHelper.isEmpty(page_num))
 			return;
 		int now = Integer.parseInt(page_num);
 		if (stop == true) {
-			model.addObject(jobKey + ":HTTP:URL", "" + "http://www.baidu.com");
+			model.addObject("HTTP_URL", "http://www.baidu.com");
 		} else {
 			if (now % size == (size - 1)) {
+				model.addObject("HTTP_URL", "http://www.baidu.com");
 				stop = true;
+			} else {
+				model.addObject("HTTP_URL", getServerURL(now));
+				myMqService.offerObjectInList("PAGE:NUM:" + jobKey, "" + (now + 1), false);
 			}
-
-			model.addObject(jobKey + ":HTTP:URL", "" + getServerURL(now));
 		}
-		myMqService.offerObjectInList(jobKey + ":PAGE:NUM", "" + (now + 1), false);
-		model.addObject(jobKey + ":FILE:NAME", "" + jobKey);
-
+		model.addObject("FILE_NAME", "" + jobKey);
 	}
 }
