@@ -5,8 +5,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 
 import javax.annotation.Resource;
@@ -20,7 +21,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import redis.clients.jedis.Jedis;
@@ -42,22 +42,18 @@ public class GanjiController {
 	public static void main(String[] args) throws Exception {
 		Jedis jedis = new Jedis("10.10.168.50", 6379);
 		jedis.auth("ImxV@ly1D4bBtGwv");
-		
+
 		// Jedis jedis = new Jedis("127.0.0.1", 6379);
-		
-		
-//		jedis.rpush("GJ:COMP:KEY", "铁路");
-//		jedis.rpush("GJ:COMP:KEY", "医疗");
-//		jedis.rpush("GJ:COMP:KEY", "教育");
-		
+
+		// jedis.rpush("GJ:COMP:KEY", "铁路");
+		// jedis.rpush("GJ:COMP:KEY", "医疗");
+		// jedis.rpush("GJ:COMP:KEY", "教育");
+
 		loadCompanyFile(jedis);
-		
-		
-//		jedis.set("GJ:TASK:INVEL", "5000");
+
+		// jedis.set("GJ:TASK:INVEL", "5000");
 	}
-	
-	
-	
+
 	public static void loadCompanyFile(Jedis jedis) throws Exception {
 		File file = new File("D:/corp_name_all_20160130.txt");
 		BufferedReader reader = null;
@@ -73,8 +69,8 @@ public class GanjiController {
 					System.out.println("line " + line + "======>>>>>" + tempString);
 				}
 				line++;
-				//if(line>500)
-				//	break;
+				// if(line>500)
+				// break;
 			}
 			reader.close();
 		} catch (Exception e) {
@@ -103,15 +99,15 @@ public class GanjiController {
 	public ModelAndView capInit(HttpServletRequest request) {
 		ModelAndView model = new ModelAndView("CAP");
 		model.addObject("TASK_INVEL", mq.getObject("GJ:TASK:INVEL", false));
-		
+
 		String comp_key = (String) mq.pollFirstObjectInList("GJ:COMP:KEY", false);
 		if (EmptyHelper.isNotEmpty(comp_key)) {
 			model.addObject("COMP_KEY", comp_key);
-		}else{
+		} else {
 			comp_key = (String) mq.pollFirstObjectInList("GJ:COMP:NAME", false);
 			if (EmptyHelper.isNotEmpty(comp_key)) {
 				model.addObject("COMP_KEY", comp_key);
-			}else{
+			} else {
 				model.addObject("COMP_KEY", "");
 			}
 		}
@@ -119,38 +115,38 @@ public class GanjiController {
 		String comp_url = (String) mq.pollFirstObjectInList("GJ:COMP:LIST", false);
 		if (EmptyHelper.isNotEmpty(comp_url)) {
 			model.addObject("COMP_URL", comp_url);
-		}else{
+		} else {
 			model.addObject("COMP_URL", "");
 		}
-		
+
 		return model;
 	}
 
 	@RequestMapping(value = "/GJ1", method = RequestMethod.POST)
 	public ModelAndView capUpload1(HttpServletRequest request, @RequestParam String code, @RequestParam String name) {
 		ModelAndView model = new ModelAndView("DWC/09001000");
-		
-		mq.offerObjectInList("GJ:COMP:LIST", "http://qichacha.com/company_base?unique="+code+"&companyname="+name, false);
+
+		mq.offerObjectInList("GJ:COMP:LIST", code + " " + name, false);
 
 		model.addObject(WEB_KEY, "OK");
 		return model;
-	}	
-	
+	}
+
 	public static String WEB_KEY = "HTML_RESULT";
 	@Resource
 	protected JobConfig config;
-	
+
 	@RequestMapping(value = "/GJ2", method = RequestMethod.POST)
-	public ModelAndView capUpload2(HttpServletRequest request, @RequestParam String fileName, @RequestParam MultipartFile file) {
+	public ModelAndView capUpload2(HttpServletRequest request, @RequestParam String fileName, @RequestParam String file) {
 		ModelAndView model = new ModelAndView("DWC/09001000");
 		if (!file.isEmpty()) {
 			try {
 				// 文件存储
-				String path = config.getFileSavePath()+DateHelper.currentDate3()+"/";
+				String path = config.getFileSavePath() + DateHelper.currentDate3() + "/";
 				File f = new File(path);
-				if(f.exists()==false)
+				if (f.exists() == false)
 					f.mkdirs();
-				SaveFileFromInputStream(file.getInputStream(), path , fileName + ".html");
+				SaveFileFromInputStream(file, path, fileName + ".html");
 				model.addObject(WEB_KEY, "OK");
 				// Redis存储
 				// model.addObject("FILE_VALUE", new String(bytes, "UTF-8"));
@@ -163,27 +159,24 @@ public class GanjiController {
 		}
 		return model;
 	}
-	
+
 	@RequestMapping(value = "/GJ3", method = RequestMethod.POST)
 	public ModelAndView capUpload3(HttpServletRequest request, @RequestParam String taskInvel) {
 		ModelAndView model = new ModelAndView("DWC/09001000");
-		
+
 		mq.putObject("GJ:TASK:INVEL", taskInvel, 0, false);
 
 		model.addObject(WEB_KEY, "OK");
 		return model;
 	}
 
-	public void SaveFileFromInputStream(InputStream stream, String path, String fileName) throws IOException {
-		FileOutputStream fs = new FileOutputStream(path + fileName);
-		byte[] buffer = new byte[1024 * 1024];
-		int byteread = 0;
-		while ((byteread = stream.read(buffer)) != -1) {
-			fs.write(buffer, 0, byteread);
-			fs.flush();
-		}
-		fs.close();
-		stream.close();
+	public void SaveFileFromInputStream(String content, String path, String fileName) throws IOException {
+		FileOutputStream fos = new FileOutputStream(path + fileName);
+		Writer out = new OutputStreamWriter(fos, "UTF-8");
+		out.write(content);
+		out.flush();
+		fos.close();
+
 	}
 
 }
