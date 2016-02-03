@@ -10,7 +10,7 @@
 </script>
 </head>
 <body>
-<H1>${HTML_RESULT}</H1><H3><A href="/0900">返回</A></H3>
+<H1>${HTML_RESULT}</H1><H3><A href="/">返回</A></H3>
 ${FILE_VALUE}
 </body>
 </html>
