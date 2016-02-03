@@ -23,7 +23,7 @@
 	<!-- 系统初始化 -->
 	<import resource='spring/spring-system.xml' />	
 	<!-- 数据定义 -->
-	<import resource='db/spring-db.xml' />
+	<!-- <import resource='db/spring-db.xml' /> -->
 	<!-- 网页抓取 -->
 	<import resource='dwc/spring-dwc.xml' />
 	<!-- 文件资源 -->

@@ -25,17 +25,11 @@
 		'>
 	
 	<bean class='org.isotope.jfp.dwc.business.JobConfig' >
-		<property name='fileSavePath' value='/AAA/' />  
+		<property name='fileSavePath' value='/data/springdata/' />  
 		<!-- 间隔秒数 -->
         <property name='monitorConfig'>
-        	<map> 
-        		<!-- 《AreaCode，ServiceImpl》 -->   
-        		<!-- 华北地区 --> 
-        		<entry key='1100002'			value='BeiJing2' />			<!-- 北京 -->   
-        		<entry key='1200002'			value='TianJin2' />			<!-- 天津 -->   
-        		<entry key='1300002'			value='HeBei2' />			<!-- 河北 -->          	
-        		<entry key='1400002'			value='ShanXi2' />			<!-- 山西 -->   
-        		<entry key='1500002'			value='NeiMengGu2' />		<!-- 内蒙古 -->  
+        	<map>
+        		<entry key='QCC'			value='QiChaCha' />	
             </map>
         </property>
 	</bean>		
