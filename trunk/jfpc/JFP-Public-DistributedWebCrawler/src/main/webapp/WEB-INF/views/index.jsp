@@ -16,20 +16,21 @@
 
 	<form method="POST" action="/GJ3">
 		频率设定
+		<input type="input" name="key">
 		<input type="input" name="taskInvel">
-		<input type="submit" value="Upload">
+		<input type="submit" value="submit">
 	</form>
 	<BR><BR><BR>
 	<form method="POST" enctype="multipart/form-data" action="/GJ2">
 		文件名称<input type="input" name="fileName">文件路径
-		<input type="file" name="file"><input type="submit" value="Upload">
+		<input type="file" name="file"><input type="submit" value="submit">
 	</form>
 	<BR><BR><BR>
 	<form method="POST" action="/GJ1">
 		文件名称登记
 		<input type="input" name="code">
 		<input type="input" name="name">
-		<input type="submit" value="Upload">
+		<input type="submit" value="submit">
 	</form>
 </body>
 </html>
