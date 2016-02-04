@@ -8,7 +8,6 @@
 </head>
 <body>
 TASK_INVEL=${TASK_INVEL},
-COMP_URL=${COMP_URL},
-COMP_KEY=${COMP_KEY}
+COMP_URL=${COMP_URL}
 </body>
 </html>
