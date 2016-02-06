@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 /// <summary>
-/// TSS资源分析
+/// TSS分享分析
 /// 作者：同位素
 /// 时间：2015/10/1
 /// </summary>
@@ -25,7 +25,7 @@ namespace TheSeed
         /// <summary>
         /// 文件类型
         /// </summary>
-        public static String LOCAL_FILE_TYPE = ".dat";
+        public static String LOCAL_FILE_TYPE = ".rsc";
 
         /// <summary>
         /// 系统配置
@@ -53,7 +53,7 @@ namespace TheSeed
         /// </summary>
         public static String LOCAL_CFG_USR = @"\usr";
         /// <summary>
-        /// 资源路径
+        /// 分享路径
         /// </summary>
         public static String LOCAL_RES = @"\res";
         /// <summary>
@@ -61,7 +61,7 @@ namespace TheSeed
         /// </summary>
         public static String LOCAL_RES_TOP = @"\top";
         /// <summary>
-        /// 剧集路径
+        /// 主题路径
         /// </summary>
         public static String LOCAL_SER = @"\ser";
         #endregion
@@ -93,11 +93,11 @@ namespace TheSeed
         /// </summary>
         public static String SERVER_ATR_ZM = SERVER_ATR + "//ZM";
         /// <summary>
-        /// 资源路径
+        /// 分享路径
         /// </summary>
         public static String SERVER_RES = "RES";
         /// <summary>
-        /// 剧集路径
+        /// 主题路径
         /// </summary>
         public static String SERVER_SER = "SER";
         #endregion

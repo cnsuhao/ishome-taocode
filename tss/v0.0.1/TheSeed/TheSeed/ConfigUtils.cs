@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 /// <summary>
-/// TSS资源分析
+/// TSS分享分析
 /// 作者：同位素
 /// 时间：2015/10/1
 /// </summary>
@@ -62,7 +62,7 @@ namespace TheSeed
 
         public static Boolean CheckConfigFile()
         {
-            //检查本地资源路径合法性
+            //检查本地分享路径合法性
             return Directory.Exists(ConfigFile);
         }
 
@@ -126,7 +126,7 @@ namespace TheSeed
             ServerConfigFileName = DataFileSavePath + @"\" + FilePathUtils.LOCAL_CFG + FilePathUtils.LOCAL_CFG_SER + FilePathUtils.LOCAL_FILE_TYPE;
             ResourceTop10FileName = ConfigUtils.DataFileSavePath + @"\" + FilePathUtils.LOCAL_RES + FilePathUtils.LOCAL_RES_TOP + FilePathUtils.LOCAL_FILE_TYPE;
 
-            //检查本地资源路径合法性
+            //检查本地分享路径合法性
             if (Directory.Exists(ConfigUtils.DataFileSavePath) == false)
             {
                 return false;

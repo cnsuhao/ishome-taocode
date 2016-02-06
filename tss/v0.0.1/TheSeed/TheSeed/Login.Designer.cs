@@ -67,7 +67,7 @@
             this.ConfigBTN.Name = "ConfigBTN";
             this.ConfigBTN.Size = new System.Drawing.Size(75, 23);
             this.ConfigBTN.TabIndex = 3;
-            this.ConfigBTN.Text = "系统设置";
+            this.ConfigBTN.Text = "系统配置";
             this.ConfigBTN.UseVisualStyleBackColor = true;
             this.ConfigBTN.Click += new System.EventHandler(this.ConfigBTN_Click);
             // 

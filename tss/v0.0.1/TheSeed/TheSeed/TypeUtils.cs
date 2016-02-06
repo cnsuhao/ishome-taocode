@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 /// <summary>
-/// TSS资源分析
+/// TSS分享分析
 /// 作者：同位素
 /// 时间：2015/10/1
 /// </summary>
@@ -92,14 +92,14 @@ namespace TheSeed
         }
 
         /// <summary>
-        /// 加载我订阅的分类资源
+        /// 加载我订阅的分类分享
         /// </summary>
         /// <returns></returns>
         public static Boolean LoadMyOrderTypes()
         {
             //获取网络通信
             //MyOrderResource
-            //获取本地资源数据最后更新日期（文件列表）
+            //获取本地分享数据最后更新日期（文件列表）
             String[] LocalPaths = Directory.GetDirectories(ConfigUtils.DataFileSavePath + FilePathUtils.LOCAL_RES);
             //获取最大的日期路径
             Int32 LastPath = Int32.MinValue;//YYYYMMDD
@@ -112,7 +112,7 @@ namespace TheSeed
             if (DownloadOrderResouces == null)
                 DownloadOrderResouces = new Dictionary<string, string>();
 
-            //获取云端资源数据更新日期（文件列表）
+            //获取云端分享数据更新日期（文件列表）
             List<String> CloundPaths = ConfigUtils.ServerProtocol.ListResourceFilePath(LastPath.ToString());
             foreach (String item in CloundPaths)
             {
@@ -122,7 +122,7 @@ namespace TheSeed
                 Directory.CreateDirectory(ConfigUtils.DataFileSavePath + FilePathUtils.LOCAL_RES + @"\" + item.Substring(0, 3) + @"\" + item.Substring(4, 2));
                 String FilePathResource = ConfigUtils.DataFileSavePath + FilePathUtils.LOCAL_RES + @"\" + item.Substring(0, 3) + @"\" + item.Substring(4, 2) + @"\" + item.Substring(6, 2);
                 Directory.CreateDirectory(FilePathResource);
-                //获取云端资源列表判断时间）
+                //获取云端分享列表判断时间）
                 List<String> CloundItems = ConfigUtils.ServerProtocol.ListResourceFilePath(LastPath.ToString());
 
                 DataSet.ConfigDataTable NowResouseItems = null;
@@ -136,7 +136,7 @@ namespace TheSeed
                     NowResouseItems.ReadXml(ItemsFilePathForResouseList);
                 }
 
-                #region 保存用户订阅资源数据到本地（资源XML文件列表副本）
+                #region 保存用户订阅分享数据到本地（分享XML文件列表副本）
                 foreach (String ResouseItem in CloundItems)
                 {
                     //判断类别决定是否需要更新到本地
@@ -166,7 +166,7 @@ namespace TheSeed
                 }
                 #endregion
 
-                //保存订阅资源清单
+                //保存订阅分享清单
                 NowResouseItems.WriteXml(ItemsFilePathForResouseList);
             }
 
@@ -174,12 +174,12 @@ namespace TheSeed
         }
         // foreach (KeyValuePair<String, String> Resouses in CloundPathItems)
         /// <summary>
-        /// 保存我订阅的分类资源
+        /// 保存我订阅的分类分享
         /// </summary>
         /// <returns></returns>
         public static Boolean SaveMyOrderTypes()
         {
-            //根据下载清单更新资源文件内容
+            //根据下载清单更新分享文件内容
             foreach (KeyValuePair<String, String> ResouseItem in DownloadOrderResouces)
             {
                 File.WriteAllText(ResouseItem.Value, ConfigUtils.ServerProtocol.ReadResource(ResouseItem.Key, ResouseItem.Value));

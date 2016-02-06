@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 /// <summary>
-/// TSS资源分析
+/// TSS分享分析
 /// 作者：同位素
 /// 时间：2015/10/1
 /// </summary>
@@ -37,12 +37,12 @@ namespace TheSeed
         }
 
         /// <summary>
-        /// 是否进行剧集发布
+        /// 是否进行主题发布
         /// </summary>
         public Boolean SeriesType { get; set; }
 
         /// <summary>
-        /// 创建的资源
+        /// 创建的分享
         /// </summary>
         public DataSet.ResourceRow Resource { get; set; }
     }

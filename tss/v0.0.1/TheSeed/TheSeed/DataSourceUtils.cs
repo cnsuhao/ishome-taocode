@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 /// <summary>
-/// TSS资源分析
+/// TSS分享分析
 /// 作者：同位素
 /// 时间：2015/10/1
 /// </summary>

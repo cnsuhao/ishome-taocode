@@ -13,7 +13,7 @@ namespace TheSeed.Properties {
     
     
     /// <summary>
-    ///   一个强类型的资源类，用于查找本地化的字符串等。
+    ///   一个强类型的分享类，用于查找本地化的字符串等。
     /// </summary>
     // 此类是由 StronglyTypedResourceBuilder
     // 类通过类似于 ResGen 或 Visual Studio 的工具自动生成的。
@@ -47,7 +47,7 @@ namespace TheSeed.Properties {
         }
         
         /// <summary>
-        ///   使用此强类型资源类，为所有资源查找
+        ///   使用此强类型分享类，为所有分享查找
         ///   重写当前线程的 CurrentUICulture 属性。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -61,7 +61,7 @@ namespace TheSeed.Properties {
         }
         
         /// <summary>
-        ///   查找类似于 (Icon) 的 System.Drawing.Icon 类型的本地化资源。
+        ///   查找类似于 (Icon) 的 System.Drawing.Icon 类型的本地化分享。
         /// </summary>
         internal static System.Drawing.Icon TSS {
             get {

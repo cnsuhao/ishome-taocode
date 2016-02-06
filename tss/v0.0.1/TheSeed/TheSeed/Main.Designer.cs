@@ -8,9 +8,9 @@
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        /// 清理所有正在使用的资源。
+        /// 清理所有正在使用的分享。
         /// </summary>
-        /// <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
+        /// <param name="disposing">如果应释放托管分享，为 true；否则为 false。</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -53,7 +53,7 @@
             this.ResourceListBTN.Name = "ResourceListBTN";
             this.ResourceListBTN.Size = new System.Drawing.Size(202, 36);
             this.ResourceListBTN.TabIndex = 1;
-            this.ResourceListBTN.Text = "资源查看";
+            this.ResourceListBTN.Text = "查看分享";
             this.ResourceListBTN.UseVisualStyleBackColor = true;
             this.ResourceListBTN.Click += new System.EventHandler(this.ResourceListBTN_Click);
             // 
@@ -63,7 +63,7 @@
             this.ResourceCreatBTN.Name = "ResourceCreatBTN";
             this.ResourceCreatBTN.Size = new System.Drawing.Size(93, 36);
             this.ResourceCreatBTN.TabIndex = 2;
-            this.ResourceCreatBTN.Text = "资源发布";
+            this.ResourceCreatBTN.Text = "发布资源";
             this.ResourceCreatBTN.UseVisualStyleBackColor = true;
             this.ResourceCreatBTN.Click += new System.EventHandler(this.ResourceCreatBTN_Click);
             // 
@@ -73,7 +73,7 @@
             this.TypeCreatBTN.Name = "TypeCreatBTN";
             this.TypeCreatBTN.Size = new System.Drawing.Size(202, 36);
             this.TypeCreatBTN.TabIndex = 1;
-            this.TypeCreatBTN.Text = "类别发布";
+            this.TypeCreatBTN.Text = "发布类别";
             this.TypeCreatBTN.UseVisualStyleBackColor = true;
             this.TypeCreatBTN.Click += new System.EventHandler(this.TypeCreatBTN_Click);
             // 
@@ -93,7 +93,7 @@
             this.SeriesCreatBTN.Name = "SeriesCreatBTN";
             this.SeriesCreatBTN.Size = new System.Drawing.Size(90, 36);
             this.SeriesCreatBTN.TabIndex = 2;
-            this.SeriesCreatBTN.Text = "剧集发布";
+            this.SeriesCreatBTN.Text = "发布主题";
             this.SeriesCreatBTN.UseVisualStyleBackColor = true;
             this.SeriesCreatBTN.Click += new System.EventHandler(this.SeriesCreatBTN_Click);
             // 

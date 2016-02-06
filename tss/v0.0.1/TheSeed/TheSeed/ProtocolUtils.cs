@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 /// <summary>
-/// TSS资源分析
+/// TSS分享分析
 /// 作者：同位素
 /// 时间：2015/10/1
 /// </summary>
@@ -20,7 +20,7 @@ namespace TheSeed
         /// <returns></returns>
         Boolean ConnectServer();        
         /// <summary>
-        /// 获取资源服务器清单(FTP、网盘)
+        /// 获取分享服务器清单(FTP、网盘)
         /// </summary>
         /// <returns></returns>
         List<String> ListServer();
@@ -55,107 +55,107 @@ namespace TheSeed
         String ReadType(String TypeID, String TypeFilePath);
         #endregion
 
-        #region 资源
+        #region 分享
         /// <summary>
-        /// 资源一览
+        /// 分享一览
         /// </summary>
         /// <param name="DateTime"></param>
         /// <returns></returns>
         List<String> ListResourceTop10();
         /// <summary>
-        /// 资源目录一览<ListResource>
+        /// 分享目录一览<ListResource>
         /// </summary>
         /// <param name="DateTime"></param>
         /// <returns></returns>
         List<String> ListResourceFilePath(String DateTime);
         /// <summary>
-        /// 资源目录一览
+        /// 分享目录一览
         /// </summary>
         /// <param name="DateTime"></param>
         /// <returns></returns>
         Dictionary<String, String> ListResource(String DateTime);
         /// <summary>
-        /// 发布资源
+        /// 发布分享
         /// </summary>
         /// <param name="ResourceStruct"></param>
-        /// <param name="ResourceFilePath">文件名称(资源名称/内容标题)</param>
+        /// <param name="ResourceFilePath">文件名称(分享名称/内容标题)</param>
         /// <returns></returns>
         Boolean CreatResource(String ResourceStruct, String ResourceFilePath);
         /// <summary>
-        /// 删除资源
+        /// 删除分享
         /// </summary>
         /// <param name="ResourceID"></param>
-        /// <param name="ResourceFilePath">文件名称(资源名称/内容标题</param>
+        /// <param name="ResourceFilePath">文件名称(分享名称/内容标题</param>
         /// <returns></returns>
         Boolean DeleteResource(String ResourceID, String ResourceFilePath);
         /// <summary>
-        /// 读取资源
+        /// 读取分享
         /// </summary>
         /// <param name="ResourceID"></param>
-        /// <param name="ResourceFilePath">文件名称(资源名称/内容标题</param>
+        /// <param name="ResourceFilePath">文件名称(分享名称/内容标题</param>
         /// <returns></returns>
         String ReadResource(String ResourceID,String ResourceFilePath);
         #endregion
 
-        #region 剧集
+        #region 主题
         /// <summary>
-        /// 剧集目录一览
+        /// 主题目录一览
         /// </summary>
         /// <param name="DateTime"></param>
         /// <returns></returns>
         List<String> ListSeriesFilePath(String DateTime);
         /// <summary>
-        /// 剧集一览
+        /// 主题一览
         /// </summary>
         /// <param name="DateTime"></param>
         /// <returns></returns>
         Dictionary<String,String> ListSeries(String DateTime);
         /// <summary>
-        /// 发布剧集
+        /// 发布主题
         /// </summary>
         /// <param name="SeriesStruct"></param>
-        /// <param name="SeriesFilePath">文件名称(资源名称/内容标题</param>
+        /// <param name="SeriesFilePath">文件名称(分享名称/内容标题</param>
         /// <returns></returns>
         Boolean CreatSeries(String SeriesStruct, String SeriesFilePath);
         /// <summary>
-        /// 删除剧集
+        /// 删除主题
         /// </summary>
         /// <param name="SeriesID"></param>
-        /// <param name="SeriesFilePath">文件名称(资源名称/内容标题</param>
+        /// <param name="SeriesFilePath">文件名称(分享名称/内容标题</param>
         /// <returns></returns>
         Boolean DeleteSeries(String SeriesID, String SeriesFilePath);
         /// <summary>
-        /// 读取剧集
+        /// 读取主题
         /// </summary>
         /// <param name="SeriesID"></param>
-        /// <param name="SeriesFilePath">文件名称(资源名称/内容标题</param>
+        /// <param name="SeriesFilePath">文件名称(分享名称/内容标题</param>
         /// <returns></returns>
         String ReadSeries(String SeriesID, String SeriesFilePath);
         /// <summary>
-        /// 剧集资源一览
+        /// 主题分享一览
         /// </summary>
         /// <param name="DateTime"></param>
         /// <returns></returns>
         Dictionary<String, String> ListSeriesResource(String SeriesResourceID, String DateTime);
         /// <summary>
-        /// 发布剧集资源
+        /// 发布主题分享
         /// </summary>
         /// <param name="SeriesResourceStruct"></param>
-        /// <param name="SeriesResourceFilePath">文件名称(资源名称/内容标题</param>
+        /// <param name="SeriesResourceFilePath">文件名称(分享名称/内容标题</param>
         /// <returns></returns>
         Boolean CreatSeriesResource(String SeriesResourceStruct, String SeriesResourceFilePath);
         /// <summary>
-        /// 删除剧集资源
+        /// 删除主题分享
         /// </summary>
         /// <param name="SeriesResourceID"></param>
-        /// <param name="SeriesResourceFilePath">文件名称(资源名称/内容标题</param>
+        /// <param name="SeriesResourceFilePath">文件名称(分享名称/内容标题</param>
         /// <returns></returns>
         Boolean DeleteSeriesResource(String SeriesResourceID, String SeriesResourceFilePath);
         /// <summary>
-        /// 读取剧集资源
+        /// 读取主题分享
         /// </summary>
         /// <param name="SeriesResourceID"></param>
-        /// <param name="SeriesResourceFilePath">文件名称(资源名称/内容标题</param>
+        /// <param name="SeriesResourceFilePath">文件名称(分享名称/内容标题</param>
         /// <returns></returns>
         String ReadSeriesResource(String SeriesResourceID, String SeriesResourceFilePath);
 
@@ -176,7 +176,7 @@ namespace TheSeed
     {
         public Boolean ConnectServer()
         {
-            //检查本地资源路径合法性
+            //检查本地分享路径合法性
             if (Directory.Exists(ConfigUtils.DataFileSavePath) == false)
                 return false;
             return true;

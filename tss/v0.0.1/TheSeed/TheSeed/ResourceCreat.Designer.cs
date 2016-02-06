@@ -38,8 +38,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
-            this.GXJM = new System.Windows.Forms.TextBox();
-            this.GXJS = new System.Windows.Forms.TextBox();
             this.LB = new System.Windows.Forms.ListBox();
             this.FXDQ = new System.Windows.Forms.ListBox();
             this.ZM = new System.Windows.Forms.ListBox();
@@ -81,7 +79,7 @@
             this.UUID.ReadOnly = true;
             this.UUID.Size = new System.Drawing.Size(239, 21);
             this.UUID.TabIndex = 5;
-            this.UUID.Text = "资源代码";
+            this.UUID.Text = "分享代码";
             // 
             // textBox2
             // 
@@ -132,24 +130,6 @@
             this.textBox4.Size = new System.Drawing.Size(129, 21);
             this.textBox4.TabIndex = 15;
             this.textBox4.Text = "收集日期";
-            // 
-            // GXJM
-            // 
-            this.GXJM.Location = new System.Drawing.Point(403, 12);
-            this.GXJM.Name = "GXJM";
-            this.GXJM.Size = new System.Drawing.Size(92, 21);
-            this.GXJM.TabIndex = 33;
-            this.GXJM.Text = "当前更新集目";
-            this.GXJM.Visible = false;
-            // 
-            // GXJS
-            // 
-            this.GXJS.Location = new System.Drawing.Point(302, 12);
-            this.GXJS.Name = "GXJS";
-            this.GXJS.Size = new System.Drawing.Size(92, 21);
-            this.GXJS.TabIndex = 34;
-            this.GXJS.Text = "当前更新季数";
-            this.GXJS.Visible = false;
             // 
             // LB
             // 
@@ -208,8 +188,6 @@
             this.Controls.Add(this.FXDQ);
             this.Controls.Add(this.ZM);
             this.Controls.Add(this.YYZL);
-            this.Controls.Add(this.GXJM);
-            this.Controls.Add(this.GXJS);
             this.Controls.Add(this.textBox4);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label1);
@@ -243,8 +221,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox GXJM;
-        private System.Windows.Forms.TextBox GXJS;
         private System.Windows.Forms.ListBox LB;
         private System.Windows.Forms.ListBox FXDQ;
         private System.Windows.Forms.ListBox ZM;
