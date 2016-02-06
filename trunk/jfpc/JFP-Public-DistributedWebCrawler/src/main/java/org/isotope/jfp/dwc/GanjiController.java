@@ -41,10 +41,12 @@ public class GanjiController {
 	static int size = 678;
 
 	public static void main(String[] args) throws Exception {
+		
+		
 		Jedis jedis = new Jedis("10.10.168.50", 6379);
 		jedis.auth("ImxV@ly1D4bBtGwv");
 
-		String target = "QCC";
+		String target = "QXB";
 
 		// Jedis jedis = new Jedis("127.0.0.1", 6379);
 
@@ -52,16 +54,16 @@ public class GanjiController {
 		// jedis.rpush("GJ:COMP:KEY", "医疗");
 		// jedis.rpush("GJ:COMP:KEY", "教育");
 
-		jedis.set(target + ":TASK:INVEL", "30:30");
+		//jedis.set(target + ":TASK:INVEL", "300;300");
 
 		loadKeyWordFile(jedis, target);
-		loadCompanyFile(jedis, target);
+		//loadCompanyFile(jedis, target);
 
 		// jedis.set("GJ:TASK:INVEL", "5000");
 	}
 
 	public static void loadKeyWordFile(Jedis jedis, String key) throws Exception {
-		File file = new File("D:/corp_name_all_20160130.txt");
+		File file = new File("E:/KeyWord.txt");
 		BufferedReader reader = null;
 		try {
 			reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
@@ -168,11 +170,11 @@ public class GanjiController {
 		return model;
 	}
 
-	@RequestMapping(value = "/GJ1", method = RequestMethod.POST)
-	public ModelAndView capUpload1(HttpServletRequest request, @RequestParam String code, @RequestParam String name) {
+	@RequestMapping(value = "/GJ1/{key}", method = RequestMethod.POST)
+	public ModelAndView capUpload1(HttpServletRequest request, @PathVariable String key, @RequestParam String code, @RequestParam String name) {
 		ModelAndView model = new ModelAndView("DWC/09001000");
 
-		mq.offerObjectInList("GJ:COMP:LIST", code + " " + name, false);
+		mq.offerObjectInList(key+":COMP:LIST", code + " " + name, false);
 
 		model.addObject(WEB_KEY, "OK");
 		return model;
