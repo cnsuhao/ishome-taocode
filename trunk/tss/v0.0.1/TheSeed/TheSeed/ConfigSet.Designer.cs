@@ -57,12 +57,13 @@
             // 
             // NeedAdminBTN
             // 
-            this.NeedAdminBTN.Location = new System.Drawing.Point(117, 71);
+            this.NeedAdminBTN.Location = new System.Drawing.Point(103, 71);
             this.NeedAdminBTN.Name = "NeedAdminBTN";
             this.NeedAdminBTN.Size = new System.Drawing.Size(303, 32);
             this.NeedAdminBTN.TabIndex = 5;
-            this.NeedAdminBTN.Text = "申请管理员";
+            this.NeedAdminBTN.Text = "我要分享";
             this.NeedAdminBTN.UseVisualStyleBackColor = true;
+            this.NeedAdminBTN.Click += new System.EventHandler(this.NeedAdminBTN_Click);
             // 
             // ChangePasswordBTN
             // 
@@ -72,6 +73,7 @@
             this.ChangePasswordBTN.TabIndex = 6;
             this.ChangePasswordBTN.Text = "修改密码";
             this.ChangePasswordBTN.UseVisualStyleBackColor = true;
+            this.ChangePasswordBTN.Click += new System.EventHandler(this.ChangePasswordBTN_Click);
             // 
             // DataFileSavePath
             // 

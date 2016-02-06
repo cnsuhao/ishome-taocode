@@ -174,7 +174,7 @@
             this.UUID.ReadOnly = true;
             this.UUID.Size = new System.Drawing.Size(239, 21);
             this.UUID.TabIndex = 16;
-            this.UUID.Text = "剧集代码";
+            this.UUID.Text = "主题代码";
             // 
             // textBox1
             // 
@@ -240,7 +240,7 @@
             this.CreatResourceBTN.Name = "CreatResourceBTN";
             this.CreatResourceBTN.Size = new System.Drawing.Size(85, 23);
             this.CreatResourceBTN.TabIndex = 34;
-            this.CreatResourceBTN.Text = "发布剧集";
+            this.CreatResourceBTN.Text = "发布主题";
             this.CreatResourceBTN.UseVisualStyleBackColor = true;
             this.CreatResourceBTN.Click += new System.EventHandler(this.CreatResourceBTN_Click);
             // 

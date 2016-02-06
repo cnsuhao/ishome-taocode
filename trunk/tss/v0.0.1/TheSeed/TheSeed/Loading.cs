@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 /// <summary>
-/// TSS资源分析
+/// TSS分享分析
 /// 作者：同位素
 /// 时间：2015/10/1
 /// </summary>
@@ -51,8 +51,8 @@ namespace TheSeed
                 ConfigUtils.LoadServerListConfig();
                 #endregion
 
-                #region 获取资源更新
-                MessageLBL.Text = "获取今日热播信息";
+                #region 获取分享更新
+                MessageLBL.Text = "获取今日热点信息";
                 LoadPB.Value = 30;
                 Thread.Sleep(2000);
                 ResourceUtils.LoadResourcesTop10();
@@ -62,12 +62,12 @@ namespace TheSeed
                 Thread.Sleep(2000);
                 TypeUtils.LoadAllTypes();
 
-                MessageLBL.Text = "获取最新资源信息";
+                MessageLBL.Text = "获取最新分享信息";
                 LoadPB.Value = 50;
                 Thread.Sleep(2000);
                 ResourceUtils.LoadAllResources();
 
-                MessageLBL.Text = "获取最新剧集信息";
+                MessageLBL.Text = "获取最新主题信息";
                 LoadPB.Value = 60;
                 Thread.Sleep(2000);
                 SeriesUtils.LoadAllSeries();
@@ -80,7 +80,7 @@ namespace TheSeed
                 Thread.Sleep(1000);
                 TypeUtils.LoadMyOrderTypes();
                 
-                MessageLBL.Text = "获得我关注的剧集信息";
+                MessageLBL.Text = "获得我关注的主题信息";
                 LoadPB.Value = 80;
                 MessageLBL.Refresh();
                 Thread.Sleep(1000);

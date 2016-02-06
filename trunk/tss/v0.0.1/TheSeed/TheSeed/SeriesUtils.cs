@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 /// <summary>
-/// TSS资源分析
+/// TSS分享分析
 /// 作者：同位素
 /// 时间：2015/10/1
 /// </summary>
@@ -17,14 +17,14 @@ namespace TheSeed
         public static DataSet.SeriesDataTable Series { get; set; }
 
         /// <summary>
-        /// 获得所有剧集清单
+        /// 获得所有主题清单
         /// </summary>
         /// <returns></returns>
         public static Boolean LoadAllSeries()
         {
-            //按照年/日.XML格式保存（文件内保存左右资源信息列表）
+            //按照年/日.XML格式保存（文件内保存左右分享信息列表）
             //yyyy/MM/dd HH:mm:ss
-            #region 获取本地资源数据最后更新日期（文件列表）
+            #region 获取本地分享数据最后更新日期（文件列表）
             String FilePath = ConfigUtils.DataFileSavePath + FilePathUtils.LOCAL_RES + @"\" + DateTime.Now.ToString("yyyy");
             String[] LocalPaths = Directory.GetDirectories(FilePath);
             //获取最大的日期路径
@@ -49,18 +49,18 @@ namespace TheSeed
             return true;
         }
         /// <summary>
-        /// 获得每日资源列表（全体）
+        /// 获得每日分享列表（全体）
         /// </summary>
         /// <param name="DateTime"></param>
         /// <returns></returns>
         public static Boolean LoadResources(String DateTime)
         {
-            //按照年/月/日.XML格式保存（文件内保存左右资源信息列表）
+            //按照年/月/日.XML格式保存（文件内保存左右分享信息列表）
             return true;
         }
 
         /// <summary>
-        /// 发布新的剧集
+        /// 发布新的主题
         /// </summary>
         /// <returns></returns>
         public static Boolean SaveNewSeriess()
@@ -69,7 +69,7 @@ namespace TheSeed
         }
 
         /// <summary>
-        /// 加载我订阅的剧集更新
+        /// 加载我订阅的主题更新
         /// </summary>
         /// <returns></returns>
         public static Boolean LoadMyOrderSeriess()
@@ -78,7 +78,7 @@ namespace TheSeed
         }
 
         /// <summary>
-        /// 保存我订阅的剧集资源
+        /// 保存我订阅的主题分享
         /// </summary>
         /// <returns></returns>
         public static Boolean SaveMyOrderSeriess()

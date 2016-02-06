@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 /// <summary>
-/// TSS资源分析
+/// TSS分享分析
 /// 作者：同位素
 /// 时间：2015/10/1
 /// </summary>
@@ -95,6 +95,16 @@ namespace TheSeed
                     e.Cancel = true;
                 }
             }
+        }
+
+        private void NeedAdminBTN_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ChangePasswordBTN_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

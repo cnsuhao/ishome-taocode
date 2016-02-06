@@ -76,7 +76,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 12);
             this.label2.TabIndex = 3;
-            this.label2.Text = "剧集订阅";
+            this.label2.Text = "主题订阅";
             // 
             // MyNeed
             // 

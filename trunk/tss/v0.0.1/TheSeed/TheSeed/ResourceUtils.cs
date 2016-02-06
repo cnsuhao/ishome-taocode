@@ -7,24 +7,24 @@ using System.Text;
 using System.Threading.Tasks;
 
 /// <summary>
-/// TSS资源分析
+/// TSS分享分析
 /// 作者：同位素
 /// 时间：2015/10/1
 /// </summary>
 namespace TheSeed
 {
     /// <summary>
-    /// 资源管理工具
+    /// 分享管理工具
     /// </summary>
     class ResourceUtils
     {
         /// <summary>
-        /// 最新资源信息清单（Top10）
+        /// 最新分享信息清单（Top10）
         /// </summary>
         public static DataSet.ResourceDataTable ResourceTop10 { get; set; }
 
         /// <summary>
-        /// 获得最新资源
+        /// 获得最新分享
         /// </summary>
         /// <returns></returns>
         public static Boolean SaveResourcesTop10()
@@ -33,7 +33,7 @@ namespace TheSeed
             return true;
         }
         /// <summary>
-         /// 获得最新资源（本地展示）
+         /// 获得最新分享（本地展示）
          /// </summary>
          /// <returns></returns>
         public static Boolean ReadResourcesTop10()
@@ -44,7 +44,7 @@ namespace TheSeed
         }
 
         /// <summary>
-        /// 更新热播（最新Top10）
+        /// 更新热点（最新Top10）
         /// </summary>
         /// <returns></returns>
         public static Boolean LoadResourcesTop10()
@@ -56,14 +56,14 @@ namespace TheSeed
         }
 
         /// <summary>
-        /// 获得每日资源列表（全体）
+        /// 获得每日分享列表（全体）
         /// </summary>
         /// <returns></returns>
         public static Boolean LoadAllResources()
         {
-            //按照年/日.XML格式保存（文件内保存左右资源信息列表）
+            //按照年/日.XML格式保存（文件内保存左右分享信息列表）
             //yyyy/MM/dd HH:mm:ss
-            #region 获取本地资源数据最后更新日期（文件列表）
+            #region 获取本地分享数据最后更新日期（文件列表）
             String FilePath = ConfigUtils.DataFileSavePath + FilePathUtils.LOCAL_RES + @"\" + DateTime.Now.ToString("yyyy");
             String[] LocalPaths = Directory.GetDirectories(FilePath);
             //获取最大的日期路径

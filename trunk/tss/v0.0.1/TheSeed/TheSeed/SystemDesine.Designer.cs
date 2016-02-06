@@ -93,7 +93,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 1;
-            this.button3.Text = "资源文件";
+            this.button3.Text = "分享文件";
             this.button3.UseVisualStyleBackColor = true;
             // 
             // groupBox1
@@ -152,7 +152,7 @@
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(96, 16);
             this.checkBox1.TabIndex = 2;
-            this.checkBox1.Text = "剧集可以订阅";
+            this.checkBox1.Text = "主题可以订阅";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // button4
@@ -170,7 +170,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 23);
             this.button5.TabIndex = 1;
-            this.button5.Text = "剧集";
+            this.button5.Text = "主题";
             this.button5.UseVisualStyleBackColor = true;
             // 
             // button6
@@ -235,7 +235,7 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(107, 23);
             this.button15.TabIndex = 4;
-            this.button15.Text = "发布资源";
+            this.button15.Text = "发布分享";
             this.button15.UseVisualStyleBackColor = true;
             // 
             // button14
@@ -244,7 +244,7 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(268, 23);
             this.button14.TabIndex = 3;
-            this.button14.Text = "更新我关注资源";
+            this.button14.Text = "更新我关注分享";
             this.button14.UseVisualStyleBackColor = true;
             // 
             // button12
@@ -262,7 +262,7 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(122, 23);
             this.button11.TabIndex = 2;
-            this.button11.Text = "更新资源信息";
+            this.button11.Text = "更新分享信息";
             this.button11.UseVisualStyleBackColor = true;
             // 
             // button10
@@ -289,7 +289,7 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(144, 23);
             this.button9.TabIndex = 0;
-            this.button9.Text = "获取资源服务器地址";
+            this.button9.Text = "获取分享服务器地址";
             this.button9.UseVisualStyleBackColor = true;
             // 
             // button8
@@ -311,7 +311,7 @@
             this.groupBox4.Size = new System.Drawing.Size(612, 57);
             this.groupBox4.TabIndex = 4;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "TSS资源发布算法";
+            this.groupBox4.Text = "TSS分享发布算法";
             // 
             // button21
             // 
@@ -369,7 +369,7 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(156, 23);
             this.button25.TabIndex = 1;
-            this.button25.Text = "获取关注剧集";
+            this.button25.Text = "获取关注主题";
             this.button25.UseVisualStyleBackColor = true;
             // 
             // button24
@@ -415,7 +415,7 @@
             this.button27.Name = "button27";
             this.button27.Size = new System.Drawing.Size(291, 23);
             this.button27.TabIndex = 0;
-            this.button27.Text = "按资源剧集目录，按年目录，日文件保存";
+            this.button27.Text = "按分享主题目录，按年目录，日文件保存";
             this.button27.UseVisualStyleBackColor = true;
             // 
             // groupBox7
@@ -434,7 +434,7 @@
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(286, 23);
             this.button28.TabIndex = 0;
-            this.button28.Text = "按资源剧集目录，按年日目录，多个文件";
+            this.button28.Text = "按分享主题目录，按年日目录，多个文件";
             this.button28.UseVisualStyleBackColor = true;
             // 
             // groupBox8
