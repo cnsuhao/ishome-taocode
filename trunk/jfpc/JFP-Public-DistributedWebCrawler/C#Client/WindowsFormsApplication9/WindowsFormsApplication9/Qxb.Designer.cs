@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsApplication3
 {
-    partial class Qcc
+    partial class Qxb
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Qcc));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Qxb));
             this.MessageTBX = new System.Windows.Forms.TextBox();
             this.KeyWordSearchWB = new System.Windows.Forms.WebBrowser();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
@@ -38,7 +38,6 @@
             this.showToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.TimerTBX = new System.Windows.Forms.TextBox();
             this.TargetKeyTBX = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.CompanyConfigWB = new System.Windows.Forms.WebBrowser();
@@ -55,7 +54,7 @@
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.CompNameUploadWB = new System.Windows.Forms.WebBrowser();
             this.ConfigTimer = new System.Windows.Forms.Timer(this.components);
-            this.RunNumerCBX = new System.Windows.Forms.ComboBox();
+            this.TimerTBX = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -132,7 +131,6 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.RunNumerCBX);
             this.tabPage1.Controls.Add(this.TimerTBX);
             this.tabPage1.Controls.Add(this.TargetKeyTBX);
             this.tabPage1.Controls.Add(this.panel3);
@@ -148,22 +146,14 @@
             this.tabPage1.Text = "基本信息";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // TimerTBX
-            // 
-            this.TimerTBX.Location = new System.Drawing.Point(389, 5);
-            this.TimerTBX.Name = "TimerTBX";
-            this.TimerTBX.ReadOnly = true;
-            this.TimerTBX.Size = new System.Drawing.Size(91, 21);
-            this.TimerTBX.TabIndex = 8;
-            // 
             // TargetKeyTBX
             // 
             this.TargetKeyTBX.Location = new System.Drawing.Point(9, 5);
             this.TargetKeyTBX.Name = "TargetKeyTBX";
             this.TargetKeyTBX.ReadOnly = true;
-            this.TargetKeyTBX.Size = new System.Drawing.Size(107, 21);
+            this.TargetKeyTBX.Size = new System.Drawing.Size(110, 21);
             this.TargetKeyTBX.TabIndex = 7;
-            this.TargetKeyTBX.Text = "QCC";
+            this.TargetKeyTBX.Text = "QXB";
             // 
             // panel3
             // 
@@ -225,10 +215,10 @@
             // 
             // ConfigURL
             // 
-            this.ConfigURL.Location = new System.Drawing.Point(122, 5);
+            this.ConfigURL.Location = new System.Drawing.Point(125, 5);
             this.ConfigURL.Name = "ConfigURL";
             this.ConfigURL.ReadOnly = true;
-            this.ConfigURL.Size = new System.Drawing.Size(261, 21);
+            this.ConfigURL.Size = new System.Drawing.Size(324, 21);
             this.ConfigURL.TabIndex = 1;
             this.ConfigURL.Text = "http://qcctest.wzyrz.cn";
             // 
@@ -316,20 +306,14 @@
             this.ConfigTimer.Interval = 1000;
             this.ConfigTimer.Tick += new System.EventHandler(this.ConfigTimer_Tick);
             // 
-            // RunNumerCBX
+            // TimerTBX
             // 
-            this.RunNumerCBX.FormattingEnabled = true;
-            this.RunNumerCBX.Items.AddRange(new object[] {
-            "30",
-            "60",
-            "90"});
-            this.RunNumerCBX.Location = new System.Drawing.Point(487, 5);
-            this.RunNumerCBX.Name = "RunNumerCBX";
-            this.RunNumerCBX.Size = new System.Drawing.Size(67, 20);
-            this.RunNumerCBX.TabIndex = 9;
-            this.RunNumerCBX.Text = "60";
+            this.TimerTBX.Location = new System.Drawing.Point(455, 5);
+            this.TimerTBX.Name = "TimerTBX";
+            this.TimerTBX.Size = new System.Drawing.Size(97, 21);
+            this.TimerTBX.TabIndex = 8;
             // 
-            // Qcc
+            // Qxb
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -337,8 +321,8 @@
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Qcc";
-            this.Text = "网页数据抓取 ver 0.2.1";
+            this.Name = "Qxb";
+            this.Text = "感谢您的共享";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Qcc_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.SizeChanged += new System.EventHandler(this.Qcc_SizeChanged);
@@ -385,7 +369,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox TimerTBX;
-        private System.Windows.Forms.ComboBox RunNumerCBX;
     }
 }
 

@@ -11,9 +11,9 @@ using System.Runtime.InteropServices;
 
 namespace WindowsFormsApplication3
 {
-    public partial class Qcc : Form
+    public partial class Qxb : Form
     {
-        public Qcc()
+        public Qxb()
         {
             InitializeComponent();
         }
@@ -24,12 +24,13 @@ namespace WindowsFormsApplication3
 
             //ConfigURL.Text = "http://127.0.0.1:8080";
 
-            TargetKeyTBX.Text = "QCC";
+            //TargetKeyTBX.Text = "QCC";
 
             KeyWordConfigWB.Navigate(ConfigURL.Text + "/K/" + TargetKeyTBX.Text);
-            CompanyConfigWB.Navigate(ConfigURL.Text + "/N/" + TargetKeyTBX.Text);
             CompNameUploadWB.Navigate(Application.StartupPath + "/CompNameUpload.html");
-            CompanyUploadWB.Navigate(Application.StartupPath + "/CompanyUpload.html");
+
+            //CompanyConfigWB.Navigate(ConfigURL.Text + "/N/" + TargetKeyTBX.Text);
+            //CompanyUploadWB.Navigate(Application.StartupPath + "/CompanyUpload.html");
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -73,100 +74,50 @@ namespace WindowsFormsApplication3
 
         private void ConfigTimer_Tick(object sender, EventArgs e)
         {
-            //查询数据
-            if (KeyWordSearchTimer_Num > KeyWordSearchTimer_Interval && KeyWordSearchRunning == true)
-            {
-                KeyWordConfigWB.Navigate(ConfigURL.Text + "/K/" + TargetKeyTBX.Text);
-                KeyWordSearchRunning = false;
-            }
-
-            KeyWordSearchTimer_Num = KeyWordSearchTimer_Num + 1;
-
             //提交结果
             if (CompNameUploadRunning == true && CompNameListDatas.Count > 0)
             {
                 CompNameUploadWB.Navigate(Application.StartupPath + "/CompNameUpload.html");
                 CompNameUploadRunning = false;
             }
-
-
-            //查询数据
-            if (CompanyTimer_Num > CompanyTimer_Interval && CompanyRunning == true)
-            {
-                CompanyConfigWB.Navigate(ConfigURL.Text + "/N/" + TargetKeyTBX.Text);
-                CompanyRunning = false;
+            else if (KeyWordSearchTimer_Num > KeyWordSearchTimer_Interval && CompNameListDatas.Count == 0) {
+                Application.Exit();
             }
 
-            CompanyTimer_Num = CompanyTimer_Num + 1;
+            KeyWordSearchTimer_Num = KeyWordSearchTimer_Num + 1;
 
-            //提交结果
-            if (CompanyUploadWBRunning == true && CompanyListDatas.Count > 0)
-            {
-                CompanyUploadWB.Navigate(Application.StartupPath + "/CompanyUpload.html");
-                CompanyUploadWBRunning = false;
-            }
 
-            TimerTBX.Text = KeyWordSearchTimer_Num + ":" + CompanyTimer_Num;
+            ////查询数据
+            //if (CompanyTimer_Num > CompanyTimer_Interval && CompanyRunning == true)
+            //{
+            //    CompanyConfigWB.Navigate(ConfigURL.Text + "/N/" + TargetKeyTBX.Text);
+            //    CompanyRunning = false;
+            //}
 
-            //保存检索数据
-            if (loadCompanyRunning == true)
-            {
-                loadCompanyRunning = false;
-                loadCompany(CompanyWB);
+            ////提交结果
+            //if (CompanyUploadWBRunning == true && CompanyListDatas.Count > 0)
+            //{
+            //    CompanyUploadWB.Navigate(Application.StartupPath + "/CompanyUpload.html");
+            //    CompanyUploadWBRunning = false;
+            //}
 
-                MessageTBX.Text = "准备新的企业数据抓取>>>>>>";
-                //抓取数据
-                if (String.IsNullOrEmpty((String)configs["COMP_URL"]) == false)
-                {
-                    String[] html = ((String)configs["COMP_URL"]).Split(' ');
-                    //CompanyListDatas.Clear();
-                    CompanyListDatas.Add(html[0] + "_" + html[1]);
-                    CompanyWB.Navigate("http://qichacha.com/company_base?unique=" + html[0] + "&companyname=" + EncodeTools.UrlEncode(html[1]));
-
-                    CompanyRunning = false;
-                    CompanyTimer_Num = 1;
-                    configs.Remove("COMP_URL");
-                }
-            }
-            //保存企业数据
-            if (loadCompListRunning == true)
-            {
-                loadCompListRunning = false;
-                loadCompList(KeyWordSearchWB);
-
-                MessageTBX.Text = "准备新的检索数据抓取>>>>>>";
-                //抓取数据
-                if (String.IsNullOrEmpty((String)configs["COMP_KEY"]) == false)
-                {
-                    KeyWordSearchWB.Navigate("http://qichacha.com/search?key=" + EncodeTools.UrlEncode((String)configs["COMP_KEY"]) + "&index=0");
-
-                    KeyWordSearchRunning = false;
-                    KeyWordSearchTimer_Num = 1;
-                    configs.Remove("COMP_KEY");
-                }
-            }
-
-            if (ExitFlagRunning > Convert.ToInt32(RunNumerCBX.Text)) Application.Exit();
-            ExitFlagRunning = ExitFlagRunning + 1;
+            //CompanyTimer_Num = CompanyTimer_Num + 1;
+            TimerTBX.Text = ""+KeyWordSearchTimer_Num;
         }
-
-        int ExitFlagRunning = 0;
 
         Boolean KeyWordSearchRunning = false;
         Boolean CompanyRunning = false;
 
         private void KeyWordSearchWB_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
-            //列表搜索
-            KeyWordSearchRunning = true;
-            loadCompListRunning = true;
+            //保存数据
+            loadCompList(KeyWordSearchWB);
         }
 
         private void CompanyWB_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
             //企业信息
             CompanyRunning = true;
-            loadCompanyRunning = true;
         }
 
         /// <summary>
@@ -177,39 +128,25 @@ namespace WindowsFormsApplication3
         {
             try
             {
-                foreach (HtmlElement item in webBrowser1.Document.GetElementsByTagName("section"))
+                foreach (HtmlElement item in webBrowser1.Document.GetElementsByTagName("a"))
                 {
-                    if ("panel panel-default".Equals(item.GetAttribute("className")))
+                    String href = item.GetAttribute("href");
+                    if (href.IndexOf("company") >= 0)
                     {
-                        String name = "";
-                        foreach (HtmlElement span in item.GetElementsByTagName("span"))
-                        {
-                            //MessageBox.Show(a.OuterHtml);
-                            //获得企业访问地址
-                            if ("name".Equals(span.GetAttribute("className")))
-                            {
-                                name = span.OuterText;
-                                break;
-                            }
-                        }
-                        String code = "";
-                        HtmlElement a = item.GetElementsByTagName("a")[0];                        
-                        {
-                            //获得企业访问地址
-                            code = a.GetAttribute("href").Split('_')[2];
-                           
-                        }
+                        String name = item.OuterText;
+                        String code = href.Split('_')[2];
                         CompNameListDatas.Add(code+ " " +name);
                     }
-                }
-                if(CompNameListDatas.Count>0)
-                    CompNameUploadRunning = true;
+                }              
             }
-            catch (Exception) { }
+            catch (Exception ) 
+            { 
+            } 
+            if (CompNameListDatas.Count > 0)
+                CompNameUploadRunning = true;
             MessageTBX.Text = "成功结束检索数据抓取<<<<<<";
         }
-        Boolean loadCompanyRunning = false;
-        Boolean loadCompListRunning = false;   
+
         /// <summary>
         /// 获得企业基本信息
         /// </summary>
@@ -291,7 +228,17 @@ namespace WindowsFormsApplication3
             CompanyTimer_Interval = Convert.ToInt32(tk[1]);
 
             //保存数据
-            loadCompListRunning = true;
+            loadCompList(KeyWordSearchWB);
+
+            MessageTBX.Text = "准备新的检索数据抓取>>>>>>";
+            //抓取数据
+            if (String.IsNullOrEmpty((String)configs["COMP_KEY"]) == false)
+            {
+                KeyWordSearchWB.Navigate("http://www.qixin007.com/search/?key=" + EncodeTools.UrlEncode((String)configs["COMP_KEY"]) + "&type=enterprise&method=all");
+
+                KeyWordSearchRunning = false;
+                KeyWordSearchTimer_Num = 1;
+            }
         }
 
         private void CompanyConfigWB_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
@@ -308,7 +255,21 @@ namespace WindowsFormsApplication3
             KeyWordSearchTimer_Interval = Convert.ToInt32(tk[0]);
             CompanyTimer_Interval = Convert.ToInt32(tk[1]);
 
-            loadCompanyRunning = true;           
+            //保存数据
+            loadCompany(CompanyWB);
+
+            MessageTBX.Text = "准备新的企业数据抓取>>>>>>";
+            //抓取数据
+            if (String.IsNullOrEmpty((String)configs["COMP_URL"])==false)
+            {
+                String[] html = ((String)configs["COMP_URL"]).Split(' ');
+                //CompanyListDatas.Clear();
+                CompanyListDatas.Add(html[0] + "_" + html[1]);
+                CompanyWB.Navigate("http://qichacha.com/company_base?unique=" + html[0] + "&companyname=" + EncodeTools.UrlEncode(html[1]));
+
+                CompanyRunning = false;
+                CompanyTimer_Num = 1;
+            }
         }
     }
 }
