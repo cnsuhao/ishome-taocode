@@ -28,7 +28,7 @@ public class RedisPoolUtil {
 	public Jedis getJedis() {
 		return getJedis(0);
 	}
-
+	
 	public Jedis getJedis(int failedNum) {
 		Jedis jedis = null;
 		if (failedNum < 3) {
@@ -60,7 +60,13 @@ public class RedisPoolUtil {
 		}
 		return jedis;
 	}
-
+	
+	public Jedis getJedisOnDB(int index) {
+		Jedis jedis = getJedis(0);
+		jedis.select(index);
+		return jedis;
+	}
+	
 	/**
 	 * this method will be block until return Jedis client
 	 * 

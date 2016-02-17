@@ -39,12 +39,27 @@ public class RedisHelper implements ISFrameworkConstants {
 		}
 	}
 
+	public static void main(String[] args) throws Exception {
+		Jedis oldJedis = new Jedis("10.10.168.50", 6379);
+		oldJedis.auth("ImxV@ly1D4bBtGwv");
+		Jedis newJedis = new Jedis("10.10.168.50", 6379);
+		newJedis.auth("ImxV@ly1D4bBtGwv");
+		//newJedis.select(1);
+		copy(oldJedis,"QXB:COMP:KEY",newJedis,"QCC:COMP:KEY",false);
+		
+		//copy(oldJedis,"PAGE:GANJI:NUM",newJedis,"PAGE:GANJI:NUM",true);
+		
+	}
+	
 	public static void copy(Jedis oldJedis, String oldKey, Jedis newJedis, String newKey, boolean retain) {
 		String value;
 		long size = oldJedis.llen(oldKey);
 		for (int i = 0; i < size; i++) {
 			try {
+				if(i>100000)
+				 break;
 				value = oldJedis.lpop(oldKey);
+				System.out.println(value);
 				if (retain)
 					oldJedis.rpush(oldKey, value);
 				newJedis.rpush(newKey, value);
