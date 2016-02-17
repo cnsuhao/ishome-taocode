@@ -298,5 +298,9 @@ public class MyRedisMaster implements ICacheService, ISFrameworkConstants {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
+	@Override
+	public void selectDB(int index) {
+		jedisSupport.selectDB(index);
+	}
 }

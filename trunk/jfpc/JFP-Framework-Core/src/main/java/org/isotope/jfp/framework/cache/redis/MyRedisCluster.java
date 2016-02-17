@@ -300,4 +300,10 @@ public class MyRedisCluster implements ICacheService, ISFrameworkConstants {
         return null;
     }
 
+	@Override
+	public void selectDB(int index) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

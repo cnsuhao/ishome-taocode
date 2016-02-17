@@ -223,4 +223,10 @@ public class MyMaps implements ICacheService {
 		else
 			return ms.remove(ms.size());
 	}
+
+	@Override
+	public void selectDB(int index) {
+		// TODO Auto-generated method stub
+		
+	}
 }
