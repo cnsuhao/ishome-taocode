@@ -12,7 +12,9 @@ import java.util.Set;
  *
  */
 public interface ISJedisSupport {
-
+	
+	public void selectDB(int index) ;
+	
     String get(String key);
 
     String del(String key);
@@ -96,4 +98,12 @@ public interface ISJedisSupport {
     Set<String> setAll(String key);
 
     void expire(String key, int seconds);
+    
+    /**
+     * 
+     * @param key
+     * @param value
+     * @return 
+     */
+    long setnx(String key,String value);
 }
