@@ -306,4 +306,10 @@ public class MyRedisCluster implements ICacheService, ISFrameworkConstants {
 		
 	}
 
+	@Override
+	public void expire(String key, int timeOut) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

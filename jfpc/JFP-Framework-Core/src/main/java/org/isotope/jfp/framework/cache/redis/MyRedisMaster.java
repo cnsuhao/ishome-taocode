@@ -23,6 +23,7 @@ public class MyRedisMaster implements ICacheService, ISFrameworkConstants {
 	public MyRedisMaster() {
 
 	}
+
 	public MyRedisMaster(ISJedisSupport jedisSupport) {
 		this.jedisSupport = jedisSupport;
 	}
@@ -45,12 +46,14 @@ public class MyRedisMaster implements ICacheService, ISFrameworkConstants {
 	ISJedisSupport jedisSupport;
 
 	public ISJedisSupport getJedisSupport() {
-        return jedisSupport;
-    }
-    public void setJedisSupport(ISJedisSupport jedisSupport) {
-        this.jedisSupport = jedisSupport;
-    }
-    /**
+		return jedisSupport;
+	}
+
+	public void setJedisSupport(ISJedisSupport jedisSupport) {
+		this.jedisSupport = jedisSupport;
+	}
+
+	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
@@ -79,7 +82,7 @@ public class MyRedisMaster implements ICacheService, ISFrameworkConstants {
 		// e.printStackTrace();
 		// }
 	}
-	
+
 	@Override
 	public boolean putObject(String key, Object value) {
 		jedisSupport.add(key, getStringToRedis(value), waitTime);
@@ -298,9 +301,14 @@ public class MyRedisMaster implements ICacheService, ISFrameworkConstants {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	@Override
 	public void selectDB(int index) {
 		jedisSupport.selectDB(index);
+	}
+
+	@Override
+	public void expire(String key, int timeOut) {
+		jedisSupport.expire(key, timeOut);
 	}
 }
