@@ -785,25 +785,4 @@ public class JedisMasterUtil implements ISJedisSupport {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.isotope.jfp.framework.cache.utils.redis.Jedis#setnx(String,String)
-	 */
-
-	public long setnx(String key, String value) {
-		Jedis jedis = getJedis();
-		long rs = 0L;
-		try {
-			rs = jedis.setnx(key, value);
-		} catch (Exception e) {
-			logger.error("setnx from redis error[key:" + key + "]", e);
-		} finally {
-			close(jedis);
-		}
-
-		return rs;
-	}
-
 }
