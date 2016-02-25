@@ -229,4 +229,10 @@ public class MyMaps implements ICacheService {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void expire(String key, int timeOut) {
+		// TODO Auto-generated method stub
+		
+	}
 }
