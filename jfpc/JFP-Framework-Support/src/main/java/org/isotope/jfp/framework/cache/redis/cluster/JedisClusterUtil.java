@@ -472,10 +472,4 @@ public class JedisClusterUtil implements ISJedisSupport,ISFrameworkConstants {
         }
     }
 
-	@Override
-	public long setnx(String key, String value) {
-		  JedisCluster JedisCluster = getJedisCluster();
-		  return JedisCluster.setnx(key, value);
-	}
-
 }

@@ -11,6 +11,18 @@ package org.isotope.jfp.framework.cache;
 public interface ICacheService extends ISessionService {
 
 	//////////////////// 数据缓存////////////////////////////////
+
+	/**
+	 * 对已存在的key设置超时时间
+	 * @param key
+	 * @param timeOut
+	 */
+	public void expire(String key,int timeOut);
+	
+	/**
+	 * 选择使用DB
+	 * @param index
+	 */
 	public void selectDB(int index);
 	
 	/**
