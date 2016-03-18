@@ -12,6 +12,17 @@
     
     <!-- 查询分页数据信息  -->
     <select id='doSelectPage' parameterType='CeciCorpBaseDBO' resultType='CeciCorpBaseDBO'>
+    	SELECT *
+		FROM corp_base_list WHERE 1=1  
+		  <if test="corpName != null and corpName != '' "> 
+		 	 AND  indextext like  '%${corpName}%'  
+		  </if>
+		  <if test="resDate != null and resDate !='' ">
+		  	 AND res_date = #{resDate}
+		  </if>
+		  LIMIT ${limit}
+    </select>
+    <select id='doRead' parameterType='CeciCorpBaseDBO' resultType='CeciCorpBaseDBO'>
         SELECT <include refid='tableColumns'/> FROM ceci_corp_base
         WHERE corp_bln = #{corpBln}
     </select>
