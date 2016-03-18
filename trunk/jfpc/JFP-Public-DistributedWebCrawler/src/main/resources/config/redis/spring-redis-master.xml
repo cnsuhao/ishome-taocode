@@ -20,6 +20,7 @@
 	
 	<bean id="jedisMasterUtil" class="org.isotope.jfp.framework.cache.redis.master.JedisMasterUtil">  
 	    <property name="redisPool"  ref="redisPoolUtil" />  
+	     <property name="index"  value="3" />
 	</bean>
 	
 	<bean id="redisPoolUtil" class="org.isotope.jfp.framework.cache.redis.master.RedisPoolUtil">  
@@ -28,10 +29,10 @@
 	
 	<bean id="jedisPool" class="redis.clients.jedis.JedisPool">  
 	    <constructor-arg index="0" ref="jedisPoolConfig" />  
-    	<constructor-arg index="1" value="127.0.0.1" type="String" />
+    	<constructor-arg index="1" value="172.16.2.200" type="String" />
 	    <constructor-arg index="2" value="6379" type="int" />
 	    <constructor-arg index="3" value="10000" type="int" />
-	    <constructor-arg index="4" value="ImxV@ly1D4bBtGwv" type="String" />
+	    <constructor-arg index="4" value="123456" type="String" />
 	    <constructor-arg index="5" value="0" type="int" />
 	</bean>
 	
