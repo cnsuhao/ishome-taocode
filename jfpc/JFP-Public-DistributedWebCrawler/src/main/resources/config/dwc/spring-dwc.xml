@@ -24,8 +24,8 @@
 		http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd
 		'>
 	
-	<bean class='org.isotope.jfp.dwc.business.JobConfig' >
-		<property name='fileSavePath' value='/data/springdata/' />  
+	<bean class='org.isotope.jfp.dwc.biz.JobConfig' >
+		<property name='fileSavePath' value='/resources/upload/' />  
 		<!-- 间隔秒数 -->
         <property name='monitorConfig'>
         	<map>
