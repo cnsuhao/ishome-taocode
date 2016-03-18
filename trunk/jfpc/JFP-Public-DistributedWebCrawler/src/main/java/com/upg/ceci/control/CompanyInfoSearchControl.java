@@ -57,7 +57,7 @@ public class CompanyInfoSearchControl implements ISFrameworkConstants {
 		return rrb;
 	}
 
-	@RequestMapping(value = "/M310/010", method = RequestMethod.POST)
+	@RequestMapping(value = "/M310/020", method = RequestMethod.POST)
 	@ResponseBody
 	public RESTResultBean saveCompanyInfo(HttpServletRequest request, @RequestParam String jobId, @RequestParam String html) throws Exception {
 		RESTResultBean rrb = new RESTResultBean();
