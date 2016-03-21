@@ -20,7 +20,7 @@ public class CaptchaCodeImpl implements ISCaptcha, ISFrameworkConstants {
 
 	@Override
 	public boolean addCodeInJobList(String jobid, String filename) {
-		return mq.offerObjectInList(CODE_MAP, jobid + COLON + filename, false);
+		return mq.offerObjectInList(CODE_LIST, jobid + SEMICOLON + filename, false);
 	}
 
 	@Override
@@ -30,7 +30,7 @@ public class CaptchaCodeImpl implements ISCaptcha, ISFrameworkConstants {
 
 	@Override
 	public boolean putRestltWithJob(String jobid, String result) {
-		return mq.putObject(jobid, result, 15, false);
+		return mq.putObject(jobid, result, 30, false);
 	}
 
 	@Override
@@ -45,9 +45,13 @@ public class CaptchaCodeImpl implements ISCaptcha, ISFrameworkConstants {
 		}
 	}
 
+	/**
+	 * jobid + SEMICOLON + filename
+	 * /resources/upload/20160317/1.jpg
+	 */
 	@Override
 	public Object loadJobWithList() {
-		return mq.peekFirstObjectInList(CODE_MAP);
+		return mq.peekFirstObjectInList(CODE_LIST);
 	}
 
 }
