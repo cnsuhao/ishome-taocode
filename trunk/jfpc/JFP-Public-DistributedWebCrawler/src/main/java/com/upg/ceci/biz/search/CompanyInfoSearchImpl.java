@@ -18,6 +18,9 @@ public class CompanyInfoSearchImpl implements ISCompanyInfoSearch {
 	@Resource
 	protected ICacheService mq;
 
+	/**
+	 * jobId + SEMICOLON + areaCode + SEMICOLON + companyName
+	 */
 	@Override
 	public Object getCompanyName() {
 		return mq.peekFirstObjectInList(COMPANY_INFO);

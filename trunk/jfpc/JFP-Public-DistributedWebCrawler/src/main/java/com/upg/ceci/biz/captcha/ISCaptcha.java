@@ -10,7 +10,7 @@ public interface ISCaptcha {
 	/**
 	 * 验证码队列
 	 */
-	public static final String CODE_MAP = "CODE:MAP";
+	public static final String CODE_LIST = "CODE:LIST";
 
 	////////////////////////////////////////////////////////////
 	/**
