@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import org.isotope.jfp.dwc.biz.JobConfig;
+import org.isotope.jfp.dwc.config.JobConfig;
 import org.isotope.jfp.framework.cache.ICacheService;
 import org.isotope.jfp.framework.utils.DateHelper;
 import org.isotope.jfp.framework.utils.EmptyHelper;

@@ -3,8 +3,8 @@ package org.isotope.jfp.dwc.control;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import org.isotope.jfp.dwc.biz.JobConfig;
 import org.isotope.jfp.dwc.biz.job.AJobServiceSupport;
+import org.isotope.jfp.dwc.config.JobConfig;
 import org.isotope.jfp.framework.cache.ICacheService;
 import org.isotope.jfp.framework.cache.redis.master.JedisMasterUtil;
 import org.isotope.jfp.framework.utils.BeanFactoryHelper;
