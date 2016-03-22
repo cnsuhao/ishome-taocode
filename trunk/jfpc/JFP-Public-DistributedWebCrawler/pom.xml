@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>Isotope</groupId>
     <artifactId>JFP-Public-DistributedWebCrawler</artifactId>
-    <version>0.0.1-RELEASE</version>
+    <version>0.2.1-RELEASE</version>
     
     <packaging>war</packaging>
     
@@ -37,8 +37,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.5.1</version>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>${java-version}</source>
+                    <target>${java-version}</target>
                     <compilerArgument>-Xlint:all</compilerArgument>
                     <showWarnings>true</showWarnings>
                     <showDeprecation>true</showDeprecation>
@@ -81,7 +81,7 @@
           			</scanTargetPatterns-->					
 					<connectors>
 		                <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
-		                    <port>8080</port>
+		                    <port>8888</port>
 		                    <maxIdleTime>60000</maxIdleTime>
 		                </connector>
 		            </connectors> 
