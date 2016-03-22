@@ -15,7 +15,7 @@
 	<!-- 系统缓存 -->	
 	<bean id="myCache" class="org.isotope.jfp.framework.cache.redis.MyRedisMaster">  
 		<property name="jedisSupport"  ref="jedisMasterUtil" />  
-		<property name="waitTime" value="180" />
+		<property name="waitTime" value="2" />
 	</bean>
 	
 	<bean id="jedisMasterUtil" class="org.isotope.jfp.framework.cache.redis.master.JedisMasterUtil">  

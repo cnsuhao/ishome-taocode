@@ -18,7 +18,7 @@
 		http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd
 		'>
 	<!-- 注解探测器 -->
-	<context:component-scan base-package='org.isotope.jfp,com.upg.ceci' />
+	<context:component-scan base-package='org.isotope.jfp,com.upg.biz' />
 	
 	<!-- 系统初始化 -->
 	<import resource='spring/spring-system.xml' />	
