@@ -4,6 +4,7 @@ package org.isotope.jfp.framework.cache;
  * 缓存队列
  * 
  * @author fucy
+ * @version 3.1.1 2016/3/17 增加数据库切换和Key的时间设定
  * @version 2.4.1 2015/11/9 增加清空动作
  * @version 2.0.0
  * @since 2.0.0 2015/1/19
