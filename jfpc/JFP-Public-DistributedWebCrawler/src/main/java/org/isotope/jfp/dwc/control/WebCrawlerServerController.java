@@ -8,7 +8,7 @@ import java.io.InputStream;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import org.isotope.jfp.dwc.biz.JobConfig;
+import org.isotope.jfp.dwc.config.JobConfig;
 import org.isotope.jfp.framework.cache.ICacheService;
 import org.isotope.jfp.framework.utils.DateHelper;
 import org.springframework.stereotype.Controller;
