@@ -1,8 +1,10 @@
 package org.isotope.jfp.framework.cache.redis.cluster;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
@@ -18,6 +20,7 @@ import redis.clients.jedis.JedisCluster;
  * Redis操作工具类
  * 
  * @author fucy
+ * @version 3.1.1 2016/3/17
  * @version 2.4.1 2015/11/9
  * @version 2.3.0 2015/6/11
  * @since 2.3.0
@@ -125,7 +128,7 @@ public class JedisClusterUtil implements ISJedisSupport,ISFrameworkConstants {
                     jd.rpush(oldKey, value);
                 jd.rpush(newKey, value);
             } catch (Exception e) {
-                e.printStackTrace();
+                
             }
         }
     }
@@ -152,7 +155,7 @@ public class JedisClusterUtil implements ISJedisSupport,ISFrameworkConstants {
                     oldJedisCluster.rpush(oldKey, value);
                 newJedisCluster.rpush(newKey, value);
             } catch (Exception e) {
-                e.printStackTrace();
+                
             }
         }
     }
@@ -211,14 +214,14 @@ public class JedisClusterUtil implements ISJedisSupport,ISFrameworkConstants {
         add(key, value, 15, 0);
     }
 
-    public List<String> hset(String key) {
+    public Map<String, String> hgetall(String key) {
         JedisCluster JedisCluster = getJedisCluster();
         try {
-            return JedisCluster.hvals(key);
+            return JedisCluster.hgetAll(key);
         } catch (Exception e) {
-            e.printStackTrace();
+            
         }
-        return new ArrayList<String>();
+        return new HashMap<String, String>();
     }
 
     public String hdel(String rkey, String mkey) {
@@ -229,7 +232,7 @@ public class JedisClusterUtil implements ISJedisSupport,ISFrameworkConstants {
             JedisCluster.hdel(rkey, mkey);
             return value;
         } catch (Exception e) {
-            e.printStackTrace();
+            
         }
         return value;
     }
@@ -240,7 +243,7 @@ public class JedisClusterUtil implements ISJedisSupport,ISFrameworkConstants {
             return JedisCluster.hget(rkey, mkey);
         } catch (Exception e) {
 
-            e.printStackTrace();
+            
         }
         return null;
     }
@@ -251,7 +254,7 @@ public class JedisClusterUtil implements ISJedisSupport,ISFrameworkConstants {
         try {
             JedisCluster.hset(rkey, mkey, value);
         } catch (Exception e) {
-            e.printStackTrace();
+            
         }
         return true;
     }
@@ -286,7 +289,7 @@ public class JedisClusterUtil implements ISJedisSupport,ISFrameworkConstants {
         try {
             JedisCluster.rpush(key, value);
         } catch (Exception e) {
-            e.printStackTrace();
+            
         }
     }
 
@@ -298,7 +301,7 @@ public class JedisClusterUtil implements ISJedisSupport,ISFrameworkConstants {
                 return list.get(1);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            
         }
         return null;
     }
@@ -308,7 +311,7 @@ public class JedisClusterUtil implements ISJedisSupport,ISFrameworkConstants {
         try {
             return JedisCluster.lpop(key);
         } catch (Exception e) {
-            e.printStackTrace();
+            
         }
         return null;
     }
@@ -318,7 +321,7 @@ public class JedisClusterUtil implements ISJedisSupport,ISFrameworkConstants {
         try {
             return JedisCluster.lrange(key, 0, -1);
         } catch (Exception e) {
-            e.printStackTrace();
+            
         }
         return null;
     }
@@ -357,7 +360,7 @@ public class JedisClusterUtil implements ISJedisSupport,ISFrameworkConstants {
             }
             return list;
         } catch (Exception e) {
-            e.printStackTrace();
+            
         }
         return null;
     }
@@ -375,7 +378,7 @@ public class JedisClusterUtil implements ISJedisSupport,ISFrameworkConstants {
         try {
             return JedisCluster.lrem(key, count, value);
         } catch (Exception e) {
-            e.printStackTrace();
+            
         }
         return 0;
     }
@@ -387,7 +390,7 @@ public class JedisClusterUtil implements ISJedisSupport,ISFrameworkConstants {
             for (int i = 0; i < len; i++)
                 JedisCluster.rpop(key);
         } catch (Exception e) {
-            e.printStackTrace();
+            
         }
     }
 
@@ -402,7 +405,7 @@ public class JedisClusterUtil implements ISJedisSupport,ISFrameworkConstants {
         try {
             return JedisCluster.sadd(key, value);
         } catch (Exception e) {
-            e.printStackTrace();
+            
         }
         return 0;
     }
@@ -418,7 +421,7 @@ public class JedisClusterUtil implements ISJedisSupport,ISFrameworkConstants {
         try {
             return JedisCluster.srem(key, value);
         } catch (Exception e) {
-            e.printStackTrace();
+            
         }
         return 0;
     }
@@ -431,7 +434,7 @@ public class JedisClusterUtil implements ISJedisSupport,ISFrameworkConstants {
                 JedisCluster.spop(key);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            
         }
     }
 
@@ -440,7 +443,7 @@ public class JedisClusterUtil implements ISJedisSupport,ISFrameworkConstants {
         try {
             return JedisCluster.scard(key);
         } catch (Exception e) {
-            e.printStackTrace();
+            
         }
         return 0;
     }
@@ -450,7 +453,7 @@ public class JedisClusterUtil implements ISJedisSupport,ISFrameworkConstants {
         try {
             return JedisCluster.smembers(key);
         } catch (Exception e) {
-            e.printStackTrace();
+            
         }
         return null;
     }
@@ -460,7 +463,7 @@ public class JedisClusterUtil implements ISJedisSupport,ISFrameworkConstants {
         try {
             JedisCluster.expire(key, seconds);
         } catch (Exception e) {
-            e.printStackTrace();
+            
         }
     }
 

@@ -1,7 +1,9 @@
 package org.isotope.jfp.framework.cache.redis.master;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.isotope.jfp.framework.support.ISJedisSupport;
@@ -16,6 +18,7 @@ import redis.clients.jedis.JedisPubSub;
  * Redis操作工具类
  * 
  * @author fucy
+ * @version 3.1.1 2016/3/17
  * @version 2.4.1 2015/11/9
  * @version 2.3.0 2015/6/11
  * @since 2.3.0
@@ -70,11 +73,19 @@ public class JedisMasterUtil implements ISJedisSupport {
 
 	int index = 0;
 
+	public int getIndex() {
+		return index;
+	}
+
+	public void setIndex(int index) {
+		this.index = index;
+	}
+
 	@Override
 	public void selectDB(int index) {
 		this.index = index;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -144,7 +155,7 @@ public class JedisMasterUtil implements ISJedisSupport {
 					jd.rpush(oldKey, value);
 				jd.rpush(newKey, value);
 			} catch (Exception e) {
-				e.printStackTrace();
+				
 			}
 		}
 	}
@@ -168,7 +179,7 @@ public class JedisMasterUtil implements ISJedisSupport {
 					oldJedis.rpush(oldKey, value);
 				newJedis.rpush(newKey, value);
 			} catch (Exception e) {
-				e.printStackTrace();
+				
 			}
 		}
 	}
@@ -268,16 +279,16 @@ public class JedisMasterUtil implements ISJedisSupport {
 	 * org.isotope.jfp.framework.cache.utils.redis.Jedis#hset(java.lang.String)
 	 */
 
-	public List<String> hset(String key) {
+	public Map<String, String> hgetall(String key) {
 		Jedis jedis = getJedis();
 		try {
-			return jedis.hvals(key);
+			return jedis.hgetAll(key);
 		} catch (Exception e) {
-			e.printStackTrace();
+			
 		} finally {
 			close(jedis);
 		}
-		return new ArrayList<String>();
+		return new HashMap<String, String>();
 	}
 
 	/*
@@ -296,7 +307,7 @@ public class JedisMasterUtil implements ISJedisSupport {
 			jedis.hdel(rkey, mkey);
 			return value;
 		} catch (Exception e) {
-			e.printStackTrace();
+			
 		} finally {
 			close(jedis);
 		}
@@ -316,7 +327,7 @@ public class JedisMasterUtil implements ISJedisSupport {
 		try {
 			return jedis.hget(rkey, mkey);
 		} catch (Exception e) {
-			e.printStackTrace();
+			
 		} finally {
 			close(jedis);
 		}
@@ -337,7 +348,7 @@ public class JedisMasterUtil implements ISJedisSupport {
 		try {
 			jedis.hset(rkey, mkey, value);
 		} catch (Exception e) {
-			e.printStackTrace();
+			
 		} finally {
 			close(jedis);
 		}
@@ -406,7 +417,7 @@ public class JedisMasterUtil implements ISJedisSupport {
 			} catch (Exception e) {
 				logger.error("publish message[" + message + "] to channel[" + channel + "] error[" + failedNum + "] : "
 						+ e.getMessage());
-				e.printStackTrace();
+				
 				publish(channel, message, failedNum++);
 			} finally {
 				close(jedis);
@@ -443,7 +454,7 @@ public class JedisMasterUtil implements ISJedisSupport {
 			} catch (Exception e) {
 				logger.error("queuePublish message[" + message + "] to channel[" + channel + "] error[" + failedNum
 						+ "] : " + e.getMessage());
-				e.printStackTrace();
+				
 				queuePublish(key, channel, message, failedNum++);
 			} finally {
 				close(jedis);
@@ -464,7 +475,7 @@ public class JedisMasterUtil implements ISJedisSupport {
 		try {
 			jedis.subscribe(listener, channel);
 		} catch (Exception e) {
-			e.printStackTrace();
+			
 		}
 	}
 
@@ -480,7 +491,7 @@ public class JedisMasterUtil implements ISJedisSupport {
 		try {
 			jedis.rpush(key, value);
 		} catch (Exception e) {
-			e.printStackTrace();
+			
 		} finally {
 			close(jedis);
 		}
@@ -502,7 +513,7 @@ public class JedisMasterUtil implements ISJedisSupport {
 				return list.get(1);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			
 		} finally {
 			close(jedis);
 		}
@@ -521,7 +532,7 @@ public class JedisMasterUtil implements ISJedisSupport {
 		try {
 			return jedis.lpop(key);
 		} catch (Exception e) {
-			e.printStackTrace();
+			
 		} finally {
 			close(jedis);
 		}
@@ -540,7 +551,7 @@ public class JedisMasterUtil implements ISJedisSupport {
 		try {
 			return jedis.lrange(key, 0, -1);
 		} catch (Exception e) {
-			e.printStackTrace();
+			
 		} finally {
 			close(jedis);
 		}
@@ -607,7 +618,7 @@ public class JedisMasterUtil implements ISJedisSupport {
 			}
 			return list;
 		} catch (Exception e) {
-			e.printStackTrace();
+			
 		} finally {
 			close(jedis);
 		}
@@ -626,7 +637,7 @@ public class JedisMasterUtil implements ISJedisSupport {
 		try {
 			return jedis.lrem(key, count, value);
 		} catch (Exception e) {
-			e.printStackTrace();
+			
 		} finally {
 			close(jedis);
 		}
@@ -648,7 +659,7 @@ public class JedisMasterUtil implements ISJedisSupport {
 			for (int i = 0; i < len; i++)
 				jedis.rpop(key);
 		} catch (Exception e) {
-			e.printStackTrace();
+			
 		} finally {
 			close(jedis);
 		}
@@ -666,7 +677,7 @@ public class JedisMasterUtil implements ISJedisSupport {
 		try {
 			return jedis.sadd(key, value);
 		} catch (Exception e) {
-			e.printStackTrace();
+			
 		} finally {
 			close(jedis);
 		}
@@ -685,7 +696,7 @@ public class JedisMasterUtil implements ISJedisSupport {
 		try {
 			return jedis.srem(key, value);
 		} catch (Exception e) {
-			e.printStackTrace();
+			
 		} finally {
 			close(jedis);
 		}
@@ -708,7 +719,7 @@ public class JedisMasterUtil implements ISJedisSupport {
 				jedis.spop(key);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			
 		} finally {
 			close(jedis);
 		}
@@ -727,7 +738,7 @@ public class JedisMasterUtil implements ISJedisSupport {
 		try {
 			return jedis.scard(key);
 		} catch (Exception e) {
-			e.printStackTrace();
+			
 		} finally {
 			close(jedis);
 		}
@@ -746,7 +757,7 @@ public class JedisMasterUtil implements ISJedisSupport {
 		try {
 			return jedis.smembers(key);
 		} catch (Exception e) {
-			e.printStackTrace();
+			
 		} finally {
 			close(jedis);
 		}
@@ -765,7 +776,7 @@ public class JedisMasterUtil implements ISJedisSupport {
 		try {
 			jedis.expire(key, seconds);
 		} catch (Exception e) {
-			e.printStackTrace();
+			
 		} finally {
 			close(jedis);
 		}

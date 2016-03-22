@@ -1,101 +1,103 @@
 package org.isotope.jfp.framework.support;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
  * Redis缓存实现<br>
  * 面向缓存服务使用
  * 
+ * @version 3.1.1 2016/3/17
  * @version 2.4.2 2015/12/10
  * @since 2.4.2 2015/12/10
  *
  */
 public interface ISJedisSupport {
-	
-	public void selectDB(int index) ;
-	
-    String get(String key);
 
-    String del(String key);
+	public void selectDB(int index);
 
-    /**
-     * this method will be block, until timeout
-     * 
-     * @param key
-     * @param timeout(millisecond)
-     * @return
-     */
-    String get(String key, long timeout);
+	String get(String key);
 
-    void add(String key, String value);
+	String del(String key);
 
-    List<String> hset(String key);
+	/**
+	 * this method will be block, until timeout
+	 * 
+	 * @param key
+	 * @param timeout(millisecond)
+	 * @return
+	 */
+	String get(String key, long timeout);
 
-    String hdel(String rkey, String mkey);
+	void add(String key, String value);
 
-    String hget(String rkey, String mkey);
+	Map<String, String> hgetall(String key);
 
-    boolean hset(String rkey, String mkey, String value);
+	String hdel(String rkey, String mkey);
 
-    /**
-     * 
-     * @param key
-     * @param value
-     * @param expireTime
-     *            seconds
-     */
-    void add(String key, String value, int expireTime);
+	String hget(String rkey, String mkey);
 
-    void add(String key, String value, int expireTime, int failedNum);
+	boolean hset(String rkey, String mkey, String value);
 
-    void listAdd(String key, String... value);
+	/**
+	 * 
+	 * @param key
+	 * @param value
+	 * @param expireTime
+	 *            seconds
+	 */
+	void add(String key, String value, int expireTime);
 
-    String blistPop(String key, int expireTime);
+	void add(String key, String value, int expireTime, int failedNum);
 
-    String listPop(String key);
+	void listAdd(String key, String... value);
 
-    List<String> listAll(String key);
+	String blistPop(String key, int expireTime);
 
-    long llen(String key);
+	String listPop(String key);
 
-    long hlen(String key);
+	List<String> listAll(String key);
 
-    List<String> listPopAll(String key);
+	long llen(String key);
 
-    /**
-     * delete special value
-     * 
-     * @param key
-     * @param count
-     *            delete numbers
-     * @param value
-     */
-    long listDel(String key, int count, String value);
+	long hlen(String key);
 
-    void listDelAll(String key);
+	List<String> listPopAll(String key);
 
-    /**
-     * 
-     * @param key
-     * @param value
-     * @return 1:add success 0:value is existed other:key is not a set type
-     */
-    long setAdd(String key, String... value);
+	/**
+	 * delete special value
+	 * 
+	 * @param key
+	 * @param count
+	 *            delete numbers
+	 * @param value
+	 */
+	long listDel(String key, int count, String value);
 
-    /**
-     * 
-     * @param key
-     * @param value
-     * @return 1:add success 0:value is existed other:key is not a set type
-     */
-    long setDel(String key, String... value);
+	void listDelAll(String key);
 
-    void setDelAll(String key);
+	/**
+	 * 
+	 * @param key
+	 * @param value
+	 * @return 1:add success 0:value is existed other:key is not a set type
+	 */
+	long setAdd(String key, String... value);
 
-    long setCount(String key);
+	/**
+	 * 
+	 * @param key
+	 * @param value
+	 * @return 1:add success 0:value is existed other:key is not a set type
+	 */
+	long setDel(String key, String... value);
 
-    Set<String> setAll(String key);
+	void setDelAll(String key);
 
-    void expire(String key, int seconds);
+	long setCount(String key);
+
+	Set<String> setAll(String key);
+
+	void expire(String key, int seconds);
 }
