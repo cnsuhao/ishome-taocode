@@ -21,9 +21,9 @@
 		<input type="submit" value="submit">
 	</form>
 	<BR><BR><BR>
-	<form method="POST" enctype="multipart/form-data" action="/GJ2">
-		文件名称<input type="input" name="fileName">文件路径
-		<input type="file" name="file"><input type="submit" value="submit">
+	<form method="POST" enctype="multipart/form-data" action="/C310/010">
+		文件名称<input type="input" name="jobid">文件路径
+		<input type="file" name="img"><input type="submit" value="submit">
 	</form>
 	<BR><BR><BR>
 	<form method="POST" action="/GJ1">
