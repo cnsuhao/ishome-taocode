@@ -1,6 +1,6 @@
 package org.isotope.jfp.framework.cache.redis;
 
-import java.util.List;
+import java.util.Map;
 
 import org.isotope.jfp.framework.cache.ICacheService;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
@@ -166,8 +166,8 @@ public class MyRedisCluster implements ICacheService, ISFrameworkConstants {
     }
 
     @Override
-    public List<String> getAllObjectInMap(String key) {
-        return jedisUtil.hset(key);
+    public Map<String, String> getAllObjectInMap(String key) {
+        return jedisUtil.hgetall(key);
     }
 
     /**

@@ -1,6 +1,6 @@
 package org.isotope.jfp.framework.cache.redis;
 
-import java.util.List;
+import java.util.Map;
 
 import org.isotope.jfp.framework.cache.ICacheService;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
@@ -13,6 +13,7 @@ import com.alibaba.fastjson.JSON;
  * Redis缓存实现<br>
  * 面向开发人员使用
  * 
+ * @version 3.1.1 2016/3/17
  * @version 2.4.2 2015/12/10
  * @version 2.4.1 2015/11/9
  * @since 20150728
@@ -168,8 +169,8 @@ public class MyRedisMaster implements ICacheService, ISFrameworkConstants {
 	}
 
 	@Override
-	public List<String> getAllObjectInMap(String key) {
-		return jedisSupport.hset(key);
+	public Map<String, String> getAllObjectInMap(String key) {
+		return jedisSupport.hgetall(key);
 	}
 
 	/**
