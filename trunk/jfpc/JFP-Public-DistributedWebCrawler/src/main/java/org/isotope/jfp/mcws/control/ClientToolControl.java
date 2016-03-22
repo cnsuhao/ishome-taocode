@@ -41,7 +41,7 @@ public class ClientToolControl implements ISFrameworkConstants {
 			val = CompanyInfoSearch_.getCompanyName();
 			if (EmptyHelper.isEmpty(val)) {
 				//TODO 
-				mq.offerObjectInList(CaptchaCodeImpl.CODE_LIST, "123;/resources/upload/20160317/1.png");
+				//mq.offerObjectInList(CaptchaCodeImpl.CODE_LIST, "123;/resources/upload/20160317/1.png");
 				val = CaptchaCode_.loadJobWithList();
 				if (EmptyHelper.isEmpty(val)) {
 					rrb.setResult(EMPTY);
