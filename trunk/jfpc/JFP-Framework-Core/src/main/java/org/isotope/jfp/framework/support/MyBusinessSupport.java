@@ -6,8 +6,7 @@ import org.isotope.jfp.framework.utils.EmptyHelper;
 
 /**
  * 数据业务操作接口定义超类<br>
- * 定义通用8个操作方法<br>
- * 缓存参考SSM配置
+ * 事务性质业务逻辑<br>
  * 
  * @author Spook
  * @since 0.1.0 2013-8-21
