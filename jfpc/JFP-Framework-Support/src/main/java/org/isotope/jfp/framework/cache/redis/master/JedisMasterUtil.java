@@ -795,5 +795,19 @@ public class JedisMasterUtil implements ISJedisSupport {
 
 		}
 	}
+	
+	int defaultIndex = 0;
+	public int getDefaultIndex() {
+		return defaultIndex;
+	}
+
+	public void setDefaultIndex(int defaultIndex) {
+		this.defaultIndex = defaultIndex;
+	}
+
+	@Override
+	public void init() {
+		index = defaultIndex;
+	}
 
 }
