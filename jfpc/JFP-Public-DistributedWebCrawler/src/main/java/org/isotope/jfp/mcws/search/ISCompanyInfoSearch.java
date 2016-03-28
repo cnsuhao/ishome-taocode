@@ -33,4 +33,13 @@ public interface ISCompanyInfoSearch {
 	 * @return
 	 */
 	Object getAreaUrl(String areaCode);
+	
+	/**
+	 * 添加一个任务
+	 * @param jobId
+	 * @param areaCode
+	 * @param companyName
+	 * @return
+	 */
+	boolean addCompanyName(String jobId, String areaCode, String companyName) ;
 }

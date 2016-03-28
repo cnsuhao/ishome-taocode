@@ -33,6 +33,11 @@ public class CaptchaCodeControl {
 	@Resource
 	protected CaptchaCodeImpl CaptchaCode_;
 
+	/**
+	 * 默认页面
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/C310", method = RequestMethod.GET)
 	@ResponseBody
 	public RESTResultBean index() throws Exception {
@@ -87,6 +92,13 @@ public class CaptchaCodeControl {
 		return rrb;
 	}
 
+	/**
+	 * 提交验证码
+	 * @param request
+	 * @param jobid
+	 * @param img
+	 * @return
+	 */
 	@RequestMapping(value = "/C310/011", method = RequestMethod.POST)
 	@ResponseBody
 	public RESTResultBean addCodeInJobList2(HttpServletRequest request, @RequestParam String jobid, @RequestParam byte[] img) {
@@ -119,14 +131,28 @@ public class CaptchaCodeControl {
 		return rrb;
 	}
 
+	/**
+	 * 客户端回传结果
+	 * @param request
+	 * @param jobid
+	 * @param result
+	 * @return
+	 */
 	@RequestMapping(value = "/C310/020", method = RequestMethod.POST)
 	@ResponseBody
-	public RESTResultBean getRestltWithJob(HttpServletRequest request, String jobid, String result) {
+	public RESTResultBean getRestltWithJob(HttpServletRequest request, String jobid) {
 		RESTResultBean rrb = new RESTResultBean();
 		rrb.setResult(CaptchaCode_.getRestltWithJob(jobid));
 		return rrb;
 	}
 
+	/**
+	 * 客户端回传结果
+	 * @param request
+	 * @param jobid
+	 * @param result
+	 * @return
+	 */
 	@RequestMapping(value = "/C310/030", method = RequestMethod.POST)
 	@ResponseBody
 	public RESTResultBean putRestltWithJob(HttpServletRequest request, String jobid, String result) {
@@ -136,6 +162,12 @@ public class CaptchaCodeControl {
 		return rrb;
 	}
 
+	/**
+	 * 锁定一个任务
+	 * @param request
+	 * @param jobid
+	 * @return
+	 */
 	@RequestMapping(value = "/C310/040", method = RequestMethod.POST)
 	@ResponseBody
 	public RESTResultBean lockJobOnList(HttpServletRequest request, String jobid) {
@@ -145,6 +177,10 @@ public class CaptchaCodeControl {
 		return rrb;
 	}
 
+	/**
+	 * 获得一个待打码的任务
+	 * @return
+	 */
 	@RequestMapping(value = "/C310/050", method = RequestMethod.POST)
 	@ResponseBody
 	public RESTResultBean loadJobWithList() {
