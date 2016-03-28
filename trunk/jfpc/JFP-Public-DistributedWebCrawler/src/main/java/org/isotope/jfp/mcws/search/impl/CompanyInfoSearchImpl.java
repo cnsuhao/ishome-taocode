@@ -51,4 +51,8 @@ public class CompanyInfoSearchImpl implements ISCompanyInfoSearch, ISFrameworkCo
 		return mq.getObject(COMPANY_URL + areaCode, false);
 	}
 
+	@Override
+	public boolean addCompanyName(String jobId, String areaCode, String companyName) {
+		return mq.offerObjectInList(COMPANY_INFO, jobId + SEMICOLON + areaCode + SEMICOLON + companyName, false);
+	}
 }

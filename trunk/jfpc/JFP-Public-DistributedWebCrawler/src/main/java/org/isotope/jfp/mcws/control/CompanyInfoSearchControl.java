@@ -35,6 +35,12 @@ public class CompanyInfoSearchControl implements ISFrameworkConstants {
 	@Resource
 	protected CompanyInfoSearchImpl CompanyInfoSearch_;
 
+	/**
+	 * 默认页面
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/M310", method = RequestMethod.GET)
 	@ResponseBody
 	public RESTResultBean index() throws Exception {
@@ -43,6 +49,12 @@ public class CompanyInfoSearchControl implements ISFrameworkConstants {
 		return rrb;
 	}
 
+	/**
+	 * 获得一个等待打码的企业
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/M310/010", method = RequestMethod.GET)
 	@ResponseBody
 	public RESTResultBean getCompanyName() throws Exception {
@@ -61,6 +73,15 @@ public class CompanyInfoSearchControl implements ISFrameworkConstants {
 	@Resource
 	protected JobConfig config;
 
+	/**
+	 * 客户端上传HTML
+	 * 
+	 * @param request
+	 * @param jobId
+	 * @param html
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/M310/020", method = RequestMethod.POST)
 	public ModelAndView saveCompanyInfo(HttpServletRequest request, @RequestParam String jobId, @RequestParam String html) throws Exception {
 		RESTResultBean rrb = new RESTResultBean();
@@ -96,5 +117,20 @@ public class CompanyInfoSearchControl implements ISFrameworkConstants {
 		mav.addObject("MESSAGE", JSON.toJSONString(rrb));// 任务队列描述
 
 		return mav;
+	}
+
+	/**
+	 * 获得一个等待打码的企业
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/M310/030", method = RequestMethod.POST)
+	@ResponseBody
+	public RESTResultBean addCompanyName(HttpServletRequest request, @RequestParam String jobId, @RequestParam String areaCode, @RequestParam String companyName) throws Exception {
+		RESTResultBean rrb = new RESTResultBean();
+		CompanyInfoSearch_.addCompanyName(jobId, areaCode, companyName);
+		rrb.setMessage("OK");
+		return rrb;
 	}
 }
