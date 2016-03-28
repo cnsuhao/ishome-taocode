@@ -14,6 +14,10 @@ import java.util.Set;
  *
  */
 public interface ISJedisSupport {
+	/**
+	 * 初始化
+	 */
+	public void init();
 
 	public void selectDB(int index);
 

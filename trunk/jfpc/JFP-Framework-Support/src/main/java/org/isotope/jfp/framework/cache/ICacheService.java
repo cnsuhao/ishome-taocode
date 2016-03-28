@@ -12,6 +12,10 @@ package org.isotope.jfp.framework.cache;
 public interface ICacheService extends ISessionService {
 
 	//////////////////// 数据缓存////////////////////////////////
+	/**
+	 * 初始化
+	 */
+	public void init();
 
 	/**
 	 * 对已存在的key设置超时时间
