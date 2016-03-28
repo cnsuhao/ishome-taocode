@@ -312,4 +312,10 @@ public class MyRedisCluster implements ICacheService, ISFrameworkConstants {
 		
 	}
 
+	@Override
+	public void init() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

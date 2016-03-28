@@ -312,4 +312,9 @@ public class MyRedisMaster implements ICacheService, ISFrameworkConstants {
 	public void expire(String key, int timeOut) {
 		jedisSupport.expire(key, timeOut);
 	}
+
+	@Override
+	public void init() {
+		jedisSupport.init();
+	}
 }
