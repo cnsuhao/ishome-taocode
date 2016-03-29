@@ -26,6 +26,8 @@
 	<import resource='db/spring-db.xml' />
 	<!-- 网页抓取 -->
 	<import resource='dwc/spring-dwc.xml' />
+	<!-- 全文检索 -->
+	<import resource='es/spring-es.xml' />
 	<!-- 文件资源 -->
 	<import resource='file/spring-file.xml' />
 	<!-- 业务功能 -->
