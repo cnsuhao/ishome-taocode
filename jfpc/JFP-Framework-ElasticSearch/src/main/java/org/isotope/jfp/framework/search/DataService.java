@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import io.searchbox.client.JestClient;
@@ -12,8 +14,14 @@ import io.searchbox.core.Bulk.Builder;
 import io.searchbox.core.BulkResult;
 import io.searchbox.core.Index;
 
+/**
+ * 
+ * @author 001745
+ * @deprecated
+ */
 @Service
 public class DataService {
+	private Logger logger = LoggerFactory.getLogger(DataService.class);
 	public int size = 1000;
 
 	public int getSize() {
@@ -37,11 +45,11 @@ public class DataService {
 		JestClient jestClient = pool.getClient();
 		Builder bulkIndexBuilder = new Bulk.Builder();
 		for (int i = 0; i < datas.size(); i++) {
-			bulkIndexBuilder.addAction(new Index.Builder(datas.get(i)).index(index).type("name").build());
+			bulkIndexBuilder.addAction(new Index.Builder(datas.get(i)).index(index).type(ElasticsearchPool.TYPE).build());
 			//分批提交数据
 			if (i % size == 1) {
 				result = jestClient.execute(bulkIndexBuilder.build());
-				System.out.println( "num===" + i + "...." + result.getJsonString());
+				logger.debug( "num===" + i + "...." + result.getJsonString());
 				Thread.sleep(500);
 				bulkIndexBuilder = new Bulk.Builder();
 				jestClient = pool.getClient();

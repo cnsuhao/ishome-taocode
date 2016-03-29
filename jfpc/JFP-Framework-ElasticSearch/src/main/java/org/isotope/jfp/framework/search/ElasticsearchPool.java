@@ -5,8 +5,6 @@ import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import org.springframework.stereotype.Service;
-
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestClientFactory;
 import io.searchbox.client.config.HttpClientConfig;
@@ -17,8 +15,9 @@ import io.searchbox.client.config.HttpClientConfig;
  * @author 001745
  *
  */
-@Service
 public class ElasticsearchPool {
+	public final static String TYPE = "table";
+	
 	public static void main(String[] args) throws Exception {
 		// "http://localhost:9200"
 	}
