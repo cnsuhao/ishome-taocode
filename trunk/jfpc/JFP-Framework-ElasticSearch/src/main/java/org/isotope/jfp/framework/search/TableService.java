@@ -1,5 +1,6 @@
 package org.isotope.jfp.framework.search;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -16,6 +17,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.SqlSessionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
 
@@ -31,6 +33,11 @@ import io.searchbox.indices.CreateIndex;
 import io.searchbox.indices.DeleteIndex;
 import io.searchbox.indices.IndicesExists;
 
+/**
+ * 基于数据库表建立索引
+ * @author 001745
+ *
+ */
 public class TableService {
 	private Logger logger = LoggerFactory.getLogger(TableService.class);
 
@@ -78,6 +85,18 @@ public class TableService {
 	public TableService() {
 		this.serverList.add("http://localhost:9200");
 	}
+	
+	/**
+	 * 获得连接
+	 * 
+	 * @return
+	 * @throws IOException
+	 */
+	private JestClient getClient() throws IOException {
+		JestClientFactory factory = new JestClientFactory();
+		factory.setHttpClientConfig(new HttpClientConfig.Builder(serverList).multiThreaded(true).build());
+		return factory.getObject();
+	}
 
 	/**
 	 * 获得用于执行静态 SQL 语句并返回它所生成结果的对象
@@ -89,17 +108,12 @@ public class TableService {
 	 */
 	protected Connection getConnection() throws SQLException {
 		SqlSessionTemplate st = (SqlSessionTemplate) getMySqlSession();
-		return SqlSessionUtils
-				.getSqlSession(st.getSqlSessionFactory(), st.getExecutorType(), st.getPersistenceExceptionTranslator())
-				.getConnection();
+		return SqlSessionUtils.getSqlSession(st.getSqlSessionFactory(), st.getExecutorType(), st.getPersistenceExceptionTranslator()).getConnection();
 	}
 
 	public void creatIndexByTable(String tableName) throws Exception {
-		JestClientFactory factory = new JestClientFactory();
 
-		factory.setHttpClientConfig(new HttpClientConfig.Builder(serverList).multiThreaded(true).build());
-
-		JestClient jestClient = factory.getObject();
+		JestClient jestClient = getClient();
 
 		String index = tableName.toLowerCase();
 
@@ -107,12 +121,10 @@ public class TableService {
 		boolean indexExists = jestClient.execute(new IndicesExists.Builder(index).build()).isSucceeded();
 		if (indexExists) {
 			JestResult deleteIndexResult = jestClient.execute(new DeleteIndex.Builder(index).build());
-			logger.debug("deleteIndex===>>>ErrorMessage=" + deleteIndexResult.getErrorMessage() + ",JsonString="
-					+ deleteIndexResult.getJsonString());
+			logger.debug("deleteIndex===>>>ErrorMessage=" + deleteIndexResult.getErrorMessage() + ",JsonString=" + deleteIndexResult.getJsonString());
 		}
-		JestResult createIndexResult = factory.getObject().execute(new CreateIndex.Builder(index).build());
-		logger.debug("createIndex===>>>ErrorMessage=" + createIndexResult.getErrorMessage() + ",JsonString="
-				+ createIndexResult.getJsonString());
+		JestResult createIndexResult = jestClient.execute(new CreateIndex.Builder(index).build());
+		logger.debug("createIndex===>>>ErrorMessage=" + createIndexResult.getErrorMessage() + ",JsonString=" + createIndexResult.getJsonString());
 		Builder bulkIndexBuilder;
 
 		BulkResult result;
@@ -134,7 +146,7 @@ public class TableService {
 				commit = false;
 				while (commit == false) {
 					try {
-						jestClient = factory.getObject();
+						jestClient = getClient();
 						bulkIndexBuilder = new Bulk.Builder();
 						bulkIndexBuilder.addAction(actions);
 						result = jestClient.execute(bulkIndexBuilder.build());
@@ -162,7 +174,7 @@ public class TableService {
 	 * @return
 	 * @throws SQLException
 	 */
-	public List<Index> loadDataFromDb(String index, String tableName, int page) throws SQLException {
+	private List<Index> loadDataFromDb(String index, String tableName, int page) throws SQLException {
 		List<Index> actions = new ArrayList<Index>();
 		Connection conn = null;
 		Statement stmt = null;
@@ -185,7 +197,7 @@ public class TableService {
 					String value = resultSet.getString(i);
 					data.put(columnName.toLowerCase(), value);
 				}
-				actions.add(new Index.Builder(data.toJSONString()).index(index).type("table").build());
+				actions.add(new Index.Builder(data.toJSONString()).index(index).type(ElasticsearchPool.TYPE).build());
 			}
 
 		} catch (SQLException e) {
