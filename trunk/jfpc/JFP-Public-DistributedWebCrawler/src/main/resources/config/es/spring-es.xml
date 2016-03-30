@@ -55,7 +55,11 @@
 	</bean>	
 	<bean class='org.isotope.jfp.framework.search.QuerySentence' init-method='init'>
 		<!-- 文件地址 -->
-        <property name='sentenceFile' 	value='classpath:config/es/spring-es-query-sentence.xml' />
+        <property name='sentenceFiles'>
+			<list>
+				<value>classpath*:/com/upg/ceci/beans/**/*.dsl</value>
+		 	</list>
+		</property>
 	</bean>	
 		
 </beans>
