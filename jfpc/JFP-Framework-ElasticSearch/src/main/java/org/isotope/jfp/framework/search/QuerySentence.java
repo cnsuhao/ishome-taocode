@@ -10,9 +10,7 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamReader;
 
 import org.isotope.jfp.framework.search.bean.QueryBean;
-import org.isotope.jfp.framework.utils.EmptyHelper;
 import org.springframework.core.io.Resource;
-import org.springframework.stereotype.Service;
 
 /**
  * 查询语句
@@ -33,10 +31,12 @@ public class QuerySentence {
 	 * @throws IOException
 	 */
 	public void init() throws Exception {
-		if (EmptyHelper.isEmpty(sentenceFile) || sentenceFile.getFile().exists() == false) {
+		if (sentenceFiles == null || sentenceFiles.length == 0) {
 			return;
 		}
-		doInit(sentenceFile.getFile());
+		for (Resource r : sentenceFiles) {
+			doInit(r.getFile());
+		}
 	}
 
 	public void doInit(File xmlFile) throws Exception {
@@ -72,10 +72,10 @@ public class QuerySentence {
 	/**
 	 * 查询语句文件名称
 	 */
-	Resource sentenceFile;
+	Resource[] sentenceFiles;
 
-	public void setSentenceFile(Resource sentenceFile) {
-		this.sentenceFile = sentenceFile;
+	public void setSentenceFiles(Resource[] sentenceFiles) {
+		this.sentenceFiles = sentenceFiles;
 	}
 
 	/**

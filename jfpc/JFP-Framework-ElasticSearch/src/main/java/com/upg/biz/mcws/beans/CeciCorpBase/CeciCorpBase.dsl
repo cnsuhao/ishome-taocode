@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<sentences>
+	<query>
+		<id>default</id>
+		<index>all</index>
+		<dsl>
+			<![CDATA[
+			{
+			    "query": {
+			            "match" : {
+			                    "corp_name" : "%s"
+			        }
+			    }
+			}
+			]]>
+		</dsl>
+	</query>
+</sentences>
