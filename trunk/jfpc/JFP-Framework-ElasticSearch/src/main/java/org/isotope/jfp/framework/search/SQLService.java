@@ -90,7 +90,7 @@ public class SQLService implements ISFrameworkConstants {
 	}
 
 	public void creatIndexBySQL(String sqlID, String from2, String size2) throws Exception {
-
+		logger.info("creatIndexBySQL=====>>>>>Start");
 		if (EmptyHelper.isNotEmpty(from2))
 			from = Integer.parseInt(from2);
 		if (EmptyHelper.isNotEmpty(size2))
@@ -147,6 +147,7 @@ public class SQLService implements ISFrameworkConstants {
 				break;
 			}
 		}
+		logger.info("creatIndexBySQL<<<<<=====End");
 	}
 
 	@Resource
@@ -171,7 +172,7 @@ public class SQLService implements ISFrameworkConstants {
 				throw new RuntimeException("不存在该索引语句");
 
 			if (EmptyHelper.isEmpty(starttime))
-				starttime = DateHelper.currentTimeMillisCN3();
+				starttime = "2000-01-01";
 			if (EmptyHelper.isEmpty(endtime))
 				endtime = DateHelper.currentTimeMillisCN3();
 
