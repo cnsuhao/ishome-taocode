@@ -9,7 +9,7 @@ package org.isotope.jfp.mcws.search;
 public interface ISCompanyInfoSearch {
 
 	/**
-	 * 检索Key队列
+	 * 检索Key队列(客户端)
 	 */
 	public static final String COMPANY_INFO = "COMPANY:INFO";
 

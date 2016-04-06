@@ -1,4 +1,4 @@
-package org.isotope.jfp.mcws.control;
+package org.isotope.jfp.mcws.client.control;
 
 import javax.annotation.Resource;
 

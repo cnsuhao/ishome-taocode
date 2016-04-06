@@ -1,4 +1,4 @@
-package org.isotope.jfp.mcws.control;
+package org.isotope.jfp.mcws.client.control;
 
 /**
  * 人工抓取网页服务端<br>

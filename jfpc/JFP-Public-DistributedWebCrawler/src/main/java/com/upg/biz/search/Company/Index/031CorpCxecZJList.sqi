@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<sentences>
+	<index>
+		<id>corp_exec_zj</id>
+		<!-- 浙江企业执行信息 -->
+		<sql>
+			<![CDATA[
+			
+			SELECT 
+				exec.t_date,
+ execte_drs, #申请执行人
+       (select max(corp_id) from corp_base where corp_name=  exec_zj.execte_drs) execte_drsId,#申请人id
+			 exected_drs,#被申请执行人
+			 (select max(corp_id) from corp_base where corp_name=  exec_zj.exected_drs) exected_drsId, #执行人id
+			 case_id,#案号
+			 status,#状态
+			 court  #法院
+from corp_exec_zj exec_zj
+			WHERE exec.t_date < '2016-02-01 00:00:00'
+			AND   exec.t_date > '2016-01-25 23:59:59'
+			ORDER BY exec.t_date 
+				
+			]]>
+		</sql>
+	</index>
+</sentences>

@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<sentences>
+	<index>
+		<id>corp_base_list</id>
+		<!-- 企业基本信息 -->
+		<sql>
+			<![CDATA[
+			
+			SELECT 
+				c.t_date
+				,c.corp_id  						#企业id
+				,c.corp_name 						#企业名称
+				,c.corp_bln 						#注册号
+				,c.artificial_person				#法人
+				,c.corp_rc							#注册资本
+				,c.corp_edate 						#成立日期
+				,c.approval_status					#状态
+				,c.corp_type						#类型
+				,c.currency_code					#货币单位
+				,'corp_name' as search_type			#条件类型
+				,c.corp_addr						#注册地址
+			FROM corp_base c
+			WHERE 
+			         c.t_date < '{starttime} 00:00:00'
+				AND  c.t_date > '{endtime} 23:59:59'
+				ORDER BY c.t_date
+				LIMIT {limit}
+				
+			]]>
+		</sql>
+	</index>
+</sentences>

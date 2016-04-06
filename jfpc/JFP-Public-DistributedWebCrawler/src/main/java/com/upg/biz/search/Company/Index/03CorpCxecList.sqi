@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<sentences>
+	<index>
+		<id>corp_exec_list</id>
+		<!-- 企业执行信息 -->
+		<sql>
+			<![CDATA[
+			
+			SELECT
+				 a.t_date
+				,a.name							#企业名称
+				,a.card_id						#身份证号码/组织机构代码
+				,a.court						#执行法院
+				#,a.reg_date					#立案时间
+				,a.case_no						#案号
+				#,a.exec_money 					#执行标的
+
+				,c.corp_id  						#企业id
+				,c.corp_name 						#企业名称
+				,c.corp_bln 						#注册号
+				,c.artificial_person				#法人
+				,c.corp_rc							#注册资本
+				,c.corp_edate 						#成立日期
+				,c.approval_status					#状态
+				,c.corp_type						#类型
+				,c.currency_code					#货币单位
+				,'corp_exec_name' as search_type			#条件类型
+FROM		
+			corp_exec a,
+			(SELECT 
+			  exec.*
+			  ,MAX(base.corp_id) AS max_corp_id 			#企业id
+			FROM corp_exec exec 
+				LEFT JOIN corp_base base ON exec.name=base.corp_name) b 
+      LEFT JOIN corp_base c ON c.corp_id=b.max_corp_id
+WHERE
+      a.exec_id = b.exec_id
+			AND  a.t_date < '{starttime} 00:00:00'
+			AND  a.t_date > '{endtime} 23:59:59'
+			ORDER BY a.t_date
+			LIMIT {limit}
+				
+			]]>
+		</sql>
+	</index>
+</sentences>

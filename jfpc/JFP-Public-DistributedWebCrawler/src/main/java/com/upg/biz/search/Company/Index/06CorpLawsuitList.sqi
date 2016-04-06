@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<sentences>
+	<index>
+		<id>corp_lawsuit_list</id>
+		<!-- 诉讼信 -->
+		<sql>
+			<![CDATA[
+			
+			SELECT 
+				law.t_date,
+				law.lawsuit, 							#法院
+				law.plaintiff,							#原告
+				MAX(base1.corp_id) AS plaintiff_id,
+				law.defandant,							#被告
+				MAX(base2.corp_id) AS defandant_id,
+				law.lawsuit,							#诉讼请求
+				law.case_reason,						#案由
+				law.case_id								#案号
+			FROM corp_lawsuit law 
+				left JOIN corp_base base1 ON law.plaintiff=base1.corp_name
+				left JOIN corp_base base2 ON law.defandant=base2.corp_name
+			WHERE law.t_date < '2016-02-01 00:00:00'
+			AND   law.t_date > '2016-01-25 23:59:59'
+			ORDER BY law.t_date 
+			LIMIT 1
+				
+			]]>
+		</sql>
+	</index>
+</sentences>
