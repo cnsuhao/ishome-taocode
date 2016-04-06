@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<sentences>
+	<index>
+		<id>corp_product_list</id>
+		<!-- 产品 -->
+		<sql>
+			<![CDATA[
+			
+			SELECT 
+				product.t_date,
+				MAX(base.corp_id) AS corp_id,		#企业id
+				product.corp_name,					#企业名称
+				product.contacts,					#联系人
+				product.telephone,					#电话
+				product.company_adress,				#地址
+				product.industry,					#行业
+				product.href						#网址
+			FROM corp_product product
+				LEFT JOIN corp_base base ON product.corp_name=base.corp_name		
+			WHERE product.t_date < '2016-02-01 00:00:00'
+			AND   product.t_date > '2016-01-25 23:59:59'
+			ORDER BY product.t_date 
+			LIMIT 1 
+
+			]]>
+		</sql>
+	</index>
+</sentences>

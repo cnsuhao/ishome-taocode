@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<sentences>
+	<index>
+		<id>corp_court_list</id>
+		<!-- 开庭信息（包括个人开庭和企业开庭） -->
+		<sql>
+			<![CDATA[
+			
+			SELECT 
+				court.t_date,
+				court.cause_no,						#案号
+				court.cause_reason,					#案由
+				court.plaintiff, 					#原告
+				MAX(base1.corp_id) AS plaintiff_id,
+				court.defandant, 					#被告
+				MAX(base2.corp_id) AS defandant_id,
+				court.cause_type 					#案件类型
+			FROM corp_court court 
+				LEFT JOIN corp_base base1 ON court.plaintiff=base1.corp_name
+				LEFT JOIN corp_base base2 g court.defandant=base2.corp_name
+			WHERE court.t_date < '2016-02-01 00:00:00'
+			AND   court.t_date > '2016-01-25 23:59:59'
+			ORDER BY court.t_date 
+			LIMIT 1
+				
+			]]>
+		</sql>
+	</index>
+</sentences>

@@ -1,4 +1,4 @@
-package org.isotope.jfp.mcws.control;
+package org.isotope.jfp.mcws.client.control;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -7,9 +7,11 @@ import java.io.InputStream;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.codec.binary.Base64;
 import org.isotope.jfp.dwc.config.JobConfig;
 import org.isotope.jfp.framework.beans.common.RESTResultBean;
 import org.isotope.jfp.framework.utils.DateHelper;
+import org.isotope.jfp.framework.utils.EmptyHelper;
 import org.isotope.jfp.framework.utils.HttpRequestHelper;
 import org.isotope.jfp.mcws.captcha.impl.CaptchaCodeImpl;
 import org.springframework.stereotype.Controller;
@@ -35,6 +37,7 @@ public class CaptchaCodeControl {
 
 	/**
 	 * 默认页面
+	 * 
 	 * @return
 	 * @throws Exception
 	 */
@@ -61,7 +64,7 @@ public class CaptchaCodeControl {
 			try {
 				// 文件存储
 				String path = config.getFileSavePath() + DateHelper.currentDate3() + "/";
-				String realDirPath= request.getServletContext().getRealPath(path);
+				String realDirPath = request.getServletContext().getRealPath(path);
 				File f = new File(realDirPath);
 				// 创建目录
 				if (f.exists() == false)
@@ -94,6 +97,7 @@ public class CaptchaCodeControl {
 
 	/**
 	 * 提交验证码
+	 * 
 	 * @param request
 	 * @param jobid
 	 * @param img
@@ -101,13 +105,13 @@ public class CaptchaCodeControl {
 	 */
 	@RequestMapping(value = "/C310/011", method = RequestMethod.POST)
 	@ResponseBody
-	public RESTResultBean addCodeInJobList2(HttpServletRequest request, @RequestParam String jobid, @RequestParam byte[] img) {
+	public RESTResultBean addCodeInJobList2(HttpServletRequest request, @RequestParam String jobid, @RequestParam String img) {
 		RESTResultBean rrb = new RESTResultBean();
-		if (img != null && img.length > 0) {
+		if (EmptyHelper.isNotEmpty(img)) {
 			try {
 				// 文件存储
 				String path = config.getFileSavePath() + DateHelper.currentDate3() + "/";
-				String realDirPath= request.getServletContext().getRealPath(path);
+				String realDirPath = request.getServletContext().getRealPath(path);
 				File f = new File(realDirPath);
 				// 创建目录
 				if (f.exists() == false)
@@ -115,7 +119,7 @@ public class CaptchaCodeControl {
 				// 保存文件
 				String fileName = jobid + ".jpg";
 				FileOutputStream fs = new FileOutputStream(realDirPath + "/" + fileName);
-				fs.write(img);
+				fs.write(Base64.decodeBase64(img));
 				fs.close();
 				// 设定返回值
 				rrb.setMessage("OK");
@@ -133,6 +137,7 @@ public class CaptchaCodeControl {
 
 	/**
 	 * 客户端回传结果
+	 * 
 	 * @param request
 	 * @param jobid
 	 * @param result
@@ -148,6 +153,7 @@ public class CaptchaCodeControl {
 
 	/**
 	 * 客户端回传结果
+	 * 
 	 * @param request
 	 * @param jobid
 	 * @param result
@@ -164,6 +170,7 @@ public class CaptchaCodeControl {
 
 	/**
 	 * 锁定一个任务
+	 * 
 	 * @param request
 	 * @param jobid
 	 * @return
@@ -179,6 +186,7 @@ public class CaptchaCodeControl {
 
 	/**
 	 * 获得一个待打码的任务
+	 * 
 	 * @return
 	 */
 	@RequestMapping(value = "/C310/050", method = RequestMethod.POST)

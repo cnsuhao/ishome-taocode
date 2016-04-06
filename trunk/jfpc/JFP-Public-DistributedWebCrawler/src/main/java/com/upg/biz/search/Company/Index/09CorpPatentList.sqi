@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<sentences>
+	<index>
+		<id>corp_patent_list</id>
+		<!-- 专利 -->
+		<sql>
+			<![CDATA[
+			
+			SELECT 
+				patent.t_date,
+				MAX(base.corp_id) AS corp_id,		#企业id
+				patent.corp_name,					#企业名称
+				patent.patent_name,					#专利名称
+				patent.originator					#发明人
+			FROM corp_patent patent 
+				LEFT JOIN corp_base base ON patent.corp_name=base.corp_name		
+			WHERE patent.t_date < '2016-02-01 00:00:00'
+			AND   patent.t_date > '2016-01-25 23:59:59'
+			ORDER BY patent.t_date
+			LIMIT 1 
+
+			]]>
+		</sql>
+	</index>
+</sentences>

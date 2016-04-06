@@ -1,4 +1,4 @@
-package org.isotope.jfp.mcws.control;
+package org.isotope.jfp.mcws.client.control;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -50,7 +50,7 @@ public class CompanyInfoSearchControl implements ISFrameworkConstants {
 	}
 
 	/**
-	 * 获得一个等待打码的企业
+	 * 获得一个等待打码的企业(工具使用)
 	 * 
 	 * @return
 	 * @throws Exception
@@ -70,6 +70,18 @@ public class CompanyInfoSearchControl implements ISFrameworkConstants {
 		return rrb;
 	}
 
+	/**
+	 * 打码队列获得一个等待打码的企业
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/M310/0101", method = RequestMethod.GET)
+	@ResponseBody
+	public CompanyInfoSearchImpl.ForCodeCompany getCompanyNameByCap() throws Exception {
+		return CompanyInfoSearch_.getCompanyNameByCap();
+	}
+	
 	@Resource
 	protected JobConfig config;
 
@@ -103,7 +115,7 @@ public class CompanyInfoSearchControl implements ISFrameworkConstants {
 				// 设定返回值
 				rrb.setMessage("OK");
 				// 缓存到队列
-				CompanyInfoSearch_.saveCompanyInfo(jobId, path + jobId);
+				CompanyInfoSearch_.saveCompanyInfo(jobId, path + jobId + ".html");
 			} catch (Exception e) {
 				e.printStackTrace();
 				rrb.setMessage("FAIL");

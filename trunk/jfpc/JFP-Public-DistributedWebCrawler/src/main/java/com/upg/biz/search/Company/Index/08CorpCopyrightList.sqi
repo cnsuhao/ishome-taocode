@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<sentences>
+	<index>
+		<id>corp_copyright_list</id>
+		<!-- 著作权 -->
+		<sql>
+			<![CDATA[
+			
+			SELECT 
+				copyright.t_date,
+				MAX(base.corp_id) AS corp_id,		#企业id
+				copyright.corp_name,				#企业名称
+				full_name,							#软件全称
+				shorter_name,						#软件简称
+				version,							#版本号
+				register_time 						#登记时间
+				FROM corp_copyright copyright 
+					LEFT JOIN corp_base base ON copyright.corp_name=base.corp_name		
+			WHERE copyright.t_date < '2016-02-01 00:00:00'
+			AND   copyright.t_date > '2016-01-25 23:59:59'
+			ORDER BY copyright.t_date 
+			LIMIT 1
+
+			]]>
+		</sql>
+	</index>
+</sentences>
