@@ -35,8 +35,8 @@ FROM
       LEFT JOIN corp_base c ON c.corp_id=b.max_corp_id
 WHERE
       a.exec_id = b.exec_id
-			AND  a.t_date < '{starttime} 00:00:00'
-			AND  a.t_date > '{endtime} 23:59:59'
+			AND  a.t_date > '{starttime} 00:00:00'
+			AND  a.t_date < '{endtime} 23:59:59'
 			ORDER BY a.t_date
 			LIMIT {limit}
 				

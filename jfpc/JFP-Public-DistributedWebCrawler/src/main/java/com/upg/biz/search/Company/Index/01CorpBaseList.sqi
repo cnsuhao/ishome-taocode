@@ -21,8 +21,8 @@
 				,c.corp_addr						#注册地址
 			FROM corp_base c
 			WHERE 
-			         c.t_date < '{starttime} 00:00:00'
-				AND  c.t_date > '{endtime} 23:59:59'
+			         c.t_date > '{starttime} 00:00:00'
+				AND  c.t_date < '{endtime} 23:59:59'
 				ORDER BY c.t_date
 				LIMIT {limit}
 				

@@ -39,8 +39,8 @@
 			WHERE
       			a.corp_blackID = b.corp_blackID
       			
-				AND  a.t_date < '{starttime} 00:00:00'
-				AND  a.t_date > '{endtime} 23:59:59'
+				AND  a.t_date > '{starttime} 00:00:00'
+				AND  a.t_date < '{endtime} 23:59:59'
 				ORDER BY a.t_date
 				LIMIT {limit}
 
