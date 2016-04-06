@@ -1,6 +1,7 @@
 package org.isotope.jfp.framework.search;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
@@ -72,7 +73,7 @@ public class QuerySentence {
 		XMLInputFactory factory = XMLInputFactory.newInstance();
 		try {
 			// 创建基于迭代器的事件读取器对象
-			XMLStreamReader reader = factory.createXMLStreamReader(new FileReader(xmlFile));
+			XMLStreamReader reader = factory.createXMLStreamReader(new FileInputStream(xmlFile),"UTF-8");
 			QueryBean qb = null;
 			// 遍历XML文档
 			while (reader.hasNext()) {
@@ -82,9 +83,9 @@ public class QuerySentence {
 					if ("query".equals(reader.getLocalName())) {
 						qb = new QueryBean();
 					} else if ("id".equals(reader.getLocalName()))
-						qb.setId(reader.getElementText());
+						qb.setId(reader.getElementText().toLowerCase());
 					else if ("index".equals(reader.getLocalName()))
-						qb.setIndex(reader.getElementText());
+						qb.setIndex(reader.getElementText().toLowerCase());
 					else if ("dsl".equals(reader.getLocalName())) {
 						qb.setDsl(reader.getElementText());
 						logger.debug("保存全文检索配置.........." + qb.getId());
@@ -104,7 +105,7 @@ public class QuerySentence {
 		XMLInputFactory factory = XMLInputFactory.newInstance();
 		try {
 			// 创建基于迭代器的事件读取器对象
-			XMLStreamReader reader = factory.createXMLStreamReader(new FileReader(xmlFile));
+			XMLStreamReader reader = factory.createXMLStreamReader(new FileInputStream(xmlFile),"UTF-8");
 			String id = "";
 			String value = "";
 			// 遍历XML文档
