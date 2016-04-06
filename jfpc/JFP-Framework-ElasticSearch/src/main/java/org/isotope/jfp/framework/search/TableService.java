@@ -1,15 +1,14 @@
 package org.isotope.jfp.framework.search;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
+
+import javax.annotation.Resource;
 
 import org.apache.ibatis.session.SqlSession;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
@@ -23,9 +22,7 @@ import org.slf4j.LoggerFactory;
 import com.alibaba.fastjson.JSONObject;
 
 import io.searchbox.client.JestClient;
-import io.searchbox.client.JestClientFactory;
 import io.searchbox.client.JestResult;
-import io.searchbox.client.config.HttpClientConfig;
 import io.searchbox.core.Bulk;
 import io.searchbox.core.Bulk.Builder;
 import io.searchbox.core.BulkResult;
@@ -46,7 +43,13 @@ public class TableService implements ISFrameworkConstants {
 	/**
 	 * 数据库连接
 	 */
-	private SqlSession mySqlSession;
+	@Resource
+	SqlSession mySqlSession;
+	/**
+	 * 索引服务连接
+	 */
+	@Resource
+	ElasticsearchPool pool;
 
 	public SqlSession getMySqlSession() {
 		if (mySqlSession == null)
@@ -54,30 +57,10 @@ public class TableService implements ISFrameworkConstants {
 		return mySqlSession;
 	}
 
-	protected Set<String> serverList = new LinkedHashSet<String>();
-
-	public Set<String> getServerList() {
-		return serverList;
-	}
-
-	public void setServerList(Set<String> serverList) {
-		this.serverList = serverList;
-	}
-
-	public TableService() {
-		this.serverList.add("http://localhost:9200");
-	}
-
-	/**
-	 * 获得连接
-	 * 
-	 * @return
-	 * @throws IOException
-	 */
-	private JestClient getClient() throws IOException {
-		JestClientFactory factory = new JestClientFactory();
-		factory.setHttpClientConfig(new HttpClientConfig.Builder(serverList).multiThreaded(true).build());
-		return factory.getObject();
+	public ElasticsearchPool getElasticsearchPool() {
+		if (pool == null)
+			pool = BeanFactoryHelper.getBean("ElasticsearchPool");
+		return pool;
 	}
 
 	/**
@@ -112,7 +95,7 @@ public class TableService implements ISFrameworkConstants {
 		if (EmptyHelper.isNotEmpty(size2))
 			size = Integer.parseInt(size2);
 
-		JestClient jestClient = getClient();
+		JestClient jestClient = getElasticsearchPool().getClient();
 
 		String index = tableName.toLowerCase();
 
@@ -145,7 +128,7 @@ public class TableService implements ISFrameworkConstants {
 				commit = false;
 				while (commit == false) {
 					try {
-						jestClient = getClient();
+						jestClient = getElasticsearchPool().getClient();
 						bulkIndexBuilder = new Bulk.Builder();
 						bulkIndexBuilder.addAction(actions);
 						result = jestClient.execute(bulkIndexBuilder.build());
