@@ -16,7 +16,7 @@ import io.searchbox.client.config.HttpClientConfig;
  *
  */
 public class ElasticsearchPool {
-	public final static String TYPE = "table";
+	public final static String TYPE = "data";
 	
 	public static void main(String[] args) throws Exception {
 		// "http://localhost:9200"
