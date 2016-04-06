@@ -9,8 +9,14 @@ import java.util.Map;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamReader;
 
+import org.isotope.jfp.framework.cache.ICacheService;
 import org.isotope.jfp.framework.search.bean.QueryBean;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
+
+import com.alibaba.fastjson.JSON;
 
 /**
  * 查询语句
@@ -19,9 +25,17 @@ import org.springframework.core.io.Resource;
  *
  */
 public class QuerySentence {
+
+	public final static String SENTENCE_SQL = "SENTENCE:SQL:";
+	public final static String SENTENCE_DSL = "SENTENCE:DSL:";
+
+	private Logger logger = LoggerFactory.getLogger(TableService.class);
+	@Autowired
+	private ICacheService myCacheService;
+
 	public static void main(String[] args) throws Exception {
 		QuerySentence q = new QuerySentence();
-		q.doInit(new File("E:/workspace/JFP-Public-DistributedWebCrawler/src/main/resources/config/es/spring-es-query-sentence.xml"));
+		q.doLoadSentenceFiles(new File("E:/workspace/JFP-Public-DistributedWebCrawler/src/main/resources/config/es/spring-es-query-sentence.xml"));
 		System.out.println();
 	}
 
@@ -31,15 +45,30 @@ public class QuerySentence {
 	 * @throws IOException
 	 */
 	public void init() throws Exception {
+		logger.debug("全文检索初始化=====>>>>>开始");
 		if (sentenceFiles == null || sentenceFiles.length == 0) {
 			return;
 		}
-		for (Resource r : sentenceFiles) {
-			doInit(r.getFile());
+		for (Resource s : sentenceFiles) {
+			logger.debug("加载全文检索配置文件......" + s.getFile());
+			doLoadSentenceFiles(s.getFile());
 		}
+		for (Resource i : indexFiles) {
+			logger.debug("加载全文检索索引文件......" + i.getFile());
+			doLoadIndexFiles(i.getFile());
+		}
+		logger.debug("全文检索初始化<<<<<=====结束");
 	}
 
-	public void doInit(File xmlFile) throws Exception {
+	public void doLoadSentenceRedis() throws Exception {
+
+	}
+
+	public void doLoadIndexRedis() throws Exception {
+
+	}
+
+	public void doLoadSentenceFiles(File xmlFile) throws Exception {
 		XMLInputFactory factory = XMLInputFactory.newInstance();
 		try {
 			// 创建基于迭代器的事件读取器对象
@@ -58,7 +87,9 @@ public class QuerySentence {
 						qb.setIndex(reader.getElementText());
 					else if ("dsl".equals(reader.getLocalName())) {
 						qb.setDsl(reader.getElementText());
+						logger.debug("保存全文检索配置.........." + qb.getId());
 						sentenceMap.put(qb.getId(), qb);
+						myCacheService.putObject(SENTENCE_DSL + qb.getId(), JSON.toJSONString(qb), 0, false);
 					}
 				}
 			}
@@ -69,6 +100,39 @@ public class QuerySentence {
 		}
 	}
 
+	public void doLoadIndexFiles(File xmlFile) throws Exception {
+		XMLInputFactory factory = XMLInputFactory.newInstance();
+		try {
+			// 创建基于迭代器的事件读取器对象
+			XMLStreamReader reader = factory.createXMLStreamReader(new FileReader(xmlFile));
+			String id = "";
+			String value = "";
+			// 遍历XML文档
+			while (reader.hasNext()) {
+				int event = reader.next();
+				// 如果事件对象是元素的开始
+				if (event == XMLStreamReader.START_ELEMENT) {
+					if ("index".equals(reader.getLocalName())) {
+						id = "";
+						value = "";
+					} else if ("id".equals(reader.getLocalName()))
+						id = reader.getElementText();
+					else if ("sql".equals(reader.getLocalName())) {
+						logger.debug("保存全文检索索引.........." + id);
+						value = reader.getElementText();
+						indexMap.put(id, value);
+						myCacheService.putObject(SENTENCE_SQL + id, value, 0, false);
+					}
+				}
+			}
+			// System.out.println(sentenceMap);
+			reader.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/////////////////////////////////// 使用动态更新//////////////////////////////////////////
 	/**
 	 * 查询语句文件名称
 	 */
@@ -85,6 +149,24 @@ public class QuerySentence {
 
 	public QueryBean getSentence(String queryID) {
 		return sentenceMap.get(queryID);
+	}
+
+	/**
+	 * 索引语句文件名称
+	 */
+	Resource[] indexFiles;
+
+	public void setIndexFiles(Resource[] indexFiles) {
+		this.indexFiles = indexFiles;
+	}
+
+	/**
+	 * 查询语句Map
+	 */
+	Map<String, String> indexMap = new HashMap<String, String>();
+
+	public String getIndex(String indexID) {
+		return indexMap.get(indexID);
 	}
 
 }

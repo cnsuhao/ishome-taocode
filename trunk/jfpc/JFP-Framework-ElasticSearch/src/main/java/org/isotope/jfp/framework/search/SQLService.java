@@ -11,9 +11,12 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.annotation.Resource;
+
 import org.apache.ibatis.session.SqlSession;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.utils.BeanFactoryHelper;
+import org.isotope.jfp.framework.utils.DateHelper;
 import org.isotope.jfp.framework.utils.EmptyHelper;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.SqlSessionUtils;
@@ -40,8 +43,8 @@ import io.searchbox.indices.IndicesExists;
  * @author 001745
  *
  */
-public class TableService implements ISFrameworkConstants {
-	private Logger logger = LoggerFactory.getLogger(TableService.class);
+public class SQLService implements ISFrameworkConstants {
+	private Logger logger = LoggerFactory.getLogger(SQLService.class);
 
 	/**
 	 * 数据库连接
@@ -64,7 +67,7 @@ public class TableService implements ISFrameworkConstants {
 		this.serverList = serverList;
 	}
 
-	public TableService() {
+	public SQLService() {
 		this.serverList.add("http://localhost:9200");
 	}
 
@@ -101,11 +104,11 @@ public class TableService implements ISFrameworkConstants {
 	 * @return
 	 * @throws SQLException
 	 */
-	public void creatIndexByTable(String tableName) throws Exception {
-		creatIndexByTable(tableName, EMPTY, EMPTY);
+	public void creatIndexBySQL(String sqlID) throws Exception {
+		creatIndexBySQL(sqlID, EMPTY, EMPTY);
 	}
 
-	public void creatIndexByTable(String tableName, String from2, String size2) throws Exception {
+	public void creatIndexBySQL(String sqlID, String from2, String size2) throws Exception {
 
 		if (EmptyHelper.isNotEmpty(from2))
 			from = Integer.parseInt(from2);
@@ -114,7 +117,7 @@ public class TableService implements ISFrameworkConstants {
 
 		JestClient jestClient = getClient();
 
-		String index = tableName.toLowerCase();
+		String index = sqlID.toLowerCase();
 
 		// 删除索引
 		boolean indexExists = jestClient.execute(new IndicesExists.Builder(index).build()).isSucceeded();
@@ -133,7 +136,7 @@ public class TableService implements ISFrameworkConstants {
 		for (int c = 0; c <= Integer.MAX_VALUE; c++) {
 			while (commit == false) {
 				try {
-					actions = loadDataFromDb(index, tableName, c, from);
+					actions = loadDataFromDb(index, sqlID, c, from);
 					commit = true;
 				} catch (Exception e) {
 					Thread.sleep(sleep * 2);
@@ -165,7 +168,10 @@ public class TableService implements ISFrameworkConstants {
 		}
 	}
 
-	private List<Index> loadDataFromDb(String index, String tableName, int page, int from) throws SQLException {
+	@Resource
+	QuerySentence config;
+
+	private List<Index> loadDataFromDb(String index, String sqlID, int page, int from) throws SQLException {
 		List<Index> actions = new ArrayList<Index>();
 		Connection conn = null;
 		Statement stmt = null;
@@ -178,7 +184,21 @@ public class TableService implements ISFrameworkConstants {
 			conn.setAutoCommit(false);
 			stmt = conn.createStatement();
 			int start = from + page * size;
-			resultSet = stmt.executeQuery("SELECT * FROM " + tableName + " LIMIT " + start + "," + size);
+
+			String sql = config.getIndex(index);
+			if (EmptyHelper.isEmpty(sql))
+				throw new RuntimeException("不存在该索引语句");
+
+			if (EmptyHelper.isEmpty(starttime))
+				starttime = DateHelper.currentTimeMillisCN3();
+			if (EmptyHelper.isEmpty(endtime))
+				endtime = DateHelper.currentTimeMillisCN3();
+			
+			sql = sql.replace("{starttime}", starttime);// 开始时间
+			sql = sql.replace("{endtime}", endtime);// 终了时间
+			sql = sql.replace("{limit}", start + "," + size);// 分页限制
+
+			resultSet = stmt.executeQuery(sql);
 			metaData = resultSet.getMetaData();
 			JSONObject data;
 			// rs.beforeFirst();
@@ -207,6 +227,26 @@ public class TableService implements ISFrameworkConstants {
 	}
 
 	//////////////////////////////////////////////////////////
+
+	String starttime = "";
+	String endtime = "";
+
+	public String getStarttime() {
+		return starttime;
+	}
+
+	public void setStarttime(String starttime) {
+		this.starttime = starttime;
+	}
+
+	public String getEndtime() {
+		return endtime;
+	}
+
+	public void setEndtime(String endtime) {
+		this.endtime = endtime;
+	}
+
 	private int from = 0;
 
 	public int getFrom() {
