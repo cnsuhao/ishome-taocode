@@ -185,13 +185,18 @@ public class SQLService implements ISFrameworkConstants {
 			JSONObject data;
 			// rs.beforeFirst();
 			while (resultSet.next()) {
+				String id = "";
 				data = new JSONObject();
 				for (int i = 1; i <= metaData.getColumnCount(); i++) {
-					String columnName = metaData.getColumnName(i);
+					String columnName = metaData.getColumnLabel(i);
 					String value = resultSet.getString(i);
 					data.put(columnName.toLowerCase(), value);
 				}
-				actions.add(new Index.Builder(data.toJSONString()).index(index).type(ElasticsearchPool.TYPE).build());
+				id = data.remove("id").toString();
+				if(EmptyHelper.isEmpty(id))
+					actions.add(new Index.Builder(data.toJSONString()).index(index).type(ElasticsearchPool.TYPE).build());
+				else
+					actions.add(new Index.Builder(data.toJSONString()).index(index).id(id).type(ElasticsearchPool.TYPE).build());
 			}
 
 		} catch (SQLException e) {
