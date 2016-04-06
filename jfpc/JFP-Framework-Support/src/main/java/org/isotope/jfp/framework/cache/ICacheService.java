@@ -187,6 +187,14 @@ public interface ICacheService extends ISessionService {
 	 * @return
 	 */
 	public Object peekFirstObjectInList(String key, boolean translation);
+	
+	/**
+	 * 从已有的缓存数据里面获取并移除第一个数据(阻塞模式) <br>
+	 * （基于保存Key,List数据队列）
+	 * 
+	 * @return
+	 */
+	public Object peekFirstObjectInList(String key, int waitTime, boolean translation);
 
 	/**
 	 * 从已有的缓存数据里面获取并移除第一个数据 <br>
