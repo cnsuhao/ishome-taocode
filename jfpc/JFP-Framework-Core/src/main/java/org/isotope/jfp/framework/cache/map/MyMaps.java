@@ -171,6 +171,15 @@ public class MyMaps implements ICacheService {
 	}
 
 	@Override
+	public Object peekFirstObjectInList(String key, int waitTime, boolean translation) {
+		ArrayList<Object> ms = (ArrayList<Object>) getObject(key);
+		if (ms == null)
+			return null;
+		else
+			return ms.get(0);
+	}
+
+	@Override
 	public Object pollFirstObjectInList(String key) {
 		ArrayList<Object> ms = (ArrayList<Object>) getObject(key);
 		if (ms == null)
