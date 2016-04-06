@@ -267,21 +267,21 @@ public class HttpServiceHelper {
 	 * @return
 	 * @throws Exception
 	 */
-	public static String doHttpPOST(String serviceURL, String jsonString, Map<String, String> param) throws Exception {
+	public static String doHttpPOST(String serviceURL, String jsonString, Map<String, Object> param) throws Exception {
 		param.put(POST_PARAM, jsonString);
 		return doHttpPOST(serviceURL, param, null, null);
 	}
 
-	public static String doHttpPOST(String serviceURL, Map<String, String> param) throws Exception {
+	public static String doHttpPOST(String serviceURL, Map<String, Object> param) throws Exception {
 		return doHttpPOST(serviceURL, param, null, null);
 	}
 
-	public static String doHttpPOST(String serviceURL, Map<String, String> param, Map<String, String> headers)
+	public static String doHttpPOST(String serviceURL, Map<String, Object> param, Map<String, String> headers)
 			throws Exception {
 		return doHttpPOST(serviceURL, param, null, null);
 	}
 
-	public static String doHttpPOST(String serviceURL, Map<String, String> param, Map<String, String> headers,
+	public static String doHttpPOST(String serviceURL, Map<String, Object> param, Map<String, String> headers,
 			Map<String, String> cookies) throws Exception {
 		logger.debug("=====>>>>>接口请求<<<<<=====" + serviceURL);
 		// CloseableHttpClient httpclient = HttpClients.createDefault();
@@ -297,8 +297,8 @@ public class HttpServiceHelper {
 
 			// 额外参数
 			if (param != null) {
-				for (Map.Entry<String, String> entry : param.entrySet()) {
-					nvps.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
+				for (Map.Entry<String, Object> entry : param.entrySet()) {
+					nvps.add(new BasicNameValuePair(entry.getKey(), ""+entry.getValue()));
 				}
 			}
 
@@ -307,7 +307,7 @@ public class HttpServiceHelper {
 
 			// 设定请求头
 			if (headers != null) {
-				for (Map.Entry<String, String> entry : param.entrySet()) {
+				for (Map.Entry<String, String> entry : headers.entrySet()) {
 					httpPost.setHeader(entry.getKey(), entry.getValue());
 				}
 			}
@@ -319,7 +319,7 @@ public class HttpServiceHelper {
 				// 创建上下文环境
 				HttpContext context = new BasicHttpContext();
 				CookieStore cookieStore = new BasicCookieStore();
-				for (Map.Entry<String, String> entry : param.entrySet()) {
+				for (Map.Entry<String, String> entry : cookies.entrySet()) {
 					cookieStore.addCookie(new BasicClientCookie2(entry.getKey(), entry.getValue()));
 				}
 				context.setAttribute(HttpClientContext.COOKIE_STORE, cookieStore);
