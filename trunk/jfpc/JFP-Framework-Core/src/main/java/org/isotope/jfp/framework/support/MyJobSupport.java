@@ -18,18 +18,21 @@ import org.isotope.jfp.framework.utils.EmptyHelper;
  */
 public class MyJobSupport implements ISJobConstants, ISFrameworkConstants, ISTask {
 
-	// 缓存队列
-	protected ICacheService myMqService;
-
-	public ICacheService getMqService() {
-		return myMqService;
+	/**
+	 *  缓存队列
+	 */
+	protected ICacheService myCacheService;
+	public ICacheService getMyCacheService() {
+		return myCacheService;
 	}
 
-	public void setMqService(ICacheService mqService) {
-		this.myMqService = mqService;
+	public void setMyCacheService(ICacheService myCacheService) {
+		this.myCacheService = myCacheService;
 	}
 
-	// 缓存队列
+	/**
+	 *  网络通信
+	 */
 	protected MyHttpServiceSupport myHttpService = new MyHttpServiceSupport();
 
 	public MyHttpServiceSupport getHttpService() {
@@ -99,7 +102,7 @@ public class MyJobSupport implements ISJobConstants, ISFrameworkConstants, ISTas
 	 * @param jobName
 	 */
 	protected boolean startLock() {
-		myMqService.putObject(jobKey, JOB_FLAG_RUNNING, waitTimeSecond, false);
+		myCacheService.putObject(jobKey, JOB_FLAG_RUNNING, waitTimeSecond, false);
 		return true;
 	}
 
@@ -109,7 +112,7 @@ public class MyJobSupport implements ISJobConstants, ISFrameworkConstants, ISTas
 	 * @param jobName
 	 */
 	protected boolean checkLock() {
-		return EmptyHelper.isEmpty(myMqService.getObject(jobKey, false));
+		return EmptyHelper.isEmpty(myCacheService.getObject(jobKey, false));
 	}
 
 	/**
@@ -118,7 +121,7 @@ public class MyJobSupport implements ISJobConstants, ISFrameworkConstants, ISTas
 	 * @param jobName
 	 */
 	protected boolean errorLock() {
-		myMqService.putObject(jobKey, JOB_FLAG_ERROR, waitTimeSecond, false);
+		myCacheService.putObject(jobKey, JOB_FLAG_ERROR, waitTimeSecond, false);
 		return true;
 	}
 
@@ -128,7 +131,7 @@ public class MyJobSupport implements ISJobConstants, ISFrameworkConstants, ISTas
 	 * @param jobName
 	 */
 	protected boolean endLock() {
-		myMqService.putObject(jobKey, JOB_FLAG_SUCCESS, waitTimeSecond, false);
+		myCacheService.putObject(jobKey, JOB_FLAG_SUCCESS, waitTimeSecond, false);
 		return true;
 	}
 
