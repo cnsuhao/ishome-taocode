@@ -20,8 +20,6 @@ import com.alibaba.fastjson.JSON;
  */
 public class QuerySentenceServiceJob extends MyJobSupport {
 	private Logger logger = LoggerFactory.getLogger(QuerySentenceServiceJob.class);
-
-	public static final String KEY_CECI = "CECI";
 	// 缓存队列
 	QuerySentence myQuerySentence;
 
@@ -37,6 +35,7 @@ public class QuerySentenceServiceJob extends MyJobSupport {
 	 * Redis缓存空间索引
 	 */
 	int index = 0;
+
 	public int getIndex() {
 		return index;
 	}
@@ -45,12 +44,8 @@ public class QuerySentenceServiceJob extends MyJobSupport {
 		this.index = index;
 	}
 
-	public void doProcess() throws Exception {
-
+	public boolean doProcessRepeat() throws Exception {
 		logger.info("全文检索参数缓存同步业务  >>>>>===== 开始");
-		setJobKey(KEY_CECI + ":TotalData");
-		super.startLock();
-
 		// 数据整理,基于Redis进行缓存同步
 		{
 			myCacheService.selectDB(index);
@@ -68,14 +63,12 @@ public class QuerySentenceServiceJob extends MyJobSupport {
 			for (String key : keys) {
 				value = (String) myCacheService.getObject(QuerySentence.SENTENCE_SQL + key, false);
 				if (EmptyHelper.isNotEmpty(value))
-					sentenceMap.put(key, JSON.parseObject(value, QueryBean.class));
+					indexMap.put(key, value);
 			}
 			myCacheService.init();
 		}
-
-		super.endLock();
-		// 清空数据缓存
 		logger.info("全文检索参数缓存同步业务  <<<<<===== 结束");
+		return true;
 	}
 
 }
