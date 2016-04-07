@@ -19,9 +19,10 @@ import org.isotope.jfp.framework.utils.EmptyHelper;
 public class MyJobSupport implements ISJobConstants, ISFrameworkConstants, ISTask {
 
 	/**
-	 *  缓存队列
+	 * 缓存队列
 	 */
 	protected ICacheService myCacheService;
+
 	public ICacheService getMyCacheService() {
 		return myCacheService;
 	}
@@ -31,7 +32,7 @@ public class MyJobSupport implements ISJobConstants, ISFrameworkConstants, ISTas
 	}
 
 	/**
-	 *  网络通信
+	 * 网络通信
 	 */
 	protected MyHttpServiceSupport myHttpService = new MyHttpServiceSupport();
 
@@ -70,11 +71,12 @@ public class MyJobSupport implements ISJobConstants, ISFrameworkConstants, ISTas
 		this.waitTimeMinute = waitTimeMinute;
 		this.waitTimeSecond = 60 * this.waitTimeMinute;
 	}
-	
+
 	/**
 	 * 进程阻塞时间（秒）
 	 */
 	protected int waitTimeSecond = 60 * waitTimeMinute;
+
 	public int getWaitTimeSecond() {
 		return waitTimeSecond;
 	}
@@ -133,6 +135,18 @@ public class MyJobSupport implements ISJobConstants, ISFrameworkConstants, ISTas
 	protected boolean endLock() {
 		myCacheService.putObject(jobKey, JOB_FLAG_SUCCESS, waitTimeSecond, false);
 		return true;
+	}
+
+	public void doProcess() throws Exception {
+		if (checkLock() == false)
+			return;
+		startLock();
+		try {
+			doProcessRepeat();
+		} finally {
+			endLock();
+		}
+		// 清空数据缓存
 	}
 
 	/**
