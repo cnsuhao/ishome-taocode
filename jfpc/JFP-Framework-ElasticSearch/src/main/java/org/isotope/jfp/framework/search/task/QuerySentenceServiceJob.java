@@ -23,7 +23,7 @@ public class QuerySentenceServiceJob extends MyJobSupport {
 
 	public static final String KEY_CECI = "CECI";
 	// 缓存队列
-	protected QuerySentence myQuerySentence;
+	QuerySentence myQuerySentence;
 
 	public QuerySentence getMyQuerySentence() {
 		return myQuerySentence;
@@ -33,7 +33,16 @@ public class QuerySentenceServiceJob extends MyJobSupport {
 		this.myQuerySentence = myQuerySentence;
 	}
 
-	public QuerySentenceServiceJob() {
+	/**
+	 * Redis缓存空间索引
+	 */
+	int index = 0;
+	public int getIndex() {
+		return index;
+	}
+
+	public void setIndex(int index) {
+		this.index = index;
 	}
 
 	public void doProcess() throws Exception {
@@ -44,6 +53,7 @@ public class QuerySentenceServiceJob extends MyJobSupport {
 
 		// 数据整理,基于Redis进行缓存同步
 		{
+			myCacheService.selectDB(index);
 			Map<String, QueryBean> sentenceMap = myQuerySentence.getSentenceMap();
 			Set<String> keys = sentenceMap.keySet();
 			String value;
@@ -60,6 +70,7 @@ public class QuerySentenceServiceJob extends MyJobSupport {
 				if (EmptyHelper.isNotEmpty(value))
 					sentenceMap.put(key, JSON.parseObject(value, QueryBean.class));
 			}
+			myCacheService.init();
 		}
 
 		super.endLock();
