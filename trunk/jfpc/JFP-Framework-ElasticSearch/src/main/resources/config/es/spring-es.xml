@@ -24,40 +24,41 @@
 		http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd
 		'>
 	
-	<bean class='org.isotope.jfp.framework.search.TableService' >
+	<bean id='ElasticsearchTableService' class='org.isotope.jfp.framework.search.TableService' >
 		<!-- 单次导入数目 -->
 		<property name='size' value='3000'/>  
 		<!-- 间隔毫秒数 -->
 		<property name='sleep' value='1000'/>  
-		<!-- 服务器地址 -->
-        <property name='serverList'>
-        	<list>
-        		<value>http://127.0.0.1:9200</value>
-        		<!-- <value>http://10.50.86.31:9200</value>
-        		<value>http://10.50.86.32:9200</value>
-        		<value>http://10.50.86.33:9200</value>
-        		<value>http://10.50.86.34:9200</value>
-        		<value>http://10.50.86.35:9200</value> -->
-            </list>
-        </property>
 	</bean>	
-	<bean class='org.isotope.jfp.framework.search.ElasticsearchPool' >
+	<bean id='ElasticsearchSQLService' class='org.isotope.jfp.framework.search.SQLService' >
+		<!-- 单次导入数目 -->
+		<property name='size' value='3000'/>  
+		<!-- 间隔毫秒数 -->
+		<property name='sleep' value='1000'/>  
+	</bean>	
+	
+	<bean id='myElasticsearchPool' class='org.isotope.jfp.framework.search.ElasticsearchPool' >
 		<constructor-arg index="0">
 			<list>
-        		<value>http://127.0.0.1:9200</value>
-        		<!-- <value>http://10.50.86.31:9200</value>
-        		<value>http://10.50.86.32:9200</value>
-        		<value>http://10.50.86.33:9200</value>
-        		<value>http://10.50.86.34:9200</value>
-        		<value>http://10.50.86.35:9200</value> -->
+        		<!-- <value>http://127.0.0.1:9200</value> -->
+        		<value>http://10.50.86.21:9200</value>
+        		<!-- <value>http://10.50.85.30:9200</value>
+        		<value>http://10.50.85.31:9200</value>
+        		<value>http://10.50.85.32:9200</value> -->
             </list>
 		</constructor-arg>
 	</bean>	
-	<bean class='org.isotope.jfp.framework.search.QuerySentence' init-method='init'>
+	<bean id='myQuerySentence' class='org.isotope.jfp.framework.search.QuerySentence' init-method='init'>
 		<!-- 文件地址 -->
         <property name='sentenceFiles'>
 			<list>
-				<value>classpath*:/com/upg/ceci/beans/**/*.dsl</value>
+				<value>classpath*:/com/upg/biz/search/Company/Sentence/*.dsl</value>
+		 	</list>
+		</property>
+		<!-- 文件地址 -->
+        <property name='indexFiles'>
+			<list>
+				<value>classpath*:/com/upg/biz/search/Company/Index/*.sqi</value>
 		 	</list>
 		</property>
 	</bean>	
