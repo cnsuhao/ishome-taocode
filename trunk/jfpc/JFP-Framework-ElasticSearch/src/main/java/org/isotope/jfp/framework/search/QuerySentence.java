@@ -2,7 +2,6 @@ package org.isotope.jfp.framework.search;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -152,6 +151,14 @@ public class QuerySentence {
 		return sentenceMap.get(queryID);
 	}
 
+	public Map<String, QueryBean> getSentenceMap() {
+		return sentenceMap;
+	}
+
+	public void setSentenceMap(Map<String, QueryBean> sentenceMap) {
+		this.sentenceMap = sentenceMap;
+	}
+	
 	/**
 	 * 索引语句文件名称
 	 */
@@ -168,6 +175,14 @@ public class QuerySentence {
 
 	public String getIndex(String indexID) {
 		return indexMap.get(indexID);
+	}
+
+	public Map<String, String> getIndexMap() {
+		return indexMap;
+	}
+
+	public void setIndexMap(Map<String, String> indexMap) {
+		this.indexMap = indexMap;
 	}
 
 }
