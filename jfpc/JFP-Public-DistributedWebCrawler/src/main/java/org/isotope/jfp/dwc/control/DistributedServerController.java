@@ -28,7 +28,7 @@ import redis.clients.jedis.Jedis;
 @Controller
 public class DistributedServerController {
 	@Resource
-	protected ICacheService mq;
+	protected ICacheService myCacheService;
 
 	@Resource
 	protected JobConfig config;
@@ -57,7 +57,7 @@ public class DistributedServerController {
 		AJobServiceSupport jobService = BeanFactoryHelper.getBean(job);
 		// 安全限定
 		if (key.equals(jobService.getJobKey())) {
-			jobService.setMqService(mq);
+			jobService.setMyCacheService(myCacheService);
 			
 		}
 
@@ -74,9 +74,9 @@ public class DistributedServerController {
 	@RequestMapping(value = "/09001010/{key}", method = RequestMethod.POST)
 	public ModelAndView m09001010POST(@PathVariable String key, String TASK_TYPE,String FTP_PATH, String TASK_INVEL, int MAX_NUM) {
 		ModelAndView model = new ModelAndView("DWC/09001010");
-		model.addObject("TASK_TYPE", mq.putObject("FTP:PATH:" + key, TASK_TYPE, 0, false));// 任务运行状态
-		model.addObject("FTP_PATH", mq.putObject("FTP:PATH:" + key, FTP_PATH, 0, false));
-		model.addObject("TASK_INVEL", mq.putObject("TASK:INVEL:" + key, TASK_INVEL, 0, false));
+		model.addObject("TASK_TYPE", myCacheService.putObject("FTP:PATH:" + key, TASK_TYPE, 0, false));// 任务运行状态
+		model.addObject("FTP_PATH", myCacheService.putObject("FTP:PATH:" + key, FTP_PATH, 0, false));
+		model.addObject("TASK_INVEL", myCacheService.putObject("TASK:INVEL:" + key, TASK_INVEL, 0, false));
 
 		Jedis jedis = jedisMasterUtil.getJedis();
 

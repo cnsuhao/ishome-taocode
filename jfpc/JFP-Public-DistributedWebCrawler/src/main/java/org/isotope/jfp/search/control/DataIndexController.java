@@ -29,6 +29,7 @@ public class DataIndexController {
 	public ModelAndView creatDataIndex(HttpServletRequest request
 			, String T    //基于表创建索引名字
 			, String I    //基于SQL创建索引名字
+			, String C    //创建索引
 			, String from //起点
 			, String size //尺寸
 			, String st //开始日期
@@ -42,7 +43,7 @@ public class DataIndexController {
 		else if(EmptyHelper.isNotEmpty(I)){
 			sql.setStarttime(st);
 			sql.setEndtime(et);
-			sql.creatIndexBySQL(I,from,size);
+			sql.creatIndexBySQL(C,I,from,size);
 		}
 		return model;
 	}
