@@ -49,5 +49,10 @@
    			<artifactId>JFP-Framework-Support</artifactId>
    			<version>2.4.2-RELEASE</version>
    		</dependency>
+   		<dependency>
+   			<groupId>Isotope</groupId>
+   			<artifactId>JFP-Framework-Core</artifactId>
+   			<version>2.4.2-RELEASE</version>
+   		</dependency>
    	</dependencies>
 </project>
