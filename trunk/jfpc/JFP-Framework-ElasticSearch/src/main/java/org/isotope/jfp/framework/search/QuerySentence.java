@@ -1,8 +1,7 @@
 package org.isotope.jfp.framework.search;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,12 +32,6 @@ public class QuerySentence {
 	@Autowired
 	private ICacheService myCacheService;
 
-	public static void main(String[] args) throws Exception {
-		QuerySentence q = new QuerySentence();
-		q.doLoadSentenceFiles(new File("E:/workspace/JFP-Public-DistributedWebCrawler/src/main/resources/config/es/spring-es-query-sentence.xml"));
-		System.out.println();
-	}
-
 	/**
 	 * 初始化
 	 * 
@@ -51,11 +44,11 @@ public class QuerySentence {
 		}
 		for (Resource s : sentenceFiles) {
 			logger.debug("加载全文检索配置文件......" + s.getFile());
-			doLoadSentenceFiles(s.getFile());
+			doLoadSentenceFiles(s.getInputStream());
 		}
 		for (Resource i : indexFiles) {
 			logger.debug("加载全文检索索引文件......" + i.getFile());
-			doLoadIndexFiles(i.getFile());
+			doLoadIndexFiles(i.getInputStream());
 		}
 		logger.debug("全文检索初始化<<<<<=====结束");
 	}
@@ -68,11 +61,11 @@ public class QuerySentence {
 
 	}
 
-	public void doLoadSentenceFiles(File xmlFile) throws Exception {
+	public void doLoadSentenceFiles(InputStream inputStream) throws Exception {
 		XMLInputFactory factory = XMLInputFactory.newInstance();
 		try {
 			// 创建基于迭代器的事件读取器对象
-			XMLStreamReader reader = factory.createXMLStreamReader(new FileInputStream(xmlFile),"UTF-8");
+			XMLStreamReader reader = factory.createXMLStreamReader(inputStream,"UTF-8");
 			QueryBean qb = null;
 			// 遍历XML文档
 			while (reader.hasNext()) {
@@ -100,11 +93,11 @@ public class QuerySentence {
 		}
 	}
 
-	public void doLoadIndexFiles(File xmlFile) throws Exception {
+	public void doLoadIndexFiles(InputStream inputStream) throws Exception {
 		XMLInputFactory factory = XMLInputFactory.newInstance();
 		try {
 			// 创建基于迭代器的事件读取器对象
-			XMLStreamReader reader = factory.createXMLStreamReader(new FileInputStream(xmlFile),"UTF-8");
+			XMLStreamReader reader = factory.createXMLStreamReader(inputStream,"UTF-8");
 			String id = "";
 			String value = "";
 			// 遍历XML文档
