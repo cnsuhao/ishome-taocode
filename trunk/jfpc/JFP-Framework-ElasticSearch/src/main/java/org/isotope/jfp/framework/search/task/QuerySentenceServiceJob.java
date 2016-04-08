@@ -58,12 +58,12 @@ public class QuerySentenceServiceJob extends MyJobSupport {
 					sentenceMap.put(key, JSON.parseObject(value, QueryBean.class));
 			}
 
-			Map<String, String> indexMap = myQuerySentence.getIndexMap();
+			Map<String, QueryBean> indexMap = myQuerySentence.getIndexMap();
 			keys = indexMap.keySet();
 			for (String key : keys) {
 				value = (String) myCacheService.getObject(QuerySentence.SENTENCE_SQL + key, false);
 				if (EmptyHelper.isNotEmpty(value))
-					indexMap.put(key, value);
+					indexMap.put(key, JSON.parseObject(value, QueryBean.class));
 			}
 			myCacheService.init();
 		}

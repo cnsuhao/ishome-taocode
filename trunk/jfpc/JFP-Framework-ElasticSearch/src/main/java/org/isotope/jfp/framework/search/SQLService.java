@@ -12,6 +12,7 @@ import javax.annotation.Resource;
 
 import org.apache.ibatis.session.SqlSession;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
+import org.isotope.jfp.framework.search.bean.QueryBean;
 import org.isotope.jfp.framework.utils.BeanFactoryHelper;
 import org.isotope.jfp.framework.utils.DateHelper;
 import org.isotope.jfp.framework.utils.EmptyHelper;
@@ -86,10 +87,10 @@ public class SQLService implements ISFrameworkConstants {
 	 * @throws SQLException
 	 */
 	public void creatIndexBySQL(String sqlID) throws Exception {
-		creatIndexBySQL(sqlID, EMPTY, EMPTY);
+		creatIndexBySQL(ONE,sqlID, EMPTY, EMPTY);
 	}
 
-	public void creatIndexBySQL(String sqlID, String from2, String size2) throws Exception {
+	public void creatIndexBySQL(String creatFlag, String actionID, String from2, String size2) throws Exception {
 		logger.info("creatIndexBySQL=====>>>>>Start");
 		if (EmptyHelper.isNotEmpty(from2))
 			from = Integer.parseInt(from2);
@@ -97,29 +98,33 @@ public class SQLService implements ISFrameworkConstants {
 			size = Integer.parseInt(size2);
 
 		JestClient jestClient = getElasticsearchPool().getClient();
+		QueryBean qb = config.getIndex(actionID);
 
-		String index = sqlID.toLowerCase();
-
-		// 删除索引
-		boolean indexExists = jestClient.execute(new IndicesExists.Builder(index).build()).isSucceeded();
-		if (indexExists) {
-			JestResult deleteIndexResult = jestClient.execute(new DeleteIndex.Builder(index).build());
-			logger.debug("deleteIndex===>>>ErrorMessage=" + deleteIndexResult.getErrorMessage() + ",JsonString=" + deleteIndexResult.getJsonString());
+		if(ONE.equals(creatFlag)){
+			String index = qb.getIndex();
+			// 删除索引
+			boolean indexExists = jestClient.execute(new IndicesExists.Builder(index).build()).isSucceeded();
+			if (indexExists) {
+				JestResult deleteIndexResult = jestClient.execute(new DeleteIndex.Builder(index).build());
+				logger.debug("deleteIndex===>>>ErrorMessage=" + deleteIndexResult.getErrorMessage() + ",JsonString=" + deleteIndexResult.getJsonString());
+			}
+			JestResult createIndexResult = jestClient.execute(new CreateIndex.Builder(index).build());
+			logger.debug("createIndex===>>>ErrorMessage=" + createIndexResult.getErrorMessage() + ",JsonString=" + createIndexResult.getJsonString());
 		}
-		JestResult createIndexResult = jestClient.execute(new CreateIndex.Builder(index).build());
-		logger.debug("createIndex===>>>ErrorMessage=" + createIndexResult.getErrorMessage() + ",JsonString=" + createIndexResult.getJsonString());
+		
 		Builder bulkIndexBuilder;
-
 		BulkResult result;
 		int num = 0;
 		List<Index> actions = null;
 		boolean commit = false;
-		for (int c = 0; c <= Integer.MAX_VALUE; c++) {
+		for (int c = 0; c <= 100; c++) {
 			while (commit == false) {
 				try {
-					actions = loadDataFromDb(index, sqlID, c, from);
+					actions = loadDataFromDb(qb, c, from);
 					commit = true;
 				} catch (Exception e) {
+					e.printStackTrace();
+					logger.error("loadDataFromDb===>>>" + e.getMessage());
 					Thread.sleep(sleep * 2);
 				}
 			}
@@ -153,7 +158,7 @@ public class SQLService implements ISFrameworkConstants {
 	@Resource
 	QuerySentence config;
 
-	private List<Index> loadDataFromDb(String index, String sqlID, int page, int from) throws SQLException {
+	private List<Index> loadDataFromDb(QueryBean qb, int page, int from) throws SQLException {
 		List<Index> actions = new ArrayList<Index>();
 		Connection conn = null;
 		Statement stmt = null;
@@ -167,7 +172,7 @@ public class SQLService implements ISFrameworkConstants {
 			stmt = conn.createStatement();
 			int start = from + page * size;
 
-			String sql = config.getIndex(index);
+			String sql = qb.getQuery();
 			if (EmptyHelper.isEmpty(sql))
 				throw new RuntimeException("不存在该索引语句");
 
@@ -178,8 +183,8 @@ public class SQLService implements ISFrameworkConstants {
 
 			sql = sql.replace("{starttime}", starttime);// 开始时间
 			sql = sql.replace("{endtime}", endtime);// 终了时间
-			sql = sql.replace("{limit}", start + "," + size);// 分页限制
-
+			sql = sql.replace("{limit}",  start + "," + size);// 分页限制
+			//logger.debug("sql===>>>" + sql);
 			resultSet = stmt.executeQuery(sql);
 			metaData = resultSet.getMetaData();
 			JSONObject data;
@@ -194,9 +199,9 @@ public class SQLService implements ISFrameworkConstants {
 				}
 				id = data.remove("id").toString();
 				if(EmptyHelper.isEmpty(id))
-					actions.add(new Index.Builder(data.toJSONString()).index(index).type(ElasticsearchPool.TYPE).build());
+					actions.add(new Index.Builder(data.toJSONString()).index(qb.getIndex()).type(ElasticsearchPool.TYPE).build());
 				else
-					actions.add(new Index.Builder(data.toJSONString()).index(index).id(id).type(ElasticsearchPool.TYPE).build());
+					actions.add(new Index.Builder(data.toJSONString()).index(qb.getIndex()).id(id).type(ElasticsearchPool.TYPE).build());
 			}
 
 		} catch (SQLException e) {

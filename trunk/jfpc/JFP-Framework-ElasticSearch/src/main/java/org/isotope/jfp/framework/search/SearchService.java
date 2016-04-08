@@ -34,7 +34,7 @@ public class SearchService {
 		List<String> hits = null;
 		try {
 			QueryBean qb = sentence.getSentence(queryID);
-			Search.Builder searchBuilder = new Search.Builder(String.format(qb.getDsl(), param)).addIndex(qb.getIndex()).addType(ElasticsearchPool.TYPE);
+			Search.Builder searchBuilder = new Search.Builder(String.format(qb.getQuery(), param)).addIndex(qb.getIndex()).addType(ElasticsearchPool.TYPE);
 			SearchResult result = pool.getClient().execute(searchBuilder.build());
 
 			hits = result.getSourceAsStringList();

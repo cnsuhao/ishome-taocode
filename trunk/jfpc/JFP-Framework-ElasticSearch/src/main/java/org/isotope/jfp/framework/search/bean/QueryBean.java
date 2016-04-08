@@ -21,7 +21,7 @@ public class QueryBean extends ObjectBean {
 	/**
 	 * 查询语句
 	 */
-	String dsl = "";
+	String query = "";
 
 	public String getId() {
 		return id;
@@ -39,11 +39,12 @@ public class QueryBean extends ObjectBean {
 		this.index = index;
 	}
 
-	public String getDsl() {
-		return dsl;
+	public String getQuery() {
+		return query;
 	}
 
-	public void setDsl(String dsl) {
-		this.dsl = dsl;
+	public void setQuery(String query) {
+		this.query = query;
 	}
+
 }
