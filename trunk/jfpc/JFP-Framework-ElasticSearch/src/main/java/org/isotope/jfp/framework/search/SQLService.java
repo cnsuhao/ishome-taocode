@@ -117,7 +117,7 @@ public class SQLService implements ISFrameworkConstants {
 		int num = 0;
 		List<Index> actions = null;
 		boolean commit = false;
-		for (int c = 0; c <= 100; c++) {
+		for (int c = 0; c <= Integer.MAX_VALUE; c++) {
 			while (commit == false) {
 				try {
 					actions = loadDataFromDb(qb, c, from);
