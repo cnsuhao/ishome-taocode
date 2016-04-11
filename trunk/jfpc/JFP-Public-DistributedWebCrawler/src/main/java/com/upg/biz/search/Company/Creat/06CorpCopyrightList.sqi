@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <sentences>
 	<creat>
-		<id>corp_copyright_list</id>
-		<index>corp_copyright_list</index>
+		<id>corp_copyright_creat</id>
+		<index>corp_copyright_creat</index>
 		<!-- 软件著作权 -->
 		<sql>
 			<![CDATA[
@@ -27,11 +27,8 @@
 			FROM corp_copyright c
 					LEFT JOIN corp_base b ON b.corp_id=c.corp_id
 					
-			WHERE 
-			         c.t_date > '{starttime} 00:00:00'
-				AND  c.t_date < '{endtime} 23:59:59'
 				
-				ORDER BY c.t_date
+				ORDER BY c.id
 				
 				LIMIT {limit}
 

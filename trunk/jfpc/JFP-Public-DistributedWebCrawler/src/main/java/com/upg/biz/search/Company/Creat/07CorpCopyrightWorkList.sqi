@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<sentences>
+	<creat>
+		<id>corp_copyright_work_creat</id>
+		<index>corp_copyright_work_creat</index>
+		<!-- 作品著作权 -->
+		<sql>
+			<![CDATA[
+			
+			SELECT 
+				c.t_date				
+				,c.id  						#著作权id
+
+				,c.name 					#软件全称
+				,c.register_no    			#登记号
+				,c.first_time    			#首次发表时间
+
+				,'作品著作权' as search_type				#条件类型				
+				
+				,c.corp_name 						#企业名称
+				,b.artificial_person				#法人	
+					
+				,b.res_date							#来源（区域CODE）		*固定条件*
+				,b.corp_rc							#注册资本				*固定条件*
+				,b.corp_edate 						#成立日期				*固定条件*
+				
+			FROM corp_copyright_work c
+					LEFT JOIN corp_base b ON b.corp_id=c.corp_id
+					
+				
+				ORDER BY c.id
+				
+				LIMIT {limit}
+
+			]]>
+		</sql>
+	</creat>
+</sentences>

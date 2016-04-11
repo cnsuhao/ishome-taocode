@@ -17,7 +17,7 @@
 
 				,'企业产品' as search_type				#条件类型				
 				
-				,b.corp_name 						#企业名称
+				,c.corp_name 						#企业名称
 				,b.artificial_person				#法人	
 					
 				,b.res_date							#来源（区域CODE）		*固定条件*

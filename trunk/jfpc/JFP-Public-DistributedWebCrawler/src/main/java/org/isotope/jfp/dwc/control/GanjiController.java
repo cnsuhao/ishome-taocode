@@ -41,27 +41,27 @@ public class GanjiController {
 	static int size = 678;
 
 	public static void main(String[] args) throws Exception {
-		
-		
+
 		Jedis jedis = new Jedis("10.10.168.50", 6379);
 		jedis.auth("ImxV@ly1D4bBtGwv");
 
 		String target = "QCC";
-		 jedis.set("GJ:TASK:INVEL", "5000");
+		jedis.set("GJ:TASK:INVEL", "5000");
 		// Jedis jedis = new Jedis("127.0.0.1", 6379);
 
 		// jedis.rpush("GJ:COMP:KEY", "铁路");
 		// jedis.rpush("GJ:COMP:KEY", "医疗");
 		// jedis.rpush("GJ:COMP:KEY", "教育");
 
-		//jedis.set(target + ":TASK:INVEL", "300;300");
+		// jedis.set(target + ":TASK:INVEL", "300;300");
 
-		//loadKeyWordFile(jedis, target);
-		//loadCompanyFile(jedis, target);
-		//loadCompanyNameFile(jedis, target);
+		// loadKeyWordFile(jedis, target);
+		// loadCompanyFile(jedis, target);
+		// loadCompanyNameFile(jedis, target);
 
 		// jedis.set("GJ:TASK:INVEL", "5000");
 	}
+
 	public static void loadCompanyNameFile(Jedis jedis, String key) throws Exception {
 		File file = new File("F:/QCC-CompanyName/Local2/201602111-CompanyList.txt");
 		BufferedReader reader = null;
@@ -72,18 +72,17 @@ public class GanjiController {
 			// 一次读入一行，直到读入null为文件结束
 			while (EmptyHelper.isNotEmpty(tempString = reader.readLine())) {
 				// 1.数据解析
-				if(line>2237)
-				{
-					try{
-					jedis.rpush(key + ":COMP:LIST", tempString);
-					System.out.println("line " + line + "======>>>>>" + tempString);
-					}catch(Exception e){
+				if (line > 2237) {
+					try {
+						jedis.rpush(key + ":COMP:LIST", tempString);
+						System.out.println("line " + line + "======>>>>>" + tempString);
+					} catch (Exception e) {
 						jedis = new Jedis("10.10.168.50", 6379);
 						jedis.auth("ImxV@ly1D4bBtGwv");
 					}
 				}
 				line++;
-				//if(line>10)
+				// if(line>10)
 				// break;
 			}
 			reader.close();
@@ -98,7 +97,6 @@ public class GanjiController {
 			}
 		}
 	}
-
 
 	public static void loadKeyWordFile(Jedis jedis, String key) throws Exception {
 		File file = new File("D:/KeyWord.txt");
@@ -143,14 +141,13 @@ public class GanjiController {
 			// 一次读入一行，直到读入null为文件结束
 			while (EmptyHelper.isNotEmpty(tempString = reader.readLine())) {
 				// 1.数据解析
-				if(line>12100)
-				{
+				if (line > 12100) {
 					jedis.rpush(key + ":COMP:KEY", tempString);
 					System.out.println("line " + line + "======>>>>>" + tempString);
 				}
 				line++;
-				if(line>3000000)
-				 break;
+				if (line > 3000000)
+					break;
 			}
 			reader.close();
 		} catch (Exception e) {
@@ -169,8 +166,7 @@ public class GanjiController {
 	@RequestMapping(value = "/KKK", method = RequestMethod.GET)
 	public ModelAndView loadHttpProxys(HttpServletRequest request) throws Exception {
 		ModelAndView model = new ModelAndView("index");
-		
-		
+
 		Jedis jedis = new Jedis("10.10.168.50", 6379);
 		jedis.auth("ImxV@ly1D4bBtGwv");
 
@@ -185,14 +181,14 @@ public class GanjiController {
 			loadCompanyFile(jedis, target);
 		} catch (Exception e1) {
 		}
-		
+
 		return model;
 	}
-	
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView loadHttpProxys1(HttpServletRequest request) throws Exception {
 		ModelAndView model = new ModelAndView("index");
-		
+
 		return model;
 	}
 
@@ -234,7 +230,7 @@ public class GanjiController {
 	public ModelAndView capUpload1(HttpServletRequest request, @PathVariable String key, @RequestParam String code, @RequestParam String name) {
 		ModelAndView model = new ModelAndView("DWC/09001000");
 
-		mq.offerObjectInList(key+":COMP:LIST", code + " " + name, false);
+		mq.offerObjectInList(key + ":COMP:LIST", code + " " + name, false);
 
 		model.addObject(WEB_KEY, "OK");
 		return model;
