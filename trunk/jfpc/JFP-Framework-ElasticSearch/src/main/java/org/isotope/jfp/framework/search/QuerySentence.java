@@ -82,7 +82,8 @@ public class QuerySentence {
 						qb.setQuery(reader.getElementText());
 						logger.debug("保存全文检索配置.........." + qb.getId());
 						sentenceMap.put(qb.getId(), qb);
-						myCacheService.putObject(SENTENCE_DSL + qb.getId(), JSON.toJSONString(qb), 0, false);
+						if(myCacheService!=null)
+							myCacheService.putObject(SENTENCE_DSL + qb.getId(), JSON.toJSONString(qb), 0, false);
 					}
 				}
 			}
@@ -114,7 +115,8 @@ public class QuerySentence {
 						qb.setQuery(reader.getElementText());
 						logger.debug("保存全文检索索引.........." + qb.getId());
 						indexMap.put(qb.getId(), qb);
-						myCacheService.putObject(SENTENCE_SQL + qb.getId(), JSON.toJSONString(qb), 0, false);
+						if(myCacheService!=null)
+							myCacheService.putObject(SENTENCE_SQL + qb.getId(), JSON.toJSONString(qb), 0, false);
 					}
 				}
 			}
