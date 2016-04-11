@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <sentences>
 	<query>
-		<id>corp_base_list</id>
-		<index>corp_base_list</index>
+		<id>corp_director_list</id>
+		<index>corp_director_list</index>
 		<dsl>
 			<![CDATA[
 			{
@@ -11,7 +11,7 @@
 				        "query": {
 					        "bool":{
 						        "must":[
-						        	{"match" : {"corp_name" : "%s"}},
+						        	{"match" : {"name" : "%s"}},
 						        	{"match" : {"res_date" : "%s"}}
 						        ]
 					        }

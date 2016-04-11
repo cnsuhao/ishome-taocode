@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <sentences>
 	<creat>
-		<id>corp_patent_list</id>
-		<index>corp_patent_list</index>
+		<id>corp_patent_creat</id>
+		<index>corp_patent_creat</index>
 		<!-- 专利 -->
 		<sql>
 			<![CDATA[
@@ -14,7 +14,7 @@
 				,c.patent_number 					#专利号
 				,c.patent_name						#专利名称
 				,c.corp_name as  patent_corp_name   #申请人
-				,c.originator    			#发明人
+				,c.originator    					#发明人
 
 				,'企业专利' as search_type				#条件类型				
 				
@@ -26,13 +26,11 @@
 				,b.corp_edate 						#成立日期				*固定条件*
 				
 			FROM corp_patent c
-					LEFT JOIN corp_base b ON b.corp_id=c.corp_id
-					
-			WHERE 
-			         c.t_date > '{starttime} 00:00:00'
-				AND  c.t_date < '{endtime} 23:59:59'
+					LEFT JOIN corp_base b ON b.corp_id=c.corp_id			
 				
-				ORDER BY c.t_date
+				ORDER BY c.id
+				
+				LIMIT {limit}
 
 			]]>
 		</sql>

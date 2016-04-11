@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <sentences>
 	<query>
-		<id>corp_base_list</id>
-		<index>corp_base_list</index>
+		<id>corp_contacts_list</id>
+		<index>corp_contacts_list</index>
 		<dsl>
 			<![CDATA[
 			{

@@ -16,6 +16,7 @@ import com.upg.biz.search.beans.CeciCorpBase.CeciCorpBaseService;
 
 /**
  * qiyejiansuo
+ * 
  * @author ISHome
  * @version 0.0.1
  * @since 0.0.1
@@ -27,13 +28,9 @@ public class CorpBaseControl {
 	@Resource
 	protected CeciCorpBaseService CeciCorpBase;
 
-	@RequestMapping(value = "/CB", method = RequestMethod.POST)	
+	@RequestMapping(value = "/CB", method = RequestMethod.POST)
 	@ResponseBody
-	public String queryCompanyByName(
-			@RequestParam(required = true) String corp_name, 
-			@RequestParam(required = true) int maxNum
-			,String clientType)
-			throws Exception {
+	public String queryCompanyByName(@RequestParam(required = true) String corp_name, @RequestParam(required = true) int maxNum, String clientType) throws Exception {
 		Assert.notNull(corp_name);
 		Assert.hasText(corp_name, "搜索名称不能为空！");
 
