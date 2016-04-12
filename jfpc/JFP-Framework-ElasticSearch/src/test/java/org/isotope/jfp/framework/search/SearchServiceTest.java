@@ -1,50 +1,44 @@
 package org.isotope.jfp.framework.search;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.io.File;
+import java.io.FileInputStream;
+import java.util.List;
+
+import org.isotope.jfp.framework.search.bean.QueryBean;
+
+import io.searchbox.client.JestClient;
+import io.searchbox.client.JestClientFactory;
+import io.searchbox.client.config.HttpClientConfig;
+import io.searchbox.core.Search;
+import io.searchbox.core.SearchResult;
 
 public class SearchServiceTest {
 
 	// whitespace：这个分析器基于空格字符来分离所提供的值。
 	public static void main(String[] args) throws Exception {
 		
-		Calendar calendar = Calendar.getInstance();
-	
-		calendar.add(Calendar.YEAR, -2);
-		SimpleDateFormat sFormat = new SimpleDateFormat("yyyy-MM-dd");// 获取时间格式化工具
-		  String date = sFormat.format(calendar.getTime());
+		JestClientFactory factory = new JestClientFactory();
+		factory.setHttpClientConfig(new HttpClientConfig.Builder("http://10.50.86.21:9200").multiThreaded(true).build());
+		JestClient jestClient = factory.getObject();
+		File f = new File(SearchServiceTest.class.getResource("").getPath()); 
+		System.out.println(f);
+		QuerySentence qs = new QuerySentence();
+		qs.doLoadSentenceFiles(new FileInputStream(SearchServiceTest.class.getResource("").getPath()+"\\QueryTest.dsl"));
+		QueryBean qb = qs.getSentence("test");
+		
+		String query = String.format(qb.getQuery(), "中新力合");
+		System.out.println("query1=====" + query);
 
-		System.out.println(date);
-		
-		
-		
-//		
-//		
-//		
-//		JestClientFactory factory = new JestClientFactory();
-//		factory.setHttpClientConfig(new HttpClientConfig.Builder("http://10.50.85.30:9200").multiThreaded(true).build());
-//		JestClient jestClient = factory.getObject();
-//		File f = new File(SearchServiceTest.class.getResource("").getPath()); 
-//		System.out.println(f);
-//		QuerySentence qs = new QuerySentence();
-//		qs.doLoadSentenceFiles(new FileInputStream(SearchServiceTest.class.getResource("").getPath()+"\\QueryTest.dsl"));
-//		QueryBean qb = qs.getSentence("test");
-//		
-//		String query = String.format(qb.getQuery(), "大学","210000");
-//		System.out.println("query1=====" + query);
-//Map<String,Object> param = new HashMap<String,Object>();
-//param.put("query", query);
-//		//HttpServiceHelper.doHttpPOST("http://10.50.85.30:9200/corp_base_list/_search", param);
-//		Search.Builder searchBuilder = new Search.Builder(query).addIndex(qb.getIndex()).addType("data");
-//		SearchResult result = jestClient.execute(searchBuilder.build());
-//		System.out.println("==result===" + result.getMaxScore());
-//		System.out.println("getErrorMessage=====" + result.getErrorMessage());
-//		List<String> hits = result.getSourceAsStringList();
-//		for (String hit : hits) {
-//			System.out.println("==hit===" + hit);
-//			//CorpBaseBean corp = JSON.parseObject(hit, CorpBaseBean.class);
-//		//	System.out.println("==corp===" + corp.getCorp_name());
-//		}
+		Search.Builder searchBuilder = new Search.Builder(query).addIndex(qb.getIndex()).addType("data");
+		SearchResult result = jestClient.execute(searchBuilder.build());
+		System.out.println("==result===" + result.getTotal());
+		System.out.println("getErrorMessage=====" + result.getErrorMessage());
+		List<String> hits = result.getSourceAsStringList();
+		for (String hit : hits) {
+			System.out.println("==hit===" + hit);
+			//CorpBaseBean corp = JSON.parseObject(hit, CorpBaseBean.class);
+		//	System.out.println("==corp===" + corp.getCorp_name());
+		}
 
 	}
 
