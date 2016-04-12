@@ -24,9 +24,9 @@ import com.alibaba.fastjson.JSON;
  *
  */
 public class QuerySentence {
-
-	public final static String SENTENCE_SQL = "SENTENCE:SQL:";
-	public final static String SENTENCE_DSL = "SENTENCE:DSL:";
+	public final static String SENTENCE_UPD = "SENTENCE:UPD:";
+	public final static String SENTENCE_CRT = "SENTENCE:CRT:";
+	public final static String SENTENCE_SCH = "SENTENCE:SCH:";
 
 	private Logger logger = LoggerFactory.getLogger(TableService.class);
 	@Autowired
@@ -46,6 +46,10 @@ public class QuerySentence {
 			logger.debug("加载全文检索配置文件......" + s.getFile());
 			doLoadSentenceFiles(s.getInputStream());
 		}
+		for (Resource i : creatFiles) {
+			logger.debug("加载全文检索索引文件......" + i.getFile());
+			doLoadCreatFiles(i.getInputStream());
+		}
 		for (Resource i : indexFiles) {
 			logger.debug("加载全文检索索引文件......" + i.getFile());
 			doLoadIndexFiles(i.getInputStream());
@@ -53,48 +57,19 @@ public class QuerySentence {
 		logger.debug("全文检索初始化<<<<<=====结束");
 	}
 
-	public void doLoadSentenceRedis() throws Exception {
-
-	}
-
-	public void doLoadIndexRedis() throws Exception {
-
-	}
-
 	public void doLoadSentenceFiles(InputStream inputStream) throws Exception {
-		XMLInputFactory factory = XMLInputFactory.newInstance();
-		try {
-			// 创建基于迭代器的事件读取器对象
-			XMLStreamReader reader = factory.createXMLStreamReader(inputStream, "UTF-8");
-			QueryBean qb = null;
-			// 遍历XML文档
-			while (reader.hasNext()) {
-				int event = reader.next();
-				// 如果事件对象是元素的开始
-				if (event == XMLStreamReader.START_ELEMENT) {
-					if ("query".equals(reader.getLocalName())) {
-						qb = new QueryBean();
-					} else if ("id".equals(reader.getLocalName()))
-						qb.setId(reader.getElementText().toLowerCase());
-					else if ("index".equals(reader.getLocalName()))
-						qb.setIndex(reader.getElementText().toLowerCase());
-					else if ("dsl".equals(reader.getLocalName())) {
-						qb.setQuery(reader.getElementText());
-						logger.debug("保存全文检索配置.........." + qb.getId());
-						sentenceMap.put(qb.getId(), qb);
-						if(myCacheService!=null)
-							myCacheService.putObject(SENTENCE_DSL + qb.getId(), JSON.toJSONString(qb), 0, false);
-					}
-				}
-			}
-			// System.out.println(sentenceMap);
-			reader.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		loadXML(inputStream, "query", "dsl", SENTENCE_SCH,sentenceMap);
 	}
 
 	public void doLoadIndexFiles(InputStream inputStream) throws Exception {
+		loadXML(inputStream, "update", "sql", SENTENCE_UPD,updateMap);
+	}
+
+	public void doLoadCreatFiles(InputStream inputStream) throws Exception {
+		loadXML(inputStream, "creat", "sql", SENTENCE_CRT,creatMap);
+	}
+
+	private void loadXML(InputStream inputStream, String root, String type, String redisKey, Map<String, QueryBean> datas) {
 		XMLInputFactory factory = XMLInputFactory.newInstance();
 		try {
 			// 创建基于迭代器的事件读取器对象
@@ -105,18 +80,18 @@ public class QuerySentence {
 				int event = reader.next();
 				// 如果事件对象是元素的开始
 				if (event == XMLStreamReader.START_ELEMENT) {
-					if ("creat".equals(reader.getLocalName())) {
+					if (root.equals(reader.getLocalName())) {
 						qb = new QueryBean();
 					} else if ("id".equals(reader.getLocalName())) {
 						qb.setId(reader.getElementText().toLowerCase());
 					} else if ("index".equals(reader.getLocalName())) {
 						qb.setIndex(reader.getElementText().toLowerCase());
-					} else if ("sql".equals(reader.getLocalName())) {
+					} else if (type.equals(reader.getLocalName())) {
 						qb.setQuery(reader.getElementText());
 						logger.debug("保存全文检索索引.........." + qb.getId());
-						indexMap.put(qb.getId(), qb);
-						if(myCacheService!=null)
-							myCacheService.putObject(SENTENCE_SQL + qb.getId(), JSON.toJSONString(qb), 0, false);
+						datas.put(qb.getId(), qb);
+						if (myCacheService != null)
+							myCacheService.putObject(redisKey + qb.getId(), JSON.toJSONString(qb), 0, false);
 					}
 				}
 			}
@@ -125,6 +100,7 @@ public class QuerySentence {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
 	}
 
 	/////////////////////////////////// 使用动态更新//////////////////////////////////////////
@@ -164,20 +140,45 @@ public class QuerySentence {
 	}
 
 	/**
-	 * 查询语句Map
+	 * 索引语句文件名称
 	 */
-	Map<String, QueryBean> indexMap = new HashMap<String, QueryBean>();
+	Resource[] creatFiles;
 
-	public QueryBean getIndex(String indexID) {
-		return indexMap.get(indexID);
+	public void setCreatFiles(Resource[] creatFiles) {
+		this.creatFiles = creatFiles;
 	}
 
-	public Map<String, QueryBean> getIndexMap() {
-		return indexMap;
+	/**
+	 * 更新SQL语句Map
+	 */
+	Map<String, QueryBean> updateMap = new HashMap<String, QueryBean>();
+
+	public QueryBean getUpdate(String updateID) {
+		return updateMap.get(updateID);
 	}
 
-	public void setIndexMap(Map<String, QueryBean> indexMap) {
-		this.indexMap = indexMap;
+	public Map<String, QueryBean> getUpdateMap() {
+		return updateMap;
 	}
 
+	public void setUpdateMap(Map<String, QueryBean> updateMap) {
+		this.updateMap = updateMap;
+	}
+
+	/**
+	 * 创建SQL语句Map
+	 */
+	Map<String, QueryBean> creatMap = new HashMap<String, QueryBean>();
+
+	public QueryBean getCreat(String creatID) {
+		return creatMap.get(creatID);
+	}
+
+	public Map<String, QueryBean> getCreatMap() {
+		return creatMap;
+	}
+
+	public void setCreatMap(Map<String, QueryBean> creatMap) {
+		this.creatMap = creatMap;
+	}
 }

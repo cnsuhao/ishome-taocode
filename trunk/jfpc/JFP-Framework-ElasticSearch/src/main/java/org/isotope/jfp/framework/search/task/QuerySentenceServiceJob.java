@@ -48,22 +48,32 @@ public class QuerySentenceServiceJob extends MyJobSupport {
 		logger.info("全文检索参数缓存同步业务  >>>>>===== 开始");
 		// 数据整理,基于Redis进行缓存同步
 		{
-			myCacheService.selectDB(index);
 			Map<String, QueryBean> sentenceMap = myQuerySentence.getSentenceMap();
 			Set<String> keys = sentenceMap.keySet();
 			String value;
 			for (String key : keys) {
-				value = (String) myCacheService.getObject(QuerySentence.SENTENCE_DSL + key, false);
+				myCacheService.selectDB(index);
+				value = (String) myCacheService.getObject(QuerySentence.SENTENCE_SCH + key, false);
 				if (EmptyHelper.isNotEmpty(value))
 					sentenceMap.put(key, JSON.parseObject(value, QueryBean.class));
 			}
 
-			Map<String, QueryBean> indexMap = myQuerySentence.getIndexMap();
-			keys = indexMap.keySet();
+			Map<String, QueryBean> updateMap = myQuerySentence.getUpdateMap();
+			keys = updateMap.keySet();
 			for (String key : keys) {
-				value = (String) myCacheService.getObject(QuerySentence.SENTENCE_SQL + key, false);
+				myCacheService.selectDB(index);
+				value = (String) myCacheService.getObject(QuerySentence.SENTENCE_UPD + key, false);
 				if (EmptyHelper.isNotEmpty(value))
-					indexMap.put(key, JSON.parseObject(value, QueryBean.class));
+					updateMap.put(key, JSON.parseObject(value, QueryBean.class));
+			}
+			
+			Map<String, QueryBean> creatMap = myQuerySentence.getCreatMap();
+			keys = creatMap.keySet();
+			for (String key : keys) {
+				myCacheService.selectDB(index);
+				value = (String) myCacheService.getObject(QuerySentence.SENTENCE_CRT + key, false);
+				if (EmptyHelper.isNotEmpty(value))
+					creatMap.put(key, JSON.parseObject(value, QueryBean.class));
 			}
 			myCacheService.init();
 		}

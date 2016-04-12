@@ -86,11 +86,39 @@ public class SQLService implements ISFrameworkConstants {
 	 * @return
 	 * @throws SQLException
 	 */
-	public void creatIndexBySQL(String sqlID) throws Exception {
-		creatIndexBySQL(ONE,sqlID, EMPTY, EMPTY);
+	public void creatIndexBySQL(String actionID) throws Exception {
+		creatIndexBySQL(config.getCreat(actionID), ONE, EMPTY, EMPTY);
 	}
 
 	public void creatIndexBySQL(String creatFlag, String actionID, String from2, String size2) throws Exception {
+		creatIndexBySQL(config.getCreat(actionID), creatFlag, EMPTY, EMPTY);
+	}
+
+	public void creatIndexBySQL(QueryBean qb, String creatFlag, String from2, String size2) throws Exception {
+		makeIndexBySQL(qb, creatFlag, from2, size2);
+	}
+
+	/**
+	 * 分页查询并创建索引
+	 * 
+	 * @param tableName
+	 * @param page
+	 * @return
+	 * @throws SQLException
+	 */
+	public void updateIndexBySQL(String actionID) throws Exception {
+		updateIndexBySQL(config.getUpdate(actionID), EMPTY, EMPTY);
+	}
+
+	public void updateIndexBySQL(String actionID, String from2, String size2) throws Exception {
+		makeIndexBySQL(config.getUpdate(actionID), ZERO, from2, size2);
+	}
+
+	public void updateIndexBySQL(QueryBean qb, String from2, String size2) throws Exception {
+		makeIndexBySQL(qb, ZERO, from2, size2);
+	}
+
+	private void makeIndexBySQL(QueryBean qb, String creatFlag, String from2, String size2) throws Exception {
 		logger.info("creatIndexBySQL=====>>>>>Start");
 		if (EmptyHelper.isNotEmpty(from2))
 			from = Integer.parseInt(from2);
@@ -98,9 +126,8 @@ public class SQLService implements ISFrameworkConstants {
 			size = Integer.parseInt(size2);
 
 		JestClient jestClient = getElasticsearchPool().getClient();
-		QueryBean qb = config.getIndex(actionID);
 
-		if(ONE.equals(creatFlag)){
+		if (ONE.equals(creatFlag)) {
 			String index = qb.getIndex();
 			// 删除索引
 			boolean indexExists = jestClient.execute(new IndicesExists.Builder(index).build()).isSucceeded();
@@ -111,7 +138,7 @@ public class SQLService implements ISFrameworkConstants {
 			JestResult createIndexResult = jestClient.execute(new CreateIndex.Builder(index).build());
 			logger.debug("createIndex===>>>ErrorMessage=" + createIndexResult.getErrorMessage() + ",JsonString=" + createIndexResult.getJsonString());
 		}
-		
+
 		Builder bulkIndexBuilder;
 		BulkResult result;
 		int num = 0;
@@ -183,8 +210,8 @@ public class SQLService implements ISFrameworkConstants {
 
 			sql = sql.replace("{starttime}", starttime);// 开始时间
 			sql = sql.replace("{endtime}", endtime);// 终了时间
-			sql = sql.replace("{limit}",  start + "," + size);// 分页限制
-			//logger.debug("sql===>>>" + sql);
+			sql = sql.replace("{limit}", start + "," + size);// 分页限制
+			// logger.debug("sql===>>>" + sql);
 			resultSet = stmt.executeQuery(sql);
 			metaData = resultSet.getMetaData();
 			JSONObject data;
@@ -198,7 +225,7 @@ public class SQLService implements ISFrameworkConstants {
 					data.put(columnName.toLowerCase(), value);
 				}
 				id = data.remove("id").toString();
-				if(EmptyHelper.isEmpty(id))
+				if (EmptyHelper.isEmpty(id))
 					actions.add(new Index.Builder(data.toJSONString()).index(qb.getIndex()).type(ElasticsearchPool.TYPE).build());
 				else
 					actions.add(new Index.Builder(data.toJSONString()).index(qb.getIndex()).id(id).type(ElasticsearchPool.TYPE).build());

@@ -1,19 +1,19 @@
 package org.isotope.jfp.framework.search.task;
 
+import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
+import java.util.Map.Entry;
 
 import org.isotope.jfp.framework.search.QuerySentence;
+import org.isotope.jfp.framework.search.SQLService;
 import org.isotope.jfp.framework.search.bean.QueryBean;
 import org.isotope.jfp.framework.support.MyJobSupport;
-import org.isotope.jfp.framework.utils.EmptyHelper;
+import org.isotope.jfp.framework.utils.DateHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.alibaba.fastjson.JSON;
-
 /**
- * 索引同步
+ * 索引每日同步
  * 
  * @author 001745
  *
@@ -29,6 +29,16 @@ public class DataIndexServiceJob extends MyJobSupport {
 
 	public void setMyQuerySentence(QuerySentence myQuerySentence) {
 		this.myQuerySentence = myQuerySentence;
+	}
+	
+	SQLService sqlService;
+
+	public SQLService getSqlService() {
+		return sqlService;
+	}
+
+	public void setSqlService(SQLService sqlService) {
+		this.sqlService = sqlService;
 	}
 
 	/**
@@ -48,24 +58,14 @@ public class DataIndexServiceJob extends MyJobSupport {
 		logger.info("全文检索参数缓存同步业务  >>>>>===== 开始");
 		// 数据整理,基于Redis进行缓存同步
 		{
-			myCacheService.selectDB(index);
-			Map<String, QueryBean> sentenceMap = myQuerySentence.getSentenceMap();
-			Set<String> keys = sentenceMap.keySet();
-			String value;
-			for (String key : keys) {
-				value = (String) myCacheService.getObject(QuerySentence.SENTENCE_DSL + key, false);
-				if (EmptyHelper.isNotEmpty(value))
-					sentenceMap.put(key, JSON.parseObject(value, QueryBean.class));
+			sqlService.setStarttime(DateHelper.currentTimeMillisCN3());
+			sqlService.setEndtime(DateHelper.currentTimeMillisCN3());
+			Map<String, QueryBean> updateMap = myQuerySentence.getUpdateMap();		
+			Iterator<Entry<String, QueryBean>> iter = updateMap.entrySet().iterator();
+			while (iter.hasNext()) {
+				Entry<String, QueryBean> entry = iter.next();
+				sqlService.updateIndexBySQL(entry.getValue(), EMPTY, EMPTY);
 			}
-
-			Map<String, QueryBean> indexMap = myQuerySentence.getIndexMap();
-			keys = indexMap.keySet();
-			for (String key : keys) {
-				value = (String) myCacheService.getObject(QuerySentence.SENTENCE_SQL + key, false);
-				if (EmptyHelper.isNotEmpty(value))
-					indexMap.put(key, JSON.parseObject(value, QueryBean.class));
-			}
-			myCacheService.init();
 		}
 		logger.info("全文检索参数缓存同步业务  <<<<<===== 结束");
 		return true;
