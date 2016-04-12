@@ -11,8 +11,8 @@
 				        "query": {
 					        "bool":{
 						        "must":[
-						        	{"match" : {"patent_name" : "%s"}},
-						        	{"match" : {"res_date" : "%s"}}
+						        	{"match" : {"patent_name" : "%s"}}
+						        	%s
 						        ]
 					        }
 					    },

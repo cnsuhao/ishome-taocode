@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <sentences>
-	<creat>
+	<update>
 		<id>corp_shareholding_list</id>
 		<index>corp_shareholding_list</index>
 		<!-- 企业股东 -->
@@ -36,5 +36,5 @@
 
 			]]>
 		</sql>
-	</creat>
+	</update>
 </sentences>

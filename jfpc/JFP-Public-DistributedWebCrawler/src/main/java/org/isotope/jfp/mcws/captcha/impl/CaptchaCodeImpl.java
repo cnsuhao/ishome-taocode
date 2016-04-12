@@ -52,7 +52,7 @@ public class CaptchaCodeImpl implements ISCaptcha, ISFrameworkConstants {
 	 */
 	@Override
 	public Object loadJobWithList() {
-		return mq.peekFirstObjectInList(CODE_LIST);
+		return mq.pollFirstObjectInList(CODE_LIST);
 	}
 
 }

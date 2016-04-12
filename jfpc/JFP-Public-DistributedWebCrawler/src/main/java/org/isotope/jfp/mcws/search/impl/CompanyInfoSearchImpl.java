@@ -31,7 +31,7 @@ public class CompanyInfoSearchImpl implements ISCompanyInfoSearch, ISFrameworkCo
 	public Object getCompanyName() {
 		// jobId + SEMICOLON + areaCode + SEMICOLON + companyName
 		// mq.offerObjectInList(COMPANY_INFO,"123;310000;aaa",false);
-		String company = (String) mq.peekFirstObjectInList(COMPANY_INFO,false);
+		String company = (String) mq.pollFirstObjectInList(COMPANY_CAP,false);
 		if (EmptyHelper.isEmpty(company))
 			return EMPTY;
 		String[] cs = company.split(SEMICOLON);
@@ -57,7 +57,7 @@ public class CompanyInfoSearchImpl implements ISCompanyInfoSearch, ISFrameworkCo
 
 	@Override
 	public boolean addCompanyName(String jobId, String areaCode, String companyName) {
-		return mq.offerObjectInList(COMPANY_INFO, jobId + SEMICOLON + areaCode + SEMICOLON + companyName, false);
+		return mq.offerObjectInList(COMPANY_CAP, jobId + SEMICOLON + areaCode + SEMICOLON + companyName, false);
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////

@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <sentences>
-	<creat>
+	<update>
 		<id>corp_director_list</id>
 		<index>corp_director_list</index>
 		<!-- 企业高管 -->
@@ -37,5 +37,5 @@
 
 			]]>
 		</sql>
-	</creat>
+	</update>
 </sentences>

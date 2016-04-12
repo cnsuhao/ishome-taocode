@@ -41,9 +41,15 @@ public class DataIndexController {
 			table.creatIndexByTable(T,from,size);
 		//基于SQL语句操作
 		else if(EmptyHelper.isNotEmpty(I)){
-			sql.setStarttime(st);
-			sql.setEndtime(et);
-			sql.creatIndexBySQL(C,I,from,size);
+			if(EmptyHelper.isNotEmpty(C)){
+				sql.setStarttime(st);
+				sql.setEndtime(et);
+				sql.creatIndexBySQL(C,I,from,size);
+			}else{
+				sql.setStarttime(st);
+				sql.setEndtime(et);
+				sql.updateIndexBySQL(I,from,size);
+			}
 		}
 		return model;
 	}

@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <sentences>
-	<creat>
+	<update>
 		<id>corp_contacts_list</id>
 		<index>corp_contacts_list</index>
 		<!-- 企业黄页 -->
@@ -23,8 +23,8 @@
 				,b.corp_rc							#注册资本				*固定条件*
 				,b.corp_edate 						#成立日期				*固定条件*
 				
-			FROM corp_contacts c
-					LEFT JOIN corp_base b ON b.corp_id=c.corp_id
+			FROM corp_contacts c,corp_base b 
+			WHERE b.corp_id=c.corp_id
 					
 			WHERE 
 			         c.t_date > '{starttime} 00:00:00'
@@ -36,5 +36,5 @@
 
 			]]>
 		</sql>
-	</creat>
+	</update>
 </sentences>
