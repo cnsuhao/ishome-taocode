@@ -1,4 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
+<!-- 定义各种启动部署初始化工具 -->
 <beans xmlns='http://www.springframework.org/schema/beans'
 	xmlns:mvc='http://www.springframework.org/schema/mvc' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
 	xmlns:context='http://www.springframework.org/schema/context' xmlns:tx='http://www.springframework.org/schema/tx'
@@ -16,24 +17,26 @@
 		http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
 		http://www.springframework.org/schema/jdbc 
 		http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd
-		'>
-	<!-- 注解探测器 -->
-	<context:component-scan base-package='org.isotope.jfp,com.upg.biz' />
+		'>	
+    
+	<!-- 对接监控定时器 -->
+	<bean id='dataIndexServiceMonitorCronTrigger' class='org.springframework.scheduling.quartz.CronTriggerFactoryBean'>
+		<property name='jobDetail' ref='dataIndexServiceMonitorJobDetail' />
+		<!-- 每 5分钟 处理一次 -->
+		<property name='cronExpression' value='5 5 5 * * ? *'/>
+	</bean>	
+
+	<bean id='dataIndexServiceMonitorJobDetail' class='org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean'>
+		<property name='targetObject' ref='dataIndexServiceMonitorJob' />
+		<property name='targetMethod' value='doProcess' />
+	</bean>
 	
-	<!-- 系统初始化 -->
-	<import resource='spring/spring-system.xml' />	
-	<!-- 业务功能 -->
-	<import resource='bean/spring-bean.xml' />
-	<!-- 数据定义 -->
-	<import resource='db/spring-db.xml' />
-	<!-- 缓存 -->
-	<import resource='redis/spring-redis-master.xml' />
-	<!-- 网页抓取 -->
-	<import resource='dwc/spring-dwc.xml' />
-	<!-- 全文检索 -->
-	<import resource='es/spring-es.xml' />
-	<!-- 文件资源 -->
-	<import resource='file/spring-file.xml' />
-	<!-- 定时作业 -->
-	<import resource='task/spring-task.xml' />
+	<bean id='dataIndexServiceMonitorJob' class='org.isotope.jfp.framework.search.task.dataIndexServiceJob' >
+		<property name='myCacheService' ref='myCache' />
+		<property name='myQuerySentence' ref='myQuerySentence' />
+		<property name='jobKey' value='JOBTASK:CONFIG:dataIndex' />
+		<property name='index' value='3' />
+		<property name='waitTimeSecond' value='10' />
+	</bean>	
+	
 </beans>

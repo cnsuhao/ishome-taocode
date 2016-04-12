@@ -1,4 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
+<!-- 定义各种启动部署初始化工具 -->
 <beans xmlns='http://www.springframework.org/schema/beans'
 	xmlns:mvc='http://www.springframework.org/schema/mvc' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
 	xmlns:context='http://www.springframework.org/schema/context' xmlns:tx='http://www.springframework.org/schema/tx'
@@ -16,24 +17,21 @@
 		http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
 		http://www.springframework.org/schema/jdbc 
 		http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd
-		'>
-	<!-- 注解探测器 -->
-	<context:component-scan base-package='org.isotope.jfp,com.upg.biz' />
-	
-	<!-- 系统初始化 -->
-	<import resource='spring/spring-system.xml' />	
-	<!-- 业务功能 -->
-	<import resource='bean/spring-bean.xml' />
-	<!-- 数据定义 -->
-	<import resource='db/spring-db.xml' />
-	<!-- 缓存 -->
-	<import resource='redis/spring-redis-master.xml' />
-	<!-- 网页抓取 -->
-	<import resource='dwc/spring-dwc.xml' />
-	<!-- 全文检索 -->
-	<import resource='es/spring-es.xml' />
-	<!-- 文件资源 -->
-	<import resource='file/spring-file.xml' />
-	<!-- 定时作业 -->
-	<import resource='task/spring-task.xml' />
+		'>	
+		
+	<!-- 总管理类 如果将lazy-init='false'那么容器启动就会执行调度程序  -->
+    <bean id='startQuertz' lazy-init='false' autowire='no' class='org.springframework.scheduling.quartz.SchedulerFactoryBean'>
+        <property name='triggers'>
+            <list>
+             	<!-- 全文检索参数缓存同步 -->              
+            	<ref bean='querySentenceServiceMonitorCronTrigger'/>
+            	<!-- 索引每日同步 -->     
+            	<ref bean='dataIndexServiceMonitorCronTrigger'/>
+             
+            </list>
+        </property>
+    </bean>
+    
+	<!-- 对接监控定时器 begin -->
+	<import resource='spring-job-*.xml' />
 </beans>
