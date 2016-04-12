@@ -11,8 +11,8 @@
 				        "query": {
 					        "bool":{
 						        "must":[
-						        	{"match" : {"product" : "%s"}},
-						        	{"match" : {"res_date" : "%s"}}
+						        	{"match" : {"product" : "%s"}}
+						        	%s
 						        ]
 					        }
 					    },

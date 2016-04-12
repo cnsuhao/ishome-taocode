@@ -11,8 +11,8 @@
 				        "query": {
 					        "bool":{
 						        "must":[
-						        	{"match" : {"register_no" : "%s"}},
-						        	{"match" : {"res_date" : "%s"}}
+						        	{"match" : {"register_no" : "%s"}}
+						        	%s
 						        ]
 					        }
 					    },

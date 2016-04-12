@@ -11,8 +11,8 @@
 				        "query": {
 					        "bool":{
 						        "must":[
-						        	{"match" : {"name" : "%s"}},
-						        	{"match" : {"res_date" : "%s"}}
+						        	{"match" : {"name" : "%s"}}
+						        	%s
 						        ]
 					        }
 					    },

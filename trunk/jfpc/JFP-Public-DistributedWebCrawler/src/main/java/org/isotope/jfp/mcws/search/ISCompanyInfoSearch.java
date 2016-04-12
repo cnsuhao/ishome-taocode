@@ -11,7 +11,7 @@ public interface ISCompanyInfoSearch {
 	/**
 	 * 检索Key队列(客户端)
 	 */
-	public static final String COMPANY_INFO = "COMPANY:INFO";
+	public static final String COMPANY_CAP = "COMPANY:CAP";
 
 	/**
 	 * 保存网页
