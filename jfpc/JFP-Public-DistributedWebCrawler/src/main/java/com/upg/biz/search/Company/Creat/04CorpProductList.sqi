@@ -2,7 +2,7 @@
 <sentences>
 	<creat>
 		<id>corp_product_creat</id>
-		<index>corp_product_creat</index>
+		<index>corp_product_list</index>
 		<!-- 产品 -->
 		<sql>
 			<![CDATA[

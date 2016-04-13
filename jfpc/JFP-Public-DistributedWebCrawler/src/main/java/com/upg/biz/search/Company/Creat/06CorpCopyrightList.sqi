@@ -2,7 +2,7 @@
 <sentences>
 	<creat>
 		<id>corp_copyright_creat</id>
-		<index>corp_copyright_creat</index>
+		<index>corp_copyright_list</index>
 		<!-- 软件著作权 -->
 		<sql>
 			<![CDATA[

@@ -1,4 +1,4 @@
-package com.upg.biz.search.Company.Index;
+package com.upg.biz.search.Company.Update;
 
 /**
  * 数据查询索引
