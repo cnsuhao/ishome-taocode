@@ -1,21 +1,22 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <sentences>
 	<update>
-		<id>corp_product_list</id>
-		<index>corp_product_list</index>
-		<!-- 产品 -->
+		<id>corp_patent_list</id>
+		<index>corp_patent_list</index>
+		<!-- 专利 -->
 		<sql>
 			<![CDATA[
 			
 			SELECT 
 				c.t_date				
-				,c.id  								#产品id
+				,c.id  						#专利id
 
-				,c.product 							#产品
-				,c.detail							#详细说明
-				,c.industry    						#行业
+				,c.patent_number 					#专利号
+				,c.patent_name						#专利名称
+				,c.corp_name as  patent_corp_name   #申请人
+				,c.originator    			#发明人
 
-				,'企业产品' as search_type				#条件类型				
+				,'企业专利' as search_type				#条件类型				
 				
 				,c.corp_name 						#企业名称
 				,b.artificial_person				#法人	
@@ -24,16 +25,14 @@
 				,b.corp_rc							#注册资本				*固定条件*
 				,b.corp_edate 						#成立日期				*固定条件*
 				
-			FROM corp_product c,corp_base b 
+			FROM corp_patent c,corp_base b 
+			
 			WHERE b.corp_id=c.corp_id
-					
-			WHERE 
-			         c.t_date > '{starttime} 00:00:00'
+
+			    AND  c.t_date > '{starttime} 00:00:00'
 				AND  c.t_date < '{endtime} 23:59:59'
 				
 				ORDER BY c.t_date
-				
-				LIMIT {limit}
 
 			]]>
 		</sql>

@@ -2,7 +2,7 @@
 <sentences>
 	<creat>
 		<id>corp_shareholding_creat</id>
-		<index>corp_shareholding_creat</index>
+		<index>corp_shareholding_list</index>
 		<!-- 企业股东 -->
 		<sql>
 			<![CDATA[
@@ -23,9 +23,9 @@
 				,b.corp_rc							#注册资本				*固定条件*
 				,b.corp_edate 						#成立日期				*固定条件*
 				
-			FROM corp_shareholding c
-					LEFT JOIN corp_base b ON b.corp_id=c.corp_id
-				
+			FROM corp_shareholding c,corp_base b
+			
+			WHERE b.corp_id=c.corp_id	
 				
 				ORDER BY c.id
 				

@@ -2,7 +2,7 @@
 <sentences>
 	<creat>
 		<id>corp_patent_creat</id>
-		<index>corp_patent_creat</index>
+		<index>corp_patent_list</index>
 		<!-- 专利 -->
 		<sql>
 			<![CDATA[

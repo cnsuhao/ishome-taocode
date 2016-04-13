@@ -2,7 +2,7 @@
 <sentences>
 	<creat>
 		<id>corp_base_creat</id>
-		<index>corp_base_creat</index>
+		<index>corp_base_list</index>
 		<!-- 企业基本信息 -->
 		<sql>
 			<![CDATA[

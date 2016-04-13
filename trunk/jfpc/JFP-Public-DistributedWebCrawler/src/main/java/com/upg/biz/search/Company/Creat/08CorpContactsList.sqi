@@ -2,7 +2,7 @@
 <sentences>
 	<creat>
 		<id>corp_contacts_creat</id>
-		<index>corp_contacts_creat</index>
+		<index>corp_contacts_list</index>
 		<!-- 企业黄页 -->
 		<sql>
 			<![CDATA[
@@ -25,10 +25,6 @@
 				
 			FROM corp_contacts c,corp_base b 
 			WHERE b.corp_id=c.corp_id
-					
-			WHERE 
-			         c.t_date > '{starttime} 00:00:00'
-				AND  c.t_date < '{endtime} 23:59:59'
 				
 				ORDER BY c.t_date
 				
