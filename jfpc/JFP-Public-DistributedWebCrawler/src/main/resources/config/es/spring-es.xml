@@ -61,9 +61,9 @@
 		 	</list>
 		</property>
 		<!-- 更新索引文件地址 -->
-        <property name='indexFiles'>
+        <property name='updateFiles'>
 			<list>
-				<value>classpath*:/com/upg/biz/search/Company/Index/*.sqi</value>
+				<value>classpath*:/com/upg/biz/search/Company/Update/*.sqi</value>
 		 	</list>
 		</property>
 	</bean>	
