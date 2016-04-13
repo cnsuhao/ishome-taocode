@@ -31,10 +31,10 @@
 		<property name='targetMethod' value='doProcess' />
 	</bean>
 	
-	<bean id='dataIndexServiceMonitorJob' class='org.isotope.jfp.framework.search.task.dataIndexServiceJob' >
+	<bean id='dataIndexServiceMonitorJob' class='org.isotope.jfp.framework.search.task.DataIndexServiceJob' >
 		<property name='myCacheService' ref='myCache' />
 		<property name='myQuerySentence' ref='myQuerySentence' />
-		<property name='jobKey' value='JOBTASK:CONFIG:dataIndex' />
+		<property name='jobKey' value='JOBTASK:CONFIG:DataIndex' />
 		<property name='index' value='3' />
 		<property name='waitTimeSecond' value='10' />
 	</bean>	
