@@ -50,7 +50,7 @@ public class QuerySentence {
 			logger.debug("加载全文检索索引文件......" + i.getFile());
 			doLoadCreatFiles(i.getInputStream());
 		}
-		for (Resource i : indexFiles) {
+		for (Resource i : updateFiles) {
 			logger.debug("加载全文检索索引文件......" + i.getFile());
 			doLoadIndexFiles(i.getInputStream());
 		}
@@ -114,6 +114,24 @@ public class QuerySentence {
 	}
 
 	/**
+	 * 索引语句文件名称
+	 */
+	Resource[] updateFiles;
+
+	public void setUpdateFiles(Resource[] updateFiles) {
+		this.updateFiles = updateFiles;
+	}
+
+	/**
+	 * 索引语句文件名称
+	 */
+	Resource[] creatFiles;
+
+	public void setCreatFiles(Resource[] creatFiles) {
+		this.creatFiles = creatFiles;
+	}
+	//----------------------------------------------------------------------------------//
+	/**
 	 * 查询语句Map
 	 */
 	Map<String, QueryBean> sentenceMap = new HashMap<String, QueryBean>();
@@ -128,24 +146,6 @@ public class QuerySentence {
 
 	public void setSentenceMap(Map<String, QueryBean> sentenceMap) {
 		this.sentenceMap = sentenceMap;
-	}
-
-	/**
-	 * 索引语句文件名称
-	 */
-	Resource[] indexFiles;
-
-	public void setIndexFiles(Resource[] indexFiles) {
-		this.indexFiles = indexFiles;
-	}
-
-	/**
-	 * 索引语句文件名称
-	 */
-	Resource[] creatFiles;
-
-	public void setCreatFiles(Resource[] creatFiles) {
-		this.creatFiles = creatFiles;
 	}
 
 	/**
