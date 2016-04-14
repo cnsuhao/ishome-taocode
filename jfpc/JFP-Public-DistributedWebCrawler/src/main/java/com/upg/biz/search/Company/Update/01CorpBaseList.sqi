@@ -27,8 +27,8 @@
 				
 			FROM corp_base c
 			WHERE 
-			         c.t_date > '{starttime} 00:00:00'
-				AND  c.t_date < '{endtime} 23:59:59'
+			         c.t_date > '{starttime}'
+				AND  c.t_date < '{endtime}'
 				
 				ORDER BY c.t_date
 				
