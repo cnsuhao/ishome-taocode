@@ -13,21 +13,21 @@
 				        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
 
 	<!-- 系统缓存 -->	
-	<bean id="myCache" class="org.isotope.jfp.framework.cache.redis.MyRedisMaster">  
+	<bean id="myCache" class="org.isotope.jfp.framework.cache.redis.MyRedisMaster" scope='prototype'>  
 		<property name="jedisSupport"  ref="jedisMasterUtil" />  
 		<property name="waitTime" value="5" />
 	</bean>
 	
-	<bean id="jedisMasterUtil" class="org.isotope.jfp.framework.cache.redis.master.JedisMasterUtil" init-method='init'>  
+	<bean id="jedisMasterUtil" class="org.isotope.jfp.framework.cache.redis.master.JedisMasterUtil" init-method='init' scope='prototype'>  
 	    <property name="redisPool"  ref="redisPoolUtil" />  
 	    <property name="defaultIndex"  value="3" />
 	</bean>
 	
-	<bean id="redisPoolUtil" class="org.isotope.jfp.framework.cache.redis.master.RedisPoolUtil">  
+	<bean id="redisPoolUtil" class="org.isotope.jfp.framework.cache.redis.master.RedisPoolUtil" scope='prototype'>  
 	    <property name="jedisPool"  ref="jedisPool" />  
 	</bean>
 	  
-	<bean id="jedisPool" class="redis.clients.jedis.JedisPool">  
+	<bean id="jedisPool" class="redis.clients.jedis.JedisPool" scope='prototype'>  
 	    <constructor-arg index="0" ref="jedisPoolConfig" />  
     	<constructor-arg index="1" value="172.16.2.201" type="String" />
 	    <constructor-arg index="2" value="6379" type="int" />
@@ -36,7 +36,7 @@
 	    <constructor-arg index="5" value="3" type="int" />
 	</bean>
 	
-	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">  
+	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig" scope='prototype'>  
 	    <property name="maxIdle"  value="200" />  
 	    <property name="minIdle" value="100" />  
 	    <property name="maxTotal" value="1000" />  
