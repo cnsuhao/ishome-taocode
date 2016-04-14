@@ -1,5 +1,7 @@
 package org.isotope.jfp.framework.search.task;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -8,7 +10,6 @@ import org.isotope.jfp.framework.search.QuerySentence;
 import org.isotope.jfp.framework.search.SQLService;
 import org.isotope.jfp.framework.search.bean.QueryBean;
 import org.isotope.jfp.framework.support.MyJobSupport;
-import org.isotope.jfp.framework.utils.DateHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,7 +31,7 @@ public class DataIndexServiceJob extends MyJobSupport {
 	public void setMyQuerySentence(QuerySentence myQuerySentence) {
 		this.myQuerySentence = myQuerySentence;
 	}
-	
+
 	SQLService sqlService;
 
 	public SQLService getSqlService() {
@@ -58,9 +59,17 @@ public class DataIndexServiceJob extends MyJobSupport {
 		logger.info("全文检索参数缓存同步业务  >>>>>===== 开始");
 		// 数据整理,基于Redis进行缓存同步
 		{
-			sqlService.setStarttime(DateHelper.currentTimeMillisCN3());
-			sqlService.setEndtime(DateHelper.currentTimeMillisCN3());
-			Map<String, QueryBean> updateMap = myQuerySentence.getUpdateMap();		
+			Calendar calendar = Calendar.getInstance();
+			calendar.add(Calendar.HOUR, -1);
+			{
+				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:00:00");
+				sqlService.setStarttime(format.format(calendar.getTime()));
+			}
+			{
+				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:59:59");
+				sqlService.setEndtime(format.format(calendar.getTime()));
+			}
+			Map<String, QueryBean> updateMap = myQuerySentence.getUpdateMap();
 			Iterator<Entry<String, QueryBean>> iter = updateMap.entrySet().iterator();
 			while (iter.hasNext()) {
 				Entry<String, QueryBean> entry = iter.next();
