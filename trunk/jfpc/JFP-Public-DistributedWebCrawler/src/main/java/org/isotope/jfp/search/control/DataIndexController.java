@@ -1,7 +1,6 @@
 package org.isotope.jfp.search.control;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
 import org.isotope.jfp.framework.search.SQLService;
 import org.isotope.jfp.framework.search.TableService;
@@ -26,8 +25,8 @@ public class DataIndexController {
 	TableService table;
 
 	@RequestMapping(value = "/DIC", method = RequestMethod.GET)
-	public ModelAndView creatDataIndex(HttpServletRequest request
-			, String T    //基于表创建索引名字
+	public ModelAndView creatDataIndex(
+			  String T    //基于表创建索引名字
 			, String I    //基于SQL创建索引名字
 			, String C    //创建索引
 			, String from //起点
