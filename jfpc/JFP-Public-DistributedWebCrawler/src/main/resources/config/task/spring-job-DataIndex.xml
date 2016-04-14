@@ -22,8 +22,8 @@
 	<!-- 对接监控定时器 -->
 	<bean id='dataIndexServiceMonitorCronTrigger' class='org.springframework.scheduling.quartz.CronTriggerFactoryBean'>
 		<property name='jobDetail' ref='dataIndexServiceMonitorJobDetail' />
-		<!-- 每 5分钟 处理一次 -->
-		<property name='cronExpression' value='5 5 5 * * ? *'/>
+		<!-- 每 天5点5分 处理索引同步 -->
+		<property name='cronExpression' value='5 5 * * * ? *'/>
 	</bean>	
 
 	<bean id='dataIndexServiceMonitorJobDetail' class='org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean'>
