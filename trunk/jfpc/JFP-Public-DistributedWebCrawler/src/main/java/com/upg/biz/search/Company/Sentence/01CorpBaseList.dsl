@@ -17,10 +17,18 @@
 					        }
 					    },
 					    "filter":{
-					        "range":{
-					        	"corp_rc" : {"gte" : %s,"lte" : %s},
-					        	"corp_edate" : {"gte" : "%s","lte" : "%s"}
-					        }
+					    	"and":[
+					    		{
+							        "range":{
+							        	"corp_rc" : {"gte" : %s,"lte" : %s}
+							        }
+						        },
+						        {
+							        "range":{
+							        	"corp_edate" : {"gte" : "%s","lte" : "%s"}
+							        }
+							    }
+					    	]
 					    }
 			        }
 			    },
