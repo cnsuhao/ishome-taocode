@@ -26,8 +26,6 @@
 			FROM corp_contacts c,corp_base b 
 			WHERE b.corp_id=c.corp_id
 				
-				ORDER BY c.id
-				
 				LIMIT {limit}
 
 			]]>

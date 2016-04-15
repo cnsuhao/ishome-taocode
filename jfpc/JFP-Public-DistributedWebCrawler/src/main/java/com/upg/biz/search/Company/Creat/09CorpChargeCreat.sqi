@@ -16,9 +16,7 @@
 			FROM corp_charge charge 
 							
 			WHERE
-				     charge.id is not null  
-				
-				ORDER BY charge.charge_id 
+				     charge.id is not null 
 				
 				LIMIT {limit}
 				

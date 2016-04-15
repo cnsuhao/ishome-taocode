@@ -26,9 +26,7 @@
 				,b.corp_edate 						#成立日期				*固定条件*
 				
 			FROM corp_patent c,corp_base b 
-			WHERE b.corp_id=c.corp_id			
-				
-				ORDER BY c.id
+			WHERE b.corp_id=c.corp_id
 				
 				LIMIT {limit}
 
