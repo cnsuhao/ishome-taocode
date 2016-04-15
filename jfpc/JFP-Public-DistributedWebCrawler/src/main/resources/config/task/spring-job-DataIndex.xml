@@ -23,7 +23,7 @@
 	<bean id='dataIndexServiceMonitorCronTrigger' class='org.springframework.scheduling.quartz.CronTriggerFactoryBean'>
 		<property name='jobDetail' ref='dataIndexServiceMonitorJobDetail' />
 		<!-- 每 天5点5分 处理索引同步 -->
-		<property name='cronExpression' value='5 5 * * * ? *'/>
+		<property name='cronExpression' value='5 * * * * ? *'/>
 	</bean>	
 
 	<bean id='dataIndexServiceMonitorJobDetail' class='org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean'>
@@ -34,9 +34,10 @@
 	<bean id='dataIndexServiceMonitorJob' class='org.isotope.jfp.framework.search.task.DataIndexServiceJob' >
 		<property name='myCacheService' ref='myCache' />
 		<property name='myQuerySentence' ref='myQuerySentence' />
+		<property name='sqlService' ref='ElasticsearchSQLService' />
 		<property name='jobKey' value='JOBTASK:CONFIG:DataIndex' />
 		<property name='index' value='3' />
-		<property name='waitTimeSecond' value='10' />
+		<property name='waitTimeSecond' value='1800' />
 	</bean>	
 	
 </beans>

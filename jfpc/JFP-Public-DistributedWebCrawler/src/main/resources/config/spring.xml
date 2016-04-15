@@ -19,7 +19,11 @@
 		'>
 	<!-- 注解探测器 -->
 	<context:component-scan base-package='org.isotope.jfp,com.upg.biz' />
+	<!-- Bean容器 -->
+	<bean class='org.isotope.jfp.framework.utils.BeanFactoryHelper'/>
 	
+	<!-- 系统初始化 -->
+	<import resource='spring-custom.xml' />	
 	<!-- 系统初始化 -->
 	<import resource='spring/spring-system.xml' />	
 	<!-- 业务功能 -->
