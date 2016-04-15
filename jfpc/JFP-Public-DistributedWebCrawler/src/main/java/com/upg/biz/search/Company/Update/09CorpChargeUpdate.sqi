@@ -8,21 +8,22 @@
 			<![CDATA[
 			
 			SELECT 
-				 charge.t_date,
-				 charge.charge_id,						#判决书编号
-				 charge.charge,							#判决书内容
+				 charge.chargeID  as id			   			#索引id
+				 ,charge.t_date
+				 ,charge.chargeID						#判决书编号
+				 ,charge.charge							#判决书内容
 				 
 			FROM corp_charge charge 
 							
 			WHERE
 				     charge.id is not null
 
-				AND  c.t_date > '{starttime}'
-				AND  c.t_date < '{endtime}'
+				AND  charge.t_date > '{starttime}'
+				AND  charge.t_date < '{endtime}'
 				
 				ORDER BY charge.t_date 
 				
-				LIMIT 1
+				LIMIT {limit}
 				
 			]]>
 		</sql>
