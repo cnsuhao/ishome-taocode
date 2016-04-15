@@ -90,7 +90,7 @@ public class SQLService implements ISFrameworkConstants {
 	}
 
 	public void creatIndexBySQL(String creatFlag, String actionID, String from2, String size2) throws Exception {
-		creatIndexBySQL(config.getCreat(actionID), creatFlag, EMPTY, EMPTY);
+		creatIndexBySQL(config.getCreat(actionID), creatFlag, from2, size2);
 	}
 
 	public void creatIndexBySQL(QueryBean qb, String creatFlag, String from2, String size2) throws Exception {
@@ -149,7 +149,6 @@ public class SQLService implements ISFrameworkConstants {
 					actions = loadDataFromDb(qb, c, from);
 					commit = true;
 				} catch (Exception e) {
-					e.printStackTrace();
 					logger.error("loadDataFromDb===>>>" + e.getMessage());
 					Thread.sleep(sleep * 2);
 				}
@@ -202,10 +201,15 @@ public class SQLService implements ISFrameworkConstants {
 			if (EmptyHelper.isEmpty(sql))
 				throw new RuntimeException("不存在该索引语句");
 
+			if (EmptyHelper.isEmpty(starttime))
+				starttime = "1000-01-01 00:00:00";
+			if (EmptyHelper.isEmpty(endtime))
+				endtime = "9000-01-01 23:59:59";
+
 			sql = sql.replace("{starttime}", starttime);// 开始时间
 			sql = sql.replace("{endtime}", endtime);// 终了时间
 			sql = sql.replace("{limit}", start + "," + size);// 分页限制
-			// logger.debug("sql===>>>" + sql);
+			logger.debug("sql===>>>" + sql);
 			resultSet = stmt.executeQuery(sql);
 			metaData = resultSet.getMetaData();
 			JSONObject data;
