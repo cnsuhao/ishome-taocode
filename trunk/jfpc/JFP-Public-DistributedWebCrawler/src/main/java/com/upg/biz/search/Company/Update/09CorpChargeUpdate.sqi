@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <sentences>
-	<creat>
+	<update>
 		<id>corp_charge_update</id>
 		<index>corp_charge_list</index>
 		<!-- 判决信息 -->
@@ -26,5 +26,5 @@
 				
 			]]>
 		</sql>
-	</creat>
+	</update>
 </sentences>
