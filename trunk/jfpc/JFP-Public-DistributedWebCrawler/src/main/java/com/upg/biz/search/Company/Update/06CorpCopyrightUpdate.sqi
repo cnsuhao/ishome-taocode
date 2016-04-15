@@ -31,7 +31,7 @@
 			    AND  c.t_date > '{starttime}'
 				AND  c.t_date < '{endtime}'
 				
-				ORDER BY c.t_date
+				#ORDER BY c.t_date
 				
 				LIMIT {limit}
 

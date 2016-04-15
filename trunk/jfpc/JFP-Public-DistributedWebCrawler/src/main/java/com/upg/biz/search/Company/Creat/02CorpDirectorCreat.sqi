@@ -27,8 +27,6 @@
 			FROM corp_director c,corp_base b
 			
 			WHERE b.corp_id=c.corp_id
-			
-				ORDER BY c.directorID
 				
 				LIMIT {limit}
 

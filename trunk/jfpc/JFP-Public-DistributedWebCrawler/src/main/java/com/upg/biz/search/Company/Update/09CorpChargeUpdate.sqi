@@ -21,7 +21,7 @@
 				AND  charge.t_date > '{starttime}'
 				AND  charge.t_date < '{endtime}'
 				
-				ORDER BY charge.t_date 
+				#ORDER BY charge.t_date 
 				
 				LIMIT {limit}
 				
