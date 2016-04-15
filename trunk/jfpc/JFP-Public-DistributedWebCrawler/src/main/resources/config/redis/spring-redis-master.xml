@@ -26,15 +26,6 @@
 	<bean id="redisPoolUtil" class="org.isotope.jfp.framework.cache.redis.master.RedisPoolUtil" scope='prototype'>  
 	    <property name="jedisPool"  ref="jedisPool" />  
 	</bean>
-	  
-	<bean id="jedisPool" class="redis.clients.jedis.JedisPool" scope='prototype'>  
-	    <constructor-arg index="0" ref="jedisPoolConfig" />  
-    	<constructor-arg index="1" value="172.16.2.201" type="String" />
-	    <constructor-arg index="2" value="6379" type="int" />
-	    <constructor-arg index="3" value="10000" type="int" />
-	    <constructor-arg index="4" value="123456" type="String" />
-	    <constructor-arg index="5" value="3" type="int" />
-	</bean>
 	
 	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig" scope='prototype'>  
 	    <property name="maxIdle"  value="200" />  

@@ -17,9 +17,6 @@
 		http://www.springframework.org/schema/jdbc 
 		http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd
 		'>	
- 
-	<!-- Bean容器 -->
-	<bean class='org.isotope.jfp.framework.utils.BeanFactoryHelper'/>
 		
 	<!-- 主键编号 -->
 	<bean class='org.isotope.jfp.framework.utils.PKHelper'>
