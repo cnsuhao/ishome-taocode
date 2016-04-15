@@ -14,7 +14,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.search.bean.QueryBean;
 import org.isotope.jfp.framework.utils.BeanFactoryHelper;
-import org.isotope.jfp.framework.utils.DateHelper;
 import org.isotope.jfp.framework.utils.EmptyHelper;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.SqlSessionUtils;
@@ -203,11 +202,6 @@ public class SQLService implements ISFrameworkConstants {
 			if (EmptyHelper.isEmpty(sql))
 				throw new RuntimeException("不存在该索引语句");
 
-			if (EmptyHelper.isEmpty(starttime))
-				starttime = "2000-01-01";
-			if (EmptyHelper.isEmpty(endtime))
-				endtime = DateHelper.currentTimeMillisCN3();
-
 			sql = sql.replace("{starttime}", starttime);// 开始时间
 			sql = sql.replace("{endtime}", endtime);// 终了时间
 			sql = sql.replace("{limit}", start + "," + size);// 分页限制
@@ -247,8 +241,8 @@ public class SQLService implements ISFrameworkConstants {
 
 	//////////////////////////////////////////////////////////
 
-	String starttime = "";
-	String endtime = "";
+	String starttime = "1000-01-01 00:00:00";
+	String endtime = "9000-01-01 23:59:59";
 
 	public String getStarttime() {
 		return starttime;
