@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <sentences>
 	<update>
-		<id>corp_base_list</id>
+		<id>corp_base_update</id>
 		<index>corp_base_list</index>
 		<!-- 企业基本信息 -->
 		<sql>

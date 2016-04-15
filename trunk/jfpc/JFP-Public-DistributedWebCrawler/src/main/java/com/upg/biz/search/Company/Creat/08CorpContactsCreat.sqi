@@ -1,21 +1,20 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <sentences>
-	<update>
-		<id>corp_director_list</id>
-		<index>corp_director_list</index>
-		<!-- 企业高管 -->
+	<creat>
+		<id>corp_contacts_creat</id>
+		<index>corp_contacts_list</index>
+		<!-- 企业黄页 -->
 		<sql>
 			<![CDATA[
 			
 			SELECT 
 				c.t_date
-				,c.directorID  as id			   	#索引id
+				,c.id			   	#索引id
 				
-				,c.directorID  						#董事id
-				,c.name 							#姓名
-				,c.business							#职务
+				,c.contact_no 							#联系人座机
+				,c.contact_phone						#联系人移动电话
 						
-				,'企业高管' as search_type				#条件类型				
+				,'企业黄页' as search_type				#条件类型				
 				
 				,b.corp_name 						#企业名称
 				,b.artificial_person				#法人	
@@ -24,18 +23,14 @@
 				,b.corp_rc							#注册资本				*固定条件*
 				,b.corp_edate 						#成立日期				*固定条件*
 				
-			FROM corp_director c,corp_base b
-
+			FROM corp_contacts c,corp_base b 
 			WHERE b.corp_id=c.corp_id
-
-			    AND  c.t_date > '{starttime}'
-				AND  c.t_date < '{endtime}'
 				
-				ORDER BY c.t_date
+				ORDER BY c.id
 				
 				LIMIT {limit}
 
 			]]>
 		</sql>
-	</update>
+	</creat>
 </sentences>
