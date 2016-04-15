@@ -16,8 +16,6 @@
 							
 			WHERE
 				     charge.id is not null  
-				AND  charge.t_date < '2016-02-01 00:00:00'
-				AND  charge.t_date > '2016-01-25 23:59:59'
 				
 				ORDER BY charge.charge_id 
 				
