@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <sentences>
 	<creat>
-		<id>corp_charge_creat</id>
+		<id>corp_charge_update</id>
 		<index>corp_charge_list</index>
 		<!-- 判决信息 -->
 		<sql>
