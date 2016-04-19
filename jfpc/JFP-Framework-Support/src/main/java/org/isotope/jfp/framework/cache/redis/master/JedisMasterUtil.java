@@ -155,7 +155,7 @@ public class JedisMasterUtil implements ISJedisSupport {
 					jd.rpush(oldKey, value);
 				jd.rpush(newKey, value);
 			} catch (Exception e) {
-				
+				logger.error(e.getMessage());
 			}
 		}
 	}
@@ -179,7 +179,7 @@ public class JedisMasterUtil implements ISJedisSupport {
 					oldJedis.rpush(oldKey, value);
 				newJedis.rpush(newKey, value);
 			} catch (Exception e) {
-				
+				logger.error(e.getMessage());
 			}
 		}
 	}
@@ -284,7 +284,7 @@ public class JedisMasterUtil implements ISJedisSupport {
 		try {
 			return jedis.hgetAll(key);
 		} catch (Exception e) {
-			
+			logger.error("hgetall key from redis error[key:" + key + "]", e);
 		} finally {
 			close(jedis);
 		}
@@ -307,7 +307,7 @@ public class JedisMasterUtil implements ISJedisSupport {
 			jedis.hdel(rkey, mkey);
 			return value;
 		} catch (Exception e) {
-			
+			logger.error("hdel key from redis error[key:" + rkey + "],["+mkey+"]", e);			
 		} finally {
 			close(jedis);
 		}
@@ -327,7 +327,7 @@ public class JedisMasterUtil implements ISJedisSupport {
 		try {
 			return jedis.hget(rkey, mkey);
 		} catch (Exception e) {
-			
+			logger.error("hget key from redis error[key:" + rkey + "],["+mkey+"]", e);
 		} finally {
 			close(jedis);
 		}
@@ -348,7 +348,7 @@ public class JedisMasterUtil implements ISJedisSupport {
 		try {
 			jedis.hset(rkey, mkey, value);
 		} catch (Exception e) {
-			
+			logger.error("hset key from redis error[key:" + rkey + "],["+mkey+"]", e);
 		} finally {
 			close(jedis);
 		}
@@ -475,7 +475,7 @@ public class JedisMasterUtil implements ISJedisSupport {
 		try {
 			jedis.subscribe(listener, channel);
 		} catch (Exception e) {
-			
+			logger.error("subscribe from redis error[channel:" + channel + "]", e);
 		}
 	}
 
@@ -491,7 +491,7 @@ public class JedisMasterUtil implements ISJedisSupport {
 		try {
 			jedis.rpush(key, value);
 		} catch (Exception e) {
-			
+			logger.error("listAdd from redis error[key:" + key + "]", e);		
 		} finally {
 			close(jedis);
 		}
@@ -513,7 +513,7 @@ public class JedisMasterUtil implements ISJedisSupport {
 				return list.get(1);
 			}
 		} catch (Exception e) {
-			
+			logger.error("blistPop from redis error[key:" + key + "]", e);	
 		} finally {
 			close(jedis);
 		}
@@ -532,7 +532,7 @@ public class JedisMasterUtil implements ISJedisSupport {
 		try {
 			return jedis.lpop(key);
 		} catch (Exception e) {
-			
+			logger.error("listPop from redis error[key:" + key + "]", e);	
 		} finally {
 			close(jedis);
 		}
@@ -551,7 +551,7 @@ public class JedisMasterUtil implements ISJedisSupport {
 		try {
 			return jedis.lrange(key, 0, -1);
 		} catch (Exception e) {
-			
+			logger.error("listAll from redis error[key:" + key + "]", e);
 		} finally {
 			close(jedis);
 		}
@@ -618,7 +618,7 @@ public class JedisMasterUtil implements ISJedisSupport {
 			}
 			return list;
 		} catch (Exception e) {
-			
+			logger.error("listPopAll from redis error[key:" + key + "]", e);
 		} finally {
 			close(jedis);
 		}
@@ -637,7 +637,7 @@ public class JedisMasterUtil implements ISJedisSupport {
 		try {
 			return jedis.lrem(key, count, value);
 		} catch (Exception e) {
-			
+			logger.error("listDel from redis error[key:" + key + "]", e);
 		} finally {
 			close(jedis);
 		}
@@ -659,7 +659,7 @@ public class JedisMasterUtil implements ISJedisSupport {
 			for (int i = 0; i < len; i++)
 				jedis.rpop(key);
 		} catch (Exception e) {
-			
+			logger.error("listDel from redis error[key:" + key + "]", e);
 		} finally {
 			close(jedis);
 		}
@@ -677,7 +677,7 @@ public class JedisMasterUtil implements ISJedisSupport {
 		try {
 			return jedis.sadd(key, value);
 		} catch (Exception e) {
-			
+			logger.error("setAdd from redis error[key:" + key + "]", e);
 		} finally {
 			close(jedis);
 		}
@@ -696,7 +696,7 @@ public class JedisMasterUtil implements ISJedisSupport {
 		try {
 			return jedis.srem(key, value);
 		} catch (Exception e) {
-			
+			logger.error("setDel from redis error[key:" + key + "]", e);
 		} finally {
 			close(jedis);
 		}
@@ -719,7 +719,7 @@ public class JedisMasterUtil implements ISJedisSupport {
 				jedis.spop(key);
 			}
 		} catch (Exception e) {
-			
+			logger.error("setDelAll from redis error[key:" + key + "]", e);			
 		} finally {
 			close(jedis);
 		}
@@ -738,7 +738,7 @@ public class JedisMasterUtil implements ISJedisSupport {
 		try {
 			return jedis.scard(key);
 		} catch (Exception e) {
-			
+			logger.error("setCount from redis error[key:" + key + "]", e);	
 		} finally {
 			close(jedis);
 		}
@@ -757,7 +757,7 @@ public class JedisMasterUtil implements ISJedisSupport {
 		try {
 			return jedis.smembers(key);
 		} catch (Exception e) {
-			
+			logger.error("setAll from redis error[key:" + key + "]", e);				
 		} finally {
 			close(jedis);
 		}
@@ -776,12 +776,31 @@ public class JedisMasterUtil implements ISJedisSupport {
 		try {
 			jedis.expire(key, seconds);
 		} catch (Exception e) {
-			
+			logger.error("expire from redis error[key:" + key + "]", e);
 		} finally {
 			close(jedis);
 		}
 	}
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.isotope.jfp.framework.cache.utils.redis.Jedis#setnx(String,String)
+	 */
 
+	public long setnx(String key, String value) {
+		Jedis jedis = getJedis();
+		long rs = 0L;
+		try {
+			rs = jedis.setnx(key, value);
+		} catch (Exception e) {
+			logger.error("setnx from redis error[key:" + key + "]", e);
+		} finally {
+			close(jedis);
+		}
+
+		return rs;
+	}
 	/*
 	 * (non-Javadoc)
 	 * 
