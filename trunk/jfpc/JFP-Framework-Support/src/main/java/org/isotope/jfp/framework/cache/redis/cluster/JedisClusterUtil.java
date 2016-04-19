@@ -205,7 +205,7 @@ public class JedisClusterUtil implements ISJedisSupport,ISFrameworkConstants {
                 Thread.sleep(100);
             }
         } catch (Exception e) {
-            logger.error("get value from redis error[key:" + key + "]", e);
+			logger.error("get value from redis error[key:" + key + "]", e);
         }
         return value;
     }
@@ -219,7 +219,7 @@ public class JedisClusterUtil implements ISJedisSupport,ISFrameworkConstants {
         try {
             return JedisCluster.hgetAll(key);
         } catch (Exception e) {
-            
+        	logger.error("hgetall from redis error[key:" + key + "]", e);
         }
         return new HashMap<String, String>();
     }
@@ -232,7 +232,7 @@ public class JedisClusterUtil implements ISJedisSupport,ISFrameworkConstants {
             JedisCluster.hdel(rkey, mkey);
             return value;
         } catch (Exception e) {
-            
+        	logger.error("hdel from redis error[rkey:" + rkey + "],[mkey:" + mkey + "]", e);
         }
         return value;
     }
@@ -242,19 +242,17 @@ public class JedisClusterUtil implements ISJedisSupport,ISFrameworkConstants {
         try {
             return JedisCluster.hget(rkey, mkey);
         } catch (Exception e) {
-
-            
+        	logger.error("hget from redis error[rkey:" + rkey + "],[mkey:" + mkey + "]", e);
         }
         return null;
     }
 
     public boolean hset(String rkey, String mkey, String value) {
         JedisCluster JedisCluster = getJedisCluster();
-
         try {
             JedisCluster.hset(rkey, mkey, value);
         } catch (Exception e) {
-            
+        	logger.error("hset from redis error[rkey:" + rkey + "],[mkey:" + mkey + "]", e);
         }
         return true;
     }
@@ -289,7 +287,7 @@ public class JedisClusterUtil implements ISJedisSupport,ISFrameworkConstants {
         try {
             JedisCluster.rpush(key, value);
         } catch (Exception e) {
-            
+        	logger.error("listAdd from redis error[key:" + key + "]" , e);
         }
     }
 
@@ -301,7 +299,7 @@ public class JedisClusterUtil implements ISJedisSupport,ISFrameworkConstants {
                 return list.get(1);
             }
         } catch (Exception e) {
-            
+        	logger.error("blistPop from redis error[key:" + key + "]", e);
         }
         return null;
     }
@@ -311,7 +309,7 @@ public class JedisClusterUtil implements ISJedisSupport,ISFrameworkConstants {
         try {
             return JedisCluster.lpop(key);
         } catch (Exception e) {
-            
+        	logger.error("listPop from redis error[key:" + key + "]", e);
         }
         return null;
     }
@@ -321,7 +319,7 @@ public class JedisClusterUtil implements ISJedisSupport,ISFrameworkConstants {
         try {
             return JedisCluster.lrange(key, 0, -1);
         } catch (Exception e) {
-            
+        	logger.error("listAll from redis error[key:" + key + "]", e);
         }
         return null;
     }
@@ -360,7 +358,7 @@ public class JedisClusterUtil implements ISJedisSupport,ISFrameworkConstants {
             }
             return list;
         } catch (Exception e) {
-            
+        	logger.error("listPopAll from redis error[key:" + key + "]", e);
         }
         return null;
     }
@@ -378,7 +376,7 @@ public class JedisClusterUtil implements ISJedisSupport,ISFrameworkConstants {
         try {
             return JedisCluster.lrem(key, count, value);
         } catch (Exception e) {
-            
+        	logger.error("listDel from redis error[key:" + key + "]", e);
         }
         return 0;
     }
@@ -390,7 +388,7 @@ public class JedisClusterUtil implements ISJedisSupport,ISFrameworkConstants {
             for (int i = 0; i < len; i++)
                 JedisCluster.rpop(key);
         } catch (Exception e) {
-            
+        	logger.error("listDelAll from redis error[key:" + key + "]", e);
         }
     }
 
@@ -405,7 +403,7 @@ public class JedisClusterUtil implements ISJedisSupport,ISFrameworkConstants {
         try {
             return JedisCluster.sadd(key, value);
         } catch (Exception e) {
-            
+        	logger.error("setAdd from redis error[key:" + key + "]", e);
         }
         return 0;
     }
@@ -421,7 +419,7 @@ public class JedisClusterUtil implements ISJedisSupport,ISFrameworkConstants {
         try {
             return JedisCluster.srem(key, value);
         } catch (Exception e) {
-            
+        	logger.error("setDel from redis error[key:" + key + "]", e);
         }
         return 0;
     }
@@ -434,7 +432,7 @@ public class JedisClusterUtil implements ISJedisSupport,ISFrameworkConstants {
                 JedisCluster.spop(key);
             }
         } catch (Exception e) {
-            
+        	logger.error("setDelAll from redis error[key:" + key + "]", e);
         }
     }
 
@@ -443,7 +441,7 @@ public class JedisClusterUtil implements ISJedisSupport,ISFrameworkConstants {
         try {
             return JedisCluster.scard(key);
         } catch (Exception e) {
-            
+        	logger.error("setCount from redis error[key:" + key + "]", e);
         }
         return 0;
     }
@@ -453,7 +451,7 @@ public class JedisClusterUtil implements ISJedisSupport,ISFrameworkConstants {
         try {
             return JedisCluster.smembers(key);
         } catch (Exception e) {
-            
+        	logger.error("setAll from redis error[key:" + key + "]", e);
         }
         return null;
     }
@@ -463,7 +461,7 @@ public class JedisClusterUtil implements ISJedisSupport,ISFrameworkConstants {
         try {
             JedisCluster.expire(key, seconds);
         } catch (Exception e) {
-            
+        	logger.error("expire from redis error[key:" + key + "]", e);
         }
     }
 
