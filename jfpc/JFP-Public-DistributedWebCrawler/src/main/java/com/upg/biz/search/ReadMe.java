@@ -1,4 +1,4 @@
-package org.isotope.jfp.mcws.search;
+package com.upg.biz.search;
 
 /**
  * 标准数据检索

@@ -1,4 +1,4 @@
-package org.isotope.jfp.mcws.captcha;
+package com.upg.biz.search.Captcha;
 
 /**
  * 人工打码

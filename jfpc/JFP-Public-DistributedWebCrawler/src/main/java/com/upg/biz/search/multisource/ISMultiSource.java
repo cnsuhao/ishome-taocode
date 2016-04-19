@@ -1,4 +1,4 @@
-package org.isotope.jfp.mcws.multisource;
+package com.upg.biz.search.multisource;
 
 /**
  * 多源检索

@@ -1,4 +1,4 @@
-package org.isotope.jfp.mcws.client.control;
+package com.upg.biz.search.Company.control;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -13,7 +13,6 @@ import org.isotope.jfp.framework.beans.common.RESTResultBean;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.utils.DateHelper;
 import org.isotope.jfp.framework.utils.EmptyHelper;
-import org.isotope.jfp.mcws.search.impl.CompanyInfoSearchImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,16 +21,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
+import com.upg.biz.search.Captcha.CompanyInfo.impl.CompanyInfoSearchImpl;
 
 /**
- * 企业信息检索
+ * 企业信息人工检索
  * 
  * @author ISHome
  * @version 0.0.1
  * @since 0.0.1
  */
 @Controller
-public class CompanyInfoSearchControl implements ISFrameworkConstants {
+public class CompanyInfoControl implements ISFrameworkConstants {
 	@Resource
 	protected CompanyInfoSearchImpl CompanyInfoSearch_;
 
@@ -45,7 +45,7 @@ public class CompanyInfoSearchControl implements ISFrameworkConstants {
 	@ResponseBody
 	public RESTResultBean index() throws Exception {
 		RESTResultBean rrb = new RESTResultBean();
-		rrb.setMessage("企业信息检索");
+		rrb.setMessage("企业信息人工检索");
 		return rrb;
 	}
 

@@ -8,10 +8,13 @@
 			<![CDATA[
 			
 			SELECT 
-				 charge.chargeID  as id			   			#索引id
+				  charge.chargeID  as id			   			#索引id
 				 ,charge.t_date
 				 ,charge.chargeID						#判决书编号
+				 ,charge.title							#判决书标题
 				 ,charge.charge							#判决书内容
+				 ,charge.close_date						#审结日期
+				 ,charge.cause_no						#案号
 				 
 			FROM corp_charge charge 
 							

@@ -1,4 +1,4 @@
-package org.isotope.jfp.mcws.client.control;
+package com.upg.biz.search.Company.control;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -13,13 +13,14 @@ import org.isotope.jfp.framework.beans.common.RESTResultBean;
 import org.isotope.jfp.framework.utils.DateHelper;
 import org.isotope.jfp.framework.utils.EmptyHelper;
 import org.isotope.jfp.framework.utils.HttpRequestHelper;
-import org.isotope.jfp.mcws.captcha.impl.CaptchaCodeImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.upg.biz.search.Captcha.CheckCode.impl.CaptchaCodeImpl;
 
 /**
  * 抓取验证码

@@ -1,28 +1,31 @@
-package org.isotope.jfp.mcws.search.impl;
+package com.upg.biz.search.Captcha.CompanyList.impl;
 
 import javax.annotation.Resource;
 
 import org.isotope.jfp.framework.cache.ICacheService;
-import org.isotope.jfp.mcws.search.ISCompanyListSearch;
+import org.isotope.jfp.framework.constants.ISFrameworkConstants;
+import org.springframework.stereotype.Service;
 /**
  * 多源检索
  * 
  * @author 001745
  *
  */
-public class CompanyListSearchImpl implements ISCompanyListSearch {
+@Service
+public class CompanyListSearchImpl implements ISFrameworkConstants {
+	/**
+	 * 检索Key队列
+	 */
+	public static final String KEYWORD_SEARCH = "KEYWORD:SEARCH";
 	@Resource
 	protected ICacheService mq;
 
-	@Override
 	public Object searchOthers(String keyword) {
 		return false;
 	}
 
-	@Override
 	public Object getSearchKeyword() {
 		return mq.peekFirstObjectInList(KEYWORD_SEARCH);
 	}
-
 	
 }

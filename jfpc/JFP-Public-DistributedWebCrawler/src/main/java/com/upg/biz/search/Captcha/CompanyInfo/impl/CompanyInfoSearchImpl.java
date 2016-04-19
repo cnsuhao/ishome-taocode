@@ -1,11 +1,10 @@
-package org.isotope.jfp.mcws.search.impl;
+package com.upg.biz.search.Captcha.CompanyInfo.impl;
 
 import javax.annotation.Resource;
 
 import org.isotope.jfp.framework.cache.ICacheService;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.utils.EmptyHelper;
-import org.isotope.jfp.mcws.search.ISCompanyInfoSearch;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
@@ -17,8 +16,11 @@ import com.alibaba.fastjson.JSONObject;
  *
  */
 @Service
-public class CompanyInfoSearchImpl implements ISCompanyInfoSearch, ISFrameworkConstants {
-
+public class CompanyInfoSearchImpl implements ISFrameworkConstants {
+	/**
+	 * 检索Key队列(客户端)
+	 */
+	public static final String COMPANY_CAP = "COMPANY:CAP";
 	/**
 	 * 工商URL地址
 	 */
@@ -29,7 +31,6 @@ public class CompanyInfoSearchImpl implements ISCompanyInfoSearch, ISFrameworkCo
 	/**
 	 * jobId + SEMICOLON + areaCode + SEMICOLON + companyName
 	 */
-	@Override
 	public Object getCompanyName() {
 		// jobId + SEMICOLON + areaCode + SEMICOLON + companyName
 		// mq.offerObjectInList(COMPANY_INFO,"123;310000;aaa",false);
@@ -47,17 +48,14 @@ public class CompanyInfoSearchImpl implements ISCompanyInfoSearch, ISFrameworkCo
 		return res.toString();
 	}
 
-	@Override
 	public boolean saveCompanyInfo(String jobId, String html) {
 		return mq.putObject(jobId, html, 3600, false);
 	}
 
-	@Override
 	public Object getAreaUrl(String areaCode) {
 		return mq.getObject(COMPANY_URL + areaCode, false);
 	}
 
-	@Override
 	public boolean addCompanyName(String jobId, String areaCode, String companyName) {
 		return mq.offerObjectInList(COMPANY_CAP, jobId + SEMICOLON + areaCode + SEMICOLON + companyName, false);
 	}
