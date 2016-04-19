@@ -1,4 +1,4 @@
-package org.isotope.jfp.mcws.client.control;
+package com.upg.biz.search.Client;
 
 /**
  * 人工抓取网页服务端<br>
