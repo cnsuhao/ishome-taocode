@@ -27,6 +27,10 @@ public class QuerySentence {
 	public final static String SENTENCE_UPD = "SENTENCE:UPD:";
 	public final static String SENTENCE_CRT = "SENTENCE:CRT:";
 	public final static String SENTENCE_SCH = "SENTENCE:SCH:";
+	/**
+	 * 工商URL地址
+	 */
+	public static final String COMPANY_URL = "COMPANY:URL:";
 
 	private Logger logger = LoggerFactory.getLogger(TableService.class);
 	@Autowired
@@ -43,18 +47,26 @@ public class QuerySentence {
 			return;
 		}
 		for (Resource s : sentenceFiles) {
-			logger.debug("加载全文检索配置文件......" + s.getFile());
+			logger.debug("加载全文检索查询文件......" + s.getFile());
 			doLoadSentenceFiles(s.getInputStream());
 		}
 		for (Resource i : creatFiles) {
-			logger.debug("加载全文检索索引文件......" + i.getFile());
+			logger.debug("加载全文检索创建文件......" + i.getFile());
 			doLoadCreatFiles(i.getInputStream());
 		}
 		for (Resource i : updateFiles) {
-			logger.debug("加载全文检索索引文件......" + i.getFile());
+			logger.debug("加载全文检索更新文件......" + i.getFile());
 			doLoadIndexFiles(i.getInputStream());
 		}
+		for (Resource i : urlFiles) {
+			logger.debug("加载全文检索更新文件......" + i.getFile());
+			doLoadAreaUrlFiles(i.getInputStream());
+		}
 		logger.debug("全文检索初始化<<<<<=====结束");
+	}
+
+	private void doLoadAreaUrlFiles(InputStream inputStream) {
+		loadXML(inputStream, "area", "url", COMPANY_URL,new HashMap<String, QueryBean>());
 	}
 
 	public void doLoadSentenceFiles(InputStream inputStream) throws Exception {
@@ -130,6 +142,13 @@ public class QuerySentence {
 	public void setCreatFiles(Resource[] creatFiles) {
 		this.creatFiles = creatFiles;
 	}
+	
+	Resource[] urlFiles;
+
+	public void setUrlFiles(Resource[] urlFiles) {
+		this.urlFiles = urlFiles;
+	}
+	
 	//----------------------------------------------------------------------------------//
 	/**
 	 * 查询语句Map
