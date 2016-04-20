@@ -182,6 +182,8 @@ public class SQLService implements ISFrameworkConstants {
 
 	@Resource
 	QuerySentence config;
+	
+	private String maxID= "";
 
 	private List<Index> loadDataFromDb(QueryBean qb, int page, int from) throws SQLException {
 		List<Index> actions = new ArrayList<Index>();
@@ -206,27 +208,34 @@ public class SQLService implements ISFrameworkConstants {
 			if (EmptyHelper.isEmpty(endtime))
 				endtime = "9000-01-01 23:59:59";
 
-			sql = sql.replace("{starttime}", starttime);// 开始时间
-			sql = sql.replace("{endtime}", endtime);// 终了时间
-			sql = sql.replace("{limit}", start + "," + size);// 分页限制
+			//初始化运作
+			if(sql.indexOf("{maxID}")>0){
+				sql = sql.replace("{maxID}", maxID);// 开始时间
+				sql = sql.replace("{limit}", ""+size);// 分页限制
+			}
+			//差分更新			
+			else{
+				sql = sql.replace("{starttime}", starttime);// 开始时间
+				sql = sql.replace("{endtime}", endtime);// 终了时间
+				sql = sql.replace("{limit}", start + "," + size);// 分页限制
+			}
 			logger.debug("sql===>>>" + sql);
 			resultSet = stmt.executeQuery(sql);
 			metaData = resultSet.getMetaData();
 			JSONObject data;
 			// rs.beforeFirst();
 			while (resultSet.next()) {
-				String id = "";
 				data = new JSONObject();
 				for (int i = 1; i <= metaData.getColumnCount(); i++) {
 					String columnName = metaData.getColumnLabel(i);
 					String value = resultSet.getString(i);
 					data.put(columnName.toLowerCase(), value);
 				}
-				id = data.remove("id").toString();
-				if (EmptyHelper.isEmpty(id))
+				maxID = data.remove("id").toString();
+				if (EmptyHelper.isEmpty(maxID))
 					actions.add(new Index.Builder(data.toJSONString()).index(qb.getIndex()).type(ElasticsearchPool.TYPE).build());
 				else
-					actions.add(new Index.Builder(data.toJSONString()).index(qb.getIndex()).id(id).type(ElasticsearchPool.TYPE).build());
+					actions.add(new Index.Builder(data.toJSONString()).index(qb.getIndex()).id(maxID).type(ElasticsearchPool.TYPE).build());
 			}
 
 		} catch (SQLException e) {
