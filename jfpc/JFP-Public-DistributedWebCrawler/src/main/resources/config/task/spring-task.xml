@@ -17,21 +17,9 @@
 		http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
 		http://www.springframework.org/schema/jdbc 
 		http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd
-		'>	
+		'>
 		
-	<!-- 总管理类 如果将lazy-init='false'那么容器启动就会执行调度程序  -->
-    <bean id='startQuertz' lazy-init='false' autowire='no' class='org.springframework.scheduling.quartz.SchedulerFactoryBean'>
-        <property name='triggers'>
-            <list>
-             	<!-- 全文检索参数缓存同步 -->              
-            	<ref bean='querySentenceServiceMonitorCronTrigger'/>
-            	<!-- 索引每日同步 -->     
-            	<ref bean='dataIndexServiceMonitorCronTrigger'/>
-             
-            </list>
-        </property>
-    </bean>
-    
 	<!-- 对接监控定时器 begin -->
-	<import resource='spring-job-*.xml' />
+	<import resource='spring-job-*.xml' />	
+	
 </beans>
