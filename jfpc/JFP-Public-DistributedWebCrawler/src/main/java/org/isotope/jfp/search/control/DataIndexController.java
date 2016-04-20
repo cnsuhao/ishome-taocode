@@ -1,9 +1,8 @@
 package org.isotope.jfp.search.control;
 
-import javax.annotation.Resource;
-
 import org.isotope.jfp.framework.search.SQLService;
 import org.isotope.jfp.framework.search.TableService;
+import org.isotope.jfp.framework.utils.BeanFactoryHelper;
 import org.isotope.jfp.framework.utils.EmptyHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,10 +18,6 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class DataIndexController {
-	@Resource
-	SQLService sql;
-	@Resource
-	TableService table;
 
 	@RequestMapping(value = "/DIC", method = RequestMethod.GET)
 	public ModelAndView creatDataIndex(
@@ -36,18 +31,21 @@ public class DataIndexController {
 			) throws Exception {
 		ModelAndView model = new ModelAndView("DWC/index");
 		//基于表进行操作
-		if(EmptyHelper.isNotEmpty(T))
-			table.creatIndexByTable(T,from,size);
-		//基于SQL语句操作
-		else if(EmptyHelper.isNotEmpty(I)){
-			if(EmptyHelper.isNotEmpty(C)){
+		if (EmptyHelper.isNotEmpty(T)) {
+			TableService table = BeanFactoryHelper.getBean("ElasticsearchTableService");
+			table.creatIndexByTable(T, from, size);
+		}
+		// 基于SQL语句操作
+		else if (EmptyHelper.isNotEmpty(I)) {
+			SQLService sql = BeanFactoryHelper.getBean("ElasticsearchSQLService");
+			if (EmptyHelper.isNotEmpty(C)) {
 				sql.setStarttime(st);
 				sql.setEndtime(et);
-				sql.creatIndexBySQL(C,I,from,size);
-			}else{
+				sql.creatIndexBySQL(C, I, from, size);
+			} else {
 				sql.setStarttime(st);
 				sql.setEndtime(et);
-				sql.updateIndexBySQL(I,from,size);
+				sql.updateIndexBySQL(I, from, size);
 			}
 		}
 		return model;
