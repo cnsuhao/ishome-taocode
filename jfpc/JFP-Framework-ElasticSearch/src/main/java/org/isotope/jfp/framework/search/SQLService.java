@@ -200,7 +200,7 @@ public class SQLService implements ISFrameworkConstants {
 			stmt = conn.createStatement();
 			int start = from + page * size;
 
-			String sql = qb.getQuery();
+			String sql = qb.getValue();
 			if (EmptyHelper.isEmpty(sql))
 				throw new RuntimeException("不存在该索引语句");
 
