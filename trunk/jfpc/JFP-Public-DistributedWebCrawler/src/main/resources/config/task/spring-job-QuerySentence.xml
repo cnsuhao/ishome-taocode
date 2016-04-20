@@ -36,7 +36,7 @@
 		<property name='myQuerySentence' ref='myQuerySentence' />
 		<property name='jobKey' value='JOBTASK:CONFIG:QuerySentence' />
 		<property name='index' value='3' />
-		<property name='waitTimeSecond' value='10' />
+		<property name='waitTimeSecond' value='120' />
 	</bean>	
 	
 </beans>
