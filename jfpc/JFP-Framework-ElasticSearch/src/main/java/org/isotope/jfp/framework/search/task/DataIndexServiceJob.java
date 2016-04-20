@@ -56,7 +56,7 @@ public class DataIndexServiceJob extends MyJobSupport {
 	}
 
 	public boolean doProcessRepeat() throws Exception {
-		logger.info("全文检索索引同步业务  >>>>>===== 开始");
+		logger.info("全文检索索引同步更新业务  >>>>>===== 开始");
 		// 数据整理,基于Redis进行缓存同步
 		{
 			Calendar calendar = Calendar.getInstance();
@@ -76,7 +76,7 @@ public class DataIndexServiceJob extends MyJobSupport {
 				sqlService.updateIndexBySQL(entry.getValue(), EMPTY, EMPTY);
 			}
 		}
-		logger.info("全文检索索引同步业务  <<<<<===== 结束");
+		logger.info("全文检索索引同步更新业务  <<<<<===== 结束");
 		return true;
 	}
 
