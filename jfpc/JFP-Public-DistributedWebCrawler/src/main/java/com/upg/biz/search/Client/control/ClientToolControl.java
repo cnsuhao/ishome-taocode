@@ -6,6 +6,8 @@ import org.isotope.jfp.framework.beans.common.RESTResultBean;
 import org.isotope.jfp.framework.cache.ICacheService;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.utils.EmptyHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,6 +26,7 @@ import com.upg.biz.search.Captcha.CompanyList.impl.CompanyListSearchImpl;
  */
 @Controller
 public class ClientToolControl implements ISFrameworkConstants {
+	private Logger logger = LoggerFactory.getLogger(ClientToolControl.class);
 	@Resource
 	protected ICacheService mq;
 	@Resource
@@ -41,14 +44,14 @@ public class ClientToolControl implements ISFrameworkConstants {
 		try {
 			Object val = "";
 			//实时网页信息抓取 
-			//mq.offerObjectInList(CompanyInfoSearchImpl.COMPANY_INFO,"123;310000;中新力合");
+			//mq.offerObjectInList(CompanyInfoSearchImpl.COMPANY_CAP,"fd2ef08c-ce84-43e5-95ca-ff76b072b0d2;220000;延边田歌鹅业有限公司");
 			val = CompanyInfoSearch_.getCompanyName();
 			if (EmptyHelper.isEmpty(val)) {
 				//验证码图片 
 				//mq.offerObjectInList(CaptchaCodeImpl.CODE_LIST, "123;/resources/upload/20160317/1.png");
 				val = CaptchaCode_.loadJobWithList();
 				if (EmptyHelper.isEmpty(val)) {
-					//关键字多源检索
+					//关键字多源检索(CompanyInfoSearchImpl.COMPANY_INFO,"中新力合");
 					val = CompanyListSearch_.getSearchKeyword();
 					if (EmptyHelper.isEmpty(val)) {
 						rrb.setResult(EMPTY);
@@ -65,6 +68,7 @@ public class ClientToolControl implements ISFrameworkConstants {
 				rrb.setResult(val);
 				rrb.setCode(ONE);
 			}
+			logger.debug("index=====>>>>>"+val);
 		} catch (Exception e) {
 			rrb.setCode(NINE);
 			rrb.setResult(EMPTY);

@@ -5,6 +5,8 @@ import javax.annotation.Resource;
 import org.isotope.jfp.framework.cache.ICacheService;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.utils.EmptyHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
@@ -17,6 +19,7 @@ import com.alibaba.fastjson.JSONObject;
  */
 @Service
 public class CompanyInfoSearchImpl implements ISFrameworkConstants {
+	private Logger logger = LoggerFactory.getLogger(CompanyInfoSearchImpl.class);
 	/**
 	 * 检索Key队列(客户端)
 	 */
@@ -35,12 +38,16 @@ public class CompanyInfoSearchImpl implements ISFrameworkConstants {
 		// jobId + SEMICOLON + areaCode + SEMICOLON + companyName
 		// mq.offerObjectInList(COMPANY_INFO,"123;310000;aaa",false);
 		String company = (String) mq.pollFirstObjectInList(COMPANY_CAP, false);
-		if (EmptyHelper.isEmpty(company))
+		if (EmptyHelper.isEmpty(company)) {
+			logger.warn("The COMPANY_CAP job is null !!!");
 			return EMPTY;
+		}
 		String[] cs = company.split(SEMICOLON);
 		Object url = getAreaUrl(cs[1]);
-		if (EmptyHelper.isEmpty(url))
+		if (EmptyHelper.isEmpty(url)) {
+			logger.warn("The AreaUrl is null !!!");
 			return EMPTY;
+		}
 		StringBuffer res = new StringBuffer(200);
 		res.append(company);
 		res.append(SEMICOLON);

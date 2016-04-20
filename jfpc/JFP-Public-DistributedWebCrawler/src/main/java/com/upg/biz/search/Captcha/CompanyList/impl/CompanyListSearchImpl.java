@@ -25,7 +25,7 @@ public class CompanyListSearchImpl implements ISFrameworkConstants {
 	}
 
 	public Object getSearchKeyword() {
-		return mq.peekFirstObjectInList(KEYWORD_SEARCH);
+		return mq.pollFirstObjectInList(KEYWORD_SEARCH);
 	}
 	
 }
