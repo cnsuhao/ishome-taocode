@@ -46,21 +46,21 @@ public class QuerySentence {
 		if (sentenceFiles == null || sentenceFiles.length == 0) {
 			return;
 		}
-		for (Resource s : sentenceFiles) {
-			logger.debug("加载全文检索查询文件......" + s.getFile());
-			doLoadSentenceFiles(s.getInputStream());
+		for (Resource file : sentenceFiles) {
+			logger.debug("加载全文检索查询文件......" + file);
+			doLoadSentenceFiles(file.getInputStream());
 		}
-		for (Resource i : creatFiles) {
-			logger.debug("加载全文检索创建文件......" + i.getFile());
-			doLoadCreatFiles(i.getInputStream());
+		for (Resource file : creatFiles) {
+			logger.debug("加载全文检索创建文件......" + file);
+			doLoadCreatFiles(file.getInputStream());
 		}
-		for (Resource i : updateFiles) {
-			logger.debug("加载全文检索更新文件......" + i.getFile());
-			doLoadIndexFiles(i.getInputStream());
+		for (Resource file : updateFiles) {
+			logger.debug("加载全文检索更新文件......" + file);
+			doLoadIndexFiles(file.getInputStream());
 		}
-		for (Resource i : urlFiles) {
-			logger.debug("加载全文检索更新文件......" + i.getFile());
-			doLoadAreaUrlFiles(i.getInputStream());
+		for (Resource file : urlFiles) {
+			logger.debug("加载全文检索更新文件......" + file);
+			doLoadAreaUrlFiles(file.getInputStream());
 		}
 		logger.debug("全文检索初始化<<<<<=====结束");
 	}
@@ -99,7 +99,7 @@ public class QuerySentence {
 					} else if ("index".equals(reader.getLocalName())) {
 						qb.setIndex(reader.getElementText().toLowerCase());
 					} else if (type.equals(reader.getLocalName())) {
-						qb.setQuery(reader.getElementText());
+						qb.setValue(reader.getElementText());
 						logger.debug("保存全文检索索引.........." + qb.getId());
 						datas.put(qb.getId(), qb);
 						if (myCacheService != null)
