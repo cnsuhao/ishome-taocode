@@ -183,7 +183,7 @@ public class SQLService implements ISFrameworkConstants {
 	@Resource
 	QuerySentence config;
 	
-	private String maxID= "";
+	String maxID= ZERO;
 
 	private List<Index> loadDataFromDb(QueryBean qb, int page, int from) throws SQLException {
 		List<Index> actions = new ArrayList<Index>();
