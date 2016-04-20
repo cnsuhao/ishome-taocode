@@ -30,6 +30,8 @@
 				
 				AND  c.id > {maxID}
 				
+				ORDER BY c.id
+				
 				LIMIT {limit}
 
 			]]>

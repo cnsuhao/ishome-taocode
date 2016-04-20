@@ -29,6 +29,8 @@
 				
 			WHERE  c.corp_id > {maxID}
 				
+				ORDER BY c.corp_id
+				
 				LIMIT {limit}
 				
 			]]>

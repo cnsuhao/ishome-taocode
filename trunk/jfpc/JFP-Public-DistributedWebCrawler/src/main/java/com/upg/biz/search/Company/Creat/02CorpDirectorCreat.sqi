@@ -30,6 +30,8 @@
 				
 				AND  c.directorID > {maxID}
 				
+				ORDER BY c.directorID
+				
 				LIMIT {limit}
 
 			]]>

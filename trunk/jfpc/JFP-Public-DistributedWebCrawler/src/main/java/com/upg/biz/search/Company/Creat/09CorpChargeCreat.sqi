@@ -22,6 +22,8 @@
 				     c.id is not null 
 				AND  c.chargeID > {maxID}
 				
+				ORDER BY c.chargeID
+				
 				LIMIT {limit}
 				
 			]]>
