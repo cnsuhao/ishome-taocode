@@ -8,18 +8,19 @@
 			<![CDATA[
 			
 			SELECT 
-				  charge.chargeID  as id			   			#索引id
-				 ,charge.t_date
-				 ,charge.chargeID						#判决书编号
-				 ,charge.title							#判决书标题
-				 ,charge.charge							#判决书内容
-				 ,charge.close_date						#审结日期
-				 ,charge.cause_no						#案号
+				  c.chargeID  as id			   			#索引id
+				 ,c.t_date
+				 ,c.chargeID						#判决书编号
+				 ,c.title							#判决书标题
+				 ,c.charge							#判决书内容
+				 ,c.close_date						#审结日期
+				 ,c.cause_no						#案号
 				 
-			FROM corp_charge charge 
+			FROM corp_charge c 
 							
 			WHERE
-				     charge.id is not null 
+				     c.id is not null 
+				AND  c.chargeID > {maxID}
 				
 				LIMIT {limit}
 				

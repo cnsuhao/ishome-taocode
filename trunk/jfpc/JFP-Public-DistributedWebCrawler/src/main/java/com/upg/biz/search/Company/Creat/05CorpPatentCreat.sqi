@@ -25,8 +25,12 @@
 				,b.corp_rc							#注册资本				*固定条件*
 				,b.corp_edate 						#成立日期				*固定条件*
 				
-			FROM corp_patent c,corp_base b 
-			WHERE b.corp_id=c.corp_id
+			FROM corp_patent c,corp_base b,corp_patent_id a 
+			
+			WHERE b.corp_id=a.corp_id
+        		AND c.id=a.conn_id
+				
+				AND  c.id > {maxID}
 				
 				LIMIT {limit}
 
