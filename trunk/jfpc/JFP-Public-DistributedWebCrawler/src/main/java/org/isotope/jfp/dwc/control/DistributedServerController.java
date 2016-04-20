@@ -3,10 +3,10 @@ package org.isotope.jfp.dwc.control;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import org.isotope.jfp.dwc.biz.job.AJobServiceSupport;
 import org.isotope.jfp.dwc.config.JobConfig;
 import org.isotope.jfp.framework.cache.ICacheService;
 import org.isotope.jfp.framework.cache.redis.master.JedisMasterUtil;
+import org.isotope.jfp.framework.support.MyJobSupport;
 import org.isotope.jfp.framework.utils.BeanFactoryHelper;
 import org.isotope.jfp.framework.utils.EmptyHelper;
 import org.springframework.stereotype.Controller;
@@ -54,11 +54,10 @@ public class DistributedServerController {
 		if (EmptyHelper.isEmpty(job)) {
 			return model;
 		}
-		AJobServiceSupport jobService = BeanFactoryHelper.getBean(job);
+		MyJobSupport jobService = BeanFactoryHelper.getBean(job);
 		// 安全限定
 		if (key.equals(jobService.getJobKey())) {
-			jobService.setMyCacheService(myCacheService);
-			
+			jobService.setMyCacheService(myCacheService);			
 		}
 
 		return model;
