@@ -221,7 +221,9 @@ public class SQLService implements ISFrameworkConstants {
 				sql = sql.replace("{limit}", start + "," + size);// 分页限制
 			}
 			logger.debug("sql===>>>" + sql);
+			logger.debug("   start===>>>" + System.currentTimeMillis());
 			resultSet = stmt.executeQuery(sql);
+			logger.debug("   end===>>>" + System.currentTimeMillis());
 			metaData = resultSet.getMetaData();
 			JSONObject data;
 			// rs.beforeFirst();
