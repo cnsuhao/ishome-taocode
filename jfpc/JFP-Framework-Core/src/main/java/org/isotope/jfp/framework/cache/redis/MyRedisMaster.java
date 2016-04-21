@@ -27,11 +27,11 @@ public class MyRedisMaster implements ICacheService, ISFrameworkConstants {
 
 	}
 
-	public MyRedisMaster(String jedisSupport) {
+	public MyRedisMaster(ISJedisSupport jedisSupport) {
 		this.jedisSupport = jedisSupport;
 	}
 
-	public MyRedisMaster(String jedisSupport, int waitTime) {
+	public MyRedisMaster(ISJedisSupport jedisSupport, int waitTime) {
 		this.jedisSupport = jedisSupport;
 		this.waitTime = waitTime;
 	}
@@ -46,13 +46,23 @@ public class MyRedisMaster implements ICacheService, ISFrameworkConstants {
 		this.waitTime = waitTime;
 	}
 
-	String jedisSupport;
-
-	public ISJedisSupport getJedisSupport() {
-		return BeanFactoryHelper.getBean(jedisSupport);
+	String jedisScope;
+	
+	public void setJedisScope(String jedisScope) {
+		this.jedisScope = jedisScope;
 	}
 
-	public void setJedisSupport(String jedisSupport) {
+	ISJedisSupport jedisSupport;
+
+	public ISJedisSupport getJedisSupport() {
+		//激活分片下面的scope模式
+		ISJedisSupport support = BeanFactoryHelper.getBean(jedisScope);
+		if(support == null)
+			return jedisSupport;
+		return support;
+	}
+
+	public void setJedisSupport(ISJedisSupport jedisSupport) {
 		this.jedisSupport = jedisSupport;
 	}
 
@@ -362,5 +372,10 @@ public class MyRedisMaster implements ICacheService, ISFrameworkConstants {
 	@Override
 	public Object indexObjectInList(String key, int index) {
 		return getJedisSupport().indexObjectInList(key, index);
+	}
+
+	@Override
+	public long setnx(String key, Object value) {
+		return getJedisSupport().setnx(key, getStringToRedis(value), waitTime);
 	}
 }
