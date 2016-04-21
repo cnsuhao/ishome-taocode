@@ -2,10 +2,8 @@ package org.isotope.jfp.framework.common;
 
 import org.isotope.jfp.framework.biz.common.ISInit;
 import org.isotope.jfp.framework.cache.ICacheService;
-import org.isotope.jfp.framework.cache.redis.MyRedisMaster;
-import org.isotope.jfp.framework.cache.redis.master.JedisMasterUtil;
-import org.isotope.jfp.framework.cache.redis.master.RedisPoolUtil;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
+import org.isotope.jfp.framework.utils.BeanFactoryHelper;
 
 /**
  * 通用Redis通道队列设置
@@ -15,18 +13,6 @@ import org.isotope.jfp.framework.constants.ISFrameworkConstants;
  * @since 2.4.1
  */
 public class CommonChannelConfig implements ISFrameworkConstants, ISInit {
-	/**
-	 * Redis服务器定义
-	 */
-	protected RedisPoolUtil jedisPool;
-
-	public void setJedisPool(RedisPoolUtil jedisPool) {
-		this.jedisPool = jedisPool;
-	}
-
-	public RedisPoolUtil getJedisPool() {
-		return jedisPool;
-	}
 
 	/**
 	 * 缓存定义
@@ -55,8 +41,17 @@ public class CommonChannelConfig implements ISFrameworkConstants, ISInit {
 	}
 
 	public boolean doInit() {
-		JedisMasterUtil jedisUtil = new JedisMasterUtil(jedisPool);
-		catchService = new MyRedisMaster(jedisUtil);
+		catchService = BeanFactoryHelper.getBean(catchBeanName);
 		return true;
+	}
+
+	protected String catchBeanName;
+
+	public String getCatchBeanName() {
+		return catchBeanName;
+	}
+
+	public void setCatchBeanName(String catchBeanName) {
+		this.catchBeanName = catchBeanName;
 	}
 }

@@ -6,10 +6,8 @@ import org.isotope.jfp.framework.biz.common.ISCheck;
 import org.isotope.jfp.framework.biz.common.ISInit;
 import org.isotope.jfp.framework.biz.common.ISProcess;
 import org.isotope.jfp.framework.cache.ICacheService;
-import org.isotope.jfp.framework.cache.redis.MyRedisMaster;
-import org.isotope.jfp.framework.cache.redis.master.JedisMasterUtil;
-import org.isotope.jfp.framework.cache.redis.master.RedisPoolUtil;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
+import org.isotope.jfp.framework.utils.BeanFactoryHelper;
 import org.isotope.jfp.framework.utils.EmptyHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,22 +31,28 @@ public abstract class RedisChannelServiceThreadSupport extends Thread implements
 	 * Redis通道定义
 	 */
 	private String channelKey;
+	protected String catchBeanName ;
 
+	public String getCatchBeanName() {
+		return catchBeanName;
+	}
+
+	public void setCatchBeanName(String catchBeanName) {
+		this.catchBeanName = catchBeanName;
+	}
 	/**
 	 * 缓存定义
 	 */
 	private ICacheService catchService;
 
-	public void doInit(RedisPoolUtil jedisPool, String channelKey) {
+	public void doInit(String channelKey) {
 		this.channelKey = channelKey;
-		JedisMasterUtil jedisUtil = new JedisMasterUtil(jedisPool);
-		catchService = new MyRedisMaster(jedisUtil, 5);
+		catchService =  BeanFactoryHelper.getBean(catchBeanName);
 	}
 
-	public void doInit(RedisPoolUtil jedisPool, String channelKey, int waitTime) {
+	public void doInit( String channelKey, int waitTime) {
 		this.channelKey = channelKey;
-		JedisMasterUtil jedisUtil = new JedisMasterUtil(jedisPool);
-		catchService = new MyRedisMaster(jedisUtil);
+		catchService =  BeanFactoryHelper.getBean(catchBeanName);
 	}
 
 	public ICacheService getCatchService() {
