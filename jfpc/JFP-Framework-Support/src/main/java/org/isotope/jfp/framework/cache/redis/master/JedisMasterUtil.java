@@ -146,17 +146,19 @@ public class JedisMasterUtil implements ISJedisSupport {
 		long size = jd.llen(oldKey);
 		if (num < size)
 			size = num;
-		for (int i = 0; i < size; i++) {
-			try {
+		try {
+			for (int i = 0; i < size; i++) {
 				value = jd.lpop(oldKey);
 				if (EmptyHelper.isEmpty(value))
 					break;
 				if (retain)
 					jd.rpush(oldKey, value);
 				jd.rpush(newKey, value);
-			} catch (Exception e) {
-				logger.error(e.getMessage());
 			}
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		} finally {
+			close(jd);
 		}
 	}
 
@@ -172,15 +174,18 @@ public class JedisMasterUtil implements ISJedisSupport {
 	public void copy(Jedis oldJedis, String oldKey, Jedis newJedis, String newKey, boolean retain) {
 		String value;
 		long size = oldJedis.llen(oldKey);
-		for (int i = 0; i < size; i++) {
-			try {
+		try {
+			for (int i = 0; i < size; i++) {
 				value = oldJedis.lpop(oldKey);
 				if (retain)
 					oldJedis.rpush(oldKey, value);
 				newJedis.rpush(newKey, value);
-			} catch (Exception e) {
-				logger.error(e.getMessage());
 			}
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		} finally {
+			close(oldJedis);
+			close(newJedis);
 		}
 	}
 
@@ -307,7 +312,7 @@ public class JedisMasterUtil implements ISJedisSupport {
 			jedis.hdel(rkey, mkey);
 			return value;
 		} catch (Exception e) {
-			logger.error("hdel key from redis error[key:" + rkey + "],["+mkey+"]", e);			
+			logger.error("hdel key from redis error[key:" + rkey + "],[" + mkey + "]", e);
 		} finally {
 			close(jedis);
 		}
@@ -327,7 +332,7 @@ public class JedisMasterUtil implements ISJedisSupport {
 		try {
 			return jedis.hget(rkey, mkey);
 		} catch (Exception e) {
-			logger.error("hget key from redis error[key:" + rkey + "],["+mkey+"]", e);
+			logger.error("hget key from redis error[key:" + rkey + "],[" + mkey + "]", e);
 		} finally {
 			close(jedis);
 		}
@@ -344,11 +349,10 @@ public class JedisMasterUtil implements ISJedisSupport {
 
 	public boolean hset(String rkey, String mkey, String value) {
 		Jedis jedis = getJedis();
-
 		try {
 			jedis.hset(rkey, mkey, value);
 		} catch (Exception e) {
-			logger.error("hset key from redis error[key:" + rkey + "],["+mkey+"]", e);
+			logger.error("hset key from redis error[key:" + rkey + "],[" + mkey + "]", e);
 		} finally {
 			close(jedis);
 		}
@@ -415,9 +419,8 @@ public class JedisMasterUtil implements ISJedisSupport {
 			try {
 				jedis.publish(channel, message);
 			} catch (Exception e) {
-				logger.error("publish message[" + message + "] to channel[" + channel + "] error[" + failedNum + "] : "
-						+ e.getMessage());
-				
+				logger.error("publish message[" + message + "] to channel[" + channel + "] error[" + failedNum + "] : " + e.getMessage());
+
 				publish(channel, message, failedNum++);
 			} finally {
 				close(jedis);
@@ -452,9 +455,8 @@ public class JedisMasterUtil implements ISJedisSupport {
 				jedis.lpush(key, message);
 				jedis.publish(channel, message);
 			} catch (Exception e) {
-				logger.error("queuePublish message[" + message + "] to channel[" + channel + "] error[" + failedNum
-						+ "] : " + e.getMessage());
-				
+				logger.error("queuePublish message[" + message + "] to channel[" + channel + "] error[" + failedNum + "] : " + e.getMessage());
+
 				queuePublish(key, channel, message, failedNum++);
 			} finally {
 				close(jedis);
@@ -476,6 +478,8 @@ public class JedisMasterUtil implements ISJedisSupport {
 			jedis.subscribe(listener, channel);
 		} catch (Exception e) {
 			logger.error("subscribe from redis error[channel:" + channel + "]", e);
+		} finally {
+			close(jedis);
 		}
 	}
 
@@ -491,7 +495,7 @@ public class JedisMasterUtil implements ISJedisSupport {
 		try {
 			jedis.rpush(key, value);
 		} catch (Exception e) {
-			logger.error("listAdd from redis error[key:" + key + "]", e);		
+			logger.error("listAdd from redis error[key:" + key + "]", e);
 		} finally {
 			close(jedis);
 		}
@@ -513,7 +517,7 @@ public class JedisMasterUtil implements ISJedisSupport {
 				return list.get(1);
 			}
 		} catch (Exception e) {
-			logger.error("blistPop from redis error[key:" + key + "]", e);	
+			logger.error("blistPop from redis error[key:" + key + "]", e);
 		} finally {
 			close(jedis);
 		}
@@ -532,7 +536,7 @@ public class JedisMasterUtil implements ISJedisSupport {
 		try {
 			return jedis.lpop(key);
 		} catch (Exception e) {
-			logger.error("listPop from redis error[key:" + key + "]", e);	
+			logger.error("listPop from redis error[key:" + key + "]", e);
 		} finally {
 			close(jedis);
 		}
@@ -719,7 +723,7 @@ public class JedisMasterUtil implements ISJedisSupport {
 				jedis.spop(key);
 			}
 		} catch (Exception e) {
-			logger.error("setDelAll from redis error[key:" + key + "]", e);			
+			logger.error("setDelAll from redis error[key:" + key + "]", e);
 		} finally {
 			close(jedis);
 		}
@@ -738,7 +742,7 @@ public class JedisMasterUtil implements ISJedisSupport {
 		try {
 			return jedis.scard(key);
 		} catch (Exception e) {
-			logger.error("setCount from redis error[key:" + key + "]", e);	
+			logger.error("setCount from redis error[key:" + key + "]", e);
 		} finally {
 			close(jedis);
 		}
@@ -757,7 +761,7 @@ public class JedisMasterUtil implements ISJedisSupport {
 		try {
 			return jedis.smembers(key);
 		} catch (Exception e) {
-			logger.error("setAll from redis error[key:" + key + "]", e);				
+			logger.error("setAll from redis error[key:" + key + "]", e);
 		} finally {
 			close(jedis);
 		}
@@ -814,8 +818,9 @@ public class JedisMasterUtil implements ISJedisSupport {
 
 		}
 	}
-	
+
 	int defaultIndex = 0;
+
 	public int getDefaultIndex() {
 		return defaultIndex;
 	}
@@ -827,6 +832,20 @@ public class JedisMasterUtil implements ISJedisSupport {
 	@Override
 	public void init() {
 		index = defaultIndex;
+	}
+
+	@Override
+	public Object indexObjectInList(String key, int index) {
+		Jedis jedis = getJedis();
+		String value = null;
+		try {
+			value = jedis.lindex(key, index);
+		} catch (Exception e) {
+			logger.error("get value from redis error[key:" + key + "]", e);
+		} finally {
+			close(jedis);
+		}
+		return value;
 	}
 
 }

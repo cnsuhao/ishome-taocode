@@ -1,5 +1,8 @@
 package org.isotope.jfp.framework.cache;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * 缓存队列
  * 
@@ -97,6 +100,15 @@ public interface ICacheService extends ISessionService {
 	public long sizeOfMap(String key);
 
 	/**
+	 * 将指定Map内元素插入缓存数据 <br>
+	 * （基于保存Key,Map数据队列） <br>
+	 * 先进先出
+	 * 
+	 * @return
+	 */
+	public boolean addMapAll(String key, Map<String,Object> value);
+	
+	/**
 	 * 追加数据到已有的缓存数据 <br>
 	 * （基于保存Key,Map数据队列）
 	 * 
@@ -155,6 +167,15 @@ public interface ICacheService extends ISessionService {
 	public long sizeOfList(String key);
 
 	/**
+	 * 将指定List内元素插入此双端队列的末尾 <br>
+	 * （基于保存Key,List数据队列） <br>
+	 * 先进先出
+	 * 
+	 * @return
+	 */
+	public boolean offerListAll(String key, List<Object> value);
+	
+	/**
 	 * 将指定元素插入此双端队列的末尾 <br>
 	 * （基于保存Key,List数据队列） <br>
 	 * 先进先出
@@ -162,7 +183,7 @@ public interface ICacheService extends ISessionService {
 	 * @return
 	 */
 	public boolean offerObjectInList(String key, Object value);
-
+	
 	/**
 	 * 将指定元素插入此双端队列的末尾 <br>
 	 * （基于保存Key,List数据队列） <br>
@@ -172,6 +193,15 @@ public interface ICacheService extends ISessionService {
 	 */
 	public boolean offerObjectInList(String key, Object value, boolean translation);
 
+	/**
+	 * 返回名称为key的list中index位置的元素 <br>
+	 * （基于保存Key,List数据队列） <br>
+	 * 先进先出
+	 * 
+	 * @return
+	 */
+	public Object indexObjectInList(String key, int index);
+	
 	/**
 	 * 从已有的缓存数据里面获取并移除第一个数据(阻塞模式) <br>
 	 * （基于保存Key,List数据队列）

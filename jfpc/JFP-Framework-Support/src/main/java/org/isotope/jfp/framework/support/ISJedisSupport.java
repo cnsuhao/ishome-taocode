@@ -8,6 +8,7 @@ import java.util.Set;
  * Redis缓存实现<br>
  * 面向缓存服务使用
  * 
+ * @version 3.1.2 2016/4/21
  * @version 3.1.1 2016/3/17
  * @version 2.4.2 2015/12/10
  * @since 2.4.2 2015/12/10
@@ -17,21 +18,14 @@ public interface ISJedisSupport {
 	/**
 	 * 初始化
 	 */
-	public void init();
+	void init();
 
-	public void selectDB(int index);
+	void selectDB(int index);
 
 	String get(String key);
 
 	String del(String key);
 
-	/**
-	 * this method will be block, until timeout
-	 * 
-	 * @param key
-	 * @param timeout(millisecond)
-	 * @return
-	 */
 	String get(String key, long timeout);
 
 	void add(String key, String value);
@@ -44,13 +38,6 @@ public interface ISJedisSupport {
 
 	boolean hset(String rkey, String mkey, String value);
 
-	/**
-	 * 
-	 * @param key
-	 * @param value
-	 * @param expireTime
-	 *            seconds
-	 */
 	void add(String key, String value, int expireTime);
 
 	void add(String key, String value, int expireTime, int failedNum);
@@ -69,32 +56,12 @@ public interface ISJedisSupport {
 
 	List<String> listPopAll(String key);
 
-	/**
-	 * delete special value
-	 * 
-	 * @param key
-	 * @param count
-	 *            delete numbers
-	 * @param value
-	 */
 	long listDel(String key, int count, String value);
 
 	void listDelAll(String key);
 
-	/**
-	 * 
-	 * @param key
-	 * @param value
-	 * @return 1:add success 0:value is existed other:key is not a set type
-	 */
 	long setAdd(String key, String... value);
 
-	/**
-	 * 
-	 * @param key
-	 * @param value
-	 * @return 1:add success 0:value is existed other:key is not a set type
-	 */
 	long setDel(String key, String... value);
 
 	void setDelAll(String key);
@@ -104,4 +71,6 @@ public interface ISJedisSupport {
 	Set<String> setAll(String key);
 
 	void expire(String key, int seconds);
+
+	Object indexObjectInList(String key, int index);
 }

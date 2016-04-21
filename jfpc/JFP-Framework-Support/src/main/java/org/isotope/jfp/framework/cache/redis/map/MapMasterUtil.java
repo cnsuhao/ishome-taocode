@@ -196,4 +196,11 @@ public class MapMasterUtil implements ISJedisSupport {
 	public Set<String> setAll(String key) {
 		return null;
 	}
+	/**
+	 * @deprecated
+	 */
+	@Override
+	public Object indexObjectInList(String key, int index) {
+		return null;
+	}
 }
