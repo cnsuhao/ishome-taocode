@@ -83,17 +83,4 @@
             </list>
 		</constructor-arg>
 	</bean>	
-		
-	<!-- 总管理类 如果将lazy-init='false'那么容器启动就会执行调度程序  -->
-    <bean id='startQuertz' lazy-init='false' autowire='no' class='org.springframework.scheduling.quartz.SchedulerFactoryBean'>
-        <property name='triggers'>
-            <list>
-             	<!-- 全文检索参数缓存同步 -->              
-            	<!-- <ref bean='querySentenceServiceMonitorCronTrigger'/> -->
-            	<!-- 索引每日同步 -->     
-            	<ref bean='dataIndexServiceMonitorCronTrigger'/>
-             
-            </list>
-        </property>
-    </bean>
 </beans>

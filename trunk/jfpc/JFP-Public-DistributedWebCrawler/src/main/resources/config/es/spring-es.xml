@@ -56,6 +56,11 @@
 				<value>classpath*:/com/upg/biz/search/Company/Update/*.sqi</value>
 		 	</list>
 		</property>
+		<property name='urlFiles'>
+			<list>
+				<value>classpath*:/com/upg/biz/search/Company/Uri/*.uri</value>
+		 	</list>
+		</property>
 	</bean>	
 		
 </beans>
