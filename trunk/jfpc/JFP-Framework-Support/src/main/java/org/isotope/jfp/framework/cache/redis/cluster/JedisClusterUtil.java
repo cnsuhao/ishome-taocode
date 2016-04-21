@@ -537,8 +537,31 @@ public class JedisClusterUtil implements ISJedisSupport, ISFrameworkConstants {
 
 	@Override
 	public Object indexObjectInList(String key, int index) {
-		// TODO Auto-generated method stub
-		return null;
+		JedisCluster jedisCluster = getJedisCluster();
+		String value = null;
+		try {
+			value = jedisCluster.lindex(key, index);
+		} catch (Exception e) {
+			logger.error("get value from redis error[key:" + key + "]", e);
+		} finally {
+			close(jedisCluster);
+		}
+		return value;
+	}
+
+	@Override
+	public long setnx(String key, String stringToRedis, int waitTime) {
+		JedisCluster jedisCluster = getJedisCluster();
+		long rs = 0l;
+		try {
+			rs = jedisCluster.setnx(key, stringToRedis);
+			jedisCluster.expire(key, waitTime);
+		} catch (Exception e) {
+			logger.error("get value from redis error[key:" + key + "]", e);
+		} finally {
+			close(jedisCluster);
+		}
+		return rs;
 	}
 
 }

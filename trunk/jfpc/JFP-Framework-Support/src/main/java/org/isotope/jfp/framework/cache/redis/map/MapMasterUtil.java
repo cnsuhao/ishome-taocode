@@ -203,4 +203,10 @@ public class MapMasterUtil implements ISJedisSupport {
 	public Object indexObjectInList(String key, int index) {
 		return null;
 	}
+
+	@Override
+	public long setnx(String key, String value, int waitTime) {
+		add(key, value) ;
+		return 0;
+	}
 }

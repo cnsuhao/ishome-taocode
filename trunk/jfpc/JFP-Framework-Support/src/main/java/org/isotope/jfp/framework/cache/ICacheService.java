@@ -21,18 +21,29 @@ public interface ICacheService extends ISessionService {
 	public void init();
 
 	/**
+	 * 如果不存在名称为key的string，则向库中添加string，名称为key，值为value
+	 * 
+	 * @param key
+	 * @param value
+	 * @return
+	 */
+	public long setnx(String key, Object value);
+
+	/**
 	 * 对已存在的key设置超时时间
+	 * 
 	 * @param key
 	 * @param timeOut
 	 */
-	public void expire(String key,int timeOut);
-	
+	public void expire(String key, int timeOut);
+
 	/**
 	 * 选择使用DB
+	 * 
 	 * @param index
 	 */
 	public void selectDB(int index);
-	
+
 	/**
 	 * 保存数据到缓存中心 <br>
 	 * （基于保存Key）
@@ -106,8 +117,8 @@ public interface ICacheService extends ISessionService {
 	 * 
 	 * @return
 	 */
-	public boolean addMapAll(String key, Map<String,Object> value);
-	
+	public boolean addMapAll(String key, Map<String, Object> value);
+
 	/**
 	 * 追加数据到已有的缓存数据 <br>
 	 * （基于保存Key,Map数据队列）
@@ -174,7 +185,7 @@ public interface ICacheService extends ISessionService {
 	 * @return
 	 */
 	public boolean offerListAll(String key, List<Object> value);
-	
+
 	/**
 	 * 将指定元素插入此双端队列的末尾 <br>
 	 * （基于保存Key,List数据队列） <br>
@@ -183,7 +194,7 @@ public interface ICacheService extends ISessionService {
 	 * @return
 	 */
 	public boolean offerObjectInList(String key, Object value);
-	
+
 	/**
 	 * 将指定元素插入此双端队列的末尾 <br>
 	 * （基于保存Key,List数据队列） <br>
@@ -201,7 +212,7 @@ public interface ICacheService extends ISessionService {
 	 * @return
 	 */
 	public Object indexObjectInList(String key, int index);
-	
+
 	/**
 	 * 从已有的缓存数据里面获取并移除第一个数据(阻塞模式) <br>
 	 * （基于保存Key,List数据队列）
@@ -217,7 +228,7 @@ public interface ICacheService extends ISessionService {
 	 * @return
 	 */
 	public Object peekFirstObjectInList(String key, boolean translation);
-	
+
 	/**
 	 * 从已有的缓存数据里面获取并移除第一个数据(阻塞模式) <br>
 	 * （基于保存Key,List数据队列）
@@ -274,5 +285,5 @@ public interface ICacheService extends ISessionService {
 	 */
 	public Object pollLastObjectInList(String key, boolean translation);
 	//////////////////////////////////////////////////////////////////////
-	
+
 }

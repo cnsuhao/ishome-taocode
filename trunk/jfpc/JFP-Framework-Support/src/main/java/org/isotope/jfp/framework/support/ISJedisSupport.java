@@ -73,4 +73,6 @@ public interface ISJedisSupport {
 	void expire(String key, int seconds);
 
 	Object indexObjectInList(String key, int index);
+
+	long setnx(String key, String stringToRedis, int waitTime);
 }
