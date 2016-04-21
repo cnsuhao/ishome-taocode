@@ -1,5 +1,6 @@
 package org.isotope.jfp.framework.cache.redis;
 
+import java.util.List;
 import java.util.Map;
 
 import org.isotope.jfp.framework.cache.ICacheService;
@@ -322,6 +323,24 @@ public class MyRedisCluster implements ICacheService, ISFrameworkConstants {
 	public void init() {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public boolean addMapAll(String key, Map<String, Object> value) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean offerListAll(String key, List<Object> value) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Object indexObjectInList(String key, int index) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

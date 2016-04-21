@@ -2,6 +2,8 @@ package org.isotope.jfp.framework.cache.map;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.isotope.jfp.framework.cache.ICacheService;
 
@@ -13,13 +15,13 @@ import org.isotope.jfp.framework.cache.ICacheService;
 @SuppressWarnings("unchecked")
 public class MyMaps implements ICacheService {
 
-	HashMap<String, Object> cache = new HashMap<String, Object>();
-	
-	public boolean clear(){
+	Map<String, Object> cache = new HashMap<String, Object>();
+
+	public boolean clear() {
 		cache.clear();
 		return true;
 	}
-	
+
 	@Override
 	public boolean putObject(String key, Object value) {
 		cache.put(key, value);
@@ -53,8 +55,8 @@ public class MyMaps implements ICacheService {
 	}
 
 	@Override
-	public HashMap<String, Object> getAllObjectInMap(String key) {
-		HashMap<String, Object> ms = (HashMap<String, Object>) getObject(key);
+	public Map<String, Object> getAllObjectInMap(String key) {
+		Map<String, Object> ms = (Map<String, Object>) getObject(key);
 		if (ms == null)
 			ms = new HashMap<String, Object>();
 		return ms;
@@ -67,7 +69,7 @@ public class MyMaps implements ICacheService {
 	 * @return
 	 */
 	public boolean addObjectInMap(String rkey, String mkey, Object value) {
-		HashMap<String, Object> ms = (HashMap<String, Object>) getObject(rkey);
+		Map<String, Object> ms = (Map<String, Object>) getObject(rkey);
 		if (ms == null)
 			ms = new HashMap<String, Object>();
 		ms.put(mkey, value);
@@ -87,7 +89,7 @@ public class MyMaps implements ICacheService {
 	 * @return
 	 */
 	public Object removeObjectInMap(String rkey, String mkey) {
-		HashMap<String, Object> ms = (HashMap<String, Object>) getObject(rkey);
+		Map<String, Object> ms = (Map<String, Object>) getObject(rkey);
 		if (ms == null)
 			ms = new HashMap<String, Object>();
 		return ms.remove(mkey);
@@ -95,7 +97,7 @@ public class MyMaps implements ICacheService {
 
 	@Override
 	public Object removeObjectInMap(String rkey, String mkey, boolean translation) {
-		HashMap<String, Object> ms = (HashMap<String, Object>) getObject(rkey);
+		Map<String, Object> ms = (Map<String, Object>) getObject(rkey);
 		if (ms == null)
 			ms = new HashMap<String, Object>();
 		return ms.remove(mkey);
@@ -108,7 +110,7 @@ public class MyMaps implements ICacheService {
 	 * @return
 	 */
 	public Object findObjectInMap(String rkey, String mkey) {
-		HashMap<String, Object> ms = (HashMap<String, Object>) getObject(rkey);
+		Map<String, Object> ms = (Map<String, Object>) getObject(rkey);
 		if (ms == null)
 			ms = new HashMap<String, Object>();
 		return ms.get(mkey);
@@ -116,7 +118,7 @@ public class MyMaps implements ICacheService {
 
 	@Override
 	public Object findObjectInMap(String rkey, String mkey, boolean translation) {
-		HashMap<String, Object> ms = (HashMap<String, Object>) getObject(rkey);
+		Map<String, Object> ms = (Map<String, Object>) getObject(rkey);
 		if (ms == null)
 			ms = new HashMap<String, Object>();
 		return ms.get(mkey);
@@ -124,7 +126,7 @@ public class MyMaps implements ICacheService {
 
 	@Override
 	public long sizeOfMap(String key) {
-		HashMap<String, Object> ms = (HashMap<String, Object>) getObject(key);
+		Map<String, Object> ms = (Map<String, Object>) getObject(key);
 		if (ms == null)
 			return 0;
 		return (long) ms.size();
@@ -133,14 +135,14 @@ public class MyMaps implements ICacheService {
 	// ///////////////////////////////////////////////////////////////////////////
 	@Override
 	public long sizeOfList(String key) {
-		ArrayList<Object> ms = (ArrayList<Object>) getObject(key);
+		List<Object> ms = (List<Object>) getObject(key);
 		if (ms == null)
 			return 0;
 		return (long) ms.size();
 	}
 
 	public boolean offerObjectInList(String key, Object value) {
-		ArrayList<Object> ms = (ArrayList<Object>) getObject(key);
+		List<Object> ms = (List<Object>) getObject(key);
 		if (ms == null)
 			ms = new ArrayList<Object>();
 		ms.add(value);
@@ -154,7 +156,7 @@ public class MyMaps implements ICacheService {
 
 	@Override
 	public Object peekFirstObjectInList(String key) {
-		ArrayList<Object> ms = (ArrayList<Object>) getObject(key);
+		List<Object> ms = (List<Object>) getObject(key);
 		if (ms == null)
 			return null;
 		else
@@ -163,7 +165,7 @@ public class MyMaps implements ICacheService {
 
 	@Override
 	public Object peekFirstObjectInList(String key, boolean translation) {
-		ArrayList<Object> ms = (ArrayList<Object>) getObject(key);
+		List<Object> ms = (List<Object>) getObject(key);
 		if (ms == null)
 			return null;
 		else
@@ -172,7 +174,7 @@ public class MyMaps implements ICacheService {
 
 	@Override
 	public Object peekFirstObjectInList(String key, int waitTime, boolean translation) {
-		ArrayList<Object> ms = (ArrayList<Object>) getObject(key);
+		List<Object> ms = (List<Object>) getObject(key);
 		if (ms == null)
 			return null;
 		else
@@ -181,7 +183,7 @@ public class MyMaps implements ICacheService {
 
 	@Override
 	public Object pollFirstObjectInList(String key) {
-		ArrayList<Object> ms = (ArrayList<Object>) getObject(key);
+		List<Object> ms = (List<Object>) getObject(key);
 		if (ms == null)
 			return null;
 		else
@@ -190,7 +192,7 @@ public class MyMaps implements ICacheService {
 
 	@Override
 	public Object pollFirstObjectInList(String key, boolean translation) {
-		ArrayList<Object> ms = (ArrayList<Object>) getObject(key);
+		List<Object> ms = (List<Object>) getObject(key);
 		if (ms == null)
 			return null;
 		else
@@ -199,7 +201,7 @@ public class MyMaps implements ICacheService {
 
 	@Override
 	public Object peekLastObjectInList(String key) {
-		ArrayList<Object> ms = (ArrayList<Object>) getObject(key);
+		List<Object> ms = (List<Object>) getObject(key);
 		if (ms == null)
 			return null;
 		else
@@ -208,7 +210,7 @@ public class MyMaps implements ICacheService {
 
 	@Override
 	public Object peekLastObjectInList(String key, boolean translation) {
-		ArrayList<Object> ms = (ArrayList<Object>) getObject(key);
+		List<Object> ms = (List<Object>) getObject(key);
 		if (ms == null)
 			return null;
 		else
@@ -217,7 +219,7 @@ public class MyMaps implements ICacheService {
 
 	@Override
 	public Object pollLastObjectInList(String key) {
-		ArrayList<Object> ms = (ArrayList<Object>) getObject(key);
+		List<Object> ms = (List<Object>) getObject(key);
 		if (ms == null)
 			return null;
 		else
@@ -226,7 +228,7 @@ public class MyMaps implements ICacheService {
 
 	@Override
 	public Object pollLastObjectInList(String key, boolean translation) {
-		ArrayList<Object> ms = (ArrayList<Object>) getObject(key);
+		List<Object> ms = (List<Object>) getObject(key);
 		if (ms == null)
 			return null;
 		else
@@ -236,18 +238,50 @@ public class MyMaps implements ICacheService {
 	@Override
 	public void selectDB(int index) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void expire(String key, int timeOut) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void init() {
 		// TODO Auto-generated method stub
-		
+
+	}
+
+	@Override
+	public boolean addMapAll(String key, Map<String, Object> value) {
+		Map<String, Object> ms = (Map<String, Object>) getObject(key);
+		if (ms == null)
+			ms = value;
+		else {
+			ms.putAll(value);
+		}
+		cache.put(key, ms);
+
+		return false;
+	}
+
+	@Override
+	public boolean offerListAll(String key, List<Object> value) {
+		List<Object> ls = (List<Object>) getObject(key);
+		if (ls == null)
+			ls = value;
+		else
+			ls.addAll(value);
+		cache.put(key, ls);
+		return false;
+	}
+
+	@Override
+	public Object indexObjectInList(String key, int index) {
+		List<Object> ls = (List<Object>) getObject(key);
+		if (ls == null)
+			return "";
+		return ls.get(index);
 	}
 }
