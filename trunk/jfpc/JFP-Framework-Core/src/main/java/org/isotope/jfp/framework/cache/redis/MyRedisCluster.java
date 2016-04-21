@@ -343,4 +343,10 @@ public class MyRedisCluster implements ICacheService, ISFrameworkConstants {
 		return null;
 	}
 
+	@Override
+	public long setnx(String key, Object value) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

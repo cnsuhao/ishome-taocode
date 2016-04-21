@@ -284,4 +284,10 @@ public class MyMaps implements ICacheService {
 			return "";
 		return ls.get(index);
 	}
+
+	@Override
+	public long setnx(String key, Object value) {
+		putObject(key, value);
+		return 0;
+	}
 }
