@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- 定义各种启动部署初始化工具 -->
+<beans xmlns='http://www.springframework.org/schema/beans'
+	xmlns:mvc='http://www.springframework.org/schema/mvc' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xmlns:context='http://www.springframework.org/schema/context' xmlns:tx='http://www.springframework.org/schema/tx'
+	xmlns:aop='http://www.springframework.org/schema/aop'
+	xsi:schemaLocation='
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		http://www.springframework.org/schema/jdbc 
+		http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd
+		'>	
+    
+	<!-- 对接监控定时器 -->
+	<bean id='dataIndexServiceMonitorCronTrigger' class='org.springframework.scheduling.quartz.CronTriggerFactoryBean'>
+		<property name='jobDetail' ref='dataIndexServiceMonitorJobDetail' />
+		<!-- 每 天5点5分 处理索引同步 -->
+		<property name="cronExpression" value="5 5 * * * ? *"/>
+	</bean>	
+
+	<bean id='dataIndexServiceMonitorJobDetail' class='org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean'>
+		<property name='targetObject' ref='dataIndexServiceMonitorJob' />
+		<property name='targetMethod' value='doProcess' />
+	</bean>
+	
+	<bean id='dataIndexServiceMonitorJob' class='org.isotope.jfp.framework.search.task.DataIndexServiceJob' >
+		<property name='myCacheService' ref='myCache' />
+		<property name='myQuerySentence' ref='myQuerySentence' />
+		<property name='sqlService' ref='ElasticsearchSQLService' />
+		<property name='jobKey' value='JOBTASK:CONFIG:DataIndex' />
+		<property name='index' value='3' />
+		<property name='waitTimeSecond' value='1800' />
+	</bean>	
+	
+</beans>
