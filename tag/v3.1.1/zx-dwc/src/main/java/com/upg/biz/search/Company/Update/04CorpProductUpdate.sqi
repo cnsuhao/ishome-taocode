@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<sentences>
+	<update>
+		<id>corp_product_update</id>
+		<index>corp_product_list</index>
+		<!-- 产品 -->
+		<sql>
+			<![CDATA[
+			
+			SELECT 
+				c.t_date				
+				,c.id  								#产品id
+
+				,c.product 							#产品
+				,c.detail							#详细说明
+				,c.industry    						#行业
+
+				,'企业产品' as search_type				#条件类型				
+				
+				,c.corp_name 						#企业名称
+				,b.artificial_person				#法人	
+					
+				,b.res_date							#来源（区域CODE）		*固定条件*
+				,b.corp_rc							#注册资本				*固定条件*
+				,b.corp_edate 						#成立日期				*固定条件*
+				
+			FROM corp_product c,corp_base b 
+			
+			WHERE b.corp_id=c.corp_id
+
+			    AND  c.t_date > '{starttime}'
+				AND  c.t_date < '{endtime}'
+				
+				#ORDER BY c.t_date
+				
+				LIMIT {limit}
+
+			]]>
+		</sql>
+	</update>
+</sentences>

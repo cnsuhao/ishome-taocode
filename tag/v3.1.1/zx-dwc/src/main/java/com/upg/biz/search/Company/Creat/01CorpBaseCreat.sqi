@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<sentences>
+	<creat>
+		<id>corp_base_creat</id>
+		<index>corp_base_list</index>
+		<!-- 企业基本信息 -->
+		<sql>
+			<![CDATA[
+			
+			SELECT 
+				c.t_date
+				,c.corp_id  as id			   		#索引id
+				,c.corp_id  						#企业id
+				,c.corp_bln 						#注册号
+				,c.currency_code					#货币单位				
+				,c.approval_status					#状态
+				,c.corp_type						#类型		
+						
+				,'综合查询' as search_type				#条件类型				
+				
+				,c.corp_name 						#企业名称
+				,c.artificial_person				#法人	
+					
+				,c.res_date							#来源（区域CODE）		*固定条件*
+				,c.corp_rc							#注册资本				*固定条件*
+				,c.corp_edate 						#成立日期				*固定条件*
+				
+			FROM corp_base c	
+				
+			WHERE  c.corp_id > {maxID}
+				
+				ORDER BY c.corp_id
+				
+				LIMIT {limit}
+				
+			]]>
+		</sql>
+	</creat>
+</sentences>

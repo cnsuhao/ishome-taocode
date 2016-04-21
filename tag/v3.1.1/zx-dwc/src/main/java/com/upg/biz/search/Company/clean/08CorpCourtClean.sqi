@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<sentences>
+	<creat>
+		<id>corp_court_list</id>
+		<index>corp_court_list</index>
+		<!-- 开庭信息（包括个人开庭和企业开庭） -->
+		<sql>
+			<![CDATA[
+			
+			SELECT 
+				court.t_date,
+				court.cause_no,						#案号
+				court.cause_reason,					#案由
+				#persion
+				court.plaintiff, 					#原告
+				court.defandant, 					#被告
+
+			FROM corp_court court 
+			
+			WHERE court.t_date < '2016-02-01 00:00:00'
+			AND   court.t_date > '2016-01-25 23:59:59'
+			
+			ORDER BY court.t_date 
+			
+			LIMIT 1
+				
+			]]>
+		</sql>
+	</creat>
+</sentences>

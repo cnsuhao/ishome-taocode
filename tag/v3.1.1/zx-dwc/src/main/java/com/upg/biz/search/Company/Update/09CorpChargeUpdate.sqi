@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<sentences>
+	<update>
+		<id>corp_charge_update</id>
+		<index>corp_charge_list</index>
+		<!-- 判决信息 -->
+		<sql>
+			<![CDATA[
+			
+			SELECT 
+				 charge.chargeID  as id			   			#索引id
+				 ,charge.t_date
+				 ,charge.chargeID						#判决书编号
+				 ,charge.title							#判决书标题
+				 ,charge.charge							#判决书内容
+				 ,charge.close_date						#审结日期
+				 ,charge.cause_no						#案号
+				 
+			FROM corp_charge charge 
+							
+			WHERE
+				     charge.id is not null
+
+				AND  charge.t_date > '{starttime}'
+				AND  charge.t_date < '{endtime}'
+				
+				#ORDER BY charge.t_date 
+				
+				LIMIT {limit}
+				
+			]]>
+		</sql>
+	</update>
+</sentences>
