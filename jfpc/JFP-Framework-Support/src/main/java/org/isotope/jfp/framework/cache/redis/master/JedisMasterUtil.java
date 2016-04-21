@@ -848,4 +848,19 @@ public class JedisMasterUtil implements ISJedisSupport {
 		return value;
 	}
 
+	@Override
+	public long setnx(String key, String value, int waitTime) {
+		Jedis jedis = getJedis();
+		long rs = 0l;
+		try {
+			rs = jedis.setnx(key, value);
+			jedis.expire(key, waitTime);
+		} catch (Exception e) {
+			logger.error("get value from redis error[key:" + key + "]", e);
+		} finally {
+			close(jedis);
+		}
+		return rs;
+	}
+
 }
