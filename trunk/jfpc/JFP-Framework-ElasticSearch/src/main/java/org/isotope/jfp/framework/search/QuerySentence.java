@@ -30,7 +30,7 @@ public class QuerySentence {
 	/**
 	 * 工商URL地址
 	 */
-	public static final String COMPANY_URL = "COMPANY:URL:";
+	public static final String COMPANY_URL = "COMPANY:CAPURL:";
 
 	private Logger logger = LoggerFactory.getLogger(TableService.class);
 	@Autowired
