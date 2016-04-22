@@ -59,7 +59,7 @@ public class QuerySentence {
 			doLoadIndexFiles(file.getInputStream());
 		}
 		for (Resource file : urlFiles) {
-			logger.debug("加载人工检索配置文件......" + file);
+			logger.debug("加载全文检索更新文件......" + file);
 			doLoadAreaUrlFiles(file.getInputStream());
 		}
 		logger.debug("全文检索初始化<<<<<=====结束");
