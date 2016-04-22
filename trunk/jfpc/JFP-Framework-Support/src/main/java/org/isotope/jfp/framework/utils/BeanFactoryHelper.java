@@ -30,6 +30,8 @@ public class BeanFactoryHelper implements BeanFactoryAware {
 	@SuppressWarnings("unchecked")
 	public static <T> T getBean(String beanName) {
 		try{
+			if(EmptyHelper.isEmpty(beanName))
+				return null;
 			if (null != beanFactory) {
 				return (T) beanFactory.getBean(beanName);
 			}
