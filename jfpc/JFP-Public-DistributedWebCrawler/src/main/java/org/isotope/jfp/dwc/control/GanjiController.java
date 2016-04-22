@@ -185,13 +185,6 @@ public class GanjiController {
 		return model;
 	}
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ModelAndView loadHttpProxys1(HttpServletRequest request) throws Exception {
-		ModelAndView model = new ModelAndView("index");
-
-		return model;
-	}
-
 	@RequestMapping(value = "/K/{key}", method = RequestMethod.GET)
 	public ModelAndView capInitKey(HttpServletRequest request, @PathVariable String key) {
 		ModelAndView model = new ModelAndView("GJK");
