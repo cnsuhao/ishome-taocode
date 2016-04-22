@@ -29,8 +29,12 @@ public class BeanFactoryHelper implements BeanFactoryAware {
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T> T getBean(String beanName) {
-		if (null != beanFactory) {
-			return (T) beanFactory.getBean(beanName);
+		try{
+			if (null != beanFactory) {
+				return (T) beanFactory.getBean(beanName);
+			}
+		}catch(Exception e){
+			
 		}
 		return null;
 	}
