@@ -55,6 +55,8 @@ public class MyRedisMaster implements ICacheService, ISFrameworkConstants {
 	ISJedisSupport jedisSupport;
 
 	public ISJedisSupport getJedisSupport() {
+		if(EmptyHelper.isEmpty(jedisScope))
+			return jedisSupport;
 		//激活分片下面的scope模式
 		ISJedisSupport support = BeanFactoryHelper.getBean(jedisScope);
 		if(support == null)
