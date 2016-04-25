@@ -19,8 +19,8 @@ import org.slf4j.LoggerFactory;
  * @author 001745
  *
  */
-public class DataIndexServiceJob extends MyJobSupport {
-	private Logger logger = LoggerFactory.getLogger(DataIndexServiceJob.class);
+public class DataIndexUpdateServiceJob extends MyJobSupport {
+	private Logger logger = LoggerFactory.getLogger(DataIndexUpdateServiceJob.class);
 	// 缓存队列
 	QuerySentence myQuerySentence;
 
@@ -59,6 +59,9 @@ public class DataIndexServiceJob extends MyJobSupport {
 		logger.info("全文检索索引同步更新业务  >>>>>===== 开始");
 		// 数据整理,基于Redis进行缓存同步
 		{
+			
+			
+			
 			Calendar calendar = Calendar.getInstance();
 			calendar.add(Calendar.HOUR, -1);
 			{
