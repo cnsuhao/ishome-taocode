@@ -1,4 +1,4 @@
-package org.isotope.jfp.search.control;
+package org.isotope.jfp.framework.search.control;
 
 import org.isotope.jfp.framework.search.SQLService;
 import org.isotope.jfp.framework.search.TableService;
