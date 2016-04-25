@@ -47,17 +47,20 @@ public class QuerySentenceServiceJob extends MyJobSupport {
 	public boolean doProcessRepeat() throws Exception {
 		logger.info("全文检索参数缓存同步业务  >>>>>===== 开始");
 		// 数据整理,基于Redis进行缓存同步
+		Set<String> keys;
+		String value;
 		{
 			Map<String, QueryBean> sentenceMap = myQuerySentence.getSentenceMap();
-			Set<String> keys = sentenceMap.keySet();
-			String value;
+			keys = sentenceMap.keySet();
 			for (String key : keys) {
 				myCacheService.selectDB(index);
 				value = (String) myCacheService.getObject(QuerySentence.SENTENCE_SCH + key, false);
 				if (EmptyHelper.isNotEmpty(value))
 					sentenceMap.put(key, JSON.parseObject(value, QueryBean.class));
 			}
-
+			myQuerySentence.setSentenceMap(sentenceMap);
+		}
+		{
 			Map<String, QueryBean> updateMap = myQuerySentence.getUpdateMap();
 			keys = updateMap.keySet();
 			for (String key : keys) {
@@ -66,7 +69,9 @@ public class QuerySentenceServiceJob extends MyJobSupport {
 				if (EmptyHelper.isNotEmpty(value))
 					updateMap.put(key, JSON.parseObject(value, QueryBean.class));
 			}
-			
+			myQuerySentence.setUpdateMap(updateMap);
+		}
+		{
 			Map<String, QueryBean> creatMap = myQuerySentence.getCreatMap();
 			keys = creatMap.keySet();
 			for (String key : keys) {
@@ -75,8 +80,9 @@ public class QuerySentenceServiceJob extends MyJobSupport {
 				if (EmptyHelper.isNotEmpty(value))
 					creatMap.put(key, JSON.parseObject(value, QueryBean.class));
 			}
-			myCacheService.init();
+			myQuerySentence.setCreatMap(creatMap);
 		}
+		myCacheService.init();
 		logger.info("全文检索参数缓存同步业务  <<<<<===== 结束");
 		return true;
 	}

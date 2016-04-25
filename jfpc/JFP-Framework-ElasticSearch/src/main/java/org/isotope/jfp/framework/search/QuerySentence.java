@@ -24,9 +24,23 @@ import com.alibaba.fastjson.JSON;
  *
  */
 public class QuerySentence {
+	/**
+	 * 更新语句
+	 */
 	public final static String SENTENCE_UPD = "SENTENCE:UPD:";
+	/**
+	 * 创建语句
+	 */
 	public final static String SENTENCE_CRT = "SENTENCE:CRT:";
+	/**
+	 * 查询语句
+	 */
 	public final static String SENTENCE_SCH = "SENTENCE:SCH:";
+	/**
+	 * 最后同步日期
+	 */
+	public final static String SENTENCE_SYN = "SENTENCE:SYN:";
+	
 	/**
 	 * 工商URL地址
 	 */
