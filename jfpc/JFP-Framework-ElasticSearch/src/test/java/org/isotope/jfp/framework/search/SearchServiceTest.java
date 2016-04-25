@@ -26,7 +26,7 @@ public class SearchServiceTest {
 		qs.doLoadSentenceFiles(new FileInputStream(SearchServiceTest.class.getResource("").getPath()+"\\QueryTest.dsl"));
 		QueryBean qb = qs.getSentence("test");
 		
-		String query = String.format(qb.getQuery(), "中新力合");
+		String query = String.format(qb.getValue(), "杨长兵","",0,999999999,"1111-11-11","3333-11-11",1,50);
 		System.out.println("query1=====" + query);
 
 		Search.Builder searchBuilder = new Search.Builder(query).addIndex(qb.getIndex()).addType("data");
