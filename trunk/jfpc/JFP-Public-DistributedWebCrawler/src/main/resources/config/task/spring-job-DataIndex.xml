@@ -31,7 +31,7 @@
 		<property name='targetMethod' value='doProcess' />
 	</bean>
 	
-	<bean id='dataIndexServiceMonitorJob' class='org.isotope.jfp.framework.search.task.DataIndexServiceJob' >
+	<bean id='dataIndexServiceMonitorJob' class='org.isotope.jfp.framework.search.task.DataIndexUpdateServiceJob' >
 		<property name='myCacheService' ref='myCache' />
 		<property name='myQuerySentence' ref='myQuerySentence' />
 		<property name='sqlService' ref='ElasticsearchSQLService' />
