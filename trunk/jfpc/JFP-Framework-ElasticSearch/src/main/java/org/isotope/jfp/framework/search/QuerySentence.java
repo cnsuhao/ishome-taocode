@@ -25,6 +25,10 @@ import com.alibaba.fastjson.JSON;
  */
 public class QuerySentence {
 	/**
+	 * 最后更新时间
+	 */
+	public final static String SENTENCE_UTD = "SENTENCE:UTD:";
+	/**
 	 * 更新语句
 	 */
 	public final static String SENTENCE_UPD = "SENTENCE:UPD:";
@@ -114,7 +118,7 @@ public class QuerySentence {
 						qb.setIndex(reader.getElementText().toLowerCase());
 					} else if (type.equals(reader.getLocalName())) {
 						qb.setValue(reader.getElementText());
-						logger.debug("保存全文检索索引.........." + qb.getId());
+						logger.debug("保存全文检索配置.........." + qb.getId());
 						datas.put(qb.getId(), qb);
 						if (myCacheService != null)
 							myCacheService.putObject(redisKey + qb.getId(), JSON.toJSONString(qb), 0, false);
