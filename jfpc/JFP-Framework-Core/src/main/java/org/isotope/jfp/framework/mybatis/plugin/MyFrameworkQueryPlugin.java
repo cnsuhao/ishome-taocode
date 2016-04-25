@@ -27,7 +27,7 @@ import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.type.TypeHandler;
 import org.apache.ibatis.type.TypeHandlerRegistry;
-import org.isotope.jfp.framework.beands.page.PageVOSupport;
+import org.isotope.jfp.framework.beans.page.PageVOSupport;
 import org.isotope.jfp.framework.mybatis.MyFrameworkSqlSource;
 import org.isotope.jfp.framework.mybatis.plugin.dialect.DefaultDialect;
 import org.isotope.jfp.framework.support.MyDataBaseObjectSupport;

@@ -1,4 +1,4 @@
-package org.isotope.jfp.framework.beands.page;
+package org.isotope.jfp.framework.beans.page;
 
 import java.util.List;
 
