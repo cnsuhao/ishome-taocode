@@ -52,7 +52,7 @@ public class MyJobSupport implements ISJobConstants, ISFrameworkConstants, ISTas
 		return myHttpService.getHttpProxy();
 	}
 
-	public boolean removeHttpProxy(HttpProxyBean httpProxy) {
+	public boolean removeHttpProxy(HttpProxyBean httpProxy) throws Exception {
 		if (myHttpService != null)
 			return myHttpService.removeHttpProxy(httpProxy);
 		return false;
