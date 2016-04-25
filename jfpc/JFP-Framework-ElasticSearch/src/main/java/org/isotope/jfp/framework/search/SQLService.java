@@ -11,6 +11,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.apache.ibatis.session.SqlSession;
+import org.isotope.jfp.framework.cache.ICacheService;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.search.bean.QueryBean;
 import org.isotope.jfp.framework.utils.BeanFactoryHelper;
@@ -19,6 +20,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.SqlSessionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.alibaba.fastjson.JSONObject;
 
@@ -141,6 +143,7 @@ public class SQLService implements ISFrameworkConstants {
 		Builder bulkIndexBuilder;
 		BulkResult result;
 		int num = 0;
+		int errorNum = 0;
 		List<Index> actions = null;
 		boolean commit = false;
 		for (int c = 0; c <= Integer.MAX_VALUE; c++) {
@@ -170,6 +173,11 @@ public class SQLService implements ISFrameworkConstants {
 					} catch (Exception e) {
 						logger.error("addDataIntoIndex===>>>" + e.getMessage());
 						Thread.sleep(sleep * 2);
+						if(errorNum>sleep * 2){
+							throw e;
+						}else{
+							errorNum = errorNum + 1;
+						}
 					}
 				}
 				commit = false;
@@ -177,14 +185,17 @@ public class SQLService implements ISFrameworkConstants {
 				break;
 			}
 		}
+		myCacheService.putObject(QuerySentence.SENTENCE_UTD + qb.getId(), "" + System.currentTimeMillis(), 0, false);
 		logger.info("creatIndexBySQL<<<<<=====End");
 	}
 
+	@Autowired
+	private ICacheService myCacheService;
 	@Resource
-	QuerySentence config;
-	
-	long maxID= 0;
-	long minID= 0;
+	private QuerySentence config;
+
+	private long maxID = 0;
+	private long minID = 0;
 
 	private List<Index> loadDataFromDb(QueryBean qb, int page, int from) throws SQLException {
 		List<Index> actions = new ArrayList<Index>();
@@ -209,13 +220,13 @@ public class SQLService implements ISFrameworkConstants {
 			if (EmptyHelper.isEmpty(endtime))
 				endtime = "9000-01-01 23:59:59";
 
-			//初始化运作
-			if(sql.indexOf("{maxID}")>0){
-				sql = sql.replace("{maxID}", ""+maxID);// 开始时间
-				sql = sql.replace("{limit}", ""+size);// 分页限制
+			// 初始化运作
+			if (sql.indexOf("{maxID}") > 0) {
+				sql = sql.replace("{maxID}", "" + maxID);// 开始时间
+				sql = sql.replace("{limit}", "" + size);// 分页限制
 			}
-			//差分更新			
-			else{
+			// 差分更新
+			else {
 				sql = sql.replace("{starttime}", starttime);// 开始时间
 				sql = sql.replace("{endtime}", endtime);// 终了时间
 				sql = sql.replace("{limit}", start + "," + size);// 分页限制
@@ -237,7 +248,7 @@ public class SQLService implements ISFrameworkConstants {
 				}
 				id = data.remove("id").toString();
 				minID = Long.parseLong(id);
-				if(maxID < minID)
+				if (maxID < minID)
 					maxID = minID;
 				if (EmptyHelper.isEmpty(id))
 					actions.add(new Index.Builder(data.toJSONString()).index(qb.getIndex()).type(ElasticsearchPool.TYPE).build());
