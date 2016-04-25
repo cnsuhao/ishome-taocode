@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- * 分布式网络爬虫服务端 Distributed Web Crawler
+ * 全文检索服务索引管理
  * 
  * @author ISHome
  * @version 0.0.1
