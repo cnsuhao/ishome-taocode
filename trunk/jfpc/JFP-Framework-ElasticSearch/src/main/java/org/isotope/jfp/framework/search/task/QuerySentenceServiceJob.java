@@ -3,6 +3,7 @@ package org.isotope.jfp.framework.search.task;
 import java.util.Map;
 import java.util.Set;
 
+import org.isotope.jfp.framework.search.ISSentenceConstants;
 import org.isotope.jfp.framework.search.QuerySentence;
 import org.isotope.jfp.framework.search.bean.QueryBean;
 import org.isotope.jfp.framework.support.MyJobSupport;
@@ -54,7 +55,7 @@ public class QuerySentenceServiceJob extends MyJobSupport {
 			keys = sentenceMap.keySet();
 			for (String key : keys) {
 				myCacheService.selectDB(index);
-				value = (String) myCacheService.getObject(QuerySentence.SENTENCE_SCH + key, false);
+				value = (String) myCacheService.getObject(ISSentenceConstants.SENTENCE_SCH + key, false);
 				if (EmptyHelper.isNotEmpty(value))
 					sentenceMap.put(key, JSON.parseObject(value, QueryBean.class));
 			}
@@ -65,7 +66,7 @@ public class QuerySentenceServiceJob extends MyJobSupport {
 			keys = updateMap.keySet();
 			for (String key : keys) {
 				myCacheService.selectDB(index);
-				value = (String) myCacheService.getObject(QuerySentence.SENTENCE_UPD + key, false);
+				value = (String) myCacheService.getObject(ISSentenceConstants.SENTENCE_UPD + key, false);
 				if (EmptyHelper.isNotEmpty(value))
 					updateMap.put(key, JSON.parseObject(value, QueryBean.class));
 			}
@@ -76,7 +77,7 @@ public class QuerySentenceServiceJob extends MyJobSupport {
 			keys = creatMap.keySet();
 			for (String key : keys) {
 				myCacheService.selectDB(index);
-				value = (String) myCacheService.getObject(QuerySentence.SENTENCE_CRT + key, false);
+				value = (String) myCacheService.getObject(ISSentenceConstants.SENTENCE_CRT + key, false);
 				if (EmptyHelper.isNotEmpty(value))
 					creatMap.put(key, JSON.parseObject(value, QueryBean.class));
 			}

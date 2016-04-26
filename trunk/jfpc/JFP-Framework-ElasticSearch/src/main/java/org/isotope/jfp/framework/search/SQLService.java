@@ -173,9 +173,9 @@ public class SQLService implements ISFrameworkConstants {
 					} catch (Exception e) {
 						logger.error("addDataIntoIndex===>>>" + e.getMessage());
 						Thread.sleep(sleep * 2);
-						if(errorNum>sleep * 2){
+						if (errorNum > sleep * 2) {
 							throw e;
-						}else{
+						} else {
 							errorNum = errorNum + 1;
 						}
 					}
@@ -185,7 +185,7 @@ public class SQLService implements ISFrameworkConstants {
 				break;
 			}
 		}
-		myCacheService.putObject(QuerySentence.SENTENCE_UTD + qb.getId(), "" + System.currentTimeMillis(), 0, false);
+		myCacheService.putObject(ISSentenceConstants.SENTENCE_UTD + qb.getId(), "" + System.currentTimeMillis(), 0, false);
 		logger.info("creatIndexBySQL<<<<<=====End");
 	}
 

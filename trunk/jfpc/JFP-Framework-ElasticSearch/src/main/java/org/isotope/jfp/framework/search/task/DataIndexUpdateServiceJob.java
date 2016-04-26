@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.isotope.jfp.framework.cache.ICacheService;
+import org.isotope.jfp.framework.search.ISSentenceConstants;
 import org.isotope.jfp.framework.search.QuerySentence;
 import org.isotope.jfp.framework.search.SQLService;
 import org.isotope.jfp.framework.search.bean.QueryBean;
@@ -69,12 +70,12 @@ public class DataIndexUpdateServiceJob extends MyJobSupport {
 			while (iter.hasNext()) {
 				Entry<String, QueryBean> entry = iter.next();
 				// 获得最后一次更新时间
-				String lastTime = (String) myCacheService.getObject(QuerySentence.SENTENCE_UTD + entry.getKey(), false);
+				String lastTime = (String) myCacheService.getObject(ISSentenceConstants.SENTENCE_UTD + entry.getKey(), false);
 				if (EmptyHelper.isNotEmpty(lastTime)) {
 					logger.info("全文检索索引同步更新业务  xxxxx===== 取消....." + entry.getKey());
 					continue;
 				} else {
-					myCacheService.putObject(QuerySentence.SENTENCE_UTD + entry.getKey(), lastCalendar.getTimeInMillis(), 0, false);
+					myCacheService.putObject(ISSentenceConstants.SENTENCE_UTD + entry.getKey(), lastCalendar.getTimeInMillis(), 0, false);
 				}
 
 				boolean upLast = true;
@@ -94,7 +95,7 @@ public class DataIndexUpdateServiceJob extends MyJobSupport {
 					}
 
 					sqlService.updateIndexBySQL(entry.getValue(), EMPTY, EMPTY);
-					myCacheService.putObject(QuerySentence.SENTENCE_UTD + entry.getKey(), lastCalendar.getTimeInMillis(), 0, false);
+					myCacheService.putObject(ISSentenceConstants.SENTENCE_UTD + entry.getKey(), lastCalendar.getTimeInMillis(), 0, false);
 				}
 			}
 		}

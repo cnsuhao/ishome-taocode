@@ -23,34 +23,8 @@ import com.alibaba.fastjson.JSON;
  * @author 001745
  *
  */
-public class QuerySentence {
-	/**
-	 * 最后更新时间
-	 */
-	public final static String SENTENCE_UTD = "SENTENCE:UTD:";
-	/**
-	 * 更新语句
-	 */
-	public final static String SENTENCE_UPD = "SENTENCE:UPD:";
-	/**
-	 * 创建语句
-	 */
-	public final static String SENTENCE_CRT = "SENTENCE:CRT:";
-	/**
-	 * 查询语句
-	 */
-	public final static String SENTENCE_SCH = "SENTENCE:SCH:";
-	/**
-	 * 最后同步日期
-	 */
-	public final static String SENTENCE_SYN = "SENTENCE:SYN:";
-	
-	/**
-	 * 工商URL地址
-	 */
-	public static final String COMPANY_URL = "COMPANY:CAPURL:";
-
-	private Logger logger = LoggerFactory.getLogger(TableService.class);
+public class QuerySentence implements ISSentenceConstants {
+	private Logger logger = LoggerFactory.getLogger(QuerySentence.class);
 	@Autowired
 	private ICacheService myCacheService;
 
