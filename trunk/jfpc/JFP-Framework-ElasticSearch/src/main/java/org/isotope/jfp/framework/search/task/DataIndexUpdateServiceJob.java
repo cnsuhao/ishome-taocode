@@ -75,7 +75,7 @@ public class DataIndexUpdateServiceJob extends MyJobSupport {
 					logger.info("全文检索索引同步更新业务  xxxxx===== 取消....." + entry.getKey());
 					continue;
 				} else {
-					myCacheService.putObject(ISSentenceConstants.SENTENCE_UTD + entry.getKey(), lastCalendar.getTimeInMillis(), 0, false);
+					myCacheService.putObject(ISSentenceConstants.SENTENCE_UTD + entry.getKey(), "" + lastCalendar.getTimeInMillis(), 0, false);
 				}
 
 				boolean upLast = true;
@@ -95,7 +95,7 @@ public class DataIndexUpdateServiceJob extends MyJobSupport {
 					}
 
 					sqlService.updateIndexBySQL(entry.getValue(), EMPTY, EMPTY);
-					myCacheService.putObject(ISSentenceConstants.SENTENCE_UTD + entry.getKey(), lastCalendar.getTimeInMillis(), 0, false);
+					myCacheService.putObject(ISSentenceConstants.SENTENCE_UTD + entry.getKey(), "" + lastCalendar.getTimeInMillis(), 0, false);
 				}
 			}
 		}
