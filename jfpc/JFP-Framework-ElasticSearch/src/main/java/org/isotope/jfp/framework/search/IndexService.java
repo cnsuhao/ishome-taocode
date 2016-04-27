@@ -28,24 +28,42 @@ public class IndexService {
 	 * @throws Exception
 	 */
 	public void creatIndex(String index) throws Exception {
-		JestResult result = pool.getClient().execute(new CreateIndex.Builder(index).build());
-		logger.debug("creatIndex===" + result.getErrorMessage());
-		logger.debug("creatIndex===" + result.getJsonString());
+		JestClient jestClient = null;
+		try {
+			jestClient = pool.getClient();
+			JestResult result = jestClient.execute(new CreateIndex.Builder(index).build());
+			logger.debug("creatIndex===" + result.getErrorMessage());
+			logger.debug("creatIndex===" + result.getJsonString());
+		} catch (Exception e) {
+			logger.error("索引重建失败", e);
+		} finally {
+			if (jestClient != null)
+				jestClient.shutdownClient();
+		}
 	}
 
 	/**
 	 * 删除一个索引
+	 * 
 	 * @param index
 	 * @throws IOException
 	 */
 	public void deleteIndex(String index) throws IOException {
-		JestClient jestClient = pool.getClient();
-		// 删除索引
-		boolean indexExists = jestClient.execute(new IndicesExists.Builder(index).build()).isSucceeded();
-		if (indexExists) {
-			JestResult result = jestClient.execute(new DeleteIndex.Builder(index).build());
-			logger.debug("deleteIndex===" + result.getErrorMessage());
-			logger.debug("deleteIndex===" + result.getJsonString());
+		JestClient jestClient = null;
+		try {
+			jestClient = pool.getClient();
+			// 删除索引
+			boolean indexExists = jestClient.execute(new IndicesExists.Builder(index).build()).isSucceeded();
+			if (indexExists) {
+				JestResult result = jestClient.execute(new DeleteIndex.Builder(index).build());
+				logger.debug("deleteIndex===" + result.getErrorMessage());
+				logger.debug("deleteIndex===" + result.getJsonString());
+			}
+		} catch (Exception e) {
+			logger.error("索引重建失败", e);
+		} finally {
+			if (jestClient != null)
+				jestClient.shutdownClient();
 		}
 	}
 }

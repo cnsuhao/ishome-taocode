@@ -126,18 +126,25 @@ public class SQLService implements ISFrameworkConstants {
 		if (EmptyHelper.isNotEmpty(size2))
 			size = Integer.parseInt(size2);
 
-		JestClient jestClient = getElasticsearchPool().getClient();
+		JestClient jestClient = null;
 
 		if (ONE.equals(creatFlag)) {
-			String index = qb.getIndex();
-			// 删除索引
-			boolean indexExists = jestClient.execute(new IndicesExists.Builder(index).build()).isSucceeded();
-			if (indexExists) {
-				JestResult deleteIndexResult = jestClient.execute(new DeleteIndex.Builder(index).build());
-				logger.debug("deleteIndex===>>>ErrorMessage=" + deleteIndexResult.getErrorMessage() + ",JsonString=" + deleteIndexResult.getJsonString());
+			try{
+				jestClient = getElasticsearchPool().getClient();
+				String index = qb.getIndex();
+				// 删除索引
+				boolean indexExists = jestClient.execute(new IndicesExists.Builder(index).build()).isSucceeded();
+				if (indexExists) {
+					JestResult deleteIndexResult = jestClient.execute(new DeleteIndex.Builder(index).build());
+					logger.debug("deleteIndex===>>>ErrorMessage=" + deleteIndexResult.getErrorMessage() + ",JsonString=" + deleteIndexResult.getJsonString());
+				}
+				JestResult createIndexResult = jestClient.execute(new CreateIndex.Builder(index).build());
+				logger.debug("createIndex===>>>ErrorMessage=" + createIndexResult.getErrorMessage() + ",JsonString=" + createIndexResult.getJsonString());
 			}
-			JestResult createIndexResult = jestClient.execute(new CreateIndex.Builder(index).build());
-			logger.debug("createIndex===>>>ErrorMessage=" + createIndexResult.getErrorMessage() + ",JsonString=" + createIndexResult.getJsonString());
+			finally{
+				if(jestClient!=null)
+					jestClient.shutdownClient();
+			}
 		}
 
 		Builder bulkIndexBuilder;
@@ -154,6 +161,11 @@ public class SQLService implements ISFrameworkConstants {
 				} catch (Exception e) {
 					logger.error("loadDataFromDb===>>>" + e.getMessage());
 					Thread.sleep(sleep * 2);
+					if (errorNum > sleep * 2) {
+						throw e;
+					} else {
+						errorNum = errorNum + 1;
+					}
 				}
 			}
 			logger.debug("getData===>>>" + c * size);
@@ -178,6 +190,9 @@ public class SQLService implements ISFrameworkConstants {
 						} else {
 							errorNum = errorNum + 1;
 						}
+					}finally{
+						if(jestClient!=null)
+							jestClient.shutdownClient();
 					}
 				}
 				commit = false;
