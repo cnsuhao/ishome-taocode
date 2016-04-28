@@ -4,7 +4,7 @@
 
   <modelVersion>4.0.0</modelVersion>
   <groupId>Isotope</groupId>
-  <artifactId>JFP-Framework-Boxy</artifactId>
+  <artifactId>JPG-Business-Boxy</artifactId>
   <version>0.0.1-RELEASE</version>
 
     <properties>

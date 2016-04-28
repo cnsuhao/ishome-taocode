@@ -4,8 +4,8 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>Isotope</groupId>
-    <artifactId>JFP-Public-DistributedWebCrawler</artifactId>
-    <version>0.3.1-RELEASE</version>
+    <artifactId>JPG-WEB-Boxy</artifactId>
+    <version>0.0.1-RELEASE</version>
     
     <packaging>war</packaging>
     
