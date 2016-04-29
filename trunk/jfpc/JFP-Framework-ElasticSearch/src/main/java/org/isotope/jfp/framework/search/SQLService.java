@@ -48,11 +48,6 @@ public class SQLService implements ISFrameworkConstants {
 	 */
 	@Resource
 	SqlSession mySqlSession;
-	/**
-	 * 索引服务连接
-	 */
-	@Resource
-	ElasticsearchPool pool;
 
 	public SqlSession getMySqlSession() {
 		if (mySqlSession == null)
@@ -60,10 +55,15 @@ public class SQLService implements ISFrameworkConstants {
 		return mySqlSession;
 	}
 
-	public ElasticsearchPool getElasticsearchPool() {
+	/**
+	 * 索引服务连接
+	 */
+	@Resource
+	ElasticsearchPool pool;
+	public JestClient getClient() throws Exception {
 		if (pool == null)
 			pool = BeanFactoryHelper.getBean("ElasticsearchPool");
-		return pool;
+		return pool.getClient();
 	}
 
 	/**
@@ -120,7 +120,7 @@ public class SQLService implements ISFrameworkConstants {
 	}
 
 	private void makeIndexBySQL(QueryBean qb, String creatFlag, String from2, String size2) throws Exception {
-		logger.info("creatIndexBySQL=====>>>>>Start");
+		logger.info("makeIndexBySQL=====>>>>>Start....."+ qb.getIndex());
 		if (EmptyHelper.isNotEmpty(from2))
 			from = Integer.parseInt(from2);
 		if (EmptyHelper.isNotEmpty(size2))
@@ -130,7 +130,7 @@ public class SQLService implements ISFrameworkConstants {
 
 		if (ONE.equals(creatFlag)) {
 			try{
-				jestClient = getElasticsearchPool().getClient();
+				jestClient = getClient();
 				String index = qb.getIndex();
 				// 删除索引
 				boolean indexExists = jestClient.execute(new IndicesExists.Builder(index).build()).isSucceeded();
@@ -174,7 +174,7 @@ public class SQLService implements ISFrameworkConstants {
 				commit = false;
 				while (commit == false) {
 					try {
-						jestClient = getElasticsearchPool().getClient();
+						jestClient = getClient();
 						bulkIndexBuilder = new Bulk.Builder();
 						bulkIndexBuilder.addAction(actions);
 						result = jestClient.execute(bulkIndexBuilder.build());
@@ -200,8 +200,8 @@ public class SQLService implements ISFrameworkConstants {
 				break;
 			}
 		}
-		myCacheService.putObject(ISSentenceConstants.SENTENCE_UTD + qb.getId(), "" + System.currentTimeMillis(), 0, false);
-		logger.info("creatIndexBySQL<<<<<=====End");
+		myCacheService.putObject(ISSentenceConstants.SENTENCE_UTD + qb.getIndex(), "" + System.currentTimeMillis(), 0, false);
+		logger.info("makeIndexBySQL<<<<<=====End....."+ qb.getIndex());
 	}
 
 	@Autowired

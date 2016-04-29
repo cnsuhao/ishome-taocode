@@ -54,6 +54,7 @@ public class QuerySentenceServiceJob extends MyJobSupport {
 			Map<String, QueryBean> sentenceMap = myQuerySentence.getSentenceMap();
 			keys = sentenceMap.keySet();
 			for (String key : keys) {
+				logger.debug("    sentenceMap >>>>>===== "+key);
 				myCacheService.selectDB(index);
 				value = (String) myCacheService.getObject(ISSentenceConstants.SENTENCE_SCH + key, false);
 				if (EmptyHelper.isNotEmpty(value))
@@ -65,6 +66,7 @@ public class QuerySentenceServiceJob extends MyJobSupport {
 			Map<String, QueryBean> updateMap = myQuerySentence.getUpdateMap();
 			keys = updateMap.keySet();
 			for (String key : keys) {
+				logger.debug("    updateMap >>>>>===== "+key);
 				myCacheService.selectDB(index);
 				value = (String) myCacheService.getObject(ISSentenceConstants.SENTENCE_UPD + key, false);
 				if (EmptyHelper.isNotEmpty(value))
@@ -76,6 +78,7 @@ public class QuerySentenceServiceJob extends MyJobSupport {
 			Map<String, QueryBean> creatMap = myQuerySentence.getCreatMap();
 			keys = creatMap.keySet();
 			for (String key : keys) {
+				logger.debug("    creatMap >>>>>===== "+key);
 				myCacheService.selectDB(index);
 				value = (String) myCacheService.getObject(ISSentenceConstants.SENTENCE_CRT + key, false);
 				if (EmptyHelper.isNotEmpty(value))

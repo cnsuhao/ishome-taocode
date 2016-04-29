@@ -69,15 +69,13 @@ public class DataIndexUpdateServiceJob extends MyJobSupport {
 			Iterator<Entry<String, QueryBean>> iter = updateMap.entrySet().iterator();
 			while (iter.hasNext()) {
 				Entry<String, QueryBean> entry = iter.next();
+				QueryBean qb = entry.getValue();
 				// 获得最后一次更新时间
-				String lastTime = (String) myCacheService.getObject(ISSentenceConstants.SENTENCE_UTD + entry.getKey(), false);
-				if (EmptyHelper.isNotEmpty(lastTime)) {
+				String lastTime = (String) myCacheService.getObject(ISSentenceConstants.SENTENCE_UTD + qb.getIndex(), false);
+				if (EmptyHelper.isEmpty(lastTime)) {
 					logger.info("全文检索索引同步更新业务  xxxxx===== 取消....." + entry.getKey());
 					continue;
-				} else {
-					myCacheService.putObject(ISSentenceConstants.SENTENCE_UTD + entry.getKey(), "" + lastCalendar.getTimeInMillis(), 0, false);
-				}
-
+				} 
 				boolean upLast = true;
 				while (upLast) {
 					lastCalendar.add(Calendar.HOUR, 1);
@@ -95,8 +93,9 @@ public class DataIndexUpdateServiceJob extends MyJobSupport {
 					}
 
 					sqlService.updateIndexBySQL(entry.getValue(), EMPTY, EMPTY);
-					myCacheService.putObject(ISSentenceConstants.SENTENCE_UTD + entry.getKey(), "" + lastCalendar.getTimeInMillis(), 0, false);
 				}
+				// 设定最后一次更新时间
+				myCacheService.putObject(ISSentenceConstants.SENTENCE_UTD + qb.getIndex(), "" + lastCalendar.getTimeInMillis(), 0, false);
 			}
 		}
 		logger.info("全文检索索引同步更新业务  <<<<<===== 结束");
