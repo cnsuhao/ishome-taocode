@@ -60,6 +60,7 @@ public interface ISFrameworkConstants {
 	public final static String CONSTANT_SESSION_ID = "sessionid";
 	public final static String CONSTANT_USER_TOKEN = "token";
 	public final static String CONSTANT_LOGINER = "loginer";
+	public final static String CONSTANT_PASSWORD = "password";
 	public final static String CONSTANT_COMPANY = "company";
 	public final static String CONSTANT_USER_MAIN = "USERMAIN";
 	public final static String CONSTANT_SQL_SESSION = "sqlsession";
