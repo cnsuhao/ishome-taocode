@@ -1,7 +1,12 @@
 package org.isotope.jfp.framework.search.control;
 
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.isotope.jfp.framework.search.SQLService;
 import org.isotope.jfp.framework.search.TableService;
+import org.isotope.jfp.framework.security.SystemAdminInterceptor;
 import org.isotope.jfp.framework.utils.BeanFactoryHelper;
 import org.isotope.jfp.framework.utils.EmptyHelper;
 import org.springframework.stereotype.Controller;
@@ -18,19 +23,22 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class DataIndexController {
+	
+	@Resource
+	SystemAdminInterceptor systemAdminInterceptor;
 
 	@RequestMapping(value = "/DIC", method = RequestMethod.GET)
-	public ModelAndView creatDataIndex(
-			  String T    //基于表创建索引名字
-			, String I    //基于SQL创建索引名字
-			, String C    //创建索引
-			, String from //起点
-			, String size //尺寸
-			, String st //开始日期
-			, String et //终了日期
-			) throws Exception {
+	public ModelAndView creatDataIndex(HttpServletRequest request, HttpServletResponse response
+	, String T // 基于表创建索引名字
+	, String I // 基于SQL创建索引名字
+	, String C // 创建索引
+	, String from // 起点
+	, String size // 尺寸
+	, String st // 开始日期
+	, String et // 终了日期
+	) throws Exception {
 		ModelAndView model = new ModelAndView("DWC/index");
-		//基于表进行操作
+		// 基于表进行操作
 		if (EmptyHelper.isNotEmpty(T)) {
 			TableService table = BeanFactoryHelper.getBean("ElasticsearchTableService");
 			table.creatIndexByTable(T, from, size);
@@ -39,9 +47,11 @@ public class DataIndexController {
 		else if (EmptyHelper.isNotEmpty(I)) {
 			SQLService sql = BeanFactoryHelper.getBean("ElasticsearchSQLService");
 			if (EmptyHelper.isNotEmpty(C)) {
-				sql.setStarttime(st);
-				sql.setEndtime(et);
-				sql.creatIndexBySQL(C, I, from, size);
+				if (SystemAdminInterceptor.ONE.equals(C)&& systemAdminInterceptor.doCheckAdmin(request,response)) {
+					sql.setStarttime(st);
+					sql.setEndtime(et);
+					sql.creatIndexBySQL(C, I, from, size);	
+				}
 			} else {
 				sql.setStarttime(st);
 				sql.setEndtime(et);
@@ -50,6 +60,5 @@ public class DataIndexController {
 		}
 		return model;
 	}
-
 
 }
