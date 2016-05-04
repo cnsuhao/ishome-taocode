@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 import com.alibaba.fastjson.JSON;
 
 /**
- * 网络代理配置
+ * 网络代理管理
  * 
  * @author fucy
  * @version 3.1.2.2016/04/25
