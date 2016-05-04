@@ -1,4 +1,4 @@
-package org.isotope.jfp.framework.net.proxy;
+package org.isotope.jfp.framework.net;
 
 /**
  * 系统开发基底，各种工具与实现
