@@ -2,6 +2,7 @@ package org.isotope.jfp.framework.support;
 
 import org.isotope.jfp.framework.beans.net.HttpProxyBean;
 import org.isotope.jfp.framework.biz.ISTask;
+import org.isotope.jfp.framework.biz.common.ISProcess;
 import org.isotope.jfp.framework.cache.ICacheService;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.constants.pub.ISJobConstants;
@@ -16,7 +17,7 @@ import org.isotope.jfp.framework.utils.EmptyHelper;
  * @version 2.4.1.20151110
  * @since 2.4.1
  */
-public class MyJobSupport implements ISJobConstants, ISFrameworkConstants, ISTask {
+public class MyJobSupport implements ISJobConstants, ISFrameworkConstants, ISProcess, ISTask {
 
 	/**
 	 * 缓存队列
@@ -137,16 +138,16 @@ public class MyJobSupport implements ISJobConstants, ISFrameworkConstants, ISTas
 		return true;
 	}
 
-	public void doProcess() throws Exception {
+	public boolean doProcess() throws Exception {
 		if (checkLock() == false)
-			return;
+			return false;
 		startLock();
 		try {
 			doProcessRepeat();
 		} finally {
 			endLock();
 		}
-		// 清空数据缓存
+		return true;
 	}
 
 	/**
