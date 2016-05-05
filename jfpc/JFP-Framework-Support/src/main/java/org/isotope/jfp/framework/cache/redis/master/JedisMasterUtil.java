@@ -25,7 +25,7 @@ import redis.clients.jedis.JedisPubSub;
  * @see RedisChannelConfigBean
  */
 public class JedisMasterUtil implements ISJedisSupport {
-	private Logger logger = LoggerFactory.getLogger(JedisMasterUtil.class);
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	public JedisMasterUtil() {
 
