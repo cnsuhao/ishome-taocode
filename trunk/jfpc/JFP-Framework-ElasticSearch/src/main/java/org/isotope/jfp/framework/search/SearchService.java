@@ -21,7 +21,7 @@ import io.searchbox.core.SearchResult;
  */
 @Service
 public class SearchService {
-	private Logger logger = LoggerFactory.getLogger(TableService.class);
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Resource
 	ElasticsearchPool pool;

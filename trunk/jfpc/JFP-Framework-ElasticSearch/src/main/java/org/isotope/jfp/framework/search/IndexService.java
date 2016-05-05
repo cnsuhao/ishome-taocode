@@ -16,7 +16,7 @@ import io.searchbox.indices.IndicesExists;
 
 @Service
 public class IndexService {
-	private Logger logger = LoggerFactory.getLogger(IndexService.class);
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Resource
 	ElasticsearchPool pool;
 

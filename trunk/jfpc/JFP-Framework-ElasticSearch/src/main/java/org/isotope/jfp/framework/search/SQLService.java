@@ -41,7 +41,7 @@ import io.searchbox.indices.IndicesExists;
  *
  */
 public class SQLService implements ISFrameworkConstants {
-	private Logger logger = LoggerFactory.getLogger(SQLService.class);
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	/**
 	 * 数据库连接

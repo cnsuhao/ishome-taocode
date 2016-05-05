@@ -21,7 +21,7 @@ import io.searchbox.core.Index;
  */
 @Service
 public class DataService {
-	private Logger logger = LoggerFactory.getLogger(DataService.class);
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	public int size = 1000;
 
 	public int getSize() {
