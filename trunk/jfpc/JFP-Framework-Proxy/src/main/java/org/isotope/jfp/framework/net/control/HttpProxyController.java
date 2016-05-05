@@ -30,7 +30,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class HttpProxyController {
-	private Logger logger = LoggerFactory.getLogger(HttpProxyController.class);
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Resource
 	HttpProxyServiceImpl HttpProxyServiceImpl_;
