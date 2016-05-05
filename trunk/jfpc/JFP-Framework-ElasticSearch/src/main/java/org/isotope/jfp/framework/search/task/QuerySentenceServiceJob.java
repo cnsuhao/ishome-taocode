@@ -6,7 +6,7 @@ import java.util.Set;
 import org.isotope.jfp.framework.search.ISSentenceConstants;
 import org.isotope.jfp.framework.search.QuerySentence;
 import org.isotope.jfp.framework.search.bean.QueryBean;
-import org.isotope.jfp.framework.support.MyJobSupport;
+import org.isotope.jfp.framework.support.MyTaskSupport;
 import org.isotope.jfp.framework.utils.EmptyHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +19,7 @@ import com.alibaba.fastjson.JSON;
  * @author 001745
  *
  */
-public class QuerySentenceServiceJob extends MyJobSupport {
+public class QuerySentenceServiceJob extends MyTaskSupport {
 	private Logger logger = LoggerFactory.getLogger(QuerySentenceServiceJob.class);
 	// 缓存队列
 	QuerySentence myQuerySentence;
