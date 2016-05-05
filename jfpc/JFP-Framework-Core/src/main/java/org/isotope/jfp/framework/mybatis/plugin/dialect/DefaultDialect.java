@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
  * @version 1.0
  */
 public class DefaultDialect implements ISFrameworkConstants {
-	private Logger logger = LoggerFactory.getLogger(DefaultDialect.class);
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	// 自定义orderby
 	private String supportsOrderby = " ORDER BY cc1 desc ";

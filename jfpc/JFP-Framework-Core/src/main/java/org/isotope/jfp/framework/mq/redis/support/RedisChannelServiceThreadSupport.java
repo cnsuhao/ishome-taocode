@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
  * @since 2.4.1
  */
 public abstract class RedisChannelServiceThreadSupport extends Thread implements ISFrameworkConstants, ISReceive, ISInit, ISCheck, ISProcess, ISFinished {
-	private Logger logger = LoggerFactory.getLogger(RedisChannelServiceThreadSupport.class);
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	/**
 	 * 等待时间（毫秒）

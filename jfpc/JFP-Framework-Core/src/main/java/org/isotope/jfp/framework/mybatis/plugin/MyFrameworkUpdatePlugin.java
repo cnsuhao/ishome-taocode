@@ -20,7 +20,7 @@ import org.apache.ibatis.plugin.Signature;
 //TODO 添加非法字符过滤器
 @Intercepts({ @Signature(type = Executor.class, method = "update", args = { MappedStatement.class, Object.class }) })
 public class MyFrameworkUpdatePlugin implements Interceptor {
-	//private Logger logger = LoggerFactory.getLogger(MyFrameworkUpdatePlugin.class);
+	//private Logger logger = LoggerFactory.getLogger(this.getClass());
 	static int MAPPED_STATEMENT_INDEX = 0;
 	static int PARAMETER_INDEX = 1;
 	static int ROWBOUNDS_INDEX = 2;

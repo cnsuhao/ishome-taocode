@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
  */
 public class LogSendServiceImpl extends CommonChannelConfig implements ISLogSupport, ISLogConstants, ISFrameworkConstants {
 
-	private Logger logger = LoggerFactory.getLogger(LogSendServiceImpl.class);
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	public LogSendServiceImpl() {
 		this(ISLogSupport.CONFIG_KEY);

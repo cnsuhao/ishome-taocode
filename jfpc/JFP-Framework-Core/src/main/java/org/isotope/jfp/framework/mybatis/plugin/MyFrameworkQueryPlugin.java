@@ -45,7 +45,7 @@ import org.slf4j.LoggerFactory;
 //TODO 添加非法字符过滤器
 @Intercepts({ @Signature(type = Executor.class, method = "query", args = { MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class }) })
 public class MyFrameworkQueryPlugin implements Interceptor {
-	private Logger logger = LoggerFactory.getLogger(MyFrameworkQueryPlugin.class);
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	protected static final int MAPPED_STATEMENT_INDEX = 0;
 	protected static final int PARAMETER_INDEX = 1;
