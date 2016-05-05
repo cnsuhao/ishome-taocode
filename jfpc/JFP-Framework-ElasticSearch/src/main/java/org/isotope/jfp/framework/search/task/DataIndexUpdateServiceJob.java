@@ -11,7 +11,7 @@ import org.isotope.jfp.framework.search.ISSentenceConstants;
 import org.isotope.jfp.framework.search.QuerySentence;
 import org.isotope.jfp.framework.search.SQLService;
 import org.isotope.jfp.framework.search.bean.QueryBean;
-import org.isotope.jfp.framework.support.MyJobSupport;
+import org.isotope.jfp.framework.support.MyTaskSupport;
 import org.isotope.jfp.framework.utils.EmptyHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author 001745
  *
  */
-public class DataIndexUpdateServiceJob extends MyJobSupport {
+public class DataIndexUpdateServiceJob extends MyTaskSupport {
 	private Logger logger = LoggerFactory.getLogger(DataIndexUpdateServiceJob.class);
 	// 缓存队列
 	QuerySentence myQuerySentence;
