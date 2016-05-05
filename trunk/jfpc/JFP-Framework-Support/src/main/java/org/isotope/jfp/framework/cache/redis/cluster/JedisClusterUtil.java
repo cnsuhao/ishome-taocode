@@ -28,7 +28,7 @@ import redis.clients.jedis.JedisCluster;
  * @see RedisChannelConfigBean
  */
 public class JedisClusterUtil implements ISJedisSupport, ISFrameworkConstants {
-	private Logger logger = LoggerFactory.getLogger(JedisClusterUtil.class);
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	public JedisClusterUtil() {
 
