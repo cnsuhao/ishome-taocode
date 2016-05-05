@@ -20,7 +20,7 @@ import com.alibaba.fastjson.JSON;
  *
  */
 public class QuerySentenceServiceJob extends MyTaskSupport {
-	private Logger logger = LoggerFactory.getLogger(QuerySentenceServiceJob.class);
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	// 缓存队列
 	QuerySentence myQuerySentence;
 
