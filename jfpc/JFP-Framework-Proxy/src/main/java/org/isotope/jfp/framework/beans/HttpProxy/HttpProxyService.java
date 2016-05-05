@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 /** Http代理地址*/
 @Service("HttpProxyService")
 public class HttpProxyService extends MyServiceSupport {
-	protected static final Logger logger = LoggerFactory.getLogger(HttpProxyService.class);
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	public HttpProxyDao getDao() {
 		return getMySqlSession().getMapper(HttpProxyDao.class);
