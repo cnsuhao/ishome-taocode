@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
  * 
  */
 public class UserMailSendServiceImpl extends CommonChannelConfig implements ISMailSupport, ISMailConstants, ISFrameworkConstants {
-	private Logger logger = LoggerFactory.getLogger(UserMailSendServiceImpl.class);
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	public UserMailSendServiceImpl() {
 		this(ISMailSupport.CONFIG_KEY);

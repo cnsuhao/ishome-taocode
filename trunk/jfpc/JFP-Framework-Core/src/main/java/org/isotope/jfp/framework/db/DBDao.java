@@ -29,7 +29,7 @@ import org.springframework.core.io.Resource;
 // @Repository
 public class DBDao extends MyServiceSupport implements ISDBConstants {
 
-	private Logger logger_ = LoggerFactory.getLogger(DBDao.class);
+	private Logger logger_ = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	private DBConfigBean dbConfig;
