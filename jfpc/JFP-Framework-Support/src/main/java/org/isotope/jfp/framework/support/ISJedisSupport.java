@@ -22,6 +22,8 @@ public interface ISJedisSupport {
 
 	void selectDB(int index);
 
+	boolean removeKey(String key);
+
 	String get(String key);
 
 	String del(String key);

@@ -15,9 +15,10 @@ import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 public class PKHelper implements ISFrameworkConstants {
 	public static void main(String[] args) {
 		try {
-			for (int i = 0; i < 100; i++) {
+			for (int i = 0; i < 5; i++) {
 				String puk = creatPUKey();
-				System.out.println(puk);
+				System.out.println("puk=="+puk.length());
+				System.out.println(UUID.randomUUID());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
