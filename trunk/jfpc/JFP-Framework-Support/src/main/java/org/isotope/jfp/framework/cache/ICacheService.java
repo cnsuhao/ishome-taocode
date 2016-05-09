@@ -28,6 +28,13 @@ public interface ICacheService extends ISessionService {
 	 * @return
 	 */
 	public long setnx(String key, Object value);
+	
+	/**
+	 * 删除一个Key
+	 * @param key
+	 * @return
+	 */
+	public boolean removeKey(String key);
 
 	/**
 	 * 对已存在的key设置超时时间
