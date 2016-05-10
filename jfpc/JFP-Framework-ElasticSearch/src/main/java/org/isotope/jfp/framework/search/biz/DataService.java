@@ -1,9 +1,10 @@
-package org.isotope.jfp.framework.search;
+package org.isotope.jfp.framework.search.biz;
 
 import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.isotope.jfp.framework.search.ElasticsearchPool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

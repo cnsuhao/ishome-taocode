@@ -4,8 +4,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.isotope.jfp.framework.search.SQLService;
-import org.isotope.jfp.framework.search.TableService;
+import org.isotope.jfp.framework.search.biz.SQLService;
+import org.isotope.jfp.framework.search.biz.TableService;
 import org.isotope.jfp.framework.security.SystemAdminInterceptor;
 import org.isotope.jfp.framework.utils.BeanFactoryHelper;
 import org.isotope.jfp.framework.utils.EmptyHelper;
