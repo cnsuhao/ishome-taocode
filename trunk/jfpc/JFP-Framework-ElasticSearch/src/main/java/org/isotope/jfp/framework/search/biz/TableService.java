@@ -1,4 +1,4 @@
-package org.isotope.jfp.framework.search;
+package org.isotope.jfp.framework.search.biz;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -12,6 +12,7 @@ import javax.annotation.Resource;
 
 import org.apache.ibatis.session.SqlSession;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
+import org.isotope.jfp.framework.search.ElasticsearchPool;
 import org.isotope.jfp.framework.utils.BeanFactoryHelper;
 import org.isotope.jfp.framework.utils.EmptyHelper;
 import org.mybatis.spring.SqlSessionTemplate;

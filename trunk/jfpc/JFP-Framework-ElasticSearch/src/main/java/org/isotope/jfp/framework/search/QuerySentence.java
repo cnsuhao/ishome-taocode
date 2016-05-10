@@ -150,7 +150,9 @@ public class QuerySentence implements ISSentenceConstants {
 	public QueryBean getSentence(String queryID) {
 		return sentenceMap.get(queryID);
 	}
-
+	public boolean containsKey(String queryID) {
+		return sentenceMap.containsKey(queryID);
+	}
 	public Map<String, QueryBean> getSentenceMap() {
 		return sentenceMap;
 	}
