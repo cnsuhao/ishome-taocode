@@ -37,7 +37,6 @@ public class MyDataBaseObjectSupport extends FrameworkDataBean implements ISDBCo
 
 	public void changeTableNameToTemp() {
 		this.tableName = getTableName() + "_copy";
-		;
 	}
 
 	public void setTableName(String tablename) {
