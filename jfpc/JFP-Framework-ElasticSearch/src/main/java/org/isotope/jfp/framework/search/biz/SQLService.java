@@ -14,6 +14,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.isotope.jfp.framework.cache.ICacheService;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.search.ElasticsearchPool;
+import org.isotope.jfp.framework.search.IDataFormatter;
 import org.isotope.jfp.framework.search.ISSentenceConstants;
 import org.isotope.jfp.framework.search.QuerySentence;
 import org.isotope.jfp.framework.search.bean.QueryBean;
@@ -240,7 +241,7 @@ public class SQLService implements ISFrameworkConstants {
 
 			// 初始化运作
 			if (sql.indexOf("{maxID}") > 0) {
-				sql = sql.replace("{maxID}", "" + maxID);// 开始时间
+				sql = sql.replace("{maxID}", "" + maxID);// 开始数据
 				sql = sql.replace("{limit}", "" + size);// 分页限制
 			}
 			// 差分更新
@@ -261,17 +262,30 @@ public class SQLService implements ISFrameworkConstants {
 				data = new JSONObject();
 				for (int i = 1; i <= metaData.getColumnCount(); i++) {
 					String columnName = metaData.getColumnLabel(i);
-					String value = resultSet.getString(i);
+					Object value = resultSet.getObject(i);
 					data.put(columnName.toLowerCase(), value);
 				}
-				id = data.remove("id").toString();
-				minID = Long.parseLong(id);
-				if (maxID < minID)
-					maxID = minID;
-				if (EmptyHelper.isEmpty(id))
+
+				//数据整理
+				if(dataFormatter !=null)
+					data = dataFormatter.doDataFormatter(data);
+				
+				if(data.containsKey("id")){
+					id = data.remove("id").toString();
+					try{
+						minID = Long.parseLong(id);
+						if (maxID < minID)
+							maxID = minID;
+					}catch(Exception e){
+						
+					}
+					//加入索引
 					actions.add(new Index.Builder(data.toJSONString()).index(qb.getIndex()).type(ElasticsearchPool.TYPE).build());
-				else
+				}					
+				else{
+					//加入索引
 					actions.add(new Index.Builder(data.toJSONString()).index(qb.getIndex()).id(id).type(ElasticsearchPool.TYPE).build());
+				}
 			}
 
 		} catch (SQLException e) {
@@ -289,6 +303,14 @@ public class SQLService implements ISFrameworkConstants {
 	}
 
 	//////////////////////////////////////////////////////////
+	IDataFormatter dataFormatter;
+	public IDataFormatter getDataFormatter() {
+		return dataFormatter;
+	}
+
+	public void setDataFormatter(IDataFormatter dataFormatter) {
+		this.dataFormatter = dataFormatter;
+	}
 
 	String starttime = "1000-01-01 00:00:00";
 	String endtime = "9000-01-01 23:59:59";
