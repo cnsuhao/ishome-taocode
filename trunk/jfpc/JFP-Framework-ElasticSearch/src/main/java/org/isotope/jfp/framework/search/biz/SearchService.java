@@ -25,7 +25,7 @@ import io.searchbox.core.SearchResult;
  * @author 001745
  *
  */
-@Service
+@Service("SearchService")
 public class SearchService {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -35,7 +35,7 @@ public class SearchService {
 	QuerySentence sentence;
 
 	public List<Object> searchDataInIndex(Class<?> clazz, IPrepareSearchType prepare, String queryID, Object... param) throws Exception {
-		if (sentence.containsKey(queryID) == false) {
+		if (sentence.containsIndex(queryID) == false) {
 			throw new RuntimeException("The queryID is not exit ! >>>>>[" + queryID + "]<<<<<");
 		}
 		List<Object> ret = new ArrayList<Object>();

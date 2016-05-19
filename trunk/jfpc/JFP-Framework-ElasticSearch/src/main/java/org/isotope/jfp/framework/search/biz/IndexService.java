@@ -15,7 +15,7 @@ import io.searchbox.indices.CreateIndex;
 import io.searchbox.indices.DeleteIndex;
 import io.searchbox.indices.IndicesExists;
 
-@Service
+@Service("IndexService")
 public class IndexService {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Resource
