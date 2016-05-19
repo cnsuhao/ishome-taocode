@@ -58,10 +58,10 @@ public class TableService implements ISFrameworkConstants {
 		return mySqlSession;
 	}
 
-	public ElasticsearchPool getElasticsearchPool() {
+	public JestClient getClient() throws Exception {
 		if (pool == null)
 			pool = BeanFactoryHelper.getBean("ElasticsearchPool");
-		return pool;
+		return pool.getClient();
 	}
 
 	/**
@@ -96,18 +96,22 @@ public class TableService implements ISFrameworkConstants {
 		if (EmptyHelper.isNotEmpty(size2))
 			size = Integer.parseInt(size2);
 
-		JestClient jestClient = getElasticsearchPool().getClient();
-
 		String index = tableName.toLowerCase();
-
-		// 删除索引
-		boolean indexExists = jestClient.execute(new IndicesExists.Builder(index).build()).isSucceeded();
-		if (indexExists) {
-			JestResult deleteIndexResult = jestClient.execute(new DeleteIndex.Builder(index).build());
-			logger.debug("deleteIndex===>>>ErrorMessage=" + deleteIndexResult.getErrorMessage() + ",JsonString=" + deleteIndexResult.getJsonString());
+		JestClient jestClient = null;
+		try {
+			jestClient = getClient();
+			// 删除索引
+			boolean indexExists = jestClient.execute(new IndicesExists.Builder(index).build()).isSucceeded();
+			if (indexExists) {
+				JestResult deleteIndexResult = jestClient.execute(new DeleteIndex.Builder(index).build());
+				logger.debug("deleteIndex===>>>ErrorMessage=" + deleteIndexResult.getErrorMessage() + ",JsonString=" + deleteIndexResult.getJsonString());
+			}
+			JestResult createIndexResult = jestClient.execute(new CreateIndex.Builder(index).build());
+			logger.debug("createIndex===>>>ErrorMessage=" + createIndexResult.getErrorMessage() + ",JsonString=" + createIndexResult.getJsonString());
+		} finally {
+			if (jestClient != null)
+				jestClient.shutdownClient();
 		}
-		JestResult createIndexResult = jestClient.execute(new CreateIndex.Builder(index).build());
-		logger.debug("createIndex===>>>ErrorMessage=" + createIndexResult.getErrorMessage() + ",JsonString=" + createIndexResult.getJsonString());
 		Builder bulkIndexBuilder;
 
 		BulkResult result;
@@ -129,7 +133,7 @@ public class TableService implements ISFrameworkConstants {
 				commit = false;
 				while (commit == false) {
 					try {
-						jestClient = getElasticsearchPool().getClient();
+						jestClient = getClient();
 						bulkIndexBuilder = new Bulk.Builder();
 						bulkIndexBuilder.addAction(actions);
 						result = jestClient.execute(bulkIndexBuilder.build());
@@ -140,6 +144,9 @@ public class TableService implements ISFrameworkConstants {
 					} catch (Exception e) {
 						logger.error("addDataIntoIndex===>>>" + e.getMessage());
 						Thread.sleep(sleep * 2);
+					} finally {
+						if (jestClient != null)
+							jestClient.shutdownClient();
 					}
 				}
 				commit = false;
@@ -147,6 +154,7 @@ public class TableService implements ISFrameworkConstants {
 				break;
 			}
 		}
+
 	}
 
 	private List<Index> loadDataFromDb(String index, String tableName, int page, int from) throws SQLException {
@@ -175,7 +183,7 @@ public class TableService implements ISFrameworkConstants {
 					data.put(columnName.toLowerCase(), value);
 				}
 				id = data.remove("id").toString();
-				if(EmptyHelper.isEmpty(id))
+				if (EmptyHelper.isEmpty(id))
 					actions.add(new Index.Builder(data.toJSONString()).index(index).type(ElasticsearchPool.TYPE).build());
 				else
 					actions.add(new Index.Builder(data.toJSONString()).index(index).id(id).type(ElasticsearchPool.TYPE).build());
