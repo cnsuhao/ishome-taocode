@@ -9,6 +9,7 @@ import org.isotope.jfp.framework.search.ElasticsearchPool;
 import org.isotope.jfp.framework.search.IPrepareSearchType;
 import org.isotope.jfp.framework.search.QuerySentence;
 import org.isotope.jfp.framework.search.bean.QueryBean;
+import org.isotope.jfp.framework.search.bean.QueryResultBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -34,44 +35,54 @@ public class SearchService {
 	@Resource
 	QuerySentence sentence;
 
-	public List<Object> searchDataInIndex(Class<?> clazz, IPrepareSearchType prepare, String queryID, Object... param) throws Exception {
+	public QueryResultBean searchDataInIndex(String queryID, Object... param) throws Exception {
+		QueryResultBean resultBean = new QueryResultBean();
 		if (sentence.containsIndex(queryID) == false) {
 			throw new RuntimeException("The queryID is not exit ! >>>>>[" + queryID + "]<<<<<");
 		}
-		List<Object> ret = new ArrayList<Object>();
-		List<String> hits = null;
 		JestClient jestClient = null;
 		try {
-			//获得查询语句
+			// 获得查询语句
 			QueryBean qb = sentence.getSentence(queryID);
-			//设定参数
+			// 设定参数
 			String query = String.format(qb.getValue(), param);
 			logger.debug("query===================================" + query);
-			//封装查询语法
+			// 封装查询语法
 			Search.Builder searchBuilder = new Search.Builder(query).addIndex(qb.getIndex()).addType(ElasticsearchPool.TYPE);
-			//获得连接
+			// 获得连接
 			jestClient = pool.getClient();
-			//执行查询语句
+			// 执行查询语句
 			SearchResult result = jestClient.execute(searchBuilder.build());
-			//获得返回结果
-			hits = result.getSourceAsStringList();
+			// 获得返回结果
+			resultBean.setErrorMessage(result.getErrorMessage());
 			logger.debug("getErrorMessage=====" + result.getErrorMessage());
+			resultBean.setTotal(result.getTotal());
 			logger.debug("getTotal=====" + result.getTotal());
-			//整理数据结果并返回
-			Object cb;
-			if (hits != null && hits.size() > 0) {
-				for (String s : hits) {
-					cb = JSON.parseObject(s, clazz);
-					if (prepare != null)
-						prepare.prepareSearchType(JSON.parseObject(s), cb);
-					ret.add(cb);
-				}
-			}
+			resultBean.setHits(result.getSourceAsStringList());
 		} finally {
 			if (jestClient != null)
 				jestClient.shutdownClient();
 		}
-		return ret;
+		return resultBean;
+	}
+
+	public List<? extends Object> searchDataInIndex(Class<?> clazz, IPrepareSearchType prepare, String queryID, Object... param) throws Exception {
+		QueryResultBean resultBean = searchDataInIndex(queryID, param);
+		if (clazz != null) {
+			List<Object> hits = new ArrayList<Object>();
+			// 整理数据结果并返回
+			Object cb;
+			if (resultBean.getHits() != null && resultBean.getHits().size() > 0) {
+				for (Object s : resultBean.getHits()) {
+					cb = JSON.parseObject(s.toString(), clazz);
+					if (prepare != null)
+						prepare.prepareSearchType(JSON.parseObject(s.toString()), cb);
+					hits.add(cb);
+				}
+			}
+			return hits;
+		} else
+			return resultBean.getHits();
 	}
 
 }

@@ -9,16 +9,16 @@ import java.util.List;
  *
  */
 public class QueryResultBean {
-	int took = 0;
-	int total = 0;
-	List<String> hits;
+	protected String errorMessage;
+	protected int total = 0;
+	protected List<? extends Object> hits;
 
-	public int getTook() {
-		return took;
+	public String getErrorMessage() {
+		return errorMessage;
 	}
 
-	public void setTook(int took) {
-		this.took = took;
+	public void setErrorMessage(String errorMessage) {
+		this.errorMessage = errorMessage;
 	}
 
 	public int getTotal() {
@@ -29,11 +29,12 @@ public class QueryResultBean {
 		this.total = total;
 	}
 
-	public List<String> getHits() {
+	public List<? extends Object> getHits() {
 		return hits;
 	}
 
-	public void setHits(List<String> hits) {
+	public void setHits(List<? extends Object> hits) {
 		this.hits = hits;
 	}
+
 }
