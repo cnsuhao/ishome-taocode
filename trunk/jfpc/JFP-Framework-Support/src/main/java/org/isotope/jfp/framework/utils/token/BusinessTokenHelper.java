@@ -12,26 +12,25 @@ import org.isotope.jfp.framework.utils.EmptyHelper;
  * @author Spook
  * @since 2.3.1
  * @version 2.3.1 2015/6/23
+ * @see BusinessTokenBean
  */
 public class BusinessTokenHelper implements ISFrameworkConstants {
 
 	//
-	///{hosId}															18
+	///{companyId}														18
 	//--------/{userId}													18
 	//-----------------/{bizName}										8
 	//---------------------------/{encryType}							1
-	//---------------------------------------/{clientTimestamp}			8 (MMDDH24)
+	//---------------------------------------/{clientTimestamp}			8 (MMDDH24)	
+	public static void main(String[] args) {
+		System.out.println(getBizTokenData("aaa", "bbb", "123456789abcdefg"));
+		System.out.println(getUserID(getBizTokenData("aaa", "bbb", "123456789abcdefg")));
+		System.out.println(getCompanyId(getBizTokenData("aaa", "bbb", "123456789abcdefg")));
+		System.out.println(getBizId(getBizTokenData("aaa", "bbb", "123456789abcdefg")));
+		System.out.println(getEncryType(getBizTokenData("aaa", "bbb", "123456789abcdefg")));
+		System.out.println(getLoginDateTime(getBizTokenData("aaa", "bbb", "123456789abcdefg")));
+	}
 	
-//	public static void main(String[] args) {
-//
-//		System.out.println(getBizTokenBean("ab1ab2ab3__4__5__6__7__8__9__a__b__c__d__e__f__g"));
-//		System.out.println(getBizTokenData("aaa", "bbb", "123456789abcdefg"));
-//		System.out.println(getUserID(getBizTokenData("aaa", "bbb", "123456789abcdefg")));
-//		System.out.println(getCompanyId(getBizTokenData("aaa", "bbb", "123456789abcdefg")));
-//		System.out.println(getBizId(getBizTokenData("aaa", "bbb", "123456789abcdefg")));
-//		System.out.println(getEncryType(getBizTokenData("aaa", "bbb", "123456789abcdefg")));
-//		System.out.println(getLoginDateTime(getBizTokenData("aaa", "bbb", "123456789abcdefg")));
-//	}
 	/**
 	 * 
 	 * @param companyId
