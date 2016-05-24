@@ -1,5 +1,7 @@
 package org.isotope.jfp.framework.support;
 
+import org.isotope.jfp.framework.beans.common.BusinessTokenBean;
+import org.isotope.jfp.framework.biz.common.ISToken;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.constants.pub.ISModelConstants;
 import org.isotope.jfp.framework.utils.EmptyHelper;
@@ -12,15 +14,12 @@ import org.isotope.jfp.framework.utils.EmptyHelper;
  * @since 0.1.0 2013-8-21
  * @version 0.1.0
  */
-public class MyBusinessSupport implements ISFrameworkConstants, ISModelConstants {
-
-	protected Object message;// 业务请求参数数据
+public class MyBusinessSupport extends MyWorkSupport implements ISFrameworkConstants, ISModelConstants,ISToken {
 
 	/**
 	 * 返回结果(0：成功、其他：失败（业务系统提示码）)
 	 */
 	protected String returnCode = ZERO;//
-
 	/**
 	 * 提示信息
 	 */
@@ -29,72 +28,6 @@ public class MyBusinessSupport implements ISFrameworkConstants, ISModelConstants
 	 * 接口返回的数据
 	 */
 	protected Object returnObject = EMPTY;
-
-	/**
-	 * 业务请求API key 名称
-	 */
-	private String bizName;
-
-	/**
-	 * 业务请求版本号
-	 */
-	private String version;
-
-	/**
-	 * 业务请求ID
-	 * 
-	 * @return
-	 */
-	private String operationId;
-
-	////////////////////////////////////////////////////////////////////////
-	private String companyId;
-
-	private String userId;
-
-	public String getCompanyId() {
-		return companyId;
-	}
-
-	public void setCompanyId(String companyId) {
-		this.companyId = companyId;
-	}
-
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
-	private boolean encryType = false;
-
-	public boolean isEncryType() {
-		return encryType;
-	}
-
-	public void setEncryType(boolean encryType) {
-		this.encryType = encryType;
-	}
-
-	////////////////////////////////////////////////////////////////////////
-
-	public String getVersion() {
-		return version;
-	}
-
-	public void setVersion(String version) {
-		this.version = version;
-	}
-
-	public String getOperationId() {
-		return operationId;
-	}
-
-	public void setOperationId(String operationId) {
-		this.operationId = operationId;
-	}
 
 	public Object getReturnObject() {
 		return returnObject;
@@ -123,15 +56,76 @@ public class MyBusinessSupport implements ISFrameworkConstants, ISModelConstants
 	public void setReturnMessage(String returnMessage) {
 		this.returnMessage = returnMessage;
 	}
+	
+	////////////////////////////////////////////////////////////////////////
+	/**
+	 * 业务请求版本号
+	 */
+	protected String version;
 
-	public String getBizName() {
-		if (EmptyHelper.isEmpty(bizName))
-			bizName = this.getClass().getSimpleName();
-		return bizName;
+	public String getVersion() {
+		return version;
 	}
 
-	public void setBizName(String bizName) {
-		this.bizName = bizName;
+	public void setVersion(String version) {
+		this.version = version;
+	}
+
+	///////////////////////////////////////////////////////////////////////
+	/**
+	 * 用户令牌
+	 */
+	protected BusinessTokenBean token;
+	public boolean chageToken(){
+		return token.chageToken();
+	}
+
+	public String getToken() {
+		return BusinessTokenBean.getBizToken(token);
+	}
+
+	public void setToken(BusinessTokenBean token) {
+		this.token = token;
+	}
+
+	public String getBizName() {
+		if (EmptyHelper.isEmpty(token))
+			return this.getClass().getSimpleName().replace("BussinessService", "");
+		return token.getBizName();
+	}
+
+	///////////////////////////////////////////////////////////////////////
+	/**
+	 * 用户请求参数
+	 */
+	protected String paramValue;
+
+	public String getParamValue() {
+		return paramValue;
+	}
+
+	public void setParamValue(String paramValue) {
+		this.paramValue = paramValue;
+	}
+
+	@Override
+	public boolean checkToken() throws Exception {
+		try{
+			String tokenCatch = (String) myCacheService.getObject(token.getUserId(),false);
+			if(getToken().equals(tokenCatch))
+				return true;
+		}catch(Exception r){
+			
+		}
+		return false;
+	}
+
+	/**
+	 * @see waitTimeSecond
+	 */
+	@Override
+	public boolean saveToken() throws Exception {
+		return myCacheService.putObject(token.getUserId(),getToken(),waitTimeSecond,false);
 	}
 
 }
