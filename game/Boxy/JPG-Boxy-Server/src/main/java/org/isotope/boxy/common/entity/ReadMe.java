@@ -1,4 +1,4 @@
-package org.isotope.jfp.boxy.entity;
+package org.isotope.boxy.common.entity;
 
 /**
  * 数据库操作
