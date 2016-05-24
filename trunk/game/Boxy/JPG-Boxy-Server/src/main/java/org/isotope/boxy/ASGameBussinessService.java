@@ -3,7 +3,8 @@ package org.isotope.boxy;
 import org.isotope.jfp.framework.biz.common.ISCheck;
 import org.isotope.jfp.framework.biz.common.ISInit;
 import org.isotope.jfp.framework.biz.common.ISSave;
-import org.isotope.jfp.framework.support.MyWorkSupport;
+import org.isotope.jfp.framework.support.MyBusinessSupport;
+import org.isotope.jfp.framework.utils.EmptyHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,7 +14,7 @@ import org.slf4j.LoggerFactory;
  * @author 001745
  *
  */
-public abstract class ASGameBussinessService extends MyWorkSupport implements ISGameAction, ISInit, ISCheck, ISSave, Runnable {
+public abstract class ASGameBussinessService extends MyBusinessSupport implements ISGameAction, ISInit, ISCheck, ISSave, Runnable {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Override
@@ -42,4 +43,21 @@ public abstract class ASGameBussinessService extends MyWorkSupport implements IS
 		}
 	}
 
+	public boolean doInit() throws Exception {
+		if (EmptyHelper.isEmpty(getToken()))
+			return false;
+		if (EmptyHelper.isEmpty(getMyCacheService()))
+			return false;
+		if (EmptyHelper.isEmpty(getParamValue()))
+			return false;
+		
+		return super.checkToken();
+	}
+	
+	public boolean doSave() throws Exception {
+		//变更Token
+		super.chageToken();
+		//保存Token
+		return super.saveToken();
+	}
 }
