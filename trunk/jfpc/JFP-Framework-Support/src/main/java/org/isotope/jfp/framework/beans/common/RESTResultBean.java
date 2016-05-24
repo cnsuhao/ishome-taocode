@@ -48,6 +48,11 @@ public class RESTResultBean extends ObjectBean implements ISFrameworkConstants {
 	public void setToken(String token) {
 		this.token = token;
 	}
+	
+	public BusinessTokenBean getToken(String token) {
+		this.setToken(token);
+		return BusinessTokenBean.build(token);
+	}
 
 	public String getCode() {
 		return code;
