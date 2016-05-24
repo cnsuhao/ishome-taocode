@@ -118,4 +118,9 @@ public class BusinessTokenBean extends ObjectBean {
 		this.requestDateTime = requestDateTime;
 	}
 
+	public boolean chageToken() {
+		requestDateTime = DateHelper.currentTimestamp();
+		return true;
+	}
+
 }
