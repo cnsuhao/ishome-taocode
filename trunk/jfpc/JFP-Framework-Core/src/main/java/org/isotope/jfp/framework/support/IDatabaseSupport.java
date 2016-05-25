@@ -14,7 +14,7 @@ import org.isotope.jfp.framework.constants.ISFrameworkConstants;
  * @version 0.1.0 2014/2/8
  * @see <ISFrameworkConstants>
  */
-public interface ISDatabaseSupport extends ISFrameworkConstants {
+public interface IDatabaseSupport extends ISFrameworkConstants {
 	/**
 	 * 分页查询
 	 * @param formParam

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.isotope.jfp.framework.support.ISJedisSupport;
+import org.isotope.jfp.framework.support.IJedisSupport;
 
 /**
  * Redis操作工具类
@@ -17,7 +17,7 @@ import org.isotope.jfp.framework.support.ISJedisSupport;
  * @since 2.3.0
  * @see RedisChannelConfigBean
  */
-public class MapMasterUtil implements ISJedisSupport {
+public class MapMasterUtil implements IJedisSupport {
 	HashMap<String, String> cache = new HashMap<String, String>();
 
 	public boolean clear() {

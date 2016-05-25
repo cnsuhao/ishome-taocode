@@ -1,6 +1,6 @@
 package org.isotope.jfp.framework.mq.rabbit;
 
-import org.isotope.jfp.framework.support.ISMQReceiveSupport;
+import org.isotope.jfp.framework.support.IMQReceiveSupport;
 
 /**
  * 队列处理程序
@@ -9,7 +9,7 @@ import org.isotope.jfp.framework.support.ISMQReceiveSupport;
  * @version 0.1
  * @since 0.1.0 2014/2/8
  */
-public class MyQueryListener implements ISMQReceiveSupport {
+public class MyQueryListener implements IMQReceiveSupport {
 	
 	/**
 	 * 消息接受处理

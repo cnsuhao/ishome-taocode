@@ -3,7 +3,7 @@ package org.isotope.jfp.framework.support;
 import org.isotope.jfp.framework.beans.net.HttpProxyBean;
 import org.isotope.jfp.framework.cache.ICacheService;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
-import org.isotope.jfp.framework.net.ISHttpProxy;
+import org.isotope.jfp.framework.net.IHttpProxy;
 import org.isotope.jfp.framework.net.MyHttpServiceSupport;
 
 /**
@@ -15,6 +15,9 @@ import org.isotope.jfp.framework.net.MyHttpServiceSupport;
  */
 public class MyWorkSupport implements ISFrameworkConstants {
 
+	
+	ISecuritySupport mySecuritySupport;
+	
 	/**
 	 * 缓存队列
 	 */
@@ -41,11 +44,11 @@ public class MyWorkSupport implements ISFrameworkConstants {
 		this.myHttpService = myHttpService;
 	}
 
-	public void setHttpProxy(ISHttpProxy httpProxy) {
+	public void setHttpProxy(IHttpProxy httpProxy) {
 		myHttpService.setHttpProxy(httpProxy);
 	}
 
-	public ISHttpProxy getHttpProxy() {
+	public IHttpProxy getHttpProxy() {
 		return myHttpService.getHttpProxy();
 	}
 

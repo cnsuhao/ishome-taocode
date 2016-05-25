@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
-import org.isotope.jfp.framework.support.ISJedisSupport;
+import org.isotope.jfp.framework.support.IJedisSupport;
 import org.isotope.jfp.framework.utils.EmptyHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +27,7 @@ import redis.clients.jedis.JedisCluster;
  * @since 2.3.0
  * @see RedisChannelConfigBean
  */
-public class JedisClusterUtil implements ISJedisSupport, ISFrameworkConstants {
+public class JedisClusterUtil implements IJedisSupport, ISFrameworkConstants {
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	public JedisClusterUtil() {

@@ -2,7 +2,7 @@ package org.isotope.jfp.framework.mq.rabbit;
 
 import org.isotope.jfp.framework.constants.pub.ISMQConstants;
 import org.isotope.jfp.framework.mq.bean.MQConfigBean;
-import org.isotope.jfp.framework.support.ISMQReceiveSupport;
+import org.isotope.jfp.framework.support.IMQReceiveSupport;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.TopicExchange;
@@ -23,9 +23,9 @@ import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
 public class MyMQReceiveClient implements ISMQConstants {
 
 	MQConfigBean target;
-	ISMQReceiveSupport listen;// handleMessage
+	IMQReceiveSupport listen;// handleMessage
 
-	public MyMQReceiveClient(MQConfigBean config,ISMQReceiveSupport listen) {
+	public MyMQReceiveClient(MQConfigBean config,IMQReceiveSupport listen) {
 		this.target = config;
 		this.listen = listen;
 	}

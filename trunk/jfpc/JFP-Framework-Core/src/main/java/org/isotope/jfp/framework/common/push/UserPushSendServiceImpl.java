@@ -4,7 +4,7 @@ import org.isotope.jfp.framework.beans.pub.PushBean;
 import org.isotope.jfp.framework.common.CommonChannelConfig;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.constants.pub.ISPushConstant;
-import org.isotope.jfp.framework.support.common.ISPhonePushSupport;
+import org.isotope.jfp.framework.support.common.IPhonePushSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,12 +17,12 @@ import org.slf4j.LoggerFactory;
  * @since 2.3.0
  * 
  */
-public class UserPushSendServiceImpl extends CommonChannelConfig implements ISPhonePushSupport, ISPushConstant, ISFrameworkConstants {
+public class UserPushSendServiceImpl extends CommonChannelConfig implements IPhonePushSupport, ISPushConstant, ISFrameworkConstants {
 
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	public UserPushSendServiceImpl() {
-		this(ISPhonePushSupport.CONFIG_KEY);
+		this(IPhonePushSupport.CONFIG_KEY);
 	}
 
 	public UserPushSendServiceImpl(String key) {

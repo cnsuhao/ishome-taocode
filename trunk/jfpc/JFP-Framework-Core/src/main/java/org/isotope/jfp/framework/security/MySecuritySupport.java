@@ -3,7 +3,7 @@ package org.isotope.jfp.framework.security;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.security.value.MD5SecurityHelper;
 import org.isotope.jfp.framework.security.value.PBESecurityHelper;
-import org.isotope.jfp.framework.support.ISSecuritySupport;
+import org.isotope.jfp.framework.support.ISecuritySupport;
 
 /**
  * 数据加密与解密处理
@@ -11,7 +11,7 @@ import org.isotope.jfp.framework.support.ISSecuritySupport;
  * @author fucy
  * 
  */
-public class MySecuritySupport implements ISSecuritySupport,ISFrameworkConstants {
+public class MySecuritySupport implements ISecuritySupport,ISFrameworkConstants {
 	/**
 	 * @param args
 	 */

@@ -115,6 +115,8 @@ public class MyBusinessSupport extends MyWorkSupport implements ISFrameworkConst
 	public boolean checkToken() throws Exception {
 		try{
 			String tokenCatch = (String) myCacheService.getObject(token.getUserId(),false);
+			if (logger.isDebugEnabled())
+				logger.debug("    doCheck.checkToken()=====tokenCatch>>>>>"+tokenCatch);
 			if(getToken().equals(tokenCatch))
 				return true;
 		}catch(Exception r){

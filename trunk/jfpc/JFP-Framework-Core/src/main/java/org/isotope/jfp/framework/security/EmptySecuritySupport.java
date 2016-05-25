@@ -1,7 +1,7 @@
 package org.isotope.jfp.framework.security;
 
 import org.isotope.jfp.framework.security.value.PBESecurityHelper;
-import org.isotope.jfp.framework.support.ISSecuritySupport;
+import org.isotope.jfp.framework.support.ISecuritySupport;
 import org.isotope.jfp.framework.utils.EmptyHelper;
 
 /**
@@ -11,7 +11,7 @@ import org.isotope.jfp.framework.utils.EmptyHelper;
  * @version 2.0.5 2015/2/16
  * 
  */
-public class EmptySecuritySupport implements ISSecuritySupport {
+public class EmptySecuritySupport implements ISecuritySupport {
 
 	/**
 	 * 数据解密

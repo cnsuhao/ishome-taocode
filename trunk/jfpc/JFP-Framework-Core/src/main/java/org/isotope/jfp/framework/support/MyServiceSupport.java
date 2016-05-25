@@ -62,8 +62,8 @@ public class MyServiceSupport implements ISFrameworkConstants, ISDBConstants {
 	 * 
 	 * @return
 	 */
-	public ISDatabaseSupport getDao() {
-		return getMySqlSession().getMapper(ISDatabaseSupport.class);
+	public IDatabaseSupport getDao() {
+		return getMySqlSession().getMapper(IDatabaseSupport.class);
 	}
 
 	/**

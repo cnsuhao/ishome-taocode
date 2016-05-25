@@ -10,7 +10,7 @@ import org.isotope.jfp.framework.beans.net.HttpProxyBean;
  * @since 2.4.2 2015/12/17
  *
  */
-public interface ISHttpProxy {
+public interface IHttpProxy {
 	
 	public static String HTTP_PROXY = "HTTP_PROXY:";
 	public static String HTTP_PROXY_BAD = "HTTP_PROXY:BAD";
