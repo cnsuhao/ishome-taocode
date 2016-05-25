@@ -41,7 +41,7 @@ public abstract class ABussinessThreadService extends MyBusinessSupport implemen
 	/**
 	 * 业务逻辑处理
 	 */
-	public final boolean doInit() {
+	public boolean doInit() throws Exception {
 		// 参数解密
 		if (mySecuritySupport != null && ISecuritySupport.ENCRYPTION.equals(token.getEncryType())) {
 			setParamValue(mySecuritySupport.decryption(getToken(), getParamValue()));
