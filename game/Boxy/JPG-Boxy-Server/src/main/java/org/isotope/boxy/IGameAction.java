@@ -1,6 +1,6 @@
 package org.isotope.boxy;
 
-public interface ISGameAction {
+public interface IGameAction {
 	/**
 	 * 运行游戏指令
 	 */
