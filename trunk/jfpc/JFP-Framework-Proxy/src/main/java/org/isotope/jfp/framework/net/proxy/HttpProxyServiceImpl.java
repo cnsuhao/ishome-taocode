@@ -8,7 +8,7 @@ import org.isotope.jfp.framework.beans.net.HttpProxyBean;
 import org.isotope.jfp.framework.biz.common.ISInit;
 import org.isotope.jfp.framework.cache.ICacheService;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
-import org.isotope.jfp.framework.net.ISHttpProxy;
+import org.isotope.jfp.framework.net.IHttpProxy;
 import org.isotope.jfp.framework.utils.EmptyHelper;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +22,7 @@ import com.alibaba.fastjson.JSON;
  * @since 3.1.2.2016/04/25
  */
 @Service
-public class HttpProxyServiceImpl implements ISHttpProxy, ISFrameworkConstants, ISInit {
+public class HttpProxyServiceImpl implements IHttpProxy, ISFrameworkConstants, ISInit {
 
 	// 缓存队列
 	@Resource
