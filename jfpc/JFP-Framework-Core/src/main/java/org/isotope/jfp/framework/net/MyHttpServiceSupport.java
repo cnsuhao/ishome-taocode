@@ -55,13 +55,13 @@ public class MyHttpServiceSupport {
 		this.waitTimeMinute = waitTimeMinute;
 	}
 
-	private ISHttpProxy httpProxy;
+	private IHttpProxy httpProxy;
 
-	public ISHttpProxy getHttpProxy() {
+	public IHttpProxy getHttpProxy() {
 		return httpProxy;
 	}
 
-	public void setHttpProxy(ISHttpProxy httpProxy) {
+	public void setHttpProxy(IHttpProxy httpProxy) {
 		this.httpProxy = httpProxy;
 	}
 

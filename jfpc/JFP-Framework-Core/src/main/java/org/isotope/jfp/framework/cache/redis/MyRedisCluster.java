@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.isotope.jfp.framework.cache.ICacheService;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
-import org.isotope.jfp.framework.support.ISJedisSupport;
+import org.isotope.jfp.framework.support.IJedisSupport;
 import org.isotope.jfp.framework.utils.EmptyHelper;
 
 import com.alibaba.fastjson.JSON;
@@ -23,11 +23,11 @@ public class MyRedisCluster implements ICacheService, ISFrameworkConstants {
 
 	}
 
-	public MyRedisCluster(ISJedisSupport jedisUtil) {
+	public MyRedisCluster(IJedisSupport jedisUtil) {
 		this.jedisUtil = jedisUtil;
 	}
 
-	public MyRedisCluster(ISJedisSupport jedisUtil, int waitTime) {
+	public MyRedisCluster(IJedisSupport jedisUtil, int waitTime) {
 		this.jedisUtil = jedisUtil;
 		this.waitTime = waitTime;
 	}
@@ -42,13 +42,13 @@ public class MyRedisCluster implements ICacheService, ISFrameworkConstants {
 		this.waitTime = waitTime;
 	}
 
-	ISJedisSupport jedisUtil;
+	IJedisSupport jedisUtil;
 
-	public ISJedisSupport getjedisUtil() {
+	public IJedisSupport getjedisUtil() {
 		return jedisUtil;
 	}
 
-	public void setjedisUtil(ISJedisSupport jedisUtil) {
+	public void setjedisUtil(IJedisSupport jedisUtil) {
 		this.jedisUtil = jedisUtil;
 	}
 

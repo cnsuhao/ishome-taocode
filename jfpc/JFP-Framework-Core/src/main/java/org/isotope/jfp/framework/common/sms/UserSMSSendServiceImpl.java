@@ -4,7 +4,7 @@ import org.isotope.jfp.framework.beans.pub.SMSBean;
 import org.isotope.jfp.framework.common.CommonChannelConfig;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.constants.pub.ISSMSConstants;
-import org.isotope.jfp.framework.support.common.ISSMSSupport;
+import org.isotope.jfp.framework.support.common.ISMSSupport;
 import org.isotope.jfp.framework.utils.EmptyHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,11 +18,11 @@ import org.slf4j.LoggerFactory;
  * @since 2.3.0
  * 
  */
-public class UserSMSSendServiceImpl extends CommonChannelConfig implements ISSMSSupport, ISSMSConstants, ISFrameworkConstants {
+public class UserSMSSendServiceImpl extends CommonChannelConfig implements ISMSSupport, ISSMSConstants, ISFrameworkConstants {
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	public UserSMSSendServiceImpl() {
-		this(ISSMSSupport.CONFIG_KEY);
+		this(ISMSSupport.CONFIG_KEY);
 	}
 
 	public UserSMSSendServiceImpl(String key) {

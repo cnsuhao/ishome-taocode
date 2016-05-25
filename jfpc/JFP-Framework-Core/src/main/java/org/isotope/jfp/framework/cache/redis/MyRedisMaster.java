@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.isotope.jfp.framework.cache.ICacheService;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
-import org.isotope.jfp.framework.support.ISJedisSupport;
+import org.isotope.jfp.framework.support.IJedisSupport;
 import org.isotope.jfp.framework.utils.BeanFactoryHelper;
 import org.isotope.jfp.framework.utils.EmptyHelper;
 
@@ -27,11 +27,11 @@ public class MyRedisMaster implements ICacheService, ISFrameworkConstants {
 
 	}
 
-	public MyRedisMaster(ISJedisSupport jedisSupport) {
+	public MyRedisMaster(IJedisSupport jedisSupport) {
 		this.jedisSupport = jedisSupport;
 	}
 
-	public MyRedisMaster(ISJedisSupport jedisSupport, int waitTime) {
+	public MyRedisMaster(IJedisSupport jedisSupport, int waitTime) {
 		this.jedisSupport = jedisSupport;
 		this.waitTime = waitTime;
 	}
@@ -52,13 +52,13 @@ public class MyRedisMaster implements ICacheService, ISFrameworkConstants {
 		this.jedisScope = jedisScope;
 	}
 
-	ISJedisSupport jedisSupport;
+	IJedisSupport jedisSupport;
 
-	public ISJedisSupport getJedisSupport() {
+	public IJedisSupport getJedisSupport() {
 		return jedisSupport;
 	}
 
-	public void setJedisSupport(ISJedisSupport jedisSupport) {
+	public void setJedisSupport(IJedisSupport jedisSupport) {
 		this.jedisSupport = jedisSupport;
 	}
 
@@ -348,7 +348,7 @@ public class MyRedisMaster implements ICacheService, ISFrameworkConstants {
 	@Override
 	public void init() {
 		if(EmptyHelper.isNotEmpty(jedisScope)){
-			ISJedisSupport support = BeanFactoryHelper.getBean(jedisScope);
+			IJedisSupport support = BeanFactoryHelper.getBean(jedisScope);
 			if(support != null)
 				jedisSupport = support;			
 		}

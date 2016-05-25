@@ -4,7 +4,7 @@ import org.isotope.jfp.framework.beans.pub.MailBean;
 import org.isotope.jfp.framework.common.CommonChannelConfig;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.constants.pub.ISMailConstants;
-import org.isotope.jfp.framework.support.common.ISMailSupport;
+import org.isotope.jfp.framework.support.common.IMailSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,11 +16,11 @@ import org.slf4j.LoggerFactory;
  * @since 2.3.0
  * 
  */
-public class UserMailSendServiceImpl extends CommonChannelConfig implements ISMailSupport, ISMailConstants, ISFrameworkConstants {
+public class UserMailSendServiceImpl extends CommonChannelConfig implements IMailSupport, ISMailConstants, ISFrameworkConstants {
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	public UserMailSendServiceImpl() {
-		this(ISMailSupport.CONFIG_KEY);
+		this(IMailSupport.CONFIG_KEY);
 	}
 
 	public UserMailSendServiceImpl(String key) {
