@@ -56,9 +56,12 @@ public class SearchService {
 			// 获得返回结果
 			resultBean.setErrorMessage(result.getErrorMessage());
 			logger.debug("getErrorMessage=====" + result.getErrorMessage());
-			resultBean.setTotal(result.getTotal());
-			logger.debug("getTotal=====" + result.getTotal());
-			resultBean.setHits(result.getSourceAsStringList());
+			resultBean.setSucceeded(result.isSucceeded());
+			if(result.isSucceeded()){
+				resultBean.setTotal(result.getTotal());
+				logger.debug("getTotal=====" + result.getTotal());
+				resultBean.setHits(result.getSourceAsStringList());
+			}
 		} finally {
 			if (jestClient != null)
 				jestClient.shutdownClient();
