@@ -24,7 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  *
  */
 public class DataIndexUpdateServiceJob extends MyTaskSupport {
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 	// 缓存队列
 	QuerySentence myQuerySentence;
 

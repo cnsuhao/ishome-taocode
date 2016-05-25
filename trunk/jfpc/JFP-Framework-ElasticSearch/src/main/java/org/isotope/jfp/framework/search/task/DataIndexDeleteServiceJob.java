@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 
 public class DataIndexDeleteServiceJob extends MyTaskSupport {
 	
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 	QuerySentence myQuerySentence;
 
 	public QuerySentence getMyQuerySentence() {
