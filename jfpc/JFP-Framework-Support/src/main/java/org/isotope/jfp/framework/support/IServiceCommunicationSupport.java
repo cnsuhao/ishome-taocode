@@ -12,7 +12,7 @@ import org.isotope.jfp.framework.beans.ObjectBean;
  * @since 2.0.5
  * @version 2.0.5 2014/2/15
  */
-public interface ISServiceCommunicationSupport {
+public interface IServiceCommunicationSupport {
 
 	/**
 	 * List存储对象压缩

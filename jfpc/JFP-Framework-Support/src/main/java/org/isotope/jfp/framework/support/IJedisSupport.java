@@ -14,7 +14,7 @@ import java.util.Set;
  * @since 2.4.2 2015/12/10
  *
  */
-public interface ISJedisSupport {
+public interface IJedisSupport {
 	/**
 	 * 初始化
 	 */

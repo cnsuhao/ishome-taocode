@@ -10,7 +10,7 @@ import org.isotope.jfp.framework.biz.common.ISProcess;
  * @since 2.0.0 2015/1/19
  * 
  */
-public interface ISProcessCustomBusiness extends ISProcess {
+public interface IProcessCustomBusiness extends ISProcess {
 
 	/**
 	 * 业务处理前
