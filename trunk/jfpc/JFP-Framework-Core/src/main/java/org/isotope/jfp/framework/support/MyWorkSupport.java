@@ -15,9 +15,19 @@ import org.isotope.jfp.framework.net.MyHttpServiceSupport;
  */
 public class MyWorkSupport implements ISFrameworkConstants {
 
-	
+	/**
+	 * 数据安全
+	 */
 	ISecuritySupport mySecuritySupport;
 	
+	public ISecuritySupport getMySecuritySupport() {
+		return mySecuritySupport;
+	}
+
+	public void setMySecuritySupport(ISecuritySupport mySecuritySupport) {
+		this.mySecuritySupport = mySecuritySupport;
+	}
+
 	/**
 	 * 缓存队列
 	 */

@@ -22,11 +22,11 @@ public class MyBusinessSupport extends MyWorkSupport implements ISFrameworkConst
 	/**
 	 * 返回结果(0：成功、其他：失败（业务系统提示码）)
 	 */
-	protected String returnCode = ZERO;//
+	protected String returnCode = ZERO;
 	/**
 	 * 提示信息
 	 */
-	protected String returnMessage = MESSAGE_ERROR_SYNC;//
+	protected String returnMessage = MESSAGE_ERROR_SYNC;
 	/**
 	 * 接口返回的数据
 	 */
