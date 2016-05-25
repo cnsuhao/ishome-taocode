@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
  */
 public class UserPushSendServiceImpl extends CommonChannelConfig implements ISPhonePushSupport, ISPushConstant, ISFrameworkConstants {
 
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	public UserPushSendServiceImpl() {
 		this(ISPhonePushSupport.CONFIG_KEY);

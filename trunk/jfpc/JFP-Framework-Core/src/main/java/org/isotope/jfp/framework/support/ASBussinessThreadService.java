@@ -5,12 +5,9 @@ import org.isotope.jfp.framework.biz.common.ISInit;
 import org.isotope.jfp.framework.biz.common.ISProcess;
 import org.isotope.jfp.framework.biz.common.ISSave;
 import org.isotope.jfp.framework.utils.EmptyHelper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public abstract class ASBussinessThreadService extends MyBusinessSupport implements ISProcess, ISInit, ISCheck, ISSave, Runnable {
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
-
+	
 	@Override
 	public void run() {
 		try {
@@ -50,10 +47,14 @@ public abstract class ASBussinessThreadService extends MyBusinessSupport impleme
 
 	@Override
 	public boolean doCheck() throws Exception {
+		if (logger.isDebugEnabled())
+			logger.debug("    doCheck.getToken()=====>>>>>"+getToken());
 		if (EmptyHelper.isEmpty(getToken()))
 			return false;
 		if (EmptyHelper.isEmpty(getMyCacheService()))
 			return false;
+		if (logger.isDebugEnabled())
+			logger.debug("    doCheck.getParamValue()=====>>>>>"+getParamValue());
 		if (EmptyHelper.isEmpty(getParamValue()))
 			return false;
 		

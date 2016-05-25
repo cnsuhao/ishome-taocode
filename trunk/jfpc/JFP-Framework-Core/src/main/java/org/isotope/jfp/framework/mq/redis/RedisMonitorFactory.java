@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
  * @since 2.4.1
  */
 public class RedisMonitorFactory implements ISFrameworkConstants {
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	/**
 	 * Redis通道定义

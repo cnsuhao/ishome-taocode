@@ -44,7 +44,7 @@ import org.slf4j.LoggerFactory;
  * 
  */
 public class MyHttpServiceSupport {
-	private Logger logger = LoggerFactory.getLogger(MyHttpServiceSupport.class);
+	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 	private int waitTimeMinute = 15;
 
 	public int getWaitTimeMinute() {

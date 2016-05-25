@@ -29,8 +29,8 @@ import org.springframework.core.io.Resource;
 // @Repository
 public class DBDao extends MyServiceSupport implements ISDBConstants {
 
-	private Logger logger_ = LoggerFactory.getLogger(this.getClass());
-
+	protected Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	@Autowired
 	private DBConfigBean dbConfig;
 
@@ -48,7 +48,7 @@ public class DBDao extends MyServiceSupport implements ISDBConstants {
 			buff.append(data);
 		}
 
-		logger_.debug("set config ok !");
+		logger.debug("set config ok !");
 		return true;
 	}
 
@@ -91,7 +91,7 @@ public class DBDao extends MyServiceSupport implements ISDBConstants {
 			conn = getConnection();
 			conn.setAutoCommit(false);
 			stmt = conn.createStatement();
-			logger_.debug(MESSAGE_STATEMENT_START);
+			logger.debug(MESSAGE_STATEMENT_START);
 			// 加载配置文件
 			if (loadConfig() == false) {
 				throw new Exception();
@@ -109,16 +109,16 @@ public class DBDao extends MyServiceSupport implements ISDBConstants {
 					stmt.execute(DROP_TABLE + tableName);
 				} catch (SQLException e) {
 				}
-				logger_.debug(sqlLocation.toString());
+				logger.debug(sqlLocation.toString());
 				// 创建表
 				for (String sql : loadResourceDataToSQL(sqlLocation)) {
 					if (EmptyHelper.isNotEmpty(sql.trim())) {
-						logger_.debug("预处理的建表SQL语句...{}", sql);
+						logger.debug("预处理的建表SQL语句...{}", sql);
 						try {
 							stmt.execute(sql);
 						} catch (SQLException e) {
 							// 是否继续处理SQL判定
-							logger_.error("预处理的建表SQL语句异常！！！" + e.getMessage());
+							logger.error("预处理的建表SQL语句异常！！！" + e.getMessage());
 							if (dbConfig.isErrorGoon() == false)
 								throw e;
 						}
@@ -126,7 +126,7 @@ public class DBDao extends MyServiceSupport implements ISDBConstants {
 				}
 			}
 			conn.commit();
-			logger_.debug(MESSAGE_STATEMENT_END);
+			logger.debug(MESSAGE_STATEMENT_END);
 		} catch (SQLException e) {
 			conn.rollback();
 			throw e;
@@ -155,7 +155,7 @@ public class DBDao extends MyServiceSupport implements ISDBConstants {
 			conn = getConnection();
 			conn.setAutoCommit(false);
 			stmt = conn.createStatement();
-			logger_.debug(MESSAGE_STATEMENT_START);
+			logger.debug(MESSAGE_STATEMENT_START);
 			// 加载配置文件
 			if (loadConfig() == false) {
 				throw new Exception();
@@ -177,18 +177,18 @@ public class DBDao extends MyServiceSupport implements ISDBConstants {
 				indexSQLs.add("CREATE INDEX `" + tableName + "_CC1` ON `" + tableName + "` (`cc1`)");
 				for (String indexSQL : indexSQLs) {
 					try {
-						logger_.debug("预处理的索引语句...{}", indexSQL);
+						logger.debug("预处理的索引语句...{}", indexSQL);
 						stmt.execute(indexSQL);
 					} catch (SQLException e) {
 						// 是否继续处理SQL判定
-						logger_.error("预处理的索引SQL语句异常！！！" + e.getMessage());
+						logger.error("预处理的索引SQL语句异常！！！" + e.getMessage());
 						if (dbConfig.isErrorGoon() == false)
 							throw e;
 					}
 				}
 			}
 			conn.commit();
-			logger_.debug(MESSAGE_STATEMENT_END);
+			logger.debug(MESSAGE_STATEMENT_END);
 		} catch (SQLException e) {
 			conn.rollback();
 			throw e;
@@ -217,7 +217,7 @@ public class DBDao extends MyServiceSupport implements ISDBConstants {
 			conn = getConnection();
 			conn.setAutoCommit(false);
 			stmt = conn.createStatement();
-			logger_.debug(MESSAGE_STATEMENT_START);
+			logger.debug(MESSAGE_STATEMENT_START);
 			// 加载配置文件
 			if (loadConfig() == false) {
 				throw new Exception();
@@ -227,15 +227,15 @@ public class DBDao extends MyServiceSupport implements ISDBConstants {
 				throw new Exception(MESSAGE_DATALOCATIONS_NULL);
 			}
 			for (Resource dataLocation : dbConfig.getDataLocations()) {
-				logger_.debug(dataLocation.toString());
+				logger.debug(dataLocation.toString());
 				for (String sql : loadResourceDataToSQL(dataLocation)) {
 					if (EmptyHelper.isNotEmpty(sql.trim())) {
-						logger_.debug("预处理的SQL语句...{}", sql);
+						logger.debug("预处理的SQL语句...{}", sql);
 						try {
 							stmt.execute(sql);
 						} catch (SQLException e) {
 							// 是否继续处理SQL判定
-							logger_.error("预处理的建表SQL语句异常！！！" + e.getMessage());
+							logger.error("预处理的建表SQL语句异常！！！" + e.getMessage());
 							if (dbConfig.isErrorGoon() == false)
 								throw e;
 						}
@@ -243,7 +243,7 @@ public class DBDao extends MyServiceSupport implements ISDBConstants {
 				}
 			}
 			conn.commit();
-			logger_.debug(MESSAGE_STATEMENT_END);
+			logger.debug(MESSAGE_STATEMENT_END);
 		} catch (SQLException e) {
 			conn.rollback();
 			throw e;
@@ -285,10 +285,10 @@ public class DBDao extends MyServiceSupport implements ISDBConstants {
 			stmt = conn.createStatement();
 
 			ResultSet rs = stmt.executeQuery("SELECT * FROM " + TABLE_NAME_TEST);
-			logger_.debug(MESSAGE_TEST);
+			logger.debug(MESSAGE_TEST);
 			// rs.beforeFirst();
 			while (rs.next()) {
-				logger_.debug(rs.getString(1) + "\t" + rs.getString(2) + "\t" + rs.getString(3));
+				logger.debug(rs.getString(1) + "\t" + rs.getString(2) + "\t" + rs.getString(3));
 			}
 		} catch (SQLException e) {
 			conn.rollback();
