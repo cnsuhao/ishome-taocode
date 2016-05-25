@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
  * 
  */
 public class UserSMSSendServiceImpl extends CommonChannelConfig implements ISSMSSupport, ISSMSConstants, ISFrameworkConstants {
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	public UserSMSSendServiceImpl() {
 		this(ISSMSSupport.CONFIG_KEY);

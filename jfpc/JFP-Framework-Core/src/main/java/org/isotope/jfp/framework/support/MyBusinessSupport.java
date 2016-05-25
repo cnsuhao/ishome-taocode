@@ -5,6 +5,8 @@ import org.isotope.jfp.framework.biz.common.ISToken;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.constants.pub.ISModelConstants;
 import org.isotope.jfp.framework.utils.EmptyHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 数据业务操作接口定义超类<br>
@@ -15,6 +17,7 @@ import org.isotope.jfp.framework.utils.EmptyHelper;
  * @version 0.1.0
  */
 public class MyBusinessSupport extends MyWorkSupport implements ISFrameworkConstants, ISModelConstants,ISToken {
+	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	/**
 	 * 返回结果(0：成功、其他：失败（业务系统提示码）)

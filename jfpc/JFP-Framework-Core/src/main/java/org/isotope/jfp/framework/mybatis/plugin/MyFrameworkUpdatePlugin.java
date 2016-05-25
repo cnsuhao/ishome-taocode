@@ -9,6 +9,8 @@ import org.apache.ibatis.plugin.Intercepts;
 import org.apache.ibatis.plugin.Invocation;
 import org.apache.ibatis.plugin.Plugin;
 import org.apache.ibatis.plugin.Signature;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -20,7 +22,7 @@ import org.apache.ibatis.plugin.Signature;
 //TODO 添加非法字符过滤器
 @Intercepts({ @Signature(type = Executor.class, method = "update", args = { MappedStatement.class, Object.class }) })
 public class MyFrameworkUpdatePlugin implements Interceptor {
-	//private Logger logger = LoggerFactory.getLogger(this.getClass());
+	//protected Logger logger = LoggerFactory.getLogger(this.getClass());
 	static int MAPPED_STATEMENT_INDEX = 0;
 	static int PARAMETER_INDEX = 1;
 	static int ROWBOUNDS_INDEX = 2;
