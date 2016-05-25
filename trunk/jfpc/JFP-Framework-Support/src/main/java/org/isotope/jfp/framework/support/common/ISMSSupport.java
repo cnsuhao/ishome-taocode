@@ -9,7 +9,7 @@ import org.isotope.jfp.framework.constants.ISFrameworkConstants;
  * @since 2.1.2
  * @version 2.1.2.20150417
  */
-public interface ISSMSSupport {
+public interface ISMSSupport {
 
 	public static final String CONFIG_KEY = "JFP:SMSLIST";
 	

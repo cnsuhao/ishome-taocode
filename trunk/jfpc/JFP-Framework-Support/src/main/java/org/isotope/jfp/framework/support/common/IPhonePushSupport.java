@@ -8,7 +8,7 @@ import org.isotope.jfp.framework.beans.pub.PushBean;
  * @since 2.1.2
  * @version 2.1.2.20150417
  */
-public interface ISPhonePushSupport {
+public interface IPhonePushSupport {
 	public static final String CONFIG_KEY = "JFP:PUSHLIST";	
 
 	/**

@@ -10,7 +10,7 @@ import org.isotope.jfp.framework.biz.common.ISSave;
  * @since 2.0.0 2015/1/19
  * 
  */
-public interface ISSaveCustomBusiness extends ISSave {
+public interface ISaveCustomBusiness extends ISSave {
 	/**
 	 * 数据保存前
 	 */

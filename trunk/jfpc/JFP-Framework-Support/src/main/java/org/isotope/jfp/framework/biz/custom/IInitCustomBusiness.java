@@ -10,7 +10,7 @@ import org.isotope.jfp.framework.biz.common.ISInit;
  * @since 2.0.0 2015/1/19
  * 
  */
-public interface ISInitCustomBusiness extends ISInit {
+public interface IInitCustomBusiness extends ISInit {
 
 	/**
 	 * 业务初始化前

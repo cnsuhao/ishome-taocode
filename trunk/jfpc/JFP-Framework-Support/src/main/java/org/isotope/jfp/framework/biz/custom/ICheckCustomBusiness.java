@@ -10,7 +10,7 @@ import org.isotope.jfp.framework.biz.common.ISCheck;
  * @since 2.0.0 2015/1/19
  * 
  */
-public interface ISCheckCustomBusiness extends ISCheck {
+public interface ICheckCustomBusiness extends ISCheck {
 
 	/**
 	 * 业务检查前

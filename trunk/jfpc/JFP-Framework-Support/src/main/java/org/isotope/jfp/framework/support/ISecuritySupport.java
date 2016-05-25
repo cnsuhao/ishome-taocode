@@ -6,7 +6,15 @@ package org.isotope.jfp.framework.support;
  * @since 2.0.5
  * @version 2.0.5 2014/2/15
  */
-public interface ISSecuritySupport {
+public interface ISecuritySupport {
+	/**
+	 * 加密
+	 */
+	public static final String ENCRYPTION = "E";
+	/**
+	 * 解密
+	 */
+	public static final String DECRYPTION= "D";
 	
 	/**
 	 * 数据解密
