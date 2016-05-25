@@ -7,7 +7,7 @@ import org.isotope.jfp.framework.biz.common.ISSave;
 import org.isotope.jfp.framework.utils.EmptyHelper;
 
 public abstract class ABussinessThreadService extends MyBusinessSupport implements ISProcess, ISInit, ISCheck, ISSave, Runnable {
-	
+
 	@Override
 	public void run() {
 		try {
@@ -37,41 +37,39 @@ public abstract class ABussinessThreadService extends MyBusinessSupport implemen
 			e.printStackTrace();
 		}
 	}
-	
 
 	/**
 	 * 业务逻辑处理
 	 */
 	public final boolean doInit() {
-		//参数解密
-		if(ISecuritySupport.ENCRYPTION.equals(token.getEncryType()))
-		{
-			
+		// 参数解密
+		if (mySecuritySupport != null && ISecuritySupport.ENCRYPTION.equals(token.getEncryType())) {
+			setParamValue(mySecuritySupport.decryption(getToken(), getParamValue()));
 		}
-		
+
 		return true;
 	}
-	
+
 	public boolean doSave() throws Exception {
-		//变更Token
+		// 变更Token
 		super.chageToken();
-		//保存Token
+		// 保存Token
 		return super.saveToken();
 	}
 
 	@Override
 	public boolean doCheck() throws Exception {
 		if (logger.isDebugEnabled())
-			logger.debug("    doCheck.token=====>>>>>"+token);
+			logger.debug("    doCheck.token=====>>>>>" + token);
 		if (EmptyHelper.isEmpty(token))
 			return false;
 		if (EmptyHelper.isEmpty(getMyCacheService()))
 			return false;
 		if (logger.isDebugEnabled())
-			logger.debug("    doCheck.getParamValue()=====>>>>>"+getParamValue());
+			logger.debug("    doCheck.getParamValue()=====>>>>>" + getParamValue());
 		if (EmptyHelper.isEmpty(getParamValue()))
 			return false;
-		
+
 		return super.checkToken();
 	}
 }
