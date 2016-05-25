@@ -12,6 +12,15 @@ public class QueryResultBean {
 	protected String errorMessage;
 	protected int total = 0;
 	protected List<? extends Object> hits;
+	protected boolean isSucceeded;
+
+	public boolean isSucceeded() {
+		return isSucceeded;
+	}
+
+	public void setSucceeded(boolean isSucceeded) {
+		this.isSucceeded = isSucceeded;
+	}
 
 	public String getErrorMessage() {
 		return errorMessage;

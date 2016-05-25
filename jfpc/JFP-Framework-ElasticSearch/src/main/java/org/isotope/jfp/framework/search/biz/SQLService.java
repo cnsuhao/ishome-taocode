@@ -130,11 +130,10 @@ public class SQLService implements ISFrameworkConstants {
 		if (EmptyHelper.isNotEmpty(size2))
 			size = Integer.parseInt(size2);
 
-		JestClient jestClient = null;
+		JestClient jestClient = getClient();
 
 		if (ONE.equals(creatFlag)) {
 			try{
-				jestClient = getClient();
 				String index = qb.getIndex();
 				// 删除索引
 				boolean indexExists = jestClient.execute(new IndicesExists.Builder(index).build()).isSucceeded();
@@ -145,9 +144,10 @@ public class SQLService implements ISFrameworkConstants {
 				JestResult createIndexResult = jestClient.execute(new CreateIndex.Builder(index).build());
 				logger.debug("createIndex===>>>ErrorMessage=" + createIndexResult.getErrorMessage() + ",JsonString=" + createIndexResult.getJsonString());
 			}
-			finally{
+			catch(Exception e){
 				if(jestClient!=null)
 					jestClient.shutdownClient();
+				throw e;
 			}
 		}
 
@@ -178,7 +178,6 @@ public class SQLService implements ISFrameworkConstants {
 				commit = false;
 				while (commit == false) {
 					try {
-						jestClient = getClient();
 						bulkIndexBuilder = new Bulk.Builder();
 						bulkIndexBuilder.addAction(actions);
 						result = jestClient.execute(bulkIndexBuilder.build());
@@ -194,9 +193,9 @@ public class SQLService implements ISFrameworkConstants {
 						} else {
 							errorNum = errorNum + 1;
 						}
-					}finally{
 						if(jestClient!=null)
 							jestClient.shutdownClient();
+						jestClient = getClient();
 					}
 				}
 				commit = false;
@@ -292,6 +291,9 @@ public class SQLService implements ISFrameworkConstants {
 			throw e;
 		} finally {
 			// 关闭资源
+			if (resultSet != null) {
+				resultSet.close();
+			}
 			if (stmt != null) {
 				stmt.close();
 			}
