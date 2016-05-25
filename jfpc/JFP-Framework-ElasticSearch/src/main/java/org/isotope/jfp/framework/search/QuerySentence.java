@@ -24,7 +24,7 @@ import com.alibaba.fastjson.JSON;
  *
  */
 public class QuerySentence implements ISSentenceConstants {
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	private ICacheService myCacheService;
 

@@ -39,7 +39,7 @@ import io.searchbox.indices.IndicesExists;
  *
  */
 public class TableService implements ISFrameworkConstants {
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	/**
 	 * 数据库连接

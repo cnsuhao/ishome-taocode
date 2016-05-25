@@ -27,7 +27,7 @@ import io.searchbox.core.Update;
  */
 @Service("DataService")
 public class DataService {
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 	public int size = 1000;
 
 	public int getSize() {
