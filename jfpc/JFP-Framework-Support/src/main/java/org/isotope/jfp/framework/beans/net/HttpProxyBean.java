@@ -27,31 +27,31 @@ public class HttpProxyBean extends ObjectBean {
 	/**
 	 * 识别ID
 	 */
-	private String id;
+	protected String id;
 	/**
 	 * 主机地址
 	 */
-	private String host;
+	protected String host;
 	/**
 	 * 端口
 	 */
-	private int port;
+	protected int port;
 	/**
 	 * 类别（http/https）
 	 */
-	private String type;
+	protected String type;
 	/**
 	 * 权限使用(1不使用0使用)
 	 */
-	private String auth;
+	protected String auth;
 	/**
 	 * 用户名
 	 */
-	private String user;
+	protected String user;
 	/**
 	 * 密码
 	 */
-	private String pwd;
+	protected String pwd;
 
 	public String getId() {
 		return id;

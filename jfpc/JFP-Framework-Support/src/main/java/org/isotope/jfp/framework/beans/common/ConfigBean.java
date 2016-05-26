@@ -16,12 +16,12 @@ public class ConfigBean extends ObjectBean {
 	/**
 	 * 配置使用关键字
 	 */
-	private String key;
+	protected String key;
 
 	/**
 	 * 配置对应的内容
 	 */
-	private String value;
+	protected String value;
 
 	public String getKey() {
 		return key;

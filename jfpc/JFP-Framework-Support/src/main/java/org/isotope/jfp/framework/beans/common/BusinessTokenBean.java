@@ -60,23 +60,23 @@ public class BusinessTokenBean extends ObjectBean {
 	/**
 	 * 企业ID
 	 */
-	private String companyId;
+	protected String companyId;
 	/**
 	 * 用户ID
 	 */
-	private String userId;
+	protected String userId;
 	/**
-	 * 请求时间
+	 * 最后请求时间
 	 */
-	private String requestDateTime = DateHelper.currentTimestamp();
+	protected String requestDateTime = DateHelper.currentTimestamp();
 	/**
 	 * 业务标识
 	 */
-	private String bizName;
+	protected String bizName;
 	/**
 	 * 加密模式
 	 */
-	private String encryType;
+	protected String encryType;
 
 	public String getCompanyId() {
 		return companyId;

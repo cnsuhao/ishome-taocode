@@ -14,21 +14,21 @@ public class SMSBean extends FrameworkDataBean {
 	/**
 	 * 医院ID
 	 */
-	String companyId;
+	protected String companyId;
 
 	/**
 	 * 手机号码
 	 */
-	String phoneNum;
+	protected String phoneNum;
 	/**
 	 * 信息内容
 	 */
-	String message;
+	protected String message;
 
 	/**
 	 * 请求来源（1系统2医院）
 	 */
-	String sourceCmp;
+	protected String sourceCmp;
 
 	public String getCompanyId() {
 		return companyId;

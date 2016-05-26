@@ -19,7 +19,7 @@ public class FrameworkDataBean extends ObjectBean {
     /** 
      * 系统数据唯一识别ID（固定主键）
      */
-    private String puk;
+	private String puk;
 
     /** 
      * 获取系统数据唯一识别ID（固定主键）

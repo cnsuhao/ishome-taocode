@@ -16,7 +16,7 @@ public interface ILogSupport {
 	/**
 	 * 短信发送
 	 * @see ISFrameworkConstants.SEMICOLON
-	 * @param log 日志洗洗脑
+	 * @param log 日志信息
 	 * @return 发送结果
 	 */
 	public boolean send(LogBean log);
