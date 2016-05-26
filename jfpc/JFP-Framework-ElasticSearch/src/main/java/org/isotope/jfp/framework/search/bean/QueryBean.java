@@ -13,15 +13,15 @@ public class QueryBean extends ObjectBean {
 	/**
 	 * 查询语句ID
 	 */
-	String id = "";
+	protected String id = "";
 	/**
 	 * 索引名字
 	 */
-	String index = "";
+	protected String index = "";
 	/**
 	 * 查询语句
 	 */
-	String value = "";
+	protected String value = "";
 
 	public String getId() {
 		return id;
