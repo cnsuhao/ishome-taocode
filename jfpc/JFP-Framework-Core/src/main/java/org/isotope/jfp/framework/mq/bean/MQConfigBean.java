@@ -14,29 +14,29 @@ public class MQConfigBean extends ObjectBean {
 	/**
 	 * 服务地址
 	 */
-	String hostIp;
+	protected String hostIp;
 	/**
 	 * 服务端口
 	 */
-	int hostPort;
+	protected int hostPort;
 	/**
 	 * 超时时间
 	 */
-	int closeTimeout;
+	protected int closeTimeout;
 
 	/**
 	 * 队列名称
 	 */
-	String queueName;
+	protected String queueName;
 
 	/**
 	 * 用户名
 	 */
-	String username;
+	protected String username;
 	/**
 	 * 密码
 	 */
-	String password;
+	protected String password;
 
 	public String getHostIp() {
 		return hostIp;

@@ -36,30 +36,26 @@ public class PageVOSupport extends ObjectBean {
 	/**
 	 * 总页数(计算获得)
 	 */
-	private int pageCount;
+	protected int pageCount;
 	/**
 	 * 总条数(计算获得)
 	 */
-	private int resultCount;
+	protected int resultCount;
 
 	/**
 	 * 页面一览数据
 	 */
-	private List<? extends FrameworkDataBean> pageListData;
+	protected List<? extends FrameworkDataBean> pageListData;
 
 	/**
 	 * 页面检索参数
 	 */
-	private FrameworkDataBean formParamBean;
+	protected FrameworkDataBean formParamBean;
 
 	/**
 	 * 自定义排序
 	 */
-	private String orderby = "";
-
-	public PageVOSupport() {
-
-	}
+	protected String orderby = "";
 
 	public void config() {
 		pageCurrent = 0;

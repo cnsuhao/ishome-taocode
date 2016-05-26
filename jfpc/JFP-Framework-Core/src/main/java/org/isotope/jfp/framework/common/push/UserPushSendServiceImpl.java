@@ -36,7 +36,7 @@ public class UserPushSendServiceImpl extends CommonChannelConfig implements IPho
 	public boolean push(PushBean push) {
 		logger.debug(push.toString());
 
-		if (SYSTEM_NAME.equals(push.getHosId()))
+		if (SYSTEM_NAME.equals(push.getCompanyId()))
 			push.setSourceCmp(ONE);
 		else
 			push.setSourceCmp(TWO);
