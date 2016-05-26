@@ -9,6 +9,8 @@ package org.isotope.jfp.framework.constants.pub;
  */
 public interface ISLogConstants {
 
+	public final static String Default_Redis_Key = "SYSTEM:LOG:";
+	
 	public final static String LOG_LEVEL = "LVL";
 	public final static String LOG_UPD = "UPD";
 	public final static String LOG_FMN = "FMN";
