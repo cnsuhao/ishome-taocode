@@ -14,43 +14,43 @@ public class PushBean extends FrameworkDataBean {
 	/**
 	 * 医院ID
 	 */
-	String hosId;
+	protected String companyId;
 	/**
 	 * 用户ID
 	 */
-	String userId;
+	protected String userId;
 	/**
 	 * 手机号码
 	 */
-	String phoneNum;
+	protected String phoneNum;
 	/**
 	 * 手机类型(A:安卓，P:苹果)
 	 */
-	String phoneType;
+	protected String phoneType;
 	/**
 	 * 标题
 	 */
-	String title;
+	protected String title;
 	/**
 	 * 信息内容
 	 */
-	String message;
+	protected String message;
 	/**
-	 * 请求来源（1系统2医院）
+	 * 请求来源（1系统2企业）
 	 */
-	String sourceCmp;
+	protected String sourceCmp;
 
 	/**
 	 * 用户令牌
 	 */
-	String token;
+	protected String token;
 
-	public String getHosId() {
-		return hosId;
+	public String getCompanyId() {
+		return companyId;
 	}
 
-	public void setHosId(String hosId) {
-		this.hosId = hosId;
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
 	}
 
 	public String getUserId() {

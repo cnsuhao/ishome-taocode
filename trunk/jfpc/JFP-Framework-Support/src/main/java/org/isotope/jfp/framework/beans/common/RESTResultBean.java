@@ -24,22 +24,22 @@ public class RESTResultBean extends ObjectBean implements ISFrameworkConstants {
 	/**
 	 * 服务器认证授权码（登记授权）
 	 */
-	private String token = EMPTY;
+	protected String token = EMPTY;
 
 	/**
 	 * 返回结果(0成功1失败)
 	 */
-	private String code = ZERO;// 对接返回代码 -1:无数据 0:正确 其他：对应对接方错误码
+	protected String code = ZERO;// 对接返回代码 -1:无数据 0:正确 其他：对应对接方错误码
 
 	/**
 	 * 提示信息
 	 */
-	private String message = MESSAGE_PROC_WAITING;// 对接返回信息 空:正确 其他：对应对接方错误描述
+	protected String message = MESSAGE_PROC_WAITING;// 对接返回信息 空:正确 其他：对应对接方错误描述
 
 	/**
 	 * 返回结果
 	 */
-	private Object result = EMPTY;
+	protected Object result = EMPTY;
 
 	public String getToken() {
 		return token;
