@@ -4,7 +4,7 @@ import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 
 public interface ISSentenceConstants extends ISFrameworkConstants{
 
-	public final static String VERSION = "341:";
+	public final static String VERSION = "312:";
 	
 	/**
 	 * 最后更新时间
