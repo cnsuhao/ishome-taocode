@@ -29,7 +29,6 @@
 		<property name="timeOut" value="120000" />
 	</bean>
 
-
 	<!-- 抓取类配置 -->
 	<bean id="capture" class="com.upg.zx.domain.capture.imp.CaptureImp">
 		<property name="captureServices">
@@ -439,35 +438,54 @@
 		<property name="urlParser">
 			<ref bean="urlParser" />
 		</property>
-		<property name="postOtherInfoJsUrl"
-			value="http://testcapture.wzyrz.cn/Zheng/corp/uploadCompanyHtmljs"></property>
-		<property name="postOtherInfoUrl"
-			value="http://testcapture.wzyrz.cn/Zheng/corp/uploadCompanyHtml" />
+		
+		<property name="serviceConfig" ref="serviceConfig" />
 
 	</bean>
+	
+	<!-- testcapture.wzyrz.cn -->
+    <bean id='serviceConfig' class='com.upg.zx.capture.bean.ServiceConfig' >
+        <property name='serviceConfig'>
+        	<map>         		
+        		<entry key='serviceHost'						value='http://testcapture.wzyrz.cn/Zheng/' />
+        		
+        		<entry key='requestUrl'						value='corp/request/allinfo' />
+        		<entry key='analysisTemplateUrl'			value='corp/request/queryanalysisTemplate' />
+
+        		<entry key='postOtherInfoJsUrl'			value='corp/uploadCompanyHtmljs' />  
+        		<entry key='postOtherInfoUrl'				value='corp/uploadCompanyHtml' /> 
+        		
+        		<entry key='submitCompanyUrl'			value='corp/uploadCompanyHtml' />
+        		<entry key='submitCompanyls'				value='corp/uploadCompanyListHtml' />
+        		<entry key='getLianziCompanyUrl'		value='corp/sendIpDistant' />
+        		
+        		<entry key='getCompanyUrl'				value='corp/info/update/sedCompany' />
+        		<entry key='submitCourtDocUrl'			value='codc/uploadCompanyListHtml' />
+        		<entry key='corpNameUrl'					value='corp/getKeyWord' />
+
+        		<!-- <entry key='useProxy'							value='' /> -->
+            </map>
+        </property>
+	</bean>	
 
 	<!-- 获取请求以及头信息 -->
 	<bean id="requestLoad" class="com.upg.zx.domain.capture.imp.RequestLoad"
 		init-method="init">
-		<property name="request_url"
-			value="http://testcapture.wzyrz.cn/Zheng/corp/request/allinfo" />
-		<property name="analysisTemplateUrl"
-			value="http://testcapture.wzyrz.cn/Zheng/corp/request/queryanalysisTemplate"></property>
+		<property name="serviceConfig" ref="serviceConfig" />
 	</bean>
-	<!-- CorpSearchName.getCorpNameForService http://testcapture.wzyrz.cn/Zheng/corp/getKeyWord?size=1&areaCode=-->
-	<!-- testcapture.wzyrz.cn -->
+	
+	<bean id="corpSearchName" class="com.upg.zx.capture.util.CorpSearchName"
+		init-method="init">
+		<property name="serviceConfig" ref="serviceConfig" />
+	</bean>
+	
 	<bean id="companyTask" class="com.upg.zx.capture.task.CompanyTask"
 		init-method="init">
-		<property name="getCompanyUrl"
-			value="http://testcapture.wzyrz.cn/Zheng/corp/info/update/sedCompany"></property>
-		<property name="submitCompanyUrl"
-			value="http://testcapture.wzyrz.cn/Zheng/corp/uploadCompanyHtml"></property>
-		<property name="submitCompanyls"
-			value="http://testcapture.wzyrz.cn/Zheng/corp/uploadCompanyListHtml"></property>
-		<property name="postOtherInfoJsUrl"
-			value="http://testcapture.wzyrz.cn/Zheng/corp/uploadCompanyHtmljs"></property>
-		<property name="getLianziCompanyUrl"
-			value="http://testcapture.wzyrz.cn/Zheng/corp/sendIpDistant" />
+		
+		<property name="corpSearchName" ref="corpSearchName" />
+		
+		<property name="serviceConfig" ref="serviceConfig" />
+		
 		<property name="capture">
 			<ref bean="capture" />
 		</property>
@@ -481,6 +499,11 @@
 		</property>
 		 -->
 	</bean>
+	
+	<bean id="CourtDocTask" class="com.zx.court.task.CourtDocTask">
+		<property name="serviceConfig" ref="serviceConfig" />		
+	</bean>
+ 	
     <bean id="tokenclear" class="com.upg.zx.domain.capture.token.imp.DefaultTockenClean"></bean>
     
 	<bean id="urlParser" class="com.upg.zx.parser.URLParserJSON" />
@@ -493,9 +516,17 @@
 		<task:scheduled ref="companyTask" method="getLiangZiListTask"
 			cron="0/1 * * * * ?" />
  -->
+ 
+		<!-- <task:scheduled ref="CourtDocTask" method="getHtmlListSheng"
+			cron="18 18 18 * * ?" />
+		<task:scheduled ref="CourtDocTask" method="getHtmlListZhongji"
+			cron="18 18 18 * * ?" />
+		<task:scheduled ref="CourtDocTask" method="getHtmlListJicheng"
+			cron="18 18 18 * * ?" /> -->
+			
 		<!-- 获取公司详细信息 -->
 		<task:scheduled ref="companyTask" method="jsInfoTask"
-			cron="5 * * * * ?" />
+			cron="0/5 * * * * ?" />
 
 		<!-- 温州企业获取
 		<task:scheduled ref="companyQueryTask" method="queryService"
