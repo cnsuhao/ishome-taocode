@@ -536,7 +536,7 @@ public class CompanyTask {
 
 	public void infoTaskCapture(CorpBase corpBase) {
 		int value = 0, arrayLength = 0;
-		;
+		
 		Random random = new Random();
 		String areaType = "";
 		Class<?> clazz = this.getClass();
@@ -548,31 +548,6 @@ public class CompanyTask {
 
 		if ("BJ".equals(areaType) || "JL".equals(areaType) || "GZ".equals(areaType)) {
 			System.out.println("system error: not supported area  " + corpBase.getRes_date());
-			return;
-		}
-
-		try {
-			fRandomIndex = clazz.getField(areaType);
-			fProxy = clazz.getField("proxy" + areaType);
-			arrayLength = randomLength[(int) fRandomIndex.get(this)];
-			array = (String[][]) fProxy.get(this);
-			// 如果代理被用完后重新从数据库中获取代理
-			if (array.length <= 1) {
-				String[][] proxy_db = getProxyArray();
-				fProxy.set(this, proxy_db);
-				randomLength[(int) fRandomIndex.get(this)] = proxy_db.length;
-
-				arrayLength = proxy_db.length;
-				array = proxy_db;
-			}
-
-			value = random.nextInt(arrayLength - 1);
-			// ipAddressForDetail = array[value][0] ;
-			// portForDetail = Integer.valueOf( array[value][1] ) ;
-			ipAddressForList.set(array[value][0]);
-			portForList.set(Integer.valueOf(array[value][1]));
-		} catch (Exception e) {
-			System.out.println("system error: " + e.toString());
 			return;
 		}
 
