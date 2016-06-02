@@ -112,6 +112,7 @@ public class HttpClientUtil {
 	 * @throws IOException
 	 */
 	public static String postRequest(String url, String content) throws Exception {
+		System.out.println("=====>>>>>"+url);
 		CloseableHttpClient client = getHttpclient(url);
 		HttpPost post = new HttpPost(url);
 		post.setConfig(RequestConfig.custom().setSocketTimeout(30 * 1000).setConnectTimeout(30 * 1000).build());
@@ -134,6 +135,8 @@ public class HttpClientUtil {
 	}
 
 	public static String postRequest(String url, Map<String, String> content) throws Exception {
+		System.out.println("=====>>>>>"+url);
+		
 		CloseableHttpClient client = getHttpclient(url);
 		HttpPost post = new HttpPost(url);
 		post.setConfig(RequestConfig.custom().setSocketTimeout(30 * 1000).setConnectTimeout(30 * 1000).build());
@@ -170,6 +173,7 @@ public class HttpClientUtil {
 	 * @throws IOException
 	 */
 	public static String getRequest(String url) throws Exception {
+		System.out.println("=====>>>>>"+url);
 		CloseableHttpClient client = getHttpclient(url);
 		HttpGet get = new HttpGet(url);
 		get.setConfig(RequestConfig.custom().setSocketTimeout(30 * 1000).setConnectTimeout(30 * 1000).build());
