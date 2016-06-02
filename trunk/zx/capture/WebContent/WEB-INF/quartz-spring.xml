@@ -447,7 +447,9 @@
     <bean id='serviceConfig' class='com.upg.zx.capture.bean.ServiceConfig' >
         <property name='serviceConfig'>
         	<map>         		
+        	
         		<entry key='serviceHost'						value='http://testcapture.wzyrz.cn/Zheng/' />
+        		<!-- <entry key='serviceHost'						value='http://127.0.0.1:8888/Zheng/' /> -->
         		
         		<entry key='requestUrl'						value='corp/request/allinfo' />
         		<entry key='analysisTemplateUrl'			value='corp/request/queryanalysisTemplate' />
