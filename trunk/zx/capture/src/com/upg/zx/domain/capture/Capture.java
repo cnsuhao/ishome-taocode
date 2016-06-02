@@ -20,9 +20,10 @@ public interface Capture {
 	 * @param jsessionid
 	 * @param areaCode
 	 * @return
+	 * @throws Exception 
 	 */
 	CorpBaseRes findCompanyByName(String companyName, String authCode,
-			String jsessionid, String areaCode);
+			String jsessionid, String areaCode) throws Exception;
 	
 	/**
 	 * 获取公司信息html
@@ -32,7 +33,7 @@ public interface Capture {
 	 * @return
 	 */
 	public String getCompanyInfoHtml(String companyId, String areaCode,
-			String corpId,String subId);
+			String corpId,String subId) throws Exception;
 	
 	/**
 	 * 获取公司信息（公司数据类型属于html模板+json 类型 只用于江苏）
@@ -43,5 +44,5 @@ public interface Capture {
 	 * @return
 	 */
 	public String[] getCompanyInfoByHtmlTemplate(String companyId,
-			String areaCode, String corpId);
+			String areaCode, String corpId) throws Exception;
 }

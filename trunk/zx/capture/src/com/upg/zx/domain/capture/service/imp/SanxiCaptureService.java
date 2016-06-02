@@ -71,7 +71,7 @@ public class SanxiCaptureService extends CaptureServiceImp {
 
 
     @Override
-	public boolean checkWord(String companyName,String jsessionid){
+	public boolean checkWord(String companyName,String jsessionid) throws Exception{
 		Token  token = tokenRegistry.getToken(jsessionid);
 		//token不存在或已过期
 		if(token == null || token.isExpired()){
@@ -126,7 +126,7 @@ public class SanxiCaptureService extends CaptureServiceImp {
 	
 	
 	@Override
-	public String getCompanyBaseInfo(String corpId, RequestInfo requestInfo,String templateHtml){
+	public String getCompanyBaseInfo(String corpId, RequestInfo requestInfo,String templateHtml) throws Exception{
 		//基本信息
 		if(BASE_INFO.equals(requestInfo.getModeType())){
 			return super.getCompanyBaseInfo(corpId, requestInfo, templateHtml);

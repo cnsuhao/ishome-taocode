@@ -55,7 +55,7 @@ public class JianXi2CaptureService extends CaptureServiceImp{
 	
 	@Override
 	protected CorpBaseRes validateAuthCode(String companyName, String authCode,
-			String sessionId) {
+			String sessionId) throws Exception {
 		Token token = tokenRegistry.getToken(sessionId);
 		// token不存在或已过期
 		if (token == null || token.isExpired()) {
