@@ -209,7 +209,7 @@ public class CourtDocTask {
 
 		int i = 0;
 		// *****************上传日期********************
-		String from = getDate(-20);
+		String from = getDate(0);
 		String to = getDate(1);
 		// ******************************************
 		int k = 0;
