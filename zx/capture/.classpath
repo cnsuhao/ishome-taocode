@@ -1,45 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v6.0">
-		<attributes>
-			<attribute name="owner.project.facets" value="jst.web"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
-	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/c3p0-0.9.5-pre8.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/comm-jd-1.0.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-beanutils-1.7.0.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-codec-1.5.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-codec-1.10.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-collections-3.1.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-io-1.3.2.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-io-2.5.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-lang-2.4.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-logging-1.0.4.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-lang3-3.4.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/cssparser-0.9.19.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/ezmorph-1.0.3.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/httpclient-4.4.1.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/httpcore-4.4.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/htmlunit-2.22.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/htmlunit-core-js-2.22.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/httpclient-4.5.2.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/httpcore-4.4.4.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/httpmime-4.5.2.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jackson-annotations-2.5.3.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jackson-core-2.5.3.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jackson-databind-2.5.3.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/javacpp-0.11.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/json-lib-2.2.3-jdk15.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jsoup-1.7.2.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/leptonica-1.71-0.11-sources.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/leptonica-1.71-0.11-windows-x86_64.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/leptonica-1.71-0.11.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/mchange-commons-java-0.2.7.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/mybatis-3.2.8.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/mybatis-spring-1.2.2.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/mysql-connector-java-5.1.9.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/neko-htmlunit-2.21.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/sac-1.3.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/serializer-2.7.2.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/slf4j-api-1.7.6.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/slf4j-log4j12-1.7.6.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-aop-4.1.6.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-beans-4.1.6.RELEASE.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-context-4.1.6.RELEASE.jar" sourcepath="D:/001296/.m2/repository/org/springframework/spring-context/4.1.6.RELEASE/spring-context-4.1.6.RELEASE-sources.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-context-4.1.6.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-context-support-4.1.6.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-core-4.1.6.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-expression-4.1.6.RELEASE.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-jdbc-4.1.6.RELEASE.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-tx-4.1.6.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-web-4.1.6.RELEASE.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/log4j-1.2.17.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/comm-jd-1.0.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-logging-1.1.1.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/slf4j-api-1.7.6.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/slf4j-log4j12-1.7.6.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jackson-annotations-2.5.3.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/javacpp-0.11.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/leptonica-1.71-0.11-sources.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/leptonica-1.71-0.11-windows-x86_64.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/leptonica-1.71-0.11.jar" sourcepath="D:/001296/.m2/repository/org/bytedeco/javacpp-presets/leptonica/1.71-0.11/leptonica-1.71-0.11-sources.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/tesseract-3.03-rc1-0.11-windows-x86_64.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/tesseract-3.03-rc1-0.11.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/websocket-api-9.2.17.v20160517.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/websocket-client-9.2.17.v20160517.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/websocket-common-9.2.17.v20160517.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/xalan-2.7.2.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/xercesImpl-2.11.0.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/xml-apis-1.4.01.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jetty-io-9.2.17.v20160517.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jetty-util-9.2.17.v20160517.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
