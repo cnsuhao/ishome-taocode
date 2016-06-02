@@ -66,7 +66,7 @@ public class ShangDongCaptureService extends CaptureServiceImp {
 	
 	
 	@Override
-	protected Map<String, String> getRequestParam(String corpId,RequestInfo requestinfo){
+	protected Map<String, String> getRequestParam(String corpId,RequestInfo requestinfo) throws Exception{
 		 Map<String,String> map = new HashMap<String,String>();
 		 //基本信息
 		 if(BASE_INFO.equals(requestinfo.getModeType())){

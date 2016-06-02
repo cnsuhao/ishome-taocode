@@ -140,12 +140,13 @@ public class NingXiaCaptureService extends CaptureServiceImp {
 
 	/**
 	 * 获取详细信息
+	 * @throws Exception 
 	 * 
 	 * @throws IOException
 	 * @throws HttpException
 	 */
 	public String getCompanyBaseInfo(String corpId, RequestInfo requestInfo,
-			String templateHtml) {
+			String templateHtml) throws Exception {
 		String getNbxh="";
 		// 基本信息
 		if (BASE_INFO.equals(requestInfo.getModeType())) {

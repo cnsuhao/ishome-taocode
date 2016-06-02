@@ -84,7 +84,7 @@ public class NeiMengGuCaptureService extends CaptureServiceImp {
 
 	@Override
 	protected CorpBaseRes validateAuthCode(String companyName, String authCode,
-			String sessionId) {
+			String sessionId) throws Exception {
 		Token token = tokenRegistry.getToken(sessionId);
 		// token不存在或已过期
 		if (token == null || token.isExpired()) {
@@ -143,7 +143,7 @@ public class NeiMengGuCaptureService extends CaptureServiceImp {
 	
 	@Override
 	protected Map<String, String> getRequestParam(String corpId,
-			RequestInfo requestinfo) {
+			RequestInfo requestinfo) throws Exception {
 		Map<String, String> map = new HashMap<String, String>();
 		Token token = tokenRegistry.getToken(corpId);
 		// 基本信息请求
@@ -211,12 +211,13 @@ public class NeiMengGuCaptureService extends CaptureServiceImp {
 
 	/**
 	 * 获取详细信息
+	 * @throws Exception 
 	 * 
 	 * @throws IOException
 	 * @throws HttpException
 	 */
 	public String getCompanyBaseInfo(String corpId, RequestInfo requestInfo,
-			String templateHtml) {
+			String templateHtml) throws Exception {
 		List<Cookie> cookies = getRequestCookie(corpId); 
 		Map<String, String> param = getRequestParam(corpId, requestInfo);
 		String encode = this.getEncode();

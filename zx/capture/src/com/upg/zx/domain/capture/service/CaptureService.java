@@ -28,7 +28,7 @@ public interface CaptureService {
 	   * @param jsessionid
 	   * @return
 	   */
-	   CorpBaseRes captureCompany(String companyName,String authCode,String jsessionid);
+	   CorpBaseRes captureCompany(String companyName,String authCode,String jsessionid) throws Exception;
 
 	  /**
 	   * 获取公司信息
@@ -37,7 +37,7 @@ public interface CaptureService {
 	   * @param templateHtml
 	   * @return
 	   */
-	  String getCompanyBaseInfo(String corpId,RequestInfo requestInfo,String templateHtml);
+	  String getCompanyBaseInfo(String corpId,RequestInfo requestInfo,String templateHtml) throws Exception;
 	  
 	  
 	  

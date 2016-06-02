@@ -102,7 +102,7 @@ public class CompanyQueryTask {
 	 * @param corpId
 	 * @throws IOException
 	 */
-	public void queryCorpById(String corpId) throws IOException{
+	public void queryCorpById(String corpId) throws Exception{
 		String html = HttpClientUtil.getRequest(queryCorpById+"?corp_id="+corpId);
 	}
 	

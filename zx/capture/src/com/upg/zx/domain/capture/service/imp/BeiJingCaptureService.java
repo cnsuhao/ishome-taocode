@@ -84,7 +84,7 @@ public class BeiJingCaptureService extends CaptureServiceImp {
 	}
 
 	public CorpBaseRes captureCompany(String companyName, String authCode,
-			String jsessionid) {
+			String jsessionid) throws Exception {
 		CorpBaseRes corpBaseRes = super.captureCompany(companyName, authCode,
 				jsessionid);
 		List<CorpBase> corpBasels = corpBaseRes.getList();
@@ -185,7 +185,7 @@ public class BeiJingCaptureService extends CaptureServiceImp {
 	}
 	
 	 protected CorpBaseRes validateAuthCode(String companyName,
-				String authCode, String sessionId){
+				String authCode, String sessionId) throws Exception{
 				Token  token = tokenRegistry.getToken(sessionId);
 				//token不存在或已过期
 				if(token == null || token.isExpired()){
