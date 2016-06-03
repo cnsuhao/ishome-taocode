@@ -7,7 +7,7 @@ package org.isotope.jfp.framework.cache;
  * @since 2.0.0 2015/1/19
  */
 public interface ISessionService {
-	////////////////////数据缓存////////////////////////////////
+	//////////数据缓存////////////////
 	/**
 	 * 保存数据到缓存中心
 	 * <br>（基于保存Key）

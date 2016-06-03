@@ -20,8 +20,8 @@ public class PinYinHelper {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		System.out.println(getPinYinSample("获得汉字简拼"));
-		System.out.println(getPinYinFull("获得汉字简拼"));
+		//System.out.println(getPinYinSample("获得汉字简拼"));
+		//System.out.println(getPinYinFull("获得汉字简拼"));
 	}
 
 	/**
@@ -56,7 +56,7 @@ public class PinYinHelper {
 				}
 			}
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			//System.out.println(e.getMessage());
 		}
 
 		if (upCase)
@@ -100,7 +100,7 @@ public class PinYinHelper {
 				}
 			}
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			//System.out.println(e.getMessage());
 		}
 
 		if (upCase)

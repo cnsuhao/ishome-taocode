@@ -96,9 +96,9 @@ public class RESTResultBean extends ObjectBean implements ISFrameworkConstants {
 		{
 			// 直接获得深层对象List
 			JSONArray ja = (JSONArray) jsons.get("result");
-			System.out.println(JSONArray.parseArray(JSONArray.toJSONString(rs.getResult()), RESTResultBean.class));
+			//System.out.println(JSONArray.parseArray(JSONArray.toJSONString(rs.getResult()), RESTResultBean.class));
 			// 直接解析数据项目得到一个数据
-			System.out.println(JSONObject.toJavaObject((JSONObject) ja.get(0), RESTResultBean.class));
+			//System.out.println(JSONObject.toJavaObject((JSONObject) ja.get(0), RESTResultBean.class));
 		}
 	}
 }

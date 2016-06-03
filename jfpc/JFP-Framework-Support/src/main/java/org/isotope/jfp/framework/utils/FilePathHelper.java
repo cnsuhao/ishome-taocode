@@ -58,7 +58,7 @@ public class FilePathHelper implements ISFrameworkConstants {
 //			props.load(in);
 //			machinecode = props.getProperty(MACHINE_CODE);
 //		} catch (Exception e) {
-//			System.out.println("It's not exit File (fileContentType.xml)!");
+//			//System.out.println("It's not exit File (fileContentType.xml)!");
 //		}
 	}
 	
@@ -77,15 +77,15 @@ public class FilePathHelper implements ISFrameworkConstants {
 	 */
 	public static void main(String[] args) {
 		String[] s = makeFilePath("spook.jpg");
-		System.out.println("=="+(s[0]));
-		System.out.println("=="+(s[1]));
-		System.out.println("=="+(s[2]));
-		System.out.println("=="+(s[3]));
-		System.out.println("==111=="+getFilePath("11451642260080981322426024_3_7_6_1_0_0_0_._6",true)[0]);
-		System.out.println("==111=="+getFilePath("11451642260080981322426024_3_7_6_1_0_0_0_._6",true)[1]);
-		System.out.println("==111=="+getFilePath("11451642260080981322426024_3_7_6_1_0_0_0_._6",true)[2]);
-		System.out.println("==111=="+getFilePath("11451642260080981322426024_3_7_6_1_0_0_0_._6",true)[3]);
-		System.out.println("==111=="+getFilePath("11451642260080981322426024_3_7_6_1_0_0_0_._6",true)[4]);
+		//System.out.println("=="+(s[0]));
+		//System.out.println("=="+(s[1]));
+		//System.out.println("=="+(s[2]));
+		//System.out.println("=="+(s[3]));
+		//System.out.println("==111=="+getFilePath("11451642260080981322426024_3_7_6_1_0_0_0_._6",true)[0]);
+		//System.out.println("==111=="+getFilePath("11451642260080981322426024_3_7_6_1_0_0_0_._6",true)[1]);
+		//System.out.println("==111=="+getFilePath("11451642260080981322426024_3_7_6_1_0_0_0_._6",true)[2]);
+		//System.out.println("==111=="+getFilePath("11451642260080981322426024_3_7_6_1_0_0_0_._6",true)[3]);
+		//System.out.println("==111=="+getFilePath("11451642260080981322426024_3_7_6_1_0_0_0_._6",true)[4]);
 	}
 	
 	/**

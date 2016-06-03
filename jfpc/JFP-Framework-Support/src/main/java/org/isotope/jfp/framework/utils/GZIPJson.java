@@ -13,8 +13,8 @@ public class GZIPJson {
 	 * @throws Exception
 	 */
 	public static void main(String[] args) throws Exception {
-		System.out.println(compress("付长勇"));
-		System.out.println(unCompress(compress("付长勇")));
+		//System.out.println(compress("付长勇"));
+		//System.out.println(unCompress(compress("付长勇")));
 	}
 
 	/**

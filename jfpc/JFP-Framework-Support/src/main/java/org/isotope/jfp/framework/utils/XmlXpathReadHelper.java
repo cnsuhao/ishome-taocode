@@ -18,10 +18,10 @@ public class XmlXpathReadHelper {
 	
 	
 //	public static void main(String[] args) throws IOException {
-//		System.out.println((new XmlXpathReadHelper()).readFromMessage("<?xml version='1.0' encoding='UTF-8'?><msg><cmd>1</cmd><ret>n</ret><status>m</status></msg>", 
+//		//System.out.println((new XmlXpathReadHelper()).readFromMessage("<?xml version='1.0' encoding='UTF-8'?><msg><cmd>1</cmd><ret>n</ret><status>m</status></msg>", 
 //				"cmd"));
 //		
-//		System.out.println((new XmlXpathReadHelper()).readFromFile("HelpMessage.xml", "WYQJ"));
+//		//System.out.println((new XmlXpathReadHelper()).readFromFile("HelpMessage.xml", "WYQJ"));
 //	}
 	/**
 	 * @param args
