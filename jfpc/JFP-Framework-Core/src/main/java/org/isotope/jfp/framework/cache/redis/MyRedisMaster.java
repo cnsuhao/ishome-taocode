@@ -67,27 +67,27 @@ public class MyRedisMaster implements ICacheService, ISFrameworkConstants {
 	 */
 	public static void main(String[] args) {
 		// String str = "aa//bb//cc//dd";
-		// System.out.println(str.substring(0,str.indexOf("//")));
-		// System.out.println(str.substring(str.indexOf("//")+2));
+		//System.out.println(str.substring(0,str.indexOf("//")));
+		//System.out.println(str.substring(str.indexOf("//")+2));
 		// List<Object> vs = new ArrayList<Object>();
 		// Object value = new RESTResultBean();
 		// vs.add(new RESTResultBean());
 		// vs.add(new RESTResultBean());
 		// vs.add(new RESTResultBean());
 		// vs.add(new RESTResultBean());
-		// System.out.println(getStringToRedis(value));
-		// System.out.println(vs.getClass().getName() + BACKSLASH2 +
+		//System.out.println(getStringToRedis(value));
+		//System.out.println(vs.getClass().getName() + BACKSLASH2 +
 		// JSONArray.toJSONString(vs));
 		//
-		// System.out.println((getStringToRedis(value)).split(BACKSLASH2)[0]);
-		// System.out.println((getStringToRedis(value)).split(BACKSLASH2)[1]);
+		//System.out.println((getStringToRedis(value)).split(BACKSLASH2)[0]);
+		//System.out.println((getStringToRedis(value)).split(BACKSLASH2)[1]);
 		// String[] values = (vs.getClass().getName() + BACKSLASH2 +
 		// JSONArray.toJSONString(vs)).split(BACKSLASH2);
 		// try {
 		// Object a = JSON.parseObject(values[1], Class.forName(values[0]));
-		// System.out.println(a);
+		//System.out.println(a);
 		// } catch (ClassNotFoundException e) {
-		// // TODO Auto-generated catch block
+		// TODO Auto-generated catch block
 		// e.printStackTrace();
 		// }
 	}

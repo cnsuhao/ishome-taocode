@@ -101,6 +101,43 @@ public class MyHttpServiceSupport {
 
 	public static final String ENCODE_DEFAULT = "UTF-8";
 
+	/**
+	 * 获取client对象
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	protected CloseableHttpClient getCloseableHttpClient(String serviceURL) throws Exception {
+		// 创建HttpClientBuilder
+		HttpClientBuilder httpClientBuilder = HttpClientBuilder.create();
+
+		RequestConfig.Builder requestConfigBuilder = RequestConfig.custom();
+		requestConfigBuilder.setSocketTimeout(waitTimeMinute * 1000);
+		requestConfigBuilder.setConnectTimeout(waitTimeMinute * 1000);
+		requestConfigBuilder.setConnectionRequestTimeout(waitTimeMinute * 1000);
+		//TODO PoolingHttpClientConnectionManager
+		requestConfigBuilder.setStaleConnectionCheckEnabled(true);
+		// 代理httpProxy
+		if (httpProxy != null) {
+			currentHttpProxy = httpProxy.getHttpProxy();
+			requestConfigBuilder.setProxy(currentHttpProxy.getHttpProxy());
+		}
+
+		httpClientBuilder.setDefaultRequestConfig(requestConfigBuilder.build());
+		if (serviceURL.indexOf("https") != -1) {
+			SSLContext sslContext = new SSLContextBuilder().loadTrustMaterial(null, new TrustStrategy() {
+				// 信任所有证书
+				public boolean isTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+					return true;
+				}
+			}).build();
+			SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslContext);
+
+			httpClientBuilder.setSSLSocketFactory(sslsf);
+		}
+		return httpClientBuilder.build();
+	}
+	
 	public String doHttpGET(String serviceURL) throws Exception {
 		return doHttpGET(serviceURL, null);
 	}
@@ -256,7 +293,7 @@ public class MyHttpServiceSupport {
 
 		mh.setCurrentHttpProxy(currentHttpProxy);
 
-		System.out.println(mh.doHttpGET("mail.163.com"));
+		//System.out.println(mh.doHttpGET("mail.163.com"));
 
 		// HttpHost proxy = new HttpHost("27.221.31.66", 8080, "http");
 		// RequestConfig config =
@@ -279,7 +316,7 @@ public class MyHttpServiceSupport {
 
 		// String serviceURL = "http://mail.163.com";
 		// int waitTimeMinute = 15;
-		// // 创建HttpClientBuilder
+		// 创建HttpClientBuilder
 		// HttpClientBuilder httpClientBuilder = HttpClientBuilder.create();
 		// HttpHost proxy = new HttpHost("27.221.31.66", 8080, "http");
 		// RequestConfig defaultRequestConfig =
@@ -293,7 +330,7 @@ public class MyHttpServiceSupport {
 		// try {
 		// SSLContext sslContext = new
 		// SSLContextBuilder().loadTrustMaterial(null, new TrustStrategy() {
-		// // 信任所有证书
+		// 信任所有证书
 		// public boolean isTrusted(X509Certificate[] chain, String authType)
 		// throws CertificateException {
 		// return true;
@@ -307,7 +344,7 @@ public class MyHttpServiceSupport {
 		// e.printStackTrace();
 		// }
 		// }
-		// // HttpClient
+		// HttpClient
 		// CloseableHttpClient closeableHttpClient = httpClientBuilder.build();
 		//
 		// HttpGet httpPost = new HttpGet("http://mail.163.com");
@@ -317,48 +354,11 @@ public class MyHttpServiceSupport {
 		// if (status >= 200 && status < 300) {
 		// HttpEntity entity = response.getEntity();
 		// if (entity != null)
-		// System.out.println(EntityUtils.toString(entity, ENCODE_DEFAULT));
+		//System.out.println(EntityUtils.toString(entity, ENCODE_DEFAULT));
 		// } else {
 		// throw new Exception("服务请求异常: " + status);
 		// }
 
-	}
-
-	/**
-	 * 获取client对象
-	 * 
-	 * @return
-	 * @throws Exception
-	 */
-	protected CloseableHttpClient getCloseableHttpClient(String serviceURL) throws Exception {
-		// 创建HttpClientBuilder
-		HttpClientBuilder httpClientBuilder = HttpClientBuilder.create();
-
-		RequestConfig.Builder requestConfigBuilder = RequestConfig.custom();
-		requestConfigBuilder.setSocketTimeout(waitTimeMinute * 1000);
-		requestConfigBuilder.setConnectTimeout(waitTimeMinute * 1000);
-		requestConfigBuilder.setConnectionRequestTimeout(waitTimeMinute * 1000);
-		//TODO PoolingHttpClientConnectionManager
-		requestConfigBuilder.setStaleConnectionCheckEnabled(true);
-		// 代理httpProxy
-		if (httpProxy != null) {
-			currentHttpProxy = httpProxy.getHttpProxy();
-			requestConfigBuilder.setProxy(currentHttpProxy.getHttpProxy());
-		}
-
-		httpClientBuilder.setDefaultRequestConfig(requestConfigBuilder.build());
-		if (serviceURL.indexOf("https") != -1) {
-			SSLContext sslContext = new SSLContextBuilder().loadTrustMaterial(null, new TrustStrategy() {
-				// 信任所有证书
-				public boolean isTrusted(X509Certificate[] chain, String authType) throws CertificateException {
-					return true;
-				}
-			}).build();
-			SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslContext);
-
-			httpClientBuilder.setSSLSocketFactory(sslsf);
-		}
-		return httpClientBuilder.build();
 	}
 
 	/**

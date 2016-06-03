@@ -15,7 +15,7 @@ public class MyQueryListener implements IMQReceiveSupport {
 	 * 消息接受处理
 	 */
 	public void handleMessage(String message) {
-		System.out.println("<<<=Query==========" + message);
+		//System.out.println("<<<=Query==========" + message);
 	}
 
 }

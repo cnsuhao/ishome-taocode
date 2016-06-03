@@ -21,7 +21,7 @@ public interface IDatabaseSupport extends ISFrameworkConstants {
 	 * @return
 	 */
 	int[] doUpdateAll(MyDataBaseObjectSupport paramBean);
-	///////////////////////////////////// 条件查询操作///////////////////////////////////
+	/////////////////// 条件查询操作///////////////////
 	/**
 	 * 分页查询
 	 * @param formParam
@@ -34,7 +34,7 @@ public interface IDatabaseSupport extends ISFrameworkConstants {
 	 * @return
 	 */
 	List<? extends FrameworkDataBean> doSelectPage(MyDataBaseObjectSupport paramBean);
-	///////////////////////////////////// 增删改查（CRUD）///////////////////////////////////
+	/////////////////// 增删改查（CRUD）///////////////////
 
 	/**
 	 * 查询一条记录(主键)

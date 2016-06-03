@@ -32,7 +32,7 @@ public class PageVOSupport extends ObjectBean {
 	 * 每页显示条数
 	 */
 	protected int pageLimit;
-	//////////////////////////////////////////////////////////////
+	////////////////////////////////
 	/**
 	 * 总页数(计算获得)
 	 */
