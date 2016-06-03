@@ -99,7 +99,7 @@ public class QuerySentence implements ISSentenceConstants {
 					}
 				}
 			}
-			// System.out.println(sentenceMap);
+			//System.out.println(sentenceMap);
 			reader.close();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -107,7 +107,7 @@ public class QuerySentence implements ISSentenceConstants {
 
 	}
 
-	/////////////////////////////////// 使用动态更新//////////////////////////////////////////
+	/////////////////// 使用动态更新//////////////////////
 	/**
 	 * 查询语句文件名称
 	 */

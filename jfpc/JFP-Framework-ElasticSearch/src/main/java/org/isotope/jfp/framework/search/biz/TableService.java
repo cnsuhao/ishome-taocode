@@ -203,7 +203,7 @@ public class TableService implements ISFrameworkConstants {
 		return actions;
 	}
 
-	//////////////////////////////////////////////////////////
+	//////////////////////////////
 	private int from = 0;
 
 	public int getFrom() {
