@@ -519,9 +519,9 @@
 			cron="0/1 * * * * ?" />
  -->
  
-		<!-- <task:scheduled ref="CourtDocTask" method="getHtmlListSheng"
-			cron="18 18 18 * * ?" />
-		<task:scheduled ref="CourtDocTask" method="getHtmlListZhongji"
+		<task:scheduled ref="CourtDocTask" method="getHtmlListSheng"
+			cron="5 5 9 * * ?" />
+		<!-- <task:scheduled ref="CourtDocTask" method="getHtmlListZhongji"
 			cron="18 18 18 * * ?" />
 		<task:scheduled ref="CourtDocTask" method="getHtmlListJicheng"
 			cron="18 18 18 * * ?" /> -->
