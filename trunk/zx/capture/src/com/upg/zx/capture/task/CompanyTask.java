@@ -593,45 +593,8 @@ public class CompanyTask {
 					error_count++;
 					System.out.println(corpBase.getCorp_name() + "上传 失败....." + e.getMessage() + "||" + error_count);
 				}
-
-				array[value][2] = "2";
-				try {
-					fProxy.set(this, array);
-				} catch (IllegalArgumentException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
 				return;
-			} else {
-				// remove the proxy IP
-				try {
-					if (decreaseCountValue.equals(array[value][2])) {
-						System.out.println("area " + areaType + "  decrease proxy error: " + array[value][0]
-								+ "  arrayLength: " + arrayLength);
-
-						array[value][0] = array[arrayLength - 1][0];
-						array[value][1] = array[arrayLength - 1][1];
-						randomLength[(int) fRandomIndex.get(this)] = arrayLength - 1;
-						// reset the proxy IP array
-						if (randomLength[(int) fRandomIndex.get(this)] <= 1)
-							randomLength[(int) fRandomIndex.get(this)] = proxyOther.length;
-					} else {
-						array[value][2] = String.valueOf(Integer.valueOf(array[value][2]) - 1);
-					}
-					fProxy.set(this, array);
-				} catch (IllegalArgumentException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (IllegalAccessException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				return;
-			}
+			} 
 		}
 		long beginTime = System.currentTimeMillis();
 		String html = "";
@@ -658,45 +621,7 @@ public class CompanyTask {
 				error_count++;
 				System.out.println(corpBase.getCorp_name() + "上传 失败....." + e.getMessage() + "||" + error_count);
 			}
-
-			array[value][2] = "2";
-			try {
-				fProxy.set(this, array);
-			} catch (IllegalArgumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} else {
-			// remove the proxy IP
-			try {
-				if (decreaseCountValue.equals(array[value][2])) {
-					System.out.println("area " + areaType + "  decrease proxy error: " + array[value][0]
-							+ "  arrayLength: " + arrayLength);
-
-					array[value][0] = array[arrayLength - 1][0];
-					array[value][1] = array[arrayLength - 1][1];
-					randomLength[(int) fRandomIndex.get(this)] = arrayLength - 1;
-					// reset the proxy IP array
-					if (randomLength[(int) fRandomIndex.get(this)] <= 1)
-						randomLength[(int) fRandomIndex.get(this)] = proxyOther.length;
-				} else {
-					array[value][2] = String.valueOf(Integer.valueOf(array[value][2]) - 1);
-				}
-				fProxy.set(this, array);
-
-			} catch (IllegalArgumentException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch (IllegalAccessException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			return;
-		}
-
+		} 
 	}
 
 	/**
