@@ -304,7 +304,7 @@ public class SQLService implements ISFrameworkConstants {
 		return actions;
 	}
 
-	//////////////////////////////////////////////////////////
+	//////////////////////////////
 	IDataFormatter dataFormatter;
 	public IDataFormatter getDataFormatter() {
 		return dataFormatter;
