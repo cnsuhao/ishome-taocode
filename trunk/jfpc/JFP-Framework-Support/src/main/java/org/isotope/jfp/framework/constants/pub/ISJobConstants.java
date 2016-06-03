@@ -21,7 +21,7 @@ public interface ISJobConstants {
 	public static final String JOB_FLAG_ERROR = "error";
 	// 表明云端处理成功
 	public static final String JOB_FLAG_SUCCESS = "success";
-	// //////////////////////////////////////////////////////////////
+	////////////////////////////////
 	public static final String JOB_NAME_CLIENT = "ClientService";
 	public static final String JOB_NAME_SERVER = "ServerService";	
 	

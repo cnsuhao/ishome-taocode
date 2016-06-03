@@ -59,7 +59,7 @@ public class RedisHelper implements ISFrameworkConstants {
 				if(i>100000)
 				 break;
 				value = oldJedis.lpop(oldKey);
-				System.out.println(value);
+				//System.out.println(value);
 				if (retain)
 					oldJedis.rpush(oldKey, value);
 				newJedis.rpush(newKey, value);

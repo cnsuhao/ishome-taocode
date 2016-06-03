@@ -23,12 +23,12 @@ public class BusinessTokenHelper implements ISFrameworkConstants {
 	//---------------------------/{encryType}							1
 	//---------------------------------------/{clientTimestamp}			8 (MMDDH24)	
 	public static void main(String[] args) {
-		System.out.println(getBizTokenData("aaa", "bbb", "123456789abcdefg"));
-		System.out.println(getUserID(getBizTokenData("aaa", "bbb", "123456789abcdefg")));
-		System.out.println(getCompanyId(getBizTokenData("aaa", "bbb", "123456789abcdefg")));
-		System.out.println(getBizId(getBizTokenData("aaa", "bbb", "123456789abcdefg")));
-		System.out.println(getEncryType(getBizTokenData("aaa", "bbb", "123456789abcdefg")));
-		System.out.println(getLoginDateTime(getBizTokenData("aaa", "bbb", "123456789abcdefg")));
+		//System.out.println(getBizTokenData("aaa", "bbb", "123456789abcdefg"));
+		//System.out.println(getUserID(getBizTokenData("aaa", "bbb", "123456789abcdefg")));
+		//System.out.println(getCompanyId(getBizTokenData("aaa", "bbb", "123456789abcdefg")));
+		//System.out.println(getBizId(getBizTokenData("aaa", "bbb", "123456789abcdefg")));
+		//System.out.println(getEncryType(getBizTokenData("aaa", "bbb", "123456789abcdefg")));
+		//System.out.println(getLoginDateTime(getBizTokenData("aaa", "bbb", "123456789abcdefg")));
 	}
 	
 	/**

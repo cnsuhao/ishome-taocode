@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public interface ICacheService extends ISessionService {
 
-	//////////////////// 数据缓存////////////////////////////////
+	////////// 数据缓存////////////////
 	/**
 	 * 初始化
 	 */
@@ -99,7 +99,7 @@ public interface ICacheService extends ISessionService {
 	 */
 	public Object deleteObject(String key, boolean translation);
 
-	///////////////////////////////// 消息队列/////////////////////////////////////
+	///////////////// 消息队列///////////////////
 	/**
 	 * 从缓存中心获取Map里面的全部数据 <br>
 	 * （基于保存Key）
@@ -174,7 +174,7 @@ public interface ICacheService extends ISessionService {
 	 */
 	public Object findObjectInMap(String rkey, String mkey, boolean translation);
 
-	///////////////////////////// 消息队列///////////////////////////////
+	/////////////// 消息队列/////////////////
 	/**
 	 * 返回名称为key的list的长度 <br>
 	 * （基于保存Key,List数据队列） <br>
@@ -291,6 +291,6 @@ public interface ICacheService extends ISessionService {
 	 * @return
 	 */
 	public Object pollLastObjectInList(String key, boolean translation);
-	//////////////////////////////////////////////////////////////////////
+	////////////////////////////////////
 
 }

@@ -82,7 +82,7 @@ public class FTPUtil implements ISFrameworkConstants {
 			// 看返回的值是不是230，如果是，表示登陆成功
 			if (is == false)
 				return success;
-			// System.out.println(is);
+			//System.out.println(is);
 			reply = ftp.getReplyCode();
 			// 以2开头的返回值就会为真
 			if (!FTPReply.isPositiveCompletion(reply)) {
@@ -126,7 +126,7 @@ public class FTPUtil implements ISFrameworkConstants {
 		return success;
 	}
 
-	// //////////////////属性定义/////////////////////////
+	//////////属性定义/////////////
 	/**
 	 * 文件访问前缀地址
 	 */

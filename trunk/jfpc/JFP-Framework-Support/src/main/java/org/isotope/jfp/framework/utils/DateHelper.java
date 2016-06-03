@@ -290,10 +290,11 @@ public class DateHelper {
     }
 
     public static void main(String[] args) throws Exception {
-        System.out.println(getDate("20150619", "yyyy/MM/dd"));
-        System.out.println(getDate("2015/6/19", "yyyy/MM/dd"));
-        System.out.println(getDate("2015-6-19", "yyyy/MM/dd"));
-        System.out.println(getDate("2015年6月19日", "yyyy/MM/dd"));
-        System.out.print(currentTimeMillis4());
+//        //System.out.println(getDate("20150619", "yyyy/MM/dd"));
+//        //System.out.println(getDate("2015/6/19", "yyyy/MM/dd"));
+//        //System.out.println(getDate("2015-6-19", "yyyy/MM/dd"));
+//        //System.out.println(getDate("2015年6月19日", "yyyy/MM/dd"));
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        System.out.print( format.format(new Date(1464587877000L)));
     }
 }
