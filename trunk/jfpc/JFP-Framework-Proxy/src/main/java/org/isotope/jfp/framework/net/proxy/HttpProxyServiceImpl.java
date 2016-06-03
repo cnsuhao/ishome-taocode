@@ -135,7 +135,7 @@ public class HttpProxyServiceImpl implements IHttpProxy, ISFrameworkConstants, I
 		return cache.offerObjectInList(HTTP_PROXY_BAD, httpProxy.getHost(), false);
 	}
 
-	///////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////
 	/**
 	 * 保存代理到个人队列
 	 * 
