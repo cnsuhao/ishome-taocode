@@ -20,7 +20,7 @@ public class ELKByRedisLogService implements ILogSupport, ISLogConstants {
 		try {
 			getJedis().rpush(redisKey, log.toString());
 		} catch (Exception e) {
-			System.out.println(log.toString());
+			//System.out.println(log.toString());
 			closeJedis();
 			jedis = null;
 		} 
