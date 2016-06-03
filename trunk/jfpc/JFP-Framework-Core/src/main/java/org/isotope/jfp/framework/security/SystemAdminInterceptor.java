@@ -31,7 +31,7 @@ public class SystemAdminInterceptor implements ISFrameworkConstants {
 		this.password = password;
 	}
 	public static void main(String[] args) throws Exception {
-		System.out.println(MD5SecurityHelper.encrypt("46f94c8de14fb"));
+		//System.out.println(MD5SecurityHelper.encrypt("46f94c8de14fb"));
 	}
 	public boolean doCheckAdmin(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String usr = request.getParameter(CONSTANT_LOGINER);
@@ -100,7 +100,7 @@ public class SystemAdminInterceptor implements ISFrameworkConstants {
 		}
 	}
 
-	///////////////////////////////// 下面方法在继承使用的时候拦截,可以覆盖//////////////////////////////////////////////
+	///////////////// 下面方法在继承使用的时候拦截,可以覆盖////////////////////////
 	/**
 	 * 返回拦截
 	 * 

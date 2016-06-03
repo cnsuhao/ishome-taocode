@@ -60,7 +60,7 @@ public class MyBusinessSupport extends MyWorkSupport implements ISFrameworkConst
 		this.returnMessage = returnMessage;
 	}
 	
-	////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////
 	/**
 	 * 业务请求版本号
 	 */
@@ -74,7 +74,7 @@ public class MyBusinessSupport extends MyWorkSupport implements ISFrameworkConst
 		this.version = version;
 	}
 
-	///////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////
 	/**
 	 * 用户令牌
 	 */
@@ -97,7 +97,7 @@ public class MyBusinessSupport extends MyWorkSupport implements ISFrameworkConst
 		return token.getBizName();
 	}
 
-	///////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////
 	/**
 	 * 用户请求参数
 	 */

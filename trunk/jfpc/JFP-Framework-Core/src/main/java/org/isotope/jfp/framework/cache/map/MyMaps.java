@@ -132,7 +132,7 @@ public class MyMaps implements ICacheService {
 		return (long) ms.size();
 	}
 
-	// ///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////
 	@Override
 	public long sizeOfList(String key) {
 		List<Object> ms = (List<Object>) getObject(key);

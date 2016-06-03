@@ -18,7 +18,7 @@ public class JedisTest {
             try {
                 Thread.sleep(100);
                 jedis.set("" + i, "" + i);
-                System.out.println(jedis.get("" + i));
+                //System.out.println(jedis.get("" + i));
                 i++;
             } catch (Exception e) {
                 e.printStackTrace();
@@ -44,7 +44,7 @@ public class JedisTest {
         JedisCluster jedisCluster = new JedisCluster(jedisClusterNodes);
 
         jedisCluster.set("1111", "1111");
-        System.out.println(jedisCluster.get("1111"));
+        //System.out.println(jedisCluster.get("1111"));
     }
 
 }

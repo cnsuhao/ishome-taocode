@@ -36,7 +36,7 @@ public class MyAccessSupport implements ISFrameworkConstants {
 		this.waitTimeMinute = waitTimeMinute;
 	}
 
-	// /////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////
 	/**
 	 * 对接调用
 	 * 
@@ -91,7 +91,7 @@ public class MyAccessSupport implements ISFrameworkConstants {
 	 */
 	public RESTResultBean getAccessReult(String operationId, String compantId, String bizName, String jsonData, int timeout) {
 		Jedis jedis = null;//JedisUtil.getJedis();
-		// ////////////////////////////////////////////////
+		////////////////////////
 		RESTResultBean rs;
 		// TODO 发送数据
 		jedis.rpush(BussinessKeyService.getBizServiceKeyName(compantId, bizName), jsonData);
@@ -99,7 +99,7 @@ public class MyAccessSupport implements ISFrameworkConstants {
 		try {
 			while (true) {
 				Thread.sleep(2000);
-				// ////////////////////////////////////////////////
+				////////////////////////
 				// 处理结果返回
 				String result = jedis.get(operationId);
 				if (EmptyHelper.isNotEmpty(result)) {
@@ -108,7 +108,7 @@ public class MyAccessSupport implements ISFrameworkConstants {
 					rs.setResult(EMPTY + rs.getResult());
 					return rs;
 				}
-				// ///////////////////超时判断/////////////////////////////
+				///////////超时判断///////////////
 				if (System.currentTimeMillis() - resquestTime > timeout * 1000) {
 					rs = new RESTResultBean();
 					rs.setCode(ONE);

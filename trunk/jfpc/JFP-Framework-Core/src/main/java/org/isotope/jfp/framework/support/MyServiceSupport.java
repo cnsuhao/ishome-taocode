@@ -56,7 +56,7 @@ public class MyServiceSupport implements ISFrameworkConstants, ISDBConstants {
 		return SqlSessionUtils.getSqlSession(st.getSqlSessionFactory(), st.getExecutorType(), st.getPersistenceExceptionTranslator()).getConnection();
 	}
 
-	// ///////////////////////////////////////////////
+	/////////////////////////
 	/**
 	 * 获得数据库操作对象
 	 * 
@@ -73,7 +73,7 @@ public class MyServiceSupport implements ISFrameworkConstants, ISDBConstants {
 	 */
 	public void changeTable(MyDataBaseObjectSupport data, int dbType) {
 		// String companyType = ((XXXXXDBO)data).getT01();
-		// // 分表处理
+		// 分表处理
 		// if (ZERO.equals(companyType)) {
 		// data.setTableName("0");
 		// } else if (ONE.equals(companyType)) {
@@ -84,7 +84,7 @@ public class MyServiceSupport implements ISFrameworkConstants, ISDBConstants {
 		// }
 	}
 
-	// /////////////////////////分页查询//////////////////////////////
+	/////////////分页查询////////////////
 	/**
 	 * 分页查询
 	 * 
@@ -114,7 +114,7 @@ public class MyServiceSupport implements ISFrameworkConstants, ISDBConstants {
 	 * @return
 	 */
 	public PageVOSupport doSelectPage(PageVOSupport formParamPageModel, boolean ppp, boolean ddd) {
-		// // 设定企业ID
+		// 设定企业ID
 		FrameworkDataBean formParamBean = formParamPageModel.getFormParamBean();
 		// if (ppp && StringUtils.isEmpty(formParamBean.getPpp()))
 		// formParamBean.setPpp(getCompanyId());
@@ -156,7 +156,7 @@ public class MyServiceSupport implements ISFrameworkConstants, ISDBConstants {
 	 * @return
 	 */
 	public List<? extends FrameworkDataBean> doSelectData(MyDataBaseObjectSupport formParamBean, boolean ppp, boolean ddd) {
-		// // 设定企业ID
+		// 设定企业ID
 		// if (ppp && StringUtils.isEmpty(formParamBean.getPpp()))
 		// formParamBean.setPpp(getCompanyId());
 		// if (ddd && StringUtils.isEmpty(formParamBean.getDdd()))
@@ -165,7 +165,7 @@ public class MyServiceSupport implements ISFrameworkConstants, ISDBConstants {
 		return getDao().doSelectPage(formParamBean);
 	}
 
-	// /////////////////////////////////基本操作//////带有乐观锁/////////////////////////////////////////
+	/////////////////基本操作////带有乐观锁/////////////////////
 	/**
 	 * 根据主键，逻辑删除一条数据
 	 */
@@ -253,23 +253,23 @@ public class MyServiceSupport implements ISFrameworkConstants, ISDBConstants {
 	public int doInsert(MyDataBaseObjectSupport formParamBean) {
 		changeTable(formParamBean, DB_INSERT);
 
-		// // 主键ID
+		// 主键ID
 		// if (StringUtils.isEmpty(formParamBean.getPuk()))
 		// formParamBean.setPuk(PKHelper.creatPUKey());
 		//
-		// // 数据所属系统
+		// 数据所属系统
 		// if (StringUtils.isEmpty(formParamBean.getGgg()))
 		// formParamBean.setGgg("SYSTEM");
 		//
-		// // 企业ID
+		// 企业ID
 		// if (StringUtils.isEmpty(formParamBean.getPpp()))
 		// formParamBean.setPpp(getCompanyId());
 		//
-		// // 有效标识
+		// 有效标识
 		// if (StringUtils.isEmpty(formParamBean.getDdd()))
 		// formParamBean.setDdd("0");
 		//
-		// // 有效标记、创建者、创建时间
+		// 有效标记、创建者、创建时间
 		// formParamBean.setCc1(DateHelper.currentTimeMillisCN1());
 		// formParamBean.setCc2(getLoginerId());
 		// formParamBean.setUu1(DateHelper.currentTimeMillisCN1());
@@ -286,7 +286,7 @@ public class MyServiceSupport implements ISFrameworkConstants, ISDBConstants {
 	 */
 	public int doUpdate(MyDataBaseObjectSupport formParamBean) {
 		changeTable(formParamBean, DB_UPDATE);
-		// // 更新者、更新时间
+		// 更新者、更新时间
 		// formParamBean.setUu2(getLoginerId());
 		return getDao().doUpdate(formParamBean);
 	}
@@ -311,7 +311,7 @@ public class MyServiceSupport implements ISFrameworkConstants, ISDBConstants {
 	 */
 	public FrameworkDataBean doRead(MyDataBaseObjectSupport formParamBean, boolean ddd) {
 		changeTable(formParamBean, DB_SELECT);
-		// // 有效标记、创建者、创建时间
+		// 有效标记、创建者、创建时间
 		// if (ddd && StringUtils.isEmpty(formParamBean.getDdd()))
 		// formParamBean.setDdd("0");
 		return getDao().doRead(formParamBean);

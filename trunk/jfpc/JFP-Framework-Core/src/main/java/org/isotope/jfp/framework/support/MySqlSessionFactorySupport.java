@@ -63,7 +63,7 @@ public class MySqlSessionFactorySupport extends SqlSessionFactoryBean {
 			uri = uri.replace(".xml", "DBO").replaceAll("/", ".");
 			typeAliasesList.add(Class.forName(uri));			
 		} catch (Exception e) {
-			System.out.println("Can't load class ==>>>"+e.getMessage());
+			//System.out.println("Can't load class ==>>>"+e.getMessage());
 		}
 	}
 }

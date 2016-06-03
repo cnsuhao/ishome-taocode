@@ -274,7 +274,7 @@ public class DBDao extends MyServiceSupport implements ISDBConstants {
 	}
 
 	public boolean test() throws Exception {
-		// ////////////////////////////////////////////////////////
+		////////////////////////////
 		// 结果测试
 		Connection conn = null;
 		Statement stmt = null;
@@ -315,10 +315,10 @@ public class DBDao extends MyServiceSupport implements ISDBConstants {
 	// stmt.execute("CREATE TABLE Users(id VARCHAR(18) , username VARCHAR(12) , password VARCHAR(12), PRIMARY KEY (id)  )");
 	// stmt.execute("insert into Users(id,username,password)values('admin','admin','passowrd')");
 	// ResultSet rs = stmt.executeQuery("SELECT * FROM users");
-	// System.out.println("Got ResultSet Now");
-	// //rs.beforeFirst();
+	//System.out.println("Got ResultSet Now");
+	//rs.beforeFirst();
 	// while (rs.next()) {
-	// System.out.println(rs.getString(1)+"\t"+rs.getString(2)+"\t"+rs.getString(3));
+	//System.out.println(rs.getString(1)+"\t"+rs.getString(2)+"\t"+rs.getString(3));
 	// }
 	// conn.rollback();
 	// rs.close();
