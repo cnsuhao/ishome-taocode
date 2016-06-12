@@ -70,7 +70,7 @@ public class DataService {
 	}
 	public void addDataInIndex(String index, List<? extends Object> datas) throws Exception {
 		BulkResult result;
-		JestClient jestClient = null;
+		JestClient jestClient = pool.getClient();
 		Builder bulkIndexBuilder = new Bulk.Builder();
 		try {
 			for (int i = 0; i < datas.size(); i++) {
@@ -83,10 +83,10 @@ public class DataService {
 					bulkIndexBuilder.addAction(new Index.Builder(JSON.toJSONString(data)).index(index).type(ElasticsearchPool.TYPE).build());
 				// 分批提交数据
 				if (i % size == 1) {
-					jestClient = pool.getClient();
 					result = jestClient.execute(bulkIndexBuilder.build());
 					logger.debug("num===" + i + "...." + result.getJsonString());
 					Thread.sleep(500);
+					jestClient = pool.getClient();
 					bulkIndexBuilder = new Bulk.Builder();
 				}
 			}
@@ -121,7 +121,7 @@ public class DataService {
 	}
 	public void updateDataInIndex(String index, List<? extends Object> datas) throws Exception {
 		BulkResult result;
-		JestClient jestClient = null;
+		JestClient jestClient = pool.getClient();
 		Builder bulkIndexBuilder = new Bulk.Builder();
 		try {
 			for (int i = 0; i < datas.size(); i++) {
@@ -134,10 +134,10 @@ public class DataService {
 					bulkIndexBuilder.addAction(new Update.Builder(JSON.toJSONString(data)).index(index).type(ElasticsearchPool.TYPE).build());
 				// 分批提交数据
 				if (i % size == 1) {
-					jestClient = pool.getClient();
 					result = jestClient.execute(bulkIndexBuilder.build());
 					logger.debug("num===" + i + "...." + result.getJsonString());
 					Thread.sleep(500);
+					jestClient = pool.getClient();
 					bulkIndexBuilder = new Bulk.Builder();
 				}
 			}
@@ -172,7 +172,7 @@ public class DataService {
 	
 	public void deleteDataInIndex(String index, List<? extends Object> datas) throws Exception {
 		BulkResult result;
-		JestClient jestClient = null;
+		JestClient jestClient = pool.getClient();
 		Builder bulkIndexBuilder = new Bulk.Builder();
 		try {
 			for (int i = 0; i < datas.size(); i++) {
@@ -183,10 +183,10 @@ public class DataService {
 					bulkIndexBuilder.addAction(new Delete.Builder(""+((JSONObject)data).getString("id")).index(index).type(ElasticsearchPool.TYPE).build());
 				// 分批提交数据
 				if (i % size == 1) {
-					jestClient = pool.getClient();
 					result = jestClient.execute(bulkIndexBuilder.build());
 					logger.debug("num===" + i + "...." + result.getJsonString());
 					Thread.sleep(500);
+					jestClient = pool.getClient();
 					bulkIndexBuilder = new Bulk.Builder();
 				}
 			}
