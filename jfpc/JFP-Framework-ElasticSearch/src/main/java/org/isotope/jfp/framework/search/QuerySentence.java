@@ -2,6 +2,7 @@ package org.isotope.jfp.framework.search;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -79,6 +80,7 @@ public class QuerySentence implements ISSentenceConstants {
 			// 创建基于迭代器的事件读取器对象
 			XMLStreamReader reader = factory.createXMLStreamReader(inputStream, "UTF-8");
 			QueryBean qb = null;
+			String index;
 			// 遍历XML文档
 			while (reader.hasNext()) {
 				int event = reader.next();
@@ -89,7 +91,9 @@ public class QuerySentence implements ISSentenceConstants {
 					} else if ("id".equals(reader.getLocalName())) {
 						qb.setId(reader.getElementText().toLowerCase());
 					} else if ("index".equals(reader.getLocalName())) {
-						qb.setIndex(reader.getElementText().toLowerCase());
+						index = reader.getElementText().toLowerCase();
+						qb.setIndex(index);
+						indexs.add(index);
 					} else if (type.equals(reader.getLocalName())) {
 						qb.setValue(reader.getElementText());
 						logger.debug("保存全文检索配置.........." + qb.getId());
@@ -106,7 +110,12 @@ public class QuerySentence implements ISSentenceConstants {
 		}
 
 	}
-
+	
+	ArrayList<String> indexs =  new ArrayList<String> ();
+	public boolean containsIndex(String queryID) {
+		return indexs.contains(queryID);
+	}
+	
 	/////////////////// 使用动态更新//////////////////////
 	/**
 	 * 查询语句文件名称
@@ -149,9 +158,6 @@ public class QuerySentence implements ISSentenceConstants {
 
 	public QueryBean getSentence(String queryID) {
 		return sentenceMap.get(queryID);
-	}
-	public boolean containsIndex(String queryID) {
-		return sentenceMap.containsKey(queryID);
 	}
 	public Map<String, QueryBean> getSentenceMap() {
 		return sentenceMap;

@@ -33,7 +33,7 @@ public interface ISSentenceConstants extends ISFrameworkConstants{
 	public static final String COMPANY_URL = "INDEX"+VERSION+"CAPURL:";
 	
 	/**
-	 * 工商URL地址
+	 * 索引数据删除
 	 */
-	public static final String COMPANY_DEL = "COMPANY"+VERSION+"DEL:";
+	public static final String COMPANY_DEL = "INDEX"+VERSION+"DEL:";
 }
