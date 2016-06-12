@@ -125,6 +125,10 @@ public class SQLService implements ISFrameworkConstants {
 
 	private void makeIndexBySQL(QueryBean qb, String creatFlag, String from2, String size2) throws Exception {
 		logger.info("makeIndexBySQL=====>>>>>Start....."+ qb.getIndex());
+		
+		//关闭自动更新配置
+		myCacheService.removeKey(ISSentenceConstants.SENTENCE_UTD + qb.getIndex());
+		
 		if (EmptyHelper.isNotEmpty(from2))
 			from = Integer.parseInt(from2);
 		if (EmptyHelper.isNotEmpty(size2))
@@ -203,6 +207,7 @@ public class SQLService implements ISFrameworkConstants {
 				break;
 			}
 		}
+		//开启自动更新配置
 		myCacheService.putObject(ISSentenceConstants.SENTENCE_UTD + qb.getIndex(), "" + System.currentTimeMillis(), 0, false);
 		logger.info("makeIndexBySQL<<<<<=====End....."+ qb.getIndex());
 	}

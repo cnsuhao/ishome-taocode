@@ -69,8 +69,9 @@ public class DataIndexDeleteServiceJob extends MyTaskSupport {
 		String id;
 		String index = "";
 		String key = "";
-		ArrayList<String> datas = new ArrayList<String> ();
+		ArrayList<String> datas;
 		while (iter.hasNext()) {
+			datas = new ArrayList<String> ();
 			Map.Entry<String, String> entry = iter.next();
 			index = entry.getKey();// 索引名字
 			if(myQuerySentence.containsIndex(index) == false)
