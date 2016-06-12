@@ -76,14 +76,19 @@ public class DataIndexUpdateServiceJob extends MyTaskSupport {
 				if (EmptyHelper.isEmpty(lastTime)) {
 					logger.info("全文检索索引同步更新业务  xxxxx===== 取消....." + entry.getKey());
 					continue;
-				} 
+				}
+				//设定最后更新时间
+				lastCalendar.setTimeInMillis(Long.parseLong(lastTime));
+				lastCalendar.add(Calendar.HOUR, 1);
+				// 判断时间超时
+				if ((nowCalendar.getTimeInMillis() - lastCalendar.getTimeInMillis()) < 1000 * 60 * 60 * 2) {
+					logger.info("全文检索索引同步更新业务  xxxxx===== 取消....." + entry.getKey());
+					continue;
+				}
+				//开始更新索引
 				boolean upLast = true;
 				while (upLast) {
-					lastCalendar.add(Calendar.HOUR, 1);
-					if ((nowCalendar.getTimeInMillis() - lastCalendar.getTimeInMillis()) < 3600 * 60 * 2) {
-						upLast = false;
-					}
-
+					//判断本次更新
 					{
 						SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:00:00");
 						sqlService.setStarttime(format.format(lastCalendar.getTime()));
@@ -94,6 +99,14 @@ public class DataIndexUpdateServiceJob extends MyTaskSupport {
 					}
 
 					sqlService.updateIndexBySQL(entry.getValue(), EMPTY, EMPTY);
+					
+					//追加下次更新
+					lastCalendar.add(Calendar.HOUR, 1);
+					if ((nowCalendar.getTimeInMillis() - lastCalendar.getTimeInMillis()) <  1000 * 60 * 60 * 2) {
+						upLast = false;
+						logger.info("全文检索索引同步更新业务  xxxxx===== 取消....." + entry.getKey());
+						break;
+					}
 				}
 				// 设定最后一次更新时间
 				myCacheService.selectDB(index);
