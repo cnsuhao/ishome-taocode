@@ -283,8 +283,8 @@ public class SQLService implements ISFrameworkConstants {
 				if(prepare !=null)
 					data = prepare.prepareDataType(data);
 				
-				if(data.containsKey("id")){
-					id = data.remove("id").toString();
+				if(data.containsKey("rriidd")){
+					id = data.remove("rriidd").toString();
 					try{
 						minID = Long.parseLong(id);
 						if (maxID < minID)
