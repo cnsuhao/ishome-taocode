@@ -83,10 +83,10 @@ public class DataIndexDeleteServiceJob extends MyTaskSupport {
 				logger.info("全文检索索引数据删除业务  xxxxx===== 取消 ..... " + entry);
 				continue;
 			}
-			id = (String) myCacheService.pollFirstObjectInList(ISSentenceConstants.COMPANY_DEL + key, false);
+			id = (String) myCacheService.pollFirstObjectInList(ISSentenceConstants.INDEX_DEL + key, false);
 			while (EmptyHelper.isNotEmpty(id) == true) {
 				datas.add(id);
-				id = (String) myCacheService.pollFirstObjectInList(ISSentenceConstants.COMPANY_DEL + key, false);
+				id = (String) myCacheService.pollFirstObjectInList(ISSentenceConstants.INDEX_DEL + key, false);
 				if(datas.size()>=100){
 					dataService.deleteDataInIndex(idx, datas);
 					datas = new ArrayList<String>();

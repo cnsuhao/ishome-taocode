@@ -58,6 +58,16 @@ public class DataIndexUpdateServiceJob extends MyTaskSupport {
 	public void setIndex(int index) {
 		this.index = index;
 	}
+	
+	int splitMinute = 120;	
+
+	public int getSplitMinute() {
+		return splitMinute;
+	}
+
+	public void setSplitMinute(int splitMinute) {
+		this.splitMinute = splitMinute;
+	}
 
 	public boolean doProcessRepeat() throws Exception {
 		logger.info("全文检索索引同步更新业务  >>>>>===== 开始");
@@ -81,7 +91,7 @@ public class DataIndexUpdateServiceJob extends MyTaskSupport {
 				lastCalendar.setTimeInMillis(Long.parseLong(lastTime));
 				lastCalendar.add(Calendar.HOUR, 1);
 				// 判断时间超时
-				if ((nowCalendar.getTimeInMillis() - lastCalendar.getTimeInMillis()) < 1000 * 60 * 60 * 2) {
+				if ((nowCalendar.getTimeInMillis() - lastCalendar.getTimeInMillis()) < 1000 * 60 * splitMinute) {
 					logger.info("全文检索索引同步更新业务  xxxxx===== 取消....." + entry.getKey());
 					continue;
 				}
@@ -102,7 +112,7 @@ public class DataIndexUpdateServiceJob extends MyTaskSupport {
 					
 					//追加下次更新
 					lastCalendar.add(Calendar.HOUR, 1);
-					if ((nowCalendar.getTimeInMillis() - lastCalendar.getTimeInMillis()) <  1000 * 60 * 60 * 2) {
+					if ((nowCalendar.getTimeInMillis() - lastCalendar.getTimeInMillis()) <  1000 * 60 * splitMinute) {
 						upLast = false;
 						logger.info("全文检索索引同步更新业务  xxxxx===== 取消....." + entry.getKey());
 						break;
