@@ -13,6 +13,7 @@ import javax.annotation.Resource;
 import org.apache.ibatis.session.SqlSession;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.search.ElasticsearchPool;
+import org.isotope.jfp.framework.search.IPrepareDataType;
 import org.isotope.jfp.framework.utils.BeanFactoryHelper;
 import org.isotope.jfp.framework.utils.EmptyHelper;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -86,10 +87,12 @@ public class TableService implements ISFrameworkConstants {
 	 * @throws SQLException
 	 */
 	public void creatIndexByTable(String tableName) throws Exception {
-		creatIndexByTable(tableName, EMPTY, EMPTY);
+		creatIndexByTable(tableName, ONE, EMPTY, EMPTY);
 	}
-
-	public void creatIndexByTable(String tableName, String from2, String size2) throws Exception {
+	public void creatIndexByTable(String tableName, String creatFlag, String from2, String size2) throws Exception {
+		creatIndexByTable(null, tableName, creatFlag, from2, size2);
+	}
+	public void creatIndexByTable(IPrepareDataType prepare, String tableName, String creatFlag, String from2, String size2) throws Exception {
 
 		if (EmptyHelper.isNotEmpty(from2))
 			from = Integer.parseInt(from2);
@@ -98,19 +101,21 @@ public class TableService implements ISFrameworkConstants {
 
 		String index = tableName.toLowerCase();
 		JestClient jestClient = null;
-		try {
-			jestClient = getClient();
-			// 删除索引
-			boolean indexExists = jestClient.execute(new IndicesExists.Builder(index).build()).isSucceeded();
-			if (indexExists) {
-				JestResult deleteIndexResult = jestClient.execute(new DeleteIndex.Builder(index).build());
-				logger.debug("deleteIndex===>>>ErrorMessage=" + deleteIndexResult.getErrorMessage() + ",JsonString=" + deleteIndexResult.getJsonString());
+		if (ONE.equals(creatFlag)) {
+			try {
+				jestClient = getClient();
+				// 删除索引
+				boolean indexExists = jestClient.execute(new IndicesExists.Builder(index).build()).isSucceeded();
+				if (indexExists) {
+					JestResult deleteIndexResult = jestClient.execute(new DeleteIndex.Builder(index).build());
+					logger.debug("deleteIndex===>>>ErrorMessage=" + deleteIndexResult.getErrorMessage() + ",JsonString=" + deleteIndexResult.getJsonString());
+				}
+				JestResult createIndexResult = jestClient.execute(new CreateIndex.Builder(index).build());
+				logger.debug("createIndex===>>>ErrorMessage=" + createIndexResult.getErrorMessage() + ",JsonString=" + createIndexResult.getJsonString());
+			} finally {
+				if (jestClient != null)
+					jestClient.shutdownClient();
 			}
-			JestResult createIndexResult = jestClient.execute(new CreateIndex.Builder(index).build());
-			logger.debug("createIndex===>>>ErrorMessage=" + createIndexResult.getErrorMessage() + ",JsonString=" + createIndexResult.getJsonString());
-		} finally {
-			if (jestClient != null)
-				jestClient.shutdownClient();
 		}
 		Builder bulkIndexBuilder;
 
@@ -121,7 +126,7 @@ public class TableService implements ISFrameworkConstants {
 		for (int c = 0; c <= Integer.MAX_VALUE; c++) {
 			while (commit == false) {
 				try {
-					actions = loadDataFromDb(index, tableName, c, from);
+					actions = loadDataFromDb(prepare, index, tableName, c, from);
 					commit = true;
 				} catch (Exception e) {
 					Thread.sleep(sleep * 2);
@@ -157,7 +162,7 @@ public class TableService implements ISFrameworkConstants {
 
 	}
 
-	private List<Index> loadDataFromDb(String index, String tableName, int page, int from) throws SQLException {
+	private List<Index> loadDataFromDb(IPrepareDataType prepare, String index, String tableName, int page, int from) throws SQLException {
 		List<Index> actions = new ArrayList<Index>();
 		Connection conn = null;
 		Statement stmt = null;
@@ -182,11 +187,15 @@ public class TableService implements ISFrameworkConstants {
 					String value = resultSet.getString(i);
 					data.put(columnName.toLowerCase(), value);
 				}
-				id = data.remove("id").toString();
-				if (EmptyHelper.isEmpty(id))
-					actions.add(new Index.Builder(data.toJSONString()).index(index).type(ElasticsearchPool.TYPE).build());
-				else
+				//数据整理
+				if(prepare !=null)
+					data = prepare.prepareDataType(data);
+				if(data.containsKey("id")){
+					id = data.remove("id").toString();
 					actions.add(new Index.Builder(data.toJSONString()).index(index).id(id).type(ElasticsearchPool.TYPE).build());
+				}
+				else
+					actions.add(new Index.Builder(data.toJSONString()).index(index).type(ElasticsearchPool.TYPE).build());
 			}
 
 		} catch (SQLException e) {
