@@ -2,7 +2,13 @@ package org.isotope.jfp.framework.search;
 
 import com.alibaba.fastjson.JSONObject;
 
-public interface IDataFormatter {
+/**
+ * 检索数据整理
+ * @author 001745
+ *
+ */
+public interface IPrepareDataType {
+	
 	/**
 	 * 数据格式化
 	 * 
@@ -11,5 +17,5 @@ public interface IDataFormatter {
 	 * @param cb
 	 *            转换后对象类
 	 */
-	JSONObject doDataFormatter(JSONObject data);
+	JSONObject prepareDataType(JSONObject data);
 }

@@ -14,7 +14,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.isotope.jfp.framework.cache.ICacheService;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.search.ElasticsearchPool;
-import org.isotope.jfp.framework.search.IDataFormatter;
+import org.isotope.jfp.framework.search.IPrepareDataType;
 import org.isotope.jfp.framework.search.ISSentenceConstants;
 import org.isotope.jfp.framework.search.QuerySentence;
 import org.isotope.jfp.framework.search.bean.QueryBean;
@@ -92,15 +92,21 @@ public class SQLService implements ISFrameworkConstants {
 	 * @throws SQLException
 	 */
 	public void creatIndexBySQL(String actionID) throws Exception {
-		creatIndexBySQL(config.getCreat(actionID), ONE, EMPTY, EMPTY);
+		creatIndexBySQL(actionID, ONE, EMPTY, EMPTY);
 	}
 
-	public void creatIndexBySQL(String creatFlag, String actionID, String from2, String size2) throws Exception {
+	public void creatIndexBySQL(String actionID, String creatFlag, String from2, String size2) throws Exception {
 		creatIndexBySQL(config.getCreat(actionID), creatFlag, from2, size2);
 	}
-
+	public void creatIndexBySQL(IPrepareDataType prepare,String actionID, String creatFlag, String from2, String size2) throws Exception {
+		creatIndexBySQL(prepare, config.getCreat(actionID), creatFlag, from2, size2);
+	}
 	public void creatIndexBySQL(QueryBean qb, String creatFlag, String from2, String size2) throws Exception {
-		makeIndexBySQL(qb, creatFlag, from2, size2);
+		creatIndexBySQL(null, qb, creatFlag, from2, size2);
+	}
+	
+	public void creatIndexBySQL(IPrepareDataType prepare,QueryBean qb, String creatFlag, String from2, String size2) throws Exception {
+		makeIndexBySQL(prepare, qb, creatFlag, from2, size2);
 	}
 
 	/**
@@ -112,18 +118,22 @@ public class SQLService implements ISFrameworkConstants {
 	 * @throws SQLException
 	 */
 	public void updateIndexBySQL(String actionID) throws Exception {
-		updateIndexBySQL(config.getUpdate(actionID), EMPTY, EMPTY);
+		updateIndexBySQL(actionID, EMPTY, EMPTY);
 	}
 
 	public void updateIndexBySQL(String actionID, String from2, String size2) throws Exception {
-		makeIndexBySQL(config.getUpdate(actionID), ZERO, from2, size2);
+		updateIndexBySQL(config.getUpdate(actionID), from2, size2);
 	}
-
+	public void updateIndexBySQL(IPrepareDataType prepare, String actionID, String from2, String size2) throws Exception {
+		updateIndexBySQL(prepare, config.getUpdate(actionID), from2, size2);
+	}
 	public void updateIndexBySQL(QueryBean qb, String from2, String size2) throws Exception {
-		makeIndexBySQL(qb, ZERO, from2, size2);
+		updateIndexBySQL(null, qb, from2, size2);
 	}
-
-	private void makeIndexBySQL(QueryBean qb, String creatFlag, String from2, String size2) throws Exception {
+	public void updateIndexBySQL(IPrepareDataType prepare, QueryBean qb, String from2, String size2) throws Exception {
+		makeIndexBySQL(prepare, qb, ZERO, from2, size2);
+	}
+	private void makeIndexBySQL(IPrepareDataType prepare, QueryBean qb, String creatFlag, String from2, String size2) throws Exception {
 		logger.info("makeIndexBySQL=====>>>>>Start....."+ qb.getIndex());
 		
 		//关闭自动更新配置
@@ -134,10 +144,11 @@ public class SQLService implements ISFrameworkConstants {
 		if (EmptyHelper.isNotEmpty(size2))
 			size = Integer.parseInt(size2);
 
-		JestClient jestClient = getClient();
+		JestClient jestClient = null;
 
 		if (ONE.equals(creatFlag)) {
 			try{
+				jestClient = getClient();
 				String index = qb.getIndex();
 				// 删除索引
 				boolean indexExists = jestClient.execute(new IndicesExists.Builder(index).build()).isSucceeded();
@@ -147,11 +158,9 @@ public class SQLService implements ISFrameworkConstants {
 				}
 				JestResult createIndexResult = jestClient.execute(new CreateIndex.Builder(index).build());
 				logger.debug("createIndex===>>>ErrorMessage=" + createIndexResult.getErrorMessage() + ",JsonString=" + createIndexResult.getJsonString());
-			}
-			catch(Exception e){
-				if(jestClient!=null)
+			} finally {
+				if (jestClient != null)
 					jestClient.shutdownClient();
-				throw e;
 			}
 		}
 
@@ -164,7 +173,7 @@ public class SQLService implements ISFrameworkConstants {
 		for (int c = 0; c <= Integer.MAX_VALUE; c++) {
 			while (commit == false) {
 				try {
-					actions = loadDataFromDb(qb, c, from);
+					actions = loadDataFromDb(prepare, qb, c, from);
 					commit = true;
 				} catch (Exception e) {
 					logger.error("loadDataFromDb===>>>" + e.getMessage());
@@ -220,7 +229,7 @@ public class SQLService implements ISFrameworkConstants {
 	private long maxID = 0;
 	private long minID = 0;
 
-	private List<Index> loadDataFromDb(QueryBean qb, int page, int from) throws SQLException {
+	private List<Index> loadDataFromDb(IPrepareDataType prepare, QueryBean qb, int page, int from) throws SQLException {
 		List<Index> actions = new ArrayList<Index>();
 		Connection conn = null;
 		Statement stmt = null;
@@ -271,8 +280,8 @@ public class SQLService implements ISFrameworkConstants {
 				}
 
 				//数据整理
-				if(dataFormatter !=null)
-					data = dataFormatter.doDataFormatter(data);
+				if(prepare !=null)
+					data = prepare.prepareDataType(data);
 				
 				if(data.containsKey("id")){
 					id = data.remove("id").toString();
@@ -310,15 +319,6 @@ public class SQLService implements ISFrameworkConstants {
 	}
 
 	//////////////////////////////
-	IDataFormatter dataFormatter;
-	public IDataFormatter getDataFormatter() {
-		return dataFormatter;
-	}
-
-	public void setDataFormatter(IDataFormatter dataFormatter) {
-		this.dataFormatter = dataFormatter;
-	}
-
 	String starttime = "1000-01-01 00:00:00";
 	String endtime = "9000-01-01 23:59:59";
 
