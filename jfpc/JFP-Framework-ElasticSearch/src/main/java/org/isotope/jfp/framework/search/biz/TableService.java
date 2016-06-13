@@ -190,8 +190,8 @@ public class TableService implements ISFrameworkConstants {
 				//数据整理
 				if(prepare !=null)
 					data = prepare.prepareDataType(data);
-				if(data.containsKey("id")){
-					id = data.remove("id").toString();
+				if(data.containsKey("rriidd")){
+					id = data.remove("rriidd").toString();
 					actions.add(new Index.Builder(data.toJSONString()).index(index).id(id).type(ElasticsearchPool.TYPE).build());
 				}
 				else
