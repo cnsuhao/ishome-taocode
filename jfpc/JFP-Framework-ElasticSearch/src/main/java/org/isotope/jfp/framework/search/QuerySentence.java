@@ -59,7 +59,7 @@ public class QuerySentence implements ISSentenceConstants {
 	}
 
 	private void doLoadAreaUrlFiles(InputStream inputStream) {
-		loadXML(inputStream, "area", "url", COMPANY_URL,new HashMap<String, QueryBean>());
+		loadXML(inputStream, "area", "url", INDEX_URL,new HashMap<String, QueryBean>());
 	}
 
 	public void doLoadSentenceFiles(InputStream inputStream) throws Exception {
