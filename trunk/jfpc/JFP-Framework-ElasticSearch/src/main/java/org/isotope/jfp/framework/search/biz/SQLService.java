@@ -272,6 +272,7 @@ public class SQLService implements ISFrameworkConstants {
 			// rs.beforeFirst();
 			while (resultSet.next()) {
 				String id = "";
+				String rriidd = "";
 				data = new JSONObject();
 				for (int i = 1; i <= metaData.getColumnCount(); i++) {
 					String columnName = metaData.getColumnLabel(i);
@@ -284,20 +285,21 @@ public class SQLService implements ISFrameworkConstants {
 					data = prepare.prepareDataType(data);
 				
 				if(data.containsKey("rriidd")){
-					id = data.remove("rriidd").toString();
+					id = data.remove("id").toString();//任意类型
+					rriidd = data.get("rriidd").toString();//数值型
 					try{
-						minID = Long.parseLong(id);
+						minID = Long.parseLong(rriidd);
 						if (maxID < minID)
 							maxID = minID;
 					}catch(Exception e){
 						
 					}
 					//加入索引
-					actions.add(new Index.Builder(data.toJSONString()).index(qb.getIndex()).type(ElasticsearchPool.TYPE).build());
+					actions.add(new Index.Builder(data.toJSONString()).index(qb.getIndex()).id(id).type(ElasticsearchPool.TYPE).build());
 				}					
 				else{
 					//加入索引
-					actions.add(new Index.Builder(data.toJSONString()).index(qb.getIndex()).id(id).type(ElasticsearchPool.TYPE).build());
+					actions.add(new Index.Builder(data.toJSONString()).index(qb.getIndex()).type(ElasticsearchPool.TYPE).build());
 				}
 			}
 

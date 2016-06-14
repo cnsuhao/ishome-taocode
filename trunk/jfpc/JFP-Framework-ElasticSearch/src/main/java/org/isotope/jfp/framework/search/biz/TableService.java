@@ -180,7 +180,7 @@ public class TableService implements ISFrameworkConstants {
 			JSONObject data;
 			// rs.beforeFirst();
 			while (resultSet.next()) {
-				String id = "";
+				String rriidd = "";
 				data = new JSONObject();
 				for (int i = 1; i <= metaData.getColumnCount(); i++) {
 					String columnName = metaData.getColumnName(i);
@@ -191,8 +191,8 @@ public class TableService implements ISFrameworkConstants {
 				if(prepare !=null)
 					data = prepare.prepareDataType(data);
 				if(data.containsKey("rriidd")){
-					id = data.remove("rriidd").toString();
-					actions.add(new Index.Builder(data.toJSONString()).index(index).id(id).type(ElasticsearchPool.TYPE).build());
+					rriidd = data.remove("rriidd").toString();//数值型
+					actions.add(new Index.Builder(data.toJSONString()).index(index).id(rriidd).type(ElasticsearchPool.TYPE).build());
 				}
 				else
 					actions.add(new Index.Builder(data.toJSONString()).index(index).type(ElasticsearchPool.TYPE).build());
