@@ -89,7 +89,7 @@ public class DataIndexUpdateServiceJob extends MyTaskSupport {
 				}
 				//设定最后更新时间
 				lastCalendar.setTimeInMillis(Long.parseLong(lastTime));
-				lastCalendar.add(Calendar.HOUR, 1);
+				lastCalendar.add(Calendar.MINUTE, splitMinute);
 				// 判断时间超时
 				if ((nowCalendar.getTimeInMillis() - lastCalendar.getTimeInMillis()) < 1000 * 60 * splitMinute) {
 					logger.info("全文检索索引同步更新业务  xxxxx===== 取消....." + entry.getKey());
@@ -111,7 +111,7 @@ public class DataIndexUpdateServiceJob extends MyTaskSupport {
 					sqlService.updateIndexBySQL(entry.getValue(), EMPTY, EMPTY);
 					
 					//追加下次更新
-					lastCalendar.add(Calendar.HOUR, 1);
+					lastCalendar.add(Calendar.MINUTE, splitMinute);
 					if ((nowCalendar.getTimeInMillis() - lastCalendar.getTimeInMillis()) <  1000 * 60 * splitMinute) {
 						upLast = false;
 						logger.info("全文检索索引同步更新业务  xxxxx===== 取消....." + entry.getKey());
