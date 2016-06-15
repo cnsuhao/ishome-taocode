@@ -93,7 +93,8 @@ public class QuerySentence implements ISSentenceConstants {
 					} else if ("index".equals(reader.getLocalName())) {
 						index = reader.getElementText().toLowerCase();
 						qb.setIndex(index);
-						indexs.add(index);
+						if(indexs.contains(index)==false)
+							indexs.add(index);
 					} else if (type.equals(reader.getLocalName())) {
 						qb.setValue(reader.getElementText());
 						logger.debug("保存全文检索配置.........." + qb.getId());
