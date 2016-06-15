@@ -37,7 +37,7 @@ public class SearchService {
 
 	public QueryResultBean searchDataInIndex(String queryID, Object... param) throws Exception {
 		QueryResultBean resultBean = new QueryResultBean();
-		if (sentence.containsIndex(queryID) == false) {
+		if (sentence.getSentenceMap().containsKey(queryID) == false) {
 			throw new RuntimeException("The queryID is not exit ! >>>>>[" + queryID + "]<<<<<");
 		}
 		JestClient jestClient = null;

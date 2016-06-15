@@ -82,7 +82,7 @@ public class DataIndexUpdateServiceJob extends MyTaskSupport {
 				QueryBean qb = entry.getValue();
 				// 获得最后一次更新时间
 				myCacheService.selectDB(index);
-				String lastTime = (String) myCacheService.getObject(ISSentenceConstants.SENTENCE_UTD + qb.getIndex(), false);
+				String lastTime = (String) myCacheService.getObject(ISSentenceConstants.SENTENCE_UTD + qb.getId(), false);
 				if (EmptyHelper.isEmpty(lastTime)) {
 					logger.info("全文检索索引同步更新业务  xxxxx===== 取消....." + entry.getKey());
 					continue;
@@ -120,7 +120,7 @@ public class DataIndexUpdateServiceJob extends MyTaskSupport {
 				}
 				// 设定最后一次更新时间
 				myCacheService.selectDB(index);
-				myCacheService.putObject(ISSentenceConstants.SENTENCE_UTD + qb.getIndex(), "" + lastCalendar.getTimeInMillis(), 0, false);
+				myCacheService.putObject(ISSentenceConstants.SENTENCE_UTD + qb.getId(), "" + lastCalendar.getTimeInMillis(), 0, false);
 			}
 		}
 		myCacheService.init();

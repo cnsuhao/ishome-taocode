@@ -79,7 +79,8 @@ public class DataIndexDeleteServiceJob extends MyTaskSupport {
 
 			logger.info("全文检索索引数据删除业务  >>>>>===== 开始 ..... " + entry);
 			if (myQuerySentence.containsIndex(idx) == false) {
-				//myCacheService.removeKey(ISSentenceConstants.COMPANY_DEL + key);
+				// myCacheService.removeKey(ISSentenceConstants.COMPANY_DEL +
+				// key);
 				logger.info("全文检索索引数据删除业务  xxxxx===== 取消 ..... " + entry);
 				continue;
 			}
@@ -87,13 +88,14 @@ public class DataIndexDeleteServiceJob extends MyTaskSupport {
 			while (EmptyHelper.isNotEmpty(id) == true) {
 				datas.add(id);
 				id = (String) myCacheService.pollFirstObjectInList(ISSentenceConstants.INDEX_DEL + key, false);
-				if(datas.size()>=100){
+				logger.info("    删除数据......" + key + "=" + id);
+				if (datas.size() >= 100) {
 					dataService.deleteDataInIndex(idx, datas);
 					datas = new ArrayList<String>();
 					Thread.sleep(1000);
 				}
 			}
-			if(datas.size()>0)
+			if (datas.size() > 0)
 				dataService.deleteDataInIndex(idx, datas);
 			logger.info("全文检索索引数据删除业务  =====<<<<< 结束 ..... " + entry);
 		}

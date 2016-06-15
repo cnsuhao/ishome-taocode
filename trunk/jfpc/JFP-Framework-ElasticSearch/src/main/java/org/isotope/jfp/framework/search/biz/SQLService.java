@@ -18,6 +18,7 @@ import org.isotope.jfp.framework.search.IPrepareDataType;
 import org.isotope.jfp.framework.search.ISSentenceConstants;
 import org.isotope.jfp.framework.search.QuerySentence;
 import org.isotope.jfp.framework.search.bean.QueryBean;
+import org.isotope.jfp.framework.search.utils.IndexNameHelper;
 import org.isotope.jfp.framework.utils.BeanFactoryHelper;
 import org.isotope.jfp.framework.utils.EmptyHelper;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -60,17 +61,6 @@ public class SQLService implements ISFrameworkConstants {
 	}
 
 	/**
-	 * 索引服务连接
-	 */
-	@Resource
-	ElasticsearchPool pool;
-	public JestClient getClient() throws Exception {
-		if (pool == null)
-			pool = BeanFactoryHelper.getBean("ElasticsearchPool");
-		return pool.getClient();
-	}
-
-	/**
 	 * 获得用于执行静态 SQL 语句并返回它所生成结果的对象
 	 * <p>
 	 * 基于事物控制
@@ -81,6 +71,17 @@ public class SQLService implements ISFrameworkConstants {
 	protected Connection getConnection() throws SQLException {
 		SqlSessionTemplate st = (SqlSessionTemplate) getMySqlSession();
 		return SqlSessionUtils.getSqlSession(st.getSqlSessionFactory(), st.getExecutorType(), st.getPersistenceExceptionTranslator()).getConnection();
+	}
+
+	/**
+	 * 索引服务连接
+	 */
+	@Resource
+	ElasticsearchPool pool;
+	public JestClient getClient() throws Exception {
+		if (pool == null)
+			pool = BeanFactoryHelper.getBean("ElasticsearchPool");
+		return pool.getClient();
 	}
 
 	/**
@@ -137,7 +138,7 @@ public class SQLService implements ISFrameworkConstants {
 		logger.info("makeIndexBySQL=====>>>>>Start....."+ qb.getIndex());
 		
 		//关闭自动更新配置
-		myCacheService.removeKey(ISSentenceConstants.SENTENCE_UTD + qb.getIndex());
+		myCacheService.removeKey(ISSentenceConstants.SENTENCE_UTD + IndexNameHelper.getUpdateId(qb.getIndex()));
 		
 		if (EmptyHelper.isNotEmpty(from2))
 			from = Integer.parseInt(from2);
@@ -217,7 +218,7 @@ public class SQLService implements ISFrameworkConstants {
 			}
 		}
 		//开启自动更新配置
-		myCacheService.putObject(ISSentenceConstants.SENTENCE_UTD + qb.getIndex(), "" + System.currentTimeMillis(), 0, false);
+		myCacheService.putObject(ISSentenceConstants.SENTENCE_UTD + IndexNameHelper.getUpdateId(qb.getIndex()), "" + System.currentTimeMillis(), 0, false);
 		logger.info("makeIndexBySQL<<<<<=====End....."+ qb.getIndex());
 	}
 
