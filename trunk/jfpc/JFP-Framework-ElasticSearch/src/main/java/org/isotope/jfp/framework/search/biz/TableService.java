@@ -162,7 +162,7 @@ public class TableService implements ISFrameworkConstants {
 
 	}
 
-	private List<Index> loadDataFromDb(IPrepareDataType prepare, String index, String tableName, int page, int from) throws SQLException {
+	private List<Index> loadDataFromDb(IPrepareDataType prepare, String index, String tableName, int page, int from) throws Exception {
 		List<Index> actions = new ArrayList<Index>();
 		Connection conn = null;
 		Statement stmt = null;
