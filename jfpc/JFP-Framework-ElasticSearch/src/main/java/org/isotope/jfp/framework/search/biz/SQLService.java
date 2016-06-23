@@ -78,6 +78,7 @@ public class SQLService implements ISFrameworkConstants {
 	 */
 	@Resource
 	ElasticsearchPool pool;
+
 	public JestClient getClient() throws Exception {
 		if (pool == null)
 			pool = BeanFactoryHelper.getBean("ElasticsearchPool");
@@ -99,14 +100,16 @@ public class SQLService implements ISFrameworkConstants {
 	public void creatIndexBySQL(String actionID, String creatFlag, String from2, String size2) throws Exception {
 		creatIndexBySQL(config.getCreat(actionID), creatFlag, from2, size2);
 	}
-	public void creatIndexBySQL(IPrepareDataType prepare,String actionID, String creatFlag, String from2, String size2) throws Exception {
+
+	public void creatIndexBySQL(IPrepareDataType prepare, String actionID, String creatFlag, String from2, String size2) throws Exception {
 		creatIndexBySQL(prepare, config.getCreat(actionID), creatFlag, from2, size2);
 	}
+
 	public void creatIndexBySQL(QueryBean qb, String creatFlag, String from2, String size2) throws Exception {
 		creatIndexBySQL(null, qb, creatFlag, from2, size2);
 	}
-	
-	public void creatIndexBySQL(IPrepareDataType prepare,QueryBean qb, String creatFlag, String from2, String size2) throws Exception {
+
+	public void creatIndexBySQL(IPrepareDataType prepare, QueryBean qb, String creatFlag, String from2, String size2) throws Exception {
 		makeIndexBySQL(prepare, qb, creatFlag, from2, size2);
 	}
 
@@ -125,21 +128,25 @@ public class SQLService implements ISFrameworkConstants {
 	public void updateIndexBySQL(String actionID, String from2, String size2) throws Exception {
 		updateIndexBySQL(config.getUpdate(actionID), from2, size2);
 	}
+
 	public void updateIndexBySQL(IPrepareDataType prepare, String actionID, String from2, String size2) throws Exception {
 		updateIndexBySQL(prepare, config.getUpdate(actionID), from2, size2);
 	}
+
 	public void updateIndexBySQL(QueryBean qb, String from2, String size2) throws Exception {
 		updateIndexBySQL(null, qb, from2, size2);
 	}
+
 	public void updateIndexBySQL(IPrepareDataType prepare, QueryBean qb, String from2, String size2) throws Exception {
 		makeIndexBySQL(prepare, qb, ZERO, from2, size2);
 	}
+
 	private void makeIndexBySQL(IPrepareDataType prepare, QueryBean qb, String creatFlag, String from2, String size2) throws Exception {
-		logger.info("makeIndexBySQL=====>>>>>Start....."+ qb.getIndex());
-		
-		//关闭自动更新配置
+		logger.info("makeIndexBySQL=====>>>>>Start....." + qb.getIndex());
+
+		// 关闭自动更新配置
 		myCacheService.removeKey(ISSentenceConstants.SENTENCE_UTD + IndexNameHelper.getUpdateId(qb.getIndex()));
-		
+
 		if (EmptyHelper.isNotEmpty(from2))
 			from = Integer.parseInt(from2);
 		if (EmptyHelper.isNotEmpty(size2))
@@ -148,7 +155,7 @@ public class SQLService implements ISFrameworkConstants {
 		JestClient jestClient = null;
 
 		if (ONE.equals(creatFlag)) {
-			try{
+			try {
 				jestClient = getClient();
 				String index = qb.getIndex();
 				// 删除索引
@@ -177,7 +184,7 @@ public class SQLService implements ISFrameworkConstants {
 					actions = loadDataFromDb(prepare, qb, c, from);
 					commit = true;
 				} catch (Exception e) {
-					logger.error("loadDataFromDb===>>>" + e.getMessage());
+					logger.error("loadDataFromDb==xxxxxxxxxxxxxxxx=>>>", e);
 					Thread.sleep(sleep * 2);
 					if (errorNum > sleep * 2) {
 						throw e;
@@ -207,7 +214,7 @@ public class SQLService implements ISFrameworkConstants {
 						} else {
 							errorNum = errorNum + 1;
 						}
-						if(jestClient!=null)
+						if (jestClient != null)
 							jestClient.shutdownClient();
 						jestClient = getClient();
 					}
@@ -217,9 +224,9 @@ public class SQLService implements ISFrameworkConstants {
 				break;
 			}
 		}
-		//开启自动更新配置
+		// 开启自动更新配置
 		myCacheService.putObject(ISSentenceConstants.SENTENCE_UTD + IndexNameHelper.getUpdateId(qb.getIndex()), "" + System.currentTimeMillis(), 0, false);
-		logger.info("makeIndexBySQL<<<<<=====End....."+ qb.getIndex());
+		logger.info("makeIndexBySQL<<<<<=====End....." + qb.getIndex());
 	}
 
 	@Autowired
@@ -230,7 +237,7 @@ public class SQLService implements ISFrameworkConstants {
 	private long maxID = 0;
 	private long minID = 0;
 
-	private List<Index> loadDataFromDb(IPrepareDataType prepare, QueryBean qb, int page, int from) throws SQLException {
+	private List<Index> loadDataFromDb(IPrepareDataType prepare, QueryBean qb, int page, int from) throws Exception {
 		List<Index> actions = new ArrayList<Index>();
 		Connection conn = null;
 		Statement stmt = null;
@@ -272,35 +279,36 @@ public class SQLService implements ISFrameworkConstants {
 			JSONObject data;
 			// rs.beforeFirst();
 			while (resultSet.next()) {
-				String id = "";
-				String rriidd = "";
-				data = new JSONObject();
-				for (int i = 1; i <= metaData.getColumnCount(); i++) {
-					String columnName = metaData.getColumnLabel(i);
-					Object value = resultSet.getObject(i);
-					data.put(columnName.toLowerCase(), value);
-				}
+				try {
+					String id = "";
+					String rriidd = "";
+					data = new JSONObject();
+					for (int i = 1; i <= metaData.getColumnCount(); i++) {
+						String columnName = metaData.getColumnLabel(i);
+						Object value = resultSet.getObject(i);
+						data.put(columnName.toLowerCase(), value);
+					}
 
-				//数据整理
-				if(prepare !=null)
-					data = prepare.prepareDataType(data);
-				
-				if(data.containsKey("rriidd")){
-					id = data.remove("id").toString();//任意类型
-					rriidd = data.get("rriidd").toString();//数值型
-					try{
+					// 数据整理
+					if (prepare != null)
+						data = prepare.prepareDataType(data);
+
+					if (data.containsKey("rriidd")) {
+						id = data.remove("id").toString();// 任意类型
+						rriidd = data.get("rriidd").toString();// 数值型
+
 						minID = Long.parseLong(rriidd);
 						if (maxID < minID)
 							maxID = minID;
-					}catch(Exception e){
-						
+
+						// 加入索引
+						actions.add(new Index.Builder(data.toJSONString()).index(qb.getIndex()).id(id).type(ElasticsearchPool.TYPE).build());
+					} else {
+						// 加入索引
+						actions.add(new Index.Builder(data.toJSONString()).index(qb.getIndex()).type(ElasticsearchPool.TYPE).build());
 					}
-					//加入索引
-					actions.add(new Index.Builder(data.toJSONString()).index(qb.getIndex()).id(id).type(ElasticsearchPool.TYPE).build());
-				}					
-				else{
-					//加入索引
-					actions.add(new Index.Builder(data.toJSONString()).index(qb.getIndex()).type(ElasticsearchPool.TYPE).build());
+				} catch (Exception e) {
+					logger.debug("    prepare data fail ===>>>" + e);
 				}
 			}
 

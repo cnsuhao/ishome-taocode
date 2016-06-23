@@ -17,5 +17,5 @@ public interface IPrepareDataType {
 	 * @param cb
 	 *            转换后对象类
 	 */
-	JSONObject prepareDataType(JSONObject data);
+	JSONObject prepareDataType(JSONObject data) throws Exception;
 }
