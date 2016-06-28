@@ -460,8 +460,10 @@
         		<entry key='getCompanyUrl'				value='http://testcapture.wzyrz.cn/Zheng/corp/info/update/sedCompany' />
         		<entry key='submitCourtDocUrl'			value='http://testcapture.wzyrz.cn/Zheng/codc/uploadCompanyListHtml' />
         		<entry key='corpNameUrl'					value='http://testcapture.wzyrz.cn/Zheng/corp/getKeyWord' />
+        		
+        		<entry key='keyWordUrl'						value='http://testcapture.wzyrz.cn/Zheng/key/newWord' />
 
-        		<entry key='useProxy'							value='http://localhost:8888/Zheng/proxy/newProtool' />
+        		<entry key='useProxy'							value='http://testcapture.wzyrz.cn/Zheng/proxy/newProtool' />
             </map>
         </property>
 	</bean>	
@@ -501,6 +503,11 @@
 	<bean id="CourtDocTask" class="com.zx.court.task.CourtDocTask">
 		<property name="serviceConfig" ref="serviceConfig" />		
 	</bean>
+	
+	<bean id="XYChinaCaptureTask" class="com.upg.capture.XYChina.XYChinaCaptureTask">
+		<property name="serviceConfig" 		ref="serviceConfig" />		
+		<property name="pathName" 			value="/XYChina" />		
+	</bean>
  	
     <bean id="tokenclear" class="com.upg.zx.domain.capture.token.imp.DefaultTockenClean"></bean>
     
@@ -522,9 +529,12 @@
 		<task:scheduled ref="CourtDocTask" method="getHtmlListJicheng"
 			cron="18 18 18 * * ?" /> -->
 			
+		<task:scheduled ref="XYChinaCaptureTask" method="loadKeyWordService"
+			cron="0 0/5 * * * ?" />
+			
 		<!-- 获取公司详细信息 -->
 		<task:scheduled ref="companyTask" method="jsInfoTask"
-			cron="0/5 * * * * ?" />
+			cron="0/2 * * * * ?" />
 
 		<!-- 温州企业获取
 		<task:scheduled ref="companyQueryTask" method="queryService"
@@ -532,7 +542,7 @@
  -->
 		<!-- 公司自动打 -->
 		<task:scheduled ref="companyTask" method="getListTask"
-			cron="0/5 * * * * ?" />
+			cron="0/2 * * * * ?" />
 			
 		<task:scheduled ref="tokenclear" method="clean"
 			cron="0/30  * * * * ?" />	
