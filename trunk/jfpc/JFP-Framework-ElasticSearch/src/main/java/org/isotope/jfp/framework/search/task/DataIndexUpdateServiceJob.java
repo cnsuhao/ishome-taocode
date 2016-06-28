@@ -87,6 +87,7 @@ public class DataIndexUpdateServiceJob extends MyTaskSupport {
 					logger.info("全文检索索引同步更新业务  xxxxx===== 取消....." + entry.getKey());
 					continue;
 				}
+				//splitMinute = 2;
 				//设定最后更新时间
 				lastCalendar.setTimeInMillis(Long.parseLong(lastTime));
 				lastCalendar.add(Calendar.MINUTE, splitMinute);

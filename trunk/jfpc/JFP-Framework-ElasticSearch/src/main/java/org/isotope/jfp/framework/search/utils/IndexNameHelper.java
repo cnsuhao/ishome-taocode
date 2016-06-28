@@ -20,7 +20,7 @@ public class IndexNameHelper implements ISFrameworkConstants{
 	}
 	
 	public static String getUpdateId(String indexName){
-		if(indexName.indexOf(CREAT)>0)
+		if(indexName.indexOf(CREAT)<0)
 			return indexName;
 		String[] s = indexName.split(DOWN_LINE);
 		StringBuffer id = new StringBuffer();

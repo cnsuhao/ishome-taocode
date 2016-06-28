@@ -34,6 +34,7 @@ import io.searchbox.client.JestResult;
 import io.searchbox.core.Bulk;
 import io.searchbox.core.Bulk.Builder;
 import io.searchbox.core.BulkResult;
+import io.searchbox.core.BulkResult.BulkResultItem;
 import io.searchbox.core.Index;
 import io.searchbox.indices.CreateIndex;
 import io.searchbox.indices.DeleteIndex;
@@ -145,7 +146,7 @@ public class SQLService implements ISFrameworkConstants {
 		logger.info("makeIndexBySQL=====>>>>>Start....." + qb.getIndex());
 
 		// 关闭自动更新配置
-		myCacheService.removeKey(ISSentenceConstants.SENTENCE_UTD + IndexNameHelper.getUpdateId(qb.getIndex()));
+		myCacheService.removeKey(ISSentenceConstants.SENTENCE_UTD + IndexNameHelper.getUpdateId(qb.getId()));
 
 		if (EmptyHelper.isNotEmpty(from2))
 			from = Integer.parseInt(from2);
@@ -179,6 +180,7 @@ public class SQLService implements ISFrameworkConstants {
 		List<Index> actions = null;
 		boolean commit = false;
 		for (int c = 0; c <= Integer.MAX_VALUE; c++) {
+			Thread.sleep(sleep * 2);
 			while (commit == false) {
 				try {
 					actions = loadDataFromDb(prepare, qb, c, from);
@@ -193,12 +195,13 @@ public class SQLService implements ISFrameworkConstants {
 					}
 				}
 			}
-			logger.debug("getData===>>>" + c * size);
+			logger.debug("getData======>>>" + (c + 1) * size);
 			// 分批提交数据
 			if (actions.size() > 0) {
 				commit = false;
 				while (commit == false) {
 					try {
+						jestClient = getClient();
 						bulkIndexBuilder = new Bulk.Builder();
 						bulkIndexBuilder.addAction(actions);
 						result = jestClient.execute(bulkIndexBuilder.build());
@@ -206,8 +209,14 @@ public class SQLService implements ISFrameworkConstants {
 						commit = true;
 						num = num + actions.size();
 						logger.debug("addDataIntoIndex===>>>num=" + num + ",ErrorMessage=" + result.getErrorMessage());
+						if (EmptyHelper.isNotEmpty(result.getErrorMessage())) {
+							List<BulkResultItem> rs = result.getItems();
+							for (BulkResultItem r : rs) {
+								logger.debug(r.error);
+							}
+						}
 					} catch (Exception e) {
-						logger.error("addDataIntoIndex===>>>" + e.getMessage());
+						logger.error("addDataIntoIndex===>>>", e);
 						Thread.sleep(sleep * 2);
 						if (errorNum > sleep * 2) {
 							throw e;
@@ -216,7 +225,6 @@ public class SQLService implements ISFrameworkConstants {
 						}
 						if (jestClient != null)
 							jestClient.shutdownClient();
-						jestClient = getClient();
 					}
 				}
 				commit = false;
@@ -225,7 +233,7 @@ public class SQLService implements ISFrameworkConstants {
 			}
 		}
 		// 开启自动更新配置
-		myCacheService.putObject(ISSentenceConstants.SENTENCE_UTD + IndexNameHelper.getUpdateId(qb.getIndex()), "" + System.currentTimeMillis(), 0, false);
+		myCacheService.putObject(ISSentenceConstants.SENTENCE_UTD + IndexNameHelper.getUpdateId(qb.getId()), "" + System.currentTimeMillis(), 0, false);
 		logger.info("makeIndexBySQL<<<<<=====End....." + qb.getIndex());
 	}
 
