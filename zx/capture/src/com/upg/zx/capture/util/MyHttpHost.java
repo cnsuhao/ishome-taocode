@@ -25,21 +25,39 @@ public class MyHttpHost {
 
 	public static final String ENCODE_DEFAULT = "UTF-8";
 	public static String serviceURL = "http://testcapture.wzyrz.cn/Zheng/proxy/newProtool";
+
+	private static HttpHost httpHostProxy;
+	private static long lastTime = System.currentTimeMillis();
+
 	public static HttpHost getHttpProxy() throws Exception {
 		try {
-			if (serviceConfig != null && serviceConfig.getServiceConfig().containsKey("useProxy")) {
-				serviceURL = serviceConfig.getServiceConfig().get("useProxy");
-				JSONObject rs = JSONObject.fromObject(doHttpProxyGET(serviceURL));
-				JSONObject proxy = JSONObject.fromObject(rs.get("data"));
-
-				System.out.println("useing proxy =====>>>>>"+proxy);
-				
-				return new HttpHost(proxy.getString("hostName"), proxy.getInt("port"));
+			if (httpHostProxy == null) {
+				loadHttpProxy();
+			} else {
+				long nowTime = System.currentTimeMillis();
+				if ((nowTime - lastTime) > 120 * 1000) {
+					lastTime = nowTime;
+					loadHttpProxy();
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+		return httpHostProxy;
+	}
+
+	private static HttpHost loadHttpProxy() throws Exception {
+		httpHostProxy = null;
+		if (serviceConfig != null && serviceConfig.getServiceConfig().containsKey("useProxy")) {
+			serviceURL = serviceConfig.getServiceConfig().get("useProxy");
+			JSONObject rs = JSONObject.fromObject(doHttpProxyGET(serviceURL));
+			JSONObject proxy = JSONObject.fromObject(rs.get("data"));
+
+			System.out.println("useing proxy =====>>>>>" + proxy);
+
+			httpHostProxy = new HttpHost(proxy.getString("hostName"), proxy.getInt("port"));
+		}
+		return httpHostProxy;
 	}
 
 	public static String doHttpProxyGET(String serviceURL) throws Exception {
