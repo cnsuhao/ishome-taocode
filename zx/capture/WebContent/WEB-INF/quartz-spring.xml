@@ -446,26 +446,22 @@
 	<!-- testcapture.wzyrz.cn -->
     <bean id='serviceConfig' class='com.upg.zx.capture.bean.ServiceConfig' >
         <property name='serviceConfig'>
-        	<map>         		
-        	
-        		<entry key='serviceHost'						value='http://testcapture.wzyrz.cn/Zheng/' />
-        		<!-- <entry key='serviceHost'						value='http://127.0.0.1:8888/Zheng/' /> -->
-        		
-        		<entry key='requestUrl'						value='corp/request/allinfo' />
-        		<entry key='analysisTemplateUrl'			value='corp/request/queryanalysisTemplate' />
+        	<map>  
+        		<entry key='requestUrl'						value='http://testcapture.wzyrz.cn/Zheng/corp/request/allinfo' />
+        		<entry key='analysisTemplateUrl'			value='http://testcapture.wzyrz.cn/Zheng/corp/request/queryanalysisTemplate' />
 
-        		<entry key='postOtherInfoJsUrl'			value='corp/uploadCompanyHtmljs' />  
-        		<entry key='postOtherInfoUrl'				value='corp/uploadCompanyHtml' /> 
+        		<entry key='postOtherInfoJsUrl'			value='http://testcapture.wzyrz.cn/Zheng/corp/uploadCompanyHtmljs' />  
+        		<entry key='postOtherInfoUrl'				value='http://testcapture.wzyrz.cn/Zheng/corp/uploadCompanyHtml' /> 
         		
-        		<entry key='submitCompanyUrl'			value='corp/uploadCompanyHtml' />
-        		<entry key='submitCompanyls'				value='corp/uploadCompanyListHtml' />
-        		<entry key='getLianziCompanyUrl'		value='corp/sendIpDistant' />
+        		<entry key='submitCompanyUrl'			value='http://testcapture.wzyrz.cn/Zheng/corp/uploadCompanyHtml' />
+        		<entry key='submitCompanyls'				value='http://testcapture.wzyrz.cn/Zheng/corp/uploadCompanyListHtml' />
+        		<entry key='getLianziCompanyUrl'		value='http://testcapture.wzyrz.cn/Zheng/corp/sendIpDistant' />
         		
-        		<entry key='getCompanyUrl'				value='corp/info/update/sedCompany' />
-        		<entry key='submitCourtDocUrl'			value='codc/uploadCompanyListHtml' />
-        		<entry key='corpNameUrl'					value='corp/getKeyWord' />
+        		<entry key='getCompanyUrl'				value='http://testcapture.wzyrz.cn/Zheng/corp/info/update/sedCompany' />
+        		<entry key='submitCourtDocUrl'			value='http://testcapture.wzyrz.cn/Zheng/codc/uploadCompanyListHtml' />
+        		<entry key='corpNameUrl'					value='http://testcapture.wzyrz.cn/Zheng/corp/getKeyWord' />
 
-        		<!-- <entry key='useProxy'							value='' /> -->
+        		<entry key='useProxy'							value='http://localhost:8888/Zheng/proxy/newProtool' />
             </map>
         </property>
 	</bean>	
@@ -519,8 +515,8 @@
 			cron="0/1 * * * * ?" />
  -->
  
-		<task:scheduled ref="CourtDocTask" method="getHtmlListSheng"
-			cron="5 5 9 * * ?" />
+		<!-- <task:scheduled ref="CourtDocTask" method="getHtmlListSheng"
+			cron="5 5 9 * * ?" /> -->
 		<!-- <task:scheduled ref="CourtDocTask" method="getHtmlListZhongji"
 			cron="18 18 18 * * ?" />
 		<task:scheduled ref="CourtDocTask" method="getHtmlListJicheng"
@@ -536,7 +532,7 @@
  -->
 		<!-- 公司自动打 -->
 		<task:scheduled ref="companyTask" method="getListTask"
-			cron="0/5  * * * * ?" />
+			cron="0/5 * * * * ?" />
 			
 		<task:scheduled ref="tokenclear" method="clean"
 			cron="0/30  * * * * ?" />	
