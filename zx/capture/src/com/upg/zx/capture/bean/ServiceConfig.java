@@ -15,6 +15,6 @@ public class ServiceConfig {
 	}
 
 	public String getServiceConfig(String key) {
-		return serviceConfig.get("serviceHost") + serviceConfig.get(key);
+		return serviceConfig.get(key);
 	}
 }

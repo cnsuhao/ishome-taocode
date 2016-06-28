@@ -8,6 +8,7 @@ import java.util.Map;
 
 import com.upg.zx.capture.bean.ServiceConfig;
 import com.upg.zx.capture.util.HttpClientUtil;
+import com.upg.zx.capture.util.MyHttpHost;
 import com.upg.zx.domain.capture.bean.RamCache;
 import com.upg.zx.domain.entity.AnalysisTemplate;
 import com.upg.zx.domain.entity.RequestHead;
@@ -31,6 +32,8 @@ public class RequestLoad {
 
 	public void init() {
 		try {
+			MyHttpHost.setServiceConfig(serviceConfig);
+			
 			System.out.println("加载工商网址信息......");
 			requestLoad();
 			System.out.println("加载解析模版信息......");
