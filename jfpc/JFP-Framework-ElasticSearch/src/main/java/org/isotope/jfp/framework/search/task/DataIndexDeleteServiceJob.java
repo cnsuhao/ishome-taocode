@@ -67,16 +67,18 @@ public class DataIndexDeleteServiceJob extends MyTaskSupport {
 		}
 		myCacheService.selectDB(index);
 		Iterator<Entry<String, String>> iter = delKeys.entrySet().iterator();
+		String fid;
 		String id;
 		String idx = "";
-		String key = "";
+		String redisKey = "";
 		ArrayList<String> datas;
 		while (iter.hasNext()) {
 			datas = new ArrayList<String>();
 			Map.Entry<String, String> entry = iter.next();
-			idx = entry.getKey();// 索引名字
-			key = entry.getValue();// 缓存Key
-
+			redisKey = entry.getValue();// 缓存Key
+			String[] s = entry.getKey().split("#");// 索引名字
+			idx = s[0];
+			fid = s[1];
 			logger.info("全文检索索引数据删除业务  >>>>>===== 开始 ..... " + entry);
 			if (myQuerySentence.containsIndex(idx) == false) {
 				// myCacheService.removeKey(ISSentenceConstants.COMPANY_DEL +
@@ -84,11 +86,12 @@ public class DataIndexDeleteServiceJob extends MyTaskSupport {
 				logger.info("全文检索索引数据删除业务  xxxxx===== 取消 ..... " + entry);
 				continue;
 			}
-			id = (String) myCacheService.pollFirstObjectInList(ISSentenceConstants.INDEX_DEL + key, false);
+			id = (String) myCacheService.pollFirstObjectInList(ISSentenceConstants.INDEX_DEL + redisKey, false);
 			while (EmptyHelper.isNotEmpty(id) == true) {
+				id = fid + id;
 				datas.add(id);
-				id = (String) myCacheService.pollFirstObjectInList(ISSentenceConstants.INDEX_DEL + key, false);
-				logger.info("    删除数据......" + key + "=" + id);
+				id = (String) myCacheService.pollFirstObjectInList(ISSentenceConstants.INDEX_DEL + redisKey, false);
+				logger.info("    删除数据......" + redisKey + "=" + id);
 				if (datas.size() >= 100) {
 					dataService.deleteDataInIndex(idx, datas);
 					datas = new ArrayList<String>();
