@@ -36,38 +36,16 @@ import com.upg.zx.capture.bean.ServiceConfig;
 import net.sf.json.JSONObject;
 
 public class HttpClientUtil {
-	public static ServiceConfig serviceConfig;
-
-	public static ServiceConfig getServiceConfig() {
-		return serviceConfig;
-	}
-
-	public static void setServiceConfig(ServiceConfig serviceConfig) {
-		HttpClientUtil.serviceConfig = serviceConfig;
-	}
-
 	public static CloseableHttpClient getHttpclient() throws Exception {
-		return getHttpclient("", 30, null);
+		return getHttpclient("", 30, MyHttpHost.getHttpProxy());
 	}
 
 	public static CloseableHttpClient getHttpclient(String requestURL) throws Exception {
-		return getHttpclient(requestURL, 30, null);
+		return getHttpclient(requestURL, 30, MyHttpHost.getHttpProxy());
 	}
-
-	public static HttpHost getHttpProxy() throws Exception {
-		JSONObject proxy = JSONObject.fromObject(doHttpGET(serviceConfig.getServiceConfig("useProxy")));		
-		return (HttpHost) JSONObject.toBean(proxy, HttpHost.class);
-	}
-
+	
 	protected static CloseableHttpClient getHttpclient(String requestURL, int waitTimeMinute) throws Exception {
-		try {
-			if (serviceConfig.getServiceConfig().containsKey("useProxy")) {
-				return getHttpclient(requestURL, waitTimeMinute, getHttpProxy());
-			}
-		} catch (Exception e) {
-		}
-
-		return getHttpclient(requestURL, waitTimeMinute, null);
+		return getHttpclient(requestURL, waitTimeMinute, MyHttpHost.getHttpProxy());
 	}
 
 	protected static CloseableHttpClient getHttpclient(String requestURL, int waitTimeMinute, HttpHost httpProxy)
@@ -112,7 +90,7 @@ public class HttpClientUtil {
 	 * @throws IOException
 	 */
 	public static String postRequest(String url, String content) throws Exception {
-		System.out.println("=====>>>>>"+url);
+		System.out.println("=====>>>>>" + url);
 		CloseableHttpClient client = getHttpclient(url);
 		HttpPost post = new HttpPost(url);
 		post.setConfig(RequestConfig.custom().setSocketTimeout(30 * 1000).setConnectTimeout(30 * 1000).build());
@@ -135,8 +113,8 @@ public class HttpClientUtil {
 	}
 
 	public static String postRequest(String url, Map<String, String> content) throws Exception {
-		System.out.println("=====>>>>>"+url);
-		
+		System.out.println("=====>>>>>" + url);
+
 		CloseableHttpClient client = getHttpclient(url);
 		HttpPost post = new HttpPost(url);
 		post.setConfig(RequestConfig.custom().setSocketTimeout(30 * 1000).setConnectTimeout(30 * 1000).build());
@@ -173,7 +151,7 @@ public class HttpClientUtil {
 	 * @throws IOException
 	 */
 	public static String getRequest(String url) throws Exception {
-		System.out.println("=====>>>>>"+url);
+		System.out.println("=====>>>>>" + url);
 		CloseableHttpClient client = getHttpclient(url);
 		HttpGet get = new HttpGet(url);
 		get.setConfig(RequestConfig.custom().setSocketTimeout(30 * 1000).setConnectTimeout(30 * 1000).build());
@@ -194,8 +172,7 @@ public class HttpClientUtil {
 
 	public static final String ENCODE_DEFAULT = "UTF-8";
 
-	public static String doHttpGET(String serviceURL)
-			throws Exception {
+	public static String doHttpGET(String serviceURL) throws Exception {
 		CloseableHttpClient httpClient = HttpClients.createDefault();
 		try {
 			HttpGet httpGet = new HttpGet(serviceURL);
