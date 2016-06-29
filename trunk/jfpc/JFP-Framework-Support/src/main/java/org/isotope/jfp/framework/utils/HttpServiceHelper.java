@@ -41,6 +41,7 @@ import org.slf4j.LoggerFactory;
  * 不支持代理
  * @author Spook
  * @since 0.1.0
+ * @version 3.2.1.2016/06/29
  * @version 2.4.1.2014/11/10
  * @version 0.1.0 2014/2/8
  * @see <MyHttpServiceSupport>
