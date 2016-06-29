@@ -1,9 +1,7 @@
 package org.isotope.jfp.framework.support;
 
-import org.isotope.jfp.framework.beans.net.HttpProxyBean;
 import org.isotope.jfp.framework.cache.ICacheService;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
-import org.isotope.jfp.framework.net.IHttpProxy;
 import org.isotope.jfp.framework.net.MyHttpServiceSupport;
 
 /**
@@ -52,20 +50,6 @@ public class MyWorkSupport implements ISFrameworkConstants {
 
 	public void setHttpService(MyHttpServiceSupport myHttpService) {
 		this.myHttpService = myHttpService;
-	}
-
-	public void setHttpProxy(IHttpProxy httpProxy) {
-		myHttpService.setHttpProxy(httpProxy);
-	}
-
-	public IHttpProxy getHttpProxy() {
-		return myHttpService.getHttpProxy();
-	}
-
-	public boolean removeHttpProxy(HttpProxyBean httpProxy) throws Exception {
-		if (myHttpService != null)
-			return myHttpService.removeHttpProxy(httpProxy);
-		return false;
 	}
 
 	/**
