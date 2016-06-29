@@ -67,8 +67,8 @@ public class DataIndexDeleteServiceJob extends MyTaskSupport {
 		}
 		myCacheService.selectDB(index);
 		Iterator<Entry<String, String>> iter = delKeys.entrySet().iterator();
-		String fid;
-		String id;
+		String fid = "";
+		String id = "";
 		String idx = "";
 		String redisKey = "";
 		ArrayList<String> datas;
@@ -77,8 +77,10 @@ public class DataIndexDeleteServiceJob extends MyTaskSupport {
 			Map.Entry<String, String> entry = iter.next();
 			redisKey = entry.getValue();// 缓存Key
 			String[] s = entry.getKey().split("#");// 索引名字
-			idx = s[0];
-			fid = s[1];
+			if(s.length >0)
+				idx = s[0];
+			if(s.length >1)
+				fid = s[1];
 			logger.info("全文检索索引数据删除业务  >>>>>===== 开始 ..... " + entry);
 			if (myQuerySentence.containsIndex(idx) == false) {
 				// myCacheService.removeKey(ISSentenceConstants.COMPANY_DEL +

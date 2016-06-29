@@ -96,6 +96,7 @@ public class DataIndexUpdateServiceJob extends MyTaskSupport {
 					logger.info("全文检索索引同步更新业务  xxxxx===== 取消....." + entry.getKey());
 					continue;
 				}
+				logger.info("全文检索索引同步更新开始  =====>>>>>" + entry.getKey());
 				//开始更新索引
 				boolean upLast = true;
 				while (upLast) {
@@ -122,6 +123,7 @@ public class DataIndexUpdateServiceJob extends MyTaskSupport {
 				// 设定最后一次更新时间
 				myCacheService.selectDB(index);
 				myCacheService.putObject(ISSentenceConstants.SENTENCE_UTD + qb.getId(), "" + lastCalendar.getTimeInMillis(), 0, false);
+				logger.info("全文检索索引同步更新结束  =====>>>>>" + entry.getKey());
 			}
 		}
 		myCacheService.init();
