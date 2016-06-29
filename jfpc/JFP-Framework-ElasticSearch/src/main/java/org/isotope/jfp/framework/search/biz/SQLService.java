@@ -143,7 +143,7 @@ public class SQLService implements ISFrameworkConstants {
 	}
 
 	private void makeIndexBySQL(IPrepareDataType prepare, QueryBean qb, String creatFlag, String from2, String size2) throws Exception {
-		logger.info("makeIndexBySQL=====>>>>>Start....." + qb.getIndex());
+		logger.info("makeIndexBySQL=====>>>>>Start....." + qb.getId());
 
 		// 关闭自动更新配置
 		myCacheService.removeKey(ISSentenceConstants.SENTENCE_UTD + IndexNameHelper.getUpdateId(qb.getId()));
@@ -234,7 +234,7 @@ public class SQLService implements ISFrameworkConstants {
 		}
 		// 开启自动更新配置
 		myCacheService.putObject(ISSentenceConstants.SENTENCE_UTD + IndexNameHelper.getUpdateId(qb.getId()), "" + System.currentTimeMillis(), 0, false);
-		logger.info("makeIndexBySQL<<<<<=====End....." + qb.getIndex());
+		logger.info("makeIndexBySQL<<<<<=====End....." + qb.getId());
 	}
 
 	@Autowired
