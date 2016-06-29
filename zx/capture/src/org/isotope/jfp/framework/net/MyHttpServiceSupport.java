@@ -10,7 +10,11 @@ import java.util.Map;
 import javax.net.ssl.SSLContext;
 
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpHost;
 import org.apache.http.NameValuePair;
+import org.apache.http.auth.AUTH;
+import org.apache.http.auth.MalformedChallengeException;
+import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -18,15 +22,27 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.cookie.Cookie;
+import org.apache.http.impl.auth.BasicScheme;
+import org.apache.http.impl.client.BasicAuthCache;
 import org.apache.http.impl.client.BasicCookieStore;
+import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.http.ssl.TrustStrategy;
 import org.apache.http.util.EntityUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.CookieManager;
+import com.gargoylesoftware.htmlunit.NicelyResynchronizingAjaxController;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.upg.zx.capture.util.MyHttpHost;
 
 /**
  * API请求通信
@@ -35,15 +51,16 @@ import org.apache.http.util.EntityUtils;
  * @since 0.1.0
  * @version 2.4.1.2014/11/10
  * @version 0.1.0 2014/2/8
+ * @see <MyHttpServiceSupport>
  * 
  */
 public class MyHttpServiceSupport {
+	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	public MyHttpServiceSupport() {
 		currentHeaders.put("Accept", "text/plain, */*; q=0.01");
 		currentHeaders.put("Accept-Language", "Accept-Language:zh-CN,zh;q=0.8");
-		currentHeaders.put("User-Agent",
-				"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.80 Safari/537.36 QQBrowser/9.3.6874.400");
+		currentHeaders.put("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.80 Safari/537.36 QQBrowser/9.3.6874.400");
 		currentHeaders.put("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
 	}
 
@@ -55,6 +72,17 @@ public class MyHttpServiceSupport {
 
 	public void setWaitTimeMinute(int waitTimeMinute) {
 		this.waitTimeMinute = waitTimeMinute;
+	}
+
+	private HttpHost currentHttpHost;
+
+	public HttpHost getCurrentHttpHost() throws Exception {
+		currentHttpHost = MyHttpHost.getHttpProxy();
+		return currentHttpHost;
+	}
+
+	public void setCurrentHttpHost(HttpHost currentHttpHost) {
+		this.currentHttpHost = currentHttpHost;
 	}
 
 	private Map<String, String> currentHeaders = new HashMap<String, String>();
@@ -81,11 +109,63 @@ public class MyHttpServiceSupport {
 	}
 
 	/**
+	 * 获得一个代理
+	 * 
+	 * @return
+	 * @throws MalformedChallengeException
+	 */
+	public HttpClientContext getHttpContext() throws MalformedChallengeException {
+		HttpClientContext context = HttpClientContext.create();
+
+		if (currentHttpHost != null) {
+			BasicScheme proxyAuth = new BasicScheme();
+			proxyAuth.processChallenge(new BasicHeader(AUTH.PROXY_AUTH, "BASIC realm=default"));
+			BasicAuthCache authCache = new BasicAuthCache();
+			authCache.put(currentHttpHost, proxyAuth);
+			CredentialsProvider credsProvider = new BasicCredentialsProvider();
+			// TODO
+			// credsProvider.setCredentials(new AuthScope(currentHttpHost), new
+			// UsernamePasswordCredentials(user, pwd));
+			context.setAuthCache(authCache);
+			context.setCredentialsProvider(credsProvider);
+		}
+		return context;
+	}
+
+	/**
 	 * JOSN字符串形式发送参数名的常量定义
 	 */
 	public final String POST_PARAM = "jsonData";
 
 	public static final String ENCODE_DEFAULT = "UTF-8";
+
+	public boolean loadCookieByWebClient(String serviceURL) {
+		BrowserVersion bv = BrowserVersion.CHROME;
+		bv.setBrowserLanguage("zh");
+		WebClient webClient = new WebClient(bv);
+		webClient.getCookieManager().setCookiesEnabled(true);// 开启cookie管理
+		webClient.getOptions().setJavaScriptEnabled(true);
+		webClient.getOptions().setCssEnabled(false);
+		webClient.getOptions().setRedirectEnabled(true);
+		webClient.setAjaxController(new NicelyResynchronizingAjaxController());
+		webClient.getOptions().setTimeout(30000);
+		webClient.waitForBackgroundJavaScript(10000);
+		webClient.getOptions().setThrowExceptionOnScriptError(false);
+
+		try {
+			webClient.getPage(serviceURL);
+		} catch (Exception e) {
+			return false;
+		} finally {
+			webClient.close();
+		}
+
+		// 得到cookie
+		CookieManager CM = webClient.getCookieManager();
+		cookieStore.addCookies((Cookie[]) com.gargoylesoftware.htmlunit.util.Cookie.toHttpClient(CM.getCookies()).toArray());
+
+		return true;
+	}
 
 	/**
 	 * 获取client对象
@@ -103,6 +183,10 @@ public class MyHttpServiceSupport {
 		requestConfigBuilder.setConnectionRequestTimeout(waitTimeMinute * 1000);
 		// TODO PoolingHttpClientConnectionManager
 		// requestConfigBuilder.setStaleConnectionCheckEnabled(true);
+		// 代理httpProxy
+		if (getCurrentHttpHost() != null) {
+			requestConfigBuilder.setProxy(currentHttpHost);
+		}
 
 		httpClientBuilder.setDefaultRequestConfig(requestConfigBuilder.build());
 		if (serviceURL.indexOf("https") != -1) {
@@ -137,7 +221,7 @@ public class MyHttpServiceSupport {
 			// 设定传输编码
 			CloseableHttpResponse response;
 			// 创建上下文环境
-			HttpContext context = new BasicHttpContext();
+			HttpContext context = getHttpContext();
 
 			context.setAttribute(HttpClientContext.COOKIE_STORE, cookieStore);
 			response = httpclient.execute(httpGet, context);
@@ -156,13 +240,12 @@ public class MyHttpServiceSupport {
 		}
 		return "";
 	}
-
+	
 	public static void main(String[] args) throws Exception {
 		MyHttpServiceSupport mh = new MyHttpServiceSupport();
 		Map<String, String> headers = new HashMap<String, String>();
 		headers.put("Accept", "application/json, text/plain, */*");
-		headers.put("User-Agent",
-				"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.80 Safari/537.36 QQBrowser/9.3.6874.400");
+		headers.put("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.80 Safari/537.36 QQBrowser/9.3.6874.400");
 		headers.put("Accept-Language", "zh-CN,zh;q=0.8");
 		headers.put("Accept-Encoding", "gzip, deflate, sdch");
 		headers.put("Tyc-From", "normal");
@@ -170,79 +253,6 @@ public class MyHttpServiceSupport {
 
 		System.out.println(mh.doHttpGET("http://www.tianyancha.com/company/2338440666", headers));
 		System.out.println(mh.doHttpGET("http://www.tianyancha.com/company/2338440666.json", headers));
-
-		// HttpProxyBean currentHttpProxy = new HttpProxyBean();
-		// currentHttpProxy.setHost("58.252.7.125");
-		// currentHttpProxy.setPort(8000);
-		//
-		// mh.setCurrentHttpProxy(currentHttpProxy);
-
-		// System.out.println(mh.doHttpGET("mail.163.com"));
-
-		// HttpHost proxy = new HttpHost("27.221.31.66", 8080, "http");
-		// RequestConfig config =
-		// RequestConfig.custom().setProxy(proxy).build();
-
-		// HttpClientContext context = HttpClientContext.create();
-		// BasicScheme proxyAuth = new BasicScheme();
-		// proxyAuth.processChallenge(new BasicHeader(AUTH.PROXY_AUTH, "BASIC
-		// realm=default"));
-		// BasicAuthCache authCache = new BasicAuthCache();
-		// authCache.put(proxy, proxyAuth);
-		// CredentialsProvider credsProvider = new BasicCredentialsProvider();
-		// credsProvider.setCredentials(new AuthScope(proxy), new
-		// UsernamePasswordCredentials("fcy", "fcy"));
-		// context.setAuthCache(authCache);
-		// context.setCredentialsProvider(credsProvider);
-		//
-		//
-		// httpPost.setConfig(config);
-
-		// String serviceURL = "http://mail.163.com";
-		// int waitTimeMinute = 15;
-		// 创建HttpClientBuilder
-		// HttpClientBuilder httpClientBuilder = HttpClientBuilder.create();
-		// HttpHost proxy = new HttpHost("27.221.31.66", 8080, "http");
-		// RequestConfig defaultRequestConfig =
-		// RequestConfig.custom().setSocketTimeout(waitTimeMinute * 1000)
-		// .setConnectTimeout(waitTimeMinute *
-		// 1000).setConnectionRequestTimeout(waitTimeMinute * 1000)
-		// .setProxy(proxy).setStaleConnectionCheckEnabled(true).build();
-		// httpClientBuilder.setDefaultRequestConfig(defaultRequestConfig);
-		//
-		// if (serviceURL.indexOf("https") != -1) {
-		// try {
-		// SSLContext sslContext = new
-		// SSLContextBuilder().loadTrustMaterial(null, new TrustStrategy() {
-		// 信任所有证书
-		// public boolean isTrusted(X509Certificate[] chain, String authType)
-		// throws CertificateException {
-		// return true;
-		// }
-		// }).build();
-		// SSLConnectionSocketFactory sslsf = new
-		// SSLConnectionSocketFactory(sslContext);
-		//
-		// httpClientBuilder.setSSLSocketFactory(sslsf);
-		// } catch (Exception e) {
-		// e.printStackTrace();
-		// }
-		// }
-		// HttpClient
-		// CloseableHttpClient closeableHttpClient = httpClientBuilder.build();
-		//
-		// HttpGet httpPost = new HttpGet("http://mail.163.com");
-		// CloseableHttpResponse response =
-		// closeableHttpClient.execute(httpPost);
-		// int status = response.getStatusLine().getStatusCode();
-		// if (status >= 200 && status < 300) {
-		// HttpEntity entity = response.getEntity();
-		// if (entity != null)
-		// System.out.println(EntityUtils.toString(entity, ENCODE_DEFAULT));
-		// } else {
-		// throw new Exception("服务请求异常: " + status);
-		// }
-
 	}
 
 	/**
@@ -274,7 +284,7 @@ public class MyHttpServiceSupport {
 			httpPost.setEntity(new UrlEncodedFormEntity(nvps, ENCODE_DEFAULT));
 			CloseableHttpResponse response;
 			// 创建上下文环境
-			HttpContext context = new BasicHttpContext();
+			HttpContext context = getHttpContext();
 
 			context.setAttribute(HttpClientContext.COOKIE_STORE, cookieStore);
 			response = httpclient.execute(httpPost, context);
@@ -312,8 +322,7 @@ public class MyHttpServiceSupport {
 		return doHttpPOST(serviceURL, param, currentHeaders);
 	}
 
-	public String doHttpPOST(String serviceURL, Map<String, String> param, Map<String, String> headers)
-			throws Exception {
+	public String doHttpPOST(String serviceURL, Map<String, String> param, Map<String, String> headers) throws Exception {
 		// logger.debug("=====>>>>>接口请求<<<<<=====" + serviceURL);
 		CloseableHttpClient httpclient = getCloseableHttpClient(serviceURL);
 		try {
@@ -338,7 +347,7 @@ public class MyHttpServiceSupport {
 
 			CloseableHttpResponse response;
 			// 创建上下文环境
-			HttpContext context = new BasicHttpContext();
+			HttpContext context = getHttpContext();
 
 			context.setAttribute(HttpClientContext.COOKIE_STORE, cookieStore);
 			response = httpclient.execute(httpPost, context);
