@@ -41,7 +41,7 @@ public class MyHttpHost {
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("getHttpProxy =====>>>>>" + e.getMessage());
 		}
 		return httpHostProxy;
 	}
