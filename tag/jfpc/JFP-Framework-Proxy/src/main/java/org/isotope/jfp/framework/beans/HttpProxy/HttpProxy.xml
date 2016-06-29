@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 抓取结果日志 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='org.isotope.jfp.framework.beans.HttpProxy.HttpProxyDao'>
+    
+	<!-- 查询一条数据  -->
+    <select id='doSelectPage' parameterType='HttpProxyDBO' resultType='HttpProxyDBO'>    	
+        SELECT * 
+		FROM http_proxy
+    </select>
+    
+</mapper>
