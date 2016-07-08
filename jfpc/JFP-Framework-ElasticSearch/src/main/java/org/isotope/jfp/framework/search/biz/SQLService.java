@@ -36,7 +36,6 @@ import io.searchbox.core.Bulk.Builder;
 import io.searchbox.core.BulkResult;
 import io.searchbox.core.BulkResult.BulkResultItem;
 import io.searchbox.core.Index;
-import io.searchbox.indices.CreateIndex;
 import io.searchbox.indices.DeleteIndex;
 import io.searchbox.indices.IndicesExists;
 
@@ -144,7 +143,7 @@ public class SQLService implements ISFrameworkConstants {
 
 	private void makeIndexBySQL(IPrepareDataType prepare, QueryBean qb, String creatFlag, String from2, String size2) throws Exception {
 		logger.info("makeIndexBySQL=====>>>>>Start....." + qb.getId());
-
+		logger.info("=====>>>>>=====>>>>>Index....." + qb.getIndex());
 		// 关闭自动更新配置
 		myCacheService.removeKey(ISSentenceConstants.SENTENCE_UTD + IndexNameHelper.getUpdateId(qb.getId()));
 
@@ -165,8 +164,8 @@ public class SQLService implements ISFrameworkConstants {
 					JestResult deleteIndexResult = jestClient.execute(new DeleteIndex.Builder(index).build());
 					logger.debug("deleteIndex===>>>ErrorMessage=" + deleteIndexResult.getErrorMessage() + ",JsonString=" + deleteIndexResult.getJsonString());
 				}
-				JestResult createIndexResult = jestClient.execute(new CreateIndex.Builder(index).build());
-				logger.debug("createIndex===>>>ErrorMessage=" + createIndexResult.getErrorMessage() + ",JsonString=" + createIndexResult.getJsonString());
+				//JestResult createIndexResult = jestClient.execute(new CreateIndex.Builder(index).build());
+				//logger.debug("createIndex===>>>ErrorMessage=" + createIndexResult.getErrorMessage() + ",JsonString=" + createIndexResult.getJsonString());
 			} finally {
 				if (jestClient != null)
 					jestClient.shutdownClient();
@@ -183,7 +182,7 @@ public class SQLService implements ISFrameworkConstants {
 			Thread.sleep(sleep * 2);
 			while (commit == false) {
 				try {
-					actions = loadDataFromDb(prepare, qb, c, from);
+					actions = loadDataFromDb(prepare, qb);
 					commit = true;
 				} catch (Exception e) {
 					logger.error("loadDataFromDb==xxxxxxxxxxxxxxxx=>>>", e);
@@ -195,7 +194,7 @@ public class SQLService implements ISFrameworkConstants {
 					}
 				}
 			}
-			logger.debug("getData======>>>" + (c + 1) * size);
+			logger.debug("getData======>>>num=" + ((c + 1) * size)+",size="+actions.size());
 			// 分批提交数据
 			if (actions.size() > 0) {
 				commit = false;
@@ -245,7 +244,7 @@ public class SQLService implements ISFrameworkConstants {
 	private long maxID = 0;
 	private long minID = 0;
 
-	private List<Index> loadDataFromDb(IPrepareDataType prepare, QueryBean qb, int page, int from) throws Exception {
+	private List<Index> loadDataFromDb(IPrepareDataType prepare, QueryBean qb) throws Exception {
 		List<Index> actions = new ArrayList<Index>();
 		Connection conn = null;
 		Statement stmt = null;
@@ -257,8 +256,6 @@ public class SQLService implements ISFrameworkConstants {
 			conn = getConnection();
 			conn.setAutoCommit(false);
 			stmt = conn.createStatement();
-			int start = from + page * size;
-
 			String sql = qb.getValue();
 			if (EmptyHelper.isEmpty(sql))
 				throw new RuntimeException("不存在该索引语句");
@@ -269,15 +266,11 @@ public class SQLService implements ISFrameworkConstants {
 				endtime = "9000-01-01 23:59:59";
 
 			// 初始化运作
-			if (sql.indexOf("{maxID}") > 0) {
+			{
 				sql = sql.replace("{maxID}", "" + maxID);// 开始数据
 				sql = sql.replace("{limit}", "" + size);// 分页限制
-			}
-			// 差分更新
-			else {
 				sql = sql.replace("{starttime}", starttime);// 开始时间
 				sql = sql.replace("{endtime}", endtime);// 终了时间
-				sql = sql.replace("{limit}", start + "," + size);// 分页限制
 			}
 			logger.debug("sql===>>>" + sql);
 			logger.debug("   start===>>>" + System.currentTimeMillis());
@@ -367,7 +360,7 @@ public class SQLService implements ISFrameworkConstants {
 		this.from = from;
 	}
 
-	private int size = 1000;
+	private int size = 500;
 
 	public int getSize() {
 		return size;

@@ -59,6 +59,19 @@ public class DataIndexUpdateServiceJob extends MyTaskSupport {
 		this.index = index;
 	}
 	
+	/**
+	 * 分页大小
+	 */
+	int size = 500;
+	
+	public int getSize() {
+		return size;
+	}
+
+	public void setSize(int size) {
+		this.size = size;
+	}
+
 	int splitMinute = 120;	
 
 	public int getSplitMinute() {
@@ -109,8 +122,8 @@ public class DataIndexUpdateServiceJob extends MyTaskSupport {
 						SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:59:59");
 						sqlService.setEndtime(format.format(lastCalendar.getTime()));
 					}
-
-					sqlService.updateIndexBySQL(entry.getValue(), EMPTY, EMPTY);
+					logger.info("    索引更新  =====>>>>>=====>>>>> " + entry.getValue().getId() + ","+ entry.getValue().getIndex());
+					sqlService.updateIndexBySQL(entry.getValue(), EMPTY, ""+size);
 					
 					//追加下次更新
 					lastCalendar.add(Calendar.MINUTE, splitMinute);
