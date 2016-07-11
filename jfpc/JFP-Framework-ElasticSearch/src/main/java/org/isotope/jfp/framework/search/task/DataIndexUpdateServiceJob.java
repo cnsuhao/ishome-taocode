@@ -113,16 +113,17 @@ public class DataIndexUpdateServiceJob extends MyTaskSupport {
 				//开始更新索引
 				boolean upLast = true;
 				while (upLast) {
-					//判断本次更新
+					//判断本次更新开始时间
 					{
 						lastCalendar.setTimeInMillis(Long.parseLong(lastTime));
 						SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 						sqlService.setStarttime(format.format(lastCalendar.getTime()));
 					}
-					//追加下次更新
+					//计算本次更新结束时间
 					lastCalendar.add(Calendar.MINUTE, splitMinute);
 					
-					if ((nowCalendar.getTimeInMillis() - lastCalendar.getTimeInMillis()) <  1000 * 60 * splitMinute) {
+					//超过当前时间
+					if ((nowCalendar.getTimeInMillis() - lastCalendar.getTimeInMillis()) < 1000 * 60 * splitMinute) {
 						upLast = false;
 						logger.info("全文检索索引同步更新业务  xxxxx===== 取消....." + entry.getKey());
 						break;
