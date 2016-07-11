@@ -146,93 +146,98 @@ public class SQLService implements ISFrameworkConstants {
 		logger.info("=====>>>>>=====>>>>>Index....." + qb.getIndex());
 		// 关闭自动更新配置
 		myCacheService.removeKey(ISSentenceConstants.SENTENCE_UTD + IndexNameHelper.getUpdateId(qb.getId()));
+		try {
+			if (EmptyHelper.isNotEmpty(from2))
+				from = Integer.parseInt(from2);
+			if (EmptyHelper.isNotEmpty(size2))
+				size = Integer.parseInt(size2);
 
-		if (EmptyHelper.isNotEmpty(from2))
-			from = Integer.parseInt(from2);
-		if (EmptyHelper.isNotEmpty(size2))
-			size = Integer.parseInt(size2);
+			JestClient jestClient = null;
 
-		JestClient jestClient = null;
-
-		if (ONE.equals(creatFlag)) {
-			try {
-				jestClient = getClient();
-				String index = qb.getIndex();
-				// 删除索引
-				boolean indexExists = jestClient.execute(new IndicesExists.Builder(index).build()).isSucceeded();
-				if (indexExists) {
-					JestResult deleteIndexResult = jestClient.execute(new DeleteIndex.Builder(index).build());
-					logger.debug("deleteIndex===>>>ErrorMessage=" + deleteIndexResult.getErrorMessage() + ",JsonString=" + deleteIndexResult.getJsonString());
-				}
-				//JestResult createIndexResult = jestClient.execute(new CreateIndex.Builder(index).build());
-				//logger.debug("createIndex===>>>ErrorMessage=" + createIndexResult.getErrorMessage() + ",JsonString=" + createIndexResult.getJsonString());
-			} finally {
-				if (jestClient != null)
-					jestClient.shutdownClient();
-			}
-		}
-
-		Builder bulkIndexBuilder;
-		BulkResult result;
-		int num = 0;
-		int errorNum = 0;
-		List<Index> actions = null;
-		boolean commit = false;
-		for (int c = 0; c <= Integer.MAX_VALUE; c++) {
-			Thread.sleep(sleep * 2);
-			while (commit == false) {
+			if (ONE.equals(creatFlag)) {
 				try {
-					actions = loadDataFromDb(prepare, qb);
-					commit = true;
-				} catch (Exception e) {
-					logger.error("loadDataFromDb==xxxxxxxxxxxxxxxx=>>>", e);
-					Thread.sleep(sleep * 2);
-					if (errorNum > sleep * 2) {
-						throw e;
-					} else {
-						errorNum = errorNum + 1;
+					jestClient = getClient();
+					String index = qb.getIndex();
+					// 删除索引
+					boolean indexExists = jestClient.execute(new IndicesExists.Builder(index).build()).isSucceeded();
+					if (indexExists) {
+						JestResult deleteIndexResult = jestClient.execute(new DeleteIndex.Builder(index).build());
+						logger.debug("deleteIndex===>>>ErrorMessage=" + deleteIndexResult.getErrorMessage() + ",JsonString=" + deleteIndexResult.getJsonString());
 					}
+					// JestResult createIndexResult = jestClient.execute(new
+					// CreateIndex.Builder(index).build());
+					// logger.debug("createIndex===>>>ErrorMessage=" +
+					// createIndexResult.getErrorMessage() + ",JsonString=" +
+					// createIndexResult.getJsonString());
+				} finally {
+					if (jestClient != null)
+						jestClient.shutdownClient();
 				}
 			}
-			logger.debug("getData======>>>num=" + ((c + 1) * size)+",size="+actions.size());
-			// 分批提交数据
-			if (actions.size() > 0) {
-				commit = false;
+
+			Builder bulkIndexBuilder;
+			BulkResult result;
+			int num = 0;
+			int errorNum = 0;
+			List<Index> actions = null;
+			boolean commit = false;
+			for (int c = 0; c <= Integer.MAX_VALUE; c++) {
+				Thread.sleep(sleep * 2);
 				while (commit == false) {
 					try {
-						jestClient = getClient();
-						bulkIndexBuilder = new Bulk.Builder();
-						bulkIndexBuilder.addAction(actions);
-						result = jestClient.execute(bulkIndexBuilder.build());
-						Thread.sleep(sleep);
+						actions = loadDataFromDb(prepare, qb);
 						commit = true;
-						num = num + actions.size();
-						logger.debug("addDataIntoIndex===>>>num=" + num + ",ErrorMessage=" + result.getErrorMessage());
-						if (EmptyHelper.isNotEmpty(result.getErrorMessage())) {
-							List<BulkResultItem> rs = result.getItems();
-							for (BulkResultItem r : rs) {
-								logger.debug(r.error);
-							}
-						}
 					} catch (Exception e) {
-						logger.error("addDataIntoIndex===>>>", e);
+						logger.error("loadDataFromDb==xxxxxxxxxxxxxxxx=>>>", e);
 						Thread.sleep(sleep * 2);
 						if (errorNum > sleep * 2) {
 							throw e;
 						} else {
 							errorNum = errorNum + 1;
 						}
-						if (jestClient != null)
-							jestClient.shutdownClient();
 					}
 				}
-				commit = false;
-			} else {
-				break;
+				logger.debug("getData======>>>num=" + ((c + 1) * size) + ",size=" + actions.size());
+				// 分批提交数据
+				if (actions.size() > 0) {
+					commit = false;
+					while (commit == false) {
+						try {
+							jestClient = getClient();
+							bulkIndexBuilder = new Bulk.Builder();
+							bulkIndexBuilder.addAction(actions);
+							result = jestClient.execute(bulkIndexBuilder.build());
+							Thread.sleep(sleep);
+							commit = true;
+							num = num + actions.size();
+							logger.debug("addDataIntoIndex===>>>num=" + num + ",ErrorMessage=" + result.getErrorMessage());
+							if (EmptyHelper.isNotEmpty(result.getErrorMessage())) {
+								List<BulkResultItem> rs = result.getItems();
+								for (BulkResultItem r : rs) {
+									logger.debug(r.error);
+								}
+							}
+						} catch (Exception e) {
+							logger.error("addDataIntoIndex===>>>", e);
+							Thread.sleep(sleep * 2);
+							if (errorNum > sleep * 2) {
+								throw e;
+							} else {
+								errorNum = errorNum + 1;
+							}
+							if (jestClient != null)
+								jestClient.shutdownClient();
+						}
+					}
+					commit = false;
+				} else {
+					break;
+				}
 			}
+		} finally {
+			// 开启自动更新配置
+			myCacheService.putObject(ISSentenceConstants.SENTENCE_UTD + IndexNameHelper.getUpdateId(qb.getId()), "" + System.currentTimeMillis(), 0, false);
 		}
-		// 开启自动更新配置
-		myCacheService.putObject(ISSentenceConstants.SENTENCE_UTD + IndexNameHelper.getUpdateId(qb.getId()), "" + System.currentTimeMillis(), 0, false);
 		logger.info("makeIndexBySQL<<<<<=====End....." + qb.getId());
 	}
 
@@ -243,6 +248,7 @@ public class SQLService implements ISFrameworkConstants {
 
 	private long maxID = 0;
 	private long minID = 0;
+	private String lastID = "";
 
 	private List<Index> loadDataFromDb(IPrepareDataType prepare, QueryBean qb) throws Exception {
 		List<Index> actions = new ArrayList<Index>();
@@ -296,6 +302,11 @@ public class SQLService implements ISFrameworkConstants {
 
 					if (data.containsKey("rriidd")) {
 						id = data.remove("id").toString();// 任意类型
+						if (lastID.equals(id)) {
+							continue;
+						} else {
+							lastID = id;
+						}
 						rriidd = data.get("rriidd").toString();// 数值型
 
 						minID = Long.parseLong(rriidd);
@@ -309,6 +320,7 @@ public class SQLService implements ISFrameworkConstants {
 						actions.add(new Index.Builder(data.toJSONString()).index(qb.getIndex()).type(ElasticsearchPool.TYPE).build());
 					}
 				} catch (Exception e) {
+					e.printStackTrace();
 					logger.debug("    prepare data fail ===>>>" + e);
 				}
 			}

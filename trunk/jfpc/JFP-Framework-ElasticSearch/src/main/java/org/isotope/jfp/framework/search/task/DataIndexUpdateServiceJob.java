@@ -115,27 +115,30 @@ public class DataIndexUpdateServiceJob extends MyTaskSupport {
 				while (upLast) {
 					//判断本次更新
 					{
-						SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:00:00");
+						lastCalendar.setTimeInMillis(Long.parseLong(lastTime));
+						SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 						sqlService.setStarttime(format.format(lastCalendar.getTime()));
 					}
-					{
-						SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:59:59");
-						sqlService.setEndtime(format.format(lastCalendar.getTime()));
-					}
-					logger.info("    索引更新  =====>>>>>=====>>>>> " + entry.getValue().getId() + ","+ entry.getValue().getIndex());
-					sqlService.updateIndexBySQL(entry.getValue(), EMPTY, ""+size);
-					
 					//追加下次更新
 					lastCalendar.add(Calendar.MINUTE, splitMinute);
+					
 					if ((nowCalendar.getTimeInMillis() - lastCalendar.getTimeInMillis()) <  1000 * 60 * splitMinute) {
 						upLast = false;
 						logger.info("全文检索索引同步更新业务  xxxxx===== 取消....." + entry.getKey());
 						break;
 					}
+					
+					lastTime = ""+lastCalendar.getTimeInMillis();
+					{
+						SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+						sqlService.setEndtime(format.format(lastCalendar.getTime()));
+					}
+					logger.info("    索引更新  =====>>>>>=====>>>>> " + entry.getValue().getId() + ","+ entry.getValue().getIndex());
+					sqlService.updateIndexBySQL(entry.getValue(), EMPTY, ""+size);
 				}
 				// 设定最后一次更新时间
 				myCacheService.selectDB(index);
-				myCacheService.putObject(ISSentenceConstants.SENTENCE_UTD + qb.getId(), "" + lastCalendar.getTimeInMillis(), 0, false);
+				myCacheService.putObject(ISSentenceConstants.SENTENCE_UTD + qb.getId(), lastTime, 0, false);
 				logger.info("全文检索索引同步更新结束  =====>>>>>" + entry.getKey());
 			}
 		}
