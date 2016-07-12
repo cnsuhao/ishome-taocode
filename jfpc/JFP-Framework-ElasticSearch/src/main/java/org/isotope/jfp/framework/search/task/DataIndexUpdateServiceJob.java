@@ -109,6 +109,8 @@ public class DataIndexUpdateServiceJob extends MyTaskSupport {
 					logger.info("全文检索索引同步更新业务  xxxxx===== 取消....." + entry.getKey());
 					continue;
 				}
+				//参数初始化
+				sqlService.init();
 				logger.info("全文检索索引同步更新开始  =====>>>>>" + entry.getKey());
 				//开始更新索引
 				boolean upLast = true;

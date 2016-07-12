@@ -246,10 +246,6 @@ public class SQLService implements ISFrameworkConstants {
 	@Resource
 	private QuerySentence config;
 
-	private long maxID = 0;
-	private long minID = 0;
-	private String lastID = "";
-
 	private List<Index> loadDataFromDb(IPrepareDataType prepare, QueryBean qb) throws Exception {
 		List<Index> actions = new ArrayList<Index>();
 		Connection conn = null;
@@ -343,8 +339,25 @@ public class SQLService implements ISFrameworkConstants {
 	}
 
 	//////////////////////////////
-	String starttime = "1000-01-01 00:00:00";
-	String endtime = "9000-01-01 23:59:59";
+	public void init() {
+		maxID = 0;
+		minID = 0;
+		lastID = "";
+
+		starttime = "1000-01-01 00:00:00";
+		endtime = "9000-01-01 23:59:59";
+		
+		from = 0;
+		size = 500;
+		sleep = 1000;
+	}
+
+	private long maxID = 0;
+	private long minID = 0;
+	private String lastID = "";
+
+	private String starttime = "1000-01-01 00:00:00";
+	private String endtime = "3000-01-01 23:59:59";
 
 	public String getStarttime() {
 		return starttime;
