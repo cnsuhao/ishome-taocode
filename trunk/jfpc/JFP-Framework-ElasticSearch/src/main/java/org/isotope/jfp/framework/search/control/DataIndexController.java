@@ -1,13 +1,20 @@
 package org.isotope.jfp.framework.search.control;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.search.IPrepareDataType;
+import org.isotope.jfp.framework.search.QuerySentence;
+import org.isotope.jfp.framework.search.bean.QueryBean;
+import org.isotope.jfp.framework.search.biz.DataService;
 import org.isotope.jfp.framework.search.biz.SQLService;
 import org.isotope.jfp.framework.search.biz.TableService;
+import org.isotope.jfp.framework.search.task.DataIndexUpdateServiceJob;
 import org.isotope.jfp.framework.security.SystemAdminInterceptor;
 import org.isotope.jfp.framework.utils.BeanFactoryHelper;
 import org.isotope.jfp.framework.utils.EmptyHelper;
@@ -40,7 +47,7 @@ public class DataIndexController implements ISFrameworkConstants {
 	, String et // 终了日期
 	) throws Exception {
 		prepareDataType = BeanFactoryHelper.getBean("prepareDataType");
-		
+
 		ModelAndView model = new ModelAndView("DWC/index");
 		// 基于表进行操作
 		if (EmptyHelper.isNotEmpty(T)) {
@@ -50,6 +57,7 @@ public class DataIndexController implements ISFrameworkConstants {
 		// 基于SQL语句操作
 		else if (EmptyHelper.isNotEmpty(I)) {
 			SQLService sql = BeanFactoryHelper.getBean("ElasticsearchSQLService");
+			sql.init();
 			if (systemAdminInterceptor.doCheckAdmin(request, response)) {
 				sql.setStarttime(st);
 				sql.setEndtime(et);
@@ -59,4 +67,54 @@ public class DataIndexController implements ISFrameworkConstants {
 		return model;
 	}
 
+	/**
+	 * 更新索引
+	 * 
+	 * @param request
+	 * @param response
+	 * @param k
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/UIC", method = RequestMethod.GET)
+	public ModelAndView updateDataIndex(HttpServletRequest request, HttpServletResponse response, String k) throws Exception {
+		prepareDataType = BeanFactoryHelper.getBean("prepareDataType");
+		Calendar nowCalendar = Calendar.getInstance();
+		Calendar lastCalendar = Calendar.getInstance();
+		DataIndexUpdateServiceJob diusj = BeanFactoryHelper.getBean("dataIndexServiceMonitorJob");
+		QuerySentence myQuerySentence = BeanFactoryHelper.getBean("myQuerySentence");
+		QueryBean qb = myQuerySentence.getUpdateMap().get(k);
+		if (qb != null && systemAdminInterceptor.doCheckAdmin(request, response)) {
+			diusj.setPrepareDataType(prepareDataType);
+			diusj.doUpdate(nowCalendar, lastCalendar, k, qb);
+		}
+		ModelAndView model = new ModelAndView("DWC/index");
+		return model;
+	}
+
+	/**
+	 * 删除一条数据
+	 * 
+	 * @param request
+	 * @param response
+	 * @param k
+	 * @param d
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/DIC", method = RequestMethod.GET)
+	public ModelAndView deleteDataIndex(HttpServletRequest request, HttpServletResponse response, String k, String d) throws Exception {
+		DataService dataService = BeanFactoryHelper.getBean("DataService");
+		QuerySentence myQuerySentence = BeanFactoryHelper.getBean("myQuerySentence");
+		QueryBean qb = myQuerySentence.getUpdateMap().get(k);
+		if (EmptyHelper.isEmpty(d) && qb != null && systemAdminInterceptor.doCheckAdmin(request, response)) {
+			ArrayList<String> datas = new ArrayList<String>();
+			for(String dd : d.split(COMMA))
+				datas.add(dd);
+			
+			dataService.deleteDataInIndex(qb.getIndex(), datas);
+		}
+		ModelAndView model = new ModelAndView("DWC/index");
+		return model;
+	}
 }
