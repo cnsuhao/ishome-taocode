@@ -213,8 +213,8 @@ public class SQLService implements ISFrameworkConstants {
 							logger.debug("addDataIntoIndex===>>>num=" + num + ",ErrorMessage=" + result.getErrorMessage());
 							if (EmptyHelper.isNotEmpty(result.getErrorMessage())) {
 								List<BulkResultItem> rs = result.getItems();
-								for (BulkResultItem r : rs) {
-									logger.debug(r.error);
+								for (int i = 0; i < rs.size(); i++) {
+									logger.debug(i + "===>>>" + rs.get(i).error);
 								}
 							}
 						} catch (Exception e) {
@@ -346,7 +346,7 @@ public class SQLService implements ISFrameworkConstants {
 
 		starttime = "1000-01-01 00:00:00";
 		endtime = "9000-01-01 23:59:59";
-		
+
 		from = 0;
 		size = 500;
 		sleep = 1000;
