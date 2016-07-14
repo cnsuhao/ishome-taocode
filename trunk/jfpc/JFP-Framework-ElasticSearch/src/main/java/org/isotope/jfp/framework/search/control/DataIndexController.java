@@ -76,7 +76,7 @@ public class DataIndexController implements ISFrameworkConstants {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/UIC", method = RequestMethod.GET)
+	@RequestMapping(value = "/DIU", method = RequestMethod.GET)
 	public ModelAndView updateDataIndex(HttpServletRequest request, HttpServletResponse response, String k) throws Exception {
 		prepareDataType = BeanFactoryHelper.getBean("prepareDataType");
 		Calendar nowCalendar = Calendar.getInstance();
@@ -102,7 +102,7 @@ public class DataIndexController implements ISFrameworkConstants {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/DIC", method = RequestMethod.GET)
+	@RequestMapping(value = "/DID", method = RequestMethod.GET)
 	public ModelAndView deleteDataIndex(HttpServletRequest request, HttpServletResponse response, String k, String d) throws Exception {
 		DataService dataService = BeanFactoryHelper.getBean("DataService");
 		QuerySentence myQuerySentence = BeanFactoryHelper.getBean("myQuerySentence");
