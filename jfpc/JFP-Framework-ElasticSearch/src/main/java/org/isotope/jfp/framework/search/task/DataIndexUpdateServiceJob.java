@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.isotope.jfp.framework.cache.ICacheService;
+import org.isotope.jfp.framework.search.IPrepareDataType;
 import org.isotope.jfp.framework.search.ISSentenceConstants;
 import org.isotope.jfp.framework.search.QuerySentence;
 import org.isotope.jfp.framework.search.bean.QueryBean;
@@ -44,6 +45,14 @@ public class DataIndexUpdateServiceJob extends MyTaskSupport {
 
 	public void setSqlService(SQLService sqlService) {
 		this.sqlService = sqlService;
+	}
+	IPrepareDataType prepareDataType;
+	public IPrepareDataType getPrepareDataType() {
+		return prepareDataType;
+	}
+
+	public void setPrepareDataType(IPrepareDataType prepareDataType) {
+		this.prepareDataType = prepareDataType;
 	}
 
 	/**
@@ -92,57 +101,7 @@ public class DataIndexUpdateServiceJob extends MyTaskSupport {
 			Iterator<Entry<String, QueryBean>> iter = updateMap.entrySet().iterator();
 			while (iter.hasNext()) {
 				Entry<String, QueryBean> entry = iter.next();
-				QueryBean qb = entry.getValue();
-				// 获得最后一次更新时间
-				myCacheService.selectDB(index);
-				String lastTime = (String) myCacheService.getObject(ISSentenceConstants.SENTENCE_UTD + qb.getId(), false);
-				if (EmptyHelper.isEmpty(lastTime)) {
-					logger.info("全文检索索引同步更新业务  xxxxx===== 取消....." + entry.getKey());
-					continue;
-				}
-				//splitMinute = 2;
-				//设定最后更新时间
-				lastCalendar.setTimeInMillis(Long.parseLong(lastTime));
-				lastCalendar.add(Calendar.MINUTE, splitMinute);
-				// 判断时间超时
-				if ((nowCalendar.getTimeInMillis() - lastCalendar.getTimeInMillis()) < 1000 * 60 * splitMinute) {
-					logger.info("全文检索索引同步更新业务  xxxxx===== 取消....." + entry.getKey());
-					continue;
-				}
-				//参数初始化
-				sqlService.init();
-				logger.info("全文检索索引同步更新开始  =====>>>>>" + entry.getKey());
-				//开始更新索引
-				boolean upLast = true;
-				while (upLast) {
-					//判断本次更新开始时间
-					{
-						lastCalendar.setTimeInMillis(Long.parseLong(lastTime));
-						SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-						sqlService.setStarttime(format.format(lastCalendar.getTime()));
-					}
-					//计算本次更新结束时间
-					lastCalendar.add(Calendar.MINUTE, splitMinute);
-					
-					//超过当前时间
-					if ((nowCalendar.getTimeInMillis() - lastCalendar.getTimeInMillis()) < 1000 * 60 * splitMinute) {
-						upLast = false;
-						logger.info("全文检索索引同步更新业务  xxxxx===== 取消....." + entry.getKey());
-						break;
-					}
-					
-					lastTime = ""+lastCalendar.getTimeInMillis();
-					{
-						SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-						sqlService.setEndtime(format.format(lastCalendar.getTime()));
-					}
-					logger.info("    索引更新  =====>>>>>=====>>>>> " + entry.getValue().getId() + ","+ entry.getValue().getIndex());
-					sqlService.updateIndexBySQL(entry.getValue(), EMPTY, ""+size);
-				}
-				// 设定最后一次更新时间
-				myCacheService.selectDB(index);
-				myCacheService.putObject(ISSentenceConstants.SENTENCE_UTD + qb.getId(), lastTime, 0, false);
-				logger.info("全文检索索引同步更新结束  =====>>>>>" + entry.getKey());
+				doUpdate(nowCalendar,lastCalendar,entry.getKey(),entry.getValue());
 			}
 		}
 		myCacheService.init();
@@ -152,4 +111,57 @@ public class DataIndexUpdateServiceJob extends MyTaskSupport {
 
 	@Autowired
 	private ICacheService myCacheService;
+	public void doUpdate(Calendar nowCalendar,Calendar lastCalendar,String key, QueryBean qb) throws Exception
+	{
+		// 获得最后一次更新时间
+		myCacheService.selectDB(index);
+		String lastTime = (String) myCacheService.getObject(ISSentenceConstants.SENTENCE_UTD + qb.getId(), false);
+		if (EmptyHelper.isEmpty(lastTime)) {
+			logger.info("全文检索索引同步更新业务  xxxxx===== 取消....." + key);
+			return;
+		}
+		//splitMinute = 2;
+		//设定最后更新时间
+		lastCalendar.setTimeInMillis(Long.parseLong(lastTime));
+		lastCalendar.add(Calendar.MINUTE, splitMinute);
+		// 判断时间超时
+		if ((nowCalendar.getTimeInMillis() - lastCalendar.getTimeInMillis()) < 1000 * 60 * splitMinute) {
+			logger.info("全文检索索引同步更新业务  xxxxx===== 取消....." + key);
+			return;
+		}
+		//参数初始化
+		sqlService.init();
+		logger.info("全文检索索引同步更新开始  =====>>>>>" + key);
+		//开始更新索引
+		boolean upLast = true;
+		while (upLast) {
+			//判断本次更新开始时间
+			{
+				lastCalendar.setTimeInMillis(Long.parseLong(lastTime));
+				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				sqlService.setStarttime(format.format(lastCalendar.getTime()));
+			}
+			//计算本次更新结束时间
+			lastCalendar.add(Calendar.MINUTE, splitMinute);
+			
+			//超过当前时间
+			if ((nowCalendar.getTimeInMillis() - lastCalendar.getTimeInMillis()) < 1000 * 60 * splitMinute) {
+				upLast = false;
+				logger.info("全文检索索引同步更新业务  xxxxx===== 取消....." + key);
+				break;
+			}
+			
+			lastTime = ""+lastCalendar.getTimeInMillis();
+			{
+				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				sqlService.setEndtime(format.format(lastCalendar.getTime()));
+			}
+			logger.info("    索引更新  =====>>>>>=====>>>>> " + qb.getId() + ","+ qb.getIndex());
+			sqlService.updateIndexBySQL(prepareDataType, qb, EMPTY, ""+size);
+		}
+		// 设定最后一次更新时间
+		myCacheService.selectDB(index);
+		myCacheService.putObject(ISSentenceConstants.SENTENCE_UTD + qb.getId(), lastTime, 0, false);
+		logger.info("全文检索索引同步更新结束  =====>>>>>" + key);
+	}
 }
