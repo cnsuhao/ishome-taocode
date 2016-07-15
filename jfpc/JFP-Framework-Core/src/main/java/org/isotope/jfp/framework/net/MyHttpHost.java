@@ -23,7 +23,7 @@ import com.alibaba.fastjson.JSONObject;
 public class MyHttpHost {
 
 	public final String ENCODE_DEFAULT = "UTF-8";
-	public String serviceURL = "";
+	private String serviceURL = "";
 
 	public String getServiceURL() {
 		return serviceURL;
@@ -59,7 +59,8 @@ public class MyHttpHost {
 			JSONObject proxy = JSONObject.parseObject(doHttpProxyGET(serviceURL));
 
 			System.out.println("useing proxy =====>>>>>" + proxy);
-
+			proxy = JSONObject.parseObject(proxy.getString("data"));
+			
 			httpHostProxy = new HttpHost(proxy.getString("hostName"), proxy.getIntValue("port"));
 		}
 		return httpHostProxy;
