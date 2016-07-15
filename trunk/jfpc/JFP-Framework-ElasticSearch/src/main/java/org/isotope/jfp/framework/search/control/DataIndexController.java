@@ -18,6 +18,8 @@ import org.isotope.jfp.framework.search.task.DataIndexUpdateServiceJob;
 import org.isotope.jfp.framework.security.SystemAdminInterceptor;
 import org.isotope.jfp.framework.utils.BeanFactoryHelper;
 import org.isotope.jfp.framework.utils.EmptyHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,6 +34,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class DataIndexController implements ISFrameworkConstants {
+	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 	IPrepareDataType prepareDataType;
 
 	@Resource
@@ -46,6 +49,7 @@ public class DataIndexController implements ISFrameworkConstants {
 	, String st // 开始日期
 	, String et // 终了日期
 	) throws Exception {
+		logger.debug("=====>>>>>START=====>>>>>");
 		prepareDataType = BeanFactoryHelper.getBean("prepareDataType");
 
 		ModelAndView model = new ModelAndView("DWC/index");
@@ -64,6 +68,7 @@ public class DataIndexController implements ISFrameworkConstants {
 				sql.creatIndexBySQL(prepareDataType, I, C, from, size);
 			}
 		}
+		logger.debug("=====>>>>>END=====>>>>>");
 		return model;
 	}
 
@@ -80,7 +85,9 @@ public class DataIndexController implements ISFrameworkConstants {
 	public ModelAndView updateDataIndex(HttpServletRequest request, HttpServletResponse response
 			, String k
 			, String st // 开始日期
+			, String sl // 差分日期
 			) throws Exception {
+		logger.debug("=====>>>>>START=====>>>>>");
 		prepareDataType = BeanFactoryHelper.getBean("prepareDataType");
 		Calendar nowCalendar = Calendar.getInstance();
 		Calendar lastCalendar = Calendar.getInstance();
@@ -88,9 +95,17 @@ public class DataIndexController implements ISFrameworkConstants {
 		QuerySentence myQuerySentence = BeanFactoryHelper.getBean("myQuerySentence");
 		QueryBean qb = myQuerySentence.getUpdateMap().get(k);
 		if (qb != null && systemAdminInterceptor.doCheckAdmin(request, response)) {
+			int splitMinute = diusj.getSplitMinute();
+			//进行差分篡改
+			if(EmptyHelper.isNotEmpty(sl)){
+				diusj.setSplitMinute(Integer.parseInt(sl));
+			}
 			diusj.setPrepareDataType(prepareDataType);
 			diusj.doUpdate(nowCalendar, lastCalendar, k, qb, st);
+			
+			diusj.setSplitMinute(splitMinute);
 		}
+		logger.debug("=====>>>>>END=====>>>>>");
 		ModelAndView model = new ModelAndView("DWC/index");
 		return model;
 	}
@@ -106,7 +121,9 @@ public class DataIndexController implements ISFrameworkConstants {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/DID", method = RequestMethod.GET)
-	public ModelAndView deleteDataIndex(HttpServletRequest request, HttpServletResponse response, String k, String d) throws Exception {
+	public ModelAndView deleteDataIndex(HttpServletRequest request, HttpServletResponse response, 
+			String k, String d) throws Exception {
+		logger.debug("=====>>>>>START=====>>>>>");
 		DataService dataService = BeanFactoryHelper.getBean("DataService");
 		QuerySentence myQuerySentence = BeanFactoryHelper.getBean("myQuerySentence");
 		QueryBean qb = myQuerySentence.getUpdateMap().get(k);
@@ -117,6 +134,7 @@ public class DataIndexController implements ISFrameworkConstants {
 			
 			dataService.deleteDataInIndex(qb.getIndex(), datas);
 		}
+		logger.debug("=====>>>>>END=====>>>>>");
 		ModelAndView model = new ModelAndView("DWC/index");
 		return model;
 	}
