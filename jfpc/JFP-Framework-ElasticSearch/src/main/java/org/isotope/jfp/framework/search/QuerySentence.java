@@ -36,9 +36,6 @@ public class QuerySentence implements ISSentenceConstants {
 	 */
 	public void init() throws Exception {
 		logger.debug("全文检索初始化=====>>>>>开始");
-		if (sentenceFiles == null || sentenceFiles.length == 0) {
-			return;
-		}
 		for (Resource file : sentenceFiles) {
 			logger.debug("加载全文检索查询文件......" + file);
 			doLoadSentenceFiles(file.getInputStream());
