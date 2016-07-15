@@ -77,7 +77,10 @@ public class DataIndexController implements ISFrameworkConstants {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/DIU", method = RequestMethod.GET)
-	public ModelAndView updateDataIndex(HttpServletRequest request, HttpServletResponse response, String k) throws Exception {
+	public ModelAndView updateDataIndex(HttpServletRequest request, HttpServletResponse response
+			, String k
+			, String st // 开始日期
+			) throws Exception {
 		prepareDataType = BeanFactoryHelper.getBean("prepareDataType");
 		Calendar nowCalendar = Calendar.getInstance();
 		Calendar lastCalendar = Calendar.getInstance();
@@ -86,7 +89,7 @@ public class DataIndexController implements ISFrameworkConstants {
 		QueryBean qb = myQuerySentence.getUpdateMap().get(k);
 		if (qb != null && systemAdminInterceptor.doCheckAdmin(request, response)) {
 			diusj.setPrepareDataType(prepareDataType);
-			diusj.doUpdate(nowCalendar, lastCalendar, k, qb);
+			diusj.doUpdate(nowCalendar, lastCalendar, k, qb, st);
 		}
 		ModelAndView model = new ModelAndView("DWC/index");
 		return model;
@@ -107,7 +110,7 @@ public class DataIndexController implements ISFrameworkConstants {
 		DataService dataService = BeanFactoryHelper.getBean("DataService");
 		QuerySentence myQuerySentence = BeanFactoryHelper.getBean("myQuerySentence");
 		QueryBean qb = myQuerySentence.getUpdateMap().get(k);
-		if (EmptyHelper.isEmpty(d) && qb != null && systemAdminInterceptor.doCheckAdmin(request, response)) {
+		if (EmptyHelper.isNotEmpty(d) && qb != null && systemAdminInterceptor.doCheckAdmin(request, response)) {
 			ArrayList<String> datas = new ArrayList<String>();
 			for(String dd : d.split(COMMA))
 				datas.add(dd);
