@@ -1,5 +1,7 @@
 package org.isotope.jfp.framework.support;
 
+import java.util.Random;
+
 import org.isotope.jfp.framework.biz.ISTask;
 import org.isotope.jfp.framework.biz.common.ISProcess;
 import org.isotope.jfp.framework.constants.pub.ISJobConstants;
@@ -31,6 +33,7 @@ public class MyTaskSupport extends MyWorkSupport implements ISJobConstants, ISPr
 	 * 设置任务为执行状态
 	 * 
 	 * @param jobName
+	 * @throws InterruptedException
 	 */
 	protected boolean startLock() {
 		myCacheService.putObject(jobKey, JOB_FLAG_RUNNING, waitTimeSecond, false);
@@ -67,6 +70,12 @@ public class MyTaskSupport extends MyWorkSupport implements ISJobConstants, ISPr
 	}
 
 	public boolean doProcess() throws Exception {
+		// 防止并发，随机休眠
+		{
+			Random rd = new Random();
+			Thread.sleep((long) (100 + rd.nextDouble() * 1000));
+		}
+
 		if (checkLock() == false)
 			return false;
 		startLock();

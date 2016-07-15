@@ -185,7 +185,7 @@ public class MyHttpServiceSupport {
 		// TODO PoolingHttpClientConnectionManager
 		// requestConfigBuilder.setStaleConnectionCheckEnabled(true);
 		// 代理httpProxy
-		if (currentHttpHost != null) {
+		if (getCurrentHttpHost() != null) {
 			requestConfigBuilder.setProxy(currentHttpHost);
 		}
 
@@ -316,17 +316,11 @@ public class MyHttpServiceSupport {
 	}
 
 	public static void main(String[] args) throws Exception {
-		MyHttpServiceSupport mh = new MyHttpServiceSupport();
-		Map<String, String> headers = new HashMap<String, String>();
-		headers.put("Accept", "application/json, text/plain, */*");
-		headers.put("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.80 Safari/537.36 QQBrowser/9.3.6874.400");
-		headers.put("Accept-Language", "zh-CN,zh;q=0.8");
-		headers.put("Accept-Encoding", "gzip, deflate, sdch");
-		headers.put("Tyc-From", "normal");
-		headers.put("Connection", "keep-alive");
-
-		System.out.println(mh.doHttpGET("http://www.tianyancha.com/company/2338440666", headers));
-		System.out.println(mh.doHttpGET("http://www.tianyancha.com/company/2338440666.json", headers));
+		MyHttpServiceSupport mss = new MyHttpServiceSupport();
+		MyHttpHost mhh = new MyHttpHost();
+		mhh.setServiceURL("http://testcapture.wzyrz.cn/Zheng/proxy/newProtool");
+		mss.setCurrentHttpHost(mhh.getHttpProxy());
+		System.out.println(mss.doHttpGET("http://www.baidu.com"));
 	}
 
 	/**
