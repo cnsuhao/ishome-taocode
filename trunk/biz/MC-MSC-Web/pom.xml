@@ -12,7 +12,7 @@
 		<java-version>1.7</java-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.encoding>UTF-8</maven.compiler.encoding>
-		<jfp.version>3.1.2</jfp.version>
+		<jfp.version>3.2.1</jfp.version>
   	</properties>
 	
     <build>
@@ -101,11 +101,6 @@
 			<groupId>Isotope</groupId>
 			<artifactId>JFP-Framework-Core</artifactId>
 			<version>${jfp.version}-RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>Isotope</groupId>
-			<artifactId>JPG-Boxy-Server</artifactId>
-			<version>0.0.1-RELEASE</version>
 		</dependency>
     </dependencies>
     
