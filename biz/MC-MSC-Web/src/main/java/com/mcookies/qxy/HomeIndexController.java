@@ -1,8 +1,7 @@
-package com.mcookie.msc;
+package com.mcookies.qxy;
 
 import javax.annotation.Resource;
 
-import org.isotope.boxy.AGameBussinessService;
 import org.isotope.jfp.framework.beans.common.BusinessTokenBean;
 import org.isotope.jfp.framework.beans.common.RESTResultBean;
 import org.isotope.jfp.framework.cache.ICacheService;
@@ -28,7 +27,7 @@ public class HomeIndexController implements ISFrameworkConstants {
 
 	@Resource
 	protected ICacheService myCacheService;
-	
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView home() throws Exception {
 		ModelAndView model = new ModelAndView("index");
@@ -42,16 +41,16 @@ public class HomeIndexController implements ISFrameworkConstants {
 		RESTResultBean result = new RESTResultBean();
 		BusinessTokenBean btb = result.getToken(token);
 		try {
-			AGameBussinessService asgbs = BeanFactoryHelper.getBean(btb.getBizName());
-			asgbs.setMyCacheService(myCacheService);
-			asgbs.setParamValue(paramValue);
-			asgbs.setToken(btb);
-			asgbs.doProcess();
-			// 设定返回值
-			result.setCode(asgbs.getReturnCode());
-			result.setMessage(asgbs.getReturnMessage());
-			result.setResult(asgbs.getReturnObject());
-			result.setToken(asgbs.getToken());
+//			AGameBussinessService asgbs = BeanFactoryHelper.getBean(btb.getBizName());
+//			asgbs.setMyCacheService(myCacheService);
+//			asgbs.setParamValue(paramValue);
+//			asgbs.setToken(btb);
+//			asgbs.doProcess();
+//			// 设定返回值
+//			result.setCode(asgbs.getReturnCode());
+//			result.setMessage(asgbs.getReturnMessage());
+//			result.setResult(asgbs.getReturnObject());
+//			result.setToken(asgbs.getToken());
 		} catch (Exception e) {
 			result.setMessage("蛋仔的世界：" + MESSAGE_ERROR_SYNC);
 			result.setCode(ONE);
