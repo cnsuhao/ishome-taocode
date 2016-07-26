@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<beans xmlns='http://www.springframework.org/schema/beans'
+	xmlns:mvc='http://www.springframework.org/schema/mvc' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xmlns:context='http://www.springframework.org/schema/context' xmlns:tx='http://www.springframework.org/schema/tx'
+	xmlns:aop='http://www.springframework.org/schema/aop'
+	xsi:schemaLocation='
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		http://www.springframework.org/schema/jdbc 
+		http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd
+		'>
+	<!--数据库连接配置信息 -->
+	<bean id='mysqlDataSource' class='org.apache.commons.dbcp.BasicDataSource' destroy-method='close'>
+		<property name='driverClassName' value='org.mariadb.jdbc.Driver' />
+	
+	    <!-- 测试环境地址 -->
+	    <property name='url' value='jdbc:mysql://172.16.2.185:3306/zxlh?useUnicode=true&amp;characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull' />
+		<property name='username' value='root2' />
+		<property name='password' value='123456' />
+
+	    <!-- <property name='url' value='jdbc:mysql://10.50.86.21:3306/zxlh?useUnicode=true&amp;characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull' />
+		<property name='username' value='root' />
+		<property name='password' value='uME6Vb37t4GfqC@6e' /> -->
+		
+        <!--initialSize: 初始化连接-->    
+        <property name='initialSize' value='5'/>  
+		<!--maxActive: 最大连接数量-->    
+        <property name='maxActive' value='100'/>  
+        <!--minIdle: 最小空闲连接-->    
+        <property name='minIdle' value='5'/>  
+        <!--maxIdle: 最大空闲连接-->    
+        <property name='maxIdle' value='10'/> 
+         
+        <!-- 连接被泄露时是否打印 -->  
+        <property name='logAbandoned' value='true'/>  
+        <!--removeAbandoned: 打开自动释放未被使用的连接-->    
+        <property name='removeAbandoned'  value='true'/> 
+        <!--removeAbandonedTimeout: 超时时间(以秒数为单位)-->    
+        <property name='removeAbandonedTimeout' value='5'/>  
+        <!--maxWait: 超时等待时间以毫秒为单位 1000等于60秒-->  
+        <property name='maxWait' value='100'/>  
+        <!-- 在空闲连接回收器线程运行期间休眠的时间值,以毫秒为单位. -->  
+        <property name='timeBetweenEvictionRunsMillis' value='5000'/>  
+        <!--  在每次空闲连接回收器线程(如果有)运行时检查的连接数量 -->  
+        <property name='numTestsPerEvictionRun' value='10'/>  
+        <!-- 连接池中保持空闲而不被空闲连接回收器线程的时间值,以毫秒为单位-->  
+        <property name='minEvictableIdleTimeMillis' value='5000'/>  
+		
+		<!-- 验证连接是否可用，使用的SQL语句 -->
+        <property name='validationQuery' value='SELECT 1'/>
+        <!-- 指明连接是否被空闲连接回收器(如果有)进行检验.如果检测失败,则连接将被从池中去除 --> 
+        <property name='testWhileIdle' value='true'/> 
+        <!-- 借出连接时不要测试，否则很影响性能 -->
+        <property name='testOnBorrow' value='true'/> 
+	</bean>
+	
+	<!--缓存中心连接配置信息 -->	  
+	<bean id="jedisPool" class="redis.clients.jedis.JedisPool">  
+	    <constructor-arg index="0" ref="jedisPoolConfig" />  
+    	<constructor-arg index="1" value="172.16.2.201" type="String" />
+	    <constructor-arg index="2" value="6379" type="int" />
+	    <constructor-arg index="3" value="10000" type="int" />
+	    <constructor-arg index="4" value="123456" type="String" />
+	    <constructor-arg index="5" value="3" type="int" />
+	</bean>
+	
+</beans>
