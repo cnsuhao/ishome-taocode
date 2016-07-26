@@ -17,10 +17,5 @@
 		http://www.springframework.org/schema/jdbc 
 		http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd
 		'>	
-		
-	<!-- 主键编号 -->
-	<bean class='org.isotope.jfp.framework.utils.PKHelper'>
-		<property name='machineCode' value='1' />
-		<property name='pattern' value='yyMMddHHmmss' />
-	</bean>
+	
  </beans>
