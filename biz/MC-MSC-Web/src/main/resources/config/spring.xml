@@ -33,6 +33,4 @@
 	<!-- 缓存 -->
 	<import resource='redis/spring-redis-master.xml' />
 	
-	<!-- 定时作业 -->
-	<import resource='task/spring-task.xml' />
 </beans>
