@@ -104,15 +104,5 @@
 		</dependency>
     </dependencies>
     
-    <distributionManagement>  
-	  <repository>  
-	    <id>Releases</id>  
-	    <url>http://172.16.2.151:8080/nexus/content/repositories/releases</url>  
-	  </repository>  
-	  <snapshotRepository>  
-	    <id>Snapshots</id>  
-	    <url>http://172.16.2.151:8080/nexus/content/repositories/snapshots/</url>  
-	  </snapshotRepository>  
-	</distributionManagement> 
     <groupId>mcookie.msc</groupId>
 </project>
