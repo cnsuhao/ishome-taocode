@@ -18,7 +18,7 @@
 		http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd
 		'>
 	<!-- 注解探测器 -->
-	<context:component-scan base-package='org.isotope.jfp,com.upg.biz' />
+	<context:component-scan base-package='org.isotope.jfp,com.mcookies.qxy' />
 	<!-- Bean容器 -->
 	<bean class='org.isotope.jfp.framework.utils.BeanFactoryHelper'/>
 	
