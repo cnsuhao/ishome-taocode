@@ -31,7 +31,7 @@ public class HomeIndexController implements ISFrameworkConstants {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView home() throws Exception {
 		ModelAndView model = new ModelAndView("index");
-		model.addObject("DDD", "欢迎来到蛋仔的世界：" + DateHelper.currentTimeMillis2());
+		model.addObject("DDD", "欢迎访问千校云平台：" + DateHelper.currentTimeMillis2());
 		return model;
 	}
 
