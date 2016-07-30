@@ -1,0 +1,211 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 班级表 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='com.mcookies.qxy.base.Class.ClassDao'>
+    <!-- 表字段信息  -->
+    <sql id='tableColumns'>
+        cid,sid,name,year,cnum,term_id,grade_id,work_id,is_use,create_time,creator,update_time,updator
+    </sql>
+
+    <!-- 根据条件更新所有记录 -->
+    <update id='doUpdateAll' parameterType='ClassDBO'>
+        UPDATE class SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
+        <if test=" cid != null and cid !='' "><!-- 班级id -->
+            ,cid = #{cid}
+        </if>
+        <if test=" sid != null and sid !='' "><!-- 学校id -->
+            ,sid = #{sid}
+        </if>
+        <if test=" name != null and name !='' "><!-- 班级名称 -->
+            ,name = #{name}
+        </if>
+        <if test=" year != null and year !='' "><!-- 入学年份 -->
+            ,year = #{year}
+        </if>
+        <if test=" cnum != null and cnum !='' "><!-- 班级编号 -->
+            ,cnum = #{cnum}
+        </if>
+        <if test=" termId != null and termId !='' "><!-- 所属学期id -->
+            ,term_id = #{termId}
+        </if>
+        <if test=" gradeId != null and gradeId !='' "><!-- 年级标签id -->
+            ,grade_id = #{gradeId}
+        </if>
+        <if test=" workId != null and workId !='' "><!-- 作息时间模板id -->
+            ,work_id = #{workId}
+        </if>
+        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+            ,is_use = #{isUse}
+        </if>
+        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+            ,create_time = #{createTime}
+        </if>
+        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+            ,creator = #{creator}
+        </if>
+        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+            ,updator = #{updator}
+        </if>
+        WHERE 1 = 1 
+            <if test=" cid != null and cid !='' "><!-- 班级id -->
+                AND cid = #{cid}
+            </if>
+            <if test=" sid != null and sid !='' "><!-- 学校id -->
+                AND sid = #{sid}
+            </if>
+            <if test=" name != null and name !='' "><!-- 班级名称 -->
+                AND name = #{name}
+            </if>
+            <if test=" year != null and year !='' "><!-- 入学年份 -->
+                AND year = #{year}
+            </if>
+            <if test=" cnum != null and cnum !='' "><!-- 班级编号 -->
+                AND cnum = #{cnum}
+            </if>
+            <if test=" termId != null and termId !='' "><!-- 所属学期id -->
+                AND term_id = #{termId}
+            </if>
+            <if test=" gradeId != null and gradeId !='' "><!-- 年级标签id -->
+                AND grade_id = #{gradeId}
+            </if>
+            <if test=" workId != null and workId !='' "><!-- 作息时间模板id -->
+                AND work_id = #{workId}
+            </if>
+            <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+                AND is_use = #{isUse}
+            </if>
+            <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+                AND create_time = #{createTime}
+            </if>
+            <if test=" creator != null and creator !='' "><!-- 创建者 -->
+                AND creator = #{creator}
+            </if>
+            <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+                AND update_time = #{updateTime}
+            </if>
+            <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+                AND updator = #{updator}
+            </if>
+    </update>
+    <!-- 查询分页数据信息  -->
+    <select id='doSelectPage' parameterType='ClassDBO' resultType='ClassDBO'>
+        SELECT <include refid='tableColumns'/> FROM class
+        WHERE 1 = 1 
+        <if test=" cid != null and cid !='' "><!-- 班级id -->
+            AND cid = #{cid}
+        </if>
+        <if test=" sid != null and sid !='' "><!-- 学校id -->
+            AND sid = #{sid}
+        </if>
+        <if test=" name != null and name !='' "><!-- 班级名称 -->
+            AND name = #{name}
+        </if>
+        <if test=" year != null and year !='' "><!-- 入学年份 -->
+            AND year = #{year}
+        </if>
+        <if test=" cnum != null and cnum !='' "><!-- 班级编号 -->
+            AND cnum = #{cnum}
+        </if>
+        <if test=" termId != null and termId !='' "><!-- 所属学期id -->
+            AND term_id = #{termId}
+        </if>
+        <if test=" gradeId != null and gradeId !='' "><!-- 年级标签id -->
+            AND grade_id = #{gradeId}
+        </if>
+        <if test=" workId != null and workId !='' "><!-- 作息时间模板id -->
+            AND work_id = #{workId}
+        </if>
+        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+            AND is_use = #{isUse}
+        </if>
+        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+            AND create_time = #{createTime}
+        </if>
+        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+            AND creator = #{creator}
+        </if>
+        <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+            AND update_time = #{updateTime}
+        </if>
+        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+            AND updator = #{updator}
+        </if>
+    </select>
+
+    <!-- 插入一条数据 -->
+    <insert id='doInsert' parameterType='ClassDBO'>
+        INSERT INTO class
+          ( <include refid='tableColumns'/>) 
+        VALUES 
+          ( #{cid},#{sid},#{name},#{year},#{cnum},#{termId},#{gradeId},#{workId},#{isUse},#{createTime},#{creator},#{updateTime},#{updator} )
+    </insert>
+    <!-- 修改一条数据 -->
+    <update id='doUpdate' parameterType='ClassDBO'>
+        UPDATE class SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
+        <if test=" cid != null and cid !='' "><!-- 班级id -->
+            ,cid = #{cid}
+        </if>
+        <if test=" sid != null and sid !='' "><!-- 学校id -->
+            ,sid = #{sid}
+        </if>
+        <if test=" name != null and name !='' "><!-- 班级名称 -->
+            ,name = #{name}
+        </if>
+        <if test=" year != null and year !='' "><!-- 入学年份 -->
+            ,year = #{year}
+        </if>
+        <if test=" cnum != null and cnum !='' "><!-- 班级编号 -->
+            ,cnum = #{cnum}
+        </if>
+        <if test=" termId != null and termId !='' "><!-- 所属学期id -->
+            ,term_id = #{termId}
+        </if>
+        <if test=" gradeId != null and gradeId !='' "><!-- 年级标签id -->
+            ,grade_id = #{gradeId}
+        </if>
+        <if test=" workId != null and workId !='' "><!-- 作息时间模板id -->
+            ,work_id = #{workId}
+        </if>
+        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+            ,is_use = #{isUse}
+        </if>
+        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+            ,create_time = #{createTime}
+        </if>
+        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+            ,creator = #{creator}
+        </if>
+        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+            ,updator = #{updator}
+        </if>
+        WHERE 1 = 1 
+            <if test=" cid != null and cid !='' "><!-- 班级id -->
+                AND cid = #{cid}
+            </if>
+    </update>
+    <!-- 逻辑删除一条数据 -->
+    <delete id='toDelete' parameterType='ClassDBO'>
+        UPDATE class SET ddd='1', update_time = #{updateTime}, uu2 = #{uu2} WHERE update_time = #{updateTime}
+            <if test=" cid != null and cid !='' "><!-- 班级id -->
+                AND cid = #{cid}
+            </if>
+    </delete>
+    <!-- 物理删除一条数据 -->
+    <delete id='doDelete' parameterType='ClassDBO'>
+        DELETE FROM class WHERE update_time = #{updateTime}
+            <if test=" cid != null and cid !='' "><!-- 班级id -->
+                AND cid = #{cid}
+            </if>
+    </delete>
+    <!-- 查询一条数据  -->
+    <select id='doRead' parameterType='ClassDBO' resultType='ClassDBO'>
+        SELECT <include refid='tableColumns'/> FROM class WHERE 1 = 1
+            <if test=" cid != null and cid !='' "><!-- 班级id -->
+                AND cid = #{cid}
+            </if>
+    </select>
+
+</mapper>

@@ -1,0 +1,14 @@
+package com.mcookies.qxy.base.UTeacherExt;
+
+import org.isotope.jfp.framework.support.MyServiceSupport;
+import org.springframework.stereotype.Service;
+
+/** 教师信息扩展表 */
+@Service
+public class UTeacherExtService extends MyServiceSupport {
+
+	public UTeacherExtDao getDao() {
+		return getMySqlSession().getMapper(UTeacherExtDao.class);
+	}
+
+}

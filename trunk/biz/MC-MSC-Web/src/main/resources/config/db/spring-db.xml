@@ -36,7 +36,7 @@
 		<property name='configLocation' value='classpath:config/db/mybatis.xml' />
 		<property name='mapperLocations'>
 			<list>
-				<value>classpath*:/com/upg/ceci/beans/**/*.xml</value>
+				<value>classpath*:/com/mcookies/qxy/base/**/*.xml</value>
 		 	</list>
 		</property>
 	</bean>
@@ -64,30 +64,23 @@
 	
 	<!-- 配置数据库初始化 -->
 	<!-- DB管理工具初始化方法creat建库/init初始化数据/build重构/test简单测试  init-method='test' -->
-	<!-- 
-	<bean id='DBConfigBean' class='org.jfpc.common.db.DBConfigBean'>
+	<bean id='DBConfigBean' class='org.isotope.jfp.framework.db.DBConfigBean'>
 		<property name='errorGoon' value='true' />
-		<property name='configLocation' value='classpath:mydb.xml' />
+		<property name='configLocation' value='classpath:/config/db/mydb.xml' />
 		<property name='sqlLocations'>
 			<list>
-				<value>classpath*:/org/jfpc/beans/**/**/*.sql</value>
-				<value>classpath*:/org/jfpc/common/**/**/*.sql</value>
-				<value>classpath*:/com/aek56/atm/**/**/*.sql</value>
+				<value>classpath*:/com/mcookies/qxy/base/**/*.sql</value>
 		 	</list>
 		</property>
 		<property name='dataLocations'>
 			<list>
-				<value>classpath*:/com/aek56/menu/*.dat</value>
-				<value>classpath*:/com/aek56/atm/**/**/*.dat</value>
-				<value>classpath*:/org/jfpc/beans/**/**/*.dat</value>
-				<value>classpath*:/org/jfpc/common/**/**/*.dat</value>
+				<value>classpath*:/com/mcookies/qxy/base/**/*.dat</value>
 		 	</list>		
 		</property>
 	</bean> 
-	<bean class='org.jfpc.common.db.DBService' scope='singleton' init-method='build' /> 
-	<bean class='org.jfpc.common.db.DBDao' />
-	<bean class='org.jfpc.common.db.DBController' />
-	 -->	 
+	<bean class='org.isotope.jfp.framework.db.DBService' scope='singleton' init-method='creat' /> 
+	<bean class='org.isotope.jfp.framework.db.DBDao' />
+	<bean class='org.isotope.jfp.framework.db.DBController' />
 	
 	<!-- 物理分页 -->
 	<bean id='IDialectInterceptor' class='org.isotope.jfp.framework.mybatis.plugin.dialect.MySQLDialect' scope='prototype'/>
