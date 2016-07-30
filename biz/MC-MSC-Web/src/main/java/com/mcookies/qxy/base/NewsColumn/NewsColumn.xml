@@ -1,0 +1,175 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 栏目表 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='com.mcookies.qxy.base.NewsColumn.NewsColumnDao'>
+    <!-- 表字段信息  -->
+    <sql id='tableColumns'>
+        column_id,sid,title,auth,is_check,is_use,create_time,creator,update_time,updator
+    </sql>
+
+    <!-- 根据条件更新所有记录 -->
+    <update id='doUpdateAll' parameterType='NewsColumnDBO'>
+        UPDATE news_column SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
+        <if test=" columnId != null and columnId !='' "><!-- 栏目id（自增） -->
+            ,column_id = #{columnId}
+        </if>
+        <if test=" sid != null and sid !='' "><!-- 学校id -->
+            ,sid = #{sid}
+        </if>
+        <if test=" title != null and title !='' "><!-- 栏目名称 -->
+            ,title = #{title}
+        </if>
+        <if test=" auth != null and auth !='' "><!-- 访问权限 -->
+            ,auth = #{auth}
+        </if>
+        <if test=" isCheck != null and isCheck !='' "><!-- 是否需要审核 -->
+            ,is_check = #{isCheck}
+        </if>
+        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+            ,is_use = #{isUse}
+        </if>
+        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+            ,create_time = #{createTime}
+        </if>
+        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+            ,creator = #{creator}
+        </if>
+        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+            ,updator = #{updator}
+        </if>
+        WHERE 1 = 1 
+            <if test=" columnId != null and columnId !='' "><!-- 栏目id（自增） -->
+                AND column_id = #{columnId}
+            </if>
+            <if test=" sid != null and sid !='' "><!-- 学校id -->
+                AND sid = #{sid}
+            </if>
+            <if test=" title != null and title !='' "><!-- 栏目名称 -->
+                AND title = #{title}
+            </if>
+            <if test=" auth != null and auth !='' "><!-- 访问权限 -->
+                AND auth = #{auth}
+            </if>
+            <if test=" isCheck != null and isCheck !='' "><!-- 是否需要审核 -->
+                AND is_check = #{isCheck}
+            </if>
+            <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+                AND is_use = #{isUse}
+            </if>
+            <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+                AND create_time = #{createTime}
+            </if>
+            <if test=" creator != null and creator !='' "><!-- 创建者 -->
+                AND creator = #{creator}
+            </if>
+            <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+                AND update_time = #{updateTime}
+            </if>
+            <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+                AND updator = #{updator}
+            </if>
+    </update>
+    <!-- 查询分页数据信息  -->
+    <select id='doSelectPage' parameterType='NewsColumnDBO' resultType='NewsColumnDBO'>
+        SELECT <include refid='tableColumns'/> FROM news_column
+        WHERE 1 = 1 
+        <if test=" columnId != null and columnId !='' "><!-- 栏目id（自增） -->
+            AND column_id = #{columnId}
+        </if>
+        <if test=" sid != null and sid !='' "><!-- 学校id -->
+            AND sid = #{sid}
+        </if>
+        <if test=" title != null and title !='' "><!-- 栏目名称 -->
+            AND title = #{title}
+        </if>
+        <if test=" auth != null and auth !='' "><!-- 访问权限 -->
+            AND auth = #{auth}
+        </if>
+        <if test=" isCheck != null and isCheck !='' "><!-- 是否需要审核 -->
+            AND is_check = #{isCheck}
+        </if>
+        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+            AND is_use = #{isUse}
+        </if>
+        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+            AND create_time = #{createTime}
+        </if>
+        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+            AND creator = #{creator}
+        </if>
+        <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+            AND update_time = #{updateTime}
+        </if>
+        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+            AND updator = #{updator}
+        </if>
+    </select>
+
+    <!-- 插入一条数据 -->
+    <insert id='doInsert' parameterType='NewsColumnDBO'>
+        INSERT INTO news_column
+          ( <include refid='tableColumns'/>) 
+        VALUES 
+          ( #{columnId},#{sid},#{title},#{auth},#{isCheck},#{isUse},#{createTime},#{creator},#{updateTime},#{updator} )
+    </insert>
+    <!-- 修改一条数据 -->
+    <update id='doUpdate' parameterType='NewsColumnDBO'>
+        UPDATE news_column SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
+        <if test=" columnId != null and columnId !='' "><!-- 栏目id（自增） -->
+            ,column_id = #{columnId}
+        </if>
+        <if test=" sid != null and sid !='' "><!-- 学校id -->
+            ,sid = #{sid}
+        </if>
+        <if test=" title != null and title !='' "><!-- 栏目名称 -->
+            ,title = #{title}
+        </if>
+        <if test=" auth != null and auth !='' "><!-- 访问权限 -->
+            ,auth = #{auth}
+        </if>
+        <if test=" isCheck != null and isCheck !='' "><!-- 是否需要审核 -->
+            ,is_check = #{isCheck}
+        </if>
+        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+            ,is_use = #{isUse}
+        </if>
+        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+            ,create_time = #{createTime}
+        </if>
+        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+            ,creator = #{creator}
+        </if>
+        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+            ,updator = #{updator}
+        </if>
+        WHERE 1 = 1 
+            <if test=" columnId != null and columnId !='' "><!-- 栏目id（自增） -->
+                AND column_id = #{columnId}
+            </if>
+    </update>
+    <!-- 逻辑删除一条数据 -->
+    <delete id='toDelete' parameterType='NewsColumnDBO'>
+        UPDATE news_column SET ddd='1', update_time = #{updateTime}, uu2 = #{uu2} WHERE update_time = #{updateTime}
+            <if test=" columnId != null and columnId !='' "><!-- 栏目id（自增） -->
+                AND column_id = #{columnId}
+            </if>
+    </delete>
+    <!-- 物理删除一条数据 -->
+    <delete id='doDelete' parameterType='NewsColumnDBO'>
+        DELETE FROM news_column WHERE update_time = #{updateTime}
+            <if test=" columnId != null and columnId !='' "><!-- 栏目id（自增） -->
+                AND column_id = #{columnId}
+            </if>
+    </delete>
+    <!-- 查询一条数据  -->
+    <select id='doRead' parameterType='NewsColumnDBO' resultType='NewsColumnDBO'>
+        SELECT <include refid='tableColumns'/> FROM news_column WHERE 1 = 1
+            <if test=" columnId != null and columnId !='' "><!-- 栏目id（自增） -->
+                AND column_id = #{columnId}
+            </if>
+    </select>
+
+</mapper>

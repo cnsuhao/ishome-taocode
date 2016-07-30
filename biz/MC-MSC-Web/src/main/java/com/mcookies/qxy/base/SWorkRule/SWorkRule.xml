@@ -1,0 +1,199 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 作息时间规则表 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='com.mcookies.qxy.base.SWorkRule.SWorkRuleDao'>
+    <!-- 表字段信息  -->
+    <sql id='tableColumns'>
+        work_rule_id,work_id,sid,rule_name,rule_stage,start_time,end_time,is_use,create_time,creator,update_time,updator
+    </sql>
+
+    <!-- 根据条件更新所有记录 -->
+    <update id='doUpdateAll' parameterType='SWorkRuleDBO'>
+        UPDATE s_work_rule SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
+        <if test=" workRuleId != null and workRuleId !='' "><!-- 作息时间规则id -->
+            ,work_rule_id = #{workRuleId}
+        </if>
+        <if test=" workId != null and workId !='' "><!-- 作息时间模板id -->
+            ,work_id = #{workId}
+        </if>
+        <if test=" sid != null and sid !='' "><!-- 学校id -->
+            ,sid = #{sid}
+        </if>
+        <if test=" ruleName != null and ruleName !='' "><!-- 作息时间规则名称 -->
+            ,rule_name = #{ruleName}
+        </if>
+        <if test=" ruleStage != null and ruleStage !='' "><!-- 规则对应时间段 -->
+            ,rule_stage = #{ruleStage}
+        </if>
+        <if test=" startTime != null and startTime !='' "><!-- 开始时间 -->
+            ,start_time = #{startTime}
+        </if>
+        <if test=" endTime != null and endTime !='' "><!-- 结束时间 -->
+            ,end_time = #{endTime}
+        </if>
+        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+            ,is_use = #{isUse}
+        </if>
+        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+            ,create_time = #{createTime}
+        </if>
+        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+            ,creator = #{creator}
+        </if>
+        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+            ,updator = #{updator}
+        </if>
+        WHERE 1 = 1 
+            <if test=" workRuleId != null and workRuleId !='' "><!-- 作息时间规则id -->
+                AND work_rule_id = #{workRuleId}
+            </if>
+            <if test=" workId != null and workId !='' "><!-- 作息时间模板id -->
+                AND work_id = #{workId}
+            </if>
+            <if test=" sid != null and sid !='' "><!-- 学校id -->
+                AND sid = #{sid}
+            </if>
+            <if test=" ruleName != null and ruleName !='' "><!-- 作息时间规则名称 -->
+                AND rule_name = #{ruleName}
+            </if>
+            <if test=" ruleStage != null and ruleStage !='' "><!-- 规则对应时间段 -->
+                AND rule_stage = #{ruleStage}
+            </if>
+            <if test=" startTime != null and startTime !='' "><!-- 开始时间 -->
+                AND start_time = #{startTime}
+            </if>
+            <if test=" endTime != null and endTime !='' "><!-- 结束时间 -->
+                AND end_time = #{endTime}
+            </if>
+            <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+                AND is_use = #{isUse}
+            </if>
+            <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+                AND create_time = #{createTime}
+            </if>
+            <if test=" creator != null and creator !='' "><!-- 创建者 -->
+                AND creator = #{creator}
+            </if>
+            <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+                AND update_time = #{updateTime}
+            </if>
+            <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+                AND updator = #{updator}
+            </if>
+    </update>
+    <!-- 查询分页数据信息  -->
+    <select id='doSelectPage' parameterType='SWorkRuleDBO' resultType='SWorkRuleDBO'>
+        SELECT <include refid='tableColumns'/> FROM s_work_rule
+        WHERE 1 = 1 
+        <if test=" workRuleId != null and workRuleId !='' "><!-- 作息时间规则id -->
+            AND work_rule_id = #{workRuleId}
+        </if>
+        <if test=" workId != null and workId !='' "><!-- 作息时间模板id -->
+            AND work_id = #{workId}
+        </if>
+        <if test=" sid != null and sid !='' "><!-- 学校id -->
+            AND sid = #{sid}
+        </if>
+        <if test=" ruleName != null and ruleName !='' "><!-- 作息时间规则名称 -->
+            AND rule_name = #{ruleName}
+        </if>
+        <if test=" ruleStage != null and ruleStage !='' "><!-- 规则对应时间段 -->
+            AND rule_stage = #{ruleStage}
+        </if>
+        <if test=" startTime != null and startTime !='' "><!-- 开始时间 -->
+            AND start_time = #{startTime}
+        </if>
+        <if test=" endTime != null and endTime !='' "><!-- 结束时间 -->
+            AND end_time = #{endTime}
+        </if>
+        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+            AND is_use = #{isUse}
+        </if>
+        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+            AND create_time = #{createTime}
+        </if>
+        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+            AND creator = #{creator}
+        </if>
+        <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+            AND update_time = #{updateTime}
+        </if>
+        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+            AND updator = #{updator}
+        </if>
+    </select>
+
+    <!-- 插入一条数据 -->
+    <insert id='doInsert' parameterType='SWorkRuleDBO'>
+        INSERT INTO s_work_rule
+          ( <include refid='tableColumns'/>) 
+        VALUES 
+          ( #{workRuleId},#{workId},#{sid},#{ruleName},#{ruleStage},#{startTime},#{endTime},#{isUse},#{createTime},#{creator},#{updateTime},#{updator} )
+    </insert>
+    <!-- 修改一条数据 -->
+    <update id='doUpdate' parameterType='SWorkRuleDBO'>
+        UPDATE s_work_rule SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
+        <if test=" workRuleId != null and workRuleId !='' "><!-- 作息时间规则id -->
+            ,work_rule_id = #{workRuleId}
+        </if>
+        <if test=" workId != null and workId !='' "><!-- 作息时间模板id -->
+            ,work_id = #{workId}
+        </if>
+        <if test=" sid != null and sid !='' "><!-- 学校id -->
+            ,sid = #{sid}
+        </if>
+        <if test=" ruleName != null and ruleName !='' "><!-- 作息时间规则名称 -->
+            ,rule_name = #{ruleName}
+        </if>
+        <if test=" ruleStage != null and ruleStage !='' "><!-- 规则对应时间段 -->
+            ,rule_stage = #{ruleStage}
+        </if>
+        <if test=" startTime != null and startTime !='' "><!-- 开始时间 -->
+            ,start_time = #{startTime}
+        </if>
+        <if test=" endTime != null and endTime !='' "><!-- 结束时间 -->
+            ,end_time = #{endTime}
+        </if>
+        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+            ,is_use = #{isUse}
+        </if>
+        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+            ,create_time = #{createTime}
+        </if>
+        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+            ,creator = #{creator}
+        </if>
+        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+            ,updator = #{updator}
+        </if>
+        WHERE 1 = 1 
+            <if test=" workRuleId != null and workRuleId !='' "><!-- 作息时间规则id -->
+                AND work_rule_id = #{workRuleId}
+            </if>
+    </update>
+    <!-- 逻辑删除一条数据 -->
+    <delete id='toDelete' parameterType='SWorkRuleDBO'>
+        UPDATE s_work_rule SET ddd='1', update_time = #{updateTime}, uu2 = #{uu2} WHERE update_time = #{updateTime}
+            <if test=" workRuleId != null and workRuleId !='' "><!-- 作息时间规则id -->
+                AND work_rule_id = #{workRuleId}
+            </if>
+    </delete>
+    <!-- 物理删除一条数据 -->
+    <delete id='doDelete' parameterType='SWorkRuleDBO'>
+        DELETE FROM s_work_rule WHERE update_time = #{updateTime}
+            <if test=" workRuleId != null and workRuleId !='' "><!-- 作息时间规则id -->
+                AND work_rule_id = #{workRuleId}
+            </if>
+    </delete>
+    <!-- 查询一条数据  -->
+    <select id='doRead' parameterType='SWorkRuleDBO' resultType='SWorkRuleDBO'>
+        SELECT <include refid='tableColumns'/> FROM s_work_rule WHERE 1 = 1
+            <if test=" workRuleId != null and workRuleId !='' "><!-- 作息时间规则id -->
+                AND work_rule_id = #{workRuleId}
+            </if>
+    </select>
+
+</mapper>

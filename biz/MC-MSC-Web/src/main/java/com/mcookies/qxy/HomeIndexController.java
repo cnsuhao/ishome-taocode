@@ -35,7 +35,7 @@ public class HomeIndexController implements ISFrameworkConstants {
 		return model;
 	}
 
-	@RequestMapping(value = "/{token}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{token}", method = RequestMethod.PUT)
 	@ResponseBody
 	public RESTResultBean doProcess(@PathVariable String token, String paramValue) throws Exception {
 		RESTResultBean result = new RESTResultBean();
