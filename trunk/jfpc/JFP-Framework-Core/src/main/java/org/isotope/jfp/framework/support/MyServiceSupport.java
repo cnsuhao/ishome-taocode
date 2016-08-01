@@ -12,6 +12,8 @@ import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.utils.BeanFactoryHelper;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.SqlSessionUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 数据持久层超类
@@ -22,6 +24,7 @@ import org.mybatis.spring.SqlSessionUtils;
  * @version 0.1.0 2014/2/8
  */
 public class MyServiceSupport implements ISFrameworkConstants, ISDBConstants {
+    protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	/**
 	 * 数据库连接
