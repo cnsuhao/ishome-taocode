@@ -1,6 +1,6 @@
 package org.isotope.jfp.framework.net;
 
-import java.lang.reflect.Method;
+import java.io.IOException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
@@ -32,12 +32,10 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.http.ssl.TrustStrategy;
 import org.apache.http.util.EntityUtils;
-import org.isotope.jfp.framework.beans.ObjectBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -78,8 +76,31 @@ public class MyHttpServiceSupport {
 
 	private HttpHost currentHttpHost;
 
-	public HttpHost getCurrentHttpHost() {
+	public HttpHost getCurrentHttpHost() throws Exception {
+		// currentHttpHost = MyHttpHost.getHttpProxy();
+		if (checkProxy() == false)
+			currentHttpHost = null;
+
 		return currentHttpHost;
+	}
+
+	/**
+	 * get请求
+	 * 
+	 * @param url
+	 * @return
+	 * @throws IOException
+	 */
+	public boolean checkProxy() throws Exception {
+		try {
+			if(currentHttpHost == null) 
+				return false;
+			doHttpGET("http://www.baidu.com");
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 	public void setCurrentHttpHost(HttpHost currentHttpHost) {
@@ -242,85 +263,18 @@ public class MyHttpServiceSupport {
 		return "";
 	}
 
-	/**
-	 * 以简单属性参数请求提交服务
-	 * 
-	 * @param serviceURL
-	 * @param param
-	 * @return
-	 * @throws Exception
-	 */
-	public String doHttpPOST(String serviceURL, ObjectBean param) throws Exception {
-		CloseableHttpClient httpclient = getCloseableHttpClient(serviceURL);
-		try {
-
-			HttpPost httpPost = new HttpPost(serviceURL);
-			// 设定请求头
-			if (currentHeaders != null) {
-				for (Map.Entry<String, String> entry : currentHeaders.entrySet()) {
-					httpPost.setHeader(entry.getKey(), entry.getValue());
-				}
-			}
-			List<NameValuePair> nvps = new ArrayList<NameValuePair>();
-
-			// 参数翻转
-			{
-				// 获得所有属性名称
-				for (Method m : param.getClass().getMethods()) {
-					String methodName = m.getName();
-					if (methodName.startsWith("get")) {// &&
-														// methodName.indexOf("_")
-														// > 0
-						try {
-							Object value = m.invoke(param);
-							String name = methodName.substring(3, 4).toLowerCase() + methodName.substring(4);
-
-							if (value == null)
-								nvps.add(new BasicNameValuePair(name, ""));
-							else
-								nvps.add(new BasicNameValuePair(name, "" + value));
-						} catch (Exception e) {
-							logger.error(e.getMessage());
-						}
-					}
-				}
-			}
-
-			// 设定传输编码
-			httpPost.setEntity(new UrlEncodedFormEntity(nvps, ENCODE_DEFAULT));
-
-			CloseableHttpResponse response;
-			// 创建上下文环境
-			HttpContext context = getHttpContext();
-
-			context.setAttribute(HttpClientContext.COOKIE_STORE, cookieStore);
-			response = httpclient.execute(httpPost, context);
-			// 创建上下文环境
-			context = new BasicHttpContext();
-
-			context.setAttribute(HttpClientContext.COOKIE_STORE, cookieStore);
-			response = httpclient.execute(httpPost, context);
-			int status = response.getStatusLine().getStatusCode();
-
-			if (status >= 200 && status < 300) {
-				HttpEntity entity = response.getEntity();
-				if (entity != null)
-					return EntityUtils.toString(entity, ENCODE_DEFAULT);
-			} else {
-				throw new Exception("服务请求异常: " + status + ",【URL=" + serviceURL + "】");
-			}
-		} finally {
-			httpclient.close();
-		}
-		return "";
-	}
-
 	public static void main(String[] args) throws Exception {
-		MyHttpServiceSupport mss = new MyHttpServiceSupport();
-		MyHttpHost mhh = new MyHttpHost();
-		mhh.setServiceURL("http://testcapture.wzyrz.cn/Zheng/proxy/newProtool");
-		mss.setCurrentHttpHost(mhh.getHttpProxy());
-		System.out.println(mss.doHttpGET("http://www.baidu.com"));
+		MyHttpServiceSupport mh = new MyHttpServiceSupport();
+		Map<String, String> headers = new HashMap<String, String>();
+		headers.put("Accept", "application/json, text/plain, */*");
+		headers.put("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.80 Safari/537.36 QQBrowser/9.3.6874.400");
+		headers.put("Accept-Language", "zh-CN,zh;q=0.8");
+		headers.put("Accept-Encoding", "gzip, deflate, sdch");
+		headers.put("Tyc-From", "normal");
+		headers.put("Connection", "keep-alive");
+
+		System.out.println(mh.doHttpGET("http://www.tianyancha.com/company/2338440666", headers));
+		System.out.println(mh.doHttpGET("http://www.tianyancha.com/company/2338440666.json", headers));
 	}
 
 	/**

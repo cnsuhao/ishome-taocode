@@ -103,7 +103,7 @@ public class DBDao extends MyServiceSupport implements ISDBConstants {
 			String tableName;
 			for (Resource sqlLocation : dbConfig.getSqlLocations()) {
 				// 获得表名
-				tableName = sqlLocation.getFilename().replaceAll(FILE_EXTENSION_NAME_SQL, null);
+				tableName = sqlLocation.getFilename().replaceAll(FILE_EXTENSION_NAME_SQL, "");
 				// 删除当前表
 				try {
 					stmt.execute(DROP_TABLE + tableName);
