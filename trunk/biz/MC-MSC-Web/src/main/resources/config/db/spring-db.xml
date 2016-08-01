@@ -78,9 +78,10 @@
 		 	</list>		
 		</property>
 	</bean> 
-	<bean class='org.isotope.jfp.framework.db.DBService' scope='singleton' init-method='creat' /> 
+	
+	<!-- <bean class='org.isotope.jfp.framework.db.DBService' scope='singleton' init-method='creat' /> 
 	<bean class='org.isotope.jfp.framework.db.DBDao' />
-	<bean class='org.isotope.jfp.framework.db.DBController' />
+	<bean class='org.isotope.jfp.framework.db.DBController' /> -->
 	
 	<!-- 物理分页 -->
 	<bean id='IDialectInterceptor' class='org.isotope.jfp.framework.mybatis.plugin.dialect.MySQLDialect' scope='prototype'/>
