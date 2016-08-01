@@ -275,12 +275,16 @@ public class DateHelper {
      */
     public static Date getDate(String date) throws Exception {
         Calendar c = Calendar.getInstance();
-        if (date.length() == 8) {
-            c.set(Integer.parseInt(date.substring(0, 4)), Integer.parseInt(date.substring(4, 6)) - 1, Integer.parseInt(date.substring(6, 8)));
-        } else {
-            date = date.replaceAll("[\\.\\-\\年\\月]", "/").replace("日", "");
-            String[] d = date.split("/");
-            c.set(Integer.parseInt(d[0]), Integer.parseInt(d[1]) - 1, Integer.parseInt(d[2]));
+        try{
+	        if (date.length() == 8) {
+	            c.set(Integer.parseInt(date.substring(0, 4)), Integer.parseInt(date.substring(4, 6)) - 1, Integer.parseInt(date.substring(6, 8)));
+	        } else {
+	            date = date.replaceAll("[\\.\\-\\年\\月]", "/").replace("日", "");
+	            String[] d = date.split("/");
+	            c.set(Integer.parseInt(d[0]), Integer.parseInt(d[1]) - 1, Integer.parseInt(d[2]));
+	        }
+        }catch(Exception e){
+        	return null;
         }
         return c.getTime();
     }
