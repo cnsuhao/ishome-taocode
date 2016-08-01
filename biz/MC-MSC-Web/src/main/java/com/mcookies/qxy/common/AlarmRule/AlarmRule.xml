@@ -1,0 +1,235 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 报警规则表 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='com.mcookies.qxy.common.AlarmRule.AlarmRuleDao'>
+    <!-- 表字段信息  -->
+    <sql id='tableColumns'>
+        alarmrule_id,sid,alarmrule_name,device_id,start_time,end_time,flag,time_type,time_repeat,time_date,is_use,create_time,creator,update_time,updator
+    </sql>
+
+    <!-- 根据条件更新所有记录 -->
+    <update id='doUpdateAll' parameterType='AlarmRuleDBO'>
+        UPDATE alarm_rule SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
+        <if test=" alarmruleId != null and alarmruleId !='' "><!-- 规则id -->
+            ,alarmrule_id = #{alarmruleId}
+        </if>
+        <if test=" sid != null and sid !='' "><!-- 学校id -->
+            ,sid = #{sid}
+        </if>
+        <if test=" alarmruleName != null and alarmruleName !='' "><!-- 规则名 -->
+            ,alarmrule_name = #{alarmruleName}
+        </if>
+        <if test=" deviceId != null and deviceId !='' "><!-- 学校设备id -->
+            ,device_id = #{deviceId}
+        </if>
+        <if test=" startTime != null and startTime !='' "><!-- 开始时间 -->
+            ,start_time = #{startTime}
+        </if>
+        <if test=" endTime != null and endTime !='' "><!-- 结束时间 -->
+            ,end_time = #{endTime}
+        </if>
+        <if test=" flag != null and flag !='' "><!-- 行为状态 -->
+            ,flag = #{flag}
+        </if>
+        <if test=" timeType != null and timeType !='' "><!-- 生效时间设置类型 -->
+            ,time_type = #{timeType}
+        </if>
+        <if test=" timeRepeat != null and timeRepeat !='' "><!-- 指定重复时间 -->
+            ,time_repeat = #{timeRepeat}
+        </if>
+        <if test=" timeDate != null and timeDate !='' "><!-- 指定特定日期 -->
+            ,time_date = #{timeDate}
+        </if>
+        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+            ,is_use = #{isUse}
+        </if>
+        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+            ,create_time = #{createTime}
+        </if>
+        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+            ,creator = #{creator}
+        </if>
+        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+            ,updator = #{updator}
+        </if>
+        WHERE 1 = 1 
+            <if test=" alarmruleId != null and alarmruleId !='' "><!-- 规则id -->
+                AND alarmrule_id = #{alarmruleId}
+            </if>
+            <if test=" sid != null and sid !='' "><!-- 学校id -->
+                AND sid = #{sid}
+            </if>
+            <if test=" alarmruleName != null and alarmruleName !='' "><!-- 规则名 -->
+                AND alarmrule_name = #{alarmruleName}
+            </if>
+            <if test=" deviceId != null and deviceId !='' "><!-- 学校设备id -->
+                AND device_id = #{deviceId}
+            </if>
+            <if test=" startTime != null and startTime !='' "><!-- 开始时间 -->
+                AND start_time = #{startTime}
+            </if>
+            <if test=" endTime != null and endTime !='' "><!-- 结束时间 -->
+                AND end_time = #{endTime}
+            </if>
+            <if test=" flag != null and flag !='' "><!-- 行为状态 -->
+                AND flag = #{flag}
+            </if>
+            <if test=" timeType != null and timeType !='' "><!-- 生效时间设置类型 -->
+                AND time_type = #{timeType}
+            </if>
+            <if test=" timeRepeat != null and timeRepeat !='' "><!-- 指定重复时间 -->
+                AND time_repeat = #{timeRepeat}
+            </if>
+            <if test=" timeDate != null and timeDate !='' "><!-- 指定特定日期 -->
+                AND time_date = #{timeDate}
+            </if>
+            <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+                AND is_use = #{isUse}
+            </if>
+            <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+                AND create_time = #{createTime}
+            </if>
+            <if test=" creator != null and creator !='' "><!-- 创建者 -->
+                AND creator = #{creator}
+            </if>
+            <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+                AND update_time = #{updateTime}
+            </if>
+            <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+                AND updator = #{updator}
+            </if>
+    </update>
+    <!-- 查询分页数据信息  -->
+    <select id='doSelectPage' parameterType='AlarmRuleDBO' resultType='AlarmRuleDBO'>
+        SELECT <include refid='tableColumns'/> FROM alarm_rule
+        WHERE 1 = 1 
+        <if test=" alarmruleId != null and alarmruleId !='' "><!-- 规则id -->
+            AND alarmrule_id = #{alarmruleId}
+        </if>
+        <if test=" sid != null and sid !='' "><!-- 学校id -->
+            AND sid = #{sid}
+        </if>
+        <if test=" alarmruleName != null and alarmruleName !='' "><!-- 规则名 -->
+            AND alarmrule_name = #{alarmruleName}
+        </if>
+        <if test=" deviceId != null and deviceId !='' "><!-- 学校设备id -->
+            AND device_id = #{deviceId}
+        </if>
+        <if test=" startTime != null and startTime !='' "><!-- 开始时间 -->
+            AND start_time = #{startTime}
+        </if>
+        <if test=" endTime != null and endTime !='' "><!-- 结束时间 -->
+            AND end_time = #{endTime}
+        </if>
+        <if test=" flag != null and flag !='' "><!-- 行为状态 -->
+            AND flag = #{flag}
+        </if>
+        <if test=" timeType != null and timeType !='' "><!-- 生效时间设置类型 -->
+            AND time_type = #{timeType}
+        </if>
+        <if test=" timeRepeat != null and timeRepeat !='' "><!-- 指定重复时间 -->
+            AND time_repeat = #{timeRepeat}
+        </if>
+        <if test=" timeDate != null and timeDate !='' "><!-- 指定特定日期 -->
+            AND time_date = #{timeDate}
+        </if>
+        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+            AND is_use = #{isUse}
+        </if>
+        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+            AND create_time = #{createTime}
+        </if>
+        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+            AND creator = #{creator}
+        </if>
+        <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+            AND update_time = #{updateTime}
+        </if>
+        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+            AND updator = #{updator}
+        </if>
+    </select>
+
+    <!-- 插入一条数据 -->
+    <insert id='doInsert' parameterType='AlarmRuleDBO'>
+        INSERT INTO alarm_rule
+          ( <include refid='tableColumns'/>) 
+        VALUES 
+          ( #{alarmruleId},#{sid},#{alarmruleName},#{deviceId},#{startTime},#{endTime},#{flag},#{timeType},#{timeRepeat},#{timeDate},#{isUse},#{createTime},#{creator},#{updateTime},#{updator} )
+    </insert>
+    <!-- 修改一条数据 -->
+    <update id='doUpdate' parameterType='AlarmRuleDBO'>
+        UPDATE alarm_rule SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
+        <if test=" alarmruleId != null and alarmruleId !='' "><!-- 规则id -->
+            ,alarmrule_id = #{alarmruleId}
+        </if>
+        <if test=" sid != null and sid !='' "><!-- 学校id -->
+            ,sid = #{sid}
+        </if>
+        <if test=" alarmruleName != null and alarmruleName !='' "><!-- 规则名 -->
+            ,alarmrule_name = #{alarmruleName}
+        </if>
+        <if test=" deviceId != null and deviceId !='' "><!-- 学校设备id -->
+            ,device_id = #{deviceId}
+        </if>
+        <if test=" startTime != null and startTime !='' "><!-- 开始时间 -->
+            ,start_time = #{startTime}
+        </if>
+        <if test=" endTime != null and endTime !='' "><!-- 结束时间 -->
+            ,end_time = #{endTime}
+        </if>
+        <if test=" flag != null and flag !='' "><!-- 行为状态 -->
+            ,flag = #{flag}
+        </if>
+        <if test=" timeType != null and timeType !='' "><!-- 生效时间设置类型 -->
+            ,time_type = #{timeType}
+        </if>
+        <if test=" timeRepeat != null and timeRepeat !='' "><!-- 指定重复时间 -->
+            ,time_repeat = #{timeRepeat}
+        </if>
+        <if test=" timeDate != null and timeDate !='' "><!-- 指定特定日期 -->
+            ,time_date = #{timeDate}
+        </if>
+        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+            ,is_use = #{isUse}
+        </if>
+        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+            ,create_time = #{createTime}
+        </if>
+        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+            ,creator = #{creator}
+        </if>
+        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+            ,updator = #{updator}
+        </if>
+        WHERE 1 = 1 
+            <if test=" alarmruleId != null and alarmruleId !='' "><!-- 规则id -->
+                AND alarmrule_id = #{alarmruleId}
+            </if>
+    </update>
+    <!-- 逻辑删除一条数据 -->
+    <delete id='toDelete' parameterType='AlarmRuleDBO'>
+        UPDATE alarm_rule SET ddd='1', update_time = #{updateTime}, uu2 = #{uu2} WHERE update_time = #{updateTime}
+            <if test=" alarmruleId != null and alarmruleId !='' "><!-- 规则id -->
+                AND alarmrule_id = #{alarmruleId}
+            </if>
+    </delete>
+    <!-- 物理删除一条数据 -->
+    <delete id='doDelete' parameterType='AlarmRuleDBO'>
+        DELETE FROM alarm_rule WHERE update_time = #{updateTime}
+            <if test=" alarmruleId != null and alarmruleId !='' "><!-- 规则id -->
+                AND alarmrule_id = #{alarmruleId}
+            </if>
+    </delete>
+    <!-- 查询一条数据  -->
+    <select id='doRead' parameterType='AlarmRuleDBO' resultType='AlarmRuleDBO'>
+        SELECT <include refid='tableColumns'/> FROM alarm_rule WHERE 1 = 1
+            <if test=" alarmruleId != null and alarmruleId !='' "><!-- 规则id -->
+                AND alarmrule_id = #{alarmruleId}
+            </if>
+    </select>
+
+</mapper>
