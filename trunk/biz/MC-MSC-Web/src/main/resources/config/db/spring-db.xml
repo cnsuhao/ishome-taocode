@@ -36,7 +36,7 @@
 		<property name='configLocation' value='classpath:config/db/mybatis.xml' />
 		<property name='mapperLocations'>
 			<list>
-				<value>classpath*:/com/mcookies/qxy/base/**/*.xml</value>
+				<value>classpath*:/com/mcookies/qxy/common/**/*.xml</value>
 		 	</list>
 		</property>
 	</bean>
@@ -69,12 +69,12 @@
 		<property name='configLocation' value='classpath:/config/db/mydb.xml' />
 		<property name='sqlLocations'>
 			<list>
-				<value>classpath*:/com/mcookies/qxy/base/**/*.sql</value>
+				<value>classpath*:/com/mcookies/qxy/common/**/*.sql</value>
 		 	</list>
 		</property>
 		<property name='dataLocations'>
 			<list>
-				<value>classpath*:/com/mcookies/qxy/base/**/*.dat</value>
+				<value>classpath*:/com/mcookies/qxy/common/**/*.dat</value>
 		 	</list>		
 		</property>
 	</bean> 

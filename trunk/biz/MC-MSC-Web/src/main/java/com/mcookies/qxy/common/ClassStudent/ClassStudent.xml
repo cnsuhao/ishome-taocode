@@ -1,0 +1,187 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 班级学生关联表 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='com.mcookies.qxy.common.ClassStudent.ClassStudentDao'>
+    <!-- 表字段信息  -->
+    <sql id='tableColumns'>
+        id,sid,cid,student_id,join_time,exit_time,is_use,create_time,creator,update_time,updator
+    </sql>
+
+    <!-- 根据条件更新所有记录 -->
+    <update id='doUpdateAll' parameterType='ClassStudentDBO'>
+        UPDATE class_student SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
+        <if test=" id != null and id !='' "><!-- 自增id -->
+            ,id = #{id}
+        </if>
+        <if test=" sid != null and sid !='' "><!-- 学校id -->
+            ,sid = #{sid}
+        </if>
+        <if test=" cid != null and cid !='' "><!-- 班级id -->
+            ,cid = #{cid}
+        </if>
+        <if test=" studentId != null and studentId !='' "><!-- 学生id -->
+            ,student_id = #{studentId}
+        </if>
+        <if test=" joinTime != null and joinTime !='' "><!-- 加入班级时间 -->
+            ,join_time = #{joinTime}
+        </if>
+        <if test=" exitTime != null and exitTime !='' "><!-- 退出班级时间 -->
+            ,exit_time = #{exitTime}
+        </if>
+        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+            ,is_use = #{isUse}
+        </if>
+        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+            ,create_time = #{createTime}
+        </if>
+        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+            ,creator = #{creator}
+        </if>
+        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+            ,updator = #{updator}
+        </if>
+        WHERE 1 = 1 
+            <if test=" id != null and id !='' "><!-- 自增id -->
+                AND id = #{id}
+            </if>
+            <if test=" sid != null and sid !='' "><!-- 学校id -->
+                AND sid = #{sid}
+            </if>
+            <if test=" cid != null and cid !='' "><!-- 班级id -->
+                AND cid = #{cid}
+            </if>
+            <if test=" studentId != null and studentId !='' "><!-- 学生id -->
+                AND student_id = #{studentId}
+            </if>
+            <if test=" joinTime != null and joinTime !='' "><!-- 加入班级时间 -->
+                AND join_time = #{joinTime}
+            </if>
+            <if test=" exitTime != null and exitTime !='' "><!-- 退出班级时间 -->
+                AND exit_time = #{exitTime}
+            </if>
+            <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+                AND is_use = #{isUse}
+            </if>
+            <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+                AND create_time = #{createTime}
+            </if>
+            <if test=" creator != null and creator !='' "><!-- 创建者 -->
+                AND creator = #{creator}
+            </if>
+            <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+                AND update_time = #{updateTime}
+            </if>
+            <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+                AND updator = #{updator}
+            </if>
+    </update>
+    <!-- 查询分页数据信息  -->
+    <select id='doSelectPage' parameterType='ClassStudentDBO' resultType='ClassStudentDBO'>
+        SELECT <include refid='tableColumns'/> FROM class_student
+        WHERE 1 = 1 
+        <if test=" id != null and id !='' "><!-- 自增id -->
+            AND id = #{id}
+        </if>
+        <if test=" sid != null and sid !='' "><!-- 学校id -->
+            AND sid = #{sid}
+        </if>
+        <if test=" cid != null and cid !='' "><!-- 班级id -->
+            AND cid = #{cid}
+        </if>
+        <if test=" studentId != null and studentId !='' "><!-- 学生id -->
+            AND student_id = #{studentId}
+        </if>
+        <if test=" joinTime != null and joinTime !='' "><!-- 加入班级时间 -->
+            AND join_time = #{joinTime}
+        </if>
+        <if test=" exitTime != null and exitTime !='' "><!-- 退出班级时间 -->
+            AND exit_time = #{exitTime}
+        </if>
+        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+            AND is_use = #{isUse}
+        </if>
+        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+            AND create_time = #{createTime}
+        </if>
+        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+            AND creator = #{creator}
+        </if>
+        <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+            AND update_time = #{updateTime}
+        </if>
+        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+            AND updator = #{updator}
+        </if>
+    </select>
+
+    <!-- 插入一条数据 -->
+    <insert id='doInsert' parameterType='ClassStudentDBO'>
+        INSERT INTO class_student
+          ( <include refid='tableColumns'/>) 
+        VALUES 
+          ( #{id},#{sid},#{cid},#{studentId},#{joinTime},#{exitTime},#{isUse},#{createTime},#{creator},#{updateTime},#{updator} )
+    </insert>
+    <!-- 修改一条数据 -->
+    <update id='doUpdate' parameterType='ClassStudentDBO'>
+        UPDATE class_student SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
+        <if test=" id != null and id !='' "><!-- 自增id -->
+            ,id = #{id}
+        </if>
+        <if test=" sid != null and sid !='' "><!-- 学校id -->
+            ,sid = #{sid}
+        </if>
+        <if test=" cid != null and cid !='' "><!-- 班级id -->
+            ,cid = #{cid}
+        </if>
+        <if test=" studentId != null and studentId !='' "><!-- 学生id -->
+            ,student_id = #{studentId}
+        </if>
+        <if test=" joinTime != null and joinTime !='' "><!-- 加入班级时间 -->
+            ,join_time = #{joinTime}
+        </if>
+        <if test=" exitTime != null and exitTime !='' "><!-- 退出班级时间 -->
+            ,exit_time = #{exitTime}
+        </if>
+        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+            ,is_use = #{isUse}
+        </if>
+        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+            ,create_time = #{createTime}
+        </if>
+        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+            ,creator = #{creator}
+        </if>
+        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+            ,updator = #{updator}
+        </if>
+        WHERE 1 = 1 
+            <if test=" id != null and id !='' "><!-- 自增id -->
+                AND id = #{id}
+            </if>
+    </update>
+    <!-- 逻辑删除一条数据 -->
+    <delete id='toDelete' parameterType='ClassStudentDBO'>
+        UPDATE class_student SET ddd='1', update_time = #{updateTime}, uu2 = #{uu2} WHERE update_time = #{updateTime}
+            <if test=" id != null and id !='' "><!-- 自增id -->
+                AND id = #{id}
+            </if>
+    </delete>
+    <!-- 物理删除一条数据 -->
+    <delete id='doDelete' parameterType='ClassStudentDBO'>
+        DELETE FROM class_student WHERE update_time = #{updateTime}
+            <if test=" id != null and id !='' "><!-- 自增id -->
+                AND id = #{id}
+            </if>
+    </delete>
+    <!-- 查询一条数据  -->
+    <select id='doRead' parameterType='ClassStudentDBO' resultType='ClassStudentDBO'>
+        SELECT <include refid='tableColumns'/> FROM class_student WHERE 1 = 1
+            <if test=" id != null and id !='' "><!-- 自增id -->
+                AND id = #{id}
+            </if>
+    </select>
+
+</mapper>
