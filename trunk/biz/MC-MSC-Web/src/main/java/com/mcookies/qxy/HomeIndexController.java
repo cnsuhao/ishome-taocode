@@ -2,18 +2,18 @@ package com.mcookies.qxy;
 
 import javax.annotation.Resource;
 
-import org.isotope.jfp.framework.beans.common.BusinessTokenBean;
 import org.isotope.jfp.framework.beans.common.RESTResultBean;
 import org.isotope.jfp.framework.cache.ICacheService;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
-import org.isotope.jfp.framework.utils.BeanFactoryHelper;
 import org.isotope.jfp.framework.utils.DateHelper;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.mcookies.qxy.common.User.UserDBO;
 
 /**
  * 默认首页
@@ -35,27 +35,15 @@ public class HomeIndexController implements ISFrameworkConstants {
 		return model;
 	}
 
-	@RequestMapping(value = "/{token}", method = RequestMethod.PUT)
-	@ResponseBody
-	public RESTResultBean doProcess(@PathVariable String token, String paramValue) throws Exception {
+	@RequestMapping(value = "/ttt", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	@ResponseBody // @PathVariable String token,
+	public RESTResultBean doProcess(@RequestBody UserDBO user) throws Exception {
 		RESTResultBean result = new RESTResultBean();
-		BusinessTokenBean btb = result.getToken(token);
 		try {
-//			AGameBussinessService asgbs = BeanFactoryHelper.getBean(btb.getBizName());
-//			asgbs.setMyCacheService(myCacheService);
-//			asgbs.setParamValue(paramValue);
-//			asgbs.setToken(btb);
-//			asgbs.doProcess();
-//			// 设定返回值
-//			result.setCode(asgbs.getReturnCode());
-//			result.setMessage(asgbs.getReturnMessage());
-//			result.setResult(asgbs.getReturnObject());
-//			result.setToken(asgbs.getToken());
+			result.setMessage("欢迎访问千校云平台：" + user.getAccount());
 		} catch (Exception e) {
-			result.setMessage("蛋仔的世界：" + MESSAGE_ERROR_SYNC);
+			result.setMessage("访问失败");
 			result.setCode(ONE);
-			btb.chageToken();
-			result.setToken(BusinessTokenBean.getBizToken(btb));
 		}
 
 		return result;
