@@ -54,6 +54,24 @@ public class HomeIndexController extends MyControllerSupport {
 		}
 
 		return result;
+	}@RequestMapping(value = "/ttt", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public RESTResultBean doProcessDELETE(HttpServletRequest request, @RequestBody UserDBO user) throws Exception {
+		RESTResultBean result = new RESTResultBean();
+		try {
+			if (doCheckToken(user.getToken()) == false) {
+				return tokenFail();
+			}
+
+			String userId = getLoginer().getUserId();
+
+			result.setInfo("欢迎访问千校云平台：" + userId + "," + user.getAccount());
+		} catch (Exception e) {
+			result.setInfo("访问失败");
+			result.setStatus(1);
+		}
+
+		return result;
 	}
 
 	@RequestMapping(value = "/ttt", method = RequestMethod.GET)
