@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 @Service("001331")
 public class LoginBussinessService extends AGameBussinessService {
-
 	
 	@Override
 	public boolean doGameAction() throws Exception {
