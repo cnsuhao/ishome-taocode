@@ -41,7 +41,7 @@ public class HomeIndexController implements ISFrameworkConstants {
 		RESTResultBean result = new RESTResultBean();
 		BusinessTokenBean btb = result.getToken(token);
 		try {
-			ASGameBussinessService asgbs = BeanFactoryHelper.getBean(btb.getBizName());
+			AGameBussinessService asgbs = BeanFactoryHelper.getBean(btb.getBizName());
 			asgbs.setMyCacheService(myCacheService);
 			asgbs.setParamValue(paramValue);
 			asgbs.setToken(btb);
