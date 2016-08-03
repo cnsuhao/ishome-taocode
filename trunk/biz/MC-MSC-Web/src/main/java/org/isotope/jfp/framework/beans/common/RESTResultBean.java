@@ -28,18 +28,21 @@ public class RESTResultBean extends ObjectBean implements ISFrameworkConstants {
 
 	/**
 	 * 返回结果(0成功1失败)
+	 *  11->token is invalid
+       12->token is timeout
+       13->Illegal interface calls, not power use interface
 	 */
-	protected String code = ZERO;// 对接返回代码 -1:无数据 0:正确 其他：对应对接方错误码
+	protected int status = 0;
 
 	/**
 	 * 提示信息
 	 */
-	protected String message = MESSAGE_PROC_WAITING;// 对接返回信息 空:正确 其他：对应对接方错误描述
+	protected String info = "OK";// 对接返回信息 空:正确 其他：对应对接方错误描述
 
 	/**
 	 * 返回结果
 	 */
-	protected Object result = EMPTY;
+	protected Object data = EMPTY;
 
 	public String getToken() {
 		return token;
@@ -54,28 +57,28 @@ public class RESTResultBean extends ObjectBean implements ISFrameworkConstants {
 		return BusinessTokenBean.build(token);
 	}
 
-	public String getCode() {
-		return code;
+	public int getStatus() {
+		return status;
 	}
 
-	public void setCode(String resultCode) {
-		this.code = resultCode;
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
-	public String getMessage() {
-		return message;
+	public String getInfo() {
+		return info;
 	}
 
-	public void setMessage(String resultMsg) {
-		this.message = resultMsg;
+	public void setInfo(String info) {
+		this.info = info;
 	}
 
-	public Object getResult() {
-		return result;
+	public Object getData() {
+		return data;
 	}
 
-	public void setResult(Object result) {
-		this.result = result;
+	public void setData(Object data) {
+		this.data = data;
 	}
 
 	/**
@@ -87,7 +90,7 @@ public class RESTResultBean extends ObjectBean implements ISFrameworkConstants {
 		RESTResultBean rs = new RESTResultBean();
 		List<RESTResultBean> ls = new ArrayList<RESTResultBean>();
 		ls.add(new RESTResultBean());
-		rs.setResult(ls);
+		rs.setData(ls);
 		// rs.setResult(new RESTResultBean());
 		// 转换成文本
 		String json = JSONObject.toJSONString(rs);
