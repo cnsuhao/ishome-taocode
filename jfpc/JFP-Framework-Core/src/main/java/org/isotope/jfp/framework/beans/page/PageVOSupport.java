@@ -8,6 +8,7 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.isotope.jfp.framework.beans.ObjectBean;
 import org.isotope.jfp.framework.beans.common.FrameworkDataBean;
 import org.isotope.jfp.framework.mybatis.plugin.dialect.DefaultDialect;
+import org.isotope.jfp.framework.utils.BeanFactoryHelper;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
@@ -64,6 +65,7 @@ public class PageVOSupport extends ObjectBean {
 		resultCount = 0;
 		pageListData = null;
 		formParamBean = new FrameworkDataBean();
+		defaultDialect = BeanFactoryHelper.getBean("IDialectInterceptor");
 		orderby = "";
 	}
 
@@ -152,7 +154,7 @@ public class PageVOSupport extends ObjectBean {
 
 	public DefaultDialect getDefaultDialect() {
 		if (defaultDialect == null) {
-			defaultDialect = new DefaultDialect();
+			defaultDialect = BeanFactoryHelper.getBean("IDialectInterceptor");//new DefaultDialect();
 		}
 		return defaultDialect;
 	}
