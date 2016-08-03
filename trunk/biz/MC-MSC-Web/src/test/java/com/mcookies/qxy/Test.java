@@ -1,6 +1,6 @@
 package com.mcookies.qxy;
 
-import java.net.URLEncoder;
+import java.util.HashMap;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -13,7 +13,6 @@ import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
 import com.alibaba.fastjson.JSON;
-import com.mcookies.qxy.common.User.UserDBO;
 
 public class Test {
 	private static final String APPLICATION_JSON = "application/json";
@@ -21,9 +20,9 @@ public class Test {
 	private static final String CONTENT_TYPE_TEXT_JSON = "text/json";
 
 	public static void main(String[] args) throws Exception {
-		UserDBO user = new UserDBO();
-		user.setAccount("fcy");
-		user.setPassword("123456");
+		HashMap<String ,String> user = new HashMap<String ,String>();
+		user.put("account", "fcy");
+		user.put("token", "123456");
 
 		System.out.println(httpPostWithJSON("http://127.0.0.1:6666/ttt", JSON.toJSONString(user)));
 	}
