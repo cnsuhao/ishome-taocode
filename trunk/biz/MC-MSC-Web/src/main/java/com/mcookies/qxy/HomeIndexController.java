@@ -45,7 +45,7 @@ public class HomeIndexController extends MyControllerSupport {
 				return tokenFail();
 			}
 
-			String userId = myToken.getUserId();
+			String userId = getLoginer().getUserId();
 
 			result.setInfo("欢迎访问千校云平台：" + userId + "," + user.getAccount());
 		} catch (Exception e) {

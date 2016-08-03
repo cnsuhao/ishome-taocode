@@ -9,13 +9,12 @@ import javax.servlet.http.HttpSession;
 
 import org.isotope.jfp.framework.beans.common.BusinessTokenBean;
 import org.isotope.jfp.framework.beans.common.RESTResultBean;
-import org.isotope.jfp.framework.beans.common.TokenBean;
 import org.isotope.jfp.framework.beans.page.PageVOSupport;
+import org.isotope.jfp.framework.beans.user.LoginerBean;
 import org.isotope.jfp.framework.cache.ICacheService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import com.alibaba.fastjson.JSON;
 
@@ -27,7 +26,8 @@ import com.alibaba.fastjson.JSON;
  * @version 0.2.1 2014/11/05
  * @version 0.1.0 2014/2/8
  */
-public class MyControllerSupport extends MyFrameworkSupport //implements ISessionSupport 
+public class MyControllerSupport extends MyFrameworkSupport // implements
+															// ISessionSupport
 {
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -36,7 +36,7 @@ public class MyControllerSupport extends MyFrameworkSupport //implements ISessio
 	 */
 	@Resource
 	protected PageVOSupport pageModel;
-	
+
 	/**
 	 * Redis缓存
 	 */
@@ -46,16 +46,28 @@ public class MyControllerSupport extends MyFrameworkSupport //implements ISessio
 	/**
 	 * 当前用户Token
 	 */
-	protected BusinessTokenBean myToken;
-	public boolean doCheckToken(String token){
+	private BusinessTokenBean myToken;
+	private LoginerBean loginer;
+
+	public LoginerBean getLoginer() {
+		return loginer;
+	}
+
+	public boolean doCheckToken(String token) {
+		//获得用户信息
+		loginer = new LoginerBean();
+		loginer.setUserId("123456");
+		//检查用户Token
 		return true;
 	}
-	public RESTResultBean tokenFail(){
+
+	public RESTResultBean tokenFail() {
 		RESTResultBean result = new RESTResultBean();
 		result.setInfo("访问失败");
 		result.setStatus(1);
 		return result;
 	}
+
 	/**
 	 * 登录拦截
 	 * 
@@ -63,18 +75,17 @@ public class MyControllerSupport extends MyFrameworkSupport //implements ISessio
 	 */
 	//@ModelAttribute
 	public boolean doCheckLogin(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
-		//获得当前请求Token
-		
-		
-//		// 判断TOKEN有效性
-//		if (!doCheckToken(request, response)) {
-//			goBack(request, response);
-//		}
+		// 获得当前请求Token
+		loginer = new LoginerBean();
+		// // 判断TOKEN有效性
+		// if (!doCheckToken(request, response)) {
+		// goBack(request, response);
+		// }
 		myToken = new BusinessTokenBean();
 		loadUserInfo(request, response, session);
 		return true;
 	}
-	
+
 	/**
 	 * Session ID获得
 	 * 
@@ -85,7 +96,7 @@ public class MyControllerSupport extends MyFrameworkSupport //implements ISessio
 	// 注释的方法会在此controller每个方法执行前被执行
 	public void setSessionid(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		// 定义sessionID
-		//setSessionid(session.getId());
+		// setSessionid(session.getId());
 	}
 
 	/**
@@ -96,28 +107,28 @@ public class MyControllerSupport extends MyFrameworkSupport //implements ISessio
 	 */
 	public void loadUserInfo(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		//
-		
+
 	}
 
 	public void goBack(HttpServletRequest request, HttpServletResponse response) {
 		try {
 			// 销毁session
 			request.getSession().invalidate();
-			
-			//JSON拦截器
+
+			// JSON拦截器
 			{
 				RESTResultBean rs = new RESTResultBean();
 				rs.setStatus(9);
 				rs.setInfo("登录失效，请重新登录");
-				
+
 				OutputStream out = response.getOutputStream();
-				
+
 				out.write(JSON.toJSONString(rs).getBytes("UTF-8"));
 				out.flush();
 				out.close();
 			}
-			
-			//标准拦截器
+
+			// 标准拦截器
 			{
 				response.sendRedirect(SYSTEM_ROOT);
 				response.sendError(405);
@@ -151,14 +162,15 @@ public class MyControllerSupport extends MyFrameworkSupport //implements ISessio
 		}
 	}
 
-//	public boolean doCheckToken(HttpServletRequest request, HttpServletResponse response) {
-//		/*LoginerBean loginer = new LoginerBean();
-//		loginer.setToken(getToken());*/
-//		boolean result = LoginService_.doCheckToken(loginer);
-//		// request.setAttribute("loginUrl", loginer.getLoginUrl());
-//		request.setAttribute("", "");
-//		return result;
-//	}
+	// public boolean doCheckToken(HttpServletRequest request,
+	// HttpServletResponse response) {
+	// /*LoginerBean loginer = new LoginerBean();
+	// loginer.setToken(getToken());*/
+	// boolean result = LoginService_.doCheckToken(loginer);
+	// // request.setAttribute("loginUrl", loginer.getLoginUrl());
+	// request.setAttribute("", "");
+	// return result;
+	// }
 
 	public boolean doCheckComputer(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
