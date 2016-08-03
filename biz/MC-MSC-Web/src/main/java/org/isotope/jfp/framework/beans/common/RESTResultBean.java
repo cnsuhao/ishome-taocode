@@ -19,18 +19,11 @@ import com.alibaba.fastjson.JSONObject;
  * @since 0.2.0.0
  */
 @Named
-public class RESTResultBean extends ObjectBean implements ISFrameworkConstants {
+public class RESTResultBean extends TokenBean implements ISFrameworkConstants {
 
 	/**
-	 * 服务器认证授权码（登记授权）
-	 */
-	protected String token = EMPTY;
-
-	/**
-	 * 返回结果(0成功1失败)
-	 *  11->token is invalid
-       12->token is timeout
-       13->Illegal interface calls, not power use interface
+	 * 返回结果(0成功1失败) 11->token is invalid 12->token is timeout 13->Illegal
+	 * interface calls, not power use interface
 	 */
 	protected int status = 0;
 
@@ -43,19 +36,6 @@ public class RESTResultBean extends ObjectBean implements ISFrameworkConstants {
 	 * 返回结果
 	 */
 	protected Object data = EMPTY;
-
-	public String getToken() {
-		return token;
-	}
-
-	public void setToken(String token) {
-		this.token = token;
-	}
-	
-	public BusinessTokenBean getToken(String token) {
-		this.setToken(token);
-		return BusinessTokenBean.build(token);
-	}
 
 	public int getStatus() {
 		return status;
@@ -99,9 +79,11 @@ public class RESTResultBean extends ObjectBean implements ISFrameworkConstants {
 		{
 			// 直接获得深层对象List
 			JSONArray ja = (JSONArray) jsons.get("result");
-			//System.out.println(JSONArray.parseArray(JSONArray.toJSONString(rs.getResult()), RESTResultBean.class));
+			// System.out.println(JSONArray.parseArray(JSONArray.toJSONString(rs.getResult()),
+			// RESTResultBean.class));
 			// 直接解析数据项目得到一个数据
-			//System.out.println(JSONObject.toJavaObject((JSONObject) ja.get(0), RESTResultBean.class));
+			// System.out.println(JSONObject.toJavaObject((JSONObject)
+			// ja.get(0), RESTResultBean.class));
 		}
 	}
 }
