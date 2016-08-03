@@ -47,14 +47,21 @@ public class MyControllerSupport extends MyFrameworkSupport //implements ISessio
 	 * 当前用户Token
 	 */
 	protected BusinessTokenBean myToken;
-	
-
+	public boolean doCheckToken(String token){
+		return true;
+	}
+	public RESTResultBean tokenFail(){
+		RESTResultBean result = new RESTResultBean();
+		result.setInfo("访问失败");
+		result.setStatus(1);
+		return result;
+	}
 	/**
 	 * 登录拦截
 	 * 
 	 * @param response
 	 */
-	@ModelAttribute
+	//@ModelAttribute
 	public boolean doCheckLogin(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		//获得当前请求Token
 		
