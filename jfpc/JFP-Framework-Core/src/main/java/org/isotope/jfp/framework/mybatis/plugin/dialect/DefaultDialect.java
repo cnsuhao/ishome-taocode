@@ -15,7 +15,7 @@ public class DefaultDialect implements ISFrameworkConstants {
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	// 自定义orderby
-	private String supportsOrderby = " ORDER BY cc1 desc ";
+	private String supportsOrderby = " ";
 
 	public String getSupportsOrderby() {
 		return supportsOrderby;
@@ -32,10 +32,7 @@ public class DefaultDialect implements ISFrameworkConstants {
 			}else{
 				this.supportsOrderby = " ORDER BY " + orderby;
 			}
-		}else{
-			this.supportsOrderby = " ORDER BY cc1 desc ";
-		}
-		
+		}		
 	}
 
 	public boolean supportsLimit() {
