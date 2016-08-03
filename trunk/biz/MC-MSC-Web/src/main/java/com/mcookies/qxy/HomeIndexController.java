@@ -41,6 +41,10 @@ public class HomeIndexController extends MyControllerSupport {
 	public RESTResultBean doProcessPOST(HttpServletRequest request, @RequestBody UserDBO user) throws Exception {
 		RESTResultBean result = new RESTResultBean();
 		try {
+			if (doCheckToken(user.getToken()) == false) {
+				return tokenFail();
+			}
+
 			String userId = myToken.getUserId();
 
 			result.setInfo("欢迎访问千校云平台：" + userId + "," + user.getAccount());
@@ -51,12 +55,16 @@ public class HomeIndexController extends MyControllerSupport {
 
 		return result;
 	}
-	
+
 	@RequestMapping(value = "/ttt", method = RequestMethod.GET)
 	@ResponseBody
-	public RESTResultBean doProcessGET(String type,String token) throws Exception {
+	public RESTResultBean doProcessGET(String type, String token) throws Exception {
 		RESTResultBean result = new RESTResultBean();
 		try {
+			if (doCheckToken(token) == false) {
+				return tokenFail();
+			}
+
 			result.setInfo("欢迎访问千校云平台：" + type + "," + token);
 		} catch (Exception e) {
 			result.setInfo("访问失败");
