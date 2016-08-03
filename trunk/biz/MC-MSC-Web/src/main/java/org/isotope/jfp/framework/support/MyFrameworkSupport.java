@@ -1,4 +1,4 @@
-package org.jfpc.framework.support;
+package org.isotope.jfp.framework.support;
 
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.constants.pub.ISModelConstants;

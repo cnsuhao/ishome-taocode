@@ -1,10 +1,11 @@
 package com.mcookies.qxy;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.isotope.jfp.framework.beans.common.RESTResultBean;
 import org.isotope.jfp.framework.cache.ICacheService;
-import org.isotope.jfp.framework.constants.ISFrameworkConstants;
+import org.isotope.jfp.framework.support.MyControllerSupport;
 import org.isotope.jfp.framework.utils.DateHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,7 +24,7 @@ import com.mcookies.qxy.common.User.UserDBO;
  * @since 0.0.1
  */
 @Controller
-public class HomeIndexController implements ISFrameworkConstants {
+public class HomeIndexController extends MyControllerSupport {
 
 	@Resource
 	protected ICacheService myCacheService;
@@ -36,14 +37,30 @@ public class HomeIndexController implements ISFrameworkConstants {
 	}
 
 	@RequestMapping(value = "/ttt", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
-	@ResponseBody // @PathVariable String token,
-	public RESTResultBean doProcess(@RequestBody UserDBO user) throws Exception {
+	@ResponseBody
+	public RESTResultBean doProcessPOST(HttpServletRequest request, @RequestBody UserDBO user) throws Exception {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			result.setMessage("欢迎访问千校云平台：" + user.getAccount());
+			String userId = myToken.getUserId();
+
+			result.setInfo("欢迎访问千校云平台：" + userId + "," + user.getAccount());
 		} catch (Exception e) {
-			result.setMessage("访问失败");
-			result.setCode(ONE);
+			result.setInfo("访问失败");
+			result.setStatus(1);
+		}
+
+		return result;
+	}
+	
+	@RequestMapping(value = "/ttt", method = RequestMethod.GET)
+	@ResponseBody
+	public RESTResultBean doProcessGET(String type,String token) throws Exception {
+		RESTResultBean result = new RESTResultBean();
+		try {
+			result.setInfo("欢迎访问千校云平台：" + type + "," + token);
+		} catch (Exception e) {
+			result.setInfo("访问失败");
+			result.setStatus(1);
 		}
 
 		return result;

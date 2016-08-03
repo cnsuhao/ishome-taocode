@@ -1,4 +1,4 @@
-package org.jfpc.framework.support;
+package org.isotope.jfp.framework.support;
 
 import java.io.OutputStream;
 
@@ -9,11 +9,13 @@ import javax.servlet.http.HttpSession;
 
 import org.isotope.jfp.framework.beans.common.BusinessTokenBean;
 import org.isotope.jfp.framework.beans.common.RESTResultBean;
+import org.isotope.jfp.framework.beans.common.TokenBean;
 import org.isotope.jfp.framework.beans.page.PageVOSupport;
 import org.isotope.jfp.framework.cache.ICacheService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.alibaba.fastjson.JSON;
 
@@ -55,13 +57,13 @@ public class MyControllerSupport extends MyFrameworkSupport //implements ISessio
 	@ModelAttribute
 	public boolean doCheckLogin(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		//获得当前请求Token
-		String token = request.getParameter("token");
+		
 		
 //		// 判断TOKEN有效性
 //		if (!doCheckToken(request, response)) {
 //			goBack(request, response);
 //		}
-
+		myToken = new BusinessTokenBean();
 		loadUserInfo(request, response, session);
 		return true;
 	}
@@ -98,8 +100,8 @@ public class MyControllerSupport extends MyFrameworkSupport //implements ISessio
 			//JSON拦截器
 			{
 				RESTResultBean rs = new RESTResultBean();
-				rs.setCode("9");
-				rs.setMessage("登录失效，请重新登录");
+				rs.setStatus(9);
+				rs.setInfo("登录失效，请重新登录");
 				
 				OutputStream out = response.getOutputStream();
 				
