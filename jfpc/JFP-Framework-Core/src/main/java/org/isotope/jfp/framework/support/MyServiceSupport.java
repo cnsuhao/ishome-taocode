@@ -2,6 +2,7 @@ package org.isotope.jfp.framework.support;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -10,6 +11,8 @@ import org.isotope.jfp.framework.beans.page.PageVOSupport;
 import org.isotope.jfp.framework.constants.ISDBConstants;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.utils.BeanFactoryHelper;
+import org.isotope.jfp.framework.utils.DateHelper;
+import org.isotope.jfp.framework.utils.EmptyHelper;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.SqlSessionUtils;
 import org.slf4j.Logger;
@@ -24,7 +27,7 @@ import org.slf4j.LoggerFactory;
  * @version 0.1.0 2014/2/8
  */
 public class MyServiceSupport implements ISFrameworkConstants, ISDBConstants {
-    protected Logger logger = LoggerFactory.getLogger(this.getClass());
+	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	/**
 	 * 数据库连接
@@ -87,7 +90,7 @@ public class MyServiceSupport implements ISFrameworkConstants, ISDBConstants {
 		// }
 	}
 
-	/////////////分页查询////////////////
+	///////////// 分页查询////////////////
 	/**
 	 * 分页查询
 	 * 
@@ -168,7 +171,7 @@ public class MyServiceSupport implements ISFrameworkConstants, ISDBConstants {
 		return getDao().doSelectPage(formParamBean);
 	}
 
-	/////////////////基本操作////带有乐观锁/////////////////////
+	///////////////// 基本操作////带有乐观锁/////////////////////
 	/**
 	 * 根据主键，逻辑删除一条数据
 	 */
@@ -204,7 +207,7 @@ public class MyServiceSupport implements ISFrameworkConstants, ISDBConstants {
 			try {
 				rs[i] = doInsert(formParamBean);
 			} catch (Exception e) {
-				//System.err.println(e.getMessage());
+				// System.err.println(e.getMessage());
 				rs[i] = doUpdate(formParamBean);
 			}
 		}
@@ -242,7 +245,7 @@ public class MyServiceSupport implements ISFrameworkConstants, ISDBConstants {
 				rs[i] = doInsert(formParamBean);
 			} catch (Exception e) {
 				System.err.println(e.getMessage());
-			}			
+			}
 		}
 		return rs;
 	}
@@ -259,26 +262,33 @@ public class MyServiceSupport implements ISFrameworkConstants, ISDBConstants {
 		// 主键ID
 		// if (StringUtils.isEmpty(formParamBean.getPuk()))
 		// formParamBean.setPuk(PKHelper.creatPUKey());
-		//
-		// 数据所属系统
-		// if (StringUtils.isEmpty(formParamBean.getGgg()))
-		// formParamBean.setGgg("SYSTEM");
-		//
-		// 企业ID
-		// if (StringUtils.isEmpty(formParamBean.getPpp()))
-		// formParamBean.setPpp(getCompanyId());
-		//
-		// 有效标识
-		// if (StringUtils.isEmpty(formParamBean.getDdd()))
-		// formParamBean.setDdd("0");
-		//
-		// 有效标记、创建者、创建时间
-		// formParamBean.setCc1(DateHelper.currentTimeMillisCN1());
-		// formParamBean.setCc2(getLoginerId());
-		// formParamBean.setUu1(DateHelper.currentTimeMillisCN1());
-		// formParamBean.setUu2(getLoginerId());
+
+//		// 数据所属系统
+//		if (EmptyHelper.isEmpty(formParamBean.getGgg()))
+//			formParamBean.setGgg("SYSTEM");
+//
+//		// 企业ID
+//		if (EmptyHelper.isEmpty(formParamBean.getPpp()))
+//			formParamBean.setPpp(getCompanyId());
+//
+//		// 有效标识
+//		if (EmptyHelper.isEmpty(formParamBean.getDdd()))
+//			formParamBean.setDdd("0");
+
+		// 有效标记、创建者、创建时间、更新者、更新时间
+		Timestamp d = new Timestamp(System.currentTimeMillis()); 
+		Long loginId = getLoginerId();
+		formParamBean.setCreateTime(d);
+		formParamBean.setCreator(loginId);
+		formParamBean.setUpdateTime(d);
+		formParamBean.setUpdator(loginId);
 
 		return getDao().doInsert(formParamBean);
+	}
+
+	private Long getLoginerId() {
+		// TODO Auto-generated method stub
+		return 123456l;
 	}
 
 	/**
