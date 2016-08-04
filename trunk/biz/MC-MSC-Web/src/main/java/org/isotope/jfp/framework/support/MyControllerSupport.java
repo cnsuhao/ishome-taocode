@@ -57,7 +57,7 @@ public class MyControllerSupport extends MyFrameworkSupport // implements
 	}
 
 	public boolean doCheckToken(String token) {
-		myToken = BusinessTokenBean.build("91a82b73c64d55e46f3_g2__1__");
+		myToken = BusinessTokenBean.build("911822733644555466377288199__a__b__c__d__e__f__g");
 		// 获得用户信息
 		loginer = new LoginerBean();
 		loginer.setUserId("123456");
