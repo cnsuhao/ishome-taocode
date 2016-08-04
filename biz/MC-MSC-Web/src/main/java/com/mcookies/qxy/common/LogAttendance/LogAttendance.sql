@@ -5,7 +5,7 @@ CREATE TABLE log_attendance
     device_id BIGINT(12) NOT NULL COMMENT '学校设备id',
     mark_time VARCHAR(24) NOT NULL COMMENT '打卡时间',
     flag TINYINT(1) NOT NULL COMMENT '行为状态',
-    source_json DATETIME NOT NULL COMMENT '接收原文日志json',
+    source_json TEXT NOT NULL COMMENT '接收原文日志json',
     create_time VARCHAR(24) COMMENT '创建时间',
     creator BIGINT(12) COMMENT '创建者',
     update_time VARCHAR(24) COMMENT '更新时间',

@@ -5,7 +5,7 @@ CREATE TABLE oa_examine_information
     type TINYINT(1) COMMENT '标签类型',
     oatags_id BIGINT(12) COMMENT '标签id',
     tid BIGINT(12) COMMENT '发起人id',
-    content DATETIME COMMENT '待审批内容',
+    content TEXT COMMENT '待审批内容',
     result TINYINT(1) COMMENT '审核结果',
     is_use TINYINT(1) COMMENT '是否启用',
     create_time VARCHAR(24) COMMENT '创建时间',
