@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mcookies.qxy.common.DeviceTag.DeviceTagService;
 import com.mcookies.qxy.common.User.UserPVO;
-import com.mcookies.qxy.common.User.UserService;
 
 @Controller
 /** 课程管理*/
