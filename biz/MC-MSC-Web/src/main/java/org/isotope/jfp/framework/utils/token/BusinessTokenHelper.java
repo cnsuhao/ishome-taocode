@@ -23,12 +23,12 @@ public class BusinessTokenHelper implements ISFrameworkConstants {
 	//---------------------------/{encryType}							1
 	//---------------------------------------/{clientTimestamp}			8 (MMDDH24)	
 	public static void main(String[] args) {
-		//System.out.println(getBizTokenData("aaa", "bbb", "123456789abcdefg"));
-		//System.out.println(getUserID(getBizTokenData("aaa", "bbb", "123456789abcdefg")));
-		//System.out.println(getCompanyId(getBizTokenData("aaa", "bbb", "123456789abcdefg")));
-		//System.out.println(getBizId(getBizTokenData("aaa", "bbb", "123456789abcdefg")));
-		//System.out.println(getEncryType(getBizTokenData("aaa", "bbb", "123456789abcdefg")));
-		//System.out.println(getLoginDateTime(getBizTokenData("aaa", "bbb", "123456789abcdefg")));
+		System.out.println(getBizTokenData("987654321", "123456789", "123456789abcdefg"));
+		System.out.println(getUserID(getBizTokenData("987654321", "123456789", "123456789abcdefg")));
+		System.out.println(getCompanyId(getBizTokenData("987654321", "123456789", "123456789abcdefg")));
+		System.out.println(getBizId(getBizTokenData("987654321", "123456789", "123456789abcdefg")));
+		System.out.println(getEncryType(getBizTokenData("987654321", "123456789", "123456789abcdefg")));
+		System.out.println(getLoginDateTime(getBizTokenData("987654321", "123456789", "123456789abcdefg")));
 	}
 	
 	/**
@@ -143,11 +143,16 @@ public class BusinessTokenHelper implements ISFrameworkConstants {
 			if (i % 3 == 2 && userToken.charAt(i) != DOWN_LINE2)
 				loginDateTimeId.append(userToken.charAt(i));
 		}
-		String t = loginDateTimeId.toString();
-		String bizName = t.substring(0, 8);
-		String encryType = t.substring(8, 9);
-		String rRequestDateTime = t.substring(9);
-		return new String[] { userId.toString(), companyId.toString(), bizName, encryType, rRequestDateTime };
+		try{
+			String t = loginDateTimeId.toString();
+			String bizName = t.substring(0, 8);
+			String encryType = t.substring(8, 9);
+			String rRequestDateTime = t.substring(9);
+			return new String[] { userId.toString(), companyId.toString(), bizName, encryType, rRequestDateTime };
+		}catch(Exception e){
+			
+		}
+		return new String[] { userId.toString(), companyId.toString(), "", "", loginDateTimeId.toString() };
 	}
 
 	/**
