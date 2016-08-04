@@ -8,9 +8,9 @@ CREATE TABLE school
     address VARCHAR(50) COMMENT '地址',
     s_code VARCHAR(30) COMMENT '学校识别码(不启用)',
     is_use TINYINT(1) COMMENT '是否启用',
-    create_time VARCHAR(24) COMMENT '创建时间',
+    create_time DATETIME COMMENT '创建时间',
     creator BIGINT(12) COMMENT '创建者',
-    update_time VARCHAR(24) COMMENT '更新时间',
+    update_time DATETIME COMMENT '更新时间',
     updator BIGINT(12) COMMENT '最后更新者',
 PRIMARY KEY (sid)
 ) COMMENT '学校表'

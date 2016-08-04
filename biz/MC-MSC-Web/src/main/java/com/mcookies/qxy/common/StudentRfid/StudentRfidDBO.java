@@ -38,26 +38,6 @@ public class StudentRfidDBO extends MyDataBaseObjectSupport {
 	private Integer isUse = null;
 
 	/**
-	 * 创建时间
-	 */
-	private Long createTime = null;
-
-	/**
-	 * 创建者
-	 */
-	private Long creator = null;
-
-	/**
-	 * 更新时间
-	 */
-	private String updateTime = null;
-
-	/**
-	 * 最后更新者
-	 */
-	private Long updator = null;
-
-	/**
 	 * 获取自增id
 	 *
 	 * @return Id 自增id
@@ -109,42 +89,6 @@ public class StudentRfidDBO extends MyDataBaseObjectSupport {
 	 */
 	public Integer getIsUse() {
 		return this.isUse;
-	}
-
-	/**
-	 * 获取创建时间
-	 *
-	 * @return Create_time 创建时间
-	 */
-	public Long getCreateTime() {
-		return this.createTime;
-	}
-
-	/**
-	 * 获取创建者
-	 *
-	 * @return Creator 创建者
-	 */
-	public Long getCreator() {
-		return this.creator;
-	}
-
-	/**
-	 * 获取更新时间
-	 *
-	 * @return Update_time 更新时间
-	 */
-	public String getUpdateTime() {
-		return this.updateTime;
-	}
-
-	/**
-	 * 获取最后更新者
-	 *
-	 * @return Updator 最后更新者
-	 */
-	public Long getUpdator() {
-		return this.updator;
 	}
 
 	/**
@@ -205,46 +149,6 @@ public class StudentRfidDBO extends MyDataBaseObjectSupport {
 	 */
 	public void setIsUse(Integer isuse) {
 		this.isUse = isuse;
-	}
-
-	/**
-	 * 设置创建时间
-	 *
-	 * @param Create_time
-	 *            创建时间
-	 */
-	public void setCreateTime(Long createtime) {
-		this.createTime = createtime;
-	}
-
-	/**
-	 * 设置创建者
-	 *
-	 * @param Creator
-	 *            创建者
-	 */
-	public void setCreator(Long creator) {
-		this.creator = creator;
-	}
-
-	/**
-	 * 设置更新时间
-	 *
-	 * @param Update_time
-	 *            更新时间
-	 */
-	public void setUpdateTime(String updatetime) {
-		this.updateTime = updatetime;
-	}
-
-	/**
-	 * 设置最后更新者
-	 *
-	 * @param Updator
-	 *            最后更新者
-	 */
-	public void setUpdator(Long updator) {
-		this.updator = updator;
 	}
 
 }
