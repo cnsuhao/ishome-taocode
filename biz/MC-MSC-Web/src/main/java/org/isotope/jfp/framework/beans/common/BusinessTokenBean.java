@@ -23,7 +23,7 @@ public class BusinessTokenBean extends ObjectBean {
 	// ---------------------------/{encryType} 1
 	// ---------------------------------------/{clientTimestamp} 8 (MMDDH24)
 	public static void main(String[] args) {
-		// System.out.println(build("ab1ab2ab3__4__5__6__7__8__9__a__b__c__d__e__f__g"));
+		 System.out.println(build("911822733644555466377288199__a__b__c__d__e__f__g"));
 	}
 
 	/**

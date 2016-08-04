@@ -13,68 +13,68 @@
 	<!-- 根据条件更新所有记录 -->
 	<update id='doUpdateAll' parameterType='UserDBO'>
 		UPDATE user SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
-		<if test=" uid != null and uid !='' "><!-- 用户id（自增） -->
+		<if test=" uid != null "><!-- 用户id（自增） -->
 			,uid = #{uid}
 		</if>
-		<if test=" account != null and account !='' "><!-- 登录账号 -->
+		<if test=" account != null "><!-- 登录账号 -->
 			,account = #{account}
 		</if>
-		<if test=" email != null and email !='' "><!-- 登录邮箱 -->
+		<if test=" email != null "><!-- 登录邮箱 -->
 			,email = #{email}
 		</if>
-		<if test=" emailStatus != null and emailStatus !='' "><!-- 邮箱是否验证 -->
+		<if test=" emailStatus != null "><!-- 邮箱是否验证 -->
 			,email_status = #{emailStatus}
 		</if>
-		<if test=" phone != null and phone !='' "><!-- 手机号 -->
+		<if test=" phone != null "><!-- 手机号 -->
 			,phone = #{phone}
 		</if>
-		<if test=" password != null and password !='' "><!-- 密码 -->
+		<if test=" password != null "><!-- 密码 -->
 			,password = #{password}
 		</if>
-		<if test=" status != null and status !='' "><!-- 状态（不启用） -->
+		<if test=" status != null "><!-- 状态（不启用） -->
 			,status = #{status}
 		</if>
-		<if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+		<if test=" createTime != null "><!-- 创建时间 -->
 			,create_time = #{createTime}
 		</if>
-		<if test=" creator != null and creator !='' "><!-- 创建者 -->
+		<if test=" creator != null "><!-- 创建者 -->
 			,creator = #{creator}
 		</if>
-		<if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+		<if test=" updator != null "><!-- 最后更新者 -->
 			,updator = #{updator}
 		</if>
 		WHERE 1 = 1
-		<if test=" uid != null and uid !='' "><!-- 用户id（自增） -->
+		<if test=" uid != null "><!-- 用户id（自增） -->
 			AND uid = #{uid}
 		</if>
-		<if test=" account != null and account !='' "><!-- 登录账号 -->
+		<if test=" account != null "><!-- 登录账号 -->
 			AND account = #{account}
 		</if>
-		<if test=" email != null and email !='' "><!-- 登录邮箱 -->
+		<if test=" email != null "><!-- 登录邮箱 -->
 			AND email = #{email}
 		</if>
-		<if test=" emailStatus != null and emailStatus !='' "><!-- 邮箱是否验证 -->
+		<if test=" emailStatus != null "><!-- 邮箱是否验证 -->
 			AND email_status = #{emailStatus}
 		</if>
-		<if test=" phone != null and phone !='' "><!-- 手机号 -->
+		<if test=" phone != null "><!-- 手机号 -->
 			AND phone = #{phone}
 		</if>
-		<if test=" password != null and password !='' "><!-- 密码 -->
+		<if test=" password != null "><!-- 密码 -->
 			AND password = #{password}
 		</if>
-		<if test=" status != null and status !='' "><!-- 状态（不启用） -->
+		<if test=" status != null "><!-- 状态（不启用） -->
 			AND status = #{status}
 		</if>
-		<if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+		<if test=" createTime != null "><!-- 创建时间 -->
 			AND create_time = #{createTime}
 		</if>
-		<if test=" creator != null and creator !='' "><!-- 创建者 -->
+		<if test=" creator != null "><!-- 创建者 -->
 			AND creator = #{creator}
 		</if>
-		<if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+		<if test=" updateTime != null "><!-- 更新时间 -->
 			AND update_time = #{updateTime}
 		</if>
-		<if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+		<if test=" updator != null "><!-- 最后更新者 -->
 			AND updator = #{updator}
 		</if>
 	</update>
@@ -84,37 +84,37 @@
 		<include refid='tableColumns' />
 		FROM user
 		WHERE 1 = 1
-		<if test=" uid != null and uid !='' "><!-- 用户id（自增） -->
+		<if test=" uid != null "><!-- 用户id（自增） -->
 			AND uid = #{uid}
 		</if>
-		<if test=" account != null and account !='' "><!-- 登录账号 -->
+		<if test=" account != null "><!-- 登录账号 -->
 			AND account = #{account}
 		</if>
-		<if test=" email != null and email !='' "><!-- 登录邮箱 -->
+		<if test=" email != null "><!-- 登录邮箱 -->
 			AND email = #{email}
 		</if>
-		<if test=" emailStatus != null and emailStatus !='' "><!-- 邮箱是否验证 -->
+		<if test=" emailStatus != null "><!-- 邮箱是否验证 -->
 			AND email_status = #{emailStatus}
 		</if>
-		<if test=" phone != null and phone !='' "><!-- 手机号 -->
+		<if test=" phone != null "><!-- 手机号 -->
 			AND phone = #{phone}
 		</if>
-		<if test=" password != null and password !='' "><!-- 密码 -->
+		<if test=" password != null "><!-- 密码 -->
 			AND password = #{password}
 		</if>
-		<if test=" status != null and status !='' "><!-- 状态（不启用） -->
+		<if test=" status != null "><!-- 状态（不启用） -->
 			AND status = #{status}
 		</if>
-		<if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+		<if test=" createTime != null "><!-- 创建时间 -->
 			AND create_time = #{createTime}
 		</if>
-		<if test=" creator != null and creator !='' "><!-- 创建者 -->
+		<if test=" creator != null "><!-- 创建者 -->
 			AND creator = #{creator}
 		</if>
-		<if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+		<if test=" updateTime != null "><!-- 更新时间 -->
 			AND update_time = #{updateTime}
 		</if>
-		<if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+		<if test=" updator != null "><!-- 最后更新者 -->
 			AND updator = #{updator}
 		</if>
 	</select>
@@ -133,38 +133,38 @@
 	<!-- 修改一条数据 -->
 	<update id='doUpdate' parameterType='UserDBO'>
 		UPDATE user SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
-		<if test=" uid != null and uid !='' "><!-- 用户id（自增） -->
+		<if test=" uid != null "><!-- 用户id（自增） -->
 			,uid = #{uid}
 		</if>
-		<if test=" account != null and account !='' "><!-- 登录账号 -->
+		<if test=" account != null "><!-- 登录账号 -->
 			,account = #{account}
 		</if>
-		<if test=" email != null and email !='' "><!-- 登录邮箱 -->
+		<if test=" email != null "><!-- 登录邮箱 -->
 			,email = #{email}
 		</if>
-		<if test=" emailStatus != null and emailStatus !='' "><!-- 邮箱是否验证 -->
+		<if test=" emailStatus != null "><!-- 邮箱是否验证 -->
 			,email_status = #{emailStatus}
 		</if>
-		<if test=" phone != null and phone !='' "><!-- 手机号 -->
+		<if test=" phone != null "><!-- 手机号 -->
 			,phone = #{phone}
 		</if>
-		<if test=" password != null and password !='' "><!-- 密码 -->
+		<if test=" password != null "><!-- 密码 -->
 			,password = #{password}
 		</if>
-		<if test=" status != null and status !='' "><!-- 状态（不启用） -->
+		<if test=" status != null "><!-- 状态（不启用） -->
 			,status = #{status}
 		</if>
-		<if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+		<if test=" createTime != null "><!-- 创建时间 -->
 			,create_time = #{createTime}
 		</if>
-		<if test=" creator != null and creator !='' "><!-- 创建者 -->
+		<if test=" creator != null "><!-- 创建者 -->
 			,creator = #{creator}
 		</if>
-		<if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+		<if test=" updator != null "><!-- 最后更新者 -->
 			,updator = #{updator}
 		</if>
 		WHERE 1 = 1
-		<if test=" uid != null and uid !='' "><!-- 用户id（自增） -->
+		<if test=" uid != null "><!-- 用户id（自增） -->
 			AND uid = #{uid}
 		</if>
 	</update>
@@ -172,14 +172,14 @@
 	<delete id='toDelete' parameterType='UserDBO'>
 		UPDATE user SET ddd='1', update_time = #{updateTime}, uu2 = #{uu2}
 		WHERE update_time = #{updateTime}
-		<if test=" uid != null and uid !='' "><!-- 用户id（自增） -->
+		<if test=" uid != null "><!-- 用户id（自增） -->
 			AND uid = #{uid}
 		</if>
 	</delete>
 	<!-- 物理删除一条数据 -->
 	<delete id='doDelete' parameterType='UserDBO'>
 		DELETE FROM user WHERE update_time = #{updateTime}
-		<if test=" uid != null and uid !='' "><!-- 用户id（自增） -->
+		<if test=" uid != null "><!-- 用户id（自增） -->
 			AND uid = #{uid}
 		</if>
 	</delete>
@@ -188,7 +188,7 @@
 		SELECT
 		<include refid='tableColumns' />
 		FROM user WHERE 1 = 1
-		<if test=" uid != null and uid !='' "><!-- 用户id（自增） -->
+		<if test=" uid != null "><!-- 用户id（自增） -->
 			AND uid = #{uid}
 		</if>
 	</select>

@@ -13,116 +13,116 @@
     <!-- 根据条件更新所有记录 -->
     <update id='doUpdateAll' parameterType='UTeacherDBO'>
         UPDATE u_teacher SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
-        <if test=" tid != null and tid !='' "><!-- 教师id（自增） -->
+        <if test=" tid != null "><!-- 教师id（自增） -->
             ,tid = #{tid}
         </if>
-        <if test=" uid != null and uid !='' "><!-- 用户id -->
+        <if test=" uid != null "><!-- 用户id -->
             ,uid = #{uid}
         </if>
-        <if test=" sid != null and sid !='' "><!-- 学校id -->
+        <if test=" sid != null "><!-- 学校id -->
             ,sid = #{sid}
         </if>
-        <if test=" teacherName != null and teacherName !='' "><!-- 教师姓名 -->
+        <if test=" teacherName != null "><!-- 教师姓名 -->
             ,teacher_name = #{teacherName}
         </if>
-        <if test=" phone != null and phone !='' "><!-- 联系电话 -->
+        <if test=" phone != null "><!-- 联系电话 -->
             ,phone = #{phone}
         </if>
-        <if test=" email != null and email !='' "><!-- 邮箱 -->
+        <if test=" email != null "><!-- 邮箱 -->
             ,email = #{email}
         </if>
-        <if test=" idType != null and idType !='' "><!-- 用户类型 -->
+        <if test=" idType != null "><!-- 用户类型 -->
             ,id_type = #{idType}
         </if>
-        <if test=" method != null and method !='' "><!-- 认证方式 -->
+        <if test=" method != null' "><!-- 认证方式 -->
             ,method = #{method}
         </if>
-        <if test=" openid != null and openid !='' "><!-- openid -->
+        <if test=" openid != null "><!-- openid -->
             ,openid = #{openid}
         </if>
-        <if test=" wechatname != null and wechatname !='' "><!-- 微信名（不启用） -->
+        <if test=" wechatname != null "><!-- 微信名（不启用） -->
             ,wechatname = #{wechatname}
         </if>
-        <if test=" wechathead != null and wechathead !='' "><!-- 微信头像 -->
+        <if test=" wechathead != null "><!-- 微信头像 -->
             ,wechathead = #{wechathead}
         </if>
-        <if test=" city != null and city !='' "><!-- 城市 -->
+        <if test=" city != null "><!-- 城市 -->
             ,city = #{city}
         </if>
-        <if test=" gender != null and gender !='' "><!-- 性别 -->
+        <if test=" gender != null "><!-- 性别 -->
             ,gender = #{gender}
         </if>
-        <if test=" status != null and status !='' "><!-- 状态 -->
+        <if test=" status != null "><!-- 状态 -->
             ,status = #{status}
         </if>
-        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+        <if test=" isUse != null "><!-- 是否启用 -->
             ,is_use = #{isUse}
         </if>
-        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+        <if test=" createTime != null "><!-- 创建时间 -->
             ,create_time = #{createTime}
         </if>
-        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+        <if test=" creator != null "><!-- 创建者 -->
             ,creator = #{creator}
         </if>
-        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+        <if test=" updator != null "><!-- 最后更新者 -->
             ,updator = #{updator}
         </if>
         WHERE 1 = 1 
-            <if test=" tid != null and tid !='' "><!-- 教师id（自增） -->
+            <if test=" tid != null "><!-- 教师id（自增） -->
                 AND tid = #{tid}
             </if>
-            <if test=" uid != null and uid !='' "><!-- 用户id -->
+            <if test=" uid != null "><!-- 用户id -->
                 AND uid = #{uid}
             </if>
-            <if test=" sid != null and sid !='' "><!-- 学校id -->
+            <if test=" sid != null "><!-- 学校id -->
                 AND sid = #{sid}
             </if>
-            <if test=" teacherName != null and teacherName !='' "><!-- 教师姓名 -->
+            <if test=" teacherName != null "><!-- 教师姓名 -->
                 AND teacher_name = #{teacherName}
             </if>
-            <if test=" phone != null and phone !='' "><!-- 联系电话 -->
+            <if test=" phone != null "><!-- 联系电话 -->
                 AND phone = #{phone}
             </if>
-            <if test=" email != null and email !='' "><!-- 邮箱 -->
+            <if test=" email != null "><!-- 邮箱 -->
                 AND email = #{email}
             </if>
-            <if test=" idType != null and idType !='' "><!-- 用户类型 -->
+            <if test=" idType != null "><!-- 用户类型 -->
                 AND id_type = #{idType}
             </if>
-            <if test=" method != null and method !='' "><!-- 认证方式 -->
+            <if test=" method != null' "><!-- 认证方式 -->
                 AND method = #{method}
             </if>
-            <if test=" openid != null and openid !='' "><!-- openid -->
+            <if test=" openid != null "><!-- openid -->
                 AND openid = #{openid}
             </if>
-            <if test=" wechatname != null and wechatname !='' "><!-- 微信名（不启用） -->
+            <if test=" wechatname != null "><!-- 微信名（不启用） -->
                 AND wechatname = #{wechatname}
             </if>
-            <if test=" wechathead != null and wechathead !='' "><!-- 微信头像 -->
+            <if test=" wechathead != null "><!-- 微信头像 -->
                 AND wechathead = #{wechathead}
             </if>
-            <if test=" city != null and city !='' "><!-- 城市 -->
+            <if test=" city != null "><!-- 城市 -->
                 AND city = #{city}
             </if>
-            <if test=" gender != null and gender !='' "><!-- 性别 -->
+            <if test=" gender != null "><!-- 性别 -->
                 AND gender = #{gender}
             </if>
-            <if test=" status != null and status !='' "><!-- 状态 -->
+            <if test=" status != null "><!-- 状态 -->
                 AND status = #{status}
             </if>
-            <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+            <if test=" isUse != null "><!-- 是否启用 -->
                 AND is_use = #{isUse}
             </if>
-            <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+            <if test=" createTime != null "><!-- 创建时间 -->
                 AND create_time = #{createTime}
             </if>
-            <if test=" creator != null and creator !='' "><!-- 创建者 -->
+            <if test=" creator != null "><!-- 创建者 -->
                 AND creator = #{creator}
             </if>
-            <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+            <if test=" updateTime != null "><!-- 更新时间 -->
                 AND update_time = #{updateTime}
             </if>
-            <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+            <if test=" updator != null "><!-- 最后更新者 -->
                 AND updator = #{updator}
             </if>
     </update>
@@ -130,61 +130,61 @@
     <select id='doSelectPage' parameterType='UTeacherDBO' resultType='UTeacherDBO'>
         SELECT <include refid='tableColumns'/> FROM u_teacher
         WHERE 1 = 1 
-        <if test=" tid != null and tid !='' "><!-- 教师id（自增） -->
+        <if test=" tid != null "><!-- 教师id（自增） -->
             AND tid = #{tid}
         </if>
-        <if test=" uid != null and uid !='' "><!-- 用户id -->
+        <if test=" uid != null "><!-- 用户id -->
             AND uid = #{uid}
         </if>
-        <if test=" sid != null and sid !='' "><!-- 学校id -->
+        <if test=" sid != null "><!-- 学校id -->
             AND sid = #{sid}
         </if>
-        <if test=" teacherName != null and teacherName !='' "><!-- 教师姓名 -->
+        <if test=" teacherName != null "><!-- 教师姓名 -->
             AND teacher_name = #{teacherName}
         </if>
-        <if test=" phone != null and phone !='' "><!-- 联系电话 -->
+        <if test=" phone != null "><!-- 联系电话 -->
             AND phone = #{phone}
         </if>
-        <if test=" email != null and email !='' "><!-- 邮箱 -->
+        <if test=" email != null "><!-- 邮箱 -->
             AND email = #{email}
         </if>
-        <if test=" idType != null and idType !='' "><!-- 用户类型 -->
+        <if test=" idType != null "><!-- 用户类型 -->
             AND id_type = #{idType}
         </if>
-        <if test=" method != null and method !='' "><!-- 认证方式 -->
+        <if test=" method != null' "><!-- 认证方式 -->
             AND method = #{method}
         </if>
-        <if test=" openid != null and openid !='' "><!-- openid -->
+        <if test=" openid != null "><!-- openid -->
             AND openid = #{openid}
         </if>
-        <if test=" wechatname != null and wechatname !='' "><!-- 微信名（不启用） -->
+        <if test=" wechatname != null "><!-- 微信名（不启用） -->
             AND wechatname = #{wechatname}
         </if>
-        <if test=" wechathead != null and wechathead !='' "><!-- 微信头像 -->
+        <if test=" wechathead != null "><!-- 微信头像 -->
             AND wechathead = #{wechathead}
         </if>
-        <if test=" city != null and city !='' "><!-- 城市 -->
+        <if test=" city != null "><!-- 城市 -->
             AND city = #{city}
         </if>
-        <if test=" gender != null and gender !='' "><!-- 性别 -->
+        <if test=" gender != null "><!-- 性别 -->
             AND gender = #{gender}
         </if>
-        <if test=" status != null and status !='' "><!-- 状态 -->
+        <if test=" status != null "><!-- 状态 -->
             AND status = #{status}
         </if>
-        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+        <if test=" isUse != null "><!-- 是否启用 -->
             AND is_use = #{isUse}
         </if>
-        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+        <if test=" createTime != null "><!-- 创建时间 -->
             AND create_time = #{createTime}
         </if>
-        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+        <if test=" creator != null "><!-- 创建者 -->
             AND creator = #{creator}
         </if>
-        <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+        <if test=" updateTime != null "><!-- 更新时间 -->
             AND update_time = #{updateTime}
         </if>
-        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+        <if test=" updator != null "><!-- 最后更新者 -->
             AND updator = #{updator}
         </if>
     </select>
@@ -199,83 +199,83 @@
     <!-- 修改一条数据 -->
     <update id='doUpdate' parameterType='UTeacherDBO'>
         UPDATE u_teacher SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
-        <if test=" tid != null and tid !='' "><!-- 教师id（自增） -->
+        <if test=" tid != null "><!-- 教师id（自增） -->
             ,tid = #{tid}
         </if>
-        <if test=" uid != null and uid !='' "><!-- 用户id -->
+        <if test=" uid != null "><!-- 用户id -->
             ,uid = #{uid}
         </if>
-        <if test=" sid != null and sid !='' "><!-- 学校id -->
+        <if test=" sid != null "><!-- 学校id -->
             ,sid = #{sid}
         </if>
-        <if test=" teacherName != null and teacherName !='' "><!-- 教师姓名 -->
+        <if test=" teacherName != null "><!-- 教师姓名 -->
             ,teacher_name = #{teacherName}
         </if>
-        <if test=" phone != null and phone !='' "><!-- 联系电话 -->
+        <if test=" phone != null "><!-- 联系电话 -->
             ,phone = #{phone}
         </if>
-        <if test=" email != null and email !='' "><!-- 邮箱 -->
+        <if test=" email != null "><!-- 邮箱 -->
             ,email = #{email}
         </if>
-        <if test=" idType != null and idType !='' "><!-- 用户类型 -->
+        <if test=" idType != null "><!-- 用户类型 -->
             ,id_type = #{idType}
         </if>
-        <if test=" method != null and method !='' "><!-- 认证方式 -->
+        <if test=" method != null' "><!-- 认证方式 -->
             ,method = #{method}
         </if>
-        <if test=" openid != null and openid !='' "><!-- openid -->
+        <if test=" openid != null "><!-- openid -->
             ,openid = #{openid}
         </if>
-        <if test=" wechatname != null and wechatname !='' "><!-- 微信名（不启用） -->
+        <if test=" wechatname != null "><!-- 微信名（不启用） -->
             ,wechatname = #{wechatname}
         </if>
-        <if test=" wechathead != null and wechathead !='' "><!-- 微信头像 -->
+        <if test=" wechathead != null "><!-- 微信头像 -->
             ,wechathead = #{wechathead}
         </if>
-        <if test=" city != null and city !='' "><!-- 城市 -->
+        <if test=" city != null "><!-- 城市 -->
             ,city = #{city}
         </if>
-        <if test=" gender != null and gender !='' "><!-- 性别 -->
+        <if test=" gender != null "><!-- 性别 -->
             ,gender = #{gender}
         </if>
-        <if test=" status != null and status !='' "><!-- 状态 -->
+        <if test=" status != null "><!-- 状态 -->
             ,status = #{status}
         </if>
-        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+        <if test=" isUse != null "><!-- 是否启用 -->
             ,is_use = #{isUse}
         </if>
-        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+        <if test=" createTime != null "><!-- 创建时间 -->
             ,create_time = #{createTime}
         </if>
-        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+        <if test=" creator != null "><!-- 创建者 -->
             ,creator = #{creator}
         </if>
-        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+        <if test=" updator != null "><!-- 最后更新者 -->
             ,updator = #{updator}
         </if>
         WHERE 1 = 1 
-            <if test=" tid != null and tid !='' "><!-- 教师id（自增） -->
+            <if test=" tid != null "><!-- 教师id（自增） -->
                 AND tid = #{tid}
             </if>
     </update>
     <!-- 逻辑删除一条数据 -->
     <delete id='toDelete' parameterType='UTeacherDBO'>
         UPDATE u_teacher SET ddd='1', update_time = #{updateTime}, uu2 = #{uu2} WHERE update_time = #{updateTime}
-            <if test=" tid != null and tid !='' "><!-- 教师id（自增） -->
+            <if test=" tid != null "><!-- 教师id（自增） -->
                 AND tid = #{tid}
             </if>
     </delete>
     <!-- 物理删除一条数据 -->
     <delete id='doDelete' parameterType='UTeacherDBO'>
         DELETE FROM u_teacher WHERE update_time = #{updateTime}
-            <if test=" tid != null and tid !='' "><!-- 教师id（自增） -->
+            <if test=" tid != null "><!-- 教师id（自增） -->
                 AND tid = #{tid}
             </if>
     </delete>
     <!-- 查询一条数据  -->
     <select id='doRead' parameterType='UTeacherDBO' resultType='UTeacherDBO'>
         SELECT <include refid='tableColumns'/> FROM u_teacher WHERE 1 = 1
-            <if test=" tid != null and tid !='' "><!-- 教师id（自增） -->
+            <if test=" tid != null "><!-- 教师id（自增） -->
                 AND tid = #{tid}
             </if>
     </select>

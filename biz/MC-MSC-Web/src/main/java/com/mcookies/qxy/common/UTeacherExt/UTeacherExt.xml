@@ -13,80 +13,80 @@
     <!-- 根据条件更新所有记录 -->
     <update id='doUpdateAll' parameterType='UTeacherExtDBO'>
         UPDATE u_teacher_ext SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
-        <if test=" tid != null and tid !='' "><!-- 教师id -->
+        <if test=" tid != null "><!-- 教师id -->
             ,tid = #{tid}
         </if>
-        <if test=" jobNumber != null and jobNumber !='' "><!-- 教师工号 -->
+        <if test=" jobNumber != null "><!-- 教师工号 -->
             ,job_number = #{jobNumber}
         </if>
-        <if test=" gender != null and gender !='' "><!-- 教师性别 -->
+        <if test=" gender != null "><!-- 教师性别 -->
             ,gender = #{gender}
         </if>
-        <if test=" dateOfBirth != null and dateOfBirth !='' "><!-- 出生年月 -->
+        <if test=" dateOfBirth != null "><!-- 出生年月 -->
             ,date_of_birth = #{dateOfBirth}
         </if>
-        <if test=" startWorkT != null and startWorkT !='' "><!-- 开始工作时间 -->
+        <if test=" startWorkT != null "><!-- 开始工作时间 -->
             ,start_work_t = #{startWorkT}
         </if>
-        <if test=" cardType != null and cardType !='' "><!-- 证件类型 -->
+        <if test=" cardType != null "><!-- 证件类型 -->
             ,card_type = #{cardType}
         </if>
-        <if test=" cardNumber != null and cardNumber !='' "><!-- 证件号码 -->
+        <if test=" cardNumber != null "><!-- 证件号码 -->
             ,card_number = #{cardNumber}
         </if>
-        <if test=" homeAddress != null and homeAddress !='' "><!-- 家庭住址 -->
+        <if test=" homeAddress != null "><!-- 家庭住址 -->
             ,home_address = #{homeAddress}
         </if>
-        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+        <if test=" isUse != null "><!-- 是否启用 -->
             ,is_use = #{isUse}
         </if>
-        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+        <if test=" createTime != null "><!-- 创建时间 -->
             ,create_time = #{createTime}
         </if>
-        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+        <if test=" creator != null "><!-- 创建者 -->
             ,creator = #{creator}
         </if>
-        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+        <if test=" updator != null "><!-- 最后更新者 -->
             ,updator = #{updator}
         </if>
         WHERE 1 = 1 
-            <if test=" tid != null and tid !='' "><!-- 教师id -->
+            <if test=" tid != null "><!-- 教师id -->
                 AND tid = #{tid}
             </if>
-            <if test=" jobNumber != null and jobNumber !='' "><!-- 教师工号 -->
+            <if test=" jobNumber != null "><!-- 教师工号 -->
                 AND job_number = #{jobNumber}
             </if>
-            <if test=" gender != null and gender !='' "><!-- 教师性别 -->
+            <if test=" gender != null "><!-- 教师性别 -->
                 AND gender = #{gender}
             </if>
-            <if test=" dateOfBirth != null and dateOfBirth !='' "><!-- 出生年月 -->
+            <if test=" dateOfBirth != null "><!-- 出生年月 -->
                 AND date_of_birth = #{dateOfBirth}
             </if>
-            <if test=" startWorkT != null and startWorkT !='' "><!-- 开始工作时间 -->
+            <if test=" startWorkT != null "><!-- 开始工作时间 -->
                 AND start_work_t = #{startWorkT}
             </if>
-            <if test=" cardType != null and cardType !='' "><!-- 证件类型 -->
+            <if test=" cardType != null "><!-- 证件类型 -->
                 AND card_type = #{cardType}
             </if>
-            <if test=" cardNumber != null and cardNumber !='' "><!-- 证件号码 -->
+            <if test=" cardNumber != null "><!-- 证件号码 -->
                 AND card_number = #{cardNumber}
             </if>
-            <if test=" homeAddress != null and homeAddress !='' "><!-- 家庭住址 -->
+            <if test=" homeAddress != null "><!-- 家庭住址 -->
                 AND home_address = #{homeAddress}
             </if>
-            <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+            <if test=" isUse != null "><!-- 是否启用 -->
                 AND is_use = #{isUse}
             </if>
-            <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+            <if test=" createTime != null "><!-- 创建时间 -->
                 AND create_time = #{createTime}
             </if>
-            <if test=" creator != null and creator !='' "><!-- 创建者 -->
+            <if test=" creator != null "><!-- 创建者 -->
                 AND creator = #{creator}
             </if>
-            <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+            <if test=" updateTime != null "><!-- 更新时间 -->
                 AND update_time = #{updateTime}
             </if>
-            <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+            <if test=" updator != null "><!-- 最后更新者 -->
                 AND updator = #{updator}
             </if>
     </update>
@@ -94,43 +94,43 @@
     <select id='doSelectPage' parameterType='UTeacherExtDBO' resultType='UTeacherExtDBO'>
         SELECT <include refid='tableColumns'/> FROM u_teacher_ext
         WHERE 1 = 1 
-        <if test=" tid != null and tid !='' "><!-- 教师id -->
+        <if test=" tid != null "><!-- 教师id -->
             AND tid = #{tid}
         </if>
-        <if test=" jobNumber != null and jobNumber !='' "><!-- 教师工号 -->
+        <if test=" jobNumber != null "><!-- 教师工号 -->
             AND job_number = #{jobNumber}
         </if>
-        <if test=" gender != null and gender !='' "><!-- 教师性别 -->
+        <if test=" gender != null "><!-- 教师性别 -->
             AND gender = #{gender}
         </if>
-        <if test=" dateOfBirth != null and dateOfBirth !='' "><!-- 出生年月 -->
+        <if test=" dateOfBirth != null "><!-- 出生年月 -->
             AND date_of_birth = #{dateOfBirth}
         </if>
-        <if test=" startWorkT != null and startWorkT !='' "><!-- 开始工作时间 -->
+        <if test=" startWorkT != null "><!-- 开始工作时间 -->
             AND start_work_t = #{startWorkT}
         </if>
-        <if test=" cardType != null and cardType !='' "><!-- 证件类型 -->
+        <if test=" cardType != null "><!-- 证件类型 -->
             AND card_type = #{cardType}
         </if>
-        <if test=" cardNumber != null and cardNumber !='' "><!-- 证件号码 -->
+        <if test=" cardNumber != null "><!-- 证件号码 -->
             AND card_number = #{cardNumber}
         </if>
-        <if test=" homeAddress != null and homeAddress !='' "><!-- 家庭住址 -->
+        <if test=" homeAddress != null "><!-- 家庭住址 -->
             AND home_address = #{homeAddress}
         </if>
-        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+        <if test=" isUse != null "><!-- 是否启用 -->
             AND is_use = #{isUse}
         </if>
-        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+        <if test=" createTime != null "><!-- 创建时间 -->
             AND create_time = #{createTime}
         </if>
-        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+        <if test=" creator != null "><!-- 创建者 -->
             AND creator = #{creator}
         </if>
-        <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+        <if test=" updateTime != null "><!-- 更新时间 -->
             AND update_time = #{updateTime}
         </if>
-        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+        <if test=" updator != null "><!-- 最后更新者 -->
             AND updator = #{updator}
         </if>
     </select>
@@ -145,65 +145,65 @@
     <!-- 修改一条数据 -->
     <update id='doUpdate' parameterType='UTeacherExtDBO'>
         UPDATE u_teacher_ext SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
-        <if test=" tid != null and tid !='' "><!-- 教师id -->
+        <if test=" tid != null "><!-- 教师id -->
             ,tid = #{tid}
         </if>
-        <if test=" jobNumber != null and jobNumber !='' "><!-- 教师工号 -->
+        <if test=" jobNumber != null "><!-- 教师工号 -->
             ,job_number = #{jobNumber}
         </if>
-        <if test=" gender != null and gender !='' "><!-- 教师性别 -->
+        <if test=" gender != null "><!-- 教师性别 -->
             ,gender = #{gender}
         </if>
-        <if test=" dateOfBirth != null and dateOfBirth !='' "><!-- 出生年月 -->
+        <if test=" dateOfBirth != null "><!-- 出生年月 -->
             ,date_of_birth = #{dateOfBirth}
         </if>
-        <if test=" startWorkT != null and startWorkT !='' "><!-- 开始工作时间 -->
+        <if test=" startWorkT != null "><!-- 开始工作时间 -->
             ,start_work_t = #{startWorkT}
         </if>
-        <if test=" cardType != null and cardType !='' "><!-- 证件类型 -->
+        <if test=" cardType != null "><!-- 证件类型 -->
             ,card_type = #{cardType}
         </if>
-        <if test=" cardNumber != null and cardNumber !='' "><!-- 证件号码 -->
+        <if test=" cardNumber != null "><!-- 证件号码 -->
             ,card_number = #{cardNumber}
         </if>
-        <if test=" homeAddress != null and homeAddress !='' "><!-- 家庭住址 -->
+        <if test=" homeAddress != null "><!-- 家庭住址 -->
             ,home_address = #{homeAddress}
         </if>
-        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+        <if test=" isUse != null "><!-- 是否启用 -->
             ,is_use = #{isUse}
         </if>
-        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+        <if test=" createTime != null "><!-- 创建时间 -->
             ,create_time = #{createTime}
         </if>
-        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+        <if test=" creator != null "><!-- 创建者 -->
             ,creator = #{creator}
         </if>
-        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+        <if test=" updator != null "><!-- 最后更新者 -->
             ,updator = #{updator}
         </if>
         WHERE 1 = 1 
-            <if test=" tid != null and tid !='' "><!-- 教师id -->
+            <if test=" tid != null "><!-- 教师id -->
                 AND tid = #{tid}
             </if>
     </update>
     <!-- 逻辑删除一条数据 -->
     <delete id='toDelete' parameterType='UTeacherExtDBO'>
         UPDATE u_teacher_ext SET ddd='1', update_time = #{updateTime}, uu2 = #{uu2} WHERE update_time = #{updateTime}
-            <if test=" tid != null and tid !='' "><!-- 教师id -->
+            <if test=" tid != null "><!-- 教师id -->
                 AND tid = #{tid}
             </if>
     </delete>
     <!-- 物理删除一条数据 -->
     <delete id='doDelete' parameterType='UTeacherExtDBO'>
         DELETE FROM u_teacher_ext WHERE update_time = #{updateTime}
-            <if test=" tid != null and tid !='' "><!-- 教师id -->
+            <if test=" tid != null "><!-- 教师id -->
                 AND tid = #{tid}
             </if>
     </delete>
     <!-- 查询一条数据  -->
     <select id='doRead' parameterType='UTeacherExtDBO' resultType='UTeacherExtDBO'>
         SELECT <include refid='tableColumns'/> FROM u_teacher_ext WHERE 1 = 1
-            <if test=" tid != null and tid !='' "><!-- 教师id -->
+            <if test=" tid != null "><!-- 教师id -->
                 AND tid = #{tid}
             </if>
     </select>

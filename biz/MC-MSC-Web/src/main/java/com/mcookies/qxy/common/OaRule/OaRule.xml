@@ -13,74 +13,74 @@
 	<!-- 根据条件更新所有记录 -->
 	<update id='doUpdateAll' parameterType='OaRuleDBO'>
 		UPDATE oa_rule SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
-		<if test=" oaruleId != null and oaruleId !='' "><!-- 规则id -->
+		<if test=" oaruleId != null "><!-- 规则id -->
 			,oarule_id = #{oaruleId}
 		</if>
-		<if test=" sid != null and sid !='' "><!-- 学校id -->
+		<if test=" sid != null "><!-- 学校id -->
 			,sid = #{sid}
 		</if>
-		<if test=" oatagsId != null and oatagsId !='' "><!-- 标签id -->
+		<if test=" oatagsId != null "><!-- 标签id -->
 			,oatags_id = #{oatagsId}
 		</if>
-		<if test=" oaruleName != null and oaruleName !='' "><!-- 规则名称 -->
+		<if test=" oaruleName != null "><!-- 规则名称 -->
 			,oarule_name = #{oaruleName}
 		</if>
-		<if test=" serialNumber != null and serialNumber !='' "><!-- 规则序号 -->
+		<if test=" serialNumber != null "><!-- 规则序号 -->
 			,serial_number = #{serialNumber}
 		</if>
-		<if test=" adoptType != null and adoptType !='' "><!-- 规则通过方式 -->
+		<if test=" adoptType != null "><!-- 规则通过方式 -->
 			,adopt_type = #{adoptType}
 		</if>
-		<if test=" tids != null and tids !='' "><!-- 审核人列表 -->
+		<if test=" tids != null "><!-- 审核人列表 -->
 			,tids = #{tids}
 		</if>
-		<if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+		<if test=" isUse != null "><!-- 是否启用 -->
 			,is_use = #{isUse}
 		</if>
-		<if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+		<if test=" createTime != null "><!-- 创建时间 -->
 			,create_time = #{createTime}
 		</if>
-		<if test=" creator != null and creator !='' "><!-- 创建者 -->
+		<if test=" creator != null "><!-- 创建者 -->
 			,creator = #{creator}
 		</if>
-		<if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+		<if test=" updator != null "><!-- 最后更新者 -->
 			,updator = #{updator}
 		</if>
 		WHERE 1 = 1
-		<if test=" oaruleId != null and oaruleId !='' "><!-- 规则id -->
+		<if test=" oaruleId != null "><!-- 规则id -->
 			AND oarule_id = #{oaruleId}
 		</if>
-		<if test=" sid != null and sid !='' "><!-- 学校id -->
+		<if test=" sid != null "><!-- 学校id -->
 			AND sid = #{sid}
 		</if>
-		<if test=" oatagsId != null and oatagsId !='' "><!-- 标签id -->
+		<if test=" oatagsId != null "><!-- 标签id -->
 			AND oatags_id = #{oatagsId}
 		</if>
-		<if test=" oaruleName != null and oaruleName !='' "><!-- 规则名称 -->
+		<if test=" oaruleName != null "><!-- 规则名称 -->
 			AND oarule_name = #{oaruleName}
 		</if>
-		<if test=" serialNumber != null and serialNumber !='' "><!-- 规则序号 -->
+		<if test=" serialNumber != null "><!-- 规则序号 -->
 			AND serial_number = #{serialNumber}
 		</if>
-		<if test=" adoptType != null and adoptType !='' "><!-- 规则通过方式 -->
+		<if test=" adoptType != null "><!-- 规则通过方式 -->
 			AND adopt_type = #{adoptType}
 		</if>
-		<if test=" tids != null and tids !='' "><!-- 审核人列表 -->
+		<if test=" tids != null "><!-- 审核人列表 -->
 			AND tids = #{tids}
 		</if>
-		<if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+		<if test=" isUse != null "><!-- 是否启用 -->
 			AND is_use = #{isUse}
 		</if>
-		<if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+		<if test=" createTime != null "><!-- 创建时间 -->
 			AND create_time = #{createTime}
 		</if>
-		<if test=" creator != null and creator !='' "><!-- 创建者 -->
+		<if test=" creator != null "><!-- 创建者 -->
 			AND creator = #{creator}
 		</if>
-		<if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+		<if test=" updateTime != null "><!-- 更新时间 -->
 			AND update_time = #{updateTime}
 		</if>
-		<if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+		<if test=" updator != null "><!-- 最后更新者 -->
 			AND updator = #{updator}
 		</if>
 	</update>
@@ -90,40 +90,40 @@
 		<include refid='tableColumns' />
 		FROM oa_rule
 		WHERE 1 = 1
-		<if test=" oaruleId != null and oaruleId !='' "><!-- 规则id -->
+		<if test=" oaruleId != null "><!-- 规则id -->
 			AND oarule_id = #{oaruleId}
 		</if>
-		<if test=" sid != null and sid !='' "><!-- 学校id -->
+		<if test=" sid != null "><!-- 学校id -->
 			AND sid = #{sid}
 		</if>
-		<if test=" oatagsId != null and oatagsId !='' "><!-- 标签id -->
+		<if test=" oatagsId != null "><!-- 标签id -->
 			AND oatags_id = #{oatagsId}
 		</if>
-		<if test=" oaruleName != null and oaruleName !='' "><!-- 规则名称 -->
+		<if test=" oaruleName != null "><!-- 规则名称 -->
 			AND oarule_name = #{oaruleName}
 		</if>
-		<if test=" serialNumber != null and serialNumber !='' "><!-- 规则序号 -->
+		<if test=" serialNumber != null "><!-- 规则序号 -->
 			AND serial_number = #{serialNumber}
 		</if>
-		<if test=" adoptType != null and adoptType !='' "><!-- 规则通过方式 -->
+		<if test=" adoptType != null "><!-- 规则通过方式 -->
 			AND adopt_type = #{adoptType}
 		</if>
-		<if test=" tids != null and tids !='' "><!-- 审核人列表 -->
+		<if test=" tids != null "><!-- 审核人列表 -->
 			AND tids = #{tids}
 		</if>
-		<if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+		<if test=" isUse != null "><!-- 是否启用 -->
 			AND is_use = #{isUse}
 		</if>
-		<if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+		<if test=" createTime != null "><!-- 创建时间 -->
 			AND create_time = #{createTime}
 		</if>
-		<if test=" creator != null and creator !='' "><!-- 创建者 -->
+		<if test=" creator != null "><!-- 创建者 -->
 			AND creator = #{creator}
 		</if>
-		<if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+		<if test=" updateTime != null "><!-- 更新时间 -->
 			AND update_time = #{updateTime}
 		</if>
-		<if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+		<if test=" updator != null "><!-- 最后更新者 -->
 			AND updator = #{updator}
 		</if>
 	</select>
@@ -142,41 +142,41 @@
 	<!-- 修改一条数据 -->
 	<update id='doUpdate' parameterType='OaRuleDBO'>
 		UPDATE oa_rule SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
-		<if test=" oaruleId != null and oaruleId !='' "><!-- 规则id -->
+		<if test=" oaruleId != null "><!-- 规则id -->
 			,oarule_id = #{oaruleId}
 		</if>
-		<if test=" sid != null and sid !='' "><!-- 学校id -->
+		<if test=" sid != null "><!-- 学校id -->
 			,sid = #{sid}
 		</if>
-		<if test=" oatagsId != null and oatagsId !='' "><!-- 标签id -->
+		<if test=" oatagsId != null "><!-- 标签id -->
 			,oatags_id = #{oatagsId}
 		</if>
-		<if test=" oaruleName != null and oaruleName !='' "><!-- 规则名称 -->
+		<if test=" oaruleName != null "><!-- 规则名称 -->
 			,oarule_name = #{oaruleName}
 		</if>
-		<if test=" serialNumber != null and serialNumber !='' "><!-- 规则序号 -->
+		<if test=" serialNumber != null "><!-- 规则序号 -->
 			,serial_number = #{serialNumber}
 		</if>
-		<if test=" adoptType != null and adoptType !='' "><!-- 规则通过方式 -->
+		<if test=" adoptType != null "><!-- 规则通过方式 -->
 			,adopt_type = #{adoptType}
 		</if>
-		<if test=" tids != null and tids !='' "><!-- 审核人列表 -->
+		<if test=" tids != null "><!-- 审核人列表 -->
 			,tids = #{tids}
 		</if>
-		<if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+		<if test=" isUse != null "><!-- 是否启用 -->
 			,is_use = #{isUse}
 		</if>
-		<if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+		<if test=" createTime != null "><!-- 创建时间 -->
 			,create_time = #{createTime}
 		</if>
-		<if test=" creator != null and creator !='' "><!-- 创建者 -->
+		<if test=" creator != null "><!-- 创建者 -->
 			,creator = #{creator}
 		</if>
-		<if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+		<if test=" updator != null "><!-- 最后更新者 -->
 			,updator = #{updator}
 		</if>
 		WHERE 1 = 1
-		<if test=" oaruleId != null and oaruleId !='' "><!-- 规则id -->
+		<if test=" oaruleId != null "><!-- 规则id -->
 			AND oarule_id = #{oaruleId}
 		</if>
 	</update>
@@ -184,14 +184,14 @@
 	<delete id='toDelete' parameterType='OaRuleDBO'>
 		UPDATE oa_rule SET ddd='1', update_time = #{updateTime}, uu2 = #{uu2}
 		WHERE update_time = #{updateTime}
-		<if test=" oaruleId != null and oaruleId !='' "><!-- 规则id -->
+		<if test=" oaruleId != null "><!-- 规则id -->
 			AND oarule_id = #{oaruleId}
 		</if>
 	</delete>
 	<!-- 物理删除一条数据 -->
 	<delete id='doDelete' parameterType='OaRuleDBO'>
 		DELETE FROM oa_rule WHERE update_time = #{updateTime}
-		<if test=" oaruleId != null and oaruleId !='' "><!-- 规则id -->
+		<if test=" oaruleId != null "><!-- 规则id -->
 			AND oarule_id = #{oaruleId}
 		</if>
 	</delete>
@@ -200,7 +200,7 @@
 		SELECT
 		<include refid='tableColumns' />
 		FROM oa_rule WHERE 1 = 1
-		<if test=" oaruleId != null and oaruleId !='' "><!-- 规则id -->
+		<if test=" oaruleId != null "><!-- 规则id -->
 			AND oarule_id = #{oaruleId}
 		</if>
 	</select>

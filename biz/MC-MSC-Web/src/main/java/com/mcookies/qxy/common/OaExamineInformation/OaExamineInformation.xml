@@ -13,74 +13,74 @@
     <!-- 根据条件更新所有记录 -->
     <update id='doUpdateAll' parameterType='OaExamineInformationDBO'>
         UPDATE oa_examine_information SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
-        <if test=" approvalInformationId != null and approvalInformationId !='' "><!-- 审核信息id -->
+        <if test=" approvalInformationId != null "><!-- 审核信息id -->
             ,approval_information_id = #{approvalInformationId}
         </if>
-        <if test=" sid != null and sid !='' "><!-- 学校id -->
+        <if test=" sid != null "><!-- 学校id -->
             ,sid = #{sid}
         </if>
-        <if test=" type != null and type !='' "><!-- 标签类型 -->
+        <if test=" type != null "><!-- 标签类型 -->
             ,type = #{type}
         </if>
-        <if test=" oatagsId != null and oatagsId !='' "><!-- 标签id -->
+        <if test=" oatagsId != null "><!-- 标签id -->
             ,oatags_id = #{oatagsId}
         </if>
-        <if test=" tid != null and tid !='' "><!-- 发起人id -->
+        <if test=" tid != null "><!-- 发起人id -->
             ,tid = #{tid}
         </if>
-        <if test=" content != null and content !='' "><!-- 待审批内容 -->
+        <if test=" content != null "><!-- 待审批内容 -->
             ,content = #{content}
         </if>
-        <if test=" result != null and result !='' "><!-- 审核结果 -->
+        <if test=" result != null "><!-- 审核结果 -->
             ,result = #{result}
         </if>
-        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+        <if test=" isUse != null "><!-- 是否启用 -->
             ,is_use = #{isUse}
         </if>
-        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+        <if test=" createTime != null "><!-- 创建时间 -->
             ,create_time = #{createTime}
         </if>
-        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+        <if test=" creator != null "><!-- 创建者 -->
             ,creator = #{creator}
         </if>
-        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+        <if test=" updator != null "><!-- 最后更新者 -->
             ,updator = #{updator}
         </if>
         WHERE 1 = 1 
-            <if test=" approvalInformationId != null and approvalInformationId !='' "><!-- 审核信息id -->
+            <if test=" approvalInformationId != null "><!-- 审核信息id -->
                 AND approval_information_id = #{approvalInformationId}
             </if>
-            <if test=" sid != null and sid !='' "><!-- 学校id -->
+            <if test=" sid != null "><!-- 学校id -->
                 AND sid = #{sid}
             </if>
-            <if test=" type != null and type !='' "><!-- 标签类型 -->
+            <if test=" type != null "><!-- 标签类型 -->
                 AND type = #{type}
             </if>
-            <if test=" oatagsId != null and oatagsId !='' "><!-- 标签id -->
+            <if test=" oatagsId != null "><!-- 标签id -->
                 AND oatags_id = #{oatagsId}
             </if>
-            <if test=" tid != null and tid !='' "><!-- 发起人id -->
+            <if test=" tid != null "><!-- 发起人id -->
                 AND tid = #{tid}
             </if>
-            <if test=" content != null and content !='' "><!-- 待审批内容 -->
+            <if test=" content != null "><!-- 待审批内容 -->
                 AND content = #{content}
             </if>
-            <if test=" result != null and result !='' "><!-- 审核结果 -->
+            <if test=" result != null "><!-- 审核结果 -->
                 AND result = #{result}
             </if>
-            <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+            <if test=" isUse != null "><!-- 是否启用 -->
                 AND is_use = #{isUse}
             </if>
-            <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+            <if test=" createTime != null "><!-- 创建时间 -->
                 AND create_time = #{createTime}
             </if>
-            <if test=" creator != null and creator !='' "><!-- 创建者 -->
+            <if test=" creator != null "><!-- 创建者 -->
                 AND creator = #{creator}
             </if>
-            <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+            <if test=" updateTime != null "><!-- 更新时间 -->
                 AND update_time = #{updateTime}
             </if>
-            <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+            <if test=" updator != null "><!-- 最后更新者 -->
                 AND updator = #{updator}
             </if>
     </update>
@@ -88,40 +88,40 @@
     <select id='doSelectPage' parameterType='OaExamineInformationDBO' resultType='OaExamineInformationDBO'>
         SELECT <include refid='tableColumns'/> FROM oa_examine_information
         WHERE 1 = 1 
-        <if test=" approvalInformationId != null and approvalInformationId !='' "><!-- 审核信息id -->
+        <if test=" approvalInformationId != null "><!-- 审核信息id -->
             AND approval_information_id = #{approvalInformationId}
         </if>
-        <if test=" sid != null and sid !='' "><!-- 学校id -->
+        <if test=" sid != null "><!-- 学校id -->
             AND sid = #{sid}
         </if>
-        <if test=" type != null and type !='' "><!-- 标签类型 -->
+        <if test=" type != null "><!-- 标签类型 -->
             AND type = #{type}
         </if>
-        <if test=" oatagsId != null and oatagsId !='' "><!-- 标签id -->
+        <if test=" oatagsId != null "><!-- 标签id -->
             AND oatags_id = #{oatagsId}
         </if>
-        <if test=" tid != null and tid !='' "><!-- 发起人id -->
+        <if test=" tid != null "><!-- 发起人id -->
             AND tid = #{tid}
         </if>
-        <if test=" content != null and content !='' "><!-- 待审批内容 -->
+        <if test=" content != null "><!-- 待审批内容 -->
             AND content = #{content}
         </if>
-        <if test=" result != null and result !='' "><!-- 审核结果 -->
+        <if test=" result != null "><!-- 审核结果 -->
             AND result = #{result}
         </if>
-        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+        <if test=" isUse != null "><!-- 是否启用 -->
             AND is_use = #{isUse}
         </if>
-        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+        <if test=" createTime != null "><!-- 创建时间 -->
             AND create_time = #{createTime}
         </if>
-        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+        <if test=" creator != null "><!-- 创建者 -->
             AND creator = #{creator}
         </if>
-        <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+        <if test=" updateTime != null "><!-- 更新时间 -->
             AND update_time = #{updateTime}
         </if>
-        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+        <if test=" updator != null "><!-- 最后更新者 -->
             AND updator = #{updator}
         </if>
     </select>
@@ -136,62 +136,62 @@
     <!-- 修改一条数据 -->
     <update id='doUpdate' parameterType='OaExamineInformationDBO'>
         UPDATE oa_examine_information SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
-        <if test=" approvalInformationId != null and approvalInformationId !='' "><!-- 审核信息id -->
+        <if test=" approvalInformationId != null "><!-- 审核信息id -->
             ,approval_information_id = #{approvalInformationId}
         </if>
-        <if test=" sid != null and sid !='' "><!-- 学校id -->
+        <if test=" sid != null "><!-- 学校id -->
             ,sid = #{sid}
         </if>
-        <if test=" type != null and type !='' "><!-- 标签类型 -->
+        <if test=" type != null "><!-- 标签类型 -->
             ,type = #{type}
         </if>
-        <if test=" oatagsId != null and oatagsId !='' "><!-- 标签id -->
+        <if test=" oatagsId != null "><!-- 标签id -->
             ,oatags_id = #{oatagsId}
         </if>
-        <if test=" tid != null and tid !='' "><!-- 发起人id -->
+        <if test=" tid != null "><!-- 发起人id -->
             ,tid = #{tid}
         </if>
-        <if test=" content != null and content !='' "><!-- 待审批内容 -->
+        <if test=" content != null "><!-- 待审批内容 -->
             ,content = #{content}
         </if>
-        <if test=" result != null and result !='' "><!-- 审核结果 -->
+        <if test=" result != null "><!-- 审核结果 -->
             ,result = #{result}
         </if>
-        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+        <if test=" isUse != null "><!-- 是否启用 -->
             ,is_use = #{isUse}
         </if>
-        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+        <if test=" createTime != null "><!-- 创建时间 -->
             ,create_time = #{createTime}
         </if>
-        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+        <if test=" creator != null "><!-- 创建者 -->
             ,creator = #{creator}
         </if>
-        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+        <if test=" updator != null "><!-- 最后更新者 -->
             ,updator = #{updator}
         </if>
         WHERE 1 = 1 
-            <if test=" approvalInformationId != null and approvalInformationId !='' "><!-- 审核信息id -->
+            <if test=" approvalInformationId != null "><!-- 审核信息id -->
                 AND approval_information_id = #{approvalInformationId}
             </if>
     </update>
     <!-- 逻辑删除一条数据 -->
     <delete id='toDelete' parameterType='OaExamineInformationDBO'>
         UPDATE oa_examine_information SET ddd='1', update_time = #{updateTime}, uu2 = #{uu2} WHERE update_time = #{updateTime}
-            <if test=" approvalInformationId != null and approvalInformationId !='' "><!-- 审核信息id -->
+            <if test=" approvalInformationId != null "><!-- 审核信息id -->
                 AND approval_information_id = #{approvalInformationId}
             </if>
     </delete>
     <!-- 物理删除一条数据 -->
     <delete id='doDelete' parameterType='OaExamineInformationDBO'>
         DELETE FROM oa_examine_information WHERE update_time = #{updateTime}
-            <if test=" approvalInformationId != null and approvalInformationId !='' "><!-- 审核信息id -->
+            <if test=" approvalInformationId != null "><!-- 审核信息id -->
                 AND approval_information_id = #{approvalInformationId}
             </if>
     </delete>
     <!-- 查询一条数据  -->
     <select id='doRead' parameterType='OaExamineInformationDBO' resultType='OaExamineInformationDBO'>
         SELECT <include refid='tableColumns'/> FROM oa_examine_information WHERE 1 = 1
-            <if test=" approvalInformationId != null and approvalInformationId !='' "><!-- 审核信息id -->
+            <if test=" approvalInformationId != null "><!-- 审核信息id -->
                 AND approval_information_id = #{approvalInformationId}
             </if>
     </select>

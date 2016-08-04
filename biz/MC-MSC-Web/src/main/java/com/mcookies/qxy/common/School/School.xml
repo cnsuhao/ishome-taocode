@@ -13,74 +13,74 @@
     <!-- 根据条件更新所有记录 -->
     <update id='doUpdateAll' parameterType='SchoolDBO'>
         UPDATE school SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
-        <if test=" sid != null and sid !='' "><!-- 学校id -->
+        <if test=" sid != null "><!-- 学校id -->
             ,sid = #{sid}
         </if>
-        <if test=" createUid != null and createUid !='' "><!-- 创建人id -->
+        <if test=" createUid != null "><!-- 创建人id -->
             ,create_uid = #{createUid}
         </if>
-        <if test=" schoolName != null and schoolName !='' "><!-- 学校名字 -->
+        <if test=" schoolName != null "><!-- 学校名字 -->
             ,school_name = #{schoolName}
         </if>
-        <if test=" contacts != null and contacts !='' "><!-- 联系人 -->
+        <if test=" contacts != null "><!-- 联系人 -->
             ,contacts = #{contacts}
         </if>
-        <if test=" phone != null and phone !='' "><!-- 电话 -->
+        <if test=" phone != null "><!-- 电话 -->
             ,phone = #{phone}
         </if>
-        <if test=" address != null and address !='' "><!-- 地址 -->
+        <if test=" address != null "><!-- 地址 -->
             ,address = #{address}
         </if>
-        <if test=" sCode != null and sCode !='' "><!-- 学校识别码(不启用) -->
+        <if test=" sCode != null "><!-- 学校识别码(不启用) -->
             ,s_code = #{sCode}
         </if>
-        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+        <if test=" isUse != null "><!-- 是否启用 -->
             ,is_use = #{isUse}
         </if>
-        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+        <if test=" createTime != null "><!-- 创建时间 -->
             ,create_time = #{createTime}
         </if>
-        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+        <if test=" creator != null "><!-- 创建者 -->
             ,creator = #{creator}
         </if>
-        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+        <if test=" updator != null "><!-- 最后更新者 -->
             ,updator = #{updator}
         </if>
         WHERE 1 = 1 
-            <if test=" sid != null and sid !='' "><!-- 学校id -->
+            <if test=" sid != null "><!-- 学校id -->
                 AND sid = #{sid}
             </if>
-            <if test=" createUid != null and createUid !='' "><!-- 创建人id -->
+            <if test=" createUid != null "><!-- 创建人id -->
                 AND create_uid = #{createUid}
             </if>
-            <if test=" schoolName != null and schoolName !='' "><!-- 学校名字 -->
+            <if test=" schoolName != null "><!-- 学校名字 -->
                 AND school_name = #{schoolName}
             </if>
-            <if test=" contacts != null and contacts !='' "><!-- 联系人 -->
+            <if test=" contacts != null "><!-- 联系人 -->
                 AND contacts = #{contacts}
             </if>
-            <if test=" phone != null and phone !='' "><!-- 电话 -->
+            <if test=" phone != null "><!-- 电话 -->
                 AND phone = #{phone}
             </if>
-            <if test=" address != null and address !='' "><!-- 地址 -->
+            <if test=" address != null "><!-- 地址 -->
                 AND address = #{address}
             </if>
-            <if test=" sCode != null and sCode !='' "><!-- 学校识别码(不启用) -->
+            <if test=" sCode != null "><!-- 学校识别码(不启用) -->
                 AND s_code = #{sCode}
             </if>
-            <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+            <if test=" isUse != null "><!-- 是否启用 -->
                 AND is_use = #{isUse}
             </if>
-            <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+            <if test=" createTime != null "><!-- 创建时间 -->
                 AND create_time = #{createTime}
             </if>
-            <if test=" creator != null and creator !='' "><!-- 创建者 -->
+            <if test=" creator != null "><!-- 创建者 -->
                 AND creator = #{creator}
             </if>
-            <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+            <if test=" updateTime != null "><!-- 更新时间 -->
                 AND update_time = #{updateTime}
             </if>
-            <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+            <if test=" updator != null "><!-- 最后更新者 -->
                 AND updator = #{updator}
             </if>
     </update>
@@ -88,40 +88,40 @@
     <select id='doSelectPage' parameterType='SchoolDBO' resultType='SchoolDBO'>
         SELECT <include refid='tableColumns'/> FROM school
         WHERE 1 = 1 
-        <if test=" sid != null and sid !='' "><!-- 学校id -->
+        <if test=" sid != null "><!-- 学校id -->
             AND sid = #{sid}
         </if>
-        <if test=" createUid != null and createUid !='' "><!-- 创建人id -->
+        <if test=" createUid != null "><!-- 创建人id -->
             AND create_uid = #{createUid}
         </if>
-        <if test=" schoolName != null and schoolName !='' "><!-- 学校名字 -->
+        <if test=" schoolName != null "><!-- 学校名字 -->
             AND school_name = #{schoolName}
         </if>
-        <if test=" contacts != null and contacts !='' "><!-- 联系人 -->
+        <if test=" contacts != null "><!-- 联系人 -->
             AND contacts = #{contacts}
         </if>
-        <if test=" phone != null and phone !='' "><!-- 电话 -->
+        <if test=" phone != null "><!-- 电话 -->
             AND phone = #{phone}
         </if>
-        <if test=" address != null and address !='' "><!-- 地址 -->
+        <if test=" address != null "><!-- 地址 -->
             AND address = #{address}
         </if>
-        <if test=" sCode != null and sCode !='' "><!-- 学校识别码(不启用) -->
+        <if test=" sCode != null "><!-- 学校识别码(不启用) -->
             AND s_code = #{sCode}
         </if>
-        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+        <if test=" isUse != null "><!-- 是否启用 -->
             AND is_use = #{isUse}
         </if>
-        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+        <if test=" createTime != null "><!-- 创建时间 -->
             AND create_time = #{createTime}
         </if>
-        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+        <if test=" creator != null "><!-- 创建者 -->
             AND creator = #{creator}
         </if>
-        <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+        <if test=" updateTime != null "><!-- 更新时间 -->
             AND update_time = #{updateTime}
         </if>
-        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+        <if test=" updator != null "><!-- 最后更新者 -->
             AND updator = #{updator}
         </if>
     </select>
@@ -136,62 +136,62 @@
     <!-- 修改一条数据 -->
     <update id='doUpdate' parameterType='SchoolDBO'>
         UPDATE school SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
-        <if test=" sid != null and sid !='' "><!-- 学校id -->
+        <if test=" sid != null "><!-- 学校id -->
             ,sid = #{sid}
         </if>
-        <if test=" createUid != null and createUid !='' "><!-- 创建人id -->
+        <if test=" createUid != null "><!-- 创建人id -->
             ,create_uid = #{createUid}
         </if>
-        <if test=" schoolName != null and schoolName !='' "><!-- 学校名字 -->
+        <if test=" schoolName != null "><!-- 学校名字 -->
             ,school_name = #{schoolName}
         </if>
-        <if test=" contacts != null and contacts !='' "><!-- 联系人 -->
+        <if test=" contacts != null "><!-- 联系人 -->
             ,contacts = #{contacts}
         </if>
-        <if test=" phone != null and phone !='' "><!-- 电话 -->
+        <if test=" phone != null "><!-- 电话 -->
             ,phone = #{phone}
         </if>
-        <if test=" address != null and address !='' "><!-- 地址 -->
+        <if test=" address != null "><!-- 地址 -->
             ,address = #{address}
         </if>
-        <if test=" sCode != null and sCode !='' "><!-- 学校识别码(不启用) -->
+        <if test=" sCode != null "><!-- 学校识别码(不启用) -->
             ,s_code = #{sCode}
         </if>
-        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+        <if test=" isUse != null "><!-- 是否启用 -->
             ,is_use = #{isUse}
         </if>
-        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+        <if test=" createTime != null "><!-- 创建时间 -->
             ,create_time = #{createTime}
         </if>
-        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+        <if test=" creator != null "><!-- 创建者 -->
             ,creator = #{creator}
         </if>
-        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+        <if test=" updator != null "><!-- 最后更新者 -->
             ,updator = #{updator}
         </if>
         WHERE 1 = 1 
-            <if test=" sid != null and sid !='' "><!-- 学校id -->
+            <if test=" sid != null "><!-- 学校id -->
                 AND sid = #{sid}
             </if>
     </update>
     <!-- 逻辑删除一条数据 -->
     <delete id='toDelete' parameterType='SchoolDBO'>
         UPDATE school SET ddd='1', update_time = #{updateTime}, uu2 = #{uu2} WHERE update_time = #{updateTime}
-            <if test=" sid != null and sid !='' "><!-- 学校id -->
+            <if test=" sid != null "><!-- 学校id -->
                 AND sid = #{sid}
             </if>
     </delete>
     <!-- 物理删除一条数据 -->
     <delete id='doDelete' parameterType='SchoolDBO'>
         DELETE FROM school WHERE update_time = #{updateTime}
-            <if test=" sid != null and sid !='' "><!-- 学校id -->
+            <if test=" sid != null "><!-- 学校id -->
                 AND sid = #{sid}
             </if>
     </delete>
     <!-- 查询一条数据  -->
     <select id='doRead' parameterType='SchoolDBO' resultType='SchoolDBO'>
         SELECT <include refid='tableColumns'/> FROM school WHERE 1 = 1
-            <if test=" sid != null and sid !='' "><!-- 学校id -->
+            <if test=" sid != null "><!-- 学校id -->
                 AND sid = #{sid}
             </if>
     </select>

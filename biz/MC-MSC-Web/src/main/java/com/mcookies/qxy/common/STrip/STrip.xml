@@ -13,68 +13,68 @@
     <!-- 根据条件更新所有记录 -->
     <update id='doUpdateAll' parameterType='STripDBO'>
         UPDATE s_trip SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
-        <if test=" tripId != null and tripId !='' "><!-- 自增id -->
+        <if test=" tripId != null "><!-- 自增id -->
             ,trip_id = #{tripId}
         </if>
-        <if test=" termId != null and termId !='' "><!-- 学期id -->
+        <if test=" termId != null "><!-- 学期id -->
             ,term_id = #{termId}
         </if>
-        <if test=" sid != null and sid !='' "><!-- 学校id -->
+        <if test=" sid != null "><!-- 学校id -->
             ,sid = #{sid}
         </if>
-        <if test=" tid != null and tid !='' "><!-- 教师id -->
+        <if test=" tid != null "><!-- 教师id -->
             ,tid = #{tid}
         </if>
-        <if test=" content != null and content !='' "><!-- 内容 -->
+        <if test=" content != null "><!-- 内容 -->
             ,content = #{content}
         </if>
-        <if test=" date != null and date !='' "><!-- 日期 -->
+        <if test=" date != null "><!-- 日期 -->
             ,date = #{date}
         </if>
-        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+        <if test=" isUse != null "><!-- 是否启用 -->
             ,is_use = #{isUse}
         </if>
-        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+        <if test=" createTime != null "><!-- 创建时间 -->
             ,create_time = #{createTime}
         </if>
-        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+        <if test=" creator != null "><!-- 创建者 -->
             ,creator = #{creator}
         </if>
-        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+        <if test=" updator != null "><!-- 最后更新者 -->
             ,updator = #{updator}
         </if>
         WHERE 1 = 1 
-            <if test=" tripId != null and tripId !='' "><!-- 自增id -->
+            <if test=" tripId != null "><!-- 自增id -->
                 AND trip_id = #{tripId}
             </if>
-            <if test=" termId != null and termId !='' "><!-- 学期id -->
+            <if test=" termId != null "><!-- 学期id -->
                 AND term_id = #{termId}
             </if>
-            <if test=" sid != null and sid !='' "><!-- 学校id -->
+            <if test=" sid != null "><!-- 学校id -->
                 AND sid = #{sid}
             </if>
-            <if test=" tid != null and tid !='' "><!-- 教师id -->
+            <if test=" tid != null "><!-- 教师id -->
                 AND tid = #{tid}
             </if>
-            <if test=" content != null and content !='' "><!-- 内容 -->
+            <if test=" content != null "><!-- 内容 -->
                 AND content = #{content}
             </if>
-            <if test=" date != null and date !='' "><!-- 日期 -->
+            <if test=" date != null "><!-- 日期 -->
                 AND date = #{date}
             </if>
-            <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+            <if test=" isUse != null "><!-- 是否启用 -->
                 AND is_use = #{isUse}
             </if>
-            <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+            <if test=" createTime != null "><!-- 创建时间 -->
                 AND create_time = #{createTime}
             </if>
-            <if test=" creator != null and creator !='' "><!-- 创建者 -->
+            <if test=" creator != null "><!-- 创建者 -->
                 AND creator = #{creator}
             </if>
-            <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+            <if test=" updateTime != null "><!-- 更新时间 -->
                 AND update_time = #{updateTime}
             </if>
-            <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+            <if test=" updator != null "><!-- 最后更新者 -->
                 AND updator = #{updator}
             </if>
     </update>
@@ -82,37 +82,37 @@
     <select id='doSelectPage' parameterType='STripDBO' resultType='STripDBO'>
         SELECT <include refid='tableColumns'/> FROM s_trip
         WHERE 1 = 1 
-        <if test=" tripId != null and tripId !='' "><!-- 自增id -->
+        <if test=" tripId != null "><!-- 自增id -->
             AND trip_id = #{tripId}
         </if>
-        <if test=" termId != null and termId !='' "><!-- 学期id -->
+        <if test=" termId != null "><!-- 学期id -->
             AND term_id = #{termId}
         </if>
-        <if test=" sid != null and sid !='' "><!-- 学校id -->
+        <if test=" sid != null "><!-- 学校id -->
             AND sid = #{sid}
         </if>
-        <if test=" tid != null and tid !='' "><!-- 教师id -->
+        <if test=" tid != null "><!-- 教师id -->
             AND tid = #{tid}
         </if>
-        <if test=" content != null and content !='' "><!-- 内容 -->
+        <if test=" content != null "><!-- 内容 -->
             AND content = #{content}
         </if>
-        <if test=" date != null and date !='' "><!-- 日期 -->
+        <if test=" date != null "><!-- 日期 -->
             AND date = #{date}
         </if>
-        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+        <if test=" isUse != null "><!-- 是否启用 -->
             AND is_use = #{isUse}
         </if>
-        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+        <if test=" createTime != null "><!-- 创建时间 -->
             AND create_time = #{createTime}
         </if>
-        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+        <if test=" creator != null "><!-- 创建者 -->
             AND creator = #{creator}
         </if>
-        <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+        <if test=" updateTime != null "><!-- 更新时间 -->
             AND update_time = #{updateTime}
         </if>
-        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+        <if test=" updator != null "><!-- 最后更新者 -->
             AND updator = #{updator}
         </if>
     </select>
@@ -127,59 +127,59 @@
     <!-- 修改一条数据 -->
     <update id='doUpdate' parameterType='STripDBO'>
         UPDATE s_trip SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
-        <if test=" tripId != null and tripId !='' "><!-- 自增id -->
+        <if test=" tripId != null "><!-- 自增id -->
             ,trip_id = #{tripId}
         </if>
-        <if test=" termId != null and termId !='' "><!-- 学期id -->
+        <if test=" termId != null "><!-- 学期id -->
             ,term_id = #{termId}
         </if>
-        <if test=" sid != null and sid !='' "><!-- 学校id -->
+        <if test=" sid != null "><!-- 学校id -->
             ,sid = #{sid}
         </if>
-        <if test=" tid != null and tid !='' "><!-- 教师id -->
+        <if test=" tid != null "><!-- 教师id -->
             ,tid = #{tid}
         </if>
-        <if test=" content != null and content !='' "><!-- 内容 -->
+        <if test=" content != null "><!-- 内容 -->
             ,content = #{content}
         </if>
-        <if test=" date != null and date !='' "><!-- 日期 -->
+        <if test=" date != null "><!-- 日期 -->
             ,date = #{date}
         </if>
-        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+        <if test=" isUse != null "><!-- 是否启用 -->
             ,is_use = #{isUse}
         </if>
-        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+        <if test=" createTime != null "><!-- 创建时间 -->
             ,create_time = #{createTime}
         </if>
-        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+        <if test=" creator != null "><!-- 创建者 -->
             ,creator = #{creator}
         </if>
-        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+        <if test=" updator != null "><!-- 最后更新者 -->
             ,updator = #{updator}
         </if>
         WHERE 1 = 1 
-            <if test=" tripId != null and tripId !='' "><!-- 自增id -->
+            <if test=" tripId != null "><!-- 自增id -->
                 AND trip_id = #{tripId}
             </if>
     </update>
     <!-- 逻辑删除一条数据 -->
     <delete id='toDelete' parameterType='STripDBO'>
         UPDATE s_trip SET ddd='1', update_time = #{updateTime}, uu2 = #{uu2} WHERE update_time = #{updateTime}
-            <if test=" tripId != null and tripId !='' "><!-- 自增id -->
+            <if test=" tripId != null "><!-- 自增id -->
                 AND trip_id = #{tripId}
             </if>
     </delete>
     <!-- 物理删除一条数据 -->
     <delete id='doDelete' parameterType='STripDBO'>
         DELETE FROM s_trip WHERE update_time = #{updateTime}
-            <if test=" tripId != null and tripId !='' "><!-- 自增id -->
+            <if test=" tripId != null "><!-- 自增id -->
                 AND trip_id = #{tripId}
             </if>
     </delete>
     <!-- 查询一条数据  -->
     <select id='doRead' parameterType='STripDBO' resultType='STripDBO'>
         SELECT <include refid='tableColumns'/> FROM s_trip WHERE 1 = 1
-            <if test=" tripId != null and tripId !='' "><!-- 自增id -->
+            <if test=" tripId != null "><!-- 自增id -->
                 AND trip_id = #{tripId}
             </if>
     </select>
