@@ -46,7 +46,7 @@ public class MyControllerSupport extends MyFrameworkSupport // implements
 	/**
 	 * 当前用户Token
 	 */
-	private BusinessTokenBean myToken;
+	protected BusinessTokenBean myToken;
 	private LoginerBean loginer;
 
 	public LoginerBean getLoginer() {
@@ -54,6 +54,7 @@ public class MyControllerSupport extends MyFrameworkSupport // implements
 	}
 
 	public boolean doCheckToken(String token) {
+		myToken = BusinessTokenBean.build("ab1ab2ab3__4__5__6__7__8__9__a__b__c__d__e__f__g");
 		//获得用户信息
 		loginer = new LoginerBean();
 		loginer.setUserId("123456");
