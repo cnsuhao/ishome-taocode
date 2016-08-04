@@ -1,7 +1,5 @@
 package org.isotope.jfp.framework.support;
 
-import java.security.Timestamp;
-
 import org.isotope.jfp.framework.beans.common.TokenBean;
 import org.isotope.jfp.framework.constants.ISDBConstants;
 import org.isotope.jfp.framework.utils.EmptyHelper;
@@ -50,7 +48,7 @@ public class MyDataBaseObjectSupport extends TokenBean implements ISDBConstants 
 	/**
 	 * 创建时间
 	 */
-	private Timestamp createTime = null;
+	private String createTime = null;
 
 	/**
 	 * 创建者
@@ -60,7 +58,7 @@ public class MyDataBaseObjectSupport extends TokenBean implements ISDBConstants 
 	/**
 	 * 更新时间
 	 */
-	private Timestamp updateTime = null;
+	private String updateTime = null;
 
 	/**
 	 * 最后更新者
@@ -72,7 +70,7 @@ public class MyDataBaseObjectSupport extends TokenBean implements ISDBConstants 
 	 *
 	 * @return Create_time 创建时间
 	 */
-	public Timestamp getCreateTime() {
+	public String getCreateTime() {
 		return this.createTime;
 	}
 
@@ -90,7 +88,7 @@ public class MyDataBaseObjectSupport extends TokenBean implements ISDBConstants 
 	 *
 	 * @return Update_time 更新时间
 	 */
-	public Timestamp getUpdateTime() {
+	public String getUpdateTime() {
 		return this.updateTime;
 	}
 
@@ -109,7 +107,7 @@ public class MyDataBaseObjectSupport extends TokenBean implements ISDBConstants 
 	 * @param Create_time
 	 *            创建时间
 	 */
-	public void setCreateTime(Timestamp createtime) {
+	public void setCreateTime(String createtime) {
 		this.createTime = createtime;
 	}
 
@@ -129,7 +127,7 @@ public class MyDataBaseObjectSupport extends TokenBean implements ISDBConstants 
 	 * @param Update_time
 	 *            更新时间
 	 */
-	public void setUpdateTime(Timestamp updatetime) {
+	public void setUpdateTime(String updatetime) {
 		this.updateTime = updatetime;
 	}
 
