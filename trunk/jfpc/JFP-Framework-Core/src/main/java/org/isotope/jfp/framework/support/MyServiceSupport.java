@@ -300,7 +300,10 @@ public class MyServiceSupport implements ISFrameworkConstants, ISDBConstants {
 	public int doUpdate(MyDataBaseObjectSupport formParamBean) {
 		changeTable(formParamBean, DB_UPDATE);
 		// 更新者、更新时间
-		// formParamBean.setUu2(getLoginerId());
+		String t =DateHelper.currentTimeMillis4();
+		Long loginId = getLoginerId();
+		formParamBean.setUpdateTime(t);
+		formParamBean.setUpdator(loginId);
 		return getDao().doUpdate(formParamBean);
 	}
 
