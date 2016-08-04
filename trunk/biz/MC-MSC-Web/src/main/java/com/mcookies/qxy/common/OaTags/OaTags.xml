@@ -13,62 +13,62 @@
     <!-- 根据条件更新所有记录 -->
     <update id='doUpdateAll' parameterType='OaTagsDBO'>
         UPDATE oa_tags SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
-        <if test=" oatagsId != null and oatagsId !='' "><!-- 标签id -->
+        <if test=" oatagsId != null "><!-- 标签id -->
             ,oatags_id = #{oatagsId}
         </if>
-        <if test=" sid != null and sid !='' "><!-- 学校id -->
+        <if test=" sid != null "><!-- 学校id -->
             ,sid = #{sid}
         </if>
-        <if test=" oatagsName != null and oatagsName !='' "><!-- 标签名称 -->
+        <if test=" oatagsName != null "><!-- 标签名称 -->
             ,oatags_name = #{oatagsName}
         </if>
-        <if test=" type != null and type !='' "><!-- 标签类型 -->
+        <if test=" type != null "><!-- 标签类型 -->
             ,type = #{type}
         </if>
-        <if test=" cycle != null and cycle !='' "><!-- 审核周期 -->
+        <if test=" cycle != null "><!-- 审核周期 -->
             ,cycle = #{cycle}
         </if>
-        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+        <if test=" isUse != null "><!-- 是否启用 -->
             ,is_use = #{isUse}
         </if>
-        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+        <if test=" createTime != null "><!-- 创建时间 -->
             ,create_time = #{createTime}
         </if>
-        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+        <if test=" creator != null "><!-- 创建者 -->
             ,creator = #{creator}
         </if>
-        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+        <if test=" updator != null "><!-- 最后更新者 -->
             ,updator = #{updator}
         </if>
         WHERE 1 = 1 
-            <if test=" oatagsId != null and oatagsId !='' "><!-- 标签id -->
+            <if test=" oatagsId != null "><!-- 标签id -->
                 AND oatags_id = #{oatagsId}
             </if>
-            <if test=" sid != null and sid !='' "><!-- 学校id -->
+            <if test=" sid != null "><!-- 学校id -->
                 AND sid = #{sid}
             </if>
-            <if test=" oatagsName != null and oatagsName !='' "><!-- 标签名称 -->
+            <if test=" oatagsName != null "><!-- 标签名称 -->
                 AND oatags_name = #{oatagsName}
             </if>
-            <if test=" type != null and type !='' "><!-- 标签类型 -->
+            <if test=" type != null "><!-- 标签类型 -->
                 AND type = #{type}
             </if>
-            <if test=" cycle != null and cycle !='' "><!-- 审核周期 -->
+            <if test=" cycle != null "><!-- 审核周期 -->
                 AND cycle = #{cycle}
             </if>
-            <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+            <if test=" isUse != null "><!-- 是否启用 -->
                 AND is_use = #{isUse}
             </if>
-            <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+            <if test=" createTime != null "><!-- 创建时间 -->
                 AND create_time = #{createTime}
             </if>
-            <if test=" creator != null and creator !='' "><!-- 创建者 -->
+            <if test=" creator != null "><!-- 创建者 -->
                 AND creator = #{creator}
             </if>
-            <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+            <if test=" updateTime != null "><!-- 更新时间 -->
                 AND update_time = #{updateTime}
             </if>
-            <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+            <if test=" updator != null "><!-- 最后更新者 -->
                 AND updator = #{updator}
             </if>
     </update>
@@ -76,34 +76,34 @@
     <select id='doSelectPage' parameterType='OaTagsDBO' resultType='OaTagsDBO'>
         SELECT <include refid='tableColumns'/> FROM oa_tags
         WHERE 1 = 1 
-        <if test=" oatagsId != null and oatagsId !='' "><!-- 标签id -->
+        <if test=" oatagsId != null "><!-- 标签id -->
             AND oatags_id = #{oatagsId}
         </if>
-        <if test=" sid != null and sid !='' "><!-- 学校id -->
+        <if test=" sid != null "><!-- 学校id -->
             AND sid = #{sid}
         </if>
-        <if test=" oatagsName != null and oatagsName !='' "><!-- 标签名称 -->
+        <if test=" oatagsName != null "><!-- 标签名称 -->
             AND oatags_name = #{oatagsName}
         </if>
-        <if test=" type != null and type !='' "><!-- 标签类型 -->
+        <if test=" type != null "><!-- 标签类型 -->
             AND type = #{type}
         </if>
-        <if test=" cycle != null and cycle !='' "><!-- 审核周期 -->
+        <if test=" cycle != null "><!-- 审核周期 -->
             AND cycle = #{cycle}
         </if>
-        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+        <if test=" isUse != null "><!-- 是否启用 -->
             AND is_use = #{isUse}
         </if>
-        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+        <if test=" createTime != null "><!-- 创建时间 -->
             AND create_time = #{createTime}
         </if>
-        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+        <if test=" creator != null "><!-- 创建者 -->
             AND creator = #{creator}
         </if>
-        <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+        <if test=" updateTime != null "><!-- 更新时间 -->
             AND update_time = #{updateTime}
         </if>
-        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+        <if test=" updator != null "><!-- 最后更新者 -->
             AND updator = #{updator}
         </if>
     </select>
@@ -118,56 +118,56 @@
     <!-- 修改一条数据 -->
     <update id='doUpdate' parameterType='OaTagsDBO'>
         UPDATE oa_tags SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
-        <if test=" oatagsId != null and oatagsId !='' "><!-- 标签id -->
+        <if test=" oatagsId != null "><!-- 标签id -->
             ,oatags_id = #{oatagsId}
         </if>
-        <if test=" sid != null and sid !='' "><!-- 学校id -->
+        <if test=" sid != null "><!-- 学校id -->
             ,sid = #{sid}
         </if>
-        <if test=" oatagsName != null and oatagsName !='' "><!-- 标签名称 -->
+        <if test=" oatagsName != null "><!-- 标签名称 -->
             ,oatags_name = #{oatagsName}
         </if>
-        <if test=" type != null and type !='' "><!-- 标签类型 -->
+        <if test=" type != null "><!-- 标签类型 -->
             ,type = #{type}
         </if>
-        <if test=" cycle != null and cycle !='' "><!-- 审核周期 -->
+        <if test=" cycle != null "><!-- 审核周期 -->
             ,cycle = #{cycle}
         </if>
-        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+        <if test=" isUse != null "><!-- 是否启用 -->
             ,is_use = #{isUse}
         </if>
-        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+        <if test=" createTime != null "><!-- 创建时间 -->
             ,create_time = #{createTime}
         </if>
-        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+        <if test=" creator != null "><!-- 创建者 -->
             ,creator = #{creator}
         </if>
-        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+        <if test=" updator != null "><!-- 最后更新者 -->
             ,updator = #{updator}
         </if>
         WHERE 1 = 1 
-            <if test=" oatagsId != null and oatagsId !='' "><!-- 标签id -->
+            <if test=" oatagsId != null "><!-- 标签id -->
                 AND oatags_id = #{oatagsId}
             </if>
     </update>
     <!-- 逻辑删除一条数据 -->
     <delete id='toDelete' parameterType='OaTagsDBO'>
         UPDATE oa_tags SET ddd='1', update_time = #{updateTime}, uu2 = #{uu2} WHERE update_time = #{updateTime}
-            <if test=" oatagsId != null and oatagsId !='' "><!-- 标签id -->
+            <if test=" oatagsId != null "><!-- 标签id -->
                 AND oatags_id = #{oatagsId}
             </if>
     </delete>
     <!-- 物理删除一条数据 -->
     <delete id='doDelete' parameterType='OaTagsDBO'>
         DELETE FROM oa_tags WHERE update_time = #{updateTime}
-            <if test=" oatagsId != null and oatagsId !='' "><!-- 标签id -->
+            <if test=" oatagsId != null "><!-- 标签id -->
                 AND oatags_id = #{oatagsId}
             </if>
     </delete>
     <!-- 查询一条数据  -->
     <select id='doRead' parameterType='OaTagsDBO' resultType='OaTagsDBO'>
         SELECT <include refid='tableColumns'/> FROM oa_tags WHERE 1 = 1
-            <if test=" oatagsId != null and oatagsId !='' "><!-- 标签id -->
+            <if test=" oatagsId != null "><!-- 标签id -->
                 AND oatags_id = #{oatagsId}
             </if>
     </select>

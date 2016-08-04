@@ -13,98 +13,98 @@
     <!-- 根据条件更新所有记录 -->
     <update id='doUpdateAll' parameterType='AlarmDBO'>
         UPDATE alarm SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
-        <if test=" alarmId != null and alarmId !='' "><!-- 自增id -->
+        <if test=" alarmId != null "><!-- 自增id -->
             ,alarm_id = #{alarmId}
         </if>
-        <if test=" sid != null and sid !='' "><!-- 学校id -->
+        <if test=" sid != null "><!-- 学校id -->
             ,sid = #{sid}
         </if>
-        <if test=" cid != null and cid !='' "><!-- 班级id -->
+        <if test=" cid != null "><!-- 班级id -->
             ,cid = #{cid}
         </if>
-        <if test=" studentId != null and studentId !='' "><!-- 学生id -->
+        <if test=" studentId != null "><!-- 学生id -->
             ,student_id = #{studentId}
         </if>
-        <if test=" date != null and date !='' "><!-- 日期 -->
+        <if test=" date != null "><!-- 日期 -->
             ,date = #{date}
         </if>
-        <if test=" startTime != null and startTime !='' "><!-- 开始时间 -->
+        <if test=" startTime != null "><!-- 开始时间 -->
             ,start_time = #{startTime}
         </if>
-        <if test=" endTime != null and endTime !='' "><!-- 结束时间 -->
+        <if test=" endTime != null "><!-- 结束时间 -->
             ,end_time = #{endTime}
         </if>
-        <if test=" deviceId != null and deviceId !='' "><!-- 学校设备id -->
+        <if test=" deviceId != null "><!-- 学校设备id -->
             ,device_id = #{deviceId}
         </if>
-        <if test=" flag != null and flag !='' "><!-- 规定行为状态 -->
+        <if test=" flag != null "><!-- 规定行为状态 -->
             ,flag = #{flag}
         </if>
-        <if test=" actualFlag != null and actualFlag !='' "><!-- 实际行为状态 -->
+        <if test=" actualFlag != null "><!-- 实际行为状态 -->
             ,actual_flag = #{actualFlag}
         </if>
-        <if test=" isAlarm != null and isAlarm !='' "><!-- 是否报警 -->
+        <if test=" isAlarm != null "><!-- 是否报警 -->
             ,is_alarm = #{isAlarm}
         </if>
-        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+        <if test=" isUse != null "><!-- 是否启用 -->
             ,is_use = #{isUse}
         </if>
-        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+        <if test=" createTime != null "><!-- 创建时间 -->
             ,create_time = #{createTime}
         </if>
-        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+        <if test=" creator != null "><!-- 创建者 -->
             ,creator = #{creator}
         </if>
-        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+        <if test=" updator != null "><!-- 最后更新者 -->
             ,updator = #{updator}
         </if>
         WHERE 1 = 1 
-            <if test=" alarmId != null and alarmId !='' "><!-- 自增id -->
+            <if test=" alarmId != null "><!-- 自增id -->
                 AND alarm_id = #{alarmId}
             </if>
-            <if test=" sid != null and sid !='' "><!-- 学校id -->
+            <if test=" sid != null "><!-- 学校id -->
                 AND sid = #{sid}
             </if>
-            <if test=" cid != null and cid !='' "><!-- 班级id -->
+            <if test=" cid != null "><!-- 班级id -->
                 AND cid = #{cid}
             </if>
-            <if test=" studentId != null and studentId !='' "><!-- 学生id -->
+            <if test=" studentId != null "><!-- 学生id -->
                 AND student_id = #{studentId}
             </if>
-            <if test=" date != null and date !='' "><!-- 日期 -->
+            <if test=" date != null "><!-- 日期 -->
                 AND date = #{date}
             </if>
-            <if test=" startTime != null and startTime !='' "><!-- 开始时间 -->
+            <if test=" startTime != null "><!-- 开始时间 -->
                 AND start_time = #{startTime}
             </if>
-            <if test=" endTime != null and endTime !='' "><!-- 结束时间 -->
+            <if test=" endTime != null "><!-- 结束时间 -->
                 AND end_time = #{endTime}
             </if>
-            <if test=" deviceId != null and deviceId !='' "><!-- 学校设备id -->
+            <if test=" deviceId != null "><!-- 学校设备id -->
                 AND device_id = #{deviceId}
             </if>
-            <if test=" flag != null and flag !='' "><!-- 规定行为状态 -->
+            <if test=" flag != null "><!-- 规定行为状态 -->
                 AND flag = #{flag}
             </if>
-            <if test=" actualFlag != null and actualFlag !='' "><!-- 实际行为状态 -->
+            <if test=" actualFlag != null "><!-- 实际行为状态 -->
                 AND actual_flag = #{actualFlag}
             </if>
-            <if test=" isAlarm != null and isAlarm !='' "><!-- 是否报警 -->
+            <if test=" isAlarm != null "><!-- 是否报警 -->
                 AND is_alarm = #{isAlarm}
             </if>
-            <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+            <if test=" isUse != null "><!-- 是否启用 -->
                 AND is_use = #{isUse}
             </if>
-            <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+            <if test=" createTime != null "><!-- 创建时间 -->
                 AND create_time = #{createTime}
             </if>
-            <if test=" creator != null and creator !='' "><!-- 创建者 -->
+            <if test=" creator != null "><!-- 创建者 -->
                 AND creator = #{creator}
             </if>
-            <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+            <if test=" updateTime != null "><!-- 更新时间 -->
                 AND update_time = #{updateTime}
             </if>
-            <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+            <if test=" updator != null "><!-- 最后更新者 -->
                 AND updator = #{updator}
             </if>
     </update>
@@ -112,52 +112,52 @@
     <select id='doSelectPage' parameterType='AlarmDBO' resultType='AlarmDBO'>
         SELECT <include refid='tableColumns'/> FROM alarm
         WHERE 1 = 1 
-        <if test=" alarmId != null and alarmId !='' "><!-- 自增id -->
+        <if test=" alarmId != null "><!-- 自增id -->
             AND alarm_id = #{alarmId}
         </if>
-        <if test=" sid != null and sid !='' "><!-- 学校id -->
+        <if test=" sid != null "><!-- 学校id -->
             AND sid = #{sid}
         </if>
-        <if test=" cid != null and cid !='' "><!-- 班级id -->
+        <if test=" cid != null "><!-- 班级id -->
             AND cid = #{cid}
         </if>
-        <if test=" studentId != null and studentId !='' "><!-- 学生id -->
+        <if test=" studentId != null "><!-- 学生id -->
             AND student_id = #{studentId}
         </if>
-        <if test=" date != null and date !='' "><!-- 日期 -->
+        <if test=" date != null "><!-- 日期 -->
             AND date = #{date}
         </if>
-        <if test=" startTime != null and startTime !='' "><!-- 开始时间 -->
+        <if test=" startTime != null "><!-- 开始时间 -->
             AND start_time = #{startTime}
         </if>
-        <if test=" endTime != null and endTime !='' "><!-- 结束时间 -->
+        <if test=" endTime != null "><!-- 结束时间 -->
             AND end_time = #{endTime}
         </if>
-        <if test=" deviceId != null and deviceId !='' "><!-- 学校设备id -->
+        <if test=" deviceId != null "><!-- 学校设备id -->
             AND device_id = #{deviceId}
         </if>
-        <if test=" flag != null and flag !='' "><!-- 规定行为状态 -->
+        <if test=" flag != null "><!-- 规定行为状态 -->
             AND flag = #{flag}
         </if>
-        <if test=" actualFlag != null and actualFlag !='' "><!-- 实际行为状态 -->
+        <if test=" actualFlag != null "><!-- 实际行为状态 -->
             AND actual_flag = #{actualFlag}
         </if>
-        <if test=" isAlarm != null and isAlarm !='' "><!-- 是否报警 -->
+        <if test=" isAlarm != null "><!-- 是否报警 -->
             AND is_alarm = #{isAlarm}
         </if>
-        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+        <if test=" isUse != null "><!-- 是否启用 -->
             AND is_use = #{isUse}
         </if>
-        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+        <if test=" createTime != null "><!-- 创建时间 -->
             AND create_time = #{createTime}
         </if>
-        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+        <if test=" creator != null "><!-- 创建者 -->
             AND creator = #{creator}
         </if>
-        <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+        <if test=" updateTime != null "><!-- 更新时间 -->
             AND update_time = #{updateTime}
         </if>
-        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+        <if test=" updator != null "><!-- 最后更新者 -->
             AND updator = #{updator}
         </if>
     </select>
@@ -172,74 +172,74 @@
     <!-- 修改一条数据 -->
     <update id='doUpdate' parameterType='AlarmDBO'>
         UPDATE alarm SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
-        <if test=" alarmId != null and alarmId !='' "><!-- 自增id -->
+        <if test=" alarmId != null "><!-- 自增id -->
             ,alarm_id = #{alarmId}
         </if>
-        <if test=" sid != null and sid !='' "><!-- 学校id -->
+        <if test=" sid != null "><!-- 学校id -->
             ,sid = #{sid}
         </if>
-        <if test=" cid != null and cid !='' "><!-- 班级id -->
+        <if test=" cid != null "><!-- 班级id -->
             ,cid = #{cid}
         </if>
-        <if test=" studentId != null and studentId !='' "><!-- 学生id -->
+        <if test=" studentId != null "><!-- 学生id -->
             ,student_id = #{studentId}
         </if>
-        <if test=" date != null and date !='' "><!-- 日期 -->
+        <if test=" date != null "><!-- 日期 -->
             ,date = #{date}
         </if>
-        <if test=" startTime != null and startTime !='' "><!-- 开始时间 -->
+        <if test=" startTime != null "><!-- 开始时间 -->
             ,start_time = #{startTime}
         </if>
-        <if test=" endTime != null and endTime !='' "><!-- 结束时间 -->
+        <if test=" endTime != null "><!-- 结束时间 -->
             ,end_time = #{endTime}
         </if>
-        <if test=" deviceId != null and deviceId !='' "><!-- 学校设备id -->
+        <if test=" deviceId != null "><!-- 学校设备id -->
             ,device_id = #{deviceId}
         </if>
-        <if test=" flag != null and flag !='' "><!-- 规定行为状态 -->
+        <if test=" flag != null "><!-- 规定行为状态 -->
             ,flag = #{flag}
         </if>
-        <if test=" actualFlag != null and actualFlag !='' "><!-- 实际行为状态 -->
+        <if test=" actualFlag != null "><!-- 实际行为状态 -->
             ,actual_flag = #{actualFlag}
         </if>
-        <if test=" isAlarm != null and isAlarm !='' "><!-- 是否报警 -->
+        <if test=" isAlarm != null "><!-- 是否报警 -->
             ,is_alarm = #{isAlarm}
         </if>
-        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+        <if test=" isUse != null "><!-- 是否启用 -->
             ,is_use = #{isUse}
         </if>
-        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+        <if test=" createTime != null "><!-- 创建时间 -->
             ,create_time = #{createTime}
         </if>
-        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+        <if test=" creator != null "><!-- 创建者 -->
             ,creator = #{creator}
         </if>
-        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+        <if test=" updator != null "><!-- 最后更新者 -->
             ,updator = #{updator}
         </if>
         WHERE 1 = 1 
-            <if test=" alarmId != null and alarmId !='' "><!-- 自增id -->
+            <if test=" alarmId != null "><!-- 自增id -->
                 AND alarm_id = #{alarmId}
             </if>
     </update>
     <!-- 逻辑删除一条数据 -->
     <delete id='toDelete' parameterType='AlarmDBO'>
         UPDATE alarm SET ddd='1', update_time = #{updateTime}, uu2 = #{uu2} WHERE update_time = #{updateTime}
-            <if test=" alarmId != null and alarmId !='' "><!-- 自增id -->
+            <if test=" alarmId != null "><!-- 自增id -->
                 AND alarm_id = #{alarmId}
             </if>
     </delete>
     <!-- 物理删除一条数据 -->
     <delete id='doDelete' parameterType='AlarmDBO'>
         DELETE FROM alarm WHERE update_time = #{updateTime}
-            <if test=" alarmId != null and alarmId !='' "><!-- 自增id -->
+            <if test=" alarmId != null "><!-- 自增id -->
                 AND alarm_id = #{alarmId}
             </if>
     </delete>
     <!-- 查询一条数据  -->
     <select id='doRead' parameterType='AlarmDBO' resultType='AlarmDBO'>
         SELECT <include refid='tableColumns'/> FROM alarm WHERE 1 = 1
-            <if test=" alarmId != null and alarmId !='' "><!-- 自增id -->
+            <if test=" alarmId != null "><!-- 自增id -->
                 AND alarm_id = #{alarmId}
             </if>
     </select>

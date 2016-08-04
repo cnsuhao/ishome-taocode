@@ -13,128 +13,128 @@
     <!-- 根据条件更新所有记录 -->
     <update id='doUpdateAll' parameterType='UStudentExtDBO'>
         UPDATE u_student_ext SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
-        <if test=" studentId != null and studentId !='' "><!-- 学生id -->
+        <if test=" studentId != null "><!-- 学生id -->
             ,student_id = #{studentId}
         </if>
-        <if test=" photo != null and photo !='' "><!-- 学籍照片 -->
+        <if test=" photo != null "><!-- 学籍照片 -->
             ,photo = #{photo}
         </if>
-        <if test=" nation != null and nation !='' "><!-- 民族 -->
+        <if test=" nation != null "><!-- 民族 -->
             ,nation = #{nation}
         </if>
-        <if test=" nativePlace != null and nativePlace !='' "><!-- 籍贯 -->
+        <if test=" nativePlace != null "><!-- 籍贯 -->
             ,native_place = #{nativePlace}
         </if>
-        <if test=" cardType != null and cardType !='' "><!-- 证件类型 -->
+        <if test=" cardType != null "><!-- 证件类型 -->
             ,card_type = #{cardType}
         </if>
-        <if test=" cardNumber != null and cardNumber !='' "><!-- 证件号码 -->
+        <if test=" cardNumber != null "><!-- 证件号码 -->
             ,card_number = #{cardNumber}
         </if>
-        <if test=" isOverseas != null and isOverseas !='' "><!-- 是否港澳台侨胞 -->
+        <if test=" isOverseas != null "><!-- 是否港澳台侨胞 -->
             ,is_overseas = #{isOverseas}
         </if>
-        <if test=" political != null and political !='' "><!-- 政治面貌 -->
+        <if test=" political != null "><!-- 政治面貌 -->
             ,political = #{political}
         </if>
-        <if test=" fith != null and fith !='' "><!-- 宗教信仰 -->
+        <if test=" fith != null "><!-- 宗教信仰 -->
             ,fith = #{fith}
         </if>
-        <if test=" health != null and health !='' "><!-- 健康状况 -->
+        <if test=" health != null "><!-- 健康状况 -->
             ,health = #{health}
         </if>
-        <if test=" blood != null and blood !='' "><!-- 血型 -->
+        <if test=" blood != null "><!-- 血型 -->
             ,blood = #{blood}
         </if>
-        <if test=" dateOfSchool != null and dateOfSchool !='' "><!-- 入学日期 -->
+        <if test=" dateOfSchool != null "><!-- 入学日期 -->
             ,date_of_school = #{dateOfSchool}
         </if>
-        <if test=" dateOfBirth != null and dateOfBirth !='' "><!-- 出生日期 -->
+        <if test=" dateOfBirth != null "><!-- 出生日期 -->
             ,date_of_birth = #{dateOfBirth}
         </if>
-        <if test=" studentType != null and studentType !='' "><!-- 学生类别 -->
+        <if test=" studentType != null "><!-- 学生类别 -->
             ,student_type = #{studentType}
         </if>
-        <if test=" residenceType != null and residenceType !='' "><!-- 户口类型 -->
+        <if test=" residenceType != null "><!-- 户口类型 -->
             ,residence_type = #{residenceType}
         </if>
-        <if test=" residenceAddress != null and residenceAddress !='' "><!-- 户口地址 -->
+        <if test=" residenceAddress != null "><!-- 户口地址 -->
             ,residence_address = #{residenceAddress}
         </if>
-        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+        <if test=" isUse != null "><!-- 是否启用 -->
             ,is_use = #{isUse}
         </if>
-        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+        <if test=" createTime != null "><!-- 创建时间 -->
             ,create_time = #{createTime}
         </if>
-        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+        <if test=" creator != null "><!-- 创建者 -->
             ,creator = #{creator}
         </if>
-        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+        <if test=" updator != null "><!-- 最后更新者 -->
             ,updator = #{updator}
         </if>
         WHERE 1 = 1 
-            <if test=" studentId != null and studentId !='' "><!-- 学生id -->
+            <if test=" studentId != null "><!-- 学生id -->
                 AND student_id = #{studentId}
             </if>
-            <if test=" photo != null and photo !='' "><!-- 学籍照片 -->
+            <if test=" photo != null "><!-- 学籍照片 -->
                 AND photo = #{photo}
             </if>
-            <if test=" nation != null and nation !='' "><!-- 民族 -->
+            <if test=" nation != null "><!-- 民族 -->
                 AND nation = #{nation}
             </if>
-            <if test=" nativePlace != null and nativePlace !='' "><!-- 籍贯 -->
+            <if test=" nativePlace != null "><!-- 籍贯 -->
                 AND native_place = #{nativePlace}
             </if>
-            <if test=" cardType != null and cardType !='' "><!-- 证件类型 -->
+            <if test=" cardType != null "><!-- 证件类型 -->
                 AND card_type = #{cardType}
             </if>
-            <if test=" cardNumber != null and cardNumber !='' "><!-- 证件号码 -->
+            <if test=" cardNumber != null "><!-- 证件号码 -->
                 AND card_number = #{cardNumber}
             </if>
-            <if test=" isOverseas != null and isOverseas !='' "><!-- 是否港澳台侨胞 -->
+            <if test=" isOverseas != null "><!-- 是否港澳台侨胞 -->
                 AND is_overseas = #{isOverseas}
             </if>
-            <if test=" political != null and political !='' "><!-- 政治面貌 -->
+            <if test=" political != null "><!-- 政治面貌 -->
                 AND political = #{political}
             </if>
-            <if test=" fith != null and fith !='' "><!-- 宗教信仰 -->
+            <if test=" fith != null "><!-- 宗教信仰 -->
                 AND fith = #{fith}
             </if>
-            <if test=" health != null and health !='' "><!-- 健康状况 -->
+            <if test=" health != null "><!-- 健康状况 -->
                 AND health = #{health}
             </if>
-            <if test=" blood != null and blood !='' "><!-- 血型 -->
+            <if test=" blood != null "><!-- 血型 -->
                 AND blood = #{blood}
             </if>
-            <if test=" dateOfSchool != null and dateOfSchool !='' "><!-- 入学日期 -->
+            <if test=" dateOfSchool != null "><!-- 入学日期 -->
                 AND date_of_school = #{dateOfSchool}
             </if>
-            <if test=" dateOfBirth != null and dateOfBirth !='' "><!-- 出生日期 -->
+            <if test=" dateOfBirth != null "><!-- 出生日期 -->
                 AND date_of_birth = #{dateOfBirth}
             </if>
-            <if test=" studentType != null and studentType !='' "><!-- 学生类别 -->
+            <if test=" studentType != null "><!-- 学生类别 -->
                 AND student_type = #{studentType}
             </if>
-            <if test=" residenceType != null and residenceType !='' "><!-- 户口类型 -->
+            <if test=" residenceType != null "><!-- 户口类型 -->
                 AND residence_type = #{residenceType}
             </if>
-            <if test=" residenceAddress != null and residenceAddress !='' "><!-- 户口地址 -->
+            <if test=" residenceAddress != null "><!-- 户口地址 -->
                 AND residence_address = #{residenceAddress}
             </if>
-            <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+            <if test=" isUse != null "><!-- 是否启用 -->
                 AND is_use = #{isUse}
             </if>
-            <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+            <if test=" createTime != null "><!-- 创建时间 -->
                 AND create_time = #{createTime}
             </if>
-            <if test=" creator != null and creator !='' "><!-- 创建者 -->
+            <if test=" creator != null "><!-- 创建者 -->
                 AND creator = #{creator}
             </if>
-            <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+            <if test=" updateTime != null "><!-- 更新时间 -->
                 AND update_time = #{updateTime}
             </if>
-            <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+            <if test=" updator != null "><!-- 最后更新者 -->
                 AND updator = #{updator}
             </if>
     </update>
@@ -142,67 +142,67 @@
     <select id='doSelectPage' parameterType='UStudentExtDBO' resultType='UStudentExtDBO'>
         SELECT <include refid='tableColumns'/> FROM u_student_ext
         WHERE 1 = 1 
-        <if test=" studentId != null and studentId !='' "><!-- 学生id -->
+        <if test=" studentId != null "><!-- 学生id -->
             AND student_id = #{studentId}
         </if>
-        <if test=" photo != null and photo !='' "><!-- 学籍照片 -->
+        <if test=" photo != null "><!-- 学籍照片 -->
             AND photo = #{photo}
         </if>
-        <if test=" nation != null and nation !='' "><!-- 民族 -->
+        <if test=" nation != null "><!-- 民族 -->
             AND nation = #{nation}
         </if>
-        <if test=" nativePlace != null and nativePlace !='' "><!-- 籍贯 -->
+        <if test=" nativePlace != null "><!-- 籍贯 -->
             AND native_place = #{nativePlace}
         </if>
-        <if test=" cardType != null and cardType !='' "><!-- 证件类型 -->
+        <if test=" cardType != null "><!-- 证件类型 -->
             AND card_type = #{cardType}
         </if>
-        <if test=" cardNumber != null and cardNumber !='' "><!-- 证件号码 -->
+        <if test=" cardNumber != null "><!-- 证件号码 -->
             AND card_number = #{cardNumber}
         </if>
-        <if test=" isOverseas != null and isOverseas !='' "><!-- 是否港澳台侨胞 -->
+        <if test=" isOverseas != null "><!-- 是否港澳台侨胞 -->
             AND is_overseas = #{isOverseas}
         </if>
-        <if test=" political != null and political !='' "><!-- 政治面貌 -->
+        <if test=" political != null "><!-- 政治面貌 -->
             AND political = #{political}
         </if>
-        <if test=" fith != null and fith !='' "><!-- 宗教信仰 -->
+        <if test=" fith != null "><!-- 宗教信仰 -->
             AND fith = #{fith}
         </if>
-        <if test=" health != null and health !='' "><!-- 健康状况 -->
+        <if test=" health != null "><!-- 健康状况 -->
             AND health = #{health}
         </if>
-        <if test=" blood != null and blood !='' "><!-- 血型 -->
+        <if test=" blood != null "><!-- 血型 -->
             AND blood = #{blood}
         </if>
-        <if test=" dateOfSchool != null and dateOfSchool !='' "><!-- 入学日期 -->
+        <if test=" dateOfSchool != null "><!-- 入学日期 -->
             AND date_of_school = #{dateOfSchool}
         </if>
-        <if test=" dateOfBirth != null and dateOfBirth !='' "><!-- 出生日期 -->
+        <if test=" dateOfBirth != null "><!-- 出生日期 -->
             AND date_of_birth = #{dateOfBirth}
         </if>
-        <if test=" studentType != null and studentType !='' "><!-- 学生类别 -->
+        <if test=" studentType != null "><!-- 学生类别 -->
             AND student_type = #{studentType}
         </if>
-        <if test=" residenceType != null and residenceType !='' "><!-- 户口类型 -->
+        <if test=" residenceType != null "><!-- 户口类型 -->
             AND residence_type = #{residenceType}
         </if>
-        <if test=" residenceAddress != null and residenceAddress !='' "><!-- 户口地址 -->
+        <if test=" residenceAddress != null "><!-- 户口地址 -->
             AND residence_address = #{residenceAddress}
         </if>
-        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+        <if test=" isUse != null "><!-- 是否启用 -->
             AND is_use = #{isUse}
         </if>
-        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+        <if test=" createTime != null "><!-- 创建时间 -->
             AND create_time = #{createTime}
         </if>
-        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+        <if test=" creator != null "><!-- 创建者 -->
             AND creator = #{creator}
         </if>
-        <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+        <if test=" updateTime != null "><!-- 更新时间 -->
             AND update_time = #{updateTime}
         </if>
-        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+        <if test=" updator != null "><!-- 最后更新者 -->
             AND updator = #{updator}
         </if>
     </select>
@@ -217,89 +217,89 @@
     <!-- 修改一条数据 -->
     <update id='doUpdate' parameterType='UStudentExtDBO'>
         UPDATE u_student_ext SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
-        <if test=" studentId != null and studentId !='' "><!-- 学生id -->
+        <if test=" studentId != null "><!-- 学生id -->
             ,student_id = #{studentId}
         </if>
-        <if test=" photo != null and photo !='' "><!-- 学籍照片 -->
+        <if test=" photo != null "><!-- 学籍照片 -->
             ,photo = #{photo}
         </if>
-        <if test=" nation != null and nation !='' "><!-- 民族 -->
+        <if test=" nation != null "><!-- 民族 -->
             ,nation = #{nation}
         </if>
-        <if test=" nativePlace != null and nativePlace !='' "><!-- 籍贯 -->
+        <if test=" nativePlace != null "><!-- 籍贯 -->
             ,native_place = #{nativePlace}
         </if>
-        <if test=" cardType != null and cardType !='' "><!-- 证件类型 -->
+        <if test=" cardType != null "><!-- 证件类型 -->
             ,card_type = #{cardType}
         </if>
-        <if test=" cardNumber != null and cardNumber !='' "><!-- 证件号码 -->
+        <if test=" cardNumber != null "><!-- 证件号码 -->
             ,card_number = #{cardNumber}
         </if>
-        <if test=" isOverseas != null and isOverseas !='' "><!-- 是否港澳台侨胞 -->
+        <if test=" isOverseas != null "><!-- 是否港澳台侨胞 -->
             ,is_overseas = #{isOverseas}
         </if>
-        <if test=" political != null and political !='' "><!-- 政治面貌 -->
+        <if test=" political != null "><!-- 政治面貌 -->
             ,political = #{political}
         </if>
-        <if test=" fith != null and fith !='' "><!-- 宗教信仰 -->
+        <if test=" fith != null "><!-- 宗教信仰 -->
             ,fith = #{fith}
         </if>
-        <if test=" health != null and health !='' "><!-- 健康状况 -->
+        <if test=" health != null "><!-- 健康状况 -->
             ,health = #{health}
         </if>
-        <if test=" blood != null and blood !='' "><!-- 血型 -->
+        <if test=" blood != null "><!-- 血型 -->
             ,blood = #{blood}
         </if>
-        <if test=" dateOfSchool != null and dateOfSchool !='' "><!-- 入学日期 -->
+        <if test=" dateOfSchool != null "><!-- 入学日期 -->
             ,date_of_school = #{dateOfSchool}
         </if>
-        <if test=" dateOfBirth != null and dateOfBirth !='' "><!-- 出生日期 -->
+        <if test=" dateOfBirth != null "><!-- 出生日期 -->
             ,date_of_birth = #{dateOfBirth}
         </if>
-        <if test=" studentType != null and studentType !='' "><!-- 学生类别 -->
+        <if test=" studentType != null "><!-- 学生类别 -->
             ,student_type = #{studentType}
         </if>
-        <if test=" residenceType != null and residenceType !='' "><!-- 户口类型 -->
+        <if test=" residenceType != null "><!-- 户口类型 -->
             ,residence_type = #{residenceType}
         </if>
-        <if test=" residenceAddress != null and residenceAddress !='' "><!-- 户口地址 -->
+        <if test=" residenceAddress != null "><!-- 户口地址 -->
             ,residence_address = #{residenceAddress}
         </if>
-        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+        <if test=" isUse != null "><!-- 是否启用 -->
             ,is_use = #{isUse}
         </if>
-        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+        <if test=" createTime != null "><!-- 创建时间 -->
             ,create_time = #{createTime}
         </if>
-        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+        <if test=" creator != null "><!-- 创建者 -->
             ,creator = #{creator}
         </if>
-        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+        <if test=" updator != null "><!-- 最后更新者 -->
             ,updator = #{updator}
         </if>
         WHERE 1 = 1 
-            <if test=" studentId != null and studentId !='' "><!-- 学生id -->
+            <if test=" studentId != null "><!-- 学生id -->
                 AND student_id = #{studentId}
             </if>
     </update>
     <!-- 逻辑删除一条数据 -->
     <delete id='toDelete' parameterType='UStudentExtDBO'>
         UPDATE u_student_ext SET ddd='1', update_time = #{updateTime}, uu2 = #{uu2} WHERE update_time = #{updateTime}
-            <if test=" studentId != null and studentId !='' "><!-- 学生id -->
+            <if test=" studentId != null "><!-- 学生id -->
                 AND student_id = #{studentId}
             </if>
     </delete>
     <!-- 物理删除一条数据 -->
     <delete id='doDelete' parameterType='UStudentExtDBO'>
         DELETE FROM u_student_ext WHERE update_time = #{updateTime}
-            <if test=" studentId != null and studentId !='' "><!-- 学生id -->
+            <if test=" studentId != null "><!-- 学生id -->
                 AND student_id = #{studentId}
             </if>
     </delete>
     <!-- 查询一条数据  -->
     <select id='doRead' parameterType='UStudentExtDBO' resultType='UStudentExtDBO'>
         SELECT <include refid='tableColumns'/> FROM u_student_ext WHERE 1 = 1
-            <if test=" studentId != null and studentId !='' "><!-- 学生id -->
+            <if test=" studentId != null "><!-- 学生id -->
                 AND student_id = #{studentId}
             </if>
     </select>

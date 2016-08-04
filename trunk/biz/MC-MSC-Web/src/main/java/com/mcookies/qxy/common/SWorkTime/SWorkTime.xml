@@ -13,50 +13,50 @@
 	<!-- 根据条件更新所有记录 -->
 	<update id='doUpdateAll' parameterType='SWorkTimeDBO'>
 		UPDATE s_work_time SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
-		<if test=" workId != null and workId !='' "><!-- 作息时间模板id -->
+		<if test=" workId != null "><!-- 作息时间模板id -->
 			,work_id = #{workId}
 		</if>
-		<if test=" sid != null and sid !='' "><!-- 学校id -->
+		<if test=" sid != null "><!-- 学校id -->
 			,sid = #{sid}
 		</if>
-		<if test=" workName != null and workName !='' "><!-- 作息时间模板名称 -->
+		<if test=" workName != null "><!-- 作息时间模板名称 -->
 			,work_name = #{workName}
 		</if>
-		<if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+		<if test=" isUse != null "><!-- 是否启用 -->
 			,is_use = #{isUse}
 		</if>
-		<if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+		<if test=" createTime != null "><!-- 创建时间 -->
 			,create_time = #{createTime}
 		</if>
-		<if test=" creator != null and creator !='' "><!-- 创建者 -->
+		<if test=" creator != null "><!-- 创建者 -->
 			,creator = #{creator}
 		</if>
-		<if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+		<if test=" updator != null "><!-- 最后更新者 -->
 			,updator = #{updator}
 		</if>
 		WHERE 1 = 1
-		<if test=" workId != null and workId !='' "><!-- 作息时间模板id -->
+		<if test=" workId != null "><!-- 作息时间模板id -->
 			AND work_id = #{workId}
 		</if>
-		<if test=" sid != null and sid !='' "><!-- 学校id -->
+		<if test=" sid != null "><!-- 学校id -->
 			AND sid = #{sid}
 		</if>
-		<if test=" workName != null and workName !='' "><!-- 作息时间模板名称 -->
+		<if test=" workName != null "><!-- 作息时间模板名称 -->
 			AND work_name = #{workName}
 		</if>
-		<if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+		<if test=" isUse != null "><!-- 是否启用 -->
 			AND is_use = #{isUse}
 		</if>
-		<if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+		<if test=" createTime != null "><!-- 创建时间 -->
 			AND create_time = #{createTime}
 		</if>
-		<if test=" creator != null and creator !='' "><!-- 创建者 -->
+		<if test=" creator != null "><!-- 创建者 -->
 			AND creator = #{creator}
 		</if>
-		<if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+		<if test=" updateTime != null "><!-- 更新时间 -->
 			AND update_time = #{updateTime}
 		</if>
-		<if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+		<if test=" updator != null "><!-- 最后更新者 -->
 			AND updator = #{updator}
 		</if>
 	</update>
@@ -67,28 +67,28 @@
 		<include refid='tableColumns' />
 		FROM s_work_time
 		WHERE 1 = 1
-		<if test=" workId != null and workId !='' "><!-- 作息时间模板id -->
+		<if test=" workId != null "><!-- 作息时间模板id -->
 			AND work_id = #{workId}
 		</if>
-		<if test=" sid != null and sid !='' "><!-- 学校id -->
+		<if test=" sid != null "><!-- 学校id -->
 			AND sid = #{sid}
 		</if>
-		<if test=" workName != null and workName !='' "><!-- 作息时间模板名称 -->
+		<if test=" workName != null "><!-- 作息时间模板名称 -->
 			AND work_name = #{workName}
 		</if>
-		<if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+		<if test=" isUse != null "><!-- 是否启用 -->
 			AND is_use = #{isUse}
 		</if>
-		<if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+		<if test=" createTime != null "><!-- 创建时间 -->
 			AND create_time = #{createTime}
 		</if>
-		<if test=" creator != null and creator !='' "><!-- 创建者 -->
+		<if test=" creator != null "><!-- 创建者 -->
 			AND creator = #{creator}
 		</if>
-		<if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+		<if test=" updateTime != null "><!-- 更新时间 -->
 			AND update_time = #{updateTime}
 		</if>
-		<if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+		<if test=" updator != null "><!-- 最后更新者 -->
 			AND updator = #{updator}
 		</if>
 	</select>
@@ -107,29 +107,29 @@
 	<!-- 修改一条数据 -->
 	<update id='doUpdate' parameterType='SWorkTimeDBO'>
 		UPDATE s_work_time SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
-		<if test=" workId != null and workId !='' "><!-- 作息时间模板id -->
+		<if test=" workId != null "><!-- 作息时间模板id -->
 			,work_id = #{workId}
 		</if>
-		<if test=" sid != null and sid !='' "><!-- 学校id -->
+		<if test=" sid != null "><!-- 学校id -->
 			,sid = #{sid}
 		</if>
-		<if test=" workName != null and workName !='' "><!-- 作息时间模板名称 -->
+		<if test=" workName != null "><!-- 作息时间模板名称 -->
 			,work_name = #{workName}
 		</if>
-		<if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+		<if test=" isUse != null "><!-- 是否启用 -->
 			,is_use = #{isUse}
 		</if>
-		<if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+		<if test=" createTime != null "><!-- 创建时间 -->
 			,create_time = #{createTime}
 		</if>
-		<if test=" creator != null and creator !='' "><!-- 创建者 -->
+		<if test=" creator != null "><!-- 创建者 -->
 			,creator = #{creator}
 		</if>
-		<if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+		<if test=" updator != null "><!-- 最后更新者 -->
 			,updator = #{updator}
 		</if>
 		WHERE 1 = 1
-		<if test=" workId != null and workId !='' "><!-- 作息时间模板id -->
+		<if test=" workId != null "><!-- 作息时间模板id -->
 			AND work_id = #{workId}
 		</if>
 	</update>
@@ -137,14 +137,14 @@
 	<delete id='toDelete' parameterType='SWorkTimeDBO'>
 		UPDATE s_work_time SET ddd='1', update_time = #{updateTime}, uu2 =
 		#{uu2} WHERE update_time = #{updateTime}
-		<if test=" workId != null and workId !='' "><!-- 作息时间模板id -->
+		<if test=" workId != null "><!-- 作息时间模板id -->
 			AND work_id = #{workId}
 		</if>
 	</delete>
 	<!-- 物理删除一条数据 -->
 	<delete id='doDelete' parameterType='SWorkTimeDBO'>
 		DELETE FROM s_work_time WHERE update_time = #{updateTime}
-		<if test=" workId != null and workId !='' "><!-- 作息时间模板id -->
+		<if test=" workId != null "><!-- 作息时间模板id -->
 			AND work_id = #{workId}
 		</if>
 	</delete>
@@ -153,7 +153,7 @@
 		SELECT
 		<include refid='tableColumns' />
 		FROM s_work_time WHERE 1 = 1
-		<if test=" workId != null and workId !='' "><!-- 作息时间模板id -->
+		<if test=" workId != null "><!-- 作息时间模板id -->
 			AND work_id = #{workId}
 		</if>
 	</select>

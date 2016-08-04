@@ -19,74 +19,74 @@
     <!-- 根据条件更新所有记录 -->
     <update id='doUpdateAll' parameterType='DeviceTagDBO'>
         UPDATE device_tag SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
-        <if test=" id != null and id !='' "><!-- 自增id -->
+        <if test=" id != null "><!-- 自增id -->
             ,id = #{id}
         </if>
-        <if test=" sid != null and sid !='' "><!-- 学校id -->
+        <if test=" sid != null "><!-- 学校id -->
             ,sid = #{sid}
         </if>
-        <if test=" deviceName != null and deviceName !='' "><!-- 地点名字 -->
+        <if test=" deviceName != null "><!-- 地点名字 -->
             ,device_name = #{deviceName}
         </if>
-        <if test=" deviceId != null and deviceId !='' "><!-- 学校设备id -->
+        <if test=" deviceId != null "><!-- 学校设备id -->
             ,device_id = #{deviceId}
         </if>
-        <if test=" username != null and username !='' "><!-- 设备账号 -->
+        <if test=" username != null "><!-- 设备账号 -->
             ,username = #{username}
         </if>
-        <if test=" password != null and password !='' "><!-- 设备密码 -->
+        <if test=" password != null "><!-- 设备密码 -->
             ,password = #{password}
         </if>
-        <if test=" lastLoginTime != null and lastLoginTime !='' "><!-- 最近一次登陆时间 -->
+        <if test=" lastLoginTime != null "><!-- 最近一次登陆时间 -->
             ,last_login_time = #{lastLoginTime}
         </if>
-        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+        <if test=" isUse != null "><!-- 是否启用 -->
             ,is_use = #{isUse}
         </if>
-        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+        <if test=" createTime != null "><!-- 创建时间 -->
             ,create_time = #{createTime}
         </if>
-        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+        <if test=" creator != null "><!-- 创建者 -->
             ,creator = #{creator}
         </if>
-        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+        <if test=" updator != null "><!-- 最后更新者 -->
             ,updator = #{updator}
         </if>
         WHERE 1 = 1 
-            <if test=" id != null and id !='' "><!-- 自增id -->
+            <if test=" id != null "><!-- 自增id -->
                 AND id = #{id}
             </if>
-            <if test=" sid != null and sid !='' "><!-- 学校id -->
+            <if test=" sid != null "><!-- 学校id -->
                 AND sid = #{sid}
             </if>
-            <if test=" deviceName != null and deviceName !='' "><!-- 地点名字 -->
+            <if test=" deviceName != null "><!-- 地点名字 -->
                 AND device_name = #{deviceName}
             </if>
-            <if test=" deviceId != null and deviceId !='' "><!-- 学校设备id -->
+            <if test=" deviceId != null "><!-- 学校设备id -->
                 AND device_id = #{deviceId}
             </if>
-            <if test=" username != null and username !='' "><!-- 设备账号 -->
+            <if test=" username != null "><!-- 设备账号 -->
                 AND username = #{username}
             </if>
-            <if test=" password != null and password !='' "><!-- 设备密码 -->
+            <if test=" password != null "><!-- 设备密码 -->
                 AND password = #{password}
             </if>
-            <if test=" lastLoginTime != null and lastLoginTime !='' "><!-- 最近一次登陆时间 -->
+            <if test=" lastLoginTime != null "><!-- 最近一次登陆时间 -->
                 AND last_login_time = #{lastLoginTime}
             </if>
-            <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+            <if test=" isUse != null "><!-- 是否启用 -->
                 AND is_use = #{isUse}
             </if>
-            <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+            <if test=" createTime != null "><!-- 创建时间 -->
                 AND create_time = #{createTime}
             </if>
-            <if test=" creator != null and creator !='' "><!-- 创建者 -->
+            <if test=" creator != null "><!-- 创建者 -->
                 AND creator = #{creator}
             </if>
-            <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+            <if test=" updateTime != null "><!-- 更新时间 -->
                 AND update_time = #{updateTime}
             </if>
-            <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+            <if test=" updator != null "><!-- 最后更新者 -->
                 AND updator = #{updator}
             </if>
     </update>
@@ -94,40 +94,40 @@
     <select id='doSelectPage' parameterType='DeviceTagDBO' resultType='DeviceTagDBO'>
         SELECT <include refid='tableColumns'/> FROM device_tag
         WHERE 1 = 1 
-        <if test=" id != null and id !='' "><!-- 自增id -->
+        <if test=" id != null "><!-- 自增id -->
             AND id = #{id}
         </if>
-        <if test=" sid != null and sid !='' "><!-- 学校id -->
+        <if test=" sid != null "><!-- 学校id -->
             AND sid = #{sid}
         </if>
-        <if test=" deviceName != null and deviceName !='' "><!-- 地点名字 -->
+        <if test=" deviceName != null "><!-- 地点名字 -->
             AND device_name = #{deviceName}
         </if>
-        <if test=" deviceId != null and deviceId !='' "><!-- 学校设备id -->
+        <if test=" deviceId != null "><!-- 学校设备id -->
             AND device_id = #{deviceId}
         </if>
-        <if test=" username != null and username !='' "><!-- 设备账号 -->
+        <if test=" username != null "><!-- 设备账号 -->
             AND username = #{username}
         </if>
-        <if test=" password != null and password !='' "><!-- 设备密码 -->
+        <if test=" password != null "><!-- 设备密码 -->
             AND password = #{password}
         </if>
-        <if test=" lastLoginTime != null and lastLoginTime !='' "><!-- 最近一次登陆时间 -->
+        <if test=" lastLoginTime != null "><!-- 最近一次登陆时间 -->
             AND last_login_time = #{lastLoginTime}
         </if>
-        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+        <if test=" isUse != null "><!-- 是否启用 -->
             AND is_use = #{isUse}
         </if>
-        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+        <if test=" createTime != null "><!-- 创建时间 -->
             AND create_time = #{createTime}
         </if>
-        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+        <if test=" creator != null "><!-- 创建者 -->
             AND creator = #{creator}
         </if>
-        <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+        <if test=" updateTime != null "><!-- 更新时间 -->
             AND update_time = #{updateTime}
         </if>
-        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+        <if test=" updator != null "><!-- 最后更新者 -->
             AND updator = #{updator}
         </if>
     </select>
@@ -142,62 +142,62 @@
     <!-- 修改一条数据 -->
     <update id='doUpdate' parameterType='DeviceTagDBO'>
         UPDATE device_tag SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
-        <if test=" id != null and id !='' "><!-- 自增id -->
+        <if test=" id != null "><!-- 自增id -->
             ,id = #{id}
         </if>
-        <if test=" sid != null and sid !='' "><!-- 学校id -->
+        <if test=" sid != null "><!-- 学校id -->
             ,sid = #{sid}
         </if>
-        <if test=" deviceName != null and deviceName !='' "><!-- 地点名字 -->
+        <if test=" deviceName != null "><!-- 地点名字 -->
             ,device_name = #{deviceName}
         </if>
-        <if test=" deviceId != null and deviceId !='' "><!-- 学校设备id -->
+        <if test=" deviceId != null "><!-- 学校设备id -->
             ,device_id = #{deviceId}
         </if>
-        <if test=" username != null and username !='' "><!-- 设备账号 -->
+        <if test=" username != null "><!-- 设备账号 -->
             ,username = #{username}
         </if>
-        <if test=" password != null and password !='' "><!-- 设备密码 -->
+        <if test=" password != null "><!-- 设备密码 -->
             ,password = #{password}
         </if>
-        <if test=" lastLoginTime != null and lastLoginTime !='' "><!-- 最近一次登陆时间 -->
+        <if test=" lastLoginTime != null "><!-- 最近一次登陆时间 -->
             ,last_login_time = #{lastLoginTime}
         </if>
-        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+        <if test=" isUse != null "><!-- 是否启用 -->
             ,is_use = #{isUse}
         </if>
-        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+        <if test=" createTime != null "><!-- 创建时间 -->
             ,create_time = #{createTime}
         </if>
-        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+        <if test=" creator != null "><!-- 创建者 -->
             ,creator = #{creator}
         </if>
-        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+        <if test=" updator != null "><!-- 最后更新者 -->
             ,updator = #{updator}
         </if>
         WHERE 1 = 1 
-            <if test=" id != null and id !='' "><!-- 自增id -->
+            <if test=" id != null "><!-- 自增id -->
                 AND id = #{id}
             </if>
     </update>
     <!-- 逻辑删除一条数据 -->
     <delete id='toDelete' parameterType='DeviceTagDBO'>
         UPDATE device_tag SET ddd='1', update_time = #{updateTime}, uu2 = #{uu2} WHERE update_time = #{updateTime}
-            <if test=" id != null and id !='' "><!-- 自增id -->
+            <if test=" id != null "><!-- 自增id -->
                 AND id = #{id}
             </if>
     </delete>
     <!-- 物理删除一条数据 -->
     <delete id='doDelete' parameterType='DeviceTagDBO'>
         DELETE FROM device_tag WHERE update_time = #{updateTime}
-            <if test=" id != null and id !='' "><!-- 自增id -->
+            <if test=" id != null "><!-- 自增id -->
                 AND id = #{id}
             </if>
     </delete>
     <!-- 查询一条数据  -->
     <select id='doRead' parameterType='DeviceTagDBO' resultType='DeviceTagDBO'>
         SELECT <include refid='tableColumns'/> FROM device_tag WHERE 1 = 1
-            <if test=" id != null and id !='' "><!-- 自增id -->
+            <if test=" id != null "><!-- 自增id -->
                 AND id = #{id}
             </if>
     </select>

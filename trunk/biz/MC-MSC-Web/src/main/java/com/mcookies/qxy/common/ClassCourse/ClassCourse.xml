@@ -13,416 +13,416 @@
     <!-- 根据条件更新所有记录 -->
     <update id='doUpdateAll' parameterType='ClassCourseDBO'>
         UPDATE class_course SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
-        <if test=" id != null and id !='' "><!-- 自增id -->
+        <if test=" id != null "><!-- 自增id -->
             ,id = #{id}
         </if>
-        <if test=" sid != null and sid !='' "><!-- 学校id -->
+        <if test=" sid != null "><!-- 学校id -->
             ,sid = #{sid}
         </if>
-        <if test=" cid != null and cid !='' "><!-- 班级id -->
+        <if test=" cid != null "><!-- 班级id -->
             ,cid = #{cid}
         </if>
-        <if test=" date != null and date !='' "><!-- 日期 -->
+        <if test=" date != null "><!-- 日期 -->
             ,date = #{date}
         </if>
-        <if test=" courseId1 != null and courseId1 !='' "><!-- 课程1id -->
+        <if test=" courseId1 != null "><!-- 课程1id -->
             ,course_id1 = #{courseId1}
         </if>
-        <if test=" courseName1 != null and courseName1 !='' "><!-- 课程1名称 -->
+        <if test=" courseName1 != null "><!-- 课程1名称 -->
             ,course_name1 = #{courseName1}
         </if>
-        <if test=" tid1 != null and tid1 !='' "><!-- 教师1id -->
+        <if test=" tid1 != null "><!-- 教师1id -->
             ,tid1 = #{tid1}
         </if>
-        <if test=" teacherName1 != null and teacherName1 !='' "><!-- 教师1姓名 -->
+        <if test=" teacherName1 != null' "><!-- 教师1姓名 -->
             ,teacher_name1 = #{teacherName1}
         </if>
-        <if test=" courseId2 != null and courseId2 !='' "><!-- 课程2id -->
+        <if test=" courseId2 != null "><!-- 课程2id -->
             ,course_id2 = #{courseId2}
         </if>
-        <if test=" courseName2 != null and courseName2 !='' "><!-- 课程2名称 -->
+        <if test=" courseName2 != null "><!-- 课程2名称 -->
             ,course_name2 = #{courseName2}
         </if>
-        <if test=" tid2 != null and tid2 !='' "><!-- 教师2id -->
+        <if test=" tid2 != null "><!-- 教师2id -->
             ,tid2 = #{tid2}
         </if>
-        <if test=" teacherN2 != null and teacherN2 !='' "><!-- 教师2姓名 -->
+        <if test=" teacherN2 != null "><!-- 教师2姓名 -->
             ,teacher_n2 = #{teacherN2}
         </if>
-        <if test=" courseId3 != null and courseId3 !='' "><!-- 课程3id -->
+        <if test=" courseId3 != null "><!-- 课程3id -->
             ,course_id3 = #{courseId3}
         </if>
-        <if test=" courseName3 != null and courseName3 !='' "><!-- 课程3名称 -->
+        <if test=" courseName3 != null "><!-- 课程3名称 -->
             ,course_name3 = #{courseName3}
         </if>
-        <if test=" tid3 != null and tid3 !='' "><!-- 教师3id -->
+        <if test=" tid3 != null "><!-- 教师3id -->
             ,tid3 = #{tid3}
         </if>
-        <if test=" teacherName3 != null and teacherName3 !='' "><!-- 教师3姓名 -->
+        <if test=" teacherName3 != null "><!-- 教师3姓名 -->
             ,teacher_name3 = #{teacherName3}
         </if>
-        <if test=" courseId4 != null and courseId4 !='' "><!-- 课程4id -->
+        <if test=" courseId4 != null "><!-- 课程4id -->
             ,course_id4 = #{courseId4}
         </if>
-        <if test=" courseName4 != null and courseName4 !='' "><!-- 课程4名称 -->
+        <if test=" courseName4 != null "><!-- 课程4名称 -->
             ,course_name4 = #{courseName4}
         </if>
-        <if test=" tid4 != null and tid4 !='' "><!-- 教师4id -->
+        <if test=" tid4 != null "><!-- 教师4id -->
             ,tid4 = #{tid4}
         </if>
-        <if test=" teacherName4 != null and teacherName4 !='' "><!-- 教师4姓名 -->
+        <if test=" teacherName4 != null "><!-- 教师4姓名 -->
             ,teacher_name4 = #{teacherName4}
         </if>
-        <if test=" courseId5 != null and courseId5 !='' "><!-- 课程5id -->
+        <if test=" courseId5 != null "><!-- 课程5id -->
             ,course_id5 = #{courseId5}
         </if>
-        <if test=" courseName5 != null and courseName5 !='' "><!-- 课程5名称 -->
+        <if test=" courseName5 != null "><!-- 课程5名称 -->
             ,course_name5 = #{courseName5}
         </if>
-        <if test=" tid5 != null and tid5 !='' "><!-- 教师5id -->
+        <if test=" tid5 != null "><!-- 教师5id -->
             ,tid5 = #{tid5}
         </if>
-        <if test=" teacherName5 != null and teacherName5 !='' "><!-- 教师5姓名 -->
+        <if test=" teacherName5 != null "><!-- 教师5姓名 -->
             ,teacher_name5 = #{teacherName5}
         </if>
-        <if test=" courseId6 != null and courseId6 !='' "><!-- 课程6id -->
+        <if test=" courseId6 != null "><!-- 课程6id -->
             ,course_id6 = #{courseId6}
         </if>
-        <if test=" courseName6 != null and courseName6 !='' "><!-- 课程6名称 -->
+        <if test=" courseName6 != null "><!-- 课程6名称 -->
             ,course_name6 = #{courseName6}
         </if>
-        <if test=" tid6 != null and tid6 !='' "><!-- 教师6id -->
+        <if test=" tid6 != null "><!-- 教师6id -->
             ,tid6 = #{tid6}
         </if>
-        <if test=" teacherName6 != null and teacherName6 !='' "><!-- 教师6姓名 -->
+        <if test=" teacherName6 != null "><!-- 教师6姓名 -->
             ,teacher_name6 = #{teacherName6}
         </if>
-        <if test=" courseId7 != null and courseId7 !='' "><!-- 课程7id -->
+        <if test=" courseId7 != null "><!-- 课程7id -->
             ,course_id7 = #{courseId7}
         </if>
-        <if test=" courseName7 != null and courseName7 !='' "><!-- 课程7名称 -->
+        <if test=" courseName7 != null "><!-- 课程7名称 -->
             ,course_name7 = #{courseName7}
         </if>
-        <if test=" tid7 != null and tid7 !='' "><!-- 教师7id -->
+        <if test=" tid7 != null "><!-- 教师7id -->
             ,tid7 = #{tid7}
         </if>
-        <if test=" teacherName7 != null and teacherName7 !='' "><!-- 教师7姓名 -->
+        <if test=" teacherName7 != null "><!-- 教师7姓名 -->
             ,teacher_name7 = #{teacherName7}
         </if>
-        <if test=" courseId8 != null and courseId8 !='' "><!-- 课程8id -->
+        <if test=" courseId8 != null "><!-- 课程8id -->
             ,course_id8 = #{courseId8}
         </if>
-        <if test=" courseName8 != null and courseName8 !='' "><!-- 课程8名称 -->
+        <if test=" courseName8 != null "><!-- 课程8名称 -->
             ,course_name8 = #{courseName8}
         </if>
-        <if test=" tid8 != null and tid8 !='' "><!-- 教师8id -->
+        <if test=" tid8 != null "><!-- 教师8id -->
             ,tid8 = #{tid8}
         </if>
-        <if test=" teacherName8 != null and teacherName8 !='' "><!-- 教师8姓名 -->
+        <if test=" teacherName8 != null "><!-- 教师8姓名 -->
             ,teacher_name8 = #{teacherName8}
         </if>
-        <if test=" courseId9 != null and courseId9 !='' "><!-- 课程9id -->
+        <if test=" courseId9 != null "><!-- 课程9id -->
             ,course_id9 = #{courseId9}
         </if>
-        <if test=" courseName9 != null and courseName9 !='' "><!-- 课程9名称 -->
+        <if test=" courseName9 != null "><!-- 课程9名称 -->
             ,course_name9 = #{courseName9}
         </if>
-        <if test=" tid9 != null and tid9 !='' "><!-- 教师9id -->
+        <if test=" tid9 != null "><!-- 教师9id -->
             ,tid9 = #{tid9}
         </if>
-        <if test=" teacherName9 != null and teacherName9 !='' "><!-- 教师9姓名 -->
+        <if test=" teacherName9 != null "><!-- 教师9姓名 -->
             ,teacher_name9 = #{teacherName9}
         </if>
-        <if test=" courseId10 != null and courseId10 !='' "><!-- 课程10id -->
+        <if test=" courseId10 != null "><!-- 课程10id -->
             ,course_id10 = #{courseId10}
         </if>
-        <if test=" courseName10 != null and courseName10 !='' "><!-- 课程10名称 -->
+        <if test=" courseName10 != null "><!-- 课程10名称 -->
             ,course_name10 = #{courseName10}
         </if>
-        <if test=" tid10 != null and tid10 !='' "><!-- 教师10id -->
+        <if test=" tid10 != null "><!-- 教师10id -->
             ,tid10 = #{tid10}
         </if>
-        <if test=" teacherName10 != null and teacherName10 !='' "><!-- 教师10姓名 -->
+        <if test=" teacherName10 != null "><!-- 教师10姓名 -->
             ,teacher_name10 = #{teacherName10}
         </if>
-        <if test=" courseId11 != null and courseId11 !='' "><!-- 课程11id -->
+        <if test=" courseId11 != null "><!-- 课程11id -->
             ,course_id11 = #{courseId11}
         </if>
-        <if test=" courseName11 != null and courseName11 !='' "><!-- 课程11名称 -->
+        <if test=" courseName11 != null "><!-- 课程11名称 -->
             ,course_name11 = #{courseName11}
         </if>
-        <if test=" tid11 != null and tid11 !='' "><!-- 教师11id -->
+        <if test=" tid11 != null "><!-- 教师11id -->
             ,tid11 = #{tid11}
         </if>
-        <if test=" teacherName11 != null and teacherName11 !='' "><!-- 教师11姓名 -->
+        <if test=" teacherName11 != null "><!-- 教师11姓名 -->
             ,teacher_name11 = #{teacherName11}
         </if>
-        <if test=" courseId12 != null and courseId12 !='' "><!-- 课程12id -->
+        <if test=" courseId12 != null "><!-- 课程12id -->
             ,course_id12 = #{courseId12}
         </if>
-        <if test=" courseName12 != null and courseName12 !='' "><!-- 课程12名称 -->
+        <if test=" courseName12 != null "><!-- 课程12名称 -->
             ,course_name12 = #{courseName12}
         </if>
-        <if test=" tid12 != null and tid12 !='' "><!-- 教师12id -->
+        <if test=" tid12 != null "><!-- 教师12id -->
             ,tid12 = #{tid12}
         </if>
-        <if test=" teacherName12 != null and teacherName12 !='' "><!-- 教师12姓名 -->
+        <if test=" teacherName12 != null "><!-- 教师12姓名 -->
             ,teacher_name12 = #{teacherName12}
         </if>
-        <if test=" courseId13 != null and courseId13 !='' "><!-- 课程13id -->
+        <if test=" courseId13 != null "><!-- 课程13id -->
             ,course_id13 = #{courseId13}
         </if>
-        <if test=" courseName13 != null and courseName13 !='' "><!-- 课程13名称 -->
+        <if test=" courseName13 != null "><!-- 课程13名称 -->
             ,course_name13 = #{courseName13}
         </if>
-        <if test=" tid13 != null and tid13 !='' "><!-- 教师13id -->
+        <if test=" tid13 != null "><!-- 教师13id -->
             ,tid13 = #{tid13}
         </if>
-        <if test=" teacherName13 != null and teacherName13 !='' "><!-- 教师13姓名 -->
+        <if test=" teacherName13 != null "><!-- 教师13姓名 -->
             ,teacher_name13 = #{teacherName13}
         </if>
-        <if test=" courseId14 != null and courseId14 !='' "><!-- 课程14id -->
+        <if test=" courseId14 != null "><!-- 课程14id -->
             ,course_id14 = #{courseId14}
         </if>
-        <if test=" courseName14 != null and courseName14 !='' "><!-- 课程14名称 -->
+        <if test=" courseName14 != null "><!-- 课程14名称 -->
             ,course_name14 = #{courseName14}
         </if>
-        <if test=" tid14 != null and tid14 !='' "><!-- 教师14id -->
+        <if test=" tid14 != null "><!-- 教师14id -->
             ,tid14 = #{tid14}
         </if>
-        <if test=" teacherName14 != null and teacherName14 !='' "><!-- 教师14姓名 -->
+        <if test=" teacherName14 != null "><!-- 教师14姓名 -->
             ,teacher_name14 = #{teacherName14}
         </if>
-        <if test=" courseId15 != null and courseId15 !='' "><!-- 课程15id -->
+        <if test=" courseId15 != null "><!-- 课程15id -->
             ,course_id15 = #{courseId15}
         </if>
-        <if test=" courseName15 != null and courseName15 !='' "><!-- 课程15名称 -->
+        <if test=" courseName15 != null "><!-- 课程15名称 -->
             ,course_name15 = #{courseName15}
         </if>
-        <if test=" tid15 != null and tid15 !='' "><!-- 教师15id -->
+        <if test=" tid15 != null "><!-- 教师15id -->
             ,tid15 = #{tid15}
         </if>
-        <if test=" teacherName15 != null and teacherName15 !='' "><!-- 教师15姓名 -->
+        <if test=" teacherName15 != null "><!-- 教师15姓名 -->
             ,teacher_name15 = #{teacherName15}
         </if>
-        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+        <if test=" isUse != null "><!-- 是否启用 -->
             ,is_use = #{isUse}
         </if>
-        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+        <if test=" createTime != null "><!-- 创建时间 -->
             ,create_time = #{createTime}
         </if>
-        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+        <if test=" creator != null "><!-- 创建者 -->
             ,creator = #{creator}
         </if>
-        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+        <if test=" updator != null "><!-- 最后更新者 -->
             ,updator = #{updator}
         </if>
         WHERE 1 = 1 
-            <if test=" id != null and id !='' "><!-- 自增id -->
+            <if test=" id != null "><!-- 自增id -->
                 AND id = #{id}
             </if>
-            <if test=" sid != null and sid !='' "><!-- 学校id -->
+            <if test=" sid != null "><!-- 学校id -->
                 AND sid = #{sid}
             </if>
-            <if test=" cid != null and cid !='' "><!-- 班级id -->
+            <if test=" cid != null "><!-- 班级id -->
                 AND cid = #{cid}
             </if>
-            <if test=" date != null and date !='' "><!-- 日期 -->
+            <if test=" date != null "><!-- 日期 -->
                 AND date = #{date}
             </if>
-            <if test=" courseId1 != null and courseId1 !='' "><!-- 课程1id -->
+            <if test=" courseId1 != null "><!-- 课程1id -->
                 AND course_id1 = #{courseId1}
             </if>
-            <if test=" courseName1 != null and courseName1 !='' "><!-- 课程1名称 -->
+            <if test=" courseName1 != null "><!-- 课程1名称 -->
                 AND course_name1 = #{courseName1}
             </if>
-            <if test=" tid1 != null and tid1 !='' "><!-- 教师1id -->
+            <if test=" tid1 != null "><!-- 教师1id -->
                 AND tid1 = #{tid1}
             </if>
-            <if test=" teacherName1 != null and teacherName1 !='' "><!-- 教师1姓名 -->
+            <if test=" teacherName1 != null' "><!-- 教师1姓名 -->
                 AND teacher_name1 = #{teacherName1}
             </if>
-            <if test=" courseId2 != null and courseId2 !='' "><!-- 课程2id -->
+            <if test=" courseId2 != null "><!-- 课程2id -->
                 AND course_id2 = #{courseId2}
             </if>
-            <if test=" courseName2 != null and courseName2 !='' "><!-- 课程2名称 -->
+            <if test=" courseName2 != null "><!-- 课程2名称 -->
                 AND course_name2 = #{courseName2}
             </if>
-            <if test=" tid2 != null and tid2 !='' "><!-- 教师2id -->
+            <if test=" tid2 != null "><!-- 教师2id -->
                 AND tid2 = #{tid2}
             </if>
-            <if test=" teacherN2 != null and teacherN2 !='' "><!-- 教师2姓名 -->
+            <if test=" teacherN2 != null "><!-- 教师2姓名 -->
                 AND teacher_n2 = #{teacherN2}
             </if>
-            <if test=" courseId3 != null and courseId3 !='' "><!-- 课程3id -->
+            <if test=" courseId3 != null "><!-- 课程3id -->
                 AND course_id3 = #{courseId3}
             </if>
-            <if test=" courseName3 != null and courseName3 !='' "><!-- 课程3名称 -->
+            <if test=" courseName3 != null "><!-- 课程3名称 -->
                 AND course_name3 = #{courseName3}
             </if>
-            <if test=" tid3 != null and tid3 !='' "><!-- 教师3id -->
+            <if test=" tid3 != null "><!-- 教师3id -->
                 AND tid3 = #{tid3}
             </if>
-            <if test=" teacherName3 != null and teacherName3 !='' "><!-- 教师3姓名 -->
+            <if test=" teacherName3 != null "><!-- 教师3姓名 -->
                 AND teacher_name3 = #{teacherName3}
             </if>
-            <if test=" courseId4 != null and courseId4 !='' "><!-- 课程4id -->
+            <if test=" courseId4 != null "><!-- 课程4id -->
                 AND course_id4 = #{courseId4}
             </if>
-            <if test=" courseName4 != null and courseName4 !='' "><!-- 课程4名称 -->
+            <if test=" courseName4 != null "><!-- 课程4名称 -->
                 AND course_name4 = #{courseName4}
             </if>
-            <if test=" tid4 != null and tid4 !='' "><!-- 教师4id -->
+            <if test=" tid4 != null "><!-- 教师4id -->
                 AND tid4 = #{tid4}
             </if>
-            <if test=" teacherName4 != null and teacherName4 !='' "><!-- 教师4姓名 -->
+            <if test=" teacherName4 != null "><!-- 教师4姓名 -->
                 AND teacher_name4 = #{teacherName4}
             </if>
-            <if test=" courseId5 != null and courseId5 !='' "><!-- 课程5id -->
+            <if test=" courseId5 != null "><!-- 课程5id -->
                 AND course_id5 = #{courseId5}
             </if>
-            <if test=" courseName5 != null and courseName5 !='' "><!-- 课程5名称 -->
+            <if test=" courseName5 != null "><!-- 课程5名称 -->
                 AND course_name5 = #{courseName5}
             </if>
-            <if test=" tid5 != null and tid5 !='' "><!-- 教师5id -->
+            <if test=" tid5 != null "><!-- 教师5id -->
                 AND tid5 = #{tid5}
             </if>
-            <if test=" teacherName5 != null and teacherName5 !='' "><!-- 教师5姓名 -->
+            <if test=" teacherName5 != null "><!-- 教师5姓名 -->
                 AND teacher_name5 = #{teacherName5}
             </if>
-            <if test=" courseId6 != null and courseId6 !='' "><!-- 课程6id -->
+            <if test=" courseId6 != null "><!-- 课程6id -->
                 AND course_id6 = #{courseId6}
             </if>
-            <if test=" courseName6 != null and courseName6 !='' "><!-- 课程6名称 -->
+            <if test=" courseName6 != null "><!-- 课程6名称 -->
                 AND course_name6 = #{courseName6}
             </if>
-            <if test=" tid6 != null and tid6 !='' "><!-- 教师6id -->
+            <if test=" tid6 != null "><!-- 教师6id -->
                 AND tid6 = #{tid6}
             </if>
-            <if test=" teacherName6 != null and teacherName6 !='' "><!-- 教师6姓名 -->
+            <if test=" teacherName6 != null "><!-- 教师6姓名 -->
                 AND teacher_name6 = #{teacherName6}
             </if>
-            <if test=" courseId7 != null and courseId7 !='' "><!-- 课程7id -->
+            <if test=" courseId7 != null "><!-- 课程7id -->
                 AND course_id7 = #{courseId7}
             </if>
-            <if test=" courseName7 != null and courseName7 !='' "><!-- 课程7名称 -->
+            <if test=" courseName7 != null "><!-- 课程7名称 -->
                 AND course_name7 = #{courseName7}
             </if>
-            <if test=" tid7 != null and tid7 !='' "><!-- 教师7id -->
+            <if test=" tid7 != null "><!-- 教师7id -->
                 AND tid7 = #{tid7}
             </if>
-            <if test=" teacherName7 != null and teacherName7 !='' "><!-- 教师7姓名 -->
+            <if test=" teacherName7 != null "><!-- 教师7姓名 -->
                 AND teacher_name7 = #{teacherName7}
             </if>
-            <if test=" courseId8 != null and courseId8 !='' "><!-- 课程8id -->
+            <if test=" courseId8 != null "><!-- 课程8id -->
                 AND course_id8 = #{courseId8}
             </if>
-            <if test=" courseName8 != null and courseName8 !='' "><!-- 课程8名称 -->
+            <if test=" courseName8 != null "><!-- 课程8名称 -->
                 AND course_name8 = #{courseName8}
             </if>
-            <if test=" tid8 != null and tid8 !='' "><!-- 教师8id -->
+            <if test=" tid8 != null "><!-- 教师8id -->
                 AND tid8 = #{tid8}
             </if>
-            <if test=" teacherName8 != null and teacherName8 !='' "><!-- 教师8姓名 -->
+            <if test=" teacherName8 != null "><!-- 教师8姓名 -->
                 AND teacher_name8 = #{teacherName8}
             </if>
-            <if test=" courseId9 != null and courseId9 !='' "><!-- 课程9id -->
+            <if test=" courseId9 != null "><!-- 课程9id -->
                 AND course_id9 = #{courseId9}
             </if>
-            <if test=" courseName9 != null and courseName9 !='' "><!-- 课程9名称 -->
+            <if test=" courseName9 != null "><!-- 课程9名称 -->
                 AND course_name9 = #{courseName9}
             </if>
-            <if test=" tid9 != null and tid9 !='' "><!-- 教师9id -->
+            <if test=" tid9 != null "><!-- 教师9id -->
                 AND tid9 = #{tid9}
             </if>
-            <if test=" teacherName9 != null and teacherName9 !='' "><!-- 教师9姓名 -->
+            <if test=" teacherName9 != null "><!-- 教师9姓名 -->
                 AND teacher_name9 = #{teacherName9}
             </if>
-            <if test=" courseId10 != null and courseId10 !='' "><!-- 课程10id -->
+            <if test=" courseId10 != null "><!-- 课程10id -->
                 AND course_id10 = #{courseId10}
             </if>
-            <if test=" courseName10 != null and courseName10 !='' "><!-- 课程10名称 -->
+            <if test=" courseName10 != null "><!-- 课程10名称 -->
                 AND course_name10 = #{courseName10}
             </if>
-            <if test=" tid10 != null and tid10 !='' "><!-- 教师10id -->
+            <if test=" tid10 != null "><!-- 教师10id -->
                 AND tid10 = #{tid10}
             </if>
-            <if test=" teacherName10 != null and teacherName10 !='' "><!-- 教师10姓名 -->
+            <if test=" teacherName10 != null "><!-- 教师10姓名 -->
                 AND teacher_name10 = #{teacherName10}
             </if>
-            <if test=" courseId11 != null and courseId11 !='' "><!-- 课程11id -->
+            <if test=" courseId11 != null "><!-- 课程11id -->
                 AND course_id11 = #{courseId11}
             </if>
-            <if test=" courseName11 != null and courseName11 !='' "><!-- 课程11名称 -->
+            <if test=" courseName11 != null "><!-- 课程11名称 -->
                 AND course_name11 = #{courseName11}
             </if>
-            <if test=" tid11 != null and tid11 !='' "><!-- 教师11id -->
+            <if test=" tid11 != null "><!-- 教师11id -->
                 AND tid11 = #{tid11}
             </if>
-            <if test=" teacherName11 != null and teacherName11 !='' "><!-- 教师11姓名 -->
+            <if test=" teacherName11 != null "><!-- 教师11姓名 -->
                 AND teacher_name11 = #{teacherName11}
             </if>
-            <if test=" courseId12 != null and courseId12 !='' "><!-- 课程12id -->
+            <if test=" courseId12 != null "><!-- 课程12id -->
                 AND course_id12 = #{courseId12}
             </if>
-            <if test=" courseName12 != null and courseName12 !='' "><!-- 课程12名称 -->
+            <if test=" courseName12 != null "><!-- 课程12名称 -->
                 AND course_name12 = #{courseName12}
             </if>
-            <if test=" tid12 != null and tid12 !='' "><!-- 教师12id -->
+            <if test=" tid12 != null "><!-- 教师12id -->
                 AND tid12 = #{tid12}
             </if>
-            <if test=" teacherName12 != null and teacherName12 !='' "><!-- 教师12姓名 -->
+            <if test=" teacherName12 != null "><!-- 教师12姓名 -->
                 AND teacher_name12 = #{teacherName12}
             </if>
-            <if test=" courseId13 != null and courseId13 !='' "><!-- 课程13id -->
+            <if test=" courseId13 != null "><!-- 课程13id -->
                 AND course_id13 = #{courseId13}
             </if>
-            <if test=" courseName13 != null and courseName13 !='' "><!-- 课程13名称 -->
+            <if test=" courseName13 != null "><!-- 课程13名称 -->
                 AND course_name13 = #{courseName13}
             </if>
-            <if test=" tid13 != null and tid13 !='' "><!-- 教师13id -->
+            <if test=" tid13 != null "><!-- 教师13id -->
                 AND tid13 = #{tid13}
             </if>
-            <if test=" teacherName13 != null and teacherName13 !='' "><!-- 教师13姓名 -->
+            <if test=" teacherName13 != null "><!-- 教师13姓名 -->
                 AND teacher_name13 = #{teacherName13}
             </if>
-            <if test=" courseId14 != null and courseId14 !='' "><!-- 课程14id -->
+            <if test=" courseId14 != null "><!-- 课程14id -->
                 AND course_id14 = #{courseId14}
             </if>
-            <if test=" courseName14 != null and courseName14 !='' "><!-- 课程14名称 -->
+            <if test=" courseName14 != null "><!-- 课程14名称 -->
                 AND course_name14 = #{courseName14}
             </if>
-            <if test=" tid14 != null and tid14 !='' "><!-- 教师14id -->
+            <if test=" tid14 != null "><!-- 教师14id -->
                 AND tid14 = #{tid14}
             </if>
-            <if test=" teacherName14 != null and teacherName14 !='' "><!-- 教师14姓名 -->
+            <if test=" teacherName14 != null "><!-- 教师14姓名 -->
                 AND teacher_name14 = #{teacherName14}
             </if>
-            <if test=" courseId15 != null and courseId15 !='' "><!-- 课程15id -->
+            <if test=" courseId15 != null "><!-- 课程15id -->
                 AND course_id15 = #{courseId15}
             </if>
-            <if test=" courseName15 != null and courseName15 !='' "><!-- 课程15名称 -->
+            <if test=" courseName15 != null "><!-- 课程15名称 -->
                 AND course_name15 = #{courseName15}
             </if>
-            <if test=" tid15 != null and tid15 !='' "><!-- 教师15id -->
+            <if test=" tid15 != null "><!-- 教师15id -->
                 AND tid15 = #{tid15}
             </if>
-            <if test=" teacherName15 != null and teacherName15 !='' "><!-- 教师15姓名 -->
+            <if test=" teacherName15 != null "><!-- 教师15姓名 -->
                 AND teacher_name15 = #{teacherName15}
             </if>
-            <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+            <if test=" isUse != null "><!-- 是否启用 -->
                 AND is_use = #{isUse}
             </if>
-            <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+            <if test=" createTime != null "><!-- 创建时间 -->
                 AND create_time = #{createTime}
             </if>
-            <if test=" creator != null and creator !='' "><!-- 创建者 -->
+            <if test=" creator != null "><!-- 创建者 -->
                 AND creator = #{creator}
             </if>
-            <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+            <if test=" updateTime != null "><!-- 更新时间 -->
                 AND update_time = #{updateTime}
             </if>
-            <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+            <if test=" updator != null "><!-- 最后更新者 -->
                 AND updator = #{updator}
             </if>
     </update>
@@ -430,211 +430,211 @@
     <select id='doSelectPage' parameterType='ClassCourseDBO' resultType='ClassCourseDBO'>
         SELECT <include refid='tableColumns'/> FROM class_course
         WHERE 1 = 1 
-        <if test=" id != null and id !='' "><!-- 自增id -->
+        <if test=" id != null "><!-- 自增id -->
             AND id = #{id}
         </if>
-        <if test=" sid != null and sid !='' "><!-- 学校id -->
+        <if test=" sid != null "><!-- 学校id -->
             AND sid = #{sid}
         </if>
-        <if test=" cid != null and cid !='' "><!-- 班级id -->
+        <if test=" cid != null "><!-- 班级id -->
             AND cid = #{cid}
         </if>
-        <if test=" date != null and date !='' "><!-- 日期 -->
+        <if test=" date != null "><!-- 日期 -->
             AND date = #{date}
         </if>
-        <if test=" courseId1 != null and courseId1 !='' "><!-- 课程1id -->
+        <if test=" courseId1 != null "><!-- 课程1id -->
             AND course_id1 = #{courseId1}
         </if>
-        <if test=" courseName1 != null and courseName1 !='' "><!-- 课程1名称 -->
+        <if test=" courseName1 != null "><!-- 课程1名称 -->
             AND course_name1 = #{courseName1}
         </if>
-        <if test=" tid1 != null and tid1 !='' "><!-- 教师1id -->
+        <if test=" tid1 != null "><!-- 教师1id -->
             AND tid1 = #{tid1}
         </if>
-        <if test=" teacherName1 != null and teacherName1 !='' "><!-- 教师1姓名 -->
+        <if test=" teacherName1 != null' "><!-- 教师1姓名 -->
             AND teacher_name1 = #{teacherName1}
         </if>
-        <if test=" courseId2 != null and courseId2 !='' "><!-- 课程2id -->
+        <if test=" courseId2 != null "><!-- 课程2id -->
             AND course_id2 = #{courseId2}
         </if>
-        <if test=" courseName2 != null and courseName2 !='' "><!-- 课程2名称 -->
+        <if test=" courseName2 != null "><!-- 课程2名称 -->
             AND course_name2 = #{courseName2}
         </if>
-        <if test=" tid2 != null and tid2 !='' "><!-- 教师2id -->
+        <if test=" tid2 != null "><!-- 教师2id -->
             AND tid2 = #{tid2}
         </if>
-        <if test=" teacherN2 != null and teacherN2 !='' "><!-- 教师2姓名 -->
+        <if test=" teacherN2 != null "><!-- 教师2姓名 -->
             AND teacher_n2 = #{teacherN2}
         </if>
-        <if test=" courseId3 != null and courseId3 !='' "><!-- 课程3id -->
+        <if test=" courseId3 != null "><!-- 课程3id -->
             AND course_id3 = #{courseId3}
         </if>
-        <if test=" courseName3 != null and courseName3 !='' "><!-- 课程3名称 -->
+        <if test=" courseName3 != null "><!-- 课程3名称 -->
             AND course_name3 = #{courseName3}
         </if>
-        <if test=" tid3 != null and tid3 !='' "><!-- 教师3id -->
+        <if test=" tid3 != null "><!-- 教师3id -->
             AND tid3 = #{tid3}
         </if>
-        <if test=" teacherName3 != null and teacherName3 !='' "><!-- 教师3姓名 -->
+        <if test=" teacherName3 != null "><!-- 教师3姓名 -->
             AND teacher_name3 = #{teacherName3}
         </if>
-        <if test=" courseId4 != null and courseId4 !='' "><!-- 课程4id -->
+        <if test=" courseId4 != null "><!-- 课程4id -->
             AND course_id4 = #{courseId4}
         </if>
-        <if test=" courseName4 != null and courseName4 !='' "><!-- 课程4名称 -->
+        <if test=" courseName4 != null "><!-- 课程4名称 -->
             AND course_name4 = #{courseName4}
         </if>
-        <if test=" tid4 != null and tid4 !='' "><!-- 教师4id -->
+        <if test=" tid4 != null "><!-- 教师4id -->
             AND tid4 = #{tid4}
         </if>
-        <if test=" teacherName4 != null and teacherName4 !='' "><!-- 教师4姓名 -->
+        <if test=" teacherName4 != null "><!-- 教师4姓名 -->
             AND teacher_name4 = #{teacherName4}
         </if>
-        <if test=" courseId5 != null and courseId5 !='' "><!-- 课程5id -->
+        <if test=" courseId5 != null "><!-- 课程5id -->
             AND course_id5 = #{courseId5}
         </if>
-        <if test=" courseName5 != null and courseName5 !='' "><!-- 课程5名称 -->
+        <if test=" courseName5 != null "><!-- 课程5名称 -->
             AND course_name5 = #{courseName5}
         </if>
-        <if test=" tid5 != null and tid5 !='' "><!-- 教师5id -->
+        <if test=" tid5 != null "><!-- 教师5id -->
             AND tid5 = #{tid5}
         </if>
-        <if test=" teacherName5 != null and teacherName5 !='' "><!-- 教师5姓名 -->
+        <if test=" teacherName5 != null "><!-- 教师5姓名 -->
             AND teacher_name5 = #{teacherName5}
         </if>
-        <if test=" courseId6 != null and courseId6 !='' "><!-- 课程6id -->
+        <if test=" courseId6 != null "><!-- 课程6id -->
             AND course_id6 = #{courseId6}
         </if>
-        <if test=" courseName6 != null and courseName6 !='' "><!-- 课程6名称 -->
+        <if test=" courseName6 != null "><!-- 课程6名称 -->
             AND course_name6 = #{courseName6}
         </if>
-        <if test=" tid6 != null and tid6 !='' "><!-- 教师6id -->
+        <if test=" tid6 != null "><!-- 教师6id -->
             AND tid6 = #{tid6}
         </if>
-        <if test=" teacherName6 != null and teacherName6 !='' "><!-- 教师6姓名 -->
+        <if test=" teacherName6 != null "><!-- 教师6姓名 -->
             AND teacher_name6 = #{teacherName6}
         </if>
-        <if test=" courseId7 != null and courseId7 !='' "><!-- 课程7id -->
+        <if test=" courseId7 != null "><!-- 课程7id -->
             AND course_id7 = #{courseId7}
         </if>
-        <if test=" courseName7 != null and courseName7 !='' "><!-- 课程7名称 -->
+        <if test=" courseName7 != null "><!-- 课程7名称 -->
             AND course_name7 = #{courseName7}
         </if>
-        <if test=" tid7 != null and tid7 !='' "><!-- 教师7id -->
+        <if test=" tid7 != null "><!-- 教师7id -->
             AND tid7 = #{tid7}
         </if>
-        <if test=" teacherName7 != null and teacherName7 !='' "><!-- 教师7姓名 -->
+        <if test=" teacherName7 != null "><!-- 教师7姓名 -->
             AND teacher_name7 = #{teacherName7}
         </if>
-        <if test=" courseId8 != null and courseId8 !='' "><!-- 课程8id -->
+        <if test=" courseId8 != null "><!-- 课程8id -->
             AND course_id8 = #{courseId8}
         </if>
-        <if test=" courseName8 != null and courseName8 !='' "><!-- 课程8名称 -->
+        <if test=" courseName8 != null "><!-- 课程8名称 -->
             AND course_name8 = #{courseName8}
         </if>
-        <if test=" tid8 != null and tid8 !='' "><!-- 教师8id -->
+        <if test=" tid8 != null "><!-- 教师8id -->
             AND tid8 = #{tid8}
         </if>
-        <if test=" teacherName8 != null and teacherName8 !='' "><!-- 教师8姓名 -->
+        <if test=" teacherName8 != null "><!-- 教师8姓名 -->
             AND teacher_name8 = #{teacherName8}
         </if>
-        <if test=" courseId9 != null and courseId9 !='' "><!-- 课程9id -->
+        <if test=" courseId9 != null "><!-- 课程9id -->
             AND course_id9 = #{courseId9}
         </if>
-        <if test=" courseName9 != null and courseName9 !='' "><!-- 课程9名称 -->
+        <if test=" courseName9 != null "><!-- 课程9名称 -->
             AND course_name9 = #{courseName9}
         </if>
-        <if test=" tid9 != null and tid9 !='' "><!-- 教师9id -->
+        <if test=" tid9 != null "><!-- 教师9id -->
             AND tid9 = #{tid9}
         </if>
-        <if test=" teacherName9 != null and teacherName9 !='' "><!-- 教师9姓名 -->
+        <if test=" teacherName9 != null "><!-- 教师9姓名 -->
             AND teacher_name9 = #{teacherName9}
         </if>
-        <if test=" courseId10 != null and courseId10 !='' "><!-- 课程10id -->
+        <if test=" courseId10 != null "><!-- 课程10id -->
             AND course_id10 = #{courseId10}
         </if>
-        <if test=" courseName10 != null and courseName10 !='' "><!-- 课程10名称 -->
+        <if test=" courseName10 != null "><!-- 课程10名称 -->
             AND course_name10 = #{courseName10}
         </if>
-        <if test=" tid10 != null and tid10 !='' "><!-- 教师10id -->
+        <if test=" tid10 != null "><!-- 教师10id -->
             AND tid10 = #{tid10}
         </if>
-        <if test=" teacherName10 != null and teacherName10 !='' "><!-- 教师10姓名 -->
+        <if test=" teacherName10 != null "><!-- 教师10姓名 -->
             AND teacher_name10 = #{teacherName10}
         </if>
-        <if test=" courseId11 != null and courseId11 !='' "><!-- 课程11id -->
+        <if test=" courseId11 != null "><!-- 课程11id -->
             AND course_id11 = #{courseId11}
         </if>
-        <if test=" courseName11 != null and courseName11 !='' "><!-- 课程11名称 -->
+        <if test=" courseName11 != null "><!-- 课程11名称 -->
             AND course_name11 = #{courseName11}
         </if>
-        <if test=" tid11 != null and tid11 !='' "><!-- 教师11id -->
+        <if test=" tid11 != null "><!-- 教师11id -->
             AND tid11 = #{tid11}
         </if>
-        <if test=" teacherName11 != null and teacherName11 !='' "><!-- 教师11姓名 -->
+        <if test=" teacherName11 != null "><!-- 教师11姓名 -->
             AND teacher_name11 = #{teacherName11}
         </if>
-        <if test=" courseId12 != null and courseId12 !='' "><!-- 课程12id -->
+        <if test=" courseId12 != null "><!-- 课程12id -->
             AND course_id12 = #{courseId12}
         </if>
-        <if test=" courseName12 != null and courseName12 !='' "><!-- 课程12名称 -->
+        <if test=" courseName12 != null "><!-- 课程12名称 -->
             AND course_name12 = #{courseName12}
         </if>
-        <if test=" tid12 != null and tid12 !='' "><!-- 教师12id -->
+        <if test=" tid12 != null "><!-- 教师12id -->
             AND tid12 = #{tid12}
         </if>
-        <if test=" teacherName12 != null and teacherName12 !='' "><!-- 教师12姓名 -->
+        <if test=" teacherName12 != null "><!-- 教师12姓名 -->
             AND teacher_name12 = #{teacherName12}
         </if>
-        <if test=" courseId13 != null and courseId13 !='' "><!-- 课程13id -->
+        <if test=" courseId13 != null "><!-- 课程13id -->
             AND course_id13 = #{courseId13}
         </if>
-        <if test=" courseName13 != null and courseName13 !='' "><!-- 课程13名称 -->
+        <if test=" courseName13 != null "><!-- 课程13名称 -->
             AND course_name13 = #{courseName13}
         </if>
-        <if test=" tid13 != null and tid13 !='' "><!-- 教师13id -->
+        <if test=" tid13 != null "><!-- 教师13id -->
             AND tid13 = #{tid13}
         </if>
-        <if test=" teacherName13 != null and teacherName13 !='' "><!-- 教师13姓名 -->
+        <if test=" teacherName13 != null "><!-- 教师13姓名 -->
             AND teacher_name13 = #{teacherName13}
         </if>
-        <if test=" courseId14 != null and courseId14 !='' "><!-- 课程14id -->
+        <if test=" courseId14 != null "><!-- 课程14id -->
             AND course_id14 = #{courseId14}
         </if>
-        <if test=" courseName14 != null and courseName14 !='' "><!-- 课程14名称 -->
+        <if test=" courseName14 != null "><!-- 课程14名称 -->
             AND course_name14 = #{courseName14}
         </if>
-        <if test=" tid14 != null and tid14 !='' "><!-- 教师14id -->
+        <if test=" tid14 != null "><!-- 教师14id -->
             AND tid14 = #{tid14}
         </if>
-        <if test=" teacherName14 != null and teacherName14 !='' "><!-- 教师14姓名 -->
+        <if test=" teacherName14 != null "><!-- 教师14姓名 -->
             AND teacher_name14 = #{teacherName14}
         </if>
-        <if test=" courseId15 != null and courseId15 !='' "><!-- 课程15id -->
+        <if test=" courseId15 != null "><!-- 课程15id -->
             AND course_id15 = #{courseId15}
         </if>
-        <if test=" courseName15 != null and courseName15 !='' "><!-- 课程15名称 -->
+        <if test=" courseName15 != null "><!-- 课程15名称 -->
             AND course_name15 = #{courseName15}
         </if>
-        <if test=" tid15 != null and tid15 !='' "><!-- 教师15id -->
+        <if test=" tid15 != null "><!-- 教师15id -->
             AND tid15 = #{tid15}
         </if>
-        <if test=" teacherName15 != null and teacherName15 !='' "><!-- 教师15姓名 -->
+        <if test=" teacherName15 != null "><!-- 教师15姓名 -->
             AND teacher_name15 = #{teacherName15}
         </if>
-        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+        <if test=" isUse != null "><!-- 是否启用 -->
             AND is_use = #{isUse}
         </if>
-        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+        <if test=" createTime != null "><!-- 创建时间 -->
             AND create_time = #{createTime}
         </if>
-        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+        <if test=" creator != null "><!-- 创建者 -->
             AND creator = #{creator}
         </if>
-        <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+        <if test=" updateTime != null "><!-- 更新时间 -->
             AND update_time = #{updateTime}
         </if>
-        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+        <if test=" updator != null "><!-- 最后更新者 -->
             AND updator = #{updator}
         </if>
     </select>
@@ -649,233 +649,233 @@
     <!-- 修改一条数据 -->
     <update id='doUpdate' parameterType='ClassCourseDBO'>
         UPDATE class_course SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
-        <if test=" id != null and id !='' "><!-- 自增id -->
+        <if test=" id != null "><!-- 自增id -->
             ,id = #{id}
         </if>
-        <if test=" sid != null and sid !='' "><!-- 学校id -->
+        <if test=" sid != null "><!-- 学校id -->
             ,sid = #{sid}
         </if>
-        <if test=" cid != null and cid !='' "><!-- 班级id -->
+        <if test=" cid != null "><!-- 班级id -->
             ,cid = #{cid}
         </if>
-        <if test=" date != null and date !='' "><!-- 日期 -->
+        <if test=" date != null "><!-- 日期 -->
             ,date = #{date}
         </if>
-        <if test=" courseId1 != null and courseId1 !='' "><!-- 课程1id -->
+        <if test=" courseId1 != null "><!-- 课程1id -->
             ,course_id1 = #{courseId1}
         </if>
-        <if test=" courseName1 != null and courseName1 !='' "><!-- 课程1名称 -->
+        <if test=" courseName1 != null "><!-- 课程1名称 -->
             ,course_name1 = #{courseName1}
         </if>
-        <if test=" tid1 != null and tid1 !='' "><!-- 教师1id -->
+        <if test=" tid1 != null "><!-- 教师1id -->
             ,tid1 = #{tid1}
         </if>
-        <if test=" teacherName1 != null and teacherName1 !='' "><!-- 教师1姓名 -->
+        <if test=" teacherName1 != null' "><!-- 教师1姓名 -->
             ,teacher_name1 = #{teacherName1}
         </if>
-        <if test=" courseId2 != null and courseId2 !='' "><!-- 课程2id -->
+        <if test=" courseId2 != null "><!-- 课程2id -->
             ,course_id2 = #{courseId2}
         </if>
-        <if test=" courseName2 != null and courseName2 !='' "><!-- 课程2名称 -->
+        <if test=" courseName2 != null "><!-- 课程2名称 -->
             ,course_name2 = #{courseName2}
         </if>
-        <if test=" tid2 != null and tid2 !='' "><!-- 教师2id -->
+        <if test=" tid2 != null "><!-- 教师2id -->
             ,tid2 = #{tid2}
         </if>
-        <if test=" teacherN2 != null and teacherN2 !='' "><!-- 教师2姓名 -->
+        <if test=" teacherN2 != null "><!-- 教师2姓名 -->
             ,teacher_n2 = #{teacherN2}
         </if>
-        <if test=" courseId3 != null and courseId3 !='' "><!-- 课程3id -->
+        <if test=" courseId3 != null "><!-- 课程3id -->
             ,course_id3 = #{courseId3}
         </if>
-        <if test=" courseName3 != null and courseName3 !='' "><!-- 课程3名称 -->
+        <if test=" courseName3 != null "><!-- 课程3名称 -->
             ,course_name3 = #{courseName3}
         </if>
-        <if test=" tid3 != null and tid3 !='' "><!-- 教师3id -->
+        <if test=" tid3 != null "><!-- 教师3id -->
             ,tid3 = #{tid3}
         </if>
-        <if test=" teacherName3 != null and teacherName3 !='' "><!-- 教师3姓名 -->
+        <if test=" teacherName3 != null "><!-- 教师3姓名 -->
             ,teacher_name3 = #{teacherName3}
         </if>
-        <if test=" courseId4 != null and courseId4 !='' "><!-- 课程4id -->
+        <if test=" courseId4 != null "><!-- 课程4id -->
             ,course_id4 = #{courseId4}
         </if>
-        <if test=" courseName4 != null and courseName4 !='' "><!-- 课程4名称 -->
+        <if test=" courseName4 != null "><!-- 课程4名称 -->
             ,course_name4 = #{courseName4}
         </if>
-        <if test=" tid4 != null and tid4 !='' "><!-- 教师4id -->
+        <if test=" tid4 != null "><!-- 教师4id -->
             ,tid4 = #{tid4}
         </if>
-        <if test=" teacherName4 != null and teacherName4 !='' "><!-- 教师4姓名 -->
+        <if test=" teacherName4 != null "><!-- 教师4姓名 -->
             ,teacher_name4 = #{teacherName4}
         </if>
-        <if test=" courseId5 != null and courseId5 !='' "><!-- 课程5id -->
+        <if test=" courseId5 != null "><!-- 课程5id -->
             ,course_id5 = #{courseId5}
         </if>
-        <if test=" courseName5 != null and courseName5 !='' "><!-- 课程5名称 -->
+        <if test=" courseName5 != null "><!-- 课程5名称 -->
             ,course_name5 = #{courseName5}
         </if>
-        <if test=" tid5 != null and tid5 !='' "><!-- 教师5id -->
+        <if test=" tid5 != null "><!-- 教师5id -->
             ,tid5 = #{tid5}
         </if>
-        <if test=" teacherName5 != null and teacherName5 !='' "><!-- 教师5姓名 -->
+        <if test=" teacherName5 != null "><!-- 教师5姓名 -->
             ,teacher_name5 = #{teacherName5}
         </if>
-        <if test=" courseId6 != null and courseId6 !='' "><!-- 课程6id -->
+        <if test=" courseId6 != null "><!-- 课程6id -->
             ,course_id6 = #{courseId6}
         </if>
-        <if test=" courseName6 != null and courseName6 !='' "><!-- 课程6名称 -->
+        <if test=" courseName6 != null "><!-- 课程6名称 -->
             ,course_name6 = #{courseName6}
         </if>
-        <if test=" tid6 != null and tid6 !='' "><!-- 教师6id -->
+        <if test=" tid6 != null "><!-- 教师6id -->
             ,tid6 = #{tid6}
         </if>
-        <if test=" teacherName6 != null and teacherName6 !='' "><!-- 教师6姓名 -->
+        <if test=" teacherName6 != null "><!-- 教师6姓名 -->
             ,teacher_name6 = #{teacherName6}
         </if>
-        <if test=" courseId7 != null and courseId7 !='' "><!-- 课程7id -->
+        <if test=" courseId7 != null "><!-- 课程7id -->
             ,course_id7 = #{courseId7}
         </if>
-        <if test=" courseName7 != null and courseName7 !='' "><!-- 课程7名称 -->
+        <if test=" courseName7 != null "><!-- 课程7名称 -->
             ,course_name7 = #{courseName7}
         </if>
-        <if test=" tid7 != null and tid7 !='' "><!-- 教师7id -->
+        <if test=" tid7 != null "><!-- 教师7id -->
             ,tid7 = #{tid7}
         </if>
-        <if test=" teacherName7 != null and teacherName7 !='' "><!-- 教师7姓名 -->
+        <if test=" teacherName7 != null "><!-- 教师7姓名 -->
             ,teacher_name7 = #{teacherName7}
         </if>
-        <if test=" courseId8 != null and courseId8 !='' "><!-- 课程8id -->
+        <if test=" courseId8 != null "><!-- 课程8id -->
             ,course_id8 = #{courseId8}
         </if>
-        <if test=" courseName8 != null and courseName8 !='' "><!-- 课程8名称 -->
+        <if test=" courseName8 != null "><!-- 课程8名称 -->
             ,course_name8 = #{courseName8}
         </if>
-        <if test=" tid8 != null and tid8 !='' "><!-- 教师8id -->
+        <if test=" tid8 != null "><!-- 教师8id -->
             ,tid8 = #{tid8}
         </if>
-        <if test=" teacherName8 != null and teacherName8 !='' "><!-- 教师8姓名 -->
+        <if test=" teacherName8 != null "><!-- 教师8姓名 -->
             ,teacher_name8 = #{teacherName8}
         </if>
-        <if test=" courseId9 != null and courseId9 !='' "><!-- 课程9id -->
+        <if test=" courseId9 != null "><!-- 课程9id -->
             ,course_id9 = #{courseId9}
         </if>
-        <if test=" courseName9 != null and courseName9 !='' "><!-- 课程9名称 -->
+        <if test=" courseName9 != null "><!-- 课程9名称 -->
             ,course_name9 = #{courseName9}
         </if>
-        <if test=" tid9 != null and tid9 !='' "><!-- 教师9id -->
+        <if test=" tid9 != null "><!-- 教师9id -->
             ,tid9 = #{tid9}
         </if>
-        <if test=" teacherName9 != null and teacherName9 !='' "><!-- 教师9姓名 -->
+        <if test=" teacherName9 != null "><!-- 教师9姓名 -->
             ,teacher_name9 = #{teacherName9}
         </if>
-        <if test=" courseId10 != null and courseId10 !='' "><!-- 课程10id -->
+        <if test=" courseId10 != null "><!-- 课程10id -->
             ,course_id10 = #{courseId10}
         </if>
-        <if test=" courseName10 != null and courseName10 !='' "><!-- 课程10名称 -->
+        <if test=" courseName10 != null "><!-- 课程10名称 -->
             ,course_name10 = #{courseName10}
         </if>
-        <if test=" tid10 != null and tid10 !='' "><!-- 教师10id -->
+        <if test=" tid10 != null "><!-- 教师10id -->
             ,tid10 = #{tid10}
         </if>
-        <if test=" teacherName10 != null and teacherName10 !='' "><!-- 教师10姓名 -->
+        <if test=" teacherName10 != null "><!-- 教师10姓名 -->
             ,teacher_name10 = #{teacherName10}
         </if>
-        <if test=" courseId11 != null and courseId11 !='' "><!-- 课程11id -->
+        <if test=" courseId11 != null "><!-- 课程11id -->
             ,course_id11 = #{courseId11}
         </if>
-        <if test=" courseName11 != null and courseName11 !='' "><!-- 课程11名称 -->
+        <if test=" courseName11 != null "><!-- 课程11名称 -->
             ,course_name11 = #{courseName11}
         </if>
-        <if test=" tid11 != null and tid11 !='' "><!-- 教师11id -->
+        <if test=" tid11 != null "><!-- 教师11id -->
             ,tid11 = #{tid11}
         </if>
-        <if test=" teacherName11 != null and teacherName11 !='' "><!-- 教师11姓名 -->
+        <if test=" teacherName11 != null "><!-- 教师11姓名 -->
             ,teacher_name11 = #{teacherName11}
         </if>
-        <if test=" courseId12 != null and courseId12 !='' "><!-- 课程12id -->
+        <if test=" courseId12 != null "><!-- 课程12id -->
             ,course_id12 = #{courseId12}
         </if>
-        <if test=" courseName12 != null and courseName12 !='' "><!-- 课程12名称 -->
+        <if test=" courseName12 != null "><!-- 课程12名称 -->
             ,course_name12 = #{courseName12}
         </if>
-        <if test=" tid12 != null and tid12 !='' "><!-- 教师12id -->
+        <if test=" tid12 != null "><!-- 教师12id -->
             ,tid12 = #{tid12}
         </if>
-        <if test=" teacherName12 != null and teacherName12 !='' "><!-- 教师12姓名 -->
+        <if test=" teacherName12 != null "><!-- 教师12姓名 -->
             ,teacher_name12 = #{teacherName12}
         </if>
-        <if test=" courseId13 != null and courseId13 !='' "><!-- 课程13id -->
+        <if test=" courseId13 != null "><!-- 课程13id -->
             ,course_id13 = #{courseId13}
         </if>
-        <if test=" courseName13 != null and courseName13 !='' "><!-- 课程13名称 -->
+        <if test=" courseName13 != null "><!-- 课程13名称 -->
             ,course_name13 = #{courseName13}
         </if>
-        <if test=" tid13 != null and tid13 !='' "><!-- 教师13id -->
+        <if test=" tid13 != null "><!-- 教师13id -->
             ,tid13 = #{tid13}
         </if>
-        <if test=" teacherName13 != null and teacherName13 !='' "><!-- 教师13姓名 -->
+        <if test=" teacherName13 != null "><!-- 教师13姓名 -->
             ,teacher_name13 = #{teacherName13}
         </if>
-        <if test=" courseId14 != null and courseId14 !='' "><!-- 课程14id -->
+        <if test=" courseId14 != null "><!-- 课程14id -->
             ,course_id14 = #{courseId14}
         </if>
-        <if test=" courseName14 != null and courseName14 !='' "><!-- 课程14名称 -->
+        <if test=" courseName14 != null "><!-- 课程14名称 -->
             ,course_name14 = #{courseName14}
         </if>
-        <if test=" tid14 != null and tid14 !='' "><!-- 教师14id -->
+        <if test=" tid14 != null "><!-- 教师14id -->
             ,tid14 = #{tid14}
         </if>
-        <if test=" teacherName14 != null and teacherName14 !='' "><!-- 教师14姓名 -->
+        <if test=" teacherName14 != null "><!-- 教师14姓名 -->
             ,teacher_name14 = #{teacherName14}
         </if>
-        <if test=" courseId15 != null and courseId15 !='' "><!-- 课程15id -->
+        <if test=" courseId15 != null "><!-- 课程15id -->
             ,course_id15 = #{courseId15}
         </if>
-        <if test=" courseName15 != null and courseName15 !='' "><!-- 课程15名称 -->
+        <if test=" courseName15 != null "><!-- 课程15名称 -->
             ,course_name15 = #{courseName15}
         </if>
-        <if test=" tid15 != null and tid15 !='' "><!-- 教师15id -->
+        <if test=" tid15 != null "><!-- 教师15id -->
             ,tid15 = #{tid15}
         </if>
-        <if test=" teacherName15 != null and teacherName15 !='' "><!-- 教师15姓名 -->
+        <if test=" teacherName15 != null "><!-- 教师15姓名 -->
             ,teacher_name15 = #{teacherName15}
         </if>
-        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+        <if test=" isUse != null "><!-- 是否启用 -->
             ,is_use = #{isUse}
         </if>
-        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+        <if test=" createTime != null "><!-- 创建时间 -->
             ,create_time = #{createTime}
         </if>
-        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+        <if test=" creator != null "><!-- 创建者 -->
             ,creator = #{creator}
         </if>
-        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+        <if test=" updator != null "><!-- 最后更新者 -->
             ,updator = #{updator}
         </if>
         WHERE 1 = 1 
-            <if test=" id != null and id !='' "><!-- 自增id -->
+            <if test=" id != null "><!-- 自增id -->
                 AND id = #{id}
             </if>
     </update>
     <!-- 逻辑删除一条数据 -->
     <delete id='toDelete' parameterType='ClassCourseDBO'>
         UPDATE class_course SET ddd='1', update_time = #{updateTime}, uu2 = #{uu2} WHERE update_time = #{updateTime}
-            <if test=" id != null and id !='' "><!-- 自增id -->
+            <if test=" id != null "><!-- 自增id -->
                 AND id = #{id}
             </if>
     </delete>
     <!-- 物理删除一条数据 -->
     <delete id='doDelete' parameterType='ClassCourseDBO'>
         DELETE FROM class_course WHERE update_time = #{updateTime}
-            <if test=" id != null and id !='' "><!-- 自增id -->
+            <if test=" id != null "><!-- 自增id -->
                 AND id = #{id}
             </if>
     </delete>
     <!-- 查询一条数据  -->
     <select id='doRead' parameterType='ClassCourseDBO' resultType='ClassCourseDBO'>
         SELECT <include refid='tableColumns'/> FROM class_course WHERE 1 = 1
-            <if test=" id != null and id !='' "><!-- 自增id -->
+            <if test=" id != null "><!-- 自增id -->
                 AND id = #{id}
             </if>
     </select>

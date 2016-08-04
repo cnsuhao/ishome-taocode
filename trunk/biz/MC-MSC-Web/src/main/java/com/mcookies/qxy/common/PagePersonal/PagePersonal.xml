@@ -13,56 +13,56 @@
 	<!-- 根据条件更新所有记录 -->
 	<update id='doUpdateAll' parameterType='PagePersonalDBO'>
 		UPDATE page_personal SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
-		<if test=" personalId != null and personalId !='' "><!-- 自增id -->
+		<if test=" personalId != null "><!-- 自增id -->
 			,personal_id = #{personalId}
 		</if>
-		<if test=" sid != null and sid !='' "><!-- 学校id -->
+		<if test=" sid != null "><!-- 学校id -->
 			,sid = #{sid}
 		</if>
-		<if test=" tid != null and tid !='' "><!-- 教工id -->
+		<if test=" tid != null "><!-- 教工id -->
 			,tid = #{tid}
 		</if>
-		<if test=" jurisdictionId != null and jurisdictionId !='' "><!-- 页面权限id -->
+		<if test=" jurisdictionId != null "><!-- 页面权限id -->
 			,jurisdiction_id = #{jurisdictionId}
 		</if>
-		<if test=" tJson != null and tJson !='' "><!-- 权限json -->
+		<if test=" tJson != null "><!-- 权限json -->
 			,t_json = #{tJson}
 		</if>
-		<if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+		<if test=" createTime != null "><!-- 创建时间 -->
 			,create_time = #{createTime}
 		</if>
-		<if test=" creator != null and creator !='' "><!-- 创建者 -->
+		<if test=" creator != null "><!-- 创建者 -->
 			,creator = #{creator}
 		</if>
-		<if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+		<if test=" updator != null "><!-- 最后更新者 -->
 			,updator = #{updator}
 		</if>
 		WHERE 1 = 1
-		<if test=" personalId != null and personalId !='' "><!-- 自增id -->
+		<if test=" personalId != null "><!-- 自增id -->
 			AND personal_id = #{personalId}
 		</if>
-		<if test=" sid != null and sid !='' "><!-- 学校id -->
+		<if test=" sid != null "><!-- 学校id -->
 			AND sid = #{sid}
 		</if>
-		<if test=" tid != null and tid !='' "><!-- 教工id -->
+		<if test=" tid != null "><!-- 教工id -->
 			AND tid = #{tid}
 		</if>
-		<if test=" jurisdictionId != null and jurisdictionId !='' "><!-- 页面权限id -->
+		<if test=" jurisdictionId != null "><!-- 页面权限id -->
 			AND jurisdiction_id = #{jurisdictionId}
 		</if>
-		<if test=" tJson != null and tJson !='' "><!-- 权限json -->
+		<if test=" tJson != null "><!-- 权限json -->
 			AND t_json = #{tJson}
 		</if>
-		<if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+		<if test=" createTime != null "><!-- 创建时间 -->
 			AND create_time = #{createTime}
 		</if>
-		<if test=" creator != null and creator !='' "><!-- 创建者 -->
+		<if test=" creator != null "><!-- 创建者 -->
 			AND creator = #{creator}
 		</if>
-		<if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+		<if test=" updateTime != null "><!-- 更新时间 -->
 			AND update_time = #{updateTime}
 		</if>
-		<if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+		<if test=" updator != null "><!-- 最后更新者 -->
 			AND updator = #{updator}
 		</if>
 	</update>
@@ -73,31 +73,31 @@
 		<include refid='tableColumns' />
 		FROM page_personal
 		WHERE 1 = 1
-		<if test=" personalId != null and personalId !='' "><!-- 自增id -->
+		<if test=" personalId != null "><!-- 自增id -->
 			AND personal_id = #{personalId}
 		</if>
-		<if test=" sid != null and sid !='' "><!-- 学校id -->
+		<if test=" sid != null "><!-- 学校id -->
 			AND sid = #{sid}
 		</if>
-		<if test=" tid != null and tid !='' "><!-- 教工id -->
+		<if test=" tid != null "><!-- 教工id -->
 			AND tid = #{tid}
 		</if>
-		<if test=" jurisdictionId != null and jurisdictionId !='' "><!-- 页面权限id -->
+		<if test=" jurisdictionId != null "><!-- 页面权限id -->
 			AND jurisdiction_id = #{jurisdictionId}
 		</if>
-		<if test=" tJson != null and tJson !='' "><!-- 权限json -->
+		<if test=" tJson != null "><!-- 权限json -->
 			AND t_json = #{tJson}
 		</if>
-		<if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+		<if test=" createTime != null "><!-- 创建时间 -->
 			AND create_time = #{createTime}
 		</if>
-		<if test=" creator != null and creator !='' "><!-- 创建者 -->
+		<if test=" creator != null "><!-- 创建者 -->
 			AND creator = #{creator}
 		</if>
-		<if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+		<if test=" updateTime != null "><!-- 更新时间 -->
 			AND update_time = #{updateTime}
 		</if>
-		<if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+		<if test=" updator != null "><!-- 最后更新者 -->
 			AND updator = #{updator}
 		</if>
 	</select>
@@ -116,32 +116,32 @@
 	<!-- 修改一条数据 -->
 	<update id='doUpdate' parameterType='PagePersonalDBO'>
 		UPDATE page_personal SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
-		<if test=" personalId != null and personalId !='' "><!-- 自增id -->
+		<if test=" personalId != null "><!-- 自增id -->
 			,personal_id = #{personalId}
 		</if>
-		<if test=" sid != null and sid !='' "><!-- 学校id -->
+		<if test=" sid != null "><!-- 学校id -->
 			,sid = #{sid}
 		</if>
-		<if test=" tid != null and tid !='' "><!-- 教工id -->
+		<if test=" tid != null "><!-- 教工id -->
 			,tid = #{tid}
 		</if>
-		<if test=" jurisdictionId != null and jurisdictionId !='' "><!-- 页面权限id -->
+		<if test=" jurisdictionId != null "><!-- 页面权限id -->
 			,jurisdiction_id = #{jurisdictionId}
 		</if>
-		<if test=" tJson != null and tJson !='' "><!-- 权限json -->
+		<if test=" tJson != null "><!-- 权限json -->
 			,t_json = #{tJson}
 		</if>
-		<if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+		<if test=" createTime != null "><!-- 创建时间 -->
 			,create_time = #{createTime}
 		</if>
-		<if test=" creator != null and creator !='' "><!-- 创建者 -->
+		<if test=" creator != null "><!-- 创建者 -->
 			,creator = #{creator}
 		</if>
-		<if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+		<if test=" updator != null "><!-- 最后更新者 -->
 			,updator = #{updator}
 		</if>
 		WHERE 1 = 1
-		<if test=" personalId != null and personalId !='' "><!-- 自增id -->
+		<if test=" personalId != null "><!-- 自增id -->
 			AND personal_id = #{personalId}
 		</if>
 	</update>
@@ -149,14 +149,14 @@
 	<delete id='toDelete' parameterType='PagePersonalDBO'>
 		UPDATE page_personal SET ddd='1', update_time = #{updateTime}, uu2 =
 		#{uu2} WHERE update_time = #{updateTime}
-		<if test=" personalId != null and personalId !='' "><!-- 自增id -->
+		<if test=" personalId != null "><!-- 自增id -->
 			AND personal_id = #{personalId}
 		</if>
 	</delete>
 	<!-- 物理删除一条数据 -->
 	<delete id='doDelete' parameterType='PagePersonalDBO'>
 		DELETE FROM page_personal WHERE update_time = #{updateTime}
-		<if test=" personalId != null and personalId !='' "><!-- 自增id -->
+		<if test=" personalId != null "><!-- 自增id -->
 			AND personal_id = #{personalId}
 		</if>
 	</delete>
@@ -165,7 +165,7 @@
 		SELECT
 		<include refid='tableColumns' />
 		FROM page_personal WHERE 1 = 1
-		<if test=" personalId != null and personalId !='' "><!-- 自增id -->
+		<if test=" personalId != null "><!-- 自增id -->
 			AND personal_id = #{personalId}
 		</if>
 	</select>

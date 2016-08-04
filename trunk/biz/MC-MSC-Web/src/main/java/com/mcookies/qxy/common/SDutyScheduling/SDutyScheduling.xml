@@ -13,98 +13,98 @@
     <!-- 根据条件更新所有记录 -->
     <update id='doUpdateAll' parameterType='SDutySchedulingDBO'>
         UPDATE s_duty_scheduling SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
-        <if test=" id != null and id !='' "><!-- 自增id -->
+        <if test=" id != null "><!-- 自增id -->
             ,id = #{id}
         </if>
-        <if test=" sid != null and sid !='' "><!-- 学校id -->
+        <if test=" sid != null "><!-- 学校id -->
             ,sid = #{sid}
         </if>
-        <if test=" termId != null and termId !='' "><!-- 所属学期 -->
+        <if test=" termId != null "><!-- 所属学期 -->
             ,term_id = #{termId}
         </if>
-        <if test=" type != null and type !='' "><!-- 岗位类型 -->
+        <if test=" type != null "><!-- 岗位类型 -->
             ,type = #{type}
         </if>
-        <if test=" week != null and week !='' "><!-- 指定该学期的对应周 -->
+        <if test=" week != null "><!-- 指定该学期的对应周 -->
             ,week = #{week}
         </if>
-        <if test=" startTime != null and startTime !='' "><!-- 周开始日期 -->
+        <if test=" startTime != null "><!-- 周开始日期 -->
             ,start_time = #{startTime}
         </if>
-        <if test=" endTime != null and endTime !='' "><!-- 周结束日期 -->
+        <if test=" endTime != null "><!-- 周结束日期 -->
             ,end_time = #{endTime}
         </if>
-        <if test=" date != null and date !='' "><!-- 指定该学期的对应日期 -->
+        <if test=" date != null "><!-- 指定该学期的对应日期 -->
             ,date = #{date}
         </if>
-        <if test=" leaderTids != null and leaderTids !='' "><!-- 值日或值周领导id -->
+        <if test=" leaderTids != null "><!-- 值日或值周领导id -->
             ,leader_tids = #{leaderTids}
         </if>
-        <if test=" tids != null and tids !='' "><!-- 值日或值周教师id -->
+        <if test=" tids != null "><!-- 值日或值周教师id -->
             ,tids = #{tids}
         </if>
-        <if test=" dutyId != null and dutyId !='' "><!-- 岗位id -->
+        <if test=" dutyId != null "><!-- 岗位id -->
             ,duty_id = #{dutyId}
         </if>
-        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+        <if test=" isUse != null "><!-- 是否启用 -->
             ,is_use = #{isUse}
         </if>
-        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+        <if test=" createTime != null "><!-- 创建时间 -->
             ,create_time = #{createTime}
         </if>
-        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+        <if test=" creator != null "><!-- 创建者 -->
             ,creator = #{creator}
         </if>
-        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+        <if test=" updator != null "><!-- 最后更新者 -->
             ,updator = #{updator}
         </if>
         WHERE 1 = 1 
-            <if test=" id != null and id !='' "><!-- 自增id -->
+            <if test=" id != null "><!-- 自增id -->
                 AND id = #{id}
             </if>
-            <if test=" sid != null and sid !='' "><!-- 学校id -->
+            <if test=" sid != null "><!-- 学校id -->
                 AND sid = #{sid}
             </if>
-            <if test=" termId != null and termId !='' "><!-- 所属学期 -->
+            <if test=" termId != null "><!-- 所属学期 -->
                 AND term_id = #{termId}
             </if>
-            <if test=" type != null and type !='' "><!-- 岗位类型 -->
+            <if test=" type != null "><!-- 岗位类型 -->
                 AND type = #{type}
             </if>
-            <if test=" week != null and week !='' "><!-- 指定该学期的对应周 -->
+            <if test=" week != null "><!-- 指定该学期的对应周 -->
                 AND week = #{week}
             </if>
-            <if test=" startTime != null and startTime !='' "><!-- 周开始日期 -->
+            <if test=" startTime != null "><!-- 周开始日期 -->
                 AND start_time = #{startTime}
             </if>
-            <if test=" endTime != null and endTime !='' "><!-- 周结束日期 -->
+            <if test=" endTime != null "><!-- 周结束日期 -->
                 AND end_time = #{endTime}
             </if>
-            <if test=" date != null and date !='' "><!-- 指定该学期的对应日期 -->
+            <if test=" date != null "><!-- 指定该学期的对应日期 -->
                 AND date = #{date}
             </if>
-            <if test=" leaderTids != null and leaderTids !='' "><!-- 值日或值周领导id -->
+            <if test=" leaderTids != null "><!-- 值日或值周领导id -->
                 AND leader_tids = #{leaderTids}
             </if>
-            <if test=" tids != null and tids !='' "><!-- 值日或值周教师id -->
+            <if test=" tids != null "><!-- 值日或值周教师id -->
                 AND tids = #{tids}
             </if>
-            <if test=" dutyId != null and dutyId !='' "><!-- 岗位id -->
+            <if test=" dutyId != null "><!-- 岗位id -->
                 AND duty_id = #{dutyId}
             </if>
-            <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+            <if test=" isUse != null "><!-- 是否启用 -->
                 AND is_use = #{isUse}
             </if>
-            <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+            <if test=" createTime != null "><!-- 创建时间 -->
                 AND create_time = #{createTime}
             </if>
-            <if test=" creator != null and creator !='' "><!-- 创建者 -->
+            <if test=" creator != null "><!-- 创建者 -->
                 AND creator = #{creator}
             </if>
-            <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+            <if test=" updateTime != null "><!-- 更新时间 -->
                 AND update_time = #{updateTime}
             </if>
-            <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+            <if test=" updator != null "><!-- 最后更新者 -->
                 AND updator = #{updator}
             </if>
     </update>
@@ -112,52 +112,52 @@
     <select id='doSelectPage' parameterType='SDutySchedulingDBO' resultType='SDutySchedulingDBO'>
         SELECT <include refid='tableColumns'/> FROM s_duty_scheduling
         WHERE 1 = 1 
-        <if test=" id != null and id !='' "><!-- 自增id -->
+        <if test=" id != null "><!-- 自增id -->
             AND id = #{id}
         </if>
-        <if test=" sid != null and sid !='' "><!-- 学校id -->
+        <if test=" sid != null "><!-- 学校id -->
             AND sid = #{sid}
         </if>
-        <if test=" termId != null and termId !='' "><!-- 所属学期 -->
+        <if test=" termId != null "><!-- 所属学期 -->
             AND term_id = #{termId}
         </if>
-        <if test=" type != null and type !='' "><!-- 岗位类型 -->
+        <if test=" type != null "><!-- 岗位类型 -->
             AND type = #{type}
         </if>
-        <if test=" week != null and week !='' "><!-- 指定该学期的对应周 -->
+        <if test=" week != null "><!-- 指定该学期的对应周 -->
             AND week = #{week}
         </if>
-        <if test=" startTime != null and startTime !='' "><!-- 周开始日期 -->
+        <if test=" startTime != null "><!-- 周开始日期 -->
             AND start_time = #{startTime}
         </if>
-        <if test=" endTime != null and endTime !='' "><!-- 周结束日期 -->
+        <if test=" endTime != null "><!-- 周结束日期 -->
             AND end_time = #{endTime}
         </if>
-        <if test=" date != null and date !='' "><!-- 指定该学期的对应日期 -->
+        <if test=" date != null "><!-- 指定该学期的对应日期 -->
             AND date = #{date}
         </if>
-        <if test=" leaderTids != null and leaderTids !='' "><!-- 值日或值周领导id -->
+        <if test=" leaderTids != null "><!-- 值日或值周领导id -->
             AND leader_tids = #{leaderTids}
         </if>
-        <if test=" tids != null and tids !='' "><!-- 值日或值周教师id -->
+        <if test=" tids != null "><!-- 值日或值周教师id -->
             AND tids = #{tids}
         </if>
-        <if test=" dutyId != null and dutyId !='' "><!-- 岗位id -->
+        <if test=" dutyId != null "><!-- 岗位id -->
             AND duty_id = #{dutyId}
         </if>
-        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+        <if test=" isUse != null "><!-- 是否启用 -->
             AND is_use = #{isUse}
         </if>
-        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+        <if test=" createTime != null "><!-- 创建时间 -->
             AND create_time = #{createTime}
         </if>
-        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+        <if test=" creator != null "><!-- 创建者 -->
             AND creator = #{creator}
         </if>
-        <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+        <if test=" updateTime != null "><!-- 更新时间 -->
             AND update_time = #{updateTime}
         </if>
-        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+        <if test=" updator != null "><!-- 最后更新者 -->
             AND updator = #{updator}
         </if>
     </select>
@@ -172,74 +172,74 @@
     <!-- 修改一条数据 -->
     <update id='doUpdate' parameterType='SDutySchedulingDBO'>
         UPDATE s_duty_scheduling SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
-        <if test=" id != null and id !='' "><!-- 自增id -->
+        <if test=" id != null "><!-- 自增id -->
             ,id = #{id}
         </if>
-        <if test=" sid != null and sid !='' "><!-- 学校id -->
+        <if test=" sid != null "><!-- 学校id -->
             ,sid = #{sid}
         </if>
-        <if test=" termId != null and termId !='' "><!-- 所属学期 -->
+        <if test=" termId != null "><!-- 所属学期 -->
             ,term_id = #{termId}
         </if>
-        <if test=" type != null and type !='' "><!-- 岗位类型 -->
+        <if test=" type != null "><!-- 岗位类型 -->
             ,type = #{type}
         </if>
-        <if test=" week != null and week !='' "><!-- 指定该学期的对应周 -->
+        <if test=" week != null "><!-- 指定该学期的对应周 -->
             ,week = #{week}
         </if>
-        <if test=" startTime != null and startTime !='' "><!-- 周开始日期 -->
+        <if test=" startTime != null "><!-- 周开始日期 -->
             ,start_time = #{startTime}
         </if>
-        <if test=" endTime != null and endTime !='' "><!-- 周结束日期 -->
+        <if test=" endTime != null "><!-- 周结束日期 -->
             ,end_time = #{endTime}
         </if>
-        <if test=" date != null and date !='' "><!-- 指定该学期的对应日期 -->
+        <if test=" date != null "><!-- 指定该学期的对应日期 -->
             ,date = #{date}
         </if>
-        <if test=" leaderTids != null and leaderTids !='' "><!-- 值日或值周领导id -->
+        <if test=" leaderTids != null "><!-- 值日或值周领导id -->
             ,leader_tids = #{leaderTids}
         </if>
-        <if test=" tids != null and tids !='' "><!-- 值日或值周教师id -->
+        <if test=" tids != null "><!-- 值日或值周教师id -->
             ,tids = #{tids}
         </if>
-        <if test=" dutyId != null and dutyId !='' "><!-- 岗位id -->
+        <if test=" dutyId != null "><!-- 岗位id -->
             ,duty_id = #{dutyId}
         </if>
-        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+        <if test=" isUse != null "><!-- 是否启用 -->
             ,is_use = #{isUse}
         </if>
-        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+        <if test=" createTime != null "><!-- 创建时间 -->
             ,create_time = #{createTime}
         </if>
-        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+        <if test=" creator != null "><!-- 创建者 -->
             ,creator = #{creator}
         </if>
-        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+        <if test=" updator != null "><!-- 最后更新者 -->
             ,updator = #{updator}
         </if>
         WHERE 1 = 1 
-            <if test=" id != null and id !='' "><!-- 自增id -->
+            <if test=" id != null "><!-- 自增id -->
                 AND id = #{id}
             </if>
     </update>
     <!-- 逻辑删除一条数据 -->
     <delete id='toDelete' parameterType='SDutySchedulingDBO'>
         UPDATE s_duty_scheduling SET ddd='1', update_time = #{updateTime}, uu2 = #{uu2} WHERE update_time = #{updateTime}
-            <if test=" id != null and id !='' "><!-- 自增id -->
+            <if test=" id != null "><!-- 自增id -->
                 AND id = #{id}
             </if>
     </delete>
     <!-- 物理删除一条数据 -->
     <delete id='doDelete' parameterType='SDutySchedulingDBO'>
         DELETE FROM s_duty_scheduling WHERE update_time = #{updateTime}
-            <if test=" id != null and id !='' "><!-- 自增id -->
+            <if test=" id != null "><!-- 自增id -->
                 AND id = #{id}
             </if>
     </delete>
     <!-- 查询一条数据  -->
     <select id='doRead' parameterType='SDutySchedulingDBO' resultType='SDutySchedulingDBO'>
         SELECT <include refid='tableColumns'/> FROM s_duty_scheduling WHERE 1 = 1
-            <if test=" id != null and id !='' "><!-- 自增id -->
+            <if test=" id != null "><!-- 自增id -->
                 AND id = #{id}
             </if>
     </select>
