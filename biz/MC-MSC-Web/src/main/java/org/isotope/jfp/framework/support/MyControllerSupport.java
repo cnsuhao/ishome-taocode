@@ -46,9 +46,11 @@ public class MyControllerSupport extends MyFrameworkSupport // implements
 	/**
 	 * 当前用户Token
 	 */
-	protected BusinessTokenBean myToken;
+	private BusinessTokenBean myToken;
 	private LoginerBean loginer;
-
+	public BusinessTokenBean getToken() {
+		return myToken;
+	}
 	public LoginerBean getLoginer() {
 		return loginer;
 	}
