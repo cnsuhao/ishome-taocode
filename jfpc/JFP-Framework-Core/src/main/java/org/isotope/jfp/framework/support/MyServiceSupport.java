@@ -11,8 +11,6 @@ import org.isotope.jfp.framework.beans.page.PageVOSupport;
 import org.isotope.jfp.framework.constants.ISDBConstants;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.utils.BeanFactoryHelper;
-import org.isotope.jfp.framework.utils.DateHelper;
-import org.isotope.jfp.framework.utils.EmptyHelper;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.SqlSessionUtils;
 import org.slf4j.Logger;
@@ -263,20 +261,20 @@ public class MyServiceSupport implements ISFrameworkConstants, ISDBConstants {
 		// if (StringUtils.isEmpty(formParamBean.getPuk()))
 		// formParamBean.setPuk(PKHelper.creatPUKey());
 
-//		// 数据所属系统
-//		if (EmptyHelper.isEmpty(formParamBean.getGgg()))
-//			formParamBean.setGgg("SYSTEM");
-//
-//		// 企业ID
-//		if (EmptyHelper.isEmpty(formParamBean.getPpp()))
-//			formParamBean.setPpp(getCompanyId());
-//
-//		// 有效标识
-//		if (EmptyHelper.isEmpty(formParamBean.getDdd()))
-//			formParamBean.setDdd("0");
+		// // 数据所属系统
+		// if (EmptyHelper.isEmpty(formParamBean.getGgg()))
+		// formParamBean.setGgg("SYSTEM");
+		//
+		// // 企业ID
+		// if (EmptyHelper.isEmpty(formParamBean.getPpp()))
+		// formParamBean.setPpp(getCompanyId());
+		//
+		// // 有效标识
+		// if (EmptyHelper.isEmpty(formParamBean.getDdd()))
+		// formParamBean.setDdd("0");
 
 		// 有效标记、创建者、创建时间、更新者、更新时间
-		Timestamp d = new Timestamp(System.currentTimeMillis()); 
+		Timestamp d = new Timestamp(System.currentTimeMillis());
 		Long loginId = getLoginerId();
 		formParamBean.setCreateTime(d);
 		formParamBean.setCreator(loginId);
