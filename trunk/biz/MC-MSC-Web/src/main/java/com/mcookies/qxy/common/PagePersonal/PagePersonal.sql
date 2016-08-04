@@ -4,7 +4,7 @@ CREATE TABLE page_personal
     sid BIGINT(12) NOT NULL COMMENT '学校id',
     tid BIGINT(12) NOT NULL COMMENT '教工id',
     jurisdiction_id BIGINT(12) COMMENT '页面权限id',
-    t_json DATETIME COMMENT '权限json',
+    t_json TEXT COMMENT '权限json',
     create_time VARCHAR(24) COMMENT '创建时间',
     creator BIGINT(12) COMMENT '创建者',
     update_time VARCHAR(24) COMMENT '更新时间',

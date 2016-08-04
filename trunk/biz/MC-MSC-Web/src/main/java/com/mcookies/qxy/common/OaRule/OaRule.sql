@@ -6,7 +6,7 @@ CREATE TABLE oa_rule
     oarule_name VARCHAR(100) COMMENT '规则名称',
     serial_number TINYINT(2) COMMENT '规则序号',
     adopt_type VARCHAR(1) COMMENT '规则通过方式',
-    tids DATETIME COMMENT '审核人列表',
+    tids TEXT COMMENT '审核人列表',
     is_use TINYINT(1) COMMENT '是否启用',
     create_time VARCHAR(24) COMMENT '创建时间',
     creator BIGINT(12) COMMENT '创建者',
