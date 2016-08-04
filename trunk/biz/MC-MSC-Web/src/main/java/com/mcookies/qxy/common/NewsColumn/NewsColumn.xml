@@ -109,7 +109,7 @@
     </select>
 
     <!-- 插入一条数据 -->
-    <insert id='doInsert' parameterType='NewsColumnDBO'>
+    <insert id='doInsert' parameterType='NewsColumnDBO' useGeneratedKeys="true" keyProperty="columnId">
         INSERT INTO news_column
           ( <include refid='tableColumns'/>) 
         VALUES 
@@ -159,7 +159,7 @@
     </delete>
     <!-- 物理删除一条数据 -->
     <delete id='doDelete' parameterType='NewsColumnDBO'>
-        DELETE FROM news_column WHERE update_time = #{updateTime}
+        DELETE FROM news_column WHERE 1 = 1
             <if test=" columnId != null "><!-- 栏目id（自增） -->
                 AND column_id = #{columnId}
             </if>
