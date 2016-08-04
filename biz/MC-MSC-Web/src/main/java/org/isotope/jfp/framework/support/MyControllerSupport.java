@@ -14,7 +14,6 @@ import org.isotope.jfp.framework.beans.user.LoginerBean;
 import org.isotope.jfp.framework.cache.ICacheService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.alibaba.fastjson.JSON;
 
@@ -48,19 +47,21 @@ public class MyControllerSupport extends MyFrameworkSupport // implements
 	 */
 	private BusinessTokenBean myToken;
 	private LoginerBean loginer;
+
 	public BusinessTokenBean getToken() {
 		return myToken;
 	}
+
 	public LoginerBean getLoginer() {
 		return loginer;
 	}
 
 	public boolean doCheckToken(String token) {
 		myToken = BusinessTokenBean.build("91a82b73c64d55e46f3_g2__1__");
-		//获得用户信息
+		// 获得用户信息
 		loginer = new LoginerBean();
 		loginer.setUserId("123456");
-		//检查用户Token
+		// 检查用户Token
 		return true;
 	}
 
@@ -76,7 +77,7 @@ public class MyControllerSupport extends MyFrameworkSupport // implements
 	 * 
 	 * @param response
 	 */
-	//@ModelAttribute
+	// @ModelAttribute
 	public boolean doCheckLogin(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		// 获得当前请求Token
 		loginer = new LoginerBean();
