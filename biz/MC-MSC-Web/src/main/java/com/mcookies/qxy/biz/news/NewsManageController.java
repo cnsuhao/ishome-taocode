@@ -1,9 +1,12 @@
 package com.mcookies.qxy.biz.news;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.isotope.jfp.framework.beans.common.RESTResultBean;
-import org.isotope.jfp.framework.cache.ICacheService;
 import org.isotope.jfp.framework.support.MyControllerSupport;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,6 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.mcookies.qxy.common.News.NewsDBO;
+import com.mcookies.qxy.common.News.NewsService;
+import com.mcookies.qxy.common.NewsColumn.NewsColumnDBO;
+import com.mcookies.qxy.common.NewsColumn.NewsColumnService;
 import com.mcookies.qxy.common.User.UserDBO;
 
 /**
@@ -23,7 +32,9 @@ import com.mcookies.qxy.common.User.UserDBO;
 public class NewsManageController extends MyControllerSupport {
 
 	@Resource
-	protected ICacheService myCacheService;
+	protected NewsService newsService;
+	@Resource
+	protected NewsColumnService newsColumnService;
 
 	/**
 	 * 新闻列表查询接口
@@ -33,6 +44,7 @@ public class NewsManageController extends MyControllerSupport {
 	@RequestMapping(value = "/qxy/news", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean newsGET(@RequestBody UserDBO user) {
+		// TODO
 		RESTResultBean result = new RESTResultBean();
 		try {
 			if (doCheckToken(user.getToken()) == false) {
@@ -56,6 +68,7 @@ public class NewsManageController extends MyControllerSupport {
 	@RequestMapping(value = "/qxy/news/detaile", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean newsDetailGET(@RequestBody UserDBO user) {
+		// TODO
 		RESTResultBean result = new RESTResultBean();
 		try {
 			if (doCheckToken(user.getToken()) == false) {
@@ -78,18 +91,20 @@ public class NewsManageController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/qxy/news", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean newsPOST(@RequestBody UserDBO user) {
+	public RESTResultBean newsPOST(@RequestBody NewsDBO news) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(user.getToken()) == false) {
+			if (doCheckToken(news.getToken()) == false) {
 				return tokenFail();
 			}
-
-			String userId = getLoginer().getUserId();
-
-			result.setInfo("欢迎访问千校云平台：" + userId + "," + user.getAccount());
+			Long sid = Long.valueOf(getToken().getSchoolId());
+			news.setSid(sid);
+			newsService.doInsert(news);
+			Map<String, Object> data = new HashMap<String, Object>();
+			data.put("newsId", news.getNewsId());
+			result.setData(data);
 		} catch (Exception e) {
-			result.setInfo("访问失败");
+			result.setInfo("新增失败: " + e.getMessage());
 			result.setStatus(1);
 		}
 
@@ -99,20 +114,33 @@ public class NewsManageController extends MyControllerSupport {
 	/**
 	 * 新闻修改\置顶(取消)\审核(驳回)\加入轮播(取消)口 /qxy/news
 	 */
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/qxy/news", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean newsPUT(@RequestBody UserDBO user) {
+	public RESTResultBean newsPUT(@RequestBody NewsDBO news) {
+		// TODO
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(user.getToken()) == false) {
+			if (doCheckToken(news.getToken()) == false) {
 				return tokenFail();
 			}
-
-			String userId = getLoginer().getUserId();
-
-			result.setInfo("欢迎访问千校云平台：" + userId + "," + user.getAccount());
+			// 由所属栏目判断是否需要审核
+			NewsColumnDBO newsColumn = new NewsColumnDBO();
+			newsColumn.setColumnId(news.getColumnId());
+			List<NewsColumnDBO> newsColumns = (List<NewsColumnDBO>) newsColumnService.doSelectData(newsColumn);
+			if (newsColumns.size() == 0) {
+				throw new IllegalArgumentException("columnId所对应的栏目不存在");
+			}
+			newsColumn = newsColumns.get(0);
+			if (newsColumn.getIsCheck() == 0) {
+				throw new IllegalStateException("该新闻不允许修改");
+			}
+			newsService.doUpdate(news);
+			Map<String, Object> data = new HashMap<String, Object>();
+			data.put("info", "ok");
+			result.setData(data);
 		} catch (Exception e) {
-			result.setInfo("访问失败");
+			result.setInfo("修改失败: " + e.getMessage());
 			result.setStatus(1);
 		}
 
@@ -124,21 +152,32 @@ public class NewsManageController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/qxy/news", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean newsDELETE(@RequestBody UserDBO user) {
+	public RESTResultBean newsDELETE(@RequestBody String jsonparam) {
 		RESTResultBean result = new RESTResultBean();
+
 		try {
-			if (doCheckToken(user.getToken()) == false) {
+			JSONObject param = JSONObject.parseObject(jsonparam);
+			String token = (String) param.get("token");
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
-
-			String userId = getLoginer().getUserId();
-
-			result.setInfo("欢迎访问千校云平台：" + userId + "," + user.getAccount());
+			JSONArray newsIds = param.getJSONArray("newsIds");
+			for (Object newsId : newsIds) {
+				Long tmp = Long.valueOf((String) newsId);
+				// 乐观锁操作
+				NewsDBO dbo = new NewsDBO();
+				dbo.setNewsId(tmp);
+				dbo = (NewsDBO) newsService.doRead(dbo);
+				@SuppressWarnings("unused")
+				int flag = newsService.doDelete(dbo);
+			}
+			Map<String, Object> data = new HashMap<String, Object>();
+			data.put("info", "ok");
+			result.setData(data);
 		} catch (Exception e) {
-			result.setInfo("访问失败");
+			result.setInfo("删除失败: " + e.getMessage());
 			result.setStatus(1);
 		}
-
 		return result;
 	}
 
@@ -148,6 +187,7 @@ public class NewsManageController extends MyControllerSupport {
 	@RequestMapping(value = "/qxy/news/upload/pictures", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean newsUploadPicturesPUT(@RequestBody UserDBO user) {
+		// TODO
 		RESTResultBean result = new RESTResultBean();
 		try {
 			if (doCheckToken(user.getToken()) == false) {
