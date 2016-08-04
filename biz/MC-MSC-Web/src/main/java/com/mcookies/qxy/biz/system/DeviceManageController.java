@@ -56,9 +56,9 @@ public class DeviceManageController extends MyControllerSupport {
 				JSONArray array = new JSONArray();
 				for(DeviceTagPVO pvo:relist){
 					JSONObject device = new JSONObject();
-					device.put("device_id", pvo.getDeviceId()+"");
-					device.put("device_name", pvo.getDeviceName());
-					device.put("school_name", pvo.getSchoolName());
+					device.put("deviceId", pvo.getDeviceId()+"");
+					device.put("deviceName", pvo.getDeviceName());
+					device.put("schoolName", pvo.getSchoolName());
 					device.put("username", pvo.getUsername());
 					device.put("password", pvo.getPassword());
 					array.add(device);
@@ -139,7 +139,6 @@ public class DeviceManageController extends MyControllerSupport {
 				}
 			}
 			// 修改
-			String currentTime = DateHelper.currentTimeMillis2();
 			DeviceTagService_.doUpdate(device);
 		} catch (Exception e) {
 			result.setInfo("访问失败");
@@ -214,9 +213,9 @@ public class DeviceManageController extends MyControllerSupport {
 			{
 				DeviceTagPVO device = relist.get(0);
 				JSONObject json = new JSONObject();
-				json.put("device_id", device.getDeviceId()+"");
-				json.put("device_name", device.getDeviceName());
-				json.put("school_name", device.getSchoolName());
+				json.put("deviceId", device.getDeviceId()+"");
+				json.put("deviceName", device.getDeviceName());
+				json.put("schoolName", device.getSchoolName());
 				json.put("username", device.getUsername());
 				json.put("password", device.getPassword());
 				//分页查询告警列表
@@ -234,9 +233,9 @@ public class DeviceManageController extends MyControllerSupport {
 					for(DeviceAlarmPVO alarmpvo:alarmlist){
 						JSONObject alarmjson = new JSONObject();
 						alarmjson.put("id", alarmpvo.getId()+"");
-						alarmjson.put("send_time", alarmpvo.getSendTime().getTime()+"");
-						alarmjson.put("alarm_information", alarmpvo.getAlarmInformation());
-						alarmjson.put("alarm_time", alarmpvo.getAlarmTime());
+						alarmjson.put("sendTime", alarmpvo.getSendTime().getTime()+"");
+						alarmjson.put("alarmInformation", alarmpvo.getAlarmInformation());
+						alarmjson.put("alarmTime", alarmpvo.getAlarmTime());
 						array.add(alarmjson);
 					}
 				}

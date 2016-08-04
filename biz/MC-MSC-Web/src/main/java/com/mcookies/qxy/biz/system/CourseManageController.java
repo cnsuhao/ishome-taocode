@@ -14,7 +14,7 @@ import com.mcookies.qxy.common.User.UserPVO;
 import com.mcookies.qxy.common.User.UserService;
 
 @Controller
-/** 设备管理*/
+/** 课程管理*/
 public class CourseManageController extends MyControllerSupport {
 	@Resource
 	protected DeviceTagService DeviceTagService_;
