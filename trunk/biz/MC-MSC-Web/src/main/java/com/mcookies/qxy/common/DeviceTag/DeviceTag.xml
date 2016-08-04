@@ -9,7 +9,13 @@
     <sql id='tableColumns'>
         id,sid,device_name,device_id,username,password,last_login_time,is_use,create_time,creator,update_time,updator
     </sql>
-
+	<resultMap type="com.mcookies.qxy.common.DeviceTag.DeviceTagPVO" id="resultMap1">
+		<result column="school_name" property="schoolName"/>
+		<result column="device_id" property="deviceId"/>
+		<result column="device_name" property="deviceName"/>
+		<result column="username" property="username"/>
+		<result column="password" property="password"/>
+	</resultMap>
     <!-- 根据条件更新所有记录 -->
     <update id='doUpdateAll' parameterType='DeviceTagDBO'>
         UPDATE device_tag SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
@@ -195,5 +201,25 @@
                 AND id = #{id}
             </if>
     </select>
-
+	<!-- 设备标签查询接口 -->
+	<select id="doSelectDevice" parameterType="java.util.Map" resultMap="resultMap1">
+		SELECT
+			device_id,
+			device_name,
+			a.username,
+			a.`password`,
+			b.school_name
+		FROM
+			device_tag a,
+			school b
+		<where>
+			and a.sid = b.sid
+			<if test="sid != null and sid != '' ">
+				and a.sid = #{sid}
+			</if>
+			<if test="deviceId != null and deviceId != '' ">
+				and a.device_id = #{deviceId}
+			</if>
+		</where>
+	</select>
 </mapper>

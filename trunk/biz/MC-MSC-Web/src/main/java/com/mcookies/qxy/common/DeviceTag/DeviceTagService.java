@@ -1,5 +1,8 @@
 package com.mcookies.qxy.common.DeviceTag;
 
+import java.util.List;
+import java.util.Map;
+
 import org.isotope.jfp.framework.support.MyServiceSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +15,10 @@ public class DeviceTagService extends MyServiceSupport {
 
 	public DeviceTagDao getDao() {
 		return getMySqlSession().getMapper(DeviceTagDao.class);
+	}
+	
+	public List<DeviceTagPVO> doSelectDevice(Map<String,Object> param){
+		return getDao().doSelectDevice(param);
 	}
 
 }

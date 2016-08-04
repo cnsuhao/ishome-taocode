@@ -171,5 +171,23 @@
                 AND id = #{id}
             </if>
     </select>
+	<!-- 分页 获取设备  的报警信息 -->
+	<select id="doSelectPageDeviceAlarm" parameterType="com.mcookies.qxy.common.DeviceAlarm.DeviceAlarmPVO" resultType="com.mcookies.qxy.common.DeviceAlarm.DeviceAlarmPVO">
+	SELECT
+		a.id,
+		a.alarm_information,
+		a.alarm_time,
+		b.send_time
+	FROM
+		device_alarm a,
+		device_heartbeat b
+	<where>
+		and a.device_id = b.device_id
+		<if test="deviceId != null and deviceId != ''">
+		and a.device_id = 151234123443		
+		</if>
 
+	</where>
+
+	</select>
 </mapper>
