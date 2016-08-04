@@ -9,9 +9,9 @@ CREATE TABLE u_teacher_ext
     card_number VARCHAR(255) COMMENT '证件号码',
     home_address VARCHAR(255) COMMENT '家庭住址',
     is_use TINYINT(1) COMMENT '是否启用',
-    create_time VARCHAR(24) COMMENT '创建时间',
+    create_time DATETIME COMMENT '创建时间',
     creator BIGINT(12) COMMENT '创建者',
-    update_time VARCHAR(24) COMMENT '更新时间',
+    update_time DATETIME COMMENT '更新时间',
     updator BIGINT(12) COMMENT '最后更新者',
 PRIMARY KEY (tid)
 ) COMMENT '教师信息扩展表'

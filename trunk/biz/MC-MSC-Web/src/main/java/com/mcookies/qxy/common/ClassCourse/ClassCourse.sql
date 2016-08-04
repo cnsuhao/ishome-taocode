@@ -65,9 +65,9 @@ CREATE TABLE class_course
     tid15 BIGINT(12) COMMENT '教师15id',
     teacher_name15 BIGINT(50) COMMENT '教师15姓名',
     is_use TINYINT(1) COMMENT '是否启用',
-    create_time VARCHAR(24) COMMENT '创建时间',
+    create_time DATETIME COMMENT '创建时间',
     creator BIGINT(12) COMMENT '创建者',
-    update_time VARCHAR(24) COMMENT '更新时间',
+    update_time DATETIME COMMENT '更新时间',
     updator BIGINT(12) COMMENT '最后更新者',
 PRIMARY KEY (id)
 ) COMMENT '班级课程教师关联表'

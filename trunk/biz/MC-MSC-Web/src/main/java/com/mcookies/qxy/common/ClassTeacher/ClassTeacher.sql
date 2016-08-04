@@ -7,9 +7,9 @@ CREATE TABLE class_teacher
     tid BIGINT(12) NOT NULL COMMENT '教师id',
     is_leader TINYINT(1) COMMENT '是否为班主任',
     is_use TINYINT(1) COMMENT '是否启用',
-    create_time VARCHAR(24) COMMENT '创建时间',
+    create_time DATETIME COMMENT '创建时间',
     creator BIGINT(12) COMMENT '创建者',
-    update_time VARCHAR(24) COMMENT '更新时间',
+    update_time DATETIME COMMENT '更新时间',
     updator BIGINT(12) COMMENT '最后更新者',
 PRIMARY KEY (id)
 ) COMMENT '班级教师关联表'

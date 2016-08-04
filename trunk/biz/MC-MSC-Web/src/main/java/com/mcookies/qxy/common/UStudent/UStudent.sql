@@ -14,9 +14,9 @@ CREATE TABLE u_student
     gender VARCHAR(50) COMMENT '性别',
     status TINYINT(1) COMMENT '状态',
     is_use TINYINT(1) COMMENT '是否启用',
-    create_time VARCHAR(24) COMMENT '创建时间',
+    create_time DATETIME COMMENT '创建时间',
     creator BIGINT(12) COMMENT '创建者',
-    update_time VARCHAR(24) COMMENT '更新时间',
+    update_time DATETIME COMMENT '更新时间',
     updator BIGINT(12) COMMENT '最后更新者',
 PRIMARY KEY (student_id)
 ) COMMENT '学生表'

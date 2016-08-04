@@ -8,9 +8,9 @@ CREATE TABLE oa_examine_information
     content TEXT COMMENT '待审批内容',
     result TINYINT(1) COMMENT '审核结果',
     is_use TINYINT(1) COMMENT '是否启用',
-    create_time VARCHAR(24) COMMENT '创建时间',
+    create_time DATETIME COMMENT '创建时间',
     creator BIGINT(12) COMMENT '创建者',
-    update_time VARCHAR(24) COMMENT '更新时间',
+    update_time DATETIME COMMENT '更新时间',
     updator BIGINT(12) COMMENT '最后更新者',
 PRIMARY KEY (approval_information_id)
 ) COMMENT 'OA审批信息表'
