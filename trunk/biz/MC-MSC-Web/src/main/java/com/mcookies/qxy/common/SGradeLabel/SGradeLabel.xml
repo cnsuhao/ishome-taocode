@@ -116,7 +116,7 @@
 		<if test=" gradeName != null and gradeName !='' "><!-- 年级名称 -->
 			,grade_name = #{gradeName}
 		</if>
-		<if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+		<if test=" isUse != null"><!-- 是否启用 -->
 			,is_use = #{isUse}
 		</if>
 		<if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
