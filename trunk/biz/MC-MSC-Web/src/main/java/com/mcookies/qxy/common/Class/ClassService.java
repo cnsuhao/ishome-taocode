@@ -1,7 +1,7 @@
 package com.mcookies.qxy.common.Class;
+import java.util.List;
+
 import org.isotope.jfp.framework.support.MyServiceSupport;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 /** 班级表*/
@@ -12,4 +12,7 @@ public class ClassService extends MyServiceSupport {
         return getMySqlSession().getMapper(ClassDao.class);
     }
 
+    public List<ClassPVO> doSelectWorkTime(ClassDBO dbo){
+    	return  getDao().doSelectWorkTime(dbo);
+    }
 }

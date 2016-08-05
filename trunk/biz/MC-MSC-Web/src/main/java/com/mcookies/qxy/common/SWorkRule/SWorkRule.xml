@@ -183,7 +183,7 @@
     </delete>
     <!-- 物理删除一条数据 -->
     <delete id='doDelete' parameterType='SWorkRuleDBO'>
-        DELETE FROM s_work_rule WHERE update_time = #{updateTime}
+        DELETE FROM s_work_rule WHERE 1 = 1
             <if test=" wruleId != null "><!-- 作息时间规则id -->
                 AND wrule_id = #{wruleId}
             </if>

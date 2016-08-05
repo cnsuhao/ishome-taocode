@@ -184,7 +184,7 @@
 	<where>
 		and a.device_id = b.device_id
 		<if test="deviceId != null and deviceId != ''">
-		and a.device_id = 151234123443		
+		and a.device_id = #{deviceId}		
 		</if>
 
 	</where>
