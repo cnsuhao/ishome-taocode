@@ -87,4 +87,8 @@
 	<bean id='IDialectInterceptor' class='org.isotope.jfp.framework.mybatis.plugin.dialect.MySQLDialect' scope='prototype'>
 		<property name='supportsOrderby' value=' ' />
 	</bean>
+	
+	<bean id='IParameterConvert' class='com.mcookies.qxy.utils.SchoolConvert' scope='prototype'>
+		
+	</bean>
 </beans>
