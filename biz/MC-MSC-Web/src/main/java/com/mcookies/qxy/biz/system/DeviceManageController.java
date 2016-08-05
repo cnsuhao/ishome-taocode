@@ -203,7 +203,6 @@ public class DeviceManageController extends MyControllerSupport {
 			}
 			if(page==null||page==0){
 				page = 1;
-				size = 99999;
 			}
 			//获取设备信息
 			Map<String,Object> param = new HashMap<String,Object>();
