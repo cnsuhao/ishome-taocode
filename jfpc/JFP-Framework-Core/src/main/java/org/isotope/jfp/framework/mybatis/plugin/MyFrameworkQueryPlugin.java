@@ -27,13 +27,14 @@ import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.type.TypeHandler;
 import org.apache.ibatis.type.TypeHandlerRegistry;
+import org.isotope.jfp.framework.beans.common.FrameworkDataBean;
 import org.isotope.jfp.framework.beans.page.PageVOSupport;
+import org.isotope.jfp.framework.mybatis.IParameterConvertSupport;
 import org.isotope.jfp.framework.mybatis.MyFrameworkSqlSource;
 import org.isotope.jfp.framework.mybatis.plugin.dialect.DefaultDialect;
-import org.isotope.jfp.framework.support.MyDataBaseObjectSupport;
+import org.isotope.jfp.framework.utils.BeanFactoryHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 
 /**
  * 分页插件（select）
@@ -42,18 +43,28 @@ import org.slf4j.LoggerFactory;
  * 
  */
 // 拦截所有查询操作
-//TODO 添加非法字符过滤器
+// TODO 添加非法字符过滤器
 @Intercepts({ @Signature(type = Executor.class, method = "query", args = { MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class }) })
 public class MyFrameworkQueryPlugin implements Interceptor {
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
-	
+
 	protected static final int MAPPED_STATEMENT_INDEX = 0;
 	protected static final int PARAMETER_INDEX = 1;
 	protected static final int ROWBOUNDS_INDEX = 2;
 	protected static final int RESULT_HANDLER_INDEX = 3;
 
 	private static final String METHOD_SELECT = "doSelectPage";
-	
+
+	/**
+	 * 参数转换器
+	 */
+	private IParameterConvertSupport myConvert;
+	public IParameterConvertSupport getMyConvert() {
+		if(myConvert==null)
+			myConvert = BeanFactoryHelper.getBean("IParameterConvert");
+		return myConvert;
+	}
+
 	/**
 	 * 拦截器method.invoke
 	 */
@@ -69,29 +80,31 @@ public class MyFrameworkQueryPlugin implements Interceptor {
 	private void processIntercept(Object[] queryArgs) throws Throwable {
 		if ((queryArgs[MAPPED_STATEMENT_INDEX] instanceof MappedStatement) == false) {
 			return;
-		}	
+		}
+		// 参数统一拦截
+		if (getMyConvert() != null) {
+			if ((queryArgs[PARAMETER_INDEX] instanceof FrameworkDataBean) == true) {
+				myConvert.convert((FrameworkDataBean) queryArgs[PARAMETER_INDEX]);
+			} else if ((queryArgs[PARAMETER_INDEX] instanceof PageVOSupport) == true) {
+				myConvert.convert(((PageVOSupport) queryArgs[PARAMETER_INDEX]).getFormParamBean());
+			}
+		}
+		// 分页判断
 		if ((queryArgs[PARAMETER_INDEX] instanceof PageVOSupport) == false) {
 			return;
-		}		
-		if ((((PageVOSupport)queryArgs[PARAMETER_INDEX]).getFormParamBean() instanceof MyDataBaseObjectSupport) == false) {
-			return;
 		}
-		// 是否进行分页查询
-		if ((queryArgs[PARAMETER_INDEX] instanceof PageVOSupport) == false) {
-			return;
-		}
-		
+
 		MappedStatement ms = (MappedStatement) queryArgs[MAPPED_STATEMENT_INDEX];
-		
-		//自定义分页判断METHOD_SELECT
-		if (ms.getId().indexOf(METHOD_SELECT)<0) {
+
+		// 自定义分页判断METHOD_SELECT
+		if (ms.getId().indexOf(METHOD_SELECT) < 0) {
 			return;
 		}
 		// 获得传递的分页模型
 		PageVOSupport pageVO = (PageVOSupport) queryArgs[PARAMETER_INDEX];
 		// 获得自动分页器
 		DefaultDialect dialect = pageVO.getDefaultDialect();
-		if(dialect == null)
+		if (dialect == null)
 			dialect = new DefaultDialect();
 		dialect.setSupportsOrderby(pageVO.getOrderby());
 
@@ -107,17 +120,17 @@ public class MyFrameworkQueryPlugin implements Interceptor {
 				PreparedStatement countStmt = connection.prepareStatement(countSql.toString());
 				BoundSql countBS = new BoundSql(ms.getConfiguration(), countSql.toString(), boundSql.getParameterMappings(), pageVO.getFormParamBean());
 
-				//设定查询参数
+				// 设定查询参数
 				setParameters(countStmt, ms, countBS, pageVO.getFormParamBean());
 
-				logger.debug("TotalCount.SQL====>>>>>"+countBS.getSql());
-				
+				logger.debug("TotalCount.SQL====>>>>>" + countBS.getSql());
+
 				ResultSet rs = countStmt.executeQuery();
 				if (rs.next()) {
 					pageVO.setResultCount(rs.getInt(1));
 				}
-				//rs.close();
-				//countStmt.close();
+				// rs.close();
+				// countStmt.close();
 			}
 
 			// 每页显示数目
@@ -131,7 +144,7 @@ public class MyFrameworkQueryPlugin implements Interceptor {
 				sql = dialect.getLimitString(sql, 0, limit);
 			}
 			// 输出修正后的操作语句
-			logger.debug("Limit.SQL====>>>>>"+sql);
+			logger.debug("Limit.SQL====>>>>>" + sql);
 			// 设定操作参数PARAMETER
 			queryArgs[PARAMETER_INDEX] = pageVO.getFormParamBean();
 			// 保存sql语句
@@ -199,5 +212,4 @@ public class MyFrameworkQueryPlugin implements Interceptor {
 	public void setProperties(Properties properties) {
 	}
 
-	
 }
