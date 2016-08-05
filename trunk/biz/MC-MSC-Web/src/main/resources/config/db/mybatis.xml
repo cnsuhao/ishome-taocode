@@ -59,7 +59,6 @@
  	<!-- mybatis插件拦截器 -->
 	<plugins>
 		<plugin interceptor='org.isotope.jfp.framework.mybatis.plugin.MyFrameworkQueryPlugin'/>
-	<!--	<plugin interceptor='org.isotope.jfp.framework.mybatis.plugin.MyFrameworkUpdatePlugin'/> -->
-		
+		<plugin interceptor='org.isotope.jfp.framework.mybatis.plugin.MyFrameworkUpdatePlugin'/>		
 	</plugins>
 </configuration>
