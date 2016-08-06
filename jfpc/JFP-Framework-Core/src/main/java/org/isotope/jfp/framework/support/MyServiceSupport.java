@@ -286,7 +286,7 @@ public class MyServiceSupport implements ISFrameworkConstants, ISDBConstants {
 		return getDao().doInsert(formParamBean);
 	}
 
-	private Long getLoginerId() {
+	protected Long getLoginerId() {
 		// TODO Auto-generated method stub
 		return 123456l;
 	}
