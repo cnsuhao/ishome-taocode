@@ -7,7 +7,7 @@ import org.isotope.jfp.framework.mybatis.IParameterConvertSupport;
 public class SchoolConvert implements IParameterConvertSupport {
 
 	public String getSchoolId() {
-		return "9876543210";
+		return "123456789";
 	}
 
 	@Override

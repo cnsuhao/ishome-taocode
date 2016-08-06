@@ -44,38 +44,11 @@
             ,updator = #{updator}
         </if>
         WHERE 1 = 1 
-            <if test=" id != null "><!-- 自增id -->
-                AND id = #{id}
-            </if>
-            <if test=" sid != null "><!-- 学校id -->
-                AND sid = #{sid}
-            </if>
             <if test=" cid != null "><!-- 班级id -->
                 AND cid = #{cid}
             </if>
-            <if test=" courseId != null "><!-- 课程id -->
-                AND course_id = #{courseId}
-            </if>
             <if test=" tid != null "><!-- 教师id -->
                 AND tid = #{tid}
-            </if>
-            <if test=" isLeader != null "><!-- 是否为班主任 -->
-                AND is_leader = #{isLeader}
-            </if>
-            <if test=" isUse != null "><!-- 是否启用 -->
-                AND is_use = #{isUse}
-            </if>
-            <if test=" createTime != null "><!-- 创建时间 -->
-                AND create_time = #{createTime}
-            </if>
-            <if test=" creator != null "><!-- 创建者 -->
-                AND creator = #{creator}
-            </if>
-            <if test=" updateTime != null "><!-- 更新时间 -->
-                AND update_time = #{updateTime}
-            </if>
-            <if test=" updator != null "><!-- 最后更新者 -->
-                AND updator = #{updator}
             </if>
     </update>
     <!-- 查询分页数据信息  -->
