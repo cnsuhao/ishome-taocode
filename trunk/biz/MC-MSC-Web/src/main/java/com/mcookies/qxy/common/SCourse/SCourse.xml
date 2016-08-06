@@ -142,10 +142,7 @@
 	</delete>
 	<!-- 物理删除一条数据 -->
 	<delete id='doDelete' parameterType='SCourseDBO'>
-		DELETE FROM s_course WHERE update_time = #{updateTime}
-		<if test=" courseId != null "><!-- 课程id -->
-			AND course_id = #{courseId}
-		</if>
+		DELETE FROM s_course WHERE course_id = #{courseId}
 	</delete>
 	<!-- 查询一条数据 -->
 	<select id='doRead' parameterType='SCourseDBO' resultType='SCourseDBO'>
