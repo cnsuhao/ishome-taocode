@@ -20,7 +20,7 @@ public interface IDatabaseSupport extends ISFrameworkConstants {
 	 * @param formParam
 	 * @return
 	 */
-	int[] doUpdateAll(MyDataBaseObjectSupport paramBean);
+	int doUpdateAll(MyDataBaseObjectSupport paramBean);
 	/////////////////// 条件查询操作///////////////////
 	/**
 	 * 分页查询
