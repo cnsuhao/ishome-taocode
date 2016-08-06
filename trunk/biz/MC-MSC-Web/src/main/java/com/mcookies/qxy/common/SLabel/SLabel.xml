@@ -135,10 +135,7 @@
     </delete>
     <!-- 物理删除一条数据 -->
     <delete id='doDelete' parameterType='SLabelDBO'>
-        DELETE FROM s_label WHERE update_time = #{updateTime}
-            <if test=" labelId != null "><!-- 教工标签id -->
-                AND label_id = #{labelId}
-            </if>
+        DELETE FROM s_label WHERE label_id = #{labelId}
     </delete>
     <!-- 查询一条数据  -->
     <select id='doRead' parameterType='SLabelDBO' resultType='SLabelDBO'>
@@ -146,6 +143,18 @@
             <if test=" labelId != null "><!-- 教工标签id -->
                 AND label_id = #{labelId}
             </if>
+    </select>
+    <!-- 查询教工关联的标签 -->
+    <select id="doselectTeacherLabel" parameterType="UTeacherDBO" resultType="SLabelDBO">
+	SELECT
+		a.label_id,
+	  a.label_name
+	FROM
+		s_label a,
+		s_label_teacher b
+	WHERE
+		a.label_id = b.label_id
+		and b.tid = #{tid}
     </select>
 
 </mapper>

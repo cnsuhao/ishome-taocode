@@ -327,8 +327,7 @@ public class WorkTimeManageController extends MyControllerSupport {
 				result.setInfo("建立模版失败，名称重复");
 				result.setStatus(2);
 			} else {
-				// 默认停用
-				work.setIsUse(0);
+				work.setIsUse(1);
 				SWorkTimeService_.doInsert(work);
 			}
 		} catch (Exception e) {
@@ -448,7 +447,7 @@ public class WorkTimeManageController extends MyControllerSupport {
 			}
 			// 新增
 			rule.setSid(schoolId);
-			rule.setIsUse(0);
+			rule.setIsUse(1);
 			SWorkRuleService_.doInsert(rule);
 		} catch (Exception e) {
 			result.setInfo("访问失败");

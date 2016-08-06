@@ -34,9 +34,6 @@
         <if test=" idType != null "><!-- 用户类型 -->
             ,id_type = #{idType}
         </if>
-        <if test=" method != null' "><!-- 认证方式 -->
-            ,method = #{method}
-        </if>
         <if test=" openid != null "><!-- openid -->
             ,openid = #{openid}
         </if>
@@ -88,9 +85,6 @@
             </if>
             <if test=" idType != null "><!-- 用户类型 -->
                 AND id_type = #{idType}
-            </if>
-            <if test=" method != null' "><!-- 认证方式 -->
-                AND method = #{method}
             </if>
             <if test=" openid != null "><!-- openid -->
                 AND openid = #{openid}
@@ -151,9 +145,7 @@
         <if test=" idType != null "><!-- 用户类型 -->
             AND id_type = #{idType}
         </if>
-        <if test=" method != null' "><!-- 认证方式 -->
-            AND method = #{method}
-        </if>
+       
         <if test=" openid != null "><!-- openid -->
             AND openid = #{openid}
         </if>
@@ -190,7 +182,7 @@
     </select>
 
     <!-- 插入一条数据 -->
-    <insert id='doInsert' parameterType='UTeacherDBO'>
+    <insert id='doInsert' parameterType='UTeacherDBO' useGeneratedKeys="true" keyProperty="tid">
         INSERT INTO u_teacher
           ( <include refid='tableColumns'/>) 
         VALUES 
@@ -219,9 +211,6 @@
         </if>
         <if test=" idType != null "><!-- 用户类型 -->
             ,id_type = #{idType}
-        </if>
-        <if test=" method != null' "><!-- 认证方式 -->
-            ,method = #{method}
         </if>
         <if test=" openid != null "><!-- openid -->
             ,openid = #{openid}
@@ -267,10 +256,7 @@
     </delete>
     <!-- 物理删除一条数据 -->
     <delete id='doDelete' parameterType='UTeacherDBO'>
-        DELETE FROM u_teacher WHERE update_time = #{updateTime}
-            <if test=" tid != null "><!-- 教师id（自增） -->
-                AND tid = #{tid}
-            </if>
+        DELETE FROM u_teacher WHERE tid = #{tid}
     </delete>
     <!-- 查询一条数据  -->
     <select id='doRead' parameterType='UTeacherDBO' resultType='UTeacherDBO'>
