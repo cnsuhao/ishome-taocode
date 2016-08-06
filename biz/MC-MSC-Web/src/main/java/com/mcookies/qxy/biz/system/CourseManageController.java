@@ -80,7 +80,7 @@ public class CourseManageController extends MyControllerSupport {
 				result.setInfo("新增失败，名字重复");
 				result.setStatus(2);
 			} else {
-				pvo.setIsUse(0);
+				pvo.setIsUse(1);
 				SCourseService_.doInsert(pvo);
 			}
 		} catch (Exception e) {

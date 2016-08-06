@@ -99,7 +99,7 @@ public class DeviceManageController extends MyControllerSupport {
 			} else {
 				// 新增
 				String currentTime = DateHelper.currentTimeMillis2();
-				device.setIsUse(0);
+				device.setIsUse(1);
 				device.setLastLoginTime(currentTime);
 				DeviceTagService_.doInsert(device);
 			}

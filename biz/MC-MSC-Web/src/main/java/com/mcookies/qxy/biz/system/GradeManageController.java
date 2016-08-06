@@ -96,8 +96,7 @@ public class GradeManageController extends MyControllerSupport {
 			} else {
 				// 新增
 				grade.setSid(schoolId);
-				//默认停用
-				grade.setIsUse(0);
+				grade.setIsUse(1);
 				SGradeLabelService_.doInsert(grade);
 			}
 		} catch (Exception e) {

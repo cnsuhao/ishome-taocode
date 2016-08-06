@@ -120,7 +120,7 @@
 	</select>
 
 	<!-- 插入一条数据 -->
-	<insert id='doInsert' parameterType='UserDBO'>
+	<insert id='doInsert' parameterType='UserDBO' useGeneratedKeys="true" keyProperty="uid">
 		INSERT INTO user
 		(
 		<include refid='tableColumns' />
