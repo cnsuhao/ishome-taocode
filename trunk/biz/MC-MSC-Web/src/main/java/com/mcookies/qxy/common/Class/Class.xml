@@ -195,10 +195,7 @@
     </delete>
     <!-- 物理删除一条数据 -->
     <delete id='doDelete' parameterType='ClassDBO'>
-        DELETE FROM class WHERE update_time = #{updateTime}
-            <if test=" cid != null "><!-- 班级id -->
-                AND cid = #{cid}
-            </if>
+        DELETE FROM class WHERE cid = #{cid}
     </delete>
     <!-- 查询一条数据  -->
     <select id='doRead' parameterType='ClassDBO' resultType='ClassDBO'>
@@ -229,6 +226,39 @@
 			and a.grade_id = #{gradeId}
 			</if>
 		</where>
+
+	</select>
+	
+	<!-- 学校班级查询接口-->
+	<select id="doSelectPageClass" parameterType="com.mcookies.qxy.common.Class.ClassPVO" resultType="com.mcookies.qxy.common.Class.ClassPVO">
+	SELECT
+	a.cid,
+	a.class_name,
+	b.term_name,
+	c.grade_name,
+	a.create_time,
+	f.tid,
+	f.teacher_name
+	FROM
+	class a
+	LEFT JOIN s_term b ON a.term_id = b.term_id
+	LEFT JOIN s_grade_label c ON a.grade_id = c.grade_id
+	LEFT JOIN class_teacher e ON a.cid = e.cid and e.is_leader = 1
+	LEFT JOIN u_teacher f ON e.tid = f.tid
+	<where>
+		<if test="cid != null ">
+			and a.cid = #{cid}
+		</if>
+		<if test="termId != null">
+			and a.term_id = #{termId}
+		</if>
+		<if test="gradeId != null">
+			and a.grade_id = #{gradeId}
+		</if>
+		<if test="tid != null">
+			and f.tid = #{tid}
+		</if>
+	</where>
 
 	</select>
 </mapper>

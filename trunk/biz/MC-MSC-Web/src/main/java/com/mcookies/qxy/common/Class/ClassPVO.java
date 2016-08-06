@@ -22,7 +22,19 @@ public class ClassPVO extends ClassDBO
 	 */
 	private String workName = null;
 	
+	/**
+	 * 教师id
+	 */
+	private Long tid = null;
 	
+	
+	/**
+	 * 教师姓名
+	 */
+	private String teacherName = null;
+	
+	
+	private Integer count = null;
 
 
 	public String getTermName() {
@@ -52,6 +64,36 @@ public class ClassPVO extends ClassDBO
 
 	public void setWorkName(String workName) {
 		this.workName = workName;
+	}
+
+
+	public Long getTid() {
+		return tid;
+	}
+
+
+	public void setTid(Long tid) {
+		this.tid = tid;
+	}
+
+
+	public String getTeacherName() {
+		return teacherName;
+	}
+
+
+	public void setTeacherName(String teacherName) {
+		this.teacherName = teacherName;
+	}
+
+
+	public Integer getCount() {
+		return count;
+	}
+
+
+	public void setCount(Integer count) {
+		this.count = count;
 	}
 
 }
