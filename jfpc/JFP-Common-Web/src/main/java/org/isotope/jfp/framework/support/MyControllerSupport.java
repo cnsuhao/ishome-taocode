@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.isotope.jfp.common.login.LoginerCacheHelper;
 import org.isotope.jfp.framework.beans.common.BusinessTokenBean;
 import org.isotope.jfp.framework.beans.common.RESTResultBean;
 import org.isotope.jfp.framework.beans.page.PageVOSupport;
@@ -47,18 +48,19 @@ public class MyControllerSupport extends MyFrameworkSupport // implements
 	/**
 	 * 当前用户Token
 	 */
-	private BusinessTokenBean myToken;
+	protected BusinessTokenBean myToken;
 	private UserBean loginer;
 
-	public BusinessTokenBean getToken() {
-		return myToken;
-	}
-
+//	public BusinessTokenBean getToken() {
+//		return myToken;
+//	}
+//
 	public UserBean getLoginer() {
 		return loginer;
 	}
 
 	public boolean doCheckToken(String token) {
+		LoginerCacheHelper.checkLoginer(token);
 		myToken = BusinessTokenBean.build("911822733644555466377288199__a__b__c__d__e__f__g");
 		// 获得用户信息
 		loginer = new UserBean();
