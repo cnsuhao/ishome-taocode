@@ -265,5 +265,32 @@
                 AND tid = #{tid}
             </if>
     </select>
-
+	<!-- 分页查询标签下的教师 -->
+	<select id="doSelectPageTeacherOnLabel" parameterType="com.mcookies.qxy.common.SLabel.SLabelPVO"
+		resultType='UTeacherDBO'>
+		SELECT
+		a.tid,
+		a.teacher_name,
+		a.email,
+		a.phone,
+		a.is_use
+		FROM
+		u_teacher a,
+		s_label_teacher b
+		<where>
+			and a.tid = b.tid
+			<if test="labelId != null">
+				and b.label_id = #{labelId}
+			</if>
+			<if test="isUse !=null ">
+				and a.is_use = #{isUse}
+			</if>
+			<if test="phone !=null">
+				and a.phone=#{phone}
+			</if>
+			<if test="email !=null">
+				and a.email=#{email}
+			</if>
+		</where>
+	</select>
 </mapper>
