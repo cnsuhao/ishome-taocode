@@ -46,7 +46,7 @@ public class LoginService extends MyServiceSupport implements ISFrameworkConstan
 	}
 
 	protected void makeLoginToken(UserBean loginer) {
-		String token = BusinessTokenHelper.getBizToken(loginer.getCompanyId(), loginer.getUserId(), ("" + System.currentTimeMillis()), loginer.getUserType());
+		String token = BusinessTokenHelper.getBizToken(loginer.getCompanyId(), ""+loginer.getUserId(), ("" + System.currentTimeMillis()), loginer.getUserType());
 		loginer.setToken(token);
 	}
 
