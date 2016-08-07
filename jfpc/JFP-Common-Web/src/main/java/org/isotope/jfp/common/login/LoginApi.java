@@ -9,12 +9,8 @@ import org.isotope.jfp.framework.beans.common.RESTResultBean;
 import org.isotope.jfp.framework.beans.user.LoginerBean;
 import org.isotope.jfp.framework.beans.user.UserBean;
 import org.isotope.jfp.framework.support.MyFrameworkSupport;
-import org.isotope.jfp.framework.support.MyModelAndViewSupport;
-import org.isotope.jfp.framework.utils.BeanFactoryHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -32,9 +28,9 @@ public class LoginApi extends MyFrameworkSupport {
 	@Resource
 	protected LoginBusiness LoginService_;
 
-//	public MyModelAndViewSupport getModelAndView() {
-//		return new MyModelAndViewSupport("redirect:/");
-//	}
+	// public MyModelAndViewSupport getModelAndView() {
+	// return new MyModelAndViewSupport("redirect:/");
+	// }
 
 	/**
 	 * 用户登录
@@ -50,39 +46,41 @@ public class LoginApi extends MyFrameworkSupport {
 
 		if (logger.isDebugEnabled())
 			logger.debug("loginer====///loginer////loginer=======>>>>>=========>>>" + loginer);
-//
-//		// 画面校验码
-//		if (StringUtils.isNotEmpty(loginer.getVerCode())) {
-//			setSessionAttribute(RANDOM_CODE, session.getAttribute(RANDOM_CODE));
-//			if (checkRandomCode(loginer.getVerCode()) == false) {
-//				// 错误返回
-//				loginer.setCallBackUrl(loginer.getLoginUrl());
-//				loginer.setVerCode("验证码错误，请重新输入！");
-//				rs.setCode("1");
-//				rs.setMessage(loginer.getVerCode());
-//				return rs;
-//			}
-//		}
-//
-//		// 防伪验证码==MD5(产品ID+默认码+安全码)
-//		if (StringUtils.isNotEmpty(loginer.getSecurityCode())) {// 用户SessionID
-//			SecurityCodeService scs = null;
-//			try {
-//				scs = (SecurityCodeService) BeanFactoryHelper.getBean("securityCodeService");
-//				if (scs != null && scs.checkSecurityCode(loginer) == false) {
-//					// 错误返回
-//					loginer.setCallBackUrl(loginer.getLoginUrl());
-//					loginer.setVerCode("安全码校验失败，请关闭后重新登录！");
-//					rs.setCode("1");
-//					rs.setMessage(loginer.getVerCode());
-//					return rs;
-//				}
-//			} catch (Exception e) {
-//			}
-//		}
-//		// MD5加密
-//		String passWord = StringHelper.getPassword(loginer.getPassWord());
-//		loginer.setPassWord(passWord);
+		//
+		// // 画面校验码
+		// if (StringUtils.isNotEmpty(loginer.getVerCode())) {
+		// setSessionAttribute(RANDOM_CODE, session.getAttribute(RANDOM_CODE));
+		// if (checkRandomCode(loginer.getVerCode()) == false) {
+		// // 错误返回
+		// loginer.setCallBackUrl(loginer.getLoginUrl());
+		// loginer.setVerCode("验证码错误，请重新输入！");
+		// rs.setCode("1");
+		// rs.setMessage(loginer.getVerCode());
+		// return rs;
+		// }
+		// }
+		//
+		// // 防伪验证码==MD5(产品ID+默认码+安全码)
+		// if (StringUtils.isNotEmpty(loginer.getSecurityCode())) {//
+		// 用户SessionID
+		// SecurityCodeService scs = null;
+		// try {
+		// scs = (SecurityCodeService)
+		// BeanFactoryHelper.getBean("securityCodeService");
+		// if (scs != null && scs.checkSecurityCode(loginer) == false) {
+		// // 错误返回
+		// loginer.setCallBackUrl(loginer.getLoginUrl());
+		// loginer.setVerCode("安全码校验失败，请关闭后重新登录！");
+		// rs.setCode("1");
+		// rs.setMessage(loginer.getVerCode());
+		// return rs;
+		// }
+		// } catch (Exception e) {
+		// }
+		// }
+		// // MD5加密
+		// String passWord = StringHelper.getPassword(loginer.getPassWord());
+		// loginer.setPassWord(passWord);
 
 		/////////////////////// 登录系统/////////////////////////////////////
 		UserBean user = LoginService_.doLogIn(loginer);
@@ -104,12 +102,11 @@ public class LoginApi extends MyFrameworkSupport {
 	 */
 	@RequestMapping(value = "/accountCheck", method = RequestMethod.POST)
 	@ResponseBody
-	public RESTResultBean accountCheckPOST(@PathVariable String account, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+	public RESTResultBean accountCheckPOST(String account, String userType, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		RESTResultBean rs = new RESTResultBean();
-		boolean only = LoginService_.accountCheck(account, false);
-		if(only == true)
-		{
-			
+		boolean only = LoginService_.accountCheck(account, userType, false);
+		if (only == true) {
+
 		}
 		return rs;
 	}
@@ -233,7 +230,7 @@ public class LoginApi extends MyFrameworkSupport {
 		// 销毁session
 		session.invalidate();
 		LoginService_.doLogOut(user);
-		
+
 		// 退出登录
 		return rs;
 	}

@@ -20,10 +20,15 @@ public class LoginService extends MyServiceSupport implements ISFrameworkConstan
 	 * 
 	 * @param loginer
 	 */
-	protected List<UserBean> readLoginer(HashMap<String, String> loginer) {
-		return getLoginDao().readLoginerByAccount(loginer);
+	protected List<UserBean> readTeacherLoginer(HashMap<String, String> loginer) {
+		return getLoginDao().readTeacherLoginer(loginer);
 	}
-
+	protected List<UserBean> readParentLoginer(HashMap<String, String> loginer) {
+		return getLoginDao().readParentLoginer(loginer);
+	}
+	protected List<UserBean> readStudentLoginer(HashMap<String, String> loginer) {
+		return getLoginDao().readStudentLoginer(loginer);
+	}
 	protected List<UserBean> readLoginer(String authorizerRefreshToken) {
 		return getLoginDao().readLoginerByOpenId(authorizerRefreshToken);
 	}
