@@ -40,7 +40,7 @@ public class PassWordManageController extends MyControllerSupport {
 			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
-			String userId = getLoginer().getUserId();
+			Long userId = getLoginer().getUserId();
 			String oldpwd = param.getString("oldpassword");
 			String newpwd = param.getString("newpassword");
 			if(oldpwd.equals(newpwd)){
@@ -50,7 +50,7 @@ public class PassWordManageController extends MyControllerSupport {
 			}
 			//验证旧密码
 			UserDBO user = new UserDBO();
-			user.setUid(Long.valueOf(userId));
+			user.setUid(userId);
 			user.setPassword(MD5SecurityHelper.encrypt(oldpwd));
 			List<UserDBO> relist = (List<UserDBO>)UserService_.doSelectData(user);
 			if(relist!=null&&relist.size()>0){

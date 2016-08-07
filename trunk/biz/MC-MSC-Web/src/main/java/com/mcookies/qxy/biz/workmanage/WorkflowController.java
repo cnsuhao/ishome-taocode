@@ -57,7 +57,7 @@ public class WorkflowController extends MyControllerSupport {
 				return tokenFail();
 			}
 
-			String userId = getLoginer().getUserId();
+			Long userId = getLoginer().getUserId();
 
 			result.setInfo("欢迎访问千校云平台：" + userId + "," + user.getAccount());
 		} catch (Exception e) {
@@ -167,7 +167,7 @@ public class WorkflowController extends MyControllerSupport {
 				return tokenFail();
 			}
 
-			String userId = getLoginer().getUserId();
+			Long userId = getLoginer().getUserId();
 
 			result.setInfo("欢迎访问千校云平台：" + userId + "," + user.getAccount());
 		} catch (Exception e) {

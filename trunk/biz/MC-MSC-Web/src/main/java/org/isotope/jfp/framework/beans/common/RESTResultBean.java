@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.inject.Named;
 
-import org.isotope.jfp.framework.beans.ObjectBean;
+import org.isotope.jfp.framework.beans.user.TokenBean;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 
 import com.alibaba.fastjson.JSONArray;
