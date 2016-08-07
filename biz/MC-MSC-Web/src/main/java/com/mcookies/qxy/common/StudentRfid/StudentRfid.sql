@@ -6,7 +6,7 @@ CREATE TABLE student_rfid
     rfid BIGINT(12) NOT NULL COMMENT '学生卡id',
     is_effective TINYINT(1) COMMENT '是否有效',
     is_use TINYINT(1) COMMENT '是否启用',
-    create_time BIGINT(12) COMMENT '创建时间',
+    create_time DATETIME COMMENT '创建时间',
     creator BIGINT(12) COMMENT '创建者',
     update_time DATETIME COMMENT '更新时间',
     updator BIGINT(12) COMMENT '最后更新者',
