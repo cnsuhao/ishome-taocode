@@ -13,6 +13,7 @@ import org.isotope.jfp.framework.beans.page.PageVOSupport;
 import org.isotope.jfp.framework.beans.user.LoginerBean;
 import org.isotope.jfp.framework.beans.user.UserBean;
 import org.isotope.jfp.framework.cache.ICacheService;
+import org.isotope.jfp.framework.cache.session.SessionHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -61,8 +62,11 @@ public class MyControllerSupport extends MyFrameworkSupport // implements
 		myToken = BusinessTokenBean.build("911822733644555466377288199__a__b__c__d__e__f__g");
 		// 获得用户信息
 		loginer = new UserBean();
-		loginer.setUserId("123456");
+		loginer.setUserId(123456L);
+		loginer.setToken("911822733644555466377288199__a__b__c__d__e__f__g");
 		// 检查用户Token
+		// 缓存Session
+		SessionHelper.setUserData(loginer);
 		return true;
 	}
 
