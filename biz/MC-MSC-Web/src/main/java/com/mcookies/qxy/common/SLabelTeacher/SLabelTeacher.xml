@@ -152,6 +152,10 @@
                 AND id = #{id}
             </if>
     </delete>
+    <!-- 根据tid  label_id删除关联 -->
+    <delete id='doDeleteBytid' parameterType='SLabelTeacherDBO'>
+        DELETE FROM s_label_teacher where label_id = #{labelId} and tid = #{tid}
+    </delete>
     <!-- 查询一条数据  -->
     <select id='doRead' parameterType='SLabelTeacherDBO' resultType='SLabelTeacherDBO'>
         SELECT <include refid='tableColumns'/> FROM s_label_teacher WHERE 1 = 1
