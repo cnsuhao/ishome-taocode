@@ -58,7 +58,7 @@ public class ClassSettingController extends MyControllerSupport {
 				return tokenFail();
 			}
 			// 获取当前学校ID
-			Long schoolId = Long.parseLong(getToken().getSchoolId());
+			Long schoolId = getLoginer().getSchoolId();
 			Integer isuse = null;
 			if(type==null||"".equals(type)||"0".equals(type)){
 				isuse = 1;
@@ -148,7 +148,7 @@ public class ClassSettingController extends MyControllerSupport {
 				return tokenFail();
 			}
 			// 获取当前学校ID
-			Long schoolId = Long.parseLong(getToken().getSchoolId());
+			Long schoolId = getLoginer().getSchoolId();
 			//获取编辑列表
 			if(size==null||size==0){
 				size = 12;

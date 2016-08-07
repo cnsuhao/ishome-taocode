@@ -74,7 +74,7 @@ public class WorkTimeManageController extends MyControllerSupport {
 				return tokenFail();
 			}
 			// 获取当前学校ID
-			Long schoolId = Long.parseLong(getToken().getSchoolId());
+			Long schoolId = getLoginer().getSchoolId();
 			cpvo.setSid(schoolId);
 			if (size == null || size == 0) {
 				size = 12;
@@ -274,7 +274,7 @@ public class WorkTimeManageController extends MyControllerSupport {
 			JSONObject data = new JSONObject();
 			JSONArray schoolwork = new JSONArray();
 			// 获取当前学校ID
-			Long schoolId = Long.parseLong(getToken().getSchoolId());
+			Long schoolId = getLoginer().getSchoolId();
 			// 学校模板列表
 			SWorkTimeDBO swork = new SWorkTimeDBO();
 			swork.setSid(schoolId);
@@ -319,7 +319,7 @@ public class WorkTimeManageController extends MyControllerSupport {
 				return tokenFail();
 			}
 			// 获取当前学校ID
-			Long schoolId = Long.parseLong(getToken().getSchoolId());
+			Long schoolId = getLoginer().getSchoolId();
 			work.setSid(schoolId);
 			// 判断是否已经存在
 			List<SWorkTimeDBO> relist = (List<SWorkTimeDBO>) SWorkTimeService_.doSelectData(work);
@@ -352,7 +352,7 @@ public class WorkTimeManageController extends MyControllerSupport {
 				return tokenFail();
 			}
 			// 获取当前学校ID
-			Long schoolId = Long.parseLong(getToken().getSchoolId());
+			Long schoolId = getLoginer().getSchoolId();
 			// 判断是否已经存在
 			SWorkTimeDBO workt = new SWorkTimeDBO();
 			workt.setWorkName(work.getWorkName());
@@ -391,7 +391,7 @@ public class WorkTimeManageController extends MyControllerSupport {
 				return tokenFail();
 			}
 			// 获取当前学校ID
-			Long schoolId = Long.parseLong(getToken().getSchoolId());
+			Long schoolId = getLoginer().getSchoolId();
 			// 判断当前模板是否被班级使用
 			ClassDBO classd = new ClassDBO();
 			classd.setWorkId(work.getWorkId());
@@ -435,7 +435,7 @@ public class WorkTimeManageController extends MyControllerSupport {
 				return tokenFail();
 			}
 			// 获取当前学校ID
-			Long schoolId = Long.parseLong(getToken().getSchoolId());
+			Long schoolId = getLoginer().getSchoolId();
 			// 判断模板是否存在
 			SWorkTimeDBO worktime = new SWorkTimeDBO();
 			worktime.setWorkId(rule.getWorkId());
@@ -471,7 +471,7 @@ public class WorkTimeManageController extends MyControllerSupport {
 				return tokenFail();
 			}
 			// 获取当前学校ID
-			Long schoolId = Long.parseLong(getToken().getSchoolId());
+			Long schoolId = getLoginer().getSchoolId();
 			// 判断模板是否存在
 			SWorkTimeDBO worktime = new SWorkTimeDBO();
 			worktime.setWorkId(rule.getWorkId());
