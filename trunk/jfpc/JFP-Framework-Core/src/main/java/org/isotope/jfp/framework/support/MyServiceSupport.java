@@ -2,16 +2,18 @@ package org.isotope.jfp.framework.support;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.isotope.jfp.framework.beans.common.FrameworkDataBean;
 import org.isotope.jfp.framework.beans.page.PageVOSupport;
+import org.isotope.jfp.framework.beans.user.UserBean;
+import org.isotope.jfp.framework.cache.session.SessionHelper;
 import org.isotope.jfp.framework.constants.ISDBConstants;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.utils.BeanFactoryHelper;
 import org.isotope.jfp.framework.utils.DateHelper;
+import org.isotope.jfp.framework.utils.EmptyHelper;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.SqlSessionUtils;
 import org.slf4j.Logger;
@@ -275,20 +277,30 @@ public class MyServiceSupport implements ISFrameworkConstants, ISDBConstants {
 		// formParamBean.setDdd("0");
 
 		// 有效标记、创建者、创建时间、更新者、更新时间
-		//Timestamp d = new Timestamp(System.currentTimeMillis());
-		String t =DateHelper.currentTimeMillis4();
+		// Timestamp d = new Timestamp(System.currentTimeMillis());
+		String t = DateHelper.currentTimeMillis4();
 		Long loginId = getLoginerId();
-		formParamBean.setCreateTime(t);
-		formParamBean.setCreator(loginId);
-		formParamBean.setUpdateTime(t);
-		formParamBean.setUpdator(loginId);
+		if (EmptyHelper.isEmpty(formParamBean.getCreateTime()))
+			formParamBean.setCreateTime(t);
+		if (EmptyHelper.isEmpty(formParamBean.getCreator()))
+			formParamBean.setCreator(loginId);
+		if (EmptyHelper.isEmpty(formParamBean.getUpdateTime()))
+			formParamBean.setUpdateTime(t);
+		if (EmptyHelper.isEmpty(formParamBean.getUpdator()))
+			formParamBean.setUpdator(loginId);
 
 		return getDao().doInsert(formParamBean);
 	}
+	
+	private UserBean loginer;
+	public UserBean getLoginer() {
+		if(loginer == null)
+			loginer = SessionHelper.getUserData();
+		return loginer;
+	}
 
 	protected Long getLoginerId() {
-		// TODO Auto-generated method stub
-		return 123456l;
+		return getLoginer().getUserId();
 	}
 
 	/**
@@ -300,19 +312,26 @@ public class MyServiceSupport implements ISFrameworkConstants, ISDBConstants {
 	public int doUpdate(MyDataBaseObjectSupport formParamBean) {
 		changeTable(formParamBean, DB_UPDATE);
 		// 更新者、更新时间
-		String t =DateHelper.currentTimeMillis4();
+		String t = DateHelper.currentTimeMillis4();
 		Long loginId = getLoginerId();
-		formParamBean.setUpdateTime(t);
-		formParamBean.setUpdator(loginId);
+
+		if (EmptyHelper.isEmpty(formParamBean.getUpdateTime()))
+			formParamBean.setUpdateTime(t);
+		if (EmptyHelper.isEmpty(formParamBean.getUpdator()))
+			formParamBean.setUpdator(loginId);
 		return getDao().doUpdate(formParamBean);
 	}
-	
+
 	public void doUpdateAll(MyDataBaseObjectSupport formParamBean) {
 		changeTable(formParamBean, DB_UPDATE);
 		// 更新者、更新时间
-		String t =DateHelper.currentTimeMillis4();
-		formParamBean.setUpdateTime(t);
-		formParamBean.setUpdator(getLoginerId());
+		String t = DateHelper.currentTimeMillis4();
+		Long loginId = getLoginerId();
+
+		if (EmptyHelper.isEmpty(formParamBean.getUpdateTime()))
+			formParamBean.setUpdateTime(t);
+		if (EmptyHelper.isEmpty(formParamBean.getUpdator()))
+			formParamBean.setUpdator(loginId);
 		getDao().doUpdateAll(formParamBean);
 	}
 

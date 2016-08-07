@@ -1,20 +1,23 @@
 package org.isotope.jfp.framework.cache.session;
 
-import org.isotope.jfp.framework.cache.ICacheService;
-import org.isotope.jfp.framework.utils.BeanFactoryHelper;
+import org.isotope.jfp.framework.beans.user.UserBean;
 
 /**
- * 获得Session
+ * 登录用户Session（UserBean）
+ * 
  * @author fucy
- * @version 2.0.0
+ * @version 3.2.1 2016/8/6
+ * @version 2.0.0 2015/1/19
  * @since 2.0.0 2015/1/19
  */
 public class SessionHelper {
-	
-	public static final String SESSION_SERVICE_NAME = "mySessionService";
+	private static final ThreadLocal<UserBean> holder = new ThreadLocal<UserBean>();
 
-	public static ICacheService getMqService() {
-		return BeanFactoryHelper.getBean(SESSION_SERVICE_NAME);
+	public static void setUserData(UserBean value) {
+		holder.set(value);
 	}
 
+	public static UserBean getUserData() {
+		return holder.get();
+	}
 }
