@@ -32,12 +32,12 @@ public class AlarmRuleDBO extends MyDataBaseObjectSupport
     /** 
      * 开始时间
      */
-    private Date startTime = null;
+    private String startTime = null;
  
     /** 
      * 结束时间
      */
-    private Date endTime = null;
+    private String endTime = null;
  
     /** 
      * 行为状态
@@ -100,23 +100,6 @@ public class AlarmRuleDBO extends MyDataBaseObjectSupport
         return this.deviceId;
     }
  
-    /** 
-     * 获取开始时间
-     *
-     * @return Start_time 开始时间
-     */
-    public Date getStartTime() {
-        return this.startTime;
-    }
- 
-    /** 
-     * 获取结束时间
-     *
-     * @return End_time 结束时间
-     */
-    public Date getEndTime() {
-        return this.endTime;
-    }
  
     /** 
      * 获取行为状态
@@ -199,25 +182,23 @@ public class AlarmRuleDBO extends MyDataBaseObjectSupport
         this.deviceId = deviceid;
     }
  
-    /** 
-     * 设置开始时间
-     *
-     * @param Start_time 开始时间
-     */
-    public void setStartTime(Date starttime) {
-        this.startTime = starttime;
-    }
- 
-    /** 
-     * 设置结束时间
-     *
-     * @param End_time 结束时间
-     */
-    public void setEndTime(Date endtime) {
-        this.endTime = endtime;
-    }
- 
-    /** 
+    public String getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
+
+	public String getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
+
+	/** 
      * 设置行为状态
      *
      * @param Flag 行为状态

@@ -207,5 +207,35 @@
                 AND id = #{id}
             </if>
     </select>
+	<!-- 分页获取安全日志 -->
+	<select id="doSelectPageSecurityLog" parameterType="com.mcookies.qxy.common.LogSecurity.LogSecurityPVO"
+		resultType="com.mcookies.qxy.common.LogSecurity.LogSecurityPVO">
+		SELECT
+		a.student_id,
+		b.student_name,
+		b.number,
+		c.device_name,
+		a.flag,
+		a.mark_time
+		FROM
+		log_security a,
+		u_student b,
+		device_tag c
+		<where>
+			and a.student_id = b.student_id
+			AND a.device_id = c.device_id
+			<if test=" cid != null">
+				and a.cid = #{cid}
+			</if>
+			<if test="deviceId != null">
+				and a.device_id = #{deviceId}
+			</if>
+			<if test="startTime != null">
+				<if test="endTime !=null">
+					and a.mark_time BETWEEN #{startTime} and #{endTime}
+				</if>
+			</if>
+		</where>
 
+	</select>
 </mapper>

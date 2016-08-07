@@ -267,5 +267,18 @@
                 AND student_id = #{studentId}
             </if>
     </select>
-
+    <select id='doSelectListBycid' parameterType='ClassStudentDBO' resultType='UStudentDBO'>
+    	SELECT
+			a.student_id,
+			a.student_name
+		FROM
+			u_student a,
+			class_student b
+		<where>
+			a.student_id = b.student_id
+			<if test=" cid != null ">
+			AND b.cid = #{cid}
+			</if>
+		</where>
+    </select>
 </mapper>
