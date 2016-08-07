@@ -1,5 +1,7 @@
 package com.mcookies.qxy.common.SCalendar;
 
+import java.util.List;
+
 import org.isotope.jfp.framework.support.MyServiceSupport;
 import org.springframework.stereotype.Service;
 
@@ -11,4 +13,7 @@ public class SCalendarService extends MyServiceSupport {
 		return getMySqlSession().getMapper(SCalendarDao.class);
 	}
 
+	public List<SCalendarDBO> doSelectList(SCalendarDBO param){
+		return getDao().doSelectList(param);
+	}
 }

@@ -195,5 +195,48 @@
                 AND calendar_id = #{calendarId}
             </if>
     </select>
+    
+    
+     <!-- 查询分页数据信息  -->
+    <select id='doSelectList' parameterType='SCalendarDBO' resultType='SCalendarDBO'>
+        SELECT <include refid='tableColumns'/> FROM s_calendar
+        WHERE 1 = 1 
+        <if test=" calendarId != null "><!-- 自增id -->
+            AND calendar_id = #{calendarId}
+        </if>
+        <if test=" sid != null "><!-- 学校id -->
+            AND sid = #{sid}
+        </if>
+        <if test=" termId != null "><!-- 学期id -->
+            AND term_id = #{termId}
+        </if>
+        <if test=" startTime != null "><!-- 开始时间 -->
+            AND date_format(start_time, '%Y-%c-%d') &gt;= #{startTime}
+        </if>
+        <if test=" endTime != null "><!-- 结束时间 -->
+            AND date_format(end_time, '%Y-%c-%d') &lt;= #{endTime}
+        </if>
+        <if test=" content != null "><!-- 校历事项 -->
+            AND content = #{content}
+        </if>
+        <if test=" department != null "><!-- 责任部门 -->
+            AND department = #{department}
+        </if>
+        <if test=" isUse != null "><!-- 是否启用 -->
+            AND is_use = #{isUse}
+        </if>
+        <if test=" createTime != null "><!-- 创建时间 -->
+            AND create_time = #{createTime}
+        </if>
+        <if test=" creator != null "><!-- 创建者 -->
+            AND creator = #{creator}
+        </if>
+        <if test=" updateTime != null "><!-- 更新时间 -->
+            AND update_time = #{updateTime}
+        </if>
+        <if test=" updator != null "><!-- 最后更新者 -->
+            AND updator = #{updator}
+        </if>
+    </select>
 
 </mapper>
