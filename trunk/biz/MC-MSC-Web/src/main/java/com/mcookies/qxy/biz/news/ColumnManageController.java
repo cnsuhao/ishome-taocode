@@ -85,7 +85,7 @@ public class ColumnManageController extends MyControllerSupport {
 				result.setStatus(2);
 				return result;
 			}
-			Long sid = Long.valueOf(getToken().getSchoolId());
+			Long sid = getLoginer().getSchoolId();
 			newsColumn.setSid(sid);
 			newsColumnService.doInsert(newsColumn);
 			Map<String, Object> data = new HashMap<String, Object>();

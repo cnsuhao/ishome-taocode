@@ -44,7 +44,7 @@ public class GradeManageController extends MyControllerSupport {
 				return tokenFail();
 			}
 			//获取当前学校ID
-			Long schoolId = Long.parseLong(getToken().getSchoolId());
+			Long schoolId = getLoginer().getSchoolId();
 			Integer isuse = null;
 			if(type==null||"".equals(type)||"0".equals(type)){
 				isuse = 1;
@@ -86,7 +86,7 @@ public class GradeManageController extends MyControllerSupport {
 			
 			// 校验是否已经存在
 			SGradeLabelDBO param = new SGradeLabelDBO();
-			Long schoolId = Long.parseLong(getToken().getSchoolId());
+			Long schoolId = getLoginer().getSchoolId();
 			param.setSid(schoolId);
 			param.setGradeName(grade.getGradeName());
 			List<SGradeLabelDBO> relist = (List<SGradeLabelDBO>)SGradeLabelService_.doSelectData(param);
@@ -125,7 +125,7 @@ public class GradeManageController extends MyControllerSupport {
 			// 校验是否已经存在
 			if(grade.getGradeName()!=null&&!"".equals(grade.getGradeName())){
 				SGradeLabelDBO param = new SGradeLabelDBO();
-				Long schoolId = Long.parseLong(getToken().getSchoolId());
+				Long schoolId = getLoginer().getSchoolId();
 				param.setSid(schoolId);
 				param.setGradeName(grade.getGradeName());
 				List<SGradeLabelDBO> relist = (List<SGradeLabelDBO>)SGradeLabelService_.doSelectData(param);
