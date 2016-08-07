@@ -45,7 +45,7 @@ public class HomeIndexController extends MyControllerSupport {
 				return tokenFail();
 			}
 
-			String userId = getLoginer().getUserId();
+			Long userId = getLoginer().getUserId();
 
 			result.setInfo("欢迎访问千校云平台：" + userId + "," + user.getAccount());
 		} catch (Exception e) {
@@ -63,7 +63,7 @@ public class HomeIndexController extends MyControllerSupport {
 				return tokenFail();
 			}
 
-			String userId = getLoginer().getUserId();
+			Long userId = getLoginer().getUserId();
 
 			result.setInfo("欢迎访问千校云平台：" + userId + "," + user.getAccount());
 		} catch (Exception e) {

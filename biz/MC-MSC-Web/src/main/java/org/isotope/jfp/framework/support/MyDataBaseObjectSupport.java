@@ -1,6 +1,6 @@
 package org.isotope.jfp.framework.support;
 
-import org.isotope.jfp.framework.beans.common.TokenBean;
+import org.isotope.jfp.framework.beans.user.TokenBean;
 import org.isotope.jfp.framework.constants.ISDBConstants;
 import org.isotope.jfp.framework.utils.EmptyHelper;
 
