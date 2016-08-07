@@ -1,0 +1,102 @@
+﻿<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 角色功能权限 --> 
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='org.jfpc.common.login.LoginDao'>
+
+    <!-- 获得产品安全码 -->
+    <select id='loadSecurityCode' resultType='hashmap'>
+		SELECT puk as securityCode FROM mssuu AND ddd != '1'
+    </select>
+    <!-- 用户登陆  -->
+    <select id='readLoginer' parameterType='LoginerData' resultType='LoginerData'>
+		SELECT 
+			puk as userName,f01_yhxm as userNameCN,k04_dlmm as passWord,
+			k01_ssqyid as companyId,f08_zhdlrs as loginTime,fb3 as userPhone,
+			f03_jhzt as activeType,f02_yhlb as userType,f04_yhdj as isAdmin
+		FROM mssuu 
+		WHERE 
+			<choose> 
+				<when test=" eb5 =='1' "> 
+				fb3 = #{userName} 
+				</when> 
+				<when test=" eb5 =='2' "> 
+				fb1 = #{userName} 
+				</when> 
+				<when test=" eb5 =='99' "> 
+				puk = #{puk} 
+				</when>
+				<otherwise> 
+				k03_dlyhm = #{userName} 
+				</otherwise> 
+			</choose> 
+		AND ddd != '1'
+    </select>
+
+    <select id='doCheckToken' parameterType='String' resultType='LoginerData'>
+		<![CDATA[
+		SELECT puk
+		FROM csstt 
+		WHERE bbb = #{token}
+		AND datediff(SYSDATE(),cc1) <= 1 
+		LIMIT 1
+		]]>
+    </select>
+    <update id='doUpdateByToken' parameterType='LoginerData'>
+        UPDATE csstt 
+        SET ppp = #{ppp}
+        WHERE bbb = #{token}        
+    </update>
+    <!-- 记录用户登录  -->
+    <insert id='doLoginToken' parameterType='LoginerData'>
+        INSERT INTO csstt
+          ( puk,bbb,fb1,fb2,fb3,fb4,fb5,ppp,cc1) 
+        VALUES 
+          ( #{securityCode},#{token},#{productId},#{userName},#{companyId},#{useType},#{userNameCN},#{ppp},#{loginTime})
+    </insert>
+    <insert id='doLoginLog' parameterType='LoginerData'>
+        INSERT INTO cssll
+          ( puk,fb1,fb2,fb3,fb4,fb5,eb1,cc1) 
+        VALUES 
+          ( #{securityCode},#{loginTime},#{userName},#{companyId},#{useType},#{loginUrl},#{userNameCN},#{loginTime})
+    </insert> 
+    <update id='doLoginInfo' parameterType='LoginerData'>
+        UPDATE mssuu SET f08_zhdlrs = #{loginTime} <!-- 更新时间、更新者 -->
+    	WHERE puk = #{userName} 
+    </update>
+    <!-- 检查用户登录  -->
+    <select id='checkLogIn' parameterType='LoginerData' resultType='LoginerData'>
+		SELECT bbb as token,ppp FROM csstt WHERE  fb2 = #{userName} order by cc1 DESC
+    </select>
+    
+    <!-- 清空用户登录  -->
+    <delete id='doLogOut' parameterType='LoginerData'>
+        DELETE FROM csstt
+        <trim prefix='WHERE' prefixOverrides='AND |OR '>
+	        <if test=" userName != null and userName !='' ">
+          		AND fb2 = #{userName}
+	        </if>
+	        <if test=" token != null and token !='' ">
+	            AND bbb = #{token}
+	        </if>
+        </trim>
+    </delete>
+
+
+
+
+
+
+
+
+	<!-- 用户登陆  用户基本信息-->
+    <select id='getCompanyLoginer' parameterType='string' resultType='LoginerData'>
+		SELECT *
+		FROM mssuu 
+		WHERE puk = #{puk}
+    </select>
+    <!-- 用户基本信息 -->
+  
+</mapper>
