@@ -102,6 +102,11 @@
 			<artifactId>JFP-Framework-Core</artifactId>
 			<version>${jfp.version}-RELEASE</version>
 		</dependency>
+		<dependency>
+			<groupId>Isotope</groupId>
+			<artifactId>JFP-Common-Web</artifactId>
+			<version>${jfp.version}-RELEASE</version>
+		</dependency>
     </dependencies>
     
     <groupId>mcookie.msc</groupId>
