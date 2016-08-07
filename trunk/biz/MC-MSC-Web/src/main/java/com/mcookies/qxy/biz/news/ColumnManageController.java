@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
 import org.isotope.jfp.framework.beans.common.RESTResultBean;
 import org.isotope.jfp.framework.support.MyControllerSupport;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,7 @@ import com.mcookies.qxy.common.NewsColumn.NewsColumnService;
 
 /**
  * 校园新闻-栏目管理
+ * 
  * @author linyh
  *
  */
@@ -47,13 +49,13 @@ public class ColumnManageController extends MyControllerSupport {
 				newsColumn.setIsUse(1);
 			}
 			List<NewsColumnDBO> newsColumns = (List<NewsColumnDBO>) newsColumnService.doSelectData(newsColumn);
-			
+
 			Map<String, Object> data = new HashMap<String, Object>();
 			data.put("count", newsColumns.size());
 			data.put("column", newsColumns);
 			result.setData(data);
 		} catch (Exception e) {
-			result.setInfo("查询失败: " + e.getMessage());
+			result.setInfo("查询失败，" + e.getMessage());
 			result.setStatus(1);
 		}
 
@@ -72,6 +74,9 @@ public class ColumnManageController extends MyControllerSupport {
 			if (doCheckToken(newsColumn.getToken()) == false) {
 				return tokenFail();
 			}
+			if (StringUtils.isEmpty(newsColumn.getTitle())) {
+				throw new IllegalArgumentException("栏目名字不能为空");
+			}
 			NewsColumnDBO condition = new NewsColumnDBO();
 			condition.setTitle(newsColumn.getTitle());
 			List<NewsColumnDBO> newsColumns = (List<NewsColumnDBO>) newsColumnService.doSelectData(condition);
@@ -87,7 +92,7 @@ public class ColumnManageController extends MyControllerSupport {
 			data.put("info", "ok");
 			result.setData(data);
 		} catch (Exception e) {
-			result.setInfo("新增失败: " + e.getMessage());
+			result.setInfo("新增失败，" + e.getMessage());
 			result.setStatus(1);
 		}
 
@@ -107,6 +112,9 @@ public class ColumnManageController extends MyControllerSupport {
 				return tokenFail();
 			}
 			// 查询是否存在
+			if (newsColumn.getColumnId() == null) {
+				throw new IllegalArgumentException("栏目id不能为空");
+			}
 			NewsColumnDBO condition = new NewsColumnDBO();
 			condition.setColumnId(newsColumn.getColumnId());
 			List<NewsColumnDBO> newsColumns = (List<NewsColumnDBO>) newsColumnService.doSelectData(condition);
@@ -115,21 +123,26 @@ public class ColumnManageController extends MyControllerSupport {
 				result.setStatus(3);
 				return result;
 			}
-			// 查询名称是否重复（未去除本身）
-			condition = new NewsColumnDBO();
-			condition.setTitle(newsColumn.getTitle());
-			newsColumns = (List<NewsColumnDBO>) newsColumnService.doSelectData(condition);
-			if (newsColumns.size() > 0) {
-				result.setInfo("修改失败，重复的栏目名");
-				result.setStatus(2);
-				return result;
+			// 查询名称是否重复
+			// 先判断是否已经改名
+			if (!StringUtils.isEmpty(newsColumn.getTitle())
+					&& !newsColumns.get(0).getTitle().equals(newsColumn.getTitle())) {
+				// 改了名
+				condition = new NewsColumnDBO();
+				condition.setTitle(newsColumn.getTitle());
+				newsColumns = (List<NewsColumnDBO>) newsColumnService.doSelectData(condition);
+				if (newsColumns.size() > 0) {
+					result.setInfo("修改失败，重复的栏目名");
+					result.setStatus(2);
+					return result;
+				}
 			}
 			newsColumnService.doUpdate(newsColumn);
 			Map<String, Object> data = new HashMap<String, Object>();
 			data.put("info", "ok");
 			result.setData(data);
 		} catch (Exception e) {
-			result.setInfo("修改失败: " + e.getMessage());
+			result.setInfo("修改失败，" + e.getMessage());
 			result.setStatus(1);
 		}
 
@@ -147,8 +160,13 @@ public class ColumnManageController extends MyControllerSupport {
 			if (doCheckToken(newsColumn.getToken()) == false) {
 				return tokenFail();
 			}
+			// 查询是否存在
+			if (newsColumn.getColumnId() == null) {
+				throw new IllegalArgumentException("栏目id不能为空");
+			}
 			NewsColumnDBO condition = new NewsColumnDBO();
 			condition.setColumnId(newsColumn.getColumnId());
+			condition = (NewsColumnDBO) newsColumnService.doRead(condition);
 			int flag = newsColumnService.doDelete(condition);
 			if (flag == 0) {
 				result.setInfo("删除失败，该栏目不存在");
@@ -159,7 +177,7 @@ public class ColumnManageController extends MyControllerSupport {
 			data.put("info", "ok");
 			result.setData(data);
 		} catch (Exception e) {
-			result.setInfo("删除失败: " + e.getMessage());
+			result.setInfo("删除失败，" + e.getMessage());
 			result.setStatus(1);
 		}
 

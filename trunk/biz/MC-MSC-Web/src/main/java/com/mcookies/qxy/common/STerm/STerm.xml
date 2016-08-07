@@ -183,5 +183,15 @@
                 AND term_id = #{termId}
             </if>
     </select>
+    <!-- 查询一条数据  -->
+    <select id='findByTermId' parameterType='STermDBO' resultType='STermDBO'>
+        SELECT <include refid='tableColumns'/> FROM s_term WHERE 1 = 1
+            <if test=" termId != null "><!-- 学期id -->
+                AND term_id = #{termId}
+            </if>
+            <if test=" termId == null "><!-- 学期id -->
+                AND is_default = 1
+            </if>
+    </select>
 
 </mapper>

@@ -39,6 +39,11 @@ public class UTeacherPVO extends UTeacherDBO
 	 */
 	private String homeAddress = null;
 
+	/**
+	 * 班级id
+	 */
+	private Long cid = null;
+
 	public Integer getGender() {
 		return gender;
 	}
@@ -93,6 +98,14 @@ public class UTeacherPVO extends UTeacherDBO
 
 	public void setHomeAddress(String homeAddress) {
 		this.homeAddress = homeAddress;
+	}
+
+	public Long getCid() {
+		return cid;
+	}
+
+	public void setCid(Long cid) {
+		this.cid = cid;
 	}
 	
 	

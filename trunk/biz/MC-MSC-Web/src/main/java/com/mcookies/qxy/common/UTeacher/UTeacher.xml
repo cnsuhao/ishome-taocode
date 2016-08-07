@@ -293,4 +293,12 @@
 			</if>
 		</where>
 	</select>
+	<!-- 查询某班级的班主任  -->
+    <select id='findClassLeader' parameterType='ClassTeacherDBO' resultType='UTeacherDBO'>
+        SELECT a.tid, a.uid, a.sid, a.teacher_name, a.phone, a.email, a.id_type, a.method, a.openid, 
+        a.wechatname, a.wechathead, a.city, a.gender, a.status, a.is_use, a.create_time, a.creator, a.update_time, a.updator
+        FROM u_teacher a join class_teacher b on a.tid = b.tid
+		WHERE b.is_leader = 1 AND b.cid = #{cid}
+        limit 1
+    </select>
 </mapper>

@@ -183,5 +183,13 @@
                 AND id = #{id}
             </if>
     </select>
+    <!-- 通过dutyIds查数据  -->
+    <select id='doSelectByDutyIds' parameterType='java.util.List' resultType='SDutyContentDBO'>
+        SELECT <include refid='tableColumns'/> FROM s_duty_content WHERE 1 = 1
+                AND duty_id in
+            <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+    </select>
 
 </mapper>

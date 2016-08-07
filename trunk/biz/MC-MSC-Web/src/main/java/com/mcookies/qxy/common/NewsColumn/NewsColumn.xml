@@ -159,7 +159,7 @@
     </delete>
     <!-- 物理删除一条数据 -->
     <delete id='doDelete' parameterType='NewsColumnDBO'>
-        DELETE FROM news_column WHERE 1 = 1
+        DELETE FROM news_column WHERE update_time = #{updateTime}
             <if test=" columnId != null "><!-- 栏目id（自增） -->
                 AND column_id = #{columnId}
             </if>
