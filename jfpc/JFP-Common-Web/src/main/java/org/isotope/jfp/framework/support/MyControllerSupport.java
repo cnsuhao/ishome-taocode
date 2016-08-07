@@ -60,7 +60,7 @@ public class MyControllerSupport extends MyFrameworkSupport // implements
 	}
 
 	public boolean doCheckToken(String token) {
-		LoginerCacheHelper.checkLoginer(token);
+		//LoginerCacheHelper.checkLoginer(token);
 		myToken = BusinessTokenBean.build("911822733644555466377288199__a__b__c__d__e__f__g");
 		// 获得用户信息
 		loginer = new UserBean();
