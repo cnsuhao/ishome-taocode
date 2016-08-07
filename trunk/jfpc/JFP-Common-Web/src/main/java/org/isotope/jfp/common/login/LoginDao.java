@@ -23,7 +23,10 @@ public interface LoginDao extends ISFrameworkConstants {
 	 * @param loginer
 	 * @return
 	 */
-	public List<UserBean> readLoginerByAccount(HashMap<String, String> loginer);
+	public List<UserBean> readTeacherLoginer(HashMap<String, String> loginer);
+	public List<UserBean> readParentLoginer(HashMap<String, String> loginer);
+	public List<UserBean> readStudentLoginer(HashMap<String, String> loginer);
+	
 	public List<UserBean> readLoginerByOpenId(String authorizerRefreshToken);
 	public int creatLoginerByOpenId(String authorizerRefreshToken);
 

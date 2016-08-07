@@ -3,7 +3,7 @@ package org.isotope.jfp.framework.beans.user;
 public class UserBean extends LoginerBean {
 	/**
 	 * 登陆结果<br>
-	 * 0:成功 1:密码错误 2:用户不存在 3:二次登录 9:用户异常锁定
+	 * 0:成功 1:密码错误 2:用户不存在 3:二次登录8:用户类型未知 9:用户异常锁定
 	 */
 	String loginStatus;
 

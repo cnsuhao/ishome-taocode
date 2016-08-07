@@ -74,7 +74,19 @@ public class LoginBusiness extends LoginService {
 		}
 		// 完成用户登录
 		UserBean user = new UserBean();
-		List<UserBean> loginers = readLoginer(login);
+		List<UserBean> loginers;
+		//1:教师,2:家长,3:学生
+		if("1".equals(loginer.getUserType())){
+			loginers = readTeacherLoginer(login);
+		}else if("2".equals(loginer.getUserType())){
+			loginers = readParentLoginer(login);
+		}else if("3".equals(loginer.getUserType())){
+			loginers = readStudentLoginer(login);
+		}else{
+			user.setLoginStatus("8");
+			return user;
+		}
+		
 		boolean logined = false;
 		if (loginers == null) {
 			user.setLoginStatus("2");
@@ -135,7 +147,7 @@ public class LoginBusiness extends LoginService {
 	 * @param account
 	 * @return false无true有
 	 */
-	public boolean accountCheck(String account, boolean all) {
+	public boolean accountCheck(String account, String userType, boolean all) {
 		HashMap<String, String> login = new HashMap<String, String>();
 		if (all) {
 			// 种类判断
@@ -150,7 +162,16 @@ public class LoginBusiness extends LoginService {
 			login.put("account", account);
 		}
 		// 获得用户数据
-		List<UserBean> loginers = readLoginer(login);
+		List<UserBean> loginers;
+		if("1".equals(userType)){
+			loginers = readTeacherLoginer(login);
+		}else if("2".equals(userType)){
+			loginers = readParentLoginer(login);
+		}else if("3".equals(userType)){
+			loginers = readStudentLoginer(login);
+		}else{
+			return false;
+		}
 		if (loginers.size() >= 1) {
 			return true;
 		} 
