@@ -306,6 +306,15 @@ public class MyServiceSupport implements ISFrameworkConstants, ISDBConstants {
 		formParamBean.setUpdator(loginId);
 		return getDao().doUpdate(formParamBean);
 	}
+	
+	public void doUpdateAll(MyDataBaseObjectSupport formParamBean) {
+		changeTable(formParamBean, DB_UPDATE);
+		// 更新者、更新时间
+		String t =DateHelper.currentTimeMillis4();
+		formParamBean.setUpdateTime(t);
+		formParamBean.setUpdator(getLoginerId());
+		getDao().doUpdateAll(formParamBean);
+	}
 
 	/**
 	 * 读取数据
