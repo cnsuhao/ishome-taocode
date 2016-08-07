@@ -12,5 +12,7 @@ public interface ClassDao extends IDatabaseSupport{
 	List<ClassPVO> doSelectWorkTime(ClassDBO dbo);
 	
 	List<? extends FrameworkDataBean> doSelectPageClass(PageVOSupport formParamPageModel);
+	
+	List<? extends FrameworkDataBean> doSelectPageClass2(PageVOSupport formParamPageModel);
 
 }

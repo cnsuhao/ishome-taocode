@@ -219,5 +219,18 @@
                 AND id = #{id}
             </if>
     </select>
+    <!-- 查询同一层还未审批的记录  -->
+    <select id='doSelectUnChecked' parameterType='OaExamineResultDBO' resultType='OaExamineResultDBO'>
+        SELECT <include refid='tableColumns'/> FROM oa_examine_result
+        WHERE approval_information_id = #{approvalInformationId}
+        AND oarule_id = #{oaruleId}
+        AND oarule_status = '0'
+    </select>
+    <!-- 更新同一层的记录为相同状态（通过、拒绝）  -->
+    <update id='doUpdateSetStatus' parameterType='OaExamineResultDBO'>
+        UPDATE oa_examine_result SET update_time = #{updateTime}, oarule_status = #{oaruleStatus}
+        WHERE approval_information_id = #{approvalInformationId}
+        AND oarule_id = #{oaruleId}
+    </update>
 
 </mapper>

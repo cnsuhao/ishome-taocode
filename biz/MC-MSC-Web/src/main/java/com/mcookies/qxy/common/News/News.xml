@@ -291,7 +291,7 @@
     </delete>
     <!-- 物理删除一条数据 -->
     <delete id='doDelete' parameterType='NewsDBO'>
-        DELETE FROM news WHERE 1 = 1
+        DELETE FROM news WHERE update_time = #{updateTime}
             <if test=" newsId != null "><!-- 新闻id -->
                 AND news_id = #{newsId}
             </if>

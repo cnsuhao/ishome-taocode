@@ -171,5 +171,23 @@
                 AND oatags_id = #{oatagsId}
             </if>
     </select>
+    <!-- 通过oaTagsIds查数据  -->
+    <select id='doSelectUsedByOaTagsIds' parameterType='java.util.List' resultType='OaTagsDBO'>
+        SELECT <include refid='tableColumns'/> FROM oa_tags WHERE 1 = 1 AND is_use = 1
+                AND oatags_id in
+            <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+    </select>
+    <!-- 通过oaRuleIds查数据  -->
+    <select id='doSelectUsedByOaRuleIds' parameterType='java.util.List' resultType='OaTagsDBO'>
+        SELECT a.oatags_id, a.sid, a.oatags_name, a.type, a.cycle, a.is_use, a.create_time, a.creator, a.update_time, a.updator 
+        FROM oa_tags a join oa_rule b on a.oatags_id = b.oatags_id
+        WHERE 1 = 1 AND a.is_use = 1
+                AND b.oarule_id in
+            <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+    </select>
 
 </mapper>

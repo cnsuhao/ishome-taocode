@@ -204,5 +204,20 @@
 			AND oarule_id = #{oaruleId}
 		</if>
 	</select>
-
+	<!-- 通过oaTagsIds查数据  -->
+    <select id='doSelectByOaTagsIds' parameterType='java.util.List' resultType='OaRuleDBO'>
+        SELECT <include refid='tableColumns'/> FROM oa_rule WHERE 1 = 1
+                AND oatags_id in
+            <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+    </select>
+	<!-- 查找serialNumber大于#{serialNumber}的下一条规则 -->
+	<select id='doSelectNextRule' parameterType='OaRuleDBO' resultType='OaRuleDBO'>
+		SELECT
+		<include refid='tableColumns' />
+		FROM oa_rule WHERE oatags_id = #{oatagsId} AND serial_number > #{serialNumber}
+		ORDER BY serial_number
+		limit 1
+	</select>
 </mapper>

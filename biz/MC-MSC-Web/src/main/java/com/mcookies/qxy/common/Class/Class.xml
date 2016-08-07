@@ -261,4 +261,34 @@
 	</where>
 
 	</select>
+	
+	<!-- 班级列表查询接口-->
+	<select id="doSelectPageClass2" parameterType="com.mcookies.qxy.common.Class.ClassPVO" resultType="com.mcookies.qxy.common.Class.ClassPVO">
+	SELECT DISTINCT a.cid, a.class_name, b.term_name, 
+	COUNT(f.student_id) AS student_count, COUNT(g.course_id1) AS course_count
+	FROM class a 
+	LEFT JOIN s_term b ON a.term_id = b.term_id 
+	LEFT JOIN s_grade_label c ON a.grade_id = c.grade_id
+	LEFT JOIN class_teacher e ON a.cid = e.cid
+	LEFT JOIN class_student f ON a.cid = f.cid
+	LEFT JOIN class_course g ON a.cid = g.cid
+	<where>
+		<if test="cid != null ">
+			and a.cid = #{cid}
+		</if>
+		<if test="termId != null">
+			and a.term_id = #{termId}
+		</if>
+		<if test="termId == null">
+			and b.is_default = 1
+		</if>
+		<if test="gradeId != null">
+			and a.grade_id = #{gradeId}
+		</if>
+		<if test="tid != null">
+			and e.tid = #{tid}
+		</if>
+	</where>
+	GROUP BY f.student_id, g.course_id1, a.cid, a.class_name, b.term_name
+	</select>
 </mapper>

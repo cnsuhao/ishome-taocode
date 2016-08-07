@@ -34,7 +34,7 @@
         <if test=" tid1 != null "><!-- 教师1id -->
             ,tid1 = #{tid1}
         </if>
-        <if test=" teacherName1 != null' "><!-- 教师1姓名 -->
+        <if test=" teacherName1 != null "><!-- 教师1姓名 -->
             ,teacher_name1 = #{teacherName1}
         </if>
         <if test=" courseId2 != null "><!-- 课程2id -->
@@ -239,7 +239,7 @@
             <if test=" tid1 != null "><!-- 教师1id -->
                 AND tid1 = #{tid1}
             </if>
-            <if test=" teacherName1 != null' "><!-- 教师1姓名 -->
+            <if test=" teacherName1 != null "><!-- 教师1姓名 -->
                 AND teacher_name1 = #{teacherName1}
             </if>
             <if test=" courseId2 != null "><!-- 课程2id -->
@@ -427,7 +427,8 @@
             </if>
     </update>
     <!-- 查询分页数据信息  -->
-    <select id='doSelectPage' parameterType='ClassCourseDBO' resultType='ClassCourseDBO'>
+    <select id='doSelectPage' parameterType='ClassCourseDBO' 
+    		resultType='com.mcookies.qxy.common.ClassCourse.ClassCoursePVO'>
         SELECT <include refid='tableColumns'/> FROM class_course
         WHERE 1 = 1 
         <if test=" id != null "><!-- 自增id -->
@@ -451,7 +452,7 @@
         <if test=" tid1 != null "><!-- 教师1id -->
             AND tid1 = #{tid1}
         </if>
-        <if test=" teacherName1 != null' "><!-- 教师1姓名 -->
+        <if test=" teacherName1 != null "><!-- 教师1姓名 -->
             AND teacher_name1 = #{teacherName1}
         </if>
         <if test=" courseId2 != null "><!-- 课程2id -->
@@ -670,7 +671,7 @@
         <if test=" tid1 != null "><!-- 教师1id -->
             ,tid1 = #{tid1}
         </if>
-        <if test=" teacherName1 != null' "><!-- 教师1姓名 -->
+        <if test=" teacherName1 != null "><!-- 教师1姓名 -->
             ,teacher_name1 = #{teacherName1}
         </if>
         <if test=" courseId2 != null "><!-- 课程2id -->

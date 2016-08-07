@@ -127,7 +127,7 @@
     </select>
 
     <!-- 插入一条数据 -->
-    <insert id='doInsert' parameterType='OaExamineInformationDBO'>
+    <insert id='doInsert' parameterType='OaExamineInformationDBO' useGeneratedKeys="true" keyProperty="approvalInformationId">
         INSERT INTO oa_examine_information
           ( <include refid='tableColumns'/>) 
         VALUES 

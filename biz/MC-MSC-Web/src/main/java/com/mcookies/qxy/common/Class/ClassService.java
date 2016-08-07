@@ -25,4 +25,14 @@ public class ClassService extends MyServiceSupport {
 		formParamPageModel.setPageListData(getDao().doSelectPageClass(formParamPageModel));
 		return formParamPageModel;
 	}
+	
+	/**
+	 * 分页 根据  termId tid cid gradelid 查询班级
+	 * @param formParamPageModel
+	 * @return
+	 */
+	public PageVOSupport doSelectPageClass2(PageVOSupport formParamPageModel) {
+		formParamPageModel.setPageListData(getDao().doSelectPageClass2(formParamPageModel));
+		return formParamPageModel;
+	}
 }
