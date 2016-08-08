@@ -13,14 +13,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.mcookies.qxy.common.OaRule.OaRuleService;
-import com.mcookies.qxy.common.OaTags.OaTagsService;
 import com.mcookies.qxy.common.OaTags.OaTagsDBO;
-import com.mcookies.qxy.common.User.UserDBO;
+import com.mcookies.qxy.common.OaTags.OaTagsPVO;
+import com.mcookies.qxy.common.OaTags.OaTagsService;
 
 /**
  * 工作管理-工作流程模板设置
@@ -41,19 +42,28 @@ public class WorkflowTemplateSettingController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/qxy/oatags", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean oaTagsGET(@RequestBody UserDBO user) {
-		// TODO
+	public RESTResultBean oaTagsGET(@RequestParam(required = false) String token) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(user.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 
-			Long userId = getLoginer().getUserId();
-
-			result.setInfo("欢迎访问千校云平台：" + userId + "," + user.getAccount());
+			Long sid = getLoginer().getSchoolId();
+			if (sid == null) {
+				throw new IllegalStateException("获取学校id失败");
+			}
+			Map<String, Object> data = new HashMap<String, Object>();
+			// 查出列表
+			OaTagsPVO oaTag = new OaTagsPVO();
+			oaTag.setSid(sid);
+			List<OaTagsPVO> oaTagss = (List<OaTagsPVO>) oaTagsService.findBySid(oaTag);
+			
+			data.put("count", oaTagss.size());
+			data.put("oatags", oaTagss);
+			result.setData(data);
 		} catch (Exception e) {
-			result.setInfo("访问失败");
+			result.setInfo("查询失败，" + e.getMessage());
 			result.setStatus(1);
 		}
 

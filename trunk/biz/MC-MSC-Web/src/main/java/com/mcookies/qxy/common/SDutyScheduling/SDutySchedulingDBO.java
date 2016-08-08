@@ -1,6 +1,6 @@
 package com.mcookies.qxy.common.SDutyScheduling;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.inject.Named;
 

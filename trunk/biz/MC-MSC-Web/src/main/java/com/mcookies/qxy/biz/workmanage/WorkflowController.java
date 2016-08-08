@@ -1,6 +1,8 @@
 package com.mcookies.qxy.biz.workmanage;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -13,18 +15,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
 import com.mcookies.qxy.common.OaExamineInformation.OaExamineInformationDBO;
+import com.mcookies.qxy.common.OaExamineInformation.OaExamineInformationPVO;
 import com.mcookies.qxy.common.OaExamineInformation.OaExamineInformationService;
 import com.mcookies.qxy.common.OaExamineResult.OaExamineResultDBO;
+import com.mcookies.qxy.common.OaExamineResult.OaExamineResultPVO;
 import com.mcookies.qxy.common.OaExamineResult.OaExamineResultService;
 import com.mcookies.qxy.common.OaRule.OaRuleDBO;
 import com.mcookies.qxy.common.OaRule.OaRuleService;
 import com.mcookies.qxy.common.OaTags.OaTagsDBO;
 import com.mcookies.qxy.common.OaTags.OaTagsService;
-import com.mcookies.qxy.common.User.UserDBO;
+import com.mcookies.qxy.common.UTeacher.UTeacherDBO;
 
 /**
  * 工作管理-工作流程
@@ -47,21 +52,51 @@ public class WorkflowController extends MyControllerSupport {
 	/**
 	 * 我提交的事项查询接口 /qxy/myapplication/teacher=[tid]&token=[token]
 	 */
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/qxy/myapplication", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean myApplicationGET(@RequestBody UserDBO user) {
-		// TODO
+	public RESTResultBean myApplicationGET(@RequestParam(required = false) String token,
+			@RequestParam(value = "teacher", required = false) Long tid) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(user.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
+			if (tid == null) {
+				tid = getLoginer().getUserId();
+				if (tid == null) {
+					throw new IllegalStateException("获取用户id失败");
+				}
+			}
 
-			Long userId = getLoginer().getUserId();
-
-			result.setInfo("欢迎访问千校云平台：" + userId + "," + user.getAccount());
+			Map<String, Object> data = new HashMap<String, Object>();
+			// 查出列表
+			OaExamineInformationPVO info = new OaExamineInformationPVO();
+			info.setTid(tid);
+			List<OaExamineInformationPVO> infos = (List<OaExamineInformationPVO>) oaExamineInformationService.doSelectData(info);
+			
+			// 设置oatagsName和resultinfo
+			for (OaExamineInformationPVO each : infos) {
+				OaTagsDBO condition = new OaTagsDBO();
+				condition.setOatagsId(each.getOatagsId());
+				OaTagsDBO parent = (OaTagsDBO) oaTagsService.doRead(condition);
+				if (parent == null) {
+					throw new IllegalStateException("获取oatags失败");
+				}
+				each.setOatagsName(parent.getOatagsName());
+				List<OaExamineResultPVO> ress;
+				if (each.getResult() == null || each.getResult() != 1) {
+					ress = new ArrayList<OaExamineResultPVO>();
+				}
+				ress = (List<OaExamineResultPVO>) oaExamineResultService.findByApprovalInformationId(each);
+				each.setResultinfo(ress);
+			}
+			data.put("tid", tid);
+			data.put("count", infos.size());
+			data.put("myapplication", infos);
+			result.setData(data);
 		} catch (Exception e) {
-			result.setInfo("访问失败");
+			result.setInfo("查询失败，" + e.getMessage());
 			result.setStatus(1);
 		}
 
@@ -160,18 +195,32 @@ public class WorkflowController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/qxy/myaudit", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean myAuditGET(@RequestBody UserDBO user) {
+	public RESTResultBean myAuditGET(@RequestParam(required = false) String token,
+			@RequestParam(value = "teacher", required = false) Long tid) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(user.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
+			if (tid == null) {
+				tid = getLoginer().getUserId();
+				if (tid == null) {
+					throw new IllegalStateException("获取用户id失败");
+				}
+			}
 
-			Long userId = getLoginer().getUserId();
-
-			result.setInfo("欢迎访问千校云平台：" + userId + "," + user.getAccount());
+			Map<String, Object> data = new HashMap<String, Object>();
+			// 查出列表
+			OaExamineResultDBO res = new OaExamineResultDBO();
+			res.setTid(tid);
+			List<OaExamineInformationPVO> infos = (List<OaExamineInformationPVO>) oaExamineInformationService.findByCheckTid(res);
+			
+			data.put("tid", tid);
+			data.put("count", infos.size());
+			data.put("myaudit", infos);
+			result.setData(data);
 		} catch (Exception e) {
-			result.setInfo("访问失败");
+			result.setInfo("查询失败，" + e.getMessage());
 			result.setStatus(1);
 		}
 
@@ -232,11 +281,12 @@ public class WorkflowController extends MyControllerSupport {
 				}
 				// 全部通过
 				if (rule.getAdoptType() != null && rule.getAdoptType().equals("1")) {
-					// 只修改自己的状态为完成
-					origin.setOaruleStatus(1);
-					oaExamineResultService.doUpdate(origin);
 					// 如果都审核了
 					if (oaExamineResultService.doSelectUnChecked(origin).size() == 0) {
+						// 修改同层的状态为完成
+						origin.setOaruleStatus(1);
+						oaExamineResultService.doUpdateSetStatus(origin);
+						// 生成下一层的审批记录
 						OaExamineInformationDBO tmp = new OaExamineInformationDBO();
 						tmp.setApprovalInformationId(origin.getApprovalInformationId());
 						oaExamineInformation = (OaExamineInformationDBO) oaExamineInformationService.doRead(tmp);

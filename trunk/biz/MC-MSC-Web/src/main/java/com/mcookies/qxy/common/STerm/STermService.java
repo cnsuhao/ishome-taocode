@@ -11,7 +11,7 @@ public class STermService extends MyServiceSupport {
 		return getMySqlSession().getMapper(STermDao.class);
 	}
 
-	public STermDBO findByTermId(STermDBO term) {
+	public STermPVO findByTermId(STermPVO term) {
 		return getDao().findByTermId(term);
 	}
 

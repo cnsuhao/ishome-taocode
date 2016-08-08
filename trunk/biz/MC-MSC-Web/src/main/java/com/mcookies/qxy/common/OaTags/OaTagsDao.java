@@ -8,4 +8,5 @@ import org.isotope.jfp.framework.support.IDatabaseSupport;
 public interface OaTagsDao extends IDatabaseSupport {
 	List<OaTagsDBO> doSelectUsedByOaTagsIds(List<Long> oaTagsIds);
 	List<OaTagsDBO> doSelectUsedByOaRuleIds(List<Long> oaRuleIds);
+	List<OaTagsPVO> findBySid(OaTagsPVO oaTag);
 }
