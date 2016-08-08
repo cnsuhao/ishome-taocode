@@ -63,6 +63,20 @@ public class MyServiceSupport implements ISFrameworkConstants, ISDBConstants {
 		return SqlSessionUtils.getSqlSession(st.getSqlSessionFactory(), st.getExecutorType(), st.getPersistenceExceptionTranslator()).getConnection();
 	}
 
+	/**
+	 * 当前登录用户
+	 */
+	private UserBean loginer;
+	public UserBean getLoginer() {
+		if(loginer == null)
+			loginer = SessionHelper.getUserData();
+		return loginer;
+	}
+
+	protected Long getLoginerId() {
+		return getLoginer().getUserId();
+	}
+
 	/////////////////////////
 	/**
 	 * 获得数据库操作对象
@@ -292,17 +306,6 @@ public class MyServiceSupport implements ISFrameworkConstants, ISDBConstants {
 		return getDao().doInsert(formParamBean);
 	}
 	
-	private UserBean loginer;
-	public UserBean getLoginer() {
-		if(loginer == null)
-			loginer = SessionHelper.getUserData();
-		return loginer;
-	}
-
-	protected Long getLoginerId() {
-		return getLoginer().getUserId();
-	}
-
 	/**
 	 * 更新数据
 	 * 

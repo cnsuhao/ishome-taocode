@@ -3,7 +3,7 @@ package org.isotope.jfp.framework.cache.session;
 import org.isotope.jfp.framework.beans.user.UserBean;
 
 /**
- * 登录用户Session（UserBean）
+ * 登录用户Session（UserBean）本地ThreadLocal
  * 
  * @author fucy
  * @version 3.2.1 2016/8/6
