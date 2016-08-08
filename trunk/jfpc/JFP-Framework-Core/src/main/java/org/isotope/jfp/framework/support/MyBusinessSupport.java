@@ -1,6 +1,5 @@
 package org.isotope.jfp.framework.support;
 
-import org.isotope.jfp.framework.beans.common.BusinessTokenBean;
 import org.isotope.jfp.framework.biz.common.ISToken;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.constants.pub.ISModelConstants;
@@ -16,7 +15,7 @@ import org.slf4j.LoggerFactory;
  * @since 0.1.0 2013-8-21
  * @version 0.1.0
  */
-public class MyBusinessSupport extends MyWorkSupport implements ISFrameworkConstants, ISModelConstants,ISToken {
+public class MyBusinessSupport extends MyWorkSupport implements ISFrameworkConstants, ISModelConstants { //ISToken
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	/**
@@ -78,24 +77,24 @@ public class MyBusinessSupport extends MyWorkSupport implements ISFrameworkConst
 	/**
 	 * 用户令牌
 	 */
-	protected BusinessTokenBean token;
-	public boolean chageToken(){
-		return token.chageToken();
-	}
+//	protected BusinessTokenBean token;
+//	public boolean chageToken(){
+//		return token.chageToken();
+//	}
+//
+//	public String getToken() {
+//		return BusinessTokenBean.getBizToken(token);
+//	}
+//
+//	public void setToken(BusinessTokenBean token) {
+//		this.token = token;
+//	}
 
-	public String getToken() {
-		return BusinessTokenBean.getBizToken(token);
-	}
-
-	public void setToken(BusinessTokenBean token) {
-		this.token = token;
-	}
-
-	public String getBizName() {
-		if (EmptyHelper.isEmpty(token))
-			return this.getClass().getSimpleName().replace("BussinessService", "");
-		return token.getBizName();
-	}
+//	public String getBizName() {
+//		if (EmptyHelper.isEmpty(token))
+//			return this.getClass().getSimpleName().replace("BussinessService", "");
+//		return token.getBizName();
+//	}
 
 	/////////////////////////////////////
 	/**
@@ -111,26 +110,26 @@ public class MyBusinessSupport extends MyWorkSupport implements ISFrameworkConst
 		this.paramValue = paramValue;
 	}
 
-	@Override
-	public boolean checkToken() throws Exception {
-		try{
-			String tokenCatch = (String) myCacheService.getObject(token.getUserId(),false);
-			if (logger.isDebugEnabled())
-				logger.debug("    doCheck.checkToken()=====tokenCatch>>>>>"+tokenCatch);
-			if(getToken().equals(tokenCatch))
-				return true;
-		}catch(Exception r){
-			
-		}
-		return false;
-	}
-
-	/**
-	 * @see waitTimeSecond
-	 */
-	@Override
-	public boolean saveToken() throws Exception {
-		return myCacheService.putObject(token.getUserId(),getToken(),waitTimeSecond,false);
-	}
+//	@Override
+//	public boolean checkToken() throws Exception {
+//		try{
+//			String tokenCatch = (String) myCacheService.getObject(token.getUserId(),false);
+//			if (logger.isDebugEnabled())
+//				logger.debug("    doCheck.checkToken()=====tokenCatch>>>>>"+tokenCatch);
+//			if(getToken().equals(tokenCatch))
+//				return true;
+//		}catch(Exception r){
+//			
+//		}
+//		return false;
+//	}
+//
+//	/**
+//	 * @see waitTimeSecond
+//	 */
+//	@Override
+//	public boolean saveToken() throws Exception {
+//		return myCacheService.putObject(token.getUserId(),getToken(),waitTimeSecond,false);
+//	}
 
 }
