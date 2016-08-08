@@ -37,12 +37,12 @@ public class SDutySchedulingDBO extends MyDataBaseObjectSupport {
 	/**
 	 * 周开始日期
 	 */
-	private String startTime = null;
+	private Date startTime = null;
 
 	/**
 	 * 周结束日期
 	 */
-	private String endTime = null;
+	private Date endTime = null;
 
 	/**
 	 * 指定该学期的对应日期
@@ -52,12 +52,12 @@ public class SDutySchedulingDBO extends MyDataBaseObjectSupport {
 	/**
 	 * 值日或值周领导id
 	 */
-	private Long leaderTids = null;
+	private String leaderTids = null;
 
 	/**
 	 * 值日或值周教师id
 	 */
-	private Long tids = null;
+	private String tids = null;
 
 	/**
 	 * 岗位id
@@ -119,7 +119,7 @@ public class SDutySchedulingDBO extends MyDataBaseObjectSupport {
 	 *
 	 * @return Start_time 周开始日期
 	 */
-	public String getStartTime() {
+	public Date getStartTime() {
 		return this.startTime;
 	}
 
@@ -128,7 +128,7 @@ public class SDutySchedulingDBO extends MyDataBaseObjectSupport {
 	 *
 	 * @return End_time 周结束日期
 	 */
-	public String getEndTime() {
+	public Date getEndTime() {
 		return this.endTime;
 	}
 
@@ -146,7 +146,7 @@ public class SDutySchedulingDBO extends MyDataBaseObjectSupport {
 	 *
 	 * @return Leader_tids 值日或值周领导id
 	 */
-	public Long getLeaderTids() {
+	public String getLeaderTids() {
 		return this.leaderTids;
 	}
 
@@ -155,7 +155,7 @@ public class SDutySchedulingDBO extends MyDataBaseObjectSupport {
 	 *
 	 * @return Tids 值日或值周教师id
 	 */
-	public Long getTids() {
+	public String getTids() {
 		return this.tids;
 	}
 
@@ -233,7 +233,7 @@ public class SDutySchedulingDBO extends MyDataBaseObjectSupport {
 	 * @param Start_time
 	 *            周开始日期
 	 */
-	public void setStartTime(String starttime) {
+	public void setStartTime(Date starttime) {
 		this.startTime = starttime;
 	}
 
@@ -243,7 +243,7 @@ public class SDutySchedulingDBO extends MyDataBaseObjectSupport {
 	 * @param End_time
 	 *            周结束日期
 	 */
-	public void setEndTime(String endtime) {
+	public void setEndTime(Date endtime) {
 		this.endTime = endtime;
 	}
 
@@ -263,7 +263,7 @@ public class SDutySchedulingDBO extends MyDataBaseObjectSupport {
 	 * @param Leader_tids
 	 *            值日或值周领导id
 	 */
-	public void setLeaderTids(Long leadertids) {
+	public void setLeaderTids(String leadertids) {
 		this.leaderTids = leadertids;
 	}
 
@@ -273,7 +273,7 @@ public class SDutySchedulingDBO extends MyDataBaseObjectSupport {
 	 * @param Tids
 	 *            值日或值周教师id
 	 */
-	public void setTids(Long tids) {
+	public void setTids(String tids) {
 		this.tids = tids;
 	}
 
