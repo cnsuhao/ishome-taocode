@@ -46,7 +46,8 @@ public class MyControllerSupport extends MyFrameworkSupport {
 		{// 临时代码
 			// 获得用户信息
 			loginer = new UserBean();
-			loginer.setUserId(123456L);
+			loginer.setUserId(123456789L);
+			loginer.setSchoolId(987654321L);
 			loginer.setToken("911822733644555466377288199__a__b__c__d__e__f__g");
 		}
 		// 缓存Session
