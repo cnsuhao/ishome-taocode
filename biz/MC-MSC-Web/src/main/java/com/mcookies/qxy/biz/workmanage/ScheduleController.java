@@ -2,7 +2,9 @@ package com.mcookies.qxy.biz.workmanage;
 
 import java.sql.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.TreeSet;
 
 import javax.annotation.Resource;
 
@@ -20,8 +22,10 @@ import com.mcookies.qxy.biz.workmanage.ScheduleCopyPUTDto.Week;
 import com.mcookies.qxy.common.SDuty.SDutyDBO;
 import com.mcookies.qxy.common.SDuty.SDutyService;
 import com.mcookies.qxy.common.SDutyScheduling.SDutySchedulingDBO;
+import com.mcookies.qxy.common.SDutyScheduling.SDutySchedulingPVO;
 import com.mcookies.qxy.common.SDutyScheduling.SDutySchedulingService;
 import com.mcookies.qxy.common.STerm.STermDBO;
+import com.mcookies.qxy.common.STerm.STermPVO;
 import com.mcookies.qxy.common.STerm.STermService;
 import com.mcookies.qxy.common.User.UserDBO;
 
@@ -45,21 +49,41 @@ public class ScheduleController extends MyControllerSupport {
 	 * 值日值周信息日历表状态查询接口
 	 * /qxy/schedule/status/term=[term]&teacher=[tid]&token=[token]
 	 */
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/qxy/schedule/status", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean scheduleStatusGET(@RequestBody UserDBO user) {
-		// TODO
+	public RESTResultBean scheduleStatusGET(STermPVO term) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(user.getToken()) == false) {
+			if (doCheckToken(term.getToken()) == false) {
 				return tokenFail();
 			}
 
-			Long userId = getLoginer().getUserId();
+			term = (STermPVO) sTermService.findByTermId(term);
+			if (term == null) {
+				throw new IllegalArgumentException("termId所对应的学期或默认学期不存在");
+			}
+			SDutySchedulingPVO duty = new SDutySchedulingPVO();
+			duty.setTermId(term.getTermId());
+			duty.setTid(term.getTid());
+			duty.setIsUse(1);
+			List<SDutySchedulingDBO> dutys = (List<SDutySchedulingDBO>) sDutySchedulingService.findByTermIdAndTidAndIsUsed(duty);
+			TreeSet<Long> daylist = new TreeSet<Long>();
+			TreeSet<Long> weeklist = new TreeSet<Long>();
+			for (SDutySchedulingDBO each: dutys) {
+				if (each.getWeek() != null) {
+					weeklist.add(Long.valueOf(each.getWeek()));
+				} else if (each.getDate() != null) {
+					daylist.add(each.getDate().getTime());
+				} else {
 
-			result.setInfo("欢迎访问千校云平台：" + userId + "," + user.getAccount());
+				}
+			}
+			term.setDays(daylist);
+			term.setWeeklist(weeklist);
+			result.setData(term);
 		} catch (Exception e) {
-			result.setInfo("访问失败");
+			result.setInfo("查询失败，" + e.getMessage());
 			result.setStatus(1);
 		}
 
@@ -300,23 +324,20 @@ public class ScheduleController extends MyControllerSupport {
 						copy.setTids(origin.getTids());
 						copy.setType(0);
 						copy.setWeek(week.getWeek());
-//						copy.setStartTime(week.getStartTime());
-//						copy.setEndTime(week.getEndTime().toString());
-						copy.setStartTime(new Date(0));
-						copy.setEndTime(new Date(0));
+						copy.setStartTime(week.getStartTime());
+						copy.setEndTime(week.getEndTime());
 						sDutySchedulingService.doInsert(copy);
 					}
 					
 				} else if (dto.getDays() != null && dto.getDays().size() > 0) {
-					for (String day : dto.getDays()) {
+					for (Date day : dto.getDays()) {
 						SDutySchedulingDBO copy = new SDutySchedulingDBO();
 						copy.setTermId(origin.getTermId());
 						copy.setDutyId(origin.getDutyId());
 						copy.setLeaderTids(origin.getLeaderTids());
 						copy.setTids(origin.getTids());
 						copy.setType(1);
-//						copy.setDate(day);
-						copy.setDate(new Date(0));
+						copy.setDate(day);
 						sDutySchedulingService.doInsert(copy);
 					}
 				}

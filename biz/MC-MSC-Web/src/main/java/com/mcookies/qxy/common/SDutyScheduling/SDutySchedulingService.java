@@ -1,5 +1,7 @@
 package com.mcookies.qxy.common.SDutyScheduling;
 
+import java.util.List;
+
 import org.isotope.jfp.framework.support.MyServiceSupport;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +11,10 @@ public class SDutySchedulingService extends MyServiceSupport {
 
 	public SDutySchedulingDao getDao() {
 		return getMySqlSession().getMapper(SDutySchedulingDao.class);
+	}
+
+	public List<SDutySchedulingDBO> findByTermIdAndTidAndIsUsed(SDutySchedulingPVO duty) {
+		return getDao().findByTermIdAndTidAndIsUsed(duty);
 	}
 
 }

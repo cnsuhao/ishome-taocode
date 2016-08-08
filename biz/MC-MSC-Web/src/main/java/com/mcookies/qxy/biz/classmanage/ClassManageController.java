@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.mcookies.qxy.common.Class.ClassPVO;
 import com.mcookies.qxy.common.Class.ClassService;
 import com.mcookies.qxy.common.ClassTeacher.ClassTeacherDBO;
-import com.mcookies.qxy.common.STerm.STermDBO;
+import com.mcookies.qxy.common.STerm.STermPVO;
 import com.mcookies.qxy.common.STerm.STermService;
 import com.mcookies.qxy.common.UTeacher.UTeacherDBO;
 import com.mcookies.qxy.common.UTeacher.UTeacherService;
@@ -63,9 +63,10 @@ public class ClassManageController extends MyControllerSupport {
 			// pageModel.setOrderby("publish_time desc");
 			classService.doSelectPageClass2(pageModel);
 			
-			STermDBO term = new STermDBO();
+			STermPVO term = new STermPVO();
 			term.setTermId(pvo.getTermId());
-			term = (STermDBO) sTermService.findByTermId(term);
+			term.setSid(pvo.getSid());
+			term = (STermPVO) sTermService.findByTermId(term);
 			if (term == null) {
 				throw new IllegalArgumentException("termId所对应的学期不存在");
 			}
@@ -80,7 +81,7 @@ public class ClassManageController extends MyControllerSupport {
 			data.put("tid", pvo.getTid());
 			data.put("page", pageModel.getPageCurrent());
 			data.put("size", pageModel.getPageLimit());
-			data.put("count", pageModel.getPageCount());
+			data.put("count", pageModel.getResultCount());
 			data.put("class", pageModel.getPageListData());
 			result.setData(data);
 		} catch (Exception e) {

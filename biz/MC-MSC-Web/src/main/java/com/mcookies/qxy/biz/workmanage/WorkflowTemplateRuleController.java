@@ -7,21 +7,26 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.isotope.jfp.framework.beans.common.FrameworkDataBean;
 import org.isotope.jfp.framework.beans.common.RESTResultBean;
 import org.isotope.jfp.framework.support.MyControllerSupport;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.mcookies.qxy.common.Class.ClassPVO;
+import com.mcookies.qxy.common.ClassTeacher.ClassTeacherDBO;
 import com.mcookies.qxy.common.OaRule.OaRuleDBO;
+import com.mcookies.qxy.common.OaRule.OaRulePVO;
 import com.mcookies.qxy.common.OaRule.OaRuleService;
 import com.mcookies.qxy.common.OaTags.OaTagsDBO;
 import com.mcookies.qxy.common.OaTags.OaTagsService;
-import com.mcookies.qxy.common.User.UserDBO;
+import com.mcookies.qxy.common.UTeacher.UTeacherDBO;
 
 /**
  * 工作管理-工作流程模板规则
@@ -42,19 +47,43 @@ public class WorkflowTemplateRuleController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/qxy/oarule", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean oaRuleGET(@RequestBody UserDBO user) {
-		// TODO
+	public RESTResultBean oaRuleGET(@RequestParam(required = false) String token,
+			@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "12") int size) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(user.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 
-			Long userId = getLoginer().getUserId();
-
-			result.setInfo("欢迎访问千校云平台：" + userId + "," + user.getAccount());
+			Long sid = getLoginer().getSchoolId();
+			if (sid == null) {
+				throw new IllegalStateException("获取学校id失败");
+			}
+			Map<String, Object> data = new HashMap<String, Object>();
+			OaRuleDBO rule = new OaRuleDBO();
+			rule.setSid(sid);
+			pageModel.setPageCurrent(page);
+			pageModel.setPageLimit(size);
+			pageModel.setFormParamBean(rule);
+			// pageModel.setOrderby("publish_time desc");
+			oaRuleService.doSelectPage(pageModel);
+			
+			for (FrameworkDataBean each: pageModel.getPageListData()) {
+				OaRulePVO tmp = (OaRulePVO) each;
+				OaTagsDBO oatags = new OaTagsDBO();
+				oatags.setOatagsId(tmp.getOatagsId());
+				oatags = (OaTagsDBO) oaTagsService.doRead(oatags);
+				if (oatags != null) {
+					tmp.setOaruleName(oatags.getOatagsName());
+				}
+			}
+			data.put("page", pageModel.getPageCurrent());
+			data.put("size", pageModel.getPageLimit());
+			data.put("count", pageModel.getResultCount());
+			data.put("oarule", pageModel.getPageListData());
+			result.setData(data);
 		} catch (Exception e) {
-			result.setInfo("访问失败");
+			result.setInfo("查询失败，" + e.getMessage());
 			result.setStatus(1);
 		}
 

@@ -85,7 +85,7 @@
 		</if>
 	</update>
 	<!-- 查询分页数据信息 -->
-	<select id='doSelectPage' parameterType='OaRuleDBO' resultType='OaRuleDBO'>
+	<select id='doSelectPage' parameterType='OaRuleDBO' resultType='com.mcookies.qxy.common.OaRule.OaRulePVO'>
 		SELECT
 		<include refid='tableColumns' />
 		FROM oa_rule

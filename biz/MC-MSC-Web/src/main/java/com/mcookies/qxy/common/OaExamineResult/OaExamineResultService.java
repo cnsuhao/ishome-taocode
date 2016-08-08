@@ -5,6 +5,8 @@ import java.util.List;
 import org.isotope.jfp.framework.support.MyServiceSupport;
 import org.springframework.stereotype.Service;
 
+import com.mcookies.qxy.common.OaExamineInformation.OaExamineInformationPVO;
+
 /** OA审批结果表 */
 @Service
 public class OaExamineResultService extends MyServiceSupport {
@@ -19,6 +21,10 @@ public class OaExamineResultService extends MyServiceSupport {
 	
 	public void doUpdateSetStatus(OaExamineResultDBO result) {
 		getDao().doUpdateSetStatus(result);
+	}
+
+	public List<OaExamineResultPVO> findByApprovalInformationId(OaExamineInformationPVO info) {
+		return getDao().findByApprovalInformationId(info);
 	}
 
 }

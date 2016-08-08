@@ -21,4 +21,8 @@ public class OaTagsService extends MyServiceSupport {
 		return getDao().doSelectUsedByOaRuleIds(oaRuleIds);
 	}
 
+	public List<OaTagsPVO> findBySid(OaTagsPVO oaTag) {
+		return getDao().findBySid(oaTag);
+	}
+
 }

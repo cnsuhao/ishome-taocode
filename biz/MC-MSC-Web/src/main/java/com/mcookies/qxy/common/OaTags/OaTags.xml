@@ -189,5 +189,21 @@
 				#{item}
 			</foreach>
     </select>
+    <!-- 根据sid查询列表 -->
+	<select id='findBySid'
+		parameterType='com.mcookies.qxy.common.OaTags.OaTagsDBO'
+		resultType='com.mcookies.qxy.common.OaTags.OaTagsPVO'>
+		SELECT
+		a.oatags_id,
+		a.oatags_name,
+		a.type,
+		a.cycle,
+		COUNT(a.oatags_id) AS oarule_count,
+		a.create_time
+		FROM oa_tags a
+		LEFT JOIN oa_rule b ON a.oatags_id = b.oatags_id
+		WHERE a.sid = #{sid}
+		GROUP BY a.oatags_id, a.oatags_name, a.type, a.cycle, a.create_time
+	</select>
 
 </mapper>
