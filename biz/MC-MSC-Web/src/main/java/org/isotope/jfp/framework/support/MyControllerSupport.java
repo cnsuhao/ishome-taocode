@@ -9,6 +9,7 @@ import org.isotope.jfp.framework.beans.user.UserBean;
 import org.isotope.jfp.framework.cache.ICacheService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 
 /**
  * 画面控制层超类
@@ -46,7 +47,9 @@ public class MyControllerSupport extends MyFrameworkSupport {
 		// loginer = super.checkLoginer(token);
 		{// 临时代码
 			// 获得用户信息
-			loginer = (UserBean)BusinessTokenBean.build("91a82b73c64d55e46f37g28h19i");
+			loginer = new UserBean();
+			BusinessTokenBean b2b = BusinessTokenBean.build("91a82b73c64d55e46f37g28h19i");
+			BeanUtils.copyProperties(b2b, loginer);
 		}
 		// 缓存Session
 		super.setUserData(loginer);
