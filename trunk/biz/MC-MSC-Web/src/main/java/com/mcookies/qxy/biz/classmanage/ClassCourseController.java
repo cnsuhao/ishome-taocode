@@ -77,8 +77,8 @@ public class ClassCourseController extends MyControllerSupport {
 			classCourse.setCid(cid);
 			List<ClassCoursePVO> classCourses = (List<ClassCoursePVO>) classCourseService.doSelectData(classCourse);
 			for (ClassCoursePVO classCoursePVO : classCourses) {
-				if (leader != null && classCoursePVO.getTid1() != null 
-						&& classCoursePVO.getTid1() == leader.getTid()) {
+				if (leader != null && classCoursePVO.getTid() != null 
+						&& classCoursePVO.getTid() == leader.getTid()) {
 					classCoursePVO.setIsLeader(1);
 				} else {
 					classCoursePVO.setIsLeader(0);
@@ -118,16 +118,16 @@ public class ClassCourseController extends MyControllerSupport {
 			if (clazz == null) {
 				throw new IllegalArgumentException("cid所对应的班级不存在");
 			}
-			if (classCourse.getCourseId1() == null) {
+			if (classCourse.getCourseId() == null) {
 				throw new IllegalArgumentException("courseId不能为空");
 			}
 			SCourseDBO course = new SCourseDBO();
-			course.setCourseId(classCourse.getCourseId1());
+			course.setCourseId(classCourse.getCourseId());
 			course = (SCourseDBO) sCourseService.doRead(course);
 			if (course == null) {
 				throw new IllegalArgumentException("courseId所对应的课程不存在");
 			}
-			classCourse.setCourseName1(course.getCourseName());
+			classCourse.setCourseName(course.getCourseName());
 			classCourseService.doInsert(classCourse);
 			Map<String, Object> data = new HashMap<String, Object>();
 			data.put("info", "ok");
@@ -169,14 +169,14 @@ public class ClassCourseController extends MyControllerSupport {
 					throw new IllegalArgumentException("cid所对应的班级不存在");
 				}
 			}
-			if (classCourse.getCourseId1() != null) {
+			if (classCourse.getCourseId() != null) {
 				SCourseDBO course = new SCourseDBO();
-				course.setCourseId(classCourse.getCourseId1());
+				course.setCourseId(classCourse.getCourseId());
 				course = (SCourseDBO) sCourseService.doRead(course);
 				if (course == null) {
 					throw new IllegalArgumentException("courseId所对应的课程不存在");
 				}
-				classCourse.setCourseName1(course.getCourseName());
+				classCourse.setCourseName(course.getCourseName());
 			}
 			classCourseService.doUpdate(classCourse);
 			Map<String, Object> data = new HashMap<String, Object>();
@@ -212,16 +212,16 @@ public class ClassCourseController extends MyControllerSupport {
 				throw new IllegalArgumentException("班级课程不存在");
 			}
 			
-			if (classCourse.getTid1() == null) {
+			if (classCourse.getTid() == null) {
 				throw new IllegalArgumentException("班级课程教师tid不能为空");
 			}
 			UTeacherDBO teacher = new UTeacherDBO();
-			teacher.setTid(classCourse.getTid1());
+			teacher.setTid(classCourse.getTid());
 			teacher = (UTeacherDBO) uTeacherService.doRead(teacher);
 			if (teacher == null) {
 				throw new IllegalArgumentException("tid所对应的教师不存在");
 			}
-			classCourse.setTeacherName1(teacher.getTeacherName());
+			classCourse.setTeacherName(teacher.getTeacherName());
 			classCourseService.doUpdate(classCourse);
 			Map<String, Object> data = new HashMap<String, Object>();
 			data.put("info", "ok");
