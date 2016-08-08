@@ -1,9 +1,11 @@
-package org.isotope.jfp.common.login;
+package org.isotope.jfp.framework.utils.token;
 
 import org.isotope.jfp.framework.beans.user.UserBean;
 import org.isotope.jfp.framework.cache.ICacheService;
 import org.isotope.jfp.framework.utils.BeanFactoryHelper;
 import org.isotope.jfp.framework.utils.EmptyHelper;
+
+import com.alibaba.fastjson.JSON;
 
 /**
  * 缓存与本地线程同步
@@ -11,7 +13,7 @@ import org.isotope.jfp.framework.utils.EmptyHelper;
  * @author 001745
  *
  */
-public class LoginerCacheHelper {
+public class UserCacheHelper {
 
 	/**
 	 * 获得登录用户信息
@@ -19,12 +21,16 @@ public class LoginerCacheHelper {
 	 * @param token
 	 * @return
 	 */
-	public static UserBean checkLoginer(String token) {
+	public static UserBean checkUser(String token) {
 		if (EmptyHelper.isEmpty(token))
 			return null;
 		ICacheService myCache = BeanFactoryHelper.getBean("myCache");
-		myCache.selectDB(2);
-		UserBean loginer = (UserBean) myCache.getObject(token);
+		myCache.selectDB(3);
+		String obj = (String) myCache.getObject(token, false);
+		if (EmptyHelper.isEmpty(obj))
+			return null;
+
+		UserBean loginer = JSON.parseObject(obj, UserBean.class);
 		myCache.init();
 		return loginer;
 	}
@@ -34,20 +40,20 @@ public class LoginerCacheHelper {
 	 * 
 	 * @param loginer
 	 */
-	public static void saveLoginer(UserBean loginer) {
+	public static void saveUser(UserBean loginer) {
 		if (EmptyHelper.isEmpty(loginer))
 			return;
 		ICacheService myCache = BeanFactoryHelper.getBean("myCache");
-		myCache.selectDB(2);
-		myCache.putObject(loginer.getToken(), loginer);
+		myCache.selectDB(3);
+		myCache.putObject(loginer.getToken(), JSON.toJSONString(loginer), 7200, false);
 		myCache.init();
 	}
 
-	public static void removeLoginer(String token) {
+	public static void removeUser(String token) {
 		if (EmptyHelper.isEmpty(token))
 			return;
 		ICacheService myCache = BeanFactoryHelper.getBean("myCache");
-		myCache.selectDB(2);
+		myCache.selectDB(3);
 		myCache.deleteObject(token);
 		myCache.init();
 	}
