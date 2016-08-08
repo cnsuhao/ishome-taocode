@@ -8,33 +8,15 @@ public class UserBean extends LoginerBean {
 	String loginStatus;
 
 	/**
-	 * 登录用户Id
-	 */
-	Long userId;
-	/**
-	 * 企业ID
-	 */
-	String companyId;
-	/**
 	 * 产品ID
 	 */
 	String productId;
-	/**
-	 * 用户分类,用于区分数据来源<br>
-	 * 1:教师,2:家长,3:学生
-	 */
-	String userType;
 
 	/**
 	 * 激活状态<br>
 	 * 0激活1未激活
 	 */
 	String activeType;
-	/**
-	 * 用户类型<br>
-	 * 0启用1停用
-	 */
-	String useType;
 
 	/**
 	 * 用户姓名
@@ -47,15 +29,15 @@ public class UserBean extends LoginerBean {
 	/**
 	 * 企业全称
 	 */
-	String companyNameCN;
+	String schoolNameCN;
 	/**
 	 * 企业电话
 	 */
-	String companyPhone;
+	String schoolPhone;
 	/**
 	 * 企业电话
 	 */
-	String companyLogo;
+	String schoolLogo;
 	/**
 	 * 是否管理员（0超级管理员1普通用户）
 	 */
@@ -69,22 +51,6 @@ public class UserBean extends LoginerBean {
 		this.loginStatus = loginStatus;
 	}
 
-	public Long getUserId() {
-		return userId;
-	}
-
-	public void setUserId(Long userId) {
-		this.userId = userId;
-	}
-
-	public String getCompanyId() {
-		return companyId;
-	}
-
-	public void setCompanyId(String companyId) {
-		this.companyId = companyId;
-	}
-
 	public String getProductId() {
 		return productId;
 	}
@@ -93,28 +59,12 @@ public class UserBean extends LoginerBean {
 		this.productId = productId;
 	}
 
-	public String getUserType() {
-		return userType;
-	}
-
-	public void setUserType(String userType) {
-		this.userType = userType;
-	}
-
 	public String getActiveType() {
 		return activeType;
 	}
 
 	public void setActiveType(String activeType) {
 		this.activeType = activeType;
-	}
-
-	public String getUseType() {
-		return useType;
-	}
-
-	public void setUseType(String useType) {
-		this.useType = useType;
 	}
 
 	public String getUserNameCN() {
@@ -133,28 +83,28 @@ public class UserBean extends LoginerBean {
 		this.userPhone = userPhone;
 	}
 
-	public String getCompanyNameCN() {
-		return companyNameCN;
+	public String getSchoolNameCN() {
+		return schoolNameCN;
 	}
 
-	public void setCompanyNameCN(String companyNameCN) {
-		this.companyNameCN = companyNameCN;
+	public void setSchoolNameCN(String schoolNameCN) {
+		this.schoolNameCN = schoolNameCN;
 	}
 
-	public String getCompanyPhone() {
-		return companyPhone;
+	public String getSchoolPhone() {
+		return schoolPhone;
 	}
 
-	public void setCompanyPhone(String companyPhone) {
-		this.companyPhone = companyPhone;
+	public void setSchoolPhone(String schoolPhone) {
+		this.schoolPhone = schoolPhone;
 	}
 
-	public String getCompanyLogo() {
-		return companyLogo;
+	public String getSchoolLogo() {
+		return schoolLogo;
 	}
 
-	public void setCompanyLogo(String companyLogo) {
-		this.companyLogo = companyLogo;
+	public void setSchoolLogo(String schoolLogo) {
+		this.schoolLogo = schoolLogo;
 	}
 
 	public String getIsAdmin() {

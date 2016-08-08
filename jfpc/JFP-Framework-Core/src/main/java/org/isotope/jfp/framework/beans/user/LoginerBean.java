@@ -2,6 +2,7 @@ package org.isotope.jfp.framework.beans.user;
 
 import javax.inject.Named;
 
+import org.isotope.jfp.framework.beans.common.BusinessTokenBean;
 import org.isotope.jfp.framework.utils.DateHelper;
 
 /**
@@ -14,7 +15,7 @@ import org.isotope.jfp.framework.utils.DateHelper;
  * @since 0.1.0 2014/5/30
  */
 @Named
-public class LoginerBean extends TokenBean {
+public class LoginerBean extends BusinessTokenBean {
 
 	/**
 	 * 密码
