@@ -8,6 +8,7 @@ import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.support.MyServiceSupport;
 import org.isotope.jfp.framework.utils.EmptyHelper;
 import org.isotope.jfp.framework.utils.token.BusinessTokenHelper;
+import org.isotope.jfp.framework.utils.token.UserCacheHelper;
 
 public class LoginService extends MyServiceSupport implements ISFrameworkConstants {
 
@@ -57,8 +58,8 @@ public class LoginService extends MyServiceSupport implements ISFrameworkConstan
 	 */
 	protected void doLoginToken(UserBean loginer) {
 		// 缓存登录信息
-		LoginerCacheHelper.saveLoginer(loginer);
-		// 数据库保存
+		UserCacheHelper.saveUser(loginer);
+		// 数据库保存O
 		getLoginDao().doLoginToken(loginer);
 	}
 
@@ -68,7 +69,7 @@ public class LoginService extends MyServiceSupport implements ISFrameworkConstan
 	 * @param loginer
 	 */
 	protected void doLogoutToken(UserBean loginer) {
-		LoginerCacheHelper.removeLoginer(loginer.getToken());
+		UserCacheHelper.removeUser(loginer.getToken());
 		getLoginDao().doLogoutToken(loginer);
 	}
 

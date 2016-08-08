@@ -1,9 +1,14 @@
 package org.isotope.jfp.framework.support;
 
+import org.isotope.jfp.framework.beans.user.UserBean;
+import org.isotope.jfp.framework.cache.ICacheService;
+import org.isotope.jfp.framework.cache.session.SessionHelper;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.constants.pub.ISModelConstants;
-import org.springframework.web.context.request.RequestAttributes;
-import org.springframework.web.context.request.RequestContextHolder;
+import org.isotope.jfp.framework.utils.BeanFactoryHelper;
+import org.isotope.jfp.framework.utils.token.UserCacheHelper;
+
+import com.alibaba.fastjson.JSON;
 
 /**
  * 业务框架超类
@@ -13,24 +18,29 @@ import org.springframework.web.context.request.RequestContextHolder;
  * @version 0.1.1 2014/8/27 增加自定义提示信息页面{getMessageMAV}
  * @version 0.1.0 2014/2/8
  */
-public class MyFrameworkSupport implements ISFrameworkConstants, ISModelConstants
-{
+public class MyFrameworkSupport implements ISFrameworkConstants, ISModelConstants {
 
 	// //////////////////////////////////////////////////////////////
 	public void setSessionAttribute(String key, Object value) {
-		RequestContextHolder.getRequestAttributes().setAttribute(key, value, RequestAttributes.SCOPE_SESSION);
-		// CatchUtils.setAttribute(key, value);
+		ICacheService myCache = BeanFactoryHelper.getBean("myCache");
+		myCache.selectDB(1);
+		myCache.putObject(key, JSON.toJSONString(value), 3600, false);
+		myCache.init();
 	}
 
 	protected Object getSessionAttribute(String key) {
-		return RequestContextHolder.getRequestAttributes().getAttribute(key, RequestAttributes.SCOPE_SESSION);
-		// 基于缓存服务器
-		// return CatchUtils.getAttribute(key);
+		ICacheService myCache = BeanFactoryHelper.getBean("myCache");
+		myCache.selectDB(1);
+		String obj = (String) myCache.getObject(key, false);
+		myCache.init();
+		return obj;
 	}
 
 	protected void removeSessionAttribute(String key) {
-		RequestContextHolder.getRequestAttributes().removeAttribute(key, RequestAttributes.SCOPE_SESSION);
-		// CatchUtils.removeAttribute(key);
+		ICacheService myCache = BeanFactoryHelper.getBean("myCache");
+		myCache.selectDB(1);
+		myCache.deleteObject(key);
+		myCache.init();
 	}
 
 	// //////////////////////////////////////////////////////////////
@@ -53,30 +63,24 @@ public class MyFrameworkSupport implements ISFrameworkConstants, ISModelConstant
 	 * @param code
 	 * @return 核对手机验证码0正确1失败2过期
 	 */
-	// TODO
 	public int validateSMSCode(String phone, String bizId, String code) {
-		if(getSessionAttribute(phone+bizId)==null){
+		if (getSessionAttribute(phone + bizId) == null) {
 			return 2;
 		}
-		if(!code.equals(getSessionAttribute(phone+bizId))){
+		if (!code.equals(getSessionAttribute(phone + bizId))) {
 			return 1;
 		}
 		return 0;
 	}
 
 	// ////////////////处理线程安全/////////////////////////
-	/**
-	 * Session ID获得
-	 * 
-	 * @return
-	 */
-	public String getSessionid() {
-		return (String) getSessionAttribute(CONSTANT_SESSION_ID);
+	public static UserBean checkLoginer(String token) {
+		return UserCacheHelper.checkUser(token);
 	}
-	
-
-	public void setToken(String token) {
-		// Session保存
-		setSessionAttribute(CONSTANT_USER_TOKEN, token);
+	public static void setUserData(UserBean loginer) {
+		SessionHelper.setUserData(loginer);
+	}
+	public static UserBean getUserData() {
+		return SessionHelper.getUserData();
 	}
 }

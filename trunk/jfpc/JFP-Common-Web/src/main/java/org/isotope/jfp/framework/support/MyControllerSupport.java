@@ -7,14 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.isotope.jfp.common.login.LoginerCacheHelper;
-import org.isotope.jfp.framework.beans.common.BusinessTokenBean;
 import org.isotope.jfp.framework.beans.common.RESTResultBean;
 import org.isotope.jfp.framework.beans.page.PageVOSupport;
-import org.isotope.jfp.framework.beans.user.LoginerBean;
 import org.isotope.jfp.framework.beans.user.UserBean;
 import org.isotope.jfp.framework.cache.ICacheService;
-import org.isotope.jfp.framework.cache.session.SessionHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,9 +24,7 @@ import com.alibaba.fastjson.JSON;
  * @version 0.2.1 2014/11/05
  * @version 0.1.0 2014/2/8
  */
-public class MyControllerSupport extends MyFrameworkSupport // implements
-															// ISessionSupport
-{
+public class MyControllerSupport extends MyFrameworkSupport {
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	/**
@@ -46,36 +40,30 @@ public class MyControllerSupport extends MyFrameworkSupport // implements
 	protected ICacheService myCache;
 
 	/**
-	 * 当前用户Token
+	 * 当前用户
 	 */
-	protected BusinessTokenBean myToken;
 	private UserBean loginer;
 
-//	public BusinessTokenBean getToken() {
-//		return myToken;
-//	}
-//
 	public UserBean getLoginer() {
 		return loginer;
 	}
 
 	public boolean doCheckToken(String token) {
-		//LoginerCacheHelper.checkLoginer(token);
-		myToken = BusinessTokenBean.build("911822733644555466377288199__a__b__c__d__e__f__g");
-		// 获得用户信息
-		loginer = new UserBean();
-		loginer.setUserId(123456L);
-		loginer.setToken("911822733644555466377288199__a__b__c__d__e__f__g");
 		// 检查用户Token
+		// loginer = super.checkLoginer(token);
+		{// 临时代码
+			// 获得用户信息
+			loginer = new UserBean();
+			loginer.setUserId(123456L);
+			loginer.setToken("911822733644555466377288199__a__b__c__d__e__f__g");
+		}
 		// 缓存Session
-		SessionHelper.setUserData(loginer);
+		super.setUserData(loginer);
 		return true;
 	}
 
 	public RESTResultBean tokenFail() {
 		RESTResultBean result = new RESTResultBean();
-		// result.setInfo("访问失败");
-		// result.setStatus(1);
 		return result;
 	}
 
@@ -85,40 +73,9 @@ public class MyControllerSupport extends MyFrameworkSupport // implements
 	 * @param response
 	 */
 	// @ModelAttribute
-	public boolean doCheckLogin(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
-		// 获得当前请求Token
-		loginer = new UserBean();
-		// // 判断TOKEN有效性
-		// if (!doCheckToken(request, response)) {
-		// goBack(request, response);
-		// }
-		myToken = new BusinessTokenBean();
-		loadUserInfo(request, response, session);
+	public boolean doSafetyCheck(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+
 		return true;
-	}
-
-	/**
-	 * Session ID获得
-	 * 
-	 * @param request
-	 * @param response
-	 * @param session
-	 */
-	// 注释的方法会在此controller每个方法执行前被执行
-	public void setSessionid(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
-		// 定义sessionID
-		// setSessionid(session.getId());
-	}
-
-	/**
-	 * 菜单用户和企业基本信息
-	 * 
-	 * @param request
-	 * @param response
-	 */
-	public void loadUserInfo(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
-		//
-
 	}
 
 	public void goBack(HttpServletRequest request, HttpServletResponse response) {
@@ -183,8 +140,4 @@ public class MyControllerSupport extends MyFrameworkSupport // implements
 	// return result;
 	// }
 
-	public boolean doCheckComputer(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 }
