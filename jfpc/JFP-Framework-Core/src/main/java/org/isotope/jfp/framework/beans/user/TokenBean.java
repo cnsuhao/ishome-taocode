@@ -1,6 +1,5 @@
 package org.isotope.jfp.framework.beans.user;
 
-import org.isotope.jfp.framework.beans.common.BusinessTokenBean;
 import org.isotope.jfp.framework.beans.common.FrameworkDataBean;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 
@@ -17,10 +16,5 @@ public class TokenBean extends FrameworkDataBean implements ISFrameworkConstants
 
 	public void setToken(String token) {
 		this.token = token;
-	}
-
-	public BusinessTokenBean getToken(String token) {
-		this.setToken(token);
-		return BusinessTokenBean.build(token);
 	}
 }
