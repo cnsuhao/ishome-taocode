@@ -5,6 +5,7 @@ import java.util.Date;
 
 import org.isotope.jfp.framework.beans.user.TokenBean;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
+import org.isotope.jfp.framework.utils.EmptyHelper;
 import org.isotope.jfp.framework.utils.token.BusinessTokenHelper;
 
 /**
@@ -30,31 +31,37 @@ public class BusinessTokenBean extends TokenBean implements ISFrameworkConstants
 	public static String getBizToken(BusinessTokenBean loginer) {
 		return BusinessTokenHelper.getBizTokenData("" + loginer.getSchoolId(), "" + loginer.getUserId(), loginer.getUserType() + loginTime());
 	}
-	
+
 	//
-	///{companyId}														18
-	//--------/{userId}													18
-	//-----------------/{bizName}										8
-	//---------------------------/{encryType}							1
-	//---------------------------------------/{clientTimestamp}			8 (MMDDH24)	
+	/// {companyId} 18
+	// --------/{userId} 18
+	// -----------------/{bizName} 8
+	// ---------------------------/{encryType} 1
+	// ---------------------------------------/{clientTimestamp} 8 (MMDDH24)
 	public static BusinessTokenBean build(String bizToken) {
 		BusinessTokenBean tokenBean = new BusinessTokenBean();
 		String[] ds = BusinessTokenHelper.getBizTokenData(bizToken);
 		tokenBean.setSchoolId(Long.parseLong(ds[0]));
 		tokenBean.setUserId(Long.parseLong(ds[1]));
-		try{
+		try {
 			tokenBean.setUserType(ds[2].substring(0, 1));
 			tokenBean.setLogintime(ds[2].substring(1));
 			return tokenBean;
-		}catch(Exception e){
-			
+		} catch (Exception e) {
+
 		}
 		tokenBean.setLogintime(ds[2]);
 		return tokenBean;
 	}
 
+	public String getToken() {
+		if(EmptyHelper.isEmpty(token))
+			token = getBizToken();
+		return token;
+	}
+
 	public String getBizToken() {
-		return BusinessTokenHelper.getBizTokenData("" + schoolId, "" + userId, logintime);
+		return BusinessTokenHelper.getBizTokenData("" + schoolId, "" + userId, userType + logintime);
 	}
 
 	/**
