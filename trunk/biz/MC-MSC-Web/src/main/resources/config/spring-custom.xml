@@ -71,7 +71,7 @@
 		<!-- 连接池 -->
 	    <constructor-arg index="0" ref="jedisPoolConfig" />  
 	    <!-- 服务器地址 -->
-    	<constructor-arg index="1" value="127.0.0.1" type="String" />
+    	<constructor-arg index="1" value="139.196.101.78" type="String" />
     	<!-- 端口号 -->
 	    <constructor-arg index="2" value="6379" type="int" />
 	    <!-- 最大连接时间 -->
