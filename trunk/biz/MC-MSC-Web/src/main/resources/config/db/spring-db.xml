@@ -36,6 +36,7 @@
 		<property name='configLocation' value='classpath:config/db/mybatis.xml' />
 		<property name='mapperLocations'>
 			<list>
+				<value>classpath*:/org/isotope/jfp/persistent/**/*.xml</value>
 				<value>classpath*:/com/mcookies/qxy/common/**/*.xml</value>
 		 	</list>
 		</property>
@@ -69,11 +70,13 @@
 		<property name='configLocation' value='classpath:/config/db/mydb.xml' />
 		<property name='sqlLocations'>
 			<list>
+				<value>classpath*:/org/isotope/jfp/persistent/**/*.sql</value>
 				<value>classpath*:/com/mcookies/qxy/common/**/*.sql</value>
 		 	</list>
 		</property>
 		<property name='dataLocations'>
 			<list>
+				<value>classpath*:/org/isotope/jfp/persistent/**/*.dat</value>
 				<value>classpath*:/com/mcookies/qxy/common/**/*.dat</value>
 		 	</list>		
 		</property>
