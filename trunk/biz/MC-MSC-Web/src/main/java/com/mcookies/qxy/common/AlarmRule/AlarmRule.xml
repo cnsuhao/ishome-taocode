@@ -184,7 +184,7 @@
         <if test=" flag != null "><!-- 行为状态 -->
             ,flag = #{flag}
         </if>
-        <if test=" timeType != null' "><!-- 生效时间设置类型 -->
+        <if test=" timeType != null "><!-- 生效时间设置类型 -->
             ,time_type = #{timeType}
         </if>
         <if test=" timeRepeat != null "><!-- 指定重复时间 -->
