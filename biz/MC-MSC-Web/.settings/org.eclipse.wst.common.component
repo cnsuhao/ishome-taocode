@@ -10,6 +10,9 @@
         <dependent-module archiveName="JFP-Framework-Core-3.2.1-RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/JFP-Framework-Core/JFP-Framework-Core">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="JFP-Common-Web-3.2.1-RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/JFP-Common-Web/JFP-Common-Web">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="java-output-path" value="/HS-MED-Service-HDS-Job/target/classes"/>
         <property name="context-root" value="JFP-Public-DistributedWebCrawler"/>
     </wb-module>
