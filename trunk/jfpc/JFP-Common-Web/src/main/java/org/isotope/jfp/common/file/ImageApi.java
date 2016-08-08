@@ -39,8 +39,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class ImageApi extends MyContentTypeSupport {
 	protected static final Logger logger = LoggerFactory.getLogger(ImageApi.class);
-	@Resource
-	FTPUtil FTPUtil_;
+//	@Resource
+//	FTPUtil FTPUtil_;
 
 	/**
 	 * 显示一张图片

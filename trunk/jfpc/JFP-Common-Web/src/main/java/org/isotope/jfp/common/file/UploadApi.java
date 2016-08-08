@@ -28,8 +28,8 @@ import org.springframework.web.multipart.MultipartFile;
 public class UploadApi extends MyContentTypeSupport {
 	protected static final Logger logger = LoggerFactory.getLogger(UploadApi.class);
 
-	@Resource
-	FTPUtil FTPUtil_;
+//	@Resource
+//	FTPUtil FTPUtil_;
 
 	/**
 	 * 文件上传
