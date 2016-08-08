@@ -3,11 +3,11 @@ package org.isotope.jfp.common.login;
 import java.util.HashMap;
 import java.util.List;
 
+import org.isotope.jfp.framework.beans.common.BusinessTokenBean;
 import org.isotope.jfp.framework.beans.user.UserBean;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.support.MyServiceSupport;
 import org.isotope.jfp.framework.utils.EmptyHelper;
-import org.isotope.jfp.framework.utils.token.BusinessTokenHelper;
 import org.isotope.jfp.framework.utils.token.UserCacheHelper;
 
 public class LoginService extends MyServiceSupport implements ISFrameworkConstants {
@@ -47,7 +47,7 @@ public class LoginService extends MyServiceSupport implements ISFrameworkConstan
 	}
 
 	protected void makeLoginToken(UserBean loginer) {
-		String token = BusinessTokenHelper.getBizToken(loginer.getCompanyId(), ""+loginer.getUserId(), ("" + System.currentTimeMillis()), loginer.getUserType());
+		String token = BusinessTokenBean.getBizToken(loginer);
 		loginer.setToken(token);
 	}
 
