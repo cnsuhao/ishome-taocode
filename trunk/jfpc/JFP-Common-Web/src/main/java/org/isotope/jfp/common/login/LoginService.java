@@ -3,7 +3,6 @@ package org.isotope.jfp.common.login;
 import java.util.HashMap;
 import java.util.List;
 
-import org.isotope.jfp.framework.beans.common.BusinessTokenBean;
 import org.isotope.jfp.framework.beans.user.UserBean;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.support.MyServiceSupport;
@@ -24,12 +23,15 @@ public class LoginService extends MyServiceSupport implements ISFrameworkConstan
 	protected List<UserBean> readTeacherLoginer(HashMap<String, String> loginer) {
 		return getLoginDao().readTeacherLoginer(loginer);
 	}
+
 	protected List<UserBean> readParentLoginer(HashMap<String, String> loginer) {
 		return getLoginDao().readParentLoginer(loginer);
 	}
+
 	protected List<UserBean> readStudentLoginer(HashMap<String, String> loginer) {
 		return getLoginDao().readStudentLoginer(loginer);
 	}
+
 	protected List<UserBean> readLoginer(String authorizerRefreshToken) {
 		return getLoginDao().readLoginerByOpenId(authorizerRefreshToken);
 	}
@@ -46,17 +48,14 @@ public class LoginService extends MyServiceSupport implements ISFrameworkConstan
 		return user;
 	}
 
-	protected void makeLoginToken(UserBean loginer) {
-		String token = BusinessTokenBean.getBizToken(loginer);
-		loginer.setToken(token);
-	}
-
 	/**
 	 * 用户登录Token
 	 * 
 	 * @param loginer
 	 */
 	protected void doLoginToken(UserBean loginer) {
+		//Token制作
+		loginer.getToken();
 		// 缓存登录信息
 		UserCacheHelper.saveUser(loginer);
 		// 数据库保存O
