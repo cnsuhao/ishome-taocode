@@ -28,6 +28,7 @@ public class RedisHelper implements ISFrameworkConstants {
 		for (int i = 0; i < size; i++) {
 			try {
 				value = jd.lpop(oldKey);
+				System.out.println(value);
 				if (EmptyHelper.isEmpty(value))
 					break;
 				if (retain)
@@ -40,12 +41,13 @@ public class RedisHelper implements ISFrameworkConstants {
 	}
 
 	public static void main(String[] args) throws Exception {
-		Jedis oldJedis = new Jedis("10.10.168.50", 6379);
-		oldJedis.auth("ImxV@ly1D4bBtGwv");
-		Jedis newJedis = new Jedis("10.10.168.50", 6379);
-		newJedis.auth("ImxV@ly1D4bBtGwv");
-		//newJedis.select(1);
-		copy(oldJedis,"QXB:COMP:KEY",newJedis,"QCC:COMP:KEY",false);
+		Jedis oldJedis = new Jedis("172.16.2.201", 6379);
+		oldJedis.auth("123456");
+		oldJedis.select(4);
+		Jedis newJedis = new Jedis("172.16.2.201", 6379);
+		newJedis.auth("123456");
+		newJedis.select(4);
+		copy(oldJedis,"HTTP_PROXY:LIST1",newJedis,"HTTP_PROXY:LIST2",true);
 		
 		//copy(oldJedis,"PAGE:GANJI:NUM",newJedis,"PAGE:GANJI:NUM",true);
 		
@@ -59,7 +61,7 @@ public class RedisHelper implements ISFrameworkConstants {
 				if(i>100000)
 				 break;
 				value = oldJedis.lpop(oldKey);
-				//System.out.println(value);
+				System.out.println(value);
 				if (retain)
 					oldJedis.rpush(oldKey, value);
 				newJedis.rpush(newKey, value);
