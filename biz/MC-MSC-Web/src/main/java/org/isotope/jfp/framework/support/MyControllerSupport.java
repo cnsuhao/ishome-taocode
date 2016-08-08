@@ -2,6 +2,7 @@ package org.isotope.jfp.framework.support;
 
 import javax.annotation.Resource;
 
+import org.isotope.jfp.framework.beans.common.BusinessTokenBean;
 import org.isotope.jfp.framework.beans.common.RESTResultBean;
 import org.isotope.jfp.framework.beans.page.PageVOSupport;
 import org.isotope.jfp.framework.beans.user.UserBean;
@@ -45,10 +46,7 @@ public class MyControllerSupport extends MyFrameworkSupport {
 		// loginer = super.checkLoginer(token);
 		{// 临时代码
 			// 获得用户信息
-			loginer = new UserBean();
-			loginer.setUserId(123456789L);
-			loginer.setSchoolId(987654321L);
-			loginer.setToken("911822733644555466377288199__a__b__c__d__e__f__g");
+			loginer = (UserBean)BusinessTokenBean.build("91a82b73c64d55e46f37g28h19i");
 		}
 		// 缓存Session
 		super.setUserData(loginer);
