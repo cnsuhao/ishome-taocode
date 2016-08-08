@@ -1,6 +1,6 @@
 package org.isotope.jfp.framework.beans.pub;
 
-import org.isotope.jfp.framework.beans.common.BusinessTokenBean;
+import org.isotope.jfp.framework.beans.common.FrameworkDataBean;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.utils.DateHelper;
 
@@ -12,7 +12,7 @@ import org.isotope.jfp.framework.utils.DateHelper;
  * @version 2.3.1.2015/07/15
  * @since 2.3.1.2015/07/15
  */
-public class LogBean extends BusinessTokenBean implements ISFrameworkConstants {
+public class LogBean extends FrameworkDataBean implements ISFrameworkConstants {
 	/**
 	 * 当前操作时间
 	 */
