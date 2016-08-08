@@ -33,6 +33,7 @@ public class LoginBusiness extends LoginService {
 	// ******************************************************************************************
 	/**
 	 * 用户登录
+	 * 
 	 * @param authorizerRefreshToken
 	 * @return
 	 */
@@ -56,6 +57,7 @@ public class LoginBusiness extends LoginService {
 
 	/**
 	 * 用户登录
+	 * 
 	 * @param loginer
 	 * @return
 	 */
@@ -75,18 +77,18 @@ public class LoginBusiness extends LoginService {
 		// 完成用户登录
 		UserBean user = new UserBean();
 		List<UserBean> loginers;
-		//1:教师,2:家长,3:学生
-		if("1".equals(loginer.getUserType())){
+		// 1:教师,2:家长,3:学生
+		if ("1".equals(loginer.getUserType())) {
 			loginers = readTeacherLoginer(login);
-		}else if("2".equals(loginer.getUserType())){
+		} else if ("2".equals(loginer.getUserType())) {
 			loginers = readParentLoginer(login);
-		}else if("3".equals(loginer.getUserType())){
+		} else if ("3".equals(loginer.getUserType())) {
 			loginers = readStudentLoginer(login);
-		}else{
+		} else {
 			user.setLoginStatus("8");
 			return user;
 		}
-		
+
 		boolean logined = false;
 		if (loginers == null) {
 			user.setLoginStatus("2");
@@ -140,7 +142,7 @@ public class LoginBusiness extends LoginService {
 		// 强制注销
 		doLogOut(user);
 	}
-	
+
 	/**
 	 * 账户唯一性检查
 	 * 
@@ -163,34 +165,33 @@ public class LoginBusiness extends LoginService {
 		}
 		// 获得用户数据
 		List<UserBean> loginers;
-		if("1".equals(userType)){
+		if ("1".equals(userType)) {
 			loginers = readTeacherLoginer(login);
-		}else if("2".equals(userType)){
+		} else if ("2".equals(userType)) {
 			loginers = readParentLoginer(login);
-		}else if("3".equals(userType)){
+		} else if ("3".equals(userType)) {
 			loginers = readStudentLoginer(login);
-		}else{
+		} else {
 			return false;
 		}
 		if (loginers.size() >= 1) {
 			return true;
-		} 
+		}
 		return false;
 	}
-	
+
 	/**
 	 * 完成登录后业务
 	 * 
 	 * @param user
 	 */
 	private void doOtherProcess(UserBean user) {
-		// 创建本次登录Token
-		makeLoginToken(user);
 		// 保存本次登录信息（缓存、数据库）
 		doLoginToken(user);
 		// 保存本次登录日志（数据库）
 		doLoginLog(user);
 	}
+
 	/**
 	 * 检查用户登录可行性
 	 * 
