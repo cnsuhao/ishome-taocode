@@ -26,9 +26,9 @@ public class NewsDisplayController extends MyControllerSupport {
 	protected ICacheService myCacheService;
 
 	/**
-	 * 新闻查询接口 /qxy/newlist/column=[col_id]&page=[page]&size=[size]&token=[token]
+	 * 新闻查询接口 /newlist/column=[col_id]&page=[page]&size=[size]&token=[token]
 	 */
-	@RequestMapping(value = "/qxy/newlist", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/newlist", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean newsListGET(@RequestBody UserDBO user) {
 		RESTResultBean result = new RESTResultBean();
@@ -49,9 +49,9 @@ public class NewsDisplayController extends MyControllerSupport {
 	}
 
 	/**
-	 * 轮播新闻查询接口 /qxy/homenews/list/token=[token]
+	 * 轮播新闻查询接口 /homenews/list/token=[token]
 	 */
-	@RequestMapping(value = "/qxy/homenews", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/homenews", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean homeNewsGET(@RequestBody UserDBO user) {
 		RESTResultBean result = new RESTResultBean();

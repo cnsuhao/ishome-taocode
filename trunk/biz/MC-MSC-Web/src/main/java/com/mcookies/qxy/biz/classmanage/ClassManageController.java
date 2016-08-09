@@ -39,10 +39,10 @@ public class ClassManageController extends MyControllerSupport {
 	
 	/**
 	 * 班级列表查询接口
-	 * /qxy/classlist/term=[term_id]&grade=[grade_id]&class=[cid]&page=[page]&
+	 * /classlist/term=[term_id]&grade=[grade_id]&class=[cid]&page=[page]&
 	 * size=[size]&teacher=[tid]&token=[token]
 	 */
-	@RequestMapping(value = "/qxy/classlist", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/classlist", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean classListGET(ClassPVO pvo, Integer page, Integer size) {
 		RESTResultBean result = new RESTResultBean();

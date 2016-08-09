@@ -48,10 +48,10 @@ public class ClassCourseController extends MyControllerSupport {
 	protected ClassTeacherService classTeacherService;
 
 	/**
-	 * 班级课程查询接口 /qxy/class/course/cid=[cid]&token=[token]
+	 * 班级课程查询接口 /class/course/cid=[cid]&token=[token]
 	 */
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/qxy/class/course", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/class/course", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean classCourseGET(@RequestParam(required = false) String token,
 			@RequestParam(required = false) Long cid) {
@@ -99,9 +99,9 @@ public class ClassCourseController extends MyControllerSupport {
 	}
 
 	/**
-	 * 班级课程新增接口 /qxy/class/course
+	 * 班级课程新增接口 /class/course
 	 */
-	@RequestMapping(value = "/qxy/class/course", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/class/course", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean classCoursePOST(@RequestBody ClassCourseDBO classCourse) {
 		RESTResultBean result = new RESTResultBean();
@@ -141,9 +141,9 @@ public class ClassCourseController extends MyControllerSupport {
 	}
 
 	/**
-	 * 班级课程修改接口 /qxy/class/course
+	 * 班级课程修改接口 /class/course
 	 */
-	@RequestMapping(value = "/qxy/class/course", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/class/course", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean classCoursePUT(@RequestBody ClassCourseDBO classCourse) {
 		RESTResultBean result = new RESTResultBean();
@@ -191,9 +191,9 @@ public class ClassCourseController extends MyControllerSupport {
 	}
 
 	/**
-	 * 班级课程教师指定及修改接口 /qxy/class/teacher
+	 * 班级课程教师指定及修改接口 /class/teacher
 	 */
-	@RequestMapping(value = "/qxy/class/teacher", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/class/teacher", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean classTeacherPUT(@RequestBody ClassCourseDBO classCourse) {
 		RESTResultBean result = new RESTResultBean();
@@ -235,9 +235,9 @@ public class ClassCourseController extends MyControllerSupport {
 	}
 
 	/**
-	 * 班级课程删除接口 /qxy/class/course
+	 * 班级课程删除接口 /class/course
 	 */
-	@RequestMapping(value = "/qxy/class/course", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/class/course", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean classCourseDELETE(@RequestBody ClassCourseDBO classCourse) {
 		// TODO: test

@@ -38,9 +38,9 @@ public class WorkflowTemplateSettingController extends MyControllerSupport {
 	protected OaRuleService oaRuleService;
 
 	/**
-	 * 工作流程事项模板查询接口 /qxy/oatags/token=[token]
+	 * 工作流程事项模板查询接口 /oatags/token=[token]
 	 */
-	@RequestMapping(value = "/qxy/oatags", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/oatags", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean oaTagsGET(@RequestParam(required = false) String token) {
 		RESTResultBean result = new RESTResultBean();
@@ -71,10 +71,10 @@ public class WorkflowTemplateSettingController extends MyControllerSupport {
 	}
 
 	/**
-	 * 工作流程事项模板新增接口 /qxy/oatags
+	 * 工作流程事项模板新增接口 /oatags
 	 */
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/qxy/oatags", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/oatags", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean oaTagsPOST(@RequestBody OaTagsDBO oaTags) {
 		RESTResultBean result = new RESTResultBean();
@@ -106,10 +106,10 @@ public class WorkflowTemplateSettingController extends MyControllerSupport {
 	}
 
 	/**
-	 * 工作流程事项模板修改接口 /qxy/oatags
+	 * 工作流程事项模板修改接口 /oatags
 	 */
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/qxy/oatags", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/oatags", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean oaTagsPUT(@RequestBody OaTagsDBO oaTags) {
 			RESTResultBean result = new RESTResultBean();
@@ -161,10 +161,10 @@ public class WorkflowTemplateSettingController extends MyControllerSupport {
 	}
 
 	/**
-	 * 工作流程事项模板删除接口 /qxy/oatags
+	 * 工作流程事项模板删除接口 /oatags
 	 */
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/qxy/oatags", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/oatags", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean oaTagsDELETE(@RequestBody String jsonparam) {
 		RESTResultBean result = new RESTResultBean();

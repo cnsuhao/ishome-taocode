@@ -27,10 +27,10 @@ public class StudentManageController extends MyControllerSupport {
 
 	/**
 	 * 学生(家长)列表查询接口
-	 * /qxy/stundent/list/term=[term_id]&grade=[grade_id]&class=[cid]&page=[page
+	 * /stundent/list/term=[term_id]&grade=[grade_id]&class=[cid]&page=[page
 	 * ]&size=[size]&teacher=[tid]&token=[token]
 	 */
-	@RequestMapping(value = "/qxy/stundent/list", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/stundent/list", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean studentListGET(@RequestBody UserDBO user) {
 		RESTResultBean result = new RESTResultBean();
@@ -52,10 +52,10 @@ public class StudentManageController extends MyControllerSupport {
 
 	/**
 	 * 学生(家长)搜索接口
-	 * /qxy/stundent/search/term=[term]&grade=[grade]&class=[cid]&number=[number
+	 * /stundent/search/term=[term]&grade=[grade]&class=[cid]&number=[number
 	 * ]&teacher=[tid]&token=[token]
 	 */
-	@RequestMapping(value = "/qxy/student/search", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/student/search", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean studentSearchGET(@RequestBody UserDBO user) {
 		RESTResultBean result = new RESTResultBean();
@@ -77,10 +77,10 @@ public class StudentManageController extends MyControllerSupport {
 
 	/**
 	 * 学生(家长)信息查询接口
-	 * /qxy/student/info/term=[term]&grade=[grade]&class=[cid]&student=[
+	 * /student/info/term=[term]&grade=[grade]&class=[cid]&student=[
 	 * student_id]&tid=[tid]&token=[token]
 	 */
-	@RequestMapping(value = "/qxy/student/info", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/student/info", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean studentInfoGET(@RequestBody UserDBO user) {
 		RESTResultBean result = new RESTResultBean();
@@ -101,9 +101,9 @@ public class StudentManageController extends MyControllerSupport {
 	}
 
 	/**
-	 * 学生(家长)转班接口 /qxy/student/move
+	 * 学生(家长)转班接口 /student/move
 	 */
-	@RequestMapping(value = "/qxy/student/move", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/student/move", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean studentMovePUT(@RequestBody UserDBO user) {
 		RESTResultBean result = new RESTResultBean();

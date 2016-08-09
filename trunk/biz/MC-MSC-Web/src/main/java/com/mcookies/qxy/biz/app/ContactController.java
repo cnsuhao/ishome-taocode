@@ -26,9 +26,9 @@ public class ContactController extends MyControllerSupport {
 	protected ICacheService myCacheService;
 
 	/**
-	 * 教师查询任课班级 /qxy/teacher/class/term=[term]&teacher=[tid]&token=[token]
+	 * 教师查询任课班级 /teacher/class/term=[term]&teacher=[tid]&token=[token]
 	 */
-	@RequestMapping(value = "/qxy/teacher/class", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/teacher/class", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean teacherClassGET(@RequestBody UserDBO user) {
 		RESTResultBean result = new RESTResultBean();
@@ -49,9 +49,9 @@ public class ContactController extends MyControllerSupport {
 	}
 
 	/**
-	 * 班级查询任课老师 /qxy/class/teacher/term=[term]&class=[cid]&token=[token]
+	 * 班级查询任课老师 /class/teacher/term=[term]&class=[cid]&token=[token]
 	 */
-	@RequestMapping(value = "/qxy/class/teacher", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/class/teacher", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean classTeacherGET(@RequestBody UserDBO user) {
 		RESTResultBean result = new RESTResultBean();
@@ -73,10 +73,10 @@ public class ContactController extends MyControllerSupport {
 
 	/**
 	 * 班级查询家长通讯录
-	 * /qxy/class/parent/term=[term]&class=[cid]&student=[student_id]&page=[page
+	 * /class/parent/term=[term]&class=[cid]&student=[student_id]&page=[page
 	 * ]&size=[size]&token=[token]
 	 */
-	@RequestMapping(value = "/qxy/class/parent", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/class/parent", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean classParentGET(@RequestBody UserDBO user) {
 		RESTResultBean result = new RESTResultBean();
@@ -98,10 +98,10 @@ public class ContactController extends MyControllerSupport {
 
 	/**
 	 * 家长角色对应学生所属班
-	 * /qxy/parent/class/term=[term]&parent=[parent_id]&student=[student_id]&
+	 * /parent/class/term=[term]&parent=[parent_id]&student=[student_id]&
 	 * token=[token]
 	 */
-	@RequestMapping(value = "/qxy/parent/class", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/parent/class", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean parentClassGET(@RequestBody UserDBO user) {
 		RESTResultBean result = new RESTResultBean();

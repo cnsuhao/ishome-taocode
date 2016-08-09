@@ -47,10 +47,10 @@ public class ScheduleController extends MyControllerSupport {
 
 	/**
 	 * 值日值周信息日历表状态查询接口
-	 * /qxy/schedule/status/term=[term]&teacher=[tid]&token=[token]
+	 * /schedule/status/term=[term]&teacher=[tid]&token=[token]
 	 */
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/qxy/schedule/status", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/schedule/status", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean scheduleStatusGET(STermPVO term) {
 		RESTResultBean result = new RESTResultBean();
@@ -91,9 +91,9 @@ public class ScheduleController extends MyControllerSupport {
 	}
 
 	/**
-	 * 值周工作安排查询接口 /qxy/schedule/week/term=[term]&week=[week]&token=[token]
+	 * 值周工作安排查询接口 /schedule/week/term=[term]&week=[week]&token=[token]
 	 */
-	@RequestMapping(value = "/qxy/schedule/week", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/schedule/week", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean scheduleWeekGET(@RequestBody UserDBO user) {
 		// TODO
@@ -115,9 +115,9 @@ public class ScheduleController extends MyControllerSupport {
 	}
 
 	/**
-	 * 值日工作安排查询接口 /qxy/schedule/day/term=[term]&day=[date]&token=[token]
+	 * 值日工作安排查询接口 /schedule/day/term=[term]&day=[date]&token=[token]
 	 */
-	@RequestMapping(value = "/qxy/schedule/day", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/schedule/day", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean scheduleDayGET(@RequestBody UserDBO user) {
 		// TODO
@@ -139,9 +139,9 @@ public class ScheduleController extends MyControllerSupport {
 	}
 
 	/**
-	 * 值周(值日)工作岗位列表查询接口 /qxy/duty/list/type=[type]&token=[token]
+	 * 值周(值日)工作岗位列表查询接口 /duty/list/type=[type]&token=[token]
 	 */
-	@RequestMapping(value = "/qxy/duty/list", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/duty/list", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean dutyListGET(@RequestBody UserDBO user) {
 		// TODO
@@ -163,9 +163,9 @@ public class ScheduleController extends MyControllerSupport {
 	}
 
 	/**
-	 * 值周(值日)工作岗位详情查询接口 /qxy/duty/content/duty=[duty_id]&token=[token]
+	 * 值周(值日)工作岗位详情查询接口 /duty/content/duty=[duty_id]&token=[token]
 	 */
-	@RequestMapping(value = "/qxy/duty/content", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/duty/content", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean dutyContentGET(@RequestBody UserDBO user) {
 		// TODO
@@ -187,9 +187,9 @@ public class ScheduleController extends MyControllerSupport {
 	}
 
 	/**
-	 * 值周(值日)工作安排新增接口 /qxy/schedule
+	 * 值周(值日)工作安排新增接口 /schedule
 	 */
-	@RequestMapping(value = "/qxy/schedule", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/schedule", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean schedulePOST(@RequestBody SDutySchedulingDBO scheduling) {
 		RESTResultBean result = new RESTResultBean();
@@ -232,9 +232,9 @@ public class ScheduleController extends MyControllerSupport {
 	}
 
 	/**
-	 * 值周(值日)工作安排修改接口 /qxy/schedule
+	 * 值周(值日)工作安排修改接口 /schedule
 	 */
-	@RequestMapping(value = "/qxy/schedule", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/schedule", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean schedulePUT(@RequestBody SDutySchedulingDBO scheduling) {
 		RESTResultBean result = new RESTResultBean();
@@ -265,9 +265,9 @@ public class ScheduleController extends MyControllerSupport {
 	}
 
 	/**
-	 * 值周(值日)工作安排删除接口 /qxy/schedule
+	 * 值周(值日)工作安排删除接口 /schedule
 	 */
-	@RequestMapping(value = "/qxy/schedule", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/schedule", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean scheduleDELETE(@RequestBody String jsonparam) {
 		RESTResultBean result = new RESTResultBean();
@@ -298,9 +298,9 @@ public class ScheduleController extends MyControllerSupport {
 	}
 
 	/**
-	 * 值周(值日)工作安排应用至其他周或天接口 /qxy/schedule/copy
+	 * 值周(值日)工作安排应用至其他周或天接口 /schedule/copy
 	 */
-	@RequestMapping(value = "/qxy/schedule/copy", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/schedule/copy", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean scheduleCopyPUT(@RequestBody ScheduleCopyPUTDto dto) {
 		RESTResultBean result = new RESTResultBean();
