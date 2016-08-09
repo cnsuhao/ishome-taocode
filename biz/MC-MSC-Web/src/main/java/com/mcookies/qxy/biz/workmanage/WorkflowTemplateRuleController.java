@@ -43,9 +43,9 @@ public class WorkflowTemplateRuleController extends MyControllerSupport {
 	protected OaRuleService oaRuleService;
 
 	/**
-	 * 工作流程事项模板规则查询接口 /qxy/oarule/token=[token]
+	 * 工作流程事项模板规则查询接口 /oarule/token=[token]
 	 */
-	@RequestMapping(value = "/qxy/oarule", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/oarule", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean oaRuleGET(@RequestParam(required = false) String token,
 			@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "12") int size) {
@@ -91,10 +91,10 @@ public class WorkflowTemplateRuleController extends MyControllerSupport {
 	}
 
 	/**
-	 * 工作流程事项模板规则新增接口 /qxy/oarule
+	 * 工作流程事项模板规则新增接口 /oarule
 	 */
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/qxy/oarule", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/oarule", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean oaRulePOST(@RequestBody OaRuleDBO oaRule) {
 		RESTResultBean result = new RESTResultBean();
@@ -129,9 +129,9 @@ public class WorkflowTemplateRuleController extends MyControllerSupport {
 	}
 
 	/**
-	 * 工作流程事项模板规则修改及指定审批人接口 /qxy/schedule
+	 * 工作流程事项模板规则修改及指定审批人接口 /schedule
 	 */
-	@RequestMapping(value = "/qxy/oarule", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/oarule", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean oaRulePUT(@RequestBody OaRuleDBO oaRule) {
 		RESTResultBean result = new RESTResultBean();
@@ -170,10 +170,10 @@ public class WorkflowTemplateRuleController extends MyControllerSupport {
 	}
 
 	/**
-	 * 工作流程事项模板规则删除接口 /qxy/oarule
+	 * 工作流程事项模板规则删除接口 /oarule
 	 */
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/qxy/oarule", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/oarule", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean oaRuleDELETE(@RequestBody String jsonparam) {
 		RESTResultBean result = new RESTResultBean();

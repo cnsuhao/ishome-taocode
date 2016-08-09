@@ -33,9 +33,9 @@ public class ClassStudentController extends MyControllerSupport {
 
 	*//**
 	 * 班级学生(家长)列表查询接口
-	 * /qxy/class/student/list/cid=[cid]&page=[page]&size=[size]&token=[token]
+	 * /class/student/list/cid=[cid]&page=[page]&size=[size]&token=[token]
 	 *//*
-	@RequestMapping(value = "/qxy/class/student/list", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/class/student/list", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean classStudentListGET(@RequestBody UserDBO user) {
 		// TODO
@@ -58,9 +58,9 @@ public class ClassStudentController extends MyControllerSupport {
 
 	*//**
 	 * 班级学生(家长)搜索接口
-	 * /qxy/class/student/search/cid=[cid]&number=[number]&token=[token]
+	 * /class/student/search/cid=[cid]&number=[number]&token=[token]
 	 *//*
-	@RequestMapping(value = "/qxy/class/student/search", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/class/student/search", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean classStudentSearchGET(@RequestBody UserDBO user) {
 		// TODO
@@ -83,9 +83,9 @@ public class ClassStudentController extends MyControllerSupport {
 
 	*//**
 	 * 班级学生(家长)信息查询接口
-	 * /qxy/class/student/info/cid=[cid]&student=[student_id]&token=[token]
+	 * /class/student/info/cid=[cid]&student=[student_id]&token=[token]
 	 *//*
-	@RequestMapping(value = "/qxy/class/student/info", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/class/student/info", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean classStudentInfoGET(@RequestBody UserDBO user) {
 		RESTResultBean result = new RESTResultBean();
@@ -106,9 +106,9 @@ public class ClassStudentController extends MyControllerSupport {
 	}
 
 	*//**
-	 * 班级学生(家长)新增接口 /qxy/class/student/info
+	 * 班级学生(家长)新增接口 /class/student/info
 	 *//*
-	@RequestMapping(value = "/qxy/class/student/info", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/class/student/info", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean classStudentInfoPOST(@RequestBody ClassCourseDBO classCourse) {
 		RESTResultBean result = new RESTResultBean();
@@ -147,9 +147,9 @@ public class ClassStudentController extends MyControllerSupport {
 	}
 
 	*//**
-	 * 班级学生(家长)修改接口 /qxy/class/student/info
+	 * 班级学生(家长)修改接口 /class/student/info
 	 *//*
-	@RequestMapping(value = "/qxy/class/student/info", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/class/student/info", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean classStudentInfoPUT(@RequestBody ClassCourseDBO classCourse) {
 		// TODO: test
@@ -197,9 +197,9 @@ public class ClassStudentController extends MyControllerSupport {
 	}
 
 	*//**
-	 * 班级学生(家长)删除接口 /qxy/class/student/info
+	 * 班级学生(家长)删除接口 /class/student/info
 	 *//*
-	@RequestMapping(value = "/qxy/class/student/info", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/class/student/info", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean classStudentInfoDELETE(@RequestBody ClassCourseDBO classCourse) {
 		// TODO: test

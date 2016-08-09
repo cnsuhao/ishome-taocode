@@ -50,10 +50,10 @@ public class WorkflowController extends MyControllerSupport {
 	protected OaRuleService oaRuleService;
 
 	/**
-	 * 我提交的事项查询接口 /qxy/myapplication/teacher=[tid]&token=[token]
+	 * 我提交的事项查询接口 /myapplication/teacher=[tid]&token=[token]
 	 */
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/qxy/myapplication", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/myapplication", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean myApplicationGET(@RequestParam(required = false) String token,
 			@RequestParam(value = "teacher", required = false) Long tid) {
@@ -104,9 +104,9 @@ public class WorkflowController extends MyControllerSupport {
 	}
 
 	/**
-	 * 我提交的事项新增接口 /qxy/myapplication
+	 * 我提交的事项新增接口 /myapplication
 	 */
-	@RequestMapping(value = "/qxy/myapplication", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/myapplication", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean myApplicationPOST(@RequestBody OaExamineInformationDBO oaExamineInformation) {
 		RESTResultBean result = new RESTResultBean();
@@ -158,9 +158,9 @@ public class WorkflowController extends MyControllerSupport {
 	}
 
 	/**
-	 * 我提交的事项删除接口 /qxy/myapplication
+	 * 我提交的事项删除接口 /myapplication
 	 */
-	@RequestMapping(value = "/qxy/myapplication", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/myapplication", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean myApplicationDELETE(@RequestBody String jsonparam) {
 		RESTResultBean result = new RESTResultBean();
@@ -191,9 +191,9 @@ public class WorkflowController extends MyControllerSupport {
 	}
 
 	/**
-	 * 我的审批事项查询接口 /qxy/myaudit/teacher=[tid]&token=[token]
+	 * 我的审批事项查询接口 /myaudit/teacher=[tid]&token=[token]
 	 */
-	@RequestMapping(value = "/qxy/myaudit", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/myaudit", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean myAuditGET(@RequestParam(required = false) String token,
 			@RequestParam(value = "teacher", required = false) Long tid) {
@@ -228,9 +228,9 @@ public class WorkflowController extends MyControllerSupport {
 	}
 
 	/**
-	 * 我的审批驳回(同意)操作接口 /qxy/myaudit/set
+	 * 我的审批驳回(同意)操作接口 /myaudit/set
 	 */
-	@RequestMapping(value = "/qxy/myaudit/set", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/myaudit/set", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean myAuditSetPUT(@RequestBody OaExamineResultDBO oaExamineResult) {
 		RESTResultBean result = new RESTResultBean();

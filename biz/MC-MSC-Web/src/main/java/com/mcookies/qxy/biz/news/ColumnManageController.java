@@ -32,10 +32,10 @@ public class ColumnManageController extends MyControllerSupport {
 	protected NewsColumnService newsColumnService;
 
 	/**
-	 * 新闻栏目查询接口 /qxy/column/type=[type]&token=[token]
+	 * 新闻栏目查询接口 /column/type=[type]&token=[token]
 	 */
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/qxy/column", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/column", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean columnGET(@RequestParam(required = false) String token,
 			@RequestParam(defaultValue = "1") Integer type) {
@@ -63,10 +63,10 @@ public class ColumnManageController extends MyControllerSupport {
 	}
 
 	/**
-	 * 新闻栏目新增接口 /qxy/column
+	 * 新闻栏目新增接口 /column
 	 */
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/qxy/column", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/column", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean columnPOST(@RequestBody NewsColumnDBO newsColumn) {
 		RESTResultBean result = new RESTResultBean();
@@ -100,10 +100,10 @@ public class ColumnManageController extends MyControllerSupport {
 	}
 
 	/**
-	 * 新闻栏目修改及停用(启用)接口 /qxy/column
+	 * 新闻栏目修改及停用(启用)接口 /column
 	 */
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/qxy/column", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/column", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean columnPUT(@RequestBody NewsColumnDBO newsColumn) {
 		RESTResultBean result = new RESTResultBean();
@@ -150,9 +150,9 @@ public class ColumnManageController extends MyControllerSupport {
 	}
 
 	/**
-	 * 新闻栏目删除接口 /qxy/column
+	 * 新闻栏目删除接口 /column
 	 */
-	@RequestMapping(value = "/qxy/column", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/column", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean columnDELETE(@RequestBody NewsColumnDBO newsColumn) {
 		RESTResultBean result = new RESTResultBean();

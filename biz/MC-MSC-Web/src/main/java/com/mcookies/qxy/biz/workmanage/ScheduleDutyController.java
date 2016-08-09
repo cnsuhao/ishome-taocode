@@ -36,10 +36,10 @@ public class ScheduleDutyController extends MyControllerSupport {
 	protected SDutyContentService sDutyContentService;
 
 	/**
-	 * 值周(值日)工作岗位新增接口 /qxy/duty
+	 * 值周(值日)工作岗位新增接口 /duty
 	 */
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/qxy/duty", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/duty", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean dutyPOST(@RequestBody SDutyDBO sDuty) {
 		RESTResultBean result = new RESTResultBean();
@@ -71,10 +71,10 @@ public class ScheduleDutyController extends MyControllerSupport {
 	}
 
 	/**
-	 * 值周(值日)工作岗位修改及停用(启用)接口 /qxy/duty
+	 * 值周(值日)工作岗位修改及停用(启用)接口 /duty
 	 */
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/qxy/duty", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/duty", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean dutyPUT(@RequestBody SDutyDBO sDuty) {
 		RESTResultBean result = new RESTResultBean();
@@ -120,10 +120,10 @@ public class ScheduleDutyController extends MyControllerSupport {
 	}
 
 	/**
-	 * 值周(值日)工作岗位删除接口 /qxy/duty
+	 * 值周(值日)工作岗位删除接口 /duty
 	 */
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/qxy/duty", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/duty", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean dutyDELETE(@RequestBody String jsonparam) {
 		RESTResultBean result = new RESTResultBean();

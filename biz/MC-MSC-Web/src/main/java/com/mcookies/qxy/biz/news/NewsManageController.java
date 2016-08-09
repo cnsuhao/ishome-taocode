@@ -39,10 +39,10 @@ public class NewsManageController extends MyControllerSupport {
 
 	/**
 	 * 新闻列表查询接口
-	 * /qxy/news/column=[col_id]&time=[start_time|end_time]&type=[type]&teacher=
+	 * /news/column=[col_id]&time=[start_time|end_time]&type=[type]&teacher=
 	 * [tid]&page=[page]&size=[size]&token=[token]
 	 */
-	@RequestMapping(value = "/qxy/news", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/news", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean newsGET(@RequestBody UserDBO user) {
 		// TODO
@@ -64,9 +64,9 @@ public class NewsManageController extends MyControllerSupport {
 	}
 
 	/**
-	 * 新闻详情查看接口 /qxy/news/detaile/news=[new_id]&token=[token]
+	 * 新闻详情查看接口 /news/detaile/news=[new_id]&token=[token]
 	 */
-	@RequestMapping(value = "/qxy/news/detaile", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/news/detaile", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean newsDetailGET(@RequestBody UserDBO user) {
 		// TODO
@@ -88,10 +88,10 @@ public class NewsManageController extends MyControllerSupport {
 	}
 
 	/**
-	 * 新闻新增接口 /qxy/news
+	 * 新闻新增接口 /news
 	 */
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/qxy/news", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/news", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean newsPOST(@RequestBody NewsDBO news) {
 		RESTResultBean result = new RESTResultBean();
@@ -121,10 +121,10 @@ public class NewsManageController extends MyControllerSupport {
 	}
 
 	/**
-	 * 新闻修改\置顶(取消)\审核(驳回)\加入轮播(取消)口 /qxy/news
+	 * 新闻修改\置顶(取消)\审核(驳回)\加入轮播(取消)口 /news
 	 */
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/qxy/news", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/news", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean newsPUT(@RequestBody NewsDBO news) {
 		// TODO: test
@@ -161,9 +161,9 @@ public class NewsManageController extends MyControllerSupport {
 	}
 
 	/**
-	 * 新闻删除接口 /qxy/news
+	 * 新闻删除接口 /news
 	 */
-	@RequestMapping(value = "/qxy/news", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/news", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean newsDELETE(@RequestBody String jsonparam) {
 		RESTResultBean result = new RESTResultBean();
@@ -195,9 +195,9 @@ public class NewsManageController extends MyControllerSupport {
 	}
 
 	/**
-	 * 幻灯图片上传接口（暂缺） /qxy/news/upload/pictures
+	 * 幻灯图片上传接口（暂缺） /news/upload/pictures
 	 */
-	@RequestMapping(value = "/qxy/news/upload/pictures", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/news/upload/pictures", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean newsUploadPicturesPUT(@RequestBody UserDBO user) {
 		// TODO
