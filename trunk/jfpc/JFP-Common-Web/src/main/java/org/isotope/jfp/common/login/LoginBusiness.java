@@ -9,6 +9,8 @@ import org.isotope.jfp.framework.beans.user.LoginerBean;
 import org.isotope.jfp.framework.beans.user.UserBean;
 import org.isotope.jfp.framework.utils.DateHelper;
 import org.isotope.jfp.framework.utils.EmptyHelper;
+import org.isotope.jfp.framework.utils.PKHelper;
+import org.isotope.jfp.persistent.LogLoginer.LogLoginerDBO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,20 +40,49 @@ public class LoginBusiness extends LoginService {
 	 * @return
 	 */
 	@Transactional
-	public UserBean doLogIn(String authorizerRefreshToken) {
+	public UserBean doLogIn(UserBean loginer) {
 		// 获得登录用户信息（存在性检索）
-		// 读取OPEN ID表数据
-		// 完成用户登录
-		List<UserBean> loginers = readLoginer(authorizerRefreshToken);
+		List<UserBean> loginers ;
+		UserBean user = new UserBean();
+		HashMap<String, String> login = new HashMap<String, String>();
+		login.put("openid", loginer.getOpenId());
+		// 1:教师,2:家长,3:学生
+		if ("1".equals(loginer.getUserType())) {
+			loginers = readTeacherLoginer(login);
+		} else if ("2".equals(loginer.getUserType())) {
+			loginers = readParentLoginer(login);
+		} else if ("3".equals(loginer.getUserType())) {
+			loginers = readStudentLoginer(login);
+		} else {
+			user.setLoginStatus("8");
+			return user;
+		}
 		if (EmptyHelper.isEmpty(loginers)) {
 			// 创建新用户信息
 			// 创建第三方授权信息
 			loginers = new ArrayList<UserBean>();
-			UserBean user0 = creatLoginer(authorizerRefreshToken);
+			UserBean user0 = creatLoginerByOpenId(loginer);
 			loginers.add(user0);
 		}
-		UserBean user = loginers.get(0);
-		doOtherProcess(user);
+
+		// 完成用户登录
+		user = loginers.get(0);
+
+		// 保存本次登录信息（缓存、数据库）
+		doLoginToken(user);
+		// 保存本次登录日志（数据库）
+		{
+			LogLoginerDBO LogLoginer = new LogLoginerDBO();
+			LogLoginer.setAccount(loginer.getOpenId());
+			LogLoginer.setIpAdress(loginer.getIpAdress());
+			// TODO
+			LogLoginer.setClientType(9);
+			LogLoginer.setUserType("1");
+
+			makeLoginLog(LogLoginer,user);
+			doLoginLog(LogLoginer);
+		}
+
 		return user;
 	}
 
@@ -128,7 +159,22 @@ public class LoginBusiness extends LoginService {
 			// 强制注销
 			doLogOut(user);
 		}
-		doOtherProcess(user);
+
+		// 保存本次登录信息（缓存、数据库）
+		doLoginToken(user);
+		// 保存本次登录日志（数据库）
+		{
+			LogLoginerDBO LogLoginer = new LogLoginerDBO();
+			LogLoginer.setAccount(loginer.getAccount());
+			LogLoginer.setIpAdress(loginer.getIpAdress());
+
+			LogLoginer.setClientType(loginer.getClientType());
+			LogLoginer.setUserType(loginer.getUserType());
+
+			makeLoginLog(LogLoginer,user);
+			doLoginLog(LogLoginer);
+		}
+
 		return user;
 	}
 
@@ -178,18 +224,6 @@ public class LoginBusiness extends LoginService {
 			return true;
 		}
 		return false;
-	}
-
-	/**
-	 * 完成登录后业务
-	 * 
-	 * @param user
-	 */
-	private void doOtherProcess(UserBean user) {
-		// 保存本次登录信息（缓存、数据库）
-		doLoginToken(user);
-		// 保存本次登录日志（数据库）
-		doLoginLog(user);
 	}
 
 	/**

@@ -9,6 +9,7 @@ import org.isotope.jfp.framework.beans.common.RESTResultBean;
 import org.isotope.jfp.framework.beans.user.LoginerBean;
 import org.isotope.jfp.framework.beans.user.UserBean;
 import org.isotope.jfp.framework.support.MyFrameworkSupport;
+import org.isotope.jfp.framework.utils.HttpRequestHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -83,13 +84,14 @@ public class LoginApi extends MyFrameworkSupport {
 		// loginer.setPassWord(passWord);
 
 		/////////////////////// 登录系统/////////////////////////////////////
+		loginer.setIpAdress(HttpRequestHelper.getIpAddr(request));		
 		UserBean user = LoginService_.doLogIn(loginer);
 		///////////////////////////////////////////////////////////////////
 
 		if (logger.isDebugEnabled())
 			logger.debug("loginer====///loginer////loginer=======>>>>>=========>>>" + user);
 
-		rs.setCode(user.getLoginSource());
+		rs.setCode(user.getLoginStatus());
 
 		return rs;
 	}

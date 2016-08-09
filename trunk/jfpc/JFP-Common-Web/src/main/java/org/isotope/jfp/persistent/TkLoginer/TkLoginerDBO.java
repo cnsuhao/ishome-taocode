@@ -5,13 +5,13 @@ import javax.inject.Named;
 import org.isotope.jfp.framework.support.MyDataBaseObjectSupport;
  
 @Named
-/** 第三方授权Token表*/
+/** 当前登录用户Token表*/
 public class TkLoginerDBO extends MyDataBaseObjectSupport
 {
     /** 
      * TOKEN
      */
-    private String authorizerAccessToken = null;
+    private String token = null;
  
     /** 
      * 用户ID
@@ -23,8 +23,8 @@ public class TkLoginerDBO extends MyDataBaseObjectSupport
      *
      * @return Authorizer_access_token TOKEN
      */
-    public String getAuthorizerAccessToken() {
-        return this.authorizerAccessToken;
+    public String getToken() {
+        return this.token;
     }
  
     /** 
@@ -41,8 +41,8 @@ public class TkLoginerDBO extends MyDataBaseObjectSupport
      *
      * @param Authorizer_access_token TOKEN
      */
-    public void setAuthorizerAccessToken(String authorizeraccesstoken) {
-        this.authorizerAccessToken = authorizeraccesstoken;
+    public void setToken(String token) {
+        this.token = token;
     }
  
     /** 
