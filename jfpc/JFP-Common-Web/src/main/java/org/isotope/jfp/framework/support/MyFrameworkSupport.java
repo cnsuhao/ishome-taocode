@@ -6,7 +6,6 @@ import org.isotope.jfp.framework.cache.session.SessionHelper;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.constants.pub.ISModelConstants;
 import org.isotope.jfp.framework.utils.BeanFactoryHelper;
-import org.isotope.jfp.framework.utils.token.UserCacheHelper;
 
 import com.alibaba.fastjson.JSON;
 
@@ -74,9 +73,6 @@ public class MyFrameworkSupport implements ISFrameworkConstants, ISModelConstant
 	}
 
 	// ////////////////处理线程安全/////////////////////////
-	public static UserBean checkLoginer(String token) {
-		return UserCacheHelper.checkUser(token);
-	}
 	public static void setUserData(UserBean loginer) {
 		SessionHelper.setUserData(loginer);
 	}

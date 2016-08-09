@@ -25,17 +25,12 @@ public class LogLoginerDBO extends MyDataBaseObjectSupport {
 	/**
 	 * 用户种类
 	 */
-	private Integer userType = null;
+	private String userType = null;
 
 	/**
 	 * 超级管理员
 	 */
 	private Integer isAdmin = null;
-
-	/**
-	 * MAC地址
-	 */
-	private String macAdress = null;
 
 	/**
 	 * IP地址
@@ -55,7 +50,7 @@ public class LogLoginerDBO extends MyDataBaseObjectSupport {
 	/**
 	 * 产品ID
 	 */
-	private String goodId = null;
+	private String productId = null;
 
 	/**
 	 * 动作类别
@@ -94,7 +89,7 @@ public class LogLoginerDBO extends MyDataBaseObjectSupport {
 	 *
 	 * @return User_type 用户种类
 	 */
-	public Integer getUserType() {
+	public String getUserType() {
 		return this.userType;
 	}
 
@@ -105,15 +100,6 @@ public class LogLoginerDBO extends MyDataBaseObjectSupport {
 	 */
 	public Integer getIsAdmin() {
 		return this.isAdmin;
-	}
-
-	/**
-	 * 获取MAC地址
-	 *
-	 * @return Mac_adress MAC地址
-	 */
-	public String getMacAdress() {
-		return this.macAdress;
 	}
 
 	/**
@@ -146,10 +132,10 @@ public class LogLoginerDBO extends MyDataBaseObjectSupport {
 	/**
 	 * 获取产品ID
 	 *
-	 * @return Good_id 产品ID
+	 * @return productId 产品ID
 	 */
-	public String getGoodId() {
-		return this.goodId;
+	public String getProductId() {
+		return this.productId;
 	}
 
 	/**
@@ -197,7 +183,7 @@ public class LogLoginerDBO extends MyDataBaseObjectSupport {
 	 * @param User_type
 	 *            用户种类
 	 */
-	public void setUserType(Integer usertype) {
+	public void setUserType(String usertype) {
 		this.userType = usertype;
 	}
 
@@ -210,17 +196,7 @@ public class LogLoginerDBO extends MyDataBaseObjectSupport {
 	public void setIsAdmin(Integer isadmin) {
 		this.isAdmin = isadmin;
 	}
-
-	/**
-	 * 设置MAC地址
-	 *
-	 * @param Mac_adress
-	 *            MAC地址
-	 */
-	public void setMacAdress(String macadress) {
-		this.macAdress = macadress;
-	}
-
+	
 	/**
 	 * 设置IP地址
 	 *
@@ -257,8 +233,8 @@ public class LogLoginerDBO extends MyDataBaseObjectSupport {
 	 * @param Good_id
 	 *            产品ID
 	 */
-	public void setGoodId(String goodid) {
-		this.goodId = goodid;
+	public void setProductId(String productid) {
+		this.productId = productid;
 	}
 
 	/**
