@@ -45,12 +45,12 @@ public class BusinessTokenBean extends TokenBean implements ISFrameworkConstants
 		tokenBean.setUserId(Long.parseLong(ds[1]));
 		try {
 			tokenBean.setUserType(ds[2].substring(0, 1));
-			tokenBean.setLogintime(ds[2].substring(1));
+			tokenBean.setLoginTime(ds[2].substring(1));
 			return tokenBean;
 		} catch (Exception e) {
 
 		}
-		tokenBean.setLogintime(ds[2]);
+		tokenBean.setLoginTime(ds[2]);
 		return tokenBean;
 	}
 
@@ -61,7 +61,7 @@ public class BusinessTokenBean extends TokenBean implements ISFrameworkConstants
 	}
 
 	public String getBizToken() {
-		return BusinessTokenHelper.getBizTokenData("" + schoolId, "" + userId, userType + logintime);
+		return BusinessTokenHelper.getBizTokenData("" + schoolId, "" + userId, userType + loginTime);
 	}
 
 	/**
@@ -80,8 +80,8 @@ public class BusinessTokenBean extends TokenBean implements ISFrameworkConstants
 	/**
 	 * 最后请求时间
 	 */
-	String logintime = loginTime();
-
+	String loginTime = loginTime();
+	//String loginTime = DateHelper.currentTimeMillisCN1();
 	public Long getUserId() {
 		return userId;
 	}
@@ -106,12 +106,12 @@ public class BusinessTokenBean extends TokenBean implements ISFrameworkConstants
 		this.userType = userType;
 	}
 
-	public String getLogintime() {
-		return logintime;
+	public String getLoginTime() {
+		return loginTime;
 	}
 
-	public void setLogintime(String logintime) {
-		this.logintime = logintime;
+	public void setLoginTime(String logintime) {
+		this.loginTime = logintime;
 	}
 
 }

@@ -3,7 +3,6 @@ package org.isotope.jfp.framework.beans.user;
 import javax.inject.Named;
 
 import org.isotope.jfp.framework.beans.common.BusinessTokenBean;
-import org.isotope.jfp.framework.utils.DateHelper;
 
 /**
  * 系统用户登录信息
@@ -25,31 +24,26 @@ public class LoginerBean extends BusinessTokenBean {
 	 * 密码
 	 */
 	String passWord;
-	/**
-	 * 用户分类,用于区分数据来源<br>
-	 * 1:教师,2:家长,3:学生
-	 */
-	String userType;
 
 	/**
-	 * 登录时间
+	 * 安全码
 	 */
-	String loginTime = DateHelper.currentTimeMillisCN1();
+	String securityCode;
+
+	/**
+	 * 登录来源类别（1网页2手机3微信4支付宝）
+	 */
+	Integer clientType;
+
+	/**
+	 * IP地址
+	 */
+	String ipAdress;
 
 	/**
 	 * 登录页面访问地址
 	 */
 	String loginUrl;
-	/**
-	 * 登录页面访问地址
-	 */
-	String loginSource;
-
-	/**
-	 * 产品内部交互安全码
-	 */
-	String securityCode;
-
 	/**
 	 * 回调地址
 	 */
@@ -78,20 +72,28 @@ public class LoginerBean extends BusinessTokenBean {
 		this.passWord = passWord;
 	}
 
-	public String getUserType() {
-		return userType;
+	public String getSecurityCode() {
+		return securityCode;
 	}
 
-	public void setUserType(String userType) {
-		this.userType = userType;
+	public void setSecurityCode(String securityCode) {
+		this.securityCode = securityCode;
 	}
 
-	public String getLoginTime() {
-		return loginTime;
+	public Integer getClientType() {
+		return clientType;
 	}
 
-	public void setLoginTime(String loginTime) {
-		this.loginTime = loginTime;
+	public void setClientType(Integer clientType) {
+		this.clientType = clientType;
+	}
+
+	public String getIpAdress() {
+		return ipAdress;
+	}
+
+	public void setIpAdress(String ipAdress) {
+		this.ipAdress = ipAdress;
 	}
 
 	public String getLoginUrl() {
@@ -100,22 +102,6 @@ public class LoginerBean extends BusinessTokenBean {
 
 	public void setLoginUrl(String loginUrl) {
 		this.loginUrl = loginUrl;
-	}
-
-	public String getLoginSource() {
-		return loginSource;
-	}
-
-	public void setLoginSource(String loginSource) {
-		this.loginSource = loginSource;
-	}
-
-	public String getSecurityCode() {
-		return securityCode;
-	}
-
-	public void setSecurityCode(String securityCode) {
-		this.securityCode = securityCode;
 	}
 
 	public String getCallBackUrl() {
@@ -133,5 +119,4 @@ public class LoginerBean extends BusinessTokenBean {
 	public void setOpenId(String openId) {
 		this.openId = openId;
 	}
-
 }

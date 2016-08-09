@@ -39,6 +39,10 @@ public class UserBean extends LoginerBean {
 	 */
 	String schoolLogo;
 	/**
+	 * 性别
+	 */
+	String gender;
+	/**
 	 * 是否管理员（0超级管理员1普通用户）
 	 */
 	String isAdmin;
@@ -105,6 +109,14 @@ public class UserBean extends LoginerBean {
 
 	public void setSchoolLogo(String schoolLogo) {
 		this.schoolLogo = schoolLogo;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 
 	public String getIsAdmin() {
