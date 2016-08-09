@@ -10,6 +10,15 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
 
+/**
+ * 客户端请求工具类
+ * 
+ * @author Spook
+ * @version 3.3.1 2016/8/8 增加默认ipAddress（0.0.0.0:1）
+ * @version 3.1.0 2016/5/30
+ * @since 3.1.0 2016/5/30
+ *
+ */
 public class HttpRequestHelper {
 
 	public static String getIpAddr(HttpServletRequest request) {
@@ -51,7 +60,7 @@ public class HttpRequestHelper {
 				}
 			}
 		} catch (Exception e) {
-
+			ipAddress = "0.0.0.0:1";
 		}
 
 		return ipAddress;
