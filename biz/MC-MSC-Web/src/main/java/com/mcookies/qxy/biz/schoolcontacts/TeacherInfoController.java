@@ -252,7 +252,16 @@ public class TeacherInfoController extends MyControllerSupport {
 						}
 					}
 					UTeacherService_.doUpdate(pvo);
-					UTeacherExtService_.doUpdate(pvo);
+					UTeacherExtDBO ext = new UTeacherExtDBO();
+					ext.setTid(pvo.getTid());
+					ext.setJobNumber(pvo.getJobNumber());
+					ext.setGender(pvo.getGender());
+					ext.setDateOfBirth(pvo.getDateOfBirth());
+					ext.setStartWorkT(pvo.getStartWorkT());
+					ext.setCardType(pvo.getCardType());
+					ext.setCardNumber(pvo.getCardNumber());
+					ext.setHomeAddress(pvo.getHomeAddress());
+					UTeacherExtService_.doUpdate(ext);
 				}
 			}
 		} catch (Exception e) {
