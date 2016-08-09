@@ -156,5 +156,19 @@
 			AND duty_id = #{dutyId}
 		</if>
 	</select>
+	<!-- 查询岗位列表(有效、全部)，并返回内容条数 -->
+	<select id='findWithContentCountByIsUse' parameterType='SDutyDBO' 
+			resultType='com.mcookies.qxy.common.SDuty.SDutyPVO'>
+		SELECT
+		a.duty_id, a.duty_name, a.is_use, COUNT(b.id) AS duty_content_count, a.create_time
+		FROM s_duty a
+		LEFT JOIN s_duty_content b ON a.duty_id = b.duty_id
+		WHERE 1 = 1
+		AND a.sid = #{sid}
+		<if test=" isUse != null and isUse == 1 "><!-- 岗位id -->
+			AND a.is_use = 1
+		</if>
+		GROUP BY b.id, a.duty_id, a.duty_name, a.is_use, a.create_time
+	</select>
 
 </mapper>

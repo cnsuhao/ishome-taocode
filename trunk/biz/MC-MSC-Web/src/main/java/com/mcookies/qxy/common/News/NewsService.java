@@ -13,4 +13,8 @@ public class NewsService extends MyServiceSupport {
 		return getMySqlSession().getMapper(NewsDao.class);
 	}
 
+	public NewsPVO findDetailByNewsId(NewsPVO news) {
+		return getDao().findDetailByNewsId(news);
+	}
+
 }

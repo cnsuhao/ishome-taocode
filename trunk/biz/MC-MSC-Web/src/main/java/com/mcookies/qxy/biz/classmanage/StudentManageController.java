@@ -26,9 +26,8 @@ public class StudentManageController extends MyControllerSupport {
 	protected ICacheService myCacheService;
 
 	/**
-	 * 学生(家长)列表查询接口
-	 * /stundent/list/term=[term_id]&grade=[grade_id]&class=[cid]&page=[page
-	 * ]&size=[size]&teacher=[tid]&token=[token]
+	 * 学生列表搜索查询接口
+	 * /qxy/stundent/list/class=[cid]&page=[page]&size=[size]&token=[token]
 	 */
 	@RequestMapping(value = "/stundent/list", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
@@ -51,9 +50,8 @@ public class StudentManageController extends MyControllerSupport {
 	}
 
 	/**
-	 * 学生(家长)搜索接口
-	 * /stundent/search/term=[term]&grade=[grade]&class=[cid]&number=[number
-	 * ]&teacher=[tid]&token=[token]
+	 * 学生搜索接口
+	 * /qxy/stundent/search/student=[studentId]&number=[number]&token=[token]
 	 */
 	@RequestMapping(value = "/student/search", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
@@ -76,32 +74,7 @@ public class StudentManageController extends MyControllerSupport {
 	}
 
 	/**
-	 * 学生(家长)信息查询接口
-	 * /student/info/term=[term]&grade=[grade]&class=[cid]&student=[
-	 * student_id]&tid=[tid]&token=[token]
-	 */
-	@RequestMapping(value = "/student/info", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
-	@ResponseBody
-	public RESTResultBean studentInfoGET(@RequestBody UserDBO user) {
-		RESTResultBean result = new RESTResultBean();
-		try {
-			if (doCheckToken(user.getToken()) == false) {
-				return tokenFail();
-			}
-
-			Long userId = getLoginer().getUserId();
-
-			result.setInfo("欢迎访问千校云平台：" + userId + "," + user.getAccount());
-		} catch (Exception e) {
-			result.setInfo("访问失败");
-			result.setStatus(1);
-		}
-
-		return result;
-	}
-
-	/**
-	 * 学生(家长)转班接口 /student/move
+	 * 学生(家长)转班接口 /qxy/student/move
 	 */
 	@RequestMapping(value = "/student/move", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody

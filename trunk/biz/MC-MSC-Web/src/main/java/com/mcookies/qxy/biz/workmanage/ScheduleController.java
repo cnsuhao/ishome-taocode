@@ -8,6 +8,7 @@ import java.util.TreeSet;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
 import org.isotope.jfp.framework.beans.common.RESTResultBean;
 import org.isotope.jfp.framework.support.MyControllerSupport;
 import org.springframework.stereotype.Controller;
@@ -20,14 +21,18 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.mcookies.qxy.biz.workmanage.ScheduleCopyPUTDto.Week;
 import com.mcookies.qxy.common.SDuty.SDutyDBO;
+import com.mcookies.qxy.common.SDuty.SDutyPVO;
 import com.mcookies.qxy.common.SDuty.SDutyService;
+import com.mcookies.qxy.common.SDutyContent.SDutyContentDBO;
+import com.mcookies.qxy.common.SDutyContent.SDutyContentService;
 import com.mcookies.qxy.common.SDutyScheduling.SDutySchedulingDBO;
 import com.mcookies.qxy.common.SDutyScheduling.SDutySchedulingPVO;
 import com.mcookies.qxy.common.SDutyScheduling.SDutySchedulingService;
 import com.mcookies.qxy.common.STerm.STermDBO;
 import com.mcookies.qxy.common.STerm.STermPVO;
 import com.mcookies.qxy.common.STerm.STermService;
-import com.mcookies.qxy.common.User.UserDBO;
+import com.mcookies.qxy.common.UTeacher.UTeacherDBO;
+import com.mcookies.qxy.common.UTeacher.UTeacherService;
 
 /**
  * 工作管理-值日值周
@@ -43,13 +48,16 @@ public class ScheduleController extends MyControllerSupport {
 	@Resource
 	protected SDutyService sDutyService;
 	@Resource
+	protected SDutyContentService sDutyContentService;
+	@Resource
 	protected SDutySchedulingService sDutySchedulingService;
+	@Resource
+	protected UTeacherService uTeacherService;
 
 	/**
 	 * 值日值周信息日历表状态查询接口
-	 * /schedule/status/term=[term]&teacher=[tid]&token=[token]
+	 * /qxy/schedule/status/term=[term]&teacher=[tid]&token=[token]
 	 */
-	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/schedule/status", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean scheduleStatusGET(STermPVO term) {
@@ -67,10 +75,11 @@ public class ScheduleController extends MyControllerSupport {
 			duty.setTermId(term.getTermId());
 			duty.setTid(term.getTid());
 			duty.setIsUse(1);
-			List<SDutySchedulingDBO> dutys = (List<SDutySchedulingDBO>) sDutySchedulingService.findByTermIdAndTidAndIsUsed(duty);
+			List<SDutySchedulingDBO> dutys = (List<SDutySchedulingDBO>) sDutySchedulingService
+					.findByTermIdAndTidAndIsUsed(duty);
 			TreeSet<Long> daylist = new TreeSet<Long>();
 			TreeSet<Long> weeklist = new TreeSet<Long>();
-			for (SDutySchedulingDBO each: dutys) {
+			for (SDutySchedulingDBO each : dutys) {
 				if (each.getWeek() != null) {
 					weeklist.add(Long.valueOf(each.getWeek()));
 				} else if (each.getDate() != null) {
@@ -91,23 +100,45 @@ public class ScheduleController extends MyControllerSupport {
 	}
 
 	/**
-	 * 值周工作安排查询接口 /schedule/week/term=[term]&week=[week]&token=[token]
+	 * 值周工作安排查询接口 /qxy/schedule/week/term=[term]&week=[week]&token=[token]
 	 */
 	@RequestMapping(value = "/schedule/week", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean scheduleWeekGET(@RequestBody UserDBO user) {
-		// TODO
+	public RESTResultBean scheduleWeekGET(SDutySchedulingDBO dutyScheduling) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(user.getToken()) == false) {
+			if (doCheckToken(dutyScheduling.getToken()) == false) {
 				return tokenFail();
 			}
-
-			Long userId = getLoginer().getUserId();
-
-			result.setInfo("欢迎访问千校云平台：" + userId + "," + user.getAccount());
+			if (dutyScheduling.getWeek() == null) {
+				throw new IllegalArgumentException("week不能为空");
+			}
+			Map<String, Object> data = new HashMap<String, Object>();
+			STermPVO term = new STermPVO();
+			term.setTermId(dutyScheduling.getTermId());
+			term.setSid(dutyScheduling.getSid());
+			term = (STermPVO) sTermService.findByTermId(term);
+			if (term == null) {
+				throw new IllegalArgumentException("termId所对应的学期或默认学期不存在");
+			}
+			dutyScheduling.setTermId(term.getTermId());
+			List<SDutySchedulingPVO> dutySchedulings = (List<SDutySchedulingPVO>) sDutySchedulingService
+					.findByTermIdAndWeekAndIsUsed(dutyScheduling);
+			for (SDutySchedulingPVO each : dutySchedulings) {
+				if (!StringUtils.isEmpty(each.getLeaderTids())) {
+					each.setLeaders((List<UTeacherDBO>) uTeacherService.findSchedulingLeaders(each));
+				}
+				if (!StringUtils.isEmpty(each.getTids())) {
+					each.setTeachers((List<UTeacherDBO>) uTeacherService.findSchedulingTeachers(each));
+				}
+			}
+			data.put("termName", term.getTermName());
+			data.put("week", dutyScheduling.getWeek());
+			data.put("count", dutySchedulings.size());
+			data.put("scheduleweek", dutySchedulings);
+			result.setData(data);
 		} catch (Exception e) {
-			result.setInfo("访问失败");
+			result.setInfo("查询失败，" + e.getMessage());
 			result.setStatus(1);
 		}
 
@@ -115,23 +146,45 @@ public class ScheduleController extends MyControllerSupport {
 	}
 
 	/**
-	 * 值日工作安排查询接口 /schedule/day/term=[term]&day=[date]&token=[token]
+	 * 值日工作安排查询接口 /qxy/schedule/day/term=[term]&day=[date]&token=[token]
 	 */
 	@RequestMapping(value = "/schedule/day", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean scheduleDayGET(@RequestBody UserDBO user) {
-		// TODO
+	public RESTResultBean scheduleDayGET(SDutySchedulingDBO dutyScheduling) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(user.getToken()) == false) {
+			if (doCheckToken(dutyScheduling.getToken()) == false) {
 				return tokenFail();
 			}
-
-			Long userId = getLoginer().getUserId();
-
-			result.setInfo("欢迎访问千校云平台：" + userId + "," + user.getAccount());
+			if (dutyScheduling.getDate() == null) {
+				throw new IllegalArgumentException("date不能为空");
+			}
+			Map<String, Object> data = new HashMap<String, Object>();
+			STermPVO term = new STermPVO();
+			term.setTermId(dutyScheduling.getTermId());
+			term.setSid(dutyScheduling.getSid());
+			term = (STermPVO) sTermService.findByTermId(term);
+			if (term == null) {
+				throw new IllegalArgumentException("termId所对应的学期或默认学期不存在");
+			}
+			dutyScheduling.setTermId(term.getTermId());
+			List<SDutySchedulingPVO> dutySchedulings = (List<SDutySchedulingPVO>) sDutySchedulingService
+					.findByTermIdAndDateAndIsUsed(dutyScheduling);
+			for (SDutySchedulingPVO each : dutySchedulings) {
+				if (!StringUtils.isEmpty(each.getLeaderTids())) {
+					each.setLeaders((List<UTeacherDBO>) uTeacherService.findSchedulingLeaders(each));
+				}
+				if (!StringUtils.isEmpty(each.getTids())) {
+					each.setTeachers((List<UTeacherDBO>) uTeacherService.findSchedulingTeachers(each));
+				}
+			}
+			data.put("termName", term.getTermName());
+			data.put("date", dutyScheduling.getDate());
+			data.put("count", dutySchedulings.size());
+			data.put("scheduleweek", dutySchedulings);
+			result.setData(data);
 		} catch (Exception e) {
-			result.setInfo("访问失败");
+			result.setInfo("查询失败，" + e.getMessage());
 			result.setStatus(1);
 		}
 
@@ -139,23 +192,29 @@ public class ScheduleController extends MyControllerSupport {
 	}
 
 	/**
-	 * 值周(值日)工作岗位列表查询接口 /duty/list/type=[type]&token=[token]
+	 * 值周(值日)工作岗位列表查询接口 /qxy/duty/list/type=[type]&token=[token]
 	 */
 	@RequestMapping(value = "/duty/list", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean dutyListGET(@RequestBody UserDBO user) {
-		// TODO
+	public RESTResultBean dutyListGET(SDutyDBO duty, Integer type) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(user.getToken()) == false) {
+			if (doCheckToken(duty.getToken()) == false) {
 				return tokenFail();
 			}
-
-			Long userId = getLoginer().getUserId();
-
-			result.setInfo("欢迎访问千校云平台：" + userId + "," + user.getAccount());
+			if (type != null && type != 0 && type != 1) {
+				throw new IllegalArgumentException("type只能为0或1");
+			}
+			if (type == null || type == 0) {
+				duty.setIsUse(1);
+			}
+			Map<String, Object> data = new HashMap<String, Object>();
+			List<SDutyPVO> dutys = (List<SDutyPVO>) sDutyService.findWithContentCountByIsUse(duty);
+			data.put("count", dutys.size());
+			data.put("dutylist", dutys);
+			result.setData(data);
 		} catch (Exception e) {
-			result.setInfo("访问失败");
+			result.setInfo("查询失败，" + e.getMessage());
 			result.setStatus(1);
 		}
 
@@ -163,23 +222,35 @@ public class ScheduleController extends MyControllerSupport {
 	}
 
 	/**
-	 * 值周(值日)工作岗位详情查询接口 /duty/content/duty=[duty_id]&token=[token]
+	 * 值周(值日)工作岗位详情查询接口 /qxy/duty/content/duty=[duty_id]&token=[token]
 	 */
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/duty/content", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean dutyContentGET(@RequestBody UserDBO user) {
-		// TODO
+	public RESTResultBean dutyContentGET(SDutyContentDBO dutyContent) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(user.getToken()) == false) {
+			if (doCheckToken(dutyContent.getToken()) == false) {
 				return tokenFail();
 			}
-
-			Long userId = getLoginer().getUserId();
-
-			result.setInfo("欢迎访问千校云平台：" + userId + "," + user.getAccount());
+			if (dutyContent.getDutyId() == null) {
+				throw new IllegalArgumentException("dutyId不能为空");
+			}
+			SDutyDBO duty = new SDutyDBO();
+			duty.setDutyId(dutyContent.getDutyId());
+			duty = (SDutyDBO) sDutyService.doRead(duty);
+			if (duty == null) {
+				throw new IllegalArgumentException("duty id无效");
+			}
+			Map<String, Object> data = new HashMap<String, Object>();
+			List<SDutyContentDBO> dutyContents = (List<SDutyContentDBO>) sDutyContentService.doSelectData(dutyContent);
+			data.put("dutyId", duty.getDutyId());
+			data.put("dutyName", duty.getDutyName());
+			data.put("count", dutyContents.size());
+			data.put("dutyContent", dutyContents);
+			result.setData(data);
 		} catch (Exception e) {
-			result.setInfo("访问失败");
+			result.setInfo("查询失败，" + e.getMessage());
 			result.setStatus(1);
 		}
 
@@ -187,7 +258,7 @@ public class ScheduleController extends MyControllerSupport {
 	}
 
 	/**
-	 * 值周(值日)工作安排新增接口 /schedule
+	 * 值周(值日)工作安排新增接口 /qxy/schedule
 	 */
 	@RequestMapping(value = "/schedule", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
@@ -197,8 +268,7 @@ public class ScheduleController extends MyControllerSupport {
 			if (doCheckToken(scheduling.getToken()) == false) {
 				return tokenFail();
 			}
-			if (scheduling.getType() == null || 
-					!(scheduling.getType() == 0 || scheduling.getType() == 1)) {
+			if (scheduling.getType() == null || !(scheduling.getType() == 0 || scheduling.getType() == 1)) {
 				throw new IllegalArgumentException("错误的type值，必须为0或1");
 			}
 			if (scheduling.getTermId() == null) {
@@ -232,7 +302,7 @@ public class ScheduleController extends MyControllerSupport {
 	}
 
 	/**
-	 * 值周(值日)工作安排修改接口 /schedule
+	 * 值周(值日)工作安排修改接口 /qxy/schedule
 	 */
 	@RequestMapping(value = "/schedule", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
@@ -265,7 +335,7 @@ public class ScheduleController extends MyControllerSupport {
 	}
 
 	/**
-	 * 值周(值日)工作安排删除接口 /schedule
+	 * 值周(值日)工作安排删除接口 /qxy/schedule
 	 */
 	@RequestMapping(value = "/schedule", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
 	@ResponseBody
@@ -298,7 +368,7 @@ public class ScheduleController extends MyControllerSupport {
 	}
 
 	/**
-	 * 值周(值日)工作安排应用至其他周或天接口 /schedule/copy
+	 * 值周(值日)工作安排应用至其他周或天接口 /qxy/schedule/copy
 	 */
 	@RequestMapping(value = "/schedule/copy", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
@@ -328,7 +398,7 @@ public class ScheduleController extends MyControllerSupport {
 						copy.setEndTime(week.getEndTime());
 						sDutySchedulingService.doInsert(copy);
 					}
-					
+
 				} else if (dto.getDays() != null && dto.getDays().size() > 0) {
 					for (Date day : dto.getDays()) {
 						SDutySchedulingDBO copy = new SDutySchedulingDBO();
@@ -351,5 +421,5 @@ public class ScheduleController extends MyControllerSupport {
 		}
 		return result;
 	}
-	
+
 }

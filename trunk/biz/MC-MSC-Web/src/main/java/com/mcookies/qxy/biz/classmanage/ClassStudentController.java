@@ -27,13 +27,13 @@ import com.mcookies.qxy.common.User.UserDBO;
  */
 @Controller("ClassStudentController")
 public class ClassStudentController extends MyControllerSupport {
-/*
-	@Resource
+
+	/*@Resource
 	protected ICacheService myCacheService;
 
 	*//**
-	 * 班级学生(家长)列表查询接口
-	 * /class/student/list/cid=[cid]&page=[page]&size=[size]&token=[token]
+	 * 班级学生列表查询接口
+	 * /qxy/class/student/list/cid=[cid]&page=[page]&size=[size]&token=[token]
 	 *//*
 	@RequestMapping(value = "/class/student/list", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
@@ -57,8 +57,8 @@ public class ClassStudentController extends MyControllerSupport {
 	}
 
 	*//**
-	 * 班级学生(家长)搜索接口
-	 * /class/student/search/cid=[cid]&number=[number]&token=[token]
+	 * 班级学生搜索接口
+	 * /qxy/class/student/search/cid=[cid]&number=[number]&token=[token]
 	 *//*
 	@RequestMapping(value = "/class/student/search", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
@@ -82,8 +82,8 @@ public class ClassStudentController extends MyControllerSupport {
 	}
 
 	*//**
-	 * 班级学生(家长)信息查询接口
-	 * /class/student/info/cid=[cid]&student=[student_id]&token=[token]
+	 * 班级学生信息查询接口
+	 * /qxy/class/student/info/cid=[cid]&student=[student_id]&token=[token]
 	 *//*
 	@RequestMapping(value = "/class/student/info", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
@@ -106,7 +106,7 @@ public class ClassStudentController extends MyControllerSupport {
 	}
 
 	*//**
-	 * 班级学生(家长)新增接口 /class/student/info
+	 * 班级学生新增接口 /qxy/class/student/info
 	 *//*
 	@RequestMapping(value = "/class/student/info", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
@@ -147,7 +147,7 @@ public class ClassStudentController extends MyControllerSupport {
 	}
 
 	*//**
-	 * 班级学生(家长)修改接口 /class/student/info
+	 * 班级学生修改接口 /qxy/class/student/info
 	 *//*
 	@RequestMapping(value = "/class/student/info", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
@@ -197,7 +197,157 @@ public class ClassStudentController extends MyControllerSupport {
 	}
 
 	*//**
-	 * 班级学生(家长)删除接口 /class/student/info
+	 * 班级学生删除接口 /qxy/class/student/info
+	 *//*
+	@RequestMapping(value = "/class/student/info", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public RESTResultBean classStudentInfoDELETE(@RequestBody ClassCourseDBO classCourse) {
+		// TODO: test
+		RESTResultBean result = new RESTResultBean();
+		try {
+			if (doCheckToken(classCourse.getToken()) == false) {
+				return tokenFail();
+			}
+			// 查询是否存在
+			if (classCourse.getId() == null) {
+				throw new IllegalArgumentException("班级课程id不能为空");
+			}
+			ClassCourseDBO origin = new ClassCourseDBO();
+			origin.setId(classCourse.getId());
+			origin = (ClassCourseDBO) classCourseService.doRead(origin);
+			if (origin == null) {
+				throw new IllegalArgumentException("班级课程不存在");
+			}
+			classCourseService.doDelete(origin);
+			Map<String, Object> data = new HashMap<String, Object>();
+			data.put("info", "ok");
+			result.setData(data);
+		} catch (Exception e) {
+			result.setInfo("删除失败，" + e.getMessage());
+			result.setStatus(1);
+		}
+		return result;
+	}
+	
+	*//**
+	 * 班级学生家长列表查询接口
+	 * /qxy/class/student/parent/list/student=[studentId]&type=[type]&token=[token]
+	 *//*
+	@RequestMapping(value = "/class/student/parent/list", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public RESTResultBean classStudentParentListGET(@RequestBody UserDBO user) {
+		// TODO
+		RESTResultBean result = new RESTResultBean();
+		try {
+			if (doCheckToken(user.getToken()) == false) {
+				return tokenFail();
+			}
+
+			Long userId = getLoginer().getUserId();
+
+			result.setInfo("欢迎访问千校云平台：" + userId + "," + user.getAccount());
+		} catch (Exception e) {
+			result.setInfo("访问失败");
+			result.setStatus(1);
+		}
+
+		return result;
+	}
+	
+	
+	*//**
+	 * 班级学生家长新增接口 /qxy/class/student/parent
+	 *//*
+	@RequestMapping(value = "/class/student/parent", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public RESTResultBean classStudentParentPOST(@RequestBody ClassCourseDBO classCourse) {
+		RESTResultBean result = new RESTResultBean();
+		try {
+			if (doCheckToken(classCourse.getToken()) == false) {
+				return tokenFail();
+			}
+			if (classCourse.getCid() == null) {
+				throw new IllegalArgumentException("cid不能为空");
+			}
+			ClassDBO clazz = new ClassDBO();
+			clazz.setCid(classCourse.getCid());
+			clazz = (ClassDBO) classService.doRead(clazz);
+			if (clazz == null) {
+				throw new IllegalArgumentException("cid所对应的班级不存在");
+			}
+			if (classCourse.getCourseId1() == null) {
+				throw new IllegalArgumentException("courseId不能为空");
+			}
+			SCourseDBO course = new SCourseDBO();
+			course.setCourseId(classCourse.getCourseId1());
+			course = (SCourseDBO) sCourseService.doRead(course);
+			if (course == null) {
+				throw new IllegalArgumentException("courseId所对应的课程不存在");
+			}
+			classCourseService.doInsert(classCourse);
+			Map<String, Object> data = new HashMap<String, Object>();
+			data.put("info", "ok");
+			result.setData(data);
+		} catch (Exception e) {
+			result.setInfo("新增失败，" + e.getMessage());
+			result.setStatus(1);
+		}
+		
+		return result;
+	}
+	
+	*//**
+	 * 班级学生家长修改/停用(启用)及指定默认家长接口 /qxy/class/student/parent
+	 *//*
+	@RequestMapping(value = "/class/student/parent", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public RESTResultBean classStudentParentPUT(@RequestBody ClassCourseDBO classCourse) {
+		// TODO: test
+		RESTResultBean result = new RESTResultBean();
+		try {
+			if (doCheckToken(classCourse.getToken()) == false) {
+				return tokenFail();
+			}
+			// 查询是否存在
+			if (classCourse.getId() == null) {
+				throw new IllegalArgumentException("班级课程id不能为空");
+			}
+			ClassCourseDBO origin = new ClassCourseDBO();
+			origin.setId(classCourse.getId());
+			origin = (ClassCourseDBO) classCourseService.doRead(origin);
+			if (origin == null) {
+				throw new IllegalArgumentException("班级课程不存在");
+			}
+			if (classCourse.getCid() != null) {
+				ClassDBO clazz = new ClassDBO();
+				clazz.setCid(classCourse.getCid());
+				clazz = (ClassDBO) classService.doRead(clazz);
+				if (clazz == null) {
+					throw new IllegalArgumentException("cid所对应的班级不存在");
+				}
+			}
+			if (classCourse.getCourseId1() != null) {
+				SCourseDBO course = new SCourseDBO();
+				course.setCourseId(classCourse.getCourseId1());
+				course = (SCourseDBO) sCourseService.doRead(course);
+				if (course == null) {
+					throw new IllegalArgumentException("courseId所对应的课程不存在");
+				}
+			}
+			classCourseService.doUpdate(classCourse);
+			Map<String, Object> data = new HashMap<String, Object>();
+			data.put("info", "ok");
+			result.setData(data);
+		} catch (Exception e) {
+			result.setInfo("修改失败，" + e.getMessage());
+			result.setStatus(1);
+		}
+		
+		return result;
+	}
+	
+	*//**
+	 * 班级学生家长删除接口 /qxy/class/student/info
 	 *//*
 	@RequestMapping(value = "/class/student/info", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
 	@ResponseBody

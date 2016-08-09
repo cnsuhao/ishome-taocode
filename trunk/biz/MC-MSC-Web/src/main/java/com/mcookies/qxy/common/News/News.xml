@@ -303,5 +303,17 @@
                 AND news_id = #{newsId}
             </if>
     </select>
+    <!-- 根据newId查询详情  -->
+    <select id='findDetailByNewsId' parameterType='com.mcookies.qxy.common.News.NewsPVO'
+    		resultType='com.mcookies.qxy.common.News.NewsPVO'>
+        SELECT 
+        a.news_id, a.sid, a.column_id, a.title, a.content, a.is_top, a.is_pic, a.pic, a.news_type, a.news_reader,
+        a.news_classer, a.publish_time, a.is_audit, a.author, a.is_homenews, a.is_use, b.title AS column_name, c.teacher_name AS authorName
+		FROM news a 
+		LEFT JOIN news_column b ON a.column_id = b.column_id
+		LEFT JOIN u_teacher c ON a.author = c.tid
+		WHERE 1 = 1
+        AND a.news_id = #{newsId}
+    </select>
 
 </mapper>
