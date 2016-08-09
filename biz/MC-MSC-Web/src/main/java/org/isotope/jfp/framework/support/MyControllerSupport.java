@@ -7,9 +7,15 @@ import org.isotope.jfp.framework.beans.common.RESTResultBean;
 import org.isotope.jfp.framework.beans.page.PageVOSupport;
 import org.isotope.jfp.framework.beans.user.UserBean;
 import org.isotope.jfp.framework.cache.ICacheService;
+import org.isotope.jfp.framework.utils.EmptyHelper;
+import org.isotope.jfp.framework.utils.token.UserCacheHelper;
+import org.isotope.jfp.persistent.TkLoginer.TkLoginerDBO;
+import org.isotope.jfp.persistent.TkLoginer.TkLoginerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
+
+import com.alibaba.fastjson.JSON;
 
 /**
  * 画面控制层超类
@@ -42,9 +48,18 @@ public class MyControllerSupport extends MyFrameworkSupport {
 		return loginer;
 	}
 
+	@Resource
+	TkLoginerService TkLoginerService_;
+
+	// 检查用户Token
 	public boolean doCheckToken(String token) {
-		// 检查用户Token
-		// loginer = super.checkLoginer(token);
+		loginer = UserCacheHelper.checkUser(token);
+		if (EmptyHelper.isEmpty(loginer)) {
+			TkLoginerDBO tkl = new TkLoginerDBO();
+			tkl.setToken(token);
+			tkl = (TkLoginerDBO) TkLoginerService_.doRead(tkl);
+			loginer = JSON.parseObject(tkl.getJson(), UserBean.class);
+		}
 		{// 临时代码
 			// 获得用户信息
 			loginer = new UserBean();
