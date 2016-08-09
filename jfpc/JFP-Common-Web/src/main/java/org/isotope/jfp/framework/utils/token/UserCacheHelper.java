@@ -14,7 +14,14 @@ import com.alibaba.fastjson.JSON;
  *
  */
 public class UserCacheHelper {
-
+	
+	public static void main(String[] args) throws Exception {
+		UserBean user = new UserBean();
+		user.setSchoolId(987654321L);
+		user.setUserId(123456789L);
+		user.setUserType("0");
+		System.out.println(JSON.toJSONString(user));
+	}
 	/**
 	 * 获得登录用户信息
 	 * 
