@@ -1,17 +1,17 @@
 package org.isotope.jfp.framework.security.value;
 
-import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
-
+import org.isotope.jfp.framework.utils.PasswordHelper;
 
 /**
  * 加密解密工具类
  * 
  * @author Spook
  * @since 0.1.0
+ * @version 3.2.1 2016/8/9
  * @version 0.1.0 2014/2/8
  */
 public class MD5SecurityHelper {
-	
+
 	/**
 	 * 加密
 	 * 
@@ -20,9 +20,9 @@ public class MD5SecurityHelper {
 	 * @return
 	 * @throws Exception
 	 */
-	public static String encrypt( String plainText) throws Exception {
-		return new Md5PasswordEncoder().encodePassword(plainText, null);
+	public static String encrypt(String plainText) throws Exception {
+		//return new Md5PasswordEncoder().encodePassword(pass, null);
+		return PasswordHelper.getPassword(plainText);
 	}
-
 
 }
