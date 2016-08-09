@@ -80,7 +80,7 @@
           			</scanTargetPatterns-->					
 					<connectors>
 		                <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
-		                    <port>6666</port>
+		                    <port>8668</port>
 		                    <maxIdleTime>60000</maxIdleTime>
 		                </connector>
 		            </connectors> 
