@@ -93,7 +93,7 @@ authorizer_access_token | json | 7200秒 |  当前有效的access token，查询
 > token刷新接口接口返回了当前的authorizer_access_token，该API用于在授权方令牌（authorizer_access_token）失效时，可用刷新令牌（authorizer_refresh_token）获取新的令牌。请注意，此处token是2小时刷新一次，开发者需要自行进行token的缓存。
 
 ``` json
-Url:        /qxy/component/token=[authorizer_refresh_token]
+Url:        /qxy/component?token=[authorizer_refresh_token]
 Method:     GET
 Header:     Content-type:application/json
 Parameter:
@@ -126,7 +126,7 @@ Response:
 > token刷新接口接口返回了当前的authorizer_access_token，该API用于在授权方令牌（authorizer_access_token）失效时，可用刷新令牌（authorizer_refresh_token）获取新的令牌。请注意，此处token是2小时刷新一次，开发者需要自行进行token的缓存。
 
 ``` json
-Url:        /qxy/component_info/token=[authorizer_access_token]
+Url:        /qxy/component_info?token=[authorizer_access_token]
 Method:     GET
 Header:     Content-type:application/json
 Parameter:
