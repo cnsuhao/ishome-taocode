@@ -56,12 +56,8 @@ public class BusinessTokenBean extends TokenBean implements ISFrameworkConstants
 
 	public String getToken() {
 		if(EmptyHelper.isEmpty(token))
-			token = getBizToken();
+			token = BusinessTokenHelper.getBizTokenData("" + schoolId, "" + userId, userType + loginTime);
 		return token;
-	}
-
-	public String getBizToken() {
-		return BusinessTokenHelper.getBizTokenData("" + schoolId, "" + userId, userType + loginTime);
 	}
 
 	/**
