@@ -28,9 +28,9 @@
 	
 	<!-- Bean实体别名 -->
 	<!-- 参考MySqlSessionFactorySupportBean 进行标准自动配置，特殊配置直接写出 -->
-	<!-- <typeAliases>
-		<typeAlias alias='StopSchPush' type='org.isotope.jfp.beans.Scheduling.StopSchPush'/>
-	</typeAliases> -->
+	<typeAliases>
+		<typeAlias alias='LoginerData' type='org.isotope.jfp.framework.beans.user.UserBean'/>
+	</typeAliases>
 	
     <!-- 无论是MyBatis在预处理语句中设置一个参数，还是从结果集中取出一个值时，类型处理器被用来将获取的值以合适的方式转换成Java类型。 -->
     <!--typeHandlers>
