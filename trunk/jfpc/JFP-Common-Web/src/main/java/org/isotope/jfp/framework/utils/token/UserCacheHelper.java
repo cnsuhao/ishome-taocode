@@ -22,17 +22,21 @@ public class UserCacheHelper {
 	 * @return
 	 */
 	public static UserBean checkUser(String token) {
-		if (EmptyHelper.isEmpty(token))
+		try{
+			if (EmptyHelper.isEmpty(token))
+				return null;
+			ICacheService myCache = BeanFactoryHelper.getBean("myCache");
+			myCache.selectDB(3);
+			String obj = (String) myCache.getObject(token, false);
+			if (EmptyHelper.isEmpty(obj))
+				return null;
+	
+			UserBean loginer = JSON.parseObject(obj, UserBean.class);
+			myCache.init();
+			return loginer;
+		}catch(Exception e){
 			return null;
-		ICacheService myCache = BeanFactoryHelper.getBean("myCache");
-		myCache.selectDB(3);
-		String obj = (String) myCache.getObject(token, false);
-		if (EmptyHelper.isEmpty(obj))
-			return null;
-
-		UserBean loginer = JSON.parseObject(obj, UserBean.class);
-		myCache.init();
-		return loginer;
+		}
 	}
 
 	/**
