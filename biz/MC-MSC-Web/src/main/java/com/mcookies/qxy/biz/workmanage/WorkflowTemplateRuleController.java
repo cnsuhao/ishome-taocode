@@ -19,14 +19,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.mcookies.qxy.common.Class.ClassPVO;
-import com.mcookies.qxy.common.ClassTeacher.ClassTeacherDBO;
 import com.mcookies.qxy.common.OaRule.OaRuleDBO;
 import com.mcookies.qxy.common.OaRule.OaRulePVO;
 import com.mcookies.qxy.common.OaRule.OaRuleService;
 import com.mcookies.qxy.common.OaTags.OaTagsDBO;
 import com.mcookies.qxy.common.OaTags.OaTagsService;
-import com.mcookies.qxy.common.UTeacher.UTeacherDBO;
 
 /**
  * 工作管理-工作流程模板规则

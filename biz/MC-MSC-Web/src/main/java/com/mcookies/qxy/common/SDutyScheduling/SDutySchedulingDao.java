@@ -9,4 +9,8 @@ public interface SDutySchedulingDao extends IDatabaseSupport {
 
 	List<SDutySchedulingDBO> findByTermIdAndTidAndIsUsed(SDutySchedulingPVO duty);
 
+	List<SDutySchedulingPVO> findByTermIdAndWeekAndIsUsed(SDutySchedulingDBO dutyScheduling);
+
+	List<SDutySchedulingPVO> findByTermIdAndDateAndIsUsed(SDutySchedulingDBO dutyScheduling);
+
 }

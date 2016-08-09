@@ -17,10 +17,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.mcookies.qxy.common.Class.ClassDBO;
+import com.mcookies.qxy.common.Class.ClassService;
 import com.mcookies.qxy.common.News.NewsDBO;
+import com.mcookies.qxy.common.News.NewsPVO;
 import com.mcookies.qxy.common.News.NewsService;
 import com.mcookies.qxy.common.NewsColumn.NewsColumnDBO;
 import com.mcookies.qxy.common.NewsColumn.NewsColumnService;
+import com.mcookies.qxy.common.UTeacher.UTeacherDBO;
+import com.mcookies.qxy.common.UTeacher.UTeacherService;
 import com.mcookies.qxy.common.User.UserDBO;
 
 /**
@@ -36,6 +41,10 @@ public class NewsManageController extends MyControllerSupport {
 	protected NewsService newsService;
 	@Resource
 	protected NewsColumnService newsColumnService;
+	@Resource
+	protected UTeacherService uTeacherService;
+	@Resource
+	protected ClassService classService;
 
 	/**
 	 * 新闻列表查询接口
@@ -68,19 +77,25 @@ public class NewsManageController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/news/detaile", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean newsDetailGET(@RequestBody UserDBO user) {
-		// TODO
+	public RESTResultBean newsDetailGET(NewsPVO news) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(user.getToken()) == false) {
+			if (doCheckToken(news.getToken()) == false) {
 				return tokenFail();
 			}
-
-			Long userId = getLoginer().getUserId();
-
-			result.setInfo("欢迎访问千校云平台：" + userId + "," + user.getAccount());
+			if (news.getNewsId() == null) {
+				throw new IllegalArgumentException("newsId不能为空");
+			}
+			news = (NewsPVO) newsService.findDetailByNewsId(news);
+			if (news == null) {
+				throw new IllegalArgumentException("newsId对应的新闻不存在");
+			}
+			// 
+			news.setNewsReaders((List<UTeacherDBO>) uTeacherService.findNewsReaders(news));
+			news.setNewsClassers((List<ClassDBO>) classService.findNewsClassers(news));
+			result.setData(news);
 		} catch (Exception e) {
-			result.setInfo("访问失败");
+			result.setInfo("查询失败，" + e.getMessage());
 			result.setStatus(1);
 		}
 

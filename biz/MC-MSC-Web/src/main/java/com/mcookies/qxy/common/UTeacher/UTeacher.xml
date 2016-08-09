@@ -297,8 +297,35 @@
     <select id='findClassLeader' parameterType='ClassTeacherDBO' resultType='UTeacherDBO'>
         SELECT a.tid, a.uid, a.sid, a.teacher_name, a.phone, a.email, a.id_type, a.method, a.openid, 
         a.wechatname, a.wechathead, a.city, a.gender, a.status, a.is_use, a.create_time, a.creator, a.update_time, a.updator
-        FROM u_teacher a join class_teacher b on a.tid = b.tid
+        FROM u_teacher a LEFT JOIN class_teacher b ON a.tid = b.tid
 		WHERE b.is_leader = 1 AND b.cid = #{cid}
         limit 1
+    </select>
+    <!-- 查询值周值日tids下的教师列表(id1;id2;id3;)  -->
+    <select id='findSchedulingTeachers' parameterType='com.mcookies.qxy.common.SDutyScheduling.SDutySchedulingPVO' 
+    		resultType='UTeacherDBO'>
+        SELECT tid, teacher_name
+        FROM u_teacher
+		WHERE instr(#{tids}, concat(tid, ';')) > 0
+    </select>
+    <!-- 查询值周值日tids下的领导列表(id1;id2;id3;)  -->
+    <select id='findSchedulingLeaders' parameterType='com.mcookies.qxy.common.SDutyScheduling.SDutySchedulingPVO' 
+    		resultType='UTeacherDBO'>
+        SELECT tid, teacher_name
+        FROM u_teacher
+		WHERE instr(#{leaderTids}, concat(tid, ';')) > 0
+    </select>
+    <!-- 查询news newsReader对应的教师列表(id1;id2;id3;) 为空返回sid下的全部  -->
+    <select id='findNewsReaders' parameterType='com.mcookies.qxy.common.News.NewsPVO' 
+    		resultType='UTeacherDBO'>
+        SELECT tid, teacher_name
+        FROM u_teacher
+		WHERE 1 = 1
+		<if test=" newsReader != null and newsReader != ''">
+			AND instr(#{newsReader}, concat(tid, ';')) > 0
+		</if>
+		<if test=" newsReader == null or newsReader == ''">
+			AND sid = #{sid}
+		</if>
     </select>
 </mapper>

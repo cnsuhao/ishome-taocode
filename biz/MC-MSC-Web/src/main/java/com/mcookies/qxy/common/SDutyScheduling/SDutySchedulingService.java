@@ -17,4 +17,12 @@ public class SDutySchedulingService extends MyServiceSupport {
 		return getDao().findByTermIdAndTidAndIsUsed(duty);
 	}
 
+	public List<SDutySchedulingPVO> findByTermIdAndWeekAndIsUsed(SDutySchedulingDBO dutyScheduling) {
+		return getDao().findByTermIdAndWeekAndIsUsed(dutyScheduling);
+	}
+	
+	public List<SDutySchedulingPVO> findByTermIdAndDateAndIsUsed(SDutySchedulingDBO dutyScheduling) {
+		return getDao().findByTermIdAndDateAndIsUsed(dutyScheduling);
+	}
+
 }

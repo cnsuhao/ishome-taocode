@@ -5,6 +5,8 @@ import org.isotope.jfp.framework.beans.page.PageVOSupport;
 import org.isotope.jfp.framework.support.MyServiceSupport;
 import org.springframework.stereotype.Service;
 
+import com.mcookies.qxy.common.News.NewsPVO;
+
 /** 班级表*/
 @Service
 public class ClassService extends MyServiceSupport {
@@ -34,5 +36,14 @@ public class ClassService extends MyServiceSupport {
 	public PageVOSupport doSelectPageClass2(PageVOSupport formParamPageModel) {
 		formParamPageModel.setPageListData(getDao().doSelectPageClass2(formParamPageModel));
 		return formParamPageModel;
+	}
+
+	/**
+	 * 根据news的newsClasser查询，为空返回全部
+	 * @param news
+	 * @return
+	 */
+	public List<ClassDBO> findNewsClassers(NewsPVO news) {
+		return getDao().findNewsClassers(news);
 	}
 }

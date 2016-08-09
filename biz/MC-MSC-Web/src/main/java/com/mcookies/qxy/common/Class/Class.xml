@@ -291,4 +291,17 @@
 	</where>
 	GROUP BY f.student_id, g.course_id1, a.cid, a.class_name, b.term_name
 	</select>
+	<!-- 查询news newsClasser 对应的班级列表(id1;id2;id3;) 为空返回sid下的全部  -->
+    <select id='findNewsClassers' parameterType='com.mcookies.qxy.common.News.NewsPVO' 
+    		resultType='ClassDBO'>
+        SELECT cid, class_name
+        FROM class
+		WHERE 1 = 1
+		<if test=" newsClasser != null and newsClasser != ''">
+			AND instr(#{newsClasser}, concat(cid, ';')) > 0
+		</if>
+		<if test=" newsClasser == null or newsClasser == ''">
+			sid = #{sid}
+		</if>
+    </select>
 </mapper>
