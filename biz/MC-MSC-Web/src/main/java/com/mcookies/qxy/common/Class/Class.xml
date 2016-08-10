@@ -301,7 +301,7 @@
 			AND instr(#{newsClasser}, concat(cid, ';')) > 0
 		</if>
 		<if test=" newsClasser == null or newsClasser == ''">
-			sid = #{sid}
+			AND sid = #{sid}
 		</if>
     </select>
 </mapper>

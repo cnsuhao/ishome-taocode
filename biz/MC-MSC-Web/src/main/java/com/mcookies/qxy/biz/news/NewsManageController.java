@@ -160,7 +160,7 @@ public class NewsManageController extends MyControllerSupport {
 				throw new IllegalArgumentException("columnId所对应的栏目不存在");
 			}
 			newsColumn = newsColumns.get(0);
-			if (newsColumn.getIsCheck() == 0) {
+			if (newsColumn.getIsCheck() == null || newsColumn.getIsCheck() == 0) {
 				throw new IllegalStateException("该新闻不允许修改");
 			}
 			newsService.doUpdate(news);
