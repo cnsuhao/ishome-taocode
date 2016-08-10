@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 import org.apache.http.client.ClientProtocolException;
-import org.isotope.jfp.framework.beands.common.RESTResultBean;
-import org.isotope.jfp.framework.beands.pub.SMSBean;
+import org.isotope.jfp.framework.beans.common.RESTResultBean;
+import org.isotope.jfp.framework.beans.pub.SMSBean;
 import org.isotope.jfp.framework.common.sms.UserSMSSendServiceImpl;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.constants.pub.ISSMSConstants;
@@ -74,12 +74,12 @@ public class DefaultSMSGatewayImpl implements ISSMSGatewaySupport, ISSMSConstant
 	}
 
 	public String getPassword() {
-		try {
-			return PBESecurityHelper.decrypt(this.userid + this.account, password);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return "";
+//		try {
+//			return PBESecurityHelper.decrypt(this.userid + this.account, password);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+		return password;
 	}
 
 	public void setPassword(String password) {
