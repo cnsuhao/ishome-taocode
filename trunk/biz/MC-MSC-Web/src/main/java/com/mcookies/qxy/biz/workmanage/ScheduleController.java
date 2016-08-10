@@ -1,6 +1,5 @@
 package com.mcookies.qxy.biz.workmanage;
 
-import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -77,13 +76,13 @@ public class ScheduleController extends MyControllerSupport {
 			duty.setIsUse(1);
 			List<SDutySchedulingDBO> dutys = (List<SDutySchedulingDBO>) sDutySchedulingService
 					.findByTermIdAndTidAndIsUsed(duty);
-			TreeSet<Long> daylist = new TreeSet<Long>();
-			TreeSet<Long> weeklist = new TreeSet<Long>();
+			TreeSet<String> daylist = new TreeSet<String>();
+			TreeSet<Integer> weeklist = new TreeSet<Integer>();
 			for (SDutySchedulingDBO each : dutys) {
 				if (each.getWeek() != null) {
-					weeklist.add(Long.valueOf(each.getWeek()));
+					weeklist.add(each.getWeek());
 				} else if (each.getDate() != null) {
-					daylist.add(each.getDate().getTime());
+					daylist.add(each.getDate());
 				} else {
 
 				}
@@ -400,7 +399,7 @@ public class ScheduleController extends MyControllerSupport {
 					}
 
 				} else if (dto.getDays() != null && dto.getDays().size() > 0) {
-					for (Date day : dto.getDays()) {
+					for (String day : dto.getDays()) {
 						SDutySchedulingDBO copy = new SDutySchedulingDBO();
 						copy.setTermId(origin.getTermId());
 						copy.setDutyId(origin.getDutyId());

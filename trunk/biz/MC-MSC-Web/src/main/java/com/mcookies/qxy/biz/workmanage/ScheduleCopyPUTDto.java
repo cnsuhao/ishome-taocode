@@ -7,7 +7,7 @@ public class ScheduleCopyPUTDto {
 	private String token;
 	private List<Long> scheduleIds;
 	private List<Week> weeks;
-	private List<Date> days;
+	private List<String> days;
 	
 	public String getToken() {
 		return token;
@@ -34,19 +34,19 @@ public class ScheduleCopyPUTDto {
 	}
 
 
-	public List<Date> getDays() {
+	public List<String> getDays() {
 		return days;
 	}
 
-	public void setDays(List<Date> days) {
+	public void setDays(List<String> days) {
 		this.days = days;
 	}
 
 
 	public class Week {
 		private Integer week;
-		private Date startTime;
-		private Date endTime;
+		private String startTime;
+		private String endTime;
 		
 		public Integer getWeek() {
 			return week;
@@ -54,16 +54,16 @@ public class ScheduleCopyPUTDto {
 		public void setWeek(Integer week) {
 			this.week = week;
 		}
-		public Date getStartTime() {
+		public String getStartTime() {
 			return startTime;
 		}
-		public void setStartTime(Date startTime) {
+		public void setStartTime(String startTime) {
 			this.startTime = startTime;
 		}
-		public Date getEndTime() {
+		public String getEndTime() {
 			return endTime;
 		}
-		public void setEndTime(Date endTime) {
+		public void setEndTime(String endTime) {
 			this.endTime = endTime;
 		}
 		

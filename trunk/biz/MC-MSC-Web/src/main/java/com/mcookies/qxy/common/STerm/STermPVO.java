@@ -14,11 +14,11 @@ public class STermPVO extends STermDBO {
 	/**
 	 * 值周列表
 	 */
-	private TreeSet<Long> weeklist;
+	private TreeSet<Integer> weeklist;
 	/**
 	 * 值日列表
 	 */
-	private TreeSet<Long> days;
+	private TreeSet<String> days;
 
 	public Long getTid() {
 		return tid;
@@ -28,19 +28,19 @@ public class STermPVO extends STermDBO {
 		this.tid = tid;
 	}
 
-	public TreeSet<Long> getWeeklist() {
+	public TreeSet<Integer> getWeeklist() {
 		return weeklist;
 	}
 
-	public void setWeeklist(TreeSet<Long> weeklist) {
+	public void setWeeklist(TreeSet<Integer> weeklist) {
 		this.weeklist = weeklist;
 	}
 
-	public TreeSet<Long> getDays() {
+	public TreeSet<String> getDays() {
 		return days;
 	}
 
-	public void setDays(TreeSet<Long> days) {
+	public void setDays(TreeSet<String> days) {
 		this.days = days;
 	}
 

@@ -37,17 +37,17 @@ public class SDutySchedulingDBO extends MyDataBaseObjectSupport {
 	/**
 	 * 周开始日期
 	 */
-	private Date startTime = null;
+	private String startTime = null;
 
 	/**
 	 * 周结束日期
 	 */
-	private Date endTime = null;
+	private String endTime = null;
 
 	/**
 	 * 指定该学期的对应日期
 	 */
-	private Date date = null;
+	private String date = null;
 
 	/**
 	 * 值日或值周领导id
@@ -119,7 +119,7 @@ public class SDutySchedulingDBO extends MyDataBaseObjectSupport {
 	 *
 	 * @return Start_time 周开始日期
 	 */
-	public Date getStartTime() {
+	public String getStartTime() {
 		return this.startTime;
 	}
 
@@ -128,7 +128,7 @@ public class SDutySchedulingDBO extends MyDataBaseObjectSupport {
 	 *
 	 * @return End_time 周结束日期
 	 */
-	public Date getEndTime() {
+	public String getEndTime() {
 		return this.endTime;
 	}
 
@@ -137,7 +137,7 @@ public class SDutySchedulingDBO extends MyDataBaseObjectSupport {
 	 *
 	 * @return Date 指定该学期的对应日期
 	 */
-	public Date getDate() {
+	public String getDate() {
 		return this.date;
 	}
 
@@ -233,7 +233,7 @@ public class SDutySchedulingDBO extends MyDataBaseObjectSupport {
 	 * @param Start_time
 	 *            周开始日期
 	 */
-	public void setStartTime(Date starttime) {
+	public void setStartTime(String starttime) {
 		this.startTime = starttime;
 	}
 
@@ -243,7 +243,7 @@ public class SDutySchedulingDBO extends MyDataBaseObjectSupport {
 	 * @param End_time
 	 *            周结束日期
 	 */
-	public void setEndTime(Date endtime) {
+	public void setEndTime(String endtime) {
 		this.endTime = endtime;
 	}
 
@@ -253,7 +253,7 @@ public class SDutySchedulingDBO extends MyDataBaseObjectSupport {
 	 * @param Date
 	 *            指定该学期的对应日期
 	 */
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 
