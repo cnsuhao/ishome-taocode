@@ -143,10 +143,7 @@
 	</delete>
 	<!-- 物理删除一条数据 -->
 	<delete id='doDelete' parameterType='SGradeLabelDBO'>
-		DELETE FROM s_grade_label WHERE update_time = #{updateTime}
-		<if test=" gradeId != null "><!-- 自增id -->
-			AND grade_id = #{gradeId}
-		</if>
+		DELETE FROM s_grade_label WHERE grade_id = #{gradeId}
 	</delete>
 	<!-- 查询一条数据 -->
 	<select id='doRead' parameterType='SGradeLabelDBO' resultType='SGradeLabelDBO'>

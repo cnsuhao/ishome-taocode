@@ -15,8 +15,9 @@ public class ClassService extends MyServiceSupport {
         return getMySqlSession().getMapper(ClassDao.class);
     }
 
-    public List<ClassPVO> doSelectWorkTime(ClassDBO dbo){
-    	return  getDao().doSelectWorkTime(dbo);
+    public PageVOSupport doSelectPageWorkTime(PageVOSupport formParamPageModel){
+		formParamPageModel.setPageListData(getDao().doSelectPageWorkTime(formParamPageModel));
+		return formParamPageModel;
     }
     /**
      * 分页 根据  termId tid gradelid 查询班级

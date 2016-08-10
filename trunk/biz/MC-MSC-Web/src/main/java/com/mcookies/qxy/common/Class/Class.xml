@@ -205,16 +205,21 @@
             </if>
     </select>
 	<!-- 获得班级的作息模板信息 -->
-	<select id="doSelectWorkTime" parameterType="ClassDBO"
+	<select id="doSelectPageWorkTime" parameterType="ClassDBO"
 		resultType="com.mcookies.qxy.common.Class.ClassPVO">
 		SELECT
-		a.cid,
-		a.class_name,
-		a.work_id,
-		b.work_name,
-		a.create_time
+			a.cid,
+			a.class_name,
+			b.term_name,
+			c.grade_name,
+			a.work_id,
+			d.work_name,
+			a.create_time
 		FROM
-		class a left join s_work_time b on a.work_id = b.work_id
+			class a
+		LEFT JOIN s_term b ON a.term_id = b.term_id
+		LEFT JOIN s_grade_label c ON a.grade_id = c.grade_id
+		LEFT JOIN s_work_time d ON a.work_id = d.work_id
 		<where>
 			<if test="cid != null ">
 			and a.cid = #{cid}
@@ -225,8 +230,10 @@
 			<if test="gradeId != null">
 			and a.grade_id = #{gradeId}
 			</if>
+			<if test="sid != null ">
+			and a.sid = #{sid}
+			</if>
 		</where>
-
 	</select>
 	
 	<!-- 学校班级查询接口-->
