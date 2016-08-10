@@ -34,7 +34,7 @@
         <if test=" email != null"><!-- 邮箱 -->
             ,email = #{email}
         </if>
-        <if test=" method != null' "><!-- 认证方式 -->
+        <if test=" method != null "><!-- 认证方式 -->
             ,method = #{method}
         </if>
         <if test=" openid != null "><!-- openid -->
@@ -89,7 +89,7 @@
             <if test=" email != null"><!-- 邮箱 -->
                 AND email = #{email}
             </if>
-            <if test=" method != null' "><!-- 认证方式 -->
+            <if test=" method != null "><!-- 认证方式 -->
                 AND method = #{method}
             </if>
             <if test=" openid != null "><!-- openid -->
@@ -151,7 +151,7 @@
         <if test=" email != null"><!-- 邮箱 -->
             AND email = #{email}
         </if>
-        <if test=" method != null' "><!-- 认证方式 -->
+        <if test=" method != null "><!-- 认证方式 -->
             AND method = #{method}
         </if>
         <if test=" openid != null "><!-- openid -->
@@ -190,7 +190,7 @@
     </select>
 
     <!-- 插入一条数据 -->
-    <insert id='doInsert' parameterType='UStudentDBO'>
+    <insert id='doInsert' parameterType='UStudentDBO' useGeneratedKeys="true" keyProperty="studentId">
         INSERT INTO u_student
           ( <include refid='tableColumns'/>) 
         VALUES 
@@ -220,7 +220,7 @@
         <if test=" email != null"><!-- 邮箱 -->
             ,email = #{email}
         </if>
-        <if test=" method != null' "><!-- 认证方式 -->
+        <if test=" method != null "><!-- 认证方式 -->
             ,method = #{method}
         </if>
         <if test=" openid != null "><!-- openid -->
@@ -267,10 +267,7 @@
     </delete>
     <!-- 物理删除一条数据 -->
     <delete id='doDelete' parameterType='UStudentDBO'>
-        DELETE FROM u_student WHERE update_time = #{updateTime}
-            <if test=" studentId != null "><!-- 学生id（自增） -->
-                AND student_id = #{studentId}
-            </if>
+        DELETE FROM u_student WHERE student_id = #{studentId}
     </delete>
     <!-- 查询一条数据  -->
     <select id='doRead' parameterType='UStudentDBO' resultType='UStudentDBO'>

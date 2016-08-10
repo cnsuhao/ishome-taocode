@@ -171,10 +171,7 @@
     </delete>
     <!-- 物理删除一条数据 -->
     <delete id='doDelete' parameterType='ClassStudentDBO'>
-        DELETE FROM class_student WHERE update_time = #{updateTime}
-            <if test=" id != null "><!-- 自增id -->
-                AND id = #{id}
-            </if>
+        DELETE FROM class_student WHERE AND id = #{id}
     </delete>
     <!-- 查询一条数据  -->
     <select id='doRead' parameterType='ClassStudentDBO' resultType='ClassStudentDBO'>
@@ -183,5 +180,10 @@
                 AND id = #{id}
             </if>
     </select>
+    
+    <!-- 根据studentId 物理删除多条数据 -->
+    <delete id='deleteByStudentId' parameterType='ClassStudentDBO'>
+        DELETE FROM class_student WHERE student_id = #{studentId}
+    </delete>
 
 </mapper>

@@ -1,7 +1,5 @@
 package com.mcookies.qxy.common.ClassStudent;
 
-import java.sql.Date;
-
 import javax.inject.Named;
 
 import org.isotope.jfp.framework.support.MyDataBaseObjectSupport;
@@ -32,12 +30,12 @@ public class ClassStudentDBO extends MyDataBaseObjectSupport {
 	/**
 	 * 加入班级时间
 	 */
-	private Date joinTime = null;
+	private String joinTime = null;
 
 	/**
 	 * 退出班级时间
 	 */
-	private Date exitTime = null;
+	private String exitTime = null;
 
 	/**
 	 * 是否启用
@@ -85,7 +83,7 @@ public class ClassStudentDBO extends MyDataBaseObjectSupport {
 	 *
 	 * @return Join_time 加入班级时间
 	 */
-	public Date getJoinTime() {
+	public String getJoinTime() {
 		return this.joinTime;
 	}
 
@@ -94,7 +92,7 @@ public class ClassStudentDBO extends MyDataBaseObjectSupport {
 	 *
 	 * @return Exit_time 退出班级时间
 	 */
-	public Date getExitTime() {
+	public String getExitTime() {
 		return this.exitTime;
 	}
 
@@ -153,7 +151,7 @@ public class ClassStudentDBO extends MyDataBaseObjectSupport {
 	 * @param Join_time
 	 *            加入班级时间
 	 */
-	public void setJoinTime(Date jointime) {
+	public void setJoinTime(String jointime) {
 		this.joinTime = jointime;
 	}
 
@@ -163,7 +161,7 @@ public class ClassStudentDBO extends MyDataBaseObjectSupport {
 	 * @param Exit_time
 	 *            退出班级时间
 	 */
-	public void setExitTime(Date exittime) {
+	public void setExitTime(String exittime) {
 		this.exitTime = exittime;
 	}
 

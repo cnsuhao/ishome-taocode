@@ -10,4 +10,8 @@ public class ClassStudentService extends MyServiceSupport {
 		return getMySqlSession().getMapper(ClassStudentDao.class);
 	}
 
+	public void deleteByStudentId(ClassStudentDBO classStudent) {
+		getDao().deleteByStudentId(classStudent);
+	}
+
 }
