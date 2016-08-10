@@ -26,6 +26,17 @@ public class CommonChannelConfig implements ISFrameworkConstants, ISInit {
 	public ICacheService getCatchService() {
 		return catchService;
 	}
+	
+	protected int defaultIndex = 0;
+	
+
+	public int getDefaultIndex() {
+		return defaultIndex;
+	}
+
+	public void setDefaultIndex(int defaultIndex) {
+		this.defaultIndex = defaultIndex;
+	}
 
 	/**
 	 * Redis通道定义
