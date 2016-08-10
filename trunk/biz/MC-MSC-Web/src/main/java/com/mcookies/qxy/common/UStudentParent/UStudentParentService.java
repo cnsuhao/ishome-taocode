@@ -11,4 +11,8 @@ public class UStudentParentService extends MyServiceSupport {
 		return getMySqlSession().getMapper(UStudentParentDao.class);
 	}
 
+	public void deleteByStudentId(UStudentParentDBO studentParent) {
+		getDao().deleteByStudentId(studentParent);
+	}
+
 }
