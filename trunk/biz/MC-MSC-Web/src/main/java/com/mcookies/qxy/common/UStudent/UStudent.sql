@@ -6,6 +6,7 @@ CREATE TABLE u_student
     number BIGINT(12) NOT NULL COMMENT '学号',
     student_name VARCHAR(30) NOT NULL COMMENT '学生姓名',
     phone VARCHAR(50) COMMENT '联系电话',
+    email VARCHAR(255) COMMENT '邮箱',
     method TINYINT(1) COMMENT '认证方式',
     openid VARCHAR(100) COMMENT 'openid',
     wechatname VARCHAR(100) COMMENT '微信名',

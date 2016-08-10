@@ -7,7 +7,7 @@
 <mapper namespace='com.mcookies.qxy.common.UStudent.UStudentDao'>
     <!-- 表字段信息  -->
     <sql id='tableColumns'>
-        student_id,uid,sid,number,student_name,phone,method,openid,wechatname,wechathead,city,gender,status,is_use,create_time,creator,update_time,updator
+        student_id,uid,sid,number,student_name,phone,email,method,openid,wechatname,wechathead,city,gender,status,is_use,create_time,creator,update_time,updator
     </sql>
 
     <!-- 根据条件更新所有记录 -->
@@ -30,6 +30,9 @@
         </if>
         <if test=" phone != null "><!-- 联系电话 -->
             ,phone = #{phone}
+        </if>
+        <if test=" email != null"><!-- 邮箱 -->
+            ,email = #{email}
         </if>
         <if test=" method != null' "><!-- 认证方式 -->
             ,method = #{method}
@@ -82,6 +85,9 @@
             </if>
             <if test=" phone != null "><!-- 联系电话 -->
                 AND phone = #{phone}
+            </if>
+            <if test=" email != null"><!-- 邮箱 -->
+                AND email = #{email}
             </if>
             <if test=" method != null' "><!-- 认证方式 -->
                 AND method = #{method}
@@ -142,6 +148,9 @@
         <if test=" phone != null "><!-- 联系电话 -->
             AND phone = #{phone}
         </if>
+        <if test=" email != null"><!-- 邮箱 -->
+            AND email = #{email}
+        </if>
         <if test=" method != null' "><!-- 认证方式 -->
             AND method = #{method}
         </if>
@@ -185,7 +194,7 @@
         INSERT INTO u_student
           ( <include refid='tableColumns'/>) 
         VALUES 
-          ( #{studentId},#{uid},#{sid},#{number},#{studentName},#{phone},#{method},#{openid},#{wechatname},#{wechathead},#{city},#{gender},#{status},#{isUse},#{createTime},#{creator},#{updateTime},#{updator} )
+          ( #{studentId},#{uid},#{sid},#{number},#{studentName},#{phone},#{email},#{method},#{openid},#{wechatname},#{wechathead},#{city},#{gender},#{status},#{isUse},#{createTime},#{creator},#{updateTime},#{updator} )
     </insert>
     <!-- 修改一条数据 -->
     <update id='doUpdate' parameterType='UStudentDBO'>
@@ -207,6 +216,9 @@
         </if>
         <if test=" phone != null "><!-- 联系电话 -->
             ,phone = #{phone}
+        </if>
+        <if test=" email != null"><!-- 邮箱 -->
+            ,email = #{email}
         </if>
         <if test=" method != null' "><!-- 认证方式 -->
             ,method = #{method}
