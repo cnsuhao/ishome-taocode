@@ -84,23 +84,20 @@ public class ClassStudentController extends MyControllerSupport {
 
 	/**
 	 * 班级学生搜索接口
-	 * /qxy/class/student/search/cid=[cid]&number=[number]&token=[token]
+	 * /qxy/class/student/search?studentId=[studentId]&number=[number]&token=[token]
 	 */
 	@RequestMapping(value = "/class/student/search", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean classStudentSearchGET(@RequestBody UserDBO user) {
-		// TODO
+	public RESTResultBean classStudentSearchGET(UStudentPVO student) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(user.getToken()) == false) {
+			if (doCheckToken(student.getToken()) == false) {
 				return tokenFail();
 			}
-
-			Long userId = getLoginer().getUserId();
-
-			result.setInfo("欢迎访问千校云平台：" + userId + "," + user.getAccount());
+			student = (UStudentPVO) uStudentService.findByIdOrNumber(student);
+			result.setData(student);
 		} catch (Exception e) {
-			result.setInfo("访问失败");
+			result.setInfo("查询失败，" + e.getMessage());
 			result.setStatus(1);
 		}
 
@@ -113,18 +110,50 @@ public class ClassStudentController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/class/student/info", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean classStudentInfoGET(@RequestBody UserDBO user) {
+	public RESTResultBean classStudentInfoGET(UStudentPVO student) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(user.getToken()) == false) {
+			if (doCheckToken(student.getToken()) == false) {
 				return tokenFail();
 			}
-
-			Long userId = getLoginer().getUserId();
-
-			result.setInfo("欢迎访问千校云平台：" + userId + "," + user.getAccount());
+			// 查询是否存在
+			if (student.getStudentId() == null) {
+				throw new IllegalArgumentException("学生id不能为空");
+			}
+			UStudentDBO origin = new UStudentDBO();
+			origin.setStudentId(student.getStudentId());
+			origin = (UStudentDBO) uStudentService.doRead(origin);
+			if (origin == null) {
+				throw new IllegalArgumentException("学生不存在");
+			}
+			// 扩展信息
+			UStudentExtDBO ext = new UStudentExtDBO();
+			ext.setStudentId(student.getStudentId());
+			ext = (UStudentExtDBO) uStudentExtService.doRead(ext);
+			if (ext == null) {
+				throw new IllegalStateException("学生扩展信息不存在");
+			}
+			UStudentPVO pvo = new UStudentPVO();
+			pvo.setStudentId(origin.getStudentId());
+			pvo.setPhoto(ext.getPhoto());
+			pvo.setStudentName(origin.getStudentName());
+			pvo.setEmail(origin.getEmail());
+			pvo.setNumber(origin.getNumber());
+			pvo.setPhone(origin.getPhone());
+			pvo.setDateOfSchool(ext.getDateOfSchool());
+			pvo.setStudentType(ext.getStudentType());
+			pvo.setNation(ext.getNation());
+			pvo.setNativePlace(ext.getNativePlace());
+			pvo.setCardType(ext.getCardType());
+			pvo.setCardNumber(ext.getCardNumber());
+			pvo.setPolitical(ext.getPolitical());
+			pvo.setIsOverseas(ext.getIsOverseas());
+			pvo.setDateOfBirth(ext.getDateOfBirth());
+			pvo.setResidenceType(ext.getResidenceType());
+			pvo.setResidenceAddress(ext.getResidenceAddress());
+			result.setData(pvo);
 		} catch (Exception e) {
-			result.setInfo("访问失败");
+			result.setInfo("查询失败，" + e.getMessage());
 			result.setStatus(1);
 		}
 
