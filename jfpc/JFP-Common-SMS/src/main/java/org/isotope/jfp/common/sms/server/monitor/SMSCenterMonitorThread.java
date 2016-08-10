@@ -3,7 +3,7 @@ package org.isotope.jfp.common.sms.server.monitor;
 import java.util.HashMap;
 
 import org.isotope.jfp.common.sms.server.SMSGatewayFactory;
-import org.isotope.jfp.framework.beands.pub.SMSBean;
+import org.isotope.jfp.framework.beans.pub.SMSBean;
 import org.isotope.jfp.framework.mq.redis.support.RedisChannelServiceThreadSupport;
 import org.isotope.jfp.framework.support.ISSMSGatewaySupport;
 import org.isotope.jfp.framework.utils.BeanFactoryHelper;

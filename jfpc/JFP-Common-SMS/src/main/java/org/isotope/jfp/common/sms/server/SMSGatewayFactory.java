@@ -3,8 +3,8 @@ package org.isotope.jfp.common.sms.server;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.isotope.jfp.framework.beands.common.RESTResultBean;
-import org.isotope.jfp.framework.beands.pub.SMSBean;
+import org.isotope.jfp.framework.beans.common.RESTResultBean;
+import org.isotope.jfp.framework.beans.pub.SMSBean;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.support.ISSMSGatewaySupport;
 import org.isotope.jfp.framework.utils.BeanFactoryHelper;
