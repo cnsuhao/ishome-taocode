@@ -243,5 +243,47 @@
                 AND id = #{id}
             </if>
     </select>
-
+	<!-- 获得指定日期内 某班级课表日期 -->
+	<select id="doSelectUseDayList" resultType="ClassCourseDBO" parameterType="java.util.Map">
+	SELECT
+	<include refid='tableColumns'/>
+	FROM
+		class_course
+	<where>
+		<if test="cid != null">
+			and cid = 1
+		</if>
+		<if test="startTime!=null and endTime!=null">
+			AND use_day BETWEEN #{startTime}
+			AND #{endTime}
+		</if>
+	</where>
+		GROUP BY
+			use_day
+		ORDER BY
+			use_day ASC
+	</select>
+	<!-- 得到 某班级 某一天的课程 -->
+	<select id="doSelectCourseOnDay" parameterType="ClassCourseDBO" resultType="ClassCourseDBO">
+		SELECT
+			<include refid='tableColumns'/>
+		FROM
+			class_course
+		<where>
+			<if test="useDay != null">
+			and use_day = #{useDay}
+			</if>
+			<if test="cid != null">
+			and cid = #{cid}
+			</if>
+			<if test="sid != null">
+			and sid = #{sid}
+			</if>
+			<if test="term != null">
+			and term = #{term}
+			</if>
+		</where>	
+		ORDER BY
+			class_time ASC
+	</select>
 </mapper>
