@@ -8,6 +8,9 @@ public class UStudentPVO extends UStudentDBO {
 	private String termName = null;
 	private String gradeName = null;
 	private String className = null;
+	private String leaderName = null;
+	private Long parentId;
+	private String parentName = null;
 
 	private Long cid;
 
@@ -236,6 +239,30 @@ public class UStudentPVO extends UStudentDBO {
 
 	public void setResidenceAddress(String residenceAddress) {
 		this.residenceAddress = residenceAddress;
+	}
+
+	public String getLeaderName() {
+		return leaderName;
+	}
+
+	public void setLeaderName(String leaderName) {
+		this.leaderName = leaderName;
+	}
+
+	public Long getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(Long parentId) {
+		this.parentId = parentId;
+	}
+
+	public String getParentName() {
+		return parentName;
+	}
+
+	public void setParentName(String parentName) {
+		this.parentName = parentName;
 	}
 
 }

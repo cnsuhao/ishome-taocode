@@ -9,4 +9,8 @@ import org.isotope.jfp.framework.support.IDatabaseSupport;
 public interface UStudentDao extends IDatabaseSupport {
 	
 	List<? extends FrameworkDataBean> doSelectListBycid(FrameworkDataBean formParam);
+
+	UStudentPVO findByIdOrNumber(UStudentPVO student);
+
+	UStudentPVO findByIdOrNumberWithGrade(UStudentPVO student);
 }

@@ -17,4 +17,24 @@ public class UStudentService extends MyServiceSupport {
 	public List<? extends FrameworkDataBean> doSelectListBycid(FrameworkDataBean formParam){
 		return getDao().doSelectListBycid(formParam);
 	}
+
+
+	/**
+	 * 根据studentId或number学号查询
+	 * @param student
+	 * @return
+	 */
+	public UStudentPVO findByIdOrNumber(UStudentPVO student) {
+		return getDao().findByIdOrNumber(student);
+	}
+
+	/**
+	 * 根据studentId或number学号查询，多了年级名称
+	 * @param student
+	 * @return
+	 */
+	public UStudentPVO findByIdOrNumberWithGrade(UStudentPVO student) {
+		return getDao().findByIdOrNumberWithGrade(student);
+	}
+	
 }
