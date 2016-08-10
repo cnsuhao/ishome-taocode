@@ -36,7 +36,9 @@ public class UserSMSSendServiceImpl extends CommonChannelConfig implements ISMSS
 		if (catchService == null)
 			logger.error(">>>>>缓存服务没有定义...xxx");
 		else {
+			catchService.selectDB(defaultIndex);
 			catchService.offerObjectInList(channelKey, sms, false);
+			catchService.init();
 		}
 		// 直接保存到短信队列
 		return true;
@@ -66,7 +68,9 @@ public class UserSMSSendServiceImpl extends CommonChannelConfig implements ISMSS
 		if (catchService == null)
 			logger.error(">>>>>缓存服务没有定义...xxx");
 		else {
+			catchService.selectDB(defaultIndex);
 			catchService.offerObjectInList(channelKey, sms, false);
+			catchService.init();
 		}
 		// 直接保存到短信队列
 		return true;
