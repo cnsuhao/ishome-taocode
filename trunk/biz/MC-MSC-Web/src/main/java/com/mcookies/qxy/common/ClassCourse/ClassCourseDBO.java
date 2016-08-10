@@ -42,7 +42,7 @@ public class ClassCourseDBO extends MyDataBaseObjectSupport {
 	/**
 	 * 日期
 	 */
-	private Date useDay = null;
+	private String useDay = null;
 
 	/**
 	 * 课程id
@@ -143,14 +143,6 @@ public class ClassCourseDBO extends MyDataBaseObjectSupport {
 		return this.weekDay;
 	}
 
-	/**
-	 * 获取日期
-	 *
-	 * @return Use_day 日期
-	 */
-	public Date getUseDay() {
-		return this.useDay;
-	}
 
 	/**
 	 * 获取课程id
@@ -293,15 +285,6 @@ public class ClassCourseDBO extends MyDataBaseObjectSupport {
 		this.weekDay = weekday;
 	}
 
-	/**
-	 * 设置日期
-	 *
-	 * @param Use_day
-	 *            日期
-	 */
-	public void setUseDay(Date useday) {
-		this.useDay = useday;
-	}
 
 	/**
 	 * 设置课程id
@@ -392,4 +375,13 @@ public class ClassCourseDBO extends MyDataBaseObjectSupport {
 	public void setUpdator(Long updator) {
 		this.updator = updator;
 	}
+
+	public String getUseDay() {
+		return useDay;
+	}
+
+	public void setUseDay(String useDay) {
+		this.useDay = useDay;
+	}
+	
 }

@@ -6,7 +6,7 @@ CREATE TABLE class_course
     term BIGINT(8) DEFAULT '1' NOT NULL COMMENT '学期',
     class_time TINYINT(2) NOT NULL COMMENT '课次',
     week_day TINYINT(1) COMMENT '星期',
-    use_day DATETIME COMMENT '日期',
+    use_day VARCHAR(30) COMMENT '日期',
     course_id BIGINT(12) COMMENT '课程id',
     course_name VARCHAR(50) COMMENT '课程名称',
     tid BIGINT(12) COMMENT '教师id',

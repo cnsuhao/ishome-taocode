@@ -23,7 +23,7 @@ public class StaffManageController extends MyControllerSupport {
 	protected UserService UserService_;
 
 	
-	@RequestMapping(value = "/syllabus", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/syllabusddddddddddddd", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean syllabusPOST(@RequestBody String jsonparam) {
 		RESTResultBean result = new RESTResultBean();
