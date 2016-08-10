@@ -4,8 +4,9 @@
     <param-name>contextConfigLocation</param-name>
     <param-value>/WEB-INF/root-context.xml</param-value>
   </context-param>
+  
   <filter>
-    <filter-name>Set Character Encoding</filter-name>
+    <filter-name>CharacterEncoding</filter-name>
     <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
     <init-param>
       <param-name>encoding</param-name>
@@ -13,9 +14,18 @@
     </init-param>
   </filter>
   <filter-mapping>
-    <filter-name>Set Character Encoding</filter-name>
+    <filter-name>CharacterEncoding</filter-name>
     <url-pattern>*</url-pattern>
   </filter-mapping>
+  <filter>
+	<filter-name>CORSFilter</filter-name>
+	<filter-class>org.isotope.jfp.framework.filter.CORSFilter</filter-class>
+  </filter>
+  <filter-mapping>
+	<filter-name>CORSFilter</filter-name>
+	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
