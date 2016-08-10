@@ -38,6 +38,11 @@ public class UStudentDBO extends MyDataBaseObjectSupport {
 	private String phone = null;
 
 	/**
+	 * 邮箱
+	 */
+	private String email = null;
+
+	/**
 	 * 认证方式
 	 */
 	private Integer method = null;
@@ -129,6 +134,15 @@ public class UStudentDBO extends MyDataBaseObjectSupport {
 	 */
 	public String getPhone() {
 		return this.phone;
+	}
+
+	/**
+	 * 获取邮箱
+	 *
+	 * @return Email 邮箱
+	 */
+	public String getEmail() {
+		return this.email;
 	}
 
 	/**
@@ -261,6 +275,16 @@ public class UStudentDBO extends MyDataBaseObjectSupport {
 	 */
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	/**
+	 * 设置邮箱
+	 *
+	 * @param Email
+	 *            邮箱
+	 */
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	/**
