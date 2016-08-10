@@ -138,17 +138,15 @@ public class ClassSettingController extends MyControllerSupport {
 	 * @param size
 	 * @return
 	 */
-	@RequestMapping(value = "/class/term", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/class", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean classSermGET(ClassPVO cpvo,Integer page,Integer size) {
+	public RESTResultBean classGET(String token,Integer page,Integer size) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			//token校验
-			if (doCheckToken(cpvo.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
-			// 获取当前学校ID
-			Long schoolId = getLoginer().getSchoolId();
 			//获取编辑列表
 			if(size==null||size==0){
 				size = 12;
@@ -156,8 +154,7 @@ public class ClassSettingController extends MyControllerSupport {
 			if(page==null||page==0){
 				page = 1;
 			}
-			cpvo.setSid(schoolId);
-			
+			ClassPVO cpvo = new ClassPVO();
 			pageModel.setPageCurrent(page);
 			pageModel.setPageLimit(size);
 			pageModel.setFormParamBean(cpvo);
@@ -175,7 +172,31 @@ public class ClassSettingController extends MyControllerSupport {
 		}
 		return result;
 	}
-	
+	@RequestMapping(value = "/class/search", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public RESTResultBean classSearchGET(String token,Long cid) {
+		RESTResultBean result = new RESTResultBean();
+		try {
+			//token校验
+			if (doCheckToken(token) == false) {
+				return tokenFail();
+			}
+			ClassPVO cpvo = new ClassPVO();
+			cpvo.setCid(cid);
+			pageModel.setPageCurrent(1);
+			pageModel.setPageLimit(1);
+			pageModel.setFormParamBean(cpvo);
+			ClassService_.doSelectPageClass(pageModel);
+			List<ClassPVO> clist = (List<ClassPVO>)pageModel.getPageListData();
+			if(clist!=null&&clist.size()>0){
+				result.setData(clist.get(0));
+			}
+		} catch (Exception e) {
+			result.setInfo("访问失败");
+			result.setStatus(1);
+		}
+		return result;
+	}	
 	
 	
 	/**

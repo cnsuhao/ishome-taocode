@@ -265,6 +265,9 @@
 		<if test="tid != null">
 			and f.tid = #{tid}
 		</if>
+		<if test="sid != null">
+			and a.sid = #{sid}
+		</if>
 	</where>
 
 	</select>
