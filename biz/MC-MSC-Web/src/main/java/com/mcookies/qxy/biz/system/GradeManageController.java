@@ -152,23 +152,17 @@ public class GradeManageController extends MyControllerSupport {
 	
 	@RequestMapping(value = "/gradelabel", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean gradelabelDELETE(@RequestBody String jsonparam) {
+	public RESTResultBean gradelabelDELETE(@RequestBody SGradeLabelPVO pvo) {
 		RESTResultBean result = new RESTResultBean();
-		JSONObject param = JSONObject.parseObject(jsonparam);
-		String token = (String)param.get("token");
 		try {
 			// token校验
-			if (doCheckToken(token) == false) {
+			if (doCheckToken(pvo.getToken()) == false) {
 				return tokenFail();
 			}
-			JSONArray gradeIds = param.getJSONArray("gradeId");
-			for(Object device:gradeIds){
-				Long gradeid = Long.valueOf(device.toString());
-				//乐观锁操作
-				SGradeLabelDBO dbo = new SGradeLabelDBO();
-				dbo.setGradeId(gradeid);
-				dbo = (SGradeLabelDBO)SGradeLabelService_.doRead(dbo);
-				int flag = SGradeLabelService_.doDelete(dbo);
+			int flag = SGradeLabelService_.doDelete(pvo);
+			if(flag!=1){
+				result.setInfo("删除失败");
+				result.setStatus(2);		
 			}
 		} catch (Exception e) {
 			result.setInfo("访问失败");

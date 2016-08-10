@@ -64,84 +64,30 @@ public class WorkTimeManageController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/class/worktime", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean classWorktimeGET(ClassPVO cpvo, Integer page, Integer size, Long tid) {
+	public RESTResultBean classWorktimeGET(Integer page, Integer size,String token) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			JSONObject data = new JSONObject();
-			JSONArray grade = new JSONArray();
 			// token校验
-			if (doCheckToken(cpvo.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
-			// 获取当前学校ID
-			Long schoolId = getLoginer().getSchoolId();
-			cpvo.setSid(schoolId);
 			if (size == null || size == 0) {
 				size = 12;
 			}
 			if (page == null || page == 0) {
 				page = 1;
 			}
-			// 获取学期内容
-			STermDBO sterm = new STermDBO();
-			sterm.setTermId(cpvo.getTermId());
-			sterm = (STermDBO) STermService_.doRead(sterm);
-			if (sterm == null) {
-				result.setInfo("学期不存在");
-				result.setStatus(2);
-				return result;
-			}
-			// 通过班级获取年级信息
+			ClassDBO param = new ClassDBO();
 			pageModel.config();
 			pageModel.setPageCurrent(page);
 			pageModel.setPageLimit(size);
-			pageModel.setFormParamBean(cpvo);
-			List<ClassDBO> classList = (List<ClassDBO>) ClassService_.doSelectPage(pageModel).getPageListData();
-			List<Long> gradeIds = new LinkedList<Long>();
-			if (classList != null) {
-				for (ClassDBO temp : classList) {
-					if (!gradeIds.contains(temp.getGradeId())) {
-						gradeIds.add(temp.getGradeId());
-					}
-				}
-			}
-			// 根据得到的年级ID，获取年级详情
-			for (Long gradeid : gradeIds) {
-				SGradeLabelDBO sgradel = new SGradeLabelDBO();
-				sgradel.setGradeId(gradeid);
-				sgradel = (SGradeLabelDBO) SGradeLabelService_.doRead(sgradel);
-				JSONObject gradeInfo = new JSONObject();
-				gradeInfo.put("gradeId", gradeid);
-				gradeInfo.put("gradeName", sgradel.getGradeName());
-				JSONArray classinfo = new JSONArray();
-				for (ClassDBO tmp1 : classList) {
-					if (gradeid == tmp1.getGradeId()) {
-						ClassDBO dbo = new ClassDBO();
-						dbo.setCid(tmp1.getCid());
-						dbo.setTermId(cpvo.getTermId());
-						dbo.setGradeId(gradeid);
-						List<ClassPVO> classtmplist = ClassService_.doSelectWorkTime(dbo);
-						for (ClassPVO tmp : classtmplist) {
-							JSONObject c = new JSONObject();
-							c.put("cid", tmp.getCid());
-							c.put("className", tmp.getClassName());
-							c.put("termName", sterm.getTermName());
-							c.put("gradeName", sgradel.getGradeName());
-							c.put("workId", tmp.getWorkId());
-							c.put("workName", tmp.getWorkName());
-							c.put("createTime", tmp.getCreateTime());
-							classinfo.add(c);
-						}
-					}
-				}
-				gradeInfo.put("class", classinfo);
-				grade.add(gradeInfo);
-			}
+			pageModel.setFormParamBean(param);
+			ClassService_.doSelectPageWorkTime(pageModel);
 			data.put("page", page);
 			data.put("size", size);
 			data.put("count", pageModel.getResultCount());
-			data.put("termName", sterm.getTermName());
-			data.put("grade", grade);
+			data.put("class", pageModel.getPageListData());
 			result.setData(data);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -150,7 +96,35 @@ public class WorkTimeManageController extends MyControllerSupport {
 		}
 		return result;
 	}
-
+	@RequestMapping(value = "/class/worktime/search", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public RESTResultBean classWorktimeSearchGET(Long cid,String token) {
+		RESTResultBean result = new RESTResultBean();
+		try {
+			JSONObject data = new JSONObject();
+			// token校验
+			if (doCheckToken(token) == false) {
+				return tokenFail();
+			}
+			ClassDBO param = new ClassDBO();
+			param.setCid(cid);
+			pageModel.config();
+			pageModel.setPageCurrent(1);
+			pageModel.setPageLimit(1);
+			pageModel.setFormParamBean(param);
+			ClassService_.doSelectPageWorkTime(pageModel);
+			@SuppressWarnings("unchecked")
+			List<ClassPVO> list = (List<ClassPVO>)pageModel.getPageListData();
+			if(list!=null&&list.size()>0){
+				result.setData(list.get(0));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			result.setInfo("访问失败");
+			result.setStatus(1);
+		}
+		return result;
+	}
 	/**
 	 * 班级作息模版新增接口
 	 * 
@@ -231,24 +205,15 @@ public class WorkTimeManageController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/class/worktime", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean classWorktimeDELETE(@RequestBody String jsonparam) {
+	public RESTResultBean classWorktimeDELETE(@RequestBody ClassPVO pvo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			JSONObject param = JSONObject.parseObject(jsonparam);
-			String token = (String) param.get("token");
 			// token校验
-			if (doCheckToken(token) == false) {
+			if (doCheckToken(pvo.getToken()) == false) {
 				return tokenFail();
 			}
-			JSONArray cids = param.getJSONArray("cid");
-			for (Object temp : cids) {
-				Long cid = Long.valueOf(temp.toString());
-				ClassDBO cdbo = new ClassDBO();
-				cdbo.setCid(cid);
-				cdbo.setWorkId(0l);
-				ClassService_.doUpdate(cdbo);
-			}
-
+			pvo.setWorkId(0l);
+			ClassService_.doUpdate(pvo);
 		} catch (Exception e) {
 			e.printStackTrace();
 			result.setInfo("访问失败");
@@ -470,17 +435,6 @@ public class WorkTimeManageController extends MyControllerSupport {
 			if (doCheckToken(rule.getToken()) == false) {
 				return tokenFail();
 			}
-			// 获取当前学校ID
-			Long schoolId = getLoginer().getSchoolId();
-			// 判断模板是否存在
-			SWorkTimeDBO worktime = new SWorkTimeDBO();
-			worktime.setWorkId(rule.getWorkId());
-			worktime = (SWorkTimeDBO) SWorkTimeService_.doRead(worktime);
-			if (worktime == null) {
-				result.setInfo("更新新增详情失败，无对应的work_id");
-				result.setStatus(2);
-				return result;
-			}
 			// 编辑
 			SWorkRuleService_.doUpdate(rule);
 		} catch (Exception e) {
@@ -498,24 +452,14 @@ public class WorkTimeManageController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/workrule", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean workruleDELETE(@RequestBody String jsonparam) {
+	public RESTResultBean workruleDELETE(@RequestBody SWorkRulePVO pvo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			JSONObject param = JSONObject.parseObject(jsonparam);
-			String token = (String) param.get("token");
-			if (doCheckToken(token) == false) {
+			if (doCheckToken(pvo.getToken()) == false) {
 				return tokenFail();
 			}
 			// 删除规则
-			JSONArray wruleIds = param.getJSONArray("wruleIds");
-			if (wruleIds != null && wruleIds.size() > 0) {
-				for (Object temp : wruleIds) {
-					Long wruleId = Long.valueOf(temp.toString());
-					SWorkRuleDBO sworkrule = new SWorkRuleDBO();
-					sworkrule.setWruleId(wruleId);
-					SWorkRuleService_.doDelete(sworkrule);
-				}
-			}
+			SWorkRuleService_.doDelete(pvo);
 		} catch (Exception e) {
 			result.setInfo("访问失败");
 			result.setStatus(1);

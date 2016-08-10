@@ -155,25 +155,15 @@ public class DeviceManageController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/deviceinfo", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean deviceinfoDELETE(@RequestBody String jsonparam) {
+	public RESTResultBean deviceinfoDELETE(@RequestBody DeviceTagPVO pvo) {
 		RESTResultBean result = new RESTResultBean();
-		JSONObject param = JSONObject.parseObject(jsonparam);
-		String token = (String)param.get("token");
 		
 		try {
 			// token校验
-			if (doCheckToken(token) == false) {
+			if (doCheckToken(pvo.getToken()) == false) {
 				return tokenFail();
 			}
-			JSONArray devices = param.getJSONArray("device");
-			for(Object device:devices){
-				JSONObject temp = (JSONObject)device;
-				//乐观锁操作
-				DeviceTagDBO dbo = new DeviceTagDBO();
-				dbo.setId(temp.getLong("id"));
-				dbo = (DeviceTagDBO)DeviceTagService_.doRead(dbo);
-				int flag = DeviceTagService_.doDelete(dbo);
-			}
+			DeviceTagService_.doDelete(pvo);
 		} catch (Exception e) {
 			result.setInfo("访问失败");
 			result.setStatus(1);

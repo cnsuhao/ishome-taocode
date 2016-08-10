@@ -11,7 +11,7 @@ import com.mcookies.qxy.common.News.NewsPVO;
 /** 班级表*/
 public interface ClassDao extends IDatabaseSupport{
 	
-	List<ClassPVO> doSelectWorkTime(ClassDBO dbo);
+	List<? extends FrameworkDataBean> doSelectPageWorkTime(PageVOSupport formParamPageModel);
 	
 	List<? extends FrameworkDataBean> doSelectPageClass(PageVOSupport formParamPageModel);
 	
