@@ -7,8 +7,6 @@ import org.isotope.jfp.framework.beans.pub.SMSBean;
 import org.isotope.jfp.framework.mq.redis.support.RedisChannelServiceThreadSupport;
 import org.isotope.jfp.framework.support.ISSMSGatewaySupport;
 import org.isotope.jfp.framework.utils.BeanFactoryHelper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSON;
 
@@ -20,9 +18,7 @@ import com.alibaba.fastjson.JSON;
  * @version 2.1.3 2015/4/23
  * @since 2.1.3
  */
-public class SMSCenterMonitorThread extends RedisChannelServiceThreadSupport {
-
-	private Logger logger = LoggerFactory.getLogger(SMSCenterMonitorThread.class);
+public class SMSCenterServerThread extends RedisChannelServiceThreadSupport {
 
 	/**
 	 * 短信网关
@@ -90,9 +86,9 @@ public class SMSCenterMonitorThread extends RedisChannelServiceThreadSupport {
 	@Override
 	public boolean doFinished() throws Exception {
 		// 记录日志
-		//RESTResultBean result = (RESTResultBean) message;
+		// RESTResultBean result = (RESTResultBean) message;
 		// TODO
-		
+
 		return true;
 	}
 
