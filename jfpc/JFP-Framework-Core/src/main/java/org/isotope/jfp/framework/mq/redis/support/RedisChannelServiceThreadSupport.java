@@ -98,7 +98,6 @@ public abstract class RedisChannelServiceThreadSupport extends Thread implements
 	 * 
 	 */
 	public void run() {
-
 		while (true) {
 			try {
 				Thread.sleep(waitTime);
