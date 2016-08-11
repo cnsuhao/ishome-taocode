@@ -15,10 +15,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.mcookies.qxy.common.Class.ClassDBO;
+import com.mcookies.qxy.common.Class.ClassService;
+import com.mcookies.qxy.common.ClassCourse.ClassCourseDBO;
+import com.mcookies.qxy.common.ClassCourse.ClassCourseService;
 import com.mcookies.qxy.common.SCalendar.SCalendarDBO;
 import com.mcookies.qxy.common.SCalendar.SCalendarService;
+import com.mcookies.qxy.common.SDutyScheduling.SDutySchedulingDBO;
+import com.mcookies.qxy.common.SDutyScheduling.SDutySchedulingService;
 import com.mcookies.qxy.common.STerm.STermDBO;
+import com.mcookies.qxy.common.STerm.STermPVO;
 import com.mcookies.qxy.common.STerm.STermService;
+import com.mcookies.qxy.common.STrip.STripDBO;
+import com.mcookies.qxy.common.STrip.STripService;
 import com.mcookies.qxy.utils.DateUtils;
 
 /**
@@ -33,6 +42,14 @@ public class TermManageController extends MyControllerSupport {
 
 	@Resource
 	protected SCalendarService SCalendarService_;
+	@Resource
+	protected ClassService ClassService_;
+	@Resource
+	protected ClassCourseService ClassCourseService_;
+	@Resource
+	protected SDutySchedulingService SDutySchedulingService_;
+	@Resource
+	protected STripService STripService_;
 	
 	/**
 	 * 学校学期及校历日历状态查询接口
@@ -81,15 +98,15 @@ public class TermManageController extends MyControllerSupport {
 							for (SCalendarDBO sCalendarDBO : sSanlendarlist)
 							{
 								JSONObject calJson = new JSONObject();
-								calJson.put("startTime", DateUtils.formatDate(sCalendarDBO.getStartTime(), DateUtils.FORMAT_yyyyMMdd_HH_mm_ss_));
-								calJson.put("endTime", DateUtils.formatDate(sCalendarDBO.getEndTime(), DateUtils.FORMAT_yyyyMMdd_HH_mm_ss_));
+								calJson.put("startTime",sCalendarDBO.getStartTime());
+								calJson.put("endTime",sCalendarDBO.getEndTime());
 								calArray.add(calJson);
 							}
 							term.put("calendarstatus", calArray);
 						}
 					}
-					term.put("startTime", DateUtils.formatDate(sTermDBO.getStartTime(), DateUtils.FORMAT_yyyyMMdd_HH_mm_ss_));
-					term.put("endTime", DateUtils.formatDate(sTermDBO.getEndTime(), DateUtils.FORMAT_yyyyMMdd_HH_mm_ss_));
+					term.put("startTime",sTermDBO.getStartTime());
+					term.put("endTime",sTermDBO.getEndTime());
 					array.add(term);
 				}
 				json.put("termlist", array);
@@ -121,7 +138,6 @@ public class TermManageController extends MyControllerSupport {
 				return tokenFail();
 			}
 			STermDBO param = new STermDBO();
-
 			if (StringUtils.isEmpty(type) || "0".equals(type)) {
 				param.setIsUse(1);
 			}
@@ -134,14 +150,12 @@ public class TermManageController extends MyControllerSupport {
 				JSONArray array = new JSONArray();
 				for (STermDBO sTermDBO : sTermDBOlist) {
 					JSONObject term = new JSONObject();
-
 					term.put("termId", sTermDBO.getTermId() + "");
 					term.put("termName", sTermDBO.getTermName());
 					term.put("isDefault", sTermDBO.getIsDefault());
-
 					term.put("isUse", sTermDBO.getIsUse());
-					term.put("startTime", DateUtils.formatDate(sTermDBO.getStartTime(), DateUtils.FORMAT_yyyyMMdd_HH_mm_ss_));
-					term.put("endTime", DateUtils.formatDate(sTermDBO.getEndTime(), DateUtils.FORMAT_yyyyMMdd_HH_mm_ss_));
+					term.put("startTime",sTermDBO.getStartTime());
+					term.put("endTime", sTermDBO.getEndTime());
 					array.add(term);
 				}
 				json.put("termlist", array);
@@ -169,34 +183,16 @@ public class TermManageController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/term", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean termPOST(@RequestBody String jsonparam) {
+	public RESTResultBean termPOST(@RequestBody STermPVO pvo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			JSONObject param = JSONObject.parseObject(jsonparam);
-			String token = param.getString("token");
 			// token校验
-			if (doCheckToken(token) == false) {
+			if (doCheckToken(pvo.getToken()) == false) {
 				return tokenFail();
 			}
-			String startTime = param.getString("startTime");
-			String endTime = param.getString("endTime");
-			if (StringUtils.isEmpty(param.getString("termName")) || StringUtils.isEmpty(startTime) ||StringUtils.isEmpty(endTime))
-			{
-				result.setInfo("新增失败，入参格式错误");
-				result.setStatus(3);
-				return result;
-			}
-			if (startTime.indexOf("/") != 4 || startTime.lastIndexOf("/") != 7
-					|| endTime.indexOf("/") != 4 || endTime.lastIndexOf("/") != 7)
-			{
-				result.setInfo("新增失败，时间入参格式错误");
-				result.setStatus(3);
-				return result;
-			}
-				
 			// 校验学期名是否已经存在
 			STermDBO sTermDBO = new STermDBO();
-			sTermDBO.setTermName(param.getString("termName"));
+			sTermDBO.setTermName(pvo.getTermName());
 			@SuppressWarnings("unchecked")
 			List<STermDBO> termlist = (List<STermDBO>) STermService_.doSelectData(sTermDBO);
 			if (termlist != null && !termlist.isEmpty()) {
@@ -204,14 +200,11 @@ public class TermManageController extends MyControllerSupport {
 				result.setStatus(1);
 				return result;
 			}
-			sTermDBO.setStartTime(DateUtils.parseDate(param.getString("startTime")));
-			sTermDBO.setEndTime(DateUtils.parseDate(param.getString("endTime")));
 			// 默认添加的学期为启用状态
-			sTermDBO.setIsUse(1);
-			
-			sTermDBO.setIsDefault(0);
+			pvo.setIsUse(1);
+			pvo.setIsDefault(0);
 			// 新增
-			STermService_.doInsert(sTermDBO);
+			STermService_.doInsert(pvo);
 		} catch (Exception e) {
 			result.setInfo("新增失败");
 			result.setStatus(1);
@@ -228,45 +221,67 @@ public class TermManageController extends MyControllerSupport {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/term", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean termPUT(@RequestBody String jsonparam) {
+	public RESTResultBean termPUT(@RequestBody STermPVO pvo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			JSONObject param = JSONObject.parseObject(jsonparam);
-			String token = param.getString("token");
 			// token校验
-			if (doCheckToken(token) == false) {
+			if (doCheckToken(pvo.getToken()) == false) {
 				return tokenFail();
 			}
-			
-			// TOTO 校验学期是否被应用（未完成）
-			
-			String startTime = param.getString("startTime");
-			String endTime = param.getString("endTime");
-			if (StringUtils.isEmpty(param.getString("termName")) || StringUtils.isEmpty(startTime) ||StringUtils.isEmpty(endTime))
-			{
-				result.setInfo("修改失败，入参格式错误");
-				result.setStatus(3);
+			//检验该数据是否被系统使用
+			//班级关联
+			ClassDBO cdbo = new ClassDBO();
+			cdbo.setTermId(pvo.getTermId());
+			List<ClassDBO> classlist = (List<ClassDBO>)ClassService_.doSelectData(cdbo);
+			if(classlist!=null&&classlist.size()>0){
+				result.setInfo("修改失败,该学期已被系统使用");
+				result.setStatus(1);
 				return result;
 			}
-			if (startTime.indexOf("/") != 4 || startTime.lastIndexOf("/") != 7
-					|| endTime.indexOf("/") != 4 || endTime.lastIndexOf("/") != 7)
-			{
-				result.setInfo("修改失败，时间入参格式错误");
-				result.setStatus(3);
+			//课程关联
+			ClassCourseDBO classdbo = new ClassCourseDBO();
+			classdbo.setTerm(pvo.getTermId());
+			List<ClassCourseDBO> cclist =(List<ClassCourseDBO>)ClassCourseService_.doSelectData(classdbo);
+			if(cclist!=null&&cclist.size()>0){
+				result.setInfo("修改失败,该学期已被系统使用");
+				result.setStatus(1);
 				return result;
 			}
-			
-			
+			//校历关联
+			SCalendarDBO scdbo = new SCalendarDBO();
+			scdbo.setTermId(pvo.getTermId());
+			List<SCalendarDBO> sclist =(List<SCalendarDBO>)SCalendarService_.doSelectData(scdbo);
+			if(sclist!=null&&sclist.size()>0){
+				result.setInfo("修改失败,该学期已被系统使用");
+				result.setStatus(1);
+				return result;
+			}
+			//行程
+			STripDBO stdbo = new STripDBO();
+			stdbo.setTermId(pvo.getTermId());
+			List<STripDBO> stlist = (List<STripDBO>)STripService_.doSelectData(stdbo);
+			if(stlist!=null&&stlist.size()>0){
+				result.setInfo("修改失败,该学期已被系统使用");
+				result.setStatus(1);
+				return result;
+			}
+			//值日值周
+			SDutySchedulingDBO sdutyDBO = new SDutySchedulingDBO();
+			sdutyDBO.setTermId(pvo.getTermId());
+			List<SDutySchedulingDBO> sdutyList=(List<SDutySchedulingDBO>)SDutySchedulingService_.doSelectData(sdutyDBO);
+			if(sdutyList!=null&&sdutyList.size()>0){
+				result.setInfo("修改失败,该学期已被系统使用");
+				result.setStatus(1);
+				return result;
+			}			
 			// 校验学期名是否已经存在
-			String termId = param.getString("termId");
 			STermDBO sTermDBO = new STermDBO();
-			sTermDBO.setTermName(param.getString("termName"));
+			sTermDBO.setTermName(pvo.getTermName());
 			List<STermDBO> termlist = (List<STermDBO>) STermService_.doSelectData(sTermDBO);
 			if (termlist != null && !termlist.isEmpty()) {
-				
 				for (STermDBO stermDBO : termlist)
 				{
-					if (!stermDBO.getTermId().toString().equals(termId))
+					if (stermDBO.getTermId()!=pvo.getTermId())
 					{
 						result.setInfo("修改失败，学期名已存在");
 						result.setStatus(1);
@@ -274,33 +289,15 @@ public class TermManageController extends MyControllerSupport {
 					}
 				}
 			}
-			sTermDBO = new STermDBO();
-			termlist = null;
-			//是否为缺省学期	 0-否；1-是														
-			sTermDBO.setIsDefault(1);
-			
-			termlist = (List<STermDBO>) STermService_.doSelectData(sTermDBO);
-			if (termlist != null && !termlist.isEmpty()) {
-				
-				for (STermDBO stermDBO : termlist)
-				{
-					if (!stermDBO.getTermId().toString().equals(termId))
-					{
-						result.setInfo("修改失败，已存在缺失学期");
-						result.setStatus(3);
-						return result;
-					}
-				}
-				
+			//检查此次是否有设置缺省学期操作
+			if(pvo.getIsDefault()!=null&&pvo.getIsDefault()==1){
+				//其他学期设置为 非缺省
+				STermDBO sterm = new STermDBO();
+				sterm.setIsDefault(0);
+				STermService_.doUpdateAll(sterm);
 			}
-			sTermDBO.setStartTime(DateUtils.parseDate(startTime));
-			sTermDBO.setEndTime(DateUtils.parseDate(endTime));
-			sTermDBO.setIsDefault(param.getInteger("isDefaule"));
-			sTermDBO.setIsUse(param.getInteger("isUse"));
-			sTermDBO.setTermName(param.getString("termName"));
-			sTermDBO.setTermId(Long.valueOf(termId));
-			// 修改
-			STermService_.doUpdate(sTermDBO);
+			//更新操作
+			STermService_.doUpdate(pvo);
 		} catch (Exception e) {
 			result.setInfo("修改失败");
 			result.setStatus(1);
