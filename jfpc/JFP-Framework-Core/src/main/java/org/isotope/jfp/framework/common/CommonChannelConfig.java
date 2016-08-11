@@ -1,9 +1,9 @@
 package org.isotope.jfp.framework.common;
 
-import org.isotope.jfp.framework.biz.common.ISInit;
 import org.isotope.jfp.framework.cache.ICacheService;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
-import org.isotope.jfp.framework.utils.BeanFactoryHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 通用Redis通道队列设置
@@ -12,7 +12,8 @@ import org.isotope.jfp.framework.utils.BeanFactoryHelper;
  * @version 2.4.1 2015/8/15
  * @since 2.4.1
  */
-public class CommonChannelConfig implements ISFrameworkConstants, ISInit {
+public class CommonChannelConfig implements ISFrameworkConstants {
+	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	/**
 	 * 缓存定义
@@ -26,9 +27,8 @@ public class CommonChannelConfig implements ISFrameworkConstants, ISInit {
 	public ICacheService getCatchService() {
 		return catchService;
 	}
-	
+
 	protected int defaultIndex = 0;
-	
 
 	public int getDefaultIndex() {
 		return defaultIndex;
@@ -49,20 +49,5 @@ public class CommonChannelConfig implements ISFrameworkConstants, ISInit {
 
 	public void setChannelKey(String channelKey) {
 		this.channelKey = channelKey;
-	}
-
-	public boolean doInit() {
-		catchService = BeanFactoryHelper.getBean(catchBeanName);
-		return true;
-	}
-
-	protected String catchBeanName;
-
-	public String getCatchBeanName() {
-		return catchBeanName;
-	}
-
-	public void setCatchBeanName(String catchBeanName) {
-		this.catchBeanName = catchBeanName;
 	}
 }
