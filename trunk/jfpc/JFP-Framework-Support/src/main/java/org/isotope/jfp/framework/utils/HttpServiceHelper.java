@@ -1,5 +1,6 @@
 package org.isotope.jfp.framework.utils;
 
+import java.lang.reflect.Method;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.cookie.BasicClientCookie2;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.BasicHttpContext;
@@ -30,6 +32,7 @@ import org.apache.http.protocol.HttpContext;
 import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.http.ssl.TrustStrategy;
 import org.apache.http.util.EntityUtils;
+import org.isotope.jfp.framework.beans.ObjectBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -207,7 +210,67 @@ public class HttpServiceHelper {
 		}
 		return "";
 	}
+	
+	/**
+	 * 以简单属性参数请求提交服务
+	 * 
+	 * @param serviceURL
+	 * @param param
+	 * @return
+	 * @throws Exception
+	 */
+	public static String doHttpPOST(String serviceURL, ObjectBean param) throws Exception {
+		// CloseableHttpClient httpclient = HttpClients.createDefault();
 
+		RequestConfig defaultRequestConfig = RequestConfig.custom().setSocketTimeout(waitTimeMinute * 1000).setConnectTimeout(waitTimeMinute * 1000).setConnectionRequestTimeout(waitTimeMinute * 1000).setStaleConnectionCheckEnabled(true).build();
+		CloseableHttpClient httpclient = HttpClients.custom().setDefaultRequestConfig(defaultRequestConfig).build();
+
+		try {
+
+			HttpPost httpPost = new HttpPost(serviceURL);
+			List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+
+			// 参数翻转
+			{
+				// 获得所有属性名称
+				for (Method m : param.getClass().getMethods()) {
+					String methodName = m.getName();
+					if (methodName.startsWith("get")) {// &&
+														// methodName.indexOf("_")
+														// > 0
+						try {
+							Object value = m.invoke(param);
+							String name = methodName.substring(3, 4).toLowerCase() + methodName.substring(4);
+
+							if (value == null)
+								nvps.add(new BasicNameValuePair(name, ""));
+							else
+								nvps.add(new BasicNameValuePair(name, "" + value));
+						} catch (Exception e) {
+							System.err.println(e.getMessage());
+						}
+					}
+				}
+			}
+
+			// 设定传输编码
+			httpPost.setEntity(new UrlEncodedFormEntity(nvps, ENCODE_DEFAULT));
+
+			CloseableHttpResponse response = httpclient.execute(httpPost);
+
+			int status = response.getStatusLine().getStatusCode();
+			if (status >= 200 && status < 300) {
+				HttpEntity entity = response.getEntity();
+				if (entity != null)
+					return EntityUtils.toString(entity, ENCODE_DEFAULT);
+			} else {
+				throw new Exception("服务请求异常: " + status+",【URL="+serviceURL+"】");
+			}
+		} finally {
+			httpclient.close();
+		}
+		return "";
+	}
 	/**
 	 * 将全部参数以JSON字符串形式发送，接口如直接接受
 	 * 
