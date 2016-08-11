@@ -27,12 +27,12 @@ public class SCalendarDBO extends MyDataBaseObjectSupport {
 	/**
 	 * 开始时间
 	 */
-	private Date startTime = null;
+	private String startTime = null;
 
 	/**
 	 * 结束时间
 	 */
-	private Date endTime = null;
+	private String endTime = null;
 
 	/**
 	 * 校历事项
@@ -81,7 +81,7 @@ public class SCalendarDBO extends MyDataBaseObjectSupport {
 	 *
 	 * @return Start_time 开始时间
 	 */
-	public Date getStartTime() {
+	public String getStartTime() {
 		return this.startTime;
 	}
 
@@ -90,7 +90,7 @@ public class SCalendarDBO extends MyDataBaseObjectSupport {
 	 *
 	 * @return End_time 结束时间
 	 */
-	public Date getEndTime() {
+	public String getEndTime() {
 		return this.endTime;
 	}
 
@@ -157,7 +157,7 @@ public class SCalendarDBO extends MyDataBaseObjectSupport {
 	 * @param Start_time
 	 *            开始时间
 	 */
-	public void setStartTime(Date starttime) {
+	public void setStartTime(String starttime) {
 		this.startTime = starttime;
 	}
 
@@ -167,7 +167,7 @@ public class SCalendarDBO extends MyDataBaseObjectSupport {
 	 * @param End_time
 	 *            结束时间
 	 */
-	public void setEndTime(Date endtime) {
+	public void setEndTime(String endtime) {
 		this.endTime = endtime;
 	}
 

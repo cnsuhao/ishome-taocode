@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.mcookies.qxy.common.SCalendar.SCalendarDBO;
+import com.mcookies.qxy.common.SCalendar.SCalendarPVO;
 import com.mcookies.qxy.common.SCalendar.SCalendarService;
 import com.mcookies.qxy.utils.DateUtils;
 
@@ -39,7 +40,7 @@ public class CalendarManageController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/calendar", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean calendarGET(String termId, String time, String token) {
+	public RESTResultBean calendarGET(Long termId, String startTime,String endTime, String token) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			// token校验
@@ -47,30 +48,9 @@ public class CalendarManageController extends MyControllerSupport {
 				return tokenFail();
 			}
 			SCalendarDBO param = new SCalendarDBO();
-			param.setTermId(Long.valueOf(termId));
-			if (StringUtils.isNotEmpty(time)) {
-				
-				if (time.split("\\|").length < 2)
-				{
-					result.setInfo("查询失败，时间入参格式错误");
-					result.setStatus(3);
-					return result;
-				}
-				
-				String startTime = time.split("\\|")[0];
-				String endTime = time.split("\\|")[1];
-				if (startTime.indexOf("/") != 4 || startTime.lastIndexOf("/") != 7
-						|| endTime.indexOf("/") != 4 || endTime.lastIndexOf("/") != 7)
-				{
-					result.setInfo("修改失败，时间入参格式错误");
-					result.setStatus(3);
-					return result;
-				}
-				
-				param.setStartTime(DateUtils.parseDate(startTime));
-				param.setEndTime(DateUtils.parseDate(endTime));
-			}
-			
+			param.setTermId(termId);
+			param.setStartTime(startTime);
+			param.setEndTime(endTime);
 			List<SCalendarDBO> sSanlendarlist = (List<SCalendarDBO>) SCalendarService_.doSelectList(param);
 			if (sSanlendarlist != null) {
 				JSONObject json = new JSONObject();
@@ -79,11 +59,11 @@ public class CalendarManageController extends MyControllerSupport {
 				for (SCalendarDBO sCalendar : sSanlendarlist) {
 					JSONObject calendar = new JSONObject();
 					JSONObject times = new JSONObject();
-					calendar.put("calendarId", sCalendar.getCalendarId() + "");
+					calendar.put("calendarId", sCalendar.getCalendarId());
 					calendar.put("content", sCalendar.getContent());
 					calendar.put("department", sCalendar.getDepartment());
-					times.put("startTime", DateUtils.formatDate(sCalendar.getStartTime(), DateUtils.FORMAT_yyyyMMdd_HH_mm_ss_));
-					times.put("endTime", DateUtils.formatDate(sCalendar.getEndTime(), DateUtils.FORMAT_yyyyMMdd_HH_mm_ss_));
+					times.put("startTime",sCalendar.getStartTime());
+					times.put("endTime",sCalendar.getEndTime());
 					calendar.put("time", times);
 					array.add(calendar);
 				}
@@ -106,51 +86,29 @@ public class CalendarManageController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/calendar", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean calendarPOST(@RequestBody String jsonparam) {
-
+	public RESTResultBean calendarPOST(@RequestBody SCalendarPVO pvo) {
 		RESTResultBean result = new RESTResultBean();
-
 		try {
-			JSONObject param = JSONObject.parseObject(jsonparam);
-			String token = param.getString("token");
 			// token校验
-			if (doCheckToken(token) == false) {
+			if (doCheckToken(pvo.getToken()) == false) {
 				return tokenFail();
 			}
-			
-			String startTime = param.getString("startTime");
-			String endTime = param.getString("endTime");
-			
-			if (StringUtils.isEmpty(param.getString("termId")))
-			{
-				result.setInfo("修改失败，学期为空");
-				result.setStatus(3);
+			if(pvo.getTermId()==null){
+				result.setInfo("termId不能为空");
+				result.setStatus(1);
 				return result;
 			}
-			
-			if (StringUtils.isEmpty(startTime) ||StringUtils.isEmpty(endTime))
-			{
-				result.setInfo("修改失败，入参格式错误");
-				result.setStatus(3);
+			if(pvo.getStartTime()==null||pvo.getEndTime()==null){
+				result.setInfo("起始时间不能为空");
+				result.setStatus(1);
 				return result;
 			}
-			if (startTime.indexOf("/") != 4 || startTime.lastIndexOf("/") != 7
-					|| endTime.indexOf("/") != 4 || endTime.lastIndexOf("/") != 7)
-			{
-				result.setInfo("修改失败，时间入参格式错误");
-				result.setStatus(3);
-				return result;
+			pvo.setIsUse(1);
+			int flag = SCalendarService_.doInsert(pvo);
+			if(flag!=1){
+				result.setInfo("新增失败");
+				result.setStatus(1);
 			}
-
-			// 新增
-			SCalendarDBO sCalendar = new SCalendarDBO();
-			sCalendar.setTermId(param.getLong("termId"));
-			sCalendar.setContent(param.getString("content"));
-			sCalendar.setDepartment(param.getString("department"));
-			sCalendar.setStartTime(DateUtils.parseDate(startTime));
-			sCalendar.setEndTime(DateUtils.parseDate(endTime));
-			sCalendar.setIsUse(1);
-			SCalendarService_.doInsert(sCalendar);
 		} catch (Exception e) {
 			result.setInfo("新增失败");
 			result.setStatus(1);
@@ -166,67 +124,26 @@ public class CalendarManageController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/calendar", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean calendarPUT(@RequestBody String jsonparam) {
+	public RESTResultBean calendarPUT(@RequestBody SCalendarPVO pvo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-
-			JSONObject param = JSONObject.parseObject(jsonparam);
-			String token = param.getString("token");
 			// token校验
-			if (doCheckToken(token) == false) {
+			if (doCheckToken(pvo.getToken()) == false) {
 				return tokenFail();
-			}
-			
-			String startTime = param.getString("startTime");
-			String endTime = param.getString("endTime");
-			if (StringUtils.isEmpty(param.getString("termId")))
-			{
-				result.setInfo("修改失败，学期为空");
-				result.setStatus(3);
-				return result;
-			}
-			
-			if (StringUtils.isEmpty(param.getString("calendarId")))
-			{
-				result.setInfo("修改失败，学校校历为空");
-				result.setStatus(3);
-				return result;
-			}
-			
-			
-			if (StringUtils.isEmpty(startTime) ||StringUtils.isEmpty(endTime))
-			{
-				result.setInfo("修改失败，入参格式错误");
-				result.setStatus(3);
-				return result;
-			}
-			if (startTime.indexOf("/") != 4 || startTime.lastIndexOf("/") != 7
-					|| endTime.indexOf("/") != 4 || endTime.lastIndexOf("/") != 7)
-			{
-				result.setInfo("修改失败，时间入参格式错误");
-				result.setStatus(3);
-				return result;
 			}
 
 			SCalendarDBO sCalendar = new SCalendarDBO();
 
 			// 校验是否存在
-			sCalendar.setCalendarId(param.getLong("calendarId"));
+			sCalendar.setCalendarId(pvo.getCalendarId());
 			SCalendarDBO sCalendarInfo = (SCalendarDBO) SCalendarService_.doRead(sCalendar);
 			if (null == sCalendarInfo) {
 				result.setInfo("更新失败，该学校校历不存在");
 				result.setStatus(2);
 				return result;
 			}
-
-			sCalendar.setTermId(param.getLong("termId"));
-			sCalendar.setContent(param.getString("content"));
-			sCalendar.setDepartment(param.getString("department"));
-			sCalendar.setStartTime(DateUtils.parseDate(startTime));
-			sCalendar.setEndTime(DateUtils.parseDate(endTime));
-
 			// 修改
-			SCalendarService_.doUpdate(sCalendar);
+			SCalendarService_.doUpdate(pvo);
 		} catch (Exception e) {
 			result.setInfo("修改失败");
 			result.setStatus(1);
@@ -242,30 +159,15 @@ public class CalendarManageController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/calendar", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean calendarDELETE(@RequestBody String jsonparam) {
+	public RESTResultBean calendarDELETE(@RequestBody SCalendarPVO pvo) {
 		RESTResultBean result = new RESTResultBean();
-		JSONObject param = JSONObject.parseObject(jsonparam);
-		String token = param.getString("token");
-
 		try {
 			// token校验
-			if (doCheckToken(token) == false) {
+			if (doCheckToken(pvo.getToken()) == false) {
 				return tokenFail();
 			}
-			String calendarId = param.getString("calendarId");
-
-			if (StringUtils.isNotEmpty(calendarId)) {
-				// 乐观锁操作
-				SCalendarDBO dbo = new SCalendarDBO();
-				dbo.setCalendarId(Long.valueOf(calendarId));
-				dbo = (SCalendarDBO) SCalendarService_.doRead(dbo);
-
-				if (null != dbo) {
-					SCalendarService_.doDelete(dbo);
-				} else {
-					result.setInfo("没有对应的学校校历数据可以删除");
-					result.setStatus(1);
-				}
+			if (pvo.getCalendarId()!=null) {
+				SCalendarService_.doDelete(pvo);
 			}
 
 		} catch (Exception e) {
