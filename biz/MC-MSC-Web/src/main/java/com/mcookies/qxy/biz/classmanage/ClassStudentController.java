@@ -22,6 +22,8 @@ import com.mcookies.qxy.common.Class.ClassDBO;
 import com.mcookies.qxy.common.Class.ClassService;
 import com.mcookies.qxy.common.ClassStudent.ClassStudentDBO;
 import com.mcookies.qxy.common.ClassStudent.ClassStudentService;
+import com.mcookies.qxy.common.UParent.UParentDBO;
+import com.mcookies.qxy.common.UParent.UParentPVO;
 import com.mcookies.qxy.common.UParent.UParentService;
 import com.mcookies.qxy.common.UStudent.UStudentDBO;
 import com.mcookies.qxy.common.UStudent.UStudentPVO;
@@ -435,58 +437,146 @@ public class ClassStudentController extends MyControllerSupport {
 	 * 班级学生家长列表查询接口
 	 * /qxy/class/student/parent/list/student=[studentId]&type=[type]&token=[
 	 * token]
-	 *//*
+	 */
 	@RequestMapping(value = "/class/student/parent/list", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean classStudentParentListGET(@RequestBody UserDBO user) {
-		// TODO
+	public RESTResultBean classStudentParentListGET(UStudentDBO student, Integer type) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(user.getToken()) == false) {
+			if (doCheckToken(student.getToken()) == false) {
 				return tokenFail();
 			}
-
-			Long userId = getLoginer().getUserId();
-
-			result.setInfo("欢迎访问千校云平台：" + userId + "," + user.getAccount());
+			if (student.getStudentId() == null) {
+				throw new IllegalArgumentException("学生id不能为空");
+			}
+			UStudentDBO origin = new UStudentDBO();
+			origin.setStudentId(student.getStudentId());
+			origin = (UStudentDBO) uStudentService.doRead(origin);
+			if (origin == null) {
+				throw new IllegalArgumentException("学生不存在");
+			}
+			if (type == null || type == 0) {
+				student.setIsUse(1);
+			}
+			Map<String, Object> data = new HashMap<String, Object>();
+			
+			List<UParentPVO> parents = uParentService.findByStudentId(student);
+			data.put("count", parents.size());
+			data.put("parentList", parents);
+			result.setData(data);
 		} catch (Exception e) {
-			result.setInfo("访问失败");
+			result.setInfo("查询失败，" + e.getMessage());
 			result.setStatus(1);
 		}
 
 		return result;
 	}
 
-	*//**
+	/**
 	 * 班级学生家长新增接口 /qxy/class/student/parent
-	 *//*
+	 */
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/class/student/parent", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean classStudentParentPOST(@RequestBody ClassCourseDBO classCourse) {
+	public RESTResultBean classStudentParentPOST(@RequestBody UParentPVO parent) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(classCourse.getToken()) == false) {
+			if (doCheckToken(parent.getToken()) == false) {
 				return tokenFail();
 			}
-			if (classCourse.getCid() == null) {
-				throw new IllegalArgumentException("cid不能为空");
+			if (parent.getPhone() == null) {
+				throw new IllegalArgumentException("手机号码不能为空");
 			}
-			ClassDBO clazz = new ClassDBO();
-			clazz.setCid(classCourse.getCid());
-			clazz = (ClassDBO) classService.doRead(clazz);
-			if (clazz == null) {
-				throw new IllegalArgumentException("cid所对应的班级不存在");
+			if (parent.getStudentId() == null) {
+				throw new IllegalArgumentException("studentId不能为空");
 			}
-			if (classCourse.getCourseId1() == null) {
-				throw new IllegalArgumentException("courseId不能为空");
+			if (parent.getRole() == null) {
+				throw new IllegalArgumentException("家长角色不能为空");
 			}
-			SCourseDBO course = new SCourseDBO();
-			course.setCourseId(classCourse.getCourseId1());
-			course = (SCourseDBO) sCourseService.doRead(course);
-			if (course == null) {
-				throw new IllegalArgumentException("courseId所对应的课程不存在");
+			UStudentDBO student = new UStudentDBO();
+			student.setStudentId(parent.getStudentId());
+			student = (UStudentDBO) uStudentService.doRead(student);
+			if (student == null) {
+				throw new IllegalArgumentException("该学生不存在");
 			}
-			classCourseService.doInsert(classCourse);
+			// 先查一下是否已经有关联关系
+			UParentDBO origin = new UParentDBO();
+			origin.setPhone(parent.getPhone());
+			List<UParentDBO> origins = (List<UParentDBO>) uParentService.doSelectData(origin);
+			if (origins.size() > 0) {
+				UStudentParentDBO sp = new UStudentParentDBO();
+				sp.setStudentId(parent.getStudentId());
+				sp.setParentId(origins.get(0).getParentId());
+				List<UStudentParentDBO> sps = (List<UStudentParentDBO>) uStudentParentService.doSelectData(sp);
+				if (sps.size() > 0) {
+					throw new IllegalArgumentException("该学生家长已存在");
+				}
+			}
+			Long uid = null;
+			// 匹配用户表
+			UserDBO userp = new UserDBO();
+			userp.setPhone(parent.getPhone());
+			List<UserDBO> plist = (List<UserDBO>) userService.doSelectData(userp);
+
+			// 存在则直接获取uid
+			if (plist != null && plist.size() > 0) {
+				uid = plist.get(0).getUid();
+			} else {
+				// 新建
+				UserDBO user = new UserDBO();
+				user.setAccount(parent.getPhone());
+				user.setEmailStatus(0);
+				user.setPhone(parent.getPhone());
+				user.setPassword(MD5SecurityHelper.encrypt("qxy123456"));
+				user.setStatus(1);
+				userService.doInsert(user);
+				uid = user.getUid();
+			}
+			
+			// 检查手机号码是否被使用（该家长是否已经录入）
+			UParentDBO par = new UParentDBO();
+			par.setPhone(parent.getPhone());
+			List<UParentDBO> pars = (List<UParentDBO>) uParentService.doSelectData(par);
+			UParentDBO rightParent = null;
+			if (pars != null && pars.size() > 0) {
+				// 手机号码已经存在（该家长已经录入）
+				rightParent = pars.get(0);
+			} else {
+				rightParent = new UParentDBO();
+				rightParent.setUid(uid);
+				rightParent.setSid(parent.getSid());
+				rightParent.setParentName(parent.getParentName());
+				rightParent.setPhone(parent.getPhone());
+				rightParent.setPosition(parent.getPosition());
+				rightParent.setWorkUnit(parent.getWorkUnit());
+				rightParent.setIsUse(1);
+				uParentService.doInsert(rightParent);
+			}
+			// 维护学生家长表
+			// 先查一下是否已经有默认家长
+			UStudentParentDBO studentParent = new UStudentParentDBO();
+			studentParent.setStudentId(parent.getStudentId());
+			studentParent.setIsDefault(1);
+			List<UStudentParentDBO> studentParents = (List<UStudentParentDBO>) uStudentParentService.doSelectData(studentParent);
+			// 已经有默认的家长
+			if (studentParents.size() > 0) {
+				if (parent.getIsDefault() != null && parent.getIsDefault() == 1) {
+					uStudentParentService.updateIsDefaultFalse(studentParent);
+				} else {
+					studentParent.setIsDefault(0);
+				}
+			} else {
+				if (parent.getIsDefault() != null) {
+					studentParent.setIsDefault(parent.getIsDefault());
+				} else {
+					studentParent.setIsDefault(1);
+				}
+			}
+			studentParent.setSid(parent.getSid());
+			studentParent.setIsUse(1);
+			studentParent.setRole(parent.getRole());
+			studentParent.setParentId(rightParent.getParentId());
+			uStudentParentService.doInsert(studentParent);
 			Map<String, Object> data = new HashMap<String, Object>();
 			data.put("info", "ok");
 			result.setData(data);
@@ -494,49 +584,101 @@ public class ClassStudentController extends MyControllerSupport {
 			result.setInfo("新增失败，" + e.getMessage());
 			result.setStatus(1);
 		}
-
 		return result;
 	}
 
-	*//**
+	/**
 	 * 班级学生家长修改/停用(启用)及指定默认家长接口 /qxy/class/student/parent
-	 *//*
+	 */
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/class/student/parent", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean classStudentParentPUT(@RequestBody ClassCourseDBO classCourse) {
-		// TODO: test
+	public RESTResultBean classStudentParentPUT(@RequestBody UParentPVO parent) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(classCourse.getToken()) == false) {
+			if (doCheckToken(parent.getToken()) == false) {
 				return tokenFail();
 			}
-			// 查询是否存在
-			if (classCourse.getId() == null) {
-				throw new IllegalArgumentException("班级课程id不能为空");
+			if (parent.getId() == null) {
+				throw new IllegalArgumentException("id不能为空");
 			}
-			ClassCourseDBO origin = new ClassCourseDBO();
-			origin.setId(classCourse.getId());
-			origin = (ClassCourseDBO) classCourseService.doRead(origin);
+			UStudentParentDBO originSp = new UStudentParentDBO();
+			originSp.setId(parent.getId());
+			originSp = (UStudentParentDBO) uStudentParentService.doRead(originSp);
+			if (originSp == null) {
+				throw new IllegalArgumentException("该学生家长关系不存在");
+			}
+			if (parent.getParentId() == null) {
+				throw new IllegalArgumentException("parentId不能为空");
+			}
+			UParentDBO origin = new UParentDBO();
+			origin.setParentId(parent.getParentId());
+			origin = (UParentDBO) uParentService.doRead(origin);
 			if (origin == null) {
-				throw new IllegalArgumentException("班级课程不存在");
+				throw new IllegalArgumentException("该家长不存在");
 			}
-			if (classCourse.getCid() != null) {
-				ClassDBO clazz = new ClassDBO();
-				clazz.setCid(classCourse.getCid());
-				clazz = (ClassDBO) classService.doRead(clazz);
-				if (clazz == null) {
-					throw new IllegalArgumentException("cid所对应的班级不存在");
+			// 检查手机号码、邮箱是否被使用
+			if (!StringUtils.isEmpty(parent.getPhone())) {
+				UParentDBO p = new UParentDBO();
+				p.setPhone(parent.getPhone());
+				List<UParentDBO> ps = (List<UParentDBO>) uParentService.doSelectData(p);
+				if (ps != null && ps.size() > 0 && ps.get(0).getParentId() != parent.getParentId()) {
+					throw new IllegalArgumentException("手机号码已经存在");
 				}
 			}
-			if (classCourse.getCourseId1() != null) {
-				SCourseDBO course = new SCourseDBO();
-				course.setCourseId(classCourse.getCourseId1());
-				course = (SCourseDBO) sCourseService.doRead(course);
-				if (course == null) {
-					throw new IllegalArgumentException("courseId所对应的课程不存在");
+			
+			// 修改家长信息
+			origin.setParentName(parent.getParentName());
+			origin.setPhone(parent.getPhone());
+			origin.setPosition(parent.getPosition());
+			origin.setWorkUnit(parent.getWorkUnit());
+			origin.setIsUse(parent.getIsUse());
+			uParentService.doInsert(origin);
+				
+			// 维护学生家长表
+			// 先查一下是否已经有学生家长关系
+			UStudentParentDBO studentParent = new UStudentParentDBO();
+			studentParent.setStudentId(originSp.getStudentId());
+			studentParent.setParentId(parent.getParentId());
+			studentParent = (UStudentParentDBO) uStudentParentService.doRead(studentParent);
+			// 已经有学生家长关系
+			if (studentParent != null) {
+				if (parent.getIsDefault() != null && parent.getIsDefault() == 1) {
+					uStudentParentService.updateIsDefaultFalse(studentParent);
+				} else {
+					studentParent.setIsDefault(0);
 				}
+				studentParent.setRole(parent.getRole());
+				uStudentParentService.doUpdate(studentParent);
+			} else {
+				studentParent = new UStudentParentDBO();
+				studentParent.setStudentId(originSp.getStudentId());
+				studentParent.setParentId(parent.getParentId());
+				// 先查一下是否已经有默认家长
+				UStudentParentDBO sp = new UStudentParentDBO();
+				sp.setStudentId(originSp.getStudentId());
+				sp.setIsDefault(1);
+				List<UStudentParentDBO> sps = (List<UStudentParentDBO>) uStudentParentService.doSelectData(sp);
+				// 已经有默认的家长
+				if (sps.size() > 0) {
+					if (parent.getIsDefault() != null && parent.getIsDefault() == 1) {
+						uStudentParentService.updateIsDefaultFalse(sp);
+					} else {
+						studentParent.setIsDefault(0);
+					}
+				} else {
+					if (parent.getIsDefault() != null) {
+						studentParent.setIsDefault(parent.getIsDefault());
+					} else {
+						studentParent.setIsDefault(1);
+					}
+				}
+				studentParent.setIsDefault(1);
+				studentParent.setSid(parent.getSid());
+				studentParent.setIsUse(1);
+				studentParent.setRole(parent.getRole());
+				uStudentParentService.doInsert(studentParent);
 			}
-			classCourseService.doUpdate(classCourse);
 			Map<String, Object> data = new HashMap<String, Object>();
 			data.put("info", "ok");
 			result.setData(data);
@@ -544,33 +686,33 @@ public class ClassStudentController extends MyControllerSupport {
 			result.setInfo("修改失败，" + e.getMessage());
 			result.setStatus(1);
 		}
-
 		return result;
 	}
 
-	*//**
-	 * 班级学生家长删除接口 /qxy/class/student/info
-	 *//*
-	@RequestMapping(value = "/class/student/info", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
+	/**
+	 * 班级学生家长删除接口 /qxy/class/student/parent
+	 */
+	@RequestMapping(value = "/class/student/parent", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean classStudentInfoDELETE(@RequestBody ClassCourseDBO classCourse) {
-		// TODO: test
+	public RESTResultBean classStudentParentDELETE(@RequestBody UStudentParentDBO studentParent) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(classCourse.getToken()) == false) {
+			if (doCheckToken(studentParent.getToken()) == false) {
 				return tokenFail();
 			}
 			// 查询是否存在
-			if (classCourse.getId() == null) {
-				throw new IllegalArgumentException("班级课程id不能为空");
+			if (studentParent.getId() == null) {
+				throw new IllegalArgumentException("id不能为空");
 			}
-			ClassCourseDBO origin = new ClassCourseDBO();
-			origin.setId(classCourse.getId());
-			origin = (ClassCourseDBO) classCourseService.doRead(origin);
+			UStudentParentDBO origin = new UStudentParentDBO();
+			origin.setId(studentParent.getId());
+			origin = (UStudentParentDBO) uStudentParentService.doRead(origin);
 			if (origin == null) {
-				throw new IllegalArgumentException("班级课程不存在");
+				throw new IllegalArgumentException("学生家长关系不存在");
 			}
-			classCourseService.doDelete(origin);
+			
+			uStudentParentService.doDelete(studentParent);
+			
 			Map<String, Object> data = new HashMap<String, Object>();
 			data.put("info", "ok");
 			result.setData(data);
@@ -579,6 +721,6 @@ public class ClassStudentController extends MyControllerSupport {
 			result.setStatus(1);
 		}
 		return result;
-	}*/
+	}
 
 }

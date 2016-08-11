@@ -15,4 +15,12 @@ public class UStudentParentService extends MyServiceSupport {
 		getDao().deleteByStudentId(studentParent);
 	}
 
+	/**
+	 * 修改studentId对应的学生家长关系的默认为0
+	 * @param sp
+	 */
+	public void updateIsDefaultFalse(UStudentParentDBO sp) {
+		getDao().updateIsDefaultFalse(sp);
+	}
+
 }

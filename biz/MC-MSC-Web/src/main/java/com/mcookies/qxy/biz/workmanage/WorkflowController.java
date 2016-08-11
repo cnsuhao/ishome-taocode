@@ -55,7 +55,7 @@ public class WorkflowController extends MyControllerSupport {
 	@RequestMapping(value = "/myapplication", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean myApplicationGET(@RequestParam(required = false) String token,
-			@RequestParam(value = "teacher", required = false) Long tid) {
+			@RequestParam(required = false) Long tid) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			if (doCheckToken(token) == false) {
@@ -195,7 +195,7 @@ public class WorkflowController extends MyControllerSupport {
 	@RequestMapping(value = "/myaudit", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean myAuditGET(@RequestParam(required = false) String token,
-			@RequestParam(value = "teacher", required = false) Long tid) {
+			@RequestParam(required = false) Long tid) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			if (doCheckToken(token) == false) {

@@ -32,6 +32,8 @@ public class ClassPVO extends ClassDBO {
 	private String teacherName = null;
 
 	private Integer count = null;
+	
+	private Integer isLeader = null;
 
 	/**
 	 * 班主任姓名
@@ -118,6 +120,14 @@ public class ClassPVO extends ClassDBO {
 
 	public void setStudentCount(Integer studentCount) {
 		this.studentCount = studentCount;
+	}
+
+	public Integer getIsLeader() {
+		return isLeader;
+	}
+
+	public void setIsLeader(Integer isLeader) {
+		this.isLeader = isLeader;
 	}
 
 

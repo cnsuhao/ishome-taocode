@@ -328,4 +328,15 @@
 			AND sid = #{sid}
 		</if>
     </select>
+    <!-- 查询班级教师列表  -->
+    <select id='findByTermIdAndCid' parameterType='com.mcookies.qxy.common.UTeacher.UTeacherPVO' 
+    		resultType='com.mcookies.qxy.common.UTeacher.UTeacherPVO'>
+        SELECT d.tid, d.teacher_name, c.course_id, e.course_name, IF(c.is_leader, 1, 0) AS is_leader
+		FROM class a 
+		LEFT JOIN s_term b ON a.term_id = b.term_id 
+		LEFT JOIN class_teacher c ON a.cid = c.cid
+		LEFT JOIN u_teacher d ON d.tid = c.tid
+		LEFT JOIN s_course e ON c.course_id = e.course_id
+		WHERE 1 = 1 AND b.term_id = #{termId} AND a.cid = #{cid}
+    </select>
 </mapper>

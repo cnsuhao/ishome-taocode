@@ -184,4 +184,9 @@
     <delete id='deleteByStudentId' parameterType='UStudentParentDBO'>
         DELETE FROM u_student_parent WHERE student_id = #{studentId}
     </delete>
+    <!-- 修改studentId对应的学生家长关系的默认为0 -->
+    <update id='updateIsDefaultFalse' parameterType='UStudentParentDBO'>
+        UPDATE u_student_parent SET is_default = 0
+        WHERE student_id = #{studentId}
+    </update>
 </mapper>

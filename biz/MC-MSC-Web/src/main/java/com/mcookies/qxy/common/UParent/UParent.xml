@@ -190,7 +190,7 @@
     </select>
 
     <!-- 插入一条数据 -->
-    <insert id='doInsert' parameterType='UParentDBO'>
+    <insert id='doInsert' parameterType='UParentDBO' useGeneratedKeys="true" keyProperty="parentId">
         INSERT INTO u_parent
           ( <include refid='tableColumns'/>) 
         VALUES 
@@ -274,6 +274,26 @@
         SELECT <include refid='tableColumns'/> FROM u_parent WHERE 1 = 1
             <if test=" parentId != null "><!-- 家长id（自增） -->
                 AND parent_id = #{parentId}
+            </if>
+    </select>
+    <!-- 根据studentId和isUse查找学生家长信息  -->
+    <select id='findByStudentId' parameterType='com.mcookies.qxy.common.UStudent.UStudentDBO'
+    		resultType='com.mcookies.qxy.common.UParent.UParentPVO'>
+        SELECT 
+        a.id,
+        a.parent_id,
+        b.parent_name,
+        b.phone,
+        b.is_use,
+        b.work_unit,
+        b.position,
+		a.role,
+		a.is_default
+		FROM u_student_parent a 
+		LEFT JOIN u_parent b ON a.parent_id = b.parent_id
+		WHERE a.student_id = #{studentId}
+            <if test=" isUse != null ">
+                AND b.is_use = 1
             </if>
     </select>
 

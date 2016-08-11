@@ -186,4 +186,10 @@
         DELETE FROM class_student WHERE student_id = #{studentId}
     </delete>
 
+	<!-- 修改学生的班级 -->
+    <update id='updateCid' parameterType='ClassStudentDBO'>
+        UPDATE class_student SET cid = #{cid}
+        WHERE 1 = 1 
+        AND student_id = #{studentId}
+    </update>
 </mapper>

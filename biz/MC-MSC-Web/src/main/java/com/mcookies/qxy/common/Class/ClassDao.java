@@ -19,4 +19,6 @@ public interface ClassDao extends IDatabaseSupport{
 
 	List<ClassDBO> findNewsClassers(NewsPVO news);
 
+	List<ClassPVO> findByTermIdAndTid(ClassPVO clz);
+
 }
