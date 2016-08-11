@@ -1,5 +1,8 @@
 package com.mcookies.qxy.biz.classmanage;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.isotope.jfp.framework.beans.common.RESTResultBean;
@@ -10,6 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.mcookies.qxy.common.Class.ClassDBO;
+import com.mcookies.qxy.common.Class.ClassService;
+import com.mcookies.qxy.common.ClassStudent.ClassStudentDBO;
+import com.mcookies.qxy.common.ClassStudent.ClassStudentService;
+import com.mcookies.qxy.common.UStudent.UStudentDBO;
 import com.mcookies.qxy.common.UStudent.UStudentPVO;
 import com.mcookies.qxy.common.UStudent.UStudentService;
 import com.mcookies.qxy.common.User.UserDBO;
@@ -23,20 +31,12 @@ import com.mcookies.qxy.common.User.UserDBO;
 @Controller
 public class StudentManageController extends MyControllerSupport {
 
-//	@Resource
-//	protected ClassService classService;
-//	@Resource
-//	protected UserService userService;
+	@Resource
+	protected ClassService classService;
 	@Resource
 	protected UStudentService uStudentService;
-//	@Resource
-//	protected UStudentExtService uStudentExtService;
-//	@Resource
-//	protected UParentService uParentService;
-//	@Resource
-//	protected ClassStudentService classStudentService;
-//	@Resource
-//	protected UStudentParentService uStudentParentService;
+	@Resource
+	protected ClassStudentService classStudentService;
 
 	/**
 	 * 学生列表搜索查询接口
@@ -91,19 +91,38 @@ public class StudentManageController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/student/move", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean studentMovePUT(@RequestBody UserDBO user) {
-		// TODO
+	public RESTResultBean studentMovePUT(@RequestBody ClassStudentDBO classStudent) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(user.getToken()) == false) {
+			if (doCheckToken(classStudent.getToken()) == false) {
 				return tokenFail();
 			}
-
-			Long userId = getLoginer().getUserId();
-
-			result.setInfo("欢迎访问千校云平台：" + userId + "," + user.getAccount());
+			// 查询班级是否存在
+			if (classStudent.getCid() == null) {
+				throw new IllegalArgumentException("cid不能为空");
+			}
+			ClassDBO clazz = new ClassDBO();
+			clazz.setCid(classStudent.getCid());
+			clazz = (ClassDBO) classService.doRead(clazz);
+			if (clazz == null) {
+				throw new IllegalArgumentException("cid对应的班级不存在");
+			}
+			// 查询学生是否存在
+			if (classStudent.getStudentId() == null) {
+				throw new IllegalArgumentException("studentId不能为空");
+			}
+			UStudentDBO student = new UStudentDBO();
+			student.setStudentId(classStudent.getStudentId());
+			student = (UStudentDBO) uStudentService.doRead(student);
+			if (student == null) {
+				throw new IllegalArgumentException("studentId对应的学生不存在");
+			}
+			classStudentService.updateCid(classStudent);
+			Map<String, Object> data = new HashMap<String, Object>();
+			data.put("info", "ok");
+			result.setData(data);
 		} catch (Exception e) {
-			result.setInfo("访问失败");
+			result.setInfo("修改失败，" + e.getMessage());
 			result.setStatus(1);
 		}
 

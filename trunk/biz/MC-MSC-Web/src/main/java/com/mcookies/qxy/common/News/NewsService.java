@@ -1,4 +1,6 @@
 package com.mcookies.qxy.common.News;
+import org.isotope.jfp.framework.beans.common.FrameworkDataBean;
+import org.isotope.jfp.framework.beans.page.PageVOSupport;
 import org.isotope.jfp.framework.support.MyServiceSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +17,27 @@ public class NewsService extends MyServiceSupport {
 
 	public NewsPVO findDetailByNewsId(NewsPVO news) {
 		return getDao().findDetailByNewsId(news);
+	}
+
+	@SuppressWarnings("unused")
+	public PageVOSupport doSelectPageByColumnIdAndType(PageVOSupport pageModel) {
+		FrameworkDataBean formParamBean = pageModel.getFormParamBean();
+		pageModel.setPageListData(getDao().doSelectPageByColumnIdAndType(pageModel));
+		return pageModel;
+	}
+	
+	@SuppressWarnings("unused")
+	public PageVOSupport doSelectPageByColumnIdAndTid(PageVOSupport pageModel) {
+		FrameworkDataBean formParamBean = pageModel.getFormParamBean();
+		pageModel.setPageListData(getDao().doSelectPageByColumnIdAndTid(pageModel));
+		return pageModel;
+	}
+	
+	@SuppressWarnings("unused")
+	public PageVOSupport doSelectPageByColumnIdAndParentId(PageVOSupport pageModel) {
+		FrameworkDataBean formParamBean = pageModel.getFormParamBean();
+		pageModel.setPageListData(getDao().doSelectPageByColumnIdAndParentId(pageModel));
+		return pageModel;
 	}
 
 }

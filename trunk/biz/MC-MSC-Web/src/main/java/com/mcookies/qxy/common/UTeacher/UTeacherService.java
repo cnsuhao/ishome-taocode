@@ -63,4 +63,8 @@ public class UTeacherService extends MyServiceSupport {
 	public List<UTeacherDBO> findNewsReaders(NewsPVO news) {
 		return getDao().findNewsReaders(news);
 	}
+
+	public List<UTeacherPVO> findByTermIdAndCid(UTeacherPVO teacher) {
+		return getDao().findByTermIdAndCid(teacher);
+	}
 }

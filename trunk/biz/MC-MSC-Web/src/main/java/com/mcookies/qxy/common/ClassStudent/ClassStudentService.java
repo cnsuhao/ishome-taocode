@@ -14,4 +14,8 @@ public class ClassStudentService extends MyServiceSupport {
 		getDao().deleteByStudentId(classStudent);
 	}
 
+	public void updateCid(ClassStudentDBO classStudent) {
+		getDao().updateCid(classStudent);
+	}
+
 }

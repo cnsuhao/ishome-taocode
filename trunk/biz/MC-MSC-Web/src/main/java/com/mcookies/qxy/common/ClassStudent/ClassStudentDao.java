@@ -7,4 +7,6 @@ public interface ClassStudentDao extends IDatabaseSupport {
 
 	void deleteByStudentId(ClassStudentDBO classStudent);
 
+	void updateCid(ClassStudentDBO classStudent);
+
 }

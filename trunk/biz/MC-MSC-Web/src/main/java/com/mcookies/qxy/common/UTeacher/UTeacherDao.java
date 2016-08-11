@@ -17,4 +17,5 @@ public interface UTeacherDao extends IDatabaseSupport {
 	List<UTeacherDBO> findSchedulingTeachers(SDutySchedulingPVO s);
 	List<UTeacherDBO> findSchedulingLeaders(SDutySchedulingPVO s);
 	List<UTeacherDBO> findNewsReaders(NewsPVO news);
+	List<UTeacherPVO> findByTermIdAndCid(UTeacherPVO teacher);
 }

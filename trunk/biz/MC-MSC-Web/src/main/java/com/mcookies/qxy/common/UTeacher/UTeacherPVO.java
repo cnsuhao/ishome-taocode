@@ -1,15 +1,15 @@
 package com.mcookies.qxy.common.UTeacher;
+
 import javax.inject.Named;
- 
+
 @Named
-/** 教师表*/
-public class UTeacherPVO extends UTeacherDBO
-{
+/** 教师表 */
+public class UTeacherPVO extends UTeacherDBO {
 	/**
 	 * 教师性别
 	 */
 	private Integer gender = null;
-	
+
 	/**
 	 * 出生年月
 	 */
@@ -23,7 +23,7 @@ public class UTeacherPVO extends UTeacherDBO
 	 * 教师工号
 	 */
 	private String jobNumber = null;
-	
+
 	/**
 	 * 证件类型
 	 */
@@ -43,6 +43,14 @@ public class UTeacherPVO extends UTeacherDBO
 	 * 班级id
 	 */
 	private Long cid = null;
+
+	private Long termId = null;
+
+	private String courseName = null;
+
+	private Long courseId = null;
+
+	private Integer isLeader = null;
 
 	public Integer getGender() {
 		return gender;
@@ -107,6 +115,37 @@ public class UTeacherPVO extends UTeacherDBO
 	public void setCid(Long cid) {
 		this.cid = cid;
 	}
-	
-	
+
+	public Long getTermId() {
+		return termId;
+	}
+
+	public void setTermId(Long termId) {
+		this.termId = termId;
+	}
+
+	public String getCourseName() {
+		return courseName;
+	}
+
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
+	}
+
+	public Long getCourseId() {
+		return courseId;
+	}
+
+	public void setCourseId(Long courseId) {
+		this.courseId = courseId;
+	}
+
+	public Integer getIsLeader() {
+		return isLeader;
+	}
+
+	public void setIsLeader(Integer isLeader) {
+		this.isLeader = isLeader;
+	}
+
 }

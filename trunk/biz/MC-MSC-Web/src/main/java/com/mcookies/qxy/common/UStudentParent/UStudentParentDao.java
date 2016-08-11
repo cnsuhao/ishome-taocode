@@ -7,4 +7,6 @@ public interface UStudentParentDao extends IDatabaseSupport {
 
 	void deleteByStudentId(UStudentParentDBO studentParent);
 
+	void updateIsDefaultFalse(UStudentParentDBO sp);
+
 }

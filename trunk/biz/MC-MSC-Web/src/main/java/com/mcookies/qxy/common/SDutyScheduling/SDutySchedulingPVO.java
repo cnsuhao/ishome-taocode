@@ -15,11 +15,13 @@ public class SDutySchedulingPVO extends SDutySchedulingDBO {
 	private Long tid;
 	
 	private String dutyName;
-
+	
+	private String content;
+	
 	private List<UTeacherDBO> leaders;
 	
 	private List<UTeacherDBO> teachers;
-
+	
 	public Long getTid() {
 		return tid;
 	}
@@ -50,6 +52,14 @@ public class SDutySchedulingPVO extends SDutySchedulingDBO {
 
 	public void setTeachers(List<UTeacherDBO> teachers) {
 		this.teachers = teachers;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 }

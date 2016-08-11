@@ -288,6 +288,39 @@
 		WHERE 1 = 1
 		AND a.term_id = #{termId} AND b.is_use = 1
 		AND a.date = #{date}
+		<if test=" tid != null "><!-- 教师id -->
+			AND instr(a.tids, '#{tid};') > 0
+		</if>
+	</select>
+	<!-- 根据termId tid week 查询岗位有效的值周列表 -->
+	<select id='findByTermIdAndTidAndWeekAndIsUsed' parameterType='com.mcookies.qxy.common.SDutyScheduling.SDutySchedulingPVO'
+		resultType='com.mcookies.qxy.common.SDutyScheduling.SDutySchedulingPVO'>
+		SELECT
+		a.id, b.duty_id, b.duty_name, c.content, a.start_time, a.end_time
+		FROM s_duty_scheduling a
+		LEFT JOIN s_duty b ON a.duty_id = b.duty_id
+		LEFT JOIN s_duty_content c ON b.duty_id = c.duty_id
+		WHERE 1 = 1
+		AND a.term_id = #{termId} AND b.is_use = 1
+		AND a.week = #{week}
+		<if test=" tid != null "><!-- 教师id -->
+			AND instr(a.tids, '#{tid};') > 0
+		</if>
+	</select>
+	<!-- 根据termId tid date 查询岗位有效的值日列表 -->
+	<select id='findByTermIdAndTidAndDateAndIsUsed' parameterType='com.mcookies.qxy.common.SDutyScheduling.SDutySchedulingPVO'
+		resultType='com.mcookies.qxy.common.SDutyScheduling.SDutySchedulingPVO'>
+		SELECT
+		a.id, b.duty_id, b.duty_name, c.content, a.date
+		FROM s_duty_scheduling a
+		LEFT JOIN s_duty b ON a.duty_id = b.duty_id
+		LEFT JOIN s_duty_content c ON b.duty_id = c.duty_id
+		WHERE 1 = 1
+		AND a.term_id = #{termId} AND b.is_use = 1
+		AND a.date = #{date}
+		<if test=" tid != null "><!-- 教师id -->
+			AND instr(a.tids, '#{tid};') > 0
+		</if>
 	</select>
 
 </mapper>

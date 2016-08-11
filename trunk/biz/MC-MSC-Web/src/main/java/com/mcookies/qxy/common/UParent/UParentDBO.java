@@ -25,7 +25,7 @@ public class UParentDBO extends MyDataBaseObjectSupport {
 	/**
 	 * 家长姓名
 	 */
-	private Long parentName = null;
+	private String parentName = null;
 
 	/**
 	 * 家长电话
@@ -114,7 +114,7 @@ public class UParentDBO extends MyDataBaseObjectSupport {
 	 *
 	 * @return Parent_name 家长姓名
 	 */
-	public Long getParentName() {
+	public String getParentName() {
 		return this.parentName;
 	}
 
@@ -253,7 +253,7 @@ public class UParentDBO extends MyDataBaseObjectSupport {
 	 * @param Parent_name
 	 *            家长姓名
 	 */
-	public void setParentName(Long parentname) {
+	public void setParentName(String parentname) {
 		this.parentName = parentname;
 	}
 

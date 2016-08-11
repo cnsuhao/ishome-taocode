@@ -314,4 +314,14 @@
 			AND sid = #{sid}
 		</if>
     </select>
+	<!-- 查询任教班级列表  -->
+    <select id='findByTermIdAndTid' parameterType='com.mcookies.qxy.common.Class.ClassPVO' 
+    		resultType='com.mcookies.qxy.common.Class.ClassPVO'>
+        SELECT a.cid, a.class_name, b.term_name, c.grade_name, IF(d.is_leader, 1, 0) AS is_leader
+		FROM class a 
+		LEFT JOIN s_term b ON a.term_id = b.term_id 
+		LEFT JOIN s_grade_label c ON a.grade_id = c.grade_id
+		LEFT JOIN class_teacher d ON a.cid = d.cid
+		WHERE 1 = 1 AND b.term_id = #{termId} AND d.tid = #{tid}
+    </select>
 </mapper>
