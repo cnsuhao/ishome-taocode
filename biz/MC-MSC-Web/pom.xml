@@ -104,6 +104,11 @@
 		</dependency>
 		<dependency>
 			<groupId>Isotope</groupId>
+			<artifactId>JFP-Common-SMS</artifactId>
+			<version>${jfp.version}-RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>Isotope</groupId>
 			<artifactId>JFP-Common-Web</artifactId>
 			<version>${jfp.version}-RELEASE</version>
 		</dependency>
