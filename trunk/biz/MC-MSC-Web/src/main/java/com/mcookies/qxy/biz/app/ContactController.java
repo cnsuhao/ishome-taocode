@@ -227,8 +227,8 @@ public class ContactController extends MyControllerSupport {
 			List<SDutySchedulingPVO> dutySchedulings = (List<SDutySchedulingPVO>) sDutySchedulingService
 					.findByTermIdAndTidAndWeekAndIsUsed(dutyScheduling);
 			data.put("week", dutyScheduling.getWeek());
-			data.put("startTime", DateUtils.formatDate(term.getStartTime(), DateUtils.FORMAT_yyyy_MM_dd_HH_mm_ss));
-			data.put("endTime", DateUtils.formatDate(term.getEndTime(), DateUtils.FORMAT_yyyy_MM_dd_HH_mm_ss));
+			data.put("startTime", term.getStartTime());
+			data.put("endTime", term.getEndTime());
 			data.put("count", dutySchedulings.size());
 			data.put("scheduleweek", dutySchedulings);
 			result.setData(data);
