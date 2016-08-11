@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>Isotope</groupId>
 	<artifactId>JFP-Common-SMS</artifactId>
-	<version>2.4.1-RELEASE</version>
+	<version>3.2.1-RELEASE</version>
 
 	<properties>
 		<!-- JDK版本 -->
@@ -15,7 +15,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<!-- maven编译版本 -->
 		<maven.compiler.encoding>UTF-8</maven.compiler.encoding>
-		<jfp.version>2.4.1</jfp.version>
+		<jfp.version>3.2.1</jfp.version>
 
 	</properties>
 
