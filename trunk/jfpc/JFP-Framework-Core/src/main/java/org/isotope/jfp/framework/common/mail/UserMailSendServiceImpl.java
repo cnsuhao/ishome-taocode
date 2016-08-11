@@ -5,8 +5,6 @@ import org.isotope.jfp.framework.common.CommonChannelConfig;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.constants.pub.ISMailConstants;
 import org.isotope.jfp.framework.support.common.IMailSupport;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * 邮件发送SDK
@@ -17,8 +15,6 @@ import org.slf4j.LoggerFactory;
  * 
  */
 public class UserMailSendServiceImpl extends CommonChannelConfig implements IMailSupport, ISMailConstants, ISFrameworkConstants {
-	protected Logger logger = LoggerFactory.getLogger(this.getClass());
-
 	public UserMailSendServiceImpl() {
 		this(IMailSupport.CONFIG_KEY);
 	}

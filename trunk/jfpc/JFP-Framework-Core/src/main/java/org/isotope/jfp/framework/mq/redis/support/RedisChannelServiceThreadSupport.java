@@ -5,12 +5,9 @@ import org.isotope.jfp.framework.biz.ISReceive;
 import org.isotope.jfp.framework.biz.common.ISCheck;
 import org.isotope.jfp.framework.biz.common.ISInit;
 import org.isotope.jfp.framework.biz.common.ISProcess;
-import org.isotope.jfp.framework.cache.ICacheService;
+import org.isotope.jfp.framework.common.CommonChannelConfig;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
-import org.isotope.jfp.framework.utils.BeanFactoryHelper;
 import org.isotope.jfp.framework.utils.EmptyHelper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * 通道服务超类
@@ -19,57 +16,11 @@ import org.slf4j.LoggerFactory;
  * @version 2.4.1 2015/8/15
  * @since 2.4.1
  */
-public abstract class RedisChannelServiceThreadSupport extends Thread implements ISFrameworkConstants, ISReceive, ISInit, ISCheck, ISProcess, ISFinished {
-	protected Logger logger = LoggerFactory.getLogger(this.getClass());
-
+public abstract class RedisChannelServiceThreadSupport extends CommonChannelConfig implements Runnable, ISFrameworkConstants, ISReceive, ISInit, ISCheck, ISProcess, ISFinished {
 	/**
 	 * 等待时间（毫秒）
 	 */
 	private int waitTime = 500;
-
-	/**
-	 * Redis通道定义
-	 */
-	private String channelKey;
-	protected String catchBeanName ;
-
-	public String getCatchBeanName() {
-		return catchBeanName;
-	}
-
-	public void setCatchBeanName(String catchBeanName) {
-		this.catchBeanName = catchBeanName;
-	}
-	/**
-	 * 缓存定义
-	 */
-	private ICacheService catchService;
-
-	public void doInit(String channelKey) {
-		this.channelKey = channelKey;
-		catchService =  BeanFactoryHelper.getBean(catchBeanName);
-	}
-
-	public void doInit( String channelKey, int waitTime) {
-		this.channelKey = channelKey;
-		catchService =  BeanFactoryHelper.getBean(catchBeanName);
-	}
-
-	public ICacheService getCatchService() {
-		return catchService;
-	}
-
-	public void setCatchService(ICacheService catchService) {
-		this.catchService = catchService;
-	}
-
-	public void setChannelKey(String channelKey) {
-		this.channelKey = channelKey;
-	}
-
-	public String getChannelKey() {
-		return channelKey;
-	}
 
 	public int getWaitTime() {
 		return waitTime;
@@ -83,7 +34,9 @@ public abstract class RedisChannelServiceThreadSupport extends Thread implements
 	 * 基于消息队列获取数据
 	 */
 	public boolean doReceive() throws Exception {
+		catchService.selectDB(defaultIndex);
 		message = catchService.peekFirstObjectInList(channelKey, false);
+		catchService.init();
 		if (EmptyHelper.isEmpty(message))
 			return false;
 		return true;
@@ -94,8 +47,12 @@ public abstract class RedisChannelServiceThreadSupport extends Thread implements
 	 */
 	protected Object message;
 
+	public void process() {
+		(new Thread(this)).start();
+	}
+
 	/**
-	 * 
+	 * 启动监听
 	 */
 	public void run() {
 		while (true) {

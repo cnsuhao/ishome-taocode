@@ -5,8 +5,6 @@ import org.isotope.jfp.framework.common.CommonChannelConfig;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.constants.pub.ISPushConstant;
 import org.isotope.jfp.framework.support.common.IPhonePushSupport;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * 短信发送SDK
@@ -18,8 +16,6 @@ import org.slf4j.LoggerFactory;
  * 
  */
 public class UserPushSendServiceImpl extends CommonChannelConfig implements IPhonePushSupport, ISPushConstant, ISFrameworkConstants {
-
-	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	public UserPushSendServiceImpl() {
 		this(IPhonePushSupport.CONFIG_KEY);

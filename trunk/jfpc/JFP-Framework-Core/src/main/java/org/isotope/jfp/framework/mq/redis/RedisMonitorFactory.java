@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
  * @author fucy
  * @version 2.4.1 2015/8/15
  * @since 2.4.1
+ * @deprecated
  */
 public class RedisMonitorFactory implements ISFrameworkConstants {
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -44,8 +45,7 @@ public class RedisMonitorFactory implements ISFrameworkConstants {
 		// 多通道
 		for (String channelKey : channelList) {
 			if (EmptyHelper.isNotEmpty(channelKey)) {
-				service.doInit(channelKey);
-				service.start();
+				service.process();
 				logger.debug(">>>>>监控服务启动成功<<<<<....." + channelKey);
 			}
 		}
