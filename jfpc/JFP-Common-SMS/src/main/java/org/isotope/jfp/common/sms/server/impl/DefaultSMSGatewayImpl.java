@@ -1,15 +1,9 @@
 package org.isotope.jfp.common.sms.server.impl;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
-
-import org.apache.http.client.ClientProtocolException;
 import org.isotope.jfp.framework.beans.common.RESTResultBean;
 import org.isotope.jfp.framework.beans.pub.SMSBean;
-import org.isotope.jfp.framework.common.sms.UserSMSSendServiceImpl;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.constants.pub.ISSMSConstants;
-import org.isotope.jfp.framework.security.value.PBESecurityHelper;
 import org.isotope.jfp.framework.support.ISSMSGatewaySupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -74,11 +68,12 @@ public class DefaultSMSGatewayImpl implements ISSMSGatewaySupport, ISSMSConstant
 	}
 
 	public String getPassword() {
-//		try {
-//			return PBESecurityHelper.decrypt(this.userid + this.account, password);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
+		// try {
+		// return PBESecurityHelper.decrypt(this.userid + this.account,
+		// password);
+		// } catch (Exception e) {
+		// e.printStackTrace();
+		// }
 		return password;
 	}
 
@@ -94,10 +89,4 @@ public class DefaultSMSGatewayImpl implements ISSMSGatewaySupport, ISSMSConstant
 		rs.setMessage("短信通道未开启");
 		return rs;
 	}
-
-	public static void main(String[] args) throws ClientProtocolException, IOException, URISyntaxException {
-		UserSMSSendServiceImpl sms = new UserSMSSendServiceImpl();
-		sms.send("123456", "15057177411", "协和短信测试");
-	}
-
 }

@@ -1,4 +1,4 @@
-package org.isotope.jfp.common.sms.server.impl.DEMO;
+package org.isotope.jfp.common.sms.server.impl.schs;
 
 import org.isotope.jfp.framework.beans.ObjectBean;
 
