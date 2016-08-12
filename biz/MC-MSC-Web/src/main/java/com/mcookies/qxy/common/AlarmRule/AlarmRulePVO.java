@@ -5,20 +5,41 @@ import javax.inject.Named;
 /** 报警规则表*/
 public class AlarmRulePVO extends AlarmRuleDBO
 {
-	private String className;
+	private String className =null;
+	private Integer classalarmcount=null;
+	private String termName = null;
+	private String gradeName = null;
+	private Integer cid = null;
 	public String getClassName() {
 		return className;
 	}
 	public void setClassName(String className) {
 		this.className = className;
 	}
-	public Integer getCount() {
-		return count;
+	public Integer getClassalarmcount() {
+		return classalarmcount;
 	}
-	public void setCount(Integer count) {
-		this.count = count;
+	public void setClassalarmcount(Integer classalarmcount) {
+		this.classalarmcount = classalarmcount;
 	}
-	private Integer count;
+	public String getTermName() {
+		return termName;
+	}
+	public void setTermName(String termName) {
+		this.termName = termName;
+	}
+	public String getGradeName() {
+		return gradeName;
+	}
+	public void setGradeName(String gradeName) {
+		this.gradeName = gradeName;
+	}
+	public Integer getCid() {
+		return cid;
+	}
+	public void setCid(Integer cid) {
+		this.cid = cid;
+	}
 	
 	
 }

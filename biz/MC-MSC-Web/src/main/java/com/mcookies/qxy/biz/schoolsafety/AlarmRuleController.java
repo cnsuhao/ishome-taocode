@@ -20,6 +20,7 @@ import com.mcookies.qxy.common.AlarmRule.AlarmRulePVO;
 import com.mcookies.qxy.common.AlarmRule.AlarmRuleService;
 import com.mcookies.qxy.common.Class.ClassDBO;
 import com.mcookies.qxy.common.ClassAlarm.ClassAlarmDBO;
+import com.mcookies.qxy.common.ClassAlarm.ClassAlarmPVO;
 import com.mcookies.qxy.common.ClassAlarm.ClassAlarmService;
 
 @Controller
@@ -76,8 +77,32 @@ public class AlarmRuleController extends MyControllerSupport {
 		}
 		return result;
 	}
-	
-	
+	/**
+	 * 班级报警列表查询接口
+	 * @param cid
+	 * @param token
+	 * @return
+	 */
+	@RequestMapping(value = "/class/alarmlist/search", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public RESTResultBean classAlarmlistSearchGET(Long cid,String token) {
+		RESTResultBean result = new RESTResultBean();
+		try {
+			ClassDBO param = new ClassDBO();
+			param.setCid(cid);
+			pageModel.config();
+			pageModel.setPageCurrent(1);
+			pageModel.setPageLimit(200);
+			pageModel.setFormParamBean(param);
+			AlarmRuleService_.doSelectPageCountAlarmRule(pageModel);
+			List<AlarmRulePVO> rlist = (List<AlarmRulePVO>)pageModel.getPageListData();
+			result.setData(rlist);
+		} catch (Exception e) {
+			result.setInfo("访问失败");
+			result.setStatus(1);
+		}
+		return result;
+	}	
 	/**
 	 * 班级报警规则查询接口
 	 * @param cid
@@ -152,18 +177,13 @@ public class AlarmRuleController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/class/alarmrule", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean classAlarmrulePUT(@RequestBody String jsonparam) {
+	public RESTResultBean classAlarmrulePUT(@RequestBody AlarmRulePVO pvo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			JSONObject param = JSONObject.parseObject(jsonparam);
-			String token = (String) param.get("token");
-			if (doCheckToken(token) == false) {
+			if (doCheckToken(pvo.getToken()) == false) {
 				return tokenFail();
 			}
-			Long cid = param.getLong("cid");
-			JSONObject alarmrulejson = param.getJSONObject("alarmrule");
-			AlarmRuleDBO alarmrule = JSONObject.toJavaObject(alarmrulejson, AlarmRuleDBO.class);
-			AlarmRuleService_.doUpdate(alarmrule);
+			AlarmRuleService_.doUpdate(pvo);
 		} catch (Exception e) {
 			result.setInfo("访问失败");
 			result.setStatus(1);
@@ -174,30 +194,14 @@ public class AlarmRuleController extends MyControllerSupport {
 
 	@RequestMapping(value = "/class/alarmrule", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean classAlarmruleDELETE(@RequestBody String jsonparam) {
+	public RESTResultBean classAlarmruleDELETE(@RequestBody ClassAlarmPVO pvo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			JSONObject param = JSONObject.parseObject(jsonparam);
-			String token = (String) param.get("token");
-			if (doCheckToken(token) == false) {
+			if (doCheckToken(pvo.getToken()) == false) {
 				return tokenFail();
 			}
-			Long cid = param.getLong("cid");
-			JSONArray alarmruleIds = param.getJSONArray("alarmruleIds");
-			if (alarmruleIds != null && alarmruleIds.size() > 0) {
-				for (Object tmp : alarmruleIds) {
-					Long id = Long.valueOf(tmp.toString());
-					// 删除关联关系
-					ClassAlarmDBO ca = new ClassAlarmDBO();
-					ca.setCid(cid);
-					ca.setAlarmruleId(id);
-					ClassAlarmService_.doDelete(ca);
-					// 删除规则
-					AlarmRuleDBO adbo = new AlarmRuleDBO();
-					adbo.setAlarmruleId(id);
-					AlarmRuleService_.doDelete(adbo);
-				}
-			}
+			// 删除关联关系
+			ClassAlarmService_.doDelete(pvo);
 
 		} catch (Exception e) {
 			result.setInfo("访问失败");
