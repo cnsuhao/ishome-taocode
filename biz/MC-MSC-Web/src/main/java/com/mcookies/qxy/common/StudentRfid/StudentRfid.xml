@@ -163,12 +163,17 @@
 	b.is_effective,
 	a.student_id,
 	a.student_name,
-	a.phone
+	a.phone,
+	a.number,
+	a.create_time
 	FROM
 	u_student a,
 	student_rfid b
 	<where>
 		and a.student_id = b.student_id
+		<if test="sid != null">
+		and a.sid = #{sid}
+		</if>
 		<if test="rfid != null">
 		and b.rfid = #{rfid}
 		</if>

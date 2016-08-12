@@ -217,7 +217,7 @@ public class TeacherInfoController extends MyControllerSupport {
 			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
-			JSONArray teacherinfo = param.getJSONArray("teacherInfo");
+			JSONArray teacherinfo = param.getJSONArray("teacherinfo");
 			if (teacherinfo != null && teacherinfo.size() > 0) {
 				for (Object t : teacherinfo) {
 					UTeacherPVO pvo = JSONObject.toJavaObject((JSONObject) t, UTeacherPVO.class);
