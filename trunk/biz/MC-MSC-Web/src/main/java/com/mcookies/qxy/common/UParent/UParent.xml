@@ -296,5 +296,27 @@
                 AND b.is_use = 1
             </if>
     </select>
-
+    <!-- 查询班级家长，根据termId,cid,studentId  -->
+    <select id='doSelectPageByTermIdAndCidAndStudentId' parameterType='com.mcookies.qxy.common.UParent.UParentPVO'
+    		resultType='com.mcookies.qxy.common.UParent.UParentPVO'>
+        SELECT 
+        a.id,
+        a.parent_id,
+        b.parent_name,
+        b.phone,
+        b.is_use,
+        b.work_unit,
+        b.position,
+		a.role,
+		a.is_default
+		FROM u_student_parent a 
+		LEFT JOIN u_parent b ON a.parent_id = b.parent_id
+		LEFT JOIN class_student c ON a.student_id = c.student_id
+		LEFT JOIN class d ON c.cid = d.cid
+		WHERE 1 = 1 AND d.cid = #{cid} 
+		AND d.term_id = #{termId} AND b.is_use = 1
+		<if test=" studentId != null ">
+			AND a.student_id = #{studentId} 
+        </if>
+    </select>
 </mapper>

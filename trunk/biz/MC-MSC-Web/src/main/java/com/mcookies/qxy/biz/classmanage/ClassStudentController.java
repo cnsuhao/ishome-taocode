@@ -19,9 +19,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mcookies.qxy.common.Class.ClassDBO;
+import com.mcookies.qxy.common.Class.ClassPVO;
 import com.mcookies.qxy.common.Class.ClassService;
 import com.mcookies.qxy.common.ClassStudent.ClassStudentDBO;
 import com.mcookies.qxy.common.ClassStudent.ClassStudentService;
+import com.mcookies.qxy.common.ClassTeacher.ClassTeacherDBO;
 import com.mcookies.qxy.common.UParent.UParentDBO;
 import com.mcookies.qxy.common.UParent.UParentPVO;
 import com.mcookies.qxy.common.UParent.UParentService;
@@ -32,6 +34,8 @@ import com.mcookies.qxy.common.UStudentExt.UStudentExtDBO;
 import com.mcookies.qxy.common.UStudentExt.UStudentExtService;
 import com.mcookies.qxy.common.UStudentParent.UStudentParentDBO;
 import com.mcookies.qxy.common.UStudentParent.UStudentParentService;
+import com.mcookies.qxy.common.UTeacher.UTeacherDBO;
+import com.mcookies.qxy.common.UTeacher.UTeacherService;
 import com.mcookies.qxy.common.User.UserDBO;
 import com.mcookies.qxy.common.User.UserService;
 
@@ -58,6 +62,8 @@ public class ClassStudentController extends MyControllerSupport {
 	protected ClassStudentService classStudentService;
 	@Resource
 	protected UStudentParentService uStudentParentService;
+	@Resource
+	protected UTeacherService uTeacherService;
 
 	/**
 	 * 班级学生列表查询接口
@@ -65,19 +71,49 @@ public class ClassStudentController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/class/student/list", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean classStudentListGET(@RequestBody UserDBO user) {
-		// TODO
+	public RESTResultBean classStudentListGET(ClassPVO pvo, Integer page, Integer size) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(user.getToken()) == false) {
+			if (doCheckToken(pvo.getToken()) == false) {
 				return tokenFail();
 			}
-
-			Long userId = getLoginer().getUserId();
-
-			result.setInfo("欢迎访问千校云平台：" + userId + "," + user.getAccount());
+			Map<String, Object> data = new HashMap<String, Object>();
+			if (page == null || page == 0) {
+				page = 1;
+			}
+			if (size == null || size == 0) {
+				size = 12;
+			}
+			// 查询是否存在
+			if (pvo.getCid() == null) {
+				throw new IllegalArgumentException("cid不能为空");
+			}
+			ClassDBO condition = new ClassDBO();
+			condition.setCid(pvo.getCid());
+			condition = (ClassDBO) classService.doRead(condition);
+			if (condition == null) {
+				throw new IllegalArgumentException("该班级不存在");
+			}
+			ClassTeacherDBO classTeacher = new ClassTeacherDBO();
+			classTeacher.setCid(pvo.getCid());
+			UTeacherDBO leader = uTeacherService.findClassLeader(classTeacher);
+			pageModel.setPageCurrent(page);
+			pageModel.setPageLimit(size);
+			pageModel.setFormParamBean(pvo);
+			uStudentService.doSelectPageByCid(pageModel);
+			
+			data.put("cid", condition.getCid());
+			data.put("className", condition.getClassName());
+			if (leader != null) {
+				data.put("leaderName", leader.getTeacherName());
+			}
+			data.put("page", pageModel.getPageCurrent());
+			data.put("size", pageModel.getPageLimit());
+			data.put("count", pageModel.getResultCount());
+			data.put("student", pageModel.getPageListData());
+			result.setData(data);
 		} catch (Exception e) {
-			result.setInfo("访问失败");
+			result.setInfo("查询失败，" + e.getMessage());
 			result.setStatus(1);
 		}
 

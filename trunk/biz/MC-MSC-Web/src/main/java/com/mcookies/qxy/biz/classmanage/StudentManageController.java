@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mcookies.qxy.common.Class.ClassDBO;
+import com.mcookies.qxy.common.Class.ClassPVO;
 import com.mcookies.qxy.common.Class.ClassService;
 import com.mcookies.qxy.common.ClassStudent.ClassStudentDBO;
 import com.mcookies.qxy.common.ClassStudent.ClassStudentService;
 import com.mcookies.qxy.common.UStudent.UStudentDBO;
 import com.mcookies.qxy.common.UStudent.UStudentPVO;
 import com.mcookies.qxy.common.UStudent.UStudentService;
-import com.mcookies.qxy.common.User.UserDBO;
 
 /**
  * 班级管理-学生管理
@@ -42,21 +42,43 @@ public class StudentManageController extends MyControllerSupport {
 	 * 学生列表搜索查询接口
 	 * /qxy/stundent/list/class=[cid]&page=[page]&size=[size]&token=[token]
 	 */
-	@RequestMapping(value = "/stundent/list", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/student/list", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean studentListGET(@RequestBody UserDBO user) {
-		// TODO
+	public RESTResultBean studentListGET(ClassPVO pvo, Integer page, Integer size) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(user.getToken()) == false) {
+			if (doCheckToken(pvo.getToken()) == false) {
 				return tokenFail();
 			}
-
-			Long userId = getLoginer().getUserId();
-
-			result.setInfo("欢迎访问千校云平台：" + userId + "," + user.getAccount());
+			Map<String, Object> data = new HashMap<String, Object>();
+			if (page == null || page == 0) {
+				page = 1;
+			}
+			if (size == null || size == 0) {
+				size = 12;
+			}
+			// 查询是否存在
+			if (pvo.getCid() == null) {
+				throw new IllegalArgumentException("cid不能为空");
+			}
+			ClassDBO condition = new ClassDBO();
+			condition.setCid(pvo.getCid());
+			condition = (ClassDBO) classService.doRead(condition);
+			if (condition == null) {
+				throw new IllegalArgumentException("该班级不存在");
+			}
+			pageModel.setPageCurrent(page);
+			pageModel.setPageLimit(size);
+			pageModel.setFormParamBean(pvo);
+			uStudentService.doSelectPageByCidWithClassAndGrade(pageModel);
+			
+			data.put("page", pageModel.getPageCurrent());
+			data.put("size", pageModel.getPageLimit());
+			data.put("count", pageModel.getResultCount());
+			data.put("student", pageModel.getPageListData());
+			result.setData(data);
 		} catch (Exception e) {
-			result.setInfo("访问失败");
+			result.setInfo("查询失败，" + e.getMessage());
 			result.setStatus(1);
 		}
 

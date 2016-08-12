@@ -9,7 +9,6 @@ import javax.annotation.Resource;
 import org.isotope.jfp.framework.beans.common.RESTResultBean;
 import org.isotope.jfp.framework.support.MyControllerSupport;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,11 +24,15 @@ import com.mcookies.qxy.common.SGradeLabel.SGradeLabelDBO;
 import com.mcookies.qxy.common.SGradeLabel.SGradeLabelService;
 import com.mcookies.qxy.common.STerm.STermPVO;
 import com.mcookies.qxy.common.STerm.STermService;
+import com.mcookies.qxy.common.UParent.UParentDBO;
+import com.mcookies.qxy.common.UParent.UParentPVO;
+import com.mcookies.qxy.common.UParent.UParentService;
+import com.mcookies.qxy.common.UStudent.UStudentDBO;
+import com.mcookies.qxy.common.UStudent.UStudentPVO;
+import com.mcookies.qxy.common.UStudent.UStudentService;
 import com.mcookies.qxy.common.UTeacher.UTeacherDBO;
 import com.mcookies.qxy.common.UTeacher.UTeacherPVO;
 import com.mcookies.qxy.common.UTeacher.UTeacherService;
-import com.mcookies.qxy.common.User.UserDBO;
-import com.mcookies.qxy.utils.DateUtils;
 
 /**
  * 手机端-通讯录
@@ -51,6 +54,10 @@ public class ContactController extends MyControllerSupport {
 	protected UTeacherService uTeacherService;
 	@Resource
 	protected ClassService classService;
+	@Resource
+	protected UStudentService uStudentService;
+	@Resource
+	protected UParentService uParentService;
 	@Resource
 	protected SGradeLabelService sGradeLabelService;
 
@@ -157,18 +164,62 @@ public class ContactController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/class/parent", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean classParentGET(@RequestBody UserDBO user) {
+	public RESTResultBean classParentGET(UParentPVO pvo, Integer page, Integer size) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(user.getToken()) == false) {
+			if (doCheckToken(pvo.getToken()) == false) {
 				return tokenFail();
 			}
-
-			Long userId = getLoginer().getUserId();
-
-			result.setInfo("欢迎访问千校云平台：" + userId + "," + user.getAccount());
+			Map<String, Object> data = new HashMap<String, Object>();
+			if (page == null || page == 0) {
+				page = 1;
+			}
+			if (size == null || size == 0) {
+				size = 12;
+			}
+			// 查询班級是否存在
+			if (pvo.getCid() == null) {
+				throw new IllegalArgumentException("cid不能为空");
+			}
+			ClassDBO condition = new ClassDBO();
+			condition.setCid(pvo.getCid());
+			condition = (ClassDBO) classService.doRead(condition);
+			if (condition == null) {
+				throw new IllegalArgumentException("该班级不存在");
+			}
+			// 查询學生是否存在，可为空，则查全部
+			if (pvo.getStudentId() != null) {
+				UStudentDBO student = new UStudentDBO();
+				student.setStudentId(pvo.getStudentId());
+				student = (UStudentDBO) uStudentService.doRead(student);
+				if (student == null) {
+					throw new IllegalArgumentException("studentId对应的学生不存在");
+				}
+			}
+			
+			// 學期是否存在
+			STermPVO term = new STermPVO();
+			term.setTermId(pvo.getTermId());
+			term = (STermPVO) sTermService.findByTermId(term);
+			if (term == null) {
+				throw new IllegalArgumentException("termId所对应的学期或默认学期不存在");
+			}
+			pageModel.setPageCurrent(page);
+			pageModel.setPageLimit(size);
+			pageModel.setFormParamBean(pvo);
+			uParentService.doSelectPageByTermIdAndCidAndStudentId(pageModel);
+			
+			data.put("cid", condition.getCid());
+			data.put("className", condition.getClassName());
+			data.put("termName", term.getTermName());
+			data.put("gradeName", condition.getClassName());
+			data.put("page", pageModel.getPageCurrent());
+			data.put("size", pageModel.getPageLimit());
+			data.put("count", pageModel.getResultCount());
+			data.put("student", pageModel.getPageListData());
+			result.setData(data);
 		} catch (Exception e) {
-			result.setInfo("访问失败");
+			result.setInfo("查询失败，" + e.getMessage());
 			result.setStatus(1);
 		}
 
@@ -182,18 +233,61 @@ public class ContactController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/parent/class", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean parentClassGET(@RequestBody UserDBO user) {
+	public RESTResultBean parentClassGET(UStudentPVO pvo, Integer page, Integer size) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(user.getToken()) == false) {
+			if (doCheckToken(pvo.getToken()) == false) {
 				return tokenFail();
 			}
-
-			Long userId = getLoginer().getUserId();
-
-			result.setInfo("欢迎访问千校云平台：" + userId + "," + user.getAccount());
+			Map<String, Object> data = new HashMap<String, Object>();
+			if (page == null || page == 0) {
+				page = 1;
+			}
+			if (size == null || size == 0) {
+				size = 12;
+			}
+			// 查询學生是否存在，可为空，则查全部
+			if (pvo.getStudentId() != null) {
+				UStudentDBO student = new UStudentDBO();
+				student.setStudentId(pvo.getStudentId());
+				student = (UStudentDBO) uStudentService.doRead(student);
+				if (student == null) {
+					throw new IllegalArgumentException("studentId对应的学生不存在");
+				}
+			}
+			
+			// 家长是否存在
+			if (pvo.getParentId() == null) {
+				throw new IllegalArgumentException("parentId不能为空");
+			}
+			UParentDBO parent = new UParentDBO();
+			parent.setParentId(pvo.getParentId());
+			parent = (UParentDBO) uParentService.doRead(parent);
+			if (parent == null) {
+				throw new IllegalArgumentException("parentId所对应的家长不存在");
+			}
+			// 學期是否存在
+			STermPVO term = new STermPVO();
+			term.setTermId(pvo.getTermId());
+			term = (STermPVO) sTermService.findByTermId(term);
+			if (term == null) {
+				throw new IllegalArgumentException("termId所对应的学期或默认学期不存在");
+			}
+			pageModel.setPageCurrent(page);
+			pageModel.setPageLimit(size);
+			pageModel.setFormParamBean(pvo);
+			uStudentService.doSelectPageByParentIdAndTermIdAndStudentID(pageModel);
+			
+			data.put("parentId", parent.getParentId());
+			data.put("parentName", parent.getParentName());
+			data.put("termName", term.getTermName());
+			data.put("page", pageModel.getPageCurrent());
+			data.put("size", pageModel.getPageLimit());
+			data.put("count", pageModel.getResultCount());
+			data.put("studentlist", pageModel.getPageListData());
+			result.setData(data);
 		} catch (Exception e) {
-			result.setInfo("访问失败");
+			result.setInfo("查询失败，" + e.getMessage());
 			result.setStatus(1);
 		}
 

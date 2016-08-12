@@ -3,6 +3,7 @@ package com.mcookies.qxy.common.UStudent;
 import java.util.List;
 
 import org.isotope.jfp.framework.beans.common.FrameworkDataBean;
+import org.isotope.jfp.framework.beans.page.PageVOSupport;
 import org.isotope.jfp.framework.support.MyServiceSupport;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +36,27 @@ public class UStudentService extends MyServiceSupport {
 	 */
 	public UStudentPVO findByIdOrNumberWithGrade(UStudentPVO student) {
 		return getDao().findByIdOrNumberWithGrade(student);
+	}
+
+	@SuppressWarnings("unused")
+	public PageVOSupport doSelectPageByCid(PageVOSupport pageModel) {
+		FrameworkDataBean formParamBean = pageModel.getFormParamBean();
+		pageModel.setPageListData(getDao().doSelectPageByCid(pageModel));
+		return pageModel;
+	}
+	
+	@SuppressWarnings("unused")
+	public PageVOSupport doSelectPageByCidWithClassAndGrade(PageVOSupport pageModel) {
+		FrameworkDataBean formParamBean = pageModel.getFormParamBean();
+		pageModel.setPageListData(getDao().doSelectPageByCidWithClassAndGrade(pageModel));
+		return pageModel;
+	}
+	
+	@SuppressWarnings("unused")
+	public PageVOSupport doSelectPageByParentIdAndTermIdAndStudentID(PageVOSupport pageModel) {
+		FrameworkDataBean formParamBean = pageModel.getFormParamBean();
+		pageModel.setPageListData(getDao().doSelectPageByParentIdAndTermIdAndStudentID(pageModel));
+		return pageModel;
 	}
 	
 }

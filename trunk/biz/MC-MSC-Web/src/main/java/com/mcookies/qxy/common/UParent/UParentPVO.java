@@ -24,6 +24,10 @@ public class UParentPVO extends UParentDBO {
 	 * 学生家长id
 	 */
 	private Long id = null;
+	
+	private Long cid;
+	
+	private Long termId;
 
 	public Integer getRole() {
 		return role;
@@ -55,6 +59,22 @@ public class UParentPVO extends UParentDBO {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Long getCid() {
+		return cid;
+	}
+
+	public void setCid(Long cid) {
+		this.cid = cid;
+	}
+
+	public Long getTermId() {
+		return termId;
+	}
+
+	public void setTermId(Long termId) {
+		this.termId = termId;
 	}
 
 }
