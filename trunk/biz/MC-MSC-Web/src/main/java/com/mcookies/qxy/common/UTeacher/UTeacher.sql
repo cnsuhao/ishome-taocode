@@ -3,7 +3,7 @@ CREATE TABLE u_teacher
     tid BIGINT(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '教师id（自增）',
     uid BIGINT(12) NOT NULL COMMENT '用户id',
     sid BIGINT(12) NOT NULL COMMENT '学校id',
-    teacher_name VARCHAR(20) NOT NULL COMMENT '教师姓名',
+    teacher_name VARCHAR(30) NOT NULL COMMENT '教师姓名',
     phone VARCHAR(50) COMMENT '联系电话',
     email VARCHAR(255) COMMENT '邮箱',
     id_type TINYINT(1) COMMENT '用户类型',

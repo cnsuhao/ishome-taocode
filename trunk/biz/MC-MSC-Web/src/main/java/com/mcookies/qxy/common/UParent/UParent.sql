@@ -3,7 +3,7 @@ CREATE TABLE u_parent
     parent_id BIGINT(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '家长id（自增）',
     sid BIGINT(12) NOT NULL COMMENT '学校id',
     uid BIGINT(12) NOT NULL COMMENT '用户id',
-    parent_name BIGINT(20) NOT NULL COMMENT '家长姓名',
+    parent_name BIGINT(30) NOT NULL COMMENT '家长姓名',
     phone VARCHAR(50) COMMENT '家长电话',
     work_unit VARCHAR(100) COMMENT '工作单位',
     position VARCHAR(50) COMMENT '职位',
