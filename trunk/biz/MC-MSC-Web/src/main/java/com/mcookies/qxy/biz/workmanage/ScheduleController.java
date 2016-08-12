@@ -377,9 +377,9 @@ public class ScheduleController extends MyControllerSupport {
 			if (doCheckToken(dto.getToken()) == false) {
 				return tokenFail();
 			}
-			for (Long scheduleId : dto.getScheduleIds()) {
+			for (Long id : dto.getIds()) {
 				SDutySchedulingDBO origin = new SDutySchedulingDBO();
-				origin.setId(scheduleId);
+				origin.setId(id);
 				origin = (SDutySchedulingDBO) sDutySchedulingService.doRead(origin);
 				if (origin == null) {
 					continue;

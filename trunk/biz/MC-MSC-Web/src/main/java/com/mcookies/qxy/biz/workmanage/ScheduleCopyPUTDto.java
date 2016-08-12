@@ -1,11 +1,10 @@
 package com.mcookies.qxy.biz.workmanage;
 
-import java.sql.Date;
 import java.util.List;
 
 public class ScheduleCopyPUTDto {
 	private String token;
-	private List<Long> scheduleIds;
+	private List<Long> ds;
 	private List<Week> weeks;
 	private List<String> days;
 	
@@ -17,12 +16,12 @@ public class ScheduleCopyPUTDto {
 		this.token = token;
 	}
 
-	public List<Long> getScheduleIds() {
-		return scheduleIds;
+	public List<Long> getIds() {
+		return ds;
 	}
 
-	public void setScheduleIds(List<Long> scheduleIds) {
-		this.scheduleIds = scheduleIds;
+	public void setIds(List<Long> ds) {
+		this.ds = ds;
 	}
 
 	public List<Week> getWeeks() {
