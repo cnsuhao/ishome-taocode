@@ -127,7 +127,7 @@ public class NewsDisplayController extends MyControllerSupport {
 	 * 轮播新闻查询接口 /qxy/homenews/list/token=[token]
 	 */
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/homenews", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/homenews/list", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean homeNewsGET(NewsDBO dbo) {
 		RESTResultBean result = new RESTResultBean();
