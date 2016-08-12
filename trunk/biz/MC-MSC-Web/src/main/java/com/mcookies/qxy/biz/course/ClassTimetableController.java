@@ -50,7 +50,7 @@ public class ClassTimetableController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/syllabus", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean syllabusGET(Long cid,String token,String startDay,String endDay) {
+	public RESTResultBean syllabusGET(Long cid,String token,String startTime,String endTime) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			//token校验
@@ -64,9 +64,9 @@ public class ClassTimetableController extends MyControllerSupport {
 			}
 			Map<String,Object> param = new HashMap<String,Object>();
 			param.put("cid",cid);
-			if((startDay!=null&&!"".equals(startDay))&&(endDay!=null&&!"".equals(endDay))){
-				param.put("startTime", startDay);
-				param.put("endTime", endDay);
+			if((startTime!=null&&!"".equals(startTime))&&(endTime!=null&&!"".equals(endTime))){
+				param.put("startTime", startTime);
+				param.put("endTime", endTime);
 			}
 			JSONObject data = new JSONObject();
 			//获取班级信息
@@ -186,18 +186,7 @@ public class ClassTimetableController extends MyControllerSupport {
 			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
-			Long cid = param.getLong("cid");
-			//校验cid
-			ClassDBO cdbo = new ClassDBO();
-			cdbo.setCid(cid);
-			cdbo =(ClassDBO)ClassService_.doRead(cdbo);
-			if(cdbo == null){
-				result.setInfo("cid不存在");
-				result.setStatus(2);
-				return result;
-			}
-			//Long termId = param.getLong("termId");
-			JSONArray syllabus = param.getJSONArray("syllabus");
+			JSONArray syllabus = param.getJSONArray("courseteacher");
 			for(Object tmp2:syllabus){
 					JSONObject json2 = (JSONObject)tmp2;
 					ClassCourseDBO classbean = JSONObject.toJavaObject(json2, ClassCourseDBO.class);
