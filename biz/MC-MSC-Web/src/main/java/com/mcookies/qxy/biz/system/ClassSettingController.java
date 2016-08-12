@@ -99,9 +99,9 @@ public class ClassSettingController extends MyControllerSupport {
 							sgradtmp.setGradeId(gradeid);
 							sgradtmp = (SGradeLabelDBO) SGradeLabelService_.doRead(sgradtmp);
 							JSONObject gjson = new JSONObject();
-							gjson.put("grade_id", sgradtmp.getGradeId());
-							gjson.put("grade_name", sgradtmp.getGradeName());
-							gjson.put("is_use", sgradtmp.getIsUse());
+							gjson.put("gradeId", sgradtmp.getGradeId());
+							gjson.put("gradeName", sgradtmp.getGradeName());
+							gjson.put("isUse", sgradtmp.getIsUse());
 							//获取该年级下的所有班级
 							ClassDBO ctmp = new ClassDBO();
 							ctmp.setGradeId(gradeid);
