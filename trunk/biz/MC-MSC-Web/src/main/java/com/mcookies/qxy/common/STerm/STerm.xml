@@ -59,9 +59,6 @@
             <if test=" endTime != null "><!-- 结束时间 -->
                 AND end_time = #{endTime}
             </if>
-            <if test=" isDefault != null "><!-- 是否为缺省学期 -->
-                AND is_default = #{isDefault}
-            </if>
             <if test=" isUse != null "><!-- 是否启用 -->
                 AND is_use = #{isUse}
             </if>

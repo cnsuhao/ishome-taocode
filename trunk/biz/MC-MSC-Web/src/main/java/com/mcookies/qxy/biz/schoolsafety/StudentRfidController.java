@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.mcookies.qxy.common.Class.ClassDBO;
 import com.mcookies.qxy.common.Class.ClassPVO;
 import com.mcookies.qxy.common.Class.ClassService;
 import com.mcookies.qxy.common.ClassStudent.ClassStudentDBO;
@@ -22,7 +24,9 @@ import com.mcookies.qxy.common.STerm.STermService;
 import com.mcookies.qxy.common.StudentRfid.StudentRfidDBO;
 import com.mcookies.qxy.common.StudentRfid.StudentRfidPVO;
 import com.mcookies.qxy.common.StudentRfid.StudentRfidService;
+import com.mcookies.qxy.common.UStudent.UStudentDBO;
 import com.mcookies.qxy.common.UStudent.UStudentPVO;
+import com.mcookies.qxy.common.UStudent.UStudentService;
 
 @Controller
 /** 学生rfid*/
@@ -37,20 +41,113 @@ public class StudentRfidController extends MyControllerSupport {
 	protected SGradeLabelService SGradeLabelService_;
 	@Resource
 	protected STermService STermService_;
+	@Resource
+	protected UStudentService UStudentService_;	
+	
+	
+	
+	
+	
 	
 	
 	@RequestMapping(value = "/studentrfidlist", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean studentrfidlistGET(Long studentId,String token) {
+	public RESTResultBean studentrfidlistGET(Long termId,Long cid,String token,Integer page,Integer size) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
+			if(size==null||size==0){
+				size = 12;
+			}
+			if(page==null||page==0){
+				page = 1;
+			}
+			JSONObject data = new JSONObject();
+			//获取学生列表
+			ClassDBO cdbo = new ClassDBO();
+			cdbo.setTermId(termId);
+			cdbo.setCid(cid);
+			pageModel.config();
+			pageModel.setPageCurrent(page);
+			pageModel.setPageLimit(size);
+			pageModel.setFormParamBean(cdbo);
+			List<UStudentDBO> relist = (List<UStudentDBO>)UStudentService_.doselectPageStudent(pageModel);
+			data.put("page",page);
+			data.put("size",size);
+			data.put("count", pageModel.getResultCount());
+			JSONArray studentrfid = new JSONArray();
+			if(relist!=null&&relist.size()>0){
+				for(UStudentDBO tmp:relist){
+					JSONObject student = new JSONObject();
+					student.put("studentId", tmp.getStudentId());
+					student.put("studentName", tmp.getStudentName());
+					student.put("number",tmp.getNumber());
+					//获取 rfid列表
+					StudentRfidDBO rfiddbo = new StudentRfidDBO();
+					rfiddbo.setStudentId(tmp.getStudentId());
+					List<StudentRfidDBO> rfidlist =(List<StudentRfidDBO>)StudentRfidService_.doSelectData(rfiddbo);
+					if(rfidlist!=null&&rfidlist.size()>0){
+						JSONArray rfidjson = new JSONArray();
+						for(StudentRfidDBO tmp1:rfidlist){
+							JSONObject tmp1json = new JSONObject();
+							tmp1json.put("rfid", tmp1.getRfid());
+							tmp1json.put("isEffective",tmp1.getIsEffective());
+							rfidjson.add(tmp1json);
+						}
+					}
+					student.put("rfidlist", rfidlist);
+					studentrfid.add(student);
+				}
+			}
+			data.put("studentrfid",studentrfid);
+			result.setData(data);
+		} catch (Exception e) {
+			result.setInfo("访问失败");
+			result.setStatus(1);
+		}
+
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	/**
+	 * 学生rfid卡列表搜索接口
+	 * @param studentId
+	 * @param token
+	 * @return
+	 */
+	@RequestMapping(value = "/studentrfidlist/search", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public RESTResultBean studentrfidlistSearchGET(Long studentId,String token) {
+		RESTResultBean result = new RESTResultBean();
+		try {
+			if (doCheckToken(token) == false) {
+				return tokenFail();
+			}
+			//获取学生信息
+			UStudentDBO stu = new UStudentDBO();
+			stu.setStudentId(studentId);
+			stu = (UStudentDBO)UStudentService_.doRead(stu);
+			if(stu ==null){
+				result.setInfo("studentId不存在");
+				result.setStatus(2);
+				return result;
+			}
+			JSONObject data = new JSONObject();
+			data.put("studentId", stu.getStudentId());
+			data.put("studentName", stu.getStudentName());
+			data.put("number", stu.getNumber());
 			StudentRfidDBO rfids = new StudentRfidDBO();
 			rfids.setStudentId(studentId);
 			List<StudentRfidDBO> rlist =(List<StudentRfidDBO>)StudentRfidService_.doSelectData(rfids);
-			result.setData(rlist);
+			data.put("rfidlist", rlist);
+			result.setData(data);
 		} catch (Exception e) {
 			result.setInfo("访问失败");
 			result.setStatus(1);
@@ -153,16 +250,44 @@ public class StudentRfidController extends MyControllerSupport {
 	}	
 	
 	/**
-	 * rfid卡对应学生列表查询及搜索接口
+	 * rfid卡对应学生搜索接口
 	 * @param token
 	 * @param rfid
 	 * @param page
 	 * @param size
 	 * @return
 	 */
+	@RequestMapping(value = "/rfidstudent/search", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public RESTResultBean rfidstudentSearchGET(String token,Long rfid) {
+		RESTResultBean result = new RESTResultBean();
+		try {
+			if (doCheckToken(token) == false) {
+				return tokenFail();
+			}
+			//获取学生列表
+			StudentRfidDBO param = new StudentRfidDBO();
+			param.setRfid(rfid);
+			pageModel.config();
+			pageModel.setPageCurrent(1);
+			pageModel.setPageLimit(1);
+			pageModel.setFormParamBean(param);
+			StudentRfidService_.doSelectPageStudentByrfid(pageModel);
+			List<UStudentPVO> rlist = (List<UStudentPVO>)pageModel.getPageListData();
+			if(rlist!=null&&rlist.size()>0){
+				result.setData(rlist.get(0));
+			}
+		} catch (Exception e) {
+			result.setInfo("访问失败");
+			result.setStatus(1);
+		}
+		return result;
+	}
+	
+	
 	@RequestMapping(value = "/rfidstudent", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean rfidstudentGET(String token,Long rfid,Integer page,Integer size) {
+	public RESTResultBean rfidstudentGET(String token,Integer page,Integer size) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			if (doCheckToken(token) == false) {
@@ -176,7 +301,6 @@ public class StudentRfidController extends MyControllerSupport {
 			}
 			//获取学生列表
 			StudentRfidDBO param = new StudentRfidDBO();
-			param.setRfid(rfid);
 			pageModel.config();
 			pageModel.setPageCurrent(page);
 			pageModel.setPageLimit(size);
@@ -187,31 +311,7 @@ public class StudentRfidController extends MyControllerSupport {
 			data.put("page", page);
 			data.put("size", size);
 			data.put("count", pageModel.getResultCount());
-			if(rlist!=null&&rlist.size()>0){
-				for(UStudentPVO tmp:rlist){
-					//得到关联的班级
-					ClassStudentDBO cs = new ClassStudentDBO();
-					cs.setStudentId(tmp.getStudentId());
-					List<ClassStudentDBO> list1 =(List<ClassStudentDBO>)ClassStudentService_.doSelectData(cs);
-					if(list1!=null&&list1.size()>0){
-						Long cid = list1.get(0).getCid();
-						ClassPVO cpvo = new ClassPVO();
-						cpvo.setCid(cid);
-						pageModel.config();
-						pageModel.setPageCurrent(1);
-						pageModel.setPageLimit(12);
-						pageModel.setFormParamBean(cpvo);
-						ClassService_.doSelectPageClass(pageModel);
-						List<ClassPVO> list2 = (List<ClassPVO>)pageModel.getPageListData(); 
-						if(list2!=null&&list2.size()>0){
-							tmp.setClassName(list2.get(0).getClassName());
-							tmp.setTermName(list2.get(0).getTermName());
-							tmp.setGradeName(list2.get(0).getGradeName());
-						}
-					}
-				}
-			}
-			data.put("rfidStudent",rlist);
+			data.put("rfidstudent", rlist);
 			result.setData(data);
 		} catch (Exception e) {
 			result.setInfo("访问失败");
@@ -219,4 +319,5 @@ public class StudentRfidController extends MyControllerSupport {
 		}
 		return result;
 	}
+
 }
