@@ -24,6 +24,7 @@ import com.mcookies.qxy.common.ClassTeacher.ClassTeacherDBO;
 import com.mcookies.qxy.common.ClassTeacher.ClassTeacherService;
 import com.mcookies.qxy.common.SCourse.SCourseDBO;
 import com.mcookies.qxy.common.SCourse.SCourseService;
+import com.mcookies.qxy.common.STerm.STermService;
 import com.mcookies.qxy.common.UTeacher.UTeacherDBO;
 import com.mcookies.qxy.common.UTeacher.UTeacherService;
 
@@ -40,6 +41,8 @@ public class ClassCourseController extends MyControllerSupport {
 	protected ClassService classService;
 	@Resource
 	protected SCourseService sCourseService;
+	@Resource
+	protected STermService sTermService;
 	@Resource
 	protected ClassCourseService classCourseService;
 	@Resource
@@ -128,6 +131,7 @@ public class ClassCourseController extends MyControllerSupport {
 				throw new IllegalArgumentException("courseId所对应的课程不存在");
 			}
 			classCourse.setCourseName(course.getCourseName());
+			classCourse.setTerm(clazz.getTermId());
 			classCourseService.doInsert(classCourse);
 			Map<String, Object> data = new HashMap<String, Object>();
 			data.put("info", "ok");
@@ -161,23 +165,16 @@ public class ClassCourseController extends MyControllerSupport {
 			if (origin == null) {
 				throw new IllegalArgumentException("班级课程不存在");
 			}
-			if (classCourse.getCid() != null) {
-				ClassDBO clazz = new ClassDBO();
-				clazz.setCid(classCourse.getCid());
-				clazz = (ClassDBO) classService.doRead(clazz);
-				if (clazz == null) {
-					throw new IllegalArgumentException("cid所对应的班级不存在");
-				}
+			if (classCourse.getCourseId() == null) {
+				throw new IllegalArgumentException("courseId不能为空");
 			}
-			if (classCourse.getCourseId() != null) {
-				SCourseDBO course = new SCourseDBO();
-				course.setCourseId(classCourse.getCourseId());
-				course = (SCourseDBO) sCourseService.doRead(course);
-				if (course == null) {
-					throw new IllegalArgumentException("courseId所对应的课程不存在");
-				}
-				classCourse.setCourseName(course.getCourseName());
+			SCourseDBO course = new SCourseDBO();
+			course.setCourseId(classCourse.getCourseId());
+			course = (SCourseDBO) sCourseService.doRead(course);
+			if (course == null) {
+				throw new IllegalArgumentException("courseId所对应的课程不存在");
 			}
+			classCourse.setCourseName(course.getCourseName());
 			classCourseService.doUpdate(classCourse);
 			Map<String, Object> data = new HashMap<String, Object>();
 			data.put("info", "ok");
@@ -240,7 +237,6 @@ public class ClassCourseController extends MyControllerSupport {
 	@RequestMapping(value = "/class/course", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean classCourseDELETE(@RequestBody ClassCourseDBO classCourse) {
-		// TODO: test
 		RESTResultBean result = new RESTResultBean();
 		try {
 			if (doCheckToken(classCourse.getToken()) == false) {

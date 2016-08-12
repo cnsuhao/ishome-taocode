@@ -288,9 +288,6 @@
 		WHERE 1 = 1
 		AND a.term_id = #{termId} AND b.is_use = 1
 		AND a.date = #{date}
-		<if test=" tid != null "><!-- 教师id -->
-			AND instr(a.tids, '#{tid};') > 0
-		</if>
 	</select>
 	<!-- 根据termId tid week 查询岗位有效的值周列表 -->
 	<select id='findByTermIdAndTidAndWeekAndIsUsed' parameterType='com.mcookies.qxy.common.SDutyScheduling.SDutySchedulingPVO'

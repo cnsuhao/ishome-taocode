@@ -104,14 +104,22 @@ public class NewsDisplayController extends MyControllerSupport {
 			pageModel.setPageCurrent(page);
 			pageModel.setPageLimit(size);
 			pageModel.setFormParamBean(pvo);
-			if (pvo.getTid() != null) {
-				newsService.doSelectPageByColumnIdAndTid(pageModel);
-			} else {
-				newsService.doSelectPageByColumnIdAndParentId(pageModel);
-			}
-			
 			data.put("page", pageModel.getPageCurrent());
 			data.put("size", pageModel.getPageLimit());
+			if (pvo.getTid() != null) {
+				newsService.doSelectPageByColumnIdAndTid(pageModel);
+				result.setInfo("用户为教师");
+			} else if (pvo.getParentId() != null){
+				newsService.doSelectPageByColumnIdAndParentId(pageModel);
+				result.setInfo("用户为学生家长");
+			} else {
+				data.put("count", 0);
+				data.put("newslist", new ArrayList<NewsPVO>());
+				result.setData(data);
+				result.setInfo("用户既不是教师，也不是学生家长");
+				return result;
+			}
+			
 			data.put("count", pageModel.getResultCount());
 			data.put("newslist", pageModel.getPageListData());
 			result.setData(data);

@@ -149,7 +149,6 @@ public class NewsManageController extends MyControllerSupport {
 	/**
 	 * 新闻新增接口 /news
 	 */
-	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/news", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean newsPOST(@RequestBody NewsDBO news) {
@@ -163,8 +162,8 @@ public class NewsManageController extends MyControllerSupport {
 			}
 			NewsColumnDBO newsColumn = new NewsColumnDBO();
 			newsColumn.setColumnId(news.getColumnId());
-			List<NewsColumnDBO> newsColumns = (List<NewsColumnDBO>) newsColumnService.doSelectData(newsColumn);
-			if (newsColumns.size() == 0) {
+			newsColumn = (NewsColumnDBO) newsColumnService.doRead(newsColumn);
+			if (newsColumn == null) {
 				throw new IllegalArgumentException("columnId所对应的栏目不存在");
 			}
 			news.setIsAudit(0);
@@ -183,11 +182,9 @@ public class NewsManageController extends MyControllerSupport {
 	/**
 	 * 新闻修改\置顶(取消)\审核(驳回)\加入轮播(取消)口 /news
 	 */
-	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/news", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean newsPUT(@RequestBody NewsDBO news) {
-		// TODO: test
 		RESTResultBean result = new RESTResultBean();
 		try {
 			if (doCheckToken(news.getToken()) == false) {
@@ -197,14 +194,19 @@ public class NewsManageController extends MyControllerSupport {
 			if (news.getNewsId() == null) {
 				throw new IllegalArgumentException("新闻id不能为空");
 			}
+			NewsDBO origin = new NewsDBO();
+			origin.setNewsId(news.getNewsId());
+			origin = (NewsDBO) newsService.doRead(origin);
+			if (origin == null) {
+				throw new IllegalArgumentException("新闻不存在");
+			}
 			// 由所属栏目判断是否需要审核
 			NewsColumnDBO newsColumn = new NewsColumnDBO();
 			newsColumn.setColumnId(news.getColumnId());
-			List<NewsColumnDBO> newsColumns = (List<NewsColumnDBO>) newsColumnService.doSelectData(newsColumn);
-			if (newsColumns.size() == 0) {
+			newsColumn = (NewsColumnDBO) newsColumnService.doRead(newsColumn);
+			if (newsColumn == null) {
 				throw new IllegalArgumentException("columnId所对应的栏目不存在");
 			}
-			newsColumn = newsColumns.get(0);
 			if (newsColumn.getIsCheck() == null || newsColumn.getIsCheck() == 0) {
 				throw new IllegalStateException("该新闻不允许修改");
 			}
