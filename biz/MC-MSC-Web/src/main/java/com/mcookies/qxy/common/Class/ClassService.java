@@ -51,4 +51,8 @@ public class ClassService extends MyServiceSupport {
 	public List<ClassPVO> findByTermIdAndTid(ClassPVO clz) {
 		return getDao().findByTermIdAndTid(clz);
 	}
+	
+	public ClassPVO findOneByCid(ClassPVO clz) {
+		return getDao().findOneByCid(clz);
+	}
 }
