@@ -21,4 +21,6 @@ public interface ClassDao extends IDatabaseSupport{
 
 	List<ClassPVO> findByTermIdAndTid(ClassPVO clz);
 
+	ClassPVO findOneByCid(ClassPVO clz);
+
 }

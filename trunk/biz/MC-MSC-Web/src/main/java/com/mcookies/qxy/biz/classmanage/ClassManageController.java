@@ -36,11 +36,10 @@ public class ClassManageController extends MyControllerSupport {
 	protected STermService sTermService;
 	@Resource
 	protected UTeacherService uTeacherService;
-	
+
 	/**
-	 * 班级列表查询接口
-	 * /classlist/term=[term_id]&grade=[grade_id]&class=[cid]&page=[page]&
-	 * size=[size]&teacher=[tid]&token=[token]
+	 * 班级列表查询接口 /classlist/term=[term_id]&page=[page]&
+	 * size=[size]&tid=[tid]&token=[token]
 	 */
 	@RequestMapping(value = "/classlist", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
@@ -57,12 +56,6 @@ public class ClassManageController extends MyControllerSupport {
 			if (size == null || size == 0) {
 				size = 12;
 			}
-			pageModel.setPageCurrent(page);
-			pageModel.setPageLimit(size);
-			pageModel.setFormParamBean(pvo);
-			// pageModel.setOrderby("publish_time desc");
-			classService.doSelectPageClass2(pageModel);
-			
 			STermPVO term = new STermPVO();
 			term.setTermId(pvo.getTermId());
 			term.setSid(pvo.getSid());
@@ -70,13 +63,12 @@ public class ClassManageController extends MyControllerSupport {
 			if (term == null) {
 				throw new IllegalArgumentException("termId所对应的学期不存在");
 			}
-			for (FrameworkDataBean each: pageModel.getPageListData()) {
-				ClassPVO tmp = (ClassPVO) each;
-				ClassTeacherDBO tmpTeacher = new ClassTeacherDBO();
-				tmpTeacher.setCid(tmp.getCid());
-				UTeacherDBO leader = uTeacherService.findClassLeader(tmpTeacher);
-				((ClassPVO) each).setLeaderName(leader != null ? leader.getTeacherName() : "");
-			}
+			pvo.setTermId(term.getTermId());
+			pageModel.setPageCurrent(page);
+			pageModel.setPageLimit(size);
+			pageModel.setFormParamBean(pvo);
+			classService.doSelectPageClass2(pageModel);
+
 			data.put("term", term.getTermName());
 			data.put("tid", pvo.getTid());
 			data.put("page", pageModel.getPageCurrent());
@@ -84,6 +76,27 @@ public class ClassManageController extends MyControllerSupport {
 			data.put("count", pageModel.getResultCount());
 			data.put("class", pageModel.getPageListData());
 			result.setData(data);
+		} catch (Exception e) {
+			result.setInfo("查询失败，" + e.getMessage());
+			result.setStatus(1);
+		}
+
+		return result;
+	}
+
+	/**
+	 * 班级列表搜索接口 /qxy/classlist?cid=[cid]&token=[token]
+	 */
+	@RequestMapping(value = "/classlist/search", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public RESTResultBean classListSearchGET(ClassPVO pvo) {
+		RESTResultBean result = new RESTResultBean();
+		try {
+			if (doCheckToken(pvo.getToken()) == false) {
+				return tokenFail();
+			}
+			pvo = classService.findOneByCid(pvo);
+			result.setData(pvo);
 		} catch (Exception e) {
 			result.setInfo("查询失败，" + e.getMessage());
 			result.setStatus(1);
