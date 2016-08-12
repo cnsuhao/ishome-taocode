@@ -13,6 +13,9 @@
     <!-- 根据条件更新所有记录 -->
     <update id='doUpdateAll' parameterType='ClassAlarmDBO'>
         UPDATE class_alarm SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
+        <if test=" did != null "><!-- 数据id -->
+            ,did = #{did}
+        </if>
         <if test=" cid != null "><!-- 班级id -->
             ,cid = #{cid}
         </if>
@@ -35,6 +38,9 @@
             ,updator = #{updator}
         </if>
         WHERE 1 = 1 
+            <if test=" did != null "><!-- 数据id -->
+                AND did = #{did}
+            </if>
             <if test=" cid != null "><!-- 班级id -->
                 AND cid = #{cid}
             </if>
@@ -64,6 +70,9 @@
     <select id='doSelectPage' parameterType='ClassAlarmDBO' resultType='ClassAlarmDBO'>
         SELECT <include refid='tableColumns'/> FROM class_alarm
         WHERE 1 = 1 
+        <if test=" did != null "><!-- 数据id -->
+            AND did = #{did}
+        </if>
         <if test=" cid != null "><!-- 班级id -->
             AND cid = #{cid}
         </if>
@@ -95,11 +104,14 @@
         INSERT INTO class_alarm
           ( <include refid='tableColumns'/>) 
         VALUES 
-          ( #{cid},#{sid},#{alarmruleId},#{isUse},#{createTime},#{creator},#{updateTime},#{updator} )
+          ( #{did},#{cid},#{sid},#{alarmruleId},#{isUse},#{createTime},#{creator},#{updateTime},#{updator} )
     </insert>
     <!-- 修改一条数据 -->
     <update id='doUpdate' parameterType='ClassAlarmDBO'>
         UPDATE class_alarm SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
+        <if test=" did != null "><!-- 数据id -->
+            ,did = #{did}
+        </if>
         <if test=" cid != null "><!-- 班级id -->
             ,cid = #{cid}
         </if>
@@ -129,16 +141,16 @@
     <!-- 逻辑删除一条数据 -->
     <delete id='toDelete' parameterType='ClassAlarmDBO'>
         UPDATE class_alarm SET ddd='1', update_time = #{updateTime}, uu2 = #{uu2} WHERE update_time = #{updateTime}
-            <if test=" cid != null "><!-- 班级id -->
-                AND cid = #{cid}
+            <if test=" did != null "><!-- 数据id -->
+                AND did = #{did}
             </if>
     </delete>
     <!-- 物理删除一条数据 -->
     <delete id='doDelete' parameterType='ClassAlarmDBO'>
         DELETE FROM class_alarm 
         	<where>
-	            <if test=" cid != null ">
-	                AND cid = #{cid}
+	            <if test=" did != null "><!-- 数据id -->
+	                AND did = #{did}
 	            </if>
 	            <if test=" alarmruleId != null ">
 	            	and alarmrule_id = #{alarmruleId}
@@ -148,8 +160,8 @@
     <!-- 查询一条数据  -->
     <select id='doRead' parameterType='ClassAlarmDBO' resultType='ClassAlarmDBO'>
         SELECT <include refid='tableColumns'/> FROM class_alarm WHERE 1 = 1
-            <if test=" cid != null "><!-- 班级id -->
-                AND cid = #{cid}
+            <if test=" did != null "><!-- 数据id -->
+                AND did = #{did}
             </if>
     </select>
 
