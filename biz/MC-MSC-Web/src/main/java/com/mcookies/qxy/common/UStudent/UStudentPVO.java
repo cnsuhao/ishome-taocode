@@ -11,6 +11,7 @@ public class UStudentPVO extends UStudentDBO {
 	private String leaderName = null;
 	private Long parentId;
 	private String parentName = null;
+	private Long termId;
 
 	private Long cid;
 
@@ -263,6 +264,14 @@ public class UStudentPVO extends UStudentDBO {
 
 	public void setParentName(String parentName) {
 		this.parentName = parentName;
+	}
+
+	public Long getTermId() {
+		return termId;
+	}
+
+	public void setTermId(Long termId) {
+		this.termId = termId;
 	}
 
 }

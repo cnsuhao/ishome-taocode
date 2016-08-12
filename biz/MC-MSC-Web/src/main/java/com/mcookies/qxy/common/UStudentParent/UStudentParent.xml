@@ -189,4 +189,5 @@
         UPDATE u_student_parent SET is_default = 0
         WHERE student_id = #{studentId}
     </update>
+
 </mapper>

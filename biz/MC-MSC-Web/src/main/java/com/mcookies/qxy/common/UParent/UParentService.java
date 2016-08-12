@@ -2,6 +2,8 @@ package com.mcookies.qxy.common.UParent;
 
 import java.util.List;
 
+import org.isotope.jfp.framework.beans.common.FrameworkDataBean;
+import org.isotope.jfp.framework.beans.page.PageVOSupport;
 import org.isotope.jfp.framework.support.MyServiceSupport;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,14 @@ public class UParentService extends MyServiceSupport {
 	 */
 	public List<UParentPVO> findByStudentId(UStudentDBO student) {
 		return getDao().findByStudentId(student);
+	}
+	
+	
+	@SuppressWarnings("unused")
+	public PageVOSupport doSelectPageByTermIdAndCidAndStudentId(PageVOSupport pageModel) {
+		FrameworkDataBean formParamBean = pageModel.getFormParamBean();
+		pageModel.setPageListData(getDao().doSelectPageByTermIdAndCidAndStudentId(pageModel));
+		return pageModel;
 	}
 
 }

@@ -348,4 +348,76 @@
 			AND a.sid = #{sid} AND a.number = #{number}
 		</if>
     </select>
+    <!-- 根据cid查询 -->
+    <select id='doSelectPageByCid' parameterType='com.mcookies.qxy.common.UStudent.UStudentPVO' 
+    		resultType='com.mcookies.qxy.common.UStudent.UStudentPVO'>
+    	SELECT
+    	a.number,
+		a.student_id,
+		a.student_name,
+		a.phone,
+		g.parent_id,
+		g.parent_name,
+		a.is_use
+		FROM u_student a
+		LEFT JOIN class_student b ON a.student_id = b.student_id
+		LEFT JOIN class c ON b.cid = c.cid
+		LEFT JOIN u_student_parent f ON a.student_id = f.student_id AND f.is_default = 1
+		LEFT JOIN u_parent g ON f.parent_id = g.parent_id
+		WHERE 1 = 1 AND c.cid = #{cid}
+    </select>
+    <!-- 根据cid查询，多了班级年级 -->
+    <select id='doSelectPageByCidWithClassAndGrade' parameterType='com.mcookies.qxy.common.UStudent.UStudentPVO' 
+    		resultType='com.mcookies.qxy.common.UStudent.UStudentPVO'>
+		SELECT
+    	c.cid,
+    	c.class_name,
+		e.teacher_name AS leader_name,
+    	a.number,
+		a.student_id,
+		a.student_name,
+		a.phone,
+		g.parent_id,
+		g.parent_name,
+		a.is_use,
+		h.grade_name
+		FROM u_student a
+		LEFT JOIN class_student b ON a.student_id = b.student_id
+		LEFT JOIN class c ON b.cid = c.cid
+		LEFT JOIN class_teacher d ON c.cid = d.cid AND d.is_leader = 1
+		LEFT JOIN u_teacher e ON d.tid = e.tid
+		LEFT JOIN u_student_parent f ON a.student_id = f.student_id AND f.is_default = 1
+		LEFT JOIN u_parent g ON f.parent_id = g.parent_id
+		LEFT JOIN s_grade_label h ON c.grade_id = h.grade_id
+		WHERE 1 = 1 AND c.cid = #{cid}
+    </select>
+    <!-- 查询家长学生信息，根据parentId、termId、可选的studentId -->
+    <select id='doSelectPageByParentIdAndTermIdAndStudentID' parameterType='com.mcookies.qxy.common.UStudent.UStudentPVO' 
+    		resultType='com.mcookies.qxy.common.UStudent.UStudentPVO'>
+		SELECT
+    	c.cid,
+    	c.class_name,
+		e.teacher_name AS leader_name,
+    	a.number,
+		a.student_id,
+		a.student_name,
+		a.phone,
+		g.parent_id,
+		g.parent_name,
+		a.is_use,
+		h.grade_name
+		FROM u_student a
+		LEFT JOIN class_student b ON a.student_id = b.student_id
+		LEFT JOIN class c ON b.cid = c.cid
+		LEFT JOIN class_teacher d ON c.cid = d.cid AND d.is_leader = 1
+		LEFT JOIN u_teacher e ON d.tid = e.tid
+		LEFT JOIN u_student_parent f ON a.student_id = f.student_id AND f.is_default = 1
+		LEFT JOIN u_parent g ON f.parent_id = g.parent_id
+		LEFT JOIN s_grade_label h ON c.grade_id = h.grade_id
+		WHERE 1 = 1 AND c.term_id = #{termId}
+		<if test=" studentId != null ">
+			AND a.student_id = #{studentId}
+		</if>
+    </select>
+    
 </mapper>
