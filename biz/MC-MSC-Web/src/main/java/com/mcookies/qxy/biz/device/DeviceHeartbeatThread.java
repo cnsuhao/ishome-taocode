@@ -1,17 +1,15 @@
 package com.mcookies.qxy.biz.device;
 
-import java.util.ArrayList;
-
 import javax.annotation.Resource;
 
 import org.isotope.jfp.framework.cache.ICacheService;
+import org.isotope.jfp.framework.constants.ISFrameworkConstants;
+import org.isotope.jfp.framework.utils.DateHelper;
 import org.isotope.jfp.framework.utils.EmptyHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.mcookies.qxy.common.DeviceAlarm.DeviceAlarmService;
 import com.mcookies.qxy.common.DeviceHeartbeat.DeviceHeartbeatDBO;
 import com.mcookies.qxy.common.DeviceHeartbeat.DeviceHeartbeatService;
@@ -21,9 +19,11 @@ import com.mcookies.qxy.common.LogAttendance.LogAttendanceDBO;
 import com.mcookies.qxy.common.LogAttendance.LogAttendanceService;
 import com.mcookies.qxy.common.LogSecurity.LogSecurityDBO;
 import com.mcookies.qxy.common.LogSecurity.LogSecurityService;
+import com.mcookies.qxy.common.StudentRfid.StudentRfidDBO;
+import com.mcookies.qxy.common.StudentRfid.StudentRfidService;
 
-@Service("DeviceHeartbeatThread")
-public class DeviceHeartbeatThread extends Thread {
+//@Service("DeviceHeartbeatThread")
+public class DeviceHeartbeatThread extends Thread implements ISFrameworkConstants {
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 	/**
 	 * Redis缓存
@@ -40,70 +40,116 @@ public class DeviceHeartbeatThread extends Thread {
 	protected LogAttendanceService LogAttendanceService_;
 	@Resource
 	protected LogSecurityService LogSecurityService_;
+	@Resource
+	protected StudentRfidService StudentRfidService_;
 
+	/**
+	 * 数据包
+	 */
 	SendTimecardDataPVO deviceData;
-
-	public SendTimecardDataPVO getDeviceData() {
-		return deviceData;
-	}
 
 	public void setDeviceData(SendTimecardDataPVO deviceData) {
 		this.deviceData = deviceData;
+	}
+
+	/**
+	 * 心跳时间
+	 */
+	int heartSecond = 10;
+
+	public void setHeartSecond(int heartSecond) {
+		this.heartSecond = heartSecond;
 	}
 
 	public void run() {
 		saveDeviceDatas(deviceData);
 	}
 
+	final static String DeviceUserName = "DeviceUserName:";
+	final static String DeviceDatas = "DeviceDatas";
+
 	private void saveDeviceDatas(SendTimecardDataPVO data) {
-
 		logger.debug("刷卡记录处理开始 =====>>>>>");
+		long curTime = System.currentTimeMillis();
 		try {
-
 			// 检查设备的正确性
+			DeviceTagDBO dtd = null;
 			{
-				DeviceTagDBO dt = null;
 				// 判断缓存里面是否存在
+				myCache.selectDB(8);
+				Object c = myCache.getObject(DeviceUserName + data.getUsername(), false);
+				myCache.init();
 				// 不存在的场合数据库加载
+				if (EmptyHelper.isEmpty(c)) {
+					dtd = new DeviceTagDBO();
+					dtd = (DeviceTagDBO) DeviceTagService_.doRead(dtd);
+				} else {
+					dtd = JSON.parseObject((String) c, DeviceTagDBO.class);
+				}
 				// 设备无效的场合直接返回
-				if (data == null) {
-					logger.error("该设备无效" + data.getUsername());
+				if (EmptyHelper.isEmpty(dtd)) {
+					logger.error("该设备无效=====>>>>>" + data.getUsername());
 					return;
 				}
+
 				// 设备用户密码错误的场合返回
-				if (dt.getPassword().equals(data.getPassword())==false) {
-					logger.error("设备用户密码错误" + data.getUsername());
+				if (dtd.getPassword().equals(data.getPassword()) == false) {
+					logger.error("设备用户密码错误=====>>>>>" + data.getUsername());
 					return;
+				} else {
+					dtd.setLastLoginTime("" + curTime);
+					myCache.putObject(DeviceUserName + data.getUsername(), JSON.toJSONString(dtd), 0, false);
 				}
 				// 记录设备心跳
 				{
 					DeviceHeartbeatDBO dh = new DeviceHeartbeatDBO();
+					dh.setSid(dtd.getSid());
+					dh.setDeviceId(dtd.getDeviceId());
+					dh.setSendTime(DateHelper.currentTimeMillis2());
+					dh.setIsUse(0);
 					DeviceHeartbeatService_.doInsert(dh);
 				}
-				long curTime = System.currentTimeMillis();
 				// 计算最后报警
 				{
-					long last = Long.parseLong(dt.getLastLoginTime());
-
+					long lastTime = Long.parseLong(dtd.getLastLoginTime());
+					if ((lastTime - curTime) > heartSecond * 60 * 1000) {
+						logger.error("该设备异常=====>>>>>" + data.getUsername());
+						return;
+					}
 				}
 			}
+			// 1111111111,002720004,999999999;2222222222,002720004,888888888
+			String dd = data.getDatas();
 			// 用户提交
-			if (EmptyHelper.isNotEmpty(data.getDatas())) {
-				ArrayList<JSONObject> datas = new ArrayList<JSONObject>();
-				// 数据格式化
-				{
-
-				}
+			if (EmptyHelper.isNotEmpty(dd)) {
 				LogAttendanceDBO la;
 				LogSecurityDBO ls;
-				for (JSONObject l : datas) {
+				StudentRfidDBO sr;
+				String[] datas = dd.split(SEMICOLON);
+				// 数据格式化
+				for (String l : datas) {
+					// rfid号1,学校编号1,time
+					String[] sd = l.split(COMMA);
+					sr = new StudentRfidDBO();
+					sr.setRfid(Long.parseLong(sd[0]));
+					sr.setSid(Long.parseLong(sd[1]));
+					
+					// 检查rfid卡号有效性
+					sr = (StudentRfidDBO) StudentRfidService_.doRead(sr);
 					// 保存学生刷卡信息
-					if (true) {
+					if (sr != null) {
 						la = new LogAttendanceDBO();
+						la.setRfid(sr.getRfid());
+						la.setDeviceId(dtd.getDeviceId());
+						la.setMarkTime(DateHelper.currentTimeMillis2());
+						//TODO
+						la.setFlag(0);//0-进来；1-出去；2-出现
+						la.setSourceJson(l);
 						// 存在学生的场合
 						LogAttendanceService_.doInsert(la);
 					} else {
 						ls = new LogSecurityDBO();
+						//TODO
 						LogSecurityService_.doInsert(ls);
 					}
 				}
@@ -111,7 +157,9 @@ public class DeviceHeartbeatThread extends Thread {
 			logger.debug("刷卡记录处理结束 <<<<<=====");
 		} catch (Exception e) {
 			logger.error("日志保存失败", e);
+			myCache.selectDB(8);
 			myCache.offerObjectInList("", JSON.toJSONString(data), false);
+			myCache.init();
 		}
 
 	}
