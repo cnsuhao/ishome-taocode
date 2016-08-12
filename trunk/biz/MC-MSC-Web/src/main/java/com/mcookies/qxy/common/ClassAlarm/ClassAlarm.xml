@@ -155,6 +155,12 @@
 	            <if test=" alarmruleId != null ">
 	            	and alarmrule_id = #{alarmruleId}
 	            </if>
+	            <if test=" cid != null ">
+	            	and cid = #{cid}
+	            </if>
+	            <if test=" sid != null ">
+	            	and sid = #{sid}
+	            </if>
             </where>
     </delete>
     <!-- 查询一条数据  -->

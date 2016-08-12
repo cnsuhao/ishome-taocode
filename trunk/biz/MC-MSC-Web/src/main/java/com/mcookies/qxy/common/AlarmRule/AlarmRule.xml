@@ -243,25 +243,35 @@
 		</where>
     </select>
     <select id='doSelectPageCountAlarmRule' parameterType='ClassDBO' resultType='com.mcookies.qxy.common.AlarmRule.AlarmRulePVO'>
-	SELECT
-		class_name,
-		a.create_time,
-		(
-		SELECT
-		count(1)
+			SELECT
+			a.cid,
+			a.class_name,
+			b.term_name,
+			c.grade_name,
+			(
+				SELECT
+					count(1)
+				FROM
+					class_alarm b
+				WHERE
+					a.cid = b.cid
+			) AS classalarmcount
 		FROM
-		class_alarm b
-		WHERE
-		a.cid = b.cid
-		) AS count
-		FROM
-		class a
+			class a
+		LEFT JOIN s_term b ON a.term_id = b.term_id
+		LEFT JOIN s_grade_label c ON a.grade_id = c.grade_id
 		<where>
 			<if test="termId != null ">
 				and a.term_id = #{termId}
 			</if>
 			<if test="gradeId != null ">
 				and a.grade_id = #{gradeId}
+			</if>
+			<if test="sid !=null">
+				and a.sid = #{sid}
+			</if>
+			<if test="cid !=null">
+				and a.cid = #{cid}
 			</if>
 		</where>
     </select>
