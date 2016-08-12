@@ -155,6 +155,12 @@
             <if test=" id != null "><!-- 自增id -->
                 AND id = #{id}
             </if>
+            <if test=" sid != null "><!-- 学校id -->
+	            AND sid = #{sid}
+	        </if>
+	        <if test=" rfid != null "><!-- 学生卡id -->
+	            AND rfid = #{rfid}
+	        </if>
     </select>
     <!-- rfid卡对应学生列表查询及搜索接口 -->
    	<select id="doSelectPageStudentByrfid" parameterType="StudentRfidDBO" resultType="com.mcookies.qxy.common.UStudent.UStudentPVO">

@@ -16,9 +16,9 @@ public class DeviceHeartbeatController extends MyControllerSupport {
 	/**
 	 * 新闻栏目新增接口 /column
 	 */
-	@RequestMapping(value = "/column", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/sendTimecardData.t", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean columnPOST(@RequestBody SendTimecardDataPVO datas) {
+	public RESTResultBean sendTimecardDataGET(@RequestBody SendTimecardDataPVO datas) {
 		RESTResultBean result = new RESTResultBean();
 		DeviceHeartbeatThread dhbt = BeanFactoryHelper.getBean("DeviceHeartbeatThread");
 		dhbt.setDeviceData(datas);
