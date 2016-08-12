@@ -338,8 +338,20 @@ public class ClassSettingController extends MyControllerSupport {
 			dbo.setCid(pvo.getCid());
 			dbo.setIsLeader(0);
 			ClassTeacherService_.doUpdateAll(dbo);
-			//设置新的版主人
-			ClassTeacherService_.doUpdateAll(pvo);
+			//判断 老师是否已和该班级关联
+			ClassTeacherDBO ishas = new ClassTeacherDBO();
+			ishas.setCid(pvo.getCid());
+			ishas.setTid(pvo.getTid());
+			List<ClassTeacherDBO> haslist =(List<ClassTeacherDBO>)ClassTeacherService_.doSelectData(ishas);
+			if(haslist!=null&&haslist.size()>0){
+				//设置新的版主人
+				ClassTeacherService_.doUpdateAll(pvo);
+			}else{
+				pvo.setCourseId(0l);
+				pvo.setIsUse(1);
+				ClassTeacherService_.doInsert(pvo);
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			result.setInfo("访问失败");
