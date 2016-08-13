@@ -420,7 +420,7 @@
 		</if>
     </select>
     
-    <select id="doselectPageStudent" parameterType='ClassDBO' resultType="UStudentDBO">
+    <select id="doSelectPageStudent" parameterType='com.mcookies.qxy.common.Class.ClassDBO' resultType="UStudentDBO">
 	SELECT
 		a.student_id,
 		a.number,
@@ -435,7 +435,7 @@
 		AND b.cid = c.cid
 		AND c.term_id = d.term_id
 		<if test="termId != null">
-			AND c.term_id = #{termId}
+			AND c.term_id = #{termId}  
 		</if>
 		<if test="cid != null">
 			AND c.cid = #{cid}

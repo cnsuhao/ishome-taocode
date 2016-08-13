@@ -60,9 +60,9 @@ public class UStudentService extends MyServiceSupport {
 	}
 	
 	@SuppressWarnings("unused")
-	public PageVOSupport doselectPageStudent(PageVOSupport pageModel) {
+	public PageVOSupport doSelectPageStudent(PageVOSupport pageModel) {
 		FrameworkDataBean formParamBean = pageModel.getFormParamBean();
-		pageModel.setPageListData(getDao().doselectPageStudent(pageModel));
+		pageModel.setPageListData(getDao().doSelectPageStudent(pageModel));
 		return pageModel;
 	}
 }

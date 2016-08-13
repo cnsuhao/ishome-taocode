@@ -21,5 +21,5 @@ public interface UStudentDao extends IDatabaseSupport {
 
 	List<? extends FrameworkDataBean> doSelectPageByParentIdAndTermIdAndStudentID(PageVOSupport pageModel);
 	
-	List<? extends FrameworkDataBean> doselectPageStudent(PageVOSupport pageModel);
+	List<? extends FrameworkDataBean> doSelectPageStudent(PageVOSupport pageModel);
 }
