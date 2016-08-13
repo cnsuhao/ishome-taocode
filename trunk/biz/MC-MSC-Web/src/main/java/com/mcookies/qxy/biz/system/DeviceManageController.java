@@ -56,6 +56,7 @@ public class DeviceManageController extends MyControllerSupport {
 				JSONArray array = new JSONArray();
 				for(DeviceTagPVO pvo:relist){
 					JSONObject device = new JSONObject();
+					device.put("id",pvo.getId());
 					device.put("deviceId", pvo.getDeviceId()+"");
 					device.put("deviceName", pvo.getDeviceName());
 					device.put("schoolName", pvo.getSchoolName());
