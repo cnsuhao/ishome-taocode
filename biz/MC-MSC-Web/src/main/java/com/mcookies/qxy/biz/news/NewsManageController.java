@@ -166,7 +166,16 @@ public class NewsManageController extends MyControllerSupport {
 			if (newsColumn == null) {
 				throw new IllegalArgumentException("columnId所对应的栏目不存在");
 			}
-			news.setIsAudit(0);
+			if (newsColumn.getIsCheck() == null || newsColumn.getIsCheck() == 0) {
+				news.setIsAudit(1);
+			} else {
+				if (news.getIsAudit() == null) {
+					news.setIsAudit(0);
+				}
+			}
+			if (news.getIsUse() == null) {
+				news.setIsUse(1);
+			}
 			newsService.doInsert(news);
 			Map<String, Object> data = new HashMap<String, Object>();
 			data.put("info", "ok");
