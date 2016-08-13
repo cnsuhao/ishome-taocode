@@ -73,7 +73,8 @@ public class StudentRfidController extends MyControllerSupport {
 			pageModel.setPageCurrent(page);
 			pageModel.setPageLimit(size);
 			pageModel.setFormParamBean(cdbo);
-			List<UStudentDBO> relist = (List<UStudentDBO>)UStudentService_.doselectPageStudent(pageModel);
+			UStudentService_.doSelectPageStudent(pageModel);
+			List<UStudentDBO> relist = (List<UStudentDBO>)pageModel.getPageListData();
 			data.put("page",page);
 			data.put("size",size);
 			data.put("count", pageModel.getResultCount());
