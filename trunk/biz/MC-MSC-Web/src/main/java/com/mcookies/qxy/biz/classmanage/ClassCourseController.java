@@ -203,6 +203,9 @@ public class ClassCourseController extends MyControllerSupport {
 			if (teacher == null) {
 				throw new IllegalArgumentException("tid所对应的教师不存在");
 			}
+			if (classTeacher.getIsLeader() == null) {
+				classTeacher.setIsLeader(0);
+			}
 			classTeacherService.doUpdate(classTeacher);
 			Map<String, Object> data = new HashMap<String, Object>();
 			data.put("info", "ok");
