@@ -8,6 +8,7 @@ import org.isotope.jfp.framework.support.IDatabaseSupport;
 
 import com.mcookies.qxy.common.ClassTeacher.ClassTeacherDBO;
 import com.mcookies.qxy.common.News.NewsPVO;
+import com.mcookies.qxy.common.OaRule.OaRulePVO;
 import com.mcookies.qxy.common.SDutyScheduling.SDutySchedulingPVO;
 
 /** 教师表 */
@@ -18,4 +19,5 @@ public interface UTeacherDao extends IDatabaseSupport {
 	List<UTeacherDBO> findSchedulingLeaders(SDutySchedulingPVO s);
 	List<UTeacherDBO> findNewsReaders(NewsPVO news);
 	List<UTeacherPVO> findByTermIdAndCid(UTeacherPVO teacher);
+	List<UTeacherDBO> findByTids(OaRulePVO oaRule);
 }

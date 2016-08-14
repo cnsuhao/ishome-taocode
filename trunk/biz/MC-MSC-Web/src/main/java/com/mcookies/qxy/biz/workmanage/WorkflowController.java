@@ -139,8 +139,11 @@ public class WorkflowController extends MyControllerSupport {
 		oaRule.setSerialNumber(serialNumber);
 		OaRuleDBO dbo = oaRuleService.doSelectNextRule(oaRule);
 		if (dbo != null && !StringUtils.isEmpty(dbo.getTids())) {
-			String tidsStr = dbo.getTids().replace("[", "").replace("]", "");
-			String[] tidStrs = tidsStr.split(",");
+//			String tidsStr = dbo.getTids().replace("[", "").replace("]", "");
+			String tidsStr = dbo.getTids();
+			tidsStr = tidsStr.substring(0, tidsStr.length() - 1);
+			String[] tidStrs = tidsStr.split(";");
+			
 			for (String tidStr : tidStrs) {
 				OaExamineResultDBO result = new OaExamineResultDBO();
 				result.setApprovalInformationId(oaExamineInformation.getApprovalInformationId());

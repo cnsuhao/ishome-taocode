@@ -159,5 +159,22 @@
                 AND id = #{id}
             </if>
     </select>
+    <!-- 通过cid查询班级课程  -->
+    <select id='findByCid' parameterType='ClassTeacherDBO' 
+    		resultType='com.mcookies.qxy.common.ClassTeacher.ClassTeacherPVO'>
+        SELECT
+        a.id,
+        a.course_id,
+        b.course_name,
+        a.tid,
+        c.teacher_name,
+        c.phone,
+        c.email,
+        a.is_leader
+		FROM class_teacher a
+		LEFT JOIN s_course b ON a.course_id = b.course_id
+		LEFT JOIN u_teacher c ON a.tid = c.tid
+		WHERE a.cid = #{cid}
+    </select>
 
 </mapper>

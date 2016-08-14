@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
 import org.isotope.jfp.framework.beans.common.FrameworkDataBean;
 import org.isotope.jfp.framework.beans.common.RESTResultBean;
 import org.isotope.jfp.framework.support.MyControllerSupport;
@@ -14,7 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONArray;
@@ -24,6 +24,7 @@ import com.mcookies.qxy.common.OaRule.OaRulePVO;
 import com.mcookies.qxy.common.OaRule.OaRuleService;
 import com.mcookies.qxy.common.OaTags.OaTagsDBO;
 import com.mcookies.qxy.common.OaTags.OaTagsService;
+import com.mcookies.qxy.common.UTeacher.UTeacherService;
 
 /**
  * 工作管理-工作流程模板规则
@@ -38,30 +39,45 @@ public class WorkflowTemplateRuleController extends MyControllerSupport {
 	protected OaTagsService oaTagsService;
 	@Resource
 	protected OaRuleService oaRuleService;
+	@Resource
+	protected UTeacherService uTeacherService;
 
 	/**
 	 * 工作流程事项模板规则查询接口 /oarule/token=[token]
 	 */
 	@RequestMapping(value = "/oarule", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean oaRuleGET(@RequestParam(required = false) String token,
-			@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "12") int size) {
+	public RESTResultBean oaRuleGET(OaRuleDBO dbo, Integer page, Integer size) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(token) == false) {
+			if (doCheckToken(dbo.getToken()) == false) {
 				return tokenFail();
 			}
-
-			Long sid = getLoginer().getSchoolId();
-			if (sid == null) {
-				throw new IllegalStateException("获取学校id失败");
-			}
 			Map<String, Object> data = new HashMap<String, Object>();
-			OaRuleDBO rule = new OaRuleDBO();
-			rule.setSid(sid);
+			if (page == null || page == 0) {
+				page = 1;
+			}
+			if (size == null || size == 0) {
+				size = 12;
+			}
+			// 查询是否存在
+			if (dbo.getOatagsId() != null) {
+				OaTagsDBO oatags = new OaTagsDBO();
+				oatags.setOatagsId(dbo.getOatagsId());
+				oatags = (OaTagsDBO) oaTagsService.doRead(oatags);
+				if (oatags == null) {
+					throw new IllegalArgumentException("oatagsId对应的模板不存在");
+				}
+			} else {
+				Long sid = getLoginer().getSchoolId();
+				if (sid == null) {
+					throw new IllegalStateException("获取学校id失败");
+				}
+				dbo.setSid(sid);
+			}
 			pageModel.setPageCurrent(page);
 			pageModel.setPageLimit(size);
-			pageModel.setFormParamBean(rule);
+			pageModel.setFormParamBean(dbo);
 			// pageModel.setOrderby("publish_time desc");
 			oaRuleService.doSelectPage(pageModel);
 			
@@ -72,6 +88,9 @@ public class WorkflowTemplateRuleController extends MyControllerSupport {
 				oatags = (OaTagsDBO) oaTagsService.doRead(oatags);
 				if (oatags != null) {
 					tmp.setOaruleName(oatags.getOatagsName());
+				}
+				if (!StringUtils.isEmpty(tmp.getTids())) {
+					tmp.setTeachers(uTeacherService.findByTids(tmp));
 				}
 			}
 			data.put("page", pageModel.getPageCurrent());

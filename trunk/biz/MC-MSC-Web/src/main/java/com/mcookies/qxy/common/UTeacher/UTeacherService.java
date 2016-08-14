@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.mcookies.qxy.common.ClassTeacher.ClassTeacherDBO;
 import com.mcookies.qxy.common.News.NewsPVO;
+import com.mcookies.qxy.common.OaRule.OaRulePVO;
 import com.mcookies.qxy.common.SDutyScheduling.SDutySchedulingPVO;
 
 /** 教师表 */
@@ -66,5 +67,14 @@ public class UTeacherService extends MyServiceSupport {
 
 	public List<UTeacherPVO> findByTermIdAndCid(UTeacherPVO teacher) {
 		return getDao().findByTermIdAndCid(teacher);
+	}
+	
+	/**
+	 * 模板规则，查询tids对应的教师列表(id1;id2;id3;) 为空返回sid下的全部
+	 * @param news
+	 * @return
+	 */
+	public List<UTeacherDBO> findByTids(OaRulePVO oaRule) {
+		return getDao().findByTids(oaRule);
 	}
 }
