@@ -339,13 +339,6 @@
 		LEFT JOIN s_course e ON c.course_id = e.course_id
 		WHERE 1 = 1 AND b.term_id = #{termId} AND a.cid = #{cid}
     </select>
-        <!-- 查询值周值日tids下的领导列表(id1;id2;id3;)  -->
-    <select id='findSchedulingLeaders' parameterType='com.mcookies.qxy.common.SDutyScheduling.SDutySchedulingPVO' 
-    		resultType='UTeacherDBO'>
-        SELECT tid, teacher_name
-        FROM u_teacher
-		WHERE instr(#{leaderTids}, concat(tid, ';')) > 0
-    </select>
     <!-- 模板规则，查询tids对应的教师列表(id1;id2;id3;) 为空返回sid下的全部  -->
     <select id='findByTids' parameterType='com.mcookies.qxy.common.OaRule.OaRulePVO' 
     		resultType='UTeacherDBO'>
