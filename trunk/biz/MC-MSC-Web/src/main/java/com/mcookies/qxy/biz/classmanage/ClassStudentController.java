@@ -644,21 +644,21 @@ public class ClassStudentController extends MyControllerSupport {
 			if (originSp == null) {
 				throw new IllegalArgumentException("该学生家长关系不存在");
 			}
-			if (parent.getParentId() == null) {
-				throw new IllegalArgumentException("parentId不能为空");
+			if (originSp.getParentId() == null) {
+				throw new IllegalStateException("parentId为空");
 			}
 			UParentDBO origin = new UParentDBO();
-			origin.setParentId(parent.getParentId());
+			origin.setParentId(originSp.getParentId());
 			origin = (UParentDBO) uParentService.doRead(origin);
 			if (origin == null) {
-				throw new IllegalArgumentException("该家长不存在");
+				throw new IllegalStateException("家长不存在");
 			}
 			// 检查手机号码、邮箱是否被使用
 			if (!StringUtils.isEmpty(parent.getPhone())) {
 				UParentDBO p = new UParentDBO();
 				p.setPhone(parent.getPhone());
 				List<UParentDBO> ps = (List<UParentDBO>) uParentService.doSelectData(p);
-				if (ps != null && ps.size() > 0 && ps.get(0).getParentId() != parent.getParentId()) {
+				if (ps != null && ps.size() > 0 && ps.get(0).getParentId() != originSp.getParentId()) {
 					throw new IllegalArgumentException("手机号码已经存在");
 				}
 			}
@@ -668,53 +668,61 @@ public class ClassStudentController extends MyControllerSupport {
 			origin.setPhone(parent.getPhone());
 			origin.setPosition(parent.getPosition());
 			origin.setWorkUnit(parent.getWorkUnit());
-			origin.setIsUse(parent.getIsUse());
-			uParentService.doInsert(origin);
+//			origin.setIsUse(parent.getIsUse());
+			uParentService.doUpdate(origin);
 				
+//			// 维护学生家长表
+//			// 先查一下是否已经有学生家长关系
+//			UStudentParentDBO studentParent = new UStudentParentDBO();
+//			studentParent.setStudentId(originSp.getStudentId());
+//			studentParent.setParentId(parent.getParentId());
+//			studentParent = (UStudentParentDBO) uStudentParentService.doRead(studentParent);
+//			// 已经有学生家长关系
+//			if (studentParent != null) {
+//				if (parent.getIsDefault() != null && parent.getIsDefault() == 1) {
+//					uStudentParentService.updateIsDefaultFalse(studentParent);
+//				} else {
+//					studentParent.setIsDefault(0);
+//				}
+//				studentParent.setRole(parent.getRole());
+//				uStudentParentService.doUpdate(studentParent);
+//			} else {
+//				studentParent = new UStudentParentDBO();
+//				studentParent.setStudentId(originSp.getStudentId());
+//				studentParent.setParentId(parent.getParentId());
+//				// 先查一下是否已经有默认家长
+//				UStudentParentDBO sp = new UStudentParentDBO();
+//				sp.setStudentId(originSp.getStudentId());
+//				sp.setIsDefault(1);
+//				List<UStudentParentDBO> sps = (List<UStudentParentDBO>) uStudentParentService.doSelectData(sp);
+//				// 已经有默认的家长
+//				if (sps.size() > 0) {
+//					if (parent.getIsDefault() != null && parent.getIsDefault() == 1) {
+//						uStudentParentService.updateIsDefaultFalse(sp);
+//					} else {
+//						studentParent.setIsDefault(0);
+//					}
+//				} else {
+//					if (parent.getIsDefault() != null) {
+//						studentParent.setIsDefault(parent.getIsDefault());
+//					} else {
+//						studentParent.setIsDefault(1);
+//					}
+//				}
+//				studentParent.setIsDefault(1);
+//				studentParent.setSid(parent.getSid());
+//				studentParent.setIsUse(1);
+//				studentParent.setRole(parent.getRole());
+//				uStudentParentService.doInsert(studentParent);
+//			}
 			// 维护学生家长表
-			// 先查一下是否已经有学生家长关系
-			UStudentParentDBO studentParent = new UStudentParentDBO();
-			studentParent.setStudentId(originSp.getStudentId());
-			studentParent.setParentId(parent.getParentId());
-			studentParent = (UStudentParentDBO) uStudentParentService.doRead(studentParent);
-			// 已经有学生家长关系
-			if (studentParent != null) {
-				if (parent.getIsDefault() != null && parent.getIsDefault() == 1) {
-					uStudentParentService.updateIsDefaultFalse(studentParent);
-				} else {
-					studentParent.setIsDefault(0);
-				}
-				studentParent.setRole(parent.getRole());
-				uStudentParentService.doUpdate(studentParent);
+			if (parent.getIsDefault() != null && parent.getIsDefault() == 1) {
+				uStudentParentService.updateIsDefaultFalse(originSp);
 			} else {
-				studentParent = new UStudentParentDBO();
-				studentParent.setStudentId(originSp.getStudentId());
-				studentParent.setParentId(parent.getParentId());
-				// 先查一下是否已经有默认家长
-				UStudentParentDBO sp = new UStudentParentDBO();
-				sp.setStudentId(originSp.getStudentId());
-				sp.setIsDefault(1);
-				List<UStudentParentDBO> sps = (List<UStudentParentDBO>) uStudentParentService.doSelectData(sp);
-				// 已经有默认的家长
-				if (sps.size() > 0) {
-					if (parent.getIsDefault() != null && parent.getIsDefault() == 1) {
-						uStudentParentService.updateIsDefaultFalse(sp);
-					} else {
-						studentParent.setIsDefault(0);
-					}
-				} else {
-					if (parent.getIsDefault() != null) {
-						studentParent.setIsDefault(parent.getIsDefault());
-					} else {
-						studentParent.setIsDefault(1);
-					}
-				}
-				studentParent.setIsDefault(1);
-				studentParent.setSid(parent.getSid());
-				studentParent.setIsUse(1);
-				studentParent.setRole(parent.getRole());
-				uStudentParentService.doInsert(studentParent);
+				originSp.setIsDefault(0);
 			}
+			originSp.setRole(parent.getRole());
+			uStudentParentService.doUpdate(originSp);
 			Map<String, Object> data = new HashMap<String, Object>();
 			data.put("info", "ok");
 			result.setData(data);
