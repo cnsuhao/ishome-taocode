@@ -17,10 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mcookies.qxy.common.Class.ClassDBO;
 import com.mcookies.qxy.common.Class.ClassService;
-import com.mcookies.qxy.common.ClassCourse.ClassCourseDBO;
-import com.mcookies.qxy.common.ClassCourse.ClassCoursePVO;
-import com.mcookies.qxy.common.ClassCourse.ClassCourseService;
 import com.mcookies.qxy.common.ClassTeacher.ClassTeacherDBO;
+import com.mcookies.qxy.common.ClassTeacher.ClassTeacherPVO;
 import com.mcookies.qxy.common.ClassTeacher.ClassTeacherService;
 import com.mcookies.qxy.common.SCourse.SCourseDBO;
 import com.mcookies.qxy.common.SCourse.SCourseService;
@@ -44,8 +42,6 @@ public class ClassCourseController extends MyControllerSupport {
 	@Resource
 	protected STermService sTermService;
 	@Resource
-	protected ClassCourseService classCourseService;
-	@Resource
 	protected UTeacherService uTeacherService;
 	@Resource
 	protected ClassTeacherService classTeacherService;
@@ -53,7 +49,6 @@ public class ClassCourseController extends MyControllerSupport {
 	/**
 	 * 班级课程查询接口 /class/course/cid=[cid]&token=[token]
 	 */
-	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/class/course", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean classCourseGET(@RequestParam(required = false) String token,
@@ -76,22 +71,12 @@ public class ClassCourseController extends MyControllerSupport {
 			ClassTeacherDBO classTeacher = new ClassTeacherDBO();
 			classTeacher.setCid(cid);
 			UTeacherDBO leader = (UTeacherDBO) uTeacherService.findClassLeader(classTeacher);
-			ClassCourseDBO classCourse = new ClassCourseDBO();
-			classCourse.setCid(cid);
-			List<ClassCoursePVO> classCourses = (List<ClassCoursePVO>) classCourseService.doSelectData(classCourse);
-			for (ClassCoursePVO classCoursePVO : classCourses) {
-				if (leader != null && classCoursePVO.getTid() != null 
-						&& classCoursePVO.getTid() == leader.getTid()) {
-					classCoursePVO.setIsLeader(1);
-				} else {
-					classCoursePVO.setIsLeader(0);
-				}
-			}
+			List<ClassTeacherPVO> classTeachers = (List<ClassTeacherPVO>) classTeacherService.findByCid(classTeacher);
 			data.put("cid", cid);
 			data.put("className", clazz.getClassName());
 			data.put("leaderName", leader != null ? leader.getTeacherName() : "");
-			data.put("count", classCourses.size());
-			data.put("course", classCourses);
+			data.put("count", classTeachers.size());
+			data.put("course", classTeachers);
 			result.setData(data);
 		} catch (Exception e) {
 			result.setInfo("查询失败，" + e.getMessage());
@@ -106,33 +91,34 @@ public class ClassCourseController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/class/course", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean classCoursePOST(@RequestBody ClassCourseDBO classCourse) {
+	public RESTResultBean classCoursePOST(@RequestBody ClassTeacherDBO classTeacher) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(classCourse.getToken()) == false) {
+			if (doCheckToken(classTeacher.getToken()) == false) {
 				return tokenFail();
 			}
-			if (classCourse.getCid() == null) {
+			if (classTeacher.getCid() == null) {
 				throw new IllegalArgumentException("cid不能为空");
 			}
 			ClassDBO clazz = new ClassDBO();
-			clazz.setCid(classCourse.getCid());
+			clazz.setCid(classTeacher.getCid());
 			clazz = (ClassDBO) classService.doRead(clazz);
 			if (clazz == null) {
 				throw new IllegalArgumentException("cid所对应的班级不存在");
 			}
-			if (classCourse.getCourseId() == null) {
+			if (classTeacher.getCourseId() == null) {
 				throw new IllegalArgumentException("courseId不能为空");
 			}
 			SCourseDBO course = new SCourseDBO();
-			course.setCourseId(classCourse.getCourseId());
+			course.setCourseId(classTeacher.getCourseId());
 			course = (SCourseDBO) sCourseService.doRead(course);
 			if (course == null) {
 				throw new IllegalArgumentException("courseId所对应的课程不存在");
 			}
-			classCourse.setCourseName(course.getCourseName());
-			classCourse.setTerm(clazz.getTermId());
-			classCourseService.doInsert(classCourse);
+			if (classTeacher.getIsUse() == null) {
+				classTeacher.setIsUse(1);
+			}
+			classTeacherService.doInsert(classTeacher);
 			Map<String, Object> data = new HashMap<String, Object>();
 			data.put("info", "ok");
 			result.setData(data);
@@ -149,33 +135,32 @@ public class ClassCourseController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/class/course", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean classCoursePUT(@RequestBody ClassCourseDBO classCourse) {
+	public RESTResultBean classCoursePUT(@RequestBody ClassTeacherDBO classTeacher) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(classCourse.getToken()) == false) {
+			if (doCheckToken(classTeacher.getToken()) == false) {
 				return tokenFail();
 			}
 			// 查询是否存在
-			if (classCourse.getId() == null) {
+			if (classTeacher.getId() == null) {
 				throw new IllegalArgumentException("班级课程id不能为空");
 			}
-			ClassCourseDBO origin = new ClassCourseDBO();
-			origin.setId(classCourse.getId());
-			origin = (ClassCourseDBO) classCourseService.doRead(origin);
+			ClassTeacherDBO origin = new ClassTeacherDBO();
+			origin.setId(classTeacher.getId());
+			origin = (ClassTeacherDBO) classTeacherService.doRead(origin);
 			if (origin == null) {
 				throw new IllegalArgumentException("班级课程不存在");
 			}
-			if (classCourse.getCourseId() == null) {
+			if (classTeacher.getCourseId() == null) {
 				throw new IllegalArgumentException("courseId不能为空");
 			}
 			SCourseDBO course = new SCourseDBO();
-			course.setCourseId(classCourse.getCourseId());
+			course.setCourseId(classTeacher.getCourseId());
 			course = (SCourseDBO) sCourseService.doRead(course);
 			if (course == null) {
 				throw new IllegalArgumentException("courseId所对应的课程不存在");
 			}
-			classCourse.setCourseName(course.getCourseName());
-			classCourseService.doUpdate(classCourse);
+			classTeacherService.doUpdate(classTeacher);
 			Map<String, Object> data = new HashMap<String, Object>();
 			data.put("info", "ok");
 			result.setData(data);
@@ -192,34 +177,33 @@ public class ClassCourseController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/class/teacher", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean classTeacherPUT(@RequestBody ClassCourseDBO classCourse) {
+	public RESTResultBean classTeacherPUT(@RequestBody ClassTeacherDBO classTeacher) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(classCourse.getToken()) == false) {
+			if (doCheckToken(classTeacher.getToken()) == false) {
 				return tokenFail();
 			}
 			// 查询是否存在
-			if (classCourse.getId() == null) {
+			if (classTeacher.getId() == null) {
 				throw new IllegalArgumentException("班级课程id不能为空");
 			}
-			ClassCourseDBO origin = new ClassCourseDBO();
-			origin.setId(classCourse.getId());
-			origin = (ClassCourseDBO) classCourseService.doRead(origin);
+			ClassTeacherDBO origin = new ClassTeacherDBO();
+			origin.setId(classTeacher.getId());
+			origin = (ClassTeacherDBO) classTeacherService.doRead(origin);
 			if (origin == null) {
 				throw new IllegalArgumentException("班级课程不存在");
 			}
 			
-			if (classCourse.getTid() == null) {
+			if (classTeacher.getTid() == null) {
 				throw new IllegalArgumentException("班级课程教师tid不能为空");
 			}
 			UTeacherDBO teacher = new UTeacherDBO();
-			teacher.setTid(classCourse.getTid());
+			teacher.setTid(classTeacher.getTid());
 			teacher = (UTeacherDBO) uTeacherService.doRead(teacher);
 			if (teacher == null) {
 				throw new IllegalArgumentException("tid所对应的教师不存在");
 			}
-			classCourse.setTeacherName(teacher.getTeacherName());
-			classCourseService.doUpdate(classCourse);
+			classTeacherService.doUpdate(classTeacher);
 			Map<String, Object> data = new HashMap<String, Object>();
 			data.put("info", "ok");
 			result.setData(data);
@@ -236,23 +220,23 @@ public class ClassCourseController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/class/course", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean classCourseDELETE(@RequestBody ClassCourseDBO classCourse) {
+	public RESTResultBean classCourseDELETE(@RequestBody ClassTeacherDBO classTeacher) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(classCourse.getToken()) == false) {
+			if (doCheckToken(classTeacher.getToken()) == false) {
 				return tokenFail();
 			}
 			// 查询是否存在
-			if (classCourse.getId() == null) {
+			if (classTeacher.getId() == null) {
 				throw new IllegalArgumentException("班级课程id不能为空");
 			}
-			ClassCourseDBO origin = new ClassCourseDBO();
-			origin.setId(classCourse.getId());
-			origin = (ClassCourseDBO) classCourseService.doRead(origin);
+			ClassTeacherDBO origin = new ClassTeacherDBO();
+			origin.setId(classTeacher.getId());
+			origin = (ClassTeacherDBO) classTeacherService.doRead(origin);
 			if (origin == null) {
 				throw new IllegalArgumentException("班级课程不存在");
 			}
-			classCourseService.doDelete(origin);
+			classTeacherService.doDelete(origin);
 			Map<String, Object> data = new HashMap<String, Object>();
 			data.put("info", "ok");
 			result.setData(data);
