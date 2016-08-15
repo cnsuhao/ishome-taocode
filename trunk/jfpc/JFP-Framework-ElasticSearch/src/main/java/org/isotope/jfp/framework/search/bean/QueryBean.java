@@ -23,6 +23,11 @@ public class QueryBean extends ObjectBean {
 	 */
 	protected String value = "";
 
+	/**
+	 * 字段类型
+	 */
+	protected String mapping = "";
+
 	public String getId() {
 		return id;
 	}
@@ -45,6 +50,14 @@ public class QueryBean extends ObjectBean {
 
 	public void setValue(String value) {
 		this.value = value;
+	}
+
+	public String getMapping() {
+		return mapping;
+	}
+
+	public void setMapping(String mapping) {
+		this.mapping = mapping;
 	}
 
 }

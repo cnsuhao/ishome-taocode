@@ -36,8 +36,10 @@ import io.searchbox.core.Bulk.Builder;
 import io.searchbox.core.BulkResult;
 import io.searchbox.core.BulkResult.BulkResultItem;
 import io.searchbox.core.Index;
+import io.searchbox.indices.CreateIndex;
 import io.searchbox.indices.DeleteIndex;
 import io.searchbox.indices.IndicesExists;
+import io.searchbox.indices.mapping.PutMapping;
 
 /**
  * 基于数据库表建立索引
@@ -153,22 +155,34 @@ public class SQLService implements ISFrameworkConstants {
 				size = Integer.parseInt(size2);
 
 			JestClient jestClient = null;
-
+			// 初始化判断
 			if (ONE.equals(creatFlag)) {
 				try {
+					// 获得连接
 					jestClient = getClient();
 					String index = qb.getIndex();
 					// 删除索引
 					boolean indexExists = jestClient.execute(new IndicesExists.Builder(index).build()).isSucceeded();
 					if (indexExists) {
 						JestResult deleteIndexResult = jestClient.execute(new DeleteIndex.Builder(index).build());
+						if (deleteIndexResult == null || deleteIndexResult.isSucceeded() == false) {
+							throw new RuntimeException(deleteIndexResult.getErrorMessage() + "删除索引失败!，index=" + index);
+						}
 						logger.debug("deleteIndex===>>>ErrorMessage=" + deleteIndexResult.getErrorMessage() + ",JsonString=" + deleteIndexResult.getJsonString());
 					}
-					// JestResult createIndexResult = jestClient.execute(new
-					// CreateIndex.Builder(index).build());
-					// logger.debug("createIndex===>>>ErrorMessage=" +
-					// createIndexResult.getErrorMessage() + ",JsonString=" +
-					// createIndexResult.getJsonString());
+					// 创建索引
+					JestResult createIndexResult = jestClient.execute(new CreateIndex.Builder(index).build());
+					logger.debug("createIndex===>>>ErrorMessage=" + createIndexResult.getErrorMessage() + ",JsonString=" + createIndexResult.getJsonString());
+					if (createIndexResult == null || createIndexResult.isSucceeded() == false) {
+						throw new RuntimeException(createIndexResult.getErrorMessage() + "创建索引失败!，index=" + index);
+					}
+					// 设定字段类型
+					if (EmptyHelper.isEmpty(qb.getMapping()) == false) {
+						JestResult putMappingResult = jestClient.execute(new PutMapping.Builder(index, ElasticsearchPool.TYPE, qb.getMapping()).build());
+						if (putMappingResult == null || putMappingResult.isSucceeded() == false) {
+							throw new RuntimeException(putMappingResult.getErrorMessage() + "删除索引失败!，index=" + index);
+						}
+					}
 				} finally {
 					if (jestClient != null)
 						jestClient.shutdownClient();

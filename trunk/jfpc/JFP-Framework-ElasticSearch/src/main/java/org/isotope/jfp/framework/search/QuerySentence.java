@@ -98,6 +98,8 @@ public class QuerySentence implements ISSentenceConstants {
 						datas.put(qb.getId(), qb);
 						if (myCacheService != null)
 							myCacheService.putObject(redisKey + qb.getId(), JSON.toJSONString(qb), 0, false);
+					} else if ("mapping".equals(reader.getLocalName())) {
+						qb.setMapping(reader.getElementText().toLowerCase());
 					}
 				}
 			}
