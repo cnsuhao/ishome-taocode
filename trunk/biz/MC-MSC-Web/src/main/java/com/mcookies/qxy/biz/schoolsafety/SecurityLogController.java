@@ -37,7 +37,7 @@ public class SecurityLogController extends MyControllerSupport {
 	 * @param cid
 	 * @return
 	 */
-	@RequestMapping(value = "/stundent/namelist", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/student/namelist", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean stundentNamelistGET(String token,Long cid) {
 		RESTResultBean result = new RESTResultBean();

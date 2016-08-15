@@ -7,7 +7,7 @@
 <mapper namespace='com.mcookies.qxy.common.ClassAlarm.ClassAlarmDao'>
     <!-- 表字段信息  -->
     <sql id='tableColumns'>
-        cid,sid,alarmrule_id,is_use,create_time,creator,update_time,updator
+        did,cid,sid,alarmrule_id,is_use,create_time,creator,update_time,updator
     </sql>
 
     <!-- 根据条件更新所有记录 -->

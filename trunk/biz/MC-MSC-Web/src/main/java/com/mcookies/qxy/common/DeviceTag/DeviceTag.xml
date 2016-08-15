@@ -10,6 +10,7 @@
         id,sid,device_name,device_id,username,password,last_login_time,is_use,create_time,creator,update_time,updator
     </sql>
 	<resultMap type="com.mcookies.qxy.common.DeviceTag.DeviceTagPVO" id="resultMap1">
+		<result column="id" property="id"/>
 		<result column="school_name" property="schoolName"/>
 		<result column="device_id" property="deviceId"/>
 		<result column="device_name" property="deviceName"/>
@@ -207,6 +208,7 @@
 	<!-- 设备标签查询接口 -->
 	<select id="doSelectDevice" parameterType="java.util.Map" resultMap="resultMap1">
 		SELECT
+			a.id,
 			device_id,
 			device_name,
 			a.username,
