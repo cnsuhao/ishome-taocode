@@ -721,6 +721,9 @@ public class ClassStudentController extends MyControllerSupport {
 			} else {
 				originSp.setIsDefault(0);
 			}
+			if (parent.getIsUse() != null) {
+				originSp.setIsUse(parent.getIsUse());
+			}
 			originSp.setRole(parent.getRole());
 			uStudentParentService.doUpdate(originSp);
 			Map<String, Object> data = new HashMap<String, Object>();
