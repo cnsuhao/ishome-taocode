@@ -166,7 +166,7 @@ public class NewsManageController extends MyControllerSupport {
 			if (newsColumn == null) {
 				throw new IllegalArgumentException("columnId所对应的栏目不存在");
 			}
-			if (newsColumn.getIsCheck() == null || newsColumn.getIsCheck() == 0) {
+			if (newsColumn.getIsCheck() != null && newsColumn.getIsCheck() == 0) {
 				news.setIsAudit(1);
 			} else {
 				if (news.getIsAudit() == null) {
@@ -216,7 +216,7 @@ public class NewsManageController extends MyControllerSupport {
 			if (newsColumn == null) {
 				throw new IllegalArgumentException("columnId所对应的栏目不存在");
 			}
-			if (newsColumn.getIsCheck() == null || newsColumn.getIsCheck() == 0) {
+			if (newsColumn.getIsCheck() != null && newsColumn.getIsCheck() == 0) {
 				throw new IllegalStateException("该新闻不允许修改");
 			}
 			newsService.doUpdate(news);

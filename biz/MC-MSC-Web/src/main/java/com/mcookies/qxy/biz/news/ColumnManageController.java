@@ -88,6 +88,9 @@ public class ColumnManageController extends MyControllerSupport {
 			if (newsColumn.getIsUse() == null) {
 				newsColumn.setIsUse(1);
 			}
+			if (newsColumn.getIsCheck() == null) {
+				newsColumn.setIsCheck(1);
+			}
 			newsColumnService.doInsert(newsColumn);
 			Map<String, Object> data = new HashMap<String, Object>();
 			data.put("info", "ok");
