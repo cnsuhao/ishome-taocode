@@ -278,11 +278,11 @@
 	COUNT(f.student_id) AS student_count, COUNT(g.course_id) AS course_count
 	FROM class a 
 	LEFT JOIN s_term b ON a.term_id = b.term_id 
-	LEFT JOIN class_teacher e ON a.cid = e.cid
+	LEFT JOIN class_teacher e ON a.cid = e.cid AND e.is_leader = 1
 	LEFT JOIN class_student f ON a.cid = f.cid
-	LEFT JOIN class_course g ON a.cid = g.cid
+	LEFT JOIN class_teacher g ON a.cid = g.cid
 	LEFT JOIN u_teacher h ON e.tid = h.tid
-	WHERE 1 = 1 AND a.term_id = #{termId} AND e.is_leader = 1
+	WHERE 1 = 1 AND a.term_id = #{termId}
 	<if test="tid != null">
 		AND e.tid = #{tid}
 	</if>
@@ -293,13 +293,12 @@
 		SELECT DISTINCT a.cid, a.class_name, b.term_name, h.teacher_name AS leader_name,
 		COUNT(f.student_id) AS student_count, COUNT(g.course_id) AS course_count
 		FROM class a 
-		LEFT JOIN s_term b ON a.term_id = b.term_id 
-		LEFT JOIN s_grade_label c ON a.grade_id = c.grade_id
-		LEFT JOIN class_teacher e ON a.cid = e.cid
+		LEFT JOIN s_term b ON a.term_id = b.term_id
+		LEFT JOIN class_teacher e ON a.cid = e.cid AND e.is_leader = 1
 		LEFT JOIN class_student f ON a.cid = f.cid
-		LEFT JOIN class_course g ON a.cid = g.cid
+		LEFT JOIN class_teacher g ON a.cid = g.cid
 		LEFT JOIN u_teacher h ON e.tid = h.tid
-		WHERE a.cid = #{cid} AND e.is_leader = 1
+		WHERE a.cid = #{cid}
 		GROUP BY f.student_id, g.course_id, a.cid, a.class_name, b.term_name
 	</select>
 	<!-- 查询news newsClasser 对应的班级列表(id1;id2;id3;) 为空返回sid下的全部  -->
