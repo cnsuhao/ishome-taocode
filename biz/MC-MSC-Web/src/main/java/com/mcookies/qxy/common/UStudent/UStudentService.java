@@ -45,6 +45,12 @@ public class UStudentService extends MyServiceSupport {
 		return pageModel;
 	}
 	
+	/**
+	 * 根据cid或termId查询（cid不存在则根据termId查）
+	 * 
+	 * @param pageModel
+	 * @return
+	 */
 	@SuppressWarnings("unused")
 	public PageVOSupport doSelectPageByCidWithClassAndGrade(PageVOSupport pageModel) {
 		FrameworkDataBean formParamBean = pageModel.getFormParamBean();
