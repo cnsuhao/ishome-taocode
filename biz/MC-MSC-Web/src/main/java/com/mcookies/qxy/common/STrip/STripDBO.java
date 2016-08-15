@@ -37,7 +37,7 @@ public class STripDBO extends MyDataBaseObjectSupport {
 	/**
 	 * 日期
 	 */
-	private Date date = null;
+	private String date = null;
 
 	/**
 	 * 是否启用
@@ -94,7 +94,7 @@ public class STripDBO extends MyDataBaseObjectSupport {
 	 *
 	 * @return Date 日期
 	 */
-	public Date getDate() {
+	public String getDate() {
 		return this.date;
 	}
 
@@ -163,7 +163,7 @@ public class STripDBO extends MyDataBaseObjectSupport {
 	 * @param Date
 	 *            日期
 	 */
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 
