@@ -18,6 +18,8 @@ import com.mcookies.qxy.common.Class.ClassPVO;
 import com.mcookies.qxy.common.Class.ClassService;
 import com.mcookies.qxy.common.ClassStudent.ClassStudentDBO;
 import com.mcookies.qxy.common.ClassStudent.ClassStudentService;
+import com.mcookies.qxy.common.STerm.STermPVO;
+import com.mcookies.qxy.common.STerm.STermService;
 import com.mcookies.qxy.common.UStudent.UStudentDBO;
 import com.mcookies.qxy.common.UStudent.UStudentPVO;
 import com.mcookies.qxy.common.UStudent.UStudentService;
@@ -37,10 +39,12 @@ public class StudentManageController extends MyControllerSupport {
 	protected UStudentService uStudentService;
 	@Resource
 	protected ClassStudentService classStudentService;
+	@Resource
+	protected STermService sTermService;
 
 	/**
 	 * 学生列表搜索查询接口
-	 * /qxy/stundent/list/class=[cid]&page=[page]&size=[size]&token=[token]
+	 * student/list?termId=[termId]&cid=[cid]&page=[page]&size=[size]&token=[token]
 	 */
 	@RequestMapping(value = "/student/list", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
@@ -58,14 +62,21 @@ public class StudentManageController extends MyControllerSupport {
 				size = 12;
 			}
 			// 查询是否存在
-			if (pvo.getCid() == null) {
-				throw new IllegalArgumentException("cid不能为空");
-			}
-			ClassDBO condition = new ClassDBO();
-			condition.setCid(pvo.getCid());
-			condition = (ClassDBO) classService.doRead(condition);
-			if (condition == null) {
-				throw new IllegalArgumentException("该班级不存在");
+			if (pvo.getCid() != null) {
+				ClassDBO condition = new ClassDBO();
+				condition.setCid(pvo.getCid());
+				condition = (ClassDBO) classService.doRead(condition);
+				if (condition == null) {
+					throw new IllegalArgumentException("该班级不存在");
+				}
+			} else {
+				STermPVO term = new STermPVO();
+				term.setTermId(pvo.getTermId());
+				term = (STermPVO) sTermService.findByTermId(term);
+				if (term == null) {
+					throw new IllegalArgumentException("termId所对应的学期或默认学期不存在");
+				}
+				pvo.setTermId(term.getTermId());
 			}
 			pageModel.setPageCurrent(page);
 			pageModel.setPageLimit(size);

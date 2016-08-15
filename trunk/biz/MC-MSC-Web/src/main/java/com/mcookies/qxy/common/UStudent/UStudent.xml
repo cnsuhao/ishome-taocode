@@ -389,7 +389,13 @@
 		LEFT JOIN u_student_parent f ON a.student_id = f.student_id AND f.is_default = 1
 		LEFT JOIN u_parent g ON f.parent_id = g.parent_id
 		LEFT JOIN s_grade_label h ON c.grade_id = h.grade_id
-		WHERE 1 = 1 AND c.cid = #{cid}
+		WHERE 1 = 1
+		<if test=" cid != null ">
+			AND c.cid = #{cid}
+		</if>
+		<if test=" cid == null ">
+			AND c.term_id = #{termId}
+		</if>
     </select>
     <!-- 查询家长学生信息，根据parentId、termId、可选的studentId -->
     <select id='doSelectPageByParentIdAndTermIdAndStudentID' parameterType='com.mcookies.qxy.common.UStudent.UStudentPVO' 
