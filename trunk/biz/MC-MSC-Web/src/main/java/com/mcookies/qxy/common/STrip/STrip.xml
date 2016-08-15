@@ -103,18 +103,6 @@
         <if test=" isUse != null "><!-- 是否启用 -->
             AND is_use = #{isUse}
         </if>
-        <if test=" createTime != null "><!-- 创建时间 -->
-            AND create_time = #{createTime}
-        </if>
-        <if test=" creator != null "><!-- 创建者 -->
-            AND creator = #{creator}
-        </if>
-        <if test=" updateTime != null "><!-- 更新时间 -->
-            AND update_time = #{updateTime}
-        </if>
-        <if test=" updator != null "><!-- 最后更新者 -->
-            AND updator = #{updator}
-        </if>
     </select>
 
     <!-- 插入一条数据 -->
@@ -171,10 +159,7 @@
     </delete>
     <!-- 物理删除一条数据 -->
     <delete id='doDelete' parameterType='STripDBO'>
-        DELETE FROM s_trip WHERE update_time = #{updateTime}
-            <if test=" tripId != null "><!-- 自增id -->
-                AND trip_id = #{tripId}
-            </if>
+        DELETE FROM s_trip WHERE trip_id = #{tripId}
     </delete>
     <!-- 查询一条数据  -->
     <select id='doRead' parameterType='STripDBO' resultType='STripDBO'>
@@ -183,5 +168,25 @@
                 AND trip_id = #{tripId}
             </if>
     </select>
-
+    <select id='doSelectPageBytid' parameterType='STripDBO' resultType='com.mcookies.qxy.common.STrip.STripPVO'>
+       SELECT
+			a.trip_id,
+			a.content,
+			a.date,
+			b.teacher_name
+		FROM
+			s_trip a
+		LEFT JOIN u_teacher b ON a.tid = b.tid
+		<where>
+			<if test="sid != null">
+				and a.sid = #{sid}
+			</if>
+			<if test="tid != null">
+				and a.tid = #{tid}
+			</if>
+			<if test="date != null">
+				and a.date = #{date}
+			</if>		
+		</where>
+    </select>
 </mapper>
