@@ -1,11 +1,16 @@
-package org.isotope.jfp.framework.support;
+package org.isotope.jfp.framework.support.sync;
 
 import org.isotope.jfp.framework.biz.common.ISCheck;
 import org.isotope.jfp.framework.biz.common.ISInit;
 import org.isotope.jfp.framework.biz.common.ISProcess;
 import org.isotope.jfp.framework.biz.common.ISSave;
-import org.isotope.jfp.framework.utils.EmptyHelper;
 
+/**
+ * 异步线程处理父类
+ * 
+ * @author 001745
+ *
+ */
 public abstract class ABussinessThreadService extends MyBusinessSupport implements ISProcess, ISInit, ISCheck, ISSave, Runnable {
 
 	@Override
@@ -42,34 +47,36 @@ public abstract class ABussinessThreadService extends MyBusinessSupport implemen
 	 * 业务逻辑处理
 	 */
 	public boolean doInit() throws Exception {
-//		// 参数解密
-//		if (mySecuritySupport != null && ISecuritySupport.ENCRYPTION.equals(token.getEncryType())) {
-//			setParamValue(mySecuritySupport.decryption(getToken(), getParamValue()));
-//		}
+		// // 参数解密
+		// if (mySecuritySupport != null &&
+		// ISecuritySupport.ENCRYPTION.equals(token.getEncryType())) {
+		// setParamValue(mySecuritySupport.decryption(getToken(),
+		// getParamValue()));
+		// }
 
 		return true;
 	}
 
-//	public boolean doSave() throws Exception {
-//		// 变更Token
-//		super.chageToken();
-//		// 保存Token
-//		return super.saveToken();
-//	}
+	// public boolean doSave() throws Exception {
+	// // 变更Token
+	// super.chageToken();
+	// // 保存Token
+	// return super.saveToken();
+	// }
 
-//	@Override
-//	public boolean doCheck() throws Exception {
-//		if (logger.isDebugEnabled())
-//			logger.debug("    doCheck.token=====>>>>>" + token);
-//		if (EmptyHelper.isEmpty(token))
-//			return false;
-//		if (EmptyHelper.isEmpty(getMyCacheService()))
-//			return false;
-//		if (logger.isDebugEnabled())
-//			logger.debug("    doCheck.getParamValue()=====>>>>>" + getParamValue());
-//		if (EmptyHelper.isEmpty(getParamValue()))
-//			return false;
-//
-//		return super.checkToken();
-//	}
+	// @Override
+	// public boolean doCheck() throws Exception {
+	// if (logger.isDebugEnabled())
+	// logger.debug(" doCheck.token=====>>>>>" + token);
+	// if (EmptyHelper.isEmpty(token))
+	// return false;
+	// if (EmptyHelper.isEmpty(getMyCacheService()))
+	// return false;
+	// if (logger.isDebugEnabled())
+	// logger.debug(" doCheck.getParamValue()=====>>>>>" + getParamValue());
+	// if (EmptyHelper.isEmpty(getParamValue()))
+	// return false;
+	//
+	// return super.checkToken();
+	// }
 }

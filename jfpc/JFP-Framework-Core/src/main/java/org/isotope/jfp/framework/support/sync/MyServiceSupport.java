@@ -1,4 +1,4 @@
-package org.isotope.jfp.framework.support;
+package org.isotope.jfp.framework.support.sync;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -11,6 +11,8 @@ import org.isotope.jfp.framework.beans.user.UserBean;
 import org.isotope.jfp.framework.cache.session.SessionHelper;
 import org.isotope.jfp.framework.constants.ISDBConstants;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
+import org.isotope.jfp.framework.support.IDatabaseSupport;
+import org.isotope.jfp.framework.support.MyDataBaseObjectSupport;
 import org.isotope.jfp.framework.utils.BeanFactoryHelper;
 import org.isotope.jfp.framework.utils.DateHelper;
 import org.isotope.jfp.framework.utils.EmptyHelper;
@@ -69,7 +71,7 @@ public class MyServiceSupport implements ISFrameworkConstants, ISDBConstants {
 	private UserBean loginer;
 	public UserBean getLoginer() {
 		if(loginer == null)
-			loginer = SessionHelper.getUserData();
+			loginer = SessionHelper.getSessionAttribute();
 		return loginer;
 	}
 
@@ -292,7 +294,7 @@ public class MyServiceSupport implements ISFrameworkConstants, ISDBConstants {
 
 		// 有效标记、创建者、创建时间、更新者、更新时间
 		// Timestamp d = new Timestamp(System.currentTimeMillis());
-		String t = DateHelper.currentTimeMillis4();
+		String t = DateHelper.currentTimeMillis2();
 		Long loginId = getLoginerId();
 		if (EmptyHelper.isEmpty(formParamBean.getCreateTime()))
 			formParamBean.setCreateTime(t);
