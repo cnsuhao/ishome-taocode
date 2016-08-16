@@ -13,7 +13,7 @@ public class RandomHelper {
 	public static void main(String[] args) {
 		for (int i = 0; i < 10; i++)
 			// nextDouble
-			System.out.println(nextCode(8));
+			System.out.println(getRandomNumerical(8));
 	}
 	
 	/**
@@ -39,7 +39,7 @@ public class RandomHelper {
 	 * @param length
 	 * @return
 	 */
-	public static String nextCode(int length) {
+	public static String getRandomNumerical(int length) {
 		Random rd = new Random();
 		String code = "" + rd.nextDouble();
 		// System.out.print(code+"=");
