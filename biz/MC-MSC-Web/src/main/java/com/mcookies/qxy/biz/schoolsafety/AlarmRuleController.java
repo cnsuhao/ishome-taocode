@@ -129,7 +129,7 @@ public class AlarmRuleController extends MyControllerSupport {
 			data.put("className", cdbo.getClassName());
 			ClassAlarmDBO param = new ClassAlarmDBO();
 			param.setCid(cid);
-			List<AlarmRuleDBO> rlist =(List<AlarmRuleDBO>)AlarmRuleService_.doSelectPageClassAlarm(param);
+			List<AlarmRulePVO> rlist =(List<AlarmRulePVO>)AlarmRuleService_.doSelectPageClassAlarm(param);
 			data.put("count", rlist.size());
 			data.put("classalarmrule", rlist);
 			result.setData(data);

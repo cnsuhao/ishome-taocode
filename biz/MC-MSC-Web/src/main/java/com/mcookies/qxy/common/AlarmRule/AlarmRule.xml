@@ -229,16 +229,20 @@
             </if>
     </select>
     
-    <select id='doSelectPageClassAlarm' parameterType='ClassAlarmDBO' resultType='AlarmRuleDBO'>
-       SELECT
-			a.*
+    <select id='doSelectPageClassAlarm' parameterType='ClassAlarmDBO' resultType='com.mcookies.qxy.common.AlarmRule.AlarmRulePVO'>
+		SELECT
+			a.*, c.device_name
 		FROM
-			alarm_rule a,
-			class_alarm b
+			alarm_rule a
+		RIGHT JOIN class_alarm b ON a.alarmrule_id = b.alarmrule_id
+		LEFT JOIN device_tag c ON a.device_id = c.device_id
 		<where>
 			and a.alarmrule_id = b.alarmrule_id
 			<if test=" cid != null ">
 				AND b.cid = #{cid}
+			</if>
+			<if test=" sid != null">
+				AND a.sid = #{sid}
 			</if>
 		</where>
     </select>

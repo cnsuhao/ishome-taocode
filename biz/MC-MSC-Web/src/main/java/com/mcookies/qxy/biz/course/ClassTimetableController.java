@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 import org.isotope.jfp.framework.beans.common.RESTResultBean;
 import org.isotope.jfp.framework.support.MyControllerSupport;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,6 +21,8 @@ import com.mcookies.qxy.common.Class.ClassDBO;
 import com.mcookies.qxy.common.Class.ClassService;
 import com.mcookies.qxy.common.ClassCourse.ClassCourseDBO;
 import com.mcookies.qxy.common.ClassCourse.ClassCourseService;
+import com.mcookies.qxy.common.ClassTeacher.ClassTeacherDBO;
+import com.mcookies.qxy.common.ClassTeacher.ClassTeacherService;
 import com.mcookies.qxy.common.SWorkRule.SWorkRuleDBO;
 import com.mcookies.qxy.common.SWorkRule.SWorkRuleService;
 import com.mcookies.qxy.common.SWorkTime.SWorkTimeDBO;
@@ -32,6 +35,7 @@ import com.mcookies.qxy.common.SWorkTime.SWorkTimeService;
  *
  */
 @Controller
+@Transactional
 public class ClassTimetableController extends MyControllerSupport {
 	@Resource
 	protected ClassService ClassService_;
@@ -41,6 +45,8 @@ public class ClassTimetableController extends MyControllerSupport {
 	protected SWorkRuleService SWorkRuleService_;
 	@Resource
 	protected ClassCourseService ClassCourseService_;
+	@Resource
+	protected ClassTeacherService ClassTeacherService_;
 	/**
 	 * 班级课表查询接口
 	 * @param cid
@@ -160,6 +166,20 @@ public class ClassTimetableController extends MyControllerSupport {
 					classbean.setTerm(termId);
 					classbean.setUseDay(date);
 					ClassCourseService_.doInsert(classbean);
+					//判断教师是否已经关联
+					ClassTeacherDBO has = new ClassTeacherDBO();
+					has.setCid(cid);
+					has.setTid(classbean.getTid());
+					List<ClassTeacherDBO> haslist =(List<ClassTeacherDBO>)ClassTeacherService_.doSelectData(has);
+					if(haslist==null||haslist.size()==0){
+						ClassTeacherDBO ctdbo = new ClassTeacherDBO();
+						ctdbo.setCid(cid);
+						ctdbo.setCourseId(classbean.getCourseId());
+						ctdbo.setTid(classbean.getTid());
+						ctdbo.setIsLeader(0);
+						ctdbo.setIsUse(1);
+						ClassTeacherService_.doInsert(ctdbo);
+					}
 				}
 			}
 		} catch (Exception e) {
