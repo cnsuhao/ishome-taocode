@@ -419,10 +419,12 @@ Url:        /qxy/login/captcha
 Method:     POST
 Header:     Content-type:application/json
 Parameter:
+    - 'sid':           学校id
     - 'captcha':       用户收到的验证码
     - 'phone':         用户手机号
 示例
 {
+	"sid":"1",
 	"phone":"13562563656",
 	"captcha":"63656"	
 }
