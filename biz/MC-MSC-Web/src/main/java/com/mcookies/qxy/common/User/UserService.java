@@ -1,6 +1,6 @@
 package com.mcookies.qxy.common.User;
 
-import org.isotope.jfp.framework.support.MyServiceSupport;
+import org.isotope.jfp.framework.support.sync.MyServiceSupport;
 import org.springframework.stereotype.Service;
 
 /** 用户表 */

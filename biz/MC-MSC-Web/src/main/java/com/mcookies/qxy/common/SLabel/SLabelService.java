@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.isotope.jfp.framework.beans.common.FrameworkDataBean;
 import org.isotope.jfp.framework.support.MyDataBaseObjectSupport;
-import org.isotope.jfp.framework.support.MyServiceSupport;
+import org.isotope.jfp.framework.support.sync.MyServiceSupport;
 import org.springframework.stereotype.Service;
 
 /** 教工标签表 */

@@ -2,7 +2,7 @@ package com.mcookies.qxy.common.SDuty;
 
 import java.util.List;
 
-import org.isotope.jfp.framework.support.MyServiceSupport;
+import org.isotope.jfp.framework.support.sync.MyServiceSupport;
 import org.springframework.stereotype.Service;
 
 /** 岗位设置表 */

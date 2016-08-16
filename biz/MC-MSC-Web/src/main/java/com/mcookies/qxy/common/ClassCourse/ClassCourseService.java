@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.isotope.jfp.framework.support.MyDataBaseObjectSupport;
-import org.isotope.jfp.framework.support.MyServiceSupport;
+import org.isotope.jfp.framework.support.sync.MyServiceSupport;
 import org.springframework.stereotype.Service;
 
 /** 班级课程教师关联表*/
