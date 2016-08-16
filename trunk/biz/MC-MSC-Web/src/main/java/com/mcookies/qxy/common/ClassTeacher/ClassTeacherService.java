@@ -3,7 +3,7 @@ package com.mcookies.qxy.common.ClassTeacher;
 import java.util.List;
 
 import org.isotope.jfp.framework.support.MyDataBaseObjectSupport;
-import org.isotope.jfp.framework.support.MyServiceSupport;
+import org.isotope.jfp.framework.support.sync.MyServiceSupport;
 import org.isotope.jfp.framework.utils.DateHelper;
 import org.springframework.stereotype.Service;
 

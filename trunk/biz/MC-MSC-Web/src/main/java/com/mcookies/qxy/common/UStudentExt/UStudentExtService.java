@@ -1,6 +1,6 @@
 package com.mcookies.qxy.common.UStudentExt;
 
-import org.isotope.jfp.framework.support.MyServiceSupport;
+import org.isotope.jfp.framework.support.sync.MyServiceSupport;
 import org.springframework.stereotype.Service;
 
 /** 学生信息扩展表 */

@@ -2,7 +2,7 @@ package com.mcookies.qxy.common.OaExamineResult;
 
 import java.util.List;
 
-import org.isotope.jfp.framework.support.MyServiceSupport;
+import org.isotope.jfp.framework.support.sync.MyServiceSupport;
 import org.springframework.stereotype.Service;
 
 import com.mcookies.qxy.common.OaExamineInformation.OaExamineInformationPVO;

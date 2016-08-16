@@ -2,7 +2,7 @@ package com.mcookies.qxy.common.OaRule;
 
 import java.util.List;
 
-import org.isotope.jfp.framework.support.MyServiceSupport;
+import org.isotope.jfp.framework.support.sync.MyServiceSupport;
 import org.springframework.stereotype.Service;
 
 /** OA规则表 */

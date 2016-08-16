@@ -3,7 +3,7 @@ package com.mcookies.qxy.common.DeviceTag;
 import java.util.List;
 import java.util.Map;
 
-import org.isotope.jfp.framework.support.MyServiceSupport;
+import org.isotope.jfp.framework.support.sync.MyServiceSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

@@ -3,7 +3,7 @@ import java.util.List;
 
 import org.isotope.jfp.framework.beans.common.FrameworkDataBean;
 import org.isotope.jfp.framework.beans.page.PageVOSupport;
-import org.isotope.jfp.framework.support.MyServiceSupport;
+import org.isotope.jfp.framework.support.sync.MyServiceSupport;
 import org.springframework.stereotype.Service;
 
 /** 报警规则表*/

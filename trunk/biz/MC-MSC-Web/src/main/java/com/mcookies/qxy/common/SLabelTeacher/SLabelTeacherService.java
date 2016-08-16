@@ -1,7 +1,7 @@
 package com.mcookies.qxy.common.SLabelTeacher;
 
 import org.isotope.jfp.framework.support.MyDataBaseObjectSupport;
-import org.isotope.jfp.framework.support.MyServiceSupport;
+import org.isotope.jfp.framework.support.sync.MyServiceSupport;
 import org.springframework.stereotype.Service;
 
 /** 教工标签关联表 */
