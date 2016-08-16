@@ -19,6 +19,7 @@ import com.mcookies.qxy.common.AlarmRule.AlarmRuleDBO;
 import com.mcookies.qxy.common.AlarmRule.AlarmRulePVO;
 import com.mcookies.qxy.common.AlarmRule.AlarmRuleService;
 import com.mcookies.qxy.common.Class.ClassDBO;
+import com.mcookies.qxy.common.Class.ClassService;
 import com.mcookies.qxy.common.ClassAlarm.ClassAlarmDBO;
 import com.mcookies.qxy.common.ClassAlarm.ClassAlarmPVO;
 import com.mcookies.qxy.common.ClassAlarm.ClassAlarmService;
@@ -32,7 +33,8 @@ public class AlarmRuleController extends MyControllerSupport {
 	protected AlarmRuleService AlarmRuleService_;
 	@Resource
 	protected ClassAlarmService ClassAlarmService_;
-
+	@Resource
+	protected ClassService ClassService_;
 	/**
 	 * 班级报警列表查询接口
 	 * @param termId
@@ -119,10 +121,18 @@ public class AlarmRuleController extends MyControllerSupport {
 			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
+			//获取班级信息
+			ClassDBO cdbo = new ClassDBO();
+			cdbo.setCid(cid);
+			cdbo =(ClassDBO)ClassService_.doRead(cdbo);
+			JSONObject data = new JSONObject();
+			data.put("className", cdbo.getClassName());
 			ClassAlarmDBO param = new ClassAlarmDBO();
 			param.setCid(cid);
 			List<AlarmRuleDBO> rlist =(List<AlarmRuleDBO>)AlarmRuleService_.doSelectPageClassAlarm(param);
-			result.setData(rlist);
+			data.put("count", rlist.size());
+			data.put("classalarmrule", rlist);
+			result.setData(data);
 		} catch (Exception e) {
 			result.setInfo("访问失败");
 			result.setStatus(1);
