@@ -10,6 +10,10 @@ public class AlarmRulePVO extends AlarmRuleDBO
 	private String termName = null;
 	private String gradeName = null;
 	private Integer cid = null;
+	/**
+	 * 地点名字
+	 */
+	private String deviceName = null; 
 	public String getClassName() {
 		return className;
 	}
@@ -39,6 +43,12 @@ public class AlarmRulePVO extends AlarmRuleDBO
 	}
 	public void setCid(Integer cid) {
 		this.cid = cid;
+	}
+	public String getDeviceName() {
+		return deviceName;
+	}
+	public void setDeviceName(String deviceName) {
+		this.deviceName = deviceName;
 	}
 	
 	
