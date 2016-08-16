@@ -68,7 +68,7 @@ public class DeviceHeartbeatThread extends Thread implements ISFrameworkConstant
 	final static String DeviceUserName = "DeviceUserName:";
 	final static String DeviceDatas = "DeviceDatas";
 
-	private void saveDeviceDatas(SendTimecardDataPVO data) {
+	private void saveDeviceDatas(SendTimecardDataPVO param) {
 		logger.debug("刷卡记录处理开始 =====>>>>>");
 		long curTime = System.currentTimeMillis();
 		try {
@@ -77,28 +77,23 @@ public class DeviceHeartbeatThread extends Thread implements ISFrameworkConstant
 			{
 				// 判断缓存里面是否存在
 				myCache.selectDB(8);
-				Object c = myCache.getObject(DeviceUserName + data.getUsername(), false);
+				Object c = myCache.getObject(DeviceUserName + param.getDevID(), false);
 				myCache.init();
 				// 不存在的场合数据库加载
 				if (EmptyHelper.isEmpty(c)) {
 					dtd = new DeviceTagDBO();
+					dtd.setDeviceId(param.getDevID());
 					dtd = (DeviceTagDBO) DeviceTagService_.doRead(dtd);
 				} else {
 					dtd = JSON.parseObject((String) c, DeviceTagDBO.class);
 				}
 				// 设备无效的场合直接返回
-				if (EmptyHelper.isEmpty(dtd)) {
-					logger.error("该设备无效=====>>>>>" + data.getUsername());
+				if (EmptyHelper.isEmpty(dtd)||EmptyHelper.isEmpty(dtd.getDeviceId())) {
+					logger.error("该设备无效=====>>>>>" + param.getDevID());
 					return;
-				}
-
-				// 设备用户密码错误的场合返回
-				if (dtd.getPassword().equals(data.getPassword()) == false) {
-					logger.error("设备用户密码错误=====>>>>>" + data.getUsername());
-					return;
-				} else {
+				}else {
 					dtd.setLastLoginTime("" + curTime);
-					myCache.putObject(DeviceUserName + data.getUsername(), JSON.toJSONString(dtd), 0, false);
+					myCache.putObject(DeviceUserName + param.getDevID(), JSON.toJSONString(dtd), 0, false);
 				}
 				// 记录设备心跳
 				{
@@ -113,13 +108,13 @@ public class DeviceHeartbeatThread extends Thread implements ISFrameworkConstant
 				{
 					long lastTime = Long.parseLong(dtd.getLastLoginTime());
 					if ((lastTime - curTime) > heartSecond * 60 * 1000) {
-						logger.error("该设备异常=====>>>>>" + data.getUsername());
+						logger.error("该设备异常=====>>>>>" + dtd.getDeviceId());
 						return;
 					}
 				}
 			}
 			// 1111111111,002720004,999999999;2222222222,002720004,888888888
-			String dd = data.getDatas();
+			String dd = param.getDatas();
 			// 用户提交
 			if (EmptyHelper.isNotEmpty(dd)) {
 				LogAttendanceDBO la;
@@ -158,7 +153,7 @@ public class DeviceHeartbeatThread extends Thread implements ISFrameworkConstant
 		} catch (Exception e) {
 			logger.error("日志保存失败", e);
 			myCache.selectDB(8);
-			myCache.offerObjectInList("", JSON.toJSONString(data), false);
+			myCache.offerObjectInList("", JSON.toJSONString(param), false);
 			myCache.init();
 		}
 

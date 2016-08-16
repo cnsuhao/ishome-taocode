@@ -1,33 +1,43 @@
 package com.mcookies.qxy.biz.device;
 
 public class SendTimecardDataPVO {
-	String username;
-	String password;
-	int keepalive;
+	String method;
+	Long DevID;// 设备序列号
+	String EnterpriseID;// 企业id
+	String Version;// 版本号
+
 	String datas;
 
-	public String getUsername() {
-		return username;
+	public String getMethod() {
+		return method;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setMethod(String method) {
+		this.method = method;
 	}
 
-	public String getPassword() {
-		return password;
+	public Long getDevID() {
+		return DevID;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setDevID(Long devID) {
+		DevID = devID;
 	}
 
-	public int getKeepalive() {
-		return keepalive;
+	public String getEnterpriseID() {
+		return EnterpriseID;
 	}
 
-	public void setKeepalive(int keepalive) {
-		this.keepalive = keepalive;
+	public void setEnterpriseID(String enterpriseID) {
+		EnterpriseID = enterpriseID;
+	}
+
+	public String getVersion() {
+		return Version;
+	}
+
+	public void setVersion(String version) {
+		Version = version;
 	}
 
 	public String getDatas() {
@@ -37,4 +47,5 @@ public class SendTimecardDataPVO {
 	public void setDatas(String datas) {
 		this.datas = datas;
 	}
+
 }

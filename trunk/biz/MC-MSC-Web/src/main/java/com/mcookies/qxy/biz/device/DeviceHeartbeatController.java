@@ -1,6 +1,5 @@
 package com.mcookies.qxy.biz.device;
 
-import org.isotope.jfp.framework.beans.common.RESTResultBean;
 import org.isotope.jfp.framework.support.MyControllerSupport;
 import org.isotope.jfp.framework.utils.BeanFactoryHelper;
 import org.springframework.stereotype.Controller;
@@ -16,14 +15,64 @@ public class DeviceHeartbeatController extends MyControllerSupport {
 	/**
 	 * 新闻栏目新增接口 /column
 	 */
-	@RequestMapping(value = "/sendTimecardData.t", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/signCard.do", method = RequestMethod.GET)
 	@ResponseBody
-	public RESTResultBean sendTimecardDataGET(@RequestBody SendTimecardDataPVO datas) {
-		RESTResultBean result = new RESTResultBean();
-		DeviceHeartbeatThread dhbt = BeanFactoryHelper.getBean("DeviceHeartbeatThread");
-		dhbt.setDeviceData(datas);
-		dhbt.start();
+	public ResultBean signCardGET(@RequestBody String datas, SendTimecardDataPVO param) {
+		ResultBean result = new ResultBean();
+		param.setDatas(datas);
+
+		if ("getconfig".equals(param.getMethod())) {// 设备读取服务器上的配置信息
+			result.setRequestInterval("30");			
+		} else if ("swingcarddata".equals(param.getMethod())) { // 上传刷卡数据
+			DeviceHeartbeatThread dhbt = BeanFactoryHelper.getBean("DeviceHeartbeatThread");
+			dhbt.setDeviceData(param);
+			dhbt.start();
+			result.setRequestInterval("");
+		} else if ("upstatus".equals(param.getMethod())) {// 上传设备状态数据
+			result.setRequestInterval("");
+		}
 
 		return result;
+	}
+	/**
+	 * 新闻栏目新增接口 /column
+	 */
+	@RequestMapping(value = "/signCard.do", method = RequestMethod.POST, produces = "application/octet-stream")
+	@ResponseBody
+	public ResultBean signCardPOST(@RequestBody String datas, SendTimecardDataPVO param) {
+		ResultBean result = new ResultBean();
+		param.setDatas(datas);
+		if ("getconfig".equals(param.getMethod())) {// 设备读取服务器上的配置信息
+			result.setRequestInterval("30");			
+		} else if ("swingcarddata".equals(param.getMethod())) { // 上传刷卡数据
+			DeviceHeartbeatThread dhbt = BeanFactoryHelper.getBean("DeviceHeartbeatThread");
+			dhbt.setDeviceData(param);
+			dhbt.start();
+			result.setRequestInterval("");
+		} else if ("upstatus".equals(param.getMethod())) {// 上传设备状态数据
+			result.setRequestInterval("");
+		}
+
+		return result;
+	}
+	public class ResultBean {
+		String message = "OK";
+		public String getMessage() {
+			return message;
+		}
+
+		public void setMessage(String message) {
+			this.message = message;
+		}
+
+		String RequestInterval = "30";
+
+		public String getRequestInterval() {
+			return RequestInterval;
+		}
+
+		public void setRequestInterval(String requestInterval) {
+			RequestInterval = requestInterval;
+		}
 	}
 }
