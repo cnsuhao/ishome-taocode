@@ -1,8 +1,8 @@
-package org.isotope.jfp.framework.support;
+package org.isotope.jfp.framework.support.sync;
 
-import org.isotope.jfp.framework.biz.common.ISToken;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.constants.pub.ISModelConstants;
+import org.isotope.jfp.framework.support.MyWorkSupport;
 import org.isotope.jfp.framework.utils.EmptyHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -72,31 +72,7 @@ public class MyBusinessSupport extends MyWorkSupport implements ISFrameworkConst
 	public void setVersion(String version) {
 		this.version = version;
 	}
-
-	/////////////////////////////////////
-	/**
-	 * 用户令牌
-	 */
-//	protected BusinessTokenBean token;
-//	public boolean chageToken(){
-//		return token.chageToken();
-//	}
-//
-//	public String getToken() {
-//		return BusinessTokenBean.getBizToken(token);
-//	}
-//
-//	public void setToken(BusinessTokenBean token) {
-//		this.token = token;
-//	}
-
-//	public String getBizName() {
-//		if (EmptyHelper.isEmpty(token))
-//			return this.getClass().getSimpleName().replace("BussinessService", "");
-//		return token.getBizName();
-//	}
-
-	/////////////////////////////////////
+	
 	/**
 	 * 用户请求参数
 	 */
@@ -109,27 +85,5 @@ public class MyBusinessSupport extends MyWorkSupport implements ISFrameworkConst
 	public void setParamValue(String paramValue) {
 		this.paramValue = paramValue;
 	}
-
-//	@Override
-//	public boolean checkToken() throws Exception {
-//		try{
-//			String tokenCatch = (String) myCacheService.getObject(token.getUserId(),false);
-//			if (logger.isDebugEnabled())
-//				logger.debug("    doCheck.checkToken()=====tokenCatch>>>>>"+tokenCatch);
-//			if(getToken().equals(tokenCatch))
-//				return true;
-//		}catch(Exception r){
-//			
-//		}
-//		return false;
-//	}
-//
-//	/**
-//	 * @see waitTimeSecond
-//	 */
-//	@Override
-//	public boolean saveToken() throws Exception {
-//		return myCacheService.putObject(token.getUserId(),getToken(),waitTimeSecond,false);
-//	}
 
 }

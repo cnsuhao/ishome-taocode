@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 import org.apache.ibatis.session.SqlSession;
 import org.isotope.jfp.framework.constants.ISDBConstants;
-import org.isotope.jfp.framework.support.MyServiceSupport;
+import org.isotope.jfp.framework.support.sync.MyServiceSupport;
 import org.isotope.jfp.framework.utils.EmptyHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

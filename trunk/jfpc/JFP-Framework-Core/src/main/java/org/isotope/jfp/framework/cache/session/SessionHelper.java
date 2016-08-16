@@ -13,11 +13,11 @@ import org.isotope.jfp.framework.beans.user.UserBean;
 public class SessionHelper {
 	private static final ThreadLocal<UserBean> holder = new ThreadLocal<UserBean>();
 
-	public static void setUserData(UserBean value) {
+	public static void setSessionAttribute(UserBean value) {
 		holder.set(value);
 	}
 
-	public static UserBean getUserData() {
+	public static UserBean getSessionAttribute() {
 		return holder.get();
 	}
 }
