@@ -8,7 +8,7 @@ import javax.annotation.Resource;
 import org.isotope.jfp.framework.beans.user.UserBean;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.support.MyDataBaseObjectSupport;
-import org.isotope.jfp.framework.support.MyServiceSupport;
+import org.isotope.jfp.framework.support.sync.MyServiceSupport;
 import org.isotope.jfp.framework.utils.DateHelper;
 import org.isotope.jfp.framework.utils.PKHelper;
 import org.isotope.jfp.framework.utils.token.UserCacheHelper;
