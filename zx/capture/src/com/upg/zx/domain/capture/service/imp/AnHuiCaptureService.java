@@ -95,7 +95,8 @@ public class AnHuiCaptureService extends CaptureServiceImp {
 	}
 	
 	
-	public String getCompanyBaseInfo(String corpId, RequestInfo requestInfo,String templateHtml) throws Exception{
+	@Override
+	public String getCompanyBaseInfo(String corpId, RequestInfo requestInfo,String templateHtml){
 		//基本信息
 		if(BASE_INFO.equals(requestInfo.getModeType())){
 			return super.getCompanyBaseInfo(corpId, requestInfo, templateHtml);

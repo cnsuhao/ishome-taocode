@@ -1,44 +1,82 @@
 package com.upg.zx.domain.capture.service.imp;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Type;
 import java.net.URLEncoder;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
+import java.util.Scanner;
+
+import javax.annotation.Resource;
+import javax.imageio.stream.FileImageOutputStream;
+import javax.net.ssl.SSLContext;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.http.HttpException;
+import org.apache.http.HttpHost;
 import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.CookieStore;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.client.protocol.HttpClientContext;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.conn.DefaultProxyRoutePlanner;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
+import org.apache.http.ssl.SSLContextBuilder;
+import org.apache.http.ssl.TrustStrategy;
 import org.apache.http.util.EntityUtils;
 
-import com.upg.zx.capture.util.HttpClientUtil;
+import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
+import net.sf.json.processors.JsonValueProcessor;
+
+import com.fasterxml.jackson.annotation.JsonCreator.Mode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonObjectFormatVisitor;
+import com.upg.zx.capture.bean.CorpBase;
+import com.upg.zx.capture.task.CompanyTask;
+import com.upg.zx.domain.capture.bean.Column;
+import com.upg.zx.domain.capture.bean.Config;
 import com.upg.zx.domain.capture.bean.RamCache;
 import com.upg.zx.domain.capture.bean.RequestType;
+import com.upg.zx.domain.capture.bean.Template;
 import com.upg.zx.domain.capture.bean.Token;
 import com.upg.zx.domain.capture.exception.CaptureException;
 import com.upg.zx.domain.capture.service.CaptureService;
 import com.upg.zx.domain.capture.token.TokenRegistry;
 import com.upg.zx.domain.capture.token.imp.TokenFactory;
 import com.upg.zx.domain.entity.AnalysisTemplate;
-import com.upg.zx.domain.entity.RequestHead;
 import com.upg.zx.domain.entity.RequestInfo;
+import com.upg.zx.domain.entity.RequestHead;
 import com.upg.zx.domain.response.CorpBaseRes;
+import com.upg.zx.web.utils.DateUtil;
+import com.upg.zx.web.utils.JsoupUtil;
 import com.upg.zx.web.utils.StringUtil;
 
 /**
@@ -150,7 +188,8 @@ public abstract class CaptureServiceImp implements CaptureService {
 	/**
 	 * 获取指定的信息数据
 	 */
-	public String getSpecifiedInfo(String html, AnalysisTemplate analysisTemplate) {
+	public String getSpecifiedInfo(String html,
+			AnalysisTemplate analysisTemplate) {
 		return html;
 	}
 
@@ -162,14 +201,18 @@ public abstract class CaptureServiceImp implements CaptureService {
 	 * @param param
 	 * @param resultType
 	 * @return
-	 * @throws Exception 
+	 * @throws IOException
+	 * @throws HttpException
 	 */
-	protected Object request(RequestInfo requestInfo, Map<String, String> param, String resultType, String encode,
-			List<Cookie> cookies) throws Exception {
+	protected Object request(RequestInfo requestInfo,
+			Map<String, String> param, String resultType, String encode,
+			List<Cookie> cookies) throws HttpException, IOException {
 		if (RequestType.get.toString().equals(requestInfo.getRequestType())) {
-			return getMethodRequest(requestInfo, param, resultType, encode, cookies);
+			return getMethodRequest(requestInfo, param, resultType, encode,
+					cookies);
 		}
-		return postMethodRequest(requestInfo, param, resultType, encode, cookies);
+		return postMethodRequest(requestInfo, param, resultType, encode,
+				cookies);
 	}
 
 	/**
@@ -215,20 +258,22 @@ public abstract class CaptureServiceImp implements CaptureService {
 	 * 
 	 * @param companyName
 	 * @return
-	 * @throws Exception 
 	 */
-	protected String getJsessionId(String companyName) throws Exception {
+	protected String getJsessionId(String companyName) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put(this.getCompanyNameParam(), companyName);
 		final String jessionId;
 		List<Cookie> cookies = new ArrayList();
 		;
 		try {
-			String html = (String) this.request(RamCache.requestMap.get(this.getAreaCode() + "_" + this.FIRST_MODE),
-					map, this.COOKIE_RESULT, this.getEncode(), cookies);
+			String html = (String) this.request(
+					RamCache.requestMap.get(this.getAreaCode() + "_"
+							+ this.FIRST_MODE), map, this.COOKIE_RESULT,
+					this.getEncode(), cookies);
 			// 从html中获取需要的参数
 			getJsessionIdMap(map, html);
-			Token token = tokenFactory.generateToken(cookies, this.getSessionIdByCookie(cookies), map);
+			Token token = tokenFactory.generateToken(cookies,
+					this.getSessionIdByCookie(cookies), map);
 			tokenRegistry.addToken(token);
 			jessionId = this.getSessionIdByCookie(cookies);
 		} catch (HttpException e) {
@@ -246,9 +291,8 @@ public abstract class CaptureServiceImp implements CaptureService {
 	 * @param companyName
 	 * @param sessionId
 	 * @return
-	 * @throws Exception 
 	 */
-	protected CorpBaseRes getAuthCode(String companyName, String sessionId) throws Exception {
+	protected CorpBaseRes getAuthCode(String companyName, String sessionId) {
 		Token token = tokenRegistry.getToken(sessionId);
 		// token不存在或已过期
 		if (token == null || token.isExpired()) {
@@ -257,8 +301,10 @@ public abstract class CaptureServiceImp implements CaptureService {
 		byte[] imageByte = null;
 		Map<String, String> map = getAuthCodeParams(token.getParam());
 		try {
-			imageByte = (byte[]) this.request(RamCache.requestMap.get(this.getAreaCode() + "_" + this.AUTHCODE), map,
-					this.BYTE_RESULT, this.getEncode(), token.getCookies());
+			imageByte = (byte[]) this.request(
+					RamCache.requestMap.get(this.getAreaCode() + "_"
+							+ this.AUTHCODE), map, this.BYTE_RESULT,
+					this.getEncode(), token.getCookies());
 		} catch (HttpException e) {
 			throw new CaptureException(e.getMessage(), "http请求异常!");
 		} catch (IOException e) {
@@ -295,9 +341,9 @@ public abstract class CaptureServiceImp implements CaptureService {
 	 * @param authCode
 	 * @param sessionId
 	 * @return
-	 * @throws Exception 
 	 */
-	protected CorpBaseRes validateAuthCode(String companyName, String authCode, String sessionId) throws Exception {
+	protected CorpBaseRes validateAuthCode(String companyName, String authCode,
+			String sessionId) {
 		Token token = tokenRegistry.getToken(sessionId);
 		// token不存在或已过期
 		if (token == null || token.isExpired()) {
@@ -312,7 +358,8 @@ public abstract class CaptureServiceImp implements CaptureService {
 
 		try {
 			final String html = (String) this.request(
-					RamCache.requestMap.get(this.getAreaCode() + "_" + this.LIST_MODE), map, this.STRING_RESULT,
+					RamCache.requestMap.get(this.getAreaCode() + "_"
+							+ this.LIST_MODE), map, this.STRING_RESULT,
 					this.getEncode(), token.getCookies());
 			// 判断是否存在数据节点,不存在说明验证码错误，页面进行了跳转
 
@@ -338,9 +385,9 @@ public abstract class CaptureServiceImp implements CaptureService {
 	 * 详细信息参数设置
 	 * 
 	 * @return
-	 * @throws Exception 
 	 */
-	protected Map<String, String> getRequestParam(String corpId, RequestInfo requestinfo) throws Exception {
+	protected Map<String, String> getRequestParam(String corpId,
+			RequestInfo requestinfo) {
 		Map<String, String> param = new HashMap<String, String>();
 		param.put("companyId", corpId);
 		return param;
@@ -352,9 +399,8 @@ public abstract class CaptureServiceImp implements CaptureService {
 	 * @param companyName
 	 * @param jsessionid
 	 * @return
-	 * @throws Exception 
 	 */
-	public boolean checkWord(String companyName, String jsessionid) throws Exception {
+	public boolean checkWord(String companyName, String jsessionid) {
 		return true;
 	}
 
@@ -363,9 +409,9 @@ public abstract class CaptureServiceImp implements CaptureService {
 	 * 
 	 * @param companyName
 	 * @param jsessionid
-	 * @throws Exception 
 	 */
-	public CorpBaseRes captureCompany(String companyName, String authCode, String jsessionid) throws Exception {
+	public CorpBaseRes captureCompany(String companyName, String authCode,
+			String jsessionid) {
 		// 获取验证码
 		if (authCode == null || "".equals(authCode)) {
 			String sessionId = getJsessionId(companyName);
@@ -382,7 +428,8 @@ public abstract class CaptureServiceImp implements CaptureService {
 			return corpBaseRes;
 		} catch (CaptureException e) {
 			// 验证码错误或token不存在，直接返回验证码
-			if ("000001".equals(e.getErrorCode()) || "000002".equals(e.getErrorCode())) {
+			if ("000001".equals(e.getErrorCode())
+					|| "000002".equals(e.getErrorCode())) {
 				return getAuthCode(companyName, jsessionid);
 			} else {
 				throw e;
@@ -392,26 +439,28 @@ public abstract class CaptureServiceImp implements CaptureService {
 
 	/**
 	 * 获取详细信息
-	 * @throws Exception 
 	 * 
 	 * @throws IOException
 	 * @throws HttpException
 	 */
-	public String getCompanyBaseInfo(String corpId, RequestInfo requestInfo, String templateHtml) throws Exception {
+	public String getCompanyBaseInfo(String corpId, RequestInfo requestInfo,
+			String templateHtml) {
 		Map<String, String> param = getRequestParam(corpId, requestInfo);
 		String encode = this.getEncode();
 		List<Cookie> cookies = getRequestCookie(corpId);
 		String html = "";
 
 		try {
-			html = (String) this.request(requestInfo, param, this.COOKIE_RESULT, encode, cookies);
+			html = (String) this.request(requestInfo, param,
+					this.COOKIE_RESULT, encode, cookies);
 		} catch (HttpException e) {
 			throw new CaptureException(e.getMessage(), "http请求异常");
 		} catch (IOException e) {
 			throw new CaptureException(e.getMessage(), "IO异常");
 		} catch (Exception e) {
 			// e.printStackTrace();
-			System.out.println("getCompanyBaseInfo, other exception CaptureException.");
+			System.out
+					.println("getCompanyBaseInfo, other exception CaptureException.");
 		}
 		return html;
 	}
@@ -433,12 +482,13 @@ public abstract class CaptureServiceImp implements CaptureService {
 	 * @param resultType
 	 * @param encode
 	 * @return
-	 * @throws Exception 
+	 * @throws HttpException
+	 * @throws IOException
 	 */
-	protected Object getMethodRequest(RequestInfo requestInfo, Map<String, String> param, String resultType,
-			String encode, List<Cookie> cookies) throws Exception {
-		System.out.println("=====>>>>>" + requestInfo.getRurl());
-		CloseableHttpClient httpClient = HttpClientUtil.getHttpclient(requestInfo.getRurl());
+	protected Object getMethodRequest(RequestInfo requestInfo,
+			Map<String, String> param, String resultType, String encode,
+			List<Cookie> cookies) throws HttpException, IOException {
+		CloseableHttpClient httpClient = this.getClient(requestInfo.getRurl());
 		try {
 			String getUrl = requestInfo.getRurl();
 			// 设置参数
@@ -451,19 +501,23 @@ public abstract class CaptureServiceImp implements CaptureService {
 					// 判断url中是否带有#号的参数
 
 					if (getUrl.indexOf("#" + entry.getKey()) != -1) {
-						getUrl = getUrl.replace("#" + entry.getKey(), URLEncoder.encode(entry.getValue(), encode));
+						getUrl = getUrl.replace("#" + entry.getKey(),
+								URLEncoder.encode(entry.getValue(), encode));
 						continue;
 					}
 
 					if (getUrl.indexOf("?") == -1) {
-						getUrl += "?" + entry.getKey().trim() + "=" + URLEncoder.encode(entry.getValue(), encode);
+						getUrl += "?" + entry.getKey().trim() + "="
+								+ URLEncoder.encode(entry.getValue(), encode);
 					} else {
-						getUrl += "&" + entry.getKey().trim() + "=" + URLEncoder.encode(entry.getValue(), encode);
+						getUrl += "&" + entry.getKey().trim() + "="
+								+ URLEncoder.encode(entry.getValue(), encode);
 					}
 				}
 			}
 			HttpGet httpGet = new HttpGet(getUrl);
-			httpGet.setConfig(RequestConfig.custom().setSocketTimeout(SOCKET_TIME_OUT)
+			httpGet.setConfig(RequestConfig.custom()
+					.setSocketTimeout(SOCKET_TIME_OUT)
 					.setConnectTimeout(CONNECT_TIME_OUT).build());
 			HttpContext context = new BasicHttpContext();
 			CookieStore cookieStore = new BasicCookieStore();
@@ -492,8 +546,9 @@ public abstract class CaptureServiceImp implements CaptureService {
 				return EntityUtils.toByteArray(response.getEntity());
 
 			} else {
-				throw new CaptureException(response.getStatusLine().getStatusCode() + " ---访问---  ", "",
-						"请求" + getUrl + "失败!");
+				throw new CaptureException(response.getStatusLine()
+						.getStatusCode() + " ---访问---  ", "", "请求" + getUrl
+						+ "失败!");
 			}
 		} finally {
 			httpClient.close();
@@ -509,11 +564,13 @@ public abstract class CaptureServiceImp implements CaptureService {
 	 * @param resultType
 	 * @param encode
 	 * @return
-	 * @throws Exception 
+	 * @throws HttpException
+	 * @throws IOException
 	 */
-	protected Object postMethodRequest(RequestInfo requestInfo, Map<String, String> param, String resultType,
-			String encode, List<Cookie> cookies) throws Exception {
-		CloseableHttpClient httpClient = HttpClientUtil.getHttpclient(requestInfo.getRurl());
+	protected Object postMethodRequest(RequestInfo requestInfo,
+			Map<String, String> param, String resultType, String encode,
+			List<Cookie> cookies) throws HttpException, IOException {
+		CloseableHttpClient httpClient = this.getClient(requestInfo.getRurl());
 		try {
 			String postUrl = requestInfo.getRurl();
 
@@ -523,9 +580,11 @@ public abstract class CaptureServiceImp implements CaptureService {
 				if (param != null && param.size() > 0) {
 					for (Map.Entry<String, String> entry : param.entrySet()) {
 						// 判断url中是否带有#号的参数
-						if (!"".equals(entry.getKey()) && postUrl.indexOf("#" + entry.getKey()) != -1) {
-							postUrl = postUrl.replace("#" + entry.getKey(),
-									URLEncoder.encode(entry.getValue(), encode));
+						if (!"".equals(entry.getKey())
+								&& postUrl.indexOf("#" + entry.getKey()) != -1) {
+							postUrl = postUrl
+									.replace("#" + entry.getKey(), URLEncoder
+											.encode(entry.getValue(), encode));
 							removeParamKey.add(entry.getKey());
 							continue;
 						}
@@ -538,7 +597,8 @@ public abstract class CaptureServiceImp implements CaptureService {
 			}
 
 			HttpPost httpPost = new HttpPost(postUrl);
-			httpPost.setConfig(RequestConfig.custom().setSocketTimeout(SOCKET_TIME_OUT)
+			httpPost.setConfig(RequestConfig.custom()
+					.setSocketTimeout(SOCKET_TIME_OUT)
 					.setConnectTimeout(CONNECT_TIME_OUT).build());
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
 			// 设置参数
@@ -548,7 +608,8 @@ public abstract class CaptureServiceImp implements CaptureService {
 					if (entry.getKey().indexOf("#") != -1) {
 						continue;
 					}
-					params.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
+					params.add(new BasicNameValuePair(entry.getKey(), entry
+							.getValue()));
 				}
 			}
 			HttpContext context = new BasicHttpContext();
@@ -578,7 +639,8 @@ public abstract class CaptureServiceImp implements CaptureService {
 
 				return EntityUtils.toByteArray(response.getEntity());
 			} else {
-				throw new CaptureException(response.getStatusLine().getStatusCode() + "", "", "请求" + postUrl + "失败!");
+				throw new CaptureException(response.getStatusLine()
+						.getStatusCode() + "", "", "请求" + postUrl + "失败!");
 			}
 		} finally {
 			httpClient.close();
@@ -593,8 +655,9 @@ public abstract class CaptureServiceImp implements CaptureService {
 	 * @param requestInfo
 	 * @param httpClient
 	 */
-	protected void setHead(HttpContext context, List<Cookie> cookies, List<RequestHead> requestHeadls,
-			Map<String, String> map, HttpRequest request) {
+	protected void setHead(HttpContext context, List<Cookie> cookies,
+			List<RequestHead> requestHeadls, Map<String, String> map,
+			HttpRequest request) {
 		RequestHead requestHead = null;
 		String val = "";
 		if (requestHeadls != null && requestHeadls.size() > 0) {
@@ -611,7 +674,10 @@ public abstract class CaptureServiceImp implements CaptureService {
 					if (val.indexOf("http") != -1 || val.indexOf("https") != -1) {
 						String[] params = StringUtil.getUrlParamVal(val);
 						for (String param : params) {
-							val = val.replace(param, map.get(param) == null ? "" : map.get(param));
+							val = val.replace(
+									param,
+									map.get(param) == null ? "" : map
+											.get(param));
 						}
 					} else {
 						// 如果是单个参数
@@ -635,6 +701,61 @@ public abstract class CaptureServiceImp implements CaptureService {
 	}
 
 	/**
+	 * 获取client对象
+	 * 
+	 * @return
+	 */
+	protected CloseableHttpClient getClient(String url) {
+		if (url.indexOf("https") != -1) {
+			try {
+				SSLContext sslContext = new SSLContextBuilder()
+						.loadTrustMaterial(null, new TrustStrategy() {
+							// 信任所有证书
+							public boolean isTrusted(X509Certificate[] chain,
+									String authType)
+									throws CertificateException {
+								return true;
+							}
+						}).build();
+				SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(
+						sslContext);
+				CloseableHttpClient httpclient = HttpClients.custom()
+						.setSSLSocketFactory(sslsf).build();
+				return httpclient;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		// to get a random IP proxy
+//		CompanyTask companyTask = new CompanyTask();
+//		if ("".equals(companyTask.ipAddressForList.get())) {
+//			ipAddress = companyTask.ipAddressForDetail;
+//			port = companyTask.portForDetail;
+//
+//			// ipAddress = "124.240.187.89";
+//			// port = 80;
+//		} else {
+//			ipAddress = companyTask.ipAddressForList.get();
+//			port = companyTask.portForList.get();
+//		}
+//		if ("".equals(ipAddress) || ipAddress == null) {
+//			return HttpClients.createDefault();
+//		}
+
+//		HttpHost proxy = new HttpHost(ipAddress, port);
+//
+//		DefaultProxyRoutePlanner routePlanner = new DefaultProxyRoutePlanner(
+//				proxy);
+//		CloseableHttpClient httpclient = HttpClients.custom()
+//				.setRoutePlanner(routePlanner).build();
+
+		CloseableHttpClient  httpclient = HttpClients.createDefault();
+
+		return httpclient;
+	}
+
+	/**
 	 * 从cookie中获取sessionId
 	 * 
 	 * @param cookies
@@ -647,6 +768,14 @@ public abstract class CaptureServiceImp implements CaptureService {
 			}
 		}
 		return "";
+	}
+	
+	
+	/**
+	 * 解析验证码客户端提交的列表HTML
+	 */
+	public List<CorpBase> paseHtmlToListForClient(String html){
+		return this.paseHtmlToList(html);
 	}
 
 }

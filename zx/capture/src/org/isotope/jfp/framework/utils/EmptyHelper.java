@@ -1,7 +1,5 @@
 package org.isotope.jfp.framework.utils;
 
-import java.util.List;
-
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 
 
@@ -50,9 +48,6 @@ public class EmptyHelper implements ISFrameworkConstants{
 		return (array == null || array.length == 0);
 	}
 	
-	public static boolean isEmpty(List<Object> array) {
-		return (array == null || array.size() == 0);
-	}
 	/**
 	 * Check whether the given String is empty.
 	 * <p>This method accepts any Object as an argument, comparing it to
@@ -151,8 +146,6 @@ public class EmptyHelper implements ISFrameworkConstants{
 	public static boolean isNotEmpty(String str) {
         return !isEmpty(str);
     }
-	public static boolean isNotEmpty(List<Object> array) {
-        return !isEmpty(array);
-    }
+	
 	
 }

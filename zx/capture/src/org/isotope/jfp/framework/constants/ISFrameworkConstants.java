@@ -9,9 +9,6 @@ package org.isotope.jfp.framework.constants;
  * @version 0.1
  */
 public interface ISFrameworkConstants {
-
-	public final static String SYSTEM_CHARSET = "UTF-8";
-	
 	public static final String SYSTEM_NAME = "JFP";
 	
 	public static final String FOLDER_SEPARATOR = "/";
@@ -63,7 +60,6 @@ public interface ISFrameworkConstants {
 	public final static String CONSTANT_SESSION_ID = "sessionid";
 	public final static String CONSTANT_USER_TOKEN = "token";
 	public final static String CONSTANT_LOGINER = "loginer";
-	public final static String CONSTANT_PASSWORD = "password";
 	public final static String CONSTANT_COMPANY = "company";
 	public final static String CONSTANT_USER_MAIN = "USERMAIN";
 	public final static String CONSTANT_SQL_SESSION = "sqlsession";
@@ -100,10 +96,7 @@ public interface ISFrameworkConstants {
 	public final static String COLON = ":";
 	 
 	public final static String SEMICOLON = ";";// semicolon
-	public final static String QUOTES = "'";// semicolon
-	public final static String AND = "&";// semicolon
-	public final static String QUMARK = "?";// semicolon
-	
+
 	public static final String BACKSLASH = "/";// backslash
 	public static final String BACKSLASH2 = "//";// backslash
 	public static final String FILE_URI = "file://";// FILE_URI

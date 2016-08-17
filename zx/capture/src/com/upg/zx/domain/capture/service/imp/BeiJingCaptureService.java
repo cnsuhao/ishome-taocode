@@ -55,6 +55,9 @@ public class BeiJingCaptureService extends CaptureServiceImp {
 	@Override
 	protected void getJsessionIdMap(Map<String, String> map, String html) {
 		String val = JsoupUtil.getValByNameOne("credit_ticket", html);
+		if(val == null || "".equals(val)){
+			throw new CaptureException("credit_ticket不能为空", html);
+		}
 		String currentTimeMillis = JsoupUtil.getValByNameOne(
 				"currentTimeMillis", html);
 		map.put("credit_ticket", val);
@@ -84,7 +87,7 @@ public class BeiJingCaptureService extends CaptureServiceImp {
 	}
 
 	public CorpBaseRes captureCompany(String companyName, String authCode,
-			String jsessionid) throws Exception {
+			String jsessionid) {
 		CorpBaseRes corpBaseRes = super.captureCompany(companyName, authCode,
 				jsessionid);
 		List<CorpBase> corpBasels = corpBaseRes.getList();
@@ -185,7 +188,7 @@ public class BeiJingCaptureService extends CaptureServiceImp {
 	}
 	
 	 protected CorpBaseRes validateAuthCode(String companyName,
-				String authCode, String sessionId) throws Exception{
+				String authCode, String sessionId){
 				Token  token = tokenRegistry.getToken(sessionId);
 				//token不存在或已过期
 				if(token == null || token.isExpired()){
@@ -207,7 +210,7 @@ public class BeiJingCaptureService extends CaptureServiceImp {
 						throw new  CaptureException("000002","验证码错误!","验证码错误!");
 					}
 					
-					html = JsoupUtil.appHtmlToSelect("", html, "<input id='sessionId' value='"+sessionId+"' >");
+					//html = JsoupUtil.appHtmlToSelect("", html, "<input id='sessionId' value='"+sessionId+"' >");
 					System.out.println(html);
 					//List<CorpBase> list=  paseHtmlToList(html);
 					corpBaseRes.setType("list");

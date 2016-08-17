@@ -23,13 +23,16 @@ import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.upg.zx.capture.bean.CorpBase;
-import com.upg.zx.capture.util.HttpClientUtil;
 import com.upg.zx.domain.capture.bean.RamCache;
+import com.upg.zx.domain.capture.bean.RequestType;
 import com.upg.zx.domain.capture.bean.Token;
 import com.upg.zx.domain.capture.exception.CaptureException;
 import com.upg.zx.domain.entity.AnalysisTemplate;
+ 
 import com.upg.zx.domain.entity.RequestHead;
 import com.upg.zx.domain.entity.RequestInfo;
 import com.upg.zx.domain.response.CorpBaseRes;
@@ -85,10 +88,9 @@ public class ChongQingCaptureService extends CaptureServiceImp {
 	 * 
 	 * @param companyName
 	 * @param jsessionid
-	 * @throws Exception 
 	 */
 	public CorpBaseRes captureCompany(String companyName, String authCode,
-			String jsessionid) throws Exception {
+			String jsessionid) {
 		// 获取验证码
 		if (authCode == null || "".equals(authCode)) {
 			String sessionId = getJsessionId(companyName);
@@ -101,6 +103,7 @@ public class ChongQingCaptureService extends CaptureServiceImp {
 		try {
 			// 验证验证码(验证码通过返回列表，否则返回验证码)
 			corpBaseRes = validateAuthCode(companyName, authCode, jsessionid);
+			tokenRegistry.deleteToken(jsessionid);
 			return corpBaseRes;
 		} catch (CaptureException e) {
 			// 验证码错误或token不存在，直接返回验证码
@@ -120,9 +123,8 @@ public class ChongQingCaptureService extends CaptureServiceImp {
 	 * @param companyName
 	 * @param sessionId
 	 * @return
-	 * @throws Exception 
 	 */
-	protected CorpBaseRes getAuthCode(String companyName, String sessionId) throws Exception {
+	protected CorpBaseRes getAuthCode(String companyName, String sessionId) {
 		Token token = tokenRegistry.getToken(sessionId);
 		// token不存在或已过期
 		if (token == null || token.isExpired()) {
@@ -159,10 +161,9 @@ public class ChongQingCaptureService extends CaptureServiceImp {
 	 * @param companyName
 	 * @param sessionId
 	 * @return
-	 * @throws Exception 
 	 */
 	protected CorpBaseRes getAuthCode(String companyName, String sessionId,
-			String dateTime) throws Exception {
+			String dateTime) {
 		Token token = tokenRegistry.getToken(sessionId);
 		// token不存在或已过期
 		if (token == null || token.isExpired()) {
@@ -201,12 +202,13 @@ public class ChongQingCaptureService extends CaptureServiceImp {
 	 * @param resultType
 	 * @param encode
 	 * @return
-	 * @throws Exception 
+	 * @throws HttpException
+	 * @throws IOException
 	 */
 	protected Object getMethodRequest(RequestInfo requestInfo,
 			Map<String, String> param, String resultType, String encode,
-			List<Cookie> cookies) throws Exception {
-		CloseableHttpClient httpClient = HttpClientUtil.getHttpclient(requestInfo.getRurl());
+			List<Cookie> cookies) throws HttpException, IOException {
+		CloseableHttpClient httpClient = this.getClient(requestInfo.getRurl());
 		try {
 			String getUrl = requestInfo.getRurl();
 			// 设置参数

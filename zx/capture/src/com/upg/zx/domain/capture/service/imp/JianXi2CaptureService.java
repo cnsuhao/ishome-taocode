@@ -55,7 +55,7 @@ public class JianXi2CaptureService extends CaptureServiceImp{
 	
 	@Override
 	protected CorpBaseRes validateAuthCode(String companyName, String authCode,
-			String sessionId) throws Exception {
+			String sessionId) {
 		Token token = tokenRegistry.getToken(sessionId);
 		// token不存在或已过期
 		if (token == null || token.isExpired()) {
@@ -164,8 +164,10 @@ public class JianXi2CaptureService extends CaptureServiceImp{
 			corpBaseRes.setCorp_name(companyName);
 			corpBaseRes.setHtml(html);
 			
-		} catch (Exception e) {	
-				e.printStackTrace();
+		} catch (HttpException e) {
+			throw new CaptureException(e.getMessage(), "http请求异常!");
+		} catch (IOException e) {
+			throw new CaptureException(e.getMessage(), "IO异常!");
 		}
 		return corpBaseRes;
 	}
