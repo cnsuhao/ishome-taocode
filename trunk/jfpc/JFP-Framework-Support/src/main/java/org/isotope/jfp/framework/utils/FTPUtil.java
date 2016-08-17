@@ -1,6 +1,8 @@
 package org.isotope.jfp.framework.utils;
 
 import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -23,9 +25,10 @@ public class FTPUtil implements ISFrameworkConstants {
 	 * 文件上传
 	 *
 	 * @param file
-	 * @return
+	 * @return 图片识别路径
+	 * @throws Exception
 	 */
-	public String uploadFile(MultipartFile file) {
+	public String uploadFile(MultipartFile file) throws Exception {
 		String[] filePath = FilePathHelper.makeFilePath(file.getOriginalFilename());
 		try {
 			if (uploadFile(filePath[1], filePath[2], file.getInputStream()) == true)
@@ -38,11 +41,53 @@ public class FTPUtil implements ISFrameworkConstants {
 
 	/**
 	 * 文件上传
+	 *
+	 * @param file
+	 * @return 图片识别路径
+	 * @throws Exception
+	 */
+	public String uploadFile(File file) throws Exception {
+		String[] filePath = FilePathHelper.makeFilePath(file.getName());
+		FileInputStream fin = null;
+		try {
+			fin = new FileInputStream(file);
+			if (uploadFile(filePath[1], filePath[2], fin) == true)
+				return filePath[0];
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (fin != null)
+				fin.close();
+		}
+		return "";
+	}
+
+	/**
+	 * 文件上传
+	 * 
+	 * @param fileName
+	 * @param input
+	 * @return 图片识别路径
+	 */
+	public String uploadFile(String fileName, InputStream input) throws Exception {
+		String[] filePath = FilePathHelper.makeFilePath(fileName);
+		try {
+			if (uploadFile(filePath[1], fileName, input) == true)
+				return filePath[0];
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "";
+	}
+
+	/**
+	 * 文件上传到指定位置
 	 * 
 	 * @param file
-	 * @return
+	 * @return 成功与否
+	 * @throws Exception 
 	 */
-	public boolean uploadFile(String path, String filename, InputStream input) {
+	public boolean uploadFile(String path, String filename, InputStream input) throws Exception {
 		return uploadFile(serverIp, serverPort, serverUser, serverUserPassword, path, filename, input);
 	}
 
@@ -63,10 +108,10 @@ public class FTPUtil implements ISFrameworkConstants {
 	 *            上传到FTP服务器上的文件名
 	 * @param input
 	 *            输入流
-	 * @return 成功返回true，否则返回false
+	 * @return 成功返回true，否则返回falseO
+	 * @throws Exception 
 	 */
-	public boolean uploadFile(String url, int port, String username, String password, String path, String filename,
-			InputStream input) {
+	public boolean uploadFile(String url, int port, String username, String password, String path, String filename, InputStream input) throws Exception {
 		// 初始表示上传失败
 		boolean success = false;
 		// 创建FTPClient对象
@@ -82,7 +127,7 @@ public class FTPUtil implements ISFrameworkConstants {
 			// 看返回的值是不是230，如果是，表示登陆成功
 			if (is == false)
 				return success;
-			//System.out.println(is);
+			// System.out.println(is);
 			reply = ftp.getReplyCode();
 			// 以2开头的返回值就会为真
 			if (!FTPReply.isPositiveCompletion(reply)) {
@@ -111,9 +156,6 @@ public class FTPUtil implements ISFrameworkConstants {
 			ftp.logout();
 			// 表示上传成功
 			success = b;
-		} catch (IOException e) {
-			e.printStackTrace();
-
 		} finally {
 			if (ftp.isConnected()) {
 				try {
@@ -126,7 +168,7 @@ public class FTPUtil implements ISFrameworkConstants {
 		return success;
 	}
 
-	//////////属性定义/////////////
+	////////// 属性定义/////////////
 	/**
 	 * 文件访问前缀地址
 	 */
