@@ -189,37 +189,53 @@ public class NewsManageController extends MyControllerSupport {
 	}
 
 	/**
-	 * 新闻修改\置顶(取消)\审核(驳回)\加入轮播(取消)口 /news
+	 * 新闻修改 /news
 	 */
 	@RequestMapping(value = "/news", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean newsPUT(@RequestBody NewsDBO news) {
+	public RESTResultBean newsPUT(@RequestBody NewsDBO dbo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(news.getToken()) == false) {
+			if (doCheckToken(dbo.getToken()) == false) {
 				return tokenFail();
 			}
 			// 查询是否存在
-			if (news.getNewsId() == null) {
+			if (dbo.getNewsId() == null) {
 				throw new IllegalArgumentException("新闻id不能为空");
 			}
 			NewsDBO origin = new NewsDBO();
-			origin.setNewsId(news.getNewsId());
+			origin.setNewsId(dbo.getNewsId());
 			origin = (NewsDBO) newsService.doRead(origin);
 			if (origin == null) {
 				throw new IllegalArgumentException("新闻不存在");
 			}
 			// 由所属栏目判断是否需要审核
 			NewsColumnDBO newsColumn = new NewsColumnDBO();
-			newsColumn.setColumnId(news.getColumnId());
+			newsColumn.setColumnId(origin.getColumnId());
 			newsColumn = (NewsColumnDBO) newsColumnService.doRead(newsColumn);
 			if (newsColumn == null) {
-				throw new IllegalArgumentException("columnId所对应的栏目不存在");
+				throw new IllegalArgumentException("原columnId所对应的栏目不存在");
 			}
 			if (newsColumn.getIsCheck() != null && newsColumn.getIsCheck() == 0) {
 				throw new IllegalStateException("该新闻不允许修改");
 			}
-			newsService.doUpdate(news);
+			NewsColumnDBO oldNewsColumn = new NewsColumnDBO();
+			oldNewsColumn.setColumnId(dbo.getColumnId());
+			oldNewsColumn = (NewsColumnDBO) newsColumnService.doRead(oldNewsColumn);
+			if (oldNewsColumn == null) {
+				throw new IllegalArgumentException("新的columnId所对应的栏目不存在");
+			}
+			origin.setTitle(dbo.getTitle());
+			origin.setContent(dbo.getContent());
+			origin.setColumnId(dbo.getColumnId());
+			origin.setNewsType(dbo.getNewsType());
+			origin.setNewsReader(dbo.getNewsReader());
+			origin.setNewsClasser(dbo.getNewsClasser());
+			origin.setPublishTime(dbo.getPublishTime());
+			origin.setIsPic(dbo.getIsPic());
+			origin.setPic(dbo.getPic());
+			origin.setIsTop(dbo.getIsTop());
+			newsService.doUpdate(origin);
 			Map<String, Object> data = new HashMap<String, Object>();
 			data.put("info", "ok");
 			result.setData(data);
@@ -228,6 +244,108 @@ public class NewsManageController extends MyControllerSupport {
 			result.setStatus(1);
 		}
 
+		return result;
+	}
+	
+	/**
+	 * 新闻置顶(取消置顶)接口 /news/top
+	 */
+	@RequestMapping(value = "/news/top", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public RESTResultBean newsTopPUT(@RequestBody NewsDBO dbo) {
+		RESTResultBean result = new RESTResultBean();
+		try {
+			if (doCheckToken(dbo.getToken()) == false) {
+				return tokenFail();
+			}
+			// 查询是否存在
+			if (dbo.getNewsId() == null) {
+				throw new IllegalArgumentException("新闻id不能为空");
+			}
+			NewsDBO origin = new NewsDBO();
+			origin.setNewsId(dbo.getNewsId());
+			origin = (NewsDBO) newsService.doRead(origin);
+			if (origin == null) {
+				throw new IllegalArgumentException("新闻不存在");
+			}
+			origin.setIsTop(dbo.getIsTop());
+			newsService.doUpdate(origin);
+			Map<String, Object> data = new HashMap<String, Object>();
+			data.put("info", "ok");
+			result.setData(data);
+		} catch (Exception e) {
+			result.setInfo("置顶（取消置顶）失败，" + e.getMessage());
+			result.setStatus(1);
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * 新闻审核(驳回)接口 /news/audit
+	 */
+	@RequestMapping(value = "/news/audit", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public RESTResultBean newsAuditPUT(@RequestBody NewsDBO dbo) {
+		RESTResultBean result = new RESTResultBean();
+		try {
+			if (doCheckToken(dbo.getToken()) == false) {
+				return tokenFail();
+			}
+			// 查询是否存在
+			if (dbo.getNewsId() == null) {
+				throw new IllegalArgumentException("新闻id不能为空");
+			}
+			NewsDBO origin = new NewsDBO();
+			origin.setNewsId(dbo.getNewsId());
+			origin = (NewsDBO) newsService.doRead(origin);
+			if (origin == null) {
+				throw new IllegalArgumentException("新闻不存在");
+			}
+			origin.setIsAudit(dbo.getIsAudit());
+			newsService.doUpdate(origin);
+			Map<String, Object> data = new HashMap<String, Object>();
+			data.put("info", "ok");
+			result.setData(data);
+		} catch (Exception e) {
+			result.setInfo("审核（驳回）失败，" + e.getMessage());
+			result.setStatus(1);
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * 新闻加入轮播(取消轮播)接口 /news/homenews
+	 */
+	@RequestMapping(value = "/news/homenews", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public RESTResultBean newsHomenewsPUT(@RequestBody NewsDBO dbo) {
+		RESTResultBean result = new RESTResultBean();
+		try {
+			if (doCheckToken(dbo.getToken()) == false) {
+				return tokenFail();
+			}
+			// 查询是否存在
+			if (dbo.getNewsId() == null) {
+				throw new IllegalArgumentException("新闻id不能为空");
+			}
+			NewsDBO origin = new NewsDBO();
+			origin.setNewsId(dbo.getNewsId());
+			origin = (NewsDBO) newsService.doRead(origin);
+			if (origin == null) {
+				throw new IllegalArgumentException("新闻不存在");
+			}
+			origin.setIsHomenews(dbo.getIsHomenews());
+			newsService.doUpdate(origin);
+			Map<String, Object> data = new HashMap<String, Object>();
+			data.put("info", "ok");
+			result.setData(data);
+		} catch (Exception e) {
+			result.setInfo("新闻加入轮播（取消轮播）失败，" + e.getMessage());
+			result.setStatus(1);
+		}
+		
 		return result;
 	}
 
