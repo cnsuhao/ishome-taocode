@@ -23,6 +23,13 @@ public class RedisCacheHelper implements ISFrameworkConstants {
 		myCache.putObject(key, JSON.toJSONString(value), 3600, false);
 		myCache.init();
 	}
+	
+	public static void setSessionAttribute(int index, int second, String key, Object value) {
+		ICacheService myCache = BeanFactoryHelper.getBean("myCache");
+		myCache.selectDB(index);
+		myCache.putObject(key, JSON.toJSONString(value), second, false);
+		myCache.init();
+	}
 
 	public static String getSessionAttribute(int index, String key) {
 		ICacheService myCache = BeanFactoryHelper.getBean("myCache");
