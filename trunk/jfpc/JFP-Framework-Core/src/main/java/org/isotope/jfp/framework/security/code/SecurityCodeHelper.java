@@ -23,9 +23,10 @@ public class SecurityCodeHelper implements ISFrameworkConstants, ISModelConstant
 	 * @param length
 	 *            长度
 	 */
+	
 	public static String makeRandomNumCode(int second, int length, String jobid) {
 		String code = RandomHelper.getRandomNumerical(length);
-		RedisCacheHelper.setSessionAttribute(1, jobid, code);
+		RedisCacheHelper.setSessionAttribute(1, second, jobid, code);
 		return code;
 	}
 
@@ -42,7 +43,7 @@ public class SecurityCodeHelper implements ISFrameworkConstants, ISModelConstant
 		if (type == 1) {
 			code = code.toUpperCase();
 		}
-		RedisCacheHelper.setSessionAttribute(1, jobid, code);
+		RedisCacheHelper.setSessionAttribute(1, second, jobid, code);
 		return code;
 	}
 
