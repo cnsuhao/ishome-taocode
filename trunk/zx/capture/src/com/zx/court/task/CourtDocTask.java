@@ -318,14 +318,12 @@ public class CourtDocTask {
 	 * 
 	 */
 	public void getHtmlListSheng() throws Exception {
-		int page = 1;
 
 		String content = "";
 		CookiePojo pojo = new CookiePojo();
 		boolean flag = false;
 		String cookie = "";
-
-		int i = 0;
+		
 		// *****************上传日期********************
 		String from = getDate(-1);
 		String to = getDate(0);
@@ -334,7 +332,8 @@ public class CourtDocTask {
 
 		for (int j = 0; j < proType.length;) {
 			for (k = 0; k < province1.length;) {
-				i = 0;
+				int page = 1;
+				int i = 0;
 				System.out.println("======" + i + "==========page==" + page);
 				String Url = "/list/list/?sorttype=1&conditions=searchWord+++" + from + "%20TO%20" + to + "+"
 						+ Util.paraFormatEncode("上传日期") + ":" + from + "%20TO%20" + to
@@ -431,14 +430,12 @@ public class CourtDocTask {
 	}
 
 	public void getHtmlListZhongji() throws Exception {
-		int page = 1;
 
 		String content = "";
 		CookiePojo pojo = new CookiePojo();
 		boolean flag = false;
 		String cookie = "";
 
-		int i = 0;
 		// *****************上传日期********************
 		String from = getDate(-1);
 		String to = getDate(0);
@@ -446,7 +443,8 @@ public class CourtDocTask {
 		int k = 0;
 		for (int j = 0; j < proType.length;) {
 			for (k = 0; k < province2.length;) {
-				i = 0;
+				int page = 1;
+				int i = 0;
 				System.out.println("======" + i + "==========page==" + page);
 				String Url = "/list/list/?sorttype=1&conditions=searchWord+++" + from + "%20TO%20" + to + "+"
 						+ Util.paraFormatEncode("上传日期") + ":" + from + "%20TO%20" + to
@@ -534,14 +532,11 @@ public class CourtDocTask {
 	}
 
 	public void getHtmlListJicheng() throws Exception {
-		int page = 1;
-
 		String content = "";
 		CookiePojo pojo = new CookiePojo();
 		boolean flag = false;
 		String cookie = "";
 
-		int i = 0;
 		// *****************上传日期********************
 		String from = getDate(-1);
 		String to = getDate(0);
@@ -550,7 +545,8 @@ public class CourtDocTask {
 
 		for (int j = 0; j < proType.length;) {
 			for (k = 0; k < province3.length;) {
-				i = 0;
+				int page = 1;
+				int i = 0;
 				System.out.println("======" + i + "==========page==" + page);
 				String Url = "/list/list/?sorttype=1&conditions=searchWord+++" + from + "%20TO%20" + to + "+"
 						+ Util.paraFormatEncode("上传日期") + ":" + from + "%20TO%20" + to

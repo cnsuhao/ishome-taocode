@@ -21,17 +21,12 @@ public class DefaultTockenClean implements TokenClean {
 	protected Logger logger = Logger.getLogger(this.getClass());
  
 	private TokenRegistry tokenRegistry;
-	
-	
 	public TokenRegistry getTokenRegistry() {
 		return tokenRegistry;
 	}
-
-
 	public void setTokenRegistry(TokenRegistry tokenRegistry) {
 		this.tokenRegistry = tokenRegistry;
 	}
-
 
 	@Override
 	/**

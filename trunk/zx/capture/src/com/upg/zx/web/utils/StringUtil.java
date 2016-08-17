@@ -1,29 +1,19 @@
 package com.upg.zx.web.utils;
 
-import java.io.IOException;
-import java.lang.reflect.Type;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
- 
 
 /**
  * 字符串工具类
@@ -37,7 +27,7 @@ public class StringUtil {
 	private static String[][] FilterChars = { { "%", "/%" },
 		{ "/", "//;" }, {"'","''"},{"\\","\\/"}};
 	
-	
+	private static String specifiedregEx = "[`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？]";
 	/**
 	 * 特殊字符处理
 	 * @param content
@@ -89,6 +79,45 @@ public class StringUtil {
 
 		return param_val;
 	}
+	
+	
+	/**
+	 * 解析url字符串参数到map中
+	 * @param url
+	 * @return
+	 */
+	public static Map<String,String> getUrlParamAndVal(String url){
+		Map<String,String> param = new HashMap<String,String>();
+		String[] param_arr = null;
+		if (url.indexOf("?") != -1) {
+			String params_str = url.substring(url.indexOf("?") + 1,
+					url.length());
+			if (params_str.indexOf("&") != -1) {
+				param_arr = params_str.split("&");
+			} else {
+				param_arr = new String[] { params_str };
+			}
+			
+			if (param_arr != null && param_arr.length > 0) {
+				int i = 0;
+				for (String key : param_arr) {
+					if (key.indexOf("=") != -1) {
+						String[] paramAndVal = key.split("=");
+						if (paramAndVal.length > 0) {
+							if(paramAndVal.length == 1){
+								param.put(paramAndVal[0], "") ;
+							}else{
+								param.put(paramAndVal[0], paramAndVal[1]) ;
+							}
+						} 
+					}
+					i++;
+				}
+			}
+			
+		}
+		return param;
+	}
 
 	/**
 	 * 字符串转换为特定的类型
@@ -112,9 +141,11 @@ public class StringUtil {
 			}
 		}
 		if ("Integer".equals(type)) {
+			value = value.replace(",", "");
 			return Integer.parseInt(value);
 		}
 		if ("Double".equals(type)) {
+			value = value.replace(",", "");
 			return Double.parseDouble(value);
 		}
 		if ("Boolean".equals(type)) {
@@ -176,6 +207,22 @@ public class StringUtil {
 		return null;
 
 	}
+	
+	/**
+	 * 获取匹配的数组
+	 * @param str
+	 * @param reg
+	 * @return
+	 */
+	public static List<String> getMatchList(String str,String reg){
+		List<String> list = new ArrayList<String>();
+		Pattern pattern = Pattern.compile(reg);
+		Matcher matcher = pattern.matcher(str);
+		while(matcher.find()){
+			list.add(matcher.group());
+		}
+		return list;
+	}
 
 	/**
 	 * 将key value键值对的字符串解析到map中
@@ -235,14 +282,28 @@ public class StringUtil {
 	 * @return
 	 */
 	public static List<Map<String, String>> paseJsonToMap(String json_str, String tag,String title,Integer datarow,Integer dataColCount) {
+		//处理{"date":23,"day":2,"hours":0,"minutes":0,"month":11,"seconds":0,"time":1419264000000,"timezoneOffset":-480,"year":114}日期格式
+		if(json_str.indexOf("timezoneOffset") !=-1 && json_str.indexOf("time") != -1){
+			String reg = "\\{\"date\":\\d+,\"day\":\\d+,\"hours\":\\d+,\"minutes\":\\d+,\"month\":\\d+,\"seconds\":\\d+,\"time\":\\d+,\"timezoneOffset\":-?\\d+,\"year\":\\d+\\}";
+			List<String> list = StringUtil.getMatchList(json_str,reg);
+			for(String val : list){
+				String timeStr = StringUtil.getMatchStr(val, "(?<=time\":)\\d+(?=,)");
+				long time = Long.parseLong(timeStr);
+				Date date = new Date(time);				
+				json_str = json_str.replace(val, "\""+DateUtil.toDateString(date)+"\"");
+			}
+		}
+		
 		ObjectMapper objectMapper = new ObjectMapper();
 		List<Map<String, String>> list = new ArrayList<Map<String,String>>();
 		json_str = json_str.trim();
+		if("".equals(json_str)){
+			return list;
+		}
 		try {
 			if (json_str.indexOf("[") == 0) {
 				list = objectMapper.readValue(
-						json_str, List.class);
-				return list;
+						json_str, List.class);		 
 			} else {
 				//单个对象
 				if(tag == null){
@@ -253,7 +314,7 @@ public class StringUtil {
 					Map<String, Object> map = objectMapper.readValue(json_str, Map.class);
 					if(map.get(tag) != null){
 						list = (List<Map<String, String>>)map.get(tag);
-					}
+					}				
 					//如果title不为空需要转换为特定的列表
 					if(title != null && !"".equals(title)){
 						list = getSpecifiedMapFromList(title, datarow, dataColCount, list);
@@ -312,6 +373,7 @@ public class StringUtil {
 	public static String trimNull(String str) {
 		return trimNull(str, "");
 	}
+	
 	/**
 	 * md5加密
 	 * @param in
@@ -345,7 +407,32 @@ public class StringUtil {
 				hs = hs + stmp;
 		}
 		return hs;
+	} 
+	
+	/**
+	 * 判断是否包含特殊字符
+	 * @param word
+	 * @return
+	 */
+	public static boolean specifiedWord(String word){
+		 Pattern p = Pattern.compile(specifiedregEx);
+		 Matcher m = p.matcher(word);
+		 return m.find();
 	}
 	
- 
+	/**
+	 * 判断数组中是否包含指定的值
+	 * @param array
+	 * @param val
+	 */
+	public static boolean isContainInArray(String[] array,String val){
+		boolean flag = false;
+		for(String t_val : array){
+			if(t_val.equals(val)){
+				flag = true;
+				break;
+			}
+		}		
+		return flag;
+	}
 }

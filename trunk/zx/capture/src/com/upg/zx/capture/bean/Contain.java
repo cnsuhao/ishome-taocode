@@ -5,6 +5,13 @@ import java.util.Map;
 
 public class Contain {
 	public static Map<String,String>shandDongMap = new HashMap<String,String>();
+	//打码服务器地址
+	public static String ARTIFICIAL_SERVICE_HOST = "http://10.50.85.201";
+	
+	//public static String ARTIFICIAL_SERVICE_HOST = "http://10.10.168.15:8080";
+	//征信服务器地址
+	public static String ZX_SERVICE_HOST = "https://www.wzyrz.cn";
+	
 	static{
 		
 		shandDongMap.put("1", "1");
@@ -59,7 +66,18 @@ public class Contain {
 		shandDongMap.put("除", "/");
 		shandDongMap.put("除以", "/");
 		shandDongMap.put("/", "/");
-		
+			
 	}
+	
+	//需要人工打码的区域
+	public static String[] NO_CAPTURE_AREA = new String[]{"150000","330000","440000","460000"};
+	
+	//需要人工获取列表以及详细信息区域
+	public static String[] NO_CAPTURE_INFOAREA = new String[]{"110000","220000","520000"};
+	
+	//对应每个省份验证码自动识别最多失败次数
+	public static Map<String,Integer> MAX_RETRY_FORYZM = new HashMap<String,Integer>();
+	
+
 	
 }

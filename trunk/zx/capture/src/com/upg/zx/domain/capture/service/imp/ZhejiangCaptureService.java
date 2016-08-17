@@ -45,9 +45,22 @@ public class ZhejiangCaptureService extends CaptureServiceImp {
 		}
 		return false;
 	}
+	
+	@Override
+	protected void getJsessionIdMap(Map<String, String> map, String html) {
+		String tokenName = JsoupUtil.getValByNameOne("struts.token.name", html);
+		String token = JsoupUtil.getValByNameOne("token", html);
+		if(tokenName != null){
+			map.put("struts.token.name", tokenName);
+		}
+		if(token != null){
+			map.put("token", token);
+		}
+	}
 
 	@Override
 	public List<CorpBase> paseHtmlToList(String html) {
-		return JsoupUtil.parseHtmlA("corpid", ".doViewAppBasicInfoByLog.do\\?corpid=.", html);
-	}	 
+		// TODO Auto-generated method stub
+		return null;
+	} 
 }

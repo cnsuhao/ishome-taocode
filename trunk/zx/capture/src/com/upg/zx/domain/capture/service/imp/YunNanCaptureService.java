@@ -50,9 +50,8 @@ public class YunNanCaptureService extends CaptureServiceImp {
 	 * @param companyName
 	 * @param jsessionid
 	 * @return
-	 * @throws Exception 
 	 */
-	public boolean checkWord(String companyName,String jsessionid) throws Exception{
+	public boolean checkWord(String companyName,String jsessionid){
 		Token  token = tokenRegistry.getToken(jsessionid);
 		//token不存在或已过期
 		if(token == null || token.isExpired()){
