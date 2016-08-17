@@ -11,6 +11,7 @@ import org.isotope.jfp.framework.beans.common.RESTResultBean;
 import org.isotope.jfp.framework.beans.page.PageVOSupport;
 import org.isotope.jfp.framework.beans.user.UserBean;
 import org.isotope.jfp.framework.cache.ICacheService;
+import org.isotope.jfp.framework.utils.token.UserCacheHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -50,12 +51,12 @@ public class MyControllerSupport extends MyFrameworkSupport {
 
 	public boolean doCheckToken(String token) {
 		// 检查用户Token
-		// loginer = super.checkLoginer(token);
+		loginer = UserCacheHelper.checkUser(token);
 		{// 临时代码
 			// 获得用户信息
 			loginer = new UserBean();
 			loginer.setUserId(123456L);
-			loginer.setToken("911822733644555466377288199__a__b__c__d__e__f__g");
+			loginer.setToken("910820738640559462371283192");
 		}
 		// 缓存Session
 		super.setUserData(loginer);
