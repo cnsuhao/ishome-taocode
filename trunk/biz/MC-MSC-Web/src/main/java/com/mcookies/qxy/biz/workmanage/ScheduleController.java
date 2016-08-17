@@ -180,7 +180,7 @@ public class ScheduleController extends MyControllerSupport {
 			data.put("termName", term.getTermName());
 			data.put("date", dutyScheduling.getDate());
 			data.put("count", dutySchedulings.size());
-			data.put("scheduleweek", dutySchedulings);
+			data.put("scheduleday", dutySchedulings);
 			result.setData(data);
 		} catch (Exception e) {
 			result.setInfo("查询失败，" + e.getMessage());
