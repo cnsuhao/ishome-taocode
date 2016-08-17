@@ -306,7 +306,7 @@ Url:        /qxy/school?token=[token]
 Method:     PUT
 Header:     Content-type:application/json
 Parameter:
-    - 'sid':            学校id  #系统管理员允许传sid修改某个学校，学校管理员不能传sid，只能修改token中的sid的信息
+    - 'sid':            学校id  #系统管理员允许传sid修改某个学校，如果传该参数则以此为准，如果不传则以token中的sid为准
     - 'schoolName':     学校名字，系统唯一不能重复
     - 'isUse':          是否启用0-停用，1-启用，默认新增为启用
     - 'contacts':       学校联系人
@@ -314,15 +314,19 @@ Parameter:
     - 'address':        学校地址
     - 'sCode':          学校识别码（系统内唯一，预留用作选择学校使用）
     - 'token':          token
-示例
+示例修改
 {
-	"sid":"1",                #系统管理员才允许传该参数
+	"sid":"1",                #系统管理员才允许传该参数，如果传该参数则以此为准，如果不传则以token中的sid为准
 	"schoolName":"衡水一中",
-	"isUse":"1",
 	"contacts":"张三三",
 	"phone":"15785685658",
 	"address":"河北省衡水市向阳大道",
 	"sCode":"HSYZ"
+}
+示例停用（启用）
+{
+	"sid":"1",                #停用某个机构
+	"isUse":"1"
 }
 Response:  
     - `status`： 0->ok
@@ -374,7 +378,7 @@ Response:
 }
 ```
 ### login.5 用户登录相关接口
-#### 5.1 用户名/手机号/邮箱密码登录接口
+#### login.5.1 用户名/手机号/邮箱密码登录接口
 > 登录接口不需要token验证
 > 登录操作需要先选择要登录的学校，然后点击下一步选择账号或者手机号、邮箱方式输入密码登录，登录成功后返回用户token；
 ``` json
@@ -399,6 +403,10 @@ Response:
     - `status`：      0->登录成功
 				      1->登录失败，用户不在该机构下
 				      2->登录失败，账号或密码不正确
+    - `schoolName`：      学校名称
+    - `teacherName`：     教师姓名
+    - `phone`：           教师手机号
+    - `email`：           教师邮箱
 ```
 > **返回结果示例：**
 ``` json
@@ -406,7 +414,11 @@ Response:
     "status": 0,
     "data": {
         "info":"登录成功",
-        "token":"ekcoalsdfjladi323lasdfj23ls3e23"
+        "token":"ekcoalsdfjladi323lasdfj23ls3e23",
+        "schoolName":"文鼎中学",
+        "teacherName":"张老师",
+        "phone":"15678987678",
+        "email":"15@qq.com"
     }
 }
 ```
@@ -432,13 +444,21 @@ Response:
     - `status`：     0->登录成功
 					 1->登录失败，验证码已过期，请重新获取验证码
 					 2->登录失败，用户不是系统用户，请联系管理员
+    - `schoolName`：      学校名称
+    - `teacherName`：     教师姓名
+    - `phone`：           教师手机号
+    - `email`：           教师邮箱
 ```
 > **返回结果示例：**
 ``` json
 {
     "status": 0,
     "data": {
-        "token":"6kasjdkfjalsdjflajsdlkf58695"
+        "token":"6kasjdkfjalsdjflajsdlkf58695",
+        "schoolName":"文鼎中学",
+        "teacherName":"张老师",
+        "phone":"15678987678",
+        "email":"15@qq.com"
     }
 }
 ```
@@ -534,5 +554,5 @@ Response:
 ```
 
 
-#### login.5.5 OpenID登录接口
+#### login.5.6 OpenID登录接口
 
