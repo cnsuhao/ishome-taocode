@@ -195,5 +195,14 @@
                 AND sid = #{sid}
             </if>
     </select>
+    <!-- 根据isUse(可以不传)进行查询  -->
+    <select id='doSelectByIsUse' parameterType='SchoolDBO' resultType='SchoolDBO'>
+        SELECT <include refid='tableColumns'/> 
+        FROM school 
+        WHERE 1 = 1 
+        <if test=" isUse != null "><!-- 是否启用 -->
+            AND is_use = #{isUse}
+        </if>
+    </select>
 
 </mapper>
