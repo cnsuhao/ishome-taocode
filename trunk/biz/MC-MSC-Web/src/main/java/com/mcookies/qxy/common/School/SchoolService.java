@@ -1,5 +1,7 @@
 package com.mcookies.qxy.common.School;
 
+import java.util.List;
+
 import org.isotope.jfp.framework.support.sync.MyServiceSupport;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +11,16 @@ public class SchoolService extends MyServiceSupport {
 
 	public SchoolDao getDao() {
 		return getMySqlSession().getMapper(SchoolDao.class);
+	}
+
+	/**
+	 * 根据isUse(可以不传)进行查询
+	 * 
+	 * @param school
+	 * @return
+	 */
+	public List<SchoolDBO> doSelectByIsUse(SchoolDBO school) {
+		return getDao().doSelectByIsUse(school);
 	}
 
 }
