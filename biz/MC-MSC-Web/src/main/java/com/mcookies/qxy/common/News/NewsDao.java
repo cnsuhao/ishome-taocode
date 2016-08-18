@@ -15,4 +15,6 @@ public interface NewsDao extends IDatabaseSupport {
 	
 	List<NewsPVO> doSelectPageByColumnIdAndParentId(PageVOSupport pageModel);
 
+	List<NewsPVO> doSelectPageByColumnId(PageVOSupport pageModel);
+
 }

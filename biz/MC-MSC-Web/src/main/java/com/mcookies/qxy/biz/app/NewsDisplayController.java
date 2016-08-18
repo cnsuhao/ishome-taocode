@@ -113,9 +113,7 @@ public class NewsDisplayController extends MyControllerSupport {
 				newsService.doSelectPageByColumnIdAndParentId(pageModel);
 				result.setInfo("用户为学生家长");
 			} else {
-				data.put("count", 0);
-				data.put("newslist", new ArrayList<NewsPVO>());
-				result.setData(data);
+				newsService.doSelectPageByColumnId(pageModel);
 				result.setInfo("用户既不是教师，也不是学生家长");
 				return result;
 			}

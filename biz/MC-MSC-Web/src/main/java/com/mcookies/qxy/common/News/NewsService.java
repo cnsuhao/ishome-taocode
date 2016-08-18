@@ -40,4 +40,11 @@ public class NewsService extends MyServiceSupport {
 		return pageModel;
 	}
 
+	@SuppressWarnings("unused")
+	public PageVOSupport doSelectPageByColumnId(PageVOSupport pageModel) {
+		FrameworkDataBean formParamBean = pageModel.getFormParamBean();
+		pageModel.setPageListData(getDao().doSelectPageByColumnId(pageModel));
+		return pageModel;
+	}
+
 }
