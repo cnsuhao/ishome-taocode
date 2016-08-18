@@ -351,7 +351,7 @@
 		LEFT JOIN u_teacher c ON a.author = c.tid
 		WHERE 1 = 1
         AND a.column_id = #{columnId} AND b.is_use = 1
-        AND a.is_audit = 1 AND instr(a.news_reader, concat(#{tid}, ';')) > 0
+        AND a.is_audit = 1 AND (a.news_type = 0 OR instr(a.news_reader, concat(#{tid}, ';')) > 0)
 	    ORDER BY a.create_time DESC
     </select>
     <!-- 分页，根据columnId isAudit createTime parentId  -->
@@ -367,7 +367,21 @@
 		LEFT JOIN u_student_parent e ON d.student_id = e.student_id
 		WHERE 1 = 1
         AND a.column_id = #{columnId} AND b.is_use = 1
-        AND a.is_audit = 1 AND e.parent_id = #{parentId}
+        AND a.is_audit = 1 AND (a.news_type = 0 OR a.news_type = 2 AND e.parent_id = #{parentId})
+	    ORDER BY a.create_time DESC
+    </select>
+    <!-- 分页，根据columnId isAudit  -->
+    <select id='doSelectPageByColumnId' parameterType='com.mcookies.qxy.common.News.NewsPVO'
+    		resultType='com.mcookies.qxy.common.News.NewsPVO'>
+        SELECT 
+        a.news_id, a.column_id, a.title, a.is_top, a.is_pic, a.pic, a.publish_time, a.is_audit, a.author, a.is_homenews,
+        b.title AS column_name, c.teacher_name AS authorName
+		FROM news a 
+		LEFT JOIN news_column b ON a.column_id = b.column_id
+		LEFT JOIN u_teacher c ON a.author = c.tid
+		WHERE 1 = 1
+        AND a.column_id = #{columnId} AND b.is_use = 1
+        AND a.is_audit = 1 AND a.news_type = 0
 	    ORDER BY a.create_time DESC
     </select>
 
