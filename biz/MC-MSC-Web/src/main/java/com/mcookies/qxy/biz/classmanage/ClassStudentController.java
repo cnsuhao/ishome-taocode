@@ -718,6 +718,7 @@ public class ClassStudentController extends MyControllerSupport {
 			// 维护学生家长表
 			if (parent.getIsDefault() != null && parent.getIsDefault() == 1) {
 				uStudentParentService.updateIsDefaultFalse(originSp);
+				originSp.setIsDefault(1);
 			} else {
 				originSp.setIsDefault(0);
 			}
