@@ -438,55 +438,62 @@
 		<property name="urlParser">
 			<ref bean="urlParser" />
 		</property>
-		
+
 		<property name="serviceConfig" ref="serviceConfig" />
 
 	</bean>
-	
-	<!-- 172.16.2.214:80 -->
-    <bean id='serviceConfig' class='com.upg.zx.capture.bean.ServiceConfig' >
-        <property name='serviceConfig'>
-        	<map>  
-        		<entry key='requestUrl'						value='http://172.16.2.214:80/Zheng/corp/request/allinfo' />
-        		<entry key='analysisTemplateUrl'			value='http://172.16.2.214:80/Zheng/corp/request/queryanalysisTemplate' />
 
-        		<entry key='postOtherInfoJsUrl'			value='http://172.16.2.214:80/Zheng/corp/uploadCompanyHtmljs' />  
-        		<entry key='postOtherInfoUrl'				value='http://172.16.2.214:80/Zheng/corp/uploadCompanyHtml' /> 
-        		
-        		<entry key='submitCompanyUrl'			value='http://172.16.2.214:80/Zheng/corp/uploadCompanyHtml' />
-        		<entry key='submitCompanyls'				value='http://172.16.2.214:80/Zheng/corp/uploadCompanyListHtml' />
-        		<entry key='getLianziCompanyUrl'		value='http://172.16.2.214:80/Zheng/corp/sendIpDistant' />
-        		
-        		<entry key='getCompanyUrl'				value='http://172.16.2.214:80/Zheng/corp/info/update/sedCompany' />
-        		
-        		<entry key='corpNameUrl'					value='http://172.16.2.214:80/Zheng/corp/getKeyWord' />   
-        		     		
-        		<entry key='keyWordUrl'						value='http://testcapture153.wzyrz.cn/Zheng/key/newWord' />        		
-       			<entry key='submitCourtDocUrl'			value='http://testcapture153.wzyrz.cn/Zheng/codc/uploadCompanyListHtml' />
- 
-        		<!-- <entry key='useProxy'							value='http://172.16.2.214:80/Zheng/proxy/newProtool' /> -->
-            </map>
-        </property>
-	</bean>	
+	<!-- 172.16.2.214:80 -->
+	<bean id='serviceConfig' class='com.upg.zx.capture.bean.ServiceConfig'>
+		<property name='serviceConfig'>
+			<map>
+				<entry key='requestUrl' value='http://127.0.0.1:8888/corp/request/allinfo' />
+				<entry key='analysisTemplateUrl'
+					value='http://127.0.0.1:8888/corp/request/queryanalysisTemplate' />
+
+				<entry key='postOtherInfoJsUrl'
+					value='http://127.0.0.1:8888/corp/uploadCompanyHtmljs' />
+				<entry key='postOtherInfoUrl'
+					value='http://127.0.0.1:8888/corp/uploadCompanyHtml' />
+
+				<entry key='submitCompanyUrl'
+					value='http://127.0.0.1:8888/corp/uploadCompanyHtml' />
+				<entry key='submitCompanyls'
+					value='http://127.0.0.1:8888/corp/uploadCompanyListHtml' />
+				<entry key='getLianziCompanyUrl' value='http://127.0.0.1:8888/corp/sendIpDistant' />
+
+				<entry key='getCompanyUrl'
+					value='http://127.0.0.1:8888/corp/info/update/sedCompany' />
+
+				<entry key='corpNameUrl' value='http://127.0.0.1:8888/corp/getKeyWord' />
+
+				<entry key='keyWordUrl' value='http://testcapture153.wzyrz.cn/key/newWord' />
+				<entry key='submitCourtDocUrl'
+					value='http://testcapture153.wzyrz.cn/codc/uploadCompanyListHtml' />
+
+				<entry key='useProxy' value='http://127.0.0.1:8888/proxy/newProtool' />
+			</map>
+		</property>
+	</bean>
 
 	<!-- 获取请求以及头信息 -->
 	<bean id="requestLoad" class="com.upg.zx.domain.capture.imp.RequestLoad"
 		init-method="init">
 		<property name="serviceConfig" ref="serviceConfig" />
 	</bean>
-	
+
 	<bean id="corpSearchName" class="com.upg.zx.capture.util.CorpSearchName"
 		init-method="init">
 		<property name="serviceConfig" ref="serviceConfig" />
 	</bean>
-	
+
 	<bean id="companyTask" class="com.upg.zx.capture.task.CompanyTask"
 		init-method="init">
-		
+
 		<property name="corpSearchName" ref="corpSearchName" />
-		
+
 		<property name="serviceConfig" ref="serviceConfig" />
-		
+
 		<property name="capture">
 			<ref bean="capture" />
 		</property>
@@ -494,95 +501,64 @@
 			<ref bean="asyncService" />
 		</property>
 		<property name="userId" value="Fucy" />
-		<!-- 
-		<property name="proxyService">
-			<ref bean="proxyService" />
-		</property>
-		 -->
 	</bean>
-	
-	<bean id="CourtDocTask" class="com.zx.court.task.CourtDocTask">
-		<property name="serviceConfig" ref="serviceConfig" />		
-	</bean>
-	
-	<bean id="XYChinaCaptureTask" class="com.upg.capture.XYChina.XYChinaCaptureTask">
-		<property name="serviceConfig" 		ref="serviceConfig" />		
-		<property name="pathName" 			value="/XYChina" />		
-	</bean>
- 	
- 	<bean id="corbBaseTask" class="com.upg.zx.capture.task.CorbBaseTask">
+
+	<bean id="corbBaseTask" class="com.upg.zx.capture.task.CorbBaseTask">
+
+		<property name="serviceConfig" ref="serviceConfig" />
+
 		<property name="cache">
-			<ref bean="myCache"/>
+			<ref bean="myCache" />
 		</property>
-		
+
 		<property name="capture">
-			<ref bean="capture"/>
+			<ref bean="capture" />
 		</property>
-		
+
 		<property name="yzmCapture">
-			<ref bean="yzmCapture"/>
+			<ref bean="yzmCapture" />
 		</property>
-		
+
 		<property name="forCodeFaild" value="1" />
-		
+
 		<property name="asyncService">
-			<ref bean="asyncService"/>
+			<ref bean="asyncService" />
 		</property>
 	</bean>
-	
- 	<bean id="yzmCapture" class="com.upg.zx.capture.client.YzmCapture">
+
+	<bean id="yzmCapture" class="com.upg.zx.capture.client.YzmCapture">
 		<property name="cache">
-			<ref bean="myCache"/>
+			<ref bean="myCache" />
 		</property>
-		
-		<property name="count" value="2" />	
+
+		<property name="count" value="2" />
 
 	</bean>
-    <bean id="tokenclear" class="com.upg.zx.domain.capture.token.imp.DefaultTockenClean">
-    	<property name="tokenRegistry">
+	<bean id="tokenclear" class="com.upg.zx.domain.capture.token.imp.DefaultTockenClean">
+		<property name="tokenRegistry">
 			<ref bean="tokenRegistry" />
 		</property>
-    </bean>
-    
+	</bean>
+
 	<bean id="urlParser" class="com.upg.zx.parser.URLParserJSON" />
-<!--
-	<bean id="companyQueryTask" class="com.upg.zx.capture.task.CompanyQueryTask"
-		init-method="initial" />
- -->
+
 	<task:scheduled-tasks>
-<!--
-		<task:scheduled ref="companyTask" method="getLiangZiListTask"
-			cron="0/1 * * * * ?" />
- -->
- 
-		<!-- <task:scheduled ref="CourtDocTask" method="getHtmlListSheng"
-			cron="5 5 9 * * ?" /> -->
-		<!-- <task:scheduled ref="CourtDocTask" method="getHtmlListZhongji"
-			cron="18 18 18 * * ?" />
-		<task:scheduled ref="CourtDocTask" method="getHtmlListJicheng"
-			cron="18 18 18 * * ?" /> -->
-			
-		<!-- <task:scheduled ref="XYChinaCaptureTask" method="loadKeyWordService"
-			cron="0 0/5 * * * ?" /> -->
-			
+		<!-- ////////////////////////////////离线异步静态抓取//////////////////////////////////// -->
 		<!-- 获取公司详细信息 -->
-		<task:scheduled ref="companyTask" method="jsInfoTask"
+		<task:scheduled ref="companyTask" method="getInfoTask"
 			cron="0/5 * * * * ?" />
-			
-		<!-- 人工打码 -->	
-		<task:scheduled ref="corbBaseTask" method="forCodeCompanyByArtificialHtmlToUpload"
-			cron="0/1 * * * * ?" />
-			
-		<!-- 温州企业获取
-		<task:scheduled ref="companyQueryTask" method="queryService"
-			cron="0/2 * * * * ?" />
- -->
+
 		<!-- 公司自动打 -->
 		<task:scheduled ref="companyTask" method="getListTask"
 			cron="0/5 * * * * ?" />
 			
+		<!-- ////////////////////////////////离线异步静态抓取//////////////////////////////////// -->
+		<!-- 人工打码 -->
+	   <task:scheduled ref="corbBaseTask"
+			method="forCodeCompanyByArtificialHtmlToUpload" cron="0/5 * * * * ?" />
+
 		<task:scheduled ref="tokenclear" method="clean"
-			cron="0/30  * * * * ?" />	
+			cron="0/30  * * * * ?" />
 
 	</task:scheduled-tasks>
 </beans>
