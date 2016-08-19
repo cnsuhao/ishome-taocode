@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 
 import com.upg.zx.capture.bean.Contain;
 import com.upg.zx.capture.bean.YzCode;
+import com.upg.zx.capture.biz.CaptureConstants;
 import com.upg.zx.capture.util.HttpClientUtil;
 import com.upg.zx.capture.util.PicGrey;
 import com.upg.zx.domain.capture.service.IAppService;
@@ -90,7 +91,7 @@ public class YzmCapture {
 			Map<String, String> map = new HashMap<String, String>();
 			map.put("jobid", subJobId);
 			map.put("img", Base64.encodeBase64String(bitmap));
-			HttpClientUtil.postRequest(Contain.ARTIFICIAL_SERVICE_HOST + IAppService.ARTIFICIAL_CODE, map);
+			HttpClientUtil.postRequest(CaptureConstants.ARTIFICIAL_SERVICE_HOST + IAppService.ARTIFICIAL_CODE, map);
 			for (int i = 0; i < 30; i++) {
 				String code = (String) cache.getObject(subJobId, false);
 				if (EmptyHelper.isNotEmpty(code)) {

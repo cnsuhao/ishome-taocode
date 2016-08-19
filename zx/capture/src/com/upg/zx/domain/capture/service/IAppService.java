@@ -8,7 +8,7 @@ public interface IAppService {
 	//获取待打码企业接口(打码服务器)
 	public static String GET_FOR_CODE_COMPANY = "/M310/0101";
 	//打码客户端上传列表html(了解服务接口)
-	public static String LIST_UPLOAD = "/Zheng/corp//uploadCompanyListHtmlForClient";
+	public static String LIST_UPLOAD = "/Zheng/corp/uploadCompanyListHtmlForClient";
 	//本地服务获取的上传列表html(了解接口)
 	public static String LIST_UPLOAD_Capture = "/Zheng/corp/uploadCompanyListHtml";
 	
