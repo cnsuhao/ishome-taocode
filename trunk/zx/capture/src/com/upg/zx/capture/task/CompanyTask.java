@@ -8,7 +8,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -16,8 +15,11 @@ import java.util.Random;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 
+import org.apache.http.HttpHost;
 import org.apache.log4j.Logger;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.upg.zx.capture.bean.Contain;
 import com.upg.zx.capture.bean.CorpBase;
 import com.upg.zx.capture.bean.ServiceConfig;
@@ -29,18 +31,18 @@ import com.upg.zx.domain.capture.Capture;
 import com.upg.zx.domain.capture.bean.RamCache;
 import com.upg.zx.domain.entity.RequestInfo;
 import com.upg.zx.domain.response.CorpBaseRes;
-import com.upg.zx.serice.ProxyService;
 import com.zxlh.comm.async.service.AsyncService;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-
+/**
+ * 离线异步静态抓取
+ * 
+ * @author 001745
+ *
+ */
 public class CompanyTask {
 	private Capture capture;
 
 	private AsyncService asyncService;
-
-	private ProxyService proxyService;
 
 	private String userId;
 
@@ -53,7 +55,9 @@ public class CompanyTask {
 	public void setServiceConfig(ServiceConfig serviceConfig) {
 		this.serviceConfig = serviceConfig;
 	}
-	CorpSearchName corpSearchName;//= CorpSearchName.getInstance();
+
+	CorpSearchName corpSearchName;// = CorpSearchName.getInstance();
+
 	public CorpSearchName getCorpSearchName() {
 		return corpSearchName;
 	}
@@ -75,144 +79,16 @@ public class CompanyTask {
 		}
 	};
 
-	public void setProxyService(ProxyService proxyService) {
-		this.proxyService = proxyService;
-	}
-
 	public void setAsyncService(AsyncService asyncService) {
 		this.asyncService = asyncService;
 	}
-
-	// 企业列表查询的随机IP代理
-	public static ThreadLocal<String> ipAddressForList = new ThreadLocal<String>() {
-		protected String initialValue() {
-			return "";
-		}
-	};
-	public static ThreadLocal<Integer> portForList = new ThreadLocal<Integer>() {
-		protected Integer initialValue() {
-			return 0;
-		}
-	};
-	// 企业列表查询的随机IP代理
-	public static String ipAddressForDetail = null;
-	public static Integer portForDetail = 0;
-
-	// to get a random IP proxy
-	private String decreaseCountValue = "0";
-
-	public String[][] proxyOther = null;
-	//
-	// 华北
-	public String[][] proxyBJ = null;
-	public String[][] proxyTJ = null;
-	public String[][] proxyHeB = null;// 河北
-	public String[][] proxySX2 = null; // 山西
-	public String[][] proxyNMG = null;
-	// 东北
-	public String[][] proxyLN = null;
-	public String[][] proxyJN = null;
-	public String[][] proxyHLJ = null;
-	// 华东
-	public String[][] proxyJX = null;
-	public String[][] proxyAH = null;
-	public String[][] proxyJS = null;
-	public String[][] proxySD = null;
-	public String[][] proxyFJ = null;
-	public String[][] proxyZJ = null;
-	public String[][] proxySH = null;
-	// 华南
-	public String[][] proxyGD = null;
-	public String[][] proxyGX = null;
-	public String[][] proxyHaiN = null;
-	// 华中
-	public String[][] proxyHeN = null;
-	public String[][] proxyHN = null;
-	public String[][] proxyHB = null;
-	// 西南
-	public String[][] proxyCQ = null;
-	public String[][] proxySC = null;
-	public String[][] proxyGZ = null;
-	public String[][] proxyYN = null;
-	public String[][] proxyXZ = null;
-	// 西北
-	public String[][] proxySX1 = null; // 陕西
-	public String[][] proxyGS = null;
-	public String[][] proxyQH = null;
-	public String[][] proxyNX = null;
-	public String[][] proxyXJ = null;
 
 	// JX, AH, JS, SD, FJ ...
 	public Integer BJ = 0, TJ = 1, HeB = 2, SX2 = 3, NMG = 4, LN = 5, JL = 6, HLJ = 7, JX = 8, AH = 9, JS = 10, SD = 11,
 			FJ = 12, ZJ = 13, SH = 14, GD = 15, GX = 16, HaiN = 17, HeN = 18, HN = 19, HB = 20, CQ = 21, SC = 22,
 			GZ = 23, YN = 24, XZ = 25, SX1 = 26, GS = 27, QH = 28, NX = 29, XJ = 30;
-	public Integer[] randomLength = null;
-
-	/**
-	 * 获取代理IP地址
-	 * 
-	 * @return
-	 */
-	public String[][] getProxyArray() {
-		String[][] proxyArray = { { "14.29.116.77", "80", "0" }, { "14.29.116.77", "80", "0" },
-				{ "14.29.116.77", "80", "0" }, { "14.29.116.77", "80", "0" }, { "14.29.116.77", "80", "0" },
-				{ "14.29.116.77", "80", "0" }, { "14.29.116.77", "80", "0" }, { "14.29.116.77", "80", "0" },
-				{ "14.29.116.77", "80", "0" }, { "14.29.116.77", "80", "0" } };
-		return proxyArray;
-
-	}
 
 	public void init() {
-
-		proxyOther = getProxyArray();
-
-		proxyBJ = proxyOther;
-		proxyTJ = proxyOther;
-		proxyHeB = proxyOther;// 河北
-		proxySX2 = proxyOther; // 山西
-		proxyNMG = proxyOther;
-		// 东北
-		proxyLN = proxyOther;
-		proxyJN = proxyOther;
-		proxyHLJ = proxyOther;
-		// 华东
-		proxyJX = proxyOther;
-		proxyAH = proxyOther;
-		proxyJS = proxyOther;
-		proxySD = proxyOther;
-		proxyFJ = proxyOther;
-		proxyZJ = proxyOther;
-		proxySH = proxyOther;
-		// 华南
-		proxyGD = proxyOther;
-		proxyGX = proxyOther;
-		proxyHaiN = proxyOther;
-		// 华中
-		proxyHeN = proxyOther;
-		proxyHN = proxyOther;
-		proxyHB = proxyOther;
-		// 西南
-		proxyCQ = proxyOther;
-		proxySC = proxyOther;
-		proxyGZ = proxyOther;
-		proxyYN = proxyOther;
-		proxyXZ = proxyOther;
-		// 西北
-		proxySX1 = proxyOther; // 陕西
-		proxyGS = proxyOther;
-		proxyQH = proxyOther;
-		proxyNX = proxyOther;
-		proxyXJ = proxyOther;
-		if (proxyOther == null) {
-			return;
-		}
-		randomLength = new Integer[] { proxyOther.length, proxyOther.length, proxyOther.length, proxyOther.length,
-				proxyOther.length, proxyOther.length, proxyOther.length, proxyOther.length, proxyOther.length,
-				proxyOther.length, proxyOther.length, proxyOther.length, proxyOther.length, proxyOther.length,
-				proxyOther.length, proxyOther.length, proxyOther.length, proxyOther.length, proxyOther.length,
-				proxyOther.length, proxyOther.length, proxyOther.length, proxyOther.length, proxyOther.length,
-				proxyOther.length, proxyOther.length, proxyOther.length, proxyOther.length, proxyOther.length,
-				proxyOther.length, proxyOther.length };
 	}
 
 	private int error_count = 0;
@@ -259,7 +135,7 @@ public class CompanyTask {
 	 * @throws IOException
 	 */
 	public void getListTask() throws Exception {
-		//一个网站最多1分钟2次
+		// 一个网站最多1分钟2次
 		final String corpName[] = corpSearchName.getCorpSearchCorp2();
 
 		if (corpName[1] == null) {
@@ -267,68 +143,15 @@ public class CompanyTask {
 			return;
 		}
 
-		int value = 0, arrayLength = 0;
-		Random random = new Random();
-		Class<?> clazz = this.getClass();
-		Field fRandomIndex = null, fProxy = null;
-		String[][] array = null;
-
-		try {
-			fRandomIndex = clazz.getField(corpName[2]);
-			fProxy = clazz.getField("proxy" + corpName[2]);
-			arrayLength = randomLength[(int) fRandomIndex.get(this)];
-			array = (String[][]) fProxy.get(this);
-			// 如果代理被用完后重新从数据库中获取代理
-			if (array.length <= 1) {
-				String[][] proxy_db = getProxyArray();
-				fProxy.set(this, proxy_db);
-				randomLength[(int) fRandomIndex.get(this)] = proxy_db.length;
-
-				arrayLength = proxy_db.length;
-				array = proxy_db;
-			}
-			value = random.nextInt(arrayLength - 1);
-			ipAddressForList.set(array[value][0]);
-			portForList.set(Integer.valueOf(array[value][1]));
-		} catch (Exception e) {
-			System.out.println("system error: " + e.toString());
-			return;
-		}
 		CorpBaseRes corpBaseRes = null;
 		try {
-			System.out.println(
-					"=====>>>>>名称: " + corpName[1] + "==>>区域码：" + corpName[0]+ "==>>访问地址："
+			System.out.println("=====>>>>>名称: " + corpName[1] + "==>>区域码：" + corpName[0] + "==>>访问地址："
 					+ RamCache.requestMap.get(corpName[0] + "_" + 1).getRurl() + "=====getImage");
 			corpBaseRes = capture.findCompanyByName(corpName[1], null, null, corpName[0]);
-			array[value][2] = "2";
-			fProxy.set(this, array);
+
 		} catch (Exception e) {
 			// proxy IP is useless
 			corpSearchName.decreaseAreaSeqCorp(corpName[2]);
-
-			// remove the proxy IP
-			try {
-				if (decreaseCountValue.equals(array[value][2])) {
-					System.out.println("area " + corpName[2] + "  decrease proxy error: " + array[value][0]
-							+ "  arrayLength: " + arrayLength);
-
-					array[value][0] = array[arrayLength - 1][0];
-					array[value][1] = array[arrayLength - 1][1];
-					fProxy.set(this, array);
-					randomLength[(int) fRandomIndex.get(this)] = arrayLength - 1;
-				} else {
-					array[value][2] = String.valueOf(Integer.valueOf(array[value][2]) - 1);
-					fProxy.set(this, array);
-				}
-
-			} catch (IllegalArgumentException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch (IllegalAccessException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-
 			return;
 		}
 
@@ -370,14 +193,14 @@ public class CompanyTask {
 	// 北京详细信息获取
 	public void getBjInfo(String json_str) {
 		if (json_str != null && !"".equals(json_str)) {
-			JSONObject jsondata = JSONObject.fromObject(json_str);
+			JSONObject jsondata = JSONObject.parseObject(json_str);
 			if (jsondata.getJSONObject("data") == null && jsondata.getJSONObject("data").getJSONArray("list") == null) {
 				return;
 			}
 			JSONArray jsonArray = jsondata.getJSONObject("data").getJSONArray("list");
 			for (int cp = 0; cp < jsonArray.size(); cp++) {
 				JSONObject jsonObj = jsonArray.getJSONObject(cp);
-				CorpBase corpBase_cp = (CorpBase) JSONObject.toBean(jsonObj, CorpBase.class);
+				CorpBase corpBase_cp = JSONObject.toJavaObject(jsonObj, CorpBase.class);
 				RequestInfo requestInfo = null;
 				if (corpBase_cp.getZhejiang_id() != null && !"".equals(corpBase_cp.getZhejiang_id())) {
 					requestInfo = RamCache.requestMap
@@ -429,74 +252,20 @@ public class CompanyTask {
 	 * 量子数据自动打码业务处理
 	 * 
 	 * @param corpBase
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public void businessyLiangziList(CorpBase corpBase) throws Exception {
 		String area = corpSearchName.getAreaByCode(corpBase.getRes_date());
 		final String corpName[] = { corpBase.getRes_date(), corpBase.getCorp_name(), area };
 
-		int value = 0, arrayLength = 0;
-		Random random = new Random();
-		Class<?> clazz = this.getClass();
-		Field fRandomIndex = null, fProxy = null;
-		String[][] array = null;
-		try {
-
-			fRandomIndex = clazz.getField(corpName[2]);
-			fProxy = clazz.getField("proxy" + corpName[2]);
-			arrayLength = randomLength[(int) fRandomIndex.get(this)];
-			array = (String[][]) fProxy.get(this);
-
-			// 如果代理被用完后重新从数据库中获取代理
-			if (array.length <= 1) {
-				String[][] proxy_db = getProxyArray();
-				fProxy.set(this, proxy_db);
-				randomLength[(int) fRandomIndex.get(this)] = proxy_db.length;
-
-				arrayLength = proxy_db.length;
-				array = proxy_db;
-			}
-
-			value = random.nextInt(arrayLength - 1);
-			ipAddressForList.set(array[value][0]);
-			portForList.set(Integer.valueOf(array[value][1]));
-		} catch (Exception e) {
-			System.out.println("system error: " + e.toString());
-			return;
-		}
-
-		System.out.println(
-				"=====>>>>>量子企业名称: " + corpName[1] + "  ipAddress: " + ipAddressForList.get() + " port: " + portForList.get());
+		System.out.println("=====>>>>>量子企业名称: " + corpName[1]);
 		CorpBaseRes corpBaseRes = null;
 		try {
 			corpBaseRes = capture.findCompanyByName(corpName[1], null, null, corpName[0]);
-			array[value][2] = "2";
-			fProxy.set(this, array);
 		} catch (Exception e) {
 			System.out.println("Exception: areaCode " + corpName[0] + "  corp name: " + corpName[1]
 					+ "  list is searched failure. ");
-			// remove the proxy IP
-			try {
-				if (decreaseCountValue.equals(array[value][2])) {
-					System.out.println("=====>>>>>area " + corpName[2] + "  decrease proxy error: " + array[value][0]
-							+ "  arrayLength: " + arrayLength);
 
-					array[value][0] = array[arrayLength - 1][0];
-					array[value][1] = array[arrayLength - 1][1];
-					fProxy.set(this, array);
-					randomLength[(int) fRandomIndex.get(this)] = arrayLength - 1;
-				} else {
-					array[value][2] = String.valueOf(Integer.valueOf(array[value][2]) - 1);
-					fProxy.set(this, array);
-				}
-
-			} catch (IllegalArgumentException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch (IllegalAccessException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
 			return;
 		}
 
@@ -518,14 +287,14 @@ public class CompanyTask {
 		}
 	}
 
-	public void jsInfoTask() throws Exception {
+	public void getInfoTask() throws Exception {
 		System.out.println("任务开启");
 		final CorpBase corpBase = this.getCorpBase();
 		if (corpBase != null && !"".equals(corpBase.getCorp_name())) {
 			try {
 
 				logger.info(corpBase.getCorp_name() + "||" + corpBase.getRes_date() + "info");
-				asyncService.runTask(this, "infoTaskCapture", new Object[] { corpBase }, null, null, 5000, true);
+				asyncService.runTask(this, "getInfoTaskCapture", new Object[] { corpBase }, null, null, 5000, true);
 			} catch (InterruptedException e) {
 				System.out.println("异步调用抓取详细信息失败!");
 			}
@@ -534,15 +303,9 @@ public class CompanyTask {
 		System.out.println("任务结束 ");
 	}
 
-	public void infoTaskCapture(CorpBase corpBase) {
-		int value = 0, arrayLength = 0;
-		
-		Random random = new Random();
+	public void getInfoTaskCapture(CorpBase corpBase) {
 		String areaType = "";
-		Class<?> clazz = this.getClass();
-		Field fRandomIndex = null, fProxy = null;
-		String[][] array = null;
-		
+
 		corpSearchName.initialAreaCode();
 		areaType = corpSearchName.getAreaByCode(corpBase.getRes_date());
 
@@ -551,8 +314,7 @@ public class CompanyTask {
 			return;
 		}
 
-		System.out.println("area: " + areaType + ",   " + corpBase.getCorp_name() + "开始抓取 ....." + " ipAddress: "
-				+ ipAddressForList.get() + "  port: " + portForList.get());
+		System.out.println("area: " + areaType + ",   " + corpBase.getCorp_name() + "开始抓取 .....");
 		// 模板请求地址
 
 		RequestInfo requestInfo = null;
@@ -594,7 +356,7 @@ public class CompanyTask {
 					System.out.println(corpBase.getCorp_name() + "上传 失败....." + e.getMessage() + "||" + error_count);
 				}
 				return;
-			} 
+			}
 		}
 		long beginTime = System.currentTimeMillis();
 		String html = "";
@@ -621,7 +383,7 @@ public class CompanyTask {
 				error_count++;
 				System.out.println(corpBase.getCorp_name() + "上传 失败....." + e.getMessage() + "||" + error_count);
 			}
-		} 
+		}
 	}
 
 	/**
@@ -632,7 +394,7 @@ public class CompanyTask {
 	 * @param areaCode
 	 * @param image_Str
 	 * @return
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public CorpBaseRes getList(String company, String jsessionId, String areaCode, byte[] image_Str) throws Exception {
 		if (retryTimes.get() == 5) {
@@ -760,7 +522,6 @@ public class CompanyTask {
 					int sleepValue = 1 + random.nextInt(3);
 					Thread.sleep(sleepValue * 1000);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				corpBaseRes = this.getList(company, corpBaseRes.getSessionId(), areaCode, corpBaseRes.getBitmap());
@@ -811,8 +572,8 @@ public class CompanyTask {
 			return null;
 		} else {
 			try {
-				JSONObject jsonObject = JSONObject.fromObject(rs);
-				corpBase = (CorpBase) JSONObject.toBean(jsonObject, CorpBase.class);
+				JSONObject jsonObject = JSONObject.parseObject(rs);
+				corpBase = JSONObject.toJavaObject(jsonObject, CorpBase.class);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -833,9 +594,9 @@ public class CompanyTask {
 			return null;
 		} else {
 			try {
-				JSONObject jsonObject = JSONObject.fromObject(rs);
+				JSONObject jsonObject = JSONObject.parseObject(rs);
 				if (jsonObject.getJSONObject("data") != null) {
-					corpBase = (CorpBase) JSONObject.toBean(jsonObject.getJSONObject("data"), CorpBase.class);
+					corpBase = JSONObject.toJavaObject(jsonObject.getJSONObject("data"), CorpBase.class);
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -861,8 +622,9 @@ public class CompanyTask {
 	}
 
 	public void readData(String file) throws IOException {
+		BufferedReader read = null;
 		try {
-			BufferedReader read = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+			read = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
 			String json = "";
 			while ((json = read.readLine()) != null) {
 				try {
@@ -876,6 +638,9 @@ public class CompanyTask {
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
+		} finally {
+			if (read != null)
+				read.close();
 		}
 	}
 

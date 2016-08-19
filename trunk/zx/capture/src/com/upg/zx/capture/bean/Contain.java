@@ -5,8 +5,6 @@ import java.util.Map;
 
 public class Contain {
 	public static Map<String,String>shandDongMap = new HashMap<String,String>();
-	//打码服务器地址
-	public static String ARTIFICIAL_SERVICE_HOST = "http://10.50.85.201";
 	
 	//public static String ARTIFICIAL_SERVICE_HOST = "http://10.10.168.15:8080";
 	//征信服务器地址

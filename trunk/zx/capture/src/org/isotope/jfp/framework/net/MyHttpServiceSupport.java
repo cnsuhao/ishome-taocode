@@ -42,7 +42,6 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CookieManager;
 import com.gargoylesoftware.htmlunit.NicelyResynchronizingAjaxController;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.upg.zx.capture.util.MyHttpHost;
 
 /**
  * API请求通信
@@ -60,7 +59,8 @@ public class MyHttpServiceSupport {
 	public MyHttpServiceSupport() {
 		currentHeaders.put("Accept", "text/plain, */*; q=0.01");
 		currentHeaders.put("Accept-Language", "Accept-Language:zh-CN,zh;q=0.8");
-		currentHeaders.put("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.80 Safari/537.36 QQBrowser/9.3.6874.400");
+		currentHeaders.put("User-Agent",
+				"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.80 Safari/537.36 QQBrowser/9.3.6874.400");
 		currentHeaders.put("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
 	}
 
@@ -76,8 +76,7 @@ public class MyHttpServiceSupport {
 
 	private HttpHost currentHttpHost;
 
-	public HttpHost getCurrentHttpHost() throws Exception {
-		currentHttpHost = MyHttpHost.getHttpProxy();
+	public HttpHost getCurrentHttpHost() {
 		return currentHttpHost;
 	}
 
@@ -162,7 +161,8 @@ public class MyHttpServiceSupport {
 
 		// 得到cookie
 		CookieManager CM = webClient.getCookieManager();
-		cookieStore.addCookies((Cookie[]) com.gargoylesoftware.htmlunit.util.Cookie.toHttpClient(CM.getCookies()).toArray());
+		cookieStore.addCookies(
+				(Cookie[]) com.gargoylesoftware.htmlunit.util.Cookie.toHttpClient(CM.getCookies()).toArray());
 
 		return true;
 	}
@@ -184,7 +184,7 @@ public class MyHttpServiceSupport {
 		// TODO PoolingHttpClientConnectionManager
 		// requestConfigBuilder.setStaleConnectionCheckEnabled(true);
 		// 代理httpProxy
-		if (getCurrentHttpHost() != null) {
+		if (currentHttpHost != null) {
 			requestConfigBuilder.setProxy(currentHttpHost);
 		}
 
@@ -240,12 +240,13 @@ public class MyHttpServiceSupport {
 		}
 		return "";
 	}
-	
+
 	public static void main(String[] args) throws Exception {
 		MyHttpServiceSupport mh = new MyHttpServiceSupport();
 		Map<String, String> headers = new HashMap<String, String>();
 		headers.put("Accept", "application/json, text/plain, */*");
-		headers.put("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.80 Safari/537.36 QQBrowser/9.3.6874.400");
+		headers.put("User-Agent",
+				"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.80 Safari/537.36 QQBrowser/9.3.6874.400");
 		headers.put("Accept-Language", "zh-CN,zh;q=0.8");
 		headers.put("Accept-Encoding", "gzip, deflate, sdch");
 		headers.put("Tyc-From", "normal");
@@ -322,7 +323,8 @@ public class MyHttpServiceSupport {
 		return doHttpPOST(serviceURL, param, currentHeaders);
 	}
 
-	public String doHttpPOST(String serviceURL, Map<String, String> param, Map<String, String> headers) throws Exception {
+	public String doHttpPOST(String serviceURL, Map<String, String> param, Map<String, String> headers)
+			throws Exception {
 		// logger.debug("=====>>>>>接口请求<<<<<=====" + serviceURL);
 		CloseableHttpClient httpclient = getCloseableHttpClient(serviceURL);
 		try {

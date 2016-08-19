@@ -8,7 +8,6 @@ import java.util.Map;
 
 import com.upg.zx.capture.bean.ServiceConfig;
 import com.upg.zx.capture.util.HttpClientUtil;
-import com.upg.zx.capture.util.MyHttpHost;
 import com.upg.zx.domain.capture.bean.RamCache;
 import com.upg.zx.domain.entity.AnalysisTemplate;
 import com.upg.zx.domain.entity.RequestHead;
@@ -32,8 +31,6 @@ public class RequestLoad {
 
 	public void init() {
 		try {
-			MyHttpHost.setServiceConfig(serviceConfig);
-			
 			System.out.println("加载工商网址信息......");
 			requestLoad();
 			System.out.println("加载解析模版信息......");
@@ -48,12 +45,12 @@ public class RequestLoad {
 	public void requestLoad() throws Exception {
 		String str = HttpClientUtil.getRequest(serviceConfig.getServiceConfig("requestUrl"));
 		System.out.println("requestLoad=====>>>>>" + str);
-		JsonConfig jsonConfig = new JsonConfig();
-		Map<String, Class> classMap = new HashMap<String, Class>();
-		classMap.put("headList", List.class); // 指定JsonRpcRequest的request字段的内部类型
-		jsonConfig.setClassMap(classMap);
 
 		if (str != null && !"".equals(str)) {
+			JsonConfig jsonConfig = new JsonConfig();
+			Map<String, Class> classMap = new HashMap<String, Class>();
+			classMap.put("headList", List.class); // 指定JsonRpcRequest的request字段的内部类型
+			jsonConfig.setClassMap(classMap);
 			JSONObject jsonObject = JSONObject.fromObject(str);
 			JSONArray dataList = jsonObject.getJSONArray("data");
 			for (int i = 0; i < dataList.size(); i++) {
@@ -95,16 +92,18 @@ public class RequestLoad {
 	public void analysisTemplateLoad() throws Exception {
 		String str = HttpClientUtil.getRequest(serviceConfig.getServiceConfig("analysisTemplateUrl"));
 		System.out.println("analysisTemplateLoad=====>>>>>" + str);
-		JSONObject jsonObject1 = JSONObject.fromObject(str);
-		JSONObject jsonObject = jsonObject1.getJSONObject("data");
-		Iterator it = jsonObject.keys();
-		while (it.hasNext()) {
-			String key = (String) it.next();
-			JSONArray jsonArray = jsonObject.getJSONArray(key);
-			List<AnalysisTemplate> list = (List<AnalysisTemplate>) JSONArray.toCollection(jsonArray,
-					AnalysisTemplate.class);
-			RamCache.analysisTemplateMap.put(key, list);
-		}
 
+		if (str != null && !"".equals(str)) {
+			JSONObject jsonObject1 = JSONObject.fromObject(str);
+			JSONObject jsonObject = jsonObject1.getJSONObject("data");
+			Iterator it = jsonObject.keys();
+			while (it.hasNext()) {
+				String key = (String) it.next();
+				JSONArray jsonArray = jsonObject.getJSONArray(key);
+				List<AnalysisTemplate> list = (List<AnalysisTemplate>) JSONArray.toCollection(jsonArray,
+						AnalysisTemplate.class);
+				RamCache.analysisTemplateMap.put(key, list);
+			}
+		}
 	}
 }

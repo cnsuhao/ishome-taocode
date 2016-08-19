@@ -3,7 +3,6 @@ package com.upg.zx.capture.util;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -158,7 +157,8 @@ public class CorpSearchName {
 	public static int seqShi = 0;
 
 	public HashMap<String, String> areacodeMap = new HashMap<String, String>();
-//BJ,NMG,JS,ZJ,GD,HaiN,QH
+
+	// BJ,NMG,JS,ZJ,GD,HaiN,QH
 	/**
 	 * areaCode initial
 	 */
@@ -211,8 +211,9 @@ public class CorpSearchName {
 
 	// 开启验证码抓取的城市
 	public CorpSearchName() {
-		
+
 	}
+
 	public void init() {
 		areaType = PropertyHelper.getKeyValue("areaType").split(",");
 		// AH,LN,XZ,CQ,FJ,GS,GX,HB,HeB,HeN,HLJ,HN,JX,LN,NX,SC,SD,SH,SX1,SX2,TJ,XJ,YN
@@ -374,7 +375,7 @@ public class CorpSearchName {
 				InputStreamReader read = new InputStreamReader(new FileInputStream(file), encoding);// 考虑到编码格式
 				BufferedReader bufferedReader = new BufferedReader(read);
 				String lineTxt = null, corpName = null;
-				ArrayList arrayList = new ArrayList();
+				ArrayList<String> arrayList = new ArrayList<String>();
 				while ((lineTxt = bufferedReader.readLine()) != null) {
 					corpName = lineTxt;
 					arrayList.add(corpName);
@@ -420,18 +421,7 @@ public class CorpSearchName {
 			areaCode = getAreaCodeByArea(areaType[areaTypeSeq++]);
 			// corpName = array[seqCorp];
 			corpName = getCorpNameForService(areaCode);
-
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NoSuchFieldException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return new String[] { areaCode, corpName, area };
@@ -458,7 +448,7 @@ public class CorpSearchName {
 	public String getCorpNameForService(String areaCode) throws Exception {
 		String corpName = "";
 		// 10.10.168.15 /corp/getKeyWord
-
+		//http://172.16.2.214:80/Zheng/corp/getKeyWord
 		try {
 			String json = HttpClientUtil
 					.getRequest(serviceConfig.getServiceConfig("corpNameUrl") + "?size=1&areaCode=" + areaCode);
@@ -472,7 +462,6 @@ public class CorpSearchName {
 					}
 				}
 			}
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -489,7 +478,7 @@ public class CorpSearchName {
 					InputStreamReader read = new InputStreamReader(new FileInputStream(file), encoding);// 考虑到编码格式
 					BufferedReader bufferedReader = new BufferedReader(read);
 					String lineTxt = null, corpName = null;
-					ArrayList arrayList = new ArrayList();
+					ArrayList<String> arrayList = new ArrayList<String>();
 					while ((lineTxt = bufferedReader.readLine()) != null) {
 						try {
 							if (lineTxt.indexOf("个体") != -1 || lineTxt.indexOf("个人") != -1)
@@ -588,17 +577,7 @@ public class CorpSearchName {
 					}
 				}
 			} while (isSearched);
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NoSuchFieldException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
@@ -619,18 +598,7 @@ public class CorpSearchName {
 			System.out.println("decrease seqCorp" + area + ":   " + seqCorp);
 			PropertyHelper.writeProperties("seqCorp" + area, String.valueOf(seqCorp - 1));
 			fSeq.set(this, seqCorp - 1);
-
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NoSuchFieldException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -722,8 +690,7 @@ public class CorpSearchName {
 		FileOutputStream in = null;
 		try {
 			in = new FileOutputStream(file);
-		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
+		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
 		byte bt[] = new byte[1024];
@@ -739,14 +706,12 @@ public class CorpSearchName {
 				// boolean success=true;
 				// System.out.println("写入文件成功");
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 		try {
 			in.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println(corpSearchName.getAreaCodeByArea("HaiN"));
