@@ -16,7 +16,7 @@ import org.isotope.jfp.framework.utils.RandomHelper;
 public class SecurityCodeHelper implements ISFrameworkConstants, ISModelConstants {
 
 	/**
-	 * 生成验证码
+	 * 生成验证码(全数字)
 	 * 
 	 * @param second
 	 *            有效时间（秒）
@@ -31,7 +31,7 @@ public class SecurityCodeHelper implements ISFrameworkConstants, ISModelConstant
 	}
 
 	/**
-	 * 
+	 * 生成验证码(英字)
 	 * @param type
 	 *            验证码类别（0：区分大小写,1：不区分
 	 * @param second
@@ -50,6 +50,8 @@ public class SecurityCodeHelper implements ISFrameworkConstants, ISModelConstant
 	/**
 	 * 校验验证码
 	 * 
+	 * @param type
+	 *            验证码类别（0：区分大小写,1：不区分
 	 * @param verCode
 	 * @return 核对手机验证码0正确1失败2过期
 	 */
