@@ -36,10 +36,5 @@
 			<artifactId>JFP-Framework-Core</artifactId>
 			<version>${jfp.version}-RELEASE</version>
 		</dependency>
-		<dependency>
-			<groupId>Isotope</groupId>
-			<artifactId>JFP-Framework-Support</artifactId>
-			<version>${jfp.version}-RELEASE</version>
-		</dependency>
 	</dependencies>
 </project>
