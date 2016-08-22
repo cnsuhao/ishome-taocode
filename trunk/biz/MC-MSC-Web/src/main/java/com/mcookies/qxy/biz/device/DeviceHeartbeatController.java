@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class DeviceHeartbeatController extends MyControllerSupport {
 
 	/**
-	 * 新闻栏目新增接口 /column
+	 * 设备通信
 	 */
 	@RequestMapping(value = "/signCard.do", method = RequestMethod.GET)
 	@ResponseBody
@@ -35,9 +35,9 @@ public class DeviceHeartbeatController extends MyControllerSupport {
 		return result;
 	}
 	/**
-	 * 新闻栏目新增接口 /column
+	 * 设备通信
 	 */
-	@RequestMapping(value = "/signCard.do", method = RequestMethod.POST, produces = "application/octet-stream")
+	@RequestMapping(value = "/signCard.do", method = RequestMethod.POST)
 	@ResponseBody
 	public ResultBean signCardPOST(@RequestBody String datas, SendTimecardDataPVO param) {
 		ResultBean result = new ResultBean();

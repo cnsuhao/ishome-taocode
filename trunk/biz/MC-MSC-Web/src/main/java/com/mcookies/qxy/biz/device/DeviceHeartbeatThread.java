@@ -9,6 +9,7 @@ import org.isotope.jfp.framework.utils.EmptyHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.alibaba.fastjson.JSON;
 import com.mcookies.qxy.common.DeviceAlarm.DeviceAlarmService;
@@ -69,6 +70,7 @@ public class DeviceHeartbeatThread implements Runnable, ISFrameworkConstants {
 	final static String DeviceUserName = "DeviceUserName:";
 	final static String DeviceDatas = "DeviceDatas";
 
+	@Transactional
 	private void saveDeviceDatas(SendTimecardDataPVO param) {
 		logger.debug("刷卡记录处理开始 =====>>>>>"+param);
 		long curTime = System.currentTimeMillis();
@@ -118,18 +120,19 @@ public class DeviceHeartbeatThread implements Runnable, ISFrameworkConstants {
 					}
 				}
 			}
-			// 1111111111,002720004,999999999;2222222222,002720004,888888888
+			// OLD 1111111111,002720004,999999999;2222222222,002720004,888888888
 			String dd = param.getDatas();
 			// 用户提交
 			if (EmptyHelper.isNotEmpty(dd)) {
 				LogAttendanceDBO la;
 				LogSecurityDBO ls;
 				StudentRfidDBO sr;
-				String[] datas = dd.split(SEMICOLON);
+				//new 000000885366284 2016-08-22 12:13:57 1 00 000000885366284 2016-08-22 12:14:02 1 00 
+				String[] datas = dd.split("\r\n");
 				// 数据格式化
 				for (String l : datas) {
 					// rfid号1,学校编号1,time
-					String[] sd = l.split(COMMA);
+					String[] sd = l.split(BLANK);
 					sr = new StudentRfidDBO();
 					sr.setRfid(Long.parseLong(sd[0]));
 					sr.setSid(Long.parseLong(sd[1]));
