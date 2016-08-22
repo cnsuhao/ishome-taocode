@@ -12,18 +12,17 @@ import org.isotope.jfp.framework.utils.PKHelper;
  * @since 2.0.2 2015/02/06
  */
 public class BaseHAO extends MobileBean {
-	
+
 	/**
 	 * 当前页
 	 */
 	private Integer pageCurrent = 0;
-	
+
 	/**
 	 * 每页条数
 	 */
 	private Integer pageLimit = 0;
-	
-	
+
 	public BaseHAO() {
 		makePuk();
 	}
@@ -36,16 +35,16 @@ public class BaseHAO extends MobileBean {
 	}
 
 	/**
-	 * 医院id
+	 * 企业id
 	 */
-	private String hosId;
+	private String companyId;
 
-	public String getHosId() {
-		return hosId;
+	public String getCompanyId() {
+		return companyId;
 	}
 
-	public void setHosId(String hosId) {
-		this.hosId = hosId;
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
 	}
 
 	/**
