@@ -26,7 +26,7 @@ public class DeviceHeartbeatController extends MyControllerSupport {
 		} else if ("swingcarddata".equals(param.getMethod())) { // 上传刷卡数据
 			DeviceHeartbeatThread dhbt = BeanFactoryHelper.getBean("DeviceHeartbeatThread");
 			dhbt.setDeviceData(param);
-			dhbt.start();
+			(new Thread(dhbt)).start();
 			result.setRequestInterval("");
 		} else if ("upstatus".equals(param.getMethod())) {// 上传设备状态数据
 			result.setRequestInterval("");
@@ -47,7 +47,7 @@ public class DeviceHeartbeatController extends MyControllerSupport {
 		} else if ("swingcarddata".equals(param.getMethod())) { // 上传刷卡数据
 			DeviceHeartbeatThread dhbt = BeanFactoryHelper.getBean("DeviceHeartbeatThread");
 			dhbt.setDeviceData(param);
-			dhbt.start();
+			(new Thread(dhbt)).start();
 			result.setRequestInterval("");
 		} else if ("upstatus".equals(param.getMethod())) {// 上传设备状态数据
 			result.setRequestInterval("");
