@@ -32,6 +32,10 @@ public class LoginService extends MyServiceSupport implements ISFrameworkConstan
 	 * 
 	 * @param loginer
 	 */
+	protected List<UserBean> readLoginer(HashMap<String, String> loginer) {
+		return getLoginDao().readLoginer(loginer);
+	}
+
 	protected List<UserBean> readTeacherLoginer(HashMap<String, String> loginer) {
 		return getLoginDao().readTeacherLoginer(loginer);
 	}
@@ -99,16 +103,18 @@ public class LoginService extends MyServiceSupport implements ISFrameworkConstan
 	 * 
 	 * @param loginer
 	 */
-	protected void doLoginToken(UserBean loginer) {
+	protected void doLoginToken(UserBean loginer, boolean dbSave) {
 		// Token制作
 		loginer.getToken();
 		// 缓存登录信息
 		UserCacheHelper.saveUser(loginer);
-		// 数据库保存
-		TkLoginerDBO tkl = new TkLoginerDBO();
-		tkl.setToken(loginer.getToken());
-		tkl.setJson(JSON.toJSONString(loginer));
-		TkLoginerService_.doInsert(tkl);
+		if (dbSave) {
+			// 数据库保存
+			TkLoginerDBO tkl = new TkLoginerDBO();
+			tkl.setToken(loginer.getToken());
+			tkl.setJson(JSON.toJSONString(loginer));
+			TkLoginerService_.doInsert(tkl);
+		}
 	}
 
 	@Resource

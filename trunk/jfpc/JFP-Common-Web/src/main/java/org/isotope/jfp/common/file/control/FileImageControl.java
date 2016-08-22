@@ -1,4 +1,4 @@
-package org.isotope.jfp.common.file;
+package org.isotope.jfp.common.file.control;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -19,7 +19,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.swing.ImageIcon;
 
+import org.isotope.jfp.common.file.ImageMarkLogoHelper;
 import org.isotope.jfp.framework.beans.common.RESTResultBean;
+import org.isotope.jfp.framework.cache.redis.RedisCacheHelper;
 import org.isotope.jfp.framework.support.MyContentTypeSupport;
 import org.isotope.jfp.framework.utils.EmptyHelper;
 import org.isotope.jfp.framework.utils.FTPUtil;
@@ -43,7 +45,7 @@ import com.alibaba.fastjson.JSON;
  * @author 001745
  *
  */
-public class FileBusiness extends MyContentTypeSupport {
+public class FileImageControl extends MyContentTypeSupport {
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 	/**
 	 * 默认图片
@@ -78,7 +80,7 @@ public class FileBusiness extends MyContentTypeSupport {
 	 * 水印图片
 	 */
 	private Resource markPic = null;
-	
+
 	@Autowired
 	FTPUtil FTPUtil_;
 
@@ -103,7 +105,7 @@ public class FileBusiness extends MyContentTypeSupport {
 		InputStream input = file.getInputStream();
 		// 压缩
 		if (doCompress) {
-			//input = ImageCompress.Tosmallerpic(input, ratio, per);
+			// input = ImageCompress.Tosmallerpic(input, ratio, per);
 		}
 		// 水印
 		if (doMark) {
@@ -115,11 +117,11 @@ public class FileBusiness extends MyContentTypeSupport {
 
 			}
 		}
-		String filePath = FTPUtil_.uploadFile(file.getOriginalFilename(),input);
+		String filePath = FTPUtil_.uploadFile(file.getOriginalFilename(), input);
 		if (EmptyHelper.isEmpty(filePath)) {
-			 tb.setCode("1");
+			tb.setCode("1");
 		} else {
-			 tb.setResult(filePath);
+			tb.setResult(filePath);
 		}
 		logger.debug(tb.toString());
 		return tb;
@@ -227,7 +229,7 @@ public class FileBusiness extends MyContentTypeSupport {
 		BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 		Graphics g = image.getGraphics();
 
-		char[] rands = generateCheckCode(session);
+		char[] rands = generateCheckCode(30, 4, session.getId());
 		drawBackground(g, WIDTH, HEIGHT);
 		drawRands(g, rands, WIDTH, HEIGHT);
 		g.dispose();
@@ -264,7 +266,7 @@ public class FileBusiness extends MyContentTypeSupport {
 		BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 		Graphics g = image.getGraphics();
 
-		char[] rands = generateCheckCode(session);
+		char[] rands = generateCheckCode(30, 4, session.getId());
 		drawBackground(g, WIDTH, HEIGHT);
 		drawRands(g, rands, WIDTH, HEIGHT);
 		g.dispose();
@@ -385,20 +387,20 @@ public class FileBusiness extends MyContentTypeSupport {
 	}
 
 	/**
-	 * 获得图片验证码
+	 * 获得图片验证码（大写英字）
 	 * 
 	 * @param session
 	 * @return
 	 */
-	private char[] generateCheckCode(HttpSession session) {
+	private char[] generateCheckCode(int second, int length, String jobid) {
 		String chars = "23456789ABCDEFGHJKLMNPQRSTUVWXYZ";
-		char[] rands = new char[4];
-		for (int i = 0; i < 4; i++) {
+		char[] rands = new char[length];
+		for (int i = 0; i < length; i++) {
 			int rand = (int) (Math.random() * (chars.length() - 1));
 			rands[i] = chars.charAt(rand);
 		}
 		// 缓存
-		session.setAttribute(RANDOM_CODE, new String(rands));
+		RedisCacheHelper.setSessionAttribute(1, second, jobid, new String(rands));
 		return rands;
 	}
 }

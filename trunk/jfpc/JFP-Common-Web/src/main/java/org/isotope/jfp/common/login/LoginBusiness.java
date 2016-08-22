@@ -9,7 +9,7 @@ import org.isotope.jfp.framework.beans.user.LoginerBean;
 import org.isotope.jfp.framework.beans.user.UserBean;
 import org.isotope.jfp.framework.utils.DateHelper;
 import org.isotope.jfp.framework.utils.EmptyHelper;
-import org.isotope.jfp.framework.utils.PKHelper;
+import org.isotope.jfp.framework.utils.token.UserCacheHelper;
 import org.isotope.jfp.persistent.LogLoginer.LogLoginerDBO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,13 +36,14 @@ public class LoginBusiness extends LoginService {
 	/**
 	 * 用户登录
 	 * 
+	 * @deprecated
 	 * @param authorizerRefreshToken
 	 * @return
 	 */
 	@Transactional
 	public UserBean doLogIn(UserBean loginer) {
 		// 获得登录用户信息（存在性检索）
-		List<UserBean> loginers ;
+		List<UserBean> loginers;
 		UserBean user = new UserBean();
 		HashMap<String, String> login = new HashMap<String, String>();
 		login.put("openid", loginer.getOpenId());
@@ -69,7 +70,7 @@ public class LoginBusiness extends LoginService {
 		user = loginers.get(0);
 
 		// 保存本次登录信息（缓存、数据库）
-		doLoginToken(user);
+		doLoginToken(user,false);
 		// 保存本次登录日志（数据库）
 		{
 			LogLoginerDBO LogLoginer = new LogLoginerDBO();
@@ -79,7 +80,7 @@ public class LoginBusiness extends LoginService {
 			LogLoginer.setClientType(9);
 			LogLoginer.setUserType("1");
 
-			makeLoginLog(LogLoginer,user);
+			makeLoginLog(LogLoginer, user);
 			doLoginLog(LogLoginer);
 		}
 
@@ -116,7 +117,7 @@ public class LoginBusiness extends LoginService {
 		} else if ("3".equals(loginer.getUserType())) {
 			loginers = readStudentLoginer(login);
 		} else {
-			user.setLoginStatus("8");
+			loginers = readLoginer(login);
 			return user;
 		}
 
@@ -128,7 +129,8 @@ public class LoginBusiness extends LoginService {
 		} else if (loginers.size() > 1) {
 			// 系统整合的场合进行用户排他
 			for (UserBean loginerdb : loginers) {
-				if (loginer.getUserType().equals(loginerdb.getUserType())) {
+				// if (loginer.getUserType().equals(loginerdb.getUserType()))
+				{
 					logined = checkLogin(loginer, loginerdb, user);
 					if (logined == true) {
 						break;
@@ -161,9 +163,31 @@ public class LoginBusiness extends LoginService {
 		}
 
 		// 保存本次登录信息（缓存、数据库）
-		doLoginToken(user);
+		makeLogIn(loginer, user, false);
+
+		return user;
+	}
+	
+	/**
+	 * 获得当前登录用户对象
+	 * @param token
+	 * @return
+	 */
+	public UserBean loadLoginer(String token){
+		return UserCacheHelper.checkUser(token);
+	}
+
+	/**
+	 * 二次登录
+	 * 
+	 * @param loginer
+	 * @return
+	 */
+	public UserBean makeLogIn(LoginerBean loginer, UserBean user, boolean dbSave) {
+		// 保存本次登录信息（缓存、数据库）
+		doLoginToken(user,dbSave);
 		// 保存本次登录日志（数据库）
-		{
+		if(dbSave){
 			LogLoginerDBO LogLoginer = new LogLoginerDBO();
 			LogLoginer.setAccount(loginer.getAccount());
 			LogLoginer.setIpAdress(loginer.getIpAdress());
@@ -171,10 +195,9 @@ public class LoginBusiness extends LoginService {
 			LogLoginer.setClientType(loginer.getClientType());
 			LogLoginer.setUserType(loginer.getUserType());
 
-			makeLoginLog(LogLoginer,user);
+			makeLoginLog(LogLoginer, user);
 			doLoginLog(LogLoginer);
 		}
-
 		return user;
 	}
 

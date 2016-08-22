@@ -14,10 +14,14 @@ public interface LoginDao {
 	 * @param loginer
 	 * @return
 	 */
+	public List<UserBean> readLoginer(HashMap<String, String> loginer);
+
 	public List<UserBean> readTeacherLoginer(HashMap<String, String> loginer);
+
 	public List<UserBean> readParentLoginer(HashMap<String, String> loginer);
+
 	public List<UserBean> readStudentLoginer(HashMap<String, String> loginer);
-	
+
 	public int creatLoginerByOpenId(MyDataBaseObjectSupport loginer);
 
 }
