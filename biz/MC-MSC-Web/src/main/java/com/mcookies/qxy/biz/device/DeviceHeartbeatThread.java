@@ -105,6 +105,8 @@ public class DeviceHeartbeatThread implements Runnable, ISFrameworkConstants {
 					dh.setDeviceId(dtd.getDeviceId());
 					dh.setSendTime(DateHelper.currentTimeMillis2());
 					dh.setIsUse(0);
+					dh.setPuk(ONE);
+					dh.setSid(Long.parseLong(deviceData.getEnterpriseID()));
 					DeviceHeartbeatService_.doInsert(dh);
 				}
 				// 计算最后报警
@@ -133,6 +135,8 @@ public class DeviceHeartbeatThread implements Runnable, ISFrameworkConstants {
 					sr.setSid(Long.parseLong(sd[1]));
 					
 					// 检查rfid卡号有效性
+					sr.setPuk(ONE);
+					sr.setSid(Long.parseLong(deviceData.getEnterpriseID()));
 					sr = (StudentRfidDBO) StudentRfidService_.doRead(sr);
 					// 保存学生刷卡信息
 					if (sr != null) {
@@ -140,6 +144,8 @@ public class DeviceHeartbeatThread implements Runnable, ISFrameworkConstants {
 						la.setRfid(sr.getRfid());
 						la.setDeviceId(dtd.getDeviceId());
 						la.setMarkTime(DateHelper.currentTimeMillis2());
+						//la.setPuk(ONE);
+						//la.setSid(Long.parseLong(deviceData.getEnterpriseID()));
 						//TODO
 						la.setFlag(0);//0-进来；1-出去；2-出现
 						la.setSourceJson(l);
