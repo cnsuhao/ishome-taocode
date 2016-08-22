@@ -2,14 +2,17 @@ package org.isotope.jfp.framework.beans.pub;
 
 import javax.inject.Named;
 
+import org.isotope.jfp.framework.beans.common.FrameworkDataBean;
+
 /**
  * 客户端文件版本信息
+ * 
  * @author Spook
  * @version 0.1
  * @since 0.1.0 2014/2/8
  */
 @Named
-public class VersionBean {
+public class VersionBean extends FrameworkDataBean {
 	/**
 	 * 客户端名称
 	 */
@@ -46,10 +49,4 @@ public class VersionBean {
 	public void setDatetime(String datetime) {
 		this.datetime = datetime;
 	}
-
-	@Override
-	public String toString() {
-		return "VersionBean [clientname=" + clientname + ", version=" + version + ", datetime=" + datetime + "]";
-	}
-
 }
