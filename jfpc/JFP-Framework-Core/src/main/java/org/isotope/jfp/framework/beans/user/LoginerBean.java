@@ -31,7 +31,7 @@ public class LoginerBean extends BusinessTokenBean {
 	String securityCode;
 
 	/**
-	 * 登录来源类别（1网页2手机3微信4支付宝）
+	 * 登录来源类别（0APP1网页2手机3微信4支付宝）
 	 */
 	Integer clientType;
 
