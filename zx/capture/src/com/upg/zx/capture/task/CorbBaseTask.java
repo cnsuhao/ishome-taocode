@@ -69,9 +69,11 @@ public class CorbBaseTask {
 	}
 
 	public void listTask() {
+		System.out.println("任务开启......CorbBaseTask");
 		try {
 			if (clientSemaphore.tryAcquire(500L, TimeUnit.MILLISECONDS)) {
 				ForCodeCompany forCodeCompany = getForCodeCompany();
+				System.out.println("任务开启......forCodeCompany====" + forCodeCompany);
 				if (forCodeCompany != null && EmptyHelper.isNotEmpty(forCodeCompany.getCorpName())) {
 					try {
 						asyncService.runTask(this, "corpList", new Object[] { forCodeCompany }, null, null, 5000, true);
@@ -88,6 +90,7 @@ public class CorbBaseTask {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println("任务结束......CorbBaseTask");
 	}
 
 	public void setYzmCapture(YzmCapture yzmCapture) {
@@ -159,7 +162,8 @@ public class CorbBaseTask {
 					}
 				}
 				// 代理失败添加到打码失败队列
-				cache.offerObjectInList(CaptureConstants.ARTIFICIAL_CODE_FAILD, JSON.toJSONString(forCodeCompany), false);
+				cache.offerObjectInList(CaptureConstants.ARTIFICIAL_CODE_FAILD, JSON.toJSONString(forCodeCompany),
+						false);
 				// System.out.println(e.getMessage());
 				return;
 			}
@@ -256,8 +260,8 @@ public class CorbBaseTask {
 	 */
 	public ForCodeCompany getForCodeCompany() {
 		try {
-			String json = HttpClientUtil.getRequest(CaptureConstants.ARTIFICIAL_SERVICE_HOST + IAppService.GET_FOR_CODE_COMPANY,
-					null);
+			String json = HttpClientUtil
+					.getRequest(CaptureConstants.ARTIFICIAL_SERVICE_HOST + IAppService.GET_FOR_CODE_COMPANY, null);
 			if (json != null && !"".equals(json)) {
 				JSONObject json_obj = JSONObject.parseObject(json);
 				ForCodeCompany forCodeCompany = JSONObject.toJavaObject(json_obj, ForCodeCompany.class);
