@@ -378,35 +378,36 @@ Response:
 }
 ```
 ### login.5 用户登录相关接口
-#### login.5.1 用户名/手机号/邮箱密码登录接口
+#### login.5.1 用户名/手机号/邮箱、密码/手机短信验证码登录接口
 > 登录接口不需要token验证
-> 登录操作需要先选择要登录的学校，然后点击下一步选择账号或者手机号、邮箱方式输入密码登录，登录成功后返回用户token；
+> 先登录账号，再选择学校和角色登陆系统
+> 用户账号、用户手机、用户邮箱填一个即可；输入密码或者短信验证码登录，登录成功后选择用户学校和角色，进入系统；如果用户不存在则提示登录失败；
 ``` json
 Url:        /qxy/login
 Method:     POST
 Header:     Content-type:application/json
 Parameter:
-    - 'sid':         学校id
-    - 'account':     用户账号
-    - 'email':       用户邮箱
-    - 'phone':       用户手机号
-    - 'password':    用户密码
+    - 'clientType':  客户端类型（0-APP；1-网页；2-手机；3-微信；4-支付宝；）（必填）
+    - 'account':     用户账号（必填-账号、邮箱、手机号选一）
+    - 'email':       用户邮箱（必填-账号、邮箱、手机号选一）
+    - 'phone':       用户手机号（必填-账号、邮箱、手机号选一）
+    - 'password':    用户密码（必填 -密码和手机验证码二选一）
+    - 'captcha':     用户收到的手机验证码（必填 -密码和手机验证码二选一）
 示例
 {
-	"sid":"1",
-	"account":"username",
+	"clientType":"1",
+	"account":"luoidbashi",
 	"email":"eee@qq.com",
 	"phone":"15265236523",
-	"password":"123456"
+	"password":"123456",
+	"captcha":"63656"
 }
 Response:  
-    - `status`：      0->登录成功
-				      1->登录失败，用户不在该机构下
-				      2->登录失败，账号或密码不正确
+    - `status`：          0->登录成功
+				          2->登录失败，账号或密码不正确
     - `schoolName`：      学校名称
-    - `teacherName`：     教师姓名
-    - `phone`：           教师手机号
-    - `email`：           教师邮箱
+    - `isUse`：           是否启用，0-未启用1-启用，只返回为1的
+    - `uid`：             用户id
 ```
 > **返回结果示例：**
 ``` json
@@ -414,36 +415,48 @@ Response:
     "status": 0,
     "data": {
         "info":"登录成功",
-        "token":"ekcoalsdfjladi323lasdfj23ls3e23",
-        "schoolName":"文鼎中学",
-        "teacherName":"张老师",
-        "phone":"15678987678",
-        "email":"15@qq.com"
+        "uid":"14",
+        "school":[
+	        {
+		        "sid":"1",
+		        "isUse":"1",
+		        "schoolName":"英才中学"
+	        },
+	        {
+		        "sid":"2",
+		        "isUse":"1",
+		        "schoolName":"博文中学"
+	        },
+	        {
+		        "sid":"3",
+		        "isUse":"1",
+		        "schoolName":"南阳中学"
+	        }
+        ]
     }
 }
 ```
 
-#### login.5.2 手机号短信验证码登录接口
+#### login.5.2 选择登录学校及角色接口
 >不需要token验证
->如果忘记密码，可以使用手机短信验证码方式验证登录，验证成功即登录成功后获取token；如果验证成功后反馈用户手机号不存在系统中，则不能登录系统；
+>用户登录成功后获取该用户的学校列表，用户选择所需要登录的学校id和角色id，生成token进入系统；
 ``` json
-Url:        /qxy/login/captcha
+Url:        /qxy/login/in
 Method:     POST
 Header:     Content-type:application/json
 Parameter:
     - 'sid':           学校id
-    - 'captcha':       用户收到的验证码
-    - 'phone':         用户手机号
+    - 'loginRole':     登录角色（1-教师；2-家长；3-学生）
+    - 'uid':           用户id
 示例
 {
 	"sid":"1",
-	"phone":"13562563656",
-	"captcha":"63656"	
+	"loginRole":"0",
+	"uid":"12"
 }
 Response:  
     - `status`：     0->登录成功
-					 1->登录失败，验证码已过期，请重新获取验证码
-					 2->登录失败，用户不是系统用户，请联系管理员
+					 2->登录失败，用户已不存在
     - `schoolName`：      学校名称
     - `teacherName`：     教师姓名
     - `phone`：           教师手机号
