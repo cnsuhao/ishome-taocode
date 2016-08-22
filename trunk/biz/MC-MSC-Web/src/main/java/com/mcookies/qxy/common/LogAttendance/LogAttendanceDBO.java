@@ -38,27 +38,6 @@ public class LogAttendanceDBO extends MyDataBaseObjectSupport {
 	private String sourceJson = null;
 
 	/**
-	 * 学校id
-	 */
-	private Long sid = null;
-
-	/**
-	 * 学期id
-	 */
-	private Long termId = null;
-
-	/**
-	 * 班级id
-	 */
-	private Long cid = null;
-
-	/**
-	 * 学生id
-	 */
-	private Long studentId = null;
-	
-	
-	/**
 	 * 获取自增id
 	 *
 	 * @return Id 自增id

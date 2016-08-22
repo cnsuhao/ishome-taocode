@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.alibaba.fastjson.JSON;
+import com.mcookies.qxy.common.DeviceAlarm.DeviceAlarmDBO;
 import com.mcookies.qxy.common.DeviceAlarm.DeviceAlarmService;
 import com.mcookies.qxy.common.DeviceHeartbeat.DeviceHeartbeatDBO;
 import com.mcookies.qxy.common.DeviceHeartbeat.DeviceHeartbeatService;
@@ -103,7 +104,6 @@ public class DeviceHeartbeatThread implements Runnable, ISFrameworkConstants {
 				// 记录设备心跳
 				{
 					DeviceHeartbeatDBO dh = new DeviceHeartbeatDBO();
-					dh.setSid(dtd.getSid());
 					dh.setDeviceId(dtd.getDeviceId());
 					dh.setSendTime(DateHelper.currentTimeMillis2());
 					dh.setIsUse(0);
@@ -116,7 +116,14 @@ public class DeviceHeartbeatThread implements Runnable, ISFrameworkConstants {
 					long lastTime = Long.parseLong(dtd.getLastLoginTime());
 					if ((lastTime - curTime) > heartSecond * 60 * 1000) {
 						logger.error("该设备异常=====>>>>>" + dtd.getDeviceId());
-						return;
+						DeviceAlarmDBO da = new DeviceAlarmDBO();
+						da.setDeviceId(dtd.getDeviceId());
+						da.setAlarmTime(DateHelper.currentTimeMillis2());
+						da.setAlarmInformation("设备通信时间异常报警");
+						da.setIsUse(0);
+						da.setPuk(ONE);
+						da.setSid(Long.parseLong(deviceData.getEnterpriseID()));
+						DeviceAlarmService_.doInsert(da);
 					}
 				}
 			}
@@ -127,37 +134,45 @@ public class DeviceHeartbeatThread implements Runnable, ISFrameworkConstants {
 				LogAttendanceDBO la;
 				LogSecurityDBO ls;
 				StudentRfidDBO sr;
-				//new 000000885366284 2016-08-22 12:13:57 1 00 000000885366284 2016-08-22 12:14:02 1 00 
+				//new 000000885366284 2016-08-22 12:13:57 1 00 
+				//    000000885366284 2016-08-22 12:14:02 1 00 
 				String[] datas = dd.split("\r\n");
 				// 数据格式化
 				for (String l : datas) {
-					// rfid号1,学校编号1,time
 					String[] sd = l.split(BLANK);
-					sr = new StudentRfidDBO();
-					sr.setRfid(Long.parseLong(sd[0]));
-					sr.setSid(Long.parseLong(sd[1]));
+					Long rfid = Long.parseLong(sd[0]);
 					
 					// 检查rfid卡号有效性
+					sr = new StudentRfidDBO();
+					sr.setRfid(rfid);
 					sr.setPuk(ONE);
-					sr.setSid(Long.parseLong(deviceData.getEnterpriseID()));
+					sr.setSid(Long.parseLong(deviceData.getEnterpriseID()));					
 					sr = (StudentRfidDBO) StudentRfidService_.doRead(sr);
-					// 保存学生刷卡信息
+					// 存在学生的场合
 					if (sr != null) {
+						//对于接收到的内容，写入到log_attendance表中
 						la = new LogAttendanceDBO();
-						la.setRfid(sr.getRfid());
+						la.setRfid(rfid);
 						la.setDeviceId(dtd.getDeviceId());
-						la.setMarkTime(DateHelper.currentTimeMillis2());
+						la.setMarkTime(sd[1]+BLANK+sd[2]);
 						//la.setPuk(ONE);
-						//la.setSid(Long.parseLong(deviceData.getEnterpriseID()));
-						//TODO
-						la.setFlag(0);//0-进来；1-出去；2-出现
+						//la.setSid(Long.parseLong(deviceData.getEnterpriseID()));x
+						la.setFlag(Integer.parseInt(sd[3]));//0-进来；1-出去
 						la.setSourceJson(l);
-						// 存在学生的场合
 						LogAttendanceService_.doInsert(la);
-					} else {
 						ls = new LogSecurityDBO();
-						//TODO
+						ls.setDeviceId(dtd.getDeviceId());
+						ls.setPuk(ONE);
+						ls.setSid(Long.parseLong(deviceData.getEnterpriseID()));
+						ls.setRfid(Long.parseLong(sd[0]));
+						ls.setMarkTime(sd[1]+BLANK+sd[2]);
+						ls.setFlag(Integer.parseInt(sd[3]));//0-进来；1-出去
+//						ls.setTermId(termid);//学期id
+//						ls.setCid(sr.get);//班级id
+						ls.setStudentId(sr.getStudentId());//学生id
 						LogSecurityService_.doInsert(ls);
+					} else {
+						//TODO
 					}
 				}
 			}
