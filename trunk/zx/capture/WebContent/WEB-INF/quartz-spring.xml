@@ -447,31 +447,31 @@
 	<bean id='serviceConfig' class='com.upg.zx.capture.bean.ServiceConfig'>
 		<property name='serviceConfig'>
 			<map>
-				<entry key='requestUrl' value='http://127.0.0.1:8888/corp/request/allinfo' />
+				<entry key='requestUrl' value='http://172.16.2.214:80/Zheng/corp/request/allinfo' />
 				<entry key='analysisTemplateUrl'
-					value='http://127.0.0.1:8888/corp/request/queryanalysisTemplate' />
+					value='http://172.16.2.214:80/Zheng/corp/request/queryanalysisTemplate' />
 
 				<entry key='postOtherInfoJsUrl'
-					value='http://127.0.0.1:8888/corp/uploadCompanyHtmljs' />
+					value='http://172.16.2.214:80/Zheng/corp/uploadCompanyHtmljs' />
 				<entry key='postOtherInfoUrl'
-					value='http://127.0.0.1:8888/corp/uploadCompanyHtml' />
+					value='http://172.16.2.214:80/Zheng/corp/uploadCompanyHtml' />
 
 				<entry key='submitCompanyUrl'
-					value='http://127.0.0.1:8888/corp/uploadCompanyHtml' />
+					value='http://172.16.2.214:80/Zheng/corp/uploadCompanyHtml' />
 				<entry key='submitCompanyls'
-					value='http://127.0.0.1:8888/corp/uploadCompanyListHtml' />
-				<entry key='getLianziCompanyUrl' value='http://127.0.0.1:8888/corp/sendIpDistant' />
+					value='http://172.16.2.214:80/Zheng/corp/uploadCompanyListHtml' />
+				<entry key='getLianziCompanyUrl' value='http://172.16.2.214:80/Zheng/corp/sendIpDistant' />
 
 				<entry key='getCompanyUrl'
-					value='http://127.0.0.1:8888/corp/info/update/sedCompany' />
+					value='http://172.16.2.214:80/Zheng/corp/info/update/sedCompany' />
 
-				<entry key='corpNameUrl' value='http://127.0.0.1:8888/corp/getKeyWord' />
+				<entry key='corpNameUrl' value='http://172.16.2.214:80/Zheng/corp/getKeyWord' />
 
 				<entry key='keyWordUrl' value='http://testcapture153.wzyrz.cn/key/newWord' />
 				<entry key='submitCourtDocUrl'
 					value='http://testcapture153.wzyrz.cn/codc/uploadCompanyListHtml' />
 
-				<entry key='useProxy' value='http://127.0.0.1:8888/proxy/newProtool' />
+				<entry key='useProxy' value='http://172.16.2.214:80/Zheng/proxy/newProtool' />
 			</map>
 		</property>
 	</bean>
@@ -546,16 +546,19 @@
 		<!-- ////////////////////////////////离线异步静态抓取//////////////////////////////////// -->
 		<!-- 获取公司详细信息 -->
 		<task:scheduled ref="companyTask" method="getInfoTask"
-			cron="0/5 * * * * ?" />
+			cron="0/1 * * * * ?" />
 
 		<!-- 公司自动打 -->
 		<task:scheduled ref="companyTask" method="getListTask"
-			cron="0/5 * * * * ?" />
+			cron="0/1 * * * * ?" />
 			
 		<!-- ////////////////////////////////离线异步静态抓取//////////////////////////////////// -->
 		<!-- 人工打码 -->
-	   <task:scheduled ref="corbBaseTask"
-			method="forCodeCompanyByArtificialHtmlToUpload" cron="0/5 * * * * ?" />
+	  <!--  <task:scheduled ref="corbBaseTask"
+			method="forCodeCompanyByArtificialHtmlToUpload" cron="0/5 * * * * ?" /> -->
+		<!-- 获取公司详细信息  -->
+		<!-- <task:scheduled ref="corbBaseTask" method="listTask"
+			cron="0/1 * * * * ?" /> -->
 
 		<task:scheduled ref="tokenclear" method="clean"
 			cron="0/30  * * * * ?" />

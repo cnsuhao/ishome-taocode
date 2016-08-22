@@ -15,7 +15,6 @@ import java.util.Random;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 
-import org.apache.http.HttpHost;
 import org.apache.log4j.Logger;
 
 import com.alibaba.fastjson.JSONArray;
@@ -98,7 +97,7 @@ public class CompanyTask {
 	}
 
 	public void taskRun() throws Exception {
-		System.out.println("任务开启");
+		System.out.println("任务开启......CompanyTask");
 		CorpBase corpBase = this.getCorpBase();
 		if (corpBase != null) {
 			System.out.println(corpBase.getCorp_name() + "开始抓取 .....");
@@ -125,7 +124,7 @@ public class CompanyTask {
 
 			}
 		}
-		System.out.println("任务结束 ");
+		System.out.println("任务结束......CompanyTask");
 
 	}
 
