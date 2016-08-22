@@ -23,7 +23,7 @@ import com.mcookies.qxy.common.StudentRfid.StudentRfidDBO;
 import com.mcookies.qxy.common.StudentRfid.StudentRfidService;
 
 //@Service("DeviceHeartbeatThread")
-public class DeviceHeartbeatThread extends Thread implements ISFrameworkConstants {
+public class DeviceHeartbeatThread implements Runnable, ISFrameworkConstants {
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 	/**
 	 * Redis缓存
