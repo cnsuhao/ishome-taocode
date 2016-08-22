@@ -7,7 +7,7 @@
 <mapper namespace='org.isotope.jfp.common.login.LoginDao'>
 
     <!-- 用户登陆  -->
-        <select id='readTeacherLoginer' parameterType='map' resultType='LoginerData'>
+    <select id='readLoginer' parameterType='map' resultType='LoginerData'>
         SELECT 
             a.uid as puk
             ,a.password 
