@@ -199,7 +199,7 @@
                 AND id = #{id}
             </if>
             <if test="deviceId != null ">
-				and a.device_id = #{deviceId}
+				and device_id = #{deviceId}
 			</if>			
 	        <if test=" username != null "><!-- 设备账号 -->
 	            ,username = #{username}

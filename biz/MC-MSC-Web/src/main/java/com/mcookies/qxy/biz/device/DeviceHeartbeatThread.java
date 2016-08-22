@@ -8,6 +8,7 @@ import org.isotope.jfp.framework.utils.DateHelper;
 import org.isotope.jfp.framework.utils.EmptyHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
 import com.mcookies.qxy.common.DeviceAlarm.DeviceAlarmService;
@@ -22,7 +23,7 @@ import com.mcookies.qxy.common.LogSecurity.LogSecurityService;
 import com.mcookies.qxy.common.StudentRfid.StudentRfidDBO;
 import com.mcookies.qxy.common.StudentRfid.StudentRfidService;
 
-//@Service("DeviceHeartbeatThread")
+@Service("DeviceHeartbeatThread")
 public class DeviceHeartbeatThread implements Runnable, ISFrameworkConstants {
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 	/**
@@ -69,7 +70,7 @@ public class DeviceHeartbeatThread implements Runnable, ISFrameworkConstants {
 	final static String DeviceDatas = "DeviceDatas";
 
 	private void saveDeviceDatas(SendTimecardDataPVO param) {
-		logger.debug("刷卡记录处理开始 =====>>>>>");
+		logger.debug("刷卡记录处理开始 =====>>>>>"+param);
 		long curTime = System.currentTimeMillis();
 		try {
 			// 检查设备的正确性
@@ -82,6 +83,8 @@ public class DeviceHeartbeatThread implements Runnable, ISFrameworkConstants {
 				// 不存在的场合数据库加载
 				if (EmptyHelper.isEmpty(c)) {
 					dtd = new DeviceTagDBO();
+					dtd.setPuk(ONE);
+					dtd.setSid(Long.parseLong(deviceData.getEnterpriseID()));
 					dtd.setDeviceId(param.getDevID());
 					dtd = (DeviceTagDBO) DeviceTagService_.doRead(dtd);
 				} else {
