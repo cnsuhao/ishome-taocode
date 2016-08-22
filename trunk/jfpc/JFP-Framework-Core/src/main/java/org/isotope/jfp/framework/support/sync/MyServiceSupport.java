@@ -76,7 +76,10 @@ public class MyServiceSupport implements ISFrameworkConstants, ISDBConstants {
 	}
 
 	protected Long getLoginerId() {
-		return getLoginer().getUserId();
+		getLoginer();
+		if(loginer != null)
+			return loginer.getUserId();
+		return null;
 	}
 
 	/////////////////////////
