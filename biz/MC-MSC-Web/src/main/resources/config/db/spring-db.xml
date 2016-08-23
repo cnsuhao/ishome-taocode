@@ -37,7 +37,7 @@
 		<property name='mapperLocations'>
 			<list>
 				<value>classpath*:/org/isotope/jfp/persistent/**/*.xml</value>
-				<value>classpath*:/org/isotope/jfp/common/**/*.xml</value>
+				<value>classpath*:/org/isotope/jfp/common/login/*.xml</value>
 				<value>classpath*:/com/mcookies/qxy/common/**/*.xml</value>
 		 	</list>
 		</property>
