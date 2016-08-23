@@ -48,6 +48,8 @@ public class LoginController extends MyControllerSupport {
 	protected UserService UserService_;
 	@Resource
 	protected SchoolService SchoolService_;
+	
+	private Long defualtSid = 999999999l;
 
 	// public MyModelAndViewSupport getModelAndView() {
 	// return new MyModelAndViewSupport("redirect:/");
@@ -71,6 +73,7 @@ public class LoginController extends MyControllerSupport {
 		loginer.setIpAdress(HttpRequestHelper.getIpAddr(request));
 		loginer.setClientType(loginpvo.getClientType());
 		loginer.setUserType(loginpvo.getUserType());
+		loginer.setSchoolId(defualtSid);
 		// 用户名
 		if (StringUtils.isNotEmpty(loginpvo.getEmail())) {
 			loginer.setAccount(loginpvo.getEmail());
@@ -80,7 +83,7 @@ public class LoginController extends MyControllerSupport {
 			loginer.setAccount(loginpvo.getAccount());
 		}
 		// 判断是否为短信登录
-		if (TWO.equals(loginpvo.getClientType())) {
+		if (loginpvo.getClientType()==2) {
 			if (StringUtils.isNotEmpty(loginpvo.getCaptcha())) {
 				// 短信验证码校验
 				int flag = SecurityCodeHelper.checkRandomCode(1, loginpvo.getCaptcha(), loginpvo.getPhone());
@@ -113,8 +116,19 @@ public class LoginController extends MyControllerSupport {
 						UserBean user = loginers.get(0);
 						// 保存本次登录信息（缓存）
 						LoginService_.doLoginToken(user, false);
-						rs.setResult(user);
-						rs.setToken(user.getToken());
+						// 获取用户相关的 学校列表
+						Map<String, Object> param = new HashMap<String, Object>();
+						param.put("userType", loginpvo.getUserType());
+						param.put("uid", user.getUserId());
+						List<SchoolDBO> schools = SchoolService_.doSelectSchoolByTypeAndUid(param);
+						rs.setStatus(0);
+						JSONObject data = new JSONObject();
+						data.put("info", "登陆成功");
+						data.put("info", user.getUserId());
+						data.put("userType", loginpvo.getUserType());
+						data.put("school", schools);
+						data.put("token", user.getToken());
+						rs.setData(data);
 						return rs;
 					}
 				}
@@ -225,7 +239,7 @@ public class LoginController extends MyControllerSupport {
 			String captcha = SecurityCodeHelper.makeRandomNumCode(1800, 6, key);
 			String effectiveTime = "00:30:00";
 			String createTime = DateHelper.currentTimeMillisCN1();
-			UserSMSSendServiceImpl_.send(SYSTEM_NAME, phone, captcha, EMPTY);
+			UserSMSSendServiceImpl_.send(defualtSid+"", phone, captcha, EMPTY);
 			JSONObject data = new JSONObject();
 			data.put("captcha", captcha);
 			data.put("key", key);
@@ -272,6 +286,7 @@ public class LoginController extends MyControllerSupport {
 				// 获取手机号对应的UID
 				UserDBO user = new UserDBO();
 				user.setPhone(phone);
+				user.setPuk("1");
 				List<UserDBO> users = (List<UserDBO>) UserService_.doSelectData(user);
 				if (users != null && users.size() > 0) {
 					JSONObject data = new JSONObject();
@@ -285,6 +300,7 @@ public class LoginController extends MyControllerSupport {
 				}
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			rs.setStatus(2);
 			rs.setMessage("验证失败");
 		}
@@ -320,6 +336,7 @@ public class LoginController extends MyControllerSupport {
 			}
 			UserDBO user = new UserDBO();
 			user.setUid(uid);
+			user.setPuk("1");
 			user.setPassword(newPassword);
 			int flag = UserService_.doUpdate(user);
 			if (flag == 1) {
