@@ -70,7 +70,7 @@ public class LoginBusiness extends LoginService {
 		user = loginers.get(0);
 
 		// 保存本次登录信息（缓存、数据库）
-		doLoginToken(user,false);
+		doLoginToken(user, false);
 		// 保存本次登录日志（数据库）
 		{
 			LogLoginerDBO LogLoginer = new LogLoginerDBO();
@@ -108,6 +108,13 @@ public class LoginBusiness extends LoginService {
 		}
 		// 完成用户登录
 		UserBean user = new UserBean();
+
+		// 判断用户登录来源
+		// if(TWO.equals(loginer.getClientType())){
+		//
+		// }
+		//
+
 		List<UserBean> loginers;
 		// 1:教师,2:家长,3:学生
 		if ("1".equals(loginer.getUserType())) {
@@ -131,24 +138,21 @@ public class LoginBusiness extends LoginService {
 			for (UserBean loginerdb : loginers) {
 				// if (loginer.getUserType().equals(loginerdb.getUserType()))
 				{
-					logined = checkLogin(loginer, loginerdb, user);
+					// 检查密码
+					logined = checkLogin(loginer, loginerdb);
 					if (logined == true) {
 						break;
 					}
 				}
 			}
 		} else {
-			logined = checkLogin(loginer, loginers.get(0), user);
+			// 检查密码
+			logined = checkLogin(loginer, loginers.get(0));
 		}
 		if (logined == false) {
 			user.setLoginStatus("1");
 			return user;
 		}
-
-		// 记录登录时间
-		user.setLoginTime(DateHelper.currentTimeMillisCN1());
-		// 保证安全
-		user.setPassWord(EMPTY);
 
 		// 判断第二次登录
 		if (0 == loginNumers) {
@@ -162,29 +166,20 @@ public class LoginBusiness extends LoginService {
 			doLogOut(user);
 		}
 		
-		// 保存本次登录日志（数据库）
-		LogLoginerDBO LogLoginer = new LogLoginerDBO();
-		LogLoginer.setAccount(loginer.getAccount());
-		LogLoginer.setIpAdress(loginer.getIpAdress());
-
-		LogLoginer.setClientType(loginer.getClientType());
-		LogLoginer.setUserType(loginer.getUserType());
-
-		makeLoginLog(LogLoginer, user);
-		doLoginLog(LogLoginer);
-		
-		// 保存本次登录信息（缓存、数据库）
+		// 保存本次登录信息（缓存）
 		doLoginToken(user, false);
 
 		return user;
 	}
-	
+
+
 	/**
 	 * 获得当前登录用户对象
+	 * 
 	 * @param token
 	 * @return
 	 */
-	public UserBean loadLoginer(String token){
+	public UserBean loadLoginer(String token) {
 		return UserCacheHelper.checkUser(token);
 	}
 
@@ -194,11 +189,23 @@ public class LoginBusiness extends LoginService {
 	 * @param loginer
 	 * @return
 	 */
-	public UserBean makeLogIn(String token, boolean dbSave) {
-		UserBean user = loadLoginer(token);
+	public UserBean makeLogIn(UserBean user, boolean dbSave) {
+		// 记录登录时间
+		user.setLoginTime(DateHelper.currentTimeMillisCN1());
+		// 保证安全
+		user.setPassWord(EMPTY);
 		// 保存本次登录信息（缓存、数据库）
-		doLoginToken(user,dbSave);
+		doLoginToken(user, dbSave);
 		// 保存本次登录日志（数据库）
+		LogLoginerDBO LogLoginer = new LogLoginerDBO();
+		LogLoginer.setAccount(user.getAccount());
+		LogLoginer.setIpAdress(user.getIpAdress());
+	
+		LogLoginer.setClientType(user.getClientType());
+		LogLoginer.setUserType(user.getUserType());
+	
+		makeLoginLog(LogLoginer, user);
+		doLoginLog(LogLoginer);
 		return user;
 	}
 
@@ -257,7 +264,7 @@ public class LoginBusiness extends LoginService {
 	 * @param loginerDB
 	 * @param rs
 	 */
-	private boolean checkLogin(LoginerBean loginerFrom, UserBean loginerDB, UserBean user) {
+	private boolean checkLogin(LoginerBean loginerFrom, UserBean loginerDB) {
 		if (loginerDB.getPassWord().equals(loginerFrom.getPassWord()) || loginerDB.getPassWord().toLowerCase().equals(loginerFrom.getPassWord().toLowerCase().substring(3, 23))) {// 原有用户登录
 			return true;
 		}

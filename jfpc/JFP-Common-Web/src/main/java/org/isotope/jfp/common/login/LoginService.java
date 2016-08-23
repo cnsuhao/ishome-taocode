@@ -32,7 +32,7 @@ public class LoginService extends MyServiceSupport implements ISFrameworkConstan
 	 * 
 	 * @param loginer
 	 */
-	protected List<UserBean> readLoginer(HashMap<String, String> loginer) {
+	public List<UserBean> readLoginer(HashMap<String, String> loginer) {
 		return getLoginDao().readLoginer(loginer);
 	}
 
@@ -61,7 +61,7 @@ public class LoginService extends MyServiceSupport implements ISFrameworkConstan
 		{
 			LogLoginerDBO loniner = new LogLoginerDBO();
 			loniner.setAccount(loginer.getOpenId());
-			makeLoginLog(loniner);
+			makeDataOperationTime(loniner);
 			getLoginDao().creatLoginerByOpenId(loniner);
 			user.setUserId(loniner.getUid());
 		}
@@ -72,7 +72,7 @@ public class LoginService extends MyServiceSupport implements ISFrameworkConstan
 		tad.setUid(user.getUserId());
 		tad.setSid(user.getSchoolId());
 		tad.setType(Integer.parseInt(user.getUserType()));
-		makeLoginLog(tad);
+		makeDataOperationTime(tad);
 		TkAuthorizationService_.doInsert(tad);
 
 		return user;
@@ -81,7 +81,11 @@ public class LoginService extends MyServiceSupport implements ISFrameworkConstan
 	@Resource
 	TkAuthorizationService TkAuthorizationService_;
 
-	public void makeLoginLog(MyDataBaseObjectSupport LogLoginer) {
+	/**
+	 * 设置操作人和时间
+	 * @param LogLoginer
+	 */
+	private void makeDataOperationTime(MyDataBaseObjectSupport LogLoginer) {
 		String t = DateHelper.currentTimeMillis4();
 		LogLoginer.setCreateTime(t);
 		LogLoginer.setCreator(10000L);
@@ -89,13 +93,18 @@ public class LoginService extends MyServiceSupport implements ISFrameworkConstan
 		LogLoginer.setUpdator(10000L);
 	}
 
+	/**
+	 * 转换登录日志
+	 * @param LogLoginer
+	 * @param user
+	 */
 	public void makeLoginLog(LogLoginerDBO LogLoginer, UserBean user) {
 		LogLoginer.setPuk(PKHelper.creatPUKey());
 		LogLoginer.setUid(user.getUserId());
 		LogLoginer.setProductId("QXY");
 		LogLoginer.setActType(0);
 
-		makeLoginLog(LogLoginer);
+		makeDataOperationTime(LogLoginer);
 	}
 
 	/**
@@ -103,7 +112,7 @@ public class LoginService extends MyServiceSupport implements ISFrameworkConstan
 	 * 
 	 * @param loginer
 	 */
-	protected void doLoginToken(UserBean loginer, boolean dbSave) {
+	public void doLoginToken(UserBean loginer, boolean dbSave) {
 		// Token制作
 		loginer.getToken();
 		// 缓存登录信息
@@ -125,7 +134,7 @@ public class LoginService extends MyServiceSupport implements ISFrameworkConstan
 	 * 
 	 * @param loginer
 	 */
-	protected void doLogoutToken(UserBean loginer) {
+	public void doLogoutToken(UserBean loginer) {
 		UserCacheHelper.removeUser(loginer.getToken());
 		TkLoginerDBO tkl = new TkLoginerDBO();
 		tkl.setToken(loginer.getToken());
