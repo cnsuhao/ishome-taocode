@@ -20,6 +20,7 @@ import org.isotope.jfp.framework.support.MyControllerSupport;
 import org.isotope.jfp.framework.utils.DateHelper;
 import org.isotope.jfp.framework.utils.HttpRequestHelper;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -59,7 +60,7 @@ public class LoginController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean doLoginPOST(LoginPVO loginpvo, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+	public RESTResultBean doLoginPOST(@RequestBody LoginPVO loginpvo, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		// 设定返回
 		RESTResultBean rs = new RESTResultBean();
 
@@ -69,18 +70,17 @@ public class LoginController extends MyControllerSupport {
 		LoginerBean loginer = new LoginerBean();
 		loginer.setIpAdress(HttpRequestHelper.getIpAddr(request));
 		loginer.setClientType(loginpvo.getClientType());
-		//用户名
+		loginer.setUserType(loginpvo.getUserType());
+		// 用户名
 		if (StringUtils.isNotEmpty(loginpvo.getEmail())) {
 			loginer.setAccount(loginpvo.getEmail());
-		}
-		else if (StringUtils.isNotEmpty(loginpvo.getPhone())) {
+		} else if (StringUtils.isNotEmpty(loginpvo.getPhone())) {
 			loginer.setAccount(loginpvo.getPhone());
-		}
-		else if (StringUtils.isNotEmpty(loginpvo.getAccount())) {
+		} else if (StringUtils.isNotEmpty(loginpvo.getAccount())) {
 			loginer.setAccount(loginpvo.getAccount());
 		}
-		//判断是否为短信登录
-		if(TWO.equals(loginpvo.getClientType())){
+		// 判断是否为短信登录
+		if (TWO.equals(loginpvo.getClientType())) {
 			if (StringUtils.isNotEmpty(loginpvo.getCaptcha())) {
 				// 短信验证码校验
 				int flag = SecurityCodeHelper.checkRandomCode(1, loginpvo.getCaptcha(), loginpvo.getPhone());
@@ -92,8 +92,8 @@ public class LoginController extends MyControllerSupport {
 					rs.setStatus(1);
 					rs.setMessage("登录失败，验证码已过期，请重新获取验证码");
 					return rs;
-				}else{
-					//登录系统
+				} else {
+					// 登录系统
 					HashMap<String, String> login = new HashMap<String, String>();
 					login.put("phone", loginpvo.getPhone());
 					List<UserBean> loginers = LoginService_.readLoginer(login);
@@ -106,10 +106,10 @@ public class LoginController extends MyControllerSupport {
 						rs.setMessage("用户不存在");
 						return rs;
 					} else if (loginers.size() > 1) {
-						rs.setStatus(3);//多个用户存在
+						rs.setStatus(3);// 多个用户存在
 						rs.setMessage("用户资料异常，请联系管理员！");
 						return rs;
-					}else{
+					} else {
 						UserBean user = loginers.get(0);
 						// 保存本次登录信息（缓存）
 						LoginService_.doLoginToken(user, false);
@@ -118,16 +118,16 @@ public class LoginController extends MyControllerSupport {
 						return rs;
 					}
 				}
-			}else{
+			} else {
 				rs.setStatus(1);
 				rs.setMessage("非法操作！");
 				return rs;
 			}
-		}else{
-			//密码
+		} else {
+			// 密码
 			if (StringUtils.isNotEmpty(loginpvo.getPassword())) {
 				loginer.setPassWord(loginpvo.getPassword());
-				//登录系统
+				// 登录系统
 				UserBean user = LoginService_.doLogIn(loginer);
 				// 登陆成功
 				if ("0".equals(user.getLoginStatus())) {
@@ -151,7 +151,7 @@ public class LoginController extends MyControllerSupport {
 					rs.setMessage(getLoginStatusStr(user.getLoginStatus()));
 				}
 				return rs;
-			}else{
+			} else {
 				rs.setStatus(1);
 				rs.setMessage("非法操作！");
 				return rs;
@@ -160,7 +160,8 @@ public class LoginController extends MyControllerSupport {
 	}
 
 	/**
-	 *  选择登录学校及角色接口
+	 * 选择登录学校及角色接口
+	 * 
 	 * @param sid
 	 * @param userType
 	 * @param uid
@@ -168,24 +169,33 @@ public class LoginController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/login/in", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean loginInPOST(String token, Long sid, String userType) {
-		// 设定返回
+	public RESTResultBean loginInPOST(@RequestBody String jsonparam) {
 		RESTResultBean rs = new RESTResultBean();
-		//二次登陆
-		UserBean user = LoginService_.loadLoginer(token);	
-		if(user==null)
-		{
-			rs.setStatus(1);
-			rs.setMessage("非法操作！");
-			return rs;
+		try {
+			JSONObject param = JSONObject.parseObject(jsonparam);
+			String token = (String) param.get("token");
+			Long sid = param.getLong("sid");
+			String userType = (String) param.get("userType");
+			// 设定返回
+			// 二次登陆
+			UserBean user = LoginService_.loadLoginer(token);
+			if (user == null) {
+				rs.setStatus(1);
+				rs.setMessage("非法操作！");
+				return rs;
+			}
+			user.setUserType(userType);
+			user.setSchoolId(sid);
+			// 二次登录系统
+			LoginService_.makeLogIn(user, true);
+
+			rs.setResult(user);
+			rs.setToken(user.getToken());
+		} catch (Exception e) {
+			rs.setStatus(2);
+			rs.setMessage("失败");
 		}
-		user.setUserType(userType);
-		user.setSchoolId(sid);
-		//二次登录系统
-		LoginService_.makeLogIn(user, true);	
-		
-		rs.setResult(user);
-		rs.setToken(user.getToken());
+
 		return rs;
 	}
 
@@ -200,29 +210,33 @@ public class LoginController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/captcha/create", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean captchaCreatePOST(String phone, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
-		// 设定返回
+	public RESTResultBean captchaCreatePOST(@RequestBody String jsonparam) {
 		RESTResultBean rs = new RESTResultBean();
-		if (logger.isDebugEnabled())
-			logger.debug("captchaCreatePOST====///phone////=======>>>>>=========>>>" + phone);
-		if (StringUtils.isEmpty(phone)) {
+		try {
+			JSONObject param = JSONObject.parseObject(jsonparam);
+			String phone = param.getString("phone");
+			if (StringUtils.isEmpty(phone)) {
+				rs.setStatus(2);
+				rs.setMessage("手机号码不能为空");
+				return rs;
+			}
+			String key = phone;
+			// 产生验证码
+			String captcha = SecurityCodeHelper.makeRandomNumCode(1800, 6, key);
+			String effectiveTime = "00:30:00";
+			String createTime = DateHelper.currentTimeMillisCN1();
+			UserSMSSendServiceImpl_.send(SYSTEM_NAME, phone, captcha, EMPTY);
+			JSONObject data = new JSONObject();
+			data.put("captcha", captcha);
+			data.put("key", key);
+			data.put("phone", phone);
+			data.put("effectiveTime", effectiveTime);
+			data.put("createTime", createTime);
+			rs.setData(data);
+		} catch (Exception e) {
 			rs.setStatus(2);
-			rs.setMessage("手机号码不能为空");
-			return rs;
+			rs.setMessage("生成验证码失败");
 		}
-		String key = phone;
-		// 产生验证码
-		String captcha = SecurityCodeHelper.makeRandomNumCode(1800, 6, key);
-		String effectiveTime = "00:30:00";
-		String createTime = DateHelper.currentTimeMillisCN1();
-		UserSMSSendServiceImpl_.send(EMPTY, phone, captcha, EMPTY);
-		JSONObject data = new JSONObject();
-		data.put("captcha", captcha);
-		data.put("key", key);
-		data.put("phone", phone);
-		data.put("effectiveTime", effectiveTime);
-		data.put("createTime", createTime);
-		rs.setData(data);
 		return rs;
 	}
 
@@ -235,37 +249,44 @@ public class LoginController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/forgetPassword", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean forgetPasswordPOST(String phone, String captcha) {
-		// 设定返回
+	public RESTResultBean forgetPasswordPOST(@RequestBody String jsonparam) {
 		RESTResultBean rs = new RESTResultBean();
-		if (StringUtils.isEmpty(phone) || StringUtils.isEmpty(captcha)) {
-			rs.setStatus(2);
-			rs.setMessage("关键参数缺失");
-			return rs;
-		}
-		// 验证码校验
-		int flag = SecurityCodeHelper.checkRandomCode(1, captcha, phone);
-		if (flag == 1) {
-			rs.setStatus(1);
-			rs.setMessage("验证失败，验证码错误");
-		} else if (flag == 2) {
-			rs.setStatus(1);
-			rs.setMessage("验证失败，验证码已过期");
-		} else if (flag == 0) {
-			// 获取手机号对应的UID
-			UserDBO user = new UserDBO();
-			user.setPhone(phone);
-			List<UserDBO> users = (List<UserDBO>) UserService_.doSelectData(user);
-			if (users != null && users.size() > 0) {
-				JSONObject data = new JSONObject();
-				data.put("info", "验证成功");
-				data.put("uid", users.get(0).getUid());
-				rs.setData(data);
-				rs.setStatus(0);
-			} else {
-				rs.setStatus(1);
-				rs.setMessage("验证失败，手机号不是系统用户");
+		try {
+			JSONObject param = JSONObject.parseObject(jsonparam);
+			String phone = (String) param.get("phone");
+			String captcha = (String) param.get("captcha");
+			if (StringUtils.isEmpty(phone) || StringUtils.isEmpty(captcha)) {
+				rs.setStatus(2);
+				rs.setMessage("关键参数缺失");
+				return rs;
 			}
+			// 验证码校验
+			int flag = SecurityCodeHelper.checkRandomCode(1, captcha, phone);
+			if (flag == 1) {
+				rs.setStatus(1);
+				rs.setMessage("验证失败，验证码错误");
+			} else if (flag == 2) {
+				rs.setStatus(1);
+				rs.setMessage("验证失败，验证码已过期");
+			} else if (flag == 0) {
+				// 获取手机号对应的UID
+				UserDBO user = new UserDBO();
+				user.setPhone(phone);
+				List<UserDBO> users = (List<UserDBO>) UserService_.doSelectData(user);
+				if (users != null && users.size() > 0) {
+					JSONObject data = new JSONObject();
+					data.put("info", "验证成功");
+					data.put("uid", users.get(0).getUid());
+					rs.setData(data);
+					rs.setStatus(0);
+				} else {
+					rs.setStatus(1);
+					rs.setMessage("验证失败，手机号不是系统用户");
+				}
+			}
+		} catch (Exception e) {
+			rs.setStatus(2);
+			rs.setMessage("验证失败");
 		}
 		return rs;
 	}
@@ -280,29 +301,36 @@ public class LoginController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/resetPassword", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean resetPasswordPOST(Long uid, String newPassword, String repeatPassword) {
-		// 设定返回
+	public RESTResultBean resetPasswordPOST(@RequestBody String jsonparam) {
 		RESTResultBean rs = new RESTResultBean();
-		if (uid == null || StringUtils.isEmpty(newPassword) || StringUtils.isEmpty(repeatPassword)) {
-			rs.setStatus(2);
-			rs.setMessage("密码修改失败，参数缺失");
-			return rs;
-		}
-		if (!newPassword.equals(repeatPassword)) {
-			rs.setStatus(2);
-			rs.setMessage("重置密码失败，两次输入的密码不一致");
-			return rs;
-		}
-		UserDBO user = new UserDBO();
-		user.setUid(uid);
-		user.setPassword(newPassword);
-		int flag = UserService_.doUpdate(user);
-		if (flag == 1) {
-			rs.setStatus(0);
-			rs.setMessage("重置密码成功");
-		} else {
-			rs.setStatus(1);
-			rs.setMessage("重置密码失败");
+		try {
+			JSONObject param = JSONObject.parseObject(jsonparam);
+			Long uid = param.getLong("uid");
+			String newPassword = param.getString("newPassword");
+			String repeatPassword = param.getString("repeatPassword");
+			if (uid == null || StringUtils.isEmpty(newPassword) || StringUtils.isEmpty(repeatPassword)) {
+				rs.setStatus(2);
+				rs.setMessage("密码修改失败，参数缺失");
+				return rs;
+			}
+			if (!newPassword.equals(repeatPassword)) {
+				rs.setStatus(2);
+				rs.setMessage("重置密码失败，两次输入的密码不一致");
+				return rs;
+			}
+			UserDBO user = new UserDBO();
+			user.setUid(uid);
+			user.setPassword(newPassword);
+			int flag = UserService_.doUpdate(user);
+			if (flag == 1) {
+				rs.setStatus(0);
+				rs.setMessage("重置密码成功");
+			} else {
+				rs.setStatus(1);
+				rs.setMessage("重置密码失败");
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
 		return rs;
 	}
