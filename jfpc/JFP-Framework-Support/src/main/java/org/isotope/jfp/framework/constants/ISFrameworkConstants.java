@@ -12,7 +12,7 @@ public interface ISFrameworkConstants {
 
 	public final static String SYSTEM_CHARSET = "UTF-8";
 	
-	public static final String SYSTEM_NAME = "JFP";
+	public static final String SYSTEM_NAME = "SYSTEM_NAME_JFP";
 	
 	public static final String FOLDER_SEPARATOR = "/";
 
