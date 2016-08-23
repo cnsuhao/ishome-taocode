@@ -26,16 +26,17 @@
 	
 	<!-- 资源服务器 -->
 	<bean class='org.isotope.jfp.framework.utils.FTPUtil'>
-		<property name='markPic' value='/resources/images/noImg.png' />
-		<property name='defaultPic' value='D:/File/noImg.png' />
+		<!-- <property name='markPic' value='/resources/images/noImg.png' />
+		<property name='defaultPic' value='D:/File/noImg.png' /> -->
 		<property name='fileUri' value='D:/File' />
 		<property name='serverIp' value='192.168.1.57' />
 		<property name='serverPort' value='21' />
 		<property name='serverUser' value='cnmmip' />
 		<property name='serverUserPassword' value='zaq12wsx' />
-		
-		<property name='doMark' value='false' /><!--水印 -->
-		<property name='doCompress' value='false' /><!--压缩 -->
+		<!--水印 -->
+		<!-- <property name='doMark' value='false' /> -->
+		<!--压缩 -->
+		<!-- <property name='doCompress' value='false' /> -->
 	</bean>
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<!-- 设置上传文件的最大尺寸为100MB -->
