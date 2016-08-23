@@ -211,10 +211,10 @@ public class ClassStudentController extends MyControllerSupport {
 			if (doCheckToken(student.getToken()) == false) {
 				return tokenFail();
 			}
-			if (student.getPhone() == null) {
+			if (StringUtils.isEmpty(student.getPhone())) {
 				throw new IllegalArgumentException("手机号码不能为空");
 			}
-			if (student.getEmail() == null) {
+			if (StringUtils.isEmpty(student.getEmail())) {
 				throw new IllegalArgumentException("电子邮箱不能为空");
 			}
 			if (student.getNumber() == null) {
@@ -249,8 +249,9 @@ public class ClassStudentController extends MyControllerSupport {
 				return result;
 			}
 			stu = new UStudentDBO();
-			stu.setSid(student.getSid()); // 学校中学号唯一即可
+			stu.setSid(clazz.getSid()); // 学校中学号唯一即可
 			stu.setNumber(student.getNumber());
+			stu.setPuk("1");
 			stus = (List<UStudentDBO>) uStudentService.doSelectData(stu);
 			if (stus != null && stus.size() > 0) {
 				result.setInfo("学号已经存在");
@@ -299,7 +300,7 @@ public class ClassStudentController extends MyControllerSupport {
 			// 插入扩展表
 			UStudentExtDBO ext = new UStudentExtDBO();
 			ext.setStudentId(studentId);
-			ext.setPhoto(student.getPhone());
+			ext.setPhoto(student.getPhoto());
 			ext.setNation(student.getNation());
 			ext.setNativePlace(student.getNativePlace());
 			ext.setCardType(student.getCardType());
