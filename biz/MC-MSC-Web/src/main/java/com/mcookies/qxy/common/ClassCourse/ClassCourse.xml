@@ -248,7 +248,7 @@
 		class_course
 	<where>
 		<if test="cid != null">
-			and cid = 1
+			and cid = #{cid}
 		</if>
 		<if test="startTime!=null and endTime!=null">
 			AND use_day BETWEEN #{startTime}
