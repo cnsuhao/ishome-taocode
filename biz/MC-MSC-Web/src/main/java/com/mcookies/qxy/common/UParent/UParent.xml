@@ -301,6 +301,7 @@
     		resultType='com.mcookies.qxy.common.UParent.UParentPVO'>
         SELECT 
         a.id,
+        a.student_id,
         a.parent_id,
         b.parent_name,
         b.phone,
