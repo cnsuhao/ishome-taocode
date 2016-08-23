@@ -161,9 +161,20 @@ public class LoginBusiness extends LoginService {
 			// 强制注销
 			doLogOut(user);
 		}
+		
+		// 保存本次登录日志（数据库）
+		LogLoginerDBO LogLoginer = new LogLoginerDBO();
+		LogLoginer.setAccount(loginer.getAccount());
+		LogLoginer.setIpAdress(loginer.getIpAdress());
 
+		LogLoginer.setClientType(loginer.getClientType());
+		LogLoginer.setUserType(loginer.getUserType());
+
+		makeLoginLog(LogLoginer, user);
+		doLoginLog(LogLoginer);
+		
 		// 保存本次登录信息（缓存、数据库）
-		makeLogIn(loginer, user, false);
+		doLoginToken(user, false);
 
 		return user;
 	}
@@ -183,21 +194,11 @@ public class LoginBusiness extends LoginService {
 	 * @param loginer
 	 * @return
 	 */
-	public UserBean makeLogIn(LoginerBean loginer, UserBean user, boolean dbSave) {
+	public UserBean makeLogIn(String token, boolean dbSave) {
+		UserBean user = loadLoginer(token);
 		// 保存本次登录信息（缓存、数据库）
 		doLoginToken(user,dbSave);
 		// 保存本次登录日志（数据库）
-		if(dbSave){
-			LogLoginerDBO LogLoginer = new LogLoginerDBO();
-			LogLoginer.setAccount(loginer.getAccount());
-			LogLoginer.setIpAdress(loginer.getIpAdress());
-
-			LogLoginer.setClientType(loginer.getClientType());
-			LogLoginer.setUserType(loginer.getUserType());
-
-			makeLoginLog(LogLoginer, user);
-			doLoginLog(LogLoginer);
-		}
 		return user;
 	}
 
