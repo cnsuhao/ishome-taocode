@@ -14,7 +14,12 @@ public class UParentPVO extends UParentDBO {
 	 * 学生id
 	 */
 	private Long studentId = null;
-
+	
+	/**
+	 * 学生name
+	 */
+	private String studentName = null;
+	
 	/**
 	 * 是否为缺省学生
 	 */
@@ -76,5 +81,11 @@ public class UParentPVO extends UParentDBO {
 	public void setTermId(Long termId) {
 		this.termId = termId;
 	}
+	public String getStudentName() {
+		return studentName;
+	}
 
+	public void setStudentName(String studentName) {
+		this.studentName = studentName;
+	}
 }
