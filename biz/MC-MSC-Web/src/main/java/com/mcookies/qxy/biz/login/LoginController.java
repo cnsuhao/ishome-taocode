@@ -69,54 +69,94 @@ public class LoginController extends MyControllerSupport {
 		LoginerBean loginer = new LoginerBean();
 		loginer.setIpAdress(HttpRequestHelper.getIpAddr(request));
 		loginer.setClientType(loginpvo.getClientType());
+		//用户名
 		if (StringUtils.isNotEmpty(loginpvo.getEmail())) {
 			loginer.setAccount(loginpvo.getEmail());
 		}
-		if (StringUtils.isNotEmpty(loginpvo.getPhone())) {
+		else if (StringUtils.isNotEmpty(loginpvo.getPhone())) {
 			loginer.setAccount(loginpvo.getPhone());
 		}
-		if (StringUtils.isNotEmpty(loginpvo.getAccount())) {
+		else if (StringUtils.isNotEmpty(loginpvo.getAccount())) {
 			loginer.setAccount(loginpvo.getAccount());
 		}
-		if (StringUtils.isNotEmpty(loginpvo.getPassword())) {
-			loginer.setPassWord(loginpvo.getPassword());
-		}
-		if (StringUtils.isNotEmpty(loginpvo.getCaptcha())) {
-			// 短信验证码校验
-			int flag = SecurityCodeHelper.checkRandomCode(1, loginpvo.getCaptcha(), loginpvo.getPhone());
-			if (flag == 1) {
+		//判断是否为短信登录
+		if(TWO.equals(loginpvo.getClientType())){
+			if (StringUtils.isNotEmpty(loginpvo.getCaptcha())) {
+				// 短信验证码校验
+				int flag = SecurityCodeHelper.checkRandomCode(1, loginpvo.getCaptcha(), loginpvo.getPhone());
+				if (flag == 1) {
+					rs.setStatus(1);
+					rs.setMessage("登陆失败，验证码错误");
+					return rs;
+				} else if (flag == 2) {
+					rs.setStatus(1);
+					rs.setMessage("登录失败，验证码已过期，请重新获取验证码");
+					return rs;
+				}else{
+					//登录系统
+					HashMap<String, String> login = new HashMap<String, String>();
+					login.put("phone", loginpvo.getPhone());
+					List<UserBean> loginers = LoginService_.readLoginer(login);
+					if (loginers == null) {
+						rs.setStatus(2);
+						rs.setMessage("用户不存在");
+						return rs;
+					} else if (loginers.size() == 0) {
+						rs.setStatus(2);
+						rs.setMessage("用户不存在");
+						return rs;
+					} else if (loginers.size() > 1) {
+						rs.setStatus(3);//多个用户存在
+						rs.setMessage("用户资料异常，请联系管理员！");
+						return rs;
+					}else{
+						UserBean user = loginers.get(0);
+						// 保存本次登录信息（缓存）
+						LoginService_.doLoginToken(user, false);
+						rs.setResult(user);
+						rs.setToken(user.getToken());
+						return rs;
+					}
+				}
+			}else{
 				rs.setStatus(1);
-				rs.setMessage("登陆失败，验证码错误");
+				rs.setMessage("非法操作！");
 				return rs;
-			} else if (flag == 2) {
+			}
+		}else{
+			//密码
+			if (StringUtils.isNotEmpty(loginpvo.getPassword())) {
+				loginer.setPassWord(loginpvo.getPassword());
+				//登录系统
+				UserBean user = LoginService_.doLogIn(loginer);
+				// 登陆成功
+				if ("0".equals(user.getLoginStatus())) {
+					// 获取用户相关的 学校列表
+					Map<String, Object> param = new HashMap<String, Object>();
+					param.put("userType", loginpvo.getUserType());
+					param.put("uid", user.getUserId());
+					List<SchoolDBO> schools = SchoolService_.doSelectSchoolByTypeAndUid(param);
+					rs.setStatus(0);
+					JSONObject data = new JSONObject();
+					data.put("info", "登陆成功");
+					data.put("info", user.getUserId());
+					data.put("userType", loginpvo.getUserType());
+					data.put("school", schools);
+					data.put("token", user.getToken());
+					rs.setData(data);
+				}
+				// 登陆失败
+				else {
+					rs.setStatus(Integer.parseInt(user.getLoginStatus()));
+					rs.setMessage(getLoginStatusStr(user.getLoginStatus()));
+				}
+				return rs;
+			}else{
 				rs.setStatus(1);
-				rs.setMessage("登录失败，验证码已过期，请重新获取验证码");
+				rs.setMessage("非法操作！");
 				return rs;
 			}
 		}
-		UserBean user = LoginService_.doLogIn(loginer);
-		// 登陆成功
-		if ("0".equals(user.getLoginStatus())) {
-			// 获取用户相关的 学校列表
-			Map<String, Object> param = new HashMap<String, Object>();
-			param.put("userType", loginpvo.getUserType());
-			param.put("uid", user.getUserId());
-			List<SchoolDBO> schools = SchoolService_.doSelectSchoolByTypeAndUid(param);
-			rs.setStatus(0);
-			JSONObject data = new JSONObject();
-			data.put("info", "登陆成功");
-			data.put("info", user.getUserId());
-			data.put("userType", loginpvo.getUserType());
-			data.put("school", schools);
-			data.put("token", user.getToken());
-			rs.setData(data);
-		}
-		// 登陆失败
-		else {
-			rs.setStatus(Integer.parseInt(user.getLoginStatus()));
-			rs.setMessage(getLoginStatusStr(user.getLoginStatus()));
-		}
-		return rs;
 	}
 
 	/**
@@ -128,13 +168,24 @@ public class LoginController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/login/in", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean loginI那POST(Long sid, String userType, Long uid) {
+	public RESTResultBean loginInPOST(String token, Long sid, String userType) {
 		// 设定返回
 		RESTResultBean rs = new RESTResultBean();
 		//二次登陆
+		UserBean user = LoginService_.loadLoginer(token);	
+		if(user==null)
+		{
+			rs.setStatus(1);
+			rs.setMessage("非法操作！");
+			return rs;
+		}
+		user.setUserType(userType);
+		user.setSchoolId(sid);
+		//二次登录系统
+		LoginService_.makeLogIn(user, true);	
 		
-		
-		
+		rs.setResult(user);
+		rs.setToken(user.getToken());
 		return rs;
 	}
 
