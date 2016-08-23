@@ -204,5 +204,43 @@
             AND is_use = #{isUse}
         </if>
     </select>
-
+	<!-- 根据 用户ID， 类型 获取关联的学校列表    1:教师,2:家长,3:学生-->
+	<select id="doSelectSchoolByTypeAndUid" parameterType="java.util.Map" resultType="SchoolDBO">
+		<if test="userType == 1">
+			SELECT
+				a.sid,
+				a.is_use,
+				a.school_name
+			FROM
+				school a,
+				u_teacher b
+			WHERE
+				a.sid = b.sid
+				AND b.uid = #{uid}
+		</if>
+		<if test="userType == 2">
+			SELECT
+				a.sid,
+				a.is_use,
+				a.school_name
+			FROM
+				school a,
+				u_parent b
+			WHERE
+				a.sid = b.sid
+				AND b.uid = #{uid}
+		</if>
+		<if test="userType == 3">
+			SELECT
+				a.sid,
+				a.is_use,
+				a.school_name
+			FROM
+				school a,
+				u_student b
+			WHERE
+				a.sid = b.sid
+				AND b.uid = #{uid}
+		</if>
+	</select>
 </mapper>

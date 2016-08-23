@@ -1,96 +1,258 @@
 package com.mcookies.qxy.biz.login;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.StringUtils;
 import org.isotope.jfp.common.login.LoginBusiness;
 import org.isotope.jfp.framework.beans.common.RESTResultBean;
 import org.isotope.jfp.framework.beans.user.LoginerBean;
 import org.isotope.jfp.framework.beans.user.UserBean;
+import org.isotope.jfp.framework.common.sms.UserSMSSendServiceImpl;
+import org.isotope.jfp.framework.security.code.SecurityCodeHelper;
 import org.isotope.jfp.framework.support.MyControllerSupport;
+import org.isotope.jfp.framework.utils.DateHelper;
 import org.isotope.jfp.framework.utils.HttpRequestHelper;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSONObject;
+import com.mcookies.qxy.common.School.SchoolDBO;
+import com.mcookies.qxy.common.School.SchoolService;
+import com.mcookies.qxy.common.User.UserDBO;
+import com.mcookies.qxy.common.User.UserService;
+
 /**
- * 系统常量
+ * 登陆操作
  * 
  * @author Spook
  * @version 0.1
  * @since 0.1.0 2014/2/8
  */
-// @Controller
+@Controller
 public class LoginController extends MyControllerSupport {
 	@Resource
 	protected LoginBusiness LoginService_;
+	@Resource
+	protected UserSMSSendServiceImpl UserSMSSendServiceImpl_;
+	@Resource
+	protected UserService UserService_;
+	@Resource
+	protected SchoolService SchoolService_;
 
 	// public MyModelAndViewSupport getModelAndView() {
 	// return new MyModelAndViewSupport("redirect:/");
 	// }
 
 	/**
-	 * 用户登录
+	 * 用户名/手机号/邮箱密码登录接口
 	 * 
-	 * @param productId
 	 * @return
 	 */
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@RequestMapping(value = "/login", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean doLoginPOST(LoginerBean loginer, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+	public RESTResultBean doLoginPOST(LoginPVO loginpvo, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		// 设定返回
 		RESTResultBean rs = new RESTResultBean();
 
 		if (logger.isDebugEnabled())
-			logger.debug("loginer====///loginer////loginer=======>>>>>=========>>>" + loginer);
-		//
-		// // 画面校验码
-		// if (StringUtils.isNotEmpty(loginer.getVerCode())) {
-		// setSessionAttribute(RANDOM_CODE, session.getAttribute(RANDOM_CODE));
-		// if (checkRandomCode(loginer.getVerCode()) == false) {
-		// // 错误返回
-		// loginer.setCallBackUrl(loginer.getLoginUrl());
-		// loginer.setVerCode("验证码错误，请重新输入！");
-		// rs.setCode("1");
-		// rs.setMessage(loginer.getVerCode());
-		// return rs;
-		// }
-		// }
-		//
-		// // 防伪验证码==MD5(产品ID+默认码+安全码)
-		// if (StringUtils.isNotEmpty(loginer.getSecurityCode())) {//
-		// 用户SessionID
-		// SecurityCodeService scs = null;
-		// try {
-		// scs = (SecurityCodeService)
-		// BeanFactoryHelper.getBean("securityCodeService");
-		// if (scs != null && scs.checkSecurityCode(loginer) == false) {
-		// // 错误返回
-		// loginer.setCallBackUrl(loginer.getLoginUrl());
-		// loginer.setVerCode("安全码校验失败，请关闭后重新登录！");
-		// rs.setCode("1");
-		// rs.setMessage(loginer.getVerCode());
-		// return rs;
-		// }
-		// } catch (Exception e) {
-		// }
-		// }
-		// // MD5加密
-		// String passWord = StringHelper.getPassword(loginer.getPassWord());
-		// loginer.setPassWord(passWord);
-
+			logger.debug("loginpvo====///loginpvo////loginpvo=======>>>>>=========>>>" + loginpvo);
 		/////////////////////// 登录系统/////////////////////////////////////
-		loginer.setIpAdress(HttpRequestHelper.getIpAddr(request));		
+		LoginerBean loginer = new LoginerBean();
+		loginer.setIpAdress(HttpRequestHelper.getIpAddr(request));
+		loginer.setClientType(loginpvo.getClientType());
+		if (StringUtils.isNotEmpty(loginpvo.getEmail())) {
+			loginer.setAccount(loginpvo.getEmail());
+		}
+		if (StringUtils.isNotEmpty(loginpvo.getPhone())) {
+			loginer.setAccount(loginpvo.getPhone());
+		}
+		if (StringUtils.isNotEmpty(loginpvo.getAccount())) {
+			loginer.setAccount(loginpvo.getAccount());
+		}
+		if (StringUtils.isNotEmpty(loginpvo.getPassword())) {
+			loginer.setPassWord(loginpvo.getPassword());
+		}
+		if (StringUtils.isNotEmpty(loginpvo.getCaptcha())) {
+			// 短信验证码校验
+			int flag = SecurityCodeHelper.checkRandomCode(1, loginpvo.getCaptcha(), loginpvo.getPhone());
+			if (flag == 1) {
+				rs.setStatus(1);
+				rs.setMessage("登陆失败，验证码错误");
+				return rs;
+			} else if (flag == 2) {
+				rs.setStatus(1);
+				rs.setMessage("登录失败，验证码已过期，请重新获取验证码");
+				return rs;
+			}
+		}
 		UserBean user = LoginService_.doLogIn(loginer);
-		///////////////////////////////////////////////////////////////////
+		// 登陆成功
+		if ("0".equals(user.getLoginStatus())) {
+			// 获取用户相关的 学校列表
+			Map<String, Object> param = new HashMap<String, Object>();
+			param.put("userType", loginpvo.getUserType());
+			param.put("uid", user.getUserId());
+			List<SchoolDBO> schools = SchoolService_.doSelectSchoolByTypeAndUid(param);
+			rs.setStatus(0);
+			JSONObject data = new JSONObject();
+			data.put("info", "登陆成功");
+			data.put("info", user.getUserId());
+			data.put("userType", loginpvo.getUserType());
+			data.put("school", schools);
+			data.put("token", user.getToken());
+			rs.setData(data);
+		}
+		// 登陆失败
+		else {
+			rs.setStatus(Integer.parseInt(user.getLoginStatus()));
+			rs.setMessage(getLoginStatusStr(user.getLoginStatus()));
+		}
+		return rs;
+	}
 
+	/**
+	 *  选择登录学校及角色接口
+	 * @param sid
+	 * @param userType
+	 * @param uid
+	 * @return
+	 */
+	@RequestMapping(value = "/login/in", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public RESTResultBean loginI那POST(Long sid, String userType, Long uid) {
+		// 设定返回
+		RESTResultBean rs = new RESTResultBean();
+		//二次登陆
+		
+		
+		
+		return rs;
+	}
+
+	/**
+	 * 生成短信验证码接口
+	 * 
+	 * @param phone
+	 * @param request
+	 * @param response
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value = "/captcha/create", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public RESTResultBean captchaCreatePOST(String phone, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		// 设定返回
+		RESTResultBean rs = new RESTResultBean();
 		if (logger.isDebugEnabled())
-			logger.debug("loginer====///loginer////loginer=======>>>>>=========>>>" + user);
+			logger.debug("captchaCreatePOST====///phone////=======>>>>>=========>>>" + phone);
+		if (StringUtils.isEmpty(phone)) {
+			rs.setStatus(2);
+			rs.setMessage("手机号码不能为空");
+			return rs;
+		}
+		String key = phone;
+		// 产生验证码
+		String captcha = SecurityCodeHelper.makeRandomNumCode(1800, 6, key);
+		String effectiveTime = "00:30:00";
+		String createTime = DateHelper.currentTimeMillisCN1();
+		UserSMSSendServiceImpl_.send(EMPTY, phone, captcha, EMPTY);
+		JSONObject data = new JSONObject();
+		data.put("captcha", captcha);
+		data.put("key", key);
+		data.put("phone", phone);
+		data.put("effectiveTime", effectiveTime);
+		data.put("createTime", createTime);
+		rs.setData(data);
+		return rs;
+	}
 
-		rs.setCode(user.getLoginStatus());
+	/**
+	 * 忘记密码（手机）接口
+	 * 
+	 * @param phone
+	 * @param captcha
+	 * @return
+	 */
+	@RequestMapping(value = "/forgetPassword", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public RESTResultBean forgetPasswordPOST(String phone, String captcha) {
+		// 设定返回
+		RESTResultBean rs = new RESTResultBean();
+		if (StringUtils.isEmpty(phone) || StringUtils.isEmpty(captcha)) {
+			rs.setStatus(2);
+			rs.setMessage("关键参数缺失");
+			return rs;
+		}
+		// 验证码校验
+		int flag = SecurityCodeHelper.checkRandomCode(1, captcha, phone);
+		if (flag == 1) {
+			rs.setStatus(1);
+			rs.setMessage("验证失败，验证码错误");
+		} else if (flag == 2) {
+			rs.setStatus(1);
+			rs.setMessage("验证失败，验证码已过期");
+		} else if (flag == 0) {
+			// 获取手机号对应的UID
+			UserDBO user = new UserDBO();
+			user.setPhone(phone);
+			List<UserDBO> users = (List<UserDBO>) UserService_.doSelectData(user);
+			if (users != null && users.size() > 0) {
+				JSONObject data = new JSONObject();
+				data.put("info", "验证成功");
+				data.put("uid", users.get(0).getUid());
+				rs.setData(data);
+				rs.setStatus(0);
+			} else {
+				rs.setStatus(1);
+				rs.setMessage("验证失败，手机号不是系统用户");
+			}
+		}
+		return rs;
+	}
 
+	/**
+	 * 重置密码接口
+	 * 
+	 * @param uid
+	 * @param newPassword
+	 * @param repeatPassword
+	 * @return
+	 */
+	@RequestMapping(value = "/resetPassword", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public RESTResultBean resetPasswordPOST(Long uid, String newPassword, String repeatPassword) {
+		// 设定返回
+		RESTResultBean rs = new RESTResultBean();
+		if (uid == null || StringUtils.isEmpty(newPassword) || StringUtils.isEmpty(repeatPassword)) {
+			rs.setStatus(2);
+			rs.setMessage("密码修改失败，参数缺失");
+			return rs;
+		}
+		if (!newPassword.equals(repeatPassword)) {
+			rs.setStatus(2);
+			rs.setMessage("重置密码失败，两次输入的密码不一致");
+			return rs;
+		}
+		UserDBO user = new UserDBO();
+		user.setUid(uid);
+		user.setPassword(newPassword);
+		int flag = UserService_.doUpdate(user);
+		if (flag == 1) {
+			rs.setStatus(0);
+			rs.setMessage("重置密码成功");
+		} else {
+			rs.setStatus(1);
+			rs.setMessage("重置密码失败");
+		}
 		return rs;
 	}
 
@@ -233,5 +395,37 @@ public class LoginController extends MyControllerSupport {
 
 		// 退出登录
 		return rs;
+	}
+
+	public String getLoginStatusStr(String status) {
+		int state = Integer.parseInt(status);
+		String value = "";
+		/**
+		 * 登陆结果<br>
+		 * 0:成功 1:密码错误 2:用户不存在 3:二次登录8:用户类型未知 9:用户异常锁定
+		 */
+		switch (state) {
+		case 0:
+			value = "成功";
+			break;
+		case 1:
+			value = "密码错误";
+			break;
+		case 2:
+			value = "用户不存在";
+			break;
+		case 3:
+			value = "二次登录";
+			break;
+		case 8:
+			value = "用户类型未知";
+			break;
+		case 9:
+			value = "用户异常锁定";
+			break;
+		default:
+			break;
+		}
+		return value;
 	}
 }

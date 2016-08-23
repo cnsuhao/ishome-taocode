@@ -1,6 +1,7 @@
 package com.mcookies.qxy.common.School;
 
 import java.util.List;
+import java.util.Map;
 
 import org.isotope.jfp.framework.support.sync.MyServiceSupport;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,10 @@ public class SchoolService extends MyServiceSupport {
 	 */
 	public List<SchoolDBO> doSelectByIsUse(SchoolDBO school) {
 		return getDao().doSelectByIsUse(school);
+	}
+	
+	public List<SchoolDBO> doSelectSchoolByTypeAndUid(Map<String,Object> param){
+		return getDao().doSelectSchoolByTypeAndUid(param);
 	}
 
 }
