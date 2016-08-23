@@ -24,13 +24,24 @@
 		http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd
 		'>
 	
-	
-	<!-- 数据字典 -->
-	<!-- <bean id='myDictionaryService' class='org.jfpc.common.dict.DictionaryService' scope="singleton"/> -->	
-	<!-- 设备心跳-->
-	<bean id='DeviceHeartbeatThread' class='com.mcookies.qxy.biz.device.DeviceHeartbeatThread' scope="prototype">
-		<!-- 心跳时间 -->
-	    <property name="heartSecond"  value="10"/>  
-	</bean> 
+	<!-- 资源服务器 -->
+	<bean class='org.isotope.jfp.framework.utils.FTPUtil'>
+		<property name='markPic' value='/resources/images/noImg.png' />
+		<property name='defaultPic' value='D:/File/noImg.png' />
+		<property name='fileUri' value='D:/File' />
+		<property name='serverIp' value='192.168.1.57' />
+		<property name='serverPort' value='21' />
+		<property name='serverUser' value='cnmmip' />
+		<property name='serverUserPassword' value='zaq12wsx' />
+		
+		<property name='doMark' value='false' /><!--水印 -->
+		<property name='doCompress' value='false' /><!--压缩 -->
+	</bean>
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 设置上传文件的最大尺寸为100MB -->
+		<property name="maxUploadSize">
+			<value>104857600</value>
+		</property>
+	</bean>	
 	
 </beans>

@@ -32,4 +32,6 @@
 	<import resource='redis/spring-redis-master.xml' />
 	<!-- 系统初始化 -->
 	<import resource='sms/spring-sms.xml' />	
+	<!-- 文件操作 -->
+	<import resource='file/spring-file.xml' />	
 </beans>
