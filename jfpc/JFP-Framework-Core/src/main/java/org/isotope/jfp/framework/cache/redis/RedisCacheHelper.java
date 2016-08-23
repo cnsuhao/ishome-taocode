@@ -4,8 +4,6 @@ import org.isotope.jfp.framework.cache.ICacheService;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.utils.BeanFactoryHelper;
 
-import com.alibaba.fastjson.JSON;
-
 /**
  * Redis缓存操作key-value
  * 
@@ -20,29 +18,29 @@ public class RedisCacheHelper implements ISFrameworkConstants {
 	public static void setSessionAttribute(int index, String key, Object value) {
 		ICacheService myCache = BeanFactoryHelper.getBean("myCache");
 		myCache.selectDB(index);
-		myCache.putObject(key, JSON.toJSONString(value), 3600, false);
-		myCache.init();
-	}
-	
-	public static void setSessionAttribute(int index, int second, String key, Object value) {
-		ICacheService myCache = BeanFactoryHelper.getBean("myCache");
-		myCache.selectDB(index);
-		myCache.putObject(key, JSON.toJSONString(value), second, false);
+		myCache.putObject(key, value, 3600, true);
 		myCache.init();
 	}
 
-	public static String getSessionAttribute(int index, String key) {
+	public static void setSessionAttribute(int index, int second, String key, Object value) {
 		ICacheService myCache = BeanFactoryHelper.getBean("myCache");
 		myCache.selectDB(index);
-		String obj = (String) myCache.getObject(key, false);
+		myCache.putObject(key, value, second, true);
+		myCache.init();
+	}
+
+	public static Object getSessionAttribute(int index, String key) {
+		ICacheService myCache = BeanFactoryHelper.getBean("myCache");
+		myCache.selectDB(index);
+		Object obj = myCache.getObject(key);
 		myCache.init();
 		return obj;
 	}
 
-	public static String removeSessionAttribute(int index, String key) {
+	public static Object removeSessionAttribute(int index, String key) {
 		ICacheService myCache = BeanFactoryHelper.getBean("myCache");
 		myCache.selectDB(index);
-		String obj = (String) myCache.deleteObject(key, false);
+		Object obj = myCache.deleteObject(key);
 		myCache.init();
 		return obj;
 	}

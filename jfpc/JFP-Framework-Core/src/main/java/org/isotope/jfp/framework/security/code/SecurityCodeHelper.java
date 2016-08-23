@@ -59,7 +59,7 @@ public class SecurityCodeHelper implements ISFrameworkConstants, ISModelConstant
 		if (type == 1) {
 			verCode = verCode.toUpperCase();
 		}
-		String code = RedisCacheHelper.removeSessionAttribute(1, jobid);
+		Object code = RedisCacheHelper.removeSessionAttribute(1, jobid);
 		if (code == null) {
 			return 2;
 		}
