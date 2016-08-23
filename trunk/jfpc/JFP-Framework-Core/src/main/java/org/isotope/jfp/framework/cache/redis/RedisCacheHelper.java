@@ -42,7 +42,7 @@ public class RedisCacheHelper implements ISFrameworkConstants {
 	public static String removeSessionAttribute(int index, String key) {
 		ICacheService myCache = BeanFactoryHelper.getBean("myCache");
 		myCache.selectDB(index);
-		String obj = (String) myCache.deleteObject(key);
+		String obj = (String) myCache.deleteObject(key, false);
 		myCache.init();
 		return obj;
 	}
