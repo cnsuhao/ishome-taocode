@@ -165,7 +165,8 @@ public class LoginBusiness extends LoginService {
 			// 强制注销
 			doLogOut(user);
 		}
-		
+		//登录成功
+		user.setLoginStatus("0");
 		// 保存本次登录信息（缓存）
 		doLoginToken(user, false);
 
