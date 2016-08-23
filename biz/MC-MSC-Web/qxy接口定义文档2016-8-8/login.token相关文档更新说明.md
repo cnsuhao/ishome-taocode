@@ -560,8 +560,7 @@ Response:
 {
     "status": 0,
     "data": {
-        "info":"重置密码成功",
-        "token":"6kasjdkfjalsdjflajsdlkf58695"
+        "info":"重置密码成功"
     }
 }
 ```
