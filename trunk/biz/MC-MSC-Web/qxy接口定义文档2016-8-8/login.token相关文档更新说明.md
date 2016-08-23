@@ -410,6 +410,7 @@ Response:
     - `schoolName`：      学校名称
     - `isUse`：           是否启用，0-未启用1-启用，只返回为1的
     - `uid`：             用户id
+    - `token`：           临时token
 ```
 > **返回结果示例：**
 ``` json
@@ -417,6 +418,7 @@ Response:
     "status": 0,
     "data": {
         "info":"登录成功",
+        "token":"1kjsldfj23lasjdfl",
         "uid":"14",
 	    "userType":"1",
         "school":[
@@ -451,11 +453,13 @@ Parameter:
     - 'sid':           学校id
     - 'userType':      登录角色（1-教师；2-家长；3-学生）
     - 'uid':           用户id
+    - 'token'：        临时token
 示例
 {
 	"sid":"1",
 	"userType":"1",
-	"uid":"12"
+	"uid":"12",
+    "token":"1kjsldfj23lasjdfl",
 }
 Response:  
     - `status`：     0->登录成功
@@ -464,6 +468,7 @@ Response:
     - `teacherName`：     教师姓名
     - `phone`：           教师手机号
     - `email`：           教师邮箱
+    - 'token'：           持久化token
 ```
 > **返回结果示例：**
 ``` json
