@@ -109,20 +109,14 @@ public class LoginBusiness extends LoginService {
 		// 完成用户登录
 		UserBean user = new UserBean();
 
-		// 判断用户登录来源
-		// if(TWO.equals(loginer.getClientType())){
-		//
-		// }
-		//
-
 		List<UserBean> loginers;
 		// 1:教师,2:家长,3:学生
 		if ("1".equals(loginer.getUserType())) {
-			loginers = readTeacherLoginer(login);
+			loginers = readLoginer(login);
 		} else if ("2".equals(loginer.getUserType())) {
-			loginers = readParentLoginer(login);
+			loginers = readLoginer(login);
 		} else if ("3".equals(loginer.getUserType())) {
-			loginers = readStudentLoginer(login);
+			loginers = readLoginer(login);
 		} else {
 			loginers = readLoginer(login);
 		}
@@ -156,6 +150,7 @@ public class LoginBusiness extends LoginService {
 			// 强制注销
 			doLogOut(user);
 		}
+		user.setUserType(loginer.getUserType());
 		//登录成功
 		user.setLoginStatus("0");
 		// 保存本次登录信息（缓存）
