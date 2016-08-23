@@ -125,7 +125,6 @@ public class LoginBusiness extends LoginService {
 			loginers = readStudentLoginer(login);
 		} else {
 			loginers = readLoginer(login);
-			return user;
 		}
 
 		boolean logined = false;
@@ -134,17 +133,8 @@ public class LoginBusiness extends LoginService {
 		} else if (loginers.size() == 0) {
 			user.setLoginStatus("2");
 		} else if (loginers.size() > 1) {
-			// 系统整合的场合进行用户排他
-			for (UserBean loginerdb : loginers) {
-				// if (loginer.getUserType().equals(loginerdb.getUserType()))
-				{
-					// 检查密码
-					logined = checkLogin(loginer, loginerdb);
-					if (logined == true) {
-						break;
-					}
-				}
-			}
+			// 账户异常，不是唯一的
+			
 		} else {
 			// 检查密码
 			logined = checkLogin(loginer, loginers.get(0));
@@ -153,7 +143,8 @@ public class LoginBusiness extends LoginService {
 			user.setLoginStatus("1");
 			return user;
 		}
-
+		//保存登录结果
+		user = loginers.get(0);
 		// 判断第二次登录
 		if (0 == loginNumers) {
 			// 不限制
