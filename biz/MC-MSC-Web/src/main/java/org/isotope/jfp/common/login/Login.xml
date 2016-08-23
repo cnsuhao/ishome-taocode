@@ -9,7 +9,7 @@
     <!-- 用户登陆  -->
     <select id='readLoginer' parameterType='map' resultType='LoginerData'>
         SELECT 
-            a.uid as puk
+            a.uid as userId
             ,a.password 
             ,0 as userType
         FROM user a
@@ -27,7 +27,7 @@
     
     <select id='readTeacherLoginer' parameterType='map' resultType='LoginerData'>
         SELECT 
-            u.tid as puk
+            u.tid as userId
             ,a.password 
             ,u.sid as schoolId
             ,u.teacher_name as userNameCN
@@ -60,7 +60,7 @@
     </select>
     <select id='readParentLoginer' parameterType='map' resultType='LoginerData'>
         SELECT 
-             p.parent_id as puk
+             p.parent_id as userId
             ,a.uid as userId
             ,a.password 
               ,p.sid as schoolId
@@ -93,7 +93,7 @@
     </select>
     <select id='readStudentLoginer' parameterType='map' resultType='LoginerData'>
         SELECT 
-             t.student_id as puk
+             t.student_id as userId
             ,a.uid as userId
             ,a.password 
             ,t.sid as schoolId
