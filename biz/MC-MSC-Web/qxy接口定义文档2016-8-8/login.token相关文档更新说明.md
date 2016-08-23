@@ -381,13 +381,14 @@ Response:
 #### login.5.1 用户名/手机号/邮箱、密码/手机短信验证码登录接口
 > 登录接口不需要token验证
 > 先登录账号，再选择学校和角色登陆系统
-> 用户账号、用户手机、用户邮箱填一个即可；输入密码或者短信验证码登录，登录成功后选择用户学校和角色，进入系统；如果用户不存在则提示登录失败；
+> 用户账号、用户手机、用户邮箱填一个即可；输入密码或者短信验证码登录，登录成功后选择用户学校，进入系统；如果用户不存在则提示登录失败；
 ``` json
 Url:        /qxy/login
 Method:     POST
 Header:     Content-type:application/json
 Parameter:
     - 'clientType':  客户端类型（0-APP；1-网页；2-手机；3-微信；4-支付宝；）（必填）
+    - 'userType':    登录角色（1-教师；2-家长；3-学生）
     - 'account':     用户账号（必填-账号、邮箱、手机号选一）
     - 'email':       用户邮箱（必填-账号、邮箱、手机号选一）
     - 'phone':       用户手机号（必填-账号、邮箱、手机号选一）
@@ -396,6 +397,7 @@ Parameter:
 示例
 {
 	"clientType":"1",
+	"userType":"1",
 	"account":"luoidbashi",
 	"email":"eee@qq.com",
 	"phone":"15265236523",
@@ -416,6 +418,7 @@ Response:
     "data": {
         "info":"登录成功",
         "uid":"14",
+	    "userType":"1",
         "school":[
 	        {
 		        "sid":"1",
@@ -439,19 +442,19 @@ Response:
 
 #### login.5.2 选择登录学校及角色接口
 >不需要token验证
->用户登录成功后获取该用户的学校列表，用户选择所需要登录的学校id和角色id，生成token进入系统；
+>用户登录成功后获取该用户的学校列表，用户选择所需要登录的学校id，生成token进入系统；
 ``` json
 Url:        /qxy/login/in
 Method:     POST
 Header:     Content-type:application/json
 Parameter:
     - 'sid':           学校id
-    - 'loginRole':     登录角色（1-教师；2-家长；3-学生）
+    - 'userType':      登录角色（1-教师；2-家长；3-学生）
     - 'uid':           用户id
 示例
 {
 	"sid":"1",
-	"loginRole":"0",
+	"userType":"1",
 	"uid":"12"
 }
 Response:  
