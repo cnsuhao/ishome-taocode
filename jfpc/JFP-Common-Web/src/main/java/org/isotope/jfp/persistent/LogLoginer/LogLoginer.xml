@@ -7,7 +7,7 @@
 <mapper namespace='org.isotope.jfp.persistent.LogLoginer.LogLoginerDao'>
     <!-- 表字段信息  -->
     <sql id='tableColumns'>
-        puk,account,uid,user_type,is_admin,ip_adress,client_type,sid,good_id,act_type,create_time,creator,update_time,updator
+        puk,account,uid,user_type,is_admin,ip_adress,client_type,sid,act_type,create_time,creator,update_time,updator
     </sql>
 
     <!-- 根据条件更新所有记录 -->
@@ -36,9 +36,6 @@
         </if>
         <if test=" sid != null and sid !='' "><!-- 学校ID -->
             ,sid = #{sid}
-        </if>
-        <if test=" goodId != null and goodId !='' "><!-- 产品ID -->
-            ,good_id = #{goodId}
         </if>
         <if test=" actType != null and actType !='' "><!-- 动作类别 -->
             ,act_type = #{actType}
@@ -76,9 +73,6 @@
             </if>
             <if test=" sid != null and sid !='' "><!-- 学校ID -->
                 AND sid = #{sid}
-            </if>
-            <if test=" goodId != null and goodId !='' "><!-- 产品ID -->
-                AND good_id = #{goodId}
             </if>
             <if test=" actType != null and actType !='' "><!-- 动作类别 -->
                 AND act_type = #{actType}
@@ -124,9 +118,6 @@
         <if test=" sid != null and sid !='' "><!-- 学校ID -->
             AND sid = #{sid}
         </if>
-        <if test=" goodId != null and goodId !='' "><!-- 产品ID -->
-            AND good_id = #{goodId}
-        </if>
         <if test=" actType != null and actType !='' "><!-- 动作类别 -->
             AND act_type = #{actType}
         </if>
@@ -149,7 +140,7 @@
         INSERT INTO log_loginer
           ( <include refid='tableColumns'/>) 
         VALUES 
-          ( #{puk},#{account},#{uid},#{userType},#{isAdmin},#{macAdress},#{ipAdress},#{clientType},#{sid},#{goodId},#{actType},#{createTime},#{creator},#{updateTime},#{updator} )
+          ( #{puk},#{account},#{uid},#{userType},#{isAdmin},#{ipAdress},#{clientType},#{sid},#{actType},#{createTime},#{creator},#{updateTime},#{updator} )
     </insert>
     <!-- 修改一条数据 -->
     <update id='doUpdate' parameterType='LogLoginerDBO'>
@@ -177,9 +168,6 @@
         </if>
         <if test=" sid != null and sid !='' "><!-- 学校ID -->
             ,sid = #{sid}
-        </if>
-        <if test=" goodId != null and goodId !='' "><!-- 产品ID -->
-            ,good_id = #{goodId}
         </if>
         <if test=" actType != null and actType !='' "><!-- 动作类别 -->
             ,act_type = #{actType}
