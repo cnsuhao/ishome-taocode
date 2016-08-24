@@ -213,7 +213,7 @@ public class LoginController extends MyControllerSupport {
 			LoginService_.makeLogIn(user, true);
 
 			rs.setResult(user);
-			rs.setToken(user.getToken());
+			//rs.setToken(user.getToken());
 		} catch (Exception e) {
 			rs.setStatus(2);
 			rs.setMessage("失败");
