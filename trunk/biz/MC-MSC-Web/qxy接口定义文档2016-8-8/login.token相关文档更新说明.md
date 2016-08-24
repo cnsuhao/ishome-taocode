@@ -547,14 +547,12 @@ Url:        /qxy/resetPassword
 Method:     POST
 Header:     Content-type:application/json
 Parameter:
-    - 'repeatPassword':     确认密码
     - 'newPassword':        新密码
     - 'uid':                用户id
 示例
 {
 	"uid":"6", 
-	"newPassword":"13526523256",             
-	"repeatPassword":"135@qq.com"              
+	"newPassword":"13526523256"          
 }
 Response:  
     - `status`：    0->重置密码成功
