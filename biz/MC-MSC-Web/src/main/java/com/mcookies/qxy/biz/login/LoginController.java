@@ -208,6 +208,7 @@ public class LoginController extends MyControllerSupport {
 			}
 			user.setUserType(userType);
 			user.setSchoolId(sid);
+			user.setToken(EMPTY);
 			// 二次登录系统
 			LoginService_.makeLogIn(user, true);
 
