@@ -114,6 +114,7 @@ public class LoginController extends MyControllerSupport {
 						return rs;
 					} else {
 						UserBean user = loginers.get(0);
+						user.setSchoolId(999999999L);
 						// 保存本次登录信息（缓存）
 						LoginService_.doLoginToken(user, false);
 						// 获取用户相关的 学校列表
@@ -124,7 +125,7 @@ public class LoginController extends MyControllerSupport {
 						rs.setStatus(0);
 						JSONObject data = new JSONObject();
 						data.put("info", "登陆成功");
-						data.put("info", user.getUserId());
+						data.put("uid", user.getUserId());
 						data.put("userType", loginpvo.getUserType());
 						data.put("school", schools);
 						data.put("token", user.getToken());
@@ -141,6 +142,7 @@ public class LoginController extends MyControllerSupport {
 			// 密码
 			if (StringUtils.isNotEmpty(loginpvo.getPassword())) {
 				loginer.setPassWord(loginpvo.getPassword());
+				loginer.setSchoolId(999999999L);
 				// 登录系统
 				UserBean user = LoginService_.doLogIn(loginer);
 				// 登陆成功
@@ -153,7 +155,7 @@ public class LoginController extends MyControllerSupport {
 					rs.setStatus(0);
 					JSONObject data = new JSONObject();
 					data.put("info", "登陆成功");
-					data.put("info", user.getUserId());
+					data.put("uid", user.getUserId());
 					data.put("userType", loginpvo.getUserType());
 					data.put("school", schools);
 					data.put("token", user.getToken());
