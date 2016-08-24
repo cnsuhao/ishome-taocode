@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.isotope.jfp.framework.beans.common.RESTResultBean;
 import org.isotope.jfp.framework.security.value.MD5SecurityHelper;
 import org.isotope.jfp.framework.support.MyControllerSupport;
+import org.isotope.jfp.framework.utils.PasswordHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -165,7 +166,7 @@ public class TeacherInfoController extends MyControllerSupport {
 				user.setEmail(pvo.getEmail());
 				user.setEmailStatus(1);
 				user.setPhone(pvo.getPhone());
-				user.setPassword(MD5SecurityHelper.encrypt("qxy123456"));
+				user.setPassword(PasswordHelper.getPassword("qxy123456"));
 				user.setStatus(1);
 				UserService_.doInsert(user);
 				uid = user.getUid();
