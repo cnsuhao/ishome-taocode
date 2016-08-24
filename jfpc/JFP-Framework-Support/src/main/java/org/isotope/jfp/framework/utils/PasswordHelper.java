@@ -22,8 +22,11 @@ public class PasswordHelper {
 	public static String getPassword(String pass) {
 		String md5 = new Md5PasswordEncoder().encodePassword(pass, null);
 		//System.out.println(md5);
-		md5 = pass.substring(0, 3) + md5.substring(3);
-		return md5;
+		char[] ps = md5.toCharArray();
+		ps[5] = pass.charAt(0);
+		ps[10] = pass.charAt(1);
+		ps[15] = pass.charAt(2);
+		return new String(ps);
 	}
 
 }
