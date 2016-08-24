@@ -21,6 +21,7 @@ import org.isotope.jfp.framework.support.MyControllerSupport;
 import org.isotope.jfp.framework.utils.DateHelper;
 import org.isotope.jfp.framework.utils.HttpRequestHelper;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -65,6 +66,7 @@ public class LoginController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
+	@Transactional
 	public RESTResultBean doLoginPOST(@RequestBody LoginPVO loginpvo, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		// 设定返回
 		RESTResultBean rs = new RESTResultBean();
@@ -117,7 +119,8 @@ public class LoginController extends MyControllerSupport {
 						return rs;
 					} else {
 						UserBean user = loginers.get(0);
-						user.setSchoolId(999999999L);
+						user.setSchoolId(defualtSid);
+						user.setClientType(loginpvo.getClientType());
 						// 保存本次登录信息（缓存）
 						LoginService_.doLoginToken(user, false);
 						// 获取用户相关的 学校列表
@@ -191,6 +194,7 @@ public class LoginController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/login/in", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
+	@Transactional
 	public RESTResultBean loginInPOST(@RequestBody String jsonparam) {
 		RESTResultBean rs = new RESTResultBean();
 		try {
