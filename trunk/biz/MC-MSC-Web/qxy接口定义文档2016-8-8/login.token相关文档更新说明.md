@@ -463,7 +463,7 @@ Parameter:
 }
 Response:  
     - `status`：     0->登录成功
-					 2->登录失败，用户已不存在
+					 1->登录失败，用户已不存在
     - `schoolName`：      学校名称
     - `teacherName`：     教师姓名
     - `phone`：           教师手机号
@@ -487,6 +487,7 @@ Response:
 #### login.5.3 生成短信验证码接口
 >不需要token验证
 >用户使用手机短信验证码登录系统是，需要点击获取短信验证码获取，点击后会生成验证码，格式为6为随机数字，验证有效期为30分钟，过期将失效，需要重新生成验证码；重新生成验证码需要间隔60s；重新生成验证码后，上一个验证码会失效；
+>"phone":"15256235256","effectiveTime":"00:30:00","createTime":"2016-8-11 00:00:00"
 ``` json
 Url:        /qxy/captcha/create
 Method:     POST
@@ -499,18 +500,15 @@ Parameter:
 }
 Response:  
     - `status`：     0->验证码生成成功
-					 1->1分钟之后才能够重新生成验证码
+					 1->验证码生成失败
 ```
 > **返回结果示例：**
 ``` json
 {
     "status": 0,
     "data": {
-        "captcha":"658695",
-        "key":"12",                   #该验证码信息对应的key
-        "phone":"15256235256",
-        "effectiveTime":"00:30:00",
-        "createTime":"2016-8-11 00:00:00"
+        "info":"ok",
+
     }
 }
 ```
