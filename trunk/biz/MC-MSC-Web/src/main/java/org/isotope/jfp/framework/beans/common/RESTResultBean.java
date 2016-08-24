@@ -42,7 +42,7 @@ public class RESTResultBean extends TokenBean implements ISFrameworkConstants {
 	public String getInfo() {
 		return info;
 	}
-
+	
 	public void setInfo(String info) {
 		this.info = info;
 	}
@@ -60,14 +60,22 @@ public class RESTResultBean extends TokenBean implements ISFrameworkConstants {
 	protected String message = null;
 	protected Object result = null;
 
+	/**
+	 * @deprecated
+	 */
 	public void setCode(String resultCode) {
 		this.code = resultCode;
 	}
-
+	/**
+	 * @deprecated
+	 */
 	public void setMessage(String resultMsg) {
 		this.message = resultMsg;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setResult(Object result) {
 		this.result = result;
 	}
