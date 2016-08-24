@@ -7,7 +7,7 @@
 <mapper namespace='org.isotope.jfp.persistent.LogLoginer.LogLoginerDao'>
     <!-- 表字段信息  -->
     <sql id='tableColumns'>
-        puk,account,uid,user_type,is_admin,mac_adress,ip_adress,client_type,sid,good_id,act_type,create_time,creator,update_time,updator
+        puk,account,uid,user_type,is_admin,ip_adress,client_type,sid,good_id,act_type,create_time,creator,update_time,updator
     </sql>
 
     <!-- 根据条件更新所有记录 -->
@@ -27,9 +27,6 @@
         </if>
         <if test=" isAdmin != null and isAdmin !='' "><!-- 超级管理员 -->
             ,is_admin = #{isAdmin}
-        </if>
-        <if test=" macAdress != null and macAdress !='' "><!-- MAC地址 -->
-            ,mac_adress = #{macAdress}
         </if>
         <if test=" ipAdress != null and ipAdress !='' "><!-- IP地址 -->
             ,ip_adress = #{ipAdress}
@@ -70,9 +67,6 @@
             </if>
             <if test=" isAdmin != null and isAdmin !='' "><!-- 超级管理员 -->
                 AND is_admin = #{isAdmin}
-            </if>
-            <if test=" macAdress != null and macAdress !='' "><!-- MAC地址 -->
-                AND mac_adress = #{macAdress}
             </if>
             <if test=" ipAdress != null and ipAdress !='' "><!-- IP地址 -->
                 AND ip_adress = #{ipAdress}
@@ -120,9 +114,6 @@
         </if>
         <if test=" isAdmin != null and isAdmin !='' "><!-- 超级管理员 -->
             AND is_admin = #{isAdmin}
-        </if>
-        <if test=" macAdress != null and macAdress !='' "><!-- MAC地址 -->
-            AND mac_adress = #{macAdress}
         </if>
         <if test=" ipAdress != null and ipAdress !='' "><!-- IP地址 -->
             AND ip_adress = #{ipAdress}
@@ -177,9 +168,6 @@
         </if>
         <if test=" isAdmin != null and isAdmin !='' "><!-- 超级管理员 -->
             ,is_admin = #{isAdmin}
-        </if>
-        <if test=" macAdress != null and macAdress !='' "><!-- MAC地址 -->
-            ,mac_adress = #{macAdress}
         </if>
         <if test=" ipAdress != null and ipAdress !='' "><!-- IP地址 -->
             ,ip_adress = #{ipAdress}
