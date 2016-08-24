@@ -92,11 +92,11 @@ public class LoginController extends MyControllerSupport {
 				int flag = SecurityCodeHelper.checkRandomCode(1, loginpvo.getCaptcha(), loginpvo.getPhone());
 				if (flag == 1) {
 					rs.setStatus(1);
-					rs.setMessage("登陆失败，验证码错误");
+					rs.setInfo("登陆失败，验证码错误");
 					return rs;
 				} else if (flag == 2) {
 					rs.setStatus(1);
-					rs.setMessage("登录失败，验证码已过期，请重新获取验证码");
+					rs.setInfo("登录失败，验证码已过期，请重新获取验证码");
 					return rs;
 				} else {
 					// 登录系统
@@ -105,15 +105,15 @@ public class LoginController extends MyControllerSupport {
 					List<UserBean> loginers = LoginService_.readLoginer(login);
 					if (loginers == null) {
 						rs.setStatus(2);
-						rs.setMessage("用户不存在");
+						rs.setInfo("用户不存在");
 						return rs;
 					} else if (loginers.size() == 0) {
 						rs.setStatus(2);
-						rs.setMessage("用户不存在");
+						rs.setInfo("用户不存在");
 						return rs;
 					} else if (loginers.size() > 1) {
 						rs.setStatus(3);// 多个用户存在
-						rs.setMessage("用户资料异常，请联系管理员！");
+						rs.setInfo("用户资料异常，请联系管理员！");
 						return rs;
 					} else {
 						UserBean user = loginers.get(0);
@@ -138,7 +138,7 @@ public class LoginController extends MyControllerSupport {
 				}
 			} else {
 				rs.setStatus(1);
-				rs.setMessage("非法操作！");
+				rs.setInfo("非法操作！");
 				return rs;
 			}
 		} else {
@@ -170,12 +170,12 @@ public class LoginController extends MyControllerSupport {
 					JSONObject data = new JSONObject();
 					data.put("info", getLoginStatusStr(user.getLoginStatus()));
 					rs.setData(data);
-					rs.setMessage(getLoginStatusStr(user.getLoginStatus()));
+					rs.setInfo(getLoginStatusStr(user.getLoginStatus()));
 				}
 				return rs;
 			} else {
 				rs.setStatus(1);
-				rs.setMessage("非法操作！");
+				rs.setInfo("非法操作！");
 				return rs;
 			}
 		}
@@ -203,7 +203,7 @@ public class LoginController extends MyControllerSupport {
 			UserBean user = LoginService_.loadLoginer(token);
 			if (user == null) {
 				rs.setStatus(1);
-				rs.setMessage("非法操作！");
+				rs.setInfo("非法操作！");
 				return rs;
 			}
 			user.setUserType(userType);
@@ -212,13 +212,13 @@ public class LoginController extends MyControllerSupport {
 			// 二次登录系统
 			LoginService_.makeLogIn(user, true);
 
-			rs.setResult(user);
-			rs.setToken(user.getToken());
+			rs.setData(user);
+			//rs.setToken(user.getToken());
 		} catch (Exception e) {
 			rs.setStatus(2);
-			rs.setMessage("失败");
+			rs.setInfo("失败");
 		}
-
+		System.out.println("====>>>>>" + rs);
 		return rs;
 	}
 
@@ -240,7 +240,7 @@ public class LoginController extends MyControllerSupport {
 			String phone = param.getString("phone");
 			if (StringUtils.isEmpty(phone)) {
 				rs.setStatus(2);
-				rs.setMessage("手机号码不能为空");
+				rs.setInfo("手机号码不能为空");
 				return rs;
 			}
 			String key = phone;
@@ -259,7 +259,7 @@ public class LoginController extends MyControllerSupport {
 			rs.setData(data);*/
 		} catch (Exception e) {
 			rs.setStatus(2);
-			rs.setMessage("生成验证码失败");
+			rs.setInfo("生成验证码失败");
 		}
 		return rs;
 	}
@@ -281,17 +281,17 @@ public class LoginController extends MyControllerSupport {
 			String captcha = (String) param.get("captcha");
 			if (StringUtils.isEmpty(phone) || StringUtils.isEmpty(captcha)) {
 				rs.setStatus(2);
-				rs.setMessage("关键参数缺失");
+				rs.setInfo("关键参数缺失");
 				return rs;
 			}
 			// 验证码校验
 			int flag = SecurityCodeHelper.checkRandomCode(1, captcha, phone);
 			if (flag == 1) {
 				rs.setStatus(1);
-				rs.setMessage("验证失败，验证码错误");
+				rs.setInfo("验证失败，验证码错误");
 			} else if (flag == 2) {
 				rs.setStatus(1);
-				rs.setMessage("验证失败，验证码已过期");
+				rs.setInfo("验证失败，验证码已过期");
 			} else if (flag == 0) {
 				// 获取手机号对应的UID
 				UserDBO user = new UserDBO();
@@ -306,13 +306,13 @@ public class LoginController extends MyControllerSupport {
 					rs.setStatus(0);
 				} else {
 					rs.setStatus(1);
-					rs.setMessage("验证失败，手机号不是系统用户");
+					rs.setInfo("验证失败，手机号不是系统用户");
 				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			rs.setStatus(2);
-			rs.setMessage("验证失败");
+			rs.setInfo("验证失败");
 		}
 		return rs;
 	}
@@ -336,12 +336,12 @@ public class LoginController extends MyControllerSupport {
 			String repeatPassword = param.getString("repeatPassword");
 			if (uid == null || StringUtils.isEmpty(newPassword) || StringUtils.isEmpty(repeatPassword)) {
 				rs.setStatus(2);
-				rs.setMessage("密码修改失败，参数缺失");
+				rs.setInfo("密码修改失败，参数缺失");
 				return rs;
 			}
 			if (!newPassword.equals(repeatPassword)) {
 				rs.setStatus(2);
-				rs.setMessage("重置密码失败，两次输入的密码不一致");
+				rs.setInfo("重置密码失败，两次输入的密码不一致");
 				return rs;
 			}
 			UserDBO user = new UserDBO();
@@ -351,10 +351,10 @@ public class LoginController extends MyControllerSupport {
 			int flag = UserService_.doUpdate(user);
 			if (flag == 1) {
 				rs.setStatus(0);
-				rs.setMessage("重置密码成功");
+				rs.setInfo("重置密码成功");
 			} else {
 				rs.setStatus(1);
-				rs.setMessage("重置密码失败");
+				rs.setInfo("重置密码失败");
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
