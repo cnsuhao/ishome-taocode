@@ -53,21 +53,22 @@ public class MyControllerSupport extends MyFrameworkSupport {
 
 	// 检查用户Token
 	public boolean doCheckToken(String token) {
-		token = "910820738640559462371283192";
+//		token = "910820738640559462371283192";
 		loginer = UserCacheHelper.checkUser(token);
-		if (EmptyHelper.isEmpty(loginer)) {
-			TkLoginerDBO tkl = new TkLoginerDBO();
-			tkl.setToken(token);
-			tkl = (TkLoginerDBO) TkLoginerService_.doRead(tkl);
-			if (EmptyHelper.isNotEmpty(loginer)) {
-				loginer = JSON.parseObject(tkl.getJson(), UserBean.class);
-			}
-		}
+//		if (EmptyHelper.isEmpty(loginer)) {
+//			TkLoginerDBO tkl = new TkLoginerDBO();
+//			tkl.setToken(token);
+//			tkl = (TkLoginerDBO) TkLoginerService_.doRead(tkl);
+//			if (EmptyHelper.isNotEmpty(loginer)) {
+//				loginer = JSON.parseObject(tkl.getJson(), UserBean.class);
+//			}
+//		}
 		if (EmptyHelper.isEmpty(loginer)) {// 临时代码
-			// 获得用户信息
-			loginer = new UserBean();
-			BusinessTokenBean b2b = BusinessTokenBean.build(token);
-			BeanUtils.copyProperties(b2b, loginer);
+			return false;
+//			// 获得用户信息
+//			loginer = new UserBean();
+//			BusinessTokenBean b2b = BusinessTokenBean.build(token);
+//			BeanUtils.copyProperties(b2b, loginer);
 		}
 		// 缓存Session
 		super.setUserData(loginer);
