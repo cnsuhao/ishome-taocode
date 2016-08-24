@@ -168,7 +168,7 @@ public class LoginBusiness extends LoginService {
 	 * @return
 	 */
 	public UserBean loadLoginer(String token) {
-		return UserCacheHelper.checkUser(token);
+		return UserCacheHelper.removeUser(token);
 	}
 
 	/**

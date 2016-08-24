@@ -60,12 +60,24 @@ public class UserCacheHelper {
 		myCache.init();
 	}
 
-	public static void removeUser(String token) {
+	public static UserBean removeUser(String token) {
 		if (EmptyHelper.isEmpty(token))
-			return;
-		ICacheService myCache = BeanFactoryHelper.getBean("myCache");
-		myCache.selectDB(3);
-		myCache.deleteObject(token);
-		myCache.init();
+			return null;
+		
+		try{
+			if (EmptyHelper.isEmpty(token))
+				return null;
+			ICacheService myCache = BeanFactoryHelper.getBean("myCache");
+			myCache.selectDB(3);
+			String obj = (String) myCache.deleteObject(token, false);
+			if (EmptyHelper.isEmpty(obj))
+				return null;
+	
+			UserBean loginer = JSON.parseObject(obj, UserBean.class);
+			myCache.init();
+			return loginer;
+		}catch(Exception e){
+			return null;
+		}
 	}
 }
