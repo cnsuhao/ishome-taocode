@@ -53,10 +53,10 @@ public class MyControllerSupport extends MyFrameworkSupport {
 		// 检查用户Token
 		loginer = UserCacheHelper.checkUser(token);
 		{// 临时代码
-			// 获得用户信息
-			loginer = new UserBean();
-			loginer.setUserId(123456L);
-			loginer.setToken("910820738640559462371283192");
+//			// 获得用户信息
+//			loginer = new UserBean();
+//			loginer.setUserId(123456L);
+//			loginer.setToken("910820738640559462371283192");
 		}
 		// 缓存Session
 		super.setUserData(loginer);
