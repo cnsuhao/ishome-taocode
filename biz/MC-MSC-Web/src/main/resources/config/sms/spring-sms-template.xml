@@ -31,6 +31,7 @@
         <property name='templateConfig'>
         	<map>
            		<!-- 验证码 -->  
+           		<entry key="JSTZ" 			value="【千校云】（s%）通知：s% -s%老师" />	
             	<entry key="YZM" 			value="【千校云】尊敬的用户，您的验证码为%s，本次验证码30分钟内有效，感谢您的使用。" />	
             </map>
         </property>
