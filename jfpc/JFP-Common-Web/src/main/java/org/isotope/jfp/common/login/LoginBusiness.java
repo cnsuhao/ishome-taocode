@@ -150,6 +150,7 @@ public class LoginBusiness extends LoginService {
 			// 强制注销
 			doLogOut(user);
 		}
+		user.setSchoolId(loginer.getSchoolId());
 		user.setUserType(loginer.getUserType());
 		//登录成功
 		user.setLoginStatus("0");
