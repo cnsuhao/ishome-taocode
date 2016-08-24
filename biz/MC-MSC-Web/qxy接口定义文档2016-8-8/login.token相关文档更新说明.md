@@ -387,7 +387,7 @@ Url:        /qxy/login
 Method:     POST
 Header:     Content-type:application/json
 Parameter:
-    - 'clientType':  客户端类型（0-APP；1-网页；2-手机；3-微信；4-支付宝；）（必填）
+    - 'clientType':  客户端类型（1-手机号、邮箱、账号密码方式登录;2-手机验证码登录;3-微信登录;4-支付宝登录;）（必填）
     - 'userType':    登录角色（1-教师；2-家长；3-学生）
     - 'account':     用户账号（必填-账号、邮箱、手机号选一）
     - 'email':       用户邮箱（必填-账号、邮箱、手机号选一）
@@ -406,7 +406,7 @@ Parameter:
 }
 Response:  
     - `status`：          0->登录成功
-				          2->登录失败，账号或密码不正确
+				          1->登录失败，账号或密码不正确
     - `schoolName`：      学校名称
     - `isUse`：           是否启用，0-未启用1-启用，只返回为1的
     - `uid`：             用户id
@@ -451,8 +451,8 @@ Method:     POST
 Header:     Content-type:application/json
 Parameter:
     - 'sid':           学校id
-    - 'userType':      登录角色（1-教师；2-家长；3-学生）
-    - 'uid':           用户id
+    - 'userType':      登录角色（1-教师；2-家长；3-学生） 临时token中包含，可不传
+    - 'uid':           用户id            临时token中包含，可不传
     - 'token'：        临时token
 示例
 {
