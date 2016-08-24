@@ -167,6 +167,9 @@ public class LoginController extends MyControllerSupport {
 				// 登陆失败
 				else {
 					rs.setStatus(Integer.parseInt(user.getLoginStatus()));
+					JSONObject data = new JSONObject();
+					data.put("info", getLoginStatusStr(user.getLoginStatus()));
+					rs.setData(data);
 					rs.setMessage(getLoginStatusStr(user.getLoginStatus()));
 				}
 				return rs;
@@ -246,13 +249,13 @@ public class LoginController extends MyControllerSupport {
 			String createTime = DateHelper.currentTimeMillisCN1();
 			String message = SMSTemplateConfig_.getMessageWithTemplate("YZM",captcha);
 			UserSMSSendServiceImpl_.send(defualtSid+"", phone,message, EMPTY);
-			JSONObject data = new JSONObject();
+			/*JSONObject data = new JSONObject();
 			data.put("captcha", captcha);
 			data.put("key", key);
 			data.put("phone", phone);
 			data.put("effectiveTime", effectiveTime);
 			data.put("createTime", createTime);
-			rs.setData(data);
+			rs.setData(data);*/
 		} catch (Exception e) {
 			rs.setStatus(2);
 			rs.setMessage("生成验证码失败");
