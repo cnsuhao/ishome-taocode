@@ -11,7 +11,7 @@
 		<java-version>1.7</java-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.encoding>UTF-8</maven.compiler.encoding>
-		<jfp.version>3.2.1</jfp.version>
+		<jfp.version>3.3.1</jfp.version>
 		<poi.version>3.14</poi.version>
 	</properties>
 
