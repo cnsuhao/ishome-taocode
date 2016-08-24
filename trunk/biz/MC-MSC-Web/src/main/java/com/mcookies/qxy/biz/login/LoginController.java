@@ -142,7 +142,7 @@ public class LoginController extends MyControllerSupport {
 			// 密码
 			if (StringUtils.isNotEmpty(loginpvo.getPassword())) {
 				loginer.setPassWord(loginpvo.getPassword());
-				loginer.setSchoolId(999999999L);
+				loginer.setSchoolId(defualtSid);
 				// 登录系统
 				UserBean user = LoginService_.doLogIn(loginer);
 				// 登陆成功
