@@ -337,15 +337,9 @@ public class LoginController extends MyControllerSupport {
 			JSONObject param = JSONObject.parseObject(jsonparam);
 			Long uid = param.getLong("uid");
 			String newPassword = param.getString("newPassword");
-			String repeatPassword = param.getString("repeatPassword");
-			if (uid == null || StringUtils.isEmpty(newPassword) || StringUtils.isEmpty(repeatPassword)) {
+			if (uid == null || StringUtils.isEmpty(newPassword)) {
 				rs.setStatus(2);
 				rs.setInfo("密码修改失败，参数缺失");
-				return rs;
-			}
-			if (!newPassword.equals(repeatPassword)) {
-				rs.setStatus(2);
-				rs.setInfo("重置密码失败，两次输入的密码不一致");
 				return rs;
 			}
 			UserDBO user = new UserDBO();
