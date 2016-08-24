@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.isotope.jfp.framework.beans.common.RESTResultBean;
 import org.isotope.jfp.framework.security.value.MD5SecurityHelper;
 import org.isotope.jfp.framework.support.MyControllerSupport;
+import org.isotope.jfp.framework.utils.PasswordHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,10 +52,10 @@ public class PassWordManageController extends MyControllerSupport {
 			//验证旧密码
 			UserDBO user = new UserDBO();
 			user.setUid(userId);
-			user.setPassword(MD5SecurityHelper.encrypt(oldpwd));
+			user.setPassword(PasswordHelper.getPassword(oldpwd));
 			List<UserDBO> relist = (List<UserDBO>)UserService_.doSelectData(user);
 			if(relist!=null&&relist.size()>0){
-				user.setPassword(MD5SecurityHelper.encrypt(newpwd));
+				user.setPassword(PasswordHelper.getPassword(newpwd));
 				UserService_.doUpdate(user);
 			}else{
 				result.setInfo("修改密码失败，旧密码不正确");

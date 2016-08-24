@@ -11,6 +11,7 @@ import org.isotope.jfp.framework.beans.common.RESTResultBean;
 import org.isotope.jfp.framework.security.value.MD5SecurityHelper;
 import org.isotope.jfp.framework.support.MyControllerSupport;
 import org.isotope.jfp.framework.utils.DateHelper;
+import org.isotope.jfp.framework.utils.PasswordHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -278,7 +279,7 @@ public class ClassStudentController extends MyControllerSupport {
 				user.setEmail(student.getEmail());
 				user.setEmailStatus(1);
 				user.setPhone(student.getPhone());
-				user.setPassword(MD5SecurityHelper.encrypt("qxy123456"));
+				user.setPassword(PasswordHelper.getPassword("qxy123456"));
 				user.setStatus(1);
 				userService.doInsert(user);
 				uid = user.getUid();
@@ -564,7 +565,7 @@ public class ClassStudentController extends MyControllerSupport {
 				user.setAccount(parent.getPhone());
 				user.setEmailStatus(0);
 				user.setPhone(parent.getPhone());
-				user.setPassword(MD5SecurityHelper.encrypt("qxy123456"));
+				user.setPassword(PasswordHelper.getPassword("qxy123456"));
 				user.setStatus(1);
 				userService.doInsert(user);
 				uid = user.getUid();
