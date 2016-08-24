@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.isotope.jfp.framework.beans.common.RESTResultBean;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
-import org.isotope.jfp.framework.security.value.MD5SecurityHelper;
+import org.isotope.jfp.framework.utils.PasswordHelper;
 
 import com.alibaba.fastjson.JSON;
 
@@ -30,19 +30,21 @@ public class SystemAdminInterceptor implements ISFrameworkConstants {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 	public static void main(String[] args) throws Exception {
-		//System.out.println(MD5SecurityHelper.encrypt("46f94c8de14fb"));
+		// System.out.println(MD5SecurityHelper.encrypt("46f94c8de14fb"));
 	}
+
 	public boolean doCheckAdmin(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String usr = request.getParameter(CONSTANT_LOGINER);
 		String pwd = request.getParameter(CONSTANT_PASSWORD);
-		try{
-			if (administrator.equals(usr) && password.equals(MD5SecurityHelper.encrypt(pwd))) {
+		try {
+			if (administrator.equals(usr) && password.equals(PasswordHelper.getPassword(pwd))) {
 				return true;
 			} else {
 				return false;
 			}
-		}catch(Exception e){
+		} catch (Exception e) {
 			return false;
 		}
 	}

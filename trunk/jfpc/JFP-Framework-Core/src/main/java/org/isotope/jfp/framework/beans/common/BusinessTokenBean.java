@@ -28,6 +28,10 @@ public class BusinessTokenBean extends TokenBean implements ISFrameworkConstants
 		return format.format(new Date());
 	}
 
+	public static void main(String[] args) {
+		System.out.println(build("1212403_84_25_46_27_08_49_5"));
+	}
+
 	public static String getBizToken(BusinessTokenBean loginer) {
 		return BusinessTokenHelper.getBizTokenData("" + loginer.getSchoolId(), "" + loginer.getUserId(), loginer.getUserType() + loginTime());
 	}
@@ -55,7 +59,7 @@ public class BusinessTokenBean extends TokenBean implements ISFrameworkConstants
 	}
 
 	public String getToken() {
-		if(EmptyHelper.isEmpty(token))
+		if (EmptyHelper.isEmpty(token))
 			token = BusinessTokenHelper.getBizTokenData("" + schoolId, "" + userId, userType + loginTime);
 		return token;
 	}
@@ -77,7 +81,8 @@ public class BusinessTokenBean extends TokenBean implements ISFrameworkConstants
 	 * 最后请求时间
 	 */
 	String loginTime = loginTime();
-	//String loginTime = DateHelper.currentTimeMillisCN1();
+
+	// String loginTime = DateHelper.currentTimeMillisCN1();
 	public Long getUserId() {
 		return userId;
 	}
