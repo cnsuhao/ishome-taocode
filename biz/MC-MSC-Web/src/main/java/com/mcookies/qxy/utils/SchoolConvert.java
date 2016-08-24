@@ -22,7 +22,11 @@ public class SchoolConvert implements ISFrameworkConstants, IParameterConvertSup
 	}
 
 	public Long getSchoolId() {
-		return getLoginer().getSchoolId();
+		//9219809_89_29_49_19_09_49_4
+		getLoginer();
+		if (loginer != null)
+			return loginer.getSchoolId();
+		return null;
 	}
 
 	/**

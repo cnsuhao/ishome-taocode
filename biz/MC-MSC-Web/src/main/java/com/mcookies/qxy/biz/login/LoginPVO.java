@@ -1,10 +1,13 @@
 package com.mcookies.qxy.biz.login;
+
+import org.isotope.jfp.framework.beans.ObjectBean;
+
 /**
  * 登陆实体类
  * @author macBookTang
  *
  */
-public class LoginPVO {
+public class LoginPVO extends ObjectBean{
 
 	private String email;
 	private String phone;
