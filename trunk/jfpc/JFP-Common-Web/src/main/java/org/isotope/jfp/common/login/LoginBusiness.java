@@ -178,8 +178,6 @@ public class LoginBusiness extends LoginService {
 	 * @return
 	 */
 	public UserBean makeLogIn(UserBean user, boolean dbSave) {
-		// 记录登录时间
-		user.setLoginTime(DateHelper.currentTimeMillisCN1());
 		// 保证安全
 		user.setPassWord(EMPTY);
 		// 保存本次登录信息（缓存、数据库）
