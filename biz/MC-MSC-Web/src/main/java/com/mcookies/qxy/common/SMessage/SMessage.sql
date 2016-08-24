@@ -4,7 +4,7 @@ CREATE TABLE s_message
     type TINYINT(1) COMMENT '消息类型',
     object TINYINT(1) COMMENT '对象类型',
     tid BIGINT(12) COMMENT '教师id',
-    teacher_name BIGINT(12) COMMENT '教师姓名',
+    teacher_name VARCHAR(40) COMMENT '教师姓名',
     parent_id BIGINT(12) COMMENT '家长id',
     parent_name VARCHAR(40) COMMENT '家长姓名',
     phone VARCHAR(32) COMMENT '手机号',

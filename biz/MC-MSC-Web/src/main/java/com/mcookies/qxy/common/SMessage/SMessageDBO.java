@@ -30,7 +30,7 @@ public class SMessageDBO extends MyDataBaseObjectSupport {
 	/**
 	 * 教师姓名
 	 */
-	private Long teacherName = null;
+	private String teacherName = null;
 
 	/**
 	 * 家长id
@@ -108,7 +108,7 @@ public class SMessageDBO extends MyDataBaseObjectSupport {
 	 *
 	 * @return Teacher_name 教师姓名
 	 */
-	public Long getTeacherName() {
+	public String getTeacherName() {
 		return this.teacherName;
 	}
 
@@ -221,7 +221,7 @@ public class SMessageDBO extends MyDataBaseObjectSupport {
 	 * @param Teacher_name
 	 *            教师姓名
 	 */
-	public void setTeacherName(Long teachername) {
+	public void setTeacherName(String teachername) {
 		this.teacherName = teachername;
 	}
 
