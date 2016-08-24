@@ -10,7 +10,10 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="com.upg.ceci">
+	<logger name="com.mcookies.qxy">
+		<level value="DEBUG" />
+	</logger>
+	<logger name="org.isotope.jfp">
 		<level value="DEBUG" />
 	</logger>
 	<logger name="org.isotope.jfp.framework.job">
@@ -28,38 +31,38 @@
 	
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework">
-		<level value="DEBUG" />
+		<level value="INFO" />
 	</logger>
 	<logger name="org.springframework.core">
-		<level value="DEBUG" />
+		<level value="INFO" />
 	</logger>
 	<logger name="org.springframework.beans">
-		<level value="DEBUG" />
+		<level value="INFO" />
 	</logger>	
 	<logger name="org.springframework.context">
-		<level value="DEBUG" />
+		<level value="INFO" />
 	</logger>
 	<logger name="org.springframework.web">
-		<level value="DEBUG" />
+		<level value="INFO" />
 	</logger>	
 	<logger name="org.springframework.aop">
-		<level value="DEBUG" />
+		<level value="INFO" />
 	</logger>	
 	<logger name="org.mybatis.spring.SqlSessionUtils">
-		<level value="DEBUG" />
+		<level value="INFO" />
 	</logger>
 	
 	<logger name="org.apache">
-		<level value="DEBUG" />
+		<level value="INFO" />
 	</logger>
 	<logger name="org.apache.commons">
-		<level value="DEBUG" />
+		<level value="INFO" />
 	</logger>
 	<logger name="org.quartz">
-		<level value="DEBUG" />
+		<level value="INFO" />
 	</logger>
 	<logger name="org.mybatis.spring">
-		<level value="DEBUG" />
+		<level value="INFO" />
 	</logger>
 	<logger name="org.apache.ibatis.logging.jdbc">
 		<level value="DEBUG" />
