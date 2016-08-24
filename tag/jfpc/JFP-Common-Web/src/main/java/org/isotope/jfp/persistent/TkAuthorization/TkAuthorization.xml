@@ -1,0 +1,187 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 第三方授权Token表 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='org.isotope.jfp.persistent.TkAuthorization.TkAuthorizationDao'>
+    <!-- 表字段信息  -->
+    <sql id='tableColumns'>
+        authorizer_refresh_token,uid,sid,type,tid,start_time,end_time,create_time,creator,update_time,updator
+    </sql>
+
+    <!-- 根据条件更新所有记录 -->
+    <update id='doUpdateAll' parameterType='TkAuthorizationDBO'>
+        UPDATE tk_authorization SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
+        <if test=" authorizerRefreshToken != null and authorizerRefreshToken !='' "><!-- TOKEN -->
+            ,authorizer_refresh_token = #{authorizerRefreshToken}
+        </if>
+        <if test=" uid != null and uid !='' "><!-- 用户ID -->
+            ,uid = #{uid}
+        </if>
+        <if test=" sid != null and sid !='' "><!-- 学校ID -->
+            ,sid = #{sid}
+        </if>
+        <if test=" type != null and type !='' "><!-- 类别 -->
+            ,type = #{type}
+        </if>
+        <if test=" tid != null and tid !='' "><!-- 第三方id -->
+            ,tid = #{tid}
+        </if>
+        <if test=" startTime != null and startTime !='' "><!-- 授权时间 -->
+            ,start_time = #{startTime}
+        </if>
+        <if test=" endTime != null and endTime !='' "><!-- 授权终了时间 -->
+            ,end_time = #{endTime}
+        </if>
+        <if test=" createTime != null and createTime !='' "><!-- 登录时间 -->
+            ,create_time = #{createTime}
+        </if>
+        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+            ,creator = #{creator}
+        </if>
+        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+            ,updator = #{updator}
+        </if>
+        WHERE 1 = 1 
+            <if test=" authorizerRefreshToken != null and authorizerRefreshToken !='' "><!-- TOKEN -->
+                AND authorizer_refresh_token = #{authorizerRefreshToken}
+            </if>
+            <if test=" uid != null and uid !='' "><!-- 用户ID -->
+                AND uid = #{uid}
+            </if>
+            <if test=" sid != null and sid !='' "><!-- 学校ID -->
+                AND sid = #{sid}
+            </if>
+            <if test=" type != null and type !='' "><!-- 类别 -->
+                AND type = #{type}
+            </if>
+            <if test=" tid != null and tid !='' "><!-- 第三方id -->
+                AND tid = #{tid}
+            </if>
+            <if test=" startTime != null and startTime !='' "><!-- 授权时间 -->
+                AND start_time = #{startTime}
+            </if>
+            <if test=" endTime != null and endTime !='' "><!-- 授权终了时间 -->
+                AND end_time = #{endTime}
+            </if>
+            <if test=" createTime != null and createTime !='' "><!-- 登录时间 -->
+                AND create_time = #{createTime}
+            </if>
+            <if test=" creator != null and creator !='' "><!-- 创建者 -->
+                AND creator = #{creator}
+            </if>
+            <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+                AND update_time = #{updateTime}
+            </if>
+            <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+                AND updator = #{updator}
+            </if>
+    </update>
+    <!-- 查询分页数据信息  -->
+    <select id='doSelectPage' parameterType='TkAuthorizationDBO' resultType='TkAuthorizationDBO'>
+        SELECT <include refid='tableColumns'/> FROM tk_authorization
+        WHERE 1 = 1 
+        <if test=" authorizerRefreshToken != null and authorizerRefreshToken !='' "><!-- TOKEN -->
+            AND authorizer_refresh_token = #{authorizerRefreshToken}
+        </if>
+        <if test=" uid != null and uid !='' "><!-- 用户ID -->
+            AND uid = #{uid}
+        </if>
+        <if test=" sid != null and sid !='' "><!-- 学校ID -->
+            AND sid = #{sid}
+        </if>
+        <if test=" type != null and type !='' "><!-- 类别 -->
+            AND type = #{type}
+        </if>
+        <if test=" tid != null and tid !='' "><!-- 第三方id -->
+            AND tid = #{tid}
+        </if>
+        <if test=" startTime != null and startTime !='' "><!-- 授权时间 -->
+            AND start_time = #{startTime}
+        </if>
+        <if test=" endTime != null and endTime !='' "><!-- 授权终了时间 -->
+            AND end_time = #{endTime}
+        </if>
+        <if test=" createTime != null and createTime !='' "><!-- 登录时间 -->
+            AND create_time = #{createTime}
+        </if>
+        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+            AND creator = #{creator}
+        </if>
+        <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+            AND update_time = #{updateTime}
+        </if>
+        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+            AND updator = #{updator}
+        </if>
+    </select>
+
+    <!-- 插入一条数据 -->
+    <insert id='doInsert' parameterType='TkAuthorizationDBO'>
+        INSERT INTO tk_authorization
+          ( <include refid='tableColumns'/>) 
+        VALUES 
+          ( #{authorizerRefreshToken},#{uid},#{sid},#{type},#{tid},#{startTime},#{endTime},#{createTime},#{creator},#{updateTime},#{updator} )
+    </insert>
+    <!-- 修改一条数据 -->
+    <update id='doUpdate' parameterType='TkAuthorizationDBO'>
+        UPDATE tk_authorization SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
+        <if test=" authorizerRefreshToken != null and authorizerRefreshToken !='' "><!-- TOKEN -->
+            ,authorizer_refresh_token = #{authorizerRefreshToken}
+        </if>
+        <if test=" uid != null and uid !='' "><!-- 用户ID -->
+            ,uid = #{uid}
+        </if>
+        <if test=" sid != null and sid !='' "><!-- 学校ID -->
+            ,sid = #{sid}
+        </if>
+        <if test=" type != null and type !='' "><!-- 类别 -->
+            ,type = #{type}
+        </if>
+        <if test=" tid != null and tid !='' "><!-- 第三方id -->
+            ,tid = #{tid}
+        </if>
+        <if test=" startTime != null and startTime !='' "><!-- 授权时间 -->
+            ,start_time = #{startTime}
+        </if>
+        <if test=" endTime != null and endTime !='' "><!-- 授权终了时间 -->
+            ,end_time = #{endTime}
+        </if>
+        <if test=" createTime != null and createTime !='' "><!-- 登录时间 -->
+            ,create_time = #{createTime}
+        </if>
+        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+            ,creator = #{creator}
+        </if>
+        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+            ,updator = #{updator}
+        </if>
+        WHERE 1 = 1 
+            <if test=" authorizerRefreshToken != null and authorizerRefreshToken !='' "><!-- TOKEN -->
+                AND authorizer_refresh_token = #{authorizerRefreshToken}
+            </if>
+    </update>
+    <!-- 逻辑删除一条数据 -->
+    <delete id='toDelete' parameterType='TkAuthorizationDBO'>
+        UPDATE tk_authorization SET ddd='1', update_time = #{updateTime}, uu2 = #{uu2} WHERE update_time = #{updateTime}
+            <if test=" authorizerRefreshToken != null and authorizerRefreshToken !='' "><!-- TOKEN -->
+                AND authorizer_refresh_token = #{authorizerRefreshToken}
+            </if>
+    </delete>
+    <!-- 物理删除一条数据 -->
+    <delete id='doDelete' parameterType='TkAuthorizationDBO'>
+        DELETE FROM tk_authorization WHERE update_time = #{updateTime}
+            <if test=" authorizerRefreshToken != null and authorizerRefreshToken !='' "><!-- TOKEN -->
+                AND authorizer_refresh_token = #{authorizerRefreshToken}
+            </if>
+    </delete>
+    <!-- 查询一条数据  -->
+    <select id='doRead' parameterType='TkAuthorizationDBO' resultType='TkAuthorizationDBO'>
+        SELECT <include refid='tableColumns'/> FROM tk_authorization WHERE 1 = 1
+            <if test=" authorizerRefreshToken != null and authorizerRefreshToken !='' "><!-- TOKEN -->
+                AND authorizer_refresh_token = #{authorizerRefreshToken}
+            </if>
+    </select>
+
+</mapper>

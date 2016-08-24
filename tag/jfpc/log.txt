@@ -1,0 +1,78 @@
+Java Framework Project for Cloud
+版本发布日志
+13、v1.2.1	2014/12/1
+	1)、SVN地址迁移
+
+
+12、v1.1.1	2014/10/11
+	1）、修正现成安全BUG
+	2）、整理Session操作方案为Sping自带模式
+	3）、修改MyFrameworkSupport、MyControllerSupport为安全模式
+
+11、v1.0.11	2014/9/16
+	1）、分页标签
+
+10、v1.0.10	2014/9/5
+	1）、短信
+	2）、邮件
+	3）、短信与邮件模版表(MMMSS)
+	4）、增加独立配置文件（spring-mail.xml、spring-sms.xml）
+		实际业务操作文件SMSService、MailService
+
+9、v1.0.9	2014/9/1
+	1）、WEB页面模版定义
+	2）、注册与登录业务
+	3）、网站首页
+	4）、分页BUG修正
+	5）、公共文件里面dbo命名为bean
+
+8、v1.0.9	2014/8/21
+	1）、开发规范完善命名规约
+	2）、完善框架原型设计
+	3）、分页架构更新（MyControllerSupport.pageModel）
+	4）、增加统一提示过渡页（MessagePageHelper）
+
+7、v1.0.7	2014/7/8
+	1）、重新定义项目工程，包路径规划
+		JFPC-Framework		项目基础工程，工具类
+		JFPC-Common		项目共通业务工程，工具服务（★用户POM唯一引入jar）
+		JFPC-Beans		项目共通业务的各种Bean对象（dao，dbo，service，SQL和Mapper）
+	2）、重新定义企业、用户、会员表结构，增加扩展表用于各自独立系统覆盖
+	3）、共通业务设计定义
+
+6、v1.0.6	2014/6/25
+	1）、UI仅仅处理首页框架，其他部分采用原始方式开发
+	2）、页面布局采用table定位，近开发标准版本，不提供任何页面美化
+
+5、v1.0.5	2014/6/23
+	1）、工程定义
+		JFPC-Base		项目基础工程，工具类
+		JFPC-Common		项目共通业务工程，工具服务
+		JFPC-Bean		项目共通业务的各种Bean对象（dao，dbo，service）
+		JFPC-Sql-Mapper		项目共通业务的SQL和Mapper（mybatis）
+
+4、v1.0.4	2014/6/20
+	1）、数据库开发模版更新
+	2）、mybatits下面XML生成模版更新
+	3）、固定字段定义为主键、备注下面
+	4）、默认生成基本SQL、Bean、Dao、Controller、Service、XML
+
+3、v1.0.3	2014/6/19
+	1）、资源服务中心发布
+	2）、统一上传、统一展示
+		1）、文件上传00003010
+		2）、文件下载00003020
+		3）、图片显示00003030
+	3）、灵活的统一权限验证，基于Token
+	4）、可以处理各种文件，不限大小
+	5）、资源服务器基于FTP，文件扩展名进行了转换
+
+2、v1.0.2	2014/6/6
+	1）、菜单与画面定义
+	2）、共用SqlSession
+	3）、组织机构权限定义
+	4）、全新命名规范
+
+1、v1.0.1	2014/5/30
+	1）、用户登录与Token验证（Token验证服务00011011）
+	2）、Bootstrap3 引入
