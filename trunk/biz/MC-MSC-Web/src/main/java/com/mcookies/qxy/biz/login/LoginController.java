@@ -14,6 +14,7 @@ import org.isotope.jfp.common.login.LoginBusiness;
 import org.isotope.jfp.framework.beans.common.RESTResultBean;
 import org.isotope.jfp.framework.beans.user.LoginerBean;
 import org.isotope.jfp.framework.beans.user.UserBean;
+import org.isotope.jfp.framework.common.sms.SMSTemplateConfig;
 import org.isotope.jfp.framework.common.sms.UserSMSSendServiceImpl;
 import org.isotope.jfp.framework.security.code.SecurityCodeHelper;
 import org.isotope.jfp.framework.support.MyControllerSupport;
@@ -241,7 +242,8 @@ public class LoginController extends MyControllerSupport {
 			String captcha = SecurityCodeHelper.makeRandomNumCode(1800, 6, key);
 			String effectiveTime = "00:30:00";
 			String createTime = DateHelper.currentTimeMillisCN1();
-			UserSMSSendServiceImpl_.send(defualtSid+"", phone, captcha, EMPTY);
+			String message =new SMSTemplateConfig().getMessageWithTemplate("YZM",captcha);
+			UserSMSSendServiceImpl_.send(defualtSid+"", phone,message, EMPTY);
 			JSONObject data = new JSONObject();
 			data.put("captcha", captcha);
 			data.put("key", key);
