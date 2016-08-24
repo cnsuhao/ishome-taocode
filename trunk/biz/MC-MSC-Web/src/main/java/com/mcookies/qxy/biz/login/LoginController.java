@@ -49,6 +49,8 @@ public class LoginController extends MyControllerSupport {
 	protected UserService UserService_;
 	@Resource
 	protected SchoolService SchoolService_;
+	@Resource
+	protected SMSTemplateConfig SMSTemplateConfig_;
 	
 	private Long defualtSid = 999999999l;
 
@@ -242,7 +244,7 @@ public class LoginController extends MyControllerSupport {
 			String captcha = SecurityCodeHelper.makeRandomNumCode(1800, 6, key);
 			String effectiveTime = "00:30:00";
 			String createTime = DateHelper.currentTimeMillisCN1();
-			String message =new SMSTemplateConfig().getMessageWithTemplate("YZM",captcha);
+			String message = SMSTemplateConfig_.getMessageWithTemplate("YZM",captcha);
 			UserSMSSendServiceImpl_.send(defualtSid+"", phone,message, EMPTY);
 			JSONObject data = new JSONObject();
 			data.put("captcha", captcha);
