@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>Isotope</groupId>
   <artifactId>JFP-Common-Web</artifactId>
-  <version>3.2.1-RELEASE</version>
+  <version>3.3.1-RELEASE</version>
   
     <properties>
 
@@ -36,11 +36,6 @@
    		<dependency>
    			<groupId>Isotope</groupId>
    			<artifactId>JFP-Framework-Core</artifactId>
-   			<version>${jfp.version}-RELEASE</version>
-   		</dependency>
-   		<dependency>
-   			<groupId>Isotope</groupId>
-   			<artifactId>JFP-Framework-Support</artifactId>
    			<version>${jfp.version}-RELEASE</version>
    		</dependency>
    	</dependencies>
