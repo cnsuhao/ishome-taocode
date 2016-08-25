@@ -325,7 +325,7 @@
 		LEFT JOIN news_column b ON a.column_id = b.column_id
 		LEFT JOIN u_teacher c ON a.author = c.tid
 		WHERE 1 = 1
-        AND a.column_id = #{columnId} AND b.is_use = 1
+        AND b.is_use = 1
         <if test=" author != null ">
 	        AND a.author = #{author}
 	    </if>
@@ -338,6 +338,10 @@
 	    <if test=" isAudit != null ">
 	        AND a.is_audit = #{isAudit}
 	    </if>
+	    <!-- 新增栏目id可以为空  2016-8-25 13:03  tonychan  -->
+	    <if test=" columnId != null ">
+        	AND a.column_id = #{columnId} 
+        </if>
 	    ORDER BY a.create_time DESC
     </select>
     <!-- 分页，根据columnId isAudit createTime tid  -->
@@ -350,7 +354,10 @@
 		LEFT JOIN news_column b ON a.column_id = b.column_id
 		LEFT JOIN u_teacher c ON a.author = c.tid
 		WHERE 1 = 1
-        AND a.column_id = #{columnId} AND b.is_use = 1
+        AND b.is_use = 1
+        <if test=" columnId != null ">
+        	AND a.column_id = #{columnId} 
+        </if>
         AND a.is_audit = 1 AND (a.news_type = 0 OR instr(a.news_reader, concat(#{tid}, ';')) > 0)
 	    ORDER BY a.create_time DESC
     </select>
@@ -366,7 +373,10 @@
 		LEFT JOIN class_student d ON instr(a.news_classer, concat(d.cid, ';')) > 0
 		LEFT JOIN u_student_parent e ON d.student_id = e.student_id
 		WHERE 1 = 1
-        AND a.column_id = #{columnId} AND b.is_use = 1
+		AND b.is_use = 1
+        <if test=" columnId != null ">
+        	AND a.column_id = #{columnId} 
+        </if>
         AND a.is_audit = 1 AND (a.news_type = 0 OR a.news_type = 2 AND e.parent_id = #{parentId})
 	    ORDER BY a.create_time DESC
     </select>
