@@ -86,11 +86,11 @@ public class CalendarManageController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/calendar", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean calendarPOST(@RequestBody SCalendarPVO pvo) {
+	public RESTResultBean calendarPOST(String token, @RequestBody SCalendarPVO pvo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			// token校验
-			if (doCheckToken(pvo.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			if(pvo.getTermId()==null){
@@ -124,11 +124,11 @@ public class CalendarManageController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/calendar", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean calendarPUT(@RequestBody SCalendarPVO pvo) {
+	public RESTResultBean calendarPUT(String token, @RequestBody SCalendarPVO pvo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			// token校验
-			if (doCheckToken(pvo.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 
@@ -159,11 +159,11 @@ public class CalendarManageController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/calendar", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean calendarDELETE(@RequestBody SCalendarPVO pvo) {
+	public RESTResultBean calendarDELETE(String token, @RequestBody SCalendarPVO pvo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			// token校验
-			if (doCheckToken(pvo.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			if (pvo.getCalendarId()!=null) {

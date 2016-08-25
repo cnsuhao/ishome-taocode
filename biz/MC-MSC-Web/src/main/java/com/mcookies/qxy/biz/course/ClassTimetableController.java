@@ -133,11 +133,11 @@ public class ClassTimetableController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/syllabus", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean syllabusPOST(@RequestBody String jsonparam) {
+	public RESTResultBean syllabusPOST(String token, @RequestBody String jsonparam) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			JSONObject param = JSONObject.parseObject(jsonparam);
-			String token = (String) param.get("token");
+//			String token = (String) param.get("token");
 			//token校验
 			if (doCheckToken(token) == false) {
 				return tokenFail();
@@ -197,11 +197,11 @@ public class ClassTimetableController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/syllabus", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean syllabusPUT(@RequestBody String jsonparam) {
+	public RESTResultBean syllabusPUT(String token, @RequestBody String jsonparam) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			JSONObject param = JSONObject.parseObject(jsonparam);
-			String token = (String) param.get("token");
+//			String token = (String) param.get("token");
 			//token校验
 			if (doCheckToken(token) == false) {
 				return tokenFail();
@@ -226,11 +226,11 @@ public class ClassTimetableController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/syllabus/copy", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean syllabusCopyPUT(@RequestBody String jsonparam) {
+	public RESTResultBean syllabusCopyPUT(String token, @RequestBody String jsonparam) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			JSONObject param = JSONObject.parseObject(jsonparam);
-			String token = (String) param.get("token");
+//			String token = (String) param.get("token");
 			//token校验
 			if (doCheckToken(token) == false) {
 				return tokenFail();

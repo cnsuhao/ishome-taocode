@@ -196,11 +196,11 @@ public class LoginController extends MyControllerSupport {
 	@RequestMapping(value = "/login/in", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	@Transactional
-	public RESTResultBean loginInPOST(@RequestBody String jsonparam) {
+	public RESTResultBean loginInPOST(String token, @RequestBody String jsonparam) {
 		RESTResultBean rs = new RESTResultBean();
 		try {
 			JSONObject param = JSONObject.parseObject(jsonparam);
-			String token = (String) param.get("token");
+//			String token = (String) param.get("token");
 			Long sid = param.getLong("sid");
 			String userType = (String) param.get("userType");
 			// 设定返回

@@ -203,11 +203,11 @@ public class TeacherManageController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/teacher/move", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean teacherMovePUT(@RequestBody String jsonparam) {
+	public RESTResultBean teacherMovePUT(String token, @RequestBody String jsonparam) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			JSONObject param = JSONObject.parseObject(jsonparam);
-			String token = (String) param.get("token");
+//			String token = (String) param.get("token");
 			// token校验
 			if (doCheckToken(token) == false) {
 				return tokenFail();
@@ -251,11 +251,11 @@ public class TeacherManageController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/teacher/remove", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean teacherRemovePUT(@RequestBody String jsonparam) {
+	public RESTResultBean teacherRemovePUT(String token, @RequestBody String jsonparam) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			JSONObject param = JSONObject.parseObject(jsonparam);
-			String token = (String) param.get("token");
+//			String token = (String) param.get("token");
 			// token校验
 			if (doCheckToken(token) == false) {
 				return tokenFail();

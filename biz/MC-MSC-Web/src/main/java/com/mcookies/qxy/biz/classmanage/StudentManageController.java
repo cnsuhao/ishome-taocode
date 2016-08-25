@@ -124,10 +124,10 @@ public class StudentManageController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/student/move", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean studentMovePUT(@RequestBody ClassStudentDBO classStudent) {
+	public RESTResultBean studentMovePUT(String token, @RequestBody ClassStudentDBO classStudent) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(classStudent.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			// 查询班级是否存在

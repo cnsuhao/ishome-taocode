@@ -68,10 +68,10 @@ public class ColumnManageController extends MyControllerSupport {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/column", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean columnPOST(@RequestBody NewsColumnDBO newsColumn) {
+	public RESTResultBean columnPOST(String token, @RequestBody NewsColumnDBO newsColumn) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(newsColumn.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			if (StringUtils.isEmpty(newsColumn.getTitle())) {
@@ -109,10 +109,10 @@ public class ColumnManageController extends MyControllerSupport {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/column", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean columnPUT(@RequestBody NewsColumnDBO newsColumn) {
+	public RESTResultBean columnPUT(String token, @RequestBody NewsColumnDBO newsColumn) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(newsColumn.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			// 查询是否存在
@@ -158,10 +158,10 @@ public class ColumnManageController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/column", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean columnDELETE(@RequestBody NewsColumnDBO newsColumn) {
+	public RESTResultBean columnDELETE(String token, @RequestBody NewsColumnDBO newsColumn) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(newsColumn.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			// 查询是否存在

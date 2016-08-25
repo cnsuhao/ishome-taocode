@@ -32,10 +32,10 @@ public class StaffLabelController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/label", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean labelPOST(@RequestBody SLabelPVO pvo) {
+	public RESTResultBean labelPOST(String token, @RequestBody SLabelPVO pvo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(pvo.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			//校验标签是否存在
@@ -62,10 +62,10 @@ public class StaffLabelController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/label", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean labelPUT(@RequestBody SLabelPVO pvo) {
+	public RESTResultBean labelPUT(String token, @RequestBody SLabelPVO pvo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(pvo.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			//校验标签是否存在
@@ -98,10 +98,10 @@ public class StaffLabelController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/label", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean labelDELETE(@RequestBody SLabelPVO pvo) {
+	public RESTResultBean labelDELETE(String token, @RequestBody SLabelPVO pvo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(pvo.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			//删除

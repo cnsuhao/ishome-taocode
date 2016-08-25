@@ -101,10 +101,10 @@ public class SchoolManageController extends MyControllerSupport {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/school", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean schoolPOST(@RequestBody SchoolDBO school) {
+	public RESTResultBean schoolPOST(String token, @RequestBody SchoolDBO school) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(school.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			if (school.getCreateUid() == null) {
@@ -162,12 +162,12 @@ public class SchoolManageController extends MyControllerSupport {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/school", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean schoolPUT(@RequestBody SchoolDBO school) {
+	public RESTResultBean schoolPUT(String token, @RequestBody SchoolDBO school) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			// 要改的sid
 			Long sid = school.getSid();
-			if (doCheckToken(school.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			SchoolDBO origin = new SchoolDBO();
@@ -231,12 +231,12 @@ public class SchoolManageController extends MyControllerSupport {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/school", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean schoolDELETE(@RequestBody SchoolDBO school) {
+	public RESTResultBean schoolDELETE(String token, @RequestBody SchoolDBO school) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			// 要改的sid
 			Long sid = school.getSid();
-			if (doCheckToken(school.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			// 查询是否存在

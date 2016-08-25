@@ -44,12 +44,6 @@ public class StudentRfidController extends MyControllerSupport {
 	@Resource
 	protected UStudentService UStudentService_;	
 	
-	
-	
-	
-	
-	
-	
 	@RequestMapping(value = "/studentrfidlist", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean studentrfidlistGET(Long termId,Long cid,String token,Integer page,Integer size) {
@@ -165,10 +159,10 @@ public class StudentRfidController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/studentrfid", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean studentrfidPOST(@RequestBody StudentRfidPVO pvo) {
+	public RESTResultBean studentrfidPOST(String token, @RequestBody StudentRfidPVO pvo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(pvo.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			//查询该学生是否已经有卡
@@ -208,10 +202,10 @@ public class StudentRfidController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/studentrfid", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean studentrfidPUT(@RequestBody StudentRfidPVO pvo) {
+	public RESTResultBean studentrfidPUT(String token, @RequestBody StudentRfidPVO pvo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(pvo.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			//修改其他rfid卡为无效
@@ -235,10 +229,10 @@ public class StudentRfidController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/studentrfid", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean studentrfidDELETE(@RequestBody StudentRfidPVO pvo) {
+	public RESTResultBean studentrfidDELETE(String token, @RequestBody StudentRfidPVO pvo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(pvo.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			//删除该关联
