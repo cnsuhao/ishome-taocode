@@ -76,11 +76,11 @@ public class GradeManageController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/gradelabel", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean deviceinfoPOST(@RequestBody SGradeLabelPVO grade) {
+	public RESTResultBean deviceinfoPOST(String token, @RequestBody SGradeLabelPVO grade) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			// token校验
-			if (doCheckToken(grade.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			
@@ -114,11 +114,11 @@ public class GradeManageController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/gradelabel", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean deviceinfoPUT(@RequestBody SGradeLabelPVO grade) {
+	public RESTResultBean deviceinfoPUT(String token, @RequestBody SGradeLabelPVO grade) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			// token校验
-			if (doCheckToken(grade.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			
@@ -152,11 +152,11 @@ public class GradeManageController extends MyControllerSupport {
 	
 	@RequestMapping(value = "/gradelabel", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean gradelabelDELETE(@RequestBody SGradeLabelPVO pvo) {
+	public RESTResultBean gradelabelDELETE(String token, @RequestBody SGradeLabelPVO pvo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			// token校验
-			if (doCheckToken(pvo.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			int flag = SGradeLabelService_.doDelete(pvo);
