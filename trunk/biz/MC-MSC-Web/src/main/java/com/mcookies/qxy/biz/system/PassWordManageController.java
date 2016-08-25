@@ -33,11 +33,11 @@ public class PassWordManageController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/uppassword", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean uppasswrodPUT(@RequestBody String jsonparam) {
+	public RESTResultBean uppasswrodPUT(String token, @RequestBody String jsonparam) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			JSONObject param = JSONObject.parseObject(jsonparam);
-			String token = (String) param.get("token");
+//			String token = (String) param.get("token");
 			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
