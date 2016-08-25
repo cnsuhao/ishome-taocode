@@ -187,5 +187,22 @@
 
 	</select>
     
-
+	<!-- rfid卡对应学生班级信息查询接口 -->
+   	<select id="doReadCardInfoByRfid" parameterType="StudentRfidDBO" resultType="com.mcookies.qxy.biz.device.CardInfoPVO">
+		SELECT
+			class.term_id,
+			student_rfid.student_id,
+			class_student.cid,
+			student_rfid.rfid,
+			student_rfid.sid
+		FROM
+			student_rfid, class_student , class
+		WHERE
+			class_student.sid = student_rfid.sid AND
+			class_student.student_id = student_rfid.student_id AND
+			class.sid = class_student.sid AND
+			class.cid = class_student.cid AND
+			student_rfid.sid = #{sid} AND
+			student_rfid.rfid = #{rfid}
+	</select>
 </mapper>
