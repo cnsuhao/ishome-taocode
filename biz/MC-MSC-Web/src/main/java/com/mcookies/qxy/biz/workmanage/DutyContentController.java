@@ -42,10 +42,10 @@ public class DutyContentController extends MyControllerSupport {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/duty/content", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean dutyContentPOST(@RequestBody SDutyContentDBO sDutyContent) {
+	public RESTResultBean dutyContentPOST(String token, @RequestBody SDutyContentDBO sDutyContent) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(sDutyContent.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			// 判断所属岗位是否存在
@@ -76,10 +76,10 @@ public class DutyContentController extends MyControllerSupport {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/duty/content", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean dutyContentPUT(@RequestBody SDutyContentDBO sDutyContent) {
+	public RESTResultBean dutyContentPUT(String token, @RequestBody SDutyContentDBO sDutyContent) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(sDutyContent.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			// 查询是否存在
@@ -111,11 +111,10 @@ public class DutyContentController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/duty/content", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean dutyContentDELETE(@RequestBody String jsonparam) {
+	public RESTResultBean dutyContentDELETE(String token, @RequestBody String jsonparam) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			JSONObject param = JSONObject.parseObject(jsonparam);
-			String token = (String) param.get("token");
 			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
