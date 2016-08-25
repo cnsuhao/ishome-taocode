@@ -133,11 +133,11 @@ public class WorkTimeManageController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/class/worktime", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean classWorktimePOST(@RequestBody String jsonparam) {
+	public RESTResultBean classWorktimePOST(String token, @RequestBody String jsonparam) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			JSONObject param = JSONObject.parseObject(jsonparam);
-			String token = (String) param.get("token");
+//			String token = (String) param.get("token");
 			Long workId = null;
 			Long termId = null;
 			if (param.get("workId") != null) {
