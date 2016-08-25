@@ -346,7 +346,7 @@ public class ScheduleController extends MyControllerSupport {
 			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
-			JSONArray scheduleIds = param.getJSONArray("scheduleIds");
+			JSONArray scheduleIds = param.getJSONArray("ids");
 			for (Object scheduleId : scheduleIds) {
 				Long tmp = Long.valueOf(scheduleId.toString());
 				// 乐观锁操作
