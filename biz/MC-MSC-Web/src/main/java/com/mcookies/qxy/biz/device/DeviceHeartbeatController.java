@@ -50,6 +50,9 @@ public class DeviceHeartbeatController extends MyControllerSupport {
 			(new Thread(dhbt)).start();
 			result.setRequestInterval("");
 		} else if ("upstatus".equals(param.getMethod())) {// 上传设备状态数据
+			DeviceHeartbeatThread dhbt = BeanFactoryHelper.getBean("DeviceHeartbeatThread");
+			dhbt.setDeviceData(param);
+			(new Thread(dhbt)).start();
 			result.setRequestInterval("");
 		}
 
