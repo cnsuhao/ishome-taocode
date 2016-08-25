@@ -63,7 +63,7 @@ public class SMessageController extends MyControllerSupport {
 			String message = param.getString("message");
 			Integer isReceipt = param.getInteger("isReceipt");
 			// 家长信息发送
-			if (StringUtils.isEmpty(parentIdstr)) {
+			if (StringUtils.isNotEmpty(parentIdstr)) {
 				String[] parentIds = parentIdstr.split(";");
 				if (parentIds != null && parentIds.length > 0) {
 					for (String ptmp : parentIds) {
@@ -99,8 +99,8 @@ public class SMessageController extends MyControllerSupport {
 				}
 			}
 			// 教工信息发送
-			if (StringUtils.isEmpty(tidstr)) {
-				String[] tids = parentIdstr.split(";");
+			if (StringUtils.isNotEmpty(tidstr)) {
+				String[] tids = tidstr.split(";");
 				if (tids != null && tids.length > 0) {
 					for (String tidtmp : tids) {
 						Long tid = Long.parseLong(tidtmp);
