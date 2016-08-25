@@ -20,6 +20,7 @@ import org.isotope.jfp.framework.security.code.SecurityCodeHelper;
 import org.isotope.jfp.framework.support.MyControllerSupport;
 import org.isotope.jfp.framework.utils.DateHelper;
 import org.isotope.jfp.framework.utils.HttpRequestHelper;
+import org.isotope.jfp.framework.utils.token.UserCacheHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -360,6 +361,30 @@ public class LoginController extends MyControllerSupport {
 		return rs;
 	}
 
+	@RequestMapping(value = "/component", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public RESTResultBean componentGET(String token) {
+		RESTResultBean rs = new RESTResultBean();
+		try {
+			// token校验
+			if (doCheckToken(token) == false) {
+				return tokenFail();
+			}
+			UserBean loginer = UserCacheHelper.removeUser(token);
+			loginer.setLoginTime(UserBean.loginTime());
+			UserCacheHelper.saveUser(loginer);
+			String newtoken = loginer.getToken();
+			JSONObject data = new JSONObject();
+			data.put("authorizer_access_token", newtoken);
+			data.put("expires_in", 7200);
+			rs.setData(data);
+		} catch (Exception e) {
+			rs.setStatus(1);
+			rs.setInfo("刷新token异常");
+		}
+		return rs;
+	}
+	
 	/**
 	 * 账户唯一性检查
 	 * 
