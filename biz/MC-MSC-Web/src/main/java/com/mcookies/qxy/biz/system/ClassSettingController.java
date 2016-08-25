@@ -206,11 +206,11 @@ public class ClassSettingController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/class", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean classPOST(@RequestBody ClassPVO cpvo) {
+	public RESTResultBean classPOST(String token, @RequestBody ClassPVO cpvo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			//token校验
-			if (doCheckToken(cpvo.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			//根据配置的数量，循环新建班级
@@ -259,11 +259,11 @@ public class ClassSettingController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/class", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean classPUT(@RequestBody ClassPVO cpvo) {
+	public RESTResultBean classPUT(String token, @RequestBody ClassPVO cpvo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			//token校验
-			if (doCheckToken(cpvo.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			//获取班级的完整信息
@@ -303,11 +303,11 @@ public class ClassSettingController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/class", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean classDELETE(@RequestBody ClassPVO cpvo) {
+	public RESTResultBean classDELETE(String token, @RequestBody ClassPVO cpvo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			//token校验
-			if (doCheckToken(cpvo.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			ClassService_.doDelete(cpvo);
@@ -326,11 +326,11 @@ public class ClassSettingController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/class/leader", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean classLeaderPUT(@RequestBody ClassTeacherPVO pvo) {
+	public RESTResultBean classLeaderPUT(String token, @RequestBody ClassTeacherPVO pvo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			//token校验
-			if (doCheckToken(pvo.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			//班主任标准清除
