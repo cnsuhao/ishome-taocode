@@ -176,11 +176,11 @@ public class WorkTimeManageController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/class/worktime", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean classWorktimePUT(@RequestBody ClassPVO cpvo) {
+	public RESTResultBean classWorktimePUT(String token, @RequestBody ClassPVO cpvo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			// token校验
-			if (doCheckToken(cpvo.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			int flag = ClassService_.doUpdate(cpvo);
@@ -205,11 +205,11 @@ public class WorkTimeManageController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/class/worktime", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean classWorktimeDELETE(@RequestBody ClassPVO pvo) {
+	public RESTResultBean classWorktimeDELETE(String token, @RequestBody ClassPVO pvo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			// token校验
-			if (doCheckToken(pvo.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			pvo.setWorkId(0l);
@@ -277,10 +277,10 @@ public class WorkTimeManageController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/worktime", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean worktimePOST(@RequestBody SWorkTimePVO work) {
+	public RESTResultBean worktimePOST(String token, @RequestBody SWorkTimePVO work) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(work.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			// 获取当前学校ID
@@ -310,10 +310,10 @@ public class WorkTimeManageController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/worktime", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean worktimePUT(@RequestBody SWorkTimePVO work) {
+	public RESTResultBean worktimePUT(String token, @RequestBody SWorkTimePVO work) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(work.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			// 获取当前学校ID
@@ -349,10 +349,10 @@ public class WorkTimeManageController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/worktime", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean worktimeDELETE(@RequestBody SWorkTimePVO work) {
+	public RESTResultBean worktimeDELETE(String token, @RequestBody SWorkTimePVO work) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(work.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			// 获取当前学校ID
@@ -393,10 +393,10 @@ public class WorkTimeManageController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/workrule", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean workrulePOST(@RequestBody SWorkRulePVO rule) {
+	public RESTResultBean workrulePOST(String token, @RequestBody SWorkRulePVO rule) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(rule.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			// 获取当前学校ID
@@ -429,10 +429,10 @@ public class WorkTimeManageController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/workrule", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean workrulePUT(@RequestBody SWorkRulePVO rule) {
+	public RESTResultBean workrulePUT(String token, @RequestBody SWorkRulePVO rule) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(rule.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			// 编辑
@@ -452,10 +452,10 @@ public class WorkTimeManageController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/workrule", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean workruleDELETE(@RequestBody SWorkRulePVO pvo) {
+	public RESTResultBean workruleDELETE(String token, @RequestBody SWorkRulePVO pvo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(pvo.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			// 删除规则
