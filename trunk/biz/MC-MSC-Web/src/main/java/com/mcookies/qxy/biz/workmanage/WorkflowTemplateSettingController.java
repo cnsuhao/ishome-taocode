@@ -76,10 +76,10 @@ public class WorkflowTemplateSettingController extends MyControllerSupport {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/oatags", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean oaTagsPOST(@RequestBody OaTagsDBO oaTags) {
+	public RESTResultBean oaTagsPOST(String token, @RequestBody OaTagsDBO oaTags) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(oaTags.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			if (StringUtils.isEmpty(oaTags.getOatagsName())) {
@@ -111,10 +111,10 @@ public class WorkflowTemplateSettingController extends MyControllerSupport {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/oatags", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean oaTagsPUT(@RequestBody OaTagsDBO oaTags) {
+	public RESTResultBean oaTagsPUT(String token, @RequestBody OaTagsDBO oaTags) {
 			RESTResultBean result = new RESTResultBean();
 			try {
-				if (doCheckToken(oaTags.getToken()) == false) {
+				if (doCheckToken(token) == false) {
 					return tokenFail();
 				}
 				// 查询是否存在
@@ -166,11 +166,11 @@ public class WorkflowTemplateSettingController extends MyControllerSupport {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/oatags", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean oaTagsDELETE(@RequestBody String jsonparam) {
+	public RESTResultBean oaTagsDELETE(String token, @RequestBody String jsonparam) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			JSONObject param = JSONObject.parseObject(jsonparam);
-			String token = (String) param.get("token");
+//			String token = (String) param.get("token");
 			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
