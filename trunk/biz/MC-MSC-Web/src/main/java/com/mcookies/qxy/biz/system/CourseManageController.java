@@ -68,10 +68,10 @@ public class CourseManageController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/course", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean coursePOST(@RequestBody SCoursePVO pvo) {
+	public RESTResultBean coursePOST(String token, @RequestBody SCoursePVO pvo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(pvo.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			// 判断课程是否存在
@@ -98,10 +98,10 @@ public class CourseManageController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/course", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean coursePUT(@RequestBody SCoursePVO pvo) {
+	public RESTResultBean coursePUT(String token, @RequestBody SCoursePVO pvo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(pvo.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			// 判断课程是否存在
@@ -132,10 +132,10 @@ public class CourseManageController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/course", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean courseDELETE(@RequestBody SCoursePVO pvo) {
+	public RESTResultBean courseDELETE(String token, @RequestBody SCoursePVO pvo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(pvo.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			int flag = SCourseService_.doDelete(pvo);
