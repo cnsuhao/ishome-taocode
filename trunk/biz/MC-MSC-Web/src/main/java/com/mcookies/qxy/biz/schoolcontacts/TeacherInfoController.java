@@ -121,10 +121,10 @@ public class TeacherInfoController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/teacher/info", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean teacherInfoPOST(@RequestBody UTeacherPVO pvo) {
+	public RESTResultBean teacherInfoPOST(String token, @RequestBody UTeacherPVO pvo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(pvo.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			Long uid = null;
@@ -210,11 +210,11 @@ public class TeacherInfoController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/teacher/info", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean teacherInfoPUT(@RequestBody String jsonparam) {
+	public RESTResultBean teacherInfoPUT(String token, @RequestBody String jsonparam) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			JSONObject param = JSONObject.parseObject(jsonparam);
-			String token = (String) param.get("token");
+//			String token = (String) param.get("token");
 			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
@@ -281,10 +281,10 @@ public class TeacherInfoController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/teacher", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean teacherDELETE(@RequestBody UTeacherPVO pvo) {
+	public RESTResultBean teacherDELETE(String token, @RequestBody UTeacherPVO pvo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(pvo.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			Long tid = pvo.getTid();

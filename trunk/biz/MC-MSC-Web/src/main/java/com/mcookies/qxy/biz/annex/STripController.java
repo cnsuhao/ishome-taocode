@@ -69,11 +69,11 @@ public class STripController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/trip", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean tripPOST(@RequestBody STripPVO pvo) {
+	public RESTResultBean tripPOST(String token, @RequestBody STripPVO pvo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			//token校验
-			if (doCheckToken(pvo.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			pvo.setIsUse(1);
@@ -92,11 +92,11 @@ public class STripController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/trip", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean tripPUT(@RequestBody STripPVO pvo) {
+	public RESTResultBean tripPUT(String token, @RequestBody STripPVO pvo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			//token校验
-			if (doCheckToken(pvo.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			STripService_.doUpdate(pvo);
@@ -113,11 +113,11 @@ public class STripController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/trip", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean tripDELETE(@RequestBody STripPVO pvo) {
+	public RESTResultBean tripDELETE(String token, @RequestBody STripPVO pvo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			//token校验
-			if (doCheckToken(pvo.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			STripService_.doDelete(pvo);

@@ -233,10 +233,10 @@ public class NewsManageController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/news", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean newsPOST(@RequestBody NewsDBO news) {
+	public RESTResultBean newsPOST(String token, @RequestBody NewsDBO news) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(news.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			if (StringUtils.isEmpty(news.getTitle())) {
@@ -275,10 +275,10 @@ public class NewsManageController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/news", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean newsPUT(@RequestBody NewsDBO dbo) {
+	public RESTResultBean newsPUT(String token, @RequestBody NewsDBO dbo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(dbo.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			// 查询是否存在
@@ -334,10 +334,10 @@ public class NewsManageController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/news/top", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean newsTopPUT(@RequestBody NewsDBO dbo) {
+	public RESTResultBean newsTopPUT(String token, @RequestBody NewsDBO dbo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(dbo.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			// 查询是否存在
@@ -368,10 +368,10 @@ public class NewsManageController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/news/audit", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean newsAuditPUT(@RequestBody NewsDBO dbo) {
+	public RESTResultBean newsAuditPUT(String token, @RequestBody NewsDBO dbo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(dbo.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			// 查询是否存在
@@ -402,10 +402,10 @@ public class NewsManageController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/news/homenews", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean newsHomenewsPUT(@RequestBody NewsDBO dbo) {
+	public RESTResultBean newsHomenewsPUT(String token, @RequestBody NewsDBO dbo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(dbo.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			// 查询是否存在
@@ -436,12 +436,12 @@ public class NewsManageController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/news", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean newsDELETE(@RequestBody String jsonparam) {
+	public RESTResultBean newsDELETE(String token, @RequestBody String jsonparam) {
 		RESTResultBean result = new RESTResultBean();
 
 		try {
 			JSONObject param = JSONObject.parseObject(jsonparam);
-			String token = (String) param.get("token");
+//			String token = (String) param.get("token");
 			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
@@ -470,11 +470,11 @@ public class NewsManageController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/news/upload/pictures", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean newsUploadPicturesPUT(@RequestBody UserDBO user) {
+	public RESTResultBean newsUploadPicturesPUT(String token, @RequestBody UserDBO user) {
 		// TODO
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(user.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 

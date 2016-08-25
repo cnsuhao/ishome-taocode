@@ -206,10 +206,10 @@ public class ClassStudentController extends MyControllerSupport {
 	@RequestMapping(value = "/class/student/info", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	@Transactional
-	public RESTResultBean classStudentInfoPOST(@RequestBody UStudentPVO student) {
+	public RESTResultBean classStudentInfoPOST(String token, @RequestBody UStudentPVO student) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(student.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			if (StringUtils.isEmpty(student.getPhone())) {
@@ -339,10 +339,10 @@ public class ClassStudentController extends MyControllerSupport {
 	@RequestMapping(value = "/class/student/info", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	@Transactional
-	public RESTResultBean classStudentInfoPUT(@RequestBody UStudentPVO student) {
+	public RESTResultBean classStudentInfoPUT(String token, @RequestBody UStudentPVO student) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(student.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			// 查询是否存在
@@ -426,10 +426,10 @@ public class ClassStudentController extends MyControllerSupport {
 	@RequestMapping(value = "/class/student/info", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	@Transactional
-	public RESTResultBean classStudentInfoDELETE(@RequestBody UStudentPVO student) {
+	public RESTResultBean classStudentInfoDELETE(String token, @RequestBody UStudentPVO student) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(student.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			// 查询是否存在
@@ -516,10 +516,10 @@ public class ClassStudentController extends MyControllerSupport {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/class/student/parent", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean classStudentParentPOST(@RequestBody UParentPVO parent) {
+	public RESTResultBean classStudentParentPOST(String token, @RequestBody UParentPVO parent) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(parent.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			if (parent.getPhone() == null) {
@@ -631,10 +631,10 @@ public class ClassStudentController extends MyControllerSupport {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/class/student/parent", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean classStudentParentPUT(@RequestBody UParentPVO parent) {
+	public RESTResultBean classStudentParentPUT(String token, @RequestBody UParentPVO parent) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(parent.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			if (parent.getId() == null) {
@@ -744,10 +744,10 @@ public class ClassStudentController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/class/student/parent", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean classStudentParentDELETE(@RequestBody UStudentParentDBO studentParent) {
+	public RESTResultBean classStudentParentDELETE(String token, @RequestBody UStudentParentDBO studentParent) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(studentParent.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			// 查询是否存在

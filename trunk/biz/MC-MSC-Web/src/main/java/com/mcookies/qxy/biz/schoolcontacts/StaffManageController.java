@@ -25,10 +25,10 @@ public class StaffManageController extends MyControllerSupport {
 	
 	@RequestMapping(value = "/syllabusddddddddddddd", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean syllabusPOST(@RequestBody String jsonparam) {
+	public RESTResultBean syllabusPOST(String token, @RequestBody String jsonparam) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken("") == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 		} catch (Exception e) {

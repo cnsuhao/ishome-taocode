@@ -183,11 +183,11 @@ public class TermManageController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/term", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean termPOST(@RequestBody STermPVO pvo) {
+	public RESTResultBean termPOST(String token, @RequestBody STermPVO pvo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			// token校验
-			if (doCheckToken(pvo.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			// 校验学期名是否已经存在
@@ -221,11 +221,11 @@ public class TermManageController extends MyControllerSupport {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/term", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean termPUT(@RequestBody STermPVO pvo) {
+	public RESTResultBean termPUT(String token, @RequestBody STermPVO pvo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			// token校验
-			if (doCheckToken(pvo.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			//检验该数据是否被系统使用

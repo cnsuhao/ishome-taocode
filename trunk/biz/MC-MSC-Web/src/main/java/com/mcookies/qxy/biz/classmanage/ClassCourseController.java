@@ -91,10 +91,10 @@ public class ClassCourseController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/class/course", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean classCoursePOST(@RequestBody ClassTeacherDBO classTeacher) {
+	public RESTResultBean classCoursePOST(String token, @RequestBody ClassTeacherDBO classTeacher) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(classTeacher.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			if (classTeacher.getCid() == null) {
@@ -135,10 +135,10 @@ public class ClassCourseController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/class/course", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean classCoursePUT(@RequestBody ClassTeacherDBO classTeacher) {
+	public RESTResultBean classCoursePUT(String token, @RequestBody ClassTeacherDBO classTeacher) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(classTeacher.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			// 查询是否存在
@@ -177,10 +177,10 @@ public class ClassCourseController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/class/teacher", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean classTeacherPUT(@RequestBody ClassTeacherDBO classTeacher) {
+	public RESTResultBean classTeacherPUT(String token, @RequestBody ClassTeacherDBO classTeacher) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(classTeacher.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			// 查询是否存在
@@ -223,10 +223,10 @@ public class ClassCourseController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/class/course", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean classCourseDELETE(@RequestBody ClassTeacherDBO classTeacher) {
+	public RESTResultBean classCourseDELETE(String token, @RequestBody ClassTeacherDBO classTeacher) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(classTeacher.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			// 查询是否存在

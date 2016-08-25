@@ -151,11 +151,11 @@ public class AlarmRuleController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/class/alarmrule", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean classAlarmrulePOST(@RequestBody String jsonparam) {
+	public RESTResultBean classAlarmrulePOST(String token, @RequestBody String jsonparam) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			JSONObject param = JSONObject.parseObject(jsonparam);
-			String token = (String) param.get("token");
+//			String token = (String) param.get("token");
 			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
@@ -187,10 +187,10 @@ public class AlarmRuleController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/class/alarmrule", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean classAlarmrulePUT(@RequestBody AlarmRulePVO pvo) {
+	public RESTResultBean classAlarmrulePUT(String token, @RequestBody AlarmRulePVO pvo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(pvo.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			AlarmRuleService_.doUpdate(pvo);
@@ -204,10 +204,10 @@ public class AlarmRuleController extends MyControllerSupport {
 
 	@RequestMapping(value = "/class/alarmrule", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean classAlarmruleDELETE(@RequestBody ClassAlarmPVO pvo) {
+	public RESTResultBean classAlarmruleDELETE(String token, @RequestBody ClassAlarmPVO pvo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(pvo.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			// 删除关联关系
@@ -229,11 +229,11 @@ public class AlarmRuleController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/class/alarmrule/copy", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean classAlarmruleCopyPUT(@RequestBody String jsonparam) {
+	public RESTResultBean classAlarmruleCopyPUT(String token, @RequestBody String jsonparam) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			JSONObject param = JSONObject.parseObject(jsonparam);
-			String token = (String) param.get("token");
+//			String token = (String) param.get("token");
 			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
