@@ -83,11 +83,11 @@ public class DeviceManageController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/deviceinfo", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean deviceinfoPOST(@RequestBody DeviceTagPVO device) {
+	public RESTResultBean deviceinfoPOST(String token, @RequestBody DeviceTagPVO device) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			// token校验
-			if (doCheckToken(device.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			// 校验是否已经存在
@@ -119,11 +119,11 @@ public class DeviceManageController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/deviceinfo", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean deviceinfoPUT(@RequestBody DeviceTagPVO device) {
+	public RESTResultBean deviceinfoPUT(String token, @RequestBody DeviceTagPVO device) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			// token校验
-			if (doCheckToken(device.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			// 校验是否已经存在
@@ -156,12 +156,12 @@ public class DeviceManageController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/deviceinfo", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean deviceinfoDELETE(@RequestBody DeviceTagPVO pvo) {
+	public RESTResultBean deviceinfoDELETE(String token, @RequestBody DeviceTagPVO pvo) {
 		RESTResultBean result = new RESTResultBean();
 		
 		try {
 			// token校验
-			if (doCheckToken(pvo.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			DeviceTagService_.doDelete(pvo);
