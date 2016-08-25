@@ -107,10 +107,10 @@ public class WorkflowController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/myapplication", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean myApplicationPOST(@RequestBody OaExamineInformationDBO oaExamineInformation) {
+	public RESTResultBean myApplicationPOST(String token, @RequestBody OaExamineInformationDBO oaExamineInformation) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(oaExamineInformation.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			OaTagsDBO condition = new OaTagsDBO();
@@ -164,11 +164,11 @@ public class WorkflowController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/myapplication", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean myApplicationDELETE(@RequestBody String jsonparam) {
+	public RESTResultBean myApplicationDELETE(String token, @RequestBody String jsonparam) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			JSONObject param = JSONObject.parseObject(jsonparam);
-			String token = (String) param.get("token");
+//			String token = (String) param.get("token");
 			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
@@ -234,10 +234,10 @@ public class WorkflowController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/myaudit/set", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean myAuditSetPUT(@RequestBody OaExamineResultDBO oaExamineResult) {
+	public RESTResultBean myAuditSetPUT(String token, @RequestBody OaExamineResultDBO oaExamineResult) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(oaExamineResult.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			// 检查result参数
