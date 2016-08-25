@@ -261,10 +261,10 @@ public class ScheduleController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/schedule", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean schedulePOST(@RequestBody SDutySchedulingDBO scheduling) {
+	public RESTResultBean schedulePOST(String token, @RequestBody SDutySchedulingDBO scheduling) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(scheduling.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			if (scheduling.getType() == null || !(scheduling.getType() == 0 || scheduling.getType() == 1)) {
@@ -305,10 +305,10 @@ public class ScheduleController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/schedule", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean schedulePUT(@RequestBody SDutySchedulingDBO scheduling) {
+	public RESTResultBean schedulePUT(String token, @RequestBody SDutySchedulingDBO scheduling) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(scheduling.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			// 查询是否存在
@@ -338,11 +338,11 @@ public class ScheduleController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/schedule", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean scheduleDELETE(@RequestBody String jsonparam) {
+	public RESTResultBean scheduleDELETE(String token, @RequestBody String jsonparam) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			JSONObject param = JSONObject.parseObject(jsonparam);
-			String token = (String) param.get("token");
+//			String token = (String) param.get("token");
 			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
@@ -371,10 +371,10 @@ public class ScheduleController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/schedule/copy", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean scheduleCopyPUT(@RequestBody ScheduleCopyPUTDto dto) {
+	public RESTResultBean scheduleCopyPUT(String token, @RequestBody ScheduleCopyPUTDto dto) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(dto.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			for (Long id : dto.getIds()) {
@@ -420,5 +420,4 @@ public class ScheduleController extends MyControllerSupport {
 		}
 		return result;
 	}
-
 }
