@@ -112,10 +112,10 @@ public class WorkflowTemplateRuleController extends MyControllerSupport {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/oarule", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean oaRulePOST(@RequestBody OaRuleDBO oaRule) {
+	public RESTResultBean oaRulePOST(String token, @RequestBody OaRuleDBO oaRule) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(oaRule.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			OaTagsDBO parent = new OaTagsDBO();
@@ -149,10 +149,10 @@ public class WorkflowTemplateRuleController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/oarule", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean oaRulePUT(@RequestBody OaRuleDBO oaRule) {
+	public RESTResultBean oaRulePUT(String token, @RequestBody OaRuleDBO oaRule) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(oaRule.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			// 不允许在传递oatagsId
@@ -191,11 +191,11 @@ public class WorkflowTemplateRuleController extends MyControllerSupport {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/oarule", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean oaRuleDELETE(@RequestBody String jsonparam) {
+	public RESTResultBean oaRuleDELETE(String token, @RequestBody String jsonparam) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			JSONObject param = JSONObject.parseObject(jsonparam);
-			String token = (String) param.get("token");
+//			String token = (String) param.get("token");
 			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
