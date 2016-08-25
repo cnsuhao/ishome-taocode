@@ -372,8 +372,9 @@ public class LoginController extends MyControllerSupport {
 			}
 			UserBean loginer = UserCacheHelper.removeUser(token);
 			loginer.setLoginTime(UserBean.loginTime());
-			UserCacheHelper.saveUser(loginer);
+			loginer.setToken(EMPTY);
 			String newtoken = loginer.getToken();
+			UserCacheHelper.saveUser(loginer);
 			JSONObject data = new JSONObject();
 			data.put("authorizer_access_token", newtoken);
 			data.put("expires_in", 7200);
