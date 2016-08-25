@@ -147,16 +147,16 @@ public class DeviceHeartbeatThread implements Runnable, ISFrameworkConstants {
 					sr.setRfid(rfid);
 					sr.setPuk(ONE);
 					sr.setSid(Long.parseLong(deviceData.getEnterpriseID()));					
-					sr = (StudentRfidDBO) StudentRfidService_.doRead(sr);
+					CardInfoPVO cip = (CardInfoPVO) StudentRfidService_.doReadCardInfoByRfid(sr);
 					// 存在学生的场合
-					if (sr != null) {
+					if (cip != null) {
 						//对于接收到的内容，写入到log_attendance表中
 						la = new LogAttendanceDBO();
 						la.setRfid(rfid);
 						la.setDeviceId(dtd.getDeviceId());
 						la.setMarkTime(sd[1]+BLANK+sd[2]);
 						//la.setPuk(ONE);
-						//la.setSid(Long.parseLong(deviceData.getEnterpriseID()));x
+						//la.setSid(Long.parseLong(deviceData.getEnterpriseID()));
 						la.setFlag(Integer.parseInt(sd[3]));//0-进来；1-出去
 						la.setSourceJson(l);
 						LogAttendanceService_.doInsert(la);
@@ -167,9 +167,9 @@ public class DeviceHeartbeatThread implements Runnable, ISFrameworkConstants {
 						ls.setRfid(Long.parseLong(sd[0]));
 						ls.setMarkTime(sd[1]+BLANK+sd[2]);
 						ls.setFlag(Integer.parseInt(sd[3]));//0-进来；1-出去
-//						ls.setTermId(termid);//学期id
-//						ls.setCid(sr.get);//班级id
-						ls.setStudentId(sr.getStudentId());//学生id
+						ls.setTermId(cip.getTermId());//学期id
+						ls.setCid(cip.getCid());//班级id
+						ls.setStudentId(cip.getStudentId());//学生id
 						LogSecurityService_.doInsert(ls);
 					} else {
 						//TODO
