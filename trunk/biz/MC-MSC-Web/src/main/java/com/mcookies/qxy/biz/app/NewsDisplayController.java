@@ -69,15 +69,25 @@ public class NewsDisplayController extends MyControllerSupport {
 				size = 12;
 			}
 			// 查询是否存在
-			if (pvo.getColumnId() == null) {
-				throw new IllegalArgumentException("栏目id不能为空");
+			// if (pvo.getColumnId() == null) {
+			// throw new IllegalArgumentException("栏目id不能为空");
+			// }
+			// NewsColumnDBO condition = new NewsColumnDBO();
+			// condition.setColumnId(pvo.getColumnId());
+			// condition = (NewsColumnDBO) newsColumnService.doRead(condition);
+			// if (condition == null) {
+			// throw new IllegalArgumentException("该栏目不存在");
+			// }
+
+			if (pvo.getColumnId() != null) {
+				NewsColumnDBO condition = new NewsColumnDBO();
+				condition.setColumnId(pvo.getColumnId());
+				condition = (NewsColumnDBO) newsColumnService.doRead(condition);
+				if (condition == null) {
+					throw new IllegalArgumentException("该栏目不存在");
+				}
 			}
-			NewsColumnDBO condition = new NewsColumnDBO();
-			condition.setColumnId(pvo.getColumnId());
-			condition = (NewsColumnDBO) newsColumnService.doRead(condition);
-			if (condition == null) {
-				throw new IllegalArgumentException("该栏目不存在");
-			}
+
 			Long userId = getLoginer().getUserId();
 			if (userId == null) {
 				throw new IllegalStateException("获取用户id失败");
@@ -109,7 +119,7 @@ public class NewsDisplayController extends MyControllerSupport {
 			if (pvo.getTid() != null) {
 				newsService.doSelectPageByColumnIdAndTid(pageModel);
 				result.setInfo("用户为教师");
-			} else if (pvo.getParentId() != null){
+			} else if (pvo.getParentId() != null) {
 				newsService.doSelectPageByColumnIdAndParentId(pageModel);
 				result.setInfo("用户为学生家长");
 			} else {
@@ -117,7 +127,7 @@ public class NewsDisplayController extends MyControllerSupport {
 				result.setInfo("用户既不是教师，也不是学生家长");
 				return result;
 			}
-			
+
 			data.put("count", pageModel.getResultCount());
 			data.put("newslist", pageModel.getPageListData());
 			result.setData(data);
