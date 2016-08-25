@@ -41,10 +41,10 @@ public class ScheduleDutyController extends MyControllerSupport {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/duty", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean dutyPOST(@RequestBody SDutyDBO sDuty) {
+	public RESTResultBean dutyPOST(String token, @RequestBody SDutyDBO sDuty) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(sDuty.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			if (StringUtils.isEmpty(sDuty.getDutyName())) {
@@ -76,10 +76,10 @@ public class ScheduleDutyController extends MyControllerSupport {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/duty", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean dutyPUT(@RequestBody SDutyDBO sDuty) {
+	public RESTResultBean dutyPUT(String token, @RequestBody SDutyDBO sDuty) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (doCheckToken(sDuty.getToken()) == false) {
+			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			// 查询是否存在
@@ -125,11 +125,11 @@ public class ScheduleDutyController extends MyControllerSupport {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/duty", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean dutyDELETE(@RequestBody String jsonparam) {
+	public RESTResultBean dutyDELETE(String token, @RequestBody String jsonparam) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			JSONObject param = JSONObject.parseObject(jsonparam);
-			String token = (String) param.get("token");
+//			String token = (String) param.get("token");
 			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
