@@ -1,5 +1,7 @@
 package com.mcookies.qxy.biz.annex;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.isotope.jfp.framework.beans.common.RESTResultBean;
@@ -14,6 +16,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.mcookies.qxy.common.STrip.STripDBO;
 import com.mcookies.qxy.common.STrip.STripPVO;
 import com.mcookies.qxy.common.STrip.STripService;
+import com.mcookies.qxy.common.UTeacher.UTeacherDBO;
+import com.mcookies.qxy.common.UTeacher.UTeacherService;
 
 /**
  * 个人行程
@@ -24,6 +28,8 @@ import com.mcookies.qxy.common.STrip.STripService;
 public class STripController extends MyControllerSupport {
 	@Resource
 	protected STripService STripService_;
+	@Resource
+	protected UTeacherService uTeacherService;
 	
 	@RequestMapping(value = "/trip", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
@@ -77,6 +83,18 @@ public class STripController extends MyControllerSupport {
 				return tokenFail();
 			}
 			pvo.setIsUse(1);
+			
+			Long schoolId = getLoginer().getSchoolId();
+			Long userId = getLoginer().getUserId();
+			
+			UTeacherDBO teacher = new UTeacherDBO();
+			teacher.setUid(userId);
+			teacher.setSid(schoolId);
+			List<UTeacherDBO> teachers = (List<UTeacherDBO>) uTeacherService.doSelectData(teacher);
+			
+			pvo.setSid(schoolId);
+			pvo.setTid(teachers.get(0).getTid());
+			
 			STripService_.doInsert(pvo);
 		} catch (Exception e) {
 			result.setInfo("访问失败");
@@ -99,6 +117,17 @@ public class STripController extends MyControllerSupport {
 			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
+			Long schoolId = getLoginer().getSchoolId();
+			Long userId = getLoginer().getUserId();
+			
+			UTeacherDBO teacher = new UTeacherDBO();
+			teacher.setUid(userId);
+			teacher.setSid(schoolId);
+			List<UTeacherDBO> teachers = (List<UTeacherDBO>) uTeacherService.doSelectData(teacher);
+			
+			pvo.setSid(schoolId);
+			pvo.setTid(teachers.get(0).getTid());
+			
 			STripService_.doUpdate(pvo);
 		} catch (Exception e) {
 			result.setInfo("访问失败");
