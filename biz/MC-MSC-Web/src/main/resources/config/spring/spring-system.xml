@@ -23,13 +23,13 @@
     	<beans:property name="staticField" value="com.alibaba.fastjson.serializer.SerializerFeature.DisableCircularReferenceDetect" />  
     </beans:bean>  
     
-    <bean id='mySystemConfig' class='org.isotope.jfp.framework.support.MySystemConfig' >
-		<!-- 间隔秒数 -->
-        <property name='configs'>
-        	<map> 
-        		<entry key='TokenCanUseHour'	value='168' />			<!-- 用户Token可以使用时间(小时) -->    
-            </map>
-        </property>
-	</bean>	    
+    <beans:bean id='mySystemConfig' class='org.isotope.jfp.framework.support.MySystemConfig' >
+		<!-- 系统参数配置 -->
+        <beans:property name='configs'>
+        	<beans:map> 
+        		<beans:entry key='TokenCanUseHour'	value='168' />			<!-- 用户Token可以使用时间(小时) -->    
+            </beans:map>
+        </beans:property>
+	</beans:bean>	    
 
 </beans:beans>
