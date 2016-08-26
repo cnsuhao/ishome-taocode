@@ -196,6 +196,9 @@
         <if test=" courseId != null and courseId !='' "><!-- 课程id -->
             ,course_id = #{courseId}
         </if>
+        <if test=" courseId == 0 or courseId =='0' "><!-- 课程id -->
+            ,course_id = null
+        </if>
         <if test=" courseName != null and courseName !='' "><!-- 课程名称 -->
             ,course_name = #{courseName}
         </if>
@@ -216,6 +219,9 @@
         </if>
         <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
             ,updator = #{updator}
+        </if>
+        <if test=" courseId == 0 or courseId =='0' "><!-- 课程id -->
+            ,course_id = null, course_name = null, tid = null, teacher_name = null
         </if>
         WHERE 1 = 1 
             <if test=" id != null and id !='' "><!-- 自增id -->
