@@ -9,7 +9,8 @@ package org.isotope.jfp.framework.constants;
  * @version 0.1
  */
 public interface ISFrameworkConstants {
-
+	
+	public final static String Token_Can_Use_Hour = "TokenCanUseHour";
 	public final static String SYSTEM_CHARSET = "UTF-8";
 	
 	public static final String SYSTEM_NAME = "SYSTEM_NAME_JFP";
