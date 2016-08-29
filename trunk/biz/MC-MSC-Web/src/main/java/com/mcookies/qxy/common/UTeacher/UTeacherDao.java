@@ -20,4 +20,5 @@ public interface UTeacherDao extends IDatabaseSupport {
 	List<UTeacherDBO> findNewsReaders(NewsPVO news);
 	List<UTeacherPVO> findByTermIdAndCid(UTeacherPVO teacher);
 	List<UTeacherDBO> findByTids(OaRulePVO oaRule);
+	UTeacherDBO doReadByUid(UTeacherDBO u);
 }

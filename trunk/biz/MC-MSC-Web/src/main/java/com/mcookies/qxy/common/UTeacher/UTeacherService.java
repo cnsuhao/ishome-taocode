@@ -77,4 +77,14 @@ public class UTeacherService extends MyServiceSupport {
 	public List<UTeacherDBO> findByTids(OaRulePVO oaRule) {
 		return getDao().findByTids(oaRule);
 	}
+	
+	/**
+	 * 通过uid查询班主任信息
+	 * @param classTeacher
+	 * @return
+	 */
+	public UTeacherDBO doReadByUid(UTeacherDBO u) {
+		return getDao().doReadByUid(u);
+	}
+	
 }
