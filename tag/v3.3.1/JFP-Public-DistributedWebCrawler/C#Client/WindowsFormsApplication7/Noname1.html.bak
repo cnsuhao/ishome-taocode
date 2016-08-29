@@ -1,0 +1,695 @@
+ <!DOCTYPE html>
+<html lang="en"> 
+  <head> 
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit">	
+    <meta name="author" content="leslie">   
+    <title>丁字口联通营业厅的搜索结果 - 企查查</title>	
+    <meta name="keywords" content="企查查,企业信用信息查询系统,企业查询,企业信用,工商查询,企业信用查询,企业工商信息查询,红盾网,启信宝"> 
+    <meta name="description" content="企查查是一款服务大众的企业信用信息查询工具,方便用户实时查询企业相关的股东，法人，企业对外投资信息，信用信息；提供北京、上海、广州、武汉、河南、河北、浙江、安徽、山东、湖南等全国企业工商信息,公司工商注册登记信息信用查询服务以及企业诉讼，商标和专利信息查询。">	
+    <link rel="icon" href="/material/theme/chacha/cms/img/favicon.ico">    	
+   <link rel="stylesheet" href="/material/theme/chacha/cms/v2/css/bootstrap.css" type="text/css" />
+   <link rel="stylesheet" href="/material/theme/chacha/cms/v2/css/animate.css" type="text/css" />
+   <link rel="stylesheet" href="/material/theme/chacha/cms/v2/css/font-awesome.min.css" type="text/css" />
+   <link rel="stylesheet" href="/material/theme/chacha/cms/v2/css/icon.css" type="text/css" />
+   <link rel="stylesheet" href="/material/theme/chacha/cms/v2/css/font.css" type="text/css" />
+   <link rel="stylesheet" href="/material/theme/chacha/cms/v2/css/app.css" type="text/css" />    
+  <script type="text/javascript" src="/material/js/siteconfig.js"></script>
+    <script src="/material/theme/chacha/cms/v2/js/jquery.min.js"></script>
+     
+   <script src="/material/theme/chacha/cms/v2/js/bootstrap.js"></script>
+   
+  <link rel="stylesheet" href="/material/theme/chacha/cms/css/toastr.css" />  
+  <script src="/material/theme/chacha/cms/js/toastr.js" type="text/javascript"></script>   
+  <script src="/material/theme/chacha/cms/v2/js/app.js"></script>
+  <script src="/material/theme/chacha/cms/v2/js/slimscroll/jquery.slimscroll.min.js"></script>
+  <script src="/material/theme/chacha/cms/v2/js/app.plugin.js"></script>
+  <script src="/material/theme/chacha/cms/v2/js/custom.js"></script>
+  
+    <!--[if lt IE 9]>
+      <script src="https://mos.meituan.com/media/lib/html5shiv.js"></script>
+      <script src="https://mos.meituan.com/media/lib/respond.js"></script>
+    <![endif]-->
+	
+	<!--[if lt IE 8]>
+		<link href="/material/theme/chacha/cms/css/bootstrap-ie7.css" rel="stylesheet">
+	<![endif]-->	  
+ 
+	
+</head> 
+<body>
+
+   <!--头部-->
+   <header class="bg-black header header-md navbar  box-shadow">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="btn btn-link visible-xs" data-toggle="collapse" data-target="#bs-navbar" aria-controls="bs-navbar" aria-expanded="false">
+          <i class="fa fa-bars"></i>
+        </a> 
+        <a href="/"  class="navbar-brand">
+          <img src="/material/theme/chacha/cms/v2/images/logo.png" class="m-r-sm" alt="企查查">
+        </a>
+		        <a class="btn btn-link visible-xs" href="/user_follow">
+          <i class="fa fa-user"></i>  
+        </a>
+              </div>
+ 		  <ul class="nav navbar-nav collapse navbar-collapse" id="bs-navbar"> 
+			<li class=" active"><a href="/" >查企业</a></li>
+			<li class=" "><a href="/album">看专辑</a></li>
+			<li class=" "><a href="/dianping">读点评</a></li>
+			<li class=""><a href="/app">APP</a></li>
+			<li class=""><a href="/vip">会员服务</a></li>
+			<li><a href="http://open.qichacha.com/">开放平台</a></li>		
+		  </ul>  
+ 
+			 <div id="wechat_div"  class="hidden-xs">    
+				<a id="wechat_code" class="hidden-xs">微信公众号</a>   
+				<div class="wechat_showplace" style="display: none; top: 35px; opacity: 0;"></div>	
+			</div>
+		
+	   		   <ul class="nav navbar-nav navbar-right m-n hidden-xs  user">	   
+			<li class="hidden-xs">
+			  <a href="/order_manage" class="dropdown-toggle text-md">
+				<i class="fa  fa-shopping-cart"></i> 我的订单
+			  </a>
+			</li>
+			<li class="dropdown  nav-user">  
+			   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+				<span class="thumb-sm avatar pull-left">
+				  <img src="  http://q.qlogo.cn/qqapp/101188807/DF335B60E7C4E152C89232A512C82ABD/100 "  alt="个人中心">
+				</span>
+				冷月 <b class="caret"></b>
+			  </a> 
+			  <ul class="dropdown-menu animated fadeInRight profile-box">					
+				<li>
+				  <span class="arrow top"></span>
+				  <a  href="/user_follow"><i class="fa fa-heart"></i> 我的关注</a>
+				</li>
+				<li>
+				  <a href="/user_history"><i class="fa fa-list"></i> 浏览历史</a>
+				</li>
+				<li>
+				  <a href="/msg">
+				   					<i class="fa fa-bell"></i> 消息中心
+				  </a>
+				</li>				
+				<li>
+				  <a href="/user_credit"><i class="fa fa-circle"></i> 用户积分</a> 
+				</li>
+				<li>
+				  <a href="/balance_manage"><i class="fa  fa-cny"></i> 账户总览</a>
+				</li>
+				<li>
+				  <a href="/user_setting"><i class="fa  fa-cog"></i> 账号设置</a>
+				</li>			
+								 <li><a href="/vip"><i class="fa  fa-tint"></i> 购买会员</a></li>				
+				   			
+				<li class="divider"></li> 
+				<li>
+				  <a href="/user_logout"><i class="fa fa-power-off"></i>  退出</a>
+				</li>
+			  </ul>
+			</li>
+		  </ul>		
+		 
+    </div>
+    </header><style>
+em{
+color: #e33244;
+font-style:normal;
+}
+#searchlist .name{
+  font-size:17px;
+  font-weight: 700;  
+}
+#searchlist small{
+  font-size:14px;
+  color:#888;
+}
+#searchlist .panel-footer{
+  background:#fafafa;
+}
+#searchlist .label{
+  font-weight:normal;
+  padding: .1em 0.6em .2em;
+}
+#searchlist .btn-default{  
+  border:1px solid #dedede;
+  color:#999;
+} 
+</style> 
+ <!--内容-->
+    <div class="container m-t-md">
+      <div class="row">   
+
+          <div class="col-md-12">
+            <div class="panel b-a padder">
+              <div class="row">		   
+                <div class="col-sm-6 m-b m-t">
+                  <form role="search" action="/search">
+                    <div class="form-group m-b-none">
+                      <div class="input-group">
+                        <input type="text" class="form-control input-lg"  id="searchkey"  style="font-size: 14px;"  name="key" placeholder="请输入企业名称、人名，产品名等，多个关键词用空格隔开，如“小米 雷军”" value="丁字口联通营业厅" autocomplete="off">
+ 						<input type="hidden" name="index" value="0" />                     
+ 					    <span class="input-group-btn">  
+                          <button type="submit" class="btn btn-success btn-icon input-lg btn-top"><i class="fa fa-search"></i></button>
+                        </span>
+                      </div> 
+                    </div>
+                  </form> 
+				  <section class="panel  hidden-xs" id="search-list"  style="width: 490px;top: 40px;">
+				  </section>					  
+                </div>
+				<div class="col-sm-6 m-b"> 
+					<p class="top-hot">热搜词：
+						
+												
+						  <a  class="top-hot-company" href="/search?key=北京+互联网&index=0" target="_blank">北京 互联网</a>	  	
+												
+						  <a  class="top-hot-company" href="/search?key=刘强东+章泽天&index=0" target="_blank">刘强东 章泽天</a>	  	
+												
+						  <a  class="top-hot-company" href="/search?key=黄晓明+李冰冰&index=0" target="_blank">黄晓明 李冰冰</a>	  	
+												
+						  <a  class="top-hot-company" href="/firm_CN_fd0b8526f8636c9a23303cbb8ef47e18" target="_blank">华尔街见闻 </a>	  	
+												
+						  <a  class="top-hot-company" href="/firm_CN_229b38d66bd7d70cf4f2e591d0d6e0eb" target="_blank">杜蕾斯</a>	  	
+												
+						  <a  class="top-hot-company" href="/firm_CN_d4be450b6336f742b8c57fd8f4543a4d" target="_blank">Oculus</a>	  	
+												
+					</p> 
+                </div> 				
+              </div> 
+            </div>
+			
+ 			<div class="col-md-12 bg-white b-t m-b-lg top-search-nav">
+				  <div class="pull-left">
+					 <a href="/search?key=丁字口联通营业厅&index=0"  class="active">全部</a> 				  
+					 <a href="/search?key=丁字口联通营业厅&index=2"  >企业名</a> 
+					 <a href="/search?key=丁字口联通营业厅&index=4"  >法人或股东</a>  
+					 <a href="/search?key=丁字口联通营业厅&index=6"  > 高管 </a>  
+					 <a href="/search?key=丁字口联通营业厅&index=8"   > 品牌或产品 </a> 
+					 <a href="/search?key=丁字口联通营业厅&index=10"   > 地址 </a> 
+					 <a href="/search?key=丁字口联通营业厅&index=12"  > 经营范围 </a> 
+				  </div>	
+                  <div class="clearfix"></div>				  
+			</div>				 
+          </div>
+	
+	
+        <div class="col-md-12">
+		    <div class="panel panel-default" style="padding:15px 0 45px;">
+				<span class="font-15 text-dark pull-right m-r">找到<span class="text-danger"> 0 </span>家符合条件的企业</span>
+				<div class="col-sm-7 text-left filter-bar">   
+					  <div class="btn-group"> 
+						<a class="btn btn-sm   btn-default dropdown-toggle" data-toggle="dropdown">不限区域 <span class="caret"></span></a>
+						<ul class="dropdown-menu text-left  pull-none-xs animated fadeInRight" id="citys">
+						  <li><a  href="/search?key=丁字口联通营业厅&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=&subIndustryCode=" id="block">不限区域</a></li> 
+						  <li class="divider"></li>					
+						  						   <li class="m-b-xs"><span class="m-l text-blod text-black text-lg m-r-xs">A</span> 
+						    
+						   <a href="/search?key=丁字口联通营业厅&province=AH&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=&subIndustryCode="  >安徽 </a>  
+						   						   </li> 			 	 	  				  
+						   						   <li class="m-b-xs"><span class="m-l text-blod text-black text-lg m-r-xs">B</span> 
+						    
+						   <a href="/search?key=丁字口联通营业厅&province=BJ&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=&subIndustryCode="  >北京 </a>  
+						   						   </li> 			 	 	  				  
+						   						   <li class="m-b-xs"><span class="m-l text-blod text-black text-lg m-r-xs">C</span> 
+						    
+						   <a href="/search?key=丁字口联通营业厅&province=CQ&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=&subIndustryCode="  >重庆 </a>  
+						   						   </li> 			 	 	  				  
+						   						   <li class="m-b-xs"><span class="m-l text-blod text-black text-lg m-r-xs">F</span> 
+						    
+						   <a href="/search?key=丁字口联通营业厅&province=FJ&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=&subIndustryCode="  >福建 </a>  
+						   						   </li> 			 	 	  				  
+						   						   <li class="m-b-xs"><span class="m-l text-blod text-black text-lg m-r-xs">G</span> 
+						    
+						   <a href="/search?key=丁字口联通营业厅&province=GD&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=&subIndustryCode="  >广东 </a>  
+						    
+						   <a href="/search?key=丁字口联通营业厅&province=GX&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=&subIndustryCode="  >广西 </a>  
+						    
+						   <a href="/search?key=丁字口联通营业厅&province=GZ&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=&subIndustryCode="  >贵州 </a>  
+						   						   </li> 			 	 	  				  
+						   						   <li class="m-b-xs"><span class="m-l text-blod text-black text-lg m-r-xs">H</span> 
+						    
+						   <a href="/search?key=丁字口联通营业厅&province=HAIN&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=&subIndustryCode="  >海南 </a>  
+						    
+						   <a href="/search?key=丁字口联通营业厅&province=HB&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=&subIndustryCode="  >河北 </a>  
+						    
+						   <a href="/search?key=丁字口联通营业厅&province=HEN&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=&subIndustryCode="  >河南 </a>  
+						    
+						   <a href="/search?key=丁字口联通营业厅&province=HUB&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=&subIndustryCode="  >湖北 </a>  
+						    
+						   <a href="/search?key=丁字口联通营业厅&province=HUN&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=&subIndustryCode="   style="margin-left:35px;">湖南 </a>  
+						    
+						   <a href="/search?key=丁字口联通营业厅&province=HLJ&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=&subIndustryCode="  >黑龙江 </a>  
+						   						   </li> 			 	 	  				  
+						   						   <li class="m-b-xs"><span class="m-l text-blod text-black text-lg m-r-xs">J</span> 
+						    
+						   <a href="/search?key=丁字口联通营业厅&province=JS&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=&subIndustryCode="  >江苏 </a>  
+						    
+						   <a href="/search?key=丁字口联通营业厅&province=JX&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=&subIndustryCode="  >江西 </a>  
+						    
+						   <a href="/search?key=丁字口联通营业厅&province=JL&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=&subIndustryCode="  >吉林 </a>  
+						   						   </li> 			 	 	  				  
+						   						   <li class="m-b-xs"><span class="m-l text-blod text-black text-lg m-r-xs">L</span> 
+						    
+						   <a href="/search?key=丁字口联通营业厅&province=LN&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=&subIndustryCode="  >辽宁 </a>  
+						   						   </li> 			 	 	  				  
+						   						   <li class="m-b-xs"><span class="m-l text-blod text-black text-lg m-r-xs">N</span> 
+						    
+						   <a href="/search?key=丁字口联通营业厅&province=NMG&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=&subIndustryCode="  >内蒙古 </a>  
+						    
+						   <a href="/search?key=丁字口联通营业厅&province=NX&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=&subIndustryCode="  >宁夏 </a>  
+						   						   </li> 			 	 	  				  
+						   						   <li class="m-b-xs"><span class="m-l text-blod text-black text-lg m-r-xs">Q</span> 
+						    
+						   <a href="/search?key=丁字口联通营业厅&province=QH&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=&subIndustryCode="  >青海 </a>  
+						   						   </li> 			 	 	  				  
+						   						   <li class="m-b-xs"><span class="m-l text-blod text-black text-lg m-r-xs">S</span> 
+						    
+						   <a href="/search?key=丁字口联通营业厅&province=SH&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=&subIndustryCode="  >上海 </a>  
+						    
+						   <a href="/search?key=丁字口联通营业厅&province=SD&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=&subIndustryCode="  >山东 </a>  
+						    
+						   <a href="/search?key=丁字口联通营业厅&province=SX&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=&subIndustryCode="  >山西 </a>  
+						    
+						   <a href="/search?key=丁字口联通营业厅&province=SC&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=&subIndustryCode="  >四川 </a>  
+						    
+						   <a href="/search?key=丁字口联通营业厅&province=SAX&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=&subIndustryCode="   style="margin-left:35px;">陕西 </a>  
+						   						   </li> 			 	 	  				  
+						   						   <li class="m-b-xs"><span class="m-l text-blod text-black text-lg m-r-xs">T</span> 
+						    
+						   <a href="/search?key=丁字口联通营业厅&province=TJ&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=&subIndustryCode="  >天津 </a>  
+						   						   </li> 			 	 	  				  
+						   						   <li class="m-b-xs"><span class="m-l text-blod text-black text-lg m-r-xs">X</span> 
+						    
+						   <a href="/search?key=丁字口联通营业厅&province=XJ&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=&subIndustryCode="  >新疆 </a>  
+						    
+						   <a href="/search?key=丁字口联通营业厅&province=XZ&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=&subIndustryCode="  >西藏 </a>  
+						   						   </li> 			 	 	  				  
+						   						   <li class="m-b-xs"><span class="m-l text-blod text-black text-lg m-r-xs">Y</span> 
+						    
+						   <a href="/search?key=丁字口联通营业厅&province=YN&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=&subIndustryCode="  >云南 </a>  
+						   						   </li> 			 	 	  				  
+						   						   <li class="m-b-xs"><span class="m-l text-blod text-black text-lg m-r-xs">Z</span> 
+						    
+						   <a href="/search?key=丁字口联通营业厅&province=ZJ&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=&subIndustryCode="  >浙江 </a>  
+						   						   </li> 			 	 	  				  
+						   						</ul> 
+					  </div>     
+					     
+
+					  <div class="btn-group">
+						<a class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown">不限行业 <span class="caret"></span></a>
+						<ul class="dropdown-menu text-left pull-none-xs animated fadeInRight">
+						  <li><a href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=&subIndustryCode=&cityName=">不限行业</a></li>  					
+						  							 <li class="dropdown-submenu" id="hangye"> 
+								<a tabindex="-1"   href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=A&subIndustryCode=&cityName=">农、林、牧、渔业</a>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu"> 
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=A&subIndustryCode=1&cityName=">农业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=A&subIndustryCode=2&cityName=">林业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=A&subIndustryCode=3&cityName=">畜牧业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=A&subIndustryCode=4&cityName=">渔业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=A&subIndustryCode=5&cityName=">农、林、牧、渔服务业</a></li>
+								   
+								</ul>
+							  </li>
+						  							 <li class="dropdown-submenu" id="hangye"> 
+								<a tabindex="-1"   href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=B&subIndustryCode=&cityName=">采矿业</a>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu"> 
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=B&subIndustryCode=6&cityName=">煤炭开采和洗选业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=B&subIndustryCode=7&cityName=">石油和天然气开采业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=B&subIndustryCode=8&cityName=">黑色金属矿采选业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=B&subIndustryCode=9&cityName=">有色金属矿采选业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=B&subIndustryCode=10&cityName=">非金属矿采选业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=B&subIndustryCode=11&cityName=">开采辅助活动</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=B&subIndustryCode=12&cityName=">其他采矿业</a></li>
+								   
+								</ul>
+							  </li>
+						  							 <li class="dropdown-submenu" id="hangye"> 
+								<a tabindex="-1"   href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=C&subIndustryCode=&cityName=">制造业</a>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu"> 
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=C&subIndustryCode=13&cityName=">农副食品加工业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=C&subIndustryCode=14&cityName=">食品制造业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=C&subIndustryCode=15&cityName=">酒、饮料和精制茶制造业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=C&subIndustryCode=16&cityName=">烟草制品业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=C&subIndustryCode=17&cityName=">纺织业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=C&subIndustryCode=18&cityName=">纺织服装、服饰业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=C&subIndustryCode=19&cityName=">皮革、毛皮、羽毛及其制品和制鞋业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=C&subIndustryCode=20&cityName=">木材加工和木、竹、藤、棕、草制品业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=C&subIndustryCode=21&cityName=">家具制造业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=C&subIndustryCode=22&cityName=">造纸和纸制品业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=C&subIndustryCode=23&cityName=">印刷和记录媒介复制业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=C&subIndustryCode=24&cityName=">文教、工美、体育和娱乐用品制造业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=C&subIndustryCode=25&cityName=">石油加工、炼焦和核燃料加工业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=C&subIndustryCode=26&cityName=">化学原料和化学制品制造业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=C&subIndustryCode=27&cityName=">医药制造业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=C&subIndustryCode=28&cityName=">化学纤维制造业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=C&subIndustryCode=29&cityName=">橡胶和塑料制品业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=C&subIndustryCode=30&cityName=">非金属矿物制品业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=C&subIndustryCode=31&cityName=">黑色金属冶炼和压延加工业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=C&subIndustryCode=32&cityName=">有色金属冶炼和压延加工业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=C&subIndustryCode=33&cityName=">金属制品业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=C&subIndustryCode=34&cityName=">通用设备制造业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=C&subIndustryCode=35&cityName=">专用设备制造业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=C&subIndustryCode=36&cityName=">汽车制造业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=C&subIndustryCode=37&cityName=">铁路、船舶、航空航天和其他运输设备制造业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=C&subIndustryCode=38&cityName=">电气机械和器材制造业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=C&subIndustryCode=39&cityName=">计算机、通信和其他电子设备制造业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=C&subIndustryCode=40&cityName=">仪器仪表制造业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=C&subIndustryCode=41&cityName=">其他制造业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=C&subIndustryCode=42&cityName=">废弃资源综合利用业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=C&subIndustryCode=43&cityName=">金属制品、机械和设备修理业</a></li>
+								   
+								</ul>
+							  </li>
+						  							 <li class="dropdown-submenu" id="hangye"> 
+								<a tabindex="-1"   href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=D&subIndustryCode=&cityName=">电力、热力、燃气及水生产和供应业</a>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu"> 
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=D&subIndustryCode=44&cityName=">电力、热力生产和供应业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=D&subIndustryCode=45&cityName=">燃气生产和供应业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=D&subIndustryCode=46&cityName=">水的生产和供应业</a></li>
+								   
+								</ul>
+							  </li>
+						  							 <li class="dropdown-submenu" id="hangye"> 
+								<a tabindex="-1"   href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=E&subIndustryCode=&cityName=">建筑业</a>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu"> 
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=E&subIndustryCode=47&cityName=">房屋建筑业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=E&subIndustryCode=48&cityName=">土木工程建筑业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=E&subIndustryCode=49&cityName=">建筑安装业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=E&subIndustryCode=50&cityName=">建筑装饰和其他建筑业</a></li>
+								   
+								</ul>
+							  </li>
+						  							 <li class="dropdown-submenu" id="hangye"> 
+								<a tabindex="-1"   href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=F&subIndustryCode=&cityName=">批发和零售业</a>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu"> 
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=F&subIndustryCode=51&cityName=">批发业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=F&subIndustryCode=52&cityName=">零售业</a></li>
+								   
+								</ul>
+							  </li>
+						  							 <li class="dropdown-submenu" id="hangye"> 
+								<a tabindex="-1"   href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=G&subIndustryCode=&cityName=">交通运输、仓储和邮政业</a>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu"> 
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=G&subIndustryCode=53&cityName=">铁路运输业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=G&subIndustryCode=54&cityName=">道路运输业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=G&subIndustryCode=55&cityName=">水上运输业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=G&subIndustryCode=56&cityName=">航空运输业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=G&subIndustryCode=57&cityName=">管道运输业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=G&subIndustryCode=58&cityName=">装卸搬运和运输代理业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=G&subIndustryCode=59&cityName=">仓储业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=G&subIndustryCode=60&cityName=">邮政业</a></li>
+								   
+								</ul>
+							  </li>
+						  							 <li class="dropdown-submenu" id="hangye"> 
+								<a tabindex="-1"   href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=H&subIndustryCode=&cityName=">住宿和餐饮业</a>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu"> 
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=H&subIndustryCode=61&cityName=">住宿业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=H&subIndustryCode=62&cityName=">餐饮业</a></li>
+								   
+								</ul>
+							  </li>
+						  							 <li class="dropdown-submenu" id="hangye"> 
+								<a tabindex="-1"   href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=I&subIndustryCode=&cityName=">信息传输、软件和信息技术服务业</a>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu"> 
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=I&subIndustryCode=63&cityName=">电信、广播电视和卫星传输服务</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=I&subIndustryCode=64&cityName=">互联网和相关服务</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=I&subIndustryCode=65&cityName=">软件和信息技术服务业</a></li>
+								   
+								</ul>
+							  </li>
+						  							 <li class="dropdown-submenu" id="hangye"> 
+								<a tabindex="-1"   href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=J&subIndustryCode=&cityName=">金融业</a>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu"> 
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=J&subIndustryCode=66&cityName=">货币金融服务</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=J&subIndustryCode=67&cityName=">资本市场服务</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=J&subIndustryCode=68&cityName=">保险业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=J&subIndustryCode=69&cityName=">其他金融业</a></li>
+								   
+								</ul>
+							  </li>
+						  							 <li class="dropdown-submenu" id="hangye"> 
+								<a tabindex="-1"   href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=K&subIndustryCode=&cityName=">房地产业</a>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu"> 
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=K&subIndustryCode=70&cityName=">房地产业</a></li>
+								   
+								</ul>
+							  </li>
+						  							 <li class="dropdown-submenu" id="hangye"> 
+								<a tabindex="-1"   href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=L&subIndustryCode=&cityName=">租赁和商务服务业</a>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu"> 
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=L&subIndustryCode=71&cityName=">租赁业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=L&subIndustryCode=72&cityName=">商务服务业</a></li>
+								   
+								</ul>
+							  </li>
+						  							 <li class="dropdown-submenu" id="hangye"> 
+								<a tabindex="-1"   href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=M&subIndustryCode=&cityName=">科学研究和技术服务业</a>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu"> 
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=M&subIndustryCode=73&cityName=">研究和试验发展</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=M&subIndustryCode=74&cityName=">专业技术服务业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=M&subIndustryCode=75&cityName=">科技推广和应用服务业</a></li>
+								   
+								</ul>
+							  </li>
+						  							 <li class="dropdown-submenu" id="hangye"> 
+								<a tabindex="-1"   href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=N&subIndustryCode=&cityName=">水利、环境和公共设施管理业</a>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu"> 
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=N&subIndustryCode=76&cityName=">水利管理业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=N&subIndustryCode=77&cityName=">生态保护和环境治理业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=N&subIndustryCode=78&cityName=">公共设施管理业</a></li>
+								   
+								</ul>
+							  </li>
+						  							 <li class="dropdown-submenu" id="hangye"> 
+								<a tabindex="-1"   href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=O&subIndustryCode=&cityName=">居民服务、修理和其他服务业</a>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu"> 
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=O&subIndustryCode=79&cityName=">居民服务业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=O&subIndustryCode=80&cityName=">机动车、电子产品和日用产品修理业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=O&subIndustryCode=81&cityName=">其他服务业</a></li>
+								   
+								</ul>
+							  </li>
+						  							 <li class="dropdown-submenu" id="hangye"> 
+								<a tabindex="-1"   href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=P&subIndustryCode=&cityName=">教育</a>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu"> 
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=P&subIndustryCode=82&cityName=">教育</a></li>
+								   
+								</ul>
+							  </li>
+						  							 <li class="dropdown-submenu" id="hangye"> 
+								<a tabindex="-1"   href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=Q&subIndustryCode=&cityName=">卫生和社会工作</a>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu"> 
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=Q&subIndustryCode=83&cityName=">卫生</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=Q&subIndustryCode=84&cityName=">社会工作</a></li>
+								   
+								</ul>
+							  </li>
+						  							 <li class="dropdown-submenu" id="hangye"> 
+								<a tabindex="-1"   href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=R&subIndustryCode=&cityName=">文化、体育和娱乐业</a>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu"> 
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=R&subIndustryCode=85&cityName=">新闻和出版业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=R&subIndustryCode=86&cityName=">广播、电视、电影和影视录音制作业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=R&subIndustryCode=87&cityName=">文化艺术业</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=R&subIndustryCode=88&cityName=">体育</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=R&subIndustryCode=89&cityName=">娱乐业</a></li>
+								   
+								</ul>
+							  </li>
+						  							 <li class="dropdown-submenu" id="hangye"> 
+								<a tabindex="-1"   href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=S&subIndustryCode=&cityName=">公共管理、社会保障和社会组织</a>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu"> 
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=S&subIndustryCode=90&cityName=">中国共产党机关</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=S&subIndustryCode=91&cityName=">国家机构</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=S&subIndustryCode=92&cityName=">人民政协、民主党派</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=S&subIndustryCode=93&cityName=">社会保障</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=S&subIndustryCode=94&cityName=">群众团体、社会团体和其他成员组织</a></li>
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=S&subIndustryCode=95&cityName=">基层群众自治组织</a></li>
+								   
+								</ul>
+							  </li>
+						  							 <li class="dropdown-submenu" id="hangye"> 
+								<a tabindex="-1"   href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=T&subIndustryCode=&cityName=">国际组织</a>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu"> 
+								  								  <li><a tabindex="-1"     href="/search?key=丁字口联通营业厅&province=&cityCode=&order=&isSortAsc=&index=0&startDateBegin=&startDateEnd=&registCapiBegin=&registCapiEnd=&industryCode=T&subIndustryCode=96&cityName=">国际组织</a></li>
+								   
+								</ul>
+							  </li>
+						     
+						</ul>
+					  </div>  	 					 		  
+				</div>
+			</div>
+        </div>
+		  
+   	  				  
+         <div class="col-md-9">
+							 
+				  					<section class="panel panel-default"> 
+					   <div class="noresult  no-search"> <p class="noface"><img src="/material/theme/chacha/cms/img/nodata.png"/></p>小查还没找到数据</div>
+					   						<div class="text-muted text-lg text-center">我不甘心，还想试一试</div>                 		 
+					   <div class="col-md-6 col-md-offset-3" style="margin-top:30px;">
+							<form class="index-search" action="/search_more">
+								<div class="input-group">
+									<input type="text"  placeholder="" name="key" class="form-control" value="丁字口联通营业厅" style="height:40px;">
+									<span class="input-group-btn">
+									<input type="submit" class="button btn btn-primary" value="点击实时搜索"  style="height:40px;">>
+									</span>
+								</div>
+							</form>
+						</div> 
+						<div class="clearfix pd-100"></div>	
+					 </section>					
+                   					 
+				 				  
+ 				
+	            					 <div style="text-align:center;"></div>
+				 	
+				  <div class="text-left m-t-lg m-b-lg">
+					<ul class="pagination pagination-md">
+					 
+					</ul>
+				  </div>
+				  	 	  
+				  
+           </div>
+           <div class="col-md-3">
+                <section class="panel b-a">
+                  <div class="panel-heading b-b">
+ 					 <span class="font-bold font-15 text-dark">浏览历史</span>
+                  </div>
+                  <ul class="list-group list-group-lg no-bg auto">
+				    
+				                        <a href="/firm_CN_be3c416a7eed86f3867e90f9335a6629"  target="_blank"  class="list-group-item clearfix">
+                      <span class="pull-left thumb-sm avatar m-r">
+                        <img src="/material/theme/chacha/cms/img/company.jpg"   alt="河南正果农业科技有限公司">
+                      </span>
+                      <span class="clear">
+                        <span>河南正果农业科技有限公司</span>
+                        <small class="text-muted clear text-ellipsis">6天前</small>
+                      </span>
+                    </a>
+                                        <a href="/firm_CN_86eed90ec1b36dda15df88005e594556"  target="_blank"  class="list-group-item clearfix">
+                      <span class="pull-left thumb-sm avatar m-r">
+                        <img src="/material/theme/chacha/cms/img/company.jpg"   alt="海南正红科技发展有限公司">
+                      </span>
+                      <span class="clear">
+                        <span>海南正红科技发展有限公司</span>
+                        <small class="text-muted clear text-ellipsis">6天前</small>
+                      </span>
+                    </a>
+                                        <a href="/firm_CN_e32de12208c25b298681cdd883a255ea"  target="_blank"  class="list-group-item clearfix">
+                      <span class="pull-left thumb-sm avatar m-r">
+                        <img src="/material/theme/chacha/cms/img/company.jpg"   alt="杭州南正科技开发有限公司">
+                      </span>
+                      <span class="clear">
+                        <span>杭州南正科技开发有限公司</span>
+                        <small class="text-muted clear text-ellipsis">6天前</small>
+                      </span>
+                    </a>
+                                        <a href="/firm_CN_aea8ffe2fdb373fe0bad7dbd69159b75"  target="_blank"  class="list-group-item clearfix">
+                      <span class="pull-left thumb-sm avatar m-r">
+                        <img src="/material/theme/chacha/cms/img/company.jpg"   alt="湖南正阳科技有限公司">
+                      </span>
+                      <span class="clear">
+                        <span>湖南正阳科技有限公司</span>
+                        <small class="text-muted clear text-ellipsis">6天前</small>
+                      </span>
+                    </a>
+                                        <a href="/firm_CN_28d06d1f189856d82a72b5897a62e48e"  target="_blank"  class="list-group-item clearfix">
+                      <span class="pull-left thumb-sm avatar m-r">
+                        <img src="/material/theme/chacha/cms/img/company.jpg"   alt="海南正和科技有限公司">
+                      </span>
+                      <span class="clear">
+                        <span>海南正和科技有限公司</span>
+                        <small class="text-muted clear text-ellipsis">6天前</small>
+                      </span>
+                    </a>
+                                      </ul>
+                </section>
+            </div>
+        </div>
+    </div>
+
+
+	
+    <!--尾部-->
+    <footer class="bg-dark" id="footer">
+        <div class="dk">
+            <div class="container">
+                <div class="row m-t-lg m-b-lg">
+                    <div class="col-sm-12 text-center">
+						
+												<span><a  href="/cms?id=13">联系我们</a></span>
+						<span class="m-r-sm m-l-sm">|</span>
+												<span><a  href="/cms?id=14">用户协议</a></span>
+						<span class="m-r-sm m-l-sm">|</span>
+												<span><a  href="/cms?id=15">用户隐私权</a></span>
+						<span class="m-r-sm m-l-sm">|</span>
+												<span><a  href="/cms?id=16">友情链接</a></span>
+						<span class="m-r-sm m-l-sm">|</span>
+												<span><a  href="/cms?id=892">关于我们</a></span>
+						<span class="m-r-sm m-l-sm">|</span>
+												<span><a href="http://open.qichacha.com"  target="_blank"> 开放平台</a></span>
+						<span class="m-r-sm m-l-sm">|</span>			
+						<span><a href="/weixin_yjjump"  target="_blank"> 云聚数据</a></span>				
+					    <div class="text-muted m-t-sm">
+							<span><a href="javascript:void(0)" title="企查查">@2014-2015</a> <a href="/">企查查</a> <a href="http://www.qichacha.com" title="企查查">qichacha.com</a></span>
+							<span class="hidden-xs">苏ICP备14039861号-5</span>
+							<span>交流QQ群：243390895</span>
+							<span class="m-l">
+							   <a href="http://wpa.b.qq.com/cgi/wpa.php?ln=1&amp;key=XzkzODA0NDMwM18zMzkzMzVfNDAwOTk4NTIxMl8yXw" target="_blank"><img src="/material/theme/chacha/cms/img/qqchat.png"></a>
+							</span>
+					    </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </footer> 
+      <a  data-toggle="modal" data-target="#feedModal"  id="feedback" class="hidden-xs"></a>
+      <a href="#top" id="scroll-top" class="hidden-xs"></a>
+    <div class="modal fade" id="feedModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content"> 
+          <div class="modal-header"> 
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">x</span></button>
+            <h4 class="modal-title" id="myModalLabel">意见反馈</h4>
+          </div> 
+          <div class="modal-body">
+              <form class="form-horizontal" role="form"> 
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2">反馈内容</label>
+                  <div class="col-sm-10">
+                    <textarea class="form-control content" rows="5"  name="content" placeholder="亲爱的用户：请在这里直接填写您遇到的问题或意见建议，您的意见是我们前进的动力"></textarea> 
+                    <span class="contentmsg text-danger"></span>
+				  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputPassword3" class="col-sm-2">联系方式</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control email" name="email" placeholder="请输入邮箱/手机号，方便我们联系您。">
+					 <span class="emailmsg text-danger"></span>
+                  </div>
+                </div>
+                <div class="form-group"> 
+                  <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary btn-guest">提交反馈</button>
+                  </div> 
+                </div> 
+              </form>                      
+          </div>  
+        </div>
+      </div> 
+    </div>   
+   <div style="display:none;">
+        <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1254842228'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1254842228' type='text/javascript'%3E%3C/script%3E"));</script>
+   </div>  	  
+</body>
+</html>
+ 
