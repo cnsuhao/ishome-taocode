@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<beans xmlns='http://www.springframework.org/schema/beans'
+	xmlns:mvc='http://www.springframework.org/schema/mvc' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xmlns:context='http://www.springframework.org/schema/context' xmlns:tx='http://www.springframework.org/schema/tx'
+	xmlns:aop='http://www.springframework.org/schema/aop'
+	xsi:schemaLocation='
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		http://www.springframework.org/schema/jdbc 
+		http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd
+		'>
+	<!-- 注解探测器 -->
+	<context:component-scan base-package='org.isotope.jfp,com.upg.biz' />
+	<!-- Bean容器 -->
+	<bean class='org.isotope.jfp.framework.utils.BeanFactoryHelper'/>
+	
+	<!-- 系统初始化 -->
+	<import resource='spring-custom.xml' />	
+	<!-- 系统初始化 -->
+	<import resource='spring/spring-system.xml' />	
+	<!-- 业务功能 -->
+	<import resource='bean/spring-bean.xml' />
+	<!-- 数据定义 -->
+	<import resource='db/spring-db.xml' />
+	<!-- 缓存 -->
+	<import resource='redis/spring-redis-master.xml' />
+	
+</beans>

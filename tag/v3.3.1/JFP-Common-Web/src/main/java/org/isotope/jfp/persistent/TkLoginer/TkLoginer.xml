@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 当前登录用户Token表 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='org.isotope.jfp.persistent.TkLoginer.TkLoginerDao'>
+    <!-- 表字段信息  -->
+    <sql id='tableColumns'>
+        token,json
+    </sql>
+
+    <!-- 根据条件更新所有记录 -->
+    <update id='doUpdateAll' parameterType='TkLoginerDBO'>
+        UPDATE tk_loginer SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
+        <if test=" token != null and token !='' "><!-- TOKEN -->
+            ,token = #{token}
+        </if>
+        <if test=" json != null and json !='' "><!-- 用户ID -->
+            ,json = #{json}
+        </if>
+        WHERE 1 = 1 
+            <if test=" token != null and token !='' "><!-- TOKEN -->
+                AND token = #{token}
+            </if>
+            <if test=" json != null and json !='' "><!-- 用户ID -->
+                AND json = #{json}
+            </if>
+    </update>
+    <!-- 查询分页数据信息  -->
+    <select id='doSelectPage' parameterType='TkLoginerDBO' resultType='TkLoginerDBO'>
+        SELECT <include refid='tableColumns'/> FROM tk_loginer
+        WHERE 1 = 1 
+        <if test=" token != null and token !='' "><!-- TOKEN -->
+            AND token = #{token}
+        </if>
+        <if test=" json != null and json !='' "><!-- 用户ID -->
+            AND json = #{json}
+        </if>
+    </select>
+
+    <!-- 插入一条数据 -->
+    <insert id='doInsert' parameterType='TkLoginerDBO'>
+        INSERT INTO tk_loginer
+          ( <include refid='tableColumns'/>) 
+        VALUES 
+          ( #{token},#{json} )
+    </insert>
+    <!-- 修改一条数据 -->
+    <update id='doUpdate' parameterType='TkLoginerDBO'>
+        UPDATE tk_loginer SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
+        <if test=" token != null and token !='' "><!-- TOKEN -->
+            ,token = #{token}
+        </if>
+        <if test=" json != null and json !='' "><!-- 用户ID -->
+            ,json = #{json}
+        </if>
+        WHERE 1 = 1 
+            <if test=" token != null and token !='' "><!-- TOKEN -->
+                AND token = #{token}
+            </if>
+    </update>
+    <!-- 逻辑删除一条数据 -->
+    <delete id='toDelete' parameterType='TkLoginerDBO'>
+        UPDATE tk_loginer SET ddd='1', update_time = #{updateTime}, uu2 = #{uu2} WHERE update_time = #{updateTime}
+            <if test=" token != null and token !='' "><!-- TOKEN -->
+                AND token = #{token}
+            </if>
+    </delete>
+    <!-- 物理删除一条数据 -->
+    <delete id='doDelete' parameterType='TkLoginerDBO'>
+        DELETE FROM tk_loginer WHERE 1 = 1
+            <if test=" token != null and token !='' "><!-- TOKEN -->
+                AND token = #{token}
+            </if>
+    </delete>
+    <!-- 查询一条数据  -->
+    <select id='doRead' parameterType='TkLoginerDBO' resultType='TkLoginerDBO'>
+        SELECT <include refid='tableColumns'/> FROM tk_loginer WHERE 1 = 1
+            <if test=" token != null and token !='' "><!-- TOKEN -->
+                AND token = #{token}
+            </if>
+    </select>
+
+</mapper>
