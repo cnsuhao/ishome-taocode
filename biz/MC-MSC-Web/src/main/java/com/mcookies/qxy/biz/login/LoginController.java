@@ -203,7 +203,7 @@ public class LoginController extends MyControllerSupport {
 	@ResponseBody
 	@Transactional
 	public RESTResultBean loginInPOST(@RequestBody String jsonparam) {
-		RESTResultBean rs = new RESTResultBean();
+		RESTResultBean rs = new RESTResultBean();///
 		try {
 			JSONObject param = JSONObject.parseObject(jsonparam);
 			String token = (String) param.get("token");
@@ -223,7 +223,12 @@ public class LoginController extends MyControllerSupport {
 			// 二次登录系统
 			LoginService_.makeLogIn(user, true);
 //
-			String token1= user.getToken();
+			
+			
+			
+			
+			
+			
 			rs.setStatus(0);
 			
 			UTeacherDBO condition = new UTeacherDBO();
@@ -250,12 +255,17 @@ public class LoginController extends MyControllerSupport {
 //			List<SchoolDBO> schools = SchoolService_.doSelectSchoolByTypeAndUid(param);
 //			
 			JSONObject data = new JSONObject();
+			data.put("loginStatus", user.getLoginStatus());
+			data.put("loginTime", user.getLoginTime());
+			data.put("schoolId",user.getSchoolId());
+			data.put("token", user.getToken());
+			data.put("userId", user.getUserId());
+			data.put("userType", userType);
 			data.put("teacherName", teacherName);
 			data.put("phone", phone);
 			data.put("email", email);
 			data.put("schoolName", schoolName);
 			data.put("tid", tid);
-			data.put("token", token1);
 			rs.setData(data);
 			
 //			rs.setData(user);
@@ -263,7 +273,7 @@ public class LoginController extends MyControllerSupport {
 			
 			
 //
-//			rs.setData(user);
+//		rs.setData(user);
 			//rs.setToken(user.getToken());
 		} catch (Exception e) {
 			rs.setStatus(2);
