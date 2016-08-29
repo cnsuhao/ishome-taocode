@@ -1,10 +1,12 @@
 package com.mcookies.qxy.biz.schoolsafety;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.isotope.jfp.framework.beans.common.RESTResultBean;
+import org.isotope.jfp.framework.beans.page.PageVOSupport;
 import org.isotope.jfp.framework.support.MyControllerSupport;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -74,7 +76,7 @@ public class SecurityLogController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/securitylog", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean securitylogGET(String token,Long cid,Long studentId,Long deviceId,String time,Integer page,Integer size) {
+	public RESTResultBean securitylogGET(String token,Long cid,Long[] studentIds,Long deviceId,String time,Integer page,Integer size) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			if (doCheckToken(token) == false) {
@@ -86,10 +88,13 @@ public class SecurityLogController extends MyControllerSupport {
 			if (page == null || page == 0) {
 				page = 1;
 			}
+			List<PageVOSupport> plist= new ArrayList<PageVOSupport>();
+			for(Long studentid :studentIds){
+			
 			LogSecurityPVO pvo = new LogSecurityPVO();
-			pvo.setStudentId(studentId);
 			pvo.setCid(cid);
 			pvo.setDeviceId(deviceId);
+			pvo.setStudentId(studentid);
 			if(time!=null&&!"".equals(time)){
 				String[] times = time.split("|");
 				pvo.setStartTime(times[0]);
@@ -99,12 +104,15 @@ public class SecurityLogController extends MyControllerSupport {
 			pageModel.setPageCurrent(page);
 			pageModel.setPageLimit(size);
 			pageModel.setFormParamBean(pvo);
-			LogSecurityService_.doSelectPageSecurityLog(pageModel);
+			PageVOSupport logSecurity=LogSecurityService_.doSelectPageSecurityLog(pageModel);
+			
+			plist.add(logSecurity);
+			}
 			JSONObject data = new JSONObject();
 			data.put("page", page);
 			data.put("size", size);
 			data.put("count", pageModel.getResultCount());
-			data.put("securitylog", pageModel.getPageListData());
+			data.put("securitylog", plist);
 			result.setData(data);
 		} catch (Exception e) {
 			result.setInfo("访问失败");
