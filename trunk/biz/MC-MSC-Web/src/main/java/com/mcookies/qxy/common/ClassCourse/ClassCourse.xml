@@ -5,288 +5,297 @@
 <!-- 班级课程教师关联表 -->
 <!-- 需要和DAO保持完全路径一致 -->
 <mapper namespace='com.mcookies.qxy.common.ClassCourse.ClassCourseDao'>
-    <!-- 表字段信息  -->
-    <sql id='tableColumns'>
-        id,sid,cid,term,class_time,week_day,use_day,course_id,course_name,tid,teacher_name,is_use,create_time,creator,update_time,updator
-    </sql>
+	<!-- 表字段信息 -->
+	<sql id='tableColumns'>
+		id,sid,cid,term,class_time,week_day,use_day,course_id,course_name,tid,teacher_name,is_use,create_time,creator,update_time,updator
+	</sql>
 
-    <!-- 根据条件更新所有记录 -->
-    <update id='doUpdateAll' parameterType='ClassCourseDBO'>
-        UPDATE class_course SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
-        <if test=" id != null and id !='' "><!-- 自增id -->
-            ,id = #{id}
-        </if>
-        <if test=" sid != null and sid !='' "><!-- 学校id -->
-            ,sid = #{sid}
-        </if>
-        <if test=" cid != null and cid !='' "><!-- 班级id -->
-            ,cid = #{cid}
-        </if>
-        <if test=" term != null and term !='' "><!-- 学期 -->
-            ,term = #{term}
-        </if>
-        <if test=" classTime != null and classTime !='' "><!-- 课次 -->
-            ,class_time = #{classTime}
-        </if>
-        <if test=" weekDay != null and weekDay !='' "><!-- 星期 -->
-            ,week_day = #{weekDay}
-        </if>
-        <if test=" useDay != null and useDay !='' "><!-- 日期 -->
-            ,use_day = #{useDay}
-        </if>
-        <if test=" courseId != null and courseId !='' "><!-- 课程id -->
-            ,course_id = #{courseId}
-        </if>
-        <if test=" courseName != null and courseName !='' "><!-- 课程名称 -->
-            ,course_name = #{courseName}
-        </if>
-        <if test=" tid != null and tid !='' "><!-- 教师id -->
-            ,tid = #{tid}
-        </if>
-        <if test=" teacherName != null and teacherName !='' "><!-- 教师姓名 -->
-            ,teacher_name = #{teacherName}
-        </if>
-        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
-            ,is_use = #{isUse}
-        </if>
-        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
-            ,create_time = #{createTime}
-        </if>
-        <if test=" creator != null and creator !='' "><!-- 创建者 -->
-            ,creator = #{creator}
-        </if>
-        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
-            ,updator = #{updator}
-        </if>
-        WHERE 1 = 1 
-            <if test=" id != null and id !='' "><!-- 自增id -->
-                AND id = #{id}
-            </if>
-            <if test=" sid != null and sid !='' "><!-- 学校id -->
-                AND sid = #{sid}
-            </if>
-            <if test=" cid != null and cid !='' "><!-- 班级id -->
-                AND cid = #{cid}
-            </if>
-            <if test=" term != null and term !='' "><!-- 学期 -->
-                AND term = #{term}
-            </if>
-            <if test=" classTime != null and classTime !='' "><!-- 课次 -->
-                AND class_time = #{classTime}
-            </if>
-            <if test=" weekDay != null and weekDay !='' "><!-- 星期 -->
-                AND week_day = #{weekDay}
-            </if>
-            <if test=" useDay != null and useDay !='' "><!-- 日期 -->
-                AND use_day = #{useDay}
-            </if>
-            <if test=" courseId != null and courseId !='' "><!-- 课程id -->
-                AND course_id = #{courseId}
-            </if>
-            <if test=" courseName != null and courseName !='' "><!-- 课程名称 -->
-                AND course_name = #{courseName}
-            </if>
-            <if test=" tid != null and tid !='' "><!-- 教师id -->
-                AND tid = #{tid}
-            </if>
-            <if test=" teacherName != null and teacherName !='' "><!-- 教师姓名 -->
-                AND teacher_name = #{teacherName}
-            </if>
-            <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
-                AND is_use = #{isUse}
-            </if>
-            <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
-                AND create_time = #{createTime}
-            </if>
-            <if test=" creator != null and creator !='' "><!-- 创建者 -->
-                AND creator = #{creator}
-            </if>
-            <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
-                AND update_time = #{updateTime}
-            </if>
-            <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
-                AND updator = #{updator}
-            </if>
-    </update>
-    <!-- 查询分页数据信息  -->
-    <select id='doSelectPage' parameterType='ClassCourseDBO' resultType='ClassCourseDBO'>
-        SELECT <include refid='tableColumns'/> FROM class_course
-        WHERE 1 = 1 
-        <if test=" id != null and id !='' "><!-- 自增id -->
-            AND id = #{id}
-        </if>
-        <if test=" sid != null and sid !='' "><!-- 学校id -->
-            AND sid = #{sid}
-        </if>
-        <if test=" cid != null and cid !='' "><!-- 班级id -->
-            AND cid = #{cid}
-        </if>
-        <if test=" term != null and term !='' "><!-- 学期 -->
-            AND term = #{term}
-        </if>
-        <if test=" classTime != null and classTime !='' "><!-- 课次 -->
-            AND class_time = #{classTime}
-        </if>
-        <if test=" weekDay != null and weekDay !='' "><!-- 星期 -->
-            AND week_day = #{weekDay}
-        </if>
-        <if test=" useDay != null and useDay !='' "><!-- 日期 -->
-            AND use_day = #{useDay}
-        </if>
-        <if test=" courseId != null and courseId !='' "><!-- 课程id -->
-            AND course_id = #{courseId}
-        </if>
-        <if test=" courseName != null and courseName !='' "><!-- 课程名称 -->
-            AND course_name = #{courseName}
-        </if>
-        <if test=" tid != null and tid !='' "><!-- 教师id -->
-            AND tid = #{tid}
-        </if>
-        <if test=" teacherName != null and teacherName !='' "><!-- 教师姓名 -->
-            AND teacher_name = #{teacherName}
-        </if>
-        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
-            AND is_use = #{isUse}
-        </if>
-        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
-            AND create_time = #{createTime}
-        </if>
-        <if test=" creator != null and creator !='' "><!-- 创建者 -->
-            AND creator = #{creator}
-        </if>
-        <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
-            AND update_time = #{updateTime}
-        </if>
-        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
-            AND updator = #{updator}
-        </if>
-    </select>
+	<!-- 根据条件更新所有记录 -->
+	<update id='doUpdateAll' parameterType='ClassCourseDBO'>
+		UPDATE class_course SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
+		<if test=" id != null and id !='' "><!-- 自增id -->
+			,id = #{id}
+		</if>
+		<if test=" sid != null and sid !='' "><!-- 学校id -->
+			,sid = #{sid}
+		</if>
+		<if test=" cid != null and cid !='' "><!-- 班级id -->
+			,cid = #{cid}
+		</if>
+		<if test=" term != null and term !='' "><!-- 学期 -->
+			,term = #{term}
+		</if>
+		<if test=" classTime != null and classTime !='' "><!-- 课次 -->
+			,class_time = #{classTime}
+		</if>
+		<if test=" weekDay != null and weekDay !='' "><!-- 星期 -->
+			,week_day = #{weekDay}
+		</if>
+		<if test=" useDay != null and useDay !='' "><!-- 日期 -->
+			,use_day = #{useDay}
+		</if>
+		<if test=" courseId != null and courseId !='' "><!-- 课程id -->
+			,course_id = #{courseId}
+		</if>
+		<if test=" courseName != null and courseName !='' "><!-- 课程名称 -->
+			,course_name = #{courseName}
+		</if>
+		<if test=" tid != null and tid !='' "><!-- 教师id -->
+			,tid = #{tid}
+		</if>
+		<if test=" teacherName != null and teacherName !='' "><!-- 教师姓名 -->
+			,teacher_name = #{teacherName}
+		</if>
+		<if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+			,is_use = #{isUse}
+		</if>
+		<if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+			,create_time = #{createTime}
+		</if>
+		<if test=" creator != null and creator !='' "><!-- 创建者 -->
+			,creator = #{creator}
+		</if>
+		<if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+			,updator = #{updator}
+		</if>
+		WHERE 1 = 1
+		<if test=" id != null and id !='' "><!-- 自增id -->
+			AND id = #{id}
+		</if>
+		<if test=" sid != null and sid !='' "><!-- 学校id -->
+			AND sid = #{sid}
+		</if>
+		<if test=" cid != null and cid !='' "><!-- 班级id -->
+			AND cid = #{cid}
+		</if>
+		<if test=" term != null and term !='' "><!-- 学期 -->
+			AND term = #{term}
+		</if>
+		<if test=" classTime != null and classTime !='' "><!-- 课次 -->
+			AND class_time = #{classTime}
+		</if>
+		<if test=" weekDay != null and weekDay !='' "><!-- 星期 -->
+			AND week_day = #{weekDay}
+		</if>
+		<if test=" useDay != null and useDay !='' "><!-- 日期 -->
+			AND use_day = #{useDay}
+		</if>
+		<if test=" courseId != null and courseId !='' "><!-- 课程id -->
+			AND course_id = #{courseId}
+		</if>
+		<if test=" courseName != null and courseName !='' "><!-- 课程名称 -->
+			AND course_name = #{courseName}
+		</if>
+		<if test=" tid != null and tid !='' "><!-- 教师id -->
+			AND tid = #{tid}
+		</if>
+		<if test=" teacherName != null and teacherName !='' "><!-- 教师姓名 -->
+			AND teacher_name = #{teacherName}
+		</if>
+		<if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+			AND is_use = #{isUse}
+		</if>
+		<if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+			AND create_time = #{createTime}
+		</if>
+		<if test=" creator != null and creator !='' "><!-- 创建者 -->
+			AND creator = #{creator}
+		</if>
+		<if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+			AND update_time = #{updateTime}
+		</if>
+		<if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+			AND updator = #{updator}
+		</if>
+	</update>
+	<!-- 查询分页数据信息 -->
+	<select id='doSelectPage' parameterType='ClassCourseDBO'
+		resultType='ClassCourseDBO'>
+		SELECT
+		<include refid='tableColumns' />
+		FROM class_course
+		WHERE 1 = 1
+		<if test=" id != null and id !='' "><!-- 自增id -->
+			AND id = #{id}
+		</if>
+		<if test=" sid != null and sid !='' "><!-- 学校id -->
+			AND sid = #{sid}
+		</if>
+		<if test=" cid != null and cid !='' "><!-- 班级id -->
+			AND cid = #{cid}
+		</if>
+		<if test=" term != null and term !='' "><!-- 学期 -->
+			AND term = #{term}
+		</if>
+		<if test=" classTime != null and classTime !='' "><!-- 课次 -->
+			AND class_time = #{classTime}
+		</if>
+		<if test=" weekDay != null and weekDay !='' "><!-- 星期 -->
+			AND week_day = #{weekDay}
+		</if>
+		<if test=" useDay != null and useDay !='' "><!-- 日期 -->
+			AND use_day = #{useDay}
+		</if>
+		<if test=" courseId != null and courseId !='' "><!-- 课程id -->
+			AND course_id = #{courseId}
+		</if>
+		<if test=" courseName != null and courseName !='' "><!-- 课程名称 -->
+			AND course_name = #{courseName}
+		</if>
+		<if test=" tid != null and tid !='' "><!-- 教师id -->
+			AND tid = #{tid}
+		</if>
+		<if test=" teacherName != null and teacherName !='' "><!-- 教师姓名 -->
+			AND teacher_name = #{teacherName}
+		</if>
+		<if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+			AND is_use = #{isUse}
+		</if>
+		<if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+			AND create_time = #{createTime}
+		</if>
+		<if test=" creator != null and creator !='' "><!-- 创建者 -->
+			AND creator = #{creator}
+		</if>
+		<if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+			AND update_time = #{updateTime}
+		</if>
+		<if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+			AND updator = #{updator}
+		</if>
+	</select>
 
-    <!-- 插入一条数据 -->
-    <insert id='doInsert' parameterType='ClassCourseDBO'>
-        INSERT INTO class_course
-          ( <include refid='tableColumns'/>) 
-        VALUES 
-          ( #{id},#{sid},#{cid},#{term},#{classTime},#{weekDay},#{useDay},#{courseId},#{courseName},#{tid},#{teacherName},#{isUse},#{createTime},#{creator},#{updateTime},#{updator} )
-    </insert>
-    <!-- 修改一条数据 -->
-    <update id='doUpdate' parameterType='ClassCourseDBO'>
-        UPDATE class_course SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
-        <if test=" id != null and id !='' "><!-- 自增id -->
-            ,id = #{id}
-        </if>
-        <if test=" sid != null and sid !='' "><!-- 学校id -->
-            ,sid = #{sid}
-        </if>
-        <if test=" cid != null and cid !='' "><!-- 班级id -->
-            ,cid = #{cid}
-        </if>
-        <if test=" term != null and term !='' "><!-- 学期 -->
-            ,term = #{term}
-        </if>
-        <if test=" classTime != null and classTime !='' "><!-- 课次 -->
-            ,class_time = #{classTime}
-        </if>
-        <if test=" weekDay != null and weekDay !='' "><!-- 星期 -->
-            ,week_day = #{weekDay}
-        </if>
-        <if test=" useDay != null and useDay !='' "><!-- 日期 -->
-            ,use_day = #{useDay}
-        </if>
-        <if test=" courseId != null and courseId !='' "><!-- 课程id -->
-            ,course_id = #{courseId}
-        </if>
-        <if test=" courseId == 0 or courseId =='0' "><!-- 课程id -->
-            ,course_id = null
-        </if>
-        <if test=" courseName != null and courseName !='' "><!-- 课程名称 -->
-            ,course_name = #{courseName}
-        </if>
-        <if test=" tid != null and tid !='' "><!-- 教师id -->
-            ,tid = #{tid}
-        </if>
-        <if test=" teacherName != null and teacherName !='' "><!-- 教师姓名 -->
-            ,teacher_name = #{teacherName}
-        </if>
-        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
-            ,is_use = #{isUse}
-        </if>
-        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
-            ,create_time = #{createTime}
-        </if>
-        <if test=" creator != null and creator !='' "><!-- 创建者 -->
-            ,creator = #{creator}
-        </if>
-        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
-            ,updator = #{updator}
-        </if>
-        <if test=" courseId == 0 or courseId =='0' "><!-- 课程id -->
-            ,course_id = null, course_name = null, tid = null, teacher_name = null
-        </if>
-        WHERE 1 = 1 
-            <if test=" id != null and id !='' "><!-- 自增id -->
-                AND id = #{id}
-            </if>
-    </update>
-    <!-- 逻辑删除一条数据 -->
-    <delete id='toDelete' parameterType='ClassCourseDBO'>
-        UPDATE class_course SET ddd='1', update_time = #{updateTime}, uu2 = #{uu2} WHERE update_time = #{updateTime}
-            <if test=" id != null and id !='' "><!-- 自增id -->
-                AND id = #{id}
-            </if>
-    </delete>
-    <!-- 物理删除一条数据 -->
-    <delete id='doDelete' parameterType='ClassCourseDBO'>
-        DELETE FROM class_course WHERE id = #{id}
-    </delete>
-    <!-- 查询一条数据  -->
-    <select id='doRead' parameterType='ClassCourseDBO' resultType='ClassCourseDBO'>
-        SELECT <include refid='tableColumns'/> FROM class_course WHERE 1 = 1
-            <if test=" id != null and id !='' "><!-- 自增id -->
-                AND id = #{id}
-            </if>
-    </select>
+	<!-- 插入一条数据 -->
+	<insert id='doInsert' parameterType='ClassCourseDBO'>
+		INSERT INTO class_course
+		(
+		<include refid='tableColumns' />
+		)
+		VALUES
+		(
+		#{id},#{sid},#{cid},#{term},#{classTime},#{weekDay},#{useDay},#{courseId},#{courseName},#{tid},#{teacherName},#{isUse},#{createTime},#{creator},#{updateTime},#{updator}
+		)
+	</insert>
+	<!-- 修改一条数据 -->
+	<update id='doUpdate' parameterType='ClassCourseDBO'>
+		UPDATE class_course SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
+		<if test=" id != null and id !='' "><!-- 自增id -->
+			,id = #{id}
+		</if>
+		<if test=" sid != null and sid !='' "><!-- 学校id -->
+			,sid = #{sid}
+		</if>
+		<if test=" cid != null and cid !='' "><!-- 班级id -->
+			,cid = #{cid}
+		</if>
+		<if test=" term != null and term !='' "><!-- 学期 -->
+			,term = #{term}
+		</if>
+		<if test=" classTime != null and classTime !='' "><!-- 课次 -->
+			,class_time = #{classTime}
+		</if>
+		<if test=" weekDay != null and weekDay !='' "><!-- 星期 -->
+			,week_day = #{weekDay}
+		</if>
+		<if test=" useDay != null and useDay !='' "><!-- 日期 -->
+			,use_day = #{useDay}
+		</if>
+		<if test=" courseId != null and courseId !='' and courseId !='-1'"><!-- 课程id -->
+			,course_id = #{courseId}
+		</if>
+		<if test=" courseName != null and courseName !='' "><!-- 课程名称 -->
+			,course_name = #{courseName}
+		</if>
+		<if test=" courseId != null and courseId !='' and courseId =='-1'"><!-- 课程id -->
+			,course_id = null, course_name = null, tid = null, teacher_name=null
+		</if>
+		<if test=" tid != null and tid !='' "><!-- 教师id -->
+			,tid = #{tid}
+		</if>
+		<if test=" teacherName != null and teacherName !='' "><!-- 教师姓名 -->
+			,teacher_name = #{teacherName}
+		</if>
+		<if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+			,is_use = #{isUse}
+		</if>
+		<if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+			,create_time = #{createTime}
+		</if>
+		<if test=" creator != null and creator !='' "><!-- 创建者 -->
+			,creator = #{creator}
+		</if>
+		<if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+			,updator = #{updator}
+		</if>
+		WHERE 1 = 1
+		<if test=" id != null and id !='' "><!-- 自增id -->
+			AND id = #{id}
+		</if>
+	</update>
+	<!-- 逻辑删除一条数据 -->
+	<delete id='toDelete' parameterType='ClassCourseDBO'>
+		UPDATE class_course SET ddd='1', update_time = #{updateTime}, uu2 =
+		#{uu2} WHERE update_time = #{updateTime}
+		<if test=" id != null and id !='' "><!-- 自增id -->
+			AND id = #{id}
+		</if>
+	</delete>
+	<!-- 物理删除一条数据 -->
+	<delete id='doDelete' parameterType='ClassCourseDBO'>
+		DELETE FROM class_course WHERE id = #{id}
+	</delete>
+	<!-- 查询一条数据 -->
+	<select id='doRead' parameterType='ClassCourseDBO' resultType='ClassCourseDBO'>
+		SELECT
+		<include refid='tableColumns' />
+		FROM class_course WHERE 1 = 1
+		<if test=" id != null and id !='' "><!-- 自增id -->
+			AND id = #{id}
+		</if>
+	</select>
 	<!-- 获得指定日期内 某班级课表日期 -->
-	<select id="doSelectUseDayList" resultType="ClassCourseDBO" parameterType="java.util.Map">
-	SELECT
-	<include refid='tableColumns'/>
-	FROM
+	<select id="doSelectUseDayList" resultType="ClassCourseDBO"
+		parameterType="java.util.Map">
+		SELECT
+		<include refid='tableColumns' />
+		FROM
 		class_course
-	<where>
-		<if test="cid != null">
-			and cid = #{cid}
-		</if>
-		<if test="startTime!=null and endTime!=null">
-			AND use_day BETWEEN #{startTime}
-			AND #{endTime}
-		</if>
-	</where>
+		<where>
+			<if test="cid != null">
+				and cid = #{cid}
+			</if>
+			<if test="startTime!=null and endTime!=null">
+				AND use_day BETWEEN #{startTime}
+				AND #{endTime}
+			</if>
+		</where>
 		GROUP BY
-			use_day
+		use_day
 		ORDER BY
-			use_day ASC
+		use_day ASC
 	</select>
 	<!-- 得到 某班级 某一天的课程 -->
-	<select id="doSelectCourseOnDay" parameterType="ClassCourseDBO" resultType="ClassCourseDBO">
+	<select id="doSelectCourseOnDay" parameterType="ClassCourseDBO"
+		resultType="ClassCourseDBO">
 		SELECT
-			<include refid='tableColumns'/>
+		<include refid='tableColumns' />
 		FROM
-			class_course
+		class_course
 		<where>
 			<if test="useDay != null">
-			and use_day = #{useDay}
+				and use_day = #{useDay}
 			</if>
 			<if test="cid != null">
-			and cid = #{cid}
+				and cid = #{cid}
 			</if>
 			<if test="sid != null">
-			and sid = #{sid}
+				and sid = #{sid}
 			</if>
 			<if test="term != null">
-			and term = #{term}
+				and term = #{term}
 			</if>
-		</where>	
+		</where>
 		ORDER BY
-			class_time ASC
+		class_time ASC
 	</select>
 </mapper>
