@@ -170,6 +170,7 @@ public class StudentRfidController extends MyControllerSupport {
 			sdbo.setStudentId(pvo.getStudentId());
 			List<StudentRfidDBO> rlist =(List<StudentRfidDBO>)StudentRfidService_.doSelectData(sdbo);
 			if(rlist!=null&&rlist.size()>0){
+				boolean boo=true;
 				pvo.setIsEffective(0);
 				pvo.setIsUse(1);
 				for(StudentRfidDBO tmp:rlist){
@@ -177,9 +178,14 @@ public class StudentRfidController extends MyControllerSupport {
 					if(tmp.getStudentId().equals(pvo.getStudentId()) && tmp.getRfid().equals(pvo.getRfid())){
 						result.setInfo("已经添加过此卡");
 						result.setStatus(2);
+						boo=false;
 						return result;
 					}
+					
+				}
+				if(boo){
 					StudentRfidService_.doInsert(pvo);
+					return result;
 				}
 			}else{
 				//直接添加，并默认为有效
