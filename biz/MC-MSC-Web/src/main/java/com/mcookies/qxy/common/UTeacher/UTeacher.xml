@@ -352,4 +352,11 @@
 			AND sid = #{sid}
 		</if>
     </select>
+        <!-- 查询一条数据  -->
+    <select id='doReadByUid' parameterType='UTeacherDBO' resultType='UTeacherDBO'>
+        SELECT <include refid='tableColumns'/> FROM u_teacher WHERE 1 = 1
+            <if test=" uid != null "><!-- 教师id（自增） -->
+                AND uid = #{uid}
+            </if>
+    </select>
 </mapper>

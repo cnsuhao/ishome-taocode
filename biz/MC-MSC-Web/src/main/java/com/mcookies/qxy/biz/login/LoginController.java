@@ -31,6 +31,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSONObject;
 import com.mcookies.qxy.common.School.SchoolDBO;
 import com.mcookies.qxy.common.School.SchoolService;
+import com.mcookies.qxy.common.UTeacher.UTeacherDBO;
+import com.mcookies.qxy.common.UTeacher.UTeacherService;
+import com.mcookies.qxy.common.UTeacherExt.UTeacherExtService;
 import com.mcookies.qxy.common.User.UserDBO;
 import com.mcookies.qxy.common.User.UserService;
 
@@ -53,6 +56,9 @@ public class LoginController extends MyControllerSupport {
 	protected SchoolService SchoolService_;
 	@Resource
 	protected SMSTemplateConfig SMSTemplateConfig_;
+	@Resource
+	protected UTeacherService UTeacherService_;
+	
 	
 	private Long defualtSid = 999999999l;
 
@@ -216,8 +222,48 @@ public class LoginController extends MyControllerSupport {
 			user.setToken(EMPTY);
 			// 二次登录系统
 			LoginService_.makeLogIn(user, true);
-
-			rs.setData(user);
+//
+			String token1= user.getToken();
+			rs.setStatus(0);
+			
+			UTeacherDBO condition = new UTeacherDBO();
+//			condition.setSid(sid);
+			condition.setUid(param.getLong("uid"));
+			condition = (UTeacherDBO) UTeacherService_.doReadByUid(condition);
+			String teacherName = condition.getTeacherName();
+			String phone = condition.getPhone();
+			String email = condition.getEmail();
+			Long tid = condition.getTid();
+			
+			
+			SchoolDBO schl = new SchoolDBO();
+			schl.setPuk("1");
+			schl.setSid(sid);
+			Long  a = schl.getSid();
+//			Long sid2 = (long) 123456789;
+			schl = (SchoolDBO) SchoolService_.doRead(schl);
+			String schoolName = schl.getSchoolName();
+			
+//			Map<String, Object> param = new HashMap<String, Object>();
+//			param.put("userType", loginpvo.getUserType());
+//			param.put("uid", user.getUserId());
+//			List<SchoolDBO> schools = SchoolService_.doSelectSchoolByTypeAndUid(param);
+//			
+			JSONObject data = new JSONObject();
+			data.put("teacherName", teacherName);
+			data.put("phone", phone);
+			data.put("email", email);
+			data.put("schoolName", schoolName);
+			data.put("tid", tid);
+			data.put("token", token1);
+			rs.setData(data);
+			
+//			rs.setData(user);
+			//rs.setToken(user.getToken());
+			
+			
+//
+//			rs.setData(user);
 			//rs.setToken(user.getToken());
 		} catch (Exception e) {
 			rs.setStatus(2);
