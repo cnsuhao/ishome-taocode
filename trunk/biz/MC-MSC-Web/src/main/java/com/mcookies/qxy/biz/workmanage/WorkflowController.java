@@ -101,6 +101,51 @@ public class WorkflowController extends MyControllerSupport {
 
 		return result;
 	}
+	
+	/**
+	 * 我提交的事项通过approvalInformationId查询接口 /myapplication/info?approvalInformationId=[approvalInformationId]&token=[token]
+	 */
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/myapplication/info", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public RESTResultBean myapplicationByAppInfoIdGET(@RequestParam(required = false) String token,
+			@RequestParam Long approvalInformationId) {
+		RESTResultBean result = new RESTResultBean();
+		try {
+			if (doCheckToken(token) == false) {
+				return tokenFail();
+			}	
+			Map<String, Object> data = new HashMap<String, Object>();
+			// 查出单个
+			OaExamineInformationPVO info = new OaExamineInformationPVO();
+			info.setApprovalInformationId(approvalInformationId);;
+			List<OaExamineInformationPVO> infos = (List<OaExamineInformationPVO>) oaExamineInformationService.doSelectData(info);			
+			// 设置oatagsName和resultinfo
+			for (OaExamineInformationPVO each : infos) {
+				OaTagsDBO condition = new OaTagsDBO();
+				condition.setOatagsId(each.getOatagsId());
+				OaTagsDBO parent = (OaTagsDBO) oaTagsService.doRead(condition);
+				if (parent == null) {
+					throw new IllegalStateException("获取oatags失败");
+				}
+				each.setOatagsName(parent.getOatagsName());
+//				List<OaExamineResultPVO> ress;
+//				if (each.getResult() == null || each.getResult() != 1) {
+//					ress = new ArrayList<OaExamineResultPVO>();
+//				}
+//				ress = (List<OaExamineResultPVO>) oaExamineResultService.findByApprovalInformationId(each);
+//				each.setResultinfo(ress);
+			}
+			result.setData(infos.get(0));
+//			result.setStatus(0);
+		} catch (Exception e) {
+			result.setInfo("查询失败，" + e.getMessage());
+			result.setStatus(1);
+		}
+
+		return result;
+	}
+	
 
 	/**
 	 * 我提交的事项新增接口 /myapplication
