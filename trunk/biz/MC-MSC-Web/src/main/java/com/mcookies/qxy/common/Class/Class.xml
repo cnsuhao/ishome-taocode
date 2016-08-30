@@ -274,20 +274,21 @@
 	
 	<!-- 班级列表查询接口-->
 	<select id="doSelectPageClass2" parameterType="com.mcookies.qxy.common.Class.ClassPVO" resultType="com.mcookies.qxy.common.Class.ClassPVO">
-	SELECT DISTINCT a.cid, a.class_name, b.term_name, h.teacher_name AS leader_name,
-	COUNT(f.student_id) AS student_count, COUNT(g.course_id) AS course_count
-	FROM class a 
-	LEFT JOIN s_term b ON a.term_id = b.term_id 
-	LEFT JOIN class_teacher e ON a.cid = e.cid AND e.is_leader = 1
-	LEFT JOIN class_student f ON a.cid = f.cid
-	LEFT JOIN class_teacher g ON a.cid = g.cid
-	LEFT JOIN u_teacher h ON e.tid = h.tid
-	WHERE 1 = 1 AND a.term_id = #{termId}
+     SELECT a.term_id,a.cid,CONCAT(a.grade_name,a.class_name) as class_name,a.term_name,a.leader_name,a.student_count,
+     COUNT(b.course_id) AS course_count
+	 FROM class_view a LEFT JOIN class_teacher b ON a.cid = b.cid
+	 WHERE 1 = 1 AND a.term_id = #{termId} 
 	<if test="tid != null">
-		AND e.tid = #{tid}
+		AND b.tid = #{tid} 
 	</if>
-	GROUP BY f.student_id, g.course_id, a.cid, a.class_name, b.term_name
+	GROUP BY a.cid
+	ORDER BY a.cid
 	</select>
+
+	
+	
+	
+	
 	<!-- 班级列表搜索接口-->
 	<select id="findOneByCid" parameterType="com.mcookies.qxy.common.Class.ClassPVO" resultType="com.mcookies.qxy.common.Class.ClassPVO">
 		SELECT DISTINCT a.cid, a.class_name, b.term_name, h.teacher_name AS leader_name,
