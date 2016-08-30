@@ -206,11 +206,17 @@ public class ClassTimetableController extends MyControllerSupport {
 			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
-			JSONArray syllabus = param.getJSONArray("courseteacher");
+			
+			JSONArray syllabus = param.getJSONArray("syllabus");
 			for(Object tmp2:syllabus){
-					JSONObject json2 = (JSONObject)tmp2;
-					ClassCourseDBO classbean = JSONObject.toJavaObject(json2, ClassCourseDBO.class);
+				JSONObject json2 = (JSONObject)tmp2;
+				JSONArray courseteachers = json2.getJSONArray("courseteacher");
+				for(Object tmp3:courseteachers){
+					JSONObject json3 = (JSONObject)tmp3;
+					ClassCourseDBO classbean = JSONObject.toJavaObject(json3, ClassCourseDBO.class);
 					ClassCourseService_.doUpdate(classbean);
+			}
+				
 			}
 		} catch (Exception e) {
 			result.setInfo("访问失败");
