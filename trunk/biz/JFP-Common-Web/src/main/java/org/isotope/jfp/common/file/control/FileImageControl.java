@@ -97,7 +97,7 @@ public class FileImageControl extends MyContentTypeSupport {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/00003010/{token}/{markType}", method = RequestMethod.POST)
+	@RequestMapping(value = "/file/{token}/{markType}", method = RequestMethod.POST)
 	@ResponseBody
 	public RESTResultBean m00003010POST(@PathVariable String token, @RequestParam MultipartFile file, @PathVariable int markType) throws Exception {
 		logger.debug(file.getOriginalFilename());
