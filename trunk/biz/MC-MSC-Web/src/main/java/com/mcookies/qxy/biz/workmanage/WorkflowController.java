@@ -119,6 +119,7 @@ public class WorkflowController extends MyControllerSupport {
 			if (parent == null) {
 				throw new IllegalArgumentException("oatagsId所对应的流程模板不存在");
 			}
+			oaExamineInformation.setResult(0);
 			oaExamineInformationService.doInsert(oaExamineInformation);
 			// 生成审批信息
 			genExamineResult(oaExamineInformation, parent.getOatagsId(), -1);
