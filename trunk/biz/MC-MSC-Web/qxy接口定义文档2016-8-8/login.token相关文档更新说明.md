@@ -466,24 +466,58 @@ Response:
 					 1->登录失败，用户已不存在
     - `schoolName`：      学校名称
     - `teacherName`：     教师姓名
-    - `phone`：           教师手机号
-    - `email`：           教师邮箱
+    - `phone`：           教师或学生手机号
+    - `email`：           教师或学生邮箱
     - 'token'：           持久化token
 ```
-> **返回结果示例：**
+> **返回结果示例教师：userType=1**
 ``` json
 {
     "status": 0,
     "data": {
-        "token":"6kasjdkfjalsdjflajsdlkf58695",
-        "schoolName":"文鼎中学",
-        "teacherName":"张老师",
-        "phone":"15678987678",
-        "email":"15@qq.com"
+		"token": "1212803_84_35_06_17_28_59_3",
+		"phone": "18627806720",
+		"loginTime": "08301253",
+		"schoolName": "水果湖第一小学",
+		"email": "406@qq.com",
+		"loginStatus": "0",
+		"userId": 28,
+		"tid": 22,
+		"schoolId": 123456789,
+		"teacherName": "张三分 ",
+		"userType": "1"
     }
 }
 ```
-
+> **返回结果示例家长：userType=2**
+``` json
+{
+    "status": 0,
+    "data": {
+		"token": "1212803_84_35_06_17_28_59_3",
+		"schoolId": 123456789,
+		"schoolName": "水果湖第一小学",
+		"loginStatus": "0",
+		"loginTime": "08301253",
+		"userId": 28,
+		"userType": "2",
+		"parentId": 22,
+		"role": "0",
+		"phone": "18627806720",
+		"email": "406@qq.com",
+		"studentInfo":[
+			{
+				"studentName": "张三分 ",
+				"studentId": "12"
+			},
+			{
+				"studentName": "张四分 ",
+				"studentId": "13"
+			},
+		]
+    }
+}
+```
 #### login.5.3 生成短信验证码接口
 >不需要token验证
 >用户使用手机短信验证码登录系统是，需要点击获取短信验证码获取，点击后会生成验证码，格式为6为随机数字，验证有效期为30分钟，过期将失效，需要重新生成验证码；重新生成验证码需要间隔60s；重新生成验证码后，上一个验证码会失效；
