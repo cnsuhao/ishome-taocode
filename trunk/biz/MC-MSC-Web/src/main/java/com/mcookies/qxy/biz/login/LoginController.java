@@ -225,10 +225,6 @@ public class LoginController extends MyControllerSupport {
 //
 			
 			
-			
-			
-			
-			
 			rs.setStatus(0);
 			
 			UTeacherDBO condition = new UTeacherDBO();

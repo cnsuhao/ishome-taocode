@@ -80,7 +80,7 @@ public class UTeacherService extends MyServiceSupport {
 	
 	/**
 	 * 通过uid查询班主任信息
-	 * @param classTeacher
+	 * @param    classTeacher
 	 * @return
 	 */
 	public UTeacherDBO doReadByUid(UTeacherDBO u) {
