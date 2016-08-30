@@ -19,24 +19,27 @@
 		http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd
 		'>	
     
-	<!-- 对接监控定时器 -->
-	<bean id='querySentenceServiceMonitorCronTrigger' class='org.springframework.scheduling.quartz.CronTriggerFactoryBean'>
-		<property name='jobDetail' ref='querySentenceServiceMonitorJobDetail' />
-		<!-- 每 5分钟 处理一次 -->
-		<property name='cronExpression' value='0 0/5 * * * ? *'/>
+	<!-- 监控定时器 -->
+	<bean id='deviceAlarmMonitorCronTrigger' class='org.springframework.scheduling.quartz.CronTriggerFactoryBean'>
+		<property name='jobDetail' ref='deviceAlarmMonitorJobDetail' />
+		<!-- 每 5分钟检查一次 -->
+		<property name="cronExpression" value="0 0/5 * * * ? *"/>
 	</bean>	
 
-	<bean id='querySentenceServiceMonitorJobDetail' class='org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean'>
-		<property name='targetObject' ref='querySentenceServiceMonitorJob' />
+	<bean id='deviceAlarmMonitorJobDetail' class='org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean'>
+		<property name='targetObject' ref='deviceAlarmMonitorJob' />
 		<property name='targetMethod' value='doProcess' />
 	</bean>
 	
-	<bean id='querySentenceServiceMonitorJob' class='org.isotope.jfp.framework.search.task.QuerySentenceServiceJob' >
+	<bean id='deviceAlarmMonitorJob' class='com.mcookies.qxy.task.DeviceAlarmTaskJob' init-method="doInit">
 		<property name='myCacheService' ref='myCache' />
-		<property name='myQuerySentence' ref='myQuerySentence' />
-		<property name='jobKey' value='JOBTASK:CONFIG:QuerySentence' />
-		<property name='index' value='3' />
-		<property name='waitTimeSecond' value='120' />
+		<property name='jobKey' value='JOBTASK:CONFIG:DeviceAlarm' />
+		<!-- 任务间隔分钟 -->
+		<property name='waitTimeMinute' value='5' />
+		<!-- 设备报警间隔分钟 -->
+		<property name='heartSecond' value='10' />
+		<!-- 单次处理条数 -->
+		<property name='monitorSize' value='50' />
 	</bean>	
 	
 </beans>
