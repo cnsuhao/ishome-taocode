@@ -64,7 +64,7 @@ public class WorkTimeManageController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/class/worktime", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean classWorktimeGET(Integer page, Integer size,String token) {
+	public RESTResultBean classWorktimeGET(Integer page, Integer size, String token) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			JSONObject data = new JSONObject();
@@ -96,9 +96,10 @@ public class WorkTimeManageController extends MyControllerSupport {
 		}
 		return result;
 	}
+
 	@RequestMapping(value = "/class/worktime/search", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean classWorktimeSearchGET(Long cid,String token) {
+	public RESTResultBean classWorktimeSearchGET(Long cid, String token) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			JSONObject data = new JSONObject();
@@ -114,8 +115,8 @@ public class WorkTimeManageController extends MyControllerSupport {
 			pageModel.setFormParamBean(param);
 			ClassService_.doSelectPageWorkTime(pageModel);
 			@SuppressWarnings("unchecked")
-			List<ClassPVO> list = (List<ClassPVO>)pageModel.getPageListData();
-			if(list!=null&&list.size()>0){
+			List<ClassPVO> list = (List<ClassPVO>) pageModel.getPageListData();
+			if (list != null && list.size() > 0) {
 				result.setData(list.get(0));
 			}
 		} catch (Exception e) {
@@ -125,6 +126,7 @@ public class WorkTimeManageController extends MyControllerSupport {
 		}
 		return result;
 	}
+
 	/**
 	 * 班级作息模版新增接口
 	 * 
@@ -137,7 +139,7 @@ public class WorkTimeManageController extends MyControllerSupport {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			JSONObject param = JSONObject.parseObject(jsonparam);
-//			String token = (String) param.get("token");
+			// String token = (String) param.get("token");
 			Long workId = null;
 			Long termId = null;
 			if (param.get("workId") != null) {
@@ -466,4 +468,64 @@ public class WorkTimeManageController extends MyControllerSupport {
 		}
 		return result;
 	}
+
+	/**
+	 * 作息模版详情查询接口
+	 * 
+	 * 
+	 */
+	@RequestMapping(value = "/workrule", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public RESTResultBean workruleGET(String token, Long workId) {
+		RESTResultBean result = new RESTResultBean();
+		try {
+			if (doCheckToken(token) == false) {
+				return tokenFail();
+			}
+			if (workId == null) {
+				throw new IllegalArgumentException("workId不能为空");	
+			}
+			JSONObject data = new JSONObject();
+			JSONArray workrule = new JSONArray();
+			// 获取当前学校ID
+			Long schoolId = getLoginer().getSchoolId();
+			// 作息模块
+			SWorkTimeDBO swo= new SWorkTimeDBO();
+			swo.setWorkId(workId);
+			SWorkTimeDBO workTime = (SWorkTimeDBO) SWorkTimeService_.doRead(swo);
+			if(workTime!=null){
+				String workName= workTime.getWorkName();
+				if(!"".equals(workName)||!workName.equals(null)){
+					data.put("workName", workName);
+				}
+			}
+			SWorkRuleDBO swork = new SWorkRuleDBO();
+			swork.setWorkId(workId);
+			swork.setSid(schoolId);
+			List<SWorkRuleDBO> slist = (List<SWorkRuleDBO>) SWorkRuleService_.doSelectData(swork);
+			data.put("count", slist.size());
+			data.put("workId", workId);			
+			
+			// 循环模板获取对应详情
+			for (SWorkRuleDBO temp : slist) {
+				JSONObject workr = new JSONObject();
+				workr.put("wruleId", temp.getWruleId());
+				workr.put("wruleName", temp.getWruleName());
+				workr.put("wruleStage", temp.getWruleStage());
+				workr.put("startTime", temp.getStartTime());
+				workr.put("endTime", temp.getEndTime());
+				workrule.add(workr);
+				
+			}
+			data.put("workrule", workrule);
+			result.setData(data);
+
+		} catch (Exception e) {
+			result.setInfo("访问失败");
+			result.setStatus(1);
+		}
+
+		return result;
+	}
+
 }
