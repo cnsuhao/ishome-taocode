@@ -26,10 +26,8 @@
     <bean id='startQuertz' lazy-init='false' autowire='no' class='org.springframework.scheduling.quartz.SchedulerFactoryBean'>
         <property name='triggers'>
             <list>
-             	<!-- 全文检索参数缓存同步 -->              
-            	<ref bean='querySentenceServiceMonitorCronTrigger'/>
-            	<!-- 索引每日同步 -->     
-            	<ref bean='dataIndexServiceMonitorCronTrigger'/>
+             	<!-- 设备监控 -->              
+            	<ref bean='deviceAlarmMonitorCronTrigger'/>
             </list>
         </property>
     </bean>

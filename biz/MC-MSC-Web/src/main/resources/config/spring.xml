@@ -34,4 +34,6 @@
 	<import resource='sms/spring-sms.xml' />	
 	<!-- 文件操作 -->
 	<import resource='file/spring-file.xml' />	
+	<!-- 任务监听 -->
+	<import resource='task/spring-task.xml' />	
 </beans>
