@@ -76,7 +76,7 @@ public class SecurityLogController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/securitylog", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean securitylogGET(String token,Long cid,Long[] studentIds,Long deviceId,String time,Integer page,Integer size) {
+	public RESTResultBean securitylogGET(String token,Long cid,Long[] studentId,Long deviceId,String time,Integer page,Integer size) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			if (doCheckToken(token) == false) {
@@ -89,12 +89,12 @@ public class SecurityLogController extends MyControllerSupport {
 				page = 1;
 			}
 			List<PageVOSupport> plist= new ArrayList<PageVOSupport>();
-			for(Long studentid :studentIds){
+			for(Long id :studentId){
 			
 			LogSecurityPVO pvo = new LogSecurityPVO();
 			pvo.setCid(cid);
 			pvo.setDeviceId(deviceId);
-			pvo.setStudentId(studentid);
+			pvo.setStudentId(id);
 			if(time!=null&&!"".equals(time)){
 				String[] times = time.split("|");
 				pvo.setStartTime(times[0]);
