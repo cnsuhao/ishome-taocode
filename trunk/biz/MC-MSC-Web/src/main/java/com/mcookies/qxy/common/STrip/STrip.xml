@@ -185,7 +185,7 @@
 				and a.tid = #{tid}
 			</if>
 			<if test="date != null">
-				and a.date = #{date}
+				and a.date LIKE '%${date}%'
 			</if>		
 		</where>
     </select>
