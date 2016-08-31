@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.isotope.jfp.framework.beans.common.FrameworkDataBean;
 import org.isotope.jfp.framework.beans.common.RESTResultBean;
 import org.isotope.jfp.framework.beans.page.PageVOSupport;
 import org.isotope.jfp.framework.support.MyControllerSupport;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.mcookies.qxy.common.ClassStudent.ClassStudentDBO;
 import com.mcookies.qxy.common.ClassStudent.ClassStudentService;
@@ -109,6 +111,9 @@ public class SecurityLogController extends MyControllerSupport {
 			data.put("size", size);
 			
 			if (studentId!=null) {
+				List<FrameworkDataBean> logslist = new ArrayList<FrameworkDataBean>();
+				//List<PageVOSupport> pa= new ArrayList<PageVOSupport>();
+				//JSONArray securitylog= new JSONArray();
 				for (Long id : studentId) {
 					pvo.setStudentId(id);
 					pageModel.config();
@@ -116,10 +121,20 @@ public class SecurityLogController extends MyControllerSupport {
 					pageModel.setPageLimit(size);
 					pageModel.setFormParamBean(pvo);
 					LogSecurityService_.doSelectPageSecurityLog(pageModel);
-					data.put("count", pageModel.getResultCount());
-					data.put("securitylog",pageModel.getPageListData());
+					for(FrameworkDataBean log : pageModel.getPageListData()){
+						logslist.add(log);
+					}
+					/*List<LogSecurityPVO> loglist = (List<LogSecurityPVO>) LogSecurityService_.doSelectPageSecurityLog(pvo);
+					data.put("count", pageModel.getResultCount());	
+					//securitylog.add(pageModel.getPageListData());
+					//pa.add( (PageVOSupport) pageModel.getPageListData());
+					for(LogSecurityPVO log : loglist){
+						logslist.add(log);
+					}*/
 					
 				}
+				//pageModel.setPageListData(logslist);
+				data.put("securitylog",logslist);
 								
 
 			} else {
