@@ -227,6 +227,9 @@
 			<if test=" cid != null">
 				and a.cid = #{cid}
 			</if>
+			<if test=" termId != null "><!-- 学期id -->
+                and a.term_id = #{termId}
+            </if>
 			<if test="studentId != null ">
 				and a.student_id = #{studentId}
 			</if>
