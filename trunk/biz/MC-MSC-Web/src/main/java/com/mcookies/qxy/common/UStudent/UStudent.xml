@@ -377,6 +377,7 @@
 		a.student_id,
 		a.student_name,
 		a.phone,
+		a.email,
 		g.parent_id,
 		g.parent_name,
 		a.is_use,
