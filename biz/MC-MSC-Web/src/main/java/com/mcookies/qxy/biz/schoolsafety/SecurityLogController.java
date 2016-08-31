@@ -82,7 +82,7 @@ public class SecurityLogController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/securitylog", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean securitylogGET(String token, Long termId, Long cid, Long[] studentId, Long deviceId, String time, Integer page, Integer size) {
+	public RESTResultBean securitylogGET(String token, Long termId, Long cid, Long studentId, Long deviceId, String time, Integer page, Integer size) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			if (doCheckToken(token) == false) {
@@ -98,6 +98,7 @@ public class SecurityLogController extends MyControllerSupport {
 			LogSecurityPVO pvo = new LogSecurityPVO();
 			pvo.setCid(cid);
 			pvo.setDeviceId(deviceId);
+			pvo.setStudentId(studentId);
 			if(termId!=null){
 				pvo.setTermId(termId);				
 			}
@@ -106,47 +107,17 @@ public class SecurityLogController extends MyControllerSupport {
 				pvo.setStartTime(times[0]);
 				pvo.setEndTime(times[2]);
 			}
+			
+			pageModel.config();
+			pageModel.setPageCurrent(page);
+			pageModel.setPageLimit(size);
+			pageModel.setFormParamBean(pvo);
+			LogSecurityService_.doSelectPageSecurityLog(pageModel);
 			JSONObject data = new JSONObject();
 			data.put("page", page);
 			data.put("size", size);
-			
-			if (studentId!=null) {
-				List<FrameworkDataBean> logslist = new ArrayList<FrameworkDataBean>();
-				//List<PageVOSupport> pa= new ArrayList<PageVOSupport>();
-				//JSONArray securitylog= new JSONArray();
-				for (Long id : studentId) {
-					pvo.setStudentId(id);
-					pageModel.config();
-					pageModel.setPageCurrent(page);
-					pageModel.setPageLimit(size);
-					pageModel.setFormParamBean(pvo);
-					LogSecurityService_.doSelectPageSecurityLog(pageModel);
-					for(FrameworkDataBean log : pageModel.getPageListData()){
-						logslist.add(log);
-					}
-					/*List<LogSecurityPVO> loglist = (List<LogSecurityPVO>) LogSecurityService_.doSelectPageSecurityLog(pvo);
-					data.put("count", pageModel.getResultCount());	
-					//securitylog.add(pageModel.getPageListData());
-					//pa.add( (PageVOSupport) pageModel.getPageListData());
-					for(LogSecurityPVO log : loglist){
-						logslist.add(log);
-					}*/
-					
-				}
-				//pageModel.setPageListData(logslist);
-				data.put("securitylog",logslist);
-								
-
-			} else {
-				pageModel.config();
-				pageModel.setPageCurrent(page);
-				pageModel.setPageLimit(size);
-				pageModel.setFormParamBean(pvo);
-				LogSecurityService_.doSelectPageSecurityLog(pageModel);
-				data.put("count", pageModel.getResultCount());
-				data.put("securitylog",pageModel.getPageListData());
-			}
-			
+			data.put("count", pageModel.getResultCount());
+			data.put("securitylog", pageModel.getPageListData());
 			result.setData(data);
 		} catch (Exception e) {
 			result.setInfo("访问失败");
