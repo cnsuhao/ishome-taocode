@@ -1,6 +1,7 @@
 package com.mcookies.qxy.biz.schoolsafety;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -82,7 +83,7 @@ public class SecurityLogController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/securitylog", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean securitylogGET(String token, Long termId, Long cid, Long studentId, Long deviceId, String time, Integer page, Integer size) {
+	public RESTResultBean securitylogGET(String token, Long termId, Long cid, Long studentId, Long deviceId, String startTime, String endTime,Integer page, Integer size) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			if (doCheckToken(token) == false) {
@@ -96,16 +97,23 @@ public class SecurityLogController extends MyControllerSupport {
 			}
 
 			LogSecurityPVO pvo = new LogSecurityPVO();
-			pvo.setCid(cid);
-			pvo.setDeviceId(deviceId);
-			pvo.setStudentId(studentId);
+			if(cid != null && cid>0){
+				pvo.setCid(cid);				
+			}
+			if(deviceId != null && deviceId>0){
+				pvo.setCid(deviceId);				
+			}
+			if(studentId != null && studentId>0){
+				pvo.setCid(studentId);				
+			}
 			if(termId!=null){
 				pvo.setTermId(termId);				
 			}
-			if (time != null && !"".equals(time)) {
-				String[] times = time.split("|");
-				pvo.setStartTime(times[0]);
-				pvo.setEndTime(times[2]);
+			if (startTime != null && !"".equals(startTime)) {
+				pvo.setStartTime(startTime);
+			}
+			if (endTime != null && !"".equals(endTime)) {
+				pvo.setStartTime(endTime);
 			}
 			
 			pageModel.config();
