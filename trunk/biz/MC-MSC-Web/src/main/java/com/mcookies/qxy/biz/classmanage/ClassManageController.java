@@ -19,6 +19,7 @@ import com.mcookies.qxy.common.ClassTeacher.ClassTeacherDBO;
 import com.mcookies.qxy.common.STerm.STermPVO;
 import com.mcookies.qxy.common.STerm.STermService;
 import com.mcookies.qxy.common.UTeacher.UTeacherDBO;
+import com.mcookies.qxy.common.UTeacher.UTeacherPVO;
 import com.mcookies.qxy.common.UTeacher.UTeacherService;
 
 /**
@@ -41,9 +42,10 @@ public class ClassManageController extends MyControllerSupport {
 	 * 班级列表查询接口 /classlist/term=[term_id]&page=[page]&
 	 * size=[size]&tid=[tid]&token=[token]
 	 */
+	@SuppressWarnings("unused")
 	@RequestMapping(value = "/classlist", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean classListGET(ClassPVO pvo, Integer page, Integer size) {
+	public RESTResultBean classListGET(ClassPVO pvo, Integer page, Integer size,Long tid) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			if (doCheckToken(pvo.getToken()) == false) {
@@ -60,8 +62,19 @@ public class ClassManageController extends MyControllerSupport {
 			term.setTermId(pvo.getTermId());
 			term.setSid(pvo.getSid());
 			term = (STermPVO) sTermService.findByTermId(term);
+			
 			if (term == null) {
 				throw new IllegalArgumentException("termId所对应的学期不存在");
+			}
+			if(tid != null){
+				UTeacherDBO teacher= new UTeacherDBO();
+				teacher.setTid(tid);
+				uTeacherService.doRead(teacher);
+				if(teacher == null){
+					throw new IllegalArgumentException("tid所对应的教师不存在");
+				}
+				
+				pvo.setTid(tid);
 			}
 			pvo.setTermId(term.getTermId());
 			pageModel.setPageCurrent(page);
