@@ -21,9 +21,36 @@ public class LogSecurityPVO extends LogSecurityDBO
 	
 	private String startTime = null;
 	private String endTime = null;
+	private String className = null;
+	private Long gradeId = null;
+	private String gradeName = null;
 
 	public String getStartTime() {
 		return startTime;
+	}
+
+	public String getClassName() {
+		return className;
+	}
+
+	public void setClassName(String className) {
+		this.className = className;
+	}
+
+	public Long getGradeId() {
+		return gradeId;
+	}
+
+	public void setGradeId(Long gradeId) {
+		this.gradeId = gradeId;
+	}
+
+	public String getGradeName() {
+		return gradeName;
+	}
+
+	public void setGradeName(String gradeName) {
+		this.gradeName = gradeName;
 	}
 
 	public void setStartTime(String startTime) {
