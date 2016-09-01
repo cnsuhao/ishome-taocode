@@ -499,20 +499,25 @@ Response:
 		"schoolName": "水果湖第一小学",
 		"loginStatus": "0",
 		"loginTime": "08301253",
-		"userId": 28,
+		"userId": "28",
 		"userType": "2",
-		"parentId": 22,
+		"parentId": "22",
+		"parentName": "张三三",
 		"role": "0",
 		"phone": "18627806720",
 		"email": "406@qq.com",
 		"studentInfo":[
 			{
 				"studentName": "张三分 ",
-				"studentId": "12"
+				"studentId": "12",
+				"cid": "12",
+				"className": "二年级三班"     #名称为年级+班级
 			},
 			{
 				"studentName": "张四分 ",
-				"studentId": "13"
+				"studentId": "13",
+				"cid": "12",
+				"className": "三年级二班"
 			},
 		]
     }
