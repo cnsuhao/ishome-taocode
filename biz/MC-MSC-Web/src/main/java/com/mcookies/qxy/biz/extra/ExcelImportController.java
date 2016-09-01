@@ -482,7 +482,7 @@ public class ExcelImportController extends MyControllerSupport {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/import/teacher", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean importTeacherPOST(@RequestParam("excel") MultipartFile file, String token, Long sid) {
+	public RESTResultBean importTeacherPOST(@RequestParam("excel") MultipartFile file,Long sid, String token) {
 		RESTResultBean result = new RESTResultBean();
 		InputStream is = null;
 		Workbook workbook = null;
@@ -491,7 +491,11 @@ public class ExcelImportController extends MyControllerSupport {
 				return tokenFail();
 			}
 			SchoolDBO school = new SchoolDBO();
-			if (sid != null) {
+			if(sid == null || sid == 0){
+				Long SchoolId = getLoginer().getSchoolId();
+				school.setSid(SchoolId);
+				school.setPuk("1");
+			}else {
 				school.setSid(sid);
 				school.setPuk("1");
 			}
