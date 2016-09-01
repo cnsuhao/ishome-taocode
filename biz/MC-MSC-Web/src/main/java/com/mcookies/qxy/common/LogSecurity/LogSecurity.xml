@@ -216,14 +216,19 @@
 		b.number,
 		c.device_name,
 		a.flag,
-		a.mark_time
+		a.mark_time,
+		a.rfid,
+		g.grade_id,
+		g.grade_name,
+		d.class_name
 		FROM
-		log_security a,
-		u_student b,
-		device_tag c
-		<where>
-			and a.student_id = b.student_id
-			AND a.device_id = c.device_id
+		log_security a left join
+		u_student b on a.student_id = b.student_id
+		left join device_tag c on  a.device_id = c.device_id
+		left join class d on a.cid= d.cid
+		left join s_grade_label g on d.grade_id = g.grade_id
+        <where> 
+              1 = 1
 			<if test=" cid != null">
 				and a.cid = #{cid}
 			</if>
