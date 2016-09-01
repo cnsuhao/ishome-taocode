@@ -101,10 +101,10 @@ public class SecurityLogController extends MyControllerSupport {
 				pvo.setCid(cid);				
 			}
 			if(deviceId != null && deviceId>0){
-				pvo.setCid(deviceId);				
+				pvo.setDeviceId(deviceId);				
 			}
 			if(studentId != null && studentId>0){
-				pvo.setCid(studentId);				
+				pvo.setStudentId(studentId);				
 			}
 			if(termId!=null){
 				pvo.setTermId(termId);				
