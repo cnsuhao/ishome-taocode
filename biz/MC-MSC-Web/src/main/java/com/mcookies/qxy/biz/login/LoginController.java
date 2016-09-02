@@ -300,6 +300,14 @@ public class LoginController extends MyControllerSupport {
 				rs.setInfo("手机号码不能为空");
 				return rs;
 			}
+			UserDBO user = new UserDBO();
+			user.setPhone(phone);
+			List<UserDBO> ulist = (List<UserDBO>) UserService_.doSelectData(user);
+			if(ulist == null || ulist.size() == 0){
+				rs.setStatus(2);
+				rs.setInfo("改手机号码没有注册，请先注册");
+				return rs;
+			}
 			String key = phone;
 			// 产生验证码
 			String captcha = SecurityCodeHelper.makeRandomNumCode(1800, 6, key);
