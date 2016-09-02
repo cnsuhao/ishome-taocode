@@ -116,7 +116,7 @@ public class SecurityLogController extends MyControllerSupport {
 				pvo.setStartTime(startTime);
 			}
 			if (endTime != null && !"".equals(endTime)) {
-				pvo.setStartTime(endTime);
+				pvo.setEndTime(endTime);;
 			}
 			
 			pageModel.config();
