@@ -47,6 +47,9 @@ public class ClassService extends MyServiceSupport {
 	public List<ClassDBO> findNewsClassers(NewsPVO news) {
 		return getDao().findNewsClassers(news);
 	}
+	public List<ClassPVO> findNewsClassersAndGrade(NewsPVO news) {
+		return getDao().findNewsClassersAndGrade(news);
+	}
 
 	public List<ClassPVO> findByTermIdAndTid(ClassPVO clz) {
 		return getDao().findByTermIdAndTid(clz);
