@@ -18,6 +18,7 @@ public interface ClassDao extends IDatabaseSupport{
 	List<? extends FrameworkDataBean> doSelectPageClass2(PageVOSupport formParamPageModel);
 
 	List<ClassDBO> findNewsClassers(NewsPVO news);
+	List<ClassPVO> findNewsClassersAndGrade(NewsPVO news);
 
 	List<ClassPVO> findByTermIdAndTid(ClassPVO clz);
 
