@@ -258,6 +258,17 @@ public class NewsManageController extends MyControllerSupport {
 			if (news.getIsUse() == null) {
 				news.setIsUse(1);
 			}
+			if(news.getIsTop() == null){
+				news.setIsTop(0);
+			}
+			if(news.getPic() .equals(null)|| "".equals(news.getPic())){
+				news.setIsPic(0);
+			}else{
+				news.setIsPic(1);
+			}
+			if(news.getIsHomenews() == null ){
+				news.setIsHomenews(0);
+			}
 			newsService.doInsert(news);
 			Map<String, Object> data = new HashMap<String, Object>();
 			data.put("info", "ok");
