@@ -1,9 +1,8 @@
 package com.mcookies.qxy.biz.annex;
 
+import java.util.ArrayList;
 import java.util.List;
-
 import javax.annotation.Resource;
-
 import org.isotope.jfp.framework.beans.common.RESTResultBean;
 import org.isotope.jfp.framework.support.MyControllerSupport;
 import org.springframework.stereotype.Controller;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.alibaba.fastjson.JSONObject;
 import com.mcookies.qxy.common.STrip.STripDBO;
 import com.mcookies.qxy.common.STrip.STripPVO;
@@ -154,6 +152,80 @@ public class STripController extends MyControllerSupport {
 			result.setInfo("访问失败");
 			result.setStatus(1);
 		}
+		return result;
+	}
+	
+	/**
+	 * 1.5 个人日历表状态查询接口
+	 * 
+	 * 
+	*/
+	@RequestMapping(value= "/trip/status",method = RequestMethod.GET,produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public RESTResultBean tripStatus(Long tid ,String token){
+		RESTResultBean result = new RESTResultBean();
+		try {
+			//token校验
+			if (doCheckToken(token) == false) {
+				return tokenFail();
+			}
+			//tid
+			if(tid == null ){
+				throw new IllegalArgumentException("cid不能为空");
+			}
+			UTeacherDBO teacher = new UTeacherDBO();
+			teacher.setTid(tid);
+			teacher.setPuk("1");
+			teacher = (UTeacherDBO) uTeacherService.doRead(teacher);
+			if(teacher == null){
+				result.setInfo("该教师不存在");
+				result.setStatus(1);
+				return result;
+			}
+			STripDBO strip = new STripDBO();
+			strip.setTid(tid);
+			List<STripDBO> slist = (List<STripDBO>) STripService_.doSelectData(strip);
+			String[] temp = null;
+			if(slist.size()>0){
+				List<String> nlist = new ArrayList<String> ();
+				String[] tripstatus = new String[slist.size()];
+				
+				for(int i= 0;i<slist.size();i++){
+					String a =slist.get(i).getDate().toString();
+					a = a.substring(0, 10);
+					tripstatus[i]=a;
+				}
+				for(int j=0; j<tripstatus.length;j++){
+					for(int k=j+1; k<tripstatus.length;k++){
+						if(tripstatus[j] .equals(tripstatus[k])){
+							tripstatus[j]=null;
+							break;
+						}
+					}
+				}
+				for(String s :tripstatus){
+					if(s!=null){
+						nlist.add(s);
+					}
+				}
+				temp = new String[nlist.size()];
+				for(int i= 0;i<nlist.size();i++){
+					temp[i] = nlist.get(i);
+				}
+				
+			}	
+			JSONObject data = new JSONObject();
+			data.put("tripstatus", temp);
+			result.setStatus(0);
+			result.setData(data);	
+			
+		} catch (Exception e) {
+			result.setInfo("访问失败");
+			result.setStatus(1);
+		}
+		
+		
+		
 		return result;
 	}
 	
