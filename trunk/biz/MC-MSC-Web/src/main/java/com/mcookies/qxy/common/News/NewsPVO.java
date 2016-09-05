@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Named;
 
 import com.mcookies.qxy.common.Class.ClassDBO;
+import com.mcookies.qxy.common.Class.ClassPVO;
 import com.mcookies.qxy.common.UTeacher.UTeacherDBO;
 
 @Named
@@ -16,7 +17,7 @@ public class NewsPVO extends NewsDBO {
 
 	private List<UTeacherDBO> newsReaders;
 
-	private List<ClassDBO> newsClassers;
+	private List<ClassPVO> newsClassers;
 	
 	private String startTime;
 
@@ -56,11 +57,11 @@ public class NewsPVO extends NewsDBO {
 		this.newsReaders = newsReaders;
 	}
 
-	public List<ClassDBO> getNewsClassers() {
+	public List<ClassPVO> getNewsClassers() {
 		return newsClassers;
 	}
 
-	public void setNewsClassers(List<ClassDBO> newsClassers) {
+	public void setNewsClassers(List<ClassPVO> newsClassers) {
 		this.newsClassers = newsClassers;
 	}
 
