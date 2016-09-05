@@ -315,6 +315,20 @@
 			AND sid = #{sid}
 		</if>
     </select>
+    <!-- 查询news newsClasser 对应的班级列表(id1;id2;id3;) 为空返回sid下的全部  -->
+    <select id='findNewsClassersAndGrade' parameterType='com.mcookies.qxy.common.News.NewsPVO' 
+    		resultType='com.mcookies.qxy.common.Class.ClassPVO'>
+        SELECT a.cid,c.grade_name, a.class_name
+        FROM class a
+        LEFT JOIN s_grade_label c ON a.grade_id = c.grade_id
+		WHERE 1 = 1
+		<if test=" newsClasser != null and newsClasser != ''">
+			AND instr(#{newsClasser}, concat(cid, ';')) > 0
+		</if>
+		<if test=" newsClasser == null or newsClasser == ''">
+			AND sid = #{sid}
+		</if>
+    </select>
 	<!-- 查询任教班级列表  -->
     <select id='findByTermIdAndTid' parameterType='com.mcookies.qxy.common.Class.ClassPVO' 
     		resultType='com.mcookies.qxy.common.Class.ClassPVO'>
