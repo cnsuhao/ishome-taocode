@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.mcookies.qxy.common.Class.ClassDBO;
+import com.mcookies.qxy.common.Class.ClassPVO;
 import com.mcookies.qxy.common.Class.ClassService;
 import com.mcookies.qxy.common.News.NewsDBO;
 import com.mcookies.qxy.common.News.NewsPVO;
@@ -218,7 +219,7 @@ public class NewsManageController extends MyControllerSupport {
 			}
 			//
 			news.setNewsReaders((List<UTeacherDBO>) uTeacherService.findNewsReaders(news));
-			news.setNewsClassers((List<ClassDBO>) classService.findNewsClassers(news));
+			news.setNewsClassers((List<ClassPVO>) classService.findNewsClassersAndGrade(news));
 			result.setData(news);
 		} catch (Exception e) {
 			result.setInfo("查询失败，" + e.getMessage());
