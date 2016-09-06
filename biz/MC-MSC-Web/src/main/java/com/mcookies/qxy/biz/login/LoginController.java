@@ -1,5 +1,7 @@
 package com.mcookies.qxy.biz.login;
 
+import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.xalan.lib.sql.ObjectArray;
+import org.isotope.jfp.common.file.control.FileImageControl;
 import org.isotope.jfp.common.login.LoginBusiness;
 import org.isotope.jfp.framework.beans.common.RESTResultBean;
 import org.isotope.jfp.framework.beans.user.LoginerBean;
@@ -19,6 +23,8 @@ import org.isotope.jfp.framework.common.sms.UserSMSSendServiceImpl;
 import org.isotope.jfp.framework.security.code.SecurityCodeHelper;
 import org.isotope.jfp.framework.support.MyControllerSupport;
 import org.isotope.jfp.framework.utils.DateHelper;
+import org.isotope.jfp.framework.utils.EmptyHelper;
+import org.isotope.jfp.framework.utils.FTPUtil;
 import org.isotope.jfp.framework.utils.HttpRequestHelper;
 import org.isotope.jfp.framework.utils.token.UserCacheHelper;
 import org.springframework.stereotype.Controller;
@@ -26,11 +32,21 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.mcookies.qxy.common.Alarm.AlarmController;
+import com.mcookies.qxy.common.NewsColumn.NewsColumnDBO;
 import com.mcookies.qxy.common.School.SchoolDBO;
 import com.mcookies.qxy.common.School.SchoolService;
+import com.mcookies.qxy.common.UParent.UParentDBO;
+import com.mcookies.qxy.common.UParent.UParentService;
+import com.mcookies.qxy.common.UStudentParent.UStudentParentDBO;
+import com.mcookies.qxy.common.UStudentParent.UStudentParentPVO;
+import com.mcookies.qxy.common.UStudentParent.UStudentParentService;
 import com.mcookies.qxy.common.UTeacher.UTeacherDBO;
 import com.mcookies.qxy.common.UTeacher.UTeacherService;
 import com.mcookies.qxy.common.UTeacherExt.UTeacherExtService;
@@ -58,7 +74,10 @@ public class LoginController extends MyControllerSupport {
 	protected SMSTemplateConfig SMSTemplateConfig_;
 	@Resource
 	protected UTeacherService UTeacherService_;
-	
+	@Resource
+	protected UParentService UParentService_;
+	@Resource
+	protected UStudentParentService UStudentParentService_ ;
 	
 	private Long defualtSid = 999999999l;
 
@@ -77,7 +96,6 @@ public class LoginController extends MyControllerSupport {
 	public RESTResultBean doLoginPOST(@RequestBody LoginPVO loginpvo, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		// 设定返回
 		RESTResultBean rs = new RESTResultBean();
-
 		if (logger.isDebugEnabled())
 			logger.debug("loginpvo====///loginpvo////loginpvo=======>>>>>=========>>>" + loginpvo);
 		/////////////////////// 登录系统/////////////////////////////////////
@@ -204,6 +222,7 @@ public class LoginController extends MyControllerSupport {
 	@Transactional
 	public RESTResultBean loginInPOST(@RequestBody String jsonparam) {
 		RESTResultBean rs = new RESTResultBean();///
+
 		try {
 			JSONObject param = JSONObject.parseObject(jsonparam);
 			String token = (String) param.get("token");
@@ -223,33 +242,8 @@ public class LoginController extends MyControllerSupport {
 			// 二次登录系统
 			LoginService_.makeLogIn(user, true);
 //
-			
-			
 			rs.setStatus(0);
 			
-			UTeacherDBO condition = new UTeacherDBO();
-//			condition.setSid(sid);
-			condition.setUid(param.getLong("uid"));
-			condition = (UTeacherDBO) UTeacherService_.doReadByUid(condition);
-			String teacherName = condition.getTeacherName();
-			String phone = condition.getPhone();
-			String email = condition.getEmail();
-			Long tid = condition.getTid();
-			
-			
-			SchoolDBO schl = new SchoolDBO();
-			schl.setPuk("1");
-			schl.setSid(sid);
-			Long  a = schl.getSid();
-//			Long sid2 = (long) 123456789;
-			schl = (SchoolDBO) SchoolService_.doRead(schl);
-			String schoolName = schl.getSchoolName();
-			
-//			Map<String, Object> param = new HashMap<String, Object>();
-//			param.put("userType", loginpvo.getUserType());
-//			param.put("uid", user.getUserId());
-//			List<SchoolDBO> schools = SchoolService_.doSelectSchoolByTypeAndUid(param);
-//			
 			JSONObject data = new JSONObject();
 			data.put("loginStatus", user.getLoginStatus());
 			data.put("loginTime", user.getLoginTime());
@@ -257,11 +251,72 @@ public class LoginController extends MyControllerSupport {
 			data.put("token", user.getToken());
 			data.put("userId", user.getUserId());
 			data.put("userType", userType);
-			data.put("teacherName", teacherName);
-			data.put("phone", phone);
-			data.put("email", email);
+			//获得学校名称
+			SchoolDBO schl = new SchoolDBO();
+			schl.setPuk("1");
+			schl.setSid(sid);
+			Long  a = schl.getSid();
+//			Long sid2 = (long) 123456789;
+			schl = (SchoolDBO) SchoolService_.doRead(schl);
+			String schoolName = schl.getSchoolName();
 			data.put("schoolName", schoolName);
-			data.put("tid", tid);
+			if ("1".equals(userType)) {
+				//获得老师相关信息
+				UTeacherDBO condition = new UTeacherDBO();
+//				condition.setSid(sid);
+				condition.setUid(param.getLong("uid"));
+				condition = (UTeacherDBO) UTeacherService_.doReadByUid(condition);
+				String teacherName = condition.getTeacherName();
+				String phone = condition.getPhone();
+				String email = condition.getEmail();
+				Long tid = condition.getTid();
+				data.put("teacherName", teacherName);
+				data.put("phone", phone);
+				data.put("email", email);		
+				data.put("tid", tid);	
+			} else if ("2".equals(userType)) {
+				//得到父母信息
+				UParentDBO condition = new UParentDBO();
+				condition.setUid(param.getLong("uid"));
+				condition = (UParentDBO) UParentService_.doReadByUParentUid(condition);
+				data.put("parentId",condition.getParentId() );
+				data.put("parentName",condition.getParentName() );
+				data.put("phone",condition.getPhone() );
+				//得到角色
+				UStudentParentDBO uStudentParentDBO = new UStudentParentDBO();
+				uStudentParentDBO.setParentId(condition.getParentId());
+				uStudentParentDBO = (UStudentParentDBO) UStudentParentService_.doReadByParentId(uStudentParentDBO);
+				data.put("role",uStudentParentDBO.getRole());
+				//得到邮箱
+				UserDBO userDBO = new UserDBO();
+				userDBO.setUid(param.getLong("uid"));
+				userDBO = (UserDBO) UserService_.doRead(userDBO);
+				data.put("email",userDBO.getEmail());
+				//获得学生信息List<UStudentParentPVO> doFindByParentId
+				UStudentParentPVO uStudentParentPVO = new UStudentParentPVO();
+				 uStudentParentPVO.setParentId(condition.getParentId());
+				List<UStudentParentPVO> uStudentParentPVOs = UStudentParentService_.doFindByParentId(uStudentParentPVO);
+//				ObjectArray objectArray = new ObjectArray();
+				   ArrayList a1 = new ArrayList();
+				for (UStudentParentPVO uStudentParentPVO2 : uStudentParentPVOs) {
+					Map<String, Object> data2 = new HashMap<String, Object>();
+//					JSONObject data2 = new JSONObject();
+					data2.put("studentName", uStudentParentPVO2.getCid());
+					data2.put("studentId", uStudentParentPVO2.getStudentId());
+					data2.put("cid", uStudentParentPVO2.getCid());
+					data2.put("className", uStudentParentPVO2.getClassName());
+					a1.add(data2);
+				}
+				data.put("studentInfo", a1);
+			} else {
+				
+			}
+			
+//			Map<String, Object> param = new HashMap<String, Object>();
+//			param.put("userType", loginpvo.getUserType());
+//			param.put("uid", user.getUserId());
+//			List<SchoolDBO> schools = SchoolService_.doSelectSchoolByTypeAndUid(param);
+			
 			rs.setData(data);
 			
 //			rs.setData(user);
@@ -618,4 +673,6 @@ public class LoginController extends MyControllerSupport {
 		}
 		return value;
 	}
+	
+
 }
