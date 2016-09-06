@@ -6,6 +6,7 @@ import org.isotope.jfp.framework.beans.common.FrameworkDataBean;
 import org.isotope.jfp.framework.beans.page.PageVOSupport;
 import org.isotope.jfp.framework.support.IDatabaseSupport;
 
+import com.mcookies.qxy.common.ClassStudent.ClassStudentDBO;
 import com.mcookies.qxy.common.News.NewsPVO;
 
 /** 班级表*/
@@ -21,6 +22,8 @@ public interface ClassDao extends IDatabaseSupport{
 	List<ClassPVO> findNewsClassersAndGrade(NewsPVO news);
 
 	List<ClassPVO> findByTermIdAndTid(ClassPVO clz);
+	List<ClassPVO> findByTid(ClassStudentDBO clz);
+	ClassPVO findClassersAndGrade(ClassDBO cla);
 
 	ClassPVO findOneByCid(ClassPVO clz);
 
