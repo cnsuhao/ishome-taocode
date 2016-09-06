@@ -322,4 +322,14 @@
 			AND a.student_id = #{studentId} 
         </if>
     </select>
+        <!-- 查询一条数据  -->
+    <select id='doReadByUParentUid' parameterType='UParentDBO' resultType='UParentDBO'>
+    SELECT a.parent_id,a.parent_name,a.phone
+	FROM u_parent AS a
+	WHERE 1 = 1
+    <if test=" uid != null ">
+       AND a.uid = #{uid}
+    </if>
+    </select>
+    
 </mapper>
