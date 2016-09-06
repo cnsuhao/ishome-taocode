@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.mcookies.qxy.common.Class.ClassDBO;
 import com.mcookies.qxy.common.Class.ClassPVO;
 import com.mcookies.qxy.common.Class.ClassService;
+import com.mcookies.qxy.common.ClassStudent.ClassStudentDBO;
 import com.mcookies.qxy.common.SDuty.SDutyService;
 import com.mcookies.qxy.common.SDutyContent.SDutyContentService;
 import com.mcookies.qxy.common.SDutyScheduling.SDutySchedulingPVO;
@@ -135,7 +136,7 @@ public class ContactController extends MyControllerSupport {
 			SGradeLabelDBO grade = new SGradeLabelDBO();
 			grade.setGradeId(dbo.getGradeId());
 			grade = (SGradeLabelDBO) sGradeLabelService.doRead(grade);
-			
+
 			UTeacherPVO teacher = new UTeacherPVO();
 			teacher.setTermId(term.getTermId());
 			teacher.setCid(dbo.getCid());
@@ -177,15 +178,33 @@ public class ContactController extends MyControllerSupport {
 			if (size == null || size == 0) {
 				size = 12;
 			}
-			// 查询班級是否存在
-			if (pvo.getCid() == null) {
-				throw new IllegalArgumentException("cid不能为空");
+			// 學期是否存在
+			if (pvo.getTermId() != null) {
+
+				STermPVO term = new STermPVO();
+				term.setTermId(pvo.getTermId());
+				term = (STermPVO) sTermService.findByTermId(term);
+				if (term == null) {
+					throw new IllegalArgumentException("termId所对应的学期或默认学期不存在");
+				}
+				data.put("termName", term.getTermName());
 			}
-			ClassDBO condition = new ClassDBO();
-			condition.setCid(pvo.getCid());
-			condition = (ClassDBO) classService.doRead(condition);
-			if (condition == null) {
-				throw new IllegalArgumentException("该班级不存在");
+			if (pvo.getCid() != null) {
+
+				// 查询班級是否存在
+				if (pvo.getCid() == null) {
+					throw new IllegalArgumentException("cid不能为空");
+				}
+				ClassDBO condition = new ClassDBO();
+				condition.setCid(pvo.getCid());
+				condition = (ClassDBO) classService.doRead(condition);
+				if (condition == null) {
+					throw new IllegalArgumentException("该班级不存在");
+				}
+				data.put("cid", pvo.getCid());
+				data.put("className", condition.getClassName());
+				ClassPVO cp = classService.findClassersAndGrade(condition);
+				data.put("gradeName", cp.getGradeName());
 			}
 			// 查询學生是否存在，可为空，则查全部
 			if (pvo.getStudentId() != null) {
@@ -195,24 +214,32 @@ public class ContactController extends MyControllerSupport {
 				if (student == null) {
 					throw new IllegalArgumentException("studentId对应的学生不存在");
 				}
+				// 查询学生关联的年级班级学期
+				ClassStudentDBO clz = new ClassStudentDBO();
+				clz.setStudentId(pvo.getStudentId());
+				List<ClassPVO> clist = classService.findByTid(clz);
+				Long cid = clist.get(0).getCid();
+				Long termId = clist.get(0).getTermId();
+				String termName = clist.get(0).getTermName();
+				String gradeName = clist.get(0).getGradeName();
+				String className = clist.get(0).getClassName();
+				if (pvo.getTermId() == null) {
+					pvo.setTermId(termId);
+					data.put("termName", termName);
+				}
+				if (pvo.getCid() == null) {
+					pvo.setCid(cid);
+					data.put("cid", cid);
+					data.put("className", className);
+					data.put("gradeName", gradeName);
+				}
 			}
-			
-			// 學期是否存在
-			STermPVO term = new STermPVO();
-			term.setTermId(pvo.getTermId());
-			term = (STermPVO) sTermService.findByTermId(term);
-			if (term == null) {
-				throw new IllegalArgumentException("termId所对应的学期或默认学期不存在");
-			}
+
 			pageModel.setPageCurrent(page);
 			pageModel.setPageLimit(size);
 			pageModel.setFormParamBean(pvo);
 			uParentService.doSelectPageByTermIdAndCidAndStudentId(pageModel);
-			
-			data.put("cid", condition.getCid());
-			data.put("className", condition.getClassName());
-			data.put("termName", term.getTermName());
-			data.put("gradeName", condition.getClassName());
+
 			data.put("page", pageModel.getPageCurrent());
 			data.put("size", pageModel.getPageLimit());
 			data.put("count", pageModel.getResultCount());
@@ -255,7 +282,7 @@ public class ContactController extends MyControllerSupport {
 					throw new IllegalArgumentException("studentId对应的学生不存在");
 				}
 			}
-			
+
 			// 家长是否存在
 			if (pvo.getParentId() == null) {
 				throw new IllegalArgumentException("parentId不能为空");
@@ -277,7 +304,7 @@ public class ContactController extends MyControllerSupport {
 			pageModel.setPageLimit(size);
 			pageModel.setFormParamBean(pvo);
 			uStudentService.doSelectPageByParentIdAndTermIdAndStudentID(pageModel);
-			
+
 			data.put("parentId", parent.getParentId());
 			data.put("parentName", parent.getParentName());
 			data.put("termName", term.getTermName());
@@ -293,10 +320,11 @@ public class ContactController extends MyControllerSupport {
 
 		return result;
 	}
-	
+
 	/**
 	 * 值周工作（手机端）安排查询接口
-	 * /qxy/schedule/mobile/week?termId=[termId]&week=[week]&tid=[tid]&token=[token]
+	 * /qxy/schedule/mobile/week?termId=[termId]&week=[week]&tid=[tid]&token=[
+	 * token]
 	 */
 	@RequestMapping(value = "/schedule/mobile/week", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
@@ -318,8 +346,7 @@ public class ContactController extends MyControllerSupport {
 				throw new IllegalArgumentException("termId所对应的学期或默认学期不存在");
 			}
 			dutyScheduling.setTermId(term.getTermId());
-			List<SDutySchedulingPVO> dutySchedulings = (List<SDutySchedulingPVO>) sDutySchedulingService
-					.findByTermIdAndTidAndWeekAndIsUsed(dutyScheduling);
+			List<SDutySchedulingPVO> dutySchedulings = (List<SDutySchedulingPVO>) sDutySchedulingService.findByTermIdAndTidAndWeekAndIsUsed(dutyScheduling);
 			data.put("week", dutyScheduling.getWeek());
 			data.put("startTime", term.getStartTime());
 			data.put("endTime", term.getEndTime());
@@ -333,10 +360,11 @@ public class ContactController extends MyControllerSupport {
 
 		return result;
 	}
-	
+
 	/**
 	 * 值日工作安排查询接口
-	 * /qxy/schedule/mobile/day?termId=[termId]&date=[date]&tid=[tid]&token=[token]
+	 * /qxy/schedule/mobile/day?termId=[termId]&date=[date]&tid=[tid]&token=[
+	 * token]
 	 */
 	@RequestMapping(value = "/schedule/mobile/day", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
@@ -359,8 +387,7 @@ public class ContactController extends MyControllerSupport {
 			}
 			dutyScheduling.setTermId(term.getTermId());
 			dutyScheduling.setTermId(term.getTermId());
-			List<SDutySchedulingPVO> dutySchedulings = (List<SDutySchedulingPVO>) sDutySchedulingService
-					.findByTermIdAndTidAndDateAndIsUsed(dutyScheduling);
+			List<SDutySchedulingPVO> dutySchedulings = (List<SDutySchedulingPVO>) sDutySchedulingService.findByTermIdAndTidAndDateAndIsUsed(dutyScheduling);
 			data.put("date", dutyScheduling.getDate());
 			data.put("count", dutySchedulings.size());
 			data.put("scheduleday", dutySchedulings);
