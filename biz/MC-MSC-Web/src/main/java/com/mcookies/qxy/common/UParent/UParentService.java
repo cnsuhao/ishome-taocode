@@ -34,4 +34,9 @@ public class UParentService extends MyServiceSupport {
 		return pageModel;
 	}
 
+	public UParentDBO doReadByUParentUid(UParentDBO uParentDBO) {
+		return getDao().doReadByUParentUid(uParentDBO);
+	}
+	
+	
 }
