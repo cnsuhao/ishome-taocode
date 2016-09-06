@@ -189,5 +189,27 @@
         UPDATE u_student_parent SET is_default = 0
         WHERE student_id = #{studentId}
     </update>
+        	<!-- 班级学生情况查询-->
+	<select id="doFindByParentId" parameterType="com.mcookies.qxy.common.UStudentParent.UStudentParentPVO" resultType="com.mcookies.qxy.common.UStudentParent.UStudentParentPVO">
+   		SELECT b.student_name,a.student_id,c.cid,CONCAT(e.grade_name, d.class_name) AS class_name
+		FROM u_student_parent AS a
+		LEFT JOIN u_student AS b ON a.student_id = b.student_id
+		LEFT JOIN class_student AS c ON c.student_id = a.student_id
+		LEFT JOIN class AS d ON d.cid = c.cid
+		LEFT JOIN s_grade_label AS e ON d.grade_id = e.grade_id
+		WHERE 1 = 1 
+	<if test="parentId != null">
+		AND a.parent_id = #{parentId} 
+	</if>
+	</select>
+    
+    <!-- 查询家长角色信息  -->
+    <select id='doReadByParentId' parameterType='UStudentParentDBO' resultType='UStudentParentDBO'>
+    SELECT a.role FROM u_student_parent AS a
+    WHERE 1 = 1 
+    <if test=" parentId != null ">
+            AND a.parent_id= #{parentId}
+    </if>
+    </select>
 
 </mapper>
