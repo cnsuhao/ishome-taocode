@@ -1,6 +1,5 @@
 package com.mcookies.qxy.biz.login;
 
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,8 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.xalan.lib.sql.ObjectArray;
-import org.isotope.jfp.common.file.control.FileImageControl;
 import org.isotope.jfp.common.login.LoginBusiness;
 import org.isotope.jfp.framework.beans.common.RESTResultBean;
 import org.isotope.jfp.framework.beans.user.LoginerBean;
@@ -23,8 +20,6 @@ import org.isotope.jfp.framework.common.sms.UserSMSSendServiceImpl;
 import org.isotope.jfp.framework.security.code.SecurityCodeHelper;
 import org.isotope.jfp.framework.support.MyControllerSupport;
 import org.isotope.jfp.framework.utils.DateHelper;
-import org.isotope.jfp.framework.utils.EmptyHelper;
-import org.isotope.jfp.framework.utils.FTPUtil;
 import org.isotope.jfp.framework.utils.HttpRequestHelper;
 import org.isotope.jfp.framework.utils.token.UserCacheHelper;
 import org.springframework.stereotype.Controller;
@@ -32,14 +27,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.mcookies.qxy.common.Alarm.AlarmController;
-import com.mcookies.qxy.common.NewsColumn.NewsColumnDBO;
 import com.mcookies.qxy.common.School.SchoolDBO;
 import com.mcookies.qxy.common.School.SchoolService;
 import com.mcookies.qxy.common.UParent.UParentDBO;
@@ -49,7 +38,6 @@ import com.mcookies.qxy.common.UStudentParent.UStudentParentPVO;
 import com.mcookies.qxy.common.UStudentParent.UStudentParentService;
 import com.mcookies.qxy.common.UTeacher.UTeacherDBO;
 import com.mcookies.qxy.common.UTeacher.UTeacherService;
-import com.mcookies.qxy.common.UTeacherExt.UTeacherExtService;
 import com.mcookies.qxy.common.User.UserDBO;
 import com.mcookies.qxy.common.User.UserService;
 
