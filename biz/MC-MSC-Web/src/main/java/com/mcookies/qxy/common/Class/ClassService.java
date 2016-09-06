@@ -5,6 +5,7 @@ import org.isotope.jfp.framework.beans.page.PageVOSupport;
 import org.isotope.jfp.framework.support.sync.MyServiceSupport;
 import org.springframework.stereotype.Service;
 
+import com.mcookies.qxy.common.ClassStudent.ClassStudentDBO;
 import com.mcookies.qxy.common.News.NewsPVO;
 
 /** 班级表*/
@@ -50,9 +51,17 @@ public class ClassService extends MyServiceSupport {
 	public List<ClassPVO> findNewsClassersAndGrade(NewsPVO news) {
 		return getDao().findNewsClassersAndGrade(news);
 	}
+	
+	public ClassPVO findClassersAndGrade(ClassDBO cla) {
+		return getDao().findClassersAndGrade(cla);
+	}
 
 	public List<ClassPVO> findByTermIdAndTid(ClassPVO clz) {
 		return getDao().findByTermIdAndTid(clz);
+	}
+	
+	public List<ClassPVO> findByTid(ClassStudentDBO clz) {
+		return getDao().findByTid(clz);
 	}
 	
 	public ClassPVO findOneByCid(ClassPVO clz) {
