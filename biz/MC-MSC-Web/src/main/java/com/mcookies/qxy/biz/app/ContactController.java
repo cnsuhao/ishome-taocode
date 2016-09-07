@@ -31,6 +31,9 @@ import com.mcookies.qxy.common.UParent.UParentService;
 import com.mcookies.qxy.common.UStudent.UStudentDBO;
 import com.mcookies.qxy.common.UStudent.UStudentPVO;
 import com.mcookies.qxy.common.UStudent.UStudentService;
+import com.mcookies.qxy.common.UStudentParent.UStudentParentDBO;
+import com.mcookies.qxy.common.UStudentParent.UStudentParentPVO;
+import com.mcookies.qxy.common.UStudentParent.UStudentParentService;
 import com.mcookies.qxy.common.UTeacher.UTeacherDBO;
 import com.mcookies.qxy.common.UTeacher.UTeacherPVO;
 import com.mcookies.qxy.common.UTeacher.UTeacherService;
@@ -59,6 +62,8 @@ public class ContactController extends MyControllerSupport {
 	protected UStudentService uStudentService;
 	@Resource
 	protected UParentService uParentService;
+	@Resource
+	protected UStudentParentService uStudentParentService;
 	@Resource
 	protected SGradeLabelService sGradeLabelService;
 
@@ -252,6 +257,53 @@ public class ContactController extends MyControllerSupport {
 
 		return result;
 	}
+	
+	/**
+	 * 班级学生查询家长详细信息
+	 * class/parent/info?parentId=[parentId]&token=[token]
+	 *GET
+	*/
+	@RequestMapping(value = "class/parent/info", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public RESTResultBean studentParentInfo( Long parentId, String token) {
+		RESTResultBean rs = new RESTResultBean();		
+		try {
+			if (doCheckToken(token) == false) {
+				return tokenFail();
+			}
+			Map<String, Object> data = new HashMap<String, Object>();
+			if(parentId == null){
+				throw new IllegalArgumentException("parentId不能为空");				
+			}
+			UParentPVO parent = new UParentPVO();
+			parent.setParentId(parentId);
+			parent = uParentService.findByParentId(parent);
+			if(parent == null ){
+				rs.setInfo("您还不是家长");
+				rs.setStatus(2);
+				return rs;
+			}
+			data.put("parentId", parent.getParentId());
+			data.put("parentName", parent.getParentName());
+			data.put("role", parent.getRole());
+			data.put("phone", parent.getPhone());
+			data.put("workUnit", parent.getWorkUnit());
+			data.put("position", parent.getPosition());
+			
+			UStudentParentPVO stu = new UStudentParentPVO();
+			stu.setParentId(parentId);
+			List<UStudentParentPVO> stulist = uStudentParentService.doFindByParentId(stu);
+			data.put("studentinfo", stulist);
+			rs.setData(data);
+		} catch (Exception e) {
+			rs.setInfo("查询失败，" + e.getMessage());
+			rs.setStatus(1);
+		}
+		
+		
+	   return rs;	
+	}	
+	
 
 	/**
 	 * 家长角色对应学生所属班
