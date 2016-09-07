@@ -9,6 +9,8 @@ import javax.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.isotope.jfp.framework.beans.common.RESTResultBean;
 import org.isotope.jfp.framework.support.MyControllerSupport;
+import org.isotope.jfp.persistent.TkLoginer.TkLoginerDBO;
+import org.isotope.jfp.persistent.TkLoginer.TkLoginerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.mcookies.qxy.common.NewsColumn.NewsColumnDBO;
 import com.mcookies.qxy.common.NewsColumn.NewsColumnService;
 
@@ -30,6 +34,8 @@ public class ColumnManageController extends MyControllerSupport {
 
 	@Resource
 	protected NewsColumnService newsColumnService;
+	@Resource
+	protected TkLoginerService tkLoginerService;
 
 	/**
 	 * 新闻栏目查询接口 /column/type=[type]&token=[token]
@@ -48,8 +54,18 @@ public class ColumnManageController extends MyControllerSupport {
 			if (type == 0) {
 				newsColumn.setIsUse(1);
 			}
-			List<NewsColumnDBO> newsColumns = (List<NewsColumnDBO>) newsColumnService.doSelectData(newsColumn);
-
+			TkLoginerDBO tkLogin = new TkLoginerDBO();
+			tkLogin.setToken(token);
+			tkLogin = (TkLoginerDBO) tkLoginerService.doRead(tkLogin);
+			String xjson = tkLogin.getJson();
+			JSONObject json = JSON.parseObject(xjson);
+			Integer userType = json.getInteger("userType");
+			List<NewsColumnDBO> newsColumns = null;
+			if(userType == 2){
+				newsColumns = (List<NewsColumnDBO>) newsColumnService.doSelectWithParent(newsColumn);
+			}else{		
+			    newsColumns = (List<NewsColumnDBO>) newsColumnService.doSelectData(newsColumn);
+			}
 			Map<String, Object> data = new HashMap<String, Object>();
 			data.put("count", newsColumns.size());
 			data.put("column", newsColumns);
