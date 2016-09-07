@@ -1,7 +1,7 @@
 package org.isotope.jfp.framework.key;
 
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
-import org.isotope.jfp.framework.constants.pub.ISServiceConstants;
+import org.isotope.jfp.framework.constants.pub.ISApiServiceConstants;
 import org.isotope.jfp.framework.utils.EmptyHelper;
 
 /**
@@ -12,7 +12,7 @@ import org.isotope.jfp.framework.utils.EmptyHelper;
  * @since 2.4.1 2015/8/17
  * 
  */
-public class DefaultKeyService implements ISFrameworkConstants, ISServiceConstants {
+public class DefaultKeyService implements ISFrameworkConstants, ISApiServiceConstants {
 
 	/**
 	 * 获得对接业务名称(客户数据)

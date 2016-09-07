@@ -115,7 +115,7 @@ public interface ISFrameworkConstants {
 	public static final char DOWN_LINE2 = '_';// backslash
 
 	/* 数据基本操作 */
-	public enum DB_MANAGER_TYPE {
+	public enum DBManagerType {
 		CREAT, INIT, BUILD, NONE;
 	}
 }
