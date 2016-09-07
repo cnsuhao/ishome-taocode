@@ -260,7 +260,7 @@ public class LoginController extends MyControllerSupport {
 				condition = (UTeacherDBO) UTeacherService_.doReadByUid(condition);
 				if(condition == null || condition.getTid()== null){
 					rs.setStatus(1);
-					rs.setInfo("您的账号不能不匹配教师账号");
+					rs.setInfo("您还不是教师");
 					return rs;
 				}
 				String teacherName = condition.getTeacherName();
@@ -278,7 +278,7 @@ public class LoginController extends MyControllerSupport {
 				condition = (UParentDBO) UParentService_.doReadByUParentUid(condition);
 				if( condition == null){
 					rs.setStatus(1);
-					rs.setInfo("您的账号不能不匹配家长账号");
+					rs.setInfo("您还不是家长");
 					return rs;
 				}
 				data.put("parentId",condition.getParentId() );
