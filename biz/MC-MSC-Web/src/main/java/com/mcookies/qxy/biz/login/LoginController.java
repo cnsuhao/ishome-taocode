@@ -20,8 +20,6 @@ import org.isotope.jfp.framework.common.sms.UserSMSSendServiceImpl;
 import org.isotope.jfp.framework.security.code.SecurityCodeHelper;
 import org.isotope.jfp.framework.support.MyControllerSupport;
 import org.isotope.jfp.framework.utils.DateHelper;
-import org.isotope.jfp.framework.utils.EmptyHelper;
-import org.isotope.jfp.framework.utils.FTPUtil;
 import org.isotope.jfp.framework.utils.HttpRequestHelper;
 import org.isotope.jfp.framework.utils.token.UserCacheHelper;
 import org.springframework.stereotype.Controller;
@@ -30,8 +28,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-
 import com.alibaba.fastjson.JSONObject;
 import com.mcookies.qxy.common.School.SchoolDBO;
 import com.mcookies.qxy.common.School.SchoolService;
@@ -303,7 +299,7 @@ public class LoginController extends MyControllerSupport {
 				for (UStudentParentPVO uStudentParentPVO2 : uStudentParentPVOs) {
 					Map<String, Object> data2 = new HashMap<String, Object>();
 //					JSONObject data2 = new JSONObject();
-					data2.put("studentName", uStudentParentPVO2.getStudentName());
+					data2.put("studentName", uStudentParentPVO2.getCid());
 					data2.put("studentId", uStudentParentPVO2.getStudentId());
 					data2.put("cid", uStudentParentPVO2.getCid());
 					data2.put("className", uStudentParentPVO2.getClassName());
@@ -676,6 +672,5 @@ public class LoginController extends MyControllerSupport {
 		return value;
 	}
 	
-
 
 }
