@@ -248,12 +248,17 @@ public class LoginController extends MyControllerSupport {
 			schl = (SchoolDBO) SchoolService_.doRead(schl);
 			String schoolName = schl.getSchoolName();
 			data.put("schoolName", schoolName);
-			if ("1".equals(userType)) {
+			if ("1".equals(userType)) {				
 				//获得老师相关信息
 				UTeacherDBO condition = new UTeacherDBO();
 //				condition.setSid(sid);
 				condition.setUid(param.getLong("uid"));
 				condition = (UTeacherDBO) UTeacherService_.doReadByUid(condition);
+				if(condition == null || condition.getTid()== null){
+					rs.setStatus(1);
+					rs.setInfo("您的账号不能不匹配教师账号");
+					return rs;
+				}
 				String teacherName = condition.getTeacherName();
 				String phone = condition.getPhone();
 				String email = condition.getEmail();
@@ -267,6 +272,11 @@ public class LoginController extends MyControllerSupport {
 				UParentDBO condition = new UParentDBO();
 				condition.setUid(param.getLong("uid"));
 				condition = (UParentDBO) UParentService_.doReadByUParentUid(condition);
+				if( condition == null){
+					rs.setStatus(1);
+					rs.setInfo("您的账号不能不匹配家长账号");
+					return rs;
+				}
 				data.put("parentId",condition.getParentId() );
 				data.put("parentName",condition.getParentName() );
 				data.put("phone",condition.getPhone() );
