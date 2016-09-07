@@ -44,6 +44,17 @@ public class STripController extends MyControllerSupport {
 			if(page==null||page==0){
 				page = 1;
 			}
+			String[] dates= date.split("-");
+			String year = dates[0];
+			String month = dates[1];
+			String day = dates[2];
+			if(Integer.parseInt(month)<10){
+				month = "0"+month;
+			}
+			if(Integer.parseInt(day)<10){
+				day = "0"+day;
+			}
+			date = year+"-"+month+"-"+day;
 			STripDBO strip = new STripDBO();
 			strip.setTid(tid);
 			strip.setDate(date);
