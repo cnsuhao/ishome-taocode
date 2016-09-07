@@ -95,7 +95,7 @@ public class TeacherManageController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/teacher/list", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean teacherListGET(String labelId, String type, String token, Integer page, Integer size) {
+	public RESTResultBean teacherListGET(Long labelId, String type, String token, Integer page, Integer size) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			// token校验
@@ -117,11 +117,11 @@ public class TeacherManageController extends MyControllerSupport {
 			pageModel.config();
 			pageModel.setPageCurrent(page);
 			pageModel.setPageLimit(size);
-			if (labelId != null && !"".equals(labelId)) {
-				Long lId = Long.valueOf(labelId);
+			if (labelId != null && labelId != 0) {
+//				Long lId = Long.valueOf(labelId);
 				// 获取该标签下的教工列表
 				SLabelPVO label = new SLabelPVO();
-				label.setLabelId(lId);
+				label.setLabelId(labelId);
 				label.setIsUse(isuse);
 				pageModel.setFormParamBean(label);
 				UTeacherService_.doSelectPageTeacherOnLabel(pageModel);
