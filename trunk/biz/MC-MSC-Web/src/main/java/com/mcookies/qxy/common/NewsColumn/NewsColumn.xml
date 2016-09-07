@@ -107,7 +107,40 @@
             AND updator = #{updator}
         </if>
     </select>
-
+   <!-- 家长新闻栏目查询 --> 
+   <select id='doSelectWithParent' parameterType='NewsColumnDBO' resultType='NewsColumnDBO'>
+        SELECT <include refid='tableColumns'/> FROM news_column
+        WHERE auth != 1 
+        <if test=" columnId != null "><!-- 栏目id（自增） -->
+            AND column_id = #{columnId}
+        </if>
+        <if test=" sid != null "><!-- 学校id -->
+            AND sid = #{sid}
+        </if>
+        <if test=" title != null "><!-- 栏目名称 -->
+            AND title = #{title}
+        </if>
+        <if test=" isCheck != null "><!-- 是否需要审核 -->
+            AND is_check = #{isCheck}
+        </if>
+        <if test=" isUse != null "><!-- 是否启用 -->
+            AND is_use = #{isUse}
+        </if>
+        <if test=" createTime != null "><!-- 创建时间 -->
+            AND create_time = #{createTime}
+        </if>
+        <if test=" creator != null "><!-- 创建者 -->
+            AND creator = #{creator}
+        </if>
+        <if test=" updateTime != null "><!-- 更新时间 -->
+            AND update_time = #{updateTime}
+        </if>
+        <if test=" updator != null "><!-- 最后更新者 -->
+            AND updator = #{updator}
+        </if>
+    </select>
+   
+   
     <!-- 插入一条数据 -->
     <insert id='doInsert' parameterType='NewsColumnDBO' useGeneratedKeys="true" keyProperty="columnId">
         INSERT INTO news_column
