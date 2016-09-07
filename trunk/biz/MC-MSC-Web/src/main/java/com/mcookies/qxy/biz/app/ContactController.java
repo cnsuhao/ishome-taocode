@@ -400,8 +400,8 @@ public class ContactController extends MyControllerSupport {
 			dutyScheduling.setTermId(term.getTermId());
 			List<SDutySchedulingPVO> dutySchedulings = (List<SDutySchedulingPVO>) sDutySchedulingService.findByTermIdAndTidAndWeekAndIsUsed(dutyScheduling);
 			data.put("week", dutyScheduling.getWeek());
-			data.put("startTime", term.getStartTime());
-			data.put("endTime", term.getEndTime());
+//			data.put("startTime", term.getStartTime());
+//			data.put("endTime", term.getEndTime());
 			data.put("count", dutySchedulings.size());
 			data.put("scheduleweek", dutySchedulings);
 			result.setData(data);
@@ -436,6 +436,21 @@ public class ContactController extends MyControllerSupport {
 			term = (STermPVO) sTermService.findByTermId(term);
 			if (term == null) {
 				throw new IllegalArgumentException("termId所对应的学期或默认学期不存在");
+			}
+			String date = dutyScheduling.getDate();
+			if(!date.equals(null) || !"".equals(date)){
+				String[] dates= date.split("-");
+				String year = dates[0];
+				String month = dates[1];
+				String day = dates[2];
+				if(Integer.parseInt(month)<10){
+					month = "0"+month;
+				}
+				if(Integer.parseInt(day)<10){
+					day = "0"+day;
+				}
+				date = year+"-"+month+"-"+day;
+				dutyScheduling.setDate(date);
 			}
 			dutyScheduling.setTermId(term.getTermId());
 			dutyScheduling.setTermId(term.getTermId());
