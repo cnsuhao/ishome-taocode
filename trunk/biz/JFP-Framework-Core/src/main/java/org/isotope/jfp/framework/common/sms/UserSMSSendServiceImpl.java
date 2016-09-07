@@ -6,7 +6,6 @@ import java.net.URISyntaxException;
 import org.apache.http.client.ClientProtocolException;
 import org.isotope.jfp.framework.beans.pub.SMSBean;
 import org.isotope.jfp.framework.common.CommonChannelConfig;
-import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.constants.pub.ISSMSConstants;
 import org.isotope.jfp.framework.support.common.ISMSSupport;
 import org.isotope.jfp.framework.utils.EmptyHelper;
@@ -22,7 +21,7 @@ import com.alibaba.fastjson.JSON;
  * @since 2.3.0
  * 
  */
-public class UserSMSSendServiceImpl extends CommonChannelConfig implements ISMSSupport, ISSMSConstants, ISFrameworkConstants {
+public class UserSMSSendServiceImpl extends CommonChannelConfig implements ISMSSupport, ISSMSConstants {
 	public UserSMSSendServiceImpl() {
 		this(ISMSSupport.CONFIG_KEY);
 	}
@@ -67,18 +66,17 @@ public class UserSMSSendServiceImpl extends CommonChannelConfig implements ISMSS
 		else
 			sms.setSourceCmp(TWO);
 		// 压入队列
-		if (catchService == null){
-			
-//			Jedis jedis = new Jedis("", 6379);
-//			jedis.auth("");
-//			jedis.select(2);
-//			jedis.rpush("SMSList", JSON.toJSONString(sms));			
-//			System.out.println(JSON.toJSONString(sms));
-//			jedis.close();
-			
-			logger.error(">>>>>缓存服务没有定义...xxx"+JSON.toJSONString(sms));
-		}
-		else {
+		if (catchService == null) {
+
+			// Jedis jedis = new Jedis("", 6379);
+			// jedis.auth("");
+			// jedis.select(2);
+			// jedis.rpush("SMSList", JSON.toJSONString(sms));
+			// System.out.println(JSON.toJSONString(sms));
+			// jedis.close();
+
+			logger.error(">>>>>缓存服务没有定义...xxx" + JSON.toJSONString(sms));
+		} else {
 			catchService.selectDB(defaultIndex);
 			catchService.offerObjectInList(channelKey, JSON.toJSONString(sms), false);
 			catchService.init();
@@ -86,7 +84,6 @@ public class UserSMSSendServiceImpl extends CommonChannelConfig implements ISMSS
 		// 直接保存到短信队列
 		return true;
 	}
-
 
 	public static void main(String[] args) throws ClientProtocolException, IOException, URISyntaxException {
 		UserSMSSendServiceImpl sms = new UserSMSSendServiceImpl();
