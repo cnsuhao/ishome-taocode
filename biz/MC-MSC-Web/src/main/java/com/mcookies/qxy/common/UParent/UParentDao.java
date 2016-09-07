@@ -16,5 +16,7 @@ public interface UParentDao extends IDatabaseSupport {
 	List<? extends FrameworkDataBean> doSelectPageByTermIdAndCidAndStudentId(PageVOSupport pageModel);
 	
 	UParentDBO doReadByUParentUid(UParentDBO uParentDBO);
+	
+	UParentPVO  findByParentId(UParentPVO pvo);
 
 }

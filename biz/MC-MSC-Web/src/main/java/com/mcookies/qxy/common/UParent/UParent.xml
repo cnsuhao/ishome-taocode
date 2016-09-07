@@ -296,6 +296,28 @@
                 AND b.is_use = 1
             </if>
     </select>
+    
+     <!-- 根据parentId查找学生家长信息  -->
+    <select id='findByParentId' parameterType='com.mcookies.qxy.common.UParent.UParentPVO'
+    		resultType='com.mcookies.qxy.common.UParent.UParentPVO'>
+        SELECT DISTINCT
+        a.parent_id,
+        b.parent_name,
+        b.phone,
+        b.is_use,
+        b.work_unit,
+        b.position,
+		a.role
+		FROM u_student_parent a 
+		LEFT JOIN u_parent b ON a.parent_id = b.parent_id
+		WHERE 1 = 1
+            <if test=" parentId != null ">
+                AND a.parent_id = #{parentId}
+            </if>
+    </select>
+    <!-- 根据parentId查找学生信息  -->
+    
+    
     <!-- 查询班级家长，根据termId,cid,studentId  -->
     <select id='doSelectPageByTermIdAndCidAndStudentId' parameterType='com.mcookies.qxy.common.UParent.UParentPVO'
     		resultType='com.mcookies.qxy.common.UParent.UParentPVO'>

@@ -38,5 +38,8 @@ public class UParentService extends MyServiceSupport {
 		return getDao().doReadByUParentUid(uParentDBO);
 	}
 	
+	public UParentPVO findByParentId(UParentPVO pvo) {
+		return getDao().findByParentId(pvo);
+	}
 	
 }
