@@ -191,7 +191,7 @@
     </update>
         	<!-- 班级学生情况查询-->
 	<select id="doFindByParentId" parameterType="com.mcookies.qxy.common.UStudentParent.UStudentParentPVO" resultType="com.mcookies.qxy.common.UStudentParent.UStudentParentPVO">
-   		SELECT b.student_name,a.student_id,c.cid,CONCAT(e.grade_name, d.class_name) AS class_name
+   		SELECT b.student_name,a.student_id,c.cid,a.is_default,CONCAT(e.grade_name, d.class_name) AS class_name
 		FROM u_student_parent AS a
 		LEFT JOIN u_student AS b ON a.student_id = b.student_id
 		LEFT JOIN class_student AS c ON c.student_id = a.student_id
