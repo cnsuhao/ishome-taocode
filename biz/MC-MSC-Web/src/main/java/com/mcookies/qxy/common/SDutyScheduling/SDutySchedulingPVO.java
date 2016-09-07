@@ -22,6 +22,18 @@ public class SDutySchedulingPVO extends SDutySchedulingDBO {
 	
 	private List<UTeacherDBO> teachers;
 	
+	private Long scheduleId;
+	
+	
+	
+	public Long getScheduleId() {
+		return scheduleId;
+	}
+
+	public void setScheduleId(Long scheduleId) {
+		this.scheduleId = scheduleId;
+	}
+
 	public Long getTid() {
 		return tid;
 	}

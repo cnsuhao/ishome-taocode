@@ -293,7 +293,7 @@
 	<select id='findByTermIdAndTidAndWeekAndIsUsed' parameterType='com.mcookies.qxy.common.SDutyScheduling.SDutySchedulingPVO'
 		resultType='com.mcookies.qxy.common.SDutyScheduling.SDutySchedulingPVO'>
 		SELECT
-		a.id, b.duty_id, b.duty_name, c.content, a.start_time, a.end_time
+		a.id AS scheduleId, b.duty_id, b.duty_name, c.id,c.content, c.start_time, c.end_time
 		FROM s_duty_scheduling a
 		LEFT JOIN s_duty b ON a.duty_id = b.duty_id
 		LEFT JOIN s_duty_content c ON b.duty_id = c.duty_id
@@ -310,7 +310,7 @@
 	<select id='findByTermIdAndTidAndDateAndIsUsed' parameterType='com.mcookies.qxy.common.SDutyScheduling.SDutySchedulingPVO'
 		resultType='com.mcookies.qxy.common.SDutyScheduling.SDutySchedulingPVO'>
 		SELECT
-		a.id, b.duty_id, b.duty_name, c.content, a.date
+		a.id AS scheduleId, b.duty_id, b.duty_name,c.id, c.content, a.date,c.start_time, c.end_time
 		FROM s_duty_scheduling a
 		LEFT JOIN s_duty b ON a.duty_id = b.duty_id
 		LEFT JOIN s_duty_content c ON b.duty_id = c.duty_id
