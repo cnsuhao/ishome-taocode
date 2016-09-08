@@ -257,28 +257,26 @@ public class ContactController extends MyControllerSupport {
 
 		return result;
 	}
-	
+
 	/**
-	 * 班级学生查询家长详细信息
-	 * class/parent/info?parentId=[parentId]&token=[token]
-	 *GET
-	*/
+	 * 班级学生查询家长详细信息 class/parent/info?parentId=[parentId]&token=[token] GET
+	 */
 	@RequestMapping(value = "class/parent/info", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean studentParentInfo( Long parentId, String token) {
-		RESTResultBean rs = new RESTResultBean();		
+	public RESTResultBean studentParentInfo(Long parentId, String token) {
+		RESTResultBean rs = new RESTResultBean();
 		try {
 			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
 			Map<String, Object> data = new HashMap<String, Object>();
-			if(parentId == null){
-				throw new IllegalArgumentException("parentId不能为空");				
+			if (parentId == null) {
+				throw new IllegalArgumentException("parentId不能为空");
 			}
 			UParentPVO parent = new UParentPVO();
 			parent.setParentId(parentId);
 			parent = uParentService.findByParentId(parent);
-			if(parent == null ){
+			if (parent == null) {
 				rs.setInfo("您还不是家长");
 				rs.setStatus(2);
 				return rs;
@@ -289,7 +287,7 @@ public class ContactController extends MyControllerSupport {
 			data.put("phone", parent.getPhone());
 			data.put("workUnit", parent.getWorkUnit());
 			data.put("position", parent.getPosition());
-			
+
 			UStudentParentPVO stu = new UStudentParentPVO();
 			stu.setParentId(parentId);
 			List<UStudentParentPVO> stulist = uStudentParentService.doFindByParentId(stu);
@@ -299,11 +297,9 @@ public class ContactController extends MyControllerSupport {
 			rs.setInfo("查询失败，" + e.getMessage());
 			rs.setStatus(1);
 		}
-		
-		
-	   return rs;	
-	}	
-	
+
+		return rs;
+	}
 
 	/**
 	 * 家长角色对应学生所属班
@@ -400,8 +396,8 @@ public class ContactController extends MyControllerSupport {
 			dutyScheduling.setTermId(term.getTermId());
 			List<SDutySchedulingPVO> dutySchedulings = (List<SDutySchedulingPVO>) sDutySchedulingService.findByTermIdAndTidAndWeekAndIsUsed(dutyScheduling);
 			data.put("week", dutyScheduling.getWeek());
-//			data.put("startTime", term.getStartTime());
-//			data.put("endTime", term.getEndTime());
+			// data.put("startTime", term.getStartTime());
+			// data.put("endTime", term.getEndTime());
 			data.put("count", dutySchedulings.size());
 			data.put("scheduleweek", dutySchedulings);
 			result.setData(data);
@@ -438,20 +434,27 @@ public class ContactController extends MyControllerSupport {
 				throw new IllegalArgumentException("termId所对应的学期或默认学期不存在");
 			}
 			String date = dutyScheduling.getDate();
-			if(!date.equals(null) || !"".equals(date)){
-				String[] dates= date.split("-");
+			if (!date.equals(null) || !"".equals(date)) {
+				String[] dates = null;
+				if (date.contains("-")) {
+					dates = date.split("-");
+				} else {
+					dates = date.split("/");
+				}
+
 				String year = dates[0];
 				String month = dates[1];
 				String day = dates[2];
-				if(Integer.parseInt(month)<10){
-					month = "0"+month;
+				if (Integer.parseInt(month) < 10 && !month.contains("0")) {
+					month = "0" + month;
 				}
-				if(Integer.parseInt(day)<10){
-					day = "0"+day;
+				if (Integer.parseInt(day) < 10 && !day.contains("0")) {
+					day = "0" + day;
 				}
-				date = year+"-"+month+"-"+day;
+				date = year + "-" + month + "-" + day;
 				dutyScheduling.setDate(date);
 			}
+
 			dutyScheduling.setTermId(term.getTermId());
 			dutyScheduling.setTermId(term.getTermId());
 			List<SDutySchedulingPVO> dutySchedulings = (List<SDutySchedulingPVO>) sDutySchedulingService.findByTermIdAndTidAndDateAndIsUsed(dutyScheduling);
