@@ -82,11 +82,18 @@ public class ScheduleController extends MyControllerSupport {
 				if (each.getWeek() != null) {
 					weeklist.add(each.getWeek());
 				} else if (each.getDate() != null) {
-					daylist.add(each.getDate());
+					daylist.add(each.getDate().substring(0, 10));
 				} else {
 
 				}
 			}
+			/*String[] days = new String[daylist.size()];
+			for(String day:daylist){
+				day = day.substring(0, 10);
+				int i = 0;
+				days[i]=day;
+				i++;
+			}*/
 			term.setDays(daylist);
 			term.setWeeklist(weeklist);
 			result.setData(term);
