@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.mcookies.qxy.common.ClassTeacher.ClassTeacherService;
@@ -201,6 +202,7 @@ public class TeacherManageController extends MyControllerSupport {
 	 * @param jsonparam
 	 * @return
 	 */
+	@SuppressWarnings("unused")
 	@RequestMapping(value = "/teacher/move", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean teacherMovePUT(String token, @RequestBody String jsonparam) {
@@ -212,7 +214,32 @@ public class TeacherManageController extends MyControllerSupport {
 			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
-			JSONArray teacher = param.getJSONArray("teacher");
+			JSONObject teacher = JSON.parseObject(jsonparam);
+			if(teacher!=null){
+				Long tid = teacher.getLong("tid");
+				Long labelId = teacher.getLong("labelId");
+				Long target = teacher.getLong("target");
+				
+				if(labelId.intValue()!=0){
+					//删除原有关联
+					SLabelTeacherDBO stmp = new SLabelTeacherDBO();
+					stmp.setTid(tid);
+					stmp.setLabelId(labelId);
+					SLabelTeacherService_.doDeleteBytid(stmp);
+				}
+				//新建新关联
+				SLabelTeacherDBO stmp2 = new SLabelTeacherDBO();
+				stmp2.setTid(tid);
+				stmp2.setLabelId(target);
+				SLabelTeacherService_.doInsert(stmp2);
+				
+			}else{
+				result.setInfo("参数为空");
+				result.setStatus(2);
+			}
+			
+			
+			/*JSONArray teacher = param.getJSONArray("teacher");
 			if(teacher!=null&&teacher.size()>0){
 				for(Object t:teacher){
 					JSONObject tjson = (JSONObject)t;
@@ -235,7 +262,7 @@ public class TeacherManageController extends MyControllerSupport {
 			}else{
 				result.setInfo("参数为空");
 				result.setStatus(2);
-			}
+			}*/
 		} catch (Exception e) {
 			result.setInfo("访问失败");
 			result.setStatus(1);
