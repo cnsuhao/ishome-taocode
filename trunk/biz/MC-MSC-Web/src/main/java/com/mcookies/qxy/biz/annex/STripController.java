@@ -44,7 +44,27 @@ public class STripController extends MyControllerSupport {
 			if(page==null||page==0){
 				page = 1;
 			}
-			String[] dates= date.split("-");
+			if (!date.equals(null) || !"".equals(date)) {
+				String[] dates = null;
+				if (date.contains("-")) {
+					dates = date.split("-");
+				} else {
+					dates = date.split("/");
+				}
+
+				String year = dates[0];
+				String month = dates[1];
+				String day = dates[2];
+				if (Integer.parseInt(month) < 10 && !month.contains("0")) {
+					month = "0" + month;
+				}
+				if (Integer.parseInt(day) < 10 && !day.contains("0")) {
+					day = "0" + day;
+				}
+				date = year + "-" + month + "-" + day;
+				
+			}
+			/*String[] dates= date.split("-");
 			String year = dates[0];
 			String month = dates[1];
 			String day = dates[2];
@@ -54,7 +74,7 @@ public class STripController extends MyControllerSupport {
 			if(Integer.parseInt(day)<10){
 				day = "0"+day;
 			}
-			date = year+"-"+month+"-"+day;
+			date = year+"-"+month+"-"+day;*/
 			STripDBO strip = new STripDBO();
 			strip.setTid(tid);
 			strip.setDate(date);
