@@ -65,35 +65,26 @@ public class ScheduleController extends MyControllerSupport {
 			if (doCheckToken(term.getToken()) == false) {
 				return tokenFail();
 			}
-
+			SDutySchedulingPVO duty = new SDutySchedulingPVO();
+			duty.setTid(term.getTid());
 			term = (STermPVO) sTermService.findByTermId(term);
 			if (term == null) {
 				throw new IllegalArgumentException("termId所对应的学期或默认学期不存在");
 			}
-			SDutySchedulingPVO duty = new SDutySchedulingPVO();
 			duty.setTermId(term.getTermId());
-			duty.setTid(term.getTid());
 			duty.setIsUse(1);
 			List<SDutySchedulingDBO> dutys = (List<SDutySchedulingDBO>) sDutySchedulingService
 					.findByTermIdAndTidAndIsUsed(duty);
 			TreeSet<String> daylist = new TreeSet<String>();
 			TreeSet<Integer> weeklist = new TreeSet<Integer>();
 			for (SDutySchedulingDBO each : dutys) {
-				if (each.getWeek() != null) {
+				if (each.getWeek() != null && each.getType() == 0) {
 					weeklist.add(each.getWeek());
-				} else if (each.getDate() != null) {
+				} 
+				if (each.getDate() != null && each.getType() == 1) {
 					daylist.add(each.getDate().substring(0, 10));
-				} else {
-
 				}
 			}
-			/*String[] days = new String[daylist.size()];
-			for(String day:daylist){
-				day = day.substring(0, 10);
-				int i = 0;
-				days[i]=day;
-				i++;
-			}*/
 			term.setDays(daylist);
 			term.setWeeklist(weeklist);
 			result.setData(term);
