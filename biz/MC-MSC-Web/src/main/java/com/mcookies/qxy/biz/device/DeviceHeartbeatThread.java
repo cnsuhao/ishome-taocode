@@ -111,7 +111,7 @@ public class DeviceHeartbeatThread implements Runnable, DeviceConstants, ISFrame
 				// 计算最后报警
 				{
 					long lastTime = Long.parseLong(dtd.getLastLoginTime());
-					if ((lastTime - curTime) > heartSecond * 60 * 1000) {
+					if ((lastTime - curTime) > heartSecond * 60 * 1000 && dtd.getIsUse() == 1) {						
 						logger.warn("该设备异常=====>>>>>" + dtd.getDeviceId());
 						DeviceAlarmDBO da = new DeviceAlarmDBO();
 						da.setDeviceId(dtd.getDeviceId());
