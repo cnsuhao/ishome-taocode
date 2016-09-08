@@ -66,7 +66,9 @@ public class ScheduleController extends MyControllerSupport {
 				return tokenFail();
 			}
 			SDutySchedulingPVO duty = new SDutySchedulingPVO();
-			duty.setTid(term.getTid());
+			if(term.getTid() != null && term.getTid() >0){
+				duty.setTid(term.getTid());	
+			}
 			term = (STermPVO) sTermService.findByTermId(term);
 			if (term == null) {
 				throw new IllegalArgumentException("termId所对应的学期或默认学期不存在");
