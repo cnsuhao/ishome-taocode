@@ -326,7 +326,7 @@
 			AND instr(#{newsClasser}, concat(cid, ';')) > 0
 		</if>
 		<if test=" newsClasser == null or newsClasser == ''">
-			AND sid = #{sid}
+			AND a.sid = #{sid}
 		</if>
     </select>
     <!-- 查询class 对应的班级列表(id1;id2;id3;) 为空返回sid下的全部  -->
