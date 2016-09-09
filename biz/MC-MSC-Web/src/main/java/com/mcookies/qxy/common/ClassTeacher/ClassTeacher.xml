@@ -176,5 +176,22 @@
 		LEFT JOIN u_teacher c ON a.tid = c.tid
 		WHERE a.cid = #{cid}
     </select>
-
+     <!-- 通过 sid cid course_id 查询班级教师tid teachername  -->
+      <select id='doSelectTeacherName'  parameterType='ClassTeacherDBO' 
+    		resultType='com.mcookies.qxy.common.ClassTeacher.ClassTeacherPVO'>
+        SELECT c.tid, c.teacher_name FROM class_teacher a
+		LEFT JOIN u_teacher c ON a.tid = c.tid
+		WHERE 1 = 1
+        <if test=" sid != null "><!-- 学校id -->
+            AND a.sid = #{sid}
+        </if>
+        <if test=" cid != null "><!-- 班级id -->
+            AND a.cid = #{cid}
+        </if>
+        <if test=" courseId != null "><!-- 课程id -->
+            AND a.course_id = #{courseId}
+        </if>
+    </select>
+     
+     
 </mapper>

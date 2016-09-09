@@ -33,4 +33,8 @@ public class ClassTeacherService extends MyServiceSupport {
 	public List<ClassTeacherPVO> findByCid(ClassTeacherDBO classTeacher) {
 		return getDao().findByCid(classTeacher);
 	}
+	
+	public List<ClassTeacherPVO> doSelectTeacherName(ClassTeacherDBO classTeacher) {
+		return getDao().doSelectTeacherName(classTeacher);
+	}
 }
