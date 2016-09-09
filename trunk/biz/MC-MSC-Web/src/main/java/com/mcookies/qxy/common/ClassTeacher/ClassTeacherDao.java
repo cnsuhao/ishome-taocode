@@ -8,5 +8,6 @@ import org.isotope.jfp.framework.support.IDatabaseSupport;
 public interface ClassTeacherDao extends IDatabaseSupport {
 
 	List<ClassTeacherPVO> findByCid(ClassTeacherDBO classTeacher);
+	List<ClassTeacherPVO> doSelectTeacherName(ClassTeacherDBO classTeacher);
 
 }
