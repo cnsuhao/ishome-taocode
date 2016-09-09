@@ -31,6 +31,9 @@ import com.mcookies.qxy.common.ClassCourse.ClassCourseDBO;
 import com.mcookies.qxy.common.ClassCourse.ClassCourseService;
 import com.mcookies.qxy.common.ClassStudent.ClassStudentDBO;
 import com.mcookies.qxy.common.ClassStudent.ClassStudentService;
+import com.mcookies.qxy.common.ClassTeacher.ClassTeacherDBO;
+import com.mcookies.qxy.common.ClassTeacher.ClassTeacherPVO;
+import com.mcookies.qxy.common.ClassTeacher.ClassTeacherService;
 import com.mcookies.qxy.common.SCourse.SCourseDBO;
 import com.mcookies.qxy.common.SCourse.SCourseService;
 import com.mcookies.qxy.common.School.SchoolDBO;
@@ -86,7 +89,9 @@ public class ExcelImportController extends MyControllerSupport {
 	@Resource
 	protected SCourseService sCourseService;
 	@Resource
-	protected ClassCourseService classCourseService;
+	protected ClassCourseService classCourseService;	
+	@Resource
+	protected ClassTeacherService classTeacherService;
 
 	/**
 	 * 班级学生导入接口 /import/student?token=[token]
@@ -808,6 +813,7 @@ public class ExcelImportController extends MyControllerSupport {
 			List<ClassCourseDBO> classCourses;
 			SCourseDBO course;
 			List<SCourseDBO> courses;
+			List<ClassTeacherPVO> ctlist = null;
 			for (int i = 1; i <= rowCount; i++) {
 				try {
 					Row row = sheet.getRow(i);
@@ -835,7 +841,6 @@ public class ExcelImportController extends MyControllerSupport {
 									throw new IllegalArgumentException("课程不存在");
 								}
 								course = courses.get(0);
-								
 								// 判断课次是否已经存在
 								classCourse = new ClassCourseDBO();
 								classCourse.setCid(cid);
@@ -846,6 +851,18 @@ public class ExcelImportController extends MyControllerSupport {
 								classCourses = (List<ClassCourseDBO>) classCourseService.doSelectData(classCourse);
 								if (classCourses != null && classCourses.size() > 0) {
 									throw new IllegalArgumentException("该课次已存在课程");
+								}
+								
+								//获取tid和教师名
+								ClassTeacherDBO classTeacher =new ClassTeacherDBO();
+								classTeacher.setPuk("1");
+								classTeacher.setCid(cid);
+								classTeacher.setCourseId(course.getCourseId());
+								classTeacher.setSid(clazz.getSid());
+								ctlist = (List<ClassTeacherPVO>)classTeacherService.doSelectTeacherName(classTeacher);
+								if(ctlist != null && ctlist.size() > 0){
+									classCourse.setTid(ctlist.get(0).getTid());
+									classCourse.setTeacherName(ctlist.get(0).getTeacherName());
 								}
 								classCourse.setTerm(clazz.getTermId());
 								classCourse.setIsUse(1);
