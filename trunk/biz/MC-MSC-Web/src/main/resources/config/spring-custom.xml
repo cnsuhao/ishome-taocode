@@ -71,13 +71,15 @@
 		<!-- 连接池 -->
 	    <constructor-arg index="0" ref="jedisPoolConfig" />  
 	    <!-- 服务器地址 -->
-    	<constructor-arg index="1" value="139.196.101.78" type="String" />
+    	<!--<constructor-arg index="1" value="139.196.101.78" type="String" /> -->
+    	<constructor-arg index="1" value="115.29.162.65" type="String" />
     	<!-- 端口号 -->
-	    <constructor-arg index="2" value="6379" type="int" />
+	    <constructor-arg index="2" value="6380" type="int" />
 	    <!-- 最大连接时间 -->
 	    <constructor-arg index="3" value="10000" type="int" />
 	    <!-- 密码 -->
-	    <constructor-arg index="4" value="e10adc3949" type="String" />
+	    <!--<constructor-arg index="4" value="e10adc3949" type="String" /> -->
+	    <constructor-arg index="4" value="Mkq87298233" type="String" />
 	</bean>
 	
 </beans>
