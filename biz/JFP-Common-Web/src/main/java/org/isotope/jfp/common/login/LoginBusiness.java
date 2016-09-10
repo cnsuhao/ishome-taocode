@@ -144,6 +144,12 @@ public class LoginBusiness extends LoginService {
 				// 计算md5函数
 				md.update(xpassWord.getBytes());
 				xpassWord = new BigInteger(1, md.digest()).toString(16);
+				char[] pass = xpassWord.toCharArray();
+				pass[5]= t.toString().charAt(0);
+				pass[10] = t.toString().charAt(1);
+				pass[15] = t.toString().charAt(2);
+				xpassWord = new String(pass);
+				
 			} catch (NoSuchAlgorithmException e) {
 				
 				e.printStackTrace();
