@@ -164,7 +164,7 @@ public class FilePathHelper implements ISFrameworkConstants {
 		// 图片物理路径
 		filePath[1] = makeLocalFilePath(pathId);
 		// 图片文件名
-		filePath[2] = fileId + getExtension(fileName, true);
+		filePath[2] = fileId + getExtension(fileName, false);
 		// 图片扩展名
 		filePath[3] = StringUtils.trimToEmpty(StringUtils.substring(fileName, StringUtils.lastIndexOf(fileName, DOT)));
 		return filePath;
