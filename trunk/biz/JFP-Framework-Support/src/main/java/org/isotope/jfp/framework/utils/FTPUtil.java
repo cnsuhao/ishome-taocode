@@ -9,7 +9,11 @@ import java.io.InputStream;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
+import org.mybatis.spring.batch.MyBatisBatchItemWriter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
+
 
 /**
  * FTP工具
@@ -20,7 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
  * @version 0.1 2014/2/8
  */
 public class FTPUtil implements ISFrameworkConstants {
-
+	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 	/**
 	 * 文件上传
 	 *
@@ -28,11 +32,18 @@ public class FTPUtil implements ISFrameworkConstants {
 	 * @return 图片识别路径
 	 * @throws Exception
 	 */
-	public String uploadFile(MultipartFile file) throws Exception {
+	public String uploadFile(MultipartFile file,String type) throws Exception {
 		String[] filePath = FilePathHelper.makeFilePath(file.getOriginalFilename());
 		try {
-			if (uploadFile(filePath[1], filePath[2], file.getInputStream()) == true)
-				return filePath[0];
+			if (uploadFile(filePath[1], filePath[2], file.getInputStream(),type) == true){
+//				return filePath[0];
+				if (ZERO.equals(type)) {
+					return SERVER_FILE_URI+filePath[1]+filePath[2];
+				} else {
+					return filePath[1]+filePath[2];
+				}
+			}
+				
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -46,12 +57,12 @@ public class FTPUtil implements ISFrameworkConstants {
 	 * @return 图片识别路径
 	 * @throws Exception
 	 */
-	public String uploadFile(File file) throws Exception {
+	public String uploadFile(File file,String type) throws Exception {
 		String[] filePath = FilePathHelper.makeFilePath(file.getName());
 		FileInputStream fin = null;
 		try {
 			fin = new FileInputStream(file);
-			if (uploadFile(filePath[1], filePath[2], fin) == true)
+			if (uploadFile(filePath[1], filePath[2], fin,type) == true)
 				return filePath[0];
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -69,10 +80,10 @@ public class FTPUtil implements ISFrameworkConstants {
 	 * @param input
 	 * @return 图片识别路径
 	 */
-	public String uploadFile(String fileName, InputStream input) throws Exception {
+	public String uploadFile(String fileName, InputStream input,String type) throws Exception {
 		String[] filePath = FilePathHelper.makeFilePath(fileName);
 		try {
-			if (uploadFile(filePath[1], fileName, input) == true)
+			if (uploadFile(filePath[1], fileName, input,type) == true)
 				return filePath[0];
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -87,8 +98,20 @@ public class FTPUtil implements ISFrameworkConstants {
 	 * @return 成功与否
 	 * @throws Exception 
 	 */
-	public boolean uploadFile(String path, String filename, InputStream input) throws Exception {
-		return uploadFile(serverIp, serverPort, serverUser, serverUserPassword, path, filename, input);
+	public boolean uploadFile(String path, String filename, InputStream input,String type) throws Exception {
+		String serverIp = SERVER_IP;
+		int serverPort = SERVER_PORT;
+//		String savingType = "cdnFile";
+		if (ZERO.equals(type)) {			
+			String serverUser = SERVER_USER_FIRST;
+			String serverUserPassword = SERVER_USER_PASSWORD_FIRST;
+			return uploadFile(serverIp, serverPort, serverUser, serverUserPassword, path, filename, input);
+			
+		} else {
+			String serverUser = SERVER_USER_SECOND;
+			String serverUserPassword = SERVER_USER_PASSWORD_SECOND;
+			return uploadFile(serverIp, serverPort, serverUser, serverUserPassword, path, filename, input);
+		}
 	}
 
 	/**
@@ -121,8 +144,8 @@ public class FTPUtil implements ISFrameworkConstants {
 			// 连接FTP服务器
 			// 如果采用默认端口，可以使用ftp.connect(url)的方式直接连接FTP服务器
 			ftp.connect(url, port);
-
-			// 登录ftp
+			reply = ftp.getReplyCode();
+			// 登录ftp	    
 			boolean is = ftp.login(username, password);
 			// 看返回的值是不是230，如果是，表示登陆成功
 			if (is == false)
@@ -172,24 +195,35 @@ public class FTPUtil implements ISFrameworkConstants {
 	/**
 	 * 文件访问前缀地址
 	 */
-	private String fileUri = "";
+//	private String fileUri = "F:\\用户目录\\我的文档";
+//	private String fileUri = "//home//uftp//upload//";
+//	private String fileUri = "//data//www//upload//";
+	private String fileUri ;
 	/**
 	 * FTP服务器IP
 	 */
-	private String serverIp = "";
+//	private String serverIp = "127.0.0.1";
+//	private String serverIp = "112.124.111.77";
+	private String serverIp ;
 	/**
 	 * FTP服务器端口
 	 */
-	private int serverPort = 21;
+//	private int serverPort = 21;
+	private int serverPort ;
 	/**
 	 * FTP服务器用户名
 	 */
-	private String serverUser = "";
+//	private String serverUser = "user";
+//	private String serverUser = "qftp";
+//	private String serverUser = "imager";
+	private String serverUser ;
 	/**
 	 * FTP服务器密码
 	 */
-	private String serverUserPassword = "";
-
+//	private String serverUserPassword = "123456";
+//	private String serverUserPassword = "qftp";
+//	private String serverUserPassword = "mkq87298233";
+	private String serverUserPassword ;
 	public String getFileUri() {
 		return fileUri;
 	}
