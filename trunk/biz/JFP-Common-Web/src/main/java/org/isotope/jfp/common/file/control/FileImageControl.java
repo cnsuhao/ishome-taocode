@@ -99,7 +99,7 @@ public class FileImageControl extends MyContentTypeSupport {
 	 */
 	@RequestMapping(value = "/file/{token}/{markType}", method = RequestMethod.POST)
 	@ResponseBody
-	public RESTResultBean m00003010POST(@PathVariable String token, @RequestParam MultipartFile file, @PathVariable int markType) throws Exception {
+	public RESTResultBean m00003010POST(@PathVariable String token, @RequestParam MultipartFile file, @PathVariable int markType,String savingType) throws Exception {
 		logger.debug(file.getOriginalFilename());
 		RESTResultBean tb = new RESTResultBean();
 		InputStream input = file.getInputStream();
@@ -117,7 +117,7 @@ public class FileImageControl extends MyContentTypeSupport {
 
 			}
 		}
-		String filePath = FTPUtil_.uploadFile(file.getOriginalFilename(), input);
+		String filePath = FTPUtil_.uploadFile(file.getOriginalFilename(), input, savingType);
 		if (EmptyHelper.isEmpty(filePath)) {
 			tb.setCode("1");
 		} else {
@@ -287,9 +287,9 @@ public class FileImageControl extends MyContentTypeSupport {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/file/upload", method = RequestMethod.POST)
+	@RequestMapping(value = "/file/uploadPost", method = RequestMethod.POST)
 	@ResponseBody
-	public RESTResultBean fileUploadPOST(@RequestParam String token, @RequestParam MultipartFile file, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public RESTResultBean fileUploadPOST(@RequestParam String token, @RequestParam MultipartFile file,String savingType, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		RESTResultBean tb = new RESTResultBean();
 		logger.debug(token);
 		if (UserCacheHelper.checkUser(token) == null) {
@@ -302,7 +302,39 @@ public class FileImageControl extends MyContentTypeSupport {
 		}
 		logger.debug(file.getOriginalFilename());
 		// file.transferTo(new File(file.getOriginalFilename()));
-		String filePath = FTPUtil_.uploadFile(file);
+		String filePath = FTPUtil_.uploadFile(file,savingType);
+		if (EmptyHelper.isEmpty(filePath)) {
+			tb.setCode("1");
+		} else {
+			tb.setResult(filePath);
+		}
+		logger.debug(tb.toString());
+		return tb;
+	}		
+	/**
+	 * 
+	 * @param file ftp文件上传。
+	 * @param type "0"表示需 要cdn加速,"1表示不需要加速的文件"
+	 * @return  /file/upload?type=[type]&token=[token]
+	 * @throws Exception
+	 */
+	
+	@RequestMapping(value = "/file/upload", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public RESTResultBean fileUploadFtp(@RequestParam("file") MultipartFile file,String token, String type, HttpServletRequest request, HttpServletResponse response) throws Exception{
+		RESTResultBean tb = new RESTResultBean();
+		logger.debug(token);
+		if (UserCacheHelper.checkUser(token) == null) {
+			OutputStream out = response.getOutputStream();
+			tb.setMessage("用户登录失败");
+			out.write(JSON.toJSONString(tb).getBytes("UTF-8"));
+			out.flush();
+			out.close();
+			return null;
+		}
+		logger.debug(file.getOriginalFilename());
+		// file.transferTo(new File(file.getOriginalFilename()));
+		String filePath = FTPUtil_.uploadFile(file,type);
 		if (EmptyHelper.isEmpty(filePath)) {
 			tb.setCode("1");
 		} else {
