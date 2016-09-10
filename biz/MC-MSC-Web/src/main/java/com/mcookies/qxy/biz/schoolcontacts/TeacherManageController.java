@@ -219,19 +219,26 @@ public class TeacherManageController extends MyControllerSupport {
 				Long tid = teacher.getLong("tid");
 				Long labelId = teacher.getLong("labelId");
 				Long target = teacher.getLong("target");
-				
-				if(labelId.intValue()!=0){
-					//删除原有关联
-					SLabelTeacherDBO stmp = new SLabelTeacherDBO();
-					stmp.setTid(tid);
-					stmp.setLabelId(labelId);
-					SLabelTeacherService_.doDeleteBytid(stmp);
-				}
-				//新建新关联
-				SLabelTeacherDBO stmp2 = new SLabelTeacherDBO();
-				stmp2.setTid(tid);
-				stmp2.setLabelId(target);
-				SLabelTeacherService_.doInsert(stmp2);
+				//原有关联
+				SLabelTeacherDBO stmp = new SLabelTeacherDBO();
+				stmp.setTid(tid);
+				stmp.setLabelId(labelId);
+				List<SLabelTeacherDBO> lableteacher = (List<SLabelTeacherDBO>) SLabelTeacherService_.doSelectData(stmp);
+				if(lableteacher != null && lableteacher.size()>0){
+					result.setInfo("该教工已经在此部门");
+					result.setStatus(2);
+					return result;
+				}else{
+					//新建新关联
+					SLabelTeacherDBO stmp2 = new SLabelTeacherDBO();
+					stmp2.setTid(tid);
+					stmp2.setLabelId(target);
+					SLabelTeacherService_.doInsert(stmp2);	
+					if(labelId.intValue()!=0){
+						//删除原有关联										
+						SLabelTeacherService_.doDeleteBytid(stmp);
+					}					
+				}		
 				
 			}else{
 				result.setInfo("参数为空");
