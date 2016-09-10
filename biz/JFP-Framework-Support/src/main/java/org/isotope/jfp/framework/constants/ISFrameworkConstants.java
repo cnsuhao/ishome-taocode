@@ -113,7 +113,19 @@ public interface ISFrameworkConstants {
 	public final static String COMMA  = ",";
 	public static final String DOWN_LINE = "_";// backslash
 	public static final char DOWN_LINE2 = '_';// backslash
-
+	/**
+	 * 文件上传常量
+	 * @author james
+	 *
+	 */
+	public final static String SERVER_IP = "115.29.198.242";
+	public final static int SERVER_PORT  = 21;
+	public final static String SERVER_USER_FIRST = "imager";//cdn加速的
+	public final static String SERVER_USER_PASSWORD_FIRST= "qxy395131";
+	public final static String SERVER_USER_SECOND = "resource";//非cdn加速的
+	public final static String SERVER_USER_PASSWORD_SECOND= "qxy528923";
+	public final static String SERVER_FILE_URI= "http://www.1000xyun.com/upload";
+	
 	/* 数据基本操作 */
 	public enum DBManagerType {
 		CREAT, INIT, BUILD, NONE;
