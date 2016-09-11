@@ -3,7 +3,7 @@ package org.isotope.jfp.mpc.weixin.server;
 import org.isotope.jfp.framework.beans.common.RESTResultBean;
 import org.isotope.jfp.framework.beans.message.MessageInfoBean;
 import org.isotope.jfp.framework.common.message.AMessagePushGatewaySupport;
-import org.isotope.jfp.mpc.weixin.service.MyWeixinBusiness;
+import org.isotope.jfp.mpc.weixin.service.MyWeixinCompanyBusiness;
 
 /**
  * 微信消息发送实现类
@@ -19,7 +19,7 @@ public class WeiXinMessagePushGatewayServerThread extends AMessagePushGatewaySup
 		setMessageType(MessageType.WeiXin);
 	}
 
-	MyWeixinBusiness winxinBusiness;
+	MyWeixinCompanyBusiness winxinBusiness;
 
 	@Override
 	public RESTResultBean push(MessageInfoBean message) {

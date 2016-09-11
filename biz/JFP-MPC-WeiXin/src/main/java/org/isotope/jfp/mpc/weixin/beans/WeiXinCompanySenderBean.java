@@ -14,7 +14,16 @@ public class WeiXinCompanySenderBean extends CustomerSenderBean {
 	/**
 	 * 企业ID
 	 */
-	protected String companyId;
+	private String companyId;
+	private String companyName;
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
 
 	/**
 	 * 应用ID
