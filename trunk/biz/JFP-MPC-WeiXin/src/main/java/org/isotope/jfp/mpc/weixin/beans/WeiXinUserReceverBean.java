@@ -15,7 +15,7 @@ public class WeiXinUserReceverBean extends UserReceverBean {
 	/**
 	 * 用户ID
 	 */
-	protected String userId;
+	private String userId;
 
 	/**
 	 * 学校id
