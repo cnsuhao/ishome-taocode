@@ -4,12 +4,12 @@ import javax.annotation.Resource;
 
 import org.isotope.jfp.common.weixin.WeixinService;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
-import org.isotope.jfp.mpc.weixin.service.tx.TXWeixinService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * 微信对接服务
+ * 微信数据管理服务<br>
+ * 企业用户信息
  * 
  * @author spookfcy
  * @since 3.3.1
@@ -22,7 +22,7 @@ public class MyWeixinUserBusiness implements ISFrameworkConstants {
 	@Resource
 	WeixinService WeixinService_;
 	@Resource
-	TXWeixinService TXWeixinService_;
+	WeixinService TXWeixinService_;
 
 	public Object companyIdUserIdAdd(String companyId, String userId) {
 		// TODO Auto-generated method stub

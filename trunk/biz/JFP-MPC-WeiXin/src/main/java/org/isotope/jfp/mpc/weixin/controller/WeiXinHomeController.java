@@ -4,7 +4,6 @@ import javax.annotation.Resource;
 
 import org.isotope.jfp.framework.beans.common.RESTResultBean;
 import org.isotope.jfp.framework.utils.DateHelper;
-import org.isotope.jfp.mpc.weixin.beans.WeiXinMessageValueBean;
 import org.isotope.jfp.mpc.weixin.service.MyWeixinCompanyBusiness;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

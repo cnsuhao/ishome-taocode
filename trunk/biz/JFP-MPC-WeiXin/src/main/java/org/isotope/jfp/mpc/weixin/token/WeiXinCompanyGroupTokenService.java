@@ -1,11 +1,12 @@
-package org.isotope.jfp.mpc.weixin.service.txtoken;
+package org.isotope.jfp.mpc.weixin.token;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.isotope.jfp.common.weixin.WeiXinCompanyDBO;
 import org.isotope.jfp.common.weixin.WeixinService;
 import org.isotope.jfp.framework.common.CommonChannelConfig;
+import org.isotope.jfp.mpc.weixin.beans.WeiXinCompanyGroupReceverBean;
+import org.isotope.jfp.mpc.weixin.token.beans.WeiXinCompanyGroupTokenBean;
 
 /**
  * 微信企业Token对接
@@ -14,7 +15,7 @@ import org.isotope.jfp.framework.common.CommonChannelConfig;
  * @since 3.3.1
  * @version 3.3.1.20160825
  */
-public class WeiXinCompanyTokenService extends CommonChannelConfig implements Runnable {
+public class WeiXinCompanyGroupTokenService extends CommonChannelConfig implements Runnable {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
@@ -23,11 +24,12 @@ public class WeiXinCompanyTokenService extends CommonChannelConfig implements Ru
 
 	WeixinService WeixinService_;
 	List<WeiXinCompanyDBO> list;
+
 	/**
 	 * 加载企业Token
 	 */
-	public void loadCompanyConfig() {
-		HashMap<String, String> comyany = new HashMap<String, String>();
-		list = WeixinService_.loadCompany(comyany);
+	public WeiXinCompanyGroupTokenBean loadCompanyConfig(WeiXinCompanyGroupReceverBean group) {
+		WeiXinCompanyGroupTokenBean comanyGroupToken = null;
+		return comanyGroupToken;
 	}
 }

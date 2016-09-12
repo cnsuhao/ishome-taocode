@@ -2,6 +2,7 @@ package org.isotope.jfp.mpc.weixin.beans;
 
 import java.io.File;
 
+import org.isotope.jfp.common.weixin.constants.ISWeixinConstants;
 import org.isotope.jfp.framework.beans.message.info.MessageValueBean;
 
 /**
@@ -12,13 +13,7 @@ import org.isotope.jfp.framework.beans.message.info.MessageValueBean;
  * @version 3.3.1.20160825
  *
  */
-public class WeiXinMessageValueBean extends MessageValueBean {
-
-	public static final String MEDIA_IMAGE = "image";
-	public static final String MEDIA_VOICE = "voice";
-	public static final String MEDIA_VIDEO = "video";
-	public static final String MEDIA_THUMB = "thumb";
-	public static final String MEDIA_FILE = "file";
+public class WeiXinMessageValueBean extends MessageValueBean implements ISWeixinConstants {
 
 	/**
 	 * 信息内容

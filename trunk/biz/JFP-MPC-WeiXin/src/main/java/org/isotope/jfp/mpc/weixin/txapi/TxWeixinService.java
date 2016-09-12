@@ -1,4 +1,4 @@
-package org.isotope.jfp.mpc.weixin.service.tx;
+package org.isotope.jfp.mpc.weixin.txapi;
 
 import java.io.File;
 import java.util.List;
@@ -22,7 +22,7 @@ import me.chanjar.weixin.cp.api.WxCpServiceImpl;
  * @version 3.3.1.20160825
  * 
  */
-public class TXWeixinService extends WxCpServiceImpl implements ISFrameworkConstants {
+public class TxWeixinService extends WxCpServiceImpl implements ISFrameworkConstants {
 
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 	public void setWxCpConfigStorage(WxCpConfigStorage wxConfigProvider) {
@@ -32,5 +32,9 @@ public class TXWeixinService extends WxCpServiceImpl implements ISFrameworkConst
 	public WxMediaUploadResult mediaUpload(String mediaType, File file) throws WxErrorException {
 		return super.mediaUpload( mediaType,  file);
 	}
+	
+//	public boolean sendMessage(){
+//		
+//	}
 	
 }
