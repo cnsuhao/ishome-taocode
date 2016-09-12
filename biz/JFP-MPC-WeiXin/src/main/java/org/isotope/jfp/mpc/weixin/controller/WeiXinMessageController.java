@@ -4,7 +4,7 @@ import javax.annotation.Resource;
 
 import org.isotope.jfp.framework.beans.common.RESTResultBean;
 import org.isotope.jfp.mpc.weixin.beans.WeiXinMessageValueBean;
-import org.isotope.jfp.mpc.weixin.service.MyWeixinMessageBusiness;
+import org.isotope.jfp.mpc.weixin.txapi.MyWeixinMessageBusiness;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;

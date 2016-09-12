@@ -1,11 +1,12 @@
-package org.isotope.jfp.mpc.weixin.service.txtoken;
+package org.isotope.jfp.mpc.weixin.token;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.isotope.jfp.common.weixin.WeixinService;
 import org.isotope.jfp.common.weixin.WeixinUserDBO;
 import org.isotope.jfp.framework.common.CommonChannelConfig;
+import org.isotope.jfp.mpc.weixin.beans.WeiXinUserReceverBean;
+import org.isotope.jfp.mpc.weixin.token.beans.WeiXinUserTokenBean;
 
 /**
  * 微信用户Token对接
@@ -27,8 +28,8 @@ public class WeiXinUserTokenService extends CommonChannelConfig implements Runna
 	/**
 	 * 加载用户Token
 	 */
-	public void loadCompanyConfig() {
-		HashMap<String, String> companyUser = new HashMap<String, String>();
-		list = WeixinService_.loadCompanyUser(companyUser);
+	public WeiXinUserTokenBean loadWeiXinUserToken(WeiXinUserReceverBean user) {
+		WeiXinUserTokenBean userToken = null;
+		return userToken;
 	}
 }

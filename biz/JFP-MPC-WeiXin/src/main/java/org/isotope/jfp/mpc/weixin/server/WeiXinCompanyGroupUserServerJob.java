@@ -12,6 +12,9 @@ import org.isotope.jfp.framework.common.CommonChannelConfig;
  */
 public class WeiXinCompanyGroupUserServerJob extends CommonChannelConfig {
 
+	/**
+	 * 基于变更时间进行监控，同步数据
+	 */
 	public void process() {
 		//获得全部企业
 		//获得企业所有班级
@@ -22,7 +25,15 @@ public class WeiXinCompanyGroupUserServerJob extends CommonChannelConfig {
 	/**
 	 * 加载企业微信号配置信息
 	 */
-	public void loadCompanyConfig() {
+	public void loadCompany() {
+
+	}
+	
+	public void loadCompanyGroup() {
+
+	}
+	
+	public void loadCompanyUser() {
 
 	}
 

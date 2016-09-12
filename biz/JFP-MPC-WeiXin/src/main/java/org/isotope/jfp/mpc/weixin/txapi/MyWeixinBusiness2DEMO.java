@@ -1,4 +1,4 @@
-package org.isotope.jfp.mpc.weixin.service.tx;
+package org.isotope.jfp.mpc.weixin.txapi;
 
 import java.io.File;
 import java.util.HashMap;

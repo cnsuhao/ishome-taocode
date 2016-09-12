@@ -1,6 +1,6 @@
 package org.isotope.jfp.mpc.weixin.beans;
 
-import org.isotope.jfp.framework.beans.message.info.CustomerSenderBean;
+import org.isotope.jfp.framework.beans.message.info.UserReceverBean;
 
 /**
  * 微信企业号组织信息
@@ -10,7 +10,7 @@ import org.isotope.jfp.framework.beans.message.info.CustomerSenderBean;
  * @version 3.3.1.20160825
  *
  */
-public class WeiXinCompanyGroupSenderBean extends CustomerSenderBean {
+public class WeiXinCompanyGroupReceverBean extends UserReceverBean {
 	/**
 	 * 企业ID
 	 */
