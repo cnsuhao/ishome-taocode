@@ -208,7 +208,7 @@
             AND term_id = #{termId}
         </if>
         <if test=" startTime != null and endTime != null "><!-- 开始时间 -->
-        	AND ((start_time BETWEEN #{startTime} and #{endTime})or(end_time BETWEEN #{startTime} and #{endTime}))
+        	AND ((start_time &lt;= #{startTime} and end_time &gt;= #{endTime}) OR ((start_time BETWEEN #{startTime} and #{endTime})or(end_time BETWEEN #{startTime} and #{endTime})))
         </if>
     </select>
 
