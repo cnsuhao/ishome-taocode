@@ -1,5 +1,7 @@
 package org.isotope.jfp.mpc.weixin.token.beans;
 
+import me.chanjar.weixin.cp.api.WxCpInMemoryConfigStorage;
+
 /**
  * 微信企业Token对接
  * 
@@ -7,5 +9,5 @@ package org.isotope.jfp.mpc.weixin.token.beans;
  * @since 3.3.1
  * @version 3.3.1.20160825
  */
-public class WeiXinCompanyTokenBean {
+public class WeiXinCompanyTokenBean extends WxCpInMemoryConfigStorage {
 }

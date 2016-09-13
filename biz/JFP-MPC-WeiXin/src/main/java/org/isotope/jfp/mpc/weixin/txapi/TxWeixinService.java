@@ -1,16 +1,9 @@
 package org.isotope.jfp.mpc.weixin.txapi;
 
-import java.io.File;
-import java.util.List;
-
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
-import org.isotope.jfp.mpc.weixin.beans.WeiXinMessageValueBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import me.chanjar.weixin.common.bean.result.WxMediaUploadResult;
-import me.chanjar.weixin.common.exception.WxErrorException;
-import me.chanjar.weixin.common.util.http.MediaUploadRequestExecutor;
 import me.chanjar.weixin.cp.api.WxCpConfigStorage;
 import me.chanjar.weixin.cp.api.WxCpServiceImpl;
 
@@ -25,16 +18,9 @@ import me.chanjar.weixin.cp.api.WxCpServiceImpl;
 public class TxWeixinService extends WxCpServiceImpl implements ISFrameworkConstants {
 
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
-	public void setWxCpConfigStorage(WxCpConfigStorage wxConfigProvider) {
+
+	public TxWeixinService(WxCpConfigStorage wxConfigProvider) {
 		super.setWxCpConfigStorage(wxConfigProvider);
 	}
-	
-	public WxMediaUploadResult mediaUpload(String mediaType, File file) throws WxErrorException {
-		return super.mediaUpload( mediaType,  file);
-	}
-	
-//	public boolean sendMessage(){
-//		
-//	}
-	
+
 }

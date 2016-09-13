@@ -3,10 +3,17 @@ package org.isotope.jfp.mpc.weixin.business;
 import javax.annotation.Resource;
 
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
+import org.isotope.jfp.mpc.weixin.beans.WeiXinCompanyGroupReceverBean;
+import org.isotope.jfp.mpc.weixin.beans.WeiXinCompanySenderBean;
 import org.isotope.jfp.mpc.weixin.beans.WeiXinMessageValueBean;
+import org.isotope.jfp.mpc.weixin.beans.WeiXinUserReceverBean;
+import org.isotope.jfp.mpc.weixin.token.WeiXinCompanyGroupTokenService;
+import org.isotope.jfp.mpc.weixin.token.WeiXinCompanyTokenService;
+import org.isotope.jfp.mpc.weixin.token.WeiXinUserTokenService;
 import org.isotope.jfp.mpc.weixin.token.beans.WeiXinCompanyGroupTokenBean;
 import org.isotope.jfp.mpc.weixin.token.beans.WeiXinCompanyTokenBean;
 import org.isotope.jfp.mpc.weixin.token.beans.WeiXinUserTokenBean;
+import org.isotope.jfp.mpc.weixin.token.beans.WeixinMeassageTokenBean;
 import org.isotope.jfp.mpc.weixin.txapi.TxWeixinService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,38 +29,123 @@ import org.slf4j.LoggerFactory;
 public class MyWeixinBusiness implements ISFrameworkConstants {
 
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
-	
+
 	@Resource
-	TxWeixinService txWeixinService;
+	WeiXinCompanyTokenService weixinCompanyTokenService;// 企业Token
+	@Resource
+	WeiXinCompanyGroupTokenService weixinCompanyGroupTokenService;
+	@Resource
+	WeiXinUserTokenService weixinUserTokenService;// 用户Token
 
-	public void sendText(WeiXinMessageValueBean message, WeiXinCompanyTokenBean comany, WeiXinCompanyGroupTokenBean group, WeiXinUserTokenBean user) {
-		// TODO Auto-generated method stub
-		
+	public void init() {
 	}
 
-	public void sendImage(WeiXinMessageValueBean message, WeiXinCompanyTokenBean comany, WeiXinCompanyGroupTokenBean group, WeiXinUserTokenBean user) {
-		// TODO Auto-generated method stub
-		
+	/**
+	 * 消息发送
+	 * 
+	 * @param messageValue
+	 * @param comany
+	 * @param group
+	 *            接收用户组，与User是二选一关系
+	 * @param user
+	 *            接收用户，与Group是二选一关系
+	 */
+
+	public String sendText(WeiXinMessageValueBean messageValue, WeiXinCompanySenderBean sender, WeiXinCompanyGroupReceverBean groupRecever, WeiXinUserReceverBean userRecever) {
+		// 获得微信Token信息
+		WeixinMeassageTokenBean message = new WeixinMeassageTokenBean();
+		WeiXinCompanyTokenBean comany = weixinCompanyTokenService.loadCompanyToken(sender);
+		WeiXinCompanyGroupTokenBean group = weixinCompanyGroupTokenService.loadCompanyGroupToken(groupRecever);
+		if (group != null) {
+
+		}
+		WeiXinUserTokenBean user = weixinUserTokenService.loadUserToken(userRecever);
+		if (user != null) {
+
+		}
+
+		return ZERO;
 	}
 
-	public void sendVoice(WeiXinMessageValueBean message, WeiXinCompanyTokenBean comany, WeiXinCompanyGroupTokenBean group, WeiXinUserTokenBean user) {
-		// TODO Auto-generated method stub
-		
+	public String sendImage(WeiXinMessageValueBean messageValue, WeiXinCompanySenderBean sender, WeiXinCompanyGroupReceverBean groupRecever, WeiXinUserReceverBean userRecever) {
+		// 获得微信Token信息
+		WeixinMeassageTokenBean message = new WeixinMeassageTokenBean();
+		WeiXinCompanyTokenBean comany = weixinCompanyTokenService.loadCompanyToken(sender);
+		WeiXinCompanyGroupTokenBean group = weixinCompanyGroupTokenService.loadCompanyGroupToken(groupRecever);
+		TxWeixinService txWeixinService = new TxWeixinService(comany);
+		if (group != null) {
+
+		}
+		WeiXinUserTokenBean user = weixinUserTokenService.loadUserToken(userRecever);
+		if (user != null) {
+
+		}
+
+		return ZERO;
 	}
 
-	public void sendVideo(WeiXinMessageValueBean message, WeiXinCompanyTokenBean comany, WeiXinCompanyGroupTokenBean group, WeiXinUserTokenBean user) {
-		// TODO Auto-generated method stub
-		
+	public String sendVoice(WeiXinMessageValueBean messageValue, WeiXinCompanySenderBean sender, WeiXinCompanyGroupReceverBean groupRecever, WeiXinUserReceverBean userRecever) {
+		// 获得微信Token信息
+		WeixinMeassageTokenBean message = new WeixinMeassageTokenBean();
+		WeiXinCompanyTokenBean comany = weixinCompanyTokenService.loadCompanyToken(sender);
+		WeiXinCompanyGroupTokenBean group = weixinCompanyGroupTokenService.loadCompanyGroupToken(groupRecever);
+		if (group != null) {
+
+		}
+		WeiXinUserTokenBean user = weixinUserTokenService.loadUserToken(userRecever);
+		if (user != null) {
+
+		}
+
+		return ZERO;
 	}
 
-	public void sendThumb(WeiXinMessageValueBean message, WeiXinCompanyTokenBean comany, WeiXinCompanyGroupTokenBean group, WeiXinUserTokenBean user) {
-		// TODO Auto-generated method stub
-		
+	public String sendVideo(WeiXinMessageValueBean messageValue, WeiXinCompanySenderBean sender, WeiXinCompanyGroupReceverBean groupRecever, WeiXinUserReceverBean userRecever) {
+		// 获得微信Token信息
+		WeixinMeassageTokenBean message = new WeixinMeassageTokenBean();
+		WeiXinCompanyTokenBean comany = weixinCompanyTokenService.loadCompanyToken(sender);
+		WeiXinCompanyGroupTokenBean group = weixinCompanyGroupTokenService.loadCompanyGroupToken(groupRecever);
+		if (group != null) {
+
+		}
+		WeiXinUserTokenBean user = weixinUserTokenService.loadUserToken(userRecever);
+		if (user != null) {
+
+		}
+
+		return ZERO;
 	}
 
-	public void sendFile(WeiXinMessageValueBean message, WeiXinCompanyTokenBean comany, WeiXinCompanyGroupTokenBean group, WeiXinUserTokenBean user) {
-		// TODO Auto-generated method stub
-		
+	public String sendThumb(WeiXinMessageValueBean messageValue, WeiXinCompanySenderBean sender, WeiXinCompanyGroupReceverBean groupRecever, WeiXinUserReceverBean userRecever) {
+		// 获得微信Token信息
+		WeixinMeassageTokenBean message = new WeixinMeassageTokenBean();
+		WeiXinCompanyTokenBean comany = weixinCompanyTokenService.loadCompanyToken(sender);
+		WeiXinCompanyGroupTokenBean group = weixinCompanyGroupTokenService.loadCompanyGroupToken(groupRecever);
+		if (group != null) {
+
+		}
+		WeiXinUserTokenBean user = weixinUserTokenService.loadUserToken(userRecever);
+		if (user != null) {
+
+		}
+
+		return ZERO;
 	}
-	
+
+	public String sendFile(WeiXinMessageValueBean messageValue, WeiXinCompanySenderBean sender, WeiXinCompanyGroupReceverBean groupRecever, WeiXinUserReceverBean userRecever) {
+		// 获得微信Token信息
+		WeixinMeassageTokenBean message = new WeixinMeassageTokenBean();
+		WeiXinCompanyTokenBean comany = weixinCompanyTokenService.loadCompanyToken(sender);
+		WeiXinCompanyGroupTokenBean group = weixinCompanyGroupTokenService.loadCompanyGroupToken(groupRecever);
+		if (group != null) {
+
+		}
+		WeiXinUserTokenBean user = weixinUserTokenService.loadUserToken(userRecever);
+		if (user != null) {
+
+		}
+
+		return ZERO;
+	}
+
 }

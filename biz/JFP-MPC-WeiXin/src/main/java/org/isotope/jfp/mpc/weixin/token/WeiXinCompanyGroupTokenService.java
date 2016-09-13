@@ -7,6 +7,7 @@ import org.isotope.jfp.common.weixin.WeixinService;
 import org.isotope.jfp.framework.common.CommonChannelConfig;
 import org.isotope.jfp.mpc.weixin.beans.WeiXinCompanyGroupReceverBean;
 import org.isotope.jfp.mpc.weixin.token.beans.WeiXinCompanyGroupTokenBean;
+import org.springframework.stereotype.Service;
 
 /**
  * 微信企业Token对接
@@ -15,6 +16,7 @@ import org.isotope.jfp.mpc.weixin.token.beans.WeiXinCompanyGroupTokenBean;
  * @since 3.3.1
  * @version 3.3.1.20160825
  */
+@Service
 public class WeiXinCompanyGroupTokenService extends CommonChannelConfig implements Runnable {
 	@Override
 	public void run() {
@@ -28,7 +30,8 @@ public class WeiXinCompanyGroupTokenService extends CommonChannelConfig implemen
 	/**
 	 * 加载企业Token
 	 */
-	public WeiXinCompanyGroupTokenBean loadCompanyConfig(WeiXinCompanyGroupReceverBean group) {
+	public WeiXinCompanyGroupTokenBean loadCompanyGroupToken(WeiXinCompanyGroupReceverBean group) {
+		if(group==null)return null;
 		WeiXinCompanyGroupTokenBean comanyGroupToken = null;
 		return comanyGroupToken;
 	}
