@@ -321,7 +321,7 @@ public class FileImageControl extends MyContentTypeSupport {
 	
 	@RequestMapping(value = "/file/upload", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean fileUploadFtp(@RequestParam("file") MultipartFile file,String token, String type, HttpServletRequest request, HttpServletResponse response) throws Exception{
+	public RESTResultBean fileUploadFtp(@RequestParam("resource") MultipartFile file,String token, String type, HttpServletRequest request, HttpServletResponse response) throws Exception{
 		RESTResultBean tb = new RESTResultBean();
 		logger.debug(token);
 		if (UserCacheHelper.checkUser(token) == null) {
