@@ -28,11 +28,18 @@
 	<bean class='org.isotope.jfp.framework.utils.FTPUtil'>
 		<!-- <property name='markPic' value='/resources/images/noImg.png' />
 		<property name='defaultPic' value='D:/File/noImg.png' /> -->
-		<property name='fileUri' value='D:/File' />
-		<property name='serverIp' value='192.168.1.57' />
+		<!-- <property name='fileUri' value='D:/File' /> -->
+<!-- 	<property name='serverIp' value='192.168.1.57' />
 		<property name='serverPort' value='21' />
 		<property name='serverUser' value='cnmmip' />
-		<property name='serverUserPassword' value='zaq12wsx' />
+		<property name='serverUserPassword' value='zaq12wsx' /> -->
+		<property name='serverIp' value='115.29.198.242' />
+		<property name='serverPort' value='21' />
+		<property name='serverUser' value='imager' />
+		<property name='serverUserPasswordFirst' value='qxy395131' />
+		<property name='serverUserSecond' value='resource' />
+		<property name='serverUserPasswordSecond' value='qxy528923' />
+		<property name='serverFileUri' value='http://www.1000xyun.com/upload' />		
 		<!--水印 -->
 		<!-- <property name='doMark' value='false' /> -->
 		<!--压缩 -->
