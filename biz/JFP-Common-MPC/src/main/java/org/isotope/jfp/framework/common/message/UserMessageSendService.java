@@ -11,7 +11,6 @@ import org.isotope.jfp.framework.beans.message.info.UserReceverBean;
 import org.isotope.jfp.framework.common.CommonChannelConfig;
 import org.isotope.jfp.framework.constants.pub.ISPushConstant;
 import org.isotope.jfp.framework.support.IMessageSendSupport;
-import org.isotope.jfp.framework.support.common.ISMSSupport;
 
 import com.alibaba.fastjson.JSON;
 
@@ -25,7 +24,7 @@ import com.alibaba.fastjson.JSON;
  */
 public class UserMessageSendService extends CommonChannelConfig implements IMessageSendSupport, ISPushConstant {
 	public UserMessageSendService() {
-		this(ISMSSupport.CONFIG_KEY);
+		this(PUSH_CHANNEL);
 	}
 
 	public UserMessageSendService(String key) {
@@ -55,10 +54,7 @@ public class UserMessageSendService extends CommonChannelConfig implements IMess
 		CustomerSenderBean sender = new CustomerSenderBean();
 		MessageValueBean message = new MessageValueBean();
 		UserReceverBean recever = new UserReceverBean();
-		
-		
-		
-		
+
 		messageBean.setSender(sender);
 		messageBean.setRecever(recever);
 		messageBean.setMessage(message);

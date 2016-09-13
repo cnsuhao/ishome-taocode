@@ -58,7 +58,7 @@ public abstract class AMessagePushGatewaySupport extends AMessageChannelServiceT
 	 * @param message
 	 * @return
 	 */
-	public abstract RESTResultBean push(MessageInfoBean message);
+	public abstract RESTResultBean push(MessageInfoBean messageInfo);
 
 	/**
 	 * 启动监听
@@ -138,6 +138,7 @@ public abstract class AMessagePushGatewaySupport extends AMessageChannelServiceT
 		if (ZERO.equals(result.getCode())) {
 			return true;
 		}
+		logger.error(">>>>>信息推送服务处理失败.....push......"+result);
 		return false;
 	}
 
