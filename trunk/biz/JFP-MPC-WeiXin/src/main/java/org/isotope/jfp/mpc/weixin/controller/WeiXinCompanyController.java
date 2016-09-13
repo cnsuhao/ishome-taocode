@@ -3,7 +3,7 @@ package org.isotope.jfp.mpc.weixin.controller;
 import javax.annotation.Resource;
 
 import org.isotope.jfp.framework.beans.common.RESTResultBean;
-import org.isotope.jfp.mpc.weixin.service.MyWeixinCompanyBusiness;
+import org.isotope.jfp.mpc.weixin.service.MyWeixinCompanyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class WeiXinCompanyController {
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Resource
-	MyWeixinCompanyBusiness MyWeixinCompanyBusiness_;
+	MyWeixinCompanyService MyWeixinCompanyBusiness_;
 
 	/**
 	 * 增加一个企业（数据来源于DB）

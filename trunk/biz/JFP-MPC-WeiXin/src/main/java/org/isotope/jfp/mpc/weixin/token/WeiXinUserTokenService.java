@@ -7,6 +7,7 @@ import org.isotope.jfp.common.weixin.WeixinUserDBO;
 import org.isotope.jfp.framework.common.CommonChannelConfig;
 import org.isotope.jfp.mpc.weixin.beans.WeiXinUserReceverBean;
 import org.isotope.jfp.mpc.weixin.token.beans.WeiXinUserTokenBean;
+import org.springframework.stereotype.Service;
 
 /**
  * 微信用户Token对接
@@ -15,6 +16,7 @@ import org.isotope.jfp.mpc.weixin.token.beans.WeiXinUserTokenBean;
  * @since 3.3.1
  * @version 3.3.1.20160825
  */
+@Service
 public class WeiXinUserTokenService extends CommonChannelConfig implements Runnable {
 	@Override
 	public void run() {
@@ -28,7 +30,8 @@ public class WeiXinUserTokenService extends CommonChannelConfig implements Runna
 	/**
 	 * 加载用户Token
 	 */
-	public WeiXinUserTokenBean loadWeiXinUserToken(WeiXinUserReceverBean user) {
+	public WeiXinUserTokenBean loadUserToken(WeiXinUserReceverBean user) {
+		if(user==null)return null;
 		WeiXinUserTokenBean userToken = null;
 		return userToken;
 	}

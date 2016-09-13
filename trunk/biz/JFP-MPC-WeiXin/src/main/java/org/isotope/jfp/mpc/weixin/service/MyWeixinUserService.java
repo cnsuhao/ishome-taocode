@@ -6,35 +6,47 @@ import org.isotope.jfp.common.weixin.WeixinService;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 /**
  * 微信数据管理服务<br>
- * 企业信息
+ * 企业用户信息
+ * 
  * @author spookfcy
  * @since 3.3.1
  * @version 3.3.1.20160825
  * 
  */
-public class MyWeixinCompanyBusiness implements ISFrameworkConstants {
+@Service
+public class MyWeixinUserService implements ISFrameworkConstants {
 
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
-
 	@Resource
 	WeixinService WeixinService_;
 	@Resource
 	WeixinService TXWeixinService_;
 
-	public Object companyIdSync(String companyId) {
+	public Object companyIdUserIdAdd(String companyId, String userId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Object companyIdDelete(String companyId) {
+	public Object loadCompanyId(String companyId, String userId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Object companyIdAdd(String companyId) {
+	public Object companyIdGroupIdUserIdAdd(String companyId, String groupId, String userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object companyIdGroupIdUserIdDelete(String companyId, String groupId, String userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object companyIdUserIdSync(String companyId, String userId) {
 		// TODO Auto-generated method stub
 		return null;
 	}

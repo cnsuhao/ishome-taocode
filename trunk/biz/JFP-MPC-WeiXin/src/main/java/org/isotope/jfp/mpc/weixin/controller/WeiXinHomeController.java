@@ -4,7 +4,7 @@ import javax.annotation.Resource;
 
 import org.isotope.jfp.framework.beans.common.RESTResultBean;
 import org.isotope.jfp.framework.utils.DateHelper;
-import org.isotope.jfp.mpc.weixin.service.MyWeixinCompanyBusiness;
+import org.isotope.jfp.mpc.weixin.service.MyWeixinCompanyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class WeiXinHomeController {
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Resource
-	MyWeixinCompanyBusiness WinxinBusiness_;
+	MyWeixinCompanyService WinxinBusiness_;
 
 	/**
 	 * 微信回调地址

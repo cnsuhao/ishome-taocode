@@ -4,19 +4,22 @@ import javax.annotation.Resource;
 
 import org.isotope.jfp.common.weixin.WeixinService;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
+import org.isotope.jfp.mpc.weixin.beans.WeiXinMessageValueBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 /**
  * 微信数据管理服务<br>
- * 企业用户信息
+ * 消息信息
  * 
  * @author spookfcy
  * @since 3.3.1
  * @version 3.3.1.20160825
  * 
  */
-public class MyWeixinUserBusiness implements ISFrameworkConstants {
+@Service
+public class MyWeixinMessageService implements ISFrameworkConstants {
 
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Resource
@@ -24,27 +27,17 @@ public class MyWeixinUserBusiness implements ISFrameworkConstants {
 	@Resource
 	WeixinService TXWeixinService_;
 
-	public Object companyIdUserIdAdd(String companyId, String userId) {
+	public String sendToCompanyId(String companyId, WeiXinMessageValueBean message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Object loadCompanyId(String companyId, String userId) {
+	public String sendToCompanyIdGroupId(String companyId, String groupId, WeiXinMessageValueBean message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Object companyIdGroupIdUserIdAdd(String companyId, String groupId, String userId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Object companyIdGroupIdUserIdDelete(String companyId, String groupId, String userId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Object companyIdUserIdSync(String companyId, String userId) {
+	public String sendToCompanyIdUserId(String companyId, String userId, WeiXinMessageValueBean message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
