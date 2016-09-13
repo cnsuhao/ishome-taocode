@@ -29,7 +29,7 @@ import org.isotope.jfp.framework.utils.token.UserCacheHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -45,16 +45,9 @@ import com.alibaba.fastjson.JSON;
  * @author 001745
  *
  */
+@Controller
 public class FileImageControl extends MyContentTypeSupport {
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
-	/**
-	 * 默认图片
-	 */
-	private String defaultPic = "";
-
-	public void setDefaultPic(String defaultPic) {
-		this.defaultPic = defaultPic;
-	}
 
 	/**
 	 * 开启水印
@@ -76,10 +69,6 @@ public class FileImageControl extends MyContentTypeSupport {
 	 * 百分比
 	 */
 	public float per = 0.3F;
-	/**
-	 * 水印图片
-	 */
-	private Resource markPic = null;
 
 	@Autowired
 	FTPUtil FTPUtil_;
@@ -110,9 +99,9 @@ public class FileImageControl extends MyContentTypeSupport {
 		// 水印
 		if (doMark) {
 			if (mark == MARK_TEXT) {
-				input = ImageMarkLogoHelper.markImageByIcon(input, new ImageIcon(markPic.getURL()));
+				input = ImageMarkLogoHelper.markImageByIcon(input, new ImageIcon(FTPUtil_.getMarkPic().getURL()));
 			} else if (mark == MARK_IMAGE) {
-				input = ImageMarkLogoHelper.markImageByIcon(input, new ImageIcon(markPic.getURL()));
+				input = ImageMarkLogoHelper.markImageByIcon(input, new ImageIcon(FTPUtil_.getMarkPic().getURL()));
 			} else {
 
 			}
@@ -145,7 +134,7 @@ public class FileImageControl extends MyContentTypeSupport {
 			OutputStream out = response.getOutputStream();
 			FileInputStream in;
 
-			in = new FileInputStream(defaultPic);
+			in = new FileInputStream(FTPUtil_.getDefaultPic());
 
 			byte[] buffer = new byte[1024];
 			int n = 0;
@@ -185,13 +174,13 @@ public class FileImageControl extends MyContentTypeSupport {
 			FileInputStream in;
 			if (EmptyHelper.isEmpty(id)) {
 				getResponseContextImageType(response);
-				in = new FileInputStream(defaultPic);
+				in = new FileInputStream(FTPUtil_.getDefaultPic());
 			} else {
 				try {
 					in = new FileInputStream(FTPUtil_.getFileUri(id));
 					getResponseContextType(response, id);
 				} catch (Exception e) {
-					in = new FileInputStream(defaultPic);
+					in = new FileInputStream(FTPUtil_.getDefaultPic());
 				}
 			}
 			byte[] buffer = new byte[1024];
