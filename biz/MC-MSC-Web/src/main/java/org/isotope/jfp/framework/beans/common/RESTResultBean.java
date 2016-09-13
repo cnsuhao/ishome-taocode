@@ -55,23 +55,23 @@ public class RESTResultBean extends TokenBean implements ISFrameworkConstants {
 		this.data = data;
 	}
 
-	////////////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////覆盖框架内容///////////////////////////////////////
 
 	/**
-	 * @deprecated
+	 * 设定返回值
 	 */
 	public void setCode(String resultCode) {
 		this.status = Integer.parseInt(resultCode);
 	}
 	/**
-	 * @deprecated
+	 * 设定返回信息
 	 */
 	public void setMessage(String resultMsg) {
 		this.info = resultMsg;
 	}
 
 	/**
-	 * @deprecated
+	 * 设定返回对象
 	 */
 	public void setResult(Object result) {
 		this.data = result;
