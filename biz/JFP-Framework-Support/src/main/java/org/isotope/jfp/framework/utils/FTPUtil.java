@@ -66,7 +66,7 @@ public class FTPUtil implements ISFrameworkConstants {
 			if (uploadFile(filePath[1], filePath[2], file.getInputStream(),type) == true){
 //				return filePath[0];
 				if (ZERO.equals(type)) {
-					return SERVER_FILE_URI+filePath[1]+filePath[2];
+					return serverFileUri+filePath[1]+filePath[2];
 				} else {
 					return filePath[1]+filePath[2];
 				}
@@ -127,18 +127,19 @@ public class FTPUtil implements ISFrameworkConstants {
 	 * @throws Exception 
 	 */
 	public boolean uploadFile(String path, String filename, InputStream input,String type) throws Exception {
-		String serverIp = SERVER_IP;
-		int serverPort = SERVER_PORT;
+//		String serverIp = SERVER_IP;
+//		int serverPort = SERVER_PORT;
 //		String savingType = "cdnFile";
-		if (ZERO.equals(type)) {			
-			String serverUser = SERVER_USER_FIRST;
-			String serverUserPassword = SERVER_USER_PASSWORD_FIRST;
-			return uploadFile(serverIp, serverPort, serverUser, serverUserPassword, path, filename, input);
+		if (ZERO.equals(type)) {
+			
+//			String serverUser = SERVER_USER_FIRST;
+//			String serverUserPassword = SERVER_USER_PASSWORD_FIRST;
+			return uploadFile(serverIp, serverPort, serverUser, serverUserPasswordFirst, path, filename, input);
 			
 		} else {
-			String serverUser = SERVER_USER_SECOND;
-			String serverUserPassword = SERVER_USER_PASSWORD_SECOND;
-			return uploadFile(serverIp, serverPort, serverUser, serverUserPassword, path, filename, input);
+//			String serverUser = SERVER_USER_SECOND;
+//			String serverUserPassword = SERVER_USER_PASSWORD_SECOND;
+			return uploadFile(serverIp, serverPort, serverUserSecond, serverUserPasswordSecond, path, filename, input);
 		}
 	}
 
@@ -246,12 +247,57 @@ public class FTPUtil implements ISFrameworkConstants {
 //	private String serverUser = "imager";
 	private String serverUser ;
 	/**
-	 * FTP服务器密码
+	 * FTP服务器第一个密码
 	 */
 //	private String serverUserPassword = "123456";
 //	private String serverUserPassword = "qftp";
 //	private String serverUserPassword = "mkq87298233";
-	private String serverUserPassword ;
+	private String serverUserPasswordFirst ;
+	/**
+	 * FTP服务器第二个用户名
+	 */
+	private String serverUserSecond ;
+	/**
+	 * FTP服务器第二个密码
+	 */
+	private String serverUserPasswordSecond ;
+	/**
+	 * FTP服务器网址
+	 */
+	private String serverFileUri ;
+
+	public String getServerUserPasswordFirst() {
+		return serverUserPasswordFirst;
+	}
+
+	public void setServerUserPasswordFirst(String serverUserPasswordFirst) {
+		this.serverUserPasswordFirst = serverUserPasswordFirst;
+	}
+
+	public String getServerUserSecond() {
+		return serverUserSecond;
+	}
+
+	public void setServerUserSecond(String serverUserSecond) {
+		this.serverUserSecond = serverUserSecond;
+	}
+
+	public String getServerUserPasswordSecond() {
+		return serverUserPasswordSecond;
+	}
+
+	public void setServerUserPasswordSecond(String serverUserPasswordSecond) {
+		this.serverUserPasswordSecond = serverUserPasswordSecond;
+	}
+
+	public String getServerFileUri() {
+		return serverFileUri;
+	}
+
+	public void setServerFileUri(String serverFileUri) {
+		this.serverFileUri = serverFileUri;
+	}
+
 	public String getFileUri() {
 		return fileUri;
 	}
@@ -288,12 +334,6 @@ public class FTPUtil implements ISFrameworkConstants {
 		this.serverUser = serverUser;
 	}
 
-	public String getServerUserPassword() {
-		return serverUserPassword;
-	}
 
-	public void setServerUserPassword(String serverUserPassword) {
-		this.serverUserPassword = serverUserPassword;
-	}
 
 }
