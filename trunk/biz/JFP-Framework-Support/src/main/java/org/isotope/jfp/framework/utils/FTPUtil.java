@@ -9,9 +9,9 @@ import java.io.InputStream;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
-import org.mybatis.spring.batch.MyBatisBatchItemWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;
 
 
@@ -25,6 +25,34 @@ import org.springframework.web.multipart.MultipartFile;
  */
 public class FTPUtil implements ISFrameworkConstants {
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
+	
+
+	/**
+	 * 默认图片
+	 */
+	private String defaultPic = "";
+
+	/**
+	 * 水印图片
+	 */
+	private Resource markPic = null;
+	
+	public String getDefaultPic() {
+		return defaultPic;
+	}
+
+	public void setDefaultPic(String defaultPic) {
+		this.defaultPic = defaultPic;
+	}
+
+	public Resource getMarkPic() {
+		return markPic;
+	}
+
+	public void setMarkPic(Resource markPic) {
+		this.markPic = markPic;
+	}
+
 	/**
 	 * 文件上传
 	 *
