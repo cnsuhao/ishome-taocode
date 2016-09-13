@@ -56,28 +56,25 @@ public class RESTResultBean extends TokenBean implements ISFrameworkConstants {
 	}
 
 	////////////////////////////////////////////////////////////////////////////////
-	protected String code = null;
-	protected String message = null;
-	protected Object result = null;
 
 	/**
 	 * @deprecated
 	 */
 	public void setCode(String resultCode) {
-		this.code = resultCode;
+		this.status = Integer.parseInt(resultCode);
 	}
 	/**
 	 * @deprecated
 	 */
 	public void setMessage(String resultMsg) {
-		this.message = resultMsg;
+		this.info = resultMsg;
 	}
 
 	/**
 	 * @deprecated
 	 */
 	public void setResult(Object result) {
-		this.result = result;
+		this.data = result;
 	}
 
 }
