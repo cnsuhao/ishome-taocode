@@ -1,5 +1,6 @@
 package com.mcookies.qxy.biz.login;
 
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,14 +21,21 @@ import org.isotope.jfp.framework.common.sms.UserSMSSendServiceImpl;
 import org.isotope.jfp.framework.security.code.SecurityCodeHelper;
 import org.isotope.jfp.framework.support.MyControllerSupport;
 import org.isotope.jfp.framework.utils.DateHelper;
+import org.isotope.jfp.framework.utils.EmptyHelper;
+import org.isotope.jfp.framework.utils.FTPUtil;
 import org.isotope.jfp.framework.utils.HttpRequestHelper;
 import org.isotope.jfp.framework.utils.token.UserCacheHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.mcookies.qxy.common.School.SchoolDBO;
 import com.mcookies.qxy.common.School.SchoolService;
@@ -299,7 +307,7 @@ public class LoginController extends MyControllerSupport {
 				for (UStudentParentPVO uStudentParentPVO2 : uStudentParentPVOs) {
 					Map<String, Object> data2 = new HashMap<String, Object>();
 //					JSONObject data2 = new JSONObject();
-					data2.put("studentName", uStudentParentPVO2.getCid());
+					data2.put("studentName", uStudentParentPVO2.getClassName());
 					data2.put("studentId", uStudentParentPVO2.getStudentId());
 					data2.put("cid", uStudentParentPVO2.getCid());
 					data2.put("className", uStudentParentPVO2.getClassName());
@@ -672,5 +680,78 @@ public class LoginController extends MyControllerSupport {
 		return value;
 	}
 	
+	/**
+	 * 文件上传
+	 * 
+	 * @param productId
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/file/upload66", method ={RequestMethod.GET, RequestMethod.POST}, produces = "application/json;charset=utf-8")
+	
+	public RESTResultBean fileUploadPOST66(@RequestParam(value = "savingType")  String savingType,  HttpServletRequest request, HttpServletResponse response) throws Exception {
+		RESTResultBean tb = new RESTResultBean();
+//		request.getPathInfo("savingType");
+		 String savingType1 = request.getParameter(savingType);
+//		String savingType = "cdnFile";
+//		String savingType = "File";
+//		String token = "1212403_94_05_76_17_58_49_9";
+//		UserBean userBean = UserCacheHelper.checkUser(token);
+//		RESTResultBean restResultBean = FileImageControl.fileUploadPOST(token, file2, request, response);
+		FTPUtil ft = new FTPUtil();
+//		String filePath = ft.uploadFile(file2,savingType);
+//		logger.debug(token);
+//		if (UserCacheHelper.checkUser(token) == null) {
+//			OutputStream out = response.getOutputStream();
+//			tb.setMessage("用户登录失败");
+//			out.write(JSON.toJSONString(tb).getBytes("UTF-8"));
+//			out.flush();
+//			out.close();
+//			return null;
+//		}
+//		logger.debug(file2.getOriginalFilename());
+//		 file2.transferTo(new File(file2.getOriginalFilename()));
+//		String filePath = FTPUtil_.uploadFile(file);
+//		if (EmptyHelper.isEmpty(filePath)) {
+//			tb.setCode("1");
+//		} else {
+//			tb.setResult(filePath);
+//		}
+		logger.debug(tb.toString());
+		return tb;
+	}
+	
+	/**
+	 * 
+	 * @param file ftp文件上传。
+	 * @param type "0"表示需 要cdn加速,"1表示不需要加速的文件"
+	 * @return  /file/upload?type=[type]&token=[token]
+	 * @throws Exception
+	 */
+	
+	@RequestMapping(value = "/file/upload88", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public RESTResultBean fileUploadFtp(@RequestParam("fileName") MultipartFile file,String token, String type, HttpServletRequest request, HttpServletResponse response) throws Exception{
+		RESTResultBean tb = new RESTResultBean();
+		logger.debug(token);
+		if (UserCacheHelper.checkUser(token) == null) {
+			OutputStream out = response.getOutputStream();
+			tb.setMessage("用户登录失败");
+			out.write(JSON.toJSONString(tb).getBytes("UTF-8"));
+			out.flush();
+			out.close();
+			return null;
+		}
+		logger.debug(file.getOriginalFilename());
+		// file.transferTo(new File(file.getOriginalFilename()));
+		String filePath = new FTPUtil().uploadFile(file,type);
+		if (EmptyHelper.isEmpty(filePath)) {
+			tb.setCode("1");
+		} else {
+			tb.setResult(filePath);
+		}
+		logger.debug(tb.toString());
+		return tb;
+	}
 
 }
