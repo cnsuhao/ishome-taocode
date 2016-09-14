@@ -32,7 +32,16 @@ public class MySqlSessionFactorySupport extends SqlSessionFactoryBean {
 		}
 		super.setMapperLocations(mapperLocations);
 	}
-
+	
+	/**
+	 * 允许手动指定DBO来源
+	 * @param dboLocations
+	 */
+	public void setDBOLocations(Resource[] dboLocations) {
+		for (Resource r : dboLocations) {
+			getPath(r);
+		}
+	}
 	private ArrayList<Class<?>> typeAliasesList = new ArrayList<Class<?>> ();
 	
 	/**
@@ -61,7 +70,8 @@ public class MySqlSessionFactorySupport extends SqlSessionFactoryBean {
 			else if(uri.indexOf("classes/")>0)
 				uri = uri.substring(uri.indexOf("classes/") + 8);
 			uri = uri.replace(".xml", "DBO").replaceAll("/", ".");
-			typeAliasesList.add(Class.forName(uri));			
+			if(uri.indexOf("DBO")>0)
+				typeAliasesList.add(Class.forName(uri));			
 		} catch (Exception e) {
 			//System.out.println("Can't load class ==>>>"+e.getMessage());
 		}
