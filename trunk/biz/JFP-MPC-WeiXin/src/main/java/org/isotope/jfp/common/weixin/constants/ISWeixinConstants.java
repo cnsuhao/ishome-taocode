@@ -15,4 +15,10 @@ public interface ISWeixinConstants {
 	public static final String MEDIA_VIDEO = "video";
 	public static final String MEDIA_THUMB = "thumb";
 	public static final String MEDIA_FILE = "file";
+	
+	public static final String TOKEN_Company = "COMPANY:";
+	public static final String TOKEN_Group = "GROUP:";
+	public static final String TOKEN_User = "USER:";
+	
+	
 }

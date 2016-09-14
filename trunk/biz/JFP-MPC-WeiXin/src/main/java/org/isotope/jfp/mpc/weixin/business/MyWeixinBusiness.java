@@ -17,6 +17,7 @@ import org.isotope.jfp.mpc.weixin.token.beans.WeixinMeassageTokenBean;
 import org.isotope.jfp.mpc.weixin.txapi.TxWeixinService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 /**
  * 腾讯微信对接服务
@@ -26,6 +27,7 @@ import org.slf4j.LoggerFactory;
  * @version 3.3.1.20160825
  * 
  */
+@Service("MyWeixinBusiness")
 public class MyWeixinBusiness implements ISFrameworkConstants {
 
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -56,6 +58,7 @@ public class MyWeixinBusiness implements ISFrameworkConstants {
 		WeixinMeassageTokenBean message = new WeixinMeassageTokenBean();
 		WeiXinCompanyTokenBean comany = weixinCompanyTokenService.loadCompanyToken(sender);
 		WeiXinCompanyGroupTokenBean group = weixinCompanyGroupTokenService.loadCompanyGroupToken(groupRecever);
+		TxWeixinService txWeixinService = new TxWeixinService(comany);
 		if (group != null) {
 
 		}
@@ -89,6 +92,7 @@ public class MyWeixinBusiness implements ISFrameworkConstants {
 		WeixinMeassageTokenBean message = new WeixinMeassageTokenBean();
 		WeiXinCompanyTokenBean comany = weixinCompanyTokenService.loadCompanyToken(sender);
 		WeiXinCompanyGroupTokenBean group = weixinCompanyGroupTokenService.loadCompanyGroupToken(groupRecever);
+		TxWeixinService txWeixinService = new TxWeixinService(comany);
 		if (group != null) {
 
 		}
@@ -105,6 +109,7 @@ public class MyWeixinBusiness implements ISFrameworkConstants {
 		WeixinMeassageTokenBean message = new WeixinMeassageTokenBean();
 		WeiXinCompanyTokenBean comany = weixinCompanyTokenService.loadCompanyToken(sender);
 		WeiXinCompanyGroupTokenBean group = weixinCompanyGroupTokenService.loadCompanyGroupToken(groupRecever);
+		TxWeixinService txWeixinService = new TxWeixinService(comany);
 		if (group != null) {
 
 		}
@@ -121,6 +126,7 @@ public class MyWeixinBusiness implements ISFrameworkConstants {
 		WeixinMeassageTokenBean message = new WeixinMeassageTokenBean();
 		WeiXinCompanyTokenBean comany = weixinCompanyTokenService.loadCompanyToken(sender);
 		WeiXinCompanyGroupTokenBean group = weixinCompanyGroupTokenService.loadCompanyGroupToken(groupRecever);
+		TxWeixinService txWeixinService = new TxWeixinService(comany);
 		if (group != null) {
 
 		}
@@ -137,6 +143,7 @@ public class MyWeixinBusiness implements ISFrameworkConstants {
 		WeixinMeassageTokenBean message = new WeixinMeassageTokenBean();
 		WeiXinCompanyTokenBean comany = weixinCompanyTokenService.loadCompanyToken(sender);
 		WeiXinCompanyGroupTokenBean group = weixinCompanyGroupTokenService.loadCompanyGroupToken(groupRecever);
+		TxWeixinService txWeixinService = new TxWeixinService(comany);
 		if (group != null) {
 
 		}

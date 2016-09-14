@@ -31,11 +31,13 @@ public class WeiXinMessageValueBean extends MessageValueBean implements ISWeixin
 	/**
 	 * 媒体类型
 	 */
-	private String mediaType;
+	private String mediaType = MEDIA_TEXT;
+	
 	/**
 	 * 媒体文件
 	 */
 	private File mediaFile;
+	
 	/**
 	 * 媒体文件说明摘要<br>
 	 * (半角/符号)代表换行<br>
