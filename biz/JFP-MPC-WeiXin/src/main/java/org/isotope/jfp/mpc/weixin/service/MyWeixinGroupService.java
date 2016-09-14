@@ -4,6 +4,7 @@ import javax.annotation.Resource;
 
 import org.isotope.jfp.common.weixin.WeixinService;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
+import org.isotope.jfp.mpc.weixin.token.WeiXinCompanyGroupTokenService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -17,14 +18,14 @@ import org.springframework.stereotype.Service;
  * @version 3.3.1.20160825
  * 
  */
-@Service
+@Service("MyWeixinGroupService")
 public class MyWeixinGroupService implements ISFrameworkConstants {
 
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Resource
 	WeixinService WeixinService_;
 	@Resource
-	WeixinService TXWeixinService_;
+	WeiXinCompanyGroupTokenService WeiXinCompanyGroupTokenService_;
 
 	public Object companyIdGroupIdAdd(String companyId, String groupId) {
 		// TODO Auto-generated method stub
@@ -41,4 +42,8 @@ public class MyWeixinGroupService implements ISFrameworkConstants {
 		return null;
 	}
 
+	public Object companyIdGroupIdSync() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

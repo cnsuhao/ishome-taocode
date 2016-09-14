@@ -1,6 +1,9 @@
 package org.isotope.jfp.mpc.weixin.server;
 
-import org.isotope.jfp.framework.common.CommonChannelConfig;
+import org.isotope.jfp.framework.utils.BeanFactoryHelper;
+import org.isotope.jfp.mpc.weixin.service.MyWeixinCompanyService;
+import org.isotope.jfp.mpc.weixin.service.MyWeixinGroupService;
+import org.isotope.jfp.mpc.weixin.service.MyWeixinUserService;
 
 /**
  * 微信企业用户管理<br>
@@ -10,31 +13,29 @@ import org.isotope.jfp.framework.common.CommonChannelConfig;
  * @since 3.3.1
  * @version 3.3.1.20160825
  */
-public class WeiXinCompanyGroupUserServerJob extends CommonChannelConfig {
-
+public class WeiXinCompanyGroupUserServerJob {
 	/**
-	 * 基于变更时间进行监控，同步数据
-	 */
-	public void process() {
-		//获得全部企业
-		//获得企业所有班级
-		//获得班级全部家长
-		//同步到企业号
-	}
-
-	/**
-	 * 加载企业微信号配置信息
+	 * 加载全部企业微信号配置信息
 	 */
 	public void loadCompany() {
-
+		MyWeixinCompanyService company = BeanFactoryHelper.getBean(MyWeixinCompanyService.class.getSimpleName());
+		company.companyIdSync();
 	}
-	
+
+	/**
+	 * 加载全部企业微信号用户组配置信息
+	 */
 	public void loadCompanyGroup() {
-
+		MyWeixinGroupService group = BeanFactoryHelper.getBean(MyWeixinGroupService.class.getSimpleName());
+		group.companyIdGroupIdSync();
 	}
-	
-	public void loadCompanyUser() {
 
+	/**
+	 * 加载全部企业微信号用户配置信息
+	 */
+	public void loadCompanyUser() {
+		MyWeixinUserService user = BeanFactoryHelper.getBean(MyWeixinUserService.class.getSimpleName());
+		user.companyIdUserIdSync();
 	}
 
 }
