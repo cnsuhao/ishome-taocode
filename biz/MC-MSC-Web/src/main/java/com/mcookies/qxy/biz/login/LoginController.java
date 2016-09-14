@@ -209,16 +209,16 @@ public class LoginController extends MyControllerSupport {
 	 * 选择登录学校及角色接口
 	 * 
 	 * @param sid
-	 * @param userType
+	 * @param userType 登录角色（1-教师；2-家长；3-学生）
 	 * @param uid
+	 * @param id_type值默认为0（0-普通教师；1-系统管理员；2-学校管理员）
 	 * @return
 	 */
 	@RequestMapping(value = "/login/in", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	@Transactional
 	public RESTResultBean loginInPOST(@RequestBody String jsonparam) {
-		RESTResultBean rs = new RESTResultBean();///
-
+		RESTResultBean rs = new RESTResultBean();
 		try {
 			JSONObject param = JSONObject.parseObject(jsonparam);
 			String token = (String) param.get("token");
@@ -274,7 +274,8 @@ public class LoginController extends MyControllerSupport {
 				data.put("teacherName", teacherName);
 				data.put("phone", phone);
 				data.put("email", email);		
-				data.put("tid", tid);	
+				data.put("tid", tid);
+				data.put("idType", condition.getIdType()==null?0:condition.getIdType());
 			} else if ("2".equals(userType)) {
 				//得到父母信息
 				UParentDBO condition = new UParentDBO();
