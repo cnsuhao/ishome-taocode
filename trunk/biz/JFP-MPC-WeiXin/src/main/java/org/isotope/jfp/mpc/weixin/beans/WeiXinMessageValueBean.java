@@ -20,6 +20,23 @@ public class WeiXinMessageValueBean extends MessageValueBean implements ISWeixin
 	 */
 	private String message;
 
+	/**
+	 * 媒体类型
+	 */
+	private String mediaType = MEDIA_TEXT;
+
+	/**
+	 * 媒体文件
+	 */
+	private File mediaFile;
+
+	/**
+	 * 媒体文件说明摘要<br>
+	 * (半角/符号)代表换行<br>
+	 * 用户看到后是一个点击链接
+	 */
+	private String mediaDescription;
+
 	public String getMessage() {
 		return message;
 	}
@@ -27,23 +44,6 @@ public class WeiXinMessageValueBean extends MessageValueBean implements ISWeixin
 	public void setMessage(String message) {
 		this.message = message;
 	}
-
-	/**
-	 * 媒体类型
-	 */
-	private String mediaType = MEDIA_TEXT;
-	
-	/**
-	 * 媒体文件
-	 */
-	private File mediaFile;
-	
-	/**
-	 * 媒体文件说明摘要<br>
-	 * (半角/符号)代表换行<br>
-	 * 用户看到后是一个点击链接
-	 */
-	private String mediaDescription;
 
 	public String getMediaType() {
 		return mediaType;

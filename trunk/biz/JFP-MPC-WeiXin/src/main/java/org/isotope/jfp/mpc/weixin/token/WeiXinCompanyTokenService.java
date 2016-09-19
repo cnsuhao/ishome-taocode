@@ -28,19 +28,19 @@ public class WeiXinCompanyTokenService implements ISWeixinConstants {
 	ICacheService myCatch;
 
 	/**
-	 * 基于缓存加载企业Token
+	 * 基于缓存加载企业Token，由企业id+管理组凭证密钥为唯一标识
 	 */
 	public WeiXinCompanyTokenBean loadCompanyToken(WeiXinCompanySenderBean company) {
 		if (company == null)
 			return null;
 		myCatch.selectDB(9);
-		WeiXinCompanyTokenBean comanyToken = JSONObject.parseObject((String) myCatch.getObject(TOKEN_Company + company.getCompanyId(), false), WeiXinCompanyTokenBean.class);
+		WeiXinCompanyTokenBean comanyToken = JSONObject.parseObject((String) myCatch.getObject(TOKEN_Company + company.getCompanyId() + "&" + TOKEN_CorpSecret + company.getCorpSecret(), false), WeiXinCompanyTokenBean.class);
 		if (comanyToken == null) {
 			comanyToken = loadWeixinCompanyToken(company);
 			if (comanyToken == null) {
 				return null;
 			}
-			myCatch.putObject(TOKEN_Company + company.getCompanyId(), JSONObject.toJSONString(comanyToken), 0, false);
+			myCatch.putObject(TOKEN_Company + company.getCompanyId() + "&" + TOKEN_CorpSecret + company.getCorpSecret(), JSONObject.toJSONString(comanyToken), 0, false);
 		}
 		myCatch.init();
 		return comanyToken;

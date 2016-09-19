@@ -4,9 +4,9 @@ import javax.inject.Named;
 
 import org.isotope.jfp.framework.support.MyDataBaseObjectSupport;
 
-/** 微信企业号表 */
+/** 微信企业部门表 */
 @Named
-public class WeiXinCompanyGroupDBO extends MyDataBaseObjectSupport {
+public class WeiXinCompanyDeptDBO extends MyDataBaseObjectSupport {
 	/**
 	 * 数据id
 	 */
@@ -18,24 +18,24 @@ public class WeiXinCompanyGroupDBO extends MyDataBaseObjectSupport {
 	private Long sid = null;
 
 	/**
-	 * 用户组id
+	 * 用户部门id
 	 */
-	private Long gid = null;
+	private Long did = null;
 
 	/**
-	 * 用户组编号
+	 * 用户部门微信id
 	 */
-	private String groupNo = null;
+	private String deptWeixinId = null;
 
 	/**
-	 * 用户组名称
+	 * 用户部门名称
 	 */
-	private String groupName = null;
+	private String deptName = null;
 
 	/**
-	 * 用户组openId
+	 * 父部门ID
 	 */
-	private String openid = null;
+	private String parentId = null;
 
 	/**
 	 * 关注学校企业号ID
@@ -68,37 +68,37 @@ public class WeiXinCompanyGroupDBO extends MyDataBaseObjectSupport {
 	/**
 	 * 获取用户组id
 	 *
-	 * @return Gid 用户组id
+	 * @return id 用户组id
 	 */
-	public Long getGid() {
-		return this.gid;
+	public Long getid() {
+		return this.did;
 	}
 
 	/**
-	 * 获取用户组编号
+	 * 获取用户部门微信Id
 	 *
-	 * @return Group_no 用户组编号
+	 * @return Dept_Weixin_Id 用户部门微信Id
 	 */
-	public String getGroupNo() {
-		return this.groupNo;
+	public String getDeptWeixinId() {
+		return this.deptWeixinId;
 	}
 
 	/**
-	 * 获取用户组名称
+	 * 获取用户部门名称
 	 *
-	 * @return Group_name 用户组名称
+	 * @return Dept_Name 用户部门名称
 	 */
-	public String getGroupName() {
-		return this.groupName;
+	public String geteptName() {
+		return this.deptName;
 	}
 
 	/**
-	 * 获取用户组openId
+	 * 获取父部门ID
 	 *
-	 * @return Openid 用户组openId
+	 * @return arentId 父部门Id
 	 */
-	public String getOpenid() {
-		return this.openid;
+	public String getParentId() {
+		return this.parentId;
 	}
 
 	/**
@@ -140,43 +140,43 @@ public class WeiXinCompanyGroupDBO extends MyDataBaseObjectSupport {
 	}
 
 	/**
-	 * 设置用户组id
+	 * 设置用户部门id
 	 *
-	 * @param Gid
-	 *            用户组id
+	 * @param Did
+	 *            用户部门id
 	 */
-	public void setGid(Long gid) {
-		this.gid = gid;
+	public void setDid(Long did) {
+		this.did = did;
 	}
 
 	/**
-	 * 设置用户组编号
-	 *
-	 * @param Group_no
-	 *            用户组编号
+	 * 设置用户部门微信ID
+	 * 
+	 * @param Dept_weixin_id
+	 *            用户部门微信ID
 	 */
-	public void setGroupNo(String groupno) {
-		this.groupNo = groupno;
+	public void setDeptWeixinId(String deptweixinid, String deptWeixinId) {
+		this.deptWeixinId = deptWeixinId;
 	}
 
 	/**
-	 * 设置用户组名称
+	 * 设置用户部门名称
 	 *
-	 * @param Group_name
-	 *            用户组名称
+	 * @param Dept_name
+	 *            用户部门名称
 	 */
-	public void setGroupName(String groupname) {
-		this.groupName = groupname;
+	public void setGroupName(String deptname) {
+		this.deptName = deptname;
 	}
 
 	/**
-	 * 设置用户组openId
+	 * 设置父部门Id
 	 *
-	 * @param Openid
-	 *            用户组openId
+	 * @param Parent_id
+	 *            父部门Id
 	 */
-	public void setOpenid(String openid) {
-		this.openid = openid;
+	public void setParentId(String parentid) {
+		this.parentId = parentid;
 	}
 
 	/**

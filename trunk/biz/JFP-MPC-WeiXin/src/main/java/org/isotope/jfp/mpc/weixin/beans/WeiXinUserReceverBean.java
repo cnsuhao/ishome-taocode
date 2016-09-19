@@ -13,14 +13,19 @@ import org.isotope.jfp.framework.beans.message.info.UserReceverBean;
 public class WeiXinUserReceverBean extends UserReceverBean {
 
 	/**
-	 * 用户ID
+	 * 企业ID
 	 */
-	private String userId;
+	private String companyId;
 
 	/**
 	 * 学校id
 	 */
 	private Long sid = null;
+
+	/**
+	 * id
+	 */
+	private String id = null;
 
 	/**
 	 * 用户类别
@@ -47,12 +52,12 @@ public class WeiXinUserReceverBean extends UserReceverBean {
 	 */
 	private Integer isUse = null;
 
-	public String getUserId() {
-		return userId;
+	public String getCompanyId() {
+		return companyId;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
 	}
 
 	public Long getSid() {
@@ -61,6 +66,14 @@ public class WeiXinUserReceverBean extends UserReceverBean {
 
 	public void setSid(Long sid) {
 		this.sid = sid;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public Integer getUertType() {

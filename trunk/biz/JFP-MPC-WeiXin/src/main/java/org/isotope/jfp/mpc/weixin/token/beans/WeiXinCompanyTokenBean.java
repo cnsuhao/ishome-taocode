@@ -1,5 +1,6 @@
 package org.isotope.jfp.mpc.weixin.token.beans;
 
+import me.chanjar.weixin.cp.api.WxCpConfigStorage;
 import me.chanjar.weixin.cp.api.WxCpInMemoryConfigStorage;
 
 /**
@@ -9,5 +10,5 @@ import me.chanjar.weixin.cp.api.WxCpInMemoryConfigStorage;
  * @since 3.3.1
  * @version 3.3.1.20160825
  */
-public class WeiXinCompanyTokenBean extends WxCpInMemoryConfigStorage {
+public class WeiXinCompanyTokenBean extends WxCpInMemoryConfigStorage implements WxCpConfigStorage{
 }

@@ -1,13 +1,16 @@
 package org.isotope.jfp.mpc.weixin.server;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.isotope.jfp.common.weixin.constants.ISWeixinConstants;
 import org.isotope.jfp.framework.beans.common.RESTResultBean;
 import org.isotope.jfp.framework.beans.message.MessageInfoBean;
 import org.isotope.jfp.framework.common.message.AMessagePushGatewaySupport;
-import org.isotope.jfp.mpc.weixin.beans.WeiXinCompanyGroupReceverBean;
+import org.isotope.jfp.mpc.weixin.beans.WeiXinCompanyDeptReceverBean;
 import org.isotope.jfp.mpc.weixin.beans.WeiXinCompanySenderBean;
+import org.isotope.jfp.mpc.weixin.beans.WeiXinCompanyTagReceverBean;
 import org.isotope.jfp.mpc.weixin.beans.WeiXinMessageValueBean;
 import org.isotope.jfp.mpc.weixin.beans.WeiXinUserReceverBean;
 import org.isotope.jfp.mpc.weixin.business.MyWeixinBusiness;
@@ -32,6 +35,7 @@ public class WeiXinMessagePushGatewayServerThread extends AMessagePushGatewaySup
 	/**
 	 * 消息推送
 	 */
+	@SuppressWarnings("null")
 	@Override
 	public RESTResultBean push(MessageInfoBean messageInfo) {
 		RESTResultBean result = new RESTResultBean();
@@ -40,13 +44,17 @@ public class WeiXinMessagePushGatewayServerThread extends AMessagePushGatewaySup
 			WeiXinMessageValueBean messageValue = (WeiXinMessageValueBean) messageInfo.getMessage();
 			WeiXinCompanySenderBean sender = (WeiXinCompanySenderBean) messageInfo.getSender();
 			// 推送对象
-			WeiXinCompanyGroupReceverBean groupRecever = null;
-			WeiXinUserReceverBean userRecever = null;
+			List<WeiXinCompanyDeptReceverBean> deptRecevers = null;
+			List<WeiXinCompanyTagReceverBean> tagRecevers = null;
+			List<WeiXinUserReceverBean> userRecevers = null;
+
 			boolean push = true;
-			if (messageInfo.getRecever() instanceof WeiXinCompanyGroupReceverBean)
-				groupRecever = (WeiXinCompanyGroupReceverBean) messageInfo.getRecever();
-			else if (messageInfo.getRecever() instanceof WeiXinUserReceverBean)
-				userRecever = (WeiXinUserReceverBean) messageInfo.getRecever();
+			if (messageInfo.getRecever() instanceof WeiXinUserReceverBean)
+				userRecevers.add((WeiXinUserReceverBean) messageInfo.getRecever());
+			else if (messageInfo.getRecever() instanceof WeiXinCompanyDeptReceverBean)
+				deptRecevers.add((WeiXinCompanyDeptReceverBean) messageInfo.getRecever());
+			else if (messageInfo.getRecever() instanceof WeiXinCompanyTagReceverBean)
+				tagRecevers.add((WeiXinCompanyTagReceverBean) messageInfo.getRecever());
 			else {
 				push = false;
 				result.setCode(THREE);
@@ -55,17 +63,17 @@ public class WeiXinMessagePushGatewayServerThread extends AMessagePushGatewaySup
 			if (push) {
 				// 进行数据推送
 				if (MEDIA_TEXT.equals(messageValue.getMediaType())) {
-					result.setCode(weixinService.sendText(messageValue, sender, groupRecever, userRecever));
+					result.setCode(weixinService.sendText(messageValue, sender, deptRecevers, tagRecevers, userRecevers));
 				} else if (MEDIA_IMAGE.equals(messageValue.getMediaType())) {
-					result.setCode(weixinService.sendImage(messageValue, sender, groupRecever, userRecever));
+					result.setCode(weixinService.sendImage(messageValue, sender, deptRecevers, tagRecevers, userRecevers));
 				} else if (MEDIA_VOICE.equals(messageValue.getMediaType())) {
-					result.setCode(weixinService.sendVoice(messageValue, sender, groupRecever, userRecever));
+					result.setCode(weixinService.sendVoice(messageValue, sender, deptRecevers, tagRecevers, userRecevers));
 				} else if (MEDIA_VIDEO.equals(messageValue.getMediaType())) {
-					result.setCode(weixinService.sendVideo(messageValue, sender, groupRecever, userRecever));
+					result.setCode(weixinService.sendVideo(messageValue, sender, deptRecevers, tagRecevers, userRecevers));
 				} else if (MEDIA_THUMB.equals(messageValue.getMediaType())) {
-					result.setCode(weixinService.sendThumb(messageValue, sender, groupRecever, userRecever));
+					result.setCode(weixinService.sendThumb(messageValue, sender, deptRecevers, tagRecevers, userRecevers));
 				} else if (MEDIA_FILE.equals(messageValue.getMediaType())) {
-					result.setCode(weixinService.sendFile(messageValue, sender, groupRecever, userRecever));
+					result.setCode(weixinService.sendFile(messageValue, sender, deptRecevers, tagRecevers, userRecevers));
 				} else {
 					result.setCode(TWO);
 					result.setMessage("消息类型不对，不支持当前消息内容类别getMediaType(" + messageValue.getMediaType() + ")");
