@@ -4,7 +4,7 @@ import javax.annotation.Resource;
 
 import org.isotope.jfp.common.weixin.WeixinService;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
-import org.isotope.jfp.mpc.weixin.token.WeiXinUserTokenService;
+import org.isotope.jfp.mpc.weixin.token.WeiXinCompanyTokenService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -25,7 +25,7 @@ public class MyWeixinUserService implements ISFrameworkConstants {
 	@Resource
 	WeixinService WeixinService_;
 	@Resource
-	WeiXinUserTokenService WeiXinUserTokenService_;
+	WeiXinCompanyTokenService WeiXinCompanyTokenService_;
 
 	public Object companyIdUserIdAdd(String companyId, String userId) {
 		// TODO Auto-generated method stub

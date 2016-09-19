@@ -11,14 +11,21 @@ public interface WeixinDao {
 	public List<WeiXinCompanyDBO> loadCompany(HashMap<String, String> comyany);
 
 	/**
-	 * 获得微信企业号用户组表数据
-	 */
-	public List<WeiXinCompanyGroupDBO> loadCompanyGroup(HashMap<String, String> comyanyGroup);
-
-	/**
 	 * 获得微信企业号关注用户表数据
 	 */
 	public List<WeixinUserDBO> loadCompanyUser(HashMap<String, String> companyUser);
+
+	
+	/**
+	 * 获得微信企业号部门关注用户表数据
+	 */
+	public List<WeixinUserDBO> loadCompanyDeptUser(HashMap<String, String> companyDeptUser);
+
+	
+	/**
+	 * 获得微信企业号标签关注用户表数据
+	 */
+	public List<WeixinUserDBO> loadCompanyTagUser(HashMap<String, String> companyTagUser);
 
 	// 获得全部企业
 	// 获得企业所有班级
