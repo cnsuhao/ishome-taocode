@@ -62,8 +62,8 @@ public class CalendarManageController extends MyControllerSupport {
 					calendar.put("calendarId", sCalendar.getCalendarId());
 					calendar.put("content", sCalendar.getContent());
 					calendar.put("department", sCalendar.getDepartment());
-					times.put("startTime",sCalendar.getStartTime());
-					times.put("endTime",sCalendar.getEndTime());
+					times.put("startTime",sCalendar.getStartTime().substring(0, 10));
+					times.put("endTime",sCalendar.getEndTime().substring(0, 10));
 					calendar.put("time", times);
 					array.add(calendar);
 				}
