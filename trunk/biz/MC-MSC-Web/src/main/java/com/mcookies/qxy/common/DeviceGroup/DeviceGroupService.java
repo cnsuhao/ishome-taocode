@@ -1,8 +1,10 @@
+package com.mcookies.qxy.common.DeviceGroup;
 import org.springframework.stereotype.Service;
+import org.isotope.jfp.framework.support.sync.MyServiceSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/** Éè±¸·Ö×é±í*/
+/** è®¾å¤‡åˆ†ç»„è¡¨*/
 @Service
 public class DeviceGroupService extends MyServiceSupport {
     protected static final Logger logger = LoggerFactory.getLogger(DeviceGroupService.class);

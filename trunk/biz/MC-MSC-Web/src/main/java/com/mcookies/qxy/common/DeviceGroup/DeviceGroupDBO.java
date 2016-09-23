@@ -1,212 +1,215 @@
+package com.mcookies.qxy.common.DeviceGroup;
 import java.sql.Date;
 import javax.inject.Named;
+
+import org.isotope.jfp.framework.support.MyDataBaseObjectSupport;
  
 @Named
-/** Éè±¸·Ö×é±í*/
+/** è®¾å¤‡åˆ†ç»„è¡¨*/
 public class DeviceGroupDBO extends MyDataBaseObjectSupport
 {
     /** 
-     * ·Ö×éid
+     * åˆ†ç»„id
      */
     private Long dgroupId = null;
  
     /** 
-     * Ñ§Ğ£id
+     * å­¦æ ¡id
      */
     private Long sid = null;
  
     /** 
-     * ·Ö×éÃû³Æ
+     * åˆ†ç»„åç§°
      */
     private String dgroupName = null;
  
     /** 
-     * ·Ö×éËµÃ÷
+     * åˆ†ç»„è¯´æ˜
      */
     private String dgroupExplain = null;
  
     /** 
-     * ÊÇ·ñÆôÓÃ
+     * æ˜¯å¦å¯ç”¨
      */
     private Integer isUse = null;
  
     /** 
-     * ´´½¨Ê±¼ä
+     * åˆ›å»ºæ—¶é—´
      */
     private String createTime = null;
  
     /** 
-     * ´´½¨Õß
+     * åˆ›å»ºè€…
      */
     private Long creator = null;
  
     /** 
-     * ¸üĞÂÊ±¼ä
+     * æ›´æ–°æ—¶é—´
      */
     private String updateTime = null;
  
     /** 
-     * ×îºó¸üĞÂÕß
+     * æœ€åæ›´æ–°è€…
      */
     private Long updator = null;
  
     /** 
-     * »ñÈ¡·Ö×éid
+     * è·å–åˆ†ç»„id
      *
-     * @return Dgroup_id ·Ö×éid
+     * @return Dgroup_id åˆ†ç»„id
      */
     public Long getDgroupId() {
         return this.dgroupId;
     }
  
     /** 
-     * »ñÈ¡Ñ§Ğ£id
+     * è·å–å­¦æ ¡id
      *
-     * @return Sid Ñ§Ğ£id
+     * @return Sid å­¦æ ¡id
      */
     public Long getSid() {
         return this.sid;
     }
  
     /** 
-     * »ñÈ¡·Ö×éÃû³Æ
+     * è·å–åˆ†ç»„åç§°
      *
-     * @return Dgroup_name ·Ö×éÃû³Æ
+     * @return Dgroup_name åˆ†ç»„åç§°
      */
     public String getDgroupName() {
         return this.dgroupName;
     }
  
     /** 
-     * »ñÈ¡·Ö×éËµÃ÷
+     * è·å–åˆ†ç»„è¯´æ˜
      *
-     * @return Dgroup_explain ·Ö×éËµÃ÷
+     * @return Dgroup_explain åˆ†ç»„è¯´æ˜
      */
     public String getDgroupExplain() {
         return this.dgroupExplain;
     }
  
     /** 
-     * »ñÈ¡ÊÇ·ñÆôÓÃ
+     * è·å–æ˜¯å¦å¯ç”¨
      *
-     * @return Is_use ÊÇ·ñÆôÓÃ
+     * @return Is_use æ˜¯å¦å¯ç”¨
      */
     public Integer getIsUse() {
         return this.isUse;
     }
  
     /** 
-     * »ñÈ¡´´½¨Ê±¼ä
+     * è·å–åˆ›å»ºæ—¶é—´
      *
-     * @return Create_time ´´½¨Ê±¼ä
+     * @return Create_time åˆ›å»ºæ—¶é—´
      */
     public String getCreateTime() {
         return this.createTime;
     }
  
     /** 
-     * »ñÈ¡´´½¨Õß
+     * è·å–åˆ›å»ºè€…
      *
-     * @return Creator ´´½¨Õß
+     * @return Creator åˆ›å»ºè€…
      */
     public Long getCreator() {
         return this.creator;
     }
  
     /** 
-     * »ñÈ¡¸üĞÂÊ±¼ä
+     * è·å–æ›´æ–°æ—¶é—´
      *
-     * @return Update_time ¸üĞÂÊ±¼ä
+     * @return Update_time æ›´æ–°æ—¶é—´
      */
     public String getUpdateTime() {
         return this.updateTime;
     }
  
     /** 
-     * »ñÈ¡×îºó¸üĞÂÕß
+     * è·å–æœ€åæ›´æ–°è€…
      *
-     * @return Updator ×îºó¸üĞÂÕß
+     * @return Updator æœ€åæ›´æ–°è€…
      */
     public Long getUpdator() {
         return this.updator;
     }
  
     /** 
-     * ÉèÖÃ·Ö×éid
+     * è®¾ç½®åˆ†ç»„id
      *
-     * @param Dgroup_id ·Ö×éid
+     * @param Dgroup_id åˆ†ç»„id
      */
     public void setDgroupId(Long dgroupid) {
         this.dgroupId = dgroupid;
     }
  
     /** 
-     * ÉèÖÃÑ§Ğ£id
+     * è®¾ç½®å­¦æ ¡id
      *
-     * @param Sid Ñ§Ğ£id
+     * @param Sid å­¦æ ¡id
      */
     public void setSid(Long sid) {
         this.sid = sid;
     }
  
     /** 
-     * ÉèÖÃ·Ö×éÃû³Æ
+     * è®¾ç½®åˆ†ç»„åç§°
      *
-     * @param Dgroup_name ·Ö×éÃû³Æ
+     * @param Dgroup_name åˆ†ç»„åç§°
      */
     public void setDgroupName(String dgroupname) {
         this.dgroupName = dgroupname;
     }
  
     /** 
-     * ÉèÖÃ·Ö×éËµÃ÷
+     * è®¾ç½®åˆ†ç»„è¯´æ˜
      *
-     * @param Dgroup_explain ·Ö×éËµÃ÷
+     * @param Dgroup_explain åˆ†ç»„è¯´æ˜
      */
     public void setDgroupExplain(String dgroupexplain) {
         this.dgroupExplain = dgroupexplain;
     }
  
     /** 
-     * ÉèÖÃÊÇ·ñÆôÓÃ
+     * è®¾ç½®æ˜¯å¦å¯ç”¨
      *
-     * @param Is_use ÊÇ·ñÆôÓÃ
+     * @param Is_use æ˜¯å¦å¯ç”¨
      */
     public void setIsUse(Integer isuse) {
         this.isUse = isuse;
     }
  
     /** 
-     * ÉèÖÃ´´½¨Ê±¼ä
+     * è®¾ç½®åˆ›å»ºæ—¶é—´
      *
-     * @param Create_time ´´½¨Ê±¼ä
+     * @param Create_time åˆ›å»ºæ—¶é—´
      */
     public void setCreateTime(String createtime) {
         this.createTime = createtime;
     }
  
     /** 
-     * ÉèÖÃ´´½¨Õß
+     * è®¾ç½®åˆ›å»ºè€…
      *
-     * @param Creator ´´½¨Õß
+     * @param Creator åˆ›å»ºè€…
      */
     public void setCreator(Long creator) {
         this.creator = creator;
     }
  
     /** 
-     * ÉèÖÃ¸üĞÂÊ±¼ä
+     * è®¾ç½®æ›´æ–°æ—¶é—´
      *
-     * @param Update_time ¸üĞÂÊ±¼ä
+     * @param Update_time æ›´æ–°æ—¶é—´
      */
     public void setUpdateTime(String updatetime) {
         this.updateTime = updatetime;
     }
  
     /** 
-     * ÉèÖÃ×îºó¸üĞÂÕß
+     * è®¾ç½®æœ€åæ›´æ–°è€…
      *
-     * @param Updator ×îºó¸üĞÂÕß
+     * @param Updator æœ€åæ›´æ–°è€…
      */
     public void setUpdator(Long updator) {
         this.updator = updator;
