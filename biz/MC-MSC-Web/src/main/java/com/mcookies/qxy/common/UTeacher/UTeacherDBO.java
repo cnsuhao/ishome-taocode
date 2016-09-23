@@ -40,7 +40,7 @@ public class UTeacherDBO extends MyDataBaseObjectSupport {
 	/**
 	 * 用户类型
 	 */
-	private Integer idType = 0;//默认值为0.
+	private Integer idType = null;//默认值为0.
 
 	/**
 	 * 认证方式
