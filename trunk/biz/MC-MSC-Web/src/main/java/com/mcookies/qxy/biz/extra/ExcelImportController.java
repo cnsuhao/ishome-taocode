@@ -596,6 +596,7 @@ public class ExcelImportController extends MyControllerSupport {
 						tearcher.setEmail(email);
 						tearcher.setStatus(1);
 						tearcher.setIsUse(1);
+						tearcher.setIdType(0);;
 						if (sid != null) {
 							tearcher.setSid(sid);
 							tearcher.setPuk("1");
