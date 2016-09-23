@@ -178,7 +178,11 @@ public class TeacherInfoController extends MyControllerSupport {
 			tearcher.setPhone(pvo.getPhone());
 			tearcher.setEmail(pvo.getEmail());
 			tearcher.setGender(pvo.getGender());
-			tearcher.setIdType(pvo.getIdType());
+			if(pvo.getIdType() == null ){
+				tearcher.setIdType(0);
+			}else{
+				tearcher.setIdType(pvo.getIdType());				
+			}
 			tearcher.setStatus(1);
 			tearcher.setIsUse(1);
 			UTeacherService_.doInsert(tearcher);
