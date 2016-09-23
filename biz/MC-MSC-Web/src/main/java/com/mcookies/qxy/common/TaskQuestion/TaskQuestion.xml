@@ -1,0 +1,199 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- ��ҵ��Ŀ�� -->
+<!-- ��Ҫ��DAO������ȫ·��һ�� -->
+<mapper namespace='com.mcookies.qxy.common.TaskQuestion.TaskQuestionDao'>
+    <!-- ���ֶ���Ϣ  -->
+    <sql id='tableColumns'>
+        question_id,task_id,pic,number,coordinate,answer_type,answer,is_use,create_time,creator,update_time,updator
+    </sql>
+
+    <!-- ���������������м�¼ -->
+    <update id='doUpdateAll' parameterType='TaskQuestionDBO'>
+        UPDATE task_question SET update_time = #{updateTime} <!-- ����ʱ�䡢������ -->
+        <if test=" questionId != null and questionId !='' "><!-- ��Ŀid -->
+            ,question_id = #{questionId}
+        </if>
+        <if test=" taskId != null and taskId !='' "><!-- ��ҵid -->
+            ,task_id = #{taskId}
+        </if>
+        <if test=" pic != null and pic !='' "><!-- ��ҵͼƬ -->
+            ,pic = #{pic}
+        </if>
+        <if test=" number != null and number !='' "><!-- ê����� -->
+            ,number = #{number}
+        </if>
+        <if test=" coordinate != null and coordinate !='' "><!-- ê������ -->
+            ,coordinate = #{coordinate}
+        </if>
+        <if test=" answerType != null and answerType !='' "><!-- ������ -->
+            ,answer_type = #{answerType}
+        </if>
+        <if test=" answer != null and answer !='' "><!-- ������ -->
+            ,answer = #{answer}
+        </if>
+        <if test=" isUse != null and isUse !='' "><!-- �Ƿ����� -->
+            ,is_use = #{isUse}
+        </if>
+        <if test=" createTime != null and createTime !='' "><!-- ����ʱ�� -->
+            ,create_time = #{createTime}
+        </if>
+        <if test=" creator != null and creator !='' "><!-- ������ -->
+            ,creator = #{creator}
+        </if>
+        <if test=" updator != null and updator !='' "><!-- �������� -->
+            ,updator = #{updator}
+        </if>
+        WHERE 1 = 1 
+            <if test=" questionId != null and questionId !='' "><!-- ��Ŀid -->
+                AND question_id = #{questionId}
+            </if>
+            <if test=" taskId != null and taskId !='' "><!-- ��ҵid -->
+                AND task_id = #{taskId}
+            </if>
+            <if test=" pic != null and pic !='' "><!-- ��ҵͼƬ -->
+                AND pic = #{pic}
+            </if>
+            <if test=" number != null and number !='' "><!-- ê����� -->
+                AND number = #{number}
+            </if>
+            <if test=" coordinate != null and coordinate !='' "><!-- ê������ -->
+                AND coordinate = #{coordinate}
+            </if>
+            <if test=" answerType != null and answerType !='' "><!-- ������ -->
+                AND answer_type = #{answerType}
+            </if>
+            <if test=" answer != null and answer !='' "><!-- ������ -->
+                AND answer = #{answer}
+            </if>
+            <if test=" isUse != null and isUse !='' "><!-- �Ƿ����� -->
+                AND is_use = #{isUse}
+            </if>
+            <if test=" createTime != null and createTime !='' "><!-- ����ʱ�� -->
+                AND create_time = #{createTime}
+            </if>
+            <if test=" creator != null and creator !='' "><!-- ������ -->
+                AND creator = #{creator}
+            </if>
+            <if test=" updateTime != null and updateTime !='' "><!-- ����ʱ�� -->
+                AND update_time = #{updateTime}
+            </if>
+            <if test=" updator != null and updator !='' "><!-- �������� -->
+                AND updator = #{updator}
+            </if>
+    </update>
+    <!-- ��ѯ��ҳ������Ϣ  -->
+    <select id='doSelectPage' parameterType='TaskQuestionDBO' resultType='TaskQuestionDBO'>
+        SELECT <include refid='tableColumns'/> FROM task_question
+        WHERE 1 = 1 
+        <if test=" questionId != null and questionId !='' "><!-- ��Ŀid -->
+            AND question_id = #{questionId}
+        </if>
+        <if test=" taskId != null and taskId !='' "><!-- ��ҵid -->
+            AND task_id = #{taskId}
+        </if>
+        <if test=" pic != null and pic !='' "><!-- ��ҵͼƬ -->
+            AND pic = #{pic}
+        </if>
+        <if test=" number != null and number !='' "><!-- ê����� -->
+            AND number = #{number}
+        </if>
+        <if test=" coordinate != null and coordinate !='' "><!-- ê������ -->
+            AND coordinate = #{coordinate}
+        </if>
+        <if test=" answerType != null and answerType !='' "><!-- ������ -->
+            AND answer_type = #{answerType}
+        </if>
+        <if test=" answer != null and answer !='' "><!-- ������ -->
+            AND answer = #{answer}
+        </if>
+        <if test=" isUse != null and isUse !='' "><!-- �Ƿ����� -->
+            AND is_use = #{isUse}
+        </if>
+        <if test=" createTime != null and createTime !='' "><!-- ����ʱ�� -->
+            AND create_time = #{createTime}
+        </if>
+        <if test=" creator != null and creator !='' "><!-- ������ -->
+            AND creator = #{creator}
+        </if>
+        <if test=" updateTime != null and updateTime !='' "><!-- ����ʱ�� -->
+            AND update_time = #{updateTime}
+        </if>
+        <if test=" updator != null and updator !='' "><!-- �������� -->
+            AND updator = #{updator}
+        </if>
+    </select>
+
+    <!-- ����һ������ -->
+    <insert id='doInsert' parameterType='TaskQuestionDBO'>
+        INSERT INTO task_question
+          ( <include refid='tableColumns'/>) 
+        VALUES 
+          ( #{questionId},#{taskId},#{pic},#{number},#{coordinate},#{answerType},#{answer},#{isUse},#{createTime},#{creator},#{updateTime},#{updator} )
+    </insert>
+    <!-- �޸�һ������ -->
+    <update id='doUpdate' parameterType='TaskQuestionDBO'>
+        UPDATE task_question SET update_time = #{updateTime} <!-- ����ʱ�䡢������ -->
+        <if test=" questionId != null and questionId !='' "><!-- ��Ŀid -->
+            ,question_id = #{questionId}
+        </if>
+        <if test=" taskId != null and taskId !='' "><!-- ��ҵid -->
+            ,task_id = #{taskId}
+        </if>
+        <if test=" pic != null and pic !='' "><!-- ��ҵͼƬ -->
+            ,pic = #{pic}
+        </if>
+        <if test=" number != null and number !='' "><!-- ê����� -->
+            ,number = #{number}
+        </if>
+        <if test=" coordinate != null and coordinate !='' "><!-- ê������ -->
+            ,coordinate = #{coordinate}
+        </if>
+        <if test=" answerType != null and answerType !='' "><!-- ������ -->
+            ,answer_type = #{answerType}
+        </if>
+        <if test=" answer != null and answer !='' "><!-- ������ -->
+            ,answer = #{answer}
+        </if>
+        <if test=" isUse != null and isUse !='' "><!-- �Ƿ����� -->
+            ,is_use = #{isUse}
+        </if>
+        <if test=" createTime != null and createTime !='' "><!-- ����ʱ�� -->
+            ,create_time = #{createTime}
+        </if>
+        <if test=" creator != null and creator !='' "><!-- ������ -->
+            ,creator = #{creator}
+        </if>
+        <if test=" updator != null and updator !='' "><!-- �������� -->
+            ,updator = #{updator}
+        </if>
+        WHERE 1 = 1 
+            <if test=" questionId != null and questionId !='' "><!-- ��Ŀid -->
+                AND question_id = #{questionId}
+            </if>
+    </update>
+    <!-- �߼�ɾ��һ������ -->
+    <delete id='toDelete' parameterType='TaskQuestionDBO'>
+        UPDATE task_question SET ddd='1', update_time = #{updateTime}, uu2 = #{uu2} WHERE update_time = #{updateTime}
+            <if test=" questionId != null and questionId !='' "><!-- ��Ŀid -->
+                AND question_id = #{questionId}
+            </if>
+    </delete>
+    <!-- ����ɾ��һ������ -->
+    <delete id='doDelete' parameterType='TaskQuestionDBO'>
+        DELETE FROM task_question WHERE update_time = #{updateTime}
+            <if test=" questionId != null and questionId !='' "><!-- ��Ŀid -->
+                AND question_id = #{questionId}
+            </if>
+    </delete>
+    <!-- ��ѯһ������  -->
+    <select id='doRead' parameterType='TaskQuestionDBO' resultType='TaskQuestionDBO'>
+        SELECT <include refid='tableColumns'/> FROM task_question WHERE 1 = 1
+            <if test=" questionId != null and questionId !='' "><!-- ��Ŀid -->
+                AND question_id = #{questionId}
+            </if>
+    </select>
+
+</mapper>
