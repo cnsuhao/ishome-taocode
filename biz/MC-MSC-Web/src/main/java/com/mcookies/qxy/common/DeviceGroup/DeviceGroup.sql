@@ -1,14 +1,14 @@
 CREATE TABLE device_group
 (
-    dgroup_id BIGINT(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '·Ö×éid',
-    sid BIGINT(12) NOT NULL COMMENT 'Ñ§Ð£id',
-    dgroup_name VARCHAR(50) NOT NULL COMMENT '·Ö×éÃû³Æ',
-    dgroup_explain VARCHAR(50) COMMENT '·Ö×éËµÃ÷',
-    is_use TINYINT(1) COMMENT 'ÊÇ·ñÆôÓÃ',
-    create_time VARCHAR(24) COMMENT '´´½¨Ê±¼ä',
-    creator BIGINT(12) COMMENT '´´½¨Õß',
-    update_time VARCHAR(24) COMMENT '¸üÐÂÊ±¼ä',
-    updator BIGINT(12) COMMENT '×îºó¸üÐÂÕß',
+    dgroup_id BIGINT(12) unsigned NOT NULL AUTO_INCREMENT COMMENT 'åˆ†ç»„id',
+    sid BIGINT(12) NOT NULL COMMENT 'å­¦æ ¡id',
+    dgroup_name VARCHAR(50) NOT NULL COMMENT 'åˆ†ç»„åç§°',
+    dgroup_explain VARCHAR(50) COMMENT 'åˆ†ç»„è¯´æ˜Ž',
+    is_use TINYINT(1) COMMENT 'æ˜¯å¦å¯ç”¨',
+    create_time VARCHAR(24) COMMENT 'åˆ›å»ºæ—¶é—´',
+    creator BIGINT(12) COMMENT 'åˆ›å»ºè€…',
+    update_time VARCHAR(24) COMMENT 'æ›´æ–°æ—¶é—´',
+    updator BIGINT(12) COMMENT 'æœ€åŽæ›´æ–°è€…',
 PRIMARY KEY (dgroup_id)
-) COMMENT 'Éè±¸·Ö×é±í'
+) COMMENT 'è®¾å¤‡åˆ†ç»„è¡¨'
 ;

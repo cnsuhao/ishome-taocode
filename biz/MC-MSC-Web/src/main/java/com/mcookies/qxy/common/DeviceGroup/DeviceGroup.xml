@@ -2,160 +2,160 @@
 <!DOCTYPE mapper
     PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
     'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
-<!-- Éè±¸·Ö×é±í -->
-<!-- ÐèÒªºÍDAO±£³ÖÍêÈ«Â·¾¶Ò»ÖÂ -->
+<!-- è®¾å¤‡åˆ†ç»„è¡¨ -->
+<!-- éœ€è¦å’ŒDAOä¿æŒå®Œå…¨è·¯å¾„ä¸€è‡´ -->
 <mapper namespace='DeviceGroup.DeviceGroupDao'>
-    <!-- ±í×Ö¶ÎÐÅÏ¢  -->
+    <!-- è¡¨å­—æ®µä¿¡æ¯  -->
     <sql id='tableColumns'>
         dgroup_id,sid,dgroup_name,dgroup_explain,is_use,create_time,creator,update_time,updator
     </sql>
 
-    <!-- ¸ù¾ÝÌõ¼þ¸üÐÂËùÓÐ¼ÇÂ¼ -->
+    <!-- æ ¹æ®æ¡ä»¶æ›´æ–°æ‰€æœ‰è®°å½• -->
     <update id='doUpdateAll' parameterType='DeviceGroupDBO'>
-        UPDATE device_group SET update_time = #{updateTime} <!-- ¸üÐÂÊ±¼ä¡¢¸üÐÂÕß -->
-        <if test=" dgroupId != null and dgroupId !='' "><!-- ·Ö×éid -->
+        UPDATE device_group SET update_time = #{updateTime} <!-- æ›´æ–°æ—¶é—´ã€æ›´æ–°è€… -->
+        <if test=" dgroupId != null and dgroupId !='' "><!-- åˆ†ç»„id -->
             ,dgroup_id = #{dgroupId}
         </if>
-        <if test=" sid != null and sid !='' "><!-- Ñ§Ð£id -->
+        <if test=" sid != null and sid !='' "><!-- å­¦æ ¡id -->
             ,sid = #{sid}
         </if>
-        <if test=" dgroupName != null and dgroupName !='' "><!-- ·Ö×éÃû³Æ -->
+        <if test=" dgroupName != null and dgroupName !='' "><!-- åˆ†ç»„åç§° -->
             ,dgroup_name = #{dgroupName}
         </if>
-        <if test=" dgroupExplain != null and dgroupExplain !='' "><!-- ·Ö×éËµÃ÷ -->
+        <if test=" dgroupExplain != null and dgroupExplain !='' "><!-- åˆ†ç»„è¯´æ˜Ž -->
             ,dgroup_explain = #{dgroupExplain}
         </if>
-        <if test=" isUse != null and isUse !='' "><!-- ÊÇ·ñÆôÓÃ -->
+        <if test=" isUse != null and isUse !='' "><!-- æ˜¯å¦å¯ç”¨ -->
             ,is_use = #{isUse}
         </if>
-        <if test=" createTime != null and createTime !='' "><!-- ´´½¨Ê±¼ä -->
+        <if test=" createTime != null and createTime !='' "><!-- åˆ›å»ºæ—¶é—´ -->
             ,create_time = #{createTime}
         </if>
-        <if test=" creator != null and creator !='' "><!-- ´´½¨Õß -->
+        <if test=" creator != null and creator !='' "><!-- åˆ›å»ºè€… -->
             ,creator = #{creator}
         </if>
-        <if test=" updator != null and updator !='' "><!-- ×îºó¸üÐÂÕß -->
+        <if test=" updator != null and updator !='' "><!-- æœ€åŽæ›´æ–°è€… -->
             ,updator = #{updator}
         </if>
         WHERE 1 = 1 
-            <if test=" dgroupId != null and dgroupId !='' "><!-- ·Ö×éid -->
+            <if test=" dgroupId != null and dgroupId !='' "><!-- åˆ†ç»„id -->
                 AND dgroup_id = #{dgroupId}
             </if>
-            <if test=" sid != null and sid !='' "><!-- Ñ§Ð£id -->
+            <if test=" sid != null and sid !='' "><!-- å­¦æ ¡id -->
                 AND sid = #{sid}
             </if>
-            <if test=" dgroupName != null and dgroupName !='' "><!-- ·Ö×éÃû³Æ -->
+            <if test=" dgroupName != null and dgroupName !='' "><!-- åˆ†ç»„åç§° -->
                 AND dgroup_name = #{dgroupName}
             </if>
-            <if test=" dgroupExplain != null and dgroupExplain !='' "><!-- ·Ö×éËµÃ÷ -->
+            <if test=" dgroupExplain != null and dgroupExplain !='' "><!-- åˆ†ç»„è¯´æ˜Ž -->
                 AND dgroup_explain = #{dgroupExplain}
             </if>
-            <if test=" isUse != null and isUse !='' "><!-- ÊÇ·ñÆôÓÃ -->
+            <if test=" isUse != null and isUse !='' "><!-- æ˜¯å¦å¯ç”¨ -->
                 AND is_use = #{isUse}
             </if>
-            <if test=" createTime != null and createTime !='' "><!-- ´´½¨Ê±¼ä -->
+            <if test=" createTime != null and createTime !='' "><!-- åˆ›å»ºæ—¶é—´ -->
                 AND create_time = #{createTime}
             </if>
-            <if test=" creator != null and creator !='' "><!-- ´´½¨Õß -->
+            <if test=" creator != null and creator !='' "><!-- åˆ›å»ºè€… -->
                 AND creator = #{creator}
             </if>
-            <if test=" updateTime != null and updateTime !='' "><!-- ¸üÐÂÊ±¼ä -->
+            <if test=" updateTime != null and updateTime !='' "><!-- æ›´æ–°æ—¶é—´ -->
                 AND update_time = #{updateTime}
             </if>
-            <if test=" updator != null and updator !='' "><!-- ×îºó¸üÐÂÕß -->
+            <if test=" updator != null and updator !='' "><!-- æœ€åŽæ›´æ–°è€… -->
                 AND updator = #{updator}
             </if>
     </update>
-    <!-- ²éÑ¯·ÖÒ³Êý¾ÝÐÅÏ¢  -->
+    <!-- æŸ¥è¯¢åˆ†é¡µæ•°æ®ä¿¡æ¯  -->
     <select id='doSelectPage' parameterType='DeviceGroupDBO' resultType='DeviceGroupDBO'>
         SELECT <include refid='tableColumns'/> FROM device_group
         WHERE 1 = 1 
-        <if test=" dgroupId != null and dgroupId !='' "><!-- ·Ö×éid -->
+        <if test=" dgroupId != null and dgroupId !='' "><!-- åˆ†ç»„id -->
             AND dgroup_id = #{dgroupId}
         </if>
-        <if test=" sid != null and sid !='' "><!-- Ñ§Ð£id -->
+        <if test=" sid != null and sid !='' "><!-- å­¦æ ¡id -->
             AND sid = #{sid}
         </if>
-        <if test=" dgroupName != null and dgroupName !='' "><!-- ·Ö×éÃû³Æ -->
+        <if test=" dgroupName != null and dgroupName !='' "><!-- åˆ†ç»„åç§° -->
             AND dgroup_name = #{dgroupName}
         </if>
-        <if test=" dgroupExplain != null and dgroupExplain !='' "><!-- ·Ö×éËµÃ÷ -->
+        <if test=" dgroupExplain != null and dgroupExplain !='' "><!-- åˆ†ç»„è¯´æ˜Ž -->
             AND dgroup_explain = #{dgroupExplain}
         </if>
-        <if test=" isUse != null and isUse !='' "><!-- ÊÇ·ñÆôÓÃ -->
+        <if test=" isUse != null and isUse !='' "><!-- æ˜¯å¦å¯ç”¨ -->
             AND is_use = #{isUse}
         </if>
-        <if test=" createTime != null and createTime !='' "><!-- ´´½¨Ê±¼ä -->
+        <if test=" createTime != null and createTime !='' "><!-- åˆ›å»ºæ—¶é—´ -->
             AND create_time = #{createTime}
         </if>
-        <if test=" creator != null and creator !='' "><!-- ´´½¨Õß -->
+        <if test=" creator != null and creator !='' "><!-- åˆ›å»ºè€… -->
             AND creator = #{creator}
         </if>
-        <if test=" updateTime != null and updateTime !='' "><!-- ¸üÐÂÊ±¼ä -->
+        <if test=" updateTime != null and updateTime !='' "><!-- æ›´æ–°æ—¶é—´ -->
             AND update_time = #{updateTime}
         </if>
-        <if test=" updator != null and updator !='' "><!-- ×îºó¸üÐÂÕß -->
+        <if test=" updator != null and updator !='' "><!-- æœ€åŽæ›´æ–°è€… -->
             AND updator = #{updator}
         </if>
     </select>
 
-    <!-- ²åÈëÒ»ÌõÊý¾Ý -->
+    <!-- æ’å…¥ä¸€æ¡æ•°æ® -->
     <insert id='doInsert' parameterType='DeviceGroupDBO'>
         INSERT INTO device_group
           ( <include refid='tableColumns'/>) 
         VALUES 
           ( #{dgroupId},#{sid},#{dgroupName},#{dgroupExplain},#{isUse},#{createTime},#{creator},#{updateTime},#{updator} )
     </insert>
-    <!-- ÐÞ¸ÄÒ»ÌõÊý¾Ý -->
+    <!-- ä¿®æ”¹ä¸€æ¡æ•°æ® -->
     <update id='doUpdate' parameterType='DeviceGroupDBO'>
-        UPDATE device_group SET update_time = #{updateTime} <!-- ¸üÐÂÊ±¼ä¡¢¸üÐÂÕß -->
-        <if test=" dgroupId != null and dgroupId !='' "><!-- ·Ö×éid -->
+        UPDATE device_group SET update_time = #{updateTime} <!-- æ›´æ–°æ—¶é—´ã€æ›´æ–°è€… -->
+        <if test=" dgroupId != null and dgroupId !='' "><!-- åˆ†ç»„id -->
             ,dgroup_id = #{dgroupId}
         </if>
-        <if test=" sid != null and sid !='' "><!-- Ñ§Ð£id -->
+        <if test=" sid != null and sid !='' "><!-- å­¦æ ¡id -->
             ,sid = #{sid}
         </if>
-        <if test=" dgroupName != null and dgroupName !='' "><!-- ·Ö×éÃû³Æ -->
+        <if test=" dgroupName != null and dgroupName !='' "><!-- åˆ†ç»„åç§° -->
             ,dgroup_name = #{dgroupName}
         </if>
-        <if test=" dgroupExplain != null and dgroupExplain !='' "><!-- ·Ö×éËµÃ÷ -->
+        <if test=" dgroupExplain != null and dgroupExplain !='' "><!-- åˆ†ç»„è¯´æ˜Ž -->
             ,dgroup_explain = #{dgroupExplain}
         </if>
-        <if test=" isUse != null and isUse !='' "><!-- ÊÇ·ñÆôÓÃ -->
+        <if test=" isUse != null and isUse !='' "><!-- æ˜¯å¦å¯ç”¨ -->
             ,is_use = #{isUse}
         </if>
-        <if test=" createTime != null and createTime !='' "><!-- ´´½¨Ê±¼ä -->
+        <if test=" createTime != null and createTime !='' "><!-- åˆ›å»ºæ—¶é—´ -->
             ,create_time = #{createTime}
         </if>
-        <if test=" creator != null and creator !='' "><!-- ´´½¨Õß -->
+        <if test=" creator != null and creator !='' "><!-- åˆ›å»ºè€… -->
             ,creator = #{creator}
         </if>
-        <if test=" updator != null and updator !='' "><!-- ×îºó¸üÐÂÕß -->
+        <if test=" updator != null and updator !='' "><!-- æœ€åŽæ›´æ–°è€… -->
             ,updator = #{updator}
         </if>
         WHERE 1 = 1 
-            <if test=" dgroupId != null and dgroupId !='' "><!-- ·Ö×éid -->
+            <if test=" dgroupId != null and dgroupId !='' "><!-- åˆ†ç»„id -->
                 AND dgroup_id = #{dgroupId}
             </if>
     </update>
-    <!-- Âß¼­É¾³ýÒ»ÌõÊý¾Ý -->
+    <!-- é€»è¾‘åˆ é™¤ä¸€æ¡æ•°æ® -->
     <delete id='toDelete' parameterType='DeviceGroupDBO'>
         UPDATE device_group SET ddd='1', update_time = #{updateTime}, uu2 = #{uu2} WHERE update_time = #{updateTime}
-            <if test=" dgroupId != null and dgroupId !='' "><!-- ·Ö×éid -->
+            <if test=" dgroupId != null and dgroupId !='' "><!-- åˆ†ç»„id -->
                 AND dgroup_id = #{dgroupId}
             </if>
     </delete>
-    <!-- ÎïÀíÉ¾³ýÒ»ÌõÊý¾Ý -->
+    <!-- ç‰©ç†åˆ é™¤ä¸€æ¡æ•°æ® -->
     <delete id='doDelete' parameterType='DeviceGroupDBO'>
         DELETE FROM device_group WHERE update_time = #{updateTime}
-            <if test=" dgroupId != null and dgroupId !='' "><!-- ·Ö×éid -->
+            <if test=" dgroupId != null and dgroupId !='' "><!-- åˆ†ç»„id -->
                 AND dgroup_id = #{dgroupId}
             </if>
     </delete>
-    <!-- ²éÑ¯Ò»ÌõÊý¾Ý  -->
+    <!-- æŸ¥è¯¢ä¸€æ¡æ•°æ®  -->
     <select id='doRead' parameterType='DeviceGroupDBO' resultType='DeviceGroupDBO'>
         SELECT <include refid='tableColumns'/> FROM device_group WHERE 1 = 1
-            <if test=" dgroupId != null and dgroupId !='' "><!-- ·Ö×éid -->
+            <if test=" dgroupId != null and dgroupId !='' "><!-- åˆ†ç»„id -->
                 AND dgroup_id = #{dgroupId}
             </if>
     </select>

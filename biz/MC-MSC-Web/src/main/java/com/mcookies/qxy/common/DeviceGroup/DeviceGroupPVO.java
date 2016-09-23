@@ -1,7 +1,9 @@
+package com.mcookies.qxy.common.DeviceGroup;
 import javax.inject.Named;
  
 @Named
-/** Éè±¸·Ö×é±í*/
-public class DeviceGroupPVO extends DeviceGroupDBO
-{
+/** è®¾å¤‡åˆ†ç»„è¡¨*/
+public class DeviceGroupPVO extends DeviceGroupDBO{
+	
+	
 }
