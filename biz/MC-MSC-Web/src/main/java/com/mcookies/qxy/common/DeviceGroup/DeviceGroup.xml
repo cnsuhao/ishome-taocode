@@ -4,7 +4,7 @@
     'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
 <!-- 设备分组表 -->
 <!-- 需要和DAO保持完全路径一致 -->
-<mapper namespace='DeviceGroup.DeviceGroupDao'>
+<mapper namespace='com.mcookies.qxy.common.DeviceGroup.DeviceGroupDao'>
     <!-- 表字段信息  -->
     <sql id='tableColumns'>
         dgroup_id,sid,dgroup_name,dgroup_explain,is_use,create_time,creator,update_time,updator
@@ -150,7 +150,7 @@
         DELETE FROM device_group WHERE update_time = #{updateTime}
             <if test=" dgroupId != null and dgroupId !='' "><!-- 分组id -->
                 AND dgroup_id = #{dgroupId}
-            </if>
+            </if>            
     </delete>
     <!-- 查询一条数据  -->
     <select id='doRead' parameterType='DeviceGroupDBO' resultType='DeviceGroupDBO'>
