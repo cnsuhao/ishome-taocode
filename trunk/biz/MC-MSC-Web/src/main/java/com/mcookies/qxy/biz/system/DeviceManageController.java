@@ -30,9 +30,9 @@ public class DeviceManageController extends MyControllerSupport {
 	protected DeviceTagService DeviceTagService_;
 	@Resource
 	protected DeviceAlarmService DeviceAlarmService_;
-
+	
 	/**
-	 * 设备查询接口
+	 * 设备查询接口，传的是sid
 	 * 
 	 * @param sid
 	 * @param token
@@ -59,6 +59,53 @@ public class DeviceManageController extends MyControllerSupport {
 					device.put("id",pvo.getId());
 					device.put("deviceId", pvo.getDeviceId()+"");
 					device.put("deviceName", pvo.getDeviceName());
+					device.put("dgroupId", pvo.getDgroupId()+"");
+					device.put("dgroupName", pvo.getDgroupName());
+					device.put("schoolName", pvo.getSchoolName());
+					device.put("username", pvo.getUsername());
+					device.put("password", pvo.getPassword());
+					array.add(device);
+				}
+				json.put("device", array);
+				result.setData(json);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			result.setInfo("访问失败");
+			result.setStatus(1);
+		}
+		return result;
+	}
+	/**
+	 * 设备查询接口,传的是设备分组id
+	 * 
+	 * @param dgroupId
+	 * @param token
+	 * @return
+	 */
+	@RequestMapping(value = "/deviceinfo/dgroup", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public RESTResultBean deviceinfoWithDgroupGET(String dgroupId, String token) {
+		RESTResultBean result = new RESTResultBean();
+		try {
+			// token校验
+			if (doCheckToken(token) == false) {
+				return tokenFail();
+			}
+			Map<String,Object> param = new HashMap<String,Object>();
+			param.put("dgroupId", dgroupId);
+			List<DeviceTagPVO> relist = DeviceTagService_.doSelectDevice(param);
+			if(relist!=null){
+				JSONObject json = new JSONObject();
+				json.put("count", relist.size());
+				JSONArray array = new JSONArray();
+				for(DeviceTagPVO pvo:relist){
+					JSONObject device = new JSONObject();
+					device.put("id",pvo.getId());
+					device.put("deviceId", pvo.getDeviceId()+"");
+					device.put("deviceName", pvo.getDeviceName());
+					device.put("dgroupId", pvo.getDgroupId()+"");
+					device.put("dgroupName", pvo.getDgroupName());
 					device.put("schoolName", pvo.getSchoolName());
 					device.put("username", pvo.getUsername());
 					device.put("password", pvo.getPassword());
