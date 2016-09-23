@@ -7,7 +7,7 @@
 <mapper namespace='com.mcookies.qxy.common.DeviceTag.DeviceTagDao'>
     <!-- 表字段信息  -->
     <sql id='tableColumns'>
-        id,sid,device_name,device_id,username,password,last_login_time,is_use,create_time,creator,update_time,updator
+        id,sid,dgroup_id,device_name,device_id,username,password,last_login_time,is_use,create_time,creator,update_time,updator
     </sql>
 	<resultMap type="com.mcookies.qxy.common.DeviceTag.DeviceTagPVO" id="resultMap1">
 		<result column="id" property="id"/>
@@ -25,6 +25,9 @@
         </if>
         <if test=" sid != null "><!-- 学校id -->
             ,sid = #{sid}
+        </if>
+        <if test=" dgroupId != null and dgroupId !='' "><!-- 设备分组id -->
+            ,dgroup_id = #{dgroupId}
         </if>
         <if test=" deviceName != null "><!-- 地点名字 -->
             ,device_name = #{deviceName}
@@ -66,6 +69,9 @@
             <if test=" deviceId != null "><!-- 学校设备id -->
                 AND device_id = #{deviceId}
             </if>
+            <if test=" dgroupId != null and dgroupId !='' "><!-- 设备分组id -->
+                AND dgroup_id = #{dgroupId}
+            </if>
             <if test=" username != null "><!-- 设备账号 -->
                 AND username = #{username}
             </if>
@@ -100,6 +106,9 @@
         </if>
         <if test=" sid != null "><!-- 学校id -->
             AND sid = #{sid}
+        </if>
+        <if test=" dgroupId != null and dgroupId !='' "><!-- 设备分组id -->
+            AND dgroup_id = #{dgroupId}
         </if>
         <if test=" deviceName != null "><!-- 地点名字 -->
             AND device_name = #{deviceName}
@@ -138,7 +147,7 @@
         INSERT INTO device_tag
           ( <include refid='tableColumns'/>) 
         VALUES 
-          ( #{id},#{sid},#{deviceName},#{deviceId},#{username},#{password},#{lastLoginTime},#{isUse},#{createTime},#{creator},#{updateTime},#{updator} )
+          ( #{id},#{sid},#{dgroupId},#{deviceName},#{deviceId},#{username},#{password},#{lastLoginTime},#{isUse},#{createTime},#{creator},#{updateTime},#{updator} )
     </insert>
     <!-- 修改一条数据 -->
     <update id='doUpdate' parameterType='DeviceTagDBO'>
@@ -148,6 +157,9 @@
         </if>
         <if test=" sid != null "><!-- 学校id -->
             ,sid = #{sid}
+        </if>
+        <if test=" dgroupId != null and dgroupId !='' "><!-- 设备分组id -->
+            ,dgroup_id = #{dgroupId}
         </if>
         <if test=" deviceName != null "><!-- 地点名字 -->
             ,device_name = #{deviceName}
@@ -210,21 +222,28 @@
 		SELECT
 			a.id,
 			device_id,
+			a.dgroup_id,
+			c.dgroup_name,
 			device_name,
 			a.username,
 			a.`password`,
 			b.school_name
 		FROM
 			device_tag a,
+			device_group c,
 			school b
 		<where>
 			and a.sid = b.sid
+			and a.dgroup_id = c. dgroup_id
 			<if test="sid != null and sid != '' ">
 				and a.sid = #{sid}
 			</if>
 			<if test="deviceId != null ">
 				and a.device_id = #{deviceId}
 			</if>
+			<if test=" dgroupId != null and dgroupId !='' "><!-- 设备分组id -->
+            AND a.dgroup_id = #{dgroupId}
+        </if>
 		</where>
 	</select>
 </mapper>

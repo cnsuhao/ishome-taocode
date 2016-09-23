@@ -27,6 +27,7 @@ public class DeviceTagDBO extends MyDataBaseObjectSupport {
 	 */
 	private Long deviceId = null;
 
+
 	/**
 	 * 设备账号
 	 */
@@ -64,6 +65,8 @@ public class DeviceTagDBO extends MyDataBaseObjectSupport {
 	public Long getSid() {
 		return this.sid;
 	}
+	
+	
 
 	/**
 	 * 获取地点名字
@@ -82,7 +85,24 @@ public class DeviceTagDBO extends MyDataBaseObjectSupport {
 	public Long getDeviceId() {
 		return this.deviceId;
 	}
+	
+	 /** 
+     * 设备分组id
+     */
+    private Long dgroupId = null;
 
+    /**
+	 * 获取设备分组id
+	 *
+	 * 
+	 */
+	public Long getDgroupId() {
+		return dgroupId;
+	}
+
+	public void setDgroupId(Long dgroupId) {
+		this.dgroupId = dgroupId;
+	}
 	/**
 	 * 获取设备账号
 	 *

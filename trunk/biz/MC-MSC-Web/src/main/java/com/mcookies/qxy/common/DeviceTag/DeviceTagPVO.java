@@ -6,6 +6,7 @@ import javax.inject.Named;
 public class DeviceTagPVO extends DeviceTagDBO
 {
 	private String schoolName;
+	private String dgroupName;
 
 	public String getSchoolName() {
 		return schoolName;
@@ -13,6 +14,14 @@ public class DeviceTagPVO extends DeviceTagDBO
 
 	public void setSchoolName(String schoolName) {
 		this.schoolName = schoolName;
+	}
+
+	public String getDgroupName() {
+		return dgroupName;
+	}
+
+	public void setDgroupName(String dgroupName) {
+		this.dgroupName = dgroupName;
 	}
 	
 }
