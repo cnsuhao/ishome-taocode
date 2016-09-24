@@ -42,7 +42,7 @@ public class MoraleducationClassController extends MyControllerSupport {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			if (test == true) {					
-					String str = "{\"page\":\"1\",\"size\":\"14\",\"count\":\"3\",\"classScoreList\": [{\"cid\": \"4\",\"className\": \"初一1班\",\"totalScore\": \"90\",\"ranking\": \"12\",\"updateTime\":\"2016-09-19 12:00\"},{\"cid\": \"4\",\"className\": \"初一2班\",\"totalScore\": \"92\",\"ranking\": \"11\",\"updateTime\":\"2016-09-19 12:00\"}]}";
+					String str = "{\"page\":\"1\",\"size\":\"14\",\"count\":\"3\",\"classScoreList\": [{\"cid\": \"4\",\"className\": \"初一1班\",\"totalScore\": \"90\",\"ranking\": \"12\",\"updateTime\":\"2016-09-19 00:00:00\"},{\"cid\": \"4\",\"className\": \"初一2班\",\"totalScore\": \"92\",\"ranking\": \"11\",\"updateTime\":\"2016-09-19 00:00:00\"}]}";
 					JSONObject jobj=JSON.parseObject(str);    
 					result.setData(jobj);	
 			} else {
@@ -62,10 +62,6 @@ public class MoraleducationClassController extends MyControllerSupport {
 	 * 需要使用Token验证查询者身份
 	 * 根据班级cid进行搜索，只用与班级搜索
 	 * @param test
-	 * @param termId
-	 * @param order
-	 * @param page
-	 * @param size
 	 * @return
 	 */
 			 
@@ -76,7 +72,7 @@ public class MoraleducationClassController extends MyControllerSupport {
 		try {
 			if (test == true) {
 				if (cid != null) {
-					String str = "{\"cid\":\"4\",\"className\":\"初一1班\",\"totalScore\":\"90\",\"ranking\":\"12\",\"updateTime\":\"2016-09-1912:00\"}";
+					String str = "{\"cid\":\"4\",\"className\":\"初一1班\",\"totalScore\":\"90\",\"ranking\":\"12\",\"updateTime\":\"2016-09-19 00:00:00\"}";
 					JSONObject jobj=JSON.parseObject(str);    
 					result.setData(jobj);	
 				} else{
@@ -111,7 +107,7 @@ public class MoraleducationClassController extends MyControllerSupport {
 			try {
 				if (test == true) {
 					if (cid != null) {
-						String str = "{\"termName\":\"2016-2017-2\",\"className\":\"高一三班\",\"totalScore\":\"20\",\"ranking\":\"12\",\"page\":\"2\",\"size\":\"12\",\"count\":\"20\",\"mecScoreList\":[{\"mecScoreId\":\"1\",\"mecItemId\":\"1\",\"mecItemName\":\"黑板报\",\"score\":\"-1\",\"teacherName\":\"王主任\",\"mecItemExplain\":\"凡是一次没有做的扣一分，扣分苍围针对所有班级\",\"createTime\":\"2016-09-13 00:00\"},{\"mecScoreId\":\"2\",\"mecItemId\":\"2\",\"mecItemName\":\"黑板报1\",\"score\":\"-2\",\"teacherName\":\"王主任\",\"mecItemExplain\":\"凡是一次没有做的扣一分，扣分苍围针对所有班级\",\"createTime\":\"2016-09-13 00:00\"}]}";
+						String str = "{\"termName\":\"2016-2017-2\",\"className\":\"高一三班\",\"totalScore\":\"20\",\"ranking\":\"12\",\"page\":\"2\",\"size\":\"12\",\"count\":\"20\",\"mecScoreList\":[{\"mecScoreId\":\"1\",\"mecItemId\":\"1\",\"mecItemName\":\"黑板报\",\"score\":\"-1\",\"teacherName\":\"王主任\",\"mecItemExplain\":\"凡是一次没有做的扣一分，扣分苍围针对所有班级\",\"createTime\":\"2016-09-13 00:00:00\"},{\"mecScoreId\":\"2\",\"mecItemId\":\"2\",\"mecItemName\":\"黑板报1\",\"score\":\"-2\",\"teacherName\":\"王主任\",\"mecItemExplain\":\"凡是一次没有做的扣一分，扣分苍围针对所有班级\",\"createTime\":\"2016-09-13 00:00:00\"}]}";
 						JSONObject jobj=JSON.parseObject(str);    
 						result.setData(jobj);	
 					} else{
@@ -145,7 +141,7 @@ public class MoraleducationClassController extends MyControllerSupport {
 			RESTResultBean result = new RESTResultBean();
 			try {
 				if (test == true) {
-						String str = "{\"termName\":\"2016-2017-2\",\"className\":\"高一三班\",\"totalScore\":\"20\",\"ranking\":\"12\",\"page\":\"2\",\"size\":\"12\",\"count\":\"20\",\"mecScoreList\":[{\"mecScoreId\":\"1\",\"mecItemId\":\"1\",\"mecItemName\":\"黑板报\",\"score\":\"-1\",\"teacherName\":\"王主任\",\"mecItemExplain\":\"凡是一次没有做的扣一分，扣分苍围针对所有班级\",\"createTime\":\"2016-09-13 00:00\"},{\"mecScoreId\":\"2\",\"mecItemId\":\"2\",\"mecItemName\":\"黑板报1\",\"score\":\"-2\",\"teacherName\":\"王主任\",\"mecItemExplain\":\"凡是一次没有做的扣一分，扣分苍围针对所有班级\",\"createTime\":\"2016-09-13 00:00\"}]}";
+						String str = "{\"termName\":\"2016-2017-2\",\"className\":\"高一三班\",\"totalScore\":\"20\",\"ranking\":\"12\",\"page\":\"2\",\"size\":\"12\",\"count\":\"20\",\"mecScoreList\":[{\"mecScoreId\":\"1\",\"mecItemId\":\"1\",\"mecItemName\":\"黑板报\",\"score\":\"-1\",\"teacherName\":\"王主任\",\"mecItemExplain\":\"凡是一次没有做的扣一分，扣分苍围针对所有班级\",\"createTime\":\"2016-09-13 00:00:00\"},{\"mecScoreId\":\"2\",\"mecItemId\":\"2\",\"mecItemName\":\"黑板报1\",\"score\":\"-2\",\"teacherName\":\"王主任\",\"mecItemExplain\":\"凡是一次没有做的扣一分，扣分苍围针对所有班级\",\"createTime\":\"2016-09-13 00:00:00\"}]}";
 						JSONObject jobj=JSON.parseObject(str);    
 						result.setData(jobj);	
 				} else {
@@ -226,7 +222,7 @@ public class MoraleducationClassController extends MyControllerSupport {
 			try {
 				if (test == true) {
 					if (mecScoreId != null) {
-						String str = "{\"mecItemName\":\"黑板报\",\"score\":\"-1\",\"mecItemExplain\":\"凡是一次没有做的扣一分，扣分苍围针对所有班级\",\"createTime\":\"2016-09-13 12:11\",\"teacherName\":\"王主任\",\"scoreOrder\":\"1\",\"scoreContent\":\"1\",\"scorePic\":[\"http://www.100xyun.com/upload/123.jpg\",\"http://www.100xyun.com/upload/123.jpg\"]}";
+						String str = "{\"mecItemName\":\"黑板报\",\"score\":\"-1\",\"mecItemExplain\":\"凡是一次没有做的扣一分，扣分苍围针对所有班级\",\"createTime\":\"2016-09-13 00:00:00\",\"teacherName\":\"王主任\",\"scoreOrder\":\"1\",\"scoreContent\":\"1\",\"scorePic\":[\"http://www.100xyun.com/upload/123.jpg\",\"http://www.100xyun.com/upload/123.jpg\"]}";
 						JSONObject jobj=JSON.parseObject(str);    
 						result.setData(jobj);	
 					} else{
