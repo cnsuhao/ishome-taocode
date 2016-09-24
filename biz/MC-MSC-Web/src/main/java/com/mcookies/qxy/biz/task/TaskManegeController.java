@@ -280,7 +280,7 @@ public class TaskManegeController extends MyControllerSupport{
 			data.put("info", "ok");
 			result.setData(data);
 		} catch (Exception e) {
-			result.setInfo("访问失败");
+			result.setInfo("作业新增，" + e.getMessage());
 			result.setStatus(1);
 		}
 		return result;
@@ -318,7 +318,7 @@ public class TaskManegeController extends MyControllerSupport{
 			data.put("info", "ok");
 			result.setData(data);
 		} catch (Exception e) {
-			result.setInfo("访问失败");
+			result.setInfo("作业置顶/取消置顶，" + e.getMessage());
 			result.setStatus(1);
 		}
 		return result;
@@ -354,7 +354,7 @@ public class TaskManegeController extends MyControllerSupport{
 			data.put("info", "ok");
 			result.setData(data);
 		} catch (Exception e) {
-			result.setInfo("访问失败");
+			result.setInfo("修改失败，" + e.getMessage());
 			result.setStatus(1);
 		}
 		return result;
@@ -391,7 +391,7 @@ public class TaskManegeController extends MyControllerSupport{
 			data.put("info", "ok");
 			result.setData(data);
 		} catch (Exception e) {
-			result.setInfo("访问失败");
+			result.setInfo("删除失败，" + e.getMessage());
 			result.setStatus(1);
 		}
 		return result;
