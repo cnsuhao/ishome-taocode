@@ -2,6 +2,7 @@ CREATE TABLE task
 (
     task_id BIGINT(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '作业id',
     sid BIGINT(12) NOT NULL COMMENT '学校id',
+    term_id BIGINT(12) NOT NULL COMMENT '学期id',
     course_id BIGINT(12) NOT NULL COMMENT '课程id',
     task_name VARCHAR(50) NOT NULL COMMENT '作业标题',
     content TEXT() COMMENT '作业内容',

@@ -5,9 +5,9 @@
 <!-- 作业表 -->
 <!-- 需要和DAO保持完全路径一致 -->
 <mapper namespace='com.mcookies.qxy.common.Task.TaskDao'>
-    <!-- 表字段信息  -->
+     <!-- 表字段信息  -->
     <sql id='tableColumns'>
-        task_id,sid,course_id,task_name,content,video,pic,task_classer,start_time,end_time,is_top,publish_time,is_audit,num,author,is_use,create_time,creator,update_time,updator
+        task_id,sid,term_id,course_id,task_name,content,video,pic,task_classer,start_time,end_time,is_top,publish_time,is_audit,num,author,is_use,create_time,creator,update_time,updator
     </sql>
 
     <!-- 根据条件更新所有记录 -->
@@ -18,6 +18,9 @@
         </if>
         <if test=" sid != null and sid !='' "><!-- 学校id -->
             ,sid = #{sid}
+        </if>
+        <if test=" termId != null and termId !='' "><!-- 学期id -->
+            ,term_id = #{termId}
         </if>
         <if test=" courseId != null and courseId !='' "><!-- 课程id -->
             ,course_id = #{courseId}
@@ -76,6 +79,9 @@
             </if>
             <if test=" sid != null and sid !='' "><!-- 学校id -->
                 AND sid = #{sid}
+            </if>
+            <if test=" termId != null and termId !='' "><!-- 学期id -->
+                AND term_id = #{termId}
             </if>
             <if test=" courseId != null and courseId !='' "><!-- 课程id -->
                 AND course_id = #{courseId}
@@ -142,6 +148,9 @@
         <if test=" sid != null and sid !='' "><!-- 学校id -->
             AND sid = #{sid}
         </if>
+        <if test=" termId != null and termId !='' "><!-- 学期id -->
+            AND term_id = #{termId}
+        </if>
         <if test=" courseId != null and courseId !='' "><!-- 课程id -->
             AND course_id = #{courseId}
         </if>
@@ -203,7 +212,7 @@
         INSERT INTO task
           ( <include refid='tableColumns'/>) 
         VALUES 
-          ( #{taskId},#{sid},#{courseId},#{taskName},#{content},#{video},#{pic},#{taskClasser},#{startTime},#{endTime},#{isTop},#{publishTime},#{isAudit},#{num},#{author},#{isUse},#{createTime},#{creator},#{updateTime},#{updator} )
+          ( #{taskId},#{sid},#{termId},#{courseId},#{taskName},#{content},#{video},#{pic},#{taskClasser},#{startTime},#{endTime},#{isTop},#{publishTime},#{isAudit},#{num},#{author},#{isUse},#{createTime},#{creator},#{updateTime},#{updator} )
     </insert>
     <!-- 修改一条数据 -->
     <update id='doUpdate' parameterType='TaskDBO'>
@@ -213,6 +222,9 @@
         </if>
         <if test=" sid != null and sid !='' "><!-- 学校id -->
             ,sid = #{sid}
+        </if>
+        <if test=" termId != null and termId !='' "><!-- 学期id -->
+            ,term_id = #{termId}
         </if>
         <if test=" courseId != null and courseId !='' "><!-- 课程id -->
             ,course_id = #{courseId}
@@ -291,5 +303,18 @@
                 AND task_id = #{taskId}
             </if>
     </select>
-
+     <!-- 根据termid,cid查询作业列表数据  -->
+    <select id='doSelectTaskInfoTOtermIdAndCid' parameterType='TaskDBO' resultType='com.mcookies.qxy.common.Task.TaskPVO'>
+    SELECT
+    a.*,b.course_name
+    from task a,s_course b, s_grade_lable c
+    where a.course_id = b.course_id
+     <if test=" termId != null and termId !='' "><!-- 学期id -->
+            AND a.term_id = #{termId}
+     </if>
+     <if test=" taskClasser != null and taskClasser !='' "><!-- 作业布置班级 -->
+            AND instr(task_classer,'#{taskClasser};')
+            task_classer = #{taskClasser}
+      </if>
+    </select>
 </mapper>
