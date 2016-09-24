@@ -33,7 +33,7 @@ public class MoraleducationPersonalController extends MyControllerSupport {
 		try {
 			if (test == true) {	
 				if (cid != null) {
-					String str = "{\"page\":\"0\",\"size\":\"14\",\"count\":\"3\",\"personalScoreList\":[{\"studentId\":\"1\",\"studentName\":\"张三\",\"number\":\"1000003\",\"totalScore\":\"90\",\"ranking\":\"12\",\"updateTime\":\"2016-09-19 12:00\"},{\"studentId\":\"2\",\"studentName\":\"王五\",\"number\":\"1000004\",\"totalScore\":\"93\",\"ranking\":\"11\",\"updateTime\":\"2016-09-19 12:00\"},{\"studentId\":\"3\",\"studentName\":\"赵六\",\"number\":\"1000005\",\"totalScore\":\"97\",\"ranking\":\"9\",\"updateTime\":\"2016-09-19 12:00\"}]}";
+					String str = "{\"page\":\"0\",\"size\":\"14\",\"count\":\"3\",\"personalScoreList\":[{\"studentId\":\"1\",\"studentName\":\"张三\",\"number\":\"1000003\",\"totalScore\":\"90\",\"ranking\":\"12\",\"updateTime\":\"2016-09-19 00:00:00\"},{\"studentId\":\"2\",\"studentName\":\"王五\",\"number\":\"1000004\",\"totalScore\":\"93\",\"ranking\":\"11\",\"updateTime\":\"2016-09-19 00:00:00\"},{\"studentId\":\"3\",\"studentName\":\"赵六\",\"number\":\"1000005\",\"totalScore\":\"97\",\"ranking\":\"9\",\"updateTime\":\"2016-09-19 00:00:00\"}]}";
 					JSONObject jobj=JSON.parseObject(str);    
 					result.setData(jobj);	
 				} else {
@@ -70,7 +70,7 @@ public class MoraleducationPersonalController extends MyControllerSupport {
 		try {
 			if (test == true) {
 				if (studentId != null) {
-					String str = "{\"studentId\":\"2\",\"studentName\":\"王五\",\"number\":\"1000004\",\"totalScore\":\"93\",\"ranking\":\"11\",\"updateTime\":\"2016-09-19 12:00\"}";
+					String str = "{\"studentId\":\"2\",\"studentName\":\"王五\",\"number\":\"1000004\",\"totalScore\":\"93\",\"ranking\":\"11\",\"updateTime\":\"2016-09-19 00:00:00\"}";
 					JSONObject jobj=JSON.parseObject(str);    
 					result.setData(jobj);	
 				} else{
@@ -105,7 +105,7 @@ public class MoraleducationPersonalController extends MyControllerSupport {
 			try {
 				if (test == true) {
 					if (studentId != null) {
-						String str = "{\"studentId\":\"1\",\"studentName\":\"段誉\",\"number\":\"0291029\",\"totalScore\":\"23\",\"ranking\":\"12\",\"page\":\"1\",\"size\":\"12\",\"count\":\"22\",\"mepScoreList\":[{\"mepScoreId\":\"1\",\"mepItemName\":\"黑板报\",\"score\":\"-1\",\"mepItemExplain\":\"扣分针对所有班级\",\"createTime\":\"2016-09-13 12:22\",\"teacherName\":\"王主任\"},{\"mepScoreId\":\"2\",\"mepItemName\":\"打扫卫生只加分不扣分\",\"score\":\"+2\",\"mepItemExplain\":\"只加分不扣分\",\"scoreTime\":\"2016-09-13\",\"teacherName\":\"王主任\"},{\"mepScoreId\":\"3\",\"mepItemName\":\"通报批评\",\"score\":\"-1\",\"mepItemExplain\":\"只减分不加分\",\"scoreTime\":\"2016-09-13\",\"teacherName\":\"王主任\"}]}";
+						String str = "{\"studentId\":\"1\",\"studentName\":\"段誉\",\"number\":\"0291029\",\"totalScore\":\"23\",\"ranking\":\"12\",\"page\":\"1\",\"size\":\"12\",\"count\":\"22\",\"mepScoreList\":[{\"mepScoreId\":\"1\",\"mepItemName\":\"黑板报\",\"score\":\"-1\",\"mepItemExplain\":\"扣分针对所有班级\",\"createTime\":\"2016-09-13 00:00:00\",\"teacherName\":\"王主任\"},{\"mepScoreId\":\"2\",\"mepItemName\":\"打扫卫生只加分不扣分\",\"score\":\"+2\",\"mepItemExplain\":\"只加分不扣分\",\"scoreTime\":\"2016-09-13 00:00:00\",\"teacherName\":\"王主任\"},{\"mepScoreId\":\"3\",\"mepItemName\":\"通报批评\",\"score\":\"-1\",\"mepItemExplain\":\"只减分不加分\",\"scoreTime\":\"2016-09-13 00:00:00\",\"teacherName\":\"王主任\"}]}";
 						JSONObject jobj=JSON.parseObject(str);    
 						result.setData(jobj);	
 					} else{
@@ -139,7 +139,7 @@ public class MoraleducationPersonalController extends MyControllerSupport {
 			RESTResultBean result = new RESTResultBean();
 			try {
 				if (test == true) {
-						String str = "{\"studentId\":\"1\",\"studentName\":\"段誉\",\"number\":\"0291029\",\"totalScore\":\"23\",\"ranking\":\"12\",\"page\":\"1\",\"size\":\"12\",\"count\":\"22\",\"mepScoreList\":[{\"mepScoreId\":\"1\",\"mepItemName\":\"黑板报\",\"score\":\"-1\",\"mepItemExplain\":\"扣分针对所有班级\",\"createTime\":\"2016-09-13 12:22\",\"teacherName\":\"王主任\"},{\"mepScoreId\":\"2\",\"mepItemName\":\"打扫卫生只加分不扣分\",\"score\":\"+2\",\"mepItemExplain\":\"只加分不扣分\",\"scoreTime\":\"2016-09-13\",\"teacherName\":\"王主任\"},{\"mepScoreId\":\"3\",\"mepItemName\":\"通报批评\",\"score\":\"-1\",\"mepItemExplain\":\"只减分不加分\",\"scoreTime\":\"2016-09-13\",\"teacherName\":\"王主任\"}]}";
+						String str = "{\"studentId\":\"1\",\"studentName\":\"段誉\",\"number\":\"0291029\",\"totalScore\":\"23\",\"ranking\":\"12\",\"page\":\"1\",\"size\":\"12\",\"count\":\"22\",\"mepScoreList\":[{\"mepScoreId\":\"1\",\"mepItemName\":\"黑板报\",\"score\":\"-1\",\"mepItemExplain\":\"扣分针对所有班级\",\"createTime\":\"2016-09-13 00:00:00\",\"teacherName\":\"王主任\"},{\"mepScoreId\":\"2\",\"mepItemName\":\"打扫卫生只加分不扣分\",\"score\":\"+2\",\"mepItemExplain\":\"只加分不扣分\",\"scoreTime\":\"2016-09-13 00:00:00\",\"teacherName\":\"王主任\"},{\"mepScoreId\":\"3\",\"mepItemName\":\"通报批评\",\"score\":\"-1\",\"mepItemExplain\":\"只减分不加分\",\"scoreTime\":\"2016-09-13 00:00:00\",\"teacherName\":\"王主任\"}]}";
 						JSONObject jobj=JSON.parseObject(str);    
 						result.setData(jobj);	
 				} else {
@@ -220,7 +220,7 @@ public class MoraleducationPersonalController extends MyControllerSupport {
 			try {
 				if (test == true) {
 					if (mepScoreId != null) {
-						String str = "{\"mepItemName\":\"黑板报\",\"score\":\"-1\",\"mepItemExplain\":\"凡是一次没有做的扣一分，扣分苍围针对所有班级\",\"createTime\":\"2016-09-13\",\"teacherName\":\"王主任\",\"scoreOrder\":\"1\",\"scoreContent\":\"1\",\"scorePic\":[\"http://www.100xyun.com/upload/123.jpg\",\"http://www.100xyun.com/upload/123.jpg\"]}";
+						String str = "{\"mepItemName\":\"黑板报\",\"score\":\"-1\",\"mepItemExplain\":\"凡是一次没有做的扣一分，扣分苍围针对所有班级\",\"createTime\":\"2016-09-13 00:00:00\",\"teacherName\":\"王主任\",\"scoreOrder\":\"1\",\"scoreContent\":\"1\",\"scorePic\":[\"http://www.100xyun.com/upload/123.jpg\",\"http://www.100xyun.com/upload/123.jpg\"]}";
 						JSONObject jobj=JSON.parseObject(str);    
 						result.setData(jobj);	
 					} else{
