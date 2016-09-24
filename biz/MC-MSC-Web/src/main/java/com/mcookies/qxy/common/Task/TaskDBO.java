@@ -17,8 +17,20 @@ public class TaskDBO extends MyDataBaseObjectSupport
      * 学校id
      */
     private Long sid = null;
- 
     /** 
+     * 学期id
+     */
+    private Long termId = null;
+ 
+    public Long getTermId() {
+		return termId;
+	}
+
+	public void setTermId(Long termId) {
+		this.termId = termId;
+	}
+
+	/** 
      * 课程id
      */
     private Long courseId = null;
@@ -88,25 +100,6 @@ public class TaskDBO extends MyDataBaseObjectSupport
      */
     private Integer isUse = null;
  
-    /** 
-     * 创建时间
-     */
-    private Date createTime = null;
- 
-    /** 
-     * 创建者
-     */
-    private Long creator = null;
- 
-    /** 
-     * 更新时间
-     */
-    private Date updateTime = null;
- 
-    /** 
-     * 最后更新者
-     */
-    private Long updator = null;
  
     /** 
      * 获取作业id
@@ -396,15 +389,6 @@ public class TaskDBO extends MyDataBaseObjectSupport
      */
     public void setIsUse(Integer isuse) {
         this.isUse = isuse;
-    }
- 
-    /** 
-     * 设置创建时间
-     *
-     * @param Create_time 创建时间
-     */
-    public void setCreateTime(Date createtime) {
-        this.createTime = createtime;
     }
  
    
