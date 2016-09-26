@@ -54,19 +54,23 @@ public class DeviceGroupController extends MyControllerSupport{
 			DeviceGroupDBO model = new DeviceGroupDBO();
 			model.setIsUse(1);
 			model.setSid(sid);
-			List<DeviceGroupDBO> relist = (List<DeviceGroupDBO>) DeviceGroupService.doSelectData(model);
+			List<DeviceGroupPVO> relist = (List<DeviceGroupPVO>) DeviceGroupService.doSelectData(model);
 			if(relist!=null){
 				JSONObject json = new JSONObject();
+				SchoolDBO school = new SchoolDBO();
+				school.setSid(sid);
+				school = (SchoolDBO) SchoolService.doRead(school);
 				json.put("sid", sid);
-				JSONArray array = new JSONArray();
+				json.put("schoolName", school.getSchoolName());
+				/*JSONArray array = new JSONArray();
 				for(DeviceGroupDBO d:relist){
 					JSONObject dgroup = new JSONObject();
 					dgroup.put("dgroupId", d.getDgroupId());
 					dgroup.put("dgroupName", d.getDgroupName());
 					dgroup.put("dgroupExplain", d.getDgroupExplain());
 					array.add(dgroup);
-				}
-				json.put("dgroup", array);
+				}*/
+				json.put("dgroup", relist);
 				result.setData(json);
 			}
 		} catch (Exception e) {
