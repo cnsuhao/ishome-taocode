@@ -1,9 +1,10 @@
-package org.isotope.jfp.mpc.weixin.beans;
+package org.isotope.jfp.mpc.weixin.beans.recever;
 
 import org.isotope.jfp.framework.beans.message.info.UserReceverBean;
 
 /**
- * 微信用户信息
+ * 微信用户信息 <br>
+ * 参考【微信企业号关注用户表】company_weixin_user
  * 
  * @author spookfcy
  * @since 3.3.1
@@ -20,37 +21,37 @@ public class WeiXinUserReceverBean extends UserReceverBean {
 	/**
 	 * 学校id
 	 */
-	private Long sid = null;
+	private Long sid;
 
 	/**
-	 * id
+	 * 微信id
 	 */
-	private String id = null;
+	private String wxId;
 
 	/**
 	 * 用户类别
 	 */
-	private Integer uertType = null;
+	private Integer uertType;
 
 	/**
 	 * 用户昵称
 	 */
-	private String userName = null;
+	private String userName;
 
 	/**
 	 * openId
 	 */
-	private String openid = null;
+	private String openid;
 
 	/**
 	 * 关注学校企业号ID
 	 */
-	private String schoolAppId = null;
+	private String schoolAppId;
 
 	/**
 	 * 是否启用
 	 */
-	private Integer isUse = null;
+	private Integer isUse;
 
 	public String getCompanyId() {
 		return companyId;
@@ -68,12 +69,12 @@ public class WeiXinUserReceverBean extends UserReceverBean {
 		this.sid = sid;
 	}
 
-	public String getId() {
-		return id;
+	public String getWxId() {
+		return wxId;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setWxId(String wxId) {
+		this.wxId = wxId;
 	}
 
 	public Integer getUertType() {

@@ -1,20 +1,20 @@
-package org.isotope.jfp.mpc.weixin.beans;
+package org.isotope.jfp.mpc.weixin.beans.message;
 
 import java.util.List;
 
 import org.isotope.jfp.common.weixin.constants.ISWeixinConstants;
 import org.isotope.jfp.framework.beans.message.info.MessageValueBean;
 
-public class WeiXinNewsBean extends MessageValueBean implements ISWeixinConstants {
+public class WeiXinMpnewsBean extends MessageValueBean implements ISWeixinConstants {
 	/**
 	 * 信息内容
 	 */
 	private String message;
 
 	/**
-	 * 消息类型
+	 * 媒体类型
 	 */
-	private String mediaType = MEDIA_NEWS;
+	private String mediaType = MEDIA_MPNEWS;
 	
 	/*
 	 * 消息内容
@@ -46,5 +46,4 @@ public class WeiXinNewsBean extends MessageValueBean implements ISWeixinConstant
 	}
 	
 	
-
 }

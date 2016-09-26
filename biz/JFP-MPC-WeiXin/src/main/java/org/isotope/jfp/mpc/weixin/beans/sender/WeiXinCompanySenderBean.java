@@ -1,9 +1,10 @@
-package org.isotope.jfp.mpc.weixin.beans;
+package org.isotope.jfp.mpc.weixin.beans.sender;
 
 import org.isotope.jfp.framework.beans.message.info.CustomerSenderBean;
 
 /**
- * 微信企业号信息
+ * 微信企业号信息 <br>
+ * 参考【微信企业号表】company_weixin
  * 
  * @author spookfcy
  * @since 3.3.1
@@ -15,10 +16,10 @@ public class WeiXinCompanySenderBean extends CustomerSenderBean {
 	 * 企业ID
 	 */
 	private String companyId;
-	
+
 	/**
 	 * 企业名称
-	 */	
+	 */
 	private String companyName;
 
 	/**
@@ -29,7 +30,7 @@ public class WeiXinCompanySenderBean extends CustomerSenderBean {
 	/**
 	 * 密钥
 	 */
-	private String corpSecret = null;
+	private String appSecret = null;
 
 	/**
 	 * 应用识别Token
@@ -65,20 +66,20 @@ public class WeiXinCompanySenderBean extends CustomerSenderBean {
 		this.appId = appId;
 	}
 
+	public String getAppSecret() {
+		return appSecret;
+	}
+
+	public void setAppSecret(String appSecret) {
+		this.appSecret = appSecret;
+	}
+
 	public String getToken() {
 		return token;
 	}
 
 	public void setToken(String token) {
 		this.token = token;
-	}
-
-	public String getCorpSecret() {
-		return corpSecret;
-	}
-
-	public void setCorpSecret(String corpSecret) {
-		this.corpSecret = corpSecret;
 	}
 
 	public Integer getIsUse() {

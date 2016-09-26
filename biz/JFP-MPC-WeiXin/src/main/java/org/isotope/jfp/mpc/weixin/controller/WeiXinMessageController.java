@@ -3,7 +3,7 @@ package org.isotope.jfp.mpc.weixin.controller;
 import javax.annotation.Resource;
 
 import org.isotope.jfp.framework.beans.common.RESTResultBean;
-import org.isotope.jfp.mpc.weixin.beans.WeiXinMessageValueBean;
+import org.isotope.jfp.mpc.weixin.beans.message.WeiXinMessageValueBean;
 import org.isotope.jfp.mpc.weixin.service.MyWeixinMessageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

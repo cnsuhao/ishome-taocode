@@ -7,46 +7,50 @@ import org.isotope.jfp.framework.support.MyDataBaseObjectSupport;
 /** 微信企业号表 */
 @Named
 public class WeiXinCompanyDBO extends MyDataBaseObjectSupport {
-
 	/**
-	 * 企业ID
+	 * 企业id
 	 */
-	protected String companyId;
+	private String companyId;
 
 	/**
 	 * 应用ID
 	 */
-	private String appId = null;
+	private String appId;
 
 	/**
-	 * 用用密钥
+	 * 应用密钥
 	 */
-	private String appSecret = null;
+	private String appSecret;
 
 	/**
 	 * 应用识别Token
 	 */
-	private String token = null;
+	private String token;
+
+	/**
+	 * 微信ID
+	 */
+	private String wxId;
 
 	/**
 	 * 加密key
 	 */
-	private String aesKey = null;
+	private String aesKey;
 
 	/**
 	 * 支付商户号
 	 */
-	private String partnerId = null;
+	private String partnerId;
 
 	/**
 	 * 商户支付密钥
 	 */
-	private String partnerKey = null;
+	private String partnerKey;
 
 	/**
 	 * 是否启用
 	 */
-	private Integer isUse = null;
+	private String isUse;
 
 	public String getCompanyId() {
 		return companyId;
@@ -80,6 +84,14 @@ public class WeiXinCompanyDBO extends MyDataBaseObjectSupport {
 		this.token = token;
 	}
 
+	public String getWxId() {
+		return wxId;
+	}
+
+	public void setWxId(String wxId) {
+		this.wxId = wxId;
+	}
+
 	public String getAesKey() {
 		return aesKey;
 	}
@@ -104,14 +116,12 @@ public class WeiXinCompanyDBO extends MyDataBaseObjectSupport {
 		this.partnerKey = partnerKey;
 	}
 
-	public Integer getIsUse() {
+	public String getIsUse() {
 		return isUse;
 	}
 
-	public void setIsUse(Integer isUse) {
+	public void setIsUse(String isUse) {
 		this.isUse = isUse;
 	}
-
-
 
 }

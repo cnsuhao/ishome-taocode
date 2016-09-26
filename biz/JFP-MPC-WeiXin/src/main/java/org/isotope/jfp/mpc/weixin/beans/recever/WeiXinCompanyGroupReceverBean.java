@@ -1,30 +1,31 @@
-package org.isotope.jfp.mpc.weixin.beans;
+package org.isotope.jfp.mpc.weixin.beans.recever;
 
 import org.isotope.jfp.framework.beans.message.info.UserReceverBean;
 
 /**
- * 微信企业号标签信息
+ * 微信企业号部门信息 <br>
+ * 参考【微信企业号用户组表】company_weixin_group
  * 
  * @author spookfcy
  * @since 3.3.1
  * @version 3.3.1.20160825
  *
  */
-public class WeiXinCompanyTagReceverBean extends UserReceverBean {
+public class WeiXinCompanyGroupReceverBean extends UserReceverBean {
 	/**
 	 * 企业ID
 	 */
 	private String companyId;
 
 	/**
-	 * id
+	 * 微信id
 	 */
-	private String id;
+	private String wxId;
 	
 	/**
-	 * 标签名称
+	 * 部门名称
 	 */
-	private String tagName;
+	private String deptName;
 	
 	/**
 	 * 是否启用
@@ -39,20 +40,20 @@ public class WeiXinCompanyTagReceverBean extends UserReceverBean {
 		this.companyId = companyId;
 	}
 
-	public String getId() {
-		return id;
+	public String getWxId() {
+		return wxId;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setWxId(String wxId) {
+		this.wxId = wxId;
 	}
 
-	public String getTagName() {
-		return tagName;
+	public String getDeptName() {
+		return deptName;
 	}
 
-	public void setTagName(String tagName) {
-		this.tagName = tagName;
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
 	}
 
 	public Integer getIsUse() {
