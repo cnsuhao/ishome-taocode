@@ -1,4 +1,6 @@
 package com.mcookies.qxy.common.Task;
+import java.util.TreeSet;
+
 import javax.inject.Named;
  
 @Named
@@ -9,7 +11,9 @@ public class TaskPVO extends TaskDBO
 	
 	public String courseName;  //学科名
 		
-	public String taskClasserName; //作业发布的班级名
+	public TreeSet<String> taskClasserName; //作业发布的班级名
+	
+	public String cid; //班级id
 	
 	
 	
@@ -19,12 +23,20 @@ public class TaskPVO extends TaskDBO
 	
 	
 
-	public String getTaskClasserName() {
+	public String getCid() {
+		return cid;
+	}
+
+	public void setCid(String cid) {
+		this.cid = cid;
+	}
+
+	public TreeSet<String> getTaskClasserName() {
 		return taskClasserName;
 	}
 
-	public void setTaskClasserName(String taskClasserName) {
-		this.taskClasserName = taskClasserName;
+	public void setTaskClasserName(TreeSet<String> taskClasserName2) {
+		this.taskClasserName = taskClasserName2;
 	}
 
 	public String getAuthorName() {

@@ -1,5 +1,4 @@
 package com.mcookies.qxy.common.Task;
-import java.sql.Date;
 import javax.inject.Named;
 
 import org.isotope.jfp.framework.support.MyDataBaseObjectSupport;
