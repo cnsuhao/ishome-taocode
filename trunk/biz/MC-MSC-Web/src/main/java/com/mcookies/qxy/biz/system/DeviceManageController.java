@@ -61,6 +61,7 @@ public class DeviceManageController extends MyControllerSupport {
 					device.put("deviceName", pvo.getDeviceName());
 					device.put("dgroupId", pvo.getDgroupId()+"");
 					device.put("dgroupName", pvo.getDgroupName());
+					device.put("sid", pvo.getSid());
 					device.put("schoolName", pvo.getSchoolName());
 					device.put("username", pvo.getUsername());
 					device.put("password", pvo.getPassword());
@@ -106,6 +107,7 @@ public class DeviceManageController extends MyControllerSupport {
 					device.put("deviceName", pvo.getDeviceName());
 					device.put("dgroupId", pvo.getDgroupId()+"");
 					device.put("dgroupName", pvo.getDgroupName());
+					device.put("sid", pvo.getSid());
 					device.put("schoolName", pvo.getSchoolName());
 					device.put("username", pvo.getUsername());
 					device.put("password", pvo.getPassword());
