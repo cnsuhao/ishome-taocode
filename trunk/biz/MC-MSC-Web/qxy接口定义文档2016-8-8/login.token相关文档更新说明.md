@@ -35,7 +35,7 @@
     数据库部分包括，用户表，用户教师表，用户家长表，用户学生表，学生班级表等
     Redis部分包括token信息表，用户持久token表，以及当前token表
     Redis的KV结构如下：
-    
+
 表一：用户token信息表
 
 Key | Value | 生命期 | 说明
@@ -87,7 +87,7 @@ authorizer_access_token | json | 7200秒 |  当前有效的access token，查询
 - redis中表二有一定生命周期，比如半年一年。当表二中的数据被清除后，用户的authorizer_refresh_token也随之失效，用户将不可能通过使用authorizer_refresh_token来获取新的authorizer_access_token，也就无法再使用系统，也就是说半年之后必须重新登录。这样表二是不会有冗余数据的，随着时间冗余数据也会被清除。
 - 当用户登陆的时候，首先会检查redis表一中有没有对应的数据。没有对应的数据，表明是首次使用，直接创建authorizer_refresh_token并返回即可，并同时创建表二数据，表二数据的生命周期为半年（暂定），同时authorizer_access_token内容为空，等待用户调用接口生成该数据。如果已经有对应的数据，取出authorizer_refresh_token（说明该用户已经登录过系统）并检查表二，表二中也有数据说明用户是重复登录，直接返回持久authorizer_refresh_token，并对表二的生命期延长到半年。
 - 如Redis表二中没有对应的数据。说明用户已经超过半年或者一年没有登录过系统。那么重新生成一个authorizer_refresh_token，修改表一中的authorizer_refresh_token记录。并重新插入到表二中，设置表二的生命周期为半年，同时返回新的authorizer_refresh_token即可。
-    
+
 ### login.3. Token方案接口说明
 #### login.3.1 token刷新接口
 > token刷新接口接口返回了当前的authorizer_access_token，该API用于在授权方令牌（authorizer_access_token）失效时，可用刷新令牌（authorizer_refresh_token）获取新的令牌。请注意，此处token是2小时刷新一次，开发者需要自行进行token的缓存。
@@ -113,7 +113,7 @@ Response:
 {
     "status": 0,
     "data": {
-        "authorizer_access_token":"aaUl5s6kAByLwgV0BhXNuIFFUqfrR8vTATsoSHukcIGqJgrc4KmMJ-JlKoC_-NKCLBvuU1cWPv4vDcLN8Z0pn5I45mpATruU0b51hzeT1f8", 
+        "authorizer_access_token":"aaUl5s6kAByLwgV0BhXNuIFFUqfrR8vTATsoSHukcIGqJgrc4KmMJ-JlKoC_-NKCLBvuU1cWPv4vDcLN8Z0pn5I45mpATruU0b51hzeT1f8",
         "expires_in": 7200
     }
 }
@@ -223,10 +223,10 @@ Parameter:
     - 'sid':      学校的id,可不传此参数，会默认获取token中包含sid的信息，传sid会获取其详细信息
 Response:  
     - `status`： 0->成功
-				1->获取失败 
+				1->获取失败
                 11->token is invalid
                 12->token is timeout
-                13->Illegal interface calls, not power use interface	
+                13->Illegal interface calls, not power use interface
     - 'sid':          学校id
     - 'schoolName':   学校名字
     - 'isUse':        是否启用0-停用，1-启用
@@ -282,7 +282,7 @@ Parameter:
 Response:  
     - `status`： 0->ok
 				1->新增失败，识别码已存在
-				2->新增失败，该学校名字已存在 
+				2->新增失败，该学校名字已存在
                 11->token is invalid
                 12->token is timeout
                 13->Illegal interface calls, not power use interface
@@ -331,7 +331,7 @@ Parameter:
 Response:  
     - `status`： 0->ok
 				1->修改失败，识别码已存在
-				2->修改失败，该学校名字已存在 
+				2->修改失败，该学校名字已存在
                 11->token is invalid
                 12->token is timeout
                 13->Illegal interface calls, not power use interface
@@ -362,7 +362,7 @@ Parameter:
 Response:  
     - `status`： 0->ok
 				1->删除失败，该学校已经关联了教工
-				2->删除失败，该学校已不存在 
+				2->删除失败，该学校已不存在
                 11->token is invalid
                 12->token is timeout
                 13->Illegal interface calls, not power use interface
@@ -459,16 +459,31 @@ Parameter:
 	"sid":"1",
 	"userType":"1",
 	"uid":"12",
-    "token":"1kjsldfj23lasjdfl",
+  "token":"1kjsldfj23lasjdfl",
 }
 Response:  
     - `status`：     0->登录成功
 					 1->登录失败，用户已不存在
     - `schoolName`：      学校名称
     - `teacherName`：     教师姓名
-    - `phone`：           教师或学生手机号
-    - `email`：           教师或学生邮箱
+    - `phone`：           教师或家长手机号
+    - `email`：           教师或家长邮箱
     - 'token'：           持久化token
+		- 'idType':           教师的权限角色  0-普通教师，1-系统管理员
+		- 'loginTime':        登陆时间
+		- 'loginStatus':      登陆状态
+		- 'userId':           登陆用户id
+		- 'tid':              登陆教师id
+		- 'schoolId':         登陆学校id
+		- 'userType':         登录用户角色（1-教师；2-家长；3-学生）
+		- 'loginTime':        登陆时间
+		- 'parentId':         登陆家长id
+		- 'parentName':       登陆家长姓名
+		- 'role':             登陆家长角色studentInfo
+		- 'studentInfo':      登陆家长相关学生详情
+		- 'studentName':      登陆家长相关学生姓名
+		- 'cid':              登陆家长相关学生的班级id
+		- 'className':        登陆家长相关学生的班级名称
 ```
 > **返回结果示例教师：userType=1**
 ``` json
@@ -485,7 +500,8 @@ Response:
 		"tid": 22,
 		"schoolId": 123456789,
 		"teacherName": "张三分 ",
-		"userType": "1"
+		"userType": "1",
+		"idType": "1"
     }
 }
 ```
@@ -563,7 +579,7 @@ Parameter:
 示例
 {
 	"phone":"13526523256",             
-	"captcha":"63656"	
+	"captcha":"63656"
 }
 Response:  
     - `status`：    0->验证成功
@@ -590,7 +606,7 @@ Parameter:
     - 'uid':                用户id
 示例
 {
-	"uid":"6", 
+	"uid":"6",
 	"newPassword":"13526523256"          
 }
 Response:  
@@ -610,4 +626,3 @@ Response:
 
 
 #### login.5.6 OpenID登录接口
-
