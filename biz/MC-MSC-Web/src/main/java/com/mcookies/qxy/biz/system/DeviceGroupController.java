@@ -99,9 +99,6 @@ public class DeviceGroupController extends MyControllerSupport{
 			SchoolDBO school = new SchoolDBO();
 			if(dgroup.getSid() !=null && dgroup.getSid()>0 ){
 				school.setSid(dgroup.getSid());				
-			}else{
-				Long sid= getLoginer().getSchoolId();
-				school.setSid(sid);
 			}
 			school = (SchoolDBO) SchoolService.doRead(school);
 			if(school == null){
