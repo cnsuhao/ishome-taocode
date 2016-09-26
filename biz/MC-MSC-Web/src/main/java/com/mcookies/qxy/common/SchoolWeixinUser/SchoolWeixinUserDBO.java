@@ -38,9 +38,9 @@ public class SchoolWeixinUserDBO extends MyDataBaseObjectSupport {
 	private String openid = null;
 
 	/**
-	 * 关注学校企业号ID
+	 * 微信ID
 	 */
-	private String schoolAppId = null;
+	private String wxId = null;
 
 	/**
 	 * 是否启用
@@ -102,12 +102,12 @@ public class SchoolWeixinUserDBO extends MyDataBaseObjectSupport {
 	}
 
 	/**
-	 * 获取关注学校企业号ID
+	 * 获取微信ID
 	 *
-	 * @return School_app_id 关注学校企业号ID
+	 * @return Wx_id 微信ID
 	 */
-	public String getSchoolAppId() {
-		return this.schoolAppId;
+	public String getWxId() {
+		return this.wxId;
 	}
 
 	/**
@@ -180,13 +180,13 @@ public class SchoolWeixinUserDBO extends MyDataBaseObjectSupport {
 	}
 
 	/**
-	 * 设置关注学校企业号ID
+	 * 设置微信ID
 	 *
-	 * @param School_app_id
-	 *            关注学校企业号ID
+	 * @param Wx_id
+	 *            微信ID
 	 */
-	public void setSchoolAppId(String schoolappid) {
-		this.schoolAppId = schoolappid;
+	public void setWxId(String wxid) {
+		this.wxId = wxid;
 	}
 
 	/**

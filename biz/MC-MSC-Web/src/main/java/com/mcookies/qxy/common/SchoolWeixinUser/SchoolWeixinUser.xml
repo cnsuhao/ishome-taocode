@@ -4,10 +4,10 @@
     'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
 <!-- 学校微信企业号关注用户表 -->
 <!-- 需要和DAO保持完全路径一致 -->
-<mapper namespace='SchoolWeixinUser.SchoolWeixinUserDao'>
+<mapper namespace='com.mcookies.qxy.common.SchoolWeixinUser.SchoolWeixinUserDao'>
     <!-- 表字段信息  -->
     <sql id='tableColumns'>
-        pid,sid,uid,uert_type,user_name,openid,school_app_id,is_use,create_time,creator,update_time,updator
+        pid,sid,uid,uert_type,user_name,openid,wx_id,is_use,create_time,creator,update_time,updator
     </sql>
 
     <!-- 根据条件更新所有记录 -->
@@ -31,8 +31,8 @@
         <if test=" openid != null and openid !='' "><!-- openId -->
             ,openid = #{openid}
         </if>
-        <if test=" schoolAppId != null and schoolAppId !='' "><!-- 关注学校企业号ID -->
-            ,school_app_id = #{schoolAppId}
+        <if test=" wxId != null and wxId !='' "><!-- 微信ID -->
+            ,wx_id = #{wxId}
         </if>
         <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
             ,is_use = #{isUse}
@@ -65,8 +65,8 @@
             <if test=" openid != null and openid !='' "><!-- openId -->
                 AND openid = #{openid}
             </if>
-            <if test=" schoolAppId != null and schoolAppId !='' "><!-- 关注学校企业号ID -->
-                AND school_app_id = #{schoolAppId}
+            <if test=" wxId != null and wxId !='' "><!-- 微信ID -->
+                AND wx_id = #{wxId}
             </if>
             <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
                 AND is_use = #{isUse}
@@ -106,8 +106,8 @@
         <if test=" openid != null and openid !='' "><!-- openId -->
             AND openid = #{openid}
         </if>
-        <if test=" schoolAppId != null and schoolAppId !='' "><!-- 关注学校企业号ID -->
-            AND school_app_id = #{schoolAppId}
+        <if test=" wxId != null and wxId !='' "><!-- 微信ID -->
+            AND wx_id = #{wxId}
         </if>
         <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
             AND is_use = #{isUse}
@@ -131,7 +131,7 @@
         INSERT INTO school_weixin_user
           ( <include refid='tableColumns'/>) 
         VALUES 
-          ( #{pid},#{sid},#{uid},#{uertType},#{userName},#{openid},#{schoolAppId},#{isUse},#{createTime},#{creator},#{updateTime},#{updator} )
+          ( #{pid},#{sid},#{uid},#{uertType},#{userName},#{openid},#{wxId},#{isUse},#{createTime},#{creator},#{updateTime},#{updator} )
     </insert>
     <!-- 修改一条数据 -->
     <update id='doUpdate' parameterType='SchoolWeixinUserDBO'>
@@ -154,8 +154,8 @@
         <if test=" openid != null and openid !='' "><!-- openId -->
             ,openid = #{openid}
         </if>
-        <if test=" schoolAppId != null and schoolAppId !='' "><!-- 关注学校企业号ID -->
-            ,school_app_id = #{schoolAppId}
+        <if test=" wxId != null and wxId !='' "><!-- 微信ID -->
+            ,wx_id = #{wxId}
         </if>
         <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
             ,is_use = #{isUse}

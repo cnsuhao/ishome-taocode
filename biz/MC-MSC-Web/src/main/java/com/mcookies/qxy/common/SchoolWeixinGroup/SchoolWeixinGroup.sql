@@ -6,7 +6,7 @@ CREATE TABLE school_weixin_group
     group_no VARCHAR(40) COMMENT '用户组编号',
     group_name VARCHAR(200) COMMENT '用户组名称',
     openid VARCHAR(200) COMMENT '用户组openId',
-    school_app_id VARCHAR(200) COMMENT '关注学校企业号ID',
+    wx_id VARCHAR(200) COMMENT '微信ID',
     is_use TINYINT(1) COMMENT '是否启用',
     create_time DATETIME COMMENT '创建时间',
     creator BIGINT(12) COMMENT '创建者',

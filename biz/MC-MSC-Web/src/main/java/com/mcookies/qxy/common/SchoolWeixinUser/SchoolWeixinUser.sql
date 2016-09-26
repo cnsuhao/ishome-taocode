@@ -6,7 +6,7 @@ CREATE TABLE school_weixin_user
     uert_type TINYINT(1) DEFAULT '9' COMMENT '用户类别',
     user_name VARCHAR(200) COMMENT '用户昵称',
     openid VARCHAR(200) COMMENT 'openId',
-    school_app_id VARCHAR(200) COMMENT '关注学校企业号ID',
+    wx_id VARCHAR(200) COMMENT '微信ID',
     is_use TINYINT(1) COMMENT '是否启用',
     create_time DATETIME COMMENT '创建时间',
     creator BIGINT(12) COMMENT '创建者',

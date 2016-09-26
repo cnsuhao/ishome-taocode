@@ -2,8 +2,9 @@ CREATE TABLE school_weixin
 (
     sid BIGINT(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '学校id',
     app_id VARCHAR(200) NOT NULL COMMENT '应用ID',
-    app_secret VARCHAR(200) NOT NULL COMMENT '用用密钥',
+    app_secret VARCHAR(200) NOT NULL COMMENT '应用密钥',
     token VARCHAR(200) COMMENT '应用识别Token',
+    wx_id VARCHAR(200) COMMENT '微信ID',
     aes_key VARCHAR(200) COMMENT '加密key',
     partner_id VARCHAR(200) COMMENT '支付商户号',
     partner_key VARCHAR(200) COMMENT '商户支付密钥',

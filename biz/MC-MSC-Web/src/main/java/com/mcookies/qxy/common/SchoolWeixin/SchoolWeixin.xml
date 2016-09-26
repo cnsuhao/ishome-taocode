@@ -4,10 +4,10 @@
     'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
 <!-- 学校微信企业号表 -->
 <!-- 需要和DAO保持完全路径一致 -->
-<mapper namespace='SchoolWeixin.SchoolWeixinDao'>
+<mapper namespace='com.mcookies.qxy.common.SchoolWeixin.SchoolWeixinDao'>
     <!-- 表字段信息  -->
     <sql id='tableColumns'>
-        sid,app_id,app_secret,token,aes_key,partner_id,partner_key,is_use,create_time,creator,update_time,updator
+        sid,app_id,app_secret,token,wx_id,aes_key,partner_id,partner_key,is_use,create_time,creator,update_time,updator
     </sql>
 
     <!-- 根据条件更新所有记录 -->
@@ -19,11 +19,14 @@
         <if test=" appId != null and appId !='' "><!-- 应用ID -->
             ,app_id = #{appId}
         </if>
-        <if test=" appSecret != null and appSecret !='' "><!-- 用用密钥 -->
+        <if test=" appSecret != null and appSecret !='' "><!-- 应用密钥 -->
             ,app_secret = #{appSecret}
         </if>
         <if test=" token != null and token !='' "><!-- 应用识别Token -->
             ,token = #{token}
+        </if>
+        <if test=" wxId != null and wxId !='' "><!-- 微信ID -->
+            ,wx_id = #{wxId}
         </if>
         <if test=" aesKey != null and aesKey !='' "><!-- 加密key -->
             ,aes_key = #{aesKey}
@@ -53,11 +56,14 @@
             <if test=" appId != null and appId !='' "><!-- 应用ID -->
                 AND app_id = #{appId}
             </if>
-            <if test=" appSecret != null and appSecret !='' "><!-- 用用密钥 -->
+            <if test=" appSecret != null and appSecret !='' "><!-- 应用密钥 -->
                 AND app_secret = #{appSecret}
             </if>
             <if test=" token != null and token !='' "><!-- 应用识别Token -->
                 AND token = #{token}
+            </if>
+            <if test=" wxId != null and wxId !='' "><!-- 微信ID -->
+                AND wx_id = #{wxId}
             </if>
             <if test=" aesKey != null and aesKey !='' "><!-- 加密key -->
                 AND aes_key = #{aesKey}
@@ -94,11 +100,14 @@
         <if test=" appId != null and appId !='' "><!-- 应用ID -->
             AND app_id = #{appId}
         </if>
-        <if test=" appSecret != null and appSecret !='' "><!-- 用用密钥 -->
+        <if test=" appSecret != null and appSecret !='' "><!-- 应用密钥 -->
             AND app_secret = #{appSecret}
         </if>
         <if test=" token != null and token !='' "><!-- 应用识别Token -->
             AND token = #{token}
+        </if>
+        <if test=" wxId != null and wxId !='' "><!-- 微信ID -->
+            AND wx_id = #{wxId}
         </if>
         <if test=" aesKey != null and aesKey !='' "><!-- 加密key -->
             AND aes_key = #{aesKey}
@@ -131,7 +140,7 @@
         INSERT INTO school_weixin
           ( <include refid='tableColumns'/>) 
         VALUES 
-          ( #{sid},#{appId},#{appSecret},#{token},#{aesKey},#{partnerId},#{partnerKey},#{isUse},#{createTime},#{creator},#{updateTime},#{updator} )
+          ( #{sid},#{appId},#{appSecret},#{token},#{wxId},#{aesKey},#{partnerId},#{partnerKey},#{isUse},#{createTime},#{creator},#{updateTime},#{updator} )
     </insert>
     <!-- 修改一条数据 -->
     <update id='doUpdate' parameterType='SchoolWeixinDBO'>
@@ -142,11 +151,14 @@
         <if test=" appId != null and appId !='' "><!-- 应用ID -->
             ,app_id = #{appId}
         </if>
-        <if test=" appSecret != null and appSecret !='' "><!-- 用用密钥 -->
+        <if test=" appSecret != null and appSecret !='' "><!-- 应用密钥 -->
             ,app_secret = #{appSecret}
         </if>
         <if test=" token != null and token !='' "><!-- 应用识别Token -->
             ,token = #{token}
+        </if>
+        <if test=" wxId != null and wxId !='' "><!-- 微信ID -->
+            ,wx_id = #{wxId}
         </if>
         <if test=" aesKey != null and aesKey !='' "><!-- 加密key -->
             ,aes_key = #{aesKey}
