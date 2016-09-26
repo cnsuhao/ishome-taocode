@@ -53,7 +53,12 @@ public class DeviceGroupController extends MyControllerSupport{
 			}
 			DeviceGroupDBO model = new DeviceGroupDBO();
 			model.setIsUse(1);
-			model.setSid(sid);
+			if(sid !=null && sid>0 ){
+				model.setSid(sid);				
+			}else{
+				sid= getLoginer().getSchoolId();
+				model.setSid(sid);
+			}
 			List<DeviceGroupPVO> relist = (List<DeviceGroupPVO>) DeviceGroupService.doSelectData(model);
 			if(relist!=null){
 				JSONObject json = new JSONObject();
@@ -62,14 +67,6 @@ public class DeviceGroupController extends MyControllerSupport{
 				school = (SchoolDBO) SchoolService.doRead(school);
 				json.put("sid", sid);
 				json.put("schoolName", school.getSchoolName());
-				/*JSONArray array = new JSONArray();
-				for(DeviceGroupDBO d:relist){
-					JSONObject dgroup = new JSONObject();
-					dgroup.put("dgroupId", d.getDgroupId());
-					dgroup.put("dgroupName", d.getDgroupName());
-					dgroup.put("dgroupExplain", d.getDgroupExplain());
-					array.add(dgroup);
-				}*/
 				json.put("dgroup", relist);
 				result.setData(json);
 			}
@@ -99,11 +96,13 @@ public class DeviceGroupController extends MyControllerSupport{
 			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
-			if(dgroup.getSid() == null || dgroup.getSid() == 0){
-				throw new IllegalArgumentException("学校id不能为空");
-			}
 			SchoolDBO school = new SchoolDBO();
-			school.setSid(dgroup.getSid());
+			if(dgroup.getSid() !=null && dgroup.getSid()>0 ){
+				school.setSid(dgroup.getSid());				
+			}else{
+				Long sid= getLoginer().getSchoolId();
+				school.setSid(sid);
+			}
 			school = (SchoolDBO) SchoolService.doRead(school);
 			if(school == null){
 				result.setInfo("添加失败，该学校不存在");
