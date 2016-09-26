@@ -1,6 +1,7 @@
 package com.mcookies.qxy.common.Class;
 import java.util.List;
 
+import org.isotope.jfp.framework.beans.common.FrameworkDataBean;
 import org.isotope.jfp.framework.beans.page.PageVOSupport;
 import org.isotope.jfp.framework.support.sync.MyServiceSupport;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,12 @@ public class ClassService extends MyServiceSupport {
 	public PageVOSupport doSelectPageClass(PageVOSupport formParamPageModel) {
 		formParamPageModel.setPageListData(getDao().doSelectPageClass(formParamPageModel));
 		return formParamPageModel;
+	}
+	
+	
+	public List<ClassPVO> doSelectPageClassAndTid(ClassPVO formParamPageModel) {
+		
+		return getDao().doSelectPageClassAndTid(formParamPageModel);
 	}
 	
 	/**

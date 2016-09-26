@@ -271,7 +271,36 @@
 	</where>
 
 	</select>
-	
+	<!-- 学校班级老师查询接口-->
+	<select id="doSelectPageClassAndTid" parameterType="com.mcookies.qxy.common.Class.ClassPVO" resultType="com.mcookies.qxy.common.Class.ClassPVO">
+	SELECT distinct
+	a.cid,
+	a.class_name,
+	f.tid,
+	f.teacher_name
+	FROM
+	class a
+	LEFT JOIN class_teacher e ON a.cid = e.cid
+	LEFT JOIN u_teacher f ON e.tid = f.tid
+	<where>
+	    <if test="termId != null">
+			and a.term_id = #{termId}
+		</if>
+		<if test="cid != null ">
+			and a.cid = #{cid}
+		</if>
+		<if test="gradeId != null">
+			and a.grade_id = #{gradeId}
+		</if>
+		<if test="tid != null">
+			and f.tid = #{tid}
+		</if>
+		<if test="sid != null">
+			and a.sid = #{sid}
+		</if>
+	</where>
+
+	</select>
 	<!-- 班级列表查询接口-->
 	<select id="doSelectPageClass2" parameterType="com.mcookies.qxy.common.Class.ClassPVO" resultType="com.mcookies.qxy.common.Class.ClassPVO">
      SELECT a.term_id,a.cid,CONCAT(a.grade_name,a.class_name) as class_name,a.term_name,a.leader_name,a.student_count,
@@ -332,9 +361,10 @@
     <!-- 查询class 对应的班级列表(id1;id2;id3;) 为空返回sid下的全部  -->
     <select id='findClassersAndGrade' parameterType='ClassDBO' 
     		resultType='com.mcookies.qxy.common.Class.ClassPVO'>
-        SELECT a.cid,c.grade_name, a.class_name
+        SELECT a.cid, b.term_name,c.grade_name, a.class_name
         FROM class a
         LEFT JOIN s_grade_label c ON a.grade_id = c.grade_id
+        LEFT JOIN s_term b ON a.term_id = b.term_id 
 		WHERE 1 = 1
 		<if test=" cid != '' or cid != null">
 			AND a.cid = #{cid}
