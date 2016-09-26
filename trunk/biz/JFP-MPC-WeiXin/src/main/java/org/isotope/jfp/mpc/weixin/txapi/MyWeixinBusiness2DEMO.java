@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.isotope.jfp.common.weixin.WeixinService;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
-import org.isotope.jfp.mpc.weixin.beans.WeiXinMessageValueBean;
+import org.isotope.jfp.mpc.weixin.beans.message.WeiXinMessageValueBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

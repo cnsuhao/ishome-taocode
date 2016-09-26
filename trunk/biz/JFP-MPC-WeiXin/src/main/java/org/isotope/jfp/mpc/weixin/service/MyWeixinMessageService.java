@@ -7,11 +7,11 @@ import org.isotope.jfp.framework.common.message.UserMessageSendService;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.constants.pub.ISPushConstant.MessageType;
 import org.isotope.jfp.framework.utils.BeanFactoryHelper;
-import org.isotope.jfp.mpc.weixin.beans.WeiXinCompanyDeptReceverBean;
-import org.isotope.jfp.mpc.weixin.beans.WeiXinCompanySenderBean;
-import org.isotope.jfp.mpc.weixin.beans.WeiXinCompanyTagReceverBean;
-import org.isotope.jfp.mpc.weixin.beans.WeiXinMessageValueBean;
-import org.isotope.jfp.mpc.weixin.beans.WeiXinUserReceverBean;
+import org.isotope.jfp.mpc.weixin.beans.message.WeiXinMessageValueBean;
+import org.isotope.jfp.mpc.weixin.beans.recever.WeiXinCompanyGroupReceverBean;
+import org.isotope.jfp.mpc.weixin.beans.recever.WeiXinCompanyTagReceverBean;
+import org.isotope.jfp.mpc.weixin.beans.recever.WeiXinUserReceverBean;
+import org.isotope.jfp.mpc.weixin.beans.sender.WeiXinCompanySenderBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -94,9 +94,9 @@ public class MyWeixinMessageService implements ISFrameworkConstants {
 				return "9080";
 			message.setMessage(weixinMessage);
 		}
-		MyWeixinDeptService myds = BeanFactoryHelper.getBean("MyWeixinDeptService");
+		MyWeixinGroupService myds = BeanFactoryHelper.getBean("MyWeixinGroupService");
 		{
-			WeiXinCompanyDeptReceverBean recever = myds.loadWeiXinCompanyDeptReceverBean(groupId);
+			WeiXinCompanyGroupReceverBean recever = myds.loadWeiXinCompanyDeptReceverBean(groupId);
 			if (recever == null)
 				return "9020";
 			message.setRecever(recever);
