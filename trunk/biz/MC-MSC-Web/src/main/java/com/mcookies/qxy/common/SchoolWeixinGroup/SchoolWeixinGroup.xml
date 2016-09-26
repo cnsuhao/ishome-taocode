@@ -7,7 +7,7 @@
 <mapper namespace='com.mcookies.qxy.common.SchoolWeixinGroup.SchoolWeixinGroupDao'>
     <!-- 表字段信息  -->
     <sql id='tableColumns'>
-        pid,sid,gid,group_no,group_name,openid,school_app_id,is_use,create_time,creator,update_time,updator
+        pid,sid,gid,group_no,group_name,openid,wx_id,is_use,create_time,creator,update_time,updator
     </sql>
 
     <!-- 根据条件更新所有记录 -->
@@ -31,8 +31,8 @@
         <if test=" openid != null and openid !='' "><!-- 用户组openId -->
             ,openid = #{openid}
         </if>
-        <if test=" schoolAppId != null and schoolAppId !='' "><!-- 关注学校企业号ID -->
-            ,school_app_id = #{schoolAppId}
+        <if test=" wxId != null and wxId !='' "><!-- 微信ID -->
+            ,wx_id = #{wxId}
         </if>
         <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
             ,is_use = #{isUse}
@@ -65,8 +65,8 @@
             <if test=" openid != null and openid !='' "><!-- 用户组openId -->
                 AND openid = #{openid}
             </if>
-            <if test=" schoolAppId != null and schoolAppId !='' "><!-- 关注学校企业号ID -->
-                AND school_app_id = #{schoolAppId}
+            <if test=" wxId != null and wxId !='' "><!-- 微信ID -->
+                AND wx_id = #{wxId}
             </if>
             <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
                 AND is_use = #{isUse}
@@ -106,8 +106,8 @@
         <if test=" openid != null and openid !='' "><!-- 用户组openId -->
             AND openid = #{openid}
         </if>
-        <if test=" schoolAppId != null and schoolAppId !='' "><!-- 关注学校企业号ID -->
-            AND school_app_id = #{schoolAppId}
+        <if test=" wxId != null and wxId !='' "><!-- 微信ID -->
+            AND wx_id = #{wxId}
         </if>
         <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
             AND is_use = #{isUse}
@@ -131,7 +131,7 @@
         INSERT INTO school_weixin_group
           ( <include refid='tableColumns'/>) 
         VALUES 
-          ( #{pid},#{sid},#{gid},#{groupNo},#{groupName},#{openid},#{schoolAppId},#{isUse},#{createTime},#{creator},#{updateTime},#{updator} )
+          ( #{pid},#{sid},#{gid},#{groupNo},#{groupName},#{openid},#{wxId},#{isUse},#{createTime},#{creator},#{updateTime},#{updator} )
     </insert>
     <!-- 修改一条数据 -->
     <update id='doUpdate' parameterType='SchoolWeixinGroupDBO'>
@@ -154,8 +154,8 @@
         <if test=" openid != null and openid !='' "><!-- 用户组openId -->
             ,openid = #{openid}
         </if>
-        <if test=" schoolAppId != null and schoolAppId !='' "><!-- 关注学校企业号ID -->
-            ,school_app_id = #{schoolAppId}
+        <if test=" wxId != null and wxId !='' "><!-- 微信ID -->
+            ,wx_id = #{wxId}
         </if>
         <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
             ,is_use = #{isUse}
