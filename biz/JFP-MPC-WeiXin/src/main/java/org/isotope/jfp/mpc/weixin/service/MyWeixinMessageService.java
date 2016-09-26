@@ -30,8 +30,8 @@ public class MyWeixinMessageService implements ISFrameworkConstants {
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Resource
-	UserMessageSendService umss;	
-	
+	UserMessageSendService umss;
+
 	MessageInfoBean message;
 
 	public MyWeixinMessageService() {
@@ -42,7 +42,8 @@ public class MyWeixinMessageService implements ISFrameworkConstants {
 	/**
 	 * 企业信息发送给自身
 	 * 
-	 * @param companyId 企业ID
+	 * @param companyId
+	 *            企业ID
 	 * @param message
 	 * @return
 	 */
@@ -54,7 +55,11 @@ public class MyWeixinMessageService implements ISFrameworkConstants {
 				return "9090";
 			message.setSender(sender);
 		}
-		message.setMessage(weixinMessage);
+		{
+			if (weixinMessage == null)
+				return "9080";
+			message.setMessage(weixinMessage);
+		}
 		{
 			WeiXinCompanyTagReceverBean recever = mycs.loadWeiXinCompanyTagReceverBean(companyId);
 			if (recever == null)
@@ -69,9 +74,11 @@ public class MyWeixinMessageService implements ISFrameworkConstants {
 	/**
 	 * 企业信息发送给部门
 	 * 
-	 * @param companyId 企业ID
-	 * @param groupId 用户组ID
-	 * @param message 
+	 * @param companyId
+	 *            企业ID
+	 * @param groupId
+	 *            用户组ID
+	 * @param message
 	 * @return
 	 */
 	public String sendToCompanyIdGroupId(String companyId, String groupId, WeiXinMessageValueBean weixinMessage) {
@@ -82,7 +89,11 @@ public class MyWeixinMessageService implements ISFrameworkConstants {
 				return "9090";
 			message.setSender(sender);
 		}
-		message.setMessage(weixinMessage);
+		{
+			if (weixinMessage == null)
+				return "9080";
+			message.setMessage(weixinMessage);
+		}
 		MyWeixinDeptService myds = BeanFactoryHelper.getBean("MyWeixinDeptService");
 		{
 			WeiXinCompanyDeptReceverBean recever = myds.loadWeiXinCompanyDeptReceverBean(groupId);
@@ -98,8 +109,10 @@ public class MyWeixinMessageService implements ISFrameworkConstants {
 	/**
 	 * 企业信息发送给个人
 	 * 
-	 * @param companyId 企业ID
-	 * @param userId 个人ID
+	 * @param companyId
+	 *            企业ID
+	 * @param userId
+	 *            个人ID
 	 * @param message
 	 * @return
 	 */
@@ -111,7 +124,11 @@ public class MyWeixinMessageService implements ISFrameworkConstants {
 				return "9090";
 			message.setSender(sender);
 		}
-		message.setMessage(weixinMessage);
+		{
+			if (weixinMessage == null)
+				return "9080";
+			message.setMessage(weixinMessage);
+		}
 		MyWeixinUserService myds = BeanFactoryHelper.getBean("MyWeixinUserService");
 		{
 			WeiXinUserReceverBean recever = myds.loadWeiXinUserReceverBean(userId);
