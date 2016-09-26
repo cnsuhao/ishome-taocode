@@ -227,6 +227,7 @@
 			device_name,
 			a.username,
 			a.`password`,
+			a.sid,
 			b.school_name
 		FROM
 			device_tag a,
