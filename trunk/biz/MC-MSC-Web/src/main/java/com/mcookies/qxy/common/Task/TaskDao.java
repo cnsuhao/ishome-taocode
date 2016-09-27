@@ -9,11 +9,11 @@ import org.isotope.jfp.framework.support.IDatabaseSupport;
 /** 作业表*/
 public interface TaskDao extends IDatabaseSupport{
 	
-	public List<TaskPVO> doSelectTaskTOtermIdAndCid(PageVOSupport PageModel);
+	public List<TaskPVO> doSelectPageTaskWithCid(PageVOSupport PageModel);
 	
-	public List<TaskPVO> doSelectTaskInfoTOtermIdAndTid(PageVOSupport PageModel);
+	public List<TaskPVO> doSelectPagetTaskWithCiddAndTid(PageVOSupport PageModel);
 	
-	public List<TaskPVO> doSearch(PageVOSupport PageModel);
+	public List<TaskPVO> doSelectPageSearch(PageVOSupport PageModel);
 	
 	public TaskPVO doSelectTaskInfo(TaskDBO dbo);
 	
