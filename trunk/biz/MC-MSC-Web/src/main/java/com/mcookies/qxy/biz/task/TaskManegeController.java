@@ -50,13 +50,13 @@ public class TaskManegeController extends MyControllerSupport{
 	
 	/**
 	 * 学校学期年级班级查询接口（通用）
-	 * @param termid,cid
+	 * @param cid
 	 * @param token
 	 * @return
 	 */
 	@RequestMapping(value = "/task/class", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean taskWithClassGET(String cid,String token,Integer page,Integer size,Boolean test) {
+	public RESTResultBean taskWithClassGET(String cid,String token,Integer page,Integer size) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			//token校验
@@ -69,20 +69,16 @@ public class TaskManegeController extends MyControllerSupport{
 			if (size == null || size == 0) {
 				size = 12;
 			}
-			if(!test){
-				result.setInfo("你使用的测试接口地址错误");
-				result.setStatus(3);
-				return result;
-			}
 			if(cid.equals(null)|| cid.equals("")){
 				throw new IllegalArgumentException("cid不能为空");
 			}
 			TaskPVO taskdbo = new TaskPVO();
-			/*if(!cid.equals(null)|| !cid.equals("")){
+			if(!cid.equals(null)|| !cid.equals("")){
 				ClassDBO model = new ClassDBO();
 				model.setCid(Long.parseLong(cid));
 				ClassPVO cla = ClassService.findClassersAndGrade(model);
 				taskdbo.setCid(cid);
+				taskdbo.setSid(cla.getSid());
 			}
 			pageModel.setPageCurrent(page);
 			pageModel.setPageLimit(size);			
@@ -92,25 +88,7 @@ public class TaskManegeController extends MyControllerSupport{
 			data.put("page", pageModel.getPageCurrent());
 			data.put("size", pageModel.getPageLimit());
 			data.put("count", pageModel.getResultCount());
-			data.put("tasklist", pageModel.getPageListData());*/
-			Map<String, Object> data = new HashMap<String, Object>();
-			JSONArray array = new JSONArray();
-			for(Long i=1L; i<=3;i++){
-				TaskPVO task = new TaskPVO();
-				task.setTaskId(i);
-				task.setTaskName("写一篇500论点描述");
-				task.setIsTop(0);
-				task.setAuthor(20L);
-				task.setAuthorName("陈老师");
-				task.setCourseId(3L);
-				task.setCourseName("语文");
-				task.setPublishTime("2019-09-22 16:20:30");
-				array.add(task);
-			}
-			data.put("count", 3);
-			data.put("page", page);
-			data.put("size", size);
-			data.put("tasklist", array);
+			data.put("tasklist", pageModel.getPageListData());
 			result.setData(data);
 		} catch (Exception e) {
 			result.setInfo("查询失败，" + e.getMessage());
@@ -121,13 +99,13 @@ public class TaskManegeController extends MyControllerSupport{
 	
 	/**
 	 * 学校学期年级班级查询接口（通用）
-	 * @param termid,tid
+	 * @param cid,tid
 	 * @param token
 	 * @return
 	 */
 	@RequestMapping(value = "/task/teacher", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean taskWithTeacherGET(Long tid,String cid,String token,Integer page,Integer size,Boolean test) {
+	public RESTResultBean taskWithTeacherGET(Long tid,String cid,String token,Integer page,Integer size) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			//token校验
@@ -140,11 +118,6 @@ public class TaskManegeController extends MyControllerSupport{
 			if (size == null || size == 0) {
 				size = 12;
 			}
-			if(!test){
-				result.setInfo("你使用的测试接口地址错误");
-				result.setStatus(3);
-				return result;
-			}
 			
 			if(tid == null || tid<=0){
 				throw new IllegalArgumentException("tid不能为空");
@@ -153,7 +126,8 @@ public class TaskManegeController extends MyControllerSupport{
 				throw new IllegalArgumentException("cid不能为空");
 			}
 			Map<String, Object> data = new HashMap<String, Object>();
-			/*TaskDBO taskdbo = new TaskDBO();			 
+
+			TaskPVO taskdbo = new TaskPVO();			 
 			taskdbo.setCid(cid);					
 			taskdbo.setAuthor(tid);			
 			pageModel.setPageCurrent(page);
@@ -163,24 +137,7 @@ public class TaskManegeController extends MyControllerSupport{
 			data.put("page", pageModel.getPageCurrent());
 			data.put("size", pageModel.getPageLimit());
 			data.put("count", pageModel.getResultCount());
-			data.put("tasklist", pageModel.getPageListData());*/
-			JSONArray array = new JSONArray();
-			for(Long i=1L; i<=3;i++){
-				TaskPVO task = new TaskPVO();
-				task.setTaskId(i);
-				task.setTaskName("写一篇500论点描述");
-				task.setIsTop(0);
-				task.setAuthor(20L);
-				task.setAuthorName("陈老师");
-				task.setCourseId(3L);
-				task.setCourseName("语文");
-				task.setPublishTime("2019-09-22 16:20:30");
-				array.add(task);
-			}
-			data.put("count", 3);
-			data.put("page", page);
-			data.put("size", size);
-			data.put("tasklist", array);
+			data.put("tasklist", pageModel.getPageListData());
 			result.setData(data);
 		} catch (Exception e) {
 			result.setInfo("查询失败，" + e.getMessage());
@@ -199,23 +156,18 @@ public class TaskManegeController extends MyControllerSupport{
 	
 	@RequestMapping(value = "/task/info", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean taskInfoGET(Long taskId,String token,Boolean test) {
+	public RESTResultBean taskInfoGET(Long taskId,String token) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			//token校验
 			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
-			if(!test){
-				result.setInfo("你使用的测试接口地址错误");
-				result.setStatus(3);
-				return result;
-			}
 			if(taskId<=0){
 				throw new IllegalArgumentException("taskId不能为空");
 			}
 			TreeSet<String> taskClasserName = new TreeSet<String>();
-			/*TaskDBO dbo = new TaskDBO();
+			TaskDBO dbo = new TaskDBO();
 			dbo.setTaskId(taskId);
 			dbo = (TaskDBO) TaskServicer.doRead(dbo);
 			if(dbo == null ){
@@ -231,34 +183,16 @@ public class TaskManegeController extends MyControllerSupport{
 					ClassDBO model = new ClassDBO();
 					model.setCid(Long.parseLong(cid));
 					ClassPVO cla = ClassService.findClassersAndGrade(model);
-					taskClasserName.add(cla.getTeacherName()+cla.getGradeName()+cla.getClassName());
+					if(cla!= null){
+						
+						taskClasserName.add(cla.getTermName()+cla.getGradeName()+cla.getClassName());
+					}
 				}
 				
 			}
 			TaskPVO task = new TaskPVO();
-			TaskServicer.doSelectTaskInfo(dbo);
-			task.setTaskClasserName(taskClasserName);*/
-			
-				TaskPVO task = new TaskPVO();
-				task.setTaskId(taskId);
-				task.setTaskName("写一篇500论点描述");
-				task.setContent("论秦始皇功大于过.....");
-				task.setVideo("url");
-				task.setPic("url1,url2");
-				task.setTaskClasser("1,2,5");
-				taskClasserName.add("初三1班");
-				taskClasserName.add("初三3班");
-				taskClasserName.add("初三5班");
-				task.setTaskClasserName(taskClasserName);
-				task.setIsTop(0);
-				task.setAuthor(20L);
-				task.setAuthorName("陈老师");
-				task.setCourseId(3L);
-				task.setCourseName("语文");
-				task.setPublishTime("2019-09-22 16:20:30");
-				task.setStartTime("2019-09-22 16:20:30");
-				task.setEndTime("2019-09-23 16:20:30");
-
+			task = TaskServicer.doSelectTaskInfo(dbo);
+			task.setTaskClasserName(taskClasserName);
 			result.setData(task);
 		} catch (Exception e) {
 			result.setInfo("查询失败，" + e.getMessage());
@@ -275,7 +209,7 @@ public class TaskManegeController extends MyControllerSupport{
 	 */
 	@RequestMapping(value = "/task/search", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean taskSearchGET(Long courseId,String taskName,String cid,Long tid,String token,Integer page,Integer size,Boolean test) {
+	public RESTResultBean taskSearchGET(Long courseId,String taskName,String cid,Long tid,String token,Integer page,Integer size) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			//token校验
@@ -288,22 +222,17 @@ public class TaskManegeController extends MyControllerSupport{
 			if (size == null || size == 0) {
 				size = 12;
 			}
-			if(!test){
-				result.setInfo("你使用的测试接口地址错误");
-				result.setStatus(3);
-				return result;
-			}
 			if(courseId<=0){
 				throw new IllegalArgumentException("courseId不能为空");
 			}
 			Map<String, Object> data = new HashMap<String, Object>();
-			/*TaskPVO taskdbo = new TaskPVO();
+			TaskPVO taskdbo = new TaskPVO();
 			taskdbo.setCourseId(courseId);
 			taskdbo.setTaskName(taskName);
 			if(!cid.equals(null)|| !cid.equals("")){
 				taskdbo.setCid(cid);
 			}
-			if(tid == null || tid <= 0){
+			if(tid != null && tid > 0){
 			    taskdbo.setAuthor(tid);
 			}
 			pageModel.setPageCurrent(page);
@@ -313,24 +242,7 @@ public class TaskManegeController extends MyControllerSupport{
 			data.put("page", pageModel.getPageCurrent());
 			data.put("size", pageModel.getPageLimit());
 			data.put("count", pageModel.getResultCount());
-			data.put("tasklist", pageModel.getPageListData());*/
-			JSONArray array = new JSONArray();
-			for(Long i=1L; i<=3;i++){
-				TaskPVO task = new TaskPVO();
-				task.setTaskId(i);
-				task.setTaskName("写一篇500论点描述");
-				task.setIsTop(0);
-				task.setAuthor(20L);
-				task.setAuthorName("陈老师");
-				task.setCourseId(3L);
-				task.setCourseName("语文");
-				task.setPublishTime("2019-09-22 16:20:30");
-				array.add(task);
-			}
-			data.put("count", 3);
-			data.put("page", page);
-			data.put("size", size);
-			data.put("tasklist", array);
+			data.put("tasklist", pageModel.getPageListData());
 			result.setData(data);
 		} catch (Exception e) {
 			result.setInfo("查询失败，" + e.getMessage());
@@ -347,32 +259,39 @@ public class TaskManegeController extends MyControllerSupport{
 	 */
 	@RequestMapping(value = "/task", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean taskAddPOST(@RequestBody TaskDBO task,String token,Boolean test) {
+	public RESTResultBean taskAddPOST(@RequestBody TaskDBO task,String token) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			//token校验
 			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
-			if(!test){
-				result.setInfo("你使用的测试接口地址错误");
-				result.setStatus(3);
-				return result;
-			}
+			
 			if(task.getContent()==null&&task.getPublishTime()==null){
 				result.setInfo("作业信息不全，请核对后再提交");
 				result.setStatus(2);
 				return result;
 			}
-			 /*Long sid = getLoginer().getSchoolId();
+			 Long sid = getLoginer().getSchoolId();
 			 task.setSid(sid);
 			 task.setIsAudit(1);
-			 TaskServicer.doInsert(task);*/
+			 task.setIsUse(1);
+			 task.setNum(0L);
+			 Long termId = task.getTermId();
+			 if(termId == null || termId == 0){
+					STermDBO term = new STermDBO();
+					term.setSid(sid);
+					term.setIsDefault(1);
+					List<STermDBO> termlist = (List<STermDBO>) STermService.doSelectData(term);
+					termId = termlist.get(0).getTermId();
+					task.setTermId(termId);
+				}
+			 TaskServicer.doInsert(task);
 			Map<String, Object> data = new HashMap<String, Object>();
 			data.put("info", "ok");
 			result.setData(data);
 		} catch (Exception e) {
-			result.setInfo("作业新增，" + e.getMessage());
+			result.setInfo("作业新增失败，" + e.getMessage());
 			result.setStatus(1);
 		}
 		return result;
@@ -386,32 +305,28 @@ public class TaskManegeController extends MyControllerSupport{
 	 */
 	@RequestMapping(value = "/task/set", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean taskSetPUT(@RequestBody TaskDBO task ,String token,Boolean test) {
+	public RESTResultBean taskSetPUT(@RequestBody TaskDBO task ,String token) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			//token校验
 			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
-			if(!test){
-				result.setInfo("你使用的测试接口地址错误");
-				result.setStatus(3);
-				return result;
-			}
+			
 			Long taskId = task.getTaskId();
 			Integer isTop = task.getIsTop();
-			if(isTop==null&&taskId==null){
+			if(isTop==null || taskId==null){
 				result.setInfo("isTop,taskId不能为空");
 				result.setStatus(2);
 				return result;
 			}
-			/*TaskDBO model =  (TaskDBO) TaskServicer.doRead(task);
+			TaskDBO model =  (TaskDBO) TaskServicer.doRead(task);
 			if(model.getIsTop() == task.getIsTop()){
 				result.setInfo("请不要重复操作");
 				result.setStatus(3);
 				return result;
 			}
-			TaskServicer.doUpdate(task);*/
+			TaskServicer.doUpdate(task);
 			Map<String, Object> data = new HashMap<String, Object>();
 			data.put("info", "ok");
 			result.setData(data);
@@ -429,25 +344,21 @@ public class TaskManegeController extends MyControllerSupport{
 	 */
 	@RequestMapping(value = "/task", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean taskPUT(@RequestBody TaskDBO task ,String token,Boolean test) {
+	public RESTResultBean taskPUT(@RequestBody TaskDBO task ,String token) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			//token校验
 			if (doCheckToken(token) == false) {
 				return tokenFail();
 			}
-			if(!test){
-				result.setInfo("你使用的测试接口地址错误");
-				result.setStatus(3);
-				return result;
-			}
+			
 			Long taskId = task.getTaskId();
 			if(taskId==null){
 				result.setInfo("taskId不能为空");
 				result.setStatus(2);
 				return result;
 			}
-			//TaskServicer.doUpdate(task); 
+			TaskServicer.doUpdate(task); 
 			Map<String, Object> data = new HashMap<String, Object>();
 			data.put("info", "ok");
 			result.setData(data);
@@ -466,17 +377,12 @@ public class TaskManegeController extends MyControllerSupport{
 	 */
 	@RequestMapping(value = "/task", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean taskDELETE(@RequestBody TaskDBO task ,String token,Boolean test) {
+	public RESTResultBean taskDELETE(@RequestBody TaskDBO task ,String token) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			//token校验
 			if (doCheckToken(token) == false) {
 				return tokenFail();
-			}
-			if(!test){
-				result.setInfo("你使用的测试接口地址错误");
-				result.setStatus(3);
-				return result;
 			}
 			Long taskId = task.getTaskId();
 			if(taskId==null){
@@ -484,7 +390,7 @@ public class TaskManegeController extends MyControllerSupport{
 				result.setStatus(2);
 				return result;
 			}
-			//TaskServicer.doDelete(task); 
+			TaskServicer.doDelete(task); 
 			Map<String, Object> data = new HashMap<String, Object>();
 			data.put("info", "ok");
 			result.setData(data);
