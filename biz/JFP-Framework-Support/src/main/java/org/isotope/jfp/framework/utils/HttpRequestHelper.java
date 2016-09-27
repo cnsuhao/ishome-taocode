@@ -20,8 +20,34 @@ import org.apache.commons.lang3.StringUtils;
  *
  */
 public class HttpRequestHelper {
-
-	public static String getIpAddr(HttpServletRequest request) {
+	/**
+	 * 获得当前服务器IP地址
+	 * @return
+	 */
+	public static String getServerLocalIPAddr() {
+		InetAddress addr = null;
+		try {
+			addr = InetAddress.getLocalHost();
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		}
+		byte[] ipAddr = addr.getAddress();
+		String ipAddrStr = "";
+		for (int i = 0; i < ipAddr.length; i++) {
+			if (i > 0) {
+				ipAddrStr += ".";
+			}
+			ipAddrStr += ipAddr[i] & 0xFF;
+		}
+		// System.out.println(ipAddrStr);
+		return ipAddrStr;
+	}
+	/**
+	 * 获得远程客户端IP地址
+	 * @param request
+	 * @return
+	 */
+	public static String getClientRemoteIPAddr(HttpServletRequest request) {
 		String ipAddress = null;
 		try {
 			ipAddress = request.getHeader("X-Real-IP");
