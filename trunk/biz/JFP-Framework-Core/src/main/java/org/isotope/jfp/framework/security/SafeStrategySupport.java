@@ -95,7 +95,7 @@ public class SafeStrategySupport extends HandlerInterceptorAdapter implements IS
 					setConfigNum(config);
 			}
 			String requestPath = request.getRequestURI();
-			String ipAddress = HttpRequestHelper.getIpAddr(request);
+			String ipAddress = HttpRequestHelper.getClientRemoteIPAddr(request);
 			// ipAddress = "177.85.92.136";
 			String requestIpKey = "REQUEST_IP:" + ipAddress;
 			String lastTime = (String) fireWall.get(requestIpKey);
