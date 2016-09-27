@@ -3,15 +3,15 @@ package org.isotope.jfp.mpc.weixin.beans.recever;
 import org.isotope.jfp.framework.beans.message.info.UserReceverBean;
 
 /**
- * 微信企业号部门信息 <br>
- * 参考【微信企业号用户组表】company_weixin_group
+ * 微信用户信息 <br>
+ * 参考【微信企业号关注用户表】company_weixin_user
  * 
  * @author spookfcy
  * @since 3.3.1
  * @version 3.3.1.20160825
- * @see <WeiXinCompanyGroupDBO>
+ * @see <WeixinGroupUserDBO>
  */
-public class WeiXinCompanyGroupReceverBean extends UserReceverBean {
+public class WeiXinCompanyGroupUserReceverBean extends UserReceverBean {
 
 	/**
 	 * 学校id
@@ -24,17 +24,22 @@ public class WeiXinCompanyGroupReceverBean extends UserReceverBean {
 	private String groupid;
 
 	/**
-	 * 用户组编号
+	 * 用户id
 	 */
-	private String groupNo;
+	private String userId;
 
 	/**
-	 * 用户组名称
+	 * 用户类别
 	 */
-	private String groupName;
+	private String uertType;
 
 	/**
-	 * 用户组openId
+	 * 用户昵称
+	 */
+	private String userName;
+
+	/**
+	 * openId
 	 */
 	private String openid;
 
@@ -64,20 +69,28 @@ public class WeiXinCompanyGroupReceverBean extends UserReceverBean {
 		this.groupid = groupid;
 	}
 
-	public String getGroupNo() {
-		return groupNo;
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setGroupNo(String groupNo) {
-		this.groupNo = groupNo;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
-	public String getGroupName() {
-		return groupName;
+	public String getUertType() {
+		return uertType;
 	}
 
-	public void setGroupName(String groupName) {
-		this.groupName = groupName;
+	public void setUertType(String uertType) {
+		this.uertType = uertType;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public String getOpenid() {

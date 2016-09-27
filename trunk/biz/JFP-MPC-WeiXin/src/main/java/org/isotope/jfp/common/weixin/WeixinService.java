@@ -23,9 +23,63 @@ public class WeixinService extends MyServiceSupport implements ISFrameworkConsta
 	}
 
 	/**
+	 * 获得微信企业号用户组数据
+	 */
+	public List<WeiXinCompanyGroupDBO> loadCompanyGroup(HashMap<String, String> companyGroup) {
+		return getWeixinDao().loadCompanyGroup(companyGroup);
+	}
+
+	/**
+	 * 获得微信企业号标签数据
+	 */
+	public List<WeiXinCompanyTagDBO> loadCompanyTag(HashMap<String, String> companyTag) {
+		return getWeixinDao().loadCompanyTag(companyTag);
+	}
+
+	/**
 	 * 获得微信企业号关注用户表数据
 	 */
-	public List<WeixinUserDBO> loadCompanyUser(HashMap<String, String> companyUser) {
+	public List<WeiXinCompanyUserDBO> loadCompanyUser(HashMap<String, String> companyUser) {
 		return getWeixinDao().loadCompanyUser(companyUser);
+	}
+
+	/**
+	 * 更新企业微信ID
+	 * 
+	 * @param comyany
+	 * @return
+	 */
+	public int updateCompanyById(WeiXinCompanyDBO comyany) {
+		return getWeixinDao().updateCompanyById(comyany);
+	}
+
+	/**
+	 * 更新企业用户组微信ID
+	 * 
+	 * @param comyany
+	 * @return
+	 */
+	public int updateCompanyGroupById(WeiXinCompanyGroupDBO companyGroup) {
+		return getWeixinDao().updateCompanyGroupById(companyGroup);
+	}
+
+	/**
+	 * 更新企业标签组ID
+	 * 
+	 * @param comyany
+	 * @return
+	 */
+	public int updateCompanyTagById(WeiXinCompanyTagDBO companyTag) {
+		return getWeixinDao().updateCompanyTagById(companyTag);
+	}
+
+	/**
+	 * 更新企业用户微信ID
+	 * 
+	 * @param comyany
+	 * @return
+	 */
+	public int updateCompanyUserById(WeiXinCompanyUserDBO companyUser) {
+		return getWeixinDao().updateCompanyUserById(companyUser);
 	}
 }

@@ -3,7 +3,7 @@ package org.isotope.jfp.mpc.weixin;
 import org.isotope.jfp.framework.beans.message.MessageInfoBean;
 import org.isotope.jfp.framework.common.message.UserMessageSendService;
 import org.isotope.jfp.mpc.weixin.beans.message.WeiXinMessageValueBean;
-import org.isotope.jfp.mpc.weixin.beans.recever.WeiXinUserReceverBean;
+import org.isotope.jfp.mpc.weixin.beans.recever.WeiXinCompanyUserReceverBean;
 import org.isotope.jfp.mpc.weixin.beans.sender.WeiXinCompanySenderBean;
 
 public class ReadMe {
@@ -13,7 +13,7 @@ public class ReadMe {
 
 		WeiXinCompanySenderBean sender = new WeiXinCompanySenderBean();
 		WeiXinMessageValueBean message = new WeiXinMessageValueBean();
-		WeiXinUserReceverBean recever = new WeiXinUserReceverBean();
+		WeiXinCompanyUserReceverBean recever = new WeiXinCompanyUserReceverBean();
 
 		messageBean.setSender(sender);
 		messageBean.setRecever(recever);

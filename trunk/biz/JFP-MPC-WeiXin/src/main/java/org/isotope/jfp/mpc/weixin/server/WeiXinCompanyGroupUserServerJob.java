@@ -7,7 +7,8 @@ import org.isotope.jfp.mpc.weixin.service.MyWeixinUserService;
 
 /**
  * 微信企业用户管理<br>
- * 通讯录管理（用户、用户组、企业）
+ * 通讯录管理（用户、用户组、企业）<br>
+ * 同步通讯录微信号ID
  * 
  * @author spookfcy
  * @since 3.3.1
@@ -19,7 +20,7 @@ public class WeiXinCompanyGroupUserServerJob {
 	 */
 	public void loadCompany() {
 		MyWeixinCompanyService company = BeanFactoryHelper.getBean(MyWeixinCompanyService.class.getSimpleName());
-		company.companyIdSync();
+		company.companyTokenSync();
 	}
 
 	/**
@@ -27,7 +28,7 @@ public class WeiXinCompanyGroupUserServerJob {
 	 */
 	public void loadCompanyGroup() {
 		MyWeixinGroupService group = BeanFactoryHelper.getBean(MyWeixinGroupService.class.getSimpleName());
-		group.companyIdGroupIdSync();
+		group.companyGroupIdSync();
 	}
 
 	/**
@@ -35,7 +36,7 @@ public class WeiXinCompanyGroupUserServerJob {
 	 */
 	public void loadCompanyUser() {
 		MyWeixinUserService user = BeanFactoryHelper.getBean(MyWeixinUserService.class.getSimpleName());
-		user.companyIdUserIdSync();
+		user.companyUserIdSync();
 	}
 
 }

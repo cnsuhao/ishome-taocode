@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class WeiXinGroupController {
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Resource
-	MyWeixinGroupService MyWeixinDeptBusiness_;
+	MyWeixinGroupService MyWeixinGroupBusiness_;
 
 	/**
 	 * 增加一个企业用户组（数据来源于DB）
@@ -35,7 +35,7 @@ public class WeiXinGroupController {
 	@ResponseBody
 	public RESTResultBean companyIdGroupIdAddPOST(@PathVariable String companyId,@PathVariable String groupId) {
 		RESTResultBean result = new RESTResultBean();
-		result.setResult(MyWeixinDeptBusiness_.companyIdGroupIdAdd(companyId,groupId));
+		result.setResult(MyWeixinGroupBusiness_.companyIdGroupIdAdd(companyId,groupId));
 		return result;
 	}
 
@@ -48,10 +48,23 @@ public class WeiXinGroupController {
 	@ResponseBody
 	public RESTResultBean companyIdGroupIdDeletePOST(@PathVariable String companyId,@PathVariable String groupId) {
 		RESTResultBean result = new RESTResultBean();
-		result.setResult(MyWeixinDeptBusiness_.companyIdGroupIdDelete(companyId,groupId));
+		result.setResult(MyWeixinGroupBusiness_.companyIdGroupIdDelete(companyId,groupId));
 		return result;
 	}
 
+	/**
+	 * 同步一个企业（数据来源于DB监控）
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/sync/{companyId}", method = RequestMethod.POST)
+	@ResponseBody
+	public RESTResultBean companyIdSyncPOST(@PathVariable String companyId) {
+		RESTResultBean result = new RESTResultBean();
+		result.setResult(MyWeixinGroupBusiness_.companyIdGroupIdSync(companyId));
+		return result;
+	}
+	
 	/**
 	 * 同步一个企业用户组（数据来源于DB监听）
 	 * 
@@ -61,7 +74,7 @@ public class WeiXinGroupController {
 	@ResponseBody
 	public RESTResultBean companyIdGroupIdSyncPOST(@PathVariable String companyId,@PathVariable String groupId) {
 		RESTResultBean result = new RESTResultBean();
-		result.setResult(MyWeixinDeptBusiness_.companyIdGroupIdSync(companyId,groupId));
+		result.setResult(MyWeixinGroupBusiness_.companyIdGroupIdSync(companyId,groupId));
 		return result;
 	}
 }

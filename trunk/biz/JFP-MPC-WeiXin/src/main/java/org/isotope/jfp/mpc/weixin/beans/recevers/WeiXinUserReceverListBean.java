@@ -3,7 +3,7 @@ package org.isotope.jfp.mpc.weixin.beans.recevers;
 import java.util.ArrayList;
 
 import org.isotope.jfp.framework.beans.message.info.UserReceverBean;
-import org.isotope.jfp.mpc.weixin.beans.recever.WeiXinUserReceverBean;
+import org.isotope.jfp.mpc.weixin.beans.recever.WeiXinCompanyUserReceverBean;
 
 /**
  * 微信用户信息
@@ -14,16 +14,16 @@ import org.isotope.jfp.mpc.weixin.beans.recever.WeiXinUserReceverBean;
  *
  */
 public class WeiXinUserReceverListBean extends UserReceverBean {
-	ArrayList<WeiXinUserReceverBean> recevers = new ArrayList<WeiXinUserReceverBean>();
+	ArrayList<WeiXinCompanyUserReceverBean> recevers = new ArrayList<WeiXinCompanyUserReceverBean>();
 
-	public ArrayList<WeiXinUserReceverBean> getRecevers() {
+	public ArrayList<WeiXinCompanyUserReceverBean> getRecevers() {
 		return recevers;
 	}
 
-	public void setRecevers(ArrayList<WeiXinUserReceverBean> recevers) {
+	public void setRecevers(ArrayList<WeiXinCompanyUserReceverBean> recevers) {
 		this.recevers = recevers;
 	}
-	public void addRecevers(WeiXinUserReceverBean recever) {
+	public void addRecevers(WeiXinCompanyUserReceverBean recever) {
 		this.recevers.add(recever);
 	}
 }

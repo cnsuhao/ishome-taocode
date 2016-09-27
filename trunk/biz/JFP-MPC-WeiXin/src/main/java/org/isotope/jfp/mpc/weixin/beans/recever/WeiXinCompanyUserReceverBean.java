@@ -9,29 +9,24 @@ import org.isotope.jfp.framework.beans.message.info.UserReceverBean;
  * @author spookfcy
  * @since 3.3.1
  * @version 3.3.1.20160825
- *
+ * @see <WeixinUserDBO>
  */
-public class WeiXinUserReceverBean extends UserReceverBean {
-
-	/**
-	 * 企业ID
-	 */
-	private String companyId;
+public class WeiXinCompanyUserReceverBean extends UserReceverBean {
 
 	/**
 	 * 学校id
 	 */
-	private Long sid;
+	private String companyId;
 
 	/**
-	 * 微信id
+	 * 用户id
 	 */
-	private String wxId;
+	private String userId;
 
 	/**
 	 * 用户类别
 	 */
-	private Integer uertType;
+	private String uertType;
 
 	/**
 	 * 用户昵称
@@ -44,14 +39,14 @@ public class WeiXinUserReceverBean extends UserReceverBean {
 	private String openid;
 
 	/**
-	 * 关注学校企业号ID
+	 * 微信ID
 	 */
-	private String schoolAppId;
+	private String wxId;
 
 	/**
 	 * 是否启用
 	 */
-	private Integer isUse;
+	private String isUse;
 
 	public String getCompanyId() {
 		return companyId;
@@ -61,27 +56,19 @@ public class WeiXinUserReceverBean extends UserReceverBean {
 		this.companyId = companyId;
 	}
 
-	public Long getSid() {
-		return sid;
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setSid(Long sid) {
-		this.sid = sid;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
-	public String getWxId() {
-		return wxId;
-	}
-
-	public void setWxId(String wxId) {
-		this.wxId = wxId;
-	}
-
-	public Integer getUertType() {
+	public String getUertType() {
 		return uertType;
 	}
 
-	public void setUertType(Integer uertType) {
+	public void setUertType(String uertType) {
 		this.uertType = uertType;
 	}
 
@@ -101,19 +88,19 @@ public class WeiXinUserReceverBean extends UserReceverBean {
 		this.openid = openid;
 	}
 
-	public String getSchoolAppId() {
-		return schoolAppId;
+	public String getWxId() {
+		return wxId;
 	}
 
-	public void setSchoolAppId(String schoolAppId) {
-		this.schoolAppId = schoolAppId;
+	public void setWxId(String wxId) {
+		this.wxId = wxId;
 	}
 
-	public Integer getIsUse() {
+	public String getIsUse() {
 		return isUse;
 	}
 
-	public void setIsUse(Integer isUse) {
+	public void setIsUse(String isUse) {
 		this.isUse = isUse;
 	}
 

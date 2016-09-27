@@ -13,7 +13,7 @@ import org.isotope.jfp.mpc.weixin.beans.message.WeiXinMessageValueBean;
 import org.isotope.jfp.mpc.weixin.beans.message.WeiXinNewsBean;
 import org.isotope.jfp.mpc.weixin.beans.recever.WeiXinCompanyGroupReceverBean;
 import org.isotope.jfp.mpc.weixin.beans.recever.WeiXinCompanyTagReceverBean;
-import org.isotope.jfp.mpc.weixin.beans.recever.WeiXinUserReceverBean;
+import org.isotope.jfp.mpc.weixin.beans.recever.WeiXinCompanyUserReceverBean;
 import org.isotope.jfp.mpc.weixin.beans.sender.WeiXinCompanySenderBean;
 import org.isotope.jfp.mpc.weixin.token.WeiXinCompanyTokenService;
 import org.isotope.jfp.mpc.weixin.token.beans.WeiXinCompanyTokenBean;
@@ -61,7 +61,7 @@ public class MyWeixinBusiness implements ISFrameworkConstants {
 
 	public String sendText(WeiXinMessageValueBean messageValue, WeiXinCompanySenderBean sender,
 			List<WeiXinCompanyGroupReceverBean> groupRecevers, List<WeiXinCompanyTagReceverBean> tagRecevers,
-			List<WeiXinUserReceverBean> userRecevers) {
+			List<WeiXinCompanyUserReceverBean> userRecevers) {
 		// 获得微信Token信息
 		WeiXinCompanyTokenBean comany = weixinCompanyTokenService.loadCompanyToken(sender);
 		TxWeixinService txWeixinService = new TxWeixinService(comany);
@@ -82,7 +82,7 @@ public class MyWeixinBusiness implements ISFrameworkConstants {
 
 	public String sendImage(WeiXinMessageValueBean messageValue, WeiXinCompanySenderBean sender,
 			List<WeiXinCompanyGroupReceverBean> groupRecevers, List<WeiXinCompanyTagReceverBean> tagRecevers,
-			List<WeiXinUserReceverBean> userRecevers) {
+			List<WeiXinCompanyUserReceverBean> userRecevers) {
 		// 获得微信Token信息
 		WeiXinCompanyTokenBean comany = weixinCompanyTokenService.loadCompanyToken(sender);
 		TxWeixinService txWeixinService = new TxWeixinService(comany);
@@ -106,7 +106,7 @@ public class MyWeixinBusiness implements ISFrameworkConstants {
 
 	public String sendVoice(WeiXinMessageValueBean messageValue, WeiXinCompanySenderBean sender,
 			List<WeiXinCompanyGroupReceverBean> groupRecevers, List<WeiXinCompanyTagReceverBean> tagRecevers,
-			List<WeiXinUserReceverBean> userRecevers) {
+			List<WeiXinCompanyUserReceverBean> userRecevers) {
 		// 获得微信Token信息
 		WeiXinCompanyTokenBean comany = weixinCompanyTokenService.loadCompanyToken(sender);
 		TxWeixinService txWeixinService = new TxWeixinService(comany);
@@ -130,7 +130,7 @@ public class MyWeixinBusiness implements ISFrameworkConstants {
 
 	public String sendVideo(WeiXinMessageValueBean messageValue, WeiXinCompanySenderBean sender,
 			List<WeiXinCompanyGroupReceverBean> groupRecevers, List<WeiXinCompanyTagReceverBean> tagRecevers,
-			List<WeiXinUserReceverBean> userRecevers) {
+			List<WeiXinCompanyUserReceverBean> userRecevers) {
 		// 获得微信Token信息
 		WeiXinCompanyTokenBean comany = weixinCompanyTokenService.loadCompanyToken(sender);
 		TxWeixinService txWeixinService = new TxWeixinService(comany);
@@ -154,7 +154,7 @@ public class MyWeixinBusiness implements ISFrameworkConstants {
 
 	public String sendFile(WeiXinMessageValueBean messageValue, WeiXinCompanySenderBean sender,
 			List<WeiXinCompanyGroupReceverBean> groupRecevers, List<WeiXinCompanyTagReceverBean> tagRecevers,
-			List<WeiXinUserReceverBean> userRecevers) {
+			List<WeiXinCompanyUserReceverBean> userRecevers) {
 		// 获得微信Token信息
 		WeiXinCompanyTokenBean comany = weixinCompanyTokenService.loadCompanyToken(sender);
 		TxWeixinService txWeixinService = new TxWeixinService(comany);
@@ -179,7 +179,7 @@ public class MyWeixinBusiness implements ISFrameworkConstants {
 	// ??thumb是什么消息类型，微信接口好象没有
 	public String sendThumb(WeiXinMessageValueBean messageValue, WeiXinCompanySenderBean sender,
 			List<WeiXinCompanyGroupReceverBean> groupRecevers, List<WeiXinCompanyTagReceverBean> tagRecevers,
-			List<WeiXinUserReceverBean> userRecevers) {
+			List<WeiXinCompanyUserReceverBean> userRecevers) {
 		// 获得微信Token信息
 		WeiXinCompanyTokenBean comany = weixinCompanyTokenService.loadCompanyToken(sender);
 		TxWeixinService txWeixinService = new TxWeixinService(comany);
@@ -203,7 +203,7 @@ public class MyWeixinBusiness implements ISFrameworkConstants {
 
 	public String sendNews(WeiXinNewsBean messageValue, WeiXinCompanySenderBean sender,
 			List<WeiXinCompanyGroupReceverBean> groupRecevers, List<WeiXinCompanyTagReceverBean> tagRecevers,
-			List<WeiXinUserReceverBean> userRecevers) {
+			List<WeiXinCompanyUserReceverBean> userRecevers) {
 		// 获得微信Token信息
 		WeiXinCompanyTokenBean comany = weixinCompanyTokenService.loadCompanyToken(sender);
 		TxWeixinService txWeixinService = new TxWeixinService(comany);
@@ -258,11 +258,11 @@ public class MyWeixinBusiness implements ISFrameworkConstants {
 		return receiverBuffer.toString();
 	}
 
-	private String getUserReceivers(List<WeiXinUserReceverBean> recevers) {
+	private String getUserReceivers(List<WeiXinCompanyUserReceverBean> recevers) {
 		if(EmptyHelper.isEmpty(recevers))
 			return EMPTY;
 		StringBuffer receiverBuffer = new StringBuffer();
-		Iterator<WeiXinUserReceverBean> it = recevers.iterator();
+		Iterator<WeiXinCompanyUserReceverBean> it = recevers.iterator();
 
 		if (it.hasNext()) {
 			receiverBuffer.append(it.next().getWxId());

@@ -12,7 +12,7 @@ import org.isotope.jfp.framework.common.message.AMessagePushGatewaySupport;
 import org.isotope.jfp.mpc.weixin.beans.message.WeiXinMessageValueBean;
 import org.isotope.jfp.mpc.weixin.beans.recever.WeiXinCompanyGroupReceverBean;
 import org.isotope.jfp.mpc.weixin.beans.recever.WeiXinCompanyTagReceverBean;
-import org.isotope.jfp.mpc.weixin.beans.recever.WeiXinUserReceverBean;
+import org.isotope.jfp.mpc.weixin.beans.recever.WeiXinCompanyUserReceverBean;
 import org.isotope.jfp.mpc.weixin.beans.recevers.WeiXinCompanyGroupReceverListBean;
 import org.isotope.jfp.mpc.weixin.beans.recevers.WeiXinCompanyTagReceverListBean;
 import org.isotope.jfp.mpc.weixin.beans.recevers.WeiXinUserReceverListBean;
@@ -49,13 +49,20 @@ public class WeiXinMessagePushGatewayServerThread extends AMessagePushGatewaySup
 			// 推送对象
 			List<WeiXinCompanyGroupReceverBean> deptRecevers = null;
 			List<WeiXinCompanyTagReceverBean> tagRecevers = null;
-			List<WeiXinUserReceverBean> userRecevers = null;
+			List<WeiXinCompanyUserReceverBean> userRecevers = null;
 
 			boolean push = true;
+			if(messageInfo.getRecever() == null){
+				//全体发送
+				userRecevers = new ArrayList<WeiXinCompanyUserReceverBean>();
+				WeiXinCompanyUserReceverBean allUser = new WeiXinCompanyUserReceverBean();
+				allUser.setWxId("@all");
+				userRecevers.add(allUser);
+			}
 			//发送给某个用户
-			if (messageInfo.getRecever() instanceof WeiXinUserReceverBean){
-				userRecevers = new ArrayList<WeiXinUserReceverBean>();
-				userRecevers.add((WeiXinUserReceverBean) messageInfo.getRecever());
+			else if (messageInfo.getRecever() instanceof WeiXinCompanyUserReceverBean){
+				userRecevers = new ArrayList<WeiXinCompanyUserReceverBean>();
+				userRecevers.add((WeiXinCompanyUserReceverBean) messageInfo.getRecever());
 			}
 			//发送给某个用户组
 			else if (messageInfo.getRecever() instanceof WeiXinCompanyGroupReceverBean){

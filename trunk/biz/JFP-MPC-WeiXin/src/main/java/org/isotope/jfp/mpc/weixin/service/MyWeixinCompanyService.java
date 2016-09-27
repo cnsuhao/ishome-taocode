@@ -8,7 +8,8 @@ import javax.annotation.Resource;
 import org.isotope.jfp.common.weixin.WeiXinCompanyDBO;
 import org.isotope.jfp.common.weixin.WeixinService;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
-import org.isotope.jfp.mpc.weixin.beans.recever.WeiXinCompanyTagReceverBean;
+import org.isotope.jfp.framework.utils.BeanFactoryHelper;
+import org.isotope.jfp.framework.utils.EmptyHelper;
 import org.isotope.jfp.mpc.weixin.beans.sender.WeiXinCompanySenderBean;
 import org.isotope.jfp.mpc.weixin.token.WeiXinCompanyTokenService;
 import org.isotope.jfp.mpc.weixin.token.beans.WeiXinCompanyTokenBean;
@@ -34,19 +35,19 @@ public class MyWeixinCompanyService implements ISFrameworkConstants {
 	WeixinService WeixinService_;
 	@Resource
 	WeiXinCompanyTokenService WeiXinCompanyTokenService_;
-	
+
 	public WeiXinCompanyTokenBean loadCompanyToken(String companyId) {
 		return WeiXinCompanyTokenService_.loadCompanyToken(loadWeiXinCompanySenderBean(companyId));
 	}
-	
+
 	/**
 	 * 同步数据持久化内容
 	 */
 	public WeiXinCompanySenderBean loadWeiXinCompanySenderBean(String companyId) {
-		HashMap<String, String> comyany = new HashMap<String, String> ();
+		HashMap<String, String> comyany = new HashMap<String, String>();
 		comyany.put("companyId", companyId);
 		List<WeiXinCompanyDBO> comanys = WeixinService_.loadCompany(comyany);
-		if(comanys!=null && comanys.size()==1){
+		if (comanys != null && comanys.size() == 1) {
 			WeiXinCompanyDBO comanyDBO = comanys.get(0);
 			WeiXinCompanySenderBean sender = new WeiXinCompanySenderBean();
 			sender.setCompanyId(comanyDBO.getCompanyId());
@@ -54,44 +55,51 @@ public class MyWeixinCompanyService implements ISFrameworkConstants {
 			sender.setAppSecret(comanyDBO.getAppSecret());
 			return sender;
 		}
-			
+
 		return null;
 	}
 
-	public WeiXinCompanyTagReceverBean loadWeiXinCompanyTagReceverBean(String companyId) {
-		HashMap<String, String> comyany = new HashMap<String, String> ();
+	/**
+	 * 同步企业Token
+	 * 
+	 * @param company
+	 * @return
+	 */
+	public String companyTokenSync(String companyId) {
+		HashMap<String, String> comyany = new HashMap<String, String>();
 		comyany.put("companyId", companyId);
 		List<WeiXinCompanyDBO> comanys = WeixinService_.loadCompany(comyany);
-		if(comanys!=null && comanys.size()==1){
-			WeiXinCompanyDBO comanyDBO = comanys.get(0);
-			WeiXinCompanyTagReceverBean recever = new WeiXinCompanyTagReceverBean();
-			recever.setCompanyId(comanyDBO.getCompanyId());
-			recever.setWxId(comanyDBO.getWxId());
+		if (comanys != null && comanys.size() == 1) {
+			return companyTokenSync(comanys.get(0));
+		} else
+			return ONE;
+	}
 
-			return recever;
+	public String companyTokenSync(WeiXinCompanyDBO company) {
+		WeiXinCompanyTokenService wcts = BeanFactoryHelper.getBean("WeiXinCompanyTokenService");
+		WeiXinCompanyTokenBean companyToken = wcts.loadCompanyToken(company);
+		if (EmptyHelper.isEmpty(companyToken.getAccessToken())) {
+			return NINE;
 		}
-			
-		return null;
+		return ZERO;
 	}
 
-	public Object companyIdSync(String companyId) {
-		// TODO Auto-generated method stub
-		return null;
+	/**
+	 * 同步通讯录微信号Token
+	 * 
+	 * @return
+	 */
+	public String companyTokenSync() {
+		// 查询所有
+		HashMap<String, String> comyany = new HashMap<String, String>();
+		List<WeiXinCompanyDBO> comanys = WeixinService_.loadCompany(comyany);
+		if (comanys != null) {
+			for (WeiXinCompanyDBO com : comanys) {
+				if (NINE.equals(companyTokenSync(com))) {
+					logger.error(com.getCompanyId() + "===>>>不能获取微信Token");
+				}
+			}
+		}
+		return ZERO;
 	}
-
-	public Object companyIdDelete(String companyId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Object companyIdAdd(String companyId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Object companyIdSync() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }
