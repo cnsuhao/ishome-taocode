@@ -83,7 +83,7 @@ public class TaskManegeController extends MyControllerSupport{
 			pageModel.setPageCurrent(page);
 			pageModel.setPageLimit(size);			
 			pageModel.setFormParamBean(taskdbo);
-			TaskServicer.doSelectTaskInfoTOtermIdAndCid(pageModel);
+			TaskServicer.doSelectPageTaskWithCid(pageModel);
 			Map<String, Object> data = new HashMap<String, Object>();
 			data.put("page", pageModel.getPageCurrent());
 			data.put("size", pageModel.getPageLimit());
@@ -133,7 +133,7 @@ public class TaskManegeController extends MyControllerSupport{
 			pageModel.setPageCurrent(page);
 			pageModel.setPageLimit(size);			
 			pageModel.setFormParamBean(taskdbo);
-			TaskServicer.doSelectTaskInfoTOtermIdAndTid(pageModel);
+			TaskServicer.doSelectPagetTaskWithCiddAndTid(pageModel);
 			data.put("page", pageModel.getPageCurrent());
 			data.put("size", pageModel.getPageLimit());
 			data.put("count", pageModel.getResultCount());
@@ -209,7 +209,7 @@ public class TaskManegeController extends MyControllerSupport{
 	 */
 	@RequestMapping(value = "/task/search", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean taskSearchGET(Long courseId,String taskName,String cid,Long tid,String token,Integer page,Integer size) {
+	public RESTResultBean taskSearchGET(TaskPVO taskdbo,Long tid ,String token,Integer page,Integer size) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			//token校验
@@ -222,23 +222,18 @@ public class TaskManegeController extends MyControllerSupport{
 			if (size == null || size == 0) {
 				size = 12;
 			}
-			if(courseId<=0){
+			if(taskdbo.getCourseId() == null || taskdbo.getCourseId()<=0){
 				throw new IllegalArgumentException("courseId不能为空");
 			}
 			Map<String, Object> data = new HashMap<String, Object>();
-			TaskPVO taskdbo = new TaskPVO();
-			taskdbo.setCourseId(courseId);
-			taskdbo.setTaskName(taskName);
-			if(!cid.equals(null)|| !cid.equals("")){
-				taskdbo.setCid(cid);
-			}
+		
 			if(tid != null && tid > 0){
 			    taskdbo.setAuthor(tid);
 			}
 			pageModel.setPageCurrent(page);
 			pageModel.setPageLimit(size);			
 			pageModel.setFormParamBean(taskdbo);
-			TaskServicer.doSearch(pageModel);
+			TaskServicer.doSelectPageSearch(pageModel);
 			data.put("page", pageModel.getPageCurrent());
 			data.put("size", pageModel.getPageLimit());
 			data.put("count", pageModel.getResultCount());
