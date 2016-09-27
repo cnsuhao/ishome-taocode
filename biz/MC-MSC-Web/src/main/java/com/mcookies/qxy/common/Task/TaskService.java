@@ -23,14 +23,16 @@ public class TaskService extends MyServiceSupport {
 		return pageModel;
 	}
 
-	public PageVOSupport doSelectTaskInfoTOtermIdAndTid(PageVOSupport formParamPageModel) {
-		formParamPageModel.setPageListData(getDao().doSelectTaskInfoTOtermIdAndTid(formParamPageModel));
-		return formParamPageModel;
+	public PageVOSupport doSelectTaskInfoTOtermIdAndTid(PageVOSupport pageModel) {
+		FrameworkDataBean formParamBean = pageModel.getFormParamBean();
+		pageModel.setPageListData(getDao().doSelectTaskInfoTOtermIdAndTid(pageModel));
+		return pageModel;
 	}
 	
-	public PageVOSupport doSearch(PageVOSupport formParamPageModel) {
-		formParamPageModel.setPageListData(getDao().doSearch(formParamPageModel));
-		return formParamPageModel;
+	public PageVOSupport doSearch(PageVOSupport pageModel) {
+		FrameworkDataBean formParamBean = pageModel.getFormParamBean();
+		pageModel.setPageListData(getDao().doSearch(pageModel));
+		return pageModel;
 	}
 
 	public TaskPVO doSelectTaskInfo(TaskDBO dbo) {
