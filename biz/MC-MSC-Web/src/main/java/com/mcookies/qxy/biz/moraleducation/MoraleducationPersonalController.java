@@ -373,6 +373,35 @@ public class MoraleducationPersonalController extends MyControllerSupport {
 			return result;
 		}	
 		
+		/**
+		 * 12.2.14 德育个人项目详情查询接口/qxy/moraleducation/personal/info?mepItemId=[mepItemId]&token=[token]
+		 * 德育个人项目详情查询接口提供对德育个人项目详情查询的功能。
+		 * 需要使用Token验证查询者身份
+		 */
+				 
+		@RequestMapping(value = "/moraleducation/personal/info", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+		@ResponseBody
+		public RESTResultBean mecPersonalInfoGET(Boolean test,Long mepItemId) {
+			RESTResultBean result = new RESTResultBean();
+			try {
+				if (test == true) {
+					if (mepItemId != null) {
+						String str = "{\"mepItemId\":\"23\",\"mepItemName\":\"黑板报\",\"mepItemExplain\":\"扣分苍围针对所有班级\",\"ruleNum\":\"1\",\"initialScore\":\"0\",\"intervalScore\":\"2\",\"isUse\":\"1\"}";
+						JSONObject jobj=JSON.parseObject(str);    
+						result.setData(jobj);	
+					} else{
+						result.setInfo("德育个人项目id   ---必填项");
+					}
+				} else {
+					
+				}
+				
+			} catch (Exception e) {
+				result.setInfo("查询失败，" + e.getMessage());
+				result.setStatus(1);
+			}
 
+			return result;
+		}
 	
 }
