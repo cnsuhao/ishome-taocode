@@ -96,7 +96,7 @@ public class LoginController extends MyControllerSupport {
 			logger.debug("loginpvo====///loginpvo////loginpvo=======>>>>>=========>>>" + loginpvo);
 		/////////////////////// 登录系统/////////////////////////////////////
 		LoginerBean loginer = new LoginerBean();
-		loginer.setIpAdress(HttpRequestHelper.getIpAddr(request));
+		loginer.setIpAdress(HttpRequestHelper.getClientRemoteIPAddr(request));
 		loginer.setClientType(loginpvo.getClientType());
 		loginer.setUserType(loginpvo.getUserType());
 		loginer.setSchoolId(defualtSid);
