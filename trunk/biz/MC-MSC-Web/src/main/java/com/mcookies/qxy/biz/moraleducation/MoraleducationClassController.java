@@ -441,5 +441,36 @@ public class MoraleducationClassController extends MyControllerSupport {
 			return result;
 		}	
 		
+		/**
+		 * 12.1.14 德育班级项目详情查询接口/qxy/moraleducation/class/info?mecItemId=[mecItemId]&token=[token]
+		 * 德育班级项目详情查询接口提供对德育班级项目详情查询的功能。
+		 * 需要使用Token验证查询者身份
+		 */
+				 
+		@RequestMapping(value = "/moraleducation/class/info", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+		@ResponseBody
+		public RESTResultBean mecClassInfoGET(Boolean test,Long mecItemId) {
+			RESTResultBean result = new RESTResultBean();
+			try {
+				if (test == true) {
+					if (mecItemId != null) {
+						String str = "{\"mecItemId\":\"23\",\"mecItemName\":\"黑板报\",\"mecItemExplain\":\"凡是一次没有做的扣一分，扣分苍围针对所有班级\",\"ruleNum\":\"1\",\"initialScore\":\"0\",\"intervalScore\":\"2\",\"isUse\":\"1\"}";
+						JSONObject jobj=JSON.parseObject(str);    
+						result.setData(jobj);	
+					} else{
+						result.setInfo("班级德育项目id ---必填项");
+					}
+				} else {
+					
+				}
+				
+			} catch (Exception e) {
+				result.setInfo("查询失败，" + e.getMessage());
+				result.setStatus(1);
+			}
+
+			return result;
+		}
+		
 		
 }
