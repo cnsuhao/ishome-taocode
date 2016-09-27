@@ -21,26 +21,22 @@ public class MoraleducationPersonalController extends MyControllerSupport {
 	
 	
 	/**
-	 * 德育个人评分列表查询接口 /qxy/moraleducation/personal/score?termId=[termId]&order=[order]&cid=[cid]&page=[page]&size=[size]&token=[token]
+	 * 12.2.2德育个人评分列表查询接口 /qxy/moraleducation/personal/score?termId=[termId]&gradeId=[gradeId]&cid=[cid]&order=[order]&page=[page]&size=[size]&token=[token]
 	 * 德育班级评分列表查询接口当学期id为空时，返回默认学期下班级列表数据。本接口支持分页查询班级评分列表
      * 需要使用Token验证查询者身份
 	 */
 	
 	@RequestMapping(value = "/moraleducation/personal/score", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean moraleducationPersonalGET(Boolean test,Long termId,Long cid,String order,Integer page, Integer size) {
+	public RESTResultBean moraleducationPersonalGET(Boolean test,Long termId,Long cid,String order,String token,Integer page, Integer size) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (test == true) {	
-				if (cid != null) {
+			if (test == true) {			
 					String str = "{\"page\":\"0\",\"size\":\"14\",\"count\":\"3\",\"personalScoreList\":[{\"studentId\":\"1\",\"studentName\":\"张三\",\"number\":\"1000003\",\"totalScore\":\"90\",\"ranking\":\"12\",\"updateTime\":\"2016-09-19 00:00:00\"},{\"studentId\":\"2\",\"studentName\":\"王五\",\"number\":\"1000004\",\"totalScore\":\"93\",\"ranking\":\"11\",\"updateTime\":\"2016-09-19 00:00:00\"},{\"studentId\":\"3\",\"studentName\":\"赵六\",\"number\":\"1000005\",\"totalScore\":\"97\",\"ranking\":\"9\",\"updateTime\":\"2016-09-19 00:00:00\"}]}";
 					JSONObject jobj=JSON.parseObject(str);    
-					result.setData(jobj);	
-				} else {
-					result.setInfo("班级id --必填项");
-				}
+					result.setData(jobj);				
 			} else {
-
+				
 			}
 			
 		} catch (Exception e) {

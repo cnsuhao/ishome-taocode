@@ -28,7 +28,38 @@ import com.mcookies.qxy.common.UTeacher.UTeacherDBO;
  */
 @Controller
 public class MoraleducationClassController extends MyControllerSupport {
-	
+	/**
+	 *  12.1.1-2 根据年级查询班级列表接口
+	 * /qxy/classlist/grade/search?termId=[termId]&gradeId=[gradeId]&page=[page]&size=[size]&token=[token]
+	 * 可以根据年级标签查询查询班级列表，学期为可选参数，不填或为0则默认查询该学期下的班级；年级参数为必填参数；
+	 * 需要使用Token验证查询者身份
+	 */
+
+	@RequestMapping(value = "/classlist/grade/search", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public RESTResultBean classlistGradeSearchGET(Boolean test, String token, Long termId,Long gradeId,Integer page, Integer size) {
+		RESTResultBean result = new RESTResultBean();
+		try {
+			if (test == true) {
+				if (gradeId != null) {
+					String str = "{\"page\":\"1\",\"size\":\"12\",\"count\":\"2\",\"classlist\":[{\"cid\":\"2\",\"className\":\"一班\"},{\"cid\":\"3\",\"className\":\"二班\"}]}";
+					JSONObject jobj = JSON.parseObject(str);
+					result.setData(jobj);	
+				} else {
+					result.setInfo("年级id， --必填项");
+				}
+			} else {
+
+
+			}
+			 
+		} catch (Exception e) {
+			result.setInfo("查询失败，" + e.getMessage());
+			result.setStatus(1);
+		}
+
+		return result;
+	}
 	
 	/**
 	 * 德育班级评分列表查询接口 /qxy/moraleducation/class?termId=[termId]&order=[order]&page=[page]&size=[size]&token=[token]
@@ -90,6 +121,36 @@ public class MoraleducationClassController extends MyControllerSupport {
 		return result;
 	}		 
 	
+	/**
+	 * 12.1.3-2 德育班级评分年级班级搜索接口
+	 * /qxy/moraleducation/class/score/gradeclass/search?termId=[termId]&gradeId=[gradeId]&cid=[cid]&order=[order]&page=[page]&size=[size]&token=[token]
+	 * 需要使用Token验证查询者身份
+	 * @param test
+	 * @param page
+	 * @param size
+	 * @return
+	 */
+
+	@RequestMapping(value = "/moraleducation/class/score/gradeclass/search", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public RESTResultBean mecClassScoreGradeClassGET(Boolean test, Long termId,Long gradeId,Long cid, String order,String token, Integer page, Integer size) {
+		RESTResultBean result = new RESTResultBean();
+		try {
+			if (test == true) {
+					String str = "{\"page\":\"1\",\"size\":\"14\",\"count\":\"3\",\"classScoreList\":[{\"cid\":\"4\",\"className\":\"初一1班\",\"totalScore\":\"90\",\"ranking\":\"12\",\"updateTime\":\"2016-09-19 12:00:00\"},{\"cid\":\"4\",\"className\":\"初一2班\",\"totalScore\":\"92\",\"ranking\":\"11\",\"updateTime\":\"2016-09-19 12:00:00\"},{\"cid\":\"4\",\"className\":\"初一3班\",\"totalScore\":\"95\",\"ranking\":\"9\",\"updateTime\":\"2016-09-19 12:00:00\"}]}";
+					JSONObject jobj = JSON.parseObject(str);
+					result.setData(jobj);
+			} else {
+				
+			}
+
+		} catch (Exception e) {
+			result.setInfo("查询失败，" + e.getMessage());
+			result.setStatus(1);
+		}
+
+		return result;
+	}
 	
 		/**
 		 * 德育班级评分详情列表查询接口 /qxy/moraleducation/class/score/list?cid=[cid]&page=[page]&size=[size]&token=[token]
@@ -124,6 +185,7 @@ public class MoraleducationClassController extends MyControllerSupport {
 
 			return result;
 		}		
+	
 	
 		
 		/**
