@@ -363,6 +363,7 @@
     from task a 
     LEFT JOIN s_course b ON a.course_id = b.course_id
     LEFT JOIN u_teacher c ON a.author=c.teacher_name
+    where  1= 1
       <if test=" sid != null and sid !='' "><!-- 学校id -->
             AND sid = #{sid}
       </if>
