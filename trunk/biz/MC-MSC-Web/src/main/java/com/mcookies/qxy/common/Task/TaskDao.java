@@ -9,13 +9,13 @@ import org.isotope.jfp.framework.support.IDatabaseSupport;
 /** 作业表*/
 public interface TaskDao extends IDatabaseSupport{
 	
-	List<? extends FrameworkDataBean> doSelectTaskTOtermIdAndCid(PageVOSupport formParamPageModel);
+	public List<TaskPVO> doSelectTaskTOtermIdAndCid(PageVOSupport PageModel);
 	
-	List<? extends FrameworkDataBean> doSelectTaskInfoTOtermIdAndTid(PageVOSupport formParamPageModel);
+	public List<TaskPVO> doSelectTaskInfoTOtermIdAndTid(PageVOSupport PageModel);
 	
-	List<? extends FrameworkDataBean> doSearch(PageVOSupport formParamPageModel);
+	public List<TaskPVO> doSearch(PageVOSupport PageModel);
 	
-	TaskPVO doSelectTaskInfo(TaskDBO dbo);
+	public TaskPVO doSelectTaskInfo(TaskDBO dbo);
 	
 
 }
