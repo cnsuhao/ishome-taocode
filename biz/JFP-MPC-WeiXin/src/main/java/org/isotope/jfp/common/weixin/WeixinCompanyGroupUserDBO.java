@@ -4,9 +4,9 @@ import javax.inject.Named;
 
 import org.isotope.jfp.framework.support.MyDataBaseObjectSupport;
 
-/** 微信企业部门表 */
 @Named
-public class WeiXinCompanyGroupDBO extends MyDataBaseObjectSupport {
+/** 微信企业号用户所属用户组表 */
+public class WeixinCompanyGroupUserDBO extends MyDataBaseObjectSupport {
 
 	/**
 	 * 学校id
@@ -16,20 +16,25 @@ public class WeiXinCompanyGroupDBO extends MyDataBaseObjectSupport {
 	/**
 	 * 用户组id
 	 */
-	private String groupId;
+	private String groupid;
 
 	/**
-	 * 用户组编号
+	 * 用户id
 	 */
-	private String groupNo;
+	private String userId;
 
 	/**
-	 * 用户组名称
+	 * 用户类别
 	 */
-	private String groupName;
+	private String uertType;
 
 	/**
-	 * 用户组openId
+	 * 用户昵称
+	 */
+	private String userName;
+
+	/**
+	 * openId
 	 */
 	private String openid;
 
@@ -51,28 +56,36 @@ public class WeiXinCompanyGroupDBO extends MyDataBaseObjectSupport {
 		this.companyId = companyId;
 	}
 
-	public String getGroupId() {
-		return groupId;
+	public String getGroupid() {
+		return groupid;
 	}
 
-	public void setGroupId(String groupId) {
-		this.groupId = groupId;
+	public void setGroupid(String groupid) {
+		this.groupid = groupid;
 	}
 
-	public String getGroupNo() {
-		return groupNo;
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setGroupNo(String groupNo) {
-		this.groupNo = groupNo;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
-	public String getGroupName() {
-		return groupName;
+	public String getUertType() {
+		return uertType;
 	}
 
-	public void setGroupName(String groupName) {
-		this.groupName = groupName;
+	public void setUertType(String uertType) {
+		this.uertType = uertType;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public String getOpenid() {
@@ -98,4 +111,5 @@ public class WeiXinCompanyGroupDBO extends MyDataBaseObjectSupport {
 	public void setIsUse(String isUse) {
 		this.isUse = isUse;
 	}
+
 }

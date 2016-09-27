@@ -35,7 +35,7 @@ public class WeiXinMessageController {
 	@ResponseBody
 	public RESTResultBean sendToCompanyIdPOST(@PathVariable String companyId, WeiXinMessageValueBean message) {
 		RESTResultBean result = new RESTResultBean();
-		result.setCode(MyWeixinMessageBusiness_.sendToCompanyId(companyId, message));
+		result.setCode(MyWeixinMessageBusiness_.sendToCompany(companyId, message));
 		return result;
 	}
 	

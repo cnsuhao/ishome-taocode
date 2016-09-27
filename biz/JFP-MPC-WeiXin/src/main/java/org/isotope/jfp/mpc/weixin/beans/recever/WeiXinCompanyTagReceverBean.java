@@ -9,7 +9,7 @@ import org.isotope.jfp.framework.beans.message.info.UserReceverBean;
  * @author spookfcy
  * @since 3.3.1
  * @version 3.3.1.20160825
- *
+ * @deprecated
  */
 public class WeiXinCompanyTagReceverBean extends UserReceverBean {
 	/**
@@ -30,7 +30,7 @@ public class WeiXinCompanyTagReceverBean extends UserReceverBean {
 	/**
 	 * 是否启用
 	 */
-	private Integer isUse = null;
+	private String isUse;
 
 	public String getCompanyId() {
 		return companyId;
@@ -56,11 +56,11 @@ public class WeiXinCompanyTagReceverBean extends UserReceverBean {
 		this.tagName = tagName;
 	}
 
-	public Integer getIsUse() {
+	public String getIsUse() {
 		return isUse;
 	}
 
-	public void setIsUse(Integer isUse) {
+	public void setIsUse(String isUse) {
 		this.isUse = isUse;
 	}
 

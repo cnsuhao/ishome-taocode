@@ -27,7 +27,7 @@ public class WeiXinUserController {
 	MyWeixinUserService MyWeixinUserBusiness_;
 
 	/**
-	 * 增加一个企业用户组（数据来源于DB）
+	 * 增加一个企业用户（数据来源于DB）
 	 * 
 	 * @return
 	 */
@@ -40,15 +40,15 @@ public class WeiXinUserController {
 	}
 
 	/**
-	 * 删除一个企业用户组（数据来源于接口）
+	 * 删除一个企业用户（数据来源于接口）
 	 * 
 	 * @return
 	 */
 	@RequestMapping(value = "/delete/{companyId}/{userId}", method = RequestMethod.POST)
 	@ResponseBody
-	public RESTResultBean companyIdDeletePOST(@PathVariable String companyId,@PathVariable String userId) {
+	public RESTResultBean companyIdUserIdDeletePOST(@PathVariable String companyId,@PathVariable String userId) {
 		RESTResultBean result = new RESTResultBean();
-		result.setResult(MyWeixinUserBusiness_.loadCompanyId(companyId,userId));
+		result.setResult(MyWeixinUserBusiness_.companyIdUserIdDelete(companyId,userId));
 		return result;
 	}
 
@@ -74,7 +74,7 @@ public class WeiXinUserController {
 	@ResponseBody
 	public RESTResultBean companyIdGroupIdUserIdDeletePOST(@PathVariable String companyId,@PathVariable String groupId,@PathVariable String userId) {
 		RESTResultBean result = new RESTResultBean();
-		result.setResult(MyWeixinUserBusiness_.companyIdGroupIdUserIdDelete(companyId,groupId,userId));
+		result.setResult(MyWeixinUserBusiness_.companyGroupIdUserIdDelete(companyId,groupId,userId));
 		return result;
 	}
 
@@ -87,7 +87,7 @@ public class WeiXinUserController {
 	@ResponseBody
 	public RESTResultBean companyIdUserIdSyncPOST(@PathVariable String companyId,@PathVariable String userId) {
 		RESTResultBean result = new RESTResultBean();
-		result.setResult(MyWeixinUserBusiness_.companyIdUserIdSync(companyId,userId));
+		result.setResult(MyWeixinUserBusiness_.companyUserIdSync(companyId,userId));
 		return result;
 	}
 }

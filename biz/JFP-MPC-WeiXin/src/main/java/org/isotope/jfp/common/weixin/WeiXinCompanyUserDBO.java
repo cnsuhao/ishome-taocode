@@ -6,11 +6,7 @@ import org.isotope.jfp.framework.support.MyDataBaseObjectSupport;
 
 /** 微信企业号关注用户表 */
 @Named
-public class WeixinUserDBO extends MyDataBaseObjectSupport {
-	/**
-	 * 数据id
-	 */
-	private String pid;
+public class WeiXinCompanyUserDBO extends MyDataBaseObjectSupport {
 
 	/**
 	 * 学校id
@@ -20,7 +16,7 @@ public class WeixinUserDBO extends MyDataBaseObjectSupport {
 	/**
 	 * 用户id
 	 */
-	private String userid;
+	private String userId;
 
 	/**
 	 * 用户类别
@@ -47,14 +43,6 @@ public class WeixinUserDBO extends MyDataBaseObjectSupport {
 	 */
 	private String isUse;
 
-	public String getPid() {
-		return pid;
-	}
-
-	public void setPid(String pid) {
-		this.pid = pid;
-	}
-
 	public String getCompanyId() {
 		return companyId;
 	}
@@ -63,12 +51,12 @@ public class WeixinUserDBO extends MyDataBaseObjectSupport {
 		this.companyId = companyId;
 	}
 
-	public String getUserid() {
-		return userid;
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setUserid(String userid) {
-		this.userid = userid;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 	public String getUertType() {

@@ -11,23 +11,51 @@ public interface WeixinDao {
 	public List<WeiXinCompanyDBO> loadCompany(HashMap<String, String> comyany);
 
 	/**
-	 * 获得微信企业号关注用户表数据
+	 * 获得微信企业号用户组数据
 	 */
-	public List<WeixinUserDBO> loadCompanyUser(HashMap<String, String> companyUser);
+	public List<WeiXinCompanyGroupDBO> loadCompanyGroup(HashMap<String, String> companyGroup);
 
-	
 	/**
-	 * 获得微信企业号部门关注用户表数据
+	 * 获得微信企业号标签数据
 	 */
-	public List<WeixinUserDBO> loadCompanyDeptUser(HashMap<String, String> companyDeptUser);
+	public List<WeiXinCompanyTagDBO> loadCompanyTag(HashMap<String, String> companyTag);
 
-	
 	/**
-	 * 获得微信企业号标签关注用户表数据
+	 * 获得微信企业号关注用户数据
 	 */
-	public List<WeixinUserDBO> loadCompanyTagUser(HashMap<String, String> companyTagUser);
+	public List<WeiXinCompanyUserDBO> loadCompanyUser(HashMap<String, String> companyUser);
 
-	// 获得全部企业
-	// 获得企业所有班级
-	// 获得班级全部家长
+	//////////////////////////////////////////////////////////////////////////////////////////
+	/**
+	 * 更新企业微信ID
+	 * 
+	 * @param comyany
+	 * @return
+	 */
+	public int updateCompanyById(WeiXinCompanyDBO comyany);
+
+	/**
+	 * 更新企业用户组微信ID
+	 * 
+	 * @param comyany
+	 * @return
+	 */
+	public int updateCompanyGroupById(WeiXinCompanyGroupDBO companyGroup);
+
+	/**
+	 * 更新企业标签组ID
+	 * 
+	 * @param comyany
+	 * @return
+	 */
+	public int updateCompanyTagById(WeiXinCompanyTagDBO companyTag);
+
+	/**
+	 * 更新企业用户微信ID
+	 * 
+	 * @param comyany
+	 * @return
+	 */
+	public int updateCompanyUserById(WeiXinCompanyUserDBO companyUser);
+
 }

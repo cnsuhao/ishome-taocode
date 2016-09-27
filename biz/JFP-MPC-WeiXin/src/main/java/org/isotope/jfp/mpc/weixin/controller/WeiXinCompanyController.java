@@ -25,30 +25,17 @@ public class WeiXinCompanyController {
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Resource
 	MyWeixinCompanyService MyWeixinCompanyBusiness_;
-
+	
 	/**
-	 * 增加一个企业（数据来源于DB）
+	 * 同步一个企业（数据来源于DB监控）
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/add/{companyId}", method = RequestMethod.POST)
+	@RequestMapping(value = "/sync", method = RequestMethod.POST)
 	@ResponseBody
-	public RESTResultBean companyIdAddPOST(@PathVariable String companyId) {
+	public RESTResultBean companyIdSyncPOST() {
 		RESTResultBean result = new RESTResultBean();
-		result.setResult(MyWeixinCompanyBusiness_.companyIdAdd(companyId));
-		return result;
-	}
-
-	/**
-	 * 删除一个企业（数据来源于接口）
-	 * 
-	 * @return
-	 */
-	@RequestMapping(value = "/delete/{companyId}", method = RequestMethod.POST)
-	@ResponseBody
-	public RESTResultBean companyIdDeletePOST(@PathVariable String companyId) {
-		RESTResultBean result = new RESTResultBean();
-		result.setResult(MyWeixinCompanyBusiness_.companyIdDelete(companyId));
+		result.setResult(MyWeixinCompanyBusiness_.companyTokenSync());
 		return result;
 	}
 	
@@ -61,7 +48,7 @@ public class WeiXinCompanyController {
 	@ResponseBody
 	public RESTResultBean companyIdSyncPOST(@PathVariable String companyId) {
 		RESTResultBean result = new RESTResultBean();
-		result.setResult(MyWeixinCompanyBusiness_.companyIdSync(companyId));
+		result.setResult(MyWeixinCompanyBusiness_.companyTokenSync(companyId));
 		return result;
 	}
 }

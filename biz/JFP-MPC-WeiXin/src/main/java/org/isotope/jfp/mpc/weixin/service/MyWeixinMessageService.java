@@ -9,8 +9,7 @@ import org.isotope.jfp.framework.constants.pub.ISPushConstant.MessageType;
 import org.isotope.jfp.framework.utils.BeanFactoryHelper;
 import org.isotope.jfp.mpc.weixin.beans.message.WeiXinMessageValueBean;
 import org.isotope.jfp.mpc.weixin.beans.recever.WeiXinCompanyGroupReceverBean;
-import org.isotope.jfp.mpc.weixin.beans.recever.WeiXinCompanyTagReceverBean;
-import org.isotope.jfp.mpc.weixin.beans.recever.WeiXinUserReceverBean;
+import org.isotope.jfp.mpc.weixin.beans.recever.WeiXinCompanyUserReceverBean;
 import org.isotope.jfp.mpc.weixin.beans.sender.WeiXinCompanySenderBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,7 +46,7 @@ public class MyWeixinMessageService implements ISFrameworkConstants {
 	 * @param message
 	 * @return
 	 */
-	public String sendToCompanyId(String companyId, WeiXinMessageValueBean weixinMessage) {
+	public String sendToCompany(String companyId, WeiXinMessageValueBean weixinMessage) {
 		MyWeixinCompanyService mycs = BeanFactoryHelper.getBean("MyWeixinCompanyService");
 		{
 			WeiXinCompanySenderBean sender = mycs.loadWeiXinCompanySenderBean(companyId);
@@ -61,10 +60,7 @@ public class MyWeixinMessageService implements ISFrameworkConstants {
 			message.setMessage(weixinMessage);
 		}
 		{
-			WeiXinCompanyTagReceverBean recever = mycs.loadWeiXinCompanyTagReceverBean(companyId);
-			if (recever == null)
-				return "9010";
-			message.setRecever(recever);
+			message.setRecever(null);
 		}
 
 		umss.send(message);
@@ -96,7 +92,7 @@ public class MyWeixinMessageService implements ISFrameworkConstants {
 		}
 		MyWeixinGroupService myds = BeanFactoryHelper.getBean("MyWeixinGroupService");
 		{
-			WeiXinCompanyGroupReceverBean recever = myds.loadWeiXinCompanyDeptReceverBean(groupId);
+			WeiXinCompanyGroupReceverBean recever = myds.loadWeiXinCompanyGroupReceverBean(companyId, groupId);
 			if (recever == null)
 				return "9020";
 			message.setRecever(recever);
@@ -131,7 +127,7 @@ public class MyWeixinMessageService implements ISFrameworkConstants {
 		}
 		MyWeixinUserService myds = BeanFactoryHelper.getBean("MyWeixinUserService");
 		{
-			WeiXinUserReceverBean recever = myds.loadWeiXinUserReceverBean(userId);
+			WeiXinCompanyUserReceverBean recever = myds.loadWeiXinUserReceverBean(companyId, userId);
 			if (recever == null)
 				return "9030";
 			message.setRecever(recever);
