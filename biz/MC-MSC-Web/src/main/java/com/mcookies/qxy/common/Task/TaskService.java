@@ -1,7 +1,7 @@
 package com.mcookies.qxy.common.Task;
 
 import org.springframework.stereotype.Service;
-
+import org.isotope.jfp.framework.beans.common.FrameworkDataBean;
 import org.isotope.jfp.framework.beans.page.PageVOSupport;
 import org.isotope.jfp.framework.support.sync.MyServiceSupport;
 import org.slf4j.Logger;
@@ -17,9 +17,10 @@ public class TaskService extends MyServiceSupport {
 		return getMySqlSession().getMapper(TaskDao.class);
 	}
 
-	public PageVOSupport doSelectTaskInfoTOtermIdAndCid(PageVOSupport formParamPageModel) {
-		formParamPageModel.setPageListData(getDao().doSelectTaskTOtermIdAndCid(formParamPageModel));
-		return formParamPageModel;
+	public PageVOSupport doSelectTaskInfoTOtermIdAndCid(PageVOSupport pageModel) {
+		FrameworkDataBean formParamBean = pageModel.getFormParamBean();
+		pageModel.setPageListData(getDao().doSelectTaskTOtermIdAndCid(pageModel));
+		return pageModel;
 	}
 
 	public PageVOSupport doSelectTaskInfoTOtermIdAndTid(PageVOSupport formParamPageModel) {
