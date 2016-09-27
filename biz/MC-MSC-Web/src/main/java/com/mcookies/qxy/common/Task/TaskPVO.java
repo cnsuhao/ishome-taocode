@@ -15,13 +15,6 @@ public class TaskPVO extends TaskDBO
 	
 	public String cid; //班级id
 	
-	
-	
-	
-	
-	
-	
-	
 
 	public String getCid() {
 		return cid;

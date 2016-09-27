@@ -17,21 +17,21 @@ public class TaskService extends MyServiceSupport {
 		return getMySqlSession().getMapper(TaskDao.class);
 	}
 
-	public PageVOSupport doSelectTaskInfoTOtermIdAndCid(PageVOSupport pageModel) {
+	public PageVOSupport doSelectPageTaskWithCid(PageVOSupport pageModel) {
 		FrameworkDataBean formParamBean = pageModel.getFormParamBean();
-		pageModel.setPageListData(getDao().doSelectTaskTOtermIdAndCid(pageModel));
+		pageModel.setPageListData(getDao().doSelectPageTaskWithCid(pageModel));
 		return pageModel;
 	}
 
-	public PageVOSupport doSelectTaskInfoTOtermIdAndTid(PageVOSupport pageModel) {
+	public PageVOSupport doSelectPagetTaskWithCiddAndTid(PageVOSupport pageModel) {
 		FrameworkDataBean formParamBean = pageModel.getFormParamBean();
-		pageModel.setPageListData(getDao().doSelectTaskInfoTOtermIdAndTid(pageModel));
+		pageModel.setPageListData(getDao().doSelectPagetTaskWithCiddAndTid(pageModel));
 		return pageModel;
 	}
 	
-	public PageVOSupport doSearch(PageVOSupport pageModel) {
+	public PageVOSupport doSelectPageSearch(PageVOSupport pageModel) {
 		FrameworkDataBean formParamBean = pageModel.getFormParamBean();
-		pageModel.setPageListData(getDao().doSearch(pageModel));
+		pageModel.setPageListData(getDao().doSelectPageSearch(pageModel));
 		return pageModel;
 	}
 

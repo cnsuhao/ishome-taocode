@@ -306,7 +306,7 @@
     
     
      <!--分页   根据cid查询作业列表数据  -->                          
-    <select id='doSelectTaskTOtermIdAndCid'  parameterType='com.mcookies.qxy.common.Task.TaskPVO' 
+    <select id='doSelectPageTaskWithCid'  parameterType='com.mcookies.qxy.common.Task.TaskPVO' 
       resultType='com.mcookies.qxy.common.Task.TaskPVO'>
     SELECT
     a.task_id,a.task_name,a.is_top,a.author,a.course_id,b.course_name,c.teacher_name AS authorName,a.publish_time
@@ -317,7 +317,7 @@
       order by a.publish_time desc
     </select>
     <!-- 分页  根据cid,tid查询作业列表数据  -->
-    <select id='doSelectTaskInfoTOtermIdAndTid' parameterType='com.mcookies.qxy.common.Task.TaskPVO' resultType='com.mcookies.qxy.common.Task.TaskPVO'>
+    <select id='doSelectPagetTaskWithCiddAndTid' parameterType='com.mcookies.qxy.common.Task.TaskPVO' resultType='com.mcookies.qxy.common.Task.TaskPVO'>
      SELECT
     a.task_id,a.task_name,a.is_top,a.author,a.course_id,b.course_name,c.teacher_name AS authorName,a.publish_time
     from task a 
@@ -327,7 +327,7 @@
       <if test=" author != null and author !='' "><!-- 作者（教师tid） -->
             AND a.author = #{author}
       </if>
-      <if test=" cid != null and cid !='' "><!-- 学期id -->
+      <if test=" cid != null and cid !='' "><!-- 班级id -->
            and instr(a.task_classer, concat(#{cid}, ';')) > 0
      </if>
       order by a.publish_time desc
@@ -345,9 +345,9 @@
       </if>
     </select>
     <!--分页   作业搜索  -->
-    <select id='doSearch' parameterType='com.mcookies.qxy.common.Task.TaskPVO' resultType='com.mcookies.qxy.common.Task.TaskPVO'>
+    <select id='doSelectPageSearch' parameterType='com.mcookies.qxy.common.Task.TaskPVO' resultType='com.mcookies.qxy.common.Task.TaskPVO'>
     SELECT
-    a.task_id,a.task_name,a.is_top,a.author,a.course_id,b.course_name,c.teacher_name authorName ,a.publish_time
+    a.task_id,a.task_name,a.is_top,a.author,a.course_id,b.course_name,c.teacher_name AS authorName ,a.publish_time
     from task a 
     LEFT JOIN s_course b ON a.course_id = b.course_id
     LEFT JOIN u_teacher c ON a.author=c.teacher_name
@@ -364,7 +364,7 @@
       <if test=" author != null and author !='' "><!-- 作者（教师tid） -->
             AND a.author = #{author}
       </if>
-      <if test=" cid != null and cid !='' "><!-- 学期id -->
+      <if test=" cid != null and cid !='' "><!-- 班级id -->
            and instr(a.task_classer, concat(#{cid}, ';') > 0
      </if>
       order by a.publish_time desc
