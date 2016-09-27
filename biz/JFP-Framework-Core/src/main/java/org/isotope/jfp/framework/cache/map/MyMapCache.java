@@ -13,7 +13,7 @@ import org.isotope.jfp.framework.cache.ICacheService;
  *
  */
 @SuppressWarnings("unchecked")
-public class MyMaps implements ICacheService {
+public class MyMapCache implements ICacheService {
 
 	Map<String, Object> cache = new HashMap<String, Object>();
 
