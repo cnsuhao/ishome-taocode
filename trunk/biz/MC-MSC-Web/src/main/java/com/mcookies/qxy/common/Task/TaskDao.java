@@ -9,7 +9,7 @@ import org.isotope.jfp.framework.support.IDatabaseSupport;
 /** 作业表*/
 public interface TaskDao extends IDatabaseSupport{
 	
-	List<? extends FrameworkDataBean> doSelectTaskInfoTOtermIdAndCid(PageVOSupport formParamPageModel);
+	List<? extends FrameworkDataBean> doSelectTaskTOtermIdAndCid(PageVOSupport formParamPageModel);
 	
 	List<? extends FrameworkDataBean> doSelectTaskInfoTOtermIdAndTid(PageVOSupport formParamPageModel);
 	

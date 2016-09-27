@@ -18,7 +18,7 @@ public class TaskService extends MyServiceSupport {
 	}
 
 	public PageVOSupport doSelectTaskInfoTOtermIdAndCid(PageVOSupport formParamPageModel) {
-		formParamPageModel.setPageListData(getDao().doSelectTaskInfoTOtermIdAndCid(formParamPageModel));
+		formParamPageModel.setPageListData(getDao().doSelectTaskTOtermIdAndCid(formParamPageModel));
 		return formParamPageModel;
 	}
 
@@ -33,7 +33,8 @@ public class TaskService extends MyServiceSupport {
 	}
 
 	public TaskPVO doSelectTaskInfo(TaskDBO dbo) {
-		return doSelectTaskInfo(dbo);
+		
+		return getDao().doSelectTaskInfo(dbo);
 	}
 
 }

@@ -208,7 +208,7 @@
     </select>
 
     <!-- 插入一条数据 -->
-    <insert id='doInsert' parameterType='TaskDBO'>
+    <insert id='doInsert' parameterType='TaskDBO' useGeneratedKeys="true" keyProperty="taskId">
         INSERT INTO task
           ( <include refid='tableColumns'/>) 
         VALUES 
@@ -305,69 +305,64 @@
     </select>
     
     
-     <!-- 根据termid,cid查询作业列表数据  -->
-    <select id='doSelectTaskInfoTOtermIdAndCid' parameterType='com.mcookies.qxy.common.Task.TaskPVO' resultType='com.mcookies.qxy.common.Task.TaskPVO'>
+     <!-- 根据termid,cid查询作业列表数据  -->                          
+    <select id='doSelectTaskTOtermIdAndCid'  parameterType='com.mcookies.qxy.common.Task.TaskPVO' 
+      resultType='com.mcookies.qxy.common.Task.TaskPVO'>
     SELECT
-    a.task_id,a.task_name,a.is_top,a.author,a.course_id,b.course_name,c.teacher_name authorName ,a.publishTime
-    from task a,s_course b, s_grade_lable c,u_teacger c
-    where a.course_id = b.course_id and a.author=c.teacher_name
-    and instr(a.task_classer, concat(concat(#{cid}, ';') > 0
-      <if test=" sid != null and sid !='' "><!-- 学校id -->
-            AND sid = #{sid}
+    a.task_id,a.task_name,a.is_top,a.author,a.course_id,b.course_name,c.teacher_name AS authorName,a.publish_time
+    from task a 
+    LEFT JOIN s_course b ON a.course_id = b.course_id
+    LEFT JOIN u_teacher c ON a.author=c.teacher_name
+    where  1= 1 and instr(a.task_classer, concat(#{cid}, ';')) > 0 
+     <if test=" sid != null and sid !='' "><!-- 学校id -->
+            AND a.sid = #{sid}
       </if>
      <if test=" termId != null and termId !='' "><!-- 学期id -->
             AND a.term_id = #{termId}
      </if>
       <if test=" author != null and author !='' "><!-- 作者（教师tid） -->
-            AND author = #{author}
+            AND a.author = #{author}
       </if>
       order by a.publish_time desc
     </select>
     <!-- 根据termid,tid查询作业列表数据  -->
-    <select id='doSelectTaskInfoTOtermIdAndTid' parameterType='TaskDBO' resultType='com.mcookies.qxy.common.Task.TaskPVO'>
-    SELECT
-    a.task_id,a.task_name,a.is_top,a.author,a.course_id,b.course_name,c.teacher_name authorName ,a.publishTime
-    from task a,s_course b, s_grade_lable c,u_teacger c
-    where a.course_id = b.course_id and a.author=c.teacher_name
+    <select id='doSelectTaskInfoTOtermIdAndTid' parameterType='com.mcookies.qxy.common.Task.TaskPVO' resultType='com.mcookies.qxy.common.Task.TaskPVO'>
+     SELECT
+    a.task_id,a.task_name,a.is_top,a.author,a.course_id,b.course_name,c.teacher_name AS authorName,a.publish_time
+    from task a 
+    LEFT JOIN s_course b ON a.course_id = b.course_id
+    LEFT JOIN u_teacher c ON a.author=c.teacher_name
+    where  1= 1
       <if test=" sid != null and sid !='' "><!-- 学校id -->
-            AND sid = #{sid}
+            AND a.sid = #{sid}
       </if>
      <if test=" termId != null and termId !='' "><!-- 学期id -->
             AND a.term_id = #{termId}
      </if>
       <if test=" author != null and author !='' "><!-- 作者（教师tid） -->
-            AND author = #{author}
+            AND a.author = #{author}
       </if>
       order by a.publish_time desc
     </select>
     <!-- 根据taskId查询作业详情数据  -->
     <select id='doSelectTaskInfo' parameterType='TaskDBO' resultType='com.mcookies.qxy.common.Task.TaskPVO'>
-    SELECT
-    a.*,b.course_name,c.teacher_name authorName
-    from task a,s_course b, s_grade_lable c,u_teacger c
-    where a.course_id = b.course_id and a.author=c.teacher_name
+    SELECT distinct
+    a.*,b.course_name,c.teacher_name AS authorName
+     from task a 
+    LEFT JOIN s_course b ON a.course_id = b.course_id
+    LEFT JOIN u_teacher c ON a.author=c.teacher_name
+    where  1= 1
       <if test=" taskId != null and taskId !='' "><!-- 作业id -->
-            AND task_id = #{taskId}
+            AND a.task_id = #{taskId}
       </if>
-      <if test=" sid != null and sid !='' "><!-- 学校id -->
-            AND sid = #{sid}
-      </if>
-     <if test=" termId != null and termId !='' "><!-- 学期id -->
-            AND a.term_id = #{termId}
-     </if>
-      <if test=" author != null and author !='' "><!-- 作者（教师tid） -->
-            AND author = #{author}
-      </if>
-      <if test=" cid != null and cid !='' "><!-- 学期id -->
-           and instr(a.task_classer, concat(concat(#{cid}, ';') > 0
-     </if>
     </select>
     <!-- 作业搜索  -->
     <select id='doSearch' parameterType='com.mcookies.qxy.common.Task.TaskPVO' resultType='com.mcookies.qxy.common.Task.TaskPVO'>
     SELECT
-    a.task_id,a.task_name,a.is_top,a.author,a.course_id,b.course_name,c.teacher_name authorName ,a.publishTime
-    from task a,s_course b, s_grade_lable c,u_teacger c
-    where a.course_id = b.course_id and a.author=c.teacher_name
+    a.task_id,a.task_name,a.is_top,a.author,a.course_id,b.course_name,c.teacher_name authorName ,a.publish_time
+    from task a 
+    LEFT JOIN s_course b ON a.course_id = b.course_id
+    LEFT JOIN u_teacher c ON a.author=c.teacher_name
       <if test=" sid != null and sid !='' "><!-- 学校id -->
             AND sid = #{sid}
       </if>
