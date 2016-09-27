@@ -151,6 +151,10 @@ public class DeviceManageController extends MyControllerSupport {
 				String currentTime = DateHelper.currentTimeMillis2();
 				device.setIsUse(1);
 				device.setLastLoginTime(currentTime);
+				if(device.getSid()==null || device.getSid()==0){
+					Long sid = getLoginer().getSchoolId();
+					device.setSid(sid);
+				}
 				DeviceTagService_.doInsert(device);
 			}
 		} catch (Exception e) {
