@@ -331,7 +331,14 @@ public class TaskManegeController extends MyControllerSupport{
 				result.setStatus(3);
 				return result;
 			}
-			TaskServicer.doUpdate(task);
+			if(task.getIsTop() == 0){
+				TaskServicer.doNotTop(task);
+			}else if(task.getIsTop() == 1){
+				TaskServicer.doUpdate(task);				
+			}else{
+				result.setInfo("错误操作");
+				result.setStatus(3);
+			}
 			Map<String, Object> data = new HashMap<String, Object>();
 			data.put("info", "ok");
 			result.setData(data);
