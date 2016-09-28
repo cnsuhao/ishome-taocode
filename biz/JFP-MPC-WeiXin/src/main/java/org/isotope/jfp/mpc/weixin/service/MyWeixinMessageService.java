@@ -90,7 +90,7 @@ public class MyWeixinMessageService implements ISFrameworkConstants {
 				return "9080";
 			message.setMessage(weixinMessage);
 		}
-		MyWeixinGroupService myds = BeanFactoryHelper.getBean("MyWeixinGroupService");
+		MyWeixinCompanyGroupService myds = BeanFactoryHelper.getBean("MyWeixinGroupService");
 		{
 			WeiXinCompanyGroupReceverBean recever = myds.loadWeiXinCompanyGroupReceverBean(companyId, groupId);
 			if (recever == null)
@@ -125,7 +125,7 @@ public class MyWeixinMessageService implements ISFrameworkConstants {
 				return "9080";
 			message.setMessage(weixinMessage);
 		}
-		MyWeixinUserService myds = BeanFactoryHelper.getBean("MyWeixinUserService");
+		MyWeixinCompanyGroupUserService myds = BeanFactoryHelper.getBean("MyWeixinUserService");
 		{
 			WeiXinCompanyGroupUserReceverBean recever = myds.loadWeiXinUserReceverBean(companyId, userId);
 			if (recever == null)

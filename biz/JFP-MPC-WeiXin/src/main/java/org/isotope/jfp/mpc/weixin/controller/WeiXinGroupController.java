@@ -3,7 +3,7 @@ package org.isotope.jfp.mpc.weixin.controller;
 import javax.annotation.Resource;
 
 import org.isotope.jfp.framework.beans.common.RESTResultBean;
-import org.isotope.jfp.mpc.weixin.service.MyWeixinGroupService;
+import org.isotope.jfp.mpc.weixin.service.MyWeixinCompanyGroupService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class WeiXinGroupController {
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Resource
-	MyWeixinGroupService MyWeixinGroupBusiness_;
+	MyWeixinCompanyGroupService MyWeixinGroupBusiness_;
 
 	/**
 	 * 删除一个企业用户组（数据来源于接口）
