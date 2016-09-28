@@ -28,7 +28,7 @@ public class TaskService extends MyServiceSupport {
 		pageModel.setPageListData(getDao().doSelectPagetTaskWithCiddAndTid(pageModel));
 		return pageModel;
 	}
-	
+
 	public PageVOSupport doSelectPageSearch(PageVOSupport pageModel) {
 		FrameworkDataBean formParamBean = pageModel.getFormParamBean();
 		pageModel.setPageListData(getDao().doSelectPageSearch(pageModel));
@@ -36,8 +36,13 @@ public class TaskService extends MyServiceSupport {
 	}
 
 	public TaskPVO doSelectTaskInfo(TaskDBO dbo) {
-		
+
 		return getDao().doSelectTaskInfo(dbo);
+	}
+
+	public int doNotTop(TaskDBO dbo) {
+
+		return getDao().doNotTop(dbo);
 	}
 
 }

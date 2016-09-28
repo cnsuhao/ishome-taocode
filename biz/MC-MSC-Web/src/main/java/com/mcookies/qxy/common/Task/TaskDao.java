@@ -17,5 +17,6 @@ public interface TaskDao extends IDatabaseSupport{
 	
 	public TaskPVO doSelectTaskInfo(TaskDBO dbo);
 	
+	int doNotTop(TaskDBO dbo);
 
 }
