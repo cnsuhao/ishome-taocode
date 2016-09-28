@@ -347,27 +347,24 @@
     <!--分页   作业搜索  -->
     <select id='doSelectPageSearch' parameterType='com.mcookies.qxy.common.Task.TaskPVO' resultType='com.mcookies.qxy.common.Task.TaskPVO'>
     SELECT
-    a.task_id,a.task_name,a.is_top,a.author,a.course_id,b.course_name,c.teacher_name AS authorName ,a.publish_time
+    a.task_id,a.task_name,a.is_top,a.author,a.course_id,b.course_name,c.teacher_name AS authorName,a.publish_time
     from task a 
     LEFT JOIN s_course b ON a.course_id = b.course_id
     LEFT JOIN u_teacher c ON a.author=c.teacher_name
     where  1= 1
-      <if test=" courseId != null and courseId !='' "><!-- 课程id -->
+        <if test=" courseId != null and courseId !='' "><!-- 课程id -->
                 AND a.course_id = #{courseId}
        </if>
-     <if test=" termId != null and termId !='' "><!-- 学期id -->
-            AND a.term_id = #{termId}
-     </if>
-     <if test=" taskName != null and taskName !='' "><!-- 作业标题 -->
-            AND task_name like '%#{taskName}%'
-        </if>
+       <if test=" taskName != null and taskName !='' "><!-- 作业标题 -->
+            AND task_name like concat('%',#{taskName}, '%')
+      </if>
       <if test=" author != null and author !='' "><!-- 作者（教师tid） -->
             AND a.author = #{author}
       </if>
-      <if test=" cid != null and cid !='' "><!-- 班级id -->
-           and instr(a.task_classer, concat(#{cid}, ';') > 0
+     <if test=" cid != null and cid !='' "><!-- 班级id -->
+           and instr(a.task_classer, concat(#{cid}, ';')) > 0
      </if>
-      order by a.publish_time desc
+     order by a.publish_time desc
     </select>
     
 </mapper>
