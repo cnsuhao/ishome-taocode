@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 /**
  * 微信企业号
  * 
@@ -34,59 +35,8 @@ public class WeiXinHomeController {
 	@ResponseBody
 	public RESTResultBean companyIdPOST(@PathVariable String companyId) {
 		RESTResultBean result = new RESTResultBean();
-		result.setMessage("微信企业号......"+DateHelper.currentTimeMillis2());
+		result.setMessage("微信企业号......" + DateHelper.currentTimeMillis2());
 		return result;
 	}
-//
-//	/**
-//	 * 通讯本同步地址
-//	 * 
-//	 * @return
-//	 */
-//	@RequestMapping(value = "/{companyId}/user", method = RequestMethod.POST)
-//	@ResponseBody
-//	public RESTResultBean companyUserPOST(@PathVariable String companyId) {
-//		RESTResultBean result = new RESTResultBean();
-//		result.setResult(WinxinBusiness_.loadCompanyUser(companyId));
-//		return result;
-//	}
-//
-//	/**
-//	 * jssdk的验证算法请求
-//	 * 
-//	 * @return
-//	 */
-//	@RequestMapping(value = "/{companyId}/config", method = RequestMethod.POST)
-//	@ResponseBody
-//	public RESTResultBean companyConfigPOST(@PathVariable String companyId) {
-//		RESTResultBean result = new RESTResultBean();
-//		result.setResult(WinxinBusiness_.loadCompanyConfig(companyId));
-//		return result;
-//	}
-//
-//	/**
-//	 * 群发微信消息
-//	 * 
-//	 * @return
-//	 */
-//	@RequestMapping(value = "/{companyId}/message", method = RequestMethod.POST)
-//	@ResponseBody
-//	public RESTResultBean messageAllPOST(@PathVariable String companyId, WeiXinMessageValueBean message) {
-//		RESTResultBean result = new RESTResultBean();
-//		result.setCode(WinxinBusiness_.sendMessageToCompanyAll(companyId, message));
-//		return result;
-//	}
-//
-//	/**
-//	 * 微信消息发送
-//	 * 
-//	 * @return
-//	 */
-//	@RequestMapping(value = "/{companyId}/message/{userId}", method = RequestMethod.POST)
-//	@ResponseBody
-//	public RESTResultBean messagePOST(@PathVariable String companyId, @PathVariable String userId, WeiXinMessageValueBean message) {
-//		RESTResultBean result = new RESTResultBean();
-//		result.setCode(WinxinBusiness_.sendMessageToCompanyUser(companyId, userId, message));
-//		return result;
-//	}
+
 }
