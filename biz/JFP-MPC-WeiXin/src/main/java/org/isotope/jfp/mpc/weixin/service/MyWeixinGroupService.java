@@ -5,16 +5,17 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.isotope.jfp.common.weixin.WeiXinCompanyDBO;
 import org.isotope.jfp.common.weixin.WeiXinCompanyGroupDBO;
 import org.isotope.jfp.common.weixin.WeixinService;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.utils.BeanFactoryHelper;
 import org.isotope.jfp.framework.utils.EmptyHelper;
 import org.isotope.jfp.mpc.weixin.beans.recever.WeiXinCompanyGroupReceverBean;
-import org.isotope.jfp.mpc.weixin.beans.sender.WeiXinCompanySenderBean;
 import org.isotope.jfp.mpc.weixin.token.WeiXinCompanyTokenService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 /**
@@ -36,12 +37,8 @@ public class MyWeixinGroupService implements ISFrameworkConstants {
 	WeiXinCompanyTokenService WeiXinCompanyTokenService_;
 
 	public WeiXinCompanyGroupReceverBean loadWeiXinCompanyGroupReceverBean(String companyId, String groupId) {
-		HashMap<String, String> companyGroup = new HashMap<String, String>();
-		companyGroup.put("companyId", companyId);
-		companyGroup.put("groupId", groupId);
-		List<WeiXinCompanyGroupDBO> companyGroups = WeixinService_.loadCompanyGroup(companyGroup);
-		if (companyGroups != null && companyGroups.size() == 1) {
-			WeiXinCompanyGroupDBO companyGroupDBO = companyGroups.get(0);
+		WeiXinCompanyGroupDBO companyGroupDBO = loadWeiXinCompanyGroupDBO(companyId, groupId);
+		if (EmptyHelper.isNotEmpty(companyGroupDBO)) {
 			WeiXinCompanyGroupReceverBean recever = new WeiXinCompanyGroupReceverBean();
 			recever.setCompanyId(companyGroupDBO.getCompanyId());
 			recever.setGroupName(companyGroupDBO.getGroupName());
@@ -51,13 +48,25 @@ public class MyWeixinGroupService implements ISFrameworkConstants {
 		return null;
 	}
 
+	public WeiXinCompanyGroupDBO loadWeiXinCompanyGroupDBO(String companyId, String groupId) {
+		HashMap<String, String> companyGroup = new HashMap<String, String>();
+		companyGroup.put("companyId", companyId);
+		companyGroup.put("groupId", groupId);
+		List<WeiXinCompanyGroupDBO> companyGroups = WeixinService_.loadCompanyGroup(companyGroup);
+		if (companyGroups != null && companyGroups.size() == 1) {
+			return companyGroups.get(0);
+		}
+		return null;
+	}
+
+	//////////////////////////////添加用户组/////////////////////////////////////////
 	/**
 	 * 获得企业用户组ID
 	 * 
 	 * @param companyGroup
 	 * @return
 	 */
-	public String companyIdGroupIdSync(String companyId, String groupId) {
+	public String companyGroupIdSync(String companyId, String groupId) {
 		HashMap<String, String> companyGroup = new HashMap<String, String>();
 		companyGroup.put("companyId", companyId);
 		companyGroup.put("groupId", groupId);
@@ -69,40 +78,32 @@ public class MyWeixinGroupService implements ISFrameworkConstants {
 	}
 
 	/**
-	 * 获得企业用户组ID
+	 * 获得企业用户组ID<br>
+	 * 添加一个用户组
 	 * 
 	 * @param companyGroup
 	 * @return
 	 */
+	public String companyGroupIdSync(WeiXinCompanyGroupReceverBean companyGroup) {
+		// 用户组
+		WeiXinCompanyGroupDBO companyGroupDBO = new WeiXinCompanyGroupDBO();
+		BeanUtils.copyProperties(companyGroup, companyGroupDBO);
+		return companyGroupIdSync(companyGroupDBO);
+	}
+
 	public String companyGroupIdSync(WeiXinCompanyGroupDBO companyGroup) {
 		// 企业
-		MyWeixinCompanyService company = BeanFactoryHelper.getBean(MyWeixinCompanyService.class.getSimpleName());
-		WeiXinCompanySenderBean sender = company.loadWeiXinCompanySenderBean(companyGroup.getCompanyId());
-		// 用户组
-		WeiXinCompanyGroupReceverBean recever = new WeiXinCompanyGroupReceverBean();
+		MyWeixinCompanyService companyService = BeanFactoryHelper.getBean(MyWeixinCompanyService.class.getSimpleName());
+		WeiXinCompanyDBO company = companyService.loadWeiXinCompanyDBO(companyGroup.getCompanyId());
 		// Token
 		WeiXinCompanyTokenService token = BeanFactoryHelper.getBean(WeiXinCompanyTokenService.class.getSimpleName());
-
-		String wxId = token.loadWeixinCompanyGroupId(sender, recever);
+		// 添加用户组
+		String wxId = token.addCompanyGroup(company, companyGroup);
 		if (EmptyHelper.isEmpty(wxId)) {
 			return NINE;
 		} else {
 			companyGroup.setWxId(wxId);
 			WeixinService_.updateCompanyGroupById(companyGroup);
-		}
-		return ZERO;
-	}
-
-	public String companyGroupIdSync() {
-		HashMap<String, String> companyGroup = new HashMap<String, String>();
-		companyGroup.put("wxIdIsNull", ONE);
-		List<WeiXinCompanyGroupDBO> companyGroups = WeixinService_.loadCompanyGroup(companyGroup);
-		if (companyGroups != null) {
-			for (WeiXinCompanyGroupDBO group : companyGroups) {
-				if (NINE.equals(companyGroupIdSync(group))) {
-					logger.error(group.getCompanyId() + "." + group.getGroupId() + "===>>>不能获取微信Token");
-				}
-			}
 		}
 		return ZERO;
 	}
@@ -123,31 +124,27 @@ public class MyWeixinGroupService implements ISFrameworkConstants {
 		return ZERO;
 	}
 
-	///////////////////////////////////////////////////////////////////////////////
-
-	public String companyGroupIdAdd(WeiXinCompanyGroupReceverBean companyGroup) {
-		MyWeixinCompanyService company = BeanFactoryHelper.getBean(MyWeixinCompanyService.class.getSimpleName());
-		WeiXinCompanySenderBean sender = company.loadWeiXinCompanySenderBean(companyGroup.getCompanyId());
-		return WeiXinCompanyTokenService_.addCompanyGroup(sender, companyGroup);
+	public String companyGroupIdSync() {
+		HashMap<String, String> companyGroup = new HashMap<String, String>();
+		companyGroup.put("wxIdIsNull", ONE);
+		List<WeiXinCompanyGroupDBO> companyGroups = WeixinService_.loadCompanyGroup(companyGroup);
+		if (companyGroups != null) {
+			for (WeiXinCompanyGroupDBO group : companyGroups) {
+				if (NINE.equals(companyGroupIdSync(group))) {
+					logger.error(group.getCompanyId() + "." + group.getGroupId() + "===>>>不能获取微信Token");
+				}
+			}
+		}
+		return ZERO;
 	}
 
-	public String companyIdGroupIdAdd(String companyId, String groupId) {
-		MyWeixinCompanyService company = BeanFactoryHelper.getBean(MyWeixinCompanyService.class.getSimpleName());
-		WeiXinCompanySenderBean sender = company.loadWeiXinCompanySenderBean(companyId);
-		WeiXinCompanyGroupReceverBean recever = this.loadWeiXinCompanyGroupReceverBean(companyId, groupId);
-		return WeiXinCompanyTokenService_.addCompanyGroup(sender, recever);
-	}
-
-	public String companyGroupIdDelete(WeiXinCompanyGroupReceverBean companyGroup) {
-		MyWeixinCompanyService company = BeanFactoryHelper.getBean(MyWeixinCompanyService.class.getSimpleName());
-		WeiXinCompanySenderBean sender = company.loadWeiXinCompanySenderBean(companyGroup.getCompanyId());
-		return WeiXinCompanyTokenService_.deleteCompanyGroup(sender, companyGroup);
-	}
-
+	//////////////////////////////////删除用户组/////////////////////////////////////////////
 	public String companyIdGroupIdDelete(String companyId, String groupId) {
-		MyWeixinCompanyService company = BeanFactoryHelper.getBean(MyWeixinCompanyService.class.getSimpleName());
-		WeiXinCompanySenderBean sender = company.loadWeiXinCompanySenderBean(companyId);
-		WeiXinCompanyGroupReceverBean recever = this.loadWeiXinCompanyGroupReceverBean(companyId, groupId);
-		return WeiXinCompanyTokenService_.deleteCompanyGroup(sender, recever);
+		// 企业
+		MyWeixinCompanyService companyService = BeanFactoryHelper.getBean(MyWeixinCompanyService.class.getSimpleName());
+		WeiXinCompanyDBO company = companyService.loadWeiXinCompanyDBO(companyId);
+		//用户组
+		WeiXinCompanyGroupDBO companyGroup = this.loadWeiXinCompanyGroupDBO(companyId, groupId);
+		return WeiXinCompanyTokenService_.deleteCompanyGroup(company, companyGroup);
 	}
 }

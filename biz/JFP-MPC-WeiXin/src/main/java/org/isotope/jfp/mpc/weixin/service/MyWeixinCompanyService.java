@@ -36,19 +36,12 @@ public class MyWeixinCompanyService implements ISFrameworkConstants {
 	@Resource
 	WeiXinCompanyTokenService WeiXinCompanyTokenService_;
 
-	public WeiXinCompanyTokenBean loadCompanyToken(String companyId) {
-		return WeiXinCompanyTokenService_.loadCompanyToken(loadWeiXinCompanySenderBean(companyId));
-	}
-
 	/**
 	 * 同步数据持久化内容
 	 */
 	public WeiXinCompanySenderBean loadWeiXinCompanySenderBean(String companyId) {
-		HashMap<String, String> comyany = new HashMap<String, String>();
-		comyany.put("companyId", companyId);
-		List<WeiXinCompanyDBO> comanys = WeixinService_.loadCompany(comyany);
-		if (comanys != null && comanys.size() == 1) {
-			WeiXinCompanyDBO comanyDBO = comanys.get(0);
+		WeiXinCompanyDBO comanyDBO = loadWeiXinCompanyDBO(companyId);
+		if (EmptyHelper.isNotEmpty(comanyDBO)) {
 			WeiXinCompanySenderBean sender = new WeiXinCompanySenderBean();
 			sender.setCompanyId(comanyDBO.getCompanyId());
 			sender.setAppId(comanyDBO.getAppId());
@@ -59,6 +52,21 @@ public class MyWeixinCompanyService implements ISFrameworkConstants {
 		return null;
 	}
 
+	public WeiXinCompanyDBO loadWeiXinCompanyDBO(String companyId) {
+		HashMap<String, String> comyany = new HashMap<String, String>();
+		comyany.put("companyId", companyId);
+		List<WeiXinCompanyDBO> comanys = WeixinService_.loadCompany(comyany);
+		if (comanys != null && comanys.size() == 1) {
+			return comanys.get(0);
+		}
+
+		return null;
+	}
+
+	public WeiXinCompanyTokenBean loadCompanyToken(String companyId) {
+		return WeiXinCompanyTokenService_.loadCompanyToken(loadWeiXinCompanySenderBean(companyId));
+	}
+
 	/**
 	 * 同步企业Token
 	 * 
@@ -66,18 +74,12 @@ public class MyWeixinCompanyService implements ISFrameworkConstants {
 	 * @return
 	 */
 	public String companyTokenSync(String companyId) {
-		HashMap<String, String> comyany = new HashMap<String, String>();
-		comyany.put("companyId", companyId);
-		List<WeiXinCompanyDBO> comanys = WeixinService_.loadCompany(comyany);
-		if (comanys != null && comanys.size() == 1) {
-			return companyTokenSync(comanys.get(0));
-		} else
-			return ONE;
+		return companyTokenSync(loadWeiXinCompanyDBO(companyId));
 	}
 
 	public String companyTokenSync(WeiXinCompanyDBO company) {
-		WeiXinCompanyTokenService wcts = BeanFactoryHelper.getBean("WeiXinCompanyTokenService");
-		WeiXinCompanyTokenBean companyToken = wcts.loadCompanyToken(company);
+		WeiXinCompanyTokenService token = BeanFactoryHelper.getBean("WeiXinCompanyTokenService");
+		WeiXinCompanyTokenBean companyToken = token.loadCompanyToken(company);
 		if (EmptyHelper.isEmpty(companyToken.getAccessToken())) {
 			return NINE;
 		}

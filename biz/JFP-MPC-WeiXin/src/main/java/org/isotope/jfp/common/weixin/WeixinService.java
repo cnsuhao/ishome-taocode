@@ -39,8 +39,8 @@ public class WeixinService extends MyServiceSupport implements ISFrameworkConsta
 	/**
 	 * 获得微信企业号关注用户表数据
 	 */
-	public List<WeiXinCompanyUserDBO> loadCompanyUser(HashMap<String, String> companyUser) {
-		return getWeixinDao().loadCompanyUser(companyUser);
+	public List<WeiXinCompanyGroupUserDBO> loadCompanyUser(HashMap<String, String> companyGroupUser) {
+		return getWeixinDao().loadCompanyGroupUser(companyGroupUser);
 	}
 
 	/**
@@ -79,7 +79,7 @@ public class WeixinService extends MyServiceSupport implements ISFrameworkConsta
 	 * @param comyany
 	 * @return
 	 */
-	public int updateCompanyUserById(WeiXinCompanyUserDBO companyUser) {
-		return getWeixinDao().updateCompanyUserById(companyUser);
+	public int updateCompanyUserById(WeiXinCompanyGroupUserDBO companyGroupUser) {
+		return getWeixinDao().updateCompanyUserById(companyGroupUser);
 	}
 }

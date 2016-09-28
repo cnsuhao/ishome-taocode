@@ -9,7 +9,7 @@ import org.isotope.jfp.framework.constants.pub.ISPushConstant.MessageType;
 import org.isotope.jfp.framework.utils.BeanFactoryHelper;
 import org.isotope.jfp.mpc.weixin.beans.message.WeiXinMessageValueBean;
 import org.isotope.jfp.mpc.weixin.beans.recever.WeiXinCompanyGroupReceverBean;
-import org.isotope.jfp.mpc.weixin.beans.recever.WeiXinCompanyUserReceverBean;
+import org.isotope.jfp.mpc.weixin.beans.recever.WeiXinCompanyGroupUserReceverBean;
 import org.isotope.jfp.mpc.weixin.beans.sender.WeiXinCompanySenderBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -127,7 +127,7 @@ public class MyWeixinMessageService implements ISFrameworkConstants {
 		}
 		MyWeixinUserService myds = BeanFactoryHelper.getBean("MyWeixinUserService");
 		{
-			WeiXinCompanyUserReceverBean recever = myds.loadWeiXinUserReceverBean(companyId, userId);
+			WeiXinCompanyGroupUserReceverBean recever = myds.loadWeiXinUserReceverBean(companyId, userId);
 			if (recever == null)
 				return "9030";
 			message.setRecever(recever);

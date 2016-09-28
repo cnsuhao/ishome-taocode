@@ -11,11 +11,11 @@ import org.isotope.jfp.framework.beans.message.MessageInfoBean;
 import org.isotope.jfp.framework.common.message.AMessagePushGatewaySupport;
 import org.isotope.jfp.mpc.weixin.beans.message.WeiXinMessageValueBean;
 import org.isotope.jfp.mpc.weixin.beans.recever.WeiXinCompanyGroupReceverBean;
+import org.isotope.jfp.mpc.weixin.beans.recever.WeiXinCompanyGroupUserReceverBean;
 import org.isotope.jfp.mpc.weixin.beans.recever.WeiXinCompanyTagReceverBean;
-import org.isotope.jfp.mpc.weixin.beans.recever.WeiXinCompanyUserReceverBean;
 import org.isotope.jfp.mpc.weixin.beans.recevers.WeiXinCompanyGroupReceverListBean;
+import org.isotope.jfp.mpc.weixin.beans.recevers.WeiXinCompanyGroupUserReceverListBean;
 import org.isotope.jfp.mpc.weixin.beans.recevers.WeiXinCompanyTagReceverListBean;
-import org.isotope.jfp.mpc.weixin.beans.recevers.WeiXinUserReceverListBean;
 import org.isotope.jfp.mpc.weixin.beans.sender.WeiXinCompanySenderBean;
 import org.isotope.jfp.mpc.weixin.business.MyWeixinBusiness;
 
@@ -47,27 +47,27 @@ public class WeiXinMessagePushGatewayServerThread extends AMessagePushGatewaySup
 			WeiXinMessageValueBean messageValue = (WeiXinMessageValueBean) messageInfo.getMessage();
 			WeiXinCompanySenderBean sender = (WeiXinCompanySenderBean) messageInfo.getSender();
 			// 推送对象
-			List<WeiXinCompanyGroupReceverBean> deptRecevers = null;
+			List<WeiXinCompanyGroupReceverBean> deptGroupRecevers = null;
 			List<WeiXinCompanyTagReceverBean> tagRecevers = null;
-			List<WeiXinCompanyUserReceverBean> userRecevers = null;
+			List<WeiXinCompanyGroupUserReceverBean> userGroupRecevers = null;
 
 			boolean push = true;
 			if(messageInfo.getRecever() == null){
 				//全体发送
-				userRecevers = new ArrayList<WeiXinCompanyUserReceverBean>();
-				WeiXinCompanyUserReceverBean allUser = new WeiXinCompanyUserReceverBean();
+				userGroupRecevers = new ArrayList<WeiXinCompanyGroupUserReceverBean>();
+				WeiXinCompanyGroupUserReceverBean allUser = new WeiXinCompanyGroupUserReceverBean();
 				allUser.setWxId("@all");
-				userRecevers.add(allUser);
+				userGroupRecevers.add(allUser);
 			}
 			//发送给某个用户
-			else if (messageInfo.getRecever() instanceof WeiXinCompanyUserReceverBean){
-				userRecevers = new ArrayList<WeiXinCompanyUserReceverBean>();
-				userRecevers.add((WeiXinCompanyUserReceverBean) messageInfo.getRecever());
+			else if (messageInfo.getRecever() instanceof WeiXinCompanyGroupUserReceverBean){
+				userGroupRecevers = new ArrayList<WeiXinCompanyGroupUserReceverBean>();
+				userGroupRecevers.add((WeiXinCompanyGroupUserReceverBean) messageInfo.getRecever());
 			}
 			//发送给某个用户组
 			else if (messageInfo.getRecever() instanceof WeiXinCompanyGroupReceverBean){
-				deptRecevers = new ArrayList<WeiXinCompanyGroupReceverBean>();
-				deptRecevers.add((WeiXinCompanyGroupReceverBean) messageInfo.getRecever());
+				deptGroupRecevers = new ArrayList<WeiXinCompanyGroupReceverBean>();
+				deptGroupRecevers.add((WeiXinCompanyGroupReceverBean) messageInfo.getRecever());
 			}
 			//发送给某个企业
 			else if (messageInfo.getRecever() instanceof WeiXinCompanyTagReceverBean){
@@ -76,12 +76,12 @@ public class WeiXinMessagePushGatewayServerThread extends AMessagePushGatewaySup
 			}
 			//////////////////////////////////////////////////////////////////////////////
 			//发送给某些用户
-			else if (messageInfo.getRecever() instanceof WeiXinUserReceverListBean){
-				userRecevers = ((WeiXinUserReceverListBean) messageInfo.getRecever()).getRecevers();
+			else if (messageInfo.getRecever() instanceof WeiXinCompanyGroupUserReceverListBean){
+				userGroupRecevers = ((WeiXinCompanyGroupUserReceverListBean) messageInfo.getRecever()).getRecevers();
 			}
 			//发送给某些用户组
 			else if (messageInfo.getRecever() instanceof WeiXinCompanyGroupReceverListBean){
-				deptRecevers = ((WeiXinCompanyGroupReceverListBean) messageInfo.getRecever()).getRecevers();
+				deptGroupRecevers = ((WeiXinCompanyGroupReceverListBean) messageInfo.getRecever()).getRecevers();
 			}
 			//发送给某些企业
 			else if (messageInfo.getRecever() instanceof WeiXinCompanyTagReceverListBean){
@@ -96,17 +96,17 @@ public class WeiXinMessagePushGatewayServerThread extends AMessagePushGatewaySup
 			if (push) {
 				// 进行数据推送
 				if (MEDIA_TEXT.equals(messageValue.getMediaType())) {
-					result.setCode(weixinService.sendText(messageValue, sender, deptRecevers, tagRecevers, userRecevers));
+					result.setCode(weixinService.sendText(messageValue, sender, deptGroupRecevers, tagRecevers, userGroupRecevers));
 				} else if (MEDIA_IMAGE.equals(messageValue.getMediaType())) {
-					result.setCode(weixinService.sendImage(messageValue, sender, deptRecevers, tagRecevers, userRecevers));
+					result.setCode(weixinService.sendImage(messageValue, sender, deptGroupRecevers, tagRecevers, userGroupRecevers));
 				} else if (MEDIA_VOICE.equals(messageValue.getMediaType())) {
-					result.setCode(weixinService.sendVoice(messageValue, sender, deptRecevers, tagRecevers, userRecevers));
+					result.setCode(weixinService.sendVoice(messageValue, sender, deptGroupRecevers, tagRecevers, userGroupRecevers));
 				} else if (MEDIA_VIDEO.equals(messageValue.getMediaType())) {
-					result.setCode(weixinService.sendVideo(messageValue, sender, deptRecevers, tagRecevers, userRecevers));
+					result.setCode(weixinService.sendVideo(messageValue, sender, deptGroupRecevers, tagRecevers, userGroupRecevers));
 				} else if (MEDIA_THUMB.equals(messageValue.getMediaType())) {
-					result.setCode(weixinService.sendThumb(messageValue, sender, deptRecevers, tagRecevers, userRecevers));
+					result.setCode(weixinService.sendThumb(messageValue, sender, deptGroupRecevers, tagRecevers, userGroupRecevers));
 				} else if (MEDIA_FILE.equals(messageValue.getMediaType())) {
-					result.setCode(weixinService.sendFile(messageValue, sender, deptRecevers, tagRecevers, userRecevers));
+					result.setCode(weixinService.sendFile(messageValue, sender, deptGroupRecevers, tagRecevers, userGroupRecevers));
 				} else {
 					result.setCode(TWO);
 					result.setMessage("消息类型不对，不支持当前消息内容类别getMediaType(" + messageValue.getMediaType() + ")");

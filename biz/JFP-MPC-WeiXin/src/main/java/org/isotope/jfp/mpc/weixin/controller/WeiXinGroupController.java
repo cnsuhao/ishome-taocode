@@ -27,19 +27,6 @@ public class WeiXinGroupController {
 	MyWeixinGroupService MyWeixinGroupBusiness_;
 
 	/**
-	 * 增加一个企业用户组（数据来源于DB）
-	 * 
-	 * @return
-	 */
-	@RequestMapping(value = "/add/{companyId}/{groupId}", method = RequestMethod.POST)
-	@ResponseBody
-	public RESTResultBean companyIdGroupIdAddPOST(@PathVariable String companyId,@PathVariable String groupId) {
-		RESTResultBean result = new RESTResultBean();
-		result.setResult(MyWeixinGroupBusiness_.companyIdGroupIdAdd(companyId,groupId));
-		return result;
-	}
-
-	/**
 	 * 删除一个企业用户组（数据来源于接口）
 	 * 
 	 * @return
@@ -74,7 +61,7 @@ public class WeiXinGroupController {
 	@ResponseBody
 	public RESTResultBean companyIdGroupIdSyncPOST(@PathVariable String companyId,@PathVariable String groupId) {
 		RESTResultBean result = new RESTResultBean();
-		result.setResult(MyWeixinGroupBusiness_.companyIdGroupIdSync(companyId,groupId));
+		result.setResult(MyWeixinGroupBusiness_.companyGroupIdSync(companyId,groupId));
 		return result;
 	}
 }

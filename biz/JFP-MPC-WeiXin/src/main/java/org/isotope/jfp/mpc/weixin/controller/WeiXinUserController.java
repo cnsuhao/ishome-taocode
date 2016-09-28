@@ -35,7 +35,20 @@ public class WeiXinUserController {
 	@ResponseBody
 	public RESTResultBean companyIdUserIdAddPOST(@PathVariable String companyId,@PathVariable String userId) {
 		RESTResultBean result = new RESTResultBean();
-		result.setResult(MyWeixinUserBusiness_.companyIdUserIdAdd(companyId,userId));
+		result.setResult(MyWeixinUserBusiness_.companyUserIdSync(companyId,userId));
+		return result;
+	}
+
+	/**
+	 * 增加一个企业用户组用户（数据来源于DB）
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/add/{companyId}/{groupId}/{userId}", method = RequestMethod.POST)
+	@ResponseBody
+	public RESTResultBean companyIdGroupIdUserIdAddPOST(@PathVariable String companyId,@PathVariable String groupId,@PathVariable String userId) {
+		RESTResultBean result = new RESTResultBean();
+		result.setResult(MyWeixinUserBusiness_.companyGroupUserIdSync(companyId,groupId,userId));
 		return result;
 	}
 
@@ -49,32 +62,6 @@ public class WeiXinUserController {
 	public RESTResultBean companyIdUserIdDeletePOST(@PathVariable String companyId,@PathVariable String userId) {
 		RESTResultBean result = new RESTResultBean();
 		result.setResult(MyWeixinUserBusiness_.companyIdUserIdDelete(companyId,userId));
-		return result;
-	}
-
-	/**
-	 * 增加一个企业用户组（数据来源于DB）
-	 * 
-	 * @return
-	 */
-	@RequestMapping(value = "/add/{companyId}/{groupId}/{userId}", method = RequestMethod.POST)
-	@ResponseBody
-	public RESTResultBean companyIdGroupIdUserIdAddPOST(@PathVariable String companyId,@PathVariable String groupId,@PathVariable String userId) {
-		RESTResultBean result = new RESTResultBean();
-		result.setResult(MyWeixinUserBusiness_.companyIdGroupIdUserIdAdd(companyId,groupId,userId));
-		return result;
-	}
-
-	/**
-	 * 删除一个企业用户组（数据来源于接口）
-	 * 
-	 * @return
-	 */
-	@RequestMapping(value = "/delete/{companyId}/{groupId}/{userId}", method = RequestMethod.POST)
-	@ResponseBody
-	public RESTResultBean companyIdGroupIdUserIdDeletePOST(@PathVariable String companyId,@PathVariable String groupId,@PathVariable String userId) {
-		RESTResultBean result = new RESTResultBean();
-		result.setResult(MyWeixinUserBusiness_.companyGroupIdUserIdDelete(companyId,groupId,userId));
 		return result;
 	}
 
