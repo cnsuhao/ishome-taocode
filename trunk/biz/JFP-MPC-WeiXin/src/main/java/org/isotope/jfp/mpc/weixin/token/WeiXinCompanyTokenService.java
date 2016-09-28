@@ -3,11 +3,12 @@ package org.isotope.jfp.mpc.weixin.token;
 import javax.annotation.Resource;
 
 import org.isotope.jfp.common.weixin.WeiXinCompanyDBO;
+import org.isotope.jfp.common.weixin.WeiXinCompanyGroupDBO;
+import org.isotope.jfp.common.weixin.WeiXinCompanyGroupUserDBO;
 import org.isotope.jfp.common.weixin.constants.ISWeixinConstants;
 import org.isotope.jfp.framework.cache.ICacheService;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
-import org.isotope.jfp.mpc.weixin.beans.recever.WeiXinCompanyGroupReceverBean;
-import org.isotope.jfp.mpc.weixin.beans.recever.WeiXinCompanyGroupUserReceverBean;
+import org.isotope.jfp.framework.utils.EmptyHelper;
 import org.isotope.jfp.mpc.weixin.beans.sender.WeiXinCompanySenderBean;
 import org.isotope.jfp.mpc.weixin.token.beans.WeiXinCompanyTokenBean;
 import org.isotope.jfp.mpc.weixin.txapi.TxWeixinService;
@@ -17,6 +18,10 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
+
+import me.chanjar.weixin.common.exception.WxErrorException;
+import me.chanjar.weixin.cp.bean.WxCpDepart;
+import me.chanjar.weixin.cp.bean.WxCpUser;
 
 /**
  * 微信企业Token对接
@@ -49,13 +54,13 @@ public class WeiXinCompanyTokenService implements ISFrameworkConstants, ISWeixin
 	/**
 	 * 基于缓存加载企业Token，由企业id+管理组凭证密钥为唯一标识
 	 */
-	public WeiXinCompanyTokenBean loadCompanyToken(WeiXinCompanyDBO company) {
-		WeiXinCompanySenderBean sender = new WeiXinCompanySenderBean();
+	public WeiXinCompanyTokenBean loadCompanyToken(WeiXinCompanySenderBean company) {
+		WeiXinCompanyDBO sender = new WeiXinCompanyDBO();
 		BeanUtils.copyProperties(company, sender);
 		return loadWeixinCompanyToken(sender);
 	}
 
-	public WeiXinCompanyTokenBean loadCompanyToken(WeiXinCompanySenderBean company) {
+	public WeiXinCompanyTokenBean loadCompanyToken(WeiXinCompanyDBO company) {
 		if (company == null)
 			return null;
 		myCatch.selectDB(9);
@@ -81,7 +86,7 @@ public class WeiXinCompanyTokenService implements ISFrameworkConstants, ISWeixin
 	 * @param comany
 	 * @return
 	 */
-	private WeiXinCompanyTokenBean loadWeixinCompanyToken(WeiXinCompanySenderBean comany) {
+	private WeiXinCompanyTokenBean loadWeixinCompanyToken(WeiXinCompanyDBO comany) {
 		// getAccessToken,登陆后，仅仅得到使用token内容
 		WeiXinCompanyTokenBean config = new WeiXinCompanyTokenBean();
 		config.setCorpId(comany.getAppId());
@@ -99,26 +104,29 @@ public class WeiXinCompanyTokenService implements ISFrameworkConstants, ISWeixin
 
 	///////////////////////////////////////////////////////////////////
 	/**
-	 * 获得用户组微信ID
-	 * 
-	 * @param recever
-	 * @return
-	 */
-	public String loadWeixinCompanyGroupId(WeiXinCompanySenderBean company, WeiXinCompanyGroupReceverBean companyGroup) {
-		
-		return "loadWeixinCompanyGroupId";
-	}
-
-	/**
 	 * 添加用户组
 	 * 
 	 * @param wxcsb
 	 * @param group
 	 * @return
 	 */
-	public String addCompanyGroup(WeiXinCompanySenderBean company, WeiXinCompanyGroupReceverBean group) {
-		// TODO Auto-generated method stub
-		return "addCompanyGroup";
+	public String addCompanyGroup(WeiXinCompanyDBO company, WeiXinCompanyGroupDBO group) {
+		TxWeixinService wxCpService = new TxWeixinService(loadCompanyToken(company));
+
+		WxCpDepart dept = new WxCpDepart();
+		dept.setOrder(Integer.parseInt(group.getGroupId()));
+		dept.setName(group.getGroupName());
+		dept.setParentId(Integer.parseInt(group.getParentId()));
+
+		// 创建部门
+		try {
+			Integer id = wxCpService.departCreate(dept);
+			return "" + id;
+		} catch (WxErrorException e) {
+			e.printStackTrace();
+		}
+
+		return "";
 	}
 
 	/**
@@ -128,23 +136,18 @@ public class WeiXinCompanyTokenService implements ISFrameworkConstants, ISWeixin
 	 * @param group
 	 * @return
 	 */
-	public String deleteCompanyGroup(WeiXinCompanySenderBean company, WeiXinCompanyGroupReceverBean group) {
-		// TODO Auto-generated method stub
-		return "deleteCompanyGroup";
+	public String deleteCompanyGroup(WeiXinCompanyDBO company, WeiXinCompanyGroupDBO group) {
+		TxWeixinService wxCpService = new TxWeixinService(loadCompanyToken(company));
+		// 删除部门
+		try {
+			wxCpService.departDelete(Integer.parseInt(group.getWxId()));
+		} catch (WxErrorException e) {
+			e.printStackTrace();
+		}
+		return ZERO;
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
-	/**
-	 * 获得用户微信ID
-	 * 
-	 * @param recever
-	 * @return
-	 */
-	public String loadWeixinCompanyGroupUserId(WeiXinCompanySenderBean company, WeiXinCompanyGroupUserReceverBean companyGroupUser) {
-		
-		return "loadWeixinCompanyGroupUserId";
-	}
-
 	/**
 	 * 添加用户组用户
 	 * 
@@ -152,9 +155,29 @@ public class WeiXinCompanyTokenService implements ISFrameworkConstants, ISWeixin
 	 * @param group
 	 * @return
 	 */
-	public String addCompanyGroupUser(WeiXinCompanySenderBean company, WeiXinCompanyGroupUserReceverBean companyGroupUser) {
-		// TODO Auto-generated method stub
-		return "addCompanyGroupUser";
+	public String addCompanyGroupUser(WeiXinCompanyDBO company, WeiXinCompanyGroupUserDBO companyGroupUser) {
+		TxWeixinService wxCpService = new TxWeixinService(loadCompanyToken(company));
+
+		WxCpUser user = new WxCpUser();
+		user.setUserId(companyGroupUser.getUserId());
+		user.setName(companyGroupUser.getUserName());
+
+		if (EmptyHelper.isNotEmpty(companyGroupUser.getGroupid())) {
+			Integer[] departIds = { Integer.parseInt(companyGroupUser.getGroupid()) };
+			user.setDepartIds(departIds);
+		}
+
+		// 创建用户
+		try {
+			wxCpService.userCreate(user);
+			String wxId = user.getWeiXinId();
+			return wxId;
+		} catch (WxErrorException e) {
+			e.printStackTrace();
+		}
+
+		return "";
+
 	}
 
 	/**
@@ -164,13 +187,19 @@ public class WeiXinCompanyTokenService implements ISFrameworkConstants, ISWeixin
 	 * @param group
 	 * @return
 	 */
-	public String deleteCompanyGroupUser(WeiXinCompanySenderBean company, WeiXinCompanyGroupUserReceverBean companyGroupUser) {
-		// TODO Auto-generated method stub
-		return "deleteCompanyGroupUser";
+	public String deleteCompanyGroupUser(WeiXinCompanyDBO company, WeiXinCompanyGroupUserDBO companyGroupUser) {
+		TxWeixinService wxCpService = new TxWeixinService(loadCompanyToken(company));
+		// 删除用户组用户
+		try {
+			wxCpService.departDelete(Integer.parseInt(companyGroupUser.getWxId()));
+		} catch (WxErrorException e) {
+			e.printStackTrace();
+		}
+		return ZERO;
 	}
 
 	public static void main(String args[]) {
-		WeiXinCompanySenderBean company = new WeiXinCompanySenderBean();
+		WeiXinCompanyDBO company = new WeiXinCompanyDBO();
 		company.setAppId("wxc213dac5f211edf9");
 		company.setAppSecret("cl6aPpCpsaxhQxNhmZ8KSqGNNi-hjGhJQylYDHkeTMnqjzNJI6djqCy8vWZh9nD9");
 		WeiXinCompanyTokenService service = new WeiXinCompanyTokenService();

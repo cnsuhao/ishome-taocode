@@ -23,7 +23,7 @@ public interface WeixinDao {
 	/**
 	 * 获得微信企业号关注用户数据
 	 */
-	public List<WeiXinCompanyUserDBO> loadCompanyUser(HashMap<String, String> companyUser);
+	public List<WeiXinCompanyGroupUserDBO> loadCompanyGroupUser(HashMap<String, String> companyGroupUser);
 
 	//////////////////////////////////////////////////////////////////////////////////////////
 	/**
@@ -56,6 +56,8 @@ public interface WeixinDao {
 	 * @param comyany
 	 * @return
 	 */
-	public int updateCompanyUserById(WeiXinCompanyUserDBO companyUser);
+	public int updateCompanyGroupUserById(WeiXinCompanyGroupUserDBO companyUser);
+
+	public int updateCompanyUserById(WeiXinCompanyGroupUserDBO companyUser);
 
 }

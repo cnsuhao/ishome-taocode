@@ -14,14 +14,19 @@ import org.isotope.jfp.framework.beans.message.info.UserReceverBean;
 public class WeiXinCompanyGroupReceverBean extends UserReceverBean {
 
 	/**
-	 * 学校id
+	 * 企业id
 	 */
 	private String companyId;
 
 	/**
 	 * 用户组id
 	 */
-	private String groupid;
+	private String groupId;
+
+	/**
+	 * 上级用户组ID
+	 */
+	private String parentId;
 
 	/**
 	 * 用户组编号
@@ -56,12 +61,20 @@ public class WeiXinCompanyGroupReceverBean extends UserReceverBean {
 		this.companyId = companyId;
 	}
 
-	public String getGroupid() {
-		return groupid;
+	public String getGroupId() {
+		return groupId;
 	}
 
-	public void setGroupid(String groupid) {
-		this.groupid = groupid;
+	public void setGroupId(String groupId) {
+		this.groupId = groupId;
+	}
+
+	public String getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(String parentId) {
+		this.parentId = parentId;
 	}
 
 	public String getGroupNo() {
