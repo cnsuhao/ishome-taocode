@@ -9,7 +9,7 @@ import org.isotope.jfp.framework.support.MyDataBaseObjectSupport;
 public class WeiXinCompanyGroupDBO extends MyDataBaseObjectSupport {
 
 	/**
-	 * 学校id
+	 * 企业id
 	 */
 	private String companyId;
 
@@ -17,6 +17,11 @@ public class WeiXinCompanyGroupDBO extends MyDataBaseObjectSupport {
 	 * 用户组id
 	 */
 	private String groupId;
+	
+	/**
+	 * 上级用户组ID
+	 */
+	private String parentId;
 
 	/**
 	 * 用户组编号
@@ -59,6 +64,14 @@ public class WeiXinCompanyGroupDBO extends MyDataBaseObjectSupport {
 		this.groupId = groupId;
 	}
 
+	public String getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(String parentId) {
+		this.parentId = parentId;
+	}
+
 	public String getGroupNo() {
 		return groupNo;
 	}
@@ -98,4 +111,5 @@ public class WeiXinCompanyGroupDBO extends MyDataBaseObjectSupport {
 	public void setIsUse(String isUse) {
 		this.isUse = isUse;
 	}
+
 }

@@ -6,7 +6,7 @@ import org.isotope.jfp.framework.support.MyDataBaseObjectSupport;
 
 @Named
 /** 微信企业号用户所属用户组表 */
-public class WeixinCompanyGroupUserDBO extends MyDataBaseObjectSupport {
+public class WeiXinCompanyGroupUserDBO extends MyDataBaseObjectSupport {
 
 	/**
 	 * 学校id
