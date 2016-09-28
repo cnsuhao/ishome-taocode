@@ -39,18 +39,12 @@ public class WeixinService extends MyServiceSupport implements ISFrameworkConsta
 	/**
 	 * 获得微信企业号关注用户表数据
 	 */
-	public List<WeiXinCompanyGroupUserDBO> loadCompanyUser(HashMap<String, String> companyGroupUser) {
+	public List<WeiXinCompanyGroupUserDBO> loadCompanyGroupUser(HashMap<String, String> companyGroupUser) {
 		return getWeixinDao().loadCompanyGroupUser(companyGroupUser);
 	}
 
-	/**
-	 * 更新企业微信ID
-	 * 
-	 * @param comyany
-	 * @return
-	 */
-	public int updateCompanyById(WeiXinCompanyDBO comyany) {
-		return getWeixinDao().updateCompanyById(comyany);
+	public List<WeiXinCompanyGroupUserDBO> loadCompanyUser(HashMap<String, String> companyGroupUser) {
+		return getWeixinDao().loadCompanyUser(companyGroupUser);
 	}
 
 	/**

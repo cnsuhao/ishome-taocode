@@ -2,8 +2,8 @@ package org.isotope.jfp.mpc.weixin.server;
 
 import org.isotope.jfp.framework.utils.BeanFactoryHelper;
 import org.isotope.jfp.mpc.weixin.service.MyWeixinCompanyService;
-import org.isotope.jfp.mpc.weixin.service.MyWeixinGroupService;
-import org.isotope.jfp.mpc.weixin.service.MyWeixinUserService;
+import org.isotope.jfp.mpc.weixin.service.MyWeixinCompanyGroupService;
+import org.isotope.jfp.mpc.weixin.service.MyWeixinCompanyGroupUserService;
 
 /**
  * 微信企业用户管理<br>
@@ -27,7 +27,7 @@ public class WeiXinCompanyGroupUserServerJob {
 	 * 加载全部企业微信号用户组配置信息
 	 */
 	public void loadCompanyGroup() {
-		MyWeixinGroupService group = BeanFactoryHelper.getBean(MyWeixinGroupService.class.getSimpleName());
+		MyWeixinCompanyGroupService group = BeanFactoryHelper.getBean(MyWeixinCompanyGroupService.class.getSimpleName());
 		group.companyGroupIdSync();
 	}
 
@@ -35,7 +35,7 @@ public class WeiXinCompanyGroupUserServerJob {
 	 * 加载全部企业微信号用户配置信息
 	 */
 	public void loadCompanyUser() {
-		MyWeixinUserService user = BeanFactoryHelper.getBean(MyWeixinUserService.class.getSimpleName());
+		MyWeixinCompanyGroupUserService user = BeanFactoryHelper.getBean(MyWeixinCompanyGroupUserService.class.getSimpleName());
 		user.companyUserIdSync();
 	}
 

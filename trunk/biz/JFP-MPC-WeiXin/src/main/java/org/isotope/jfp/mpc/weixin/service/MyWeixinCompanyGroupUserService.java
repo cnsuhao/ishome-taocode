@@ -28,7 +28,7 @@ import org.springframework.stereotype.Service;
  * 
  */
 @Service("MyWeixinUserService")
-public class MyWeixinUserService implements ISFrameworkConstants {
+public class MyWeixinCompanyGroupUserService implements ISFrameworkConstants {
 
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Resource
@@ -102,16 +102,25 @@ public class MyWeixinUserService implements ISFrameworkConstants {
 	}
 
 	public String companyGroupUserIdSync(String companyId, String groupId, String userId) {
-		HashMap<String, String> companyUser = new HashMap<String, String>();
+		HashMap<String, String> companyGroupUser = new HashMap<String, String>();
 		if (EmptyHelper.isNotEmpty(companyId))
-			companyUser.put("companyId", companyId);
+			companyGroupUser.put("companyId", companyId);
 		if (EmptyHelper.isNotEmpty(groupId))
-			companyUser.put("groupId", groupId);
+			companyGroupUser.put("groupId", groupId);
 		if (EmptyHelper.isNotEmpty(userId))
-			companyUser.put("userId", userId);
-		if (EmptyHelper.isEmpty(companyUser))
-			companyUser.put("wxIdIsNull", ONE);
-		List<WeiXinCompanyGroupUserDBO> companyGroupUsers = WeixinService_.loadCompanyUser(companyUser);
+			companyGroupUser.put("userId", userId);
+		//无条件补充
+		if (EmptyHelper.isEmpty(companyGroupUser))
+			companyGroupUser.put("wxIdIsNull", ONE);
+		List<WeiXinCompanyGroupUserDBO> companyGroupUsers = null;
+		
+		if (EmptyHelper.isNotEmpty(groupId))
+			companyGroupUsers = WeixinService_.loadCompanyGroupUser(companyGroupUser);
+		else if (EmptyHelper.isNotEmpty(userId)) 
+			companyGroupUsers = WeixinService_.loadCompanyUser(companyGroupUser);
+		else if (companyGroupUser.containsKey("wxIdIsNull")) 
+			companyGroupUsers = WeixinService_.loadCompanyUser(companyGroupUser);
+		
 		if (companyGroupUsers != null) {
 			for (WeiXinCompanyGroupUserDBO user : companyGroupUsers) {
 				if (NINE.equals(companyGroupUserIdSync(user))) {

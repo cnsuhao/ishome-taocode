@@ -23,7 +23,7 @@ import me.chanjar.weixin.cp.bean.WxCpUser;
  * 微信API的Service 
  * @see <TxWeixinService>
  */ 
-public interface WeixinService { 
+public interface IWeixinService { 
 	
 	
 	/** 
