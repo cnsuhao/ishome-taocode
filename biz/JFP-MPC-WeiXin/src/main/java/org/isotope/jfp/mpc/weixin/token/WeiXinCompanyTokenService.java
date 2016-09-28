@@ -105,20 +105,8 @@ public class WeiXinCompanyTokenService implements ISFrameworkConstants, ISWeixin
 	 * @return
 	 */
 	public String loadWeixinCompanyGroupId(WeiXinCompanySenderBean company, WeiXinCompanyGroupReceverBean companyGroup) {
-		// getAccessToken,登陆后，仅仅得到使用token内容
-		WeiXinCompanyTokenBean config = new WeiXinCompanyTokenBean();
-		config.setCorpId(company.getAppId());
-		config.setCorpSecret(company.getAppSecret());
-		TxWeixinService wxCpService = new TxWeixinService(config);
-		try {
-			wxCpService.getAccessToken(true);
-			// TODO
-			config.setCorpSecret(EMPTY);
-			return "";
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
+		
+		return "loadWeixinCompanyGroupId";
 	}
 
 	/**
@@ -130,7 +118,7 @@ public class WeiXinCompanyTokenService implements ISFrameworkConstants, ISWeixin
 	 */
 	public String addCompanyGroup(WeiXinCompanySenderBean company, WeiXinCompanyGroupReceverBean group) {
 		// TODO Auto-generated method stub
-		return null;
+		return "addCompanyGroup";
 	}
 
 	/**
@@ -142,7 +130,7 @@ public class WeiXinCompanyTokenService implements ISFrameworkConstants, ISWeixin
 	 */
 	public String deleteCompanyGroup(WeiXinCompanySenderBean company, WeiXinCompanyGroupReceverBean group) {
 		// TODO Auto-generated method stub
-		return null;
+		return "deleteCompanyGroup";
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -153,20 +141,8 @@ public class WeiXinCompanyTokenService implements ISFrameworkConstants, ISWeixin
 	 * @return
 	 */
 	public String loadWeixinCompanyGroupUserId(WeiXinCompanySenderBean company, WeiXinCompanyGroupUserReceverBean companyGroupUser) {
-		// getAccessToken,登陆后，仅仅得到使用token内容
-		WeiXinCompanyTokenBean config = new WeiXinCompanyTokenBean();
-		config.setCorpId(company.getAppId());
-		config.setCorpSecret(company.getAppSecret());
-		TxWeixinService wxCpService = new TxWeixinService(config);
-		try {
-			wxCpService.getAccessToken(true);
-			// TODO
-			config.setCorpSecret(EMPTY);
-			return "";
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
+		
+		return "loadWeixinCompanyGroupUserId";
 	}
 
 	/**
@@ -178,7 +154,7 @@ public class WeiXinCompanyTokenService implements ISFrameworkConstants, ISWeixin
 	 */
 	public String addCompanyGroupUser(WeiXinCompanySenderBean company, WeiXinCompanyGroupUserReceverBean companyGroupUser) {
 		// TODO Auto-generated method stub
-		return null;
+		return "addCompanyGroupUser";
 	}
 
 	/**
@@ -190,7 +166,7 @@ public class WeiXinCompanyTokenService implements ISFrameworkConstants, ISWeixin
 	 */
 	public String deleteCompanyGroupUser(WeiXinCompanySenderBean company, WeiXinCompanyGroupUserReceverBean companyGroupUser) {
 		// TODO Auto-generated method stub
-		return null;
+		return "deleteCompanyGroupUser";
 	}
 
 	public static void main(String args[]) {
