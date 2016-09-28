@@ -7,15 +7,12 @@
 <mapper namespace='com.mcookies.qxy.common.SchoolWeixinGroupUser.SchoolWeixinGroupUserDao'>
     <!-- 表字段信息  -->
     <sql id='tableColumns'>
-        pid,sid,gid,uid,is_use,create_time,creator,update_time,updator
+        sid,gid,uid,is_use,create_time,creator,update_time,updator
     </sql>
 
     <!-- 根据条件更新所有记录 -->
     <update id='doUpdateAll' parameterType='SchoolWeixinGroupUserDBO'>
         UPDATE school_weixin_group_user SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
-        <if test=" pid != null and pid !='' "><!-- 数据id -->
-            ,pid = #{pid}
-        </if>
         <if test=" sid != null and sid !='' "><!-- 学校id -->
             ,sid = #{sid}
         </if>
@@ -38,9 +35,6 @@
             ,updator = #{updator}
         </if>
         WHERE 1 = 1 
-            <if test=" pid != null and pid !='' "><!-- 数据id -->
-                AND pid = #{pid}
-            </if>
             <if test=" sid != null and sid !='' "><!-- 学校id -->
                 AND sid = #{sid}
             </if>
@@ -70,9 +64,6 @@
     <select id='doSelectPage' parameterType='SchoolWeixinGroupUserDBO' resultType='SchoolWeixinGroupUserDBO'>
         SELECT <include refid='tableColumns'/> FROM school_weixin_group_user
         WHERE 1 = 1 
-        <if test=" pid != null and pid !='' "><!-- 数据id -->
-            AND pid = #{pid}
-        </if>
         <if test=" sid != null and sid !='' "><!-- 学校id -->
             AND sid = #{sid}
         </if>
@@ -104,14 +95,11 @@
         INSERT INTO school_weixin_group_user
           ( <include refid='tableColumns'/>) 
         VALUES 
-          ( #{pid},#{sid},#{gid},#{uid},#{isUse},#{createTime},#{creator},#{updateTime},#{updator} )
+          ( #{sid},#{gid},#{uid},#{isUse},#{createTime},#{creator},#{updateTime},#{updator} )
     </insert>
     <!-- 修改一条数据 -->
     <update id='doUpdate' parameterType='SchoolWeixinGroupUserDBO'>
         UPDATE school_weixin_group_user SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
-        <if test=" pid != null and pid !='' "><!-- 数据id -->
-            ,pid = #{pid}
-        </if>
         <if test=" sid != null and sid !='' "><!-- 学校id -->
             ,sid = #{sid}
         </if>
@@ -134,30 +122,18 @@
             ,updator = #{updator}
         </if>
         WHERE 1 = 1 
-            <if test=" pid != null and pid !='' "><!-- 数据id -->
-                AND pid = #{pid}
-            </if>
     </update>
     <!-- 逻辑删除一条数据 -->
     <delete id='toDelete' parameterType='SchoolWeixinGroupUserDBO'>
         UPDATE school_weixin_group_user SET ddd='1', update_time = #{updateTime}, uu2 = #{uu2} WHERE update_time = #{updateTime}
-            <if test=" pid != null and pid !='' "><!-- 数据id -->
-                AND pid = #{pid}
-            </if>
     </delete>
     <!-- 物理删除一条数据 -->
     <delete id='doDelete' parameterType='SchoolWeixinGroupUserDBO'>
         DELETE FROM school_weixin_group_user WHERE update_time = #{updateTime}
-            <if test=" pid != null and pid !='' "><!-- 数据id -->
-                AND pid = #{pid}
-            </if>
     </delete>
     <!-- 查询一条数据  -->
     <select id='doRead' parameterType='SchoolWeixinGroupUserDBO' resultType='SchoolWeixinGroupUserDBO'>
         SELECT <include refid='tableColumns'/> FROM school_weixin_group_user WHERE 1 = 1
-            <if test=" pid != null and pid !='' "><!-- 数据id -->
-                AND pid = #{pid}
-            </if>
     </select>
 
 </mapper>

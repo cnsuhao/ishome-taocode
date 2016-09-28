@@ -8,11 +8,6 @@ import org.isotope.jfp.framework.support.MyDataBaseObjectSupport;
 /** 学校微信企业号关注用户表 */
 public class SchoolWeixinUserDBO extends MyDataBaseObjectSupport {
 	/**
-	 * 数据id
-	 */
-	private Long pid = null;
-
-	/**
 	 * 学校id
 	 */
 	private Long sid = null;
@@ -46,15 +41,6 @@ public class SchoolWeixinUserDBO extends MyDataBaseObjectSupport {
 	 * 是否启用
 	 */
 	private Integer isUse = null;
-
-	/**
-	 * 获取数据id
-	 *
-	 * @return Pid 数据id
-	 */
-	public Long getPid() {
-		return this.pid;
-	}
 
 	/**
 	 * 获取学校id
@@ -117,16 +103,6 @@ public class SchoolWeixinUserDBO extends MyDataBaseObjectSupport {
 	 */
 	public Integer getIsUse() {
 		return this.isUse;
-	}
-
-	/**
-	 * 设置数据id
-	 *
-	 * @param Pid
-	 *            数据id
-	 */
-	public void setPid(Long pid) {
-		this.pid = pid;
 	}
 
 	/**

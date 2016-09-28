@@ -8,11 +8,6 @@ import org.isotope.jfp.framework.support.MyDataBaseObjectSupport;
 /** 学校微信企业号用户组表 */
 public class SchoolWeixinGroupDBO extends MyDataBaseObjectSupport {
 	/**
-	 * 数据id
-	 */
-	private Long pid = null;
-
-	/**
 	 * 学校id
 	 */
 	private Long sid = null;
@@ -21,6 +16,11 @@ public class SchoolWeixinGroupDBO extends MyDataBaseObjectSupport {
 	 * 用户组id
 	 */
 	private Long gid = null;
+
+	/**
+	 * 上级用户组ID
+	 */
+	private Long parentid = null;
 
 	/**
 	 * 用户组编号
@@ -48,15 +48,6 @@ public class SchoolWeixinGroupDBO extends MyDataBaseObjectSupport {
 	private Integer isUse = null;
 
 	/**
-	 * 获取数据id
-	 *
-	 * @return Pid 数据id
-	 */
-	public Long getPid() {
-		return this.pid;
-	}
-
-	/**
 	 * 获取学校id
 	 *
 	 * @return Sid 学校id
@@ -72,6 +63,15 @@ public class SchoolWeixinGroupDBO extends MyDataBaseObjectSupport {
 	 */
 	public Long getGid() {
 		return this.gid;
+	}
+
+	/**
+	 * 获取上级用户组ID
+	 *
+	 * @return ParentId 上级用户组ID
+	 */
+	public Long getParentid() {
+		return this.parentid;
 	}
 
 	/**
@@ -120,16 +120,6 @@ public class SchoolWeixinGroupDBO extends MyDataBaseObjectSupport {
 	}
 
 	/**
-	 * 设置数据id
-	 *
-	 * @param Pid
-	 *            数据id
-	 */
-	public void setPid(Long pid) {
-		this.pid = pid;
-	}
-
-	/**
 	 * 设置学校id
 	 *
 	 * @param Sid
@@ -147,6 +137,16 @@ public class SchoolWeixinGroupDBO extends MyDataBaseObjectSupport {
 	 */
 	public void setGid(Long gid) {
 		this.gid = gid;
+	}
+
+	/**
+	 * 设置上级用户组ID
+	 *
+	 * @param ParentId
+	 *            上级用户组ID
+	 */
+	public void setParentid(Long parentid) {
+		this.parentid = parentid;
 	}
 
 	/**
@@ -198,4 +198,5 @@ public class SchoolWeixinGroupDBO extends MyDataBaseObjectSupport {
 	public void setIsUse(Integer isuse) {
 		this.isUse = isuse;
 	}
+
 }
