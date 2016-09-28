@@ -224,7 +224,7 @@
 		d.oatags_name,
 		b.oarule_status,
 		a.tid,
-		c.teacher_name AS tname
+		c.teacher_name AS teacherName
 		FROM oa_examine_information a
 		LEFT JOIN oa_examine_result b ON a.approval_information_id = b.approval_information_id
 		LEFT JOIN u_teacher c ON a.tid = c.tid
