@@ -4,18 +4,15 @@
     'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
 <!-- 学校微信企业号关注用户表 -->
 <!-- 需要和DAO保持完全路径一致 -->
-<mapper namespace='com.mcookies.qxy.common.SchoolWeixinUser.SchoolWeixinUserDao'>
+<mapper namespace='SchoolWeixinUser.SchoolWeixinUserDao'>
     <!-- 表字段信息  -->
     <sql id='tableColumns'>
-        pid,sid,uid,uert_type,user_name,openid,wx_id,is_use,create_time,creator,update_time,updator
+        sid,uid,uert_type,user_name,openid,wx_id,is_use,create_time,creator,update_time,updator
     </sql>
 
     <!-- 根据条件更新所有记录 -->
     <update id='doUpdateAll' parameterType='SchoolWeixinUserDBO'>
         UPDATE school_weixin_user SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
-        <if test=" pid != null and pid !='' "><!-- 数据id -->
-            ,pid = #{pid}
-        </if>
         <if test=" sid != null and sid !='' "><!-- 学校id -->
             ,sid = #{sid}
         </if>
@@ -47,9 +44,6 @@
             ,updator = #{updator}
         </if>
         WHERE 1 = 1 
-            <if test=" pid != null and pid !='' "><!-- 数据id -->
-                AND pid = #{pid}
-            </if>
             <if test=" sid != null and sid !='' "><!-- 学校id -->
                 AND sid = #{sid}
             </if>
@@ -88,9 +82,6 @@
     <select id='doSelectPage' parameterType='SchoolWeixinUserDBO' resultType='SchoolWeixinUserDBO'>
         SELECT <include refid='tableColumns'/> FROM school_weixin_user
         WHERE 1 = 1 
-        <if test=" pid != null and pid !='' "><!-- 数据id -->
-            AND pid = #{pid}
-        </if>
         <if test=" sid != null and sid !='' "><!-- 学校id -->
             AND sid = #{sid}
         </if>
@@ -131,14 +122,11 @@
         INSERT INTO school_weixin_user
           ( <include refid='tableColumns'/>) 
         VALUES 
-          ( #{pid},#{sid},#{uid},#{uertType},#{userName},#{openid},#{wxId},#{isUse},#{createTime},#{creator},#{updateTime},#{updator} )
+          ( #{sid},#{uid},#{uertType},#{userName},#{openid},#{wxId},#{isUse},#{createTime},#{creator},#{updateTime},#{updator} )
     </insert>
     <!-- 修改一条数据 -->
     <update id='doUpdate' parameterType='SchoolWeixinUserDBO'>
         UPDATE school_weixin_user SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
-        <if test=" pid != null and pid !='' "><!-- 数据id -->
-            ,pid = #{pid}
-        </if>
         <if test=" sid != null and sid !='' "><!-- 学校id -->
             ,sid = #{sid}
         </if>
@@ -170,29 +158,41 @@
             ,updator = #{updator}
         </if>
         WHERE 1 = 1 
-            <if test=" pid != null and pid !='' "><!-- 数据id -->
-                AND pid = #{pid}
+            <if test=" sid != null and sid !='' "><!-- 学校id -->
+                AND sid = #{sid}
+            </if>
+            <if test=" uid != null and uid !='' "><!-- 用户id -->
+                AND uid = #{uid}
             </if>
     </update>
     <!-- 逻辑删除一条数据 -->
     <delete id='toDelete' parameterType='SchoolWeixinUserDBO'>
         UPDATE school_weixin_user SET ddd='1', update_time = #{updateTime}, uu2 = #{uu2} WHERE update_time = #{updateTime}
-            <if test=" pid != null and pid !='' "><!-- 数据id -->
-                AND pid = #{pid}
+            <if test=" sid != null and sid !='' "><!-- 学校id -->
+                AND sid = #{sid}
+            </if>
+            <if test=" uid != null and uid !='' "><!-- 用户id -->
+                AND uid = #{uid}
             </if>
     </delete>
     <!-- 物理删除一条数据 -->
     <delete id='doDelete' parameterType='SchoolWeixinUserDBO'>
         DELETE FROM school_weixin_user WHERE update_time = #{updateTime}
-            <if test=" pid != null and pid !='' "><!-- 数据id -->
-                AND pid = #{pid}
+            <if test=" sid != null and sid !='' "><!-- 学校id -->
+                AND sid = #{sid}
+            </if>
+            <if test=" uid != null and uid !='' "><!-- 用户id -->
+                AND uid = #{uid}
             </if>
     </delete>
     <!-- 查询一条数据  -->
     <select id='doRead' parameterType='SchoolWeixinUserDBO' resultType='SchoolWeixinUserDBO'>
         SELECT <include refid='tableColumns'/> FROM school_weixin_user WHERE 1 = 1
-            <if test=" pid != null and pid !='' "><!-- 数据id -->
-                AND pid = #{pid}
+            <if test=" sid != null and sid !='' "><!-- 学校id -->
+                AND sid = #{sid}
+            </if>
+            <if test=" uid != null and uid !='' "><!-- 用户id -->
+                AND uid = #{uid}
             </if>
     </select>
 
