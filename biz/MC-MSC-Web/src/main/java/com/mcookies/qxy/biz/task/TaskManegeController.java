@@ -77,6 +77,11 @@ public class TaskManegeController extends MyControllerSupport{
 				ClassDBO model = new ClassDBO();
 				model.setCid(Long.parseLong(cid));
 				ClassPVO cla = ClassService.findClassersAndGrade(model);
+				if(cla == null){
+					result.setInfo("你所查的班级不存在");
+					result.setStatus(2);
+					return result;
+				}
 				taskdbo.setCid(cid);
 				taskdbo.setSid(cla.getSid());
 			}
@@ -225,6 +230,11 @@ public class TaskManegeController extends MyControllerSupport{
 			if(taskdbo.getCourseId() == null || taskdbo.getCourseId()<=0){
 				throw new IllegalArgumentException("courseId不能为空");
 			}
+			if(taskdbo.getTaskName().equals(null) || taskdbo.getTaskName().equals("")){
+				throw new IllegalArgumentException("搜索内容不能为空");
+			}
+			String taskName = new String(taskdbo.getTaskName().getBytes("ISO-8859-1"),"UTF-8");
+			taskdbo.setTaskName(taskName);
 			Map<String, Object> data = new HashMap<String, Object>();
 		
 			if(tid != null && tid > 0){
