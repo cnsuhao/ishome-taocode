@@ -376,7 +376,7 @@
     a.task_id,a.task_name,a.is_top,a.author,a.course_id,b.course_name,c.teacher_name AS authorName,a.publish_time
     from task a 
     LEFT JOIN s_course b ON a.course_id = b.course_id
-    LEFT JOIN u_teacher c ON a.author=c.teacher_name
+    LEFT JOIN u_teacher c ON a.author=c.tid
     where  1= 1 and instr(a.task_classer, concat(#{cid}, ';')) > 0 
     order by a.publish_time desc
     </select>
@@ -386,7 +386,7 @@
     a.task_id,a.task_name,a.is_top,a.author,a.course_id,b.course_name,c.teacher_name AS authorName,a.publish_time
     from task a 
     LEFT JOIN s_course b ON a.course_id = b.course_id
-    LEFT JOIN u_teacher c ON a.author=c.teacher_name
+    LEFT JOIN u_teacher c ON a.author=c.tid
     where  1= 1
       <if test=" author != null and author !='' "><!-- 作者（教师tid） -->
             AND a.author = #{author}
@@ -402,7 +402,7 @@
     a.*,b.course_name,c.teacher_name AS authorName
      from task a 
     LEFT JOIN s_course b ON a.course_id = b.course_id
-    LEFT JOIN u_teacher c ON a.author=c.teacher_name
+    LEFT JOIN u_teacher c ON a.author=c.tid
     where  1= 1
       <if test=" taskId != null and taskId !='' "><!-- 作业id -->
             AND a.task_id = #{taskId}
@@ -414,7 +414,7 @@
     a.task_id,a.task_name,a.is_top,a.author,a.course_id,b.course_name,c.teacher_name AS authorName,a.publish_time
     from task a 
     LEFT JOIN s_course b ON a.course_id = b.course_id
-    LEFT JOIN u_teacher c ON a.author=c.teacher_name
+    LEFT JOIN u_teacher c ON a.author=c.tid
     where  1= 1
         <if test=" courseId != null and courseId !='' "><!-- 课程id -->
                 AND a.course_id = #{courseId}
