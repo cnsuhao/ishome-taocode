@@ -314,7 +314,7 @@
     LEFT JOIN s_course b ON a.course_id = b.course_id
     LEFT JOIN u_teacher c ON a.author=c.teacher_name
     where  1= 1 and instr(a.task_classer, concat(#{cid}, ';')) > 0 
-      order by a.publish_time desc
+    order by a.publish_time desc
     </select>
     <!-- 分页  根据cid,tid查询作业列表数据  -->
     <select id='doSelectPagetTaskWithCiddAndTid' parameterType='com.mcookies.qxy.common.Task.TaskPVO' resultType='com.mcookies.qxy.common.Task.TaskPVO'>
