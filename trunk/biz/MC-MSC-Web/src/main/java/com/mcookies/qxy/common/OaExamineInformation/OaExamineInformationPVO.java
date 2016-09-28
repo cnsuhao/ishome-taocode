@@ -10,9 +10,30 @@ import com.mcookies.qxy.common.OaExamineResult.OaExamineResultPVO;
 /** OA审批信息表 */
 public class OaExamineInformationPVO extends OaExamineInformationDBO {
 	private String oatagsName;
-	private String oaruleStatus;
+	private Integer oaruleStatus;
 	private Long id;	// 审批id
 	private List<OaExamineResultPVO> resultinfo;
+	private String teacherName;  //教师姓名
+	private String content;        //审批内容
+
+	
+	
+	
+	public String getTeacherName() {
+		return teacherName;
+	}
+
+	public void setTeacherName(String teacherName) {
+		this.teacherName = teacherName;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
 
 	public String getOatagsName() {
 		return oatagsName;
@@ -22,11 +43,11 @@ public class OaExamineInformationPVO extends OaExamineInformationDBO {
 		this.oatagsName = oatagsName;
 	}
 
-	public String getOaruleStatus() {
+	public Integer getOaruleStatus() {
 		return oaruleStatus;
 	}
 
-	public void setOaruleStatus(String oaruleStatus) {
+	public void setOaruleStatus(Integer oaruleStatus) {
 		this.oaruleStatus = oaruleStatus;
 	}
 
