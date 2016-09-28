@@ -189,7 +189,7 @@ public class MoraleducationClassController extends MyControllerSupport {
 	
 		
 		/**
-		 * 德育班级评分详情列表搜索接口 /qxy/moraleducation/class/score/list/search?mecItemId=[mecItemId]&startTime=[startTime]&endTime=[endTime]&page=[page]&size=[size]&token=[token]
+		 * 德育班级评分详情列表搜索接口 /qxy/moraleducation/class/score/list/search?cid=[cid]&mecItemId=[mecItemId]&startTime=[startTime]&endTime=[endTime]&page=[page]&size=[size]&token=[token]
 		 * 需要使用Token验证查询者身份
 		 * @param test
 		 * @param page
@@ -199,13 +199,16 @@ public class MoraleducationClassController extends MyControllerSupport {
 				 
 		@RequestMapping(value = "/moraleducation/class/score/list/search", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 		@ResponseBody
-		public RESTResultBean mecClassScoreListSearchGET(Boolean test,Long mecItemId,String startTime,String endTime,Integer page, Integer size) {
+		public RESTResultBean mecClassScoreListSearchGET(Boolean test,Long mecItemId,Long cid,String startTime,String endTime,Integer page, Integer size) {
 			RESTResultBean result = new RESTResultBean();
 			try {
 				if (test == true) {
 						String str = "{\"termName\":\"2016-2017-2\",\"className\":\"高一三班\",\"totalScore\":\"20\",\"ranking\":\"12\",\"page\":\"2\",\"size\":\"12\",\"count\":\"20\",\"mecScoreList\":[{\"mecScoreId\":\"1\",\"mecItemId\":\"1\",\"mecItemName\":\"黑板报\",\"score\":\"-1\",\"teacherName\":\"王主任\",\"mecItemExplain\":\"凡是一次没有做的扣一分，扣分苍围针对所有班级\",\"createTime\":\"2016-09-13 00:00:00\"},{\"mecScoreId\":\"2\",\"mecItemId\":\"2\",\"mecItemName\":\"黑板报1\",\"score\":\"-2\",\"teacherName\":\"王主任\",\"mecItemExplain\":\"凡是一次没有做的扣一分，扣分苍围针对所有班级\",\"createTime\":\"2016-09-13 00:00:00\"}]}";
 						JSONObject jobj=JSON.parseObject(str);    
-						result.setData(jobj);	
+						result.setData(jobj);
+						if (cid == null) {
+							result.setInfo(" 班级id    --必填项 ");
+						}
 				} else {
 
 				}
@@ -284,7 +287,7 @@ public class MoraleducationClassController extends MyControllerSupport {
 			try {
 				if (test == true) {
 					if (mecScoreId != null) {
-						String str = "{\"mecItemName\":\"黑板报\",\"score\":\"-1\",\"mecItemExplain\":\"凡是一次没有做的扣一分，扣分苍围针对所有班级\",\"createTime\":\"2016-09-13 00:00:00\",\"teacherName\":\"王主任\",\"scoreOrder\":\"1\",\"scoreContent\":\"1\",\"scorePic\":[\"http://www.100xyun.com/upload/123.jpg\",\"http://www.100xyun.com/upload/123.jpg\"]}";
+						String str = "{\"mecItemName\":\"黑板报\",\"score\":\"-1\",\"mecItemExplain\":\"凡是一次没有做的扣一分，扣分苍围针对所有班级\",\"scoreTime\":\"2016-09-13 00:00:00\",\"teacherName\":\"王主任\",\"scoreOrder\":\"1\",\"scoreContent\":\"1\",\"scorePic\":[\"http://www.100xyun.com/upload/123.jpg\",\"http://www.100xyun.com/upload/123.jpg\"]}";
 						JSONObject jobj=JSON.parseObject(str);    
 						result.setData(jobj);	
 					} else{
