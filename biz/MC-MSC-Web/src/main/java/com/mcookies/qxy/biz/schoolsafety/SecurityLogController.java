@@ -21,6 +21,8 @@ import com.mcookies.qxy.common.ClassStudent.ClassStudentDBO;
 import com.mcookies.qxy.common.ClassStudent.ClassStudentService;
 import com.mcookies.qxy.common.LogSecurity.LogSecurityPVO;
 import com.mcookies.qxy.common.LogSecurity.LogSecurityService;
+import com.mcookies.qxy.common.STerm.STermDBO;
+import com.mcookies.qxy.common.STerm.STermService;
 import com.mcookies.qxy.common.UStudent.UStudentDBO;
 import com.mcookies.qxy.common.UStudent.UStudentService;
 
@@ -38,6 +40,8 @@ public class SecurityLogController extends MyControllerSupport {
 	protected ClassStudentService ClassStudentService_;
 	@Resource
 	protected LogSecurityService LogSecurityService_;
+	@Resource
+	protected STermService STermService;
 
 	/**
 	 * 学生列表查询接口
@@ -108,6 +112,14 @@ public class SecurityLogController extends MyControllerSupport {
 			}
 			if(termId!=null){
 				pvo.setTermId(termId);				
+			}else{
+				STermDBO term = new STermDBO();
+				Long sid = getLoginer().getSchoolId();
+				term.setSid(sid);
+				term.setIsDefault(1);
+				List<STermDBO> termlist = (List<STermDBO>) STermService.doSelectData(term);
+				termId = termlist.get(0).getTermId();
+				pvo.setTermId(termId);	
 			}
 			if(flag != null){
 				pvo.setFlag(flag);
@@ -131,7 +143,7 @@ public class SecurityLogController extends MyControllerSupport {
 			data.put("securitylog", pageModel.getPageListData());
 			result.setData(data);
 		} catch (Exception e) {
-			result.setInfo("访问失败");
+			result.setInfo("访问失败,"+e);
 			result.setStatus(1);
 		}
 
