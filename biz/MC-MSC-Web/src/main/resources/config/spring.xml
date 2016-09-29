@@ -24,6 +24,8 @@
 	<import resource='spring-custom.xml' />	
 	<!-- 系统初始化 -->
 	<import resource='spring/spring-system.xml' />	
+	<!-- 消息推送 -->
+	<import resource='message/spring-message-center.xml' />
 	<!-- 业务功能 -->
 	<import resource='bean/spring-bean.xml' />
 	<!-- 数据定义 -->
