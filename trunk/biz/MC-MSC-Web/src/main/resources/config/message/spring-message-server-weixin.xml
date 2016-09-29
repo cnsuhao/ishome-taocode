@@ -26,7 +26,7 @@
 		
 	<!-- ************************* 调用端配置 ************************* -->
 	<!-- 微信发送端 -->
-   	<bean id="companyHazardTask" class="org.isotope.jfp.mpc.weixin.server.WeiXinMessagePushGatewayServerThread">
+   	<bean id="WeiXinMessageServer" class="org.isotope.jfp.mpc.weixin.server.WeiXinMessagePushGatewayServerThread">
 		<property name="size" value="15" />
 		<property name='defaultIndex' value='6' />
 		<property name='channelKey' value='MESSAGE:CHANNEL:WEIXIN' />
