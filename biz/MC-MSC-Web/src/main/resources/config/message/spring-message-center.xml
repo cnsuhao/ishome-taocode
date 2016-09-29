@@ -39,5 +39,6 @@
 	</bean>
 	
 	<!-- ************************* 具体业务服务端配置 ************************* -->
+	<import resource='spring-message-client.xml' />
 	<import resource='spring-message-server-weixin.xml' />
 </beans>
