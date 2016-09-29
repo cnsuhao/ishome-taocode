@@ -24,20 +24,9 @@
 		http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd
 		'>
 		
-	<!-- ************************* 服务端配置 ************************* -->
-	<bean id='myMessagePushCenterMonitorServer' class='org.isotope.jfp.common.message.server.MessagePushCenterMonitorServer' init-method='process'>
-		<property name='waitTime' value='500' />
-		<property name='catchService' ref='myCache' />
+	<!-- ************************* 消息中心客户端配置 ************************* -->
+   	<bean class='org.isotope.jfp.framework.common.message.UserMessageSendService '>
 		<property name='defaultIndex' value='6' />
-		<property name='size' value='15' />
-		
-		<property name='messageServers'>
-            <list>
-            	<ref bean='WeiXinMessageServer' />
-            </list>
-        </property>
-	</bean>
-	
-	<!-- ************************* 具体业务服务端配置 ************************* -->
-	<import resource='spring-message-server-*.xml' />
+		<property name='channelKey' value='MESSAGE:CHANNEL:WEIXIN' />
+   	</bean> 
 </beans>
