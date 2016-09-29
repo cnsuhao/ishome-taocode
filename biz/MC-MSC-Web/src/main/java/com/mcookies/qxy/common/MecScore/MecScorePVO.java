@@ -13,7 +13,7 @@ public class MecScorePVO extends MecScoreDBO{
     /** 
      * 德育班级综合评分
      */
-    private String totalScore = null;
+    private Integer totalScore = null;
     
 	/**
 	 * 年级名称
@@ -78,10 +78,10 @@ public class MecScorePVO extends MecScoreDBO{
 	public void setGradeName(String gradeName) {
 		this.gradeName = gradeName;
 	}
-	public String getTotalScore() {
+	public Integer getTotalScore() {
 		return totalScore;
 	}
-	public void setTotalScore(String totalScore) {
+	public void setTotalScore(Integer totalScore) {
 		this.totalScore = totalScore;
 	}
 	public String getRanking() {

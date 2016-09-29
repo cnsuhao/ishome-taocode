@@ -13,92 +13,92 @@
     <!-- 根据条件更新所有记录 -->
     <update id='doUpdateAll' parameterType='MecScoreDBO'>
         UPDATE mec_score SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
-        <if test=" mecScoreId != null and mecScoreId !='' "><!-- 评分id -->
+        <if test=" mecScoreId != null  "><!-- 评分id -->
             ,mec_score_id = #{mecScoreId}
         </if>
-        <if test=" termId != null and termId !='' "><!-- 学期id -->
+        <if test=" termId != null  "><!-- 学期id -->
             ,term_id = #{termId}
         </if>
-        <if test=" cid != null and cid !='' "><!-- 班级id -->
+        <if test=" cid != null "><!-- 班级id -->
             ,cid = #{cid}
         </if>
-        <if test=" mecItemId != null and mecItemId !='' "><!-- 德育项目id -->
+        <if test=" mecItemId != null  "><!-- 德育项目id -->
             ,mec_item_id = #{mecItemId}
         </if>
-        <if test=" scroeOrder != null and scroeOrder !='' "><!-- 德育班级评分序号 -->
+        <if test=" scroeOrder != null "><!-- 德育班级评分序号 -->
             ,scroe_order = #{scroeOrder}
         </if>
-        <if test=" scroe != null and scroe !='' "><!-- 德育班级评分 -->
+        <if test=" scroe != null "><!-- 德育班级评分 -->
             ,scroe = #{scroe}
         </if>
-        <if test=" scoreTime != null and scoreTime !='' "><!-- 评分时间 -->
+        <if test=" scoreTime != null  "><!-- 评分时间 -->
             ,score_time = #{scoreTime}
         </if>
-        <if test=" tid != null and tid !='' "><!-- 评分人（tid） -->
+        <if test=" tid != null  "><!-- 评分人（tid） -->
             ,tid = #{tid}
         </if>
-        <if test=" scorePic != null and scorePic !='' "><!-- 评分图片 -->
+        <if test=" scorePic != null  "><!-- 评分图片 -->
             ,score_pic = #{scorePic}
         </if>
-        <if test=" scoreContent != null and scoreContent !='' "><!-- 评分内容 -->
+        <if test=" scoreContent != null  "><!-- 评分内容 -->
             ,score_content = #{scoreContent}
         </if>
-        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+        <if test=" isUse != null "><!-- 是否启用 -->
             ,is_use = #{isUse}
         </if>
-        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+        <if test=" createTime != null"><!-- 创建时间 -->
             ,create_time = #{createTime}
         </if>
-        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+        <if test=" creator != null  "><!-- 创建者 -->
             ,creator = #{creator}
         </if>
-        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+        <if test=" updator != null  "><!-- 最后更新者 -->
             ,updator = #{updator}
         </if>
         WHERE 1 = 1 
-            <if test=" mecScoreId != null and mecScoreId !='' "><!-- 评分id -->
+            <if test=" mecScoreId != null "><!-- 评分id -->
                 AND mec_score_id = #{mecScoreId}
             </if>
-            <if test=" termId != null and termId !='' "><!-- 学期id -->
+            <if test=" termId != null  "><!-- 学期id -->
                 AND term_id = #{termId}
             </if>
-            <if test=" cid != null and cid !='' "><!-- 班级id -->
+            <if test=" cid != null"><!-- 班级id -->
                 AND cid = #{cid}
             </if>
-            <if test=" mecItemId != null and mecItemId !='' "><!-- 德育项目id -->
+            <if test=" mecItemId != null  "><!-- 德育项目id -->
                 AND mec_item_id = #{mecItemId}
             </if>
-            <if test=" scroeOrder != null and scroeOrder !='' "><!-- 德育班级评分序号 -->
+            <if test=" scroeOrder != null  "><!-- 德育班级评分序号 -->
                 AND scroe_order = #{scroeOrder}
             </if>
-            <if test=" scroe != null and scroe !='' "><!-- 德育班级评分 -->
+            <if test=" scroe != null "><!-- 德育班级评分 -->
                 AND scroe = #{scroe}
             </if>
-            <if test=" scoreTime != null and scoreTime !='' "><!-- 评分时间 -->
+            <if test=" scoreTime != null  "><!-- 评分时间 -->
                 AND score_time = #{scoreTime}
             </if>
-            <if test=" tid != null and tid !='' "><!-- 评分人（tid） -->
+            <if test=" tid != null  "><!-- 评分人（tid） -->
                 AND tid = #{tid}
             </if>
-            <if test=" scorePic != null and scorePic !='' "><!-- 评分图片 -->
+            <if test=" scorePic != null  "><!-- 评分图片 -->
                 AND score_pic = #{scorePic}
             </if>
-            <if test=" scoreContent != null and scoreContent !='' "><!-- 评分内容 -->
+            <if test=" scoreContent != null  "><!-- 评分内容 -->
                 AND score_content = #{scoreContent}
             </if>
-            <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+            <if test=" isUse != null  "><!-- 是否启用 -->
                 AND is_use = #{isUse}
             </if>
-            <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+            <if test=" createTime != null  "><!-- 创建时间 -->
                 AND create_time = #{createTime}
             </if>
-            <if test=" creator != null and creator !='' "><!-- 创建者 -->
+            <if test=" creator != null  "><!-- 创建者 -->
                 AND creator = #{creator}
             </if>
-            <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+            <if test=" updateTime != null  "><!-- 更新时间 -->
                 AND update_time = #{updateTime}
             </if>
-            <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+            <if test=" updator != null  "><!-- 最后更新者 -->
                 AND updator = #{updator}
             </if>
     </update>
@@ -106,49 +106,49 @@
     <select id='doSelectPage' parameterType='MecScoreDBO' resultType='MecScoreDBO'>
         SELECT <include refid='tableColumns'/> FROM mec_score
         WHERE 1 = 1 
-        <if test=" mecScoreId != null and mecScoreId !='' "><!-- 评分id -->
+        <if test=" mecScoreId != null  "><!-- 评分id -->
             AND mec_score_id = #{mecScoreId}
         </if>
-        <if test=" termId != null and termId !='' "><!-- 学期id -->
+        <if test=" termId != null  "><!-- 学期id -->
             AND term_id = #{termId}
         </if>
-        <if test=" cid != null and cid !='' "><!-- 班级id -->
+        <if test=" cid != null "><!-- 班级id -->
             AND cid = #{cid}
         </if>
-        <if test=" mecItemId != null and mecItemId !='' "><!-- 德育项目id -->
+        <if test=" mecItemId != null  "><!-- 德育项目id -->
             AND mec_item_id = #{mecItemId}
         </if>
-        <if test=" scroeOrder != null and scroeOrder !='' "><!-- 德育班级评分序号 -->
+        <if test=" scroeOrder != null  "><!-- 德育班级评分序号 -->
             AND scroe_order = #{scroeOrder}
         </if>
-        <if test=" scroe != null and scroe !='' "><!-- 德育班级评分 -->
+        <if test=" scroe != null  "><!-- 德育班级评分 -->
             AND scroe = #{scroe}
         </if>
-        <if test=" scoreTime != null and scoreTime !='' "><!-- 评分时间 -->
+        <if test=" scoreTime != null  "><!-- 评分时间 -->
             AND score_time = #{scoreTime}
         </if>
-        <if test=" tid != null and tid !='' "><!-- 评分人（tid） -->
+        <if test=" tid != null  "><!-- 评分人（tid） -->
             AND tid = #{tid}
         </if>
-        <if test=" scorePic != null and scorePic !='' "><!-- 评分图片 -->
+        <if test=" scorePic != null  "><!-- 评分图片 -->
             AND score_pic = #{scorePic}
         </if>
-        <if test=" scoreContent != null and scoreContent !='' "><!-- 评分内容 -->
+        <if test=" scoreContent != null  "><!-- 评分内容 -->
             AND score_content = #{scoreContent}
         </if>
-        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+        <if test=" isUse != null  "><!-- 是否启用 -->
             AND is_use = #{isUse}
         </if>
-        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+        <if test=" createTime != null  "><!-- 创建时间 -->
             AND create_time = #{createTime}
         </if>
-        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+        <if test=" creator != null  "><!-- 创建者 -->
             AND creator = #{creator}
         </if>
-        <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+        <if test=" updateTime != null  "><!-- 更新时间 -->
             AND update_time = #{updateTime}
         </if>
-        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+        <if test=" updator != null  "><!-- 最后更新者 -->
             AND updator = #{updator}
         </if>
     </select>
@@ -163,50 +163,50 @@
     <!-- 修改一条数据 -->
     <update id='doUpdate' parameterType='MecScoreDBO'>
         UPDATE mec_score SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
-        <if test=" mecScoreId != null and mecScoreId !='' "><!-- 评分id -->
+        <if test=" mecScoreId != null  "><!-- 评分id -->
             ,mec_score_id = #{mecScoreId}
         </if>
-        <if test=" termId != null and termId !='' "><!-- 学期id -->
+        <if test=" termId != null  "><!-- 学期id -->
             ,term_id = #{termId}
         </if>
-        <if test=" cid != null and cid !='' "><!-- 班级id -->
+        <if test=" cid != null  "><!-- 班级id -->
             ,cid = #{cid}
         </if>
-        <if test=" mecItemId != null and mecItemId !='' "><!-- 德育项目id -->
+        <if test=" mecItemId != null  "><!-- 德育项目id -->
             ,mec_item_id = #{mecItemId}
         </if>
-        <if test=" scroeOrder != null and scroeOrder !='' "><!-- 德育班级评分序号 -->
+        <if test=" scroeOrder != null  "><!-- 德育班级评分序号 -->
             ,scroe_order = #{scroeOrder}
         </if>
-        <if test=" scroe != null and scroe !='' "><!-- 德育班级评分 -->
+        <if test=" scroe != null"><!-- 德育班级评分 -->
             ,scroe = #{scroe}
         </if>
-        <if test=" scoreTime != null and scoreTime !='' "><!-- 评分时间 -->
+        <if test=" scoreTime != null  "><!-- 评分时间 -->
             ,score_time = #{scoreTime}
         </if>
-        <if test=" tid != null and tid !='' "><!-- 评分人（tid） -->
+        <if test=" tid != null "><!-- 评分人（tid） -->
             ,tid = #{tid}
         </if>
-        <if test=" scorePic != null and scorePic !='' "><!-- 评分图片 -->
+        <if test=" scorePic != null  "><!-- 评分图片 -->
             ,score_pic = #{scorePic}
         </if>
-        <if test=" scoreContent != null and scoreContent !='' "><!-- 评分内容 -->
+        <if test=" scoreContent != null "><!-- 评分内容 -->
             ,score_content = #{scoreContent}
         </if>
-        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+        <if test=" isUse != null "><!-- 是否启用 -->
             ,is_use = #{isUse}
         </if>
-        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+        <if test=" createTime != null  "><!-- 创建时间 -->
             ,create_time = #{createTime}
         </if>
-        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+        <if test=" creator != null "><!-- 创建者 -->
             ,creator = #{creator}
         </if>
-        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+        <if test=" updator != null "><!-- 最后更新者 -->
             ,updator = #{updator}
         </if>
         WHERE 1 = 1 
-            <if test=" mecScoreId != null and mecScoreId !='' "><!-- 评分id -->
+            <if test=" mecScoreId != null "><!-- 评分id -->
                 AND mec_score_id = #{mecScoreId}
             </if>
     </update>
@@ -219,15 +219,13 @@
     </delete>
     <!-- 物理删除一条数据 -->
     <delete id='doDelete' parameterType='MecScoreDBO'>
-        DELETE FROM mec_score WHERE update_time = #{updateTime}
-            <if test=" mecScoreId != null and mecScoreId !='' "><!-- 评分id -->
-                AND mec_score_id = #{mecScoreId}
-            </if>
+        DELETE FROM mec_score WHERE mec_score_id = #{mecScoreId}
+           
     </delete>
     <!-- 查询一条数据  -->
     <select id='doRead' parameterType='MecScoreDBO' resultType='MecScoreDBO'>
         SELECT <include refid='tableColumns'/> FROM mec_score WHERE 1 = 1
-            <if test=" mecScoreId != null and mecScoreId !='' "><!-- 评分id -->
+            <if test=" mecScoreId != null  "><!-- 评分id -->
                 AND mec_score_id = #{mecScoreId}
             </if>
     </select>
@@ -252,11 +250,11 @@
 			CONCAT(c.grade_name, b.class_name) AS class_name,
 			SUM(a.scroe) AS totalScore
 		FROM
-			mep_score AS a
+			mec_score AS a
 		LEFT JOIN class AS b ON a.cid = b.cid
 		LEFT JOIN s_grade_label AS c ON b.grade_id = c.grade_id
 				WHERE 1 = 1 
-        <if test=" termId != null and termId !='' "><!-- 学期id -->   
+        <if test=" termId != null  "><!-- 学期id -->   
             AND a.term_id = #{termId}
         </if>
 		GROUP BY
@@ -294,7 +292,7 @@
 		LEFT JOIN class AS b ON a.cid = b.cid
 		LEFT JOIN s_grade_label AS c ON b.grade_id = c.grade_id
 				WHERE 1 = 1 
-        <if test=" termId != null and termId !='' "><!-- 学期id -->   
+        <if test=" termId != null  "><!-- 学期id -->   
             AND a.term_id = #{termId}
         </if>
 		GROUP BY
@@ -328,14 +326,14 @@
 			CONCAT(c.grade_name, b.class_name) AS class_name,
 			SUM(a.scroe) AS totalScore
 		FROM
-			mep_score AS a
+			mec_score AS a
 		LEFT JOIN class AS b ON a.cid = b.cid
 		LEFT JOIN s_grade_label AS c ON b.grade_id = c.grade_id
 				WHERE 1 = 1 
-        <if test=" termId != null and termId !='' "><!-- 学期id -->   
+        <if test=" termId != null  "><!-- 学期id -->   
             AND a.term_id = #{termId}
         </if>
-         <if test=" cid != null and cid !='' "><!-- 班级id -->
+         <if test=" cid != null  "><!-- 班级id -->
             AND a.cid = #{cid}
         </if>
 		GROUP BY
@@ -363,10 +361,10 @@
 		LEFT JOIN mec_item AS b ON a.mec_item_id = b.mec_item_id 
 		LEFT JOIN u_teacher AS c ON a.tid = c.tid
 		WHERE 1 = 1 
-		<if test=" termId != null and termId !='' "><!-- 学期id -->   
+		<if test=" termId != null  "><!-- 学期id -->   
 		    AND a.term_id = #{termId}
 		</if>
-		<if test=" cid != null and cid !='' "><!-- 班级id -->
+		<if test=" cid != null  "><!-- 班级id -->
 		            AND a.cid = #{cid}
 		</if>
 		ORDER BY
@@ -387,13 +385,13 @@
 		LEFT JOIN mec_item AS b ON a.mec_item_id = b.mec_item_id 
 		LEFT JOIN u_teacher AS c ON a.tid = c.tid
 		WHERE 1 = 1 
-		<if test=" termId != null and termId !='' "><!-- 学期id -->   
+		<if test=" termId != null  "><!-- 学期id -->   
 		    AND a.term_id = #{termId}
 		</if>
-		<if test=" cid != null and cid !='' "><!-- 班级id -->
+		<if test=" cid != null "><!-- 班级id -->
 		            AND a.cid = #{cid}
 		</if>
-        <if test=" mecItemId != null and mecItemId !='' "><!-- 德育班级项目id -->
+        <if test=" mecItemId != null  "><!-- 德育班级项目id -->
             AND b.mec_item_id = #{mecItemId}
         </if>
 		<if test="startTime != null">
@@ -410,7 +408,7 @@
 		b.mec_item_name,
 		a.scroe,
 		b.mec_item_explain,
-		a.create_time,
+		a.score_time,
 		c.teacher_name,
 		a.scroe_order,
 		a.score_content,
@@ -420,7 +418,7 @@
 		LEFT JOIN mec_item AS b ON a.mec_item_id = b.mec_item_id 
 		LEFT JOIN u_teacher AS c ON a.tid = c.tid
 		WHERE 1 = 1 
-		<if test=" mecScoreId != null and mecScoreId !='' "><!-- 评分id -->
+		<if test=" mecScoreId != null  "><!-- 评分id -->
 		    AND a.mec_score_id = #{mecScoreId}
 		</if>
 
@@ -453,14 +451,14 @@
 				CONCAT(c.grade_name, b.class_name) AS class_name,
 				SUM(a.scroe) AS totalScore
 			FROM
-				mep_score AS a
+				mec_score AS a
 			LEFT JOIN class AS b ON a.cid = b.cid
 			LEFT JOIN s_grade_label AS c ON b.grade_id = c.grade_id
 										   WHERE 1 = 1 
-			        <if test=" termId != null and termId !='' "><!-- 学期id -->   
+			        <if test=" termId != null  "><!-- 学期id -->   
 			             AND a.term_id = #{termId}
 			        </if>
-			        <if test=" gradeId != null and gradeId !='' "><!-- 年级id -->
+			        <if test=" gradeId != null  "><!-- 年级id -->
 		                AND b.grade_id = #{gradeId}
 		          </if>
 			GROUP BY
@@ -506,14 +504,14 @@
 				CONCAT(c.grade_name, b.class_name) AS class_name,
 				SUM(a.scroe) AS totalScore
 			FROM
-				mep_score AS a
+				mec_score AS a
 			LEFT JOIN class AS b ON a.cid = b.cid
 			LEFT JOIN s_grade_label AS c ON b.grade_id = c.grade_id
 										   WHERE 1 = 1 
-			        <if test=" termId != null and termId !='' "><!-- 学期id -->   
+			        <if test=" termId != null  "><!-- 学期id -->   
 			             AND a.term_id = #{termId}
 			        </if>
-			        <if test=" gradeId != null and gradeId !='' "><!-- 年级id -->
+			        <if test=" gradeId != null "><!-- 年级id -->
 		                AND b.grade_id = #{gradeId}
 		          </if>
 			GROUP BY
@@ -527,7 +525,7 @@
 		) r
 	) AS e
 		   WHERE 1 = 1 
-	<if test=" cid != null and cid !='' "><!-- 班级id -->
+	<if test=" cid != null  "><!-- 班级id -->
 	      AND e.cid = #{cid}
 	</if>	
 	</select>	
