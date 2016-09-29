@@ -66,7 +66,7 @@ public class MoraleducationPersonalController extends MyControllerSupport {
 	public RESTResultBean moraleducationPersonalGET(Boolean test,Long termId,Long cid,String order,String token,Integer page, Integer size) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (test == true) {			
+			if (test != null && test == true) {			
 					String str = "{\"page\":\"0\",\"size\":\"14\",\"count\":\"3\",\"personalScoreList\":[{\"studentId\":\"1\",\"studentName\":\"张三\",\"number\":\"1000003\",\"totalScore\":\"90\",\"ranking\":\"12\",\"updateTime\":\"2016-09-19 00:00:00\"},{\"studentId\":\"2\",\"studentName\":\"王五\",\"number\":\"1000004\",\"totalScore\":\"93\",\"ranking\":\"11\",\"updateTime\":\"2016-09-19 00:00:00\"},{\"studentId\":\"3\",\"studentName\":\"赵六\",\"number\":\"1000005\",\"totalScore\":\"97\",\"ranking\":\"9\",\"updateTime\":\"2016-09-19 00:00:00\"}]}";
 					JSONObject jobj=JSON.parseObject(str);    
 					result.setData(jobj);				
@@ -132,7 +132,7 @@ public class MoraleducationPersonalController extends MyControllerSupport {
 	public RESTResultBean moraleducationPersonalSearchGET(Boolean test,Long termId, Long gradeId,Long cid,String studentName,Long studentId,String token) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (test == true) {
+			if (test != null && test == true) {
 				if (studentId != null) {
 					String str = "{\"studentId\":\"2\",\"studentName\":\"王五\",\"number\":\"1000004\",\"totalScore\":\"93\",\"ranking\":\"11\",\"updateTime\":\"2016-09-19 00:00:00\"}";
 					JSONObject jobj=JSON.parseObject(str);    
@@ -207,7 +207,7 @@ public class MoraleducationPersonalController extends MyControllerSupport {
 		public RESTResultBean mecPersonalScoreListGET(Boolean test,Long studentId,Long termId,String token,Integer page, Integer size) {
 			RESTResultBean result = new RESTResultBean();
 			try {
-				if (test == true) {
+				if (test != null && test == true) {
 					if (studentId != null) {
 						String str = "{\"studentId\":\"1\",\"studentName\":\"段誉\",\"number\":\"0291029\",\"totalScore\":\"23\",\"ranking\":\"12\",\"page\":\"1\",\"size\":\"12\",\"count\":\"22\",\"mepScoreList\":[{\"mepScoreId\":\"1\",\"mepItemName\":\"黑板报\",\"score\":\"-1\",\"mepItemExplain\":\"扣分针对所有班级\",\"scoreTime\":\"2016-09-13 00:00:00\",\"teacherName\":\"王主任\"},{\"mepScoreId\":\"2\",\"mepItemName\":\"打扫卫生只加分不扣分\",\"score\":\"+2\",\"mepItemExplain\":\"只加分不扣分\",\"scoreTime\":\"2016-09-13 00:00:00\",\"teacherName\":\"王主任\"},{\"mepScoreId\":\"3\",\"mepItemName\":\"通报批评\",\"score\":\"-1\",\"mepItemExplain\":\"只减分不加分\",\"scoreTime\":\"2016-09-13 00:00:00\",\"teacherName\":\"王主任\"}]}";
 						JSONObject jobj=JSON.parseObject(str);    
@@ -287,7 +287,7 @@ public class MoraleducationPersonalController extends MyControllerSupport {
 		public RESTResultBean mecPersonalScoreListSearchGET(Boolean test,Long studentId,Long termId,Long mepItemId,String startTime,String endTime,String token,Integer page, Integer size) {
 			RESTResultBean result = new RESTResultBean();
 			try {
-				if (test == true) {
+				if (test != null && test == true) {
 						String str = "{\"studentId\":\"1\",\"studentName\":\"段誉\",\"number\":\"0291029\",\"totalScore\":\"23\",\"ranking\":\"12\",\"page\":\"1\",\"size\":\"12\",\"count\":\"22\",\"mepScoreList\":[{\"mepScoreId\":\"1\",\"mepItemName\":\"黑板报\",\"score\":\"-1\",\"mepItemExplain\":\"扣分针对所有班级\",\"createTime\":\"2016-09-13 00:00:00\",\"teacherName\":\"王主任\"},{\"mepScoreId\":\"2\",\"mepItemName\":\"打扫卫生只加分不扣分\",\"score\":\"+2\",\"mepItemExplain\":\"只加分不扣分\",\"scoreTime\":\"2016-09-13 00:00:00\",\"teacherName\":\"王主任\"},{\"mepScoreId\":\"3\",\"mepItemName\":\"通报批评\",\"score\":\"-1\",\"mepItemExplain\":\"只减分不加分\",\"scoreTime\":\"2016-09-13 00:00:00\",\"teacherName\":\"王主任\"}]}";
 						JSONObject jobj=JSON.parseObject(str);    
 						result.setData(jobj);	
@@ -360,7 +360,7 @@ public class MoraleducationPersonalController extends MyControllerSupport {
 		public RESTResultBean mecPersonalScorePOST(Boolean test,String token,@RequestBody MepScoreDBO dbo) {
 			RESTResultBean result = new RESTResultBean();
 			try {
-				if (test == true) {
+				if (test != null && test == true) {
 //					if (josn.get("studentId") != null && josn.get("mepItemId") != null && josn.get("scoreOrder") != null) {
 ////						String str = "{\"status\":\"0\",	\"data\":{		\"info\":\"ok\"	}}";
 ////						JSONObject jobj=JSON.parseObject(str);    
@@ -413,7 +413,7 @@ public class MoraleducationPersonalController extends MyControllerSupport {
 		public RESTResultBean mecPersonalScoreDELETE(Boolean test,String token,@RequestBody MepScoreDBO dbo) {
 			RESTResultBean result = new RESTResultBean();
 			try {
-				if (test == true) {
+				if (test != null && test == true) {
 //					if (josn.get("mepScoreId") != null) {
 ////						String str = "{\"status\":\"0\",	\"data\":{		\"info\":\"ok\"	}}";
 ////						JSONObject jobj=JSON.parseObject(str);    
@@ -446,7 +446,7 @@ public class MoraleducationPersonalController extends MyControllerSupport {
 		public RESTResultBean mecPersonalScoreInfoGET(Boolean test,String token,Long mepScoreId) {
 			RESTResultBean result = new RESTResultBean();
 			try {
-				if (test == true) {
+				if (test != null && test == true) {
 					if (mepScoreId != null) {
 						String str = "{\"mepItemName\":\"黑板报\",\"score\":\"-1\",\"mepItemExplain\":\"凡是一次没有做的扣一分，扣分苍围针对所有班级\",\"createTime\":\"2016-09-13 00:00:00\",\"teacherName\":\"王主任\",\"scoreOrder\":\"1\",\"scoreContent\":\"1\",\"scorePic\":[\"http://www.100xyun.com/upload/123.jpg\",\"http://www.100xyun.com/upload/123.jpg\"]}";
 						JSONObject jobj=JSON.parseObject(str);    
@@ -508,7 +508,7 @@ public class MoraleducationPersonalController extends MyControllerSupport {
 		public RESTResultBean mecPersonalGET(Boolean test,Long sid,String token) {
 			RESTResultBean result = new RESTResultBean();
 			try {
-				if (test == true) {
+				if (test != null && test == true) {
 					
 						String str = "{\"count\":\"12\",\"mepItemList\":[{\"mepItemId\":\"23\",\"mepItemName\":\"黑板报\",\"mepItemExplain\":\"扣分苍围针对所有班级\",\"ruleNum\":\"1\",\"initialScore\":\"0\",\"intervalScore\":\"2\",\"isUse\":\"1\"},{\"mepItemId\":\"24\",\"mepItemName\":\"大扫除\",\"mepItemExplain\":\"一次2分\",\"ruleNum\":\"3\",\"initialScore\":\"3\",\"intervalScore\":\"3\",\"isUse\":\"1\"},{\"mepItemId\":\"25\",\"mepItemName\":\"通报批评\",\"mepItemExplain\":\"扣分苍围针对所有班级\",\"ruleNum\":\"5\",\"initialScore\":\"5\",\"intervalScore\":\"5\",\"isUse\":\"1\"}]}";
 						JSONObject jobj=JSON.parseObject(str);    
@@ -545,7 +545,7 @@ public class MoraleducationPersonalController extends MyControllerSupport {
 		public RESTResultBean mecPersonalPOST(Boolean test,String token,@RequestBody MepItemDBO dbo) {
 			RESTResultBean result = new RESTResultBean();
 			try {
-				if (test == true) {
+				if (test != null && test == true) {
 //					if (josn.get("sid") != null && josn.get("mepItemName") != null && josn.get("ruleNum") != null) {
 ////						String str = "{\"status\":\"0\",	\"data\":{		\"info\":\"ok\"	}}";
 ////						JSONObject jobj=JSON.parseObject(str);    
@@ -591,7 +591,7 @@ public class MoraleducationPersonalController extends MyControllerSupport {
 		public RESTResultBean mecPersonalPUT(Boolean test,String token,@RequestBody  MepItemDBO dbo) {
 			RESTResultBean result = new RESTResultBean();
 			try {
-				if (test == true) {
+				if (test != null && test == true) {
 //					if (josn.get("mepItemId") != null ) {
 ////						String str = "{\"status\":\"0\",	\"data\":{		\"info\":\"ok\"	}}";
 ////						JSONObject jobj=JSON.parseObject(str);    
@@ -629,7 +629,7 @@ public class MoraleducationPersonalController extends MyControllerSupport {
 		public RESTResultBean mecPersonalSetPUT(Boolean test,String token,@RequestBody  MepItemDBO dbo) {
 			RESTResultBean result = new RESTResultBean();
 			try {
-				if (test == true) {
+				if (test != null && test == true) {
 //					if (josn.get("mepItemId") != null && josn.get("isUse") != null) {
 ////						String str = "{\"status\":\"0\",	\"data\":{		\"info\":\"ok\"	}}";
 ////						JSONObject jobj=JSON.parseObject(str);    
@@ -667,7 +667,7 @@ public class MoraleducationPersonalController extends MyControllerSupport {
 		public RESTResultBean mecPersonalDELETE(Boolean test,String token,@RequestBody  MepItemDBO dbo) {
 			RESTResultBean result = new RESTResultBean();
 			try {
-				if (test == true) {
+				if (test != null && test == true) {
 //					if (josn.get("mepItemId") != null) {
 ////						String str = "{\"status\":\"0\",	\"data\":{		\"info\":\"ok\"	}}";
 ////						JSONObject jobj=JSON.parseObject(str);    
@@ -704,7 +704,7 @@ public class MoraleducationPersonalController extends MyControllerSupport {
 		public RESTResultBean mecPersonalInfoGET(Boolean test,String token,Long mepItemId) {
 			RESTResultBean result = new RESTResultBean();
 			try {
-				if (test == true) {
+				if (test != null && test == true) {
 					if (mepItemId != null) {
 						String str = "{\"mepItemId\":\"23\",\"mepItemName\":\"黑板报\",\"mepItemExplain\":\"扣分苍围针对所有班级\",\"ruleNum\":\"1\",\"initialScore\":\"0\",\"intervalScore\":\"2\",\"isUse\":\"1\"}";
 						JSONObject jobj=JSON.parseObject(str);    
