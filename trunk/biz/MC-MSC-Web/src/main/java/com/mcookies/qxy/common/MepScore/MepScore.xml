@@ -1,0 +1,514 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE mapper
+    PUBLIC '-//mybatis.org//DTD Dao 3.0//EN' 
+    'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
+<!-- 德育个人评分表 -->
+<!-- 需要和DAO保持完全路径一致 -->
+<mapper namespace='com.mcookies.qxy.common.MepScore.MepScoreDao'>
+    <!-- 表字段信息  -->
+    <sql id='tableColumns'>
+        mep_score_id,term_id,cid,student_id,mep_item_id,scroe_order,scroe,score_time,tid,score_pic,score_content,is_use,create_time,creator,update_time,updator
+    </sql>
+
+    <!-- 根据条件更新所有记录 -->
+    <update id='doUpdateAll' parameterType='MepScoreDBO'>
+        UPDATE mep_score SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
+        <if test=" mepScoreId != null and mepScoreId !='' "><!-- 评分id -->
+            ,mep_score_id = #{mepScoreId}
+        </if>
+        <if test=" termId != null and termId !='' "><!-- 学期id -->
+            ,term_id = #{termId}
+        </if>
+        <if test=" cid != null and cid !='' "><!-- 班级id -->
+            ,cid = #{cid}
+        </if>
+        <if test=" studentId != null and studentId !='' "><!-- 学生id -->
+            ,student_id = #{studentId}
+        </if>
+        <if test=" mepItemId != null and mepItemId !='' "><!-- 德育项目id -->
+            ,mep_item_id = #{mepItemId}
+        </if>
+        <if test=" scroeOrder != null and scroeOrder !='' "><!-- 德育个人评分序号 -->
+            ,scroe_order = #{scroeOrder}
+        </if>
+        <if test=" scroe != null and scroe !='' "><!-- 德育个人评分 -->
+            ,scroe = #{scroe}
+        </if>
+        <if test=" scoreTime != null and scoreTime !='' "><!-- 评分时间 -->
+            ,score_time = #{scoreTime}
+        </if>
+        <if test=" tid != null and tid !='' "><!-- 评分人（tid） -->
+            ,tid = #{tid}
+        </if>
+        <if test=" scorePic != null and scorePic !='' "><!-- 评分图片 -->
+            ,score_pic = #{scorePic}
+        </if>
+        <if test=" scoreContent != null and scoreContent !='' "><!-- 评分内容 -->
+            ,score_content = #{scoreContent}
+        </if>
+        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+            ,is_use = #{isUse}
+        </if>
+        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+            ,create_time = #{createTime}
+        </if>
+        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+            ,creator = #{creator}
+        </if>
+        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+            ,updator = #{updator}
+        </if>
+        WHERE 1 = 1 
+            <if test=" mepScoreId != null and mepScoreId !='' "><!-- 评分id -->
+                AND mep_score_id = #{mepScoreId}
+            </if>
+            <if test=" termId != null and termId !='' "><!-- 学期id -->
+                AND term_id = #{termId}
+            </if>
+            <if test=" cid != null and cid !='' "><!-- 班级id -->
+                AND cid = #{cid}
+            </if>
+            <if test=" studentId != null and studentId !='' "><!-- 学生id -->
+                AND student_id = #{studentId}
+            </if>
+            <if test=" mepItemId != null and mepItemId !='' "><!-- 德育项目id -->
+                AND mep_item_id = #{mepItemId}
+            </if>
+            <if test=" scroeOrder != null and scroeOrder !='' "><!-- 德育个人评分序号 -->
+                AND scroe_order = #{scroeOrder}
+            </if>
+            <if test=" scroe != null and scroe !='' "><!-- 德育个人评分 -->
+                AND scroe = #{scroe}
+            </if>
+            <if test=" scoreTime != null and scoreTime !='' "><!-- 评分时间 -->
+                AND score_time = #{scoreTime}
+            </if>
+            <if test=" tid != null and tid !='' "><!-- 评分人（tid） -->
+                AND tid = #{tid}
+            </if>
+            <if test=" scorePic != null and scorePic !='' "><!-- 评分图片 -->
+                AND score_pic = #{scorePic}
+            </if>
+            <if test=" scoreContent != null and scoreContent !='' "><!-- 评分内容 -->
+                AND score_content = #{scoreContent}
+            </if>
+            <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+                AND is_use = #{isUse}
+            </if>
+            <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+                AND create_time = #{createTime}
+            </if>
+            <if test=" creator != null and creator !='' "><!-- 创建者 -->
+                AND creator = #{creator}
+            </if>
+            <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+                AND update_time = #{updateTime}
+            </if>
+            <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+                AND updator = #{updator}
+            </if>
+    </update>
+    <!-- 查询分页数据信息  -->
+    <select id='doSelectPage' parameterType='MepScoreDBO' resultType='MepScoreDBO'>
+        SELECT <include refid='tableColumns'/> FROM mep_score
+        WHERE 1 = 1 
+        <if test=" mepScoreId != null and mepScoreId !='' "><!-- 评分id -->
+            AND mep_score_id = #{mepScoreId}
+        </if>
+        <if test=" termId != null and termId !='' "><!-- 学期id -->
+            AND term_id = #{termId}
+        </if>
+        <if test=" cid != null and cid !='' "><!-- 班级id -->
+            AND cid = #{cid}
+        </if>
+        <if test=" studentId != null and studentId !='' "><!-- 学生id -->
+            AND student_id = #{studentId}
+        </if>
+        <if test=" mepItemId != null and mepItemId !='' "><!-- 德育项目id -->
+            AND mep_item_id = #{mepItemId}
+        </if>
+        <if test=" scroeOrder != null and scroeOrder !='' "><!-- 德育个人评分序号 -->
+            AND scroe_order = #{scroeOrder}
+        </if>
+        <if test=" scroe != null and scroe !='' "><!-- 德育个人评分 -->
+            AND scroe = #{scroe}
+        </if>
+        <if test=" scoreTime != null and scoreTime !='' "><!-- 评分时间 -->
+            AND score_time = #{scoreTime}
+        </if>
+        <if test=" tid != null and tid !='' "><!-- 评分人（tid） -->
+            AND tid = #{tid}
+        </if>
+        <if test=" scorePic != null and scorePic !='' "><!-- 评分图片 -->
+            AND score_pic = #{scorePic}
+        </if>
+        <if test=" scoreContent != null and scoreContent !='' "><!-- 评分内容 -->
+            AND score_content = #{scoreContent}
+        </if>
+        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+            AND is_use = #{isUse}
+        </if>
+        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+            AND create_time = #{createTime}
+        </if>
+        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+            AND creator = #{creator}
+        </if>
+        <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+            AND update_time = #{updateTime}
+        </if>
+        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+            AND updator = #{updator}
+        </if>
+    </select>
+
+    <!-- 插入一条数据 -->
+    <insert id='doInsert' parameterType='MepScoreDBO'>
+        INSERT INTO mep_score
+          ( <include refid='tableColumns'/>) 
+        VALUES 
+          ( #{mepScoreId},#{termId},#{cid},#{studentId},#{mepItemId},#{scroeOrder},#{scroe},#{scoreTime},#{tid},#{scorePic},#{scoreContent},#{isUse},#{createTime},#{creator},#{updateTime},#{updator} )
+    </insert>
+    <!-- 修改一条数据 -->
+    <update id='doUpdate' parameterType='MepScoreDBO'>
+        UPDATE mep_score SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
+        <if test=" mepScoreId != null and mepScoreId !='' "><!-- 评分id -->
+            ,mep_score_id = #{mepScoreId}
+        </if>
+        <if test=" termId != null and termId !='' "><!-- 学期id -->
+            ,term_id = #{termId}
+        </if>
+        <if test=" cid != null and cid !='' "><!-- 班级id -->
+            ,cid = #{cid}
+        </if>
+        <if test=" studentId != null and studentId !='' "><!-- 学生id -->
+            ,student_id = #{studentId}
+        </if>
+        <if test=" mepItemId != null and mepItemId !='' "><!-- 德育项目id -->
+            ,mep_item_id = #{mepItemId}
+        </if>
+        <if test=" scroeOrder != null and scroeOrder !='' "><!-- 德育个人评分序号 -->
+            ,scroe_order = #{scroeOrder}
+        </if>
+        <if test=" scroe != null and scroe !='' "><!-- 德育个人评分 -->
+            ,scroe = #{scroe}
+        </if>
+        <if test=" scoreTime != null and scoreTime !='' "><!-- 评分时间 -->
+            ,score_time = #{scoreTime}
+        </if>
+        <if test=" tid != null and tid !='' "><!-- 评分人（tid） -->
+            ,tid = #{tid}
+        </if>
+        <if test=" scorePic != null and scorePic !='' "><!-- 评分图片 -->
+            ,score_pic = #{scorePic}
+        </if>
+        <if test=" scoreContent != null and scoreContent !='' "><!-- 评分内容 -->
+            ,score_content = #{scoreContent}
+        </if>
+        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+            ,is_use = #{isUse}
+        </if>
+        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+            ,create_time = #{createTime}
+        </if>
+        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+            ,creator = #{creator}
+        </if>
+        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+            ,updator = #{updator}
+        </if>
+        WHERE 1 = 1 
+            <if test=" mepScoreId != null and mepScoreId !='' "><!-- 评分id -->
+                AND mep_score_id = #{mepScoreId}
+            </if>
+    </update>
+    <!-- 逻辑删除一条数据 -->
+    <delete id='toDelete' parameterType='MepScoreDBO'>
+        UPDATE mep_score SET ddd='1', update_time = #{updateTime}, uu2 = #{uu2} WHERE update_time = #{updateTime}
+            <if test=" mepScoreId != null and mepScoreId !='' "><!-- 评分id -->
+                AND mep_score_id = #{mepScoreId}
+            </if>
+    </delete>
+    <!-- 物理删除一条数据 -->
+    <delete id='doDelete' parameterType='MepScoreDBO'>
+        DELETE FROM mep_score WHERE update_time = #{updateTime}
+            <if test=" mepScoreId != null and mepScoreId !='' "><!-- 评分id -->
+                AND mep_score_id = #{mepScoreId}
+            </if>
+    </delete>
+    <!-- 查询一条数据  -->
+    <select id='doRead' parameterType='MepScoreDBO' resultType='MepScoreDBO'>
+        SELECT <include refid='tableColumns'/> FROM mep_score WHERE 1 = 1
+            <if test=" mepScoreId != null and mepScoreId !='' "><!-- 评分id -->
+                AND mep_score_id = #{mepScoreId}
+            </if>
+    </select>
+        <!-- 分页 获取德育个人评分倒序列表信息 -->
+	<select id="doSelectPageMepScoreDESC" parameterType="MepScoreDBO" resultType="com.mcookies.qxy.common.MepScore.MepScorePVO">	
+		SELECT
+			c.student_id,
+			c.student_name,
+			c.number,
+			c.totalScore,
+			CASE
+		WHEN @rowtotal = c.totalScore THEN
+			@ranking
+		WHEN @rowtotal := c.totalScore THEN
+			@ranking :=@ranking + 1
+		WHEN @rowtotal = 0 THEN
+			@ranking :=@ranking + 1
+		END AS ranking
+		FROM
+			(
+			SELECT
+			a.student_id,
+			b.student_name,
+			b.number,
+			Sum(a.scroe) AS totalScore
+			FROM
+				mep_score AS a
+			LEFT JOIN u_student AS b ON a.student_id = b.student_id
+			   WHERE 1 = 1 
+	        <if test=" termId != null and termId !='' "><!-- 学期id -->   
+	             AND a.term_id = #{termId}
+	        </if>
+	         <if test=" cid != null and cid !='' "><!-- 班级id -->
+                AND a.cid = #{cid}
+             </if>
+			GROUP BY 
+			a.student_id
+			ORDER BY
+			totalScore DESC
+		) AS c,
+		(
+			SELECT
+				@ranking := 0 ,@rowtotal := NULL
+		) r
+	</select>
+	    <!-- 分页 获取德育个人评分正序列表信息 -->
+	<select id="doSelectPageMepScoreASC" parameterType="MepScoreDBO" resultType="com.mcookies.qxy.common.MepScore.MepScorePVO">	
+		SELECT
+			c.student_id,
+			c.student_name,
+			c.number,
+			c.totalScore,
+			CASE
+		WHEN @rowtotal = c.totalScore THEN
+			@ranking
+		WHEN @rowtotal := c.totalScore THEN
+			@ranking :=@ranking + 1
+		WHEN @rowtotal = 0 THEN
+			@ranking :=@ranking + 1
+		END AS ranking
+		FROM
+			(
+			SELECT
+			a.student_id,
+			b.student_name,
+			b.number,
+			Sum(a.scroe) AS totalScore
+			FROM
+				mep_score AS a
+			LEFT JOIN u_student AS b ON a.student_id = b.student_id
+			   WHERE 1 = 1 
+	        <if test=" termId != null and termId !='' "><!-- 学期id -->   
+	             AND a.term_id = #{termId}
+	        </if>
+	        <if test=" cid != null and cid !='' "><!-- 班级id -->
+                AND a.cid = #{cid}
+             </if>
+			GROUP BY 
+			a.student_id
+			ORDER BY
+			totalScore ASC
+		) AS c,
+		(
+			SELECT
+				@ranking := 0 ,@rowtotal := NULL
+		) r
+	</select>
+	<!--  根据cid获取德育个人评分信息 -->
+	<select id="doReadMepScore" parameterType="com.mcookies.qxy.common.MepScore.MepScorePVO" resultType="com.mcookies.qxy.common.MepScore.MepScorePVO">	
+		SELECT
+					d.student_id,
+					d.student_name,
+					d.number,
+					d.totalScore,
+		      d.ranking
+		FROM
+		(
+			SELECT
+						c.student_id,
+						c.student_name,
+						c.number,
+						c.totalScore,
+				CASE
+			WHEN @rowtotal = c.totalScore THEN
+				@ranking
+			WHEN @rowtotal := c.totalScore THEN
+				@ranking :=@ranking + 1
+			WHEN @rowtotal = 0 THEN
+				@ranking :=@ranking + 1
+			END AS ranking
+			FROM
+			(
+				SELECT
+				a.student_id,
+				b.student_name,
+				b.number,
+				Sum(a.scroe) AS totalScore
+				FROM
+					mep_score AS a
+				LEFT JOIN u_student AS b ON a.student_id = b.student_id
+							   WHERE 1 = 1 
+		        <if test=" termId != null and termId !='' "><!-- 学期id -->   
+		             AND a.term_id = #{termId}
+		        </if>
+		        <if test=" cid != null and cid !='' "><!-- 班级id -->
+	                AND a.cid = #{cid}
+	          </if>
+				GROUP BY
+				a.student_id
+				ORDER BY
+				totalScore DESC
+	
+		) AS c,
+		(
+			SELECT
+				@ranking := 0 ,@rowtotal := NULL
+			) r
+	) AS d
+	    WHERE 1 = 1 
+		<if test=" studentId != null and studentId !='' "><!-- 学生id -->
+		         d.student_id = #{studentId}
+		</if>
+	</select>
+	    <!--  根据studentId获取个人评分详情列表 -->
+	<select id="doSelectPageMepScore" parameterType="MepScoreDBO" resultType="com.mcookies.qxy.common.MepScore.MepScorePVO">	
+	SELECT
+	a.mep_score_id,
+	b.mep_item_name,
+	a.scroe,
+	b.mep_item_explain,
+	a.score_time,
+	c.teacher_name
+	FROM
+	mep_score AS a
+	LEFT JOIN mep_item AS b ON a.mep_item_id = b.mep_item_id
+	LEFT JOIN u_teacher AS c ON a.tid = c.tid
+	    WHERE 1 = 1 
+	<if test=" studentId != null and studentId !='' "><!-- 学生id -->
+	  a.student_id = #{studentId}
+	</if>
+	ORDER BY
+	a.create_time DESC
+	</select>
+	<!--  根据studentId, meItemId，startTime，endTime获取个人评分详情列表 -->
+	<select id="doSelectPageMepScoreList" parameterType="com.mcookies.qxy.common.MepScore.MepScorePVO" resultType="com.mcookies.qxy.common.MepScore.MepScorePVO">	
+	SELECT
+	a.mep_score_id,
+	b.mep_item_name,
+	a.scroe,
+	b.mep_item_explain,
+	a.score_time,
+	c.teacher_name
+	FROM
+	mep_score AS a
+	LEFT JOIN mep_item AS b ON a.mep_item_id = b.mep_item_id
+	LEFT JOIN u_teacher AS c ON a.tid = c.tid
+	    WHERE 1 = 1 
+	<if test=" studentId != null and studentId !='' "><!-- 学生id -->
+	  a.student_id = #{studentId}
+	</if>
+    <if test=" mepItemId != null and mepItemId !='' "><!-- 德育项目id -->
+        AND a.mep_item_id = #{mepItemId}
+    </if>
+	<if test="startTime != null">
+			<if test="endTime !=null">
+			AND a.create_time BETWEEN #{startTime} and #{endTime}
+			</if>
+	</if>
+	ORDER BY
+	a.create_time DESC
+	</select>
+	<!--  根据mepScoreId班级评分id获取个人评分详情 -->
+	<select id="doReadMepScoreBymepScoreId" parameterType="MepScoreDBO" resultType="com.mcookies.qxy.common.MepScore.MepScorePVO">	
+	 SELECT
+		b.mep_item_name,
+		a.scroe,
+		b.mep_item_explain,
+		a.score_time,
+		c.teacher_name,
+		a.scroe_order,
+		a.score_content,
+		a.score_pic
+	FROM
+		mep_score AS a
+		LEFT JOIN mep_item AS b ON a.mep_item_id = b.mep_item_id
+		LEFT JOIN u_teacher AS c ON a.tid = c.tid
+	    WHERE 1 = 1 
+		  <if test=" mepScoreId != null and mepScoreId !='' "><!-- 评分id -->
+		      AND a.mep_score_id = #{mepScoreId}
+		  </if>	
+	</select>
+		<!--  根据cid termId,gradeId,studentName获取德育个人评分信息 -->
+	<select id="doSeleDataPers" parameterType="com.mcookies.qxy.common.MepScore.MepScorePVO" resultType="com.mcookies.qxy.common.MepScore.MepScorePVO">	
+	SELECT
+		e.student_id,
+		e.student_name,
+		e.number,
+		e.totalScore,
+		e.ranking
+	FROM
+		(
+			SELECT
+				d.student_id,
+				d.student_name,
+				d.number,
+				d.totalScore,
+				CASE
+			WHEN @rowtotal = d.totalScore THEN
+				@ranking
+			WHEN @rowtotal := d.totalScore THEN
+				@ranking :=@ranking + 1
+			WHEN @rowtotal = 0 THEN
+				@ranking :=@ranking + 1
+			END AS ranking
+			FROM
+				(
+					SELECT
+						a.student_id,
+						b.student_name,
+						b.number,
+						Sum(a.scroe) AS totalScore
+					FROM
+						mep_score AS a
+					LEFT JOIN u_student AS b ON a.student_id = b.student_id
+					LEFT JOIN class AS c ON a.cid = c.cid
+														   WHERE 1 = 1 
+			        <if test=" termId != null and termId !='' "><!-- 学期id -->   
+			             AND a.term_id = #{termId}
+			        </if>
+			        <if test=" gradeId != null and gradeId !='' "><!-- 年级id -->
+		                AND c.grade_id = #{gradeId}
+		         	 </if>
+		         	 <if test=" cid != null and cid !='' "><!-- 班级id -->
+						      AND a.cid = #{cid}
+					</if>
+					GROUP BY
+						a.student_id
+					ORDER BY
+						totalScore DESC
+				) AS d,
+				(
+					SELECT
+						@ranking := 0 ,@rowtotal := NULL
+				) r
+		) AS e
+		WHERE 1 = 1 
+	<if test=" studentName != null and studentName !='' "><!-- 学生名子 -->
+	      AND e.student_name LIKE '%${studentName}%' 
+	</if>
+	</select>
+
+</mapper>
