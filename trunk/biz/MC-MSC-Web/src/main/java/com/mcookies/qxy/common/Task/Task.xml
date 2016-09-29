@@ -217,68 +217,68 @@
     <!-- 修改一条数据 -->
     <update id='doUpdate' parameterType='TaskDBO'>
         UPDATE task SET update_time = #{updateTime} <!-- 更新时间、更新者 -->
-        <if test=" taskId != null and taskId !='' "><!-- 作业id -->
+        <if test=" taskId != null "><!-- 作业id -->
             ,task_id = #{taskId}
         </if>
-        <if test=" sid != null and sid !='' "><!-- 学校id -->
+        <if test=" sid != null"><!-- 学校id -->
             ,sid = #{sid}
         </if>
-        <if test=" termId != null and termId !='' "><!-- 学期id -->
+        <if test=" termId != null "><!-- 学期id -->
             ,term_id = #{termId}
         </if>
-        <if test=" courseId != null and courseId !='' "><!-- 课程id -->
+        <if test=" courseId != null "><!-- 课程id -->
             ,course_id = #{courseId}
         </if>
         <if test=" taskName != null and taskName !='' "><!-- 作业标题 -->
             ,task_name = #{taskName}
         </if>
-        <if test=" content != null and content !='' "><!-- 作业内容 -->
+        <if test=" content != null "><!-- 作业内容 -->
             ,content = #{content}
         </if>
-        <if test=" video != null and video !='' "><!-- 作业音频 -->
+        <if test=" video != null "><!-- 作业音频 -->
             ,video = #{video}
         </if>
-        <if test=" pic != null and pic !='' "><!-- 作业图片 -->
+        <if test=" pic != null "><!-- 作业图片 -->
             ,pic = #{pic}
         </if>
-        <if test=" taskClasser != null and taskClasser !='' "><!-- 作业布置班级 -->
+        <if test=" taskClasser != null "><!-- 作业布置班级 -->
             ,task_classer = #{taskClasser}
         </if>
-        <if test=" startTime != null and startTime !='' "><!-- 作业开始时间 -->
+        <if test=" startTime != null "><!-- 作业开始时间 -->
             ,start_time = #{startTime}
         </if>
-        <if test=" endTime != null and endTime !='' "><!-- 作业结束时间 -->
+        <if test=" endTime != null "><!-- 作业结束时间 -->
             ,end_time = #{endTime}
         </if>
-        <if test=" isTop != null and isTop !='' "><!-- 是否置顶 -->
+        <if test=" isTop != null "><!-- 是否置顶 -->
             ,is_top = #{isTop}
         </if>
-        <if test=" publishTime != null and publishTime !='' "><!-- 作业发布时间 -->
+        <if test=" publishTime != null "><!-- 作业发布时间 -->
             ,publish_time = #{publishTime}
         </if>
-        <if test=" isAudit != null and isAudit !='' "><!-- 审核状态 -->
+        <if test=" isAudit != null  "><!-- 审核状态 -->
             ,is_audit = #{isAudit}
         </if>
-        <if test=" num != null and num !='' "><!-- 阅读次数 -->
+        <if test=" num != null"><!-- 阅读次数 -->
             ,num = #{num}
         </if>
-        <if test=" author != null and author !='' "><!-- 作者（教师tid） -->
+        <if test=" author != null "><!-- 作者（教师tid） -->
             ,author = #{author}
         </if>
-        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+        <if test=" isUse != null "><!-- 是否启用 -->
             ,is_use = #{isUse}
         </if>
-        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+        <if test=" createTime != null "><!-- 创建时间 -->
             ,create_time = #{createTime}
         </if>
-        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+        <if test=" creator != null "><!-- 创建者 -->
             ,creator = #{creator}
         </if>
-        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+        <if test=" updator != null"><!-- 最后更新者 -->
             ,updator = #{updator}
         </if>
         WHERE 1 = 1 
-            <if test=" taskId != null and taskId !='' "><!-- 作业id -->
+            <if test=" taskId != null"><!-- 作业id -->
                 AND task_id = #{taskId}
             </if>
     </update>
