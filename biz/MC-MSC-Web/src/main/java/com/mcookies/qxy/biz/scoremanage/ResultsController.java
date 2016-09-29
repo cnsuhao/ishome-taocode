@@ -68,7 +68,7 @@ public class ResultsController extends MyControllerSupport {
 	public RESTResultBean resultsGET(Boolean test,Long resultsTagId,Long cid,String token,Integer page, Integer size) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (test == true) {					
+			if (test != null && test == true) {					
 				if (cid != null && resultsTagId != null ) {
 					String str = "{\"resultsTagName\":\"期中考试\",\"resultsTagId\":\"2\",\"cid\":\"12\",\"className\":\"高一三班\",\"page\":\"2\",\"size\":\"12\",\"count\":\"23\",\"studentlist\":[{\"studentId\":\"1\",\"studentName\":\"张三三\",\"number\":\"01021200\",\"totalPoints\":\"603\",\"ranking\":\"2\"},{\"studentId\":\"2\",\"studentName\":\"张四三\",\"number\":\"01021201\",\"totalPoints\":\"601\",\"ranking\":\"3\"}]}";
 					JSONObject jobj=JSON.parseObject(str);    
@@ -138,7 +138,7 @@ public class ResultsController extends MyControllerSupport {
 	public RESTResultBean resultsSearchGET(Boolean test,Long resultsTagId,Long studentId,Long number,String token) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (test == true) {
+			if (test != null && test == true) {
 				if (resultsTagId != null && (studentId != null ||number != null) ) {
 					String str = "{\"resultsTagName\":\"期中考试\",\"resultsTagId\":\"2\",\"cid\":\"12\",\"className\":\"高一三班\",\"studentlist\":{\"studentId\":\"1\",\"studentName\":\"张三三\",\"number\":\"01021200\",\"totalPoints\":\"603\",\"ranking\":\"2\"}}";
 					JSONObject jobj=JSON.parseObject(str);    
@@ -192,7 +192,7 @@ public class ResultsController extends MyControllerSupport {
 	public RESTResultBean resultsStudentDELETE(Boolean test,String token,@RequestBody ResultsDBO dbo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (test == true) {
+			if (test != null && test == true) {
 //				if (josn.get("resultsTagId") != null&& josn.get("studentId") != null) {
 ////					String str = "{\"status\":\"0\",	\"data\":{		\"info\":\"ok\"	}}";
 ////					JSONObject jobj=JSON.parseObject(str);    
@@ -233,7 +233,7 @@ public class ResultsController extends MyControllerSupport {
 	public RESTResultBean resultsStudentCourseGET(Boolean test,Long resultsTagId,String token,Long studentId) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (test == true) {					
+			if (test != null && test == true) {					
 				if (resultsTagId != null&& studentId != null ) {
 					String str = "{\"resultsTagName\":\"期中考试\",\"resultsTagId\":\"2\",\"cid\":\"12\",\"className\":\"高一三班\",\"studentId\":\"1\",\"studentName\":\"张三三\",\"number\":\"01021200\",\"totalPoints\":\"603\",\"courseScoreList\":[{\"courseId\":\"1\",\"courseName\":\"语文\",\"courseScore\":\"89\",\"courseRanking\":\"5\",\"updateTime\":\"2016-8-9 00:00:00\"},{\"courseId\":\"2\",\"courseName\":\"数学\",\"courseScore\":\"89\",\"courseRanking\":\"5\",\"updateTime\":\"2016-8-9 00:00:00\"}]}";
 					JSONObject jobj=JSON.parseObject(str);    
@@ -298,7 +298,7 @@ public class ResultsController extends MyControllerSupport {
 	public RESTResultBean resultsStudentCoursePOST(Boolean test,String token,@RequestBody ResultsDBO dbo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (test == true) {
+			if (test != null && test == true) {
 //				if (josn.get("resultsTagId") != null && josn.get("studentId") != null&&josn.get("courseId") != null && josn.get("score") != null) {
 ////					String str = "{\"status\":\"0\",	\"data\":{		\"info\":\"ok\"	}}";
 ////					JSONObject jobj=JSON.parseObject(str);    
@@ -341,7 +341,7 @@ public class ResultsController extends MyControllerSupport {
 	public RESTResultBean resultsStudentCoursePUT(Boolean test,String token,@RequestBody ResultsDBO dbo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (test == true) {
+			if (test != null && test == true) {
 //				if (josn.get("resultsId") != null && josn.get("score") != null ) {
 ////					String str = "{\"status\":\"0\",	\"data\":{		\"info\":\"ok\"	}}";
 ////					JSONObject jobj=JSON.parseObject(str);    
@@ -381,7 +381,7 @@ public class ResultsController extends MyControllerSupport {
 	public RESTResultBean resultsStudentCourseDELETE(Boolean test,String token,@RequestBody ResultsDBO dbo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (test == true) {
+			if (test != null && test == true) {
 //				if (josn.get("resultsId") != null) {
 ////					String str = "{\"status\":\"0\",	\"data\":{		\"info\":\"ok\"	}}";
 ////					JSONObject jobj=JSON.parseObject(str);    
@@ -417,7 +417,7 @@ public class ResultsController extends MyControllerSupport {
 			Long courseId,String token,@RequestBody JSONObject josn) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (test == true) {
+			if (test != null && test == true) {
 				if (josn.get("resultsTagId") != null && josn.get("cid") != null&&josn.get("courseId") != null && josn.get("excel") != null) {
 //					String str = "{\"status\":\"0\",	\"data\":{		\"info\":\"ok\"	}}";
 //					JSONObject jobj=JSON.parseObject(str);    
@@ -535,7 +535,7 @@ public class ResultsController extends MyControllerSupport {
 	public RESTResultBean resultsCourseDELETE(Boolean test,String token,@RequestBody JSONObject josn) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (test == true) {
+			if (test != null && test == true) {
 				if (josn.get("resultsTagId") != null && josn.get("cid") != null && josn.get("courseId") != null) {
 	//				String str = "{\"status\":\"0\",	\"data\":{		\"info\":\"ok\"	}}";
 	//				JSONObject jobj=JSON.parseObject(str);    
@@ -581,7 +581,7 @@ public class ResultsController extends MyControllerSupport {
 	public RESTResultBean resultsClassCourseGET(Boolean test,Long resultsTagId,String token,Long cid) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (test == true) {					
+			if (test != null && test == true) {					
 				if (cid != null && resultsTagId != null ) {
 					String str = "{\"resultsTagName\":\"期中考试\",\"resultsTagId\":\"2\",\"cid\":\"12\",\"className\":\"高一三班\",\"courseList\":[{\"courseId\":\"1\",\"courseName\":\"语文\",\"status\":\"1\"},{\"courseId\":\"2\",\"courseName\":\"数学\",\"status\":\"0\"}]}";
 					JSONObject jobj=JSON.parseObject(str);    
@@ -644,7 +644,7 @@ public class ResultsController extends MyControllerSupport {
 	public RESTResultBean resultsClassCourseStudentGET(Boolean test,Long resultsTagId,Long cid,Long courseId,String token,String order,Integer page, Integer size) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (test == true) {					
+			if (test != null && test == true) {					
 				if (cid != null && resultsTagId != null && courseId != null ) {
 					String str = "{\"resultsTagName\":\"期中考试\",\"resultsTagId\":\"2\",\"cid\":\"12\",\"className\":\"高一三班\",\"courseId\":\"1\",\"courseName\":\"语文\",\"studentList\":[{\"studentId\":\"1\",\"studentName\":\"张三\",\"number\":\"100000\",\"courseScore\":\"100\",\"courseRanking\":\"1\"},{\"studentId\":\"2\",\"studentName\":\"张三三\",\"number\":\"100001\",\"courseScore\":\"99\",\"courseRanking\":\"2\"}]}";
 					JSONObject jobj=JSON.parseObject(str);    

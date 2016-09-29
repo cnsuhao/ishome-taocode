@@ -49,7 +49,7 @@ public class ResultsTagController extends MyControllerSupport {
 	public RESTResultBean resultsTagGET(Boolean test, Long termId, String token, Integer page, Integer size) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (test == true) {
+			if (test != null && test == true) {
 				String str = "{\"termName\":\"2016-2017-2\",\"page\":\"2\",\"size\":\"12\",\"count\":\"20\",\"resultsTagList\":[{\"resultsTagId\":\"1\",\"resultsTagName\":\"2016年9月校考模拟考试\",\"resultsTagExplain\":\"这是一场摸底考试\",\"startTime\":\"2016-8-9 00:00:00\",\"endTime\":\"2016-8-10 00:00:00\",\"createTime\":\"2016-8-10 00:00:00\"},{\"resultsId\":\"2\",\"resultsTagName\":\"2016年9月校考模拟考试1\",\"resultsTagExplain\":\"这是一场摸底考试2\",\"startTime\":\"2016-9-9 00:00:00\",\"endTime\":\"2016-9-10 00:00:00\",\"createTime\":\"2016-9-10 00:00:00\"}]}";
 				JSONObject jobj = JSON.parseObject(str);
 				result.setData(jobj);
@@ -118,7 +118,7 @@ public class ResultsTagController extends MyControllerSupport {
 	public RESTResultBean resultsTagPOST(Boolean test, String token, @RequestBody ResultsTagDBO dbo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (test == true) {
+			if (test != null && test == true) {
 				// if (josn.get("termId") != null && josn.get("resultsTagName")
 				// != null) {
 				//// String str = "{\"status\":\"0\", \"data\":{ \"info\":\"ok\"
@@ -159,7 +159,7 @@ public class ResultsTagController extends MyControllerSupport {
 	public RESTResultBean resultsTagPUT(Boolean test, String token, @RequestBody ResultsTagDBO dbo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (test == true) {
+			if (test != null && test == true) {
 				// if (josn.get("resultsTagId") != null ) {
 				//// String str = "{\"status\":\"0\", \"data\":{ \"info\":\"ok\"
 				// }}";
@@ -197,7 +197,7 @@ public class ResultsTagController extends MyControllerSupport {
 	public RESTResultBean resultsTagDELETE(Boolean test, String token, @RequestBody ResultsTagDBO dbo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (test == true) {
+			if (test != null && test == true) {
 				// if (josn.get("resultsTagId") != null) {
 				//// String str = "{\"status\":\"0\", \"data\":{ \"info\":\"ok\"
 				// }}";
@@ -238,7 +238,7 @@ public class ResultsTagController extends MyControllerSupport {
 	public RESTResultBean resultsTagSearchGET(Boolean test, Long termId, String token, String resultsTagName) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (test == true) {
+			if (test != null && test == true) {
 				if (termId != null && resultsTagName != null) {
 					String str = "{\"termName\":\"2016-2017-2\",\"count\":\"2\",\"resultsTagList\":[{\"resultsTagId\":\"1\",\"resultsTagName\":\"2016年9月校考模拟考试\",\"resultsTagExplain\":\"这是一场摸底考试\",\"startTime\":\"2016-8-9 00:00:00\",\"endTime\":\"2016-8-10 00:00:00\",\"createTime\":\"2016-8-10 00:00:00\"},{\"resultsId\":\"2\",\"resultsTagName\":\"2016年9月校考模拟考试1\",\"resultsTagExplain\":\"这是一场摸底考试2\",\"startTime\":\"2016-9-9 00:00:00\",\"endTime\":\"2016-9-10 00:00:00\",\"createTime\":\"2016-9-10 00:00:00\"}]}";
 					JSONObject jobj = JSON.parseObject(str);
@@ -294,7 +294,7 @@ public class ResultsTagController extends MyControllerSupport {
 	public RESTResultBean resultsTagInfoGET(Boolean test, Long resultsTagId, String token) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (test == true) {
+			if (test != null && test == true) {
 				if (resultsTagId != null) {
 					String str = "{\"resultsTagId\":\"1\",\"resultsTagName\":\"2016年9月校考模拟考试\",\"resultsTagExplain\":\"这是一场摸底考试\",\"startTime\":\"2016-8-9 00:00:00\",\"endTime\":\"2016-8-10 00:00:00\",\"createTime\":\"2016-8-10 00:00:00\"}";
 					JSONObject jobj = JSON.parseObject(str);
