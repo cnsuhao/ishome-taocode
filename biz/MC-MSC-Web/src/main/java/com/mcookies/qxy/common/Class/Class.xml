@@ -361,10 +361,11 @@
     <!-- 查询class 对应的班级列表(id1;id2;id3;) 为空返回sid下的全部  -->
     <select id='findClassersAndGrade' parameterType='ClassDBO' 
     		resultType='com.mcookies.qxy.common.Class.ClassPVO'>
-        SELECT a.cid,a.sid, b.term_name,c.grade_name, a.class_name
+        SELECT a.cid,a.sid,COUNT(f.student_id) AS student_count, b.term_name,c.grade_name, a.class_name
         FROM class a
         LEFT JOIN s_grade_label c ON a.grade_id = c.grade_id
         LEFT JOIN s_term b ON a.term_id = b.term_id 
+        LEFT JOIN class_student f ON a.cid = f.cid
 		WHERE 1 = 1
 		<if test=" cid != '' or cid != null">
 			AND a.cid = #{cid}
