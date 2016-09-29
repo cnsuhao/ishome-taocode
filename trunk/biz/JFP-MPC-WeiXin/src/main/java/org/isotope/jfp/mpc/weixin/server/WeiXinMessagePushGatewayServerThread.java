@@ -17,7 +17,7 @@ import org.isotope.jfp.mpc.weixin.beans.recevers.WeiXinCompanyGroupReceverListBe
 import org.isotope.jfp.mpc.weixin.beans.recevers.WeiXinCompanyGroupUserReceverListBean;
 import org.isotope.jfp.mpc.weixin.beans.recevers.WeiXinCompanyTagReceverListBean;
 import org.isotope.jfp.mpc.weixin.beans.sender.WeiXinCompanySenderBean;
-import org.isotope.jfp.mpc.weixin.business.MyWeixinBusiness;
+import org.isotope.jfp.mpc.weixin.biz.MyWeixinBusiness;
 
 /**
  * 微信消息发送实现类
@@ -34,7 +34,7 @@ public class WeiXinMessagePushGatewayServerThread extends AMessagePushGatewaySup
 	}
 
 	@Resource
-	MyWeixinBusiness weixinService;// 微信接口通信
+	MyWeixinBusiness myWeixinBusiness;// 微信接口通信
 
 	/**
 	 * 消息推送
@@ -96,17 +96,17 @@ public class WeiXinMessagePushGatewayServerThread extends AMessagePushGatewaySup
 			if (push) {
 				// 进行数据推送
 				if (MEDIA_TEXT.equals(messageValue.getMediaType())) {
-					result.setCode(weixinService.sendText(messageValue, sender, deptGroupRecevers, tagRecevers, userGroupRecevers));
+					result.setCode(myWeixinBusiness.sendText(messageValue, sender, deptGroupRecevers, tagRecevers, userGroupRecevers));
 				} else if (MEDIA_IMAGE.equals(messageValue.getMediaType())) {
-					result.setCode(weixinService.sendImage(messageValue, sender, deptGroupRecevers, tagRecevers, userGroupRecevers));
+					result.setCode(myWeixinBusiness.sendImage(messageValue, sender, deptGroupRecevers, tagRecevers, userGroupRecevers));
 				} else if (MEDIA_VOICE.equals(messageValue.getMediaType())) {
-					result.setCode(weixinService.sendVoice(messageValue, sender, deptGroupRecevers, tagRecevers, userGroupRecevers));
+					result.setCode(myWeixinBusiness.sendVoice(messageValue, sender, deptGroupRecevers, tagRecevers, userGroupRecevers));
 				} else if (MEDIA_VIDEO.equals(messageValue.getMediaType())) {
-					result.setCode(weixinService.sendVideo(messageValue, sender, deptGroupRecevers, tagRecevers, userGroupRecevers));
+					result.setCode(myWeixinBusiness.sendVideo(messageValue, sender, deptGroupRecevers, tagRecevers, userGroupRecevers));
 				} else if (MEDIA_THUMB.equals(messageValue.getMediaType())) {
-					result.setCode(weixinService.sendThumb(messageValue, sender, deptGroupRecevers, tagRecevers, userGroupRecevers));
+					result.setCode(myWeixinBusiness.sendThumb(messageValue, sender, deptGroupRecevers, tagRecevers, userGroupRecevers));
 				} else if (MEDIA_FILE.equals(messageValue.getMediaType())) {
-					result.setCode(weixinService.sendFile(messageValue, sender, deptGroupRecevers, tagRecevers, userGroupRecevers));
+					result.setCode(myWeixinBusiness.sendFile(messageValue, sender, deptGroupRecevers, tagRecevers, userGroupRecevers));
 				} else {
 					result.setCode(TWO);
 					result.setMessage("消息类型不对，不支持当前消息内容类别getMediaType(" + messageValue.getMediaType() + ")");

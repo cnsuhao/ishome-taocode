@@ -1,4 +1,4 @@
-package org.isotope.jfp.mpc.weixin.business;
+package org.isotope.jfp.mpc.weixin.biz;
 
 import java.util.Iterator;
 import java.util.List;
