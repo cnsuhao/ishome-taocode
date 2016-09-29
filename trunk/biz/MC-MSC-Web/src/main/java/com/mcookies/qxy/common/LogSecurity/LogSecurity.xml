@@ -214,6 +214,8 @@
 		a.student_id,
 		b.student_name,
 		b.number,
+		e.dgroup_id,
+		e.dgroup_name,
 		c.device_name,
 		a.flag,
 		a.mark_time,
@@ -223,8 +225,9 @@
 		d.class_name
 		FROM
 		log_security a left join
-		u_student b on a.student_id = b.student_id
+		u_student b on a.student_id = b.student_id		
 		left join device_tag c on  a.device_id = c.device_id
+		left join device_group e on  e.dgroup_id = c.dgroup_id
 		left join class d on a.cid= d.cid
 		left join s_grade_label g on d.grade_id = g.grade_id
         <where> 
