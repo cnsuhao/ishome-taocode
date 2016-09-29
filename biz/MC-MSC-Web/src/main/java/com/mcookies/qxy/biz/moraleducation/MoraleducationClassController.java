@@ -10,7 +10,10 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.isotope.jfp.framework.beans.common.RESTResultBean;
+import org.isotope.jfp.framework.beans.user.UserBean;
 import org.isotope.jfp.framework.support.MyControllerSupport;
+import org.isotope.jfp.framework.utils.DateHelper;
+import org.isotope.jfp.framework.utils.token.UserCacheHelper;
 import org.jsoup.helper.DataUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,7 +22,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.gargoylesoftware.htmlunit.javascript.host.intl.V8BreakIterator;
 import com.mcookies.qxy.common.Class.ClassDBO;
 import com.mcookies.qxy.common.Class.ClassService;
 import com.mcookies.qxy.common.ClassTeacher.ClassTeacherDBO;
@@ -38,6 +43,7 @@ import com.mcookies.qxy.common.STrip.STripPVO;
 import com.mcookies.qxy.common.SWorkRule.SWorkRuleDBO;
 import com.mcookies.qxy.common.SWorkTime.SWorkTimeDBO;
 import com.mcookies.qxy.common.UTeacher.UTeacherDBO;
+import com.mcookies.qxy.common.UTeacher.UTeacherService;
 import com.mcookies.qxy.utils.DateUtils;
 import com.sun.mail.handlers.message_rfc822;
 
@@ -57,6 +63,8 @@ public class MoraleducationClassController extends MyControllerSupport {
 	protected ClassService ClassService_;
 	@Resource
 	protected STermService STermService_;
+	@Resource
+	protected UTeacherService UTeacherService_;
 
 	/**
 	 * 12.1.1-2 根据年级查询班级列表接口
@@ -164,16 +172,21 @@ public class MoraleducationClassController extends MyControllerSupport {
 					MecScoreService_.doSelectPageMecScoreASC(pageModel);
 				}
 				List<MecScorePVO> classScoreList = (List<MecScorePVO>) pageModel.getPageListData();
+				JSONArray jsonArray = new JSONArray();
 				for (MecScorePVO mecScorePVO2 : classScoreList) {
-					SimpleDateFormat df = new SimpleDateFormat(DateUtils.FORMAT_yyyy_MM_dd_HH_mm_ss);// 设置日期格式
-					mecScorePVO2.setUpdateTime(df.format(new Date()));// new
-																		// Date()为获取当前系统时间
+					JSONObject data2 = new JSONObject();
+					data2.put("cid", mecScorePVO2.getCid());
+					data2.put("className", mecScorePVO2.getClassName());
+					data2.put("totalScore", mecScorePVO2.getTotalScore());
+					data2.put("ranking", mecScorePVO2.getRanking());
+					data2.put("updateTime", DateHelper.currentTimeMillisCN1());
+					jsonArray.add(data2);												
 				}
 				JSONObject data = new JSONObject();
 				data.put("page", page);
 				data.put("size", size);
 				data.put("count", pageModel.getResultCount());
-				data.put("classScoreList", classScoreList);
+				data.put("classScoreList", jsonArray);
 				result.setData(data);
 
 			}
@@ -217,11 +230,14 @@ public class MoraleducationClassController extends MyControllerSupport {
 				}
 				MecScorePVO mecScorePVO = new MecScorePVO();
 				mecScorePVO.setCid(cid);
-				mecScorePVO = (MecScorePVO) MecScoreService_.doReadMecScore(mecScorePVO);
-				SimpleDateFormat df = new SimpleDateFormat(DateUtils.FORMAT_yyyy_MM_dd_HH_mm_ss);// 设置日期格式
-				mecScorePVO.setUpdateTime(df.format(new Date()));// new
-																	// Date()为获取当前系统时间
-				result.setData(mecScorePVO);
+				mecScorePVO = (MecScorePVO) MecScoreService_.doReadMecScore(mecScorePVO);														
+				JSONObject data = new JSONObject();
+				data.put("cid", mecScorePVO.getCid());
+				data.put("className", mecScorePVO.getClassName());
+				data.put("totalScore", mecScorePVO.getTotalScore());
+				data.put("ranking", mecScorePVO.getRanking());
+				data.put("updateTime", DateHelper.currentTimeMillisCN1());
+				result.setData(data);
 			}
 
 		} catch (Exception e) {
@@ -278,17 +294,23 @@ public class MoraleducationClassController extends MyControllerSupport {
 					MecScoreService_.doSelectPageMecScrASC(pageModel);
 				}
 				List<MecScorePVO> classScoreList = (List<MecScorePVO>) pageModel.getPageListData();
+				JSONArray jsonArray = new JSONArray();
 				for (MecScorePVO mecScorePVO2 : classScoreList) {
-					SimpleDateFormat df = new SimpleDateFormat(DateUtils.FORMAT_yyyy_MM_dd_HH_mm_ss);// 设置日期格式
-					mecScorePVO2.setUpdateTime(df.format(new Date()));// new
-																		// Date()为获取当前系统时间
+					JSONObject data2 = new JSONObject();
+					data2.put("cid", mecScorePVO2.getCid());
+					data2.put("className", mecScorePVO2.getClassName());
+					data2.put("totalScore", mecScorePVO2.getTotalScore());
+					data2.put("ranking", mecScorePVO2.getRanking());
+					data2.put("updateTime", DateHelper.currentTimeMillisCN1());
+					jsonArray.add(data2);	
 				}
 				JSONObject data = new JSONObject();
 				data.put("page", page);
 				data.put("size", size);
 				data.put("count", pageModel.getResultCount());
-				data.put("classScoreList", classScoreList);
+				data.put("classScoreList", jsonArray);
 				result.setData(data);
+				
 			}
 
 		} catch (Exception e) {
@@ -364,10 +386,22 @@ public class MoraleducationClassController extends MyControllerSupport {
 				pageModel.setFormParamBean(mecSP);
 				MecScoreService_.doSelectPageMecScore(pageModel);
 				List<MecScorePVO> mecScoreList = (List<MecScorePVO>) pageModel.getPageListData();
+				JSONArray jsonArray = new JSONArray();
+				for (MecScorePVO mecScorePVO2 : mecScoreList) {
+					JSONObject data2 = new JSONObject();
+					data2.put("mecScoreId", mecScorePVO2.getMecScoreId());
+					data2.put("mecItemId", mecScorePVO2.getMecItemId());
+					data2.put("mecItemName", mecScorePVO2.getMecItemName());
+					data2.put("score", mecScorePVO2.getScroe());
+					data2.put("teacherName", mecScorePVO2.getTeacherName());
+					data2.put("mecItemExplain", mecScorePVO2.getMecItemExplain());
+					data2.put("createTime", mecScorePVO2.getCreateTime());
+					jsonArray.add(data2);	
+				}
 				data.put("page", page);
 				data.put("size", size);
 				data.put("count", pageModel.getResultCount());
-				data.put("mecScoreList", mecScoreList);
+				data.put("mecScoreList", jsonArray);
 				result.setData(data);
 			}
 
@@ -449,10 +483,22 @@ public class MoraleducationClassController extends MyControllerSupport {
 				pageModel.setFormParamBean(mecSP);
 				MecScoreService_.doSelectPageMecScoreList(pageModel);
 				List<MecScorePVO> mecScoreList = (List<MecScorePVO>) pageModel.getPageListData();
+				List<Map<String,Object>> retListMap = new ArrayList<Map<String, Object>>();
+				for (MecScorePVO mecScorePVO2 : mecScoreList) {
+					Map<String, Object> map = new HashMap<String, Object>();
+					map.put("mecScoreId", mecScorePVO2.getMecScoreId());
+					map.put("mecItemId", mecScorePVO2.getMecItemId());
+					map.put("mecItemName", mecScorePVO2.getMecItemName());
+					map.put("score", mecScorePVO2.getScroe());
+					map.put("teacherName", mecScorePVO2.getTeacherName());
+					map.put("mecItemExplain", mecScorePVO2.getMecItemExplain());
+					map.put("createTime", mecScorePVO2.getCreateTime());
+					retListMap.add(map);
+				}
 				data.put("page", page);
 				data.put("size", size);
 				data.put("count", pageModel.getResultCount());
-				data.put("mecScoreList", mecScoreList);
+				data.put("mecScoreList", retListMap);
 				result.setData(data);
 			}
 
@@ -491,6 +537,19 @@ public class MoraleducationClassController extends MyControllerSupport {
 				if (doCheckToken(token) == false) {
 					return tokenFail();
 				}
+				//获得tid用户信息
+				UserBean userBean= UserCacheHelper.checkUser(token);
+				UTeacherDBO uTeacherDBO = new UTeacherDBO();
+				uTeacherDBO.setUid(userBean.getUserId());
+				uTeacherDBO = (UTeacherDBO) UTeacherService_.doReadByUid(uTeacherDBO);
+				dbo.setTid(uTeacherDBO.getTid());
+				//termId学期
+				ClassDBO classDBO =  new ClassDBO();
+				classDBO.setCid(dbo.getCid());
+				classDBO = (ClassDBO) ClassService_.doRead(classDBO);
+				Long termId = classDBO.getTermId();
+				dbo.setTermId(termId);
+				dbo.setScoreTime(DateHelper.currentTimeMillisCN1());;
 				dbo.setIsUse(1);
 				if (dbo.getCid() == null) {
 					throw new IllegalArgumentException("该德育班级cid不存在");
@@ -501,6 +560,7 @@ public class MoraleducationClassController extends MyControllerSupport {
 				if (dbo.getScroeOrder() == null) {
 					throw new IllegalArgumentException("德育班级评分序号（合理范围为1-6）");
 				}
+			
 				MecItemDBO mecItemDBO = new MecItemDBO();
 				mecItemDBO.setMecItemId(dbo.getMecItemId());
 				mecItemDBO = (MecItemDBO) MecItemService_.doRead(mecItemDBO);
@@ -641,12 +701,22 @@ public class MoraleducationClassController extends MyControllerSupport {
 				// 得到德育班级项目列表
 				MecItemDBO mecItemDBO = new MecItemDBO();
 				mecItemDBO.setSid(sid);
-				pageModel.setFormParamBean(mecItemDBO);
-				MecItemService_.doSelectPage(pageModel);
-				List<MecItemDBO> mecItemList = (List<MecItemDBO>) pageModel.getPageListData();
+				List<MecItemDBO> mecItemList = (List<MecItemDBO>) MecItemService_.doSelectData(mecItemDBO);
+				JSONArray jsonArray = new JSONArray(); 
+	            for (MecItemDBO mecItemDBO2 : mecItemList) {
+	            	JSONObject data2 = new JSONObject();
+	            	data2.put("mecItemId",mecItemDBO2.getMecItemId() );
+	            	data2.put("mecItemName",mecItemDBO2.getMecItemName() );
+	            	data2.put("mecItemExplain",mecItemDBO2.getMecItemExplain() );
+	            	data2.put("ruleNum",mecItemDBO2.getRuleNum() );
+	            	data2.put("initialScore",mecItemDBO2.getInitialScore() );
+	            	data2.put("intervalScore",mecItemDBO2.getIntervalScore() );
+	            	data2.put("isUse",mecItemDBO2.getIsUse() );
+	            	jsonArray.add(data2);
+				}
 				JSONObject data = new JSONObject();
-				data.put("count", pageModel.getResultCount());
-				data.put("mecItemList", mecItemList);
+				data.put("count", mecItemList.size());
+				data.put("mecItemList", jsonArray);
 				result.setData(data);
 			}
 
@@ -686,7 +756,7 @@ public class MoraleducationClassController extends MyControllerSupport {
 				if (doCheckToken(token) == false) {
 					return tokenFail();
 				}
-				dbo.setIsUse(1);
+//				dbo.setIsUse(1);
 				if (dbo.getSid() == null) {
 					throw new IllegalArgumentException("该学校id不存在");
 				}
@@ -777,7 +847,7 @@ public class MoraleducationClassController extends MyControllerSupport {
 				}
 				if (dbo.getIsUse() == null) {
 					throw new IllegalArgumentException("该启用和停用不存在");
-				}
+				}				
 				MecItemService_.doUpdate(dbo);
 			}
 
@@ -814,7 +884,7 @@ public class MoraleducationClassController extends MyControllerSupport {
 				if (dbo.getMecItemId() == null) {
 					throw new IllegalArgumentException("该德育班级项目id不存在");
 				}
-				MecScoreService_.doDelete(dbo);
+				MecItemService_.doDelete(dbo);
 			}
 		} catch (Exception e) {
 			result.setInfo("删除失败，" + e.getMessage());
