@@ -8,6 +8,7 @@ import java.util.TreeSet;
 import javax.annotation.Resource;
 import org.isotope.jfp.framework.beans.common.RESTResultBean;
 import org.isotope.jfp.framework.support.MyControllerSupport;
+import org.isotope.jfp.framework.utils.DateHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -73,26 +74,27 @@ public class TaskManegeController extends MyControllerSupport{
 				throw new IllegalArgumentException("cid不能为空");
 			}
 			TaskPVO taskdbo = new TaskPVO();
-			if(!cid.equals(null)|| !cid.equals("")){
-				ClassDBO model = new ClassDBO();
-				model.setCid(Long.parseLong(cid));
-				ClassPVO cla = ClassService.findClassersAndGrade(model);
-				if(cla == null){
-					result.setInfo("你所查的班级不存在");
-					result.setStatus(2);
-					return result;
-				}
-				taskdbo.setCid(cid);
-				taskdbo.setSid(cla.getSid());
+			ClassDBO model = new ClassDBO();
+			model.setCid(Long.parseLong(cid));
+			ClassPVO cla = ClassService.findClassersAndGrade(model);
+			if(cla.getCid() == null){
+				result.setInfo("你所查的班级不存在");
+				result.setStatus(2);
+				return result;
 			}
+			taskdbo.setCid(cid);
+			taskdbo.setSid(cla.getSid());
 			pageModel.setPageCurrent(page);
-			pageModel.setPageLimit(size);			
+			pageModel.setPageLimit(size);
 			pageModel.setFormParamBean(taskdbo);
 			TaskServicer.doSelectPageTaskWithCid(pageModel);
 			Map<String, Object> data = new HashMap<String, Object>();
 			data.put("page", pageModel.getPageCurrent());
 			data.put("size", pageModel.getPageLimit());
 			data.put("count", pageModel.getResultCount());
+			data.put("className", cla.getGradeName()+cla.getClassName());
+			data.put("termName", cla.getTermName());
+			data.put("studentCount", cla.getStudentCount());
 			data.put("tasklist", pageModel.getPageListData());
 			result.setData(data);
 		} catch (Exception e) {
@@ -291,6 +293,13 @@ public class TaskManegeController extends MyControllerSupport{
 					termId = termlist.get(0).getTermId();
 					task.setTermId(termId);
 				}
+			 if(task.getPublishTime() == null){
+				 String publishTime = DateHelper.currentTimeMillis2();
+				 task.setPublishTime(publishTime);
+			 }
+			 if(task.getIsTop() == null){
+				 task.setIsTop(0); 
+			 }
 			 TaskServicer.doInsert(task);
 			Map<String, Object> data = new HashMap<String, Object>();
 			data.put("info", "ok");
