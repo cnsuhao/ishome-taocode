@@ -58,24 +58,23 @@ public class MoraleducationClassController extends MyControllerSupport {
 	@Resource
 	protected STermService STermService_;
 
-	
 	/**
-	 *  12.1.1-2 根据年级查询班级列表接口
-	 * /qxy/classlist/grade/search?termId=[termId]&gradeId=[gradeId]&page=[page]&size=[size]&token=[token]
-	 * 可以根据年级标签查询查询班级列表，学期为可选参数，不填或为0则默认查询该学期下的班级；年级参数为必填参数；
-	 * 需要使用Token验证查询者身份
+	 * 12.1.1-2 根据年级查询班级列表接口
+	 * /qxy/classlist/grade/search?termId=[termId]&gradeId=[gradeId]&page=[page]
+	 * &size=[size]&token=[token]
+	 * 可以根据年级标签查询查询班级列表，学期为可选参数，不填或为0则默认查询该学期下的班级；年级参数为必填参数； 需要使用Token验证查询者身份
 	 */
 
 	@RequestMapping(value = "/classlist/grade/search", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean classlistGradeSearchGET(Boolean test, String token, Long termId,Long gradeId,Integer page, Integer size) {
+	public RESTResultBean classlistGradeSearchGET(Boolean test, String token, Long termId, Long gradeId, Integer page, Integer size) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (test == true) {
+			if (test != null && test == true) {
 				if (gradeId != null) {
 					String str = "{\"page\":\"1\",\"size\":\"12\",\"count\":\"2\",\"classlist\":[{\"cid\":\"2\",\"className\":\"一班\"},{\"cid\":\"3\",\"className\":\"二班\"}]}";
 					JSONObject jobj = JSON.parseObject(str);
-					result.setData(jobj);	
+					result.setData(jobj);
 				} else {
 					result.setInfo("年级id， --必填项");
 				}
@@ -107,7 +106,7 @@ public class MoraleducationClassController extends MyControllerSupport {
 				for (ClassDBO classDBO2 : classDBOs) {
 					Map<String, Object> map = new HashMap<String, Object>();
 					map.put("cid", classDBO2.getCid());
-					map.put("className", classDBO2.getClassName());	
+					map.put("className", classDBO2.getClassName());
 					classlist.add(map);
 				}
 				JSONObject data = new JSONObject();
@@ -117,7 +116,7 @@ public class MoraleducationClassController extends MyControllerSupport {
 				data.put("classlist", classlist);
 				result.setData(data);
 			}
-			 
+
 		} catch (Exception e) {
 			result.setInfo("查询失败，" + e.getMessage());
 			result.setStatus(1);
@@ -127,7 +126,7 @@ public class MoraleducationClassController extends MyControllerSupport {
 	}
 
 	/**
-	 *  12.1.2 德育班级评分列表查询接口德育班级评分列表查询接口
+	 * 12.1.2 德育班级评分列表查询接口德育班级评分列表查询接口
 	 * /qxy/moraleducation/class?termId=[termId]&order=[order]&page=[page]&size=
 	 * [size]&token=[token] 德育班级评分列表查询接口当学期id为空时，返回默认学期下班级列表数据。本接口支持分页查询班级评分列表
 	 * 需要使用Token验证查询者身份
@@ -138,7 +137,7 @@ public class MoraleducationClassController extends MyControllerSupport {
 	public RESTResultBean moraleducationClassGET(Boolean test, String token, Long termId, String order, Integer page, Integer size) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (test == true) {
+			if (test != null && test == true) {
 				String str = "{\"page\":\"1\",\"size\":\"14\",\"count\":\"3\",\"classScoreList\": [{\"cid\": \"4\",\"className\": \"初一1班\",\"totalScore\": \"90\",\"ranking\": \"12\",\"updateTime\":\"2016-09-19 00:00:00\"},{\"cid\": \"4\",\"className\": \"初一2班\",\"totalScore\": \"92\",\"ranking\": \"11\",\"updateTime\":\"2016-09-19 00:00:00\"}]}";
 				JSONObject jobj = JSON.parseObject(str);
 				result.setData(jobj);
@@ -188,8 +187,9 @@ public class MoraleducationClassController extends MyControllerSupport {
 	}
 
 	/**
-	 * 12.1.3-1 德育班级评分班级搜索接口 /qxy/moraleducation/class/search?cid=[cid]&token=[token]
-	 * 需要使用Token验证查询者身份 根据班级cid进行搜索，只用与班级搜索
+	 * 12.1.3-1 德育班级评分班级搜索接口
+	 * /qxy/moraleducation/class/search?cid=[cid]&token=[token] 需要使用Token验证查询者身份
+	 * 根据班级cid进行搜索，只用与班级搜索
 	 * 
 	 * @param test
 	 * @return
@@ -200,7 +200,7 @@ public class MoraleducationClassController extends MyControllerSupport {
 	public RESTResultBean moraleducationClassSearchGET(Boolean test, String token, Long cid) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (test == true) {
+			if (test != null && test == true) {
 				if (cid != null) {
 					String str = "{\"cid\":\"4\",\"className\":\"初一1班\",\"totalScore\":\"90\",\"ranking\":\"12\",\"updateTime\":\"2016-09-19 00:00:00\"}";
 					JSONObject jobj = JSON.parseObject(str);
@@ -234,8 +234,10 @@ public class MoraleducationClassController extends MyControllerSupport {
 
 	/**
 	 * 12.1.3-2 德育班级评分年级班级搜索接口
-	 * /qxy/moraleducation/class/score/gradeclass/search?termId=[termId]&gradeId=[gradeId]&cid=[cid]&order=[order]&page=[page]&size=[size]&token=[token]
+	 * /qxy/moraleducation/class/score/gradeclass/search?termId=[termId]&gradeId
+	 * =[gradeId]&cid=[cid]&order=[order]&page=[page]&size=[size]&token=[token]
 	 * 需要使用Token验证查询者身份
+	 * 
 	 * @param test
 	 * @param page
 	 * @param size
@@ -244,13 +246,13 @@ public class MoraleducationClassController extends MyControllerSupport {
 
 	@RequestMapping(value = "/moraleducation/class/score/gradeclass/search", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean mecClassScoreGradeClassGET(Boolean test, Long termId,Long gradeId,Long cid, String order,String token, Integer page, Integer size) {
+	public RESTResultBean mecClassScoreGradeClassGET(Boolean test, Long termId, Long gradeId, Long cid, String order, String token, Integer page, Integer size) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (test == true) {
-					String str = "{\"page\":\"1\",\"size\":\"14\",\"count\":\"3\",\"classScoreList\":[{\"cid\":\"4\",\"className\":\"初一1班\",\"totalScore\":\"90\",\"ranking\":\"12\",\"updateTime\":\"2016-09-19 12:00:00\"},{\"cid\":\"4\",\"className\":\"初一2班\",\"totalScore\":\"92\",\"ranking\":\"11\",\"updateTime\":\"2016-09-19 12:00:00\"},{\"cid\":\"4\",\"className\":\"初一3班\",\"totalScore\":\"95\",\"ranking\":\"9\",\"updateTime\":\"2016-09-19 12:00:00\"}]}";
-					JSONObject jobj = JSON.parseObject(str);
-					result.setData(jobj);
+			if (test != null && test == true) {
+				String str = "{\"page\":\"1\",\"size\":\"14\",\"count\":\"3\",\"classScoreList\":[{\"cid\":\"4\",\"className\":\"初一1班\",\"totalScore\":\"90\",\"ranking\":\"12\",\"updateTime\":\"2016-09-19 12:00:00\"},{\"cid\":\"4\",\"className\":\"初一2班\",\"totalScore\":\"92\",\"ranking\":\"11\",\"updateTime\":\"2016-09-19 12:00:00\"},{\"cid\":\"4\",\"className\":\"初一3班\",\"totalScore\":\"95\",\"ranking\":\"9\",\"updateTime\":\"2016-09-19 12:00:00\"}]}";
+				JSONObject jobj = JSON.parseObject(str);
+				result.setData(jobj);
 			} else {
 				// token校验
 				if (doCheckToken(token) == false) {
@@ -286,7 +288,7 @@ public class MoraleducationClassController extends MyControllerSupport {
 				data.put("size", size);
 				data.put("count", pageModel.getResultCount());
 				data.put("classScoreList", classScoreList);
-				result.setData(data);				
+				result.setData(data);
 			}
 
 		} catch (Exception e) {
@@ -296,9 +298,9 @@ public class MoraleducationClassController extends MyControllerSupport {
 
 		return result;
 	}
-	
+
 	/**
-	 * 12.1.4  德育班级评分详情列表查询接口
+	 * 12.1.4 德育班级评分详情列表查询接口
 	 * /qxy/moraleducation/class/score/list?cid=[cid]&page=[page]&size=[size]&
 	 * token=[token] 需要使用Token验证查询者身份
 	 * 
@@ -313,7 +315,7 @@ public class MoraleducationClassController extends MyControllerSupport {
 	public RESTResultBean mecClassScoreListGET(Boolean test, Long cid, String token, Integer page, Integer size) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (test == true) {
+			if (test != null && test == true) {
 				if (cid != null) {
 					String str = "{\"termName\":\"2016-2017-2\",\"className\":\"高一三班\",\"totalScore\":\"20\",\"ranking\":\"12\",\"page\":\"2\",\"size\":\"12\",\"count\":\"20\",\"mecScoreList\":[{\"mecScoreId\":\"1\",\"mecItemId\":\"1\",\"mecItemName\":\"黑板报\",\"score\":\"-1\",\"teacherName\":\"王主任\",\"mecItemExplain\":\"凡是一次没有做的扣一分，扣分苍围针对所有班级\",\"createTime\":\"2016-09-13 00:00:00\"},{\"mecScoreId\":\"2\",\"mecItemId\":\"2\",\"mecItemName\":\"黑板报1\",\"score\":\"-2\",\"teacherName\":\"王主任\",\"mecItemExplain\":\"凡是一次没有做的扣一分，扣分苍围针对所有班级\",\"createTime\":\"2016-09-13 00:00:00\"}]}";
 					JSONObject jobj = JSON.parseObject(str);
@@ -378,8 +380,10 @@ public class MoraleducationClassController extends MyControllerSupport {
 	}
 
 	/**
-	 * 12.1.5德育班级评分详情列表搜索接口 /qxy/moraleducation/class/score/list/search?cid=[cid]&mecItemId=[mecItemId]&startTime=[startTime]&endTime=[endTime]&page=[page]&size=[size]&token=[token]
-	 *  需要使用Token验证查询者身份
+	 * 12.1.5德育班级评分详情列表搜索接口
+	 * /qxy/moraleducation/class/score/list/search?cid=[cid]&mecItemId=[
+	 * mecItemId]&startTime=[startTime]&endTime=[endTime]&page=[page]&size=[size
+	 * ]&token=[token] 需要使用Token验证查询者身份
 	 * 
 	 * @param test
 	 * @param page
@@ -389,10 +393,10 @@ public class MoraleducationClassController extends MyControllerSupport {
 
 	@RequestMapping(value = "/moraleducation/class/score/list/search", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean mecClassScoreListSearchGET(Boolean test, Long cid,Long mecItemId, String token, String startTime, String endTime, Integer page, Integer size) {
+	public RESTResultBean mecClassScoreListSearchGET(Boolean test, Long cid, Long mecItemId, String token, String startTime, String endTime, Integer page, Integer size) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (test == true) {
+			if (test != null && test == true) {
 				String str = "{\"termName\":\"2016-2017-2\",\"className\":\"高一三班\",\"totalScore\":\"20\",\"ranking\":\"12\",\"page\":\"2\",\"size\":\"12\",\"count\":\"20\",\"mecScoreList\":[{\"mecScoreId\":\"1\",\"mecItemId\":\"1\",\"mecItemName\":\"黑板报\",\"score\":\"-1\",\"teacherName\":\"王主任\",\"mecItemExplain\":\"凡是一次没有做的扣一分，扣分苍围针对所有班级\",\"createTime\":\"2016-09-13 00:00:00\"},{\"mecScoreId\":\"2\",\"mecItemId\":\"2\",\"mecItemName\":\"黑板报1\",\"score\":\"-2\",\"teacherName\":\"王主任\",\"mecItemExplain\":\"凡是一次没有做的扣一分，扣分苍围针对所有班级\",\"createTime\":\"2016-09-13 00:00:00\"}]}";
 				JSONObject jobj = JSON.parseObject(str);
 				result.setData(jobj);
@@ -408,13 +412,13 @@ public class MoraleducationClassController extends MyControllerSupport {
 					page = 1;
 				}
 				// 获得班级cid
-//				MecScoreDBO mecScoreDBO = new MecScoreDBO();
-//				if (mecItemId == null) {
-//					throw new IllegalArgumentException("该德育班级项目id不存在");
-//				}
-//				mecScoreDBO.setMecItemId(mecItemId);
-//				MecScoreService_.doRead(mecScoreDBO);
-//				Long cid = mecScoreDBO.getCid();
+				// MecScoreDBO mecScoreDBO = new MecScoreDBO();
+				// if (mecItemId == null) {
+				// throw new IllegalArgumentException("该德育班级项目id不存在");
+				// }
+				// mecScoreDBO.setMecItemId(mecItemId);
+				// MecScoreService_.doRead(mecScoreDBO);
+				// Long cid = mecScoreDBO.getCid();
 				JSONObject data = new JSONObject();
 				// 获得termId
 				ClassDBO classDBO = new ClassDBO();
@@ -471,7 +475,7 @@ public class MoraleducationClassController extends MyControllerSupport {
 	public RESTResultBean mecClassScorePOST(Boolean test, String token, @RequestBody MecScoreDBO dbo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (test == true) {
+			if (test != null && test == true) {
 				// if (josn.get("cid") != null && josn.get("mecItemId") != null
 				// && josn.get("scoreOrder") != null) {
 				// // String str = "{\"status\":\"0\", \"data\":{
@@ -497,25 +501,25 @@ public class MoraleducationClassController extends MyControllerSupport {
 				if (dbo.getScroeOrder() == null) {
 					throw new IllegalArgumentException("德育班级评分序号（合理范围为1-6）");
 				}
-				MecItemDBO mecItemDBO =  new MecItemDBO();
+				MecItemDBO mecItemDBO = new MecItemDBO();
 				mecItemDBO.setMecItemId(dbo.getMecItemId());
 				mecItemDBO = (MecItemDBO) MecItemService_.doRead(mecItemDBO);
-				//初始分+间隔分*评分序号
-				String scroeOrder = dbo.getScroeOrder();//德育班级评分序号
-			    String initialScore = mecItemDBO.getInitialScore();//初始分
-			    String intervalScore = mecItemDBO.getIntervalScore();//间隔分
-			    int scroeOrderInt =  Integer.parseInt(scroeOrder);
-			    int initialScoreInt = Integer.parseInt(initialScore);
-			    int intervalScoreInt = Integer.parseInt(intervalScore);
-			    int scroeInt = intervalScoreInt*scroeOrderInt+initialScoreInt;
-			    String scroe = Integer.toString(scroeInt);
-			    dbo.setScroe(scroe);
+				// 初始分+间隔分*评分序号
+				String scroeOrder = dbo.getScroeOrder();// 德育班级评分序号
+				String initialScore = mecItemDBO.getInitialScore();// 初始分
+				String intervalScore = mecItemDBO.getIntervalScore();// 间隔分
+				int scroeOrderInt = Integer.parseInt(scroeOrder);
+				int initialScoreInt = Integer.parseInt(initialScore);
+				int intervalScoreInt = Integer.parseInt(intervalScore);
+				int scroeInt = intervalScoreInt * scroeOrderInt + initialScoreInt;
+				String scroe = Integer.toString(scroeInt);
+				dbo.setScroe(scroe);
 				MecScoreService_.doInsert(dbo);
 			}
 		} catch (Exception e) {
 			result.setInfo("访问失败");
 			result.setStatus(1);
-		}		
+		}
 		return result;
 	}
 
@@ -527,7 +531,7 @@ public class MoraleducationClassController extends MyControllerSupport {
 	public RESTResultBean mecClassScoreDELETE(Boolean test, String token, @RequestBody MecScoreDBO dbo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (test == true) {
+			if (test != null && test == true) {
 				// if (josn.get("mecScoreId") != null) {
 				// // String str = "{\"status\":\"0\", \"data\":{
 				// // \"info\":\"ok\" }}";
@@ -552,7 +556,8 @@ public class MoraleducationClassController extends MyControllerSupport {
 	}
 
 	/**
-	 * 12.1.8 德育班级评分详情查询接口/qxy/moraleducation/class/score/info?mecScoreId=[mecScoreId]&
+	 * 12.1.8
+	 * 德育班级评分详情查询接口/qxy/moraleducation/class/score/info?mecScoreId=[mecScoreId]&
 	 * token=[token] 需要使用Token验证查询者身份
 	 */
 
@@ -561,7 +566,7 @@ public class MoraleducationClassController extends MyControllerSupport {
 	public RESTResultBean mecClassScoreInfoGET(Boolean test, String token, Long mecScoreId) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (test == true) {
+			if (test != null && test == true) {
 				if (mecScoreId != null) {
 					String str = "{\"mecItemName\":\"黑板报\",\"score\":\"-1\",\"mecItemExplain\":\"凡是一次没有做的扣一分，扣分苍围针对所有班级\",\"scoreTime\":\"2016-09-13 00:00:00\",\"teacherName\":\"王主任\",\"scoreOrder\":\"1\",\"scoreContent\":\"1\",\"scorePic\":[\"http://www.100xyun.com/upload/123.jpg\",\"http://www.100xyun.com/upload/123.jpg\"]}";
 					JSONObject jobj = JSON.parseObject(str);
@@ -576,7 +581,7 @@ public class MoraleducationClassController extends MyControllerSupport {
 				if (mecScoreId == null) {
 					throw new IllegalArgumentException("班级评分id不存在");
 				}
-				//获得cid
+				// 获得cid
 				MecScoreDBO mecScoreDBO = new MecScoreDBO();
 				mecScoreDBO.setMecScoreId(mecScoreId);
 				mecScoreDBO = (MecScoreDBO) MecScoreService_.doRead(mecScoreDBO);
@@ -587,7 +592,7 @@ public class MoraleducationClassController extends MyControllerSupport {
 				mecScorePVO.setCid(cid);
 				mecScorePVO = (MecScorePVO) MecScoreService_.doReadMecScore(mecScorePVO);
 				data.put("totalScore", mecScorePVO.getTotalScore());
-								
+
 				MecScoreDBO mecScoreDBO2 = new MecScoreDBO();
 				mecScoreDBO2.setMecScoreId(mecScoreId);
 				MecScorePVO mecScorePVO1 = MecScoreService_.doReadMecScoreBymecScoreId(mecScoreDBO);
@@ -620,7 +625,7 @@ public class MoraleducationClassController extends MyControllerSupport {
 	public RESTResultBean mecClassGET(Boolean test, Long sid, String token) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (test == true) {
+			if (test != null && test == true) {
 
 				String str = "{\"count\":\"12\",\"mecItemList\":[{\"mecItemId\":\"23\",\"mecItemName\":\"黑板报\",\"mecItemExplain\":\"凡是一次没有做的扣一分，扣分苍围针对所有班级\",\"ruleNum\":\"1\",\"initialScore\":\"0\",\"intervalScore\":\"2\",\"isUse\":\"1\"},{\"mecItemId\":\"24\",\"mecItemName\":\"黑板报\",\"mecItemExplain\":\"凡是一次没有做的扣一分，扣分苍围针对所有班级\",\"ruleNum\":\"1\",\"initialScore\":\"0\",\"intervalScore\":\"2\",\"isUse\":\"1\"},{\"mecItemId\":\"25\",\"mecItemName\":\"黑板报\",\"mecItemExplain\":\"凡是一次没有做的扣一分，扣分苍围针对所有班级\",\"ruleNum\":\"1\",\"initialScore\":\"0\",\"intervalScore\":\"2\",\"isUse\":\"1\"}]}";
 				JSONObject jobj = JSON.parseObject(str);
@@ -654,7 +659,7 @@ public class MoraleducationClassController extends MyControllerSupport {
 	}
 
 	/**
-	 * 德育班级项目新增接口/qxy/moraleducation/class?token=[token]
+	 * 12.1.10德育班级项目新增接口/qxy/moraleducation/class?token=[token]
 	 * 
 	 * @param pvo
 	 * @return
@@ -664,16 +669,19 @@ public class MoraleducationClassController extends MyControllerSupport {
 	public RESTResultBean mecClassPOST(Boolean test, String token, @RequestBody MecItemDBO dbo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (test == true) {
-//				if (josn.get("cid") != null && josn.get("mecItemName") != null && josn.get("ruleNum") != null) {
-//					// String str = "{\"status\":\"0\", \"data\":{
-//					// \"info\":\"ok\" }}";
-//					// JSONObject jobj=JSON.parseObject(str);
-//					// result.setData(jobj);
-//				} else {
-//					result.setInfo("班级id --必填项,德育班级项目名称  --必填项,规则分数量必须大于0  --必填项");
-//				}
+			if (test != null && test == true) {
+				// if (josn.get("cid") != null && josn.get("mecItemName") !=
+				// null &&
+				// josn.get("ruleNum") != null) {
+				// // String str = "{\"status\":\"0\", \"data\":{
+				// // \"info\":\"ok\" }}";
+				// // JSONObject jobj=JSON.parseObject(str);
+				// // result.setData(jobj);
+				// } else {
+				// result.setInfo("班级id --必填项,德育班级项目名称 --必填项,规则分数量必须大于0 --必填项");
+				// }
 			} else {
+
 				// token校验
 				if (doCheckToken(token) == false) {
 					return tokenFail();
@@ -700,6 +708,7 @@ public class MoraleducationClassController extends MyControllerSupport {
 			result.setInfo("访问失败");
 			result.setStatus(1);
 		}
+
 		return result;
 	}
 
@@ -711,24 +720,24 @@ public class MoraleducationClassController extends MyControllerSupport {
 	public RESTResultBean mecClassPUT(Boolean test, String token, @RequestBody MecItemDBO dbo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (test == true) {
-//				if (josn.get("mecItemId") != null) {
-//					// String str = "{\"status\":\"0\", \"data\":{
-//					// \"info\":\"ok\" }}";
-//					// JSONObject jobj=JSON.parseObject(str);
-//					// result.setData(jobj);
-//				} else {
-//					result.setInfo("德育班级项目id --必填项");
-//				}
+			if (test != null && test == true) {
+				// if (josn.get("mecItemId") != null) {
+				// // String str = "{\"status\":\"0\", \"data\":{
+				// // \"info\":\"ok\" }}";
+				// // JSONObject jobj=JSON.parseObject(str);
+				// // result.setData(jobj);
+				// } else {
+				// result.setInfo("德育班级项目id --必填项");
+				// }
 			} else {
-				//token校验
+				// token校验
 				if (doCheckToken(token) == false) {
 					return tokenFail();
 				}
 				if (dbo.getMecItemId() == null) {
 					throw new IllegalArgumentException("该德育班级项目id不存在");
 				}
-				
+
 				MecItemService_.doUpdate(dbo);
 
 			}
@@ -749,15 +758,16 @@ public class MoraleducationClassController extends MyControllerSupport {
 	public RESTResultBean mecClassSetPUT(Boolean test, String token, @RequestBody MecItemDBO dbo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (test == true) {
-//				if (josn.get("mecItemId") != null && josn.get("isUse") != null) {
-//					// String str = "{\"status\":\"0\", \"data\":{
-//					// \"info\":\"ok\" }}";
-//					// JSONObject jobj=JSON.parseObject(str);
-//					// result.setData(jobj);
-//				} else {
-//					result.setInfo("德育班级项目id --必填项,0-启用；1-停用 --必填项");
-//				}
+			if (test != null && test == true) {
+				// if (josn.get("mecItemId") != null && josn.get("isUse") !=
+				// null) {
+				// // String str = "{\"status\":\"0\", \"data\":{
+				// // \"info\":\"ok\" }}";
+				// // JSONObject jobj=JSON.parseObject(str);
+				// // result.setData(jobj);
+				// } else {
+				// result.setInfo("德育班级项目id --必填项,0-启用；1-停用 --必填项");
+				// }
 			} else {
 				if (doCheckToken(token) == false) {
 					return tokenFail();
@@ -787,15 +797,15 @@ public class MoraleducationClassController extends MyControllerSupport {
 	public RESTResultBean mecClassDELETE(Boolean test, String token, @RequestBody MecItemDBO dbo) {
 		RESTResultBean result = new RESTResultBean();
 		try {
-			if (test == true) {
-//				if (josn.get("mecItemId") != null) {
-//					// String str = "{\"status\":\"0\", \"data\":{
-//					// \"info\":\"ok\" }}";
-//					// JSONObject jobj=JSON.parseObject(str);
-//					// result.setData(jobj);
-//				} else {
-//					result.setInfo("评分id --必填项");
-//				}
+			if (test != null && test == true) {
+				// if (josn.get("mecItemId") != null) {
+				// // String str = "{\"status\":\"0\", \"data\":{
+				// // \"info\":\"ok\" }}";
+				// // JSONObject jobj=JSON.parseObject(str);
+				// // result.setData(jobj);
+				// } else {
+				// result.setInfo("评分id --必填项");
+				// }
 			} else {
 				// token校验
 				if (doCheckToken(token) == false) {
@@ -812,49 +822,49 @@ public class MoraleducationClassController extends MyControllerSupport {
 		}
 		return result;
 	}
-	
-			/**
-		 * 12.1.14 德育班级项目详情查询接口/qxy/moraleducation/class/info?mecItemId=[mecItemId]&token=[token]
-		 * 德育班级项目详情查询接口提供对德育班级项目详情查询的功能。
-		 * 需要使用Token验证查询者身份
-		 */
-				 
-		@RequestMapping(value = "/moraleducation/class/info", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
-		@ResponseBody
-		public RESTResultBean mecClassInfoGET(Boolean test,String token,Long mecItemId) {
-			RESTResultBean result = new RESTResultBean();
-			try {
-				if (test == true) {
-					if (mecItemId != null) {
-						String str = "{\"mecItemId\":\"23\",\"mecItemName\":\"黑板报\",\"mecItemExplain\":\"凡是一次没有做的扣一分，扣分苍围针对所有班级\",\"ruleNum\":\"1\",\"initialScore\":\"0\",\"intervalScore\":\"2\",\"isUse\":\"1\"}";
-						JSONObject jobj=JSON.parseObject(str);    
-						result.setData(jobj);	
-					} else{
-						result.setInfo("班级德育项目id ---必填项");
-					}
+
+	/**
+	 * 12.1.14
+	 * 德育班级项目详情查询接口/qxy/moraleducation/class/info?mecItemId=[mecItemId]&token=[
+	 * token] 德育班级项目详情查询接口提供对德育班级项目详情查询的功能。 需要使用Token验证查询者身份
+	 */
+
+	@RequestMapping(value = "/moraleducation/class/info", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public RESTResultBean mecClassInfoGET(Boolean test, String token, Long mecItemId) {
+		RESTResultBean result = new RESTResultBean();
+		try {
+			if (test != null && test == true) {
+				if (mecItemId != null) {
+					String str = "{\"mecItemId\":\"23\",\"mecItemName\":\"黑板报\",\"mecItemExplain\":\"凡是一次没有做的扣一分，扣分苍围针对所有班级\",\"ruleNum\":\"1\",\"initialScore\":\"0\",\"intervalScore\":\"2\",\"isUse\":\"1\"}";
+					JSONObject jobj = JSON.parseObject(str);
+					result.setData(jobj);
 				} else {
-					if (doCheckToken(token) == false) {
-						return tokenFail();
-					}
-					// 得到德育班级项目列表
-					MecItemDBO mecItemDBO = new MecItemDBO();
-					if (mecItemId == null) {
-						result.setInfo("德育班级项目id不存在");
-					} else {
-						mecItemDBO.setMecItemId(mecItemId);
-					}
-					mecItemDBO = (MecItemDBO) MecItemService_.doRead(mecItemDBO);
-//					JSONObject data = new JSONObject();;
-//					data.put("mecItemList", mecItemList);
-					result.setData(mecItemDBO);				
+					result.setInfo("班级德育项目id ---必填项");
 				}
-				
-			} catch (Exception e) {
-				result.setInfo("查询失败，" + e.getMessage());
-				result.setStatus(1);
+			} else {
+				if (doCheckToken(token) == false) {
+					return tokenFail();
+				}
+				// 得到德育班级项目列表
+				MecItemDBO mecItemDBO = new MecItemDBO();
+				if (mecItemId == null) {
+					result.setInfo("德育班级项目id不存在");
+				} else {
+					mecItemDBO.setMecItemId(mecItemId);
+				}
+				mecItemDBO = (MecItemDBO) MecItemService_.doRead(mecItemDBO);
+				// JSONObject data = new JSONObject();;
+				// data.put("mecItemList", mecItemList);
+				result.setData(mecItemDBO);
 			}
 
-			return result;
+		} catch (Exception e) {
+			result.setInfo("查询失败，" + e.getMessage());
+			result.setStatus(1);
 		}
+
+		return result;
+	}
 
 }
