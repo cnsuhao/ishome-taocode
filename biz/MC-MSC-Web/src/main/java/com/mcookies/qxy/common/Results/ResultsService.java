@@ -108,5 +108,41 @@ public class ResultsService extends MyServiceSupport {
 	public ResultsPVO findByRTIdCidCsId(ResultsDBO resultsDBO) {
 		return getDao().findByRTIdCidCsId(resultsDBO);
 	}
+	/**
+	 * 分页 获取获得年级信息-
+	 * @param formParamPageModel
+	 */
+	public PageVOSupport doSelectPageGrade(PageVOSupport formParamPageModel) {
+		
+		FrameworkDataBean formParamBean = formParamPageModel.getFormParamBean();
+		formParamPageModel.setPageListData(getDao().doSelectPageGrade(formParamPageModel));
+		return formParamPageModel;
+	}
+	/**
+	 * 获得班级信息
+	 * @param ResultsDBO
+	 * @return
+	 */
+	public List<ResultsPVO> doSelectClassList(ResultsPVO resultsPVO) {
+		return getDao().doSelectClassList(resultsPVO);
+	}
+	/**
+	 * 分页 获得年级班级信息-
+	 * @param formParamPageModel
+	 */
+	public PageVOSupport doSelectPageGradeClassList(PageVOSupport formParamPageModel) {
+		
+		FrameworkDataBean formParamBean = formParamPageModel.getFormParamBean();
+		formParamPageModel.setPageListData(getDao().doSelectPageGradeClassList(formParamPageModel));
+		return formParamPageModel;
+	}
 	
+	/**
+	 * 根据cid获得年级和班级情况
+	 * @param ResultsDBO
+	 * @return
+	 */
+	public ResultsPVO doReadGradeClass(ResultsDBO resultsDBO) {
+		return getDao().doReadGradeClass(resultsDBO);
+	}
 }

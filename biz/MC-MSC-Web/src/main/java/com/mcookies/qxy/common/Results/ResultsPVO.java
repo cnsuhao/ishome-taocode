@@ -49,7 +49,27 @@ public class ResultsPVO extends ResultsDBO{
      * 德育班级课程名称
      */
     private String courseName = null;
-
+    /** 
+     * 学期Id
+     */
+    private Long termId = null;
+    /** 
+     * 老师Id
+     */
+    private Long tid = null;
+    /** 
+     * 老师Id
+     */
+    private Long resultsTagId = null;
+    /** 
+     * 德育年级id
+     */
+    private Long gradeId = null;
+    /** 
+     * 德育班级名称
+     */
+    private String gradeName = null;
+    
     
 	public String getClassName() {
 		return className;
@@ -110,6 +130,36 @@ public class ResultsPVO extends ResultsDBO{
 	}
 	public void setCourseScore(String courseScore) {
 		this.courseScore = courseScore;
+	}
+	public Long getTermId() {
+		return termId;
+	}
+	public void setTermId(Long termId) {
+		this.termId = termId;
+	}
+	public Long getTid() {
+		return tid;
+	}
+	public void setTid(Long tid) {
+		this.tid = tid;
+	}
+	public Long getGradeId() {
+		return gradeId;
+	}
+	public void setGradeId(Long gradeId) {
+		this.gradeId = gradeId;
+	}
+	public String getGradeName() {
+		return gradeName;
+	}
+	public void setGradeName(String gradeName) {
+		this.gradeName = gradeName;
+	}
+	public Long getResultsTagId() {
+		return resultsTagId;
+	}
+	public void setResultsTagId(Long resultsTagId) {
+		this.resultsTagId = resultsTagId;
 	}
 
 	
