@@ -24,14 +24,14 @@
 	<import resource='spring-custom.xml' />	
 	<!-- 系统初始化 -->
 	<import resource='spring/spring-system.xml' />	
-	<!-- 消息推送 -->
-	<import resource='message/spring-message-center.xml' />
 	<!-- 业务功能 -->
 	<import resource='bean/spring-bean.xml' />
 	<!-- 数据定义 -->
 	<import resource='db/spring-db.xml' />
 	<!-- 缓存 -->
 	<import resource='redis/spring-redis-master.xml' />
+	<!-- 消息推送 -->
+	<import resource='message/spring-message-center.xml' />
 	<!-- 系统初始化 -->
 	<import resource='sms/spring-sms.xml' />	
 	<!-- 文件操作 -->
