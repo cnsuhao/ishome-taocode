@@ -12,7 +12,10 @@ import javax.annotation.Resource;
 import org.apache.commons.logging.Log;
 import org.apache.xmlbeans.impl.jam.mutable.MPackage;
 import org.isotope.jfp.framework.beans.common.RESTResultBean;
+import org.isotope.jfp.framework.beans.user.UserBean;
 import org.isotope.jfp.framework.support.MyControllerSupport;
+import org.isotope.jfp.framework.utils.DateHelper;
+import org.isotope.jfp.framework.utils.token.UserCacheHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.mcookies.qxy.common.Class.ClassDBO;
 import com.mcookies.qxy.common.Class.ClassService;
@@ -36,6 +40,8 @@ import com.mcookies.qxy.common.MepScore.MepScorePVO;
 import com.mcookies.qxy.common.MepScore.MepScoreService;
 import com.mcookies.qxy.common.STerm.STermDBO;
 import com.mcookies.qxy.common.STerm.STermService;
+import com.mcookies.qxy.common.UTeacher.UTeacherDBO;
+import com.mcookies.qxy.common.UTeacher.UTeacherService;
 import com.mcookies.qxy.utils.DateUtils;
 /**
  * 德育个人管理
@@ -54,6 +60,8 @@ public class MoraleducationPersonalController extends MyControllerSupport {
 	protected ClassService ClassService_;
 	@Resource
 	protected STermService STermService_;
+	@Resource
+	protected UTeacherService UTeacherService_;
 	
 	/**
 	 * 12.2.2德育个人评分列表查询接口 /qxy/moraleducation/personal/score?termId=[termId]&gradeId=[gradeId]&cid=[cid]&order=[order]&page=[page]&size=[size]&token=[token]
@@ -96,18 +104,24 @@ public class MoraleducationPersonalController extends MyControllerSupport {
 				} else {
 					MepScoreService_.doSelectPageMepScoreASC(pageModel);
 				}
+				JSONArray jsonArray = new JSONArray();
 				List<MepScorePVO> personalScoreList = (List<MepScorePVO>) pageModel.getPageListData();
 				for (MepScorePVO mepScorePVO2 : personalScoreList) {
-					SimpleDateFormat df = new SimpleDateFormat(DateUtils.FORMAT_yyyy_MM_dd_HH_mm_ss);// 设置日期格式
-					mepScorePVO2.setUpdateTime(df.format(new Date()));// new
-																		// Date()为获取当前系统时间
-				}
 				
+					JSONObject data2 = new JSONObject();
+					data2.put("studentId", mepScorePVO2.getStudentId());
+					data2.put("studentName", mepScorePVO2.getStudentName());
+					data2.put("number", mepScorePVO2.getNumber());
+					data2.put("totalScore", mepScorePVO2.getTotalScore());
+					data2.put("ranking", mepScorePVO2.getRanking());
+					data2.put("updateTime", DateHelper.currentTimeMillisCN1());
+					jsonArray.add(data2);	
+				}
 				JSONObject data = new JSONObject();
 				data.put("page", page);
 				data.put("size", size);
 				data.put("count", pageModel.getResultCount());
-				data.put("classScoreList", personalScoreList);
+				data.put("personalScoreList", jsonArray);
 				result.setData(data);
 			}
 			
@@ -220,6 +234,12 @@ public class MoraleducationPersonalController extends MyControllerSupport {
 					if (doCheckToken(token) == false) {
 						return tokenFail();
 					}
+					if (size == null || size == 0) {
+						size = 12;
+					}
+					if (page == null || page == 0) {
+						page = 1;
+					}
 					if (studentId == null) {
 						throw new IllegalArgumentException("该学生id不存在");
 					}
@@ -256,12 +276,24 @@ public class MoraleducationPersonalController extends MyControllerSupport {
 					pageModel.setPageLimit(size);
 					pageModel.setFormParamBean(mepScorePVO1);
 					MepScoreService_.doSelectPageMepScore(pageModel);
+					JSONArray jsonArray = new JSONArray();
 					List<MepScorePVO> mepScoreList = (List<MepScorePVO>) pageModel.getPageListData();
+					for (MepScorePVO mepScorePVO2 : mepScoreList) {
+						JSONObject data2 = new JSONObject();
+						data2.put("mepScoreId", mepScorePVO2.getMepScoreId());
+						data2.put("mepItemName", mepScorePVO2.getMepItemName());
+						data2.put("score", mepScorePVO2.getScroe());
+						data2.put("mepItemExplain", mepScorePVO2.getMepItemExplain());
+						data2.put("teacherName", mepScorePVO2.getTeacherName());
+						data2.put("scoreTime", mepScorePVO2.getScoreTime());
+						jsonArray.add(data2);	
+					}
 					data.put("page", page);
 					data.put("size", size);
 					data.put("count", pageModel.getResultCount());
-					data.put("mepScoreList", mepScoreList);
-					result.setData(data);
+					data.put("mepScoreList", jsonArray);
+					result.setData(data); 
+					
 				}
 				
 			} catch (Exception e) {
@@ -295,6 +327,12 @@ public class MoraleducationPersonalController extends MyControllerSupport {
 					// token校验
 					if (doCheckToken(token) == false) {
 						return tokenFail();
+					}
+					if (size == null || size == 0) {
+						size = 12;
+					}
+					if (page == null || page == 0) {
+						page = 1;
 					}
 					if (studentId == null) {
 						throw new IllegalArgumentException("该学生id不存在");
@@ -335,12 +373,23 @@ public class MoraleducationPersonalController extends MyControllerSupport {
 					pageModel.setPageLimit(size);
 					pageModel.setFormParamBean(mepScorePVO1);
 					MepScoreService_.doSelectPageMepScoreList(pageModel);
+					JSONArray jsonArray = new JSONArray();
 					List<MepScorePVO> mepScoreList = (List<MepScorePVO>) pageModel.getPageListData();
+					for (MepScorePVO mepScorePVO2 : mepScoreList) {
+						JSONObject data2 = new JSONObject();
+						data2.put("mepScoreId", mepScorePVO2.getMepScoreId());
+						data2.put("mepItemName", mepScorePVO2.getMepItemName());
+						data2.put("score", mepScorePVO2.getScroe());
+						data2.put("mepItemExplain", mepScorePVO2.getMepItemExplain());
+						data2.put("teacherName", mepScorePVO2.getTeacherName());
+						data2.put("scoreTime", mepScorePVO2.getScoreTime());
+						jsonArray.add(data2);
+					}
 					data.put("page", page);
 					data.put("size", size);
 					data.put("count", pageModel.getResultCount());
-					data.put("mepScoreList", mepScoreList);
-					result.setData(data);
+					data.put("mepScoreList", jsonArray);
+					result.setData(data);									
 				}
 				
 			} catch (Exception e) {
@@ -373,6 +422,26 @@ public class MoraleducationPersonalController extends MyControllerSupport {
 					if (doCheckToken(token) == false) {
 						return tokenFail();
 					}
+					//获得tid用户信息
+					UserBean userBean= UserCacheHelper.checkUser(token);
+					UTeacherDBO uTeacherDBO = new UTeacherDBO();
+					uTeacherDBO.setUid(userBean.getUserId());
+					uTeacherDBO = (UTeacherDBO) UTeacherService_.doReadByUid(uTeacherDBO);
+					dbo.setTid(uTeacherDBO.getTid());
+					
+					//获得cid
+					ClassStudentDBO classStudentDBO = new ClassStudentDBO();
+					classStudentDBO.setStudentId(dbo.getStudentId());
+					List<ClassStudentDBO> classStudentDBOs =  (List<ClassStudentDBO>) ClassStudentService_.doSelectData(classStudentDBO);
+					dbo.setCid(classStudentDBOs.get(0).getCid());
+					//termId学期
+					ClassDBO classDBO =  new ClassDBO();
+					classDBO.setPuk(ONE);
+					classDBO.setCid(classStudentDBOs.get(0).getCid());
+					classDBO = (ClassDBO) ClassService_.doRead(classDBO);
+					Long termId = classDBO.getTermId();
+					dbo.setTermId(termId);
+					
 					dbo.setIsUse(1);
 					if (dbo.getStudentId() == null) {
 						throw new IllegalArgumentException("studentId该德育班级cid不存在");
@@ -396,10 +465,10 @@ public class MoraleducationPersonalController extends MyControllerSupport {
 				    int scroeInt = intervalScoreInt*scroeOrderInt+initialScoreInt;
 				    String scroe = Integer.toString(scroeInt);
 				    dbo.setScroe(scroe);
-					MepScoreService_.doInsert(dbo);
+					MepScoreService_.doInsert(dbo);					
 				}
 			} catch (Exception e) {
-				result.setInfo("访问失败");
+				result.setInfo("访问失败" +e.getMessage());
 				result.setStatus(1);
 			}
 			return result;
@@ -499,7 +568,7 @@ public class MoraleducationPersonalController extends MyControllerSupport {
 		
 		
 		/**
-		 * 德育个人项目列表查询接口/qxy/moraleducation/personal?sid=[sid]&token=[token]
+		 *12.2.9  德育个人项目列表查询接口/qxy/moraleducation/personal?sid=[sid]&token=[token]
 		 * 需要使用Token验证查询者身份
 		 */
 				 
@@ -517,14 +586,25 @@ public class MoraleducationPersonalController extends MyControllerSupport {
 				} else {
 					// 得到德育个人项目列表
 					MepItemDBO mepItemDBO = new MepItemDBO();
-					mepItemDBO.setSid(sid);
-					pageModel.setFormParamBean(mepItemDBO);
-					MepItemService_.doSelectPage(pageModel);
-					List<MepItemDBO> mepItemList = (List<MepItemDBO>) pageModel.getPageListData();
+					mepItemDBO.setSid(sid);					
+					List<MepItemDBO> mepItemList = (List<MepItemDBO>) MepItemService_.doSelectData(mepItemDBO);
+					JSONArray jsonArray = new JSONArray(); 
+		            for (MepItemDBO mepItemDBO2 : mepItemList) {
+		            	JSONObject data2 = new JSONObject();
+		            	data2.put("mepItemId",mepItemDBO2.getMepItemId() );
+		            	data2.put("mepItemName",mepItemDBO2.getMepItemName() );
+		            	data2.put("mepItemExplain",mepItemDBO2.getMepItemExplain() );
+		            	data2.put("ruleNum",mepItemDBO2.getRuleNum() );
+		            	data2.put("initialScore",mepItemDBO2.getInitialScore() );
+		            	data2.put("intervalScore",mepItemDBO2.getIntervalScore() );
+		            	data2.put("isUse",mepItemDBO2.getIsUse() );
+		            	jsonArray.add(data2);
+					}
 					JSONObject data = new JSONObject();
-					data.put("count", pageModel.getResultCount());
-					data.put("mepItemList", mepItemList);
+					data.put("count", mepItemList.size());
+					data.put("mepItemList", jsonArray);
 					result.setData(data);
+					
 				}
 				
 			} catch (Exception e) {
@@ -573,11 +653,11 @@ public class MoraleducationPersonalController extends MyControllerSupport {
 					}
 					if (dbo.getIntervalScore() == null) {
 						throw new IllegalArgumentException("间隔分不存在");
-					}
+					}				
 					MepItemService_.doInsert(dbo);
 				}
 			} catch (Exception e) {
-				result.setInfo("访问失败");
+				result.setInfo("访问失败"+ e.getMessage());
 				result.setStatus(1);
 			}
 			return result;
@@ -683,7 +763,7 @@ public class MoraleducationPersonalController extends MyControllerSupport {
 					if (dbo.getMepItemId() == null) {
 						throw new IllegalArgumentException("该德育班级项目id不存在");
 					}
-					MepScoreService_.doDelete(dbo);
+					MepItemService_.doDelete(dbo);
 					
 				}
 			} catch (Exception e) {
