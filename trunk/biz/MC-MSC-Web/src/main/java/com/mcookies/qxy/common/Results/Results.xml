@@ -556,6 +556,99 @@
 	 	<if test=" courseId != null and courseId !='' "><!-- 课程id -->
 		    AND a.course_id = #{courseId}
 		</if>	
-      </select> 
+      </select>
+    <!--  获得年级信息-->  
+    <select id="doSelectPageGrade" parameterType="com.mcookies.qxy.common.Results.ResultsPVO" resultType="com.mcookies.qxy.common.Results.ResultsPVO">	
+	SELECT
+	c.grade_id,
+	c.grade_name
+	FROM
+	results AS a
+	LEFT JOIN class AS b ON a.cid = b.cid
+	LEFT JOIN s_grade_label AS c ON b.grade_id = c.grade_id
+	INNER JOIN class_course AS d ON a.course_id = d.course_id
+	 WHERE 1 = 1 
+	<if test=" resultsTagId != null "><!-- 成绩标答表id -->   
+	     AND a.results_tag_id = #{resultsTagId}
+	</if>
+	<if test=" termId != null "><!-- 学期id -->   
+	     AND b.term_id = #{termId}
+	</if>
+	<if test=" tid != null "><!-- 老师id -->   
+	     AND d.tid = #{tid}
+	</if>
+	</select>
+	<!--  获得班级信息-->
+	<select id="doSelectClassList" parameterType="com.mcookies.qxy.common.Results.ResultsPVO" resultType="com.mcookies.qxy.common.Results.ResultsPVO">	
+	SELECT
+	a.cid,
+	b.class_name
+	FROM
+	results AS a
+	LEFT JOIN class AS b ON a.cid = b.cid
+	LEFT JOIN s_grade_label AS c ON b.grade_id = c.grade_id
+	LEFT JOIN class_course AS d ON a.course_id = d.course_id
+	WHERE
+	a.results_tag_id AND
+	b.term_id AND
+	d.tid AND
+	b.grade_id	
+	 WHERE 1 = 1 
+	<if test=" resultsTagId != null "><!-- 成绩标答表id -->   
+	     AND a.results_tag_id = #{resultsTagId}
+	</if>
+	<if test=" termId != null "><!-- 学期id -->   
+	     AND b.term_id = #{termId}
+	</if>
+	<if test=" tid != null "><!-- 老师id -->   
+	     AND d.tid = #{tid}
+	</if>
+	<if test=" gradeId != null "><!-- 年级id -->   
+	     AND b.grade_id = #{gradeId}
+	</if>
+	</select>
+		<!--   分页 获得年级班级信息-->
+	<select id="doSelectPageGradeClassList" parameterType="com.mcookies.qxy.common.Results.ResultsPVO" resultType="com.mcookies.qxy.common.Results.ResultsPVO">	
+	SELECT
+	a.cid,
+	b.class_name,
+	c.grade_id,
+	c.grade_name
+	FROM
+	results AS a
+	LEFT JOIN class AS b ON a.cid = b.cid
+	LEFT JOIN s_grade_label AS c ON b.grade_id = c.grade_id
+	LEFT JOIN class_course AS d ON a.cid = d.cid
+	 WHERE 1 = 1 
+	<if test=" resultsTagId != null "><!-- 成绩标答表id -->   
+	     AND a.results_tag_id = #{resultsTagId}
+	</if>
+	<if test=" termId != null "><!-- 学期id -->   
+	     AND b.term_id = #{termId}
+	</if>
+	<if test=" tid != null "><!-- 老师id -->   
+	     AND d.tid = #{tid}
+	</if>
+	</select>
+	 <!--  根据cid获得年级和班级情况-->
+	<select id="doReadGradeClass" parameterType="ResultsDBO" resultType="com.mcookies.qxy.common.Results.ResultsPVO">	
+	SELECT
+	d.results_tag_name,
+	d.results_tag_id,
+	b.term_id,
+	c.grade_id,
+	c.grade_name,
+	a.cid,
+	b.class_name
+	FROM
+	results AS a
+	LEFT JOIN class AS b ON a.cid = b.cid
+	LEFT JOIN s_grade_label AS c ON b.grade_id = c.grade_id
+	INNER JOIN results_tag AS d ON d.results_tag_id = a.results_tag_id
+	 WHERE 1 = 1 
+	<if test=" cid != null "><!-- 班级id -->   
+	     AND a.cid = #{cid}
+	</if>
+	</select>     
       
 </mapper>
