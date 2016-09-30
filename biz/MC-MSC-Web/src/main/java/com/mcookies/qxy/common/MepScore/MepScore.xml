@@ -205,7 +205,7 @@
         <if test=" scoreContent != null and scoreContent !='' "><!-- 评分内容 -->
             ,score_content = #{scoreContent}
         </if>
-        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+        <if test=" isUse != null  "><!-- 是否启用 -->
             ,is_use = #{isUse}
         </if>
         <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
@@ -231,10 +231,8 @@
     </delete>
     <!-- 物理删除一条数据 -->
     <delete id='doDelete' parameterType='MepScoreDBO'>
-        DELETE FROM mep_score WHERE update_time = #{updateTime}
-            <if test=" mepScoreId != null and mepScoreId !='' "><!-- 评分id -->
-                AND mep_score_id = #{mepScoreId}
-            </if>
+        DELETE FROM mep_score WHERE mep_score_id = #{mepScoreId}
+        
     </delete>
     <!-- 查询一条数据  -->
     <select id='doRead' parameterType='MepScoreDBO' resultType='MepScoreDBO'>
@@ -269,10 +267,10 @@
 				mep_score AS a
 			LEFT JOIN u_student AS b ON a.student_id = b.student_id
 			   WHERE 1 = 1 
-	        <if test=" termId != null and termId !='' "><!-- 学期id -->   
+	        <if test=" termId != null  "><!-- 学期id -->   
 	             AND a.term_id = #{termId}
 	        </if>
-	         <if test=" cid != null and cid !='' "><!-- 班级id -->
+	         <if test=" cid != null  "><!-- 班级id -->
                 AND a.cid = #{cid}
              </if>
 			GROUP BY 
@@ -311,10 +309,10 @@
 				mep_score AS a
 			LEFT JOIN u_student AS b ON a.student_id = b.student_id
 			   WHERE 1 = 1 
-	        <if test=" termId != null and termId !='' "><!-- 学期id -->   
+	        <if test=" termId != null  "><!-- 学期id -->   
 	             AND a.term_id = #{termId}
 	        </if>
-	        <if test=" cid != null and cid !='' "><!-- 班级id -->
+	        <if test=" cid != null  "><!-- 班级id -->
                 AND a.cid = #{cid}
              </if>
 			GROUP BY 
@@ -334,7 +332,7 @@
 					d.student_name,
 					d.number,
 					d.totalScore,
-		      d.ranking
+		            d.ranking
 		FROM
 		(
 			SELECT
@@ -361,10 +359,10 @@
 					mep_score AS a
 				LEFT JOIN u_student AS b ON a.student_id = b.student_id
 							   WHERE 1 = 1 
-		        <if test=" termId != null and termId !='' "><!-- 学期id -->   
+		        <if test=" termId != null  "><!-- 学期id -->   
 		             AND a.term_id = #{termId}
 		        </if>
-		        <if test=" cid != null and cid !='' "><!-- 班级id -->
+		        <if test=" cid != null "><!-- 班级id -->
 	                AND a.cid = #{cid}
 	          </if>
 				GROUP BY
@@ -379,29 +377,29 @@
 			) r
 	) AS d
 	    WHERE 1 = 1 
-		<if test=" studentId != null and studentId !='' "><!-- 学生id -->
-		         d.student_id = #{studentId}
+		<if test=" studentId != null "><!-- 学生id -->
+		        AND d.student_id = #{studentId}
 		</if>
 	</select>
 	    <!--  根据studentId获取个人评分详情列表 -->
 	<select id="doSelectPageMepScore" parameterType="MepScoreDBO" resultType="com.mcookies.qxy.common.MepScore.MepScorePVO">	
 	SELECT
-	a.mep_score_id,
-	b.mep_item_name,
-	a.scroe,
-	b.mep_item_explain,
-	a.score_time,
-	c.teacher_name
+	 a.mep_score_id,
+	 b.mep_item_name,
+	 a.scroe,
+	 b.mep_item_explain,
+	 a.score_time,
+	 c.teacher_name
 	FROM
 	mep_score AS a
 	LEFT JOIN mep_item AS b ON a.mep_item_id = b.mep_item_id
 	LEFT JOIN u_teacher AS c ON a.tid = c.tid
 	    WHERE 1 = 1 
-	<if test=" studentId != null and studentId !='' "><!-- 学生id -->
-	  a.student_id = #{studentId}
+	<if test=" studentId != null  "><!-- 学生id -->
+	    AND a.student_id = #{studentId}
 	</if>
-	ORDER BY
-	a.create_time DESC
+	 ORDER BY
+	 a.create_time DESC
 	</select>
 	<!--  根据studentId, meItemId，startTime，endTime获取个人评分详情列表 -->
 	<select id="doSelectPageMepScoreList" parameterType="com.mcookies.qxy.common.MepScore.MepScorePVO" resultType="com.mcookies.qxy.common.MepScore.MepScorePVO">	
@@ -417,10 +415,10 @@
 	LEFT JOIN mep_item AS b ON a.mep_item_id = b.mep_item_id
 	LEFT JOIN u_teacher AS c ON a.tid = c.tid
 	    WHERE 1 = 1 
-	<if test=" studentId != null and studentId !='' "><!-- 学生id -->
-	  a.student_id = #{studentId}
+	<if test=" studentId != null  "><!-- 学生id -->
+	   AND a.student_id = #{studentId}
 	</if>
-    <if test=" mepItemId != null and mepItemId !='' "><!-- 德育项目id -->
+    <if test=" mepItemId != null  "><!-- 德育项目id -->
         AND a.mep_item_id = #{mepItemId}
     </if>
 	<if test="startTime != null">
@@ -447,7 +445,7 @@
 		LEFT JOIN mep_item AS b ON a.mep_item_id = b.mep_item_id
 		LEFT JOIN u_teacher AS c ON a.tid = c.tid
 	    WHERE 1 = 1 
-		  <if test=" mepScoreId != null and mepScoreId !='' "><!-- 评分id -->
+		  <if test=" mepScoreId != null  "><!-- 评分id -->
 		      AND a.mep_score_id = #{mepScoreId}
 		  </if>	
 	</select>
@@ -486,13 +484,13 @@
 					LEFT JOIN u_student AS b ON a.student_id = b.student_id
 					LEFT JOIN class AS c ON a.cid = c.cid
 														   WHERE 1 = 1 
-			        <if test=" termId != null and termId !='' "><!-- 学期id -->   
+			        <if test=" termId != null  "><!-- 学期id -->   
 			             AND a.term_id = #{termId}
 			        </if>
-			        <if test=" gradeId != null and gradeId !='' "><!-- 年级id -->
+			        <if test=" gradeId != null  "><!-- 年级id -->
 		                AND c.grade_id = #{gradeId}
 		         	 </if>
-		         	 <if test=" cid != null and cid !='' "><!-- 班级id -->
+		         	 <if test=" cid != null  "><!-- 班级id -->
 						      AND a.cid = #{cid}
 					</if>
 					GROUP BY
@@ -506,7 +504,7 @@
 				) r
 		) AS e
 		WHERE 1 = 1 
-	<if test=" studentName != null and studentName !='' "><!-- 学生名子 -->
+	<if test=" studentName != null  "><!-- 学生名子 -->
 	      AND e.student_name LIKE '%${studentName}%' 
 	</if>
 	</select>
