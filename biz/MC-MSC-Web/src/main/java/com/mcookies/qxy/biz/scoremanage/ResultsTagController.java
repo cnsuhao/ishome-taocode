@@ -38,6 +38,8 @@ public class ResultsTagController extends MyControllerSupport {
 	protected STermService STermService_;
 	@Resource
 	protected ResultsTagService ResultsTagService_;
+	@Resource
+	protected STermService STermService;
 
 	/**
 	 * 成绩标签列表查询接口
@@ -138,8 +140,22 @@ public class ResultsTagController extends MyControllerSupport {
 				if (dbo.getTermId() == null) {
 					throw new IllegalArgumentException("该学期id不存在");
 				}
+				STermDBO term = new STermDBO();
+				term.setTermId(dbo.getTermId());
+				term = (STermDBO) STermService.doRead(term);
+				if(term == null){
+					result.setInfo("你所选的学期不存在");
+					result.setStatus(2);
+					return result;
+				}
 				if (dbo.getResultsTagName() == null) {
 					throw new IllegalArgumentException("该成绩标签名称不存在");
+				}
+				List<ResultsTagDBO> rlist = (List<ResultsTagDBO>) ResultsTagService_.doSelectData(dbo);
+				if(rlist.size() >0){
+					result.setInfo("请不要重复操作");
+					result.setStatus(3);
+					return result;
 				}
 
 				ResultsTagService_.doInsert(dbo);
@@ -214,6 +230,12 @@ public class ResultsTagController extends MyControllerSupport {
 				}
 				if (dbo.getResultsTagId() == null) {
 					throw new IllegalArgumentException("该成绩标签id不存在");
+				}
+				dbo = (ResultsTagDBO) ResultsTagService_.doRead(dbo);
+				if(dbo == null){
+					result.setInfo("请不要重复操作");
+					result.setStatus(2);
+					return result;
 				}
 				ResultsTagService_.doDelete(dbo);
 
@@ -314,7 +336,7 @@ public class ResultsTagController extends MyControllerSupport {
 					throw new IllegalArgumentException("该成绩标签id不存在");
 				}
 				resultsTagDBO.setResultsTagId(resultsTagId);
-				ResultsTagService_.doRead(resultsTagDBO);
+				resultsTagDBO = (ResultsTagDBO) ResultsTagService_.doRead(resultsTagDBO);
 				JSONObject jsonObject = new JSONObject();
 				jsonObject.put("resultsTagId", resultsTagDBO.getResultsTagId());
 				jsonObject.put("resultsTagName", resultsTagDBO.getResultsTagName());
