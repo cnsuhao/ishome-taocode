@@ -4,7 +4,7 @@
     'http://mybatis.org/dtd/mybatis-3-mapper.dtd' >
 <!-- 德育个人项目表 -->
 <!-- 需要和DAO保持完全路径一致 -->
-<mapper namespace='package com.mcookies.qxy.common.MepItem.MepItemDao'>
+<mapper namespace='com.mcookies.qxy.common.MepItem.MepItemDao'>
     <!-- 表字段信息  -->
     <sql id='tableColumns'>
         mep_item_id,sid,mep_item_name,mep_item_explain,rule_num,initial_score,interval_score,auth,tids,is_use,create_time,creator,update_time,updator
@@ -40,7 +40,7 @@
         <if test=" tids != null and tids !='' "><!-- 可见教师集合 -->
             ,tids = #{tids}
         </if>
-        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+        <if test=" isUse != null  "><!-- 是否启用 -->
             ,is_use = #{isUse}
         </if>
         <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
@@ -80,7 +80,7 @@
             <if test=" tids != null and tids !='' "><!-- 可见教师集合 -->
                 AND tids = #{tids}
             </if>
-            <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+            <if test=" isUse != null  "><!-- 是否启用 -->
                 AND is_use = #{isUse}
             </if>
             <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
@@ -127,7 +127,7 @@
         <if test=" tids != null and tids !='' "><!-- 可见教师集合 -->
             AND tids = #{tids}
         </if>
-        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+        <if test=" isUse != null  "><!-- 是否启用 -->
             AND is_use = #{isUse}
         </if>
         <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
@@ -145,7 +145,7 @@
     </select>
 
     <!-- 插入一条数据 -->
-    <insert id='doInsert' parameterType='MepItemDBO'>
+    <insert id='doInsert' parameterType='MepItemDBO' useGeneratedKeys="true" keyProperty="mepItemId">
         INSERT INTO mep_item
           ( <include refid='tableColumns'/>) 
         VALUES 
@@ -181,7 +181,7 @@
         <if test=" tids != null and tids !='' "><!-- 可见教师集合 -->
             ,tids = #{tids}
         </if>
-        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+        <if test=" isUse != null  "><!-- 是否启用 -->
             ,is_use = #{isUse}
         </if>
         <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
@@ -207,10 +207,8 @@
     </delete>
     <!-- 物理删除一条数据 -->
     <delete id='doDelete' parameterType='MepItemDBO'>
-        DELETE FROM mep_item WHERE update_time = #{updateTime}
-            <if test=" mepItemId != null and mepItemId !='' "><!-- 德育个人项目id -->
-                AND mep_item_id = #{mepItemId}
-            </if>
+        DELETE FROM mep_item WHERE mep_item_id = #{mepItemId}
+
     </delete>
     <!-- 查询一条数据  -->
     <select id='doRead' parameterType='MepItemDBO' resultType='MepItemDBO'>
