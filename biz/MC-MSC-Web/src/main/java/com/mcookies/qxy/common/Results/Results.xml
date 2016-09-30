@@ -559,7 +559,8 @@
       </select>
     <!--  获得年级信息-->  
     <select id="doSelectPageGrade" parameterType="com.mcookies.qxy.common.Results.ResultsPVO" resultType="com.mcookies.qxy.common.Results.ResultsPVO">	
-	SELECT
+	SELECT 
+	 DISTINCT  
 	c.grade_id,
 	c.grade_name
 	FROM
@@ -581,6 +582,7 @@
 	<!--  获得班级信息-->
 	<select id="doSelectClassList" parameterType="com.mcookies.qxy.common.Results.ResultsPVO" resultType="com.mcookies.qxy.common.Results.ResultsPVO">	
 	SELECT
+	DISTINCT
 	a.cid,
 	b.class_name
 	FROM
@@ -588,11 +590,6 @@
 	LEFT JOIN class AS b ON a.cid = b.cid
 	LEFT JOIN s_grade_label AS c ON b.grade_id = c.grade_id
 	LEFT JOIN class_course AS d ON a.course_id = d.course_id
-	WHERE
-	a.results_tag_id AND
-	b.term_id AND
-	d.tid AND
-	b.grade_id	
 	 WHERE 1 = 1 
 	<if test=" resultsTagId != null "><!-- 成绩标答表id -->   
 	     AND a.results_tag_id = #{resultsTagId}
@@ -610,6 +607,7 @@
 		<!--   分页 获得年级班级信息-->
 	<select id="doSelectPageGradeClassList" parameterType="com.mcookies.qxy.common.Results.ResultsPVO" resultType="com.mcookies.qxy.common.Results.ResultsPVO">	
 	SELECT
+	DISTINCT
 	a.cid,
 	b.class_name,
 	c.grade_id,
