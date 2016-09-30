@@ -7,7 +7,7 @@
 <mapper namespace='org.isotope.jfp.common.weixin.WeixinDao'>
 
     <!-- 企业信息  -->
-    <select id='loadCompany' parameterType='java.util.Map' resultType='WeiXinCompany'>
+    <select id='loadCompany' parameterType='java.util.Map' resultType='WeiXinCompanyDBO'>
         SELECT * FROM school_weixin
         WHERE is_use = 1 
         	<if test=" companyId != null and companyId !='' "><!-- 学校id -->
@@ -18,7 +18,7 @@
 	        </if>
     </select>
     
-    <select id='loadCompanyGroup' parameterType='java.util.Map' resultType='WeiXinCompanyGroup'>
+    <select id='loadCompanyGroup' parameterType='java.util.Map' resultType='WeiXinCompanyGroupDBO'>
         SELECT * FROM school_weixin_group
         WHERE is_use = 1 
         	<if test=" companyId != null and companyId !='' "><!-- 学校id -->
@@ -36,7 +36,7 @@
     </select>
     
     <!-- 查询用户组用户 -->
-    <select id='loadCompanyGroupUser' parameterType='java.util.Map' resultType='WeiXinCompanyGroupUser'>
+    <select id='loadCompanyGroupUser' parameterType='java.util.Map' resultType='WeiXinCompanyGroupUserDBO'>
         SELECT u.* FROM school_weixin_user u,school_weixin_group g,
         WHERE u.is_use = 1 AND u.sid = g.sid AND u.gid = g.gid ADN u.uid = g.uid
         	<if test=" companyId != null and companyId !='' "><!-- 学校id -->
@@ -47,7 +47,7 @@
 	        </if>
     </select>
     
-    <select id='loadCompanyUser' parameterType='java.util.Map' resultType='WeiXinCompanyGroupUser'>
+    <select id='loadCompanyUser' parameterType='java.util.Map' resultType='WeiXinCompanyGroupUserDBO'>
         SELECT * FROM school_weixin_user
         WHERE is_use = 1 
         	<if test=" companyId != null and companyId !='' "><!-- 学校id -->
@@ -65,12 +65,12 @@
     </select>
 
 	<!-- 更新企业用户组微信ID -->
-    <update id='updateCompanyGroupById' parameterType='WeiXinCompanyGroup'>
+    <update id='updateCompanyGroupById' parameterType='WeiXinCompanyGroupDBO'>
         UPDATE school_weixin_group SET wx_id = #{wxId} WHERE sid = #{companyId} AND gid = #{groupId}
     </update>
     
     <!-- 更新企业用户微信ID -->
-    <update id='updateCompanyUserById' parameterType='WeiXinCompanyGroupUser'>
+    <update id='updateCompanyUserById' parameterType='WeiXinCompanyGroupUserDBO'>
         UPDATE school_weixin_user SET wx_id = #{wxId} WHERE sid = #{companyId} AND uid = #{userId}
     </update>
 </mapper>
