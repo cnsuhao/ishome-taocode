@@ -17,7 +17,7 @@ public class MepScorePVO extends MepScoreDBO{
     /** 
      * 德育个人综合评分
      */
-    private String totalScore = null;
+    private Integer totalScore = null;
     
     /** 
      * 德育个人给合排名
@@ -73,11 +73,11 @@ public class MepScorePVO extends MepScoreDBO{
 		this.studentName = studentName;
 	}
 
-	public String getTotalScore() {
+	public Integer getTotalScore() {
 		return totalScore;
 	}
 
-	public void setTotalScore(String totalScore) {
+	public void setTotalScore(Integer totalScore) {
 		this.totalScore = totalScore;
 	}
 
