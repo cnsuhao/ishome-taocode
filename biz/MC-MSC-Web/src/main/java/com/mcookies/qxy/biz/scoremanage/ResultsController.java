@@ -38,6 +38,8 @@ import com.mcookies.qxy.common.MecScore.MecScoreService;
 import com.mcookies.qxy.common.Results.ResultsDBO;
 import com.mcookies.qxy.common.Results.ResultsPVO;
 import com.mcookies.qxy.common.Results.ResultsService;
+import com.mcookies.qxy.common.ResultsTag.ResultsTagDBO;
+import com.mcookies.qxy.common.ResultsTag.ResultsTagService;
 import com.mcookies.qxy.common.UStudent.UStudentDBO;
 import com.mcookies.qxy.common.UStudent.UStudentPVO;
 import com.mcookies.qxy.common.UStudent.UStudentService;
@@ -59,6 +61,8 @@ public class ResultsController extends MyControllerSupport {
 	protected ClassStudentService ClassStudentService_  ;
 	@Resource
 	protected UStudentService UStudentService_  ;
+	@Resource
+	protected ResultsTagService ResultsTagService_  ;
 	
 	/**
 	 * 13.2.1 通过考试标签查询班级列表查询接口/qxy/results/classlist?resultsTagId=[resultsTagId]&tid=[tid]&page=[page]&size=[size]&token=[token]
@@ -80,7 +84,57 @@ public class ResultsController extends MyControllerSupport {
 					result.setInfo(" 成绩标签id--必填项");
 				}	
 			} else {
-				
+				// token校验
+				if (doCheckToken(token) == false) {
+					return tokenFail();
+				}
+				if (size == null || size == 0) {
+					size = 12;
+				}
+				if (page == null || page == 0) {
+					page = 1;
+				}
+				JSONObject data = new JSONObject();
+				if (resultsTagId == null) {
+					throw new IllegalArgumentException("该成绩标签id不存在");
+				}
+				//获得termId
+				ResultsTagDBO resultsTagDBO =  new ResultsTagDBO();
+				resultsTagDBO.setResultsTagId(resultsTagId);
+				resultsTagDBO = (ResultsTagDBO) ResultsTagService_.doRead(resultsTagDBO);
+				Long termId = resultsTagDBO.getTermId();
+				// 获取年级信息
+				ResultsPVO resultsPVO = new ResultsPVO();
+				resultsPVO.setResultsTagId(resultsTagId);
+				resultsPVO.setTermId(termId);
+				resultsPVO.setTid(tid);
+				pageModel.setPageCurrent(page);
+				pageModel.setPageLimit(size);
+				pageModel.setFormParamBean(resultsPVO);
+				ResultsService_.doSelectPageGrade(pageModel);
+				List<ResultsPVO> gradelist = (List<ResultsPVO>) pageModel.getPageListData();
+				JSONArray jsonArray = new JSONArray();
+				for (ResultsPVO resultsPVO2 : gradelist) {
+					JSONObject data2 = new JSONObject();
+					data2.put("gradeId",resultsPVO2.getGradeId() );
+					data2.put("gradeName",resultsPVO2.getGradeName());
+					ResultsPVO resultsPVO3 = new ResultsPVO();
+					resultsPVO3.setResultsTagId(resultsTagId);
+					resultsPVO3.setTermId(termId);
+					resultsPVO3.setTid(tid);
+					resultsPVO3.setTid(resultsPVO2.getGradeId());
+					List<ResultsPVO> classlist = (List<ResultsPVO>)ResultsService_.doSelectClassList(resultsPVO3);
+					data2.put("classlist",classlist );
+					jsonArray.add(data2);
+				}
+				data.put("page", page);
+				data.put("size", size);
+				data.put("count", pageModel.getResultCount());
+				data.put("gradelist", jsonArray);
+				data.put("termId", termId);
+				data.put("resultsTagName", resultsTagDBO.getResultsTagName());
+				data.put("resultsTagId", resultsTagDBO.getResultsTagId());
+				result.setData(data);				
 			}	
 		} catch (Exception e) {
 			result.setInfo("查询失败，" + e.getMessage());
@@ -108,7 +162,44 @@ public class ResultsController extends MyControllerSupport {
 					result.setInfo(" 成绩标签id--必填项");
 				}	
 			} else {
+				// token校验
+				if (doCheckToken(token) == false) {
+					return tokenFail();
+				}
+				if (resultsTagId == null) {
+					throw new IllegalArgumentException("该成绩标签id不存在");
+				}
+				if (size == null || size == 0) {
+					size = 12;
+				}
+				if (page == null || page == 0) {
+					page = 1;
+				}
+				JSONObject data = new JSONObject();
+				//获得termId
+				ResultsTagDBO resultsTagDBO =  new ResultsTagDBO();
+				resultsTagDBO.setResultsTagId(resultsTagId);
+				resultsTagDBO = (ResultsTagDBO) ResultsTagService_.doRead(resultsTagDBO);
+				Long termId = resultsTagDBO.getTermId();
+				// 获取年级班级信息
 				
+				ResultsPVO resultsPVO = new ResultsPVO();
+				resultsPVO.setResultsTagId(resultsTagId);
+				resultsPVO.setTermId(termId);
+				resultsPVO.setTid(tid);
+				pageModel.setPageCurrent(page);
+				pageModel.setPageLimit(size);
+				pageModel.setFormParamBean(resultsPVO);
+				ResultsService_.doSelectPageGradeClassList(pageModel);
+				List<ResultsPVO> classlist = (List<ResultsPVO>) pageModel.getPageListData();	
+				data.put("page", page);
+				data.put("size", size);
+				data.put("count", pageModel.getResultCount());
+				data.put("classlist", classlist);
+				data.put("termId", termId);
+				data.put("resultsTagName", resultsTagDBO.getResultsTagName());
+				data.put("resultsTagId", resultsTagDBO.getResultsTagId());
+				result.setData(data);			
 			}	
 		} catch (Exception e) {
 			result.setInfo("查询失败，" + e.getMessage());
@@ -125,11 +216,11 @@ public class ResultsController extends MyControllerSupport {
 	
 	@RequestMapping(value = "/results/classlist/search", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean resultsClassListSearchGET(Boolean test,Long Cid,String token) {
+	public RESTResultBean resultsClassListSearchGET(Boolean test,Long cid,String token) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			if (test != null && test == true) {					
-				if (Cid != null ) {
+				if (cid != null ) {
 					String str = "{\"resultsTagName\":\"期中考试\",\"resultsTagId\":\"2\",\"termId\":\"12\",\"gradeId\":\"1\",\"gradeName\":\"一年级\"，\"cid\":\"1\",\"className\":\"三班\"}";
 					JSONObject jobj=JSON.parseObject(str);    
 					result.setData(jobj);	
@@ -137,6 +228,9 @@ public class ResultsController extends MyControllerSupport {
 					result.setInfo("班级id--可选项");
 				}	
 			} else {
+				if (cid == null) {
+					throw new IllegalArgumentException("该成绩标签id不存在");
+				}
 				
 			}	
 		} catch (Exception e) {
@@ -170,42 +264,15 @@ public class ResultsController extends MyControllerSupport {
 				if (doCheckToken(token) == false) {
 					return tokenFail();
 				}
-				if (size == null || size == 0) {
-					size = 12;
-				}
-				if (page == null || page == 0) {
-					page = 1;
-				}
 				JSONObject data = new JSONObject();
 				// 获取学生成绩信息
 				ResultsDBO resultsDBO = new ResultsDBO();
-				if (resultsTagId == null) {
-					throw new IllegalArgumentException("该成绩标签id不存在");
-				}
 				if (cid == null) {
-					throw new IllegalArgumentException("该班级id不存在");
+					throw new IllegalArgumentException("该cid不存在");
 				}
-				resultsDBO.setResultsTagId(resultsTagId);
 				resultsDBO.setCid(cid);
-				ResultsPVO resultsPVO = ResultsService_.doReadResult(resultsDBO);
-				data.put("resultsTagName", resultsPVO.getResultsTagName());
-				data.put("resultsTagId", resultsPVO.getResultsTagId());
-				data.put("cid",resultsPVO.getCid() );
-				data.put("className", resultsPVO.getClassName());
-				// 获取学生总成绩列表 
-				ResultsDBO resultsDBO2 = new ResultsDBO();
-				resultsDBO2.setResultsTagId(resultsTagId);
-				resultsDBO2.setCid(cid);
-				pageModel.setPageCurrent(page);
-				pageModel.setPageLimit(size);
-				pageModel.setFormParamBean(resultsDBO2);
-				ResultsService_.doSelectPageResultDESC(pageModel);
-				List<ResultsPVO> studentlist = (List<ResultsPVO>) pageModel.getPageListData();			
-				data.put("page", page);
-				data.put("size", size);
-				data.put("count", pageModel.getResultCount());
-				data.put("studentlist", studentlist);
-				result.setData(data);
+				ResultsPVO resultsPVO = ResultsService_.doReadGradeClass(resultsDBO);
+				result.setData(resultsPVO);
 			}	
 		} catch (Exception e) {
 			result.setInfo("查询失败，" + e.getMessage());
@@ -246,8 +313,8 @@ public class ResultsController extends MyControllerSupport {
 				if (resultsTagId == null) {
 					throw new IllegalArgumentException("该成绩标签id不存在");
 				}
-				if (studentId == null || number == null ) {
-					throw new IllegalArgumentException("该学生id或者number不存在");
+				if (studentId == null && number == null ) {
+					throw new IllegalArgumentException("该学生id且number不存在");
 				}
 				resultsPVO.setResultsTagId(resultsTagId);
 				resultsPVO.setStudentId(studentId);
