@@ -12,7 +12,7 @@ public class ResultsPVO extends ResultsDBO{
     /** 
      *  学生成绩总分
      */
-    private String totalPoints = null;	
+    private Integer totalPoints = null;	
     /** 
      * 德育班级给合排名
      */
@@ -57,10 +57,10 @@ public class ResultsPVO extends ResultsDBO{
 	public void setClassName(String className) {
 		this.className = className;
 	}
-	public String getTotalPoints() {
+	public Integer getTotalPoints() {
 		return totalPoints;
 	}
-	public void setTotalPoints(String totalPoints) {
+	public void setTotalPoints(Integer totalPoints) {
 		this.totalPoints = totalPoints;
 	}
 	public String getRanking() {
