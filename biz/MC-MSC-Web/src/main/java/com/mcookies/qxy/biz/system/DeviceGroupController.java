@@ -59,17 +59,22 @@ public class DeviceGroupController extends MyControllerSupport{
 				sid= getLoginer().getSchoolId();
 				model.setSid(sid);
 			}
-			List<DeviceGroupPVO> relist = (List<DeviceGroupPVO>) DeviceGroupService.doSelectData(model);
-			if(relist!=null){
-				JSONObject json = new JSONObject();
-				SchoolDBO school = new SchoolDBO();
-				school.setSid(sid);
-				school = (SchoolDBO) SchoolService.doRead(school);
-				json.put("sid", sid);
-				json.put("schoolName", school.getSchoolName());
-				json.put("dgroup", relist);
-				result.setData(json);
+			Map<String,Object> param = new HashMap<String,Object>();
+			param.put("sid", sid);
+			List<DeviceGroupPVO> relist = (List<DeviceGroupPVO>) DeviceGroupService.doSelectDeviceGroup(param);
+			if(relist.size() == 0){
+				result.setInfo("你还没给设备进行分组");
+				result.setStatus(2);
+				return result;
 			}
+			JSONObject json = new JSONObject();
+			SchoolDBO school = new SchoolDBO();
+			school.setSid(sid);
+			school = (SchoolDBO) SchoolService.doRead(school);
+			json.put("sid", sid);
+			json.put("schoolName", school.getSchoolName());
+			json.put("dgroup", relist);
+			result.setData(json);
 		} catch (Exception e) {
 			e.printStackTrace();
 			result.setInfo("访问失败");
