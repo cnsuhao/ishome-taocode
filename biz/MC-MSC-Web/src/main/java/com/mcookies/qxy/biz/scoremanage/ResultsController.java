@@ -39,6 +39,7 @@ import com.mcookies.qxy.common.Results.ResultsDBO;
 import com.mcookies.qxy.common.Results.ResultsPVO;
 import com.mcookies.qxy.common.Results.ResultsService;
 import com.mcookies.qxy.common.UStudent.UStudentDBO;
+import com.mcookies.qxy.common.UStudent.UStudentPVO;
 import com.mcookies.qxy.common.UStudent.UStudentService;
 import com.mcookies.qxy.utils.DateUtils;
 import com.mcookies.qxy.utils.ExcelUtil;
@@ -412,6 +413,11 @@ public class ResultsController extends MyControllerSupport {
 				if (dbo.getScore() == null) {
 					throw new IllegalArgumentException("该学生科目分数不存在");
 				}
+				UStudentPVO student = new UStudentPVO();
+				student.setStudentId(dbo.getStudentId());
+				student =UStudentService_.findByIdOrNumberWithGrade(student);
+				dbo.setCid(student.getCid());
+				dbo.setStudentName(student.getStudentName());
 				ResultsService_.doInsert(dbo);
 			}
 		} catch (Exception e) {
@@ -484,6 +490,12 @@ public class ResultsController extends MyControllerSupport {
 				}
 				if (dbo.getResultsId() == null) {
 					throw new IllegalArgumentException("该成绩id不存在");
+				}
+				dbo = (ResultsDBO) ResultsService_.doRead(dbo);
+				if(dbo == null){
+					result.setInfo("请不要重复删除");
+					result.setStatus(2);
+					return result;
 				}
 				ResultsService_.doDelete(dbo);
 
