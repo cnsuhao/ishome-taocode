@@ -159,5 +159,36 @@
                 AND dgroup_id = #{dgroupId}
             </if>
     </select>
-
+    <!-- 查询全部数据信息  -->
+    <select id='doSelectDeviceGroup' parameterType='java.util.Map' resultType='DeviceGroupDBO'>
+        SELECT <include refid='tableColumns'/> FROM device_group
+        WHERE 1 = 1 
+        <if test=" dgroupId != null and dgroupId !='' "><!-- 分组id -->
+            AND dgroup_id = #{dgroupId}
+        </if>
+        <if test=" sid != null and sid !='' "><!-- 学校id -->
+            AND sid = #{sid}
+        </if>
+        <if test=" dgroupName != null and dgroupName !='' "><!-- 分组名称 -->
+            AND dgroup_name = #{dgroupName}
+        </if>
+        <if test=" dgroupExplain != null and dgroupExplain !='' "><!-- 分组说明 -->
+            AND dgroup_explain = #{dgroupExplain}
+        </if>
+        <if test=" isUse != null and isUse !='' "><!-- 是否启用 -->
+            AND is_use = #{isUse}
+        </if>
+        <if test=" createTime != null and createTime !='' "><!-- 创建时间 -->
+            AND create_time = #{createTime}
+        </if>
+        <if test=" creator != null and creator !='' "><!-- 创建者 -->
+            AND creator = #{creator}
+        </if>
+        <if test=" updateTime != null and updateTime !='' "><!-- 更新时间 -->
+            AND update_time = #{updateTime}
+        </if>
+        <if test=" updator != null and updator !='' "><!-- 最后更新者 -->
+            AND updator = #{updator}
+        </if>
+    </select>
 </mapper>
