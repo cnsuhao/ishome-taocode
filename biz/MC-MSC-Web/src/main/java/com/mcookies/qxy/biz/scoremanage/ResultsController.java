@@ -58,6 +58,65 @@ public class ResultsController extends MyControllerSupport {
 	protected ClassStudentService ClassStudentService_  ;
 	@Resource
 	protected UStudentService UStudentService_  ;
+	
+	/**
+	 * 13.2.1 通过考试标签查询班级列表查询接口/qxy/results/classlist?resultsTagId=[resultsTagId]&tid=[tid]&page=[page]&size=[size]&token=[token]
+     * 需要使用Token验证查询者身份
+     * 待处理
+	 */
+	
+	@RequestMapping(value = "/results/classlist", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public RESTResultBean resultsClassListGET(Boolean test,Long resultsTagId,Long tid,String token,Integer page, Integer size) {
+		RESTResultBean result = new RESTResultBean();
+		try {
+			if (test != null && test == true) {					
+				if (resultsTagId != null ) {
+					String str = "{\"resultsTagName\":\"期中考试\",\"resultsTagId\":\"2\",\"termId\":\"12\",\"page\":\"2\",\"size\":\"12\",\"count\":\"23\",\"gradelist\":[{\"gradeId\":\"1\",\"gradeName\":\"一年级\"，\"classlist\":[{\"cid\":\"1\",\"className\":\"三班\"},{\"cid\":\"2\",\"className\":\"四班\"}]},{\"gradeId\":\"2\",\"gradeName\":\"二年级\"，\"classlist\":[{\"cid\":\"3\",\"className\":\"三班\"},{\"cid\":\"4\",\"className\":\"四班\"}]}]}";
+					JSONObject jobj=JSON.parseObject(str);    
+					result.setData(jobj);	
+				} else{
+					result.setInfo(" 成绩标签id--必填项");
+				}	
+			} else {
+				
+			}	
+		} catch (Exception e) {
+			result.setInfo("查询失败，" + e.getMessage());
+			result.setStatus(1);
+		}
+		return result;
+	}
+	/**
+	 * 13.2.2 班级列表搜索接口/qxy/results/classlist/search?&cid=[cid]&token=[token]
+     * 需要使用Token验证查询者身份
+     * 待处理
+	 */
+	
+	@RequestMapping(value = "/results/classlist/search", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public RESTResultBean resultsClassListSearchGET(Boolean test,Long Cid,String token) {
+		RESTResultBean result = new RESTResultBean();
+		try {
+			if (test != null && test == true) {					
+				if (Cid != null ) {
+					String str = "{\"resultsTagName\":\"期中考试\",\"resultsTagId\":\"2\",\"termId\":\"12\",\"gradeId\":\"1\",\"gradeName\":\"一年级\"，\"cid\":\"1\",\"className\":\"三班\"}";
+					JSONObject jobj=JSON.parseObject(str);    
+					result.setData(jobj);	
+				} else{
+					result.setInfo("班级id--可选项");
+				}	
+			} else {
+				
+			}	
+		} catch (Exception e) {
+			result.setInfo("查询失败，" + e.getMessage());
+			result.setStatus(1);
+		}
+		return result;
+	}
+	
+	
 	/**
 	 * 13.2.3 班级学生成绩列表查询接口/qxy/results?resultsTagId=[resultsTagId]&cid=[cid]&page=[page]&size=[size]&token=[token]
      * 需要使用Token验证查询者身份

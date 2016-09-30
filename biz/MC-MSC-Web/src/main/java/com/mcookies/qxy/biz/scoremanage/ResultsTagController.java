@@ -22,6 +22,7 @@ import com.mcookies.qxy.common.MecScore.MecScoreService;
 import com.mcookies.qxy.common.ResultsTag.ResultsTagDBO;
 import com.mcookies.qxy.common.ResultsTag.ResultsTagService;
 import com.mcookies.qxy.common.STerm.STermDBO;
+import com.mcookies.qxy.common.STerm.STermPVO;
 import com.mcookies.qxy.common.STerm.STermService;
 import com.mcookies.qxy.utils.DateUtils;
 
@@ -321,6 +322,11 @@ public class ResultsTagController extends MyControllerSupport {
 				jsonObject.put("startTime", resultsTagDBO.getStartTime());
 				jsonObject.put("endTime", resultsTagDBO.getEndTime());
 				jsonObject.put("createTime", resultsTagDBO.getCreateTime());
+				jsonObject.put("termId", resultsTagDBO.getTermId());
+				STermDBO sTermDBO = new STermDBO();
+				sTermDBO.setTermId( resultsTagDBO.getTermId());
+				sTermDBO = (STermDBO) STermService_.doRead(sTermDBO);
+				jsonObject.put("termName", sTermDBO.getTermName());			
 				result.setData(jsonObject);
 			}
 
