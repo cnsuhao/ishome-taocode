@@ -2,6 +2,7 @@ package org.isotope.jfp.framework.support;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -36,10 +37,11 @@ public class MySqlSessionFactorySupport extends SqlSessionFactoryBean {
 	/**
 	 * 允许手动指定DBO来源
 	 * @param dboLocations
+	 * @throws Exception 
 	 */
-	public void setDBOLocations(Resource[] dboLocations) {
-		for (Resource r : dboLocations) {
-			getPath(r);
+	public void setDBOLocations(List<String> dboLocations) throws Exception {
+		for (String dbo : dboLocations) {
+			typeAliasesList.add(Class.forName(dbo));
 		}
 	}
 	private ArrayList<Class<?>> typeAliasesList = new ArrayList<Class<?>> ();
