@@ -37,8 +37,17 @@
 		<property name='mapperLocations'>
 			<list>
 				<value>classpath*:/org/isotope/jfp/persistent/**/*.xml</value>
-				<value>classpath*:/org/isotope/jfp/common/**/*.xml</value>
+				<value>classpath*:/org/isotope/jfp/common/login/*.xml</value>
+				<value>classpath*:/org/isotope/jfp/common/weixin/*.xml</value>
 				<value>classpath*:/com/mcookies/qxy/common/**/*.xml</value>
+		 	</list>
+		</property>
+		<property name='DBOLocations'>
+			<list>
+				<value>org.isotope.jfp.common.weixin.WeiXinCompanyDBO</value>
+				<value>org.isotope.jfp.common.weixin.WeiXinCompanyGroupDBO</value>
+				<value>org.isotope.jfp.common.weixin.WeiXinCompanyGroupUserDBO</value>
+				<value>org.isotope.jfp.common.weixin.WeiXinCompanyTagDBO</value>
 		 	</list>
 		</property>
 	</bean>
