@@ -11,4 +11,5 @@ public interface OaExamineResultDao extends IDatabaseSupport {
 	List<OaExamineResultDBO> doSelectUnChecked(OaExamineResultDBO oaExamineResultDBO);
 	void doUpdateSetStatus(OaExamineResultDBO result);
 	List<OaExamineResultPVO> findByApprovalInformationId(OaExamineInformationPVO info);
+	OaExamineResultPVO doSelectMyauditAndInfo(OaExamineResultDBO oaExamineResultDBO);
 }
