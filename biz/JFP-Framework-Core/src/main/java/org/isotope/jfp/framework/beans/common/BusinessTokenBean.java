@@ -24,7 +24,7 @@ public class BusinessTokenBean extends TokenBean implements ISFrameworkConstants
 	 * @return
 	 */
 	public static String loginTime() {
-		SimpleDateFormat format = new SimpleDateFormat("MMddHHmm");
+		SimpleDateFormat format = new SimpleDateFormat("YYMMDDHHmmSS");
 		return format.format(new Date());
 	}
 
