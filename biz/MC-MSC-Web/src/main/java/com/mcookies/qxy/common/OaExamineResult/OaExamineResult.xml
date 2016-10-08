@@ -272,5 +272,24 @@
 	        </otherwise>
 	    </choose>
 	</select>
+	
+	
+	<!-- 根据提交事项id查询审批信息列表 -->
+	<select id='doSelectMyauditAndInfo'
+		parameterType='OaExamineResultDBO'
+		resultType='com.mcookies.qxy.common.OaExamineResult.OaExamineResultPVO'>
+		SELECT distinct
+		a.id, a.content, a.result, a.approval_information_id,a.oarule_status,c.type,c.content AS applyContent,c.create_time,e.oatags_id,e.oatags_name, a.tid,b.teacher_name
+		FROM oa_examine_result a
+		LEFT JOIN u_teacher b ON a.tid = b.tid
+		LEFT JOIN oa_examine_information c ON a.approval_information_id = c.approval_information_id
+		LEFT JOIN oa_rule d ON a.oarule_id = d.oarule_id
+		LEFT JOIN oa_tags e ON d.oatags_id = e.oatags_id
+		WHERE 1 = 1
+		<if test=" id != null "><!-- 自增id -->
+			AND id = #{id}
+		</if>
+	</select>
+
 
 </mapper>

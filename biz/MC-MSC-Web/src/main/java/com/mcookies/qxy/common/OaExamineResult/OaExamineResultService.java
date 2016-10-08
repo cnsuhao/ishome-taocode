@@ -26,5 +26,9 @@ public class OaExamineResultService extends MyServiceSupport {
 	public List<OaExamineResultPVO> findByApprovalInformationId(OaExamineInformationPVO info) {
 		return getDao().findByApprovalInformationId(info);
 	}
+	
+	public OaExamineResultPVO doSelectMyauditAndInfo(OaExamineResultDBO oaExamineResultDBO) {
+		return getDao().doSelectMyauditAndInfo(oaExamineResultDBO);
+	}
 
 }
