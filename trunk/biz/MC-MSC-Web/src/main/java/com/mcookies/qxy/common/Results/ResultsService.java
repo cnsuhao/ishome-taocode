@@ -57,12 +57,12 @@ public class ResultsService extends MyServiceSupport {
 		return getDao().doReadResultByStudentId(resultsPVO);
 	}
 	/**
-	 * 根据学生id ,cid，resultsTagId成绩标签id获取班级学生各课程成绩列表
+	 * 根据学生id ,cid，resultsTagId成绩标签id获取班级学生各课程成绩排名
 	 * @param ResultsDBO
 	 * @return
 	 */
-	public List<ResultsPVO> doSelectByCidRtid(ResultsDBO resultsDBO) {
-		return getDao().doSelectByCidRtid(resultsDBO);
+	public ResultsPVO doSelectByCidRtidStuId(ResultsDBO resultsDBO) {
+		return getDao().doSelectByCidRtidStuId(resultsDBO);
 	}
 	/**
 	 * 根据学生id，学号，resultsTagId成绩标签id获取班级学生成绩
