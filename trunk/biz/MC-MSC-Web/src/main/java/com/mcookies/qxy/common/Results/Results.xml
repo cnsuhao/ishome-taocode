@@ -353,6 +353,7 @@
       	 <!-- 根据学生id ,cid，resultsTagId成绩标签id获取班级学生课程成绩排名 -->
 	<select id="doSelectByCidRtidStuId" parameterType="ResultsDBO" resultType="com.mcookies.qxy.common.Results.ResultsPVO">	
 	SELECT
+	   e.results_id,
 		e.course_id,
 		e.course_name, 
 		e.courseScore,
@@ -361,6 +362,7 @@
 	FROM
 	(
 	SELECT
+	   d.results_id,
 		d.course_id,
 		d.course_name,
 	  d.student_id,
@@ -377,7 +379,8 @@
 	FROM
 		(
 			SELECT
-				a.course_id,
+			   a.results_id,
+			 	a.course_id,
 				b.course_name,
 				a.student_id,
 				a.score AS courseScore,
@@ -465,6 +468,7 @@
     <!-- 分页 获取学生总成科目分数正序排名列表信息 -->
 	<select id="doSelectPageResASC" parameterType="ResultsDBO" resultType="com.mcookies.qxy.common.Results.ResultsPVO">	
 	SELECT
+				d.results_id,
 				d.student_id,
 				d.student_name,
 				d.number,
@@ -480,6 +484,7 @@
 	FROM
 		(
 			SELECT
+			   a.results_id,
 				a.student_id,
 				a.student_name,
 				b.number,
@@ -508,6 +513,7 @@
 	    <!-- 分页 获取学生总成科目分数倒序排名列表信息 -->
 	<select id="doSelectPageResDESC" parameterType="ResultsDBO" resultType="com.mcookies.qxy.common.Results.ResultsPVO">	
 	SELECT
+		        d.results_id,
 				d.student_id,
 				d.student_name,
 				d.number,
@@ -523,6 +529,7 @@
 	FROM
 		(
 			SELECT
+			    a.results_id,
 				a.student_id,
 				a.student_name,
 				b.number,
