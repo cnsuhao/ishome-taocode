@@ -274,6 +274,34 @@ public class WorkflowController extends MyControllerSupport {
 
 		return result;
 	}
+	
+	/**
+	 * 我的审批事项查询接口 /myaudit/teacher=[tid]&token=[token]
+	 */
+	@RequestMapping(value = "/myaudit/info", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public RESTResultBean myAuditinfoGET(@RequestParam(required = false) String token,
+			@RequestParam(required = false) Long id) {
+		RESTResultBean result = new RESTResultBean();
+		try {
+			if (doCheckToken(token) == false) {
+				return tokenFail();
+			}
+			if (id == null) {
+				throw new IllegalStateException("获取id失败");
+			}
+			OaExamineResultDBO dbo = new OaExamineResultDBO();
+			dbo.setId(id);
+			// 查出列表
+			OaExamineResultPVO info = oaExamineResultService.doSelectMyauditAndInfo(dbo);
+			result.setData(info);
+		} catch (Exception e) {
+			result.setInfo("查询失败，" + e.getMessage());
+			result.setStatus(1);
+		}
+
+		return result;
+	}
 
 	/**
 	 * 我的审批驳回(同意)操作接口 /myaudit/set
