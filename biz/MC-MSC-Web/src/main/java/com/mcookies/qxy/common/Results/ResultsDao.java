@@ -15,7 +15,7 @@ public interface ResultsDao extends IDatabaseSupport{
 	ResultsPVO doReadResult(ResultsDBO resultsDBO);
 	List<ResultsPVO> doSelectResult(ResultsPVO resultsPVO);
 	ResultsPVO doReadResultByStudentId(ResultsPVO resultsPVO);
-	List<ResultsPVO> doSelectByCidRtid(ResultsDBO resultsDBO);
+	ResultsPVO doSelectByCidRtidStuId(ResultsDBO resultsDBO);
 	ResultsPVO doReadByRTIdSId(ResultsDBO resultsDBO);
 	List<ResultsPVO> findByRTIdCidCourseId(ResultsDBO resultsDBO);
 	List<? extends FrameworkDataBean> doSelectPageResASC(PageVOSupport formParamPageModel);
