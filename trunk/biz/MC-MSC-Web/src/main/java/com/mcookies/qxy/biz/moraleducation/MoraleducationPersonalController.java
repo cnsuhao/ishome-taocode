@@ -92,9 +92,6 @@ public class MoraleducationPersonalController extends MyControllerSupport {
 				// 获取德育个人评分列表信息
 				MepScorePVO mepScorePVO = new MepScorePVO();
 				mepScorePVO.setTermId(termId);
-				if (cid == null) {
-					throw new IllegalArgumentException("该班级cid不存在");
-				}
 				mepScorePVO.setCid(cid);
 				pageModel.setPageCurrent(page);
 				pageModel.setPageLimit(size);
