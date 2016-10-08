@@ -213,7 +213,7 @@
 	    AND a.term_id = #{termId}
 	</if>
 	<if test=" resultsTagName != null and resultsTagName !='' "><!-- 成绩标签名称 -->
-	    AND a.results_tag_name = #{resultsTagName}
+	    AND a.results_tag_name LIKE '%${resultsTagName}%'
 	</if>
 	</select>
 
