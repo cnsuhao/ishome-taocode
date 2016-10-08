@@ -30,8 +30,9 @@ public class ResultsPVO extends ResultsDBO{
      * 学生id
      */
     private Long studentId = null;
- 
-    /** 
+
+
+	/** 
      * 学生姓名
      */
     private String studentName = null;
@@ -43,7 +44,7 @@ public class ResultsPVO extends ResultsDBO{
     /** 
      * 德育班级课程排名
      */
-    private String courseRanking = null;
+    private Integer courseRanking = null;
    
     /** 
      * 德育班级课程名称
@@ -113,10 +114,10 @@ public class ResultsPVO extends ResultsDBO{
 	public void setStudentName(String studentName) {
 		this.studentName = studentName;
 	}
-	public String getCourseRanking() {
+	public Integer getCourseRanking() {
 		return courseRanking;
 	}
-	public void setCourseRanking(String courseRanking) {
+	public void setCourseRanking(Integer courseRanking) {
 		this.courseRanking = courseRanking;
 	}
 	public String getCourseName() {
