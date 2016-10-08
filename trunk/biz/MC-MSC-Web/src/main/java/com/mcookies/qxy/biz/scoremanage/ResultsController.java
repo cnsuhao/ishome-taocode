@@ -457,7 +457,7 @@ public class ResultsController extends MyControllerSupport {
 				data.put("studentName",resultsPVO.getStudentName() );
 				data.put("number", resultsPVO.getNumber());
 				data.put("totalPoints", resultsPVO.getTotalPoints());
-				//获得各课程的排名
+				//获得各课程的排名doSelectByCidRtidStuId
 				ClassStudentDBO classStudentDBO =  new ClassStudentDBO();
 				classStudentDBO.setStudentId(studentId);
 				List<ClassStudentDBO> classStudentDBOs = (List<ClassStudentDBO>) ClassStudentService_.doSelectData(classStudentDBO);
@@ -468,7 +468,19 @@ public class ResultsController extends MyControllerSupport {
 				ResultsDBO dbo = new ResultsDBO();
 				dbo.setCid(cid);
 				dbo.setResultsTagId(resultsTagId);
-				List<ResultsPVO> courseScoreList = ResultsService_.doSelectByCidRtid(dbo);				
+				dbo.setStudentId(studentId);
+				JSONArray courseScoreList = new JSONArray();
+//				List<ResultsPVO> courseScoreList = new ArrayList<ResultsPVO>();
+				List<ResultsDBO> resultsDBOs = (List<ResultsDBO>) ResultsService_.doSelectData(dbo);
+				for (ResultsDBO resultsDBO2 : resultsDBOs) {
+					ResultsDBO dbo2 = new ResultsDBO();
+					dbo2.setResultsId(resultsTagId);
+					dbo2.setCid(cid);
+					dbo2.setStudentId(studentId);
+					dbo2.setCourseId(resultsDBO2.getCourseId());
+					ResultsPVO resultsPVO1 = (ResultsPVO) ResultsService_.doSelectByCidRtidStuId(resultsDBO2);
+					courseScoreList.add(resultsPVO1);
+				}			
 				data.put("courseScoreList", courseScoreList);
 				result.setData(data);
 		
