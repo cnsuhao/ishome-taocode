@@ -303,7 +303,7 @@ public class FileImageControl extends MyContentTypeSupport {
 	/**
 	 * 
 	 * @param file ftp文件上传。
-	 * @param type "0"表示需 要cdn加速,"1表示不需要加速的文件"
+	 * @param type "0"表示需 要cdn加速,"1表示不需要加速的文件""2表示学藉的文件"
 	 * @return  /file/upload?type=[type]&token=[token]
 	 * @throws Exception
 	 */
