@@ -244,6 +244,9 @@
 			<if test="deviceId != null">
 				and a.device_id = #{deviceId}
 			</if>
+			<if test="dgroupId != null">
+				and e.dgroup_id = #{dgroupId}
+			</if>
 			<if test="flag != null">
 				and a.flag = #{flag}
 			</if>
