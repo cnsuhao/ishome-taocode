@@ -1,10 +1,8 @@
 package com.mcookies.qxy.common.OaExamineInformation;
-import java.util.List;
 
+import org.isotope.jfp.framework.beans.page.PageVOSupport;
 import org.isotope.jfp.framework.support.sync.MyServiceSupport;
 import org.springframework.stereotype.Service;
-
-import com.mcookies.qxy.common.OaExamineResult.OaExamineResultDBO;
 
 /** OA审批信息表 */
 @Service
@@ -14,8 +12,10 @@ public class OaExamineInformationService extends MyServiceSupport {
 		return getMySqlSession().getMapper(OaExamineInformationDao.class);
 	}
 
-	public List<OaExamineInformationPVO> findByCheckTid(OaExamineResultDBO res) {
-		return getDao().findByCheckTid(res);
+
+	public PageVOSupport doSelectPageByCheckTid(PageVOSupport pageModel) {
+		pageModel.setPageListData(getDao().doSelectPageByCheckTid(pageModel));
+		return pageModel;
 	}
 
 }
