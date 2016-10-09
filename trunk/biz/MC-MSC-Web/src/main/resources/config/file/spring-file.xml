@@ -39,7 +39,10 @@
 		<property name='serverUserPasswordFirst' value='qxy395131' />
 		<property name='serverUserSecond' value='resource' />
 		<property name='serverUserPasswordSecond' value='qxy528923' />
-		<property name='serverFileUri' value='http://www.1000xyun.com/upload' />		
+		<property name='serverUserThird' value='registration' />
+		<property name='serverUserPasswordThird' value='qxy835920' />
+		<property name='serverFileUri' value='http://www.1000xyun.com/upload' />
+		<property name='serverFileUriSecond' value='http://www.1000xyun.com/registration/student/' />			
 		<!--水印 -->
 		<!-- <property name='doMark' value='false' /> -->
 		<!--压缩 -->
