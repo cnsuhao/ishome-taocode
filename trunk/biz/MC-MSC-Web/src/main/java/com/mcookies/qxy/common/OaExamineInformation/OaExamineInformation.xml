@@ -210,13 +210,14 @@
 		</if>
 	</select>
 	<!-- 根据审批教师tid查询审批信息列表 -->
-	<select id='findByCheckTid'
+	<select id='doSelectPageByCheckTid'
 		parameterType='com.mcookies.qxy.common.OaExamineResult.OaExamineResultDBO'
 		resultType='com.mcookies.qxy.common.OaExamineInformation.OaExamineInformationPVO'>
 		SELECT
 		a.approval_information_id,
 		b.id,
 		a.type,
+		a.content applyContent,
 		b.content,
 		a.create_time,
 		b.result,

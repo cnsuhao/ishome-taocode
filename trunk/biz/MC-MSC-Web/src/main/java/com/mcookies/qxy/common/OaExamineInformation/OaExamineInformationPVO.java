@@ -15,10 +15,19 @@ public class OaExamineInformationPVO extends OaExamineInformationDBO {
 	private List<OaExamineResultPVO> resultinfo;
 	private String teacherName;  //教师姓名
 	private String content;        //审批内容
+	private String applyContent;  //申请内容
 
 	
 	
 	
+	public String getApplyContent() {
+		return applyContent;
+	}
+
+	public void setApplyContent(String applyContent) {
+		this.applyContent = applyContent;
+	}
+
 	public String getTeacherName() {
 		return teacherName;
 	}
