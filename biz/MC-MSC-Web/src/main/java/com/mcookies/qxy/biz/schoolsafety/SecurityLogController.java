@@ -87,7 +87,7 @@ public class SecurityLogController extends MyControllerSupport {
 	 */
 	@RequestMapping(value = "/securitylog", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public RESTResultBean securitylogGET(String token, Long termId, Long cid, Long studentId, Long deviceId,Integer flag, String startTime, String endTime,Integer page, Integer size) {
+	public RESTResultBean securitylogGET(String token, Long termId, Long cid, Long studentId, Long deviceId,Integer dgroupId,Integer flag, String startTime, String endTime,Integer page, Integer size) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			if (doCheckToken(token) == false) {
@@ -106,6 +106,9 @@ public class SecurityLogController extends MyControllerSupport {
 			}
 			if(deviceId != null && deviceId>0){
 				pvo.setDeviceId(deviceId);				
+			}
+			if(dgroupId != null && dgroupId>0){
+				pvo.setDgroupId(dgroupId);				
 			}
 			if(studentId != null && studentId>0){
 				pvo.setStudentId(studentId);				
