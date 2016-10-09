@@ -244,11 +244,17 @@ public class WorkflowController extends MyControllerSupport {
 	@RequestMapping(value = "/myaudit", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public RESTResultBean myAuditGET(@RequestParam(required = false) String token,
-			@RequestParam(required = false) Long tid) {
+			@RequestParam(required = false) Long tid, Integer page, Integer size) {
 		RESTResultBean result = new RESTResultBean();
 		try {
 			if (doCheckToken(token) == false) {
 				return tokenFail();
+			}
+			if (page == null || page == 0) {
+				page = 1;
+			}
+			if (size == null || size == 0) {
+				size = 12;
 			}
 			if (tid == null) {
 				tid = getLoginer().getUserId();
@@ -261,11 +267,15 @@ public class WorkflowController extends MyControllerSupport {
 			// 查出列表
 			OaExamineResultDBO res = new OaExamineResultDBO();
 			res.setTid(tid);
-			List<OaExamineInformationPVO> infos = (List<OaExamineInformationPVO>) oaExamineInformationService.findByCheckTid(res);
-			
+			pageModel.setPageCurrent(page);
+			pageModel.setPageLimit(size);
+			pageModel.setFormParamBean(res);
+			oaExamineInformationService.doSelectPageByCheckTid(pageModel);
+			data.put("page", pageModel.getPageCurrent());
+			data.put("size", pageModel.getPageLimit());
 			data.put("tid", tid);
-			data.put("count", infos.size());
-			data.put("myaudit", infos);
+			data.put("count", pageModel.getResultCount());
+			data.put("myaudit", pageModel.getPageListData());
 			result.setData(data);
 		} catch (Exception e) {
 			result.setInfo("查询失败，" + e.getMessage());
