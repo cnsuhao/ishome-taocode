@@ -1,9 +1,10 @@
 package org.isotope.jfp.mpc.weixin.server;
 
+import org.isotope.jfp.framework.support.MyTaskSupport;
 import org.isotope.jfp.framework.utils.BeanFactoryHelper;
-import org.isotope.jfp.mpc.weixin.service.MyWeixinCompanyService;
 import org.isotope.jfp.mpc.weixin.service.MyWeixinCompanyGroupService;
 import org.isotope.jfp.mpc.weixin.service.MyWeixinCompanyGroupUserService;
+import org.isotope.jfp.mpc.weixin.service.MyWeixinCompanyService;
 
 /**
  * 微信企业用户管理<br>
@@ -14,7 +15,20 @@ import org.isotope.jfp.mpc.weixin.service.MyWeixinCompanyGroupUserService;
  * @since 3.3.1
  * @version 3.3.1.20160825
  */
-public class WeiXinCompanyGroupUserServerJob {
+public class WeiXinCompanyGroupUserServerJob extends MyTaskSupport {
+
+	/**
+	 * 业务处理(重复运行)
+	 */
+	@Override
+	public boolean doProcessRepeat() throws Exception {
+		loadCompany();
+		loadCompanyGroup();
+		loadCompanyUser();
+
+		return true;
+	}
+
 	/**
 	 * 加载全部企业微信号配置信息
 	 */
