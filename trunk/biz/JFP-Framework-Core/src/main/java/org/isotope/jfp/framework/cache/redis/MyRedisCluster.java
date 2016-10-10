@@ -112,11 +112,11 @@ public class MyRedisCluster implements ICacheService, ISFrameworkConstants {
 		if (EmptyHelper.isEmpty(value))
 			return null;
 		if (value instanceof String)
-			return (String) value;
+			return String.valueOf(value);
 		if (translation)
 			return value.getClass().getName() + BACKSLASH2 + JSON.toJSON(value);
 		else
-			return (String) value;
+			return String.valueOf(value);
 	}
 
 	public static final String CLASS_NAME = "className";
