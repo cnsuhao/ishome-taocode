@@ -65,12 +65,12 @@ public abstract class AMessagePushGatewaySupport extends AMessageChannelServiceT
 	 */
 	public void run() {
 		try {
-			if (doInit()) {
-				for (int i = 0; i < size; i++) {
-					try {
-						Thread.sleep(super.getWaitTime());
+			for (int i = 0; i < size; i++) {
+				try {
+					Thread.sleep(super.getWaitTime());
 
-						if (doReceive()) {
+					if (doReceive()) {
+						if (doInit()) {
 							if (doCheck()) {
 								if (doProcess()) {
 									if (doFinished()) {
@@ -84,14 +84,15 @@ public abstract class AMessagePushGatewaySupport extends AMessageChannelServiceT
 							} else {
 								logger.info(">>>>>服务处理失败.....doCheck");
 							}
+						} else {
+							logger.info(">>>>>服务处理失败.....doInit");
 						}
-
-					} catch (Exception e) {
-						logger.error(">>>>>服务处理异常....." + e.getMessage());
 					}
+
+				} catch (Exception e) {
+					e.printStackTrace();
+					logger.error(">>>>>服务处理异常....." + e.getMessage());
 				}
-			} else {
-				logger.info(">>>>>服务处理失败.....doInit");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -138,7 +139,7 @@ public abstract class AMessagePushGatewaySupport extends AMessageChannelServiceT
 		if (ZERO.equals(result.getCode())) {
 			return true;
 		}
-		logger.error(">>>>>信息推送服务处理失败.....push......"+result);
+		logger.error(">>>>>信息推送服务处理失败.....push......" + result);
 		return false;
 	}
 
