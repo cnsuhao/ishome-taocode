@@ -11,5 +11,15 @@ import org.isotope.jfp.framework.beans.common.FrameworkDataBean;
  *
  */
 public class UserReceverBean extends FrameworkDataBean {
+	protected String receverType = this.getClass().getName();
+
+	public static void main(String[] args) throws Exception {
+		UserReceverBean a = new UserReceverBean();
+		System.out.println(a.receverType);
+	}
+
+	public String getReceverType() {
+		return receverType;
+	}
 
 }

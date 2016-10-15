@@ -108,18 +108,11 @@ public abstract class AMessagePushGatewaySupport extends AMessageChannelServiceT
 		catchService.init();
 		if (EmptyHelper.isEmpty(message))
 			return false;
-		return true;
-	}
-
-	@Override
-	public boolean doInit() throws Exception {
 		logger.debug((String) message);
-		// 参数初始化
-		messageBean = JSON.parseObject((String) message, MessageInfoBean.class);
 		return true;
 	}
 
-	MessageInfoBean messageBean;
+	protected MessageInfoBean messageBean;
 
 	@Override
 	public boolean doCheck() throws Exception {
