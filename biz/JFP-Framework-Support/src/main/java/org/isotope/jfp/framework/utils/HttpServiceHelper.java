@@ -24,7 +24,6 @@ import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.cookie.BasicClientCookie2;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.BasicHttpContext;
@@ -220,11 +219,7 @@ public class HttpServiceHelper {
 	 * @throws Exception
 	 */
 	public static String doHttpPOST(String serviceURL, ObjectBean param) throws Exception {
-		// CloseableHttpClient httpclient = HttpClients.createDefault();
-
-		RequestConfig defaultRequestConfig = RequestConfig.custom().setSocketTimeout(waitTimeMinute * 1000).setConnectTimeout(waitTimeMinute * 1000).setConnectionRequestTimeout(waitTimeMinute * 1000).setStaleConnectionCheckEnabled(true).build();
-		CloseableHttpClient httpclient = HttpClients.custom().setDefaultRequestConfig(defaultRequestConfig).build();
-
+		CloseableHttpClient httpclient = getCloseableHttpClient(serviceURL);
 		try {
 
 			HttpPost httpPost = new HttpPost(serviceURL);
