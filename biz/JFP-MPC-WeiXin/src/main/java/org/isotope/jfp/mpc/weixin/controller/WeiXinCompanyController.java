@@ -3,7 +3,7 @@ package org.isotope.jfp.mpc.weixin.controller;
 import javax.annotation.Resource;
 
 import org.isotope.jfp.framework.beans.common.RESTResultBean;
-import org.isotope.jfp.mpc.weixin.service.MyWeixinCompanyService;
+import org.isotope.jfp.mpc.weixin.client.WeiXinCompanyClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -24,8 +24,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class WeiXinCompanyController {
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Resource
-	MyWeixinCompanyService MyWeixinCompanyBusiness_;
-	
+	WeiXinCompanyClient WeiXinCompanyClient_;
+
 	/**
 	 * 同步一个企业（数据来源于DB监控）
 	 * 
@@ -34,11 +34,9 @@ public class WeiXinCompanyController {
 	@RequestMapping(value = "/sync", method = RequestMethod.POST)
 	@ResponseBody
 	public RESTResultBean companyIdSyncPOST() {
-		RESTResultBean result = new RESTResultBean();
-		result.setResult(MyWeixinCompanyBusiness_.companyTokenSync());
-		return result;
+		return WeiXinCompanyClient_.companyIdSyncPOST();
 	}
-	
+
 	/**
 	 * 同步一个企业（数据来源于DB监控）
 	 * 
@@ -47,8 +45,6 @@ public class WeiXinCompanyController {
 	@RequestMapping(value = "/sync/{companyId}", method = RequestMethod.POST)
 	@ResponseBody
 	public RESTResultBean companyIdSyncPOST(@PathVariable String companyId) {
-		RESTResultBean result = new RESTResultBean();
-		result.setResult(MyWeixinCompanyBusiness_.companyTokenSync(companyId));
-		return result;
+		return WeiXinCompanyClient_.companyIdSyncPOST(companyId);
 	}
 }

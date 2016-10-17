@@ -42,6 +42,32 @@ public class WeiXinCompanyGroupUserDBO extends MyDataBaseObjectSupport {
 	 * 微信ID
 	 */
 	private String wxId;
+	private String mobile;
+	private String email;
+	private String weiXinId;
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getWeiXinId() {
+		return weiXinId;
+	}
+
+	public void setWeiXinId(String weiXinId) {
+		this.weiXinId = weiXinId;
+	}
 
 	/**
 	 * 是否启用
