@@ -11,7 +11,7 @@ import org.isotope.jfp.framework.beans.common.FrameworkDataBean;
  *
  */
 public class UserReceverBean extends FrameworkDataBean {
-	protected String receverType = this.getClass().getName();
+	protected String receverType = this.getClass().getSimpleName();
 
 	public static void main(String[] args) throws Exception {
 		UserReceverBean a = new UserReceverBean();
