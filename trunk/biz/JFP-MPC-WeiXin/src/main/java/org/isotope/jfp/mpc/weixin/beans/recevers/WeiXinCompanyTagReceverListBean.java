@@ -3,6 +3,8 @@ package org.isotope.jfp.mpc.weixin.beans.recevers;
 import java.util.ArrayList;
 
 import org.isotope.jfp.framework.beans.message.info.UserReceverBean;
+import org.isotope.jfp.framework.utils.EmptyHelper;
+import org.isotope.jfp.mpc.weixin.beans.recever.WeiXinCompanyGroupUserReceverBean;
 import org.isotope.jfp.mpc.weixin.beans.recever.WeiXinCompanyTagReceverBean;
 
 /**
@@ -19,7 +21,21 @@ public class WeiXinCompanyTagReceverListBean extends UserReceverBean {
 	public ArrayList<WeiXinCompanyTagReceverBean> getRecevers() {
 		return recevers;
 	}
-
+	/**
+	 * 消息群发
+	 * @param wxId
+	 */
+	public void setRecevers(String... tagWxId) {
+		if (EmptyHelper.isNotEmpty(tagWxId)) {
+			WeiXinCompanyTagReceverBean user;
+			for (String wxId : tagWxId) {
+				user = new WeiXinCompanyTagReceverBean();
+				user.setTagId(wxId);
+				user.setWxId(wxId);
+				recevers.add(user);
+			}
+		}
+	}
 	public void setRecevers(ArrayList<WeiXinCompanyTagReceverBean> recevers) {
 		this.recevers = recevers;
 	}

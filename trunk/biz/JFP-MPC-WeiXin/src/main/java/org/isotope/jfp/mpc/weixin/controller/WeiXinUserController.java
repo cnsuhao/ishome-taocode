@@ -3,7 +3,7 @@ package org.isotope.jfp.mpc.weixin.controller;
 import javax.annotation.Resource;
 
 import org.isotope.jfp.framework.beans.common.RESTResultBean;
-import org.isotope.jfp.mpc.weixin.service.MyWeixinCompanyGroupUserService;
+import org.isotope.jfp.mpc.weixin.client.WeiXinUserClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class WeiXinUserController {
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Resource
-	MyWeixinCompanyGroupUserService MyWeixinUserBusiness_;
+	WeiXinUserClient WeiXinUserClient_;
 
 	/**
 	 * 增加一个企业用户（数据来源于DB）
@@ -33,10 +33,8 @@ public class WeiXinUserController {
 	 */
 	@RequestMapping(value = "/add/{companyId}/{userId}", method = RequestMethod.POST)
 	@ResponseBody
-	public RESTResultBean companyIdUserIdAddPOST(@PathVariable String companyId,@PathVariable String userId) {
-		RESTResultBean result = new RESTResultBean();
-		result.setResult(MyWeixinUserBusiness_.companyUserIdSync(companyId,userId));
-		return result;
+	public RESTResultBean companyIdUserIdAddPOST(@PathVariable String companyId, @PathVariable String userId) {
+		return WeiXinUserClient_.companyIdUserIdAddPOST(companyId, userId);
 	}
 
 	/**
@@ -46,10 +44,8 @@ public class WeiXinUserController {
 	 */
 	@RequestMapping(value = "/add/{companyId}/{groupId}/{userId}", method = RequestMethod.POST)
 	@ResponseBody
-	public RESTResultBean companyIdGroupIdUserIdAddPOST(@PathVariable String companyId,@PathVariable String groupId,@PathVariable String userId) {
-		RESTResultBean result = new RESTResultBean();
-		result.setResult(MyWeixinUserBusiness_.companyGroupUserIdSync(companyId,groupId,userId));
-		return result;
+	public RESTResultBean companyIdGroupIdUserIdAddPOST(@PathVariable String companyId, @PathVariable String groupId, @PathVariable String userId) {
+		return WeiXinUserClient_.companyIdGroupIdUserIdAddPOST(companyId, groupId, userId);
 	}
 
 	/**
@@ -59,10 +55,8 @@ public class WeiXinUserController {
 	 */
 	@RequestMapping(value = "/delete/{companyId}/{userId}", method = RequestMethod.POST)
 	@ResponseBody
-	public RESTResultBean companyIdUserIdDeletePOST(@PathVariable String companyId,@PathVariable String userId) {
-		RESTResultBean result = new RESTResultBean();
-		result.setResult(MyWeixinUserBusiness_.companyIdUserIdDelete(companyId,userId));
-		return result;
+	public RESTResultBean companyIdUserIdDeletePOST(@PathVariable String companyId, @PathVariable String userId) {
+		return WeiXinUserClient_.companyIdUserIdDeletePOST(companyId, userId);
 	}
 
 	/**
@@ -72,9 +66,7 @@ public class WeiXinUserController {
 	 */
 	@RequestMapping(value = "/sync/{companyId}/{userId}", method = RequestMethod.POST)
 	@ResponseBody
-	public RESTResultBean companyIdUserIdSyncPOST(@PathVariable String companyId,@PathVariable String userId) {
-		RESTResultBean result = new RESTResultBean();
-		result.setResult(MyWeixinUserBusiness_.companyUserIdSync(companyId,userId));
-		return result;
+	public RESTResultBean companyIdUserIdSyncPOST(@PathVariable String companyId, @PathVariable String userId) {
+		return WeiXinUserClient_.companyIdUserIdSyncPOST(companyId, userId);
 	}
 }

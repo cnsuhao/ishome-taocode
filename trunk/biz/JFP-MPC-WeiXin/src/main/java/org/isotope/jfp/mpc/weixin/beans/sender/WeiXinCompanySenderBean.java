@@ -36,7 +36,10 @@ public class WeiXinCompanySenderBean extends CustomerSenderBean {
 	 * 应用识别Token
 	 */
 	private String token = null;
-
+	/**
+	 * 微信ID
+	 */
+	private String wxId;
 	/**
 	 * 是否启用
 	 */
@@ -80,6 +83,14 @@ public class WeiXinCompanySenderBean extends CustomerSenderBean {
 
 	public void setToken(String token) {
 		this.token = token;
+	}
+
+	public String getWxId() {
+		return wxId;
+	}
+
+	public void setWxId(String wxId) {
+		this.wxId = wxId;
 	}
 
 	public Integer getIsUse() {

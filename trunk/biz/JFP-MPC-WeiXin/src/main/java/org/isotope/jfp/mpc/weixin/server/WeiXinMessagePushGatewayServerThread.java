@@ -8,7 +8,9 @@ import javax.annotation.Resource;
 import org.isotope.jfp.common.weixin.constants.ISWeixinConstants;
 import org.isotope.jfp.framework.beans.common.RESTResultBean;
 import org.isotope.jfp.framework.beans.message.MessageInfoBean;
+import org.isotope.jfp.framework.beans.message.info.UserReceverBean;
 import org.isotope.jfp.framework.common.message.AMessagePushGatewaySupport;
+import org.isotope.jfp.framework.utils.EmptyHelper;
 import org.isotope.jfp.mpc.weixin.beans.message.WeiXinMessageValueBean;
 import org.isotope.jfp.mpc.weixin.beans.recever.WeiXinCompanyGroupReceverBean;
 import org.isotope.jfp.mpc.weixin.beans.recever.WeiXinCompanyGroupUserReceverBean;
@@ -18,6 +20,9 @@ import org.isotope.jfp.mpc.weixin.beans.recevers.WeiXinCompanyGroupUserReceverLi
 import org.isotope.jfp.mpc.weixin.beans.recevers.WeiXinCompanyTagReceverListBean;
 import org.isotope.jfp.mpc.weixin.beans.sender.WeiXinCompanySenderBean;
 import org.isotope.jfp.mpc.weixin.biz.MyWeixinBusiness;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 
 /**
  * 微信消息发送实现类
@@ -36,6 +41,50 @@ public class WeiXinMessagePushGatewayServerThread extends AMessagePushGatewaySup
 	@Resource
 	MyWeixinBusiness myWeixinBusiness;// 微信接口通信
 
+	@Override
+	public boolean doInit() throws Exception {
+		// 参数初始化
+		JSONObject msg = JSON.parseObject((String) message);
+
+		messageBean = (MessageInfoBean) JSON.parseObject((String) message, MessageInfoBean.class);
+
+		messageBean.setMessage(JSON.parseObject(msg.getString("message"), WeiXinMessageValueBean.class));
+		messageBean.setSender(JSON.parseObject(msg.getString("sender"), WeiXinCompanySenderBean.class));
+		JSONObject recever = msg.getJSONObject("recever");
+		if(EmptyHelper.isNotEmpty(recever)){
+			//消息类别
+			String receverType = recever.getString("receverType");
+			//点对点发送
+			if(receverType.equals(WeiXinCompanyGroupReceverBean.class.getSimpleName())){
+				WeiXinCompanyGroupReceverBean receverBean = JSON.parseObject(msg.getString("recever"),WeiXinCompanyGroupReceverBean.class);
+				messageBean.setRecever(receverBean);
+			}else if(receverType.equals(WeiXinCompanyGroupUserReceverBean.class.getSimpleName())){
+				WeiXinCompanyGroupUserReceverBean receverBean = JSON.parseObject(msg.getString("recever"),WeiXinCompanyGroupUserReceverBean.class);
+				messageBean.setRecever(receverBean);
+			}else if(receverType.equals(WeiXinCompanyTagReceverBean.class.getSimpleName())){
+				WeiXinCompanyTagReceverBean receverBean = JSON.parseObject(msg.getString("recever"),WeiXinCompanyTagReceverBean.class);
+				messageBean.setRecever(receverBean);
+			}else 
+			//消息群发	
+			if(receverType.equals(WeiXinCompanyGroupReceverListBean.class.getSimpleName())){
+				WeiXinCompanyGroupReceverListBean receverBean = JSON.parseObject(msg.getString("recever"),WeiXinCompanyGroupReceverListBean.class);
+				messageBean.setRecever(receverBean);
+			}else if(receverType.equals(WeiXinCompanyGroupUserReceverListBean.class.getSimpleName())){
+				WeiXinCompanyGroupUserReceverListBean receverBean = JSON.parseObject(msg.getString("recever"),WeiXinCompanyGroupUserReceverListBean.class);
+				messageBean.setRecever(receverBean);
+			}else if(receverType.equals(WeiXinCompanyTagReceverListBean.class.getSimpleName())){
+				WeiXinCompanyTagReceverListBean receverBean = JSON.parseObject(msg.getString("recever"),WeiXinCompanyTagReceverListBean.class);
+				messageBean.setRecever(receverBean);
+			}else{
+				return false;
+			}
+		}
+		
+		// messageBean.setRecever(JSON.parseObject(msg.getString("recever"), WeiXinCompanySenderBean.class));
+
+		return true;
+	}
+
 	/**
 	 * 消息推送
 	 */
@@ -52,39 +101,39 @@ public class WeiXinMessagePushGatewayServerThread extends AMessagePushGatewaySup
 			List<WeiXinCompanyGroupUserReceverBean> userGroupRecevers = null;
 
 			boolean push = true;
-			if(messageInfo.getRecever() == null){
-				//全体发送
+			if (messageInfo.getRecever() == null) {
+				// 全体发送
 				userGroupRecevers = new ArrayList<WeiXinCompanyGroupUserReceverBean>();
 				WeiXinCompanyGroupUserReceverBean allUser = new WeiXinCompanyGroupUserReceverBean();
 				allUser.setWxId("@all");
 				userGroupRecevers.add(allUser);
 			}
-			//发送给某个用户
-			else if (messageInfo.getRecever() instanceof WeiXinCompanyGroupUserReceverBean){
+			// 发送给某个用户
+			else if (messageInfo.getRecever() instanceof WeiXinCompanyGroupUserReceverBean) {
 				userGroupRecevers = new ArrayList<WeiXinCompanyGroupUserReceverBean>();
 				userGroupRecevers.add((WeiXinCompanyGroupUserReceverBean) messageInfo.getRecever());
 			}
-			//发送给某个用户组
-			else if (messageInfo.getRecever() instanceof WeiXinCompanyGroupReceverBean){
+			// 发送给某个用户组
+			else if (messageInfo.getRecever() instanceof WeiXinCompanyGroupReceverBean) {
 				deptGroupRecevers = new ArrayList<WeiXinCompanyGroupReceverBean>();
 				deptGroupRecevers.add((WeiXinCompanyGroupReceverBean) messageInfo.getRecever());
 			}
-			//发送给某个企业
-			else if (messageInfo.getRecever() instanceof WeiXinCompanyTagReceverBean){
+			// 发送给某个企业
+			else if (messageInfo.getRecever() instanceof WeiXinCompanyTagReceverBean) {
 				tagRecevers = new ArrayList<WeiXinCompanyTagReceverBean>();
 				tagRecevers.add((WeiXinCompanyTagReceverBean) messageInfo.getRecever());
 			}
 			//////////////////////////////////////////////////////////////////////////////
-			//发送给某些用户
-			else if (messageInfo.getRecever() instanceof WeiXinCompanyGroupUserReceverListBean){
+			// 发送给某些用户
+			else if (messageInfo.getRecever() instanceof WeiXinCompanyGroupUserReceverListBean) {
 				userGroupRecevers = ((WeiXinCompanyGroupUserReceverListBean) messageInfo.getRecever()).getRecevers();
 			}
-			//发送给某些用户组
-			else if (messageInfo.getRecever() instanceof WeiXinCompanyGroupReceverListBean){
+			// 发送给某些用户组
+			else if (messageInfo.getRecever() instanceof WeiXinCompanyGroupReceverListBean) {
 				deptGroupRecevers = ((WeiXinCompanyGroupReceverListBean) messageInfo.getRecever()).getRecevers();
 			}
-			//发送给某些企业
-			else if (messageInfo.getRecever() instanceof WeiXinCompanyTagReceverListBean){
+			// 发送给某些企业
+			else if (messageInfo.getRecever() instanceof WeiXinCompanyTagReceverListBean) {
 				tagRecevers = ((WeiXinCompanyTagReceverListBean) messageInfo.getRecever()).getRecevers();
 			}
 			//////////////////////////////////////////////////////////////////////////////

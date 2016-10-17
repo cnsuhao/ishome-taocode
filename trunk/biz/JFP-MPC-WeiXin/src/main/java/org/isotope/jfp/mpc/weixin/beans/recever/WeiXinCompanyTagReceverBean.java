@@ -18,6 +18,11 @@ public class WeiXinCompanyTagReceverBean extends UserReceverBean {
 	private String companyId;
 
 	/**
+	 * 标签ID
+	 */
+	private String tagId;
+
+	/**
 	 * 微信id
 	 */
 	private String wxId;
@@ -38,6 +43,14 @@ public class WeiXinCompanyTagReceverBean extends UserReceverBean {
 
 	public void setCompanyId(String companyId) {
 		this.companyId = companyId;
+	}
+
+	public String getTagId() {
+		return tagId;
+	}
+
+	public void setTagId(String tagId) {
+		this.tagId = tagId;
 	}
 
 	public String getWxId() {

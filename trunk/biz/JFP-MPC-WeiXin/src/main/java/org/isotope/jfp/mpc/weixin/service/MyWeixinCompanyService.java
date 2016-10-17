@@ -46,6 +46,7 @@ public class MyWeixinCompanyService implements ISFrameworkConstants {
 			sender.setCompanyId(comanyDBO.getCompanyId());
 			sender.setAppId(comanyDBO.getAppId());
 			sender.setAppSecret(comanyDBO.getAppSecret());
+			sender.setWxId(comanyDBO.getWxId());
 			return sender;
 		}
 
@@ -80,7 +81,7 @@ public class MyWeixinCompanyService implements ISFrameworkConstants {
 	public String companyTokenSync(WeiXinCompanyDBO company) {
 		WeiXinCompanyTokenService token = BeanFactoryHelper.getBean("WeiXinCompanyTokenService");
 		WeiXinCompanyTokenBean companyToken = token.loadCompanyToken(company);
-		if (EmptyHelper.isEmpty(companyToken.getAccessToken())) {
+		if (EmptyHelper.isEmpty(companyToken)|| EmptyHelper.isEmpty(companyToken.getAccessToken())) {
 			return NINE;
 		}
 		return ZERO;

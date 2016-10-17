@@ -10,10 +10,13 @@ import org.isotope.jfp.framework.utils.BeanFactoryHelper;
 import org.isotope.jfp.mpc.weixin.beans.message.WeiXinMessageValueBean;
 import org.isotope.jfp.mpc.weixin.beans.recever.WeiXinCompanyGroupReceverBean;
 import org.isotope.jfp.mpc.weixin.beans.recever.WeiXinCompanyGroupUserReceverBean;
+import org.isotope.jfp.mpc.weixin.beans.recevers.WeiXinCompanyGroupReceverListBean;
+import org.isotope.jfp.mpc.weixin.beans.recevers.WeiXinCompanyGroupUserReceverListBean;
 import org.isotope.jfp.mpc.weixin.beans.sender.WeiXinCompanySenderBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 /**
  * 发送微信消息
@@ -90,7 +93,7 @@ public class MyWeixinMessageService implements ISFrameworkConstants {
 				return "9080";
 			message.setMessage(weixinMessage);
 		}
-		MyWeixinCompanyGroupService myds = BeanFactoryHelper.getBean("MyWeixinGroupService");
+		MyWeixinCompanyGroupService myds = BeanFactoryHelper.getBean("MyWeixinCompanyGroupService");
 		{
 			WeiXinCompanyGroupReceverBean recever = myds.loadWeiXinCompanyGroupReceverBean(companyId, groupId);
 			if (recever == null)
@@ -137,4 +140,71 @@ public class MyWeixinMessageService implements ISFrameworkConstants {
 		return ZERO;
 	}
 
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	/**
+	 * 企业信息发送给多个部门（部门ID与微信ID一致）
+	 * 
+	 * @param companyId
+	 *            企业ID
+	 * @param groupId
+	 *            用户组ID
+	 * @param message
+	 * @return
+	 */
+	public String sendToCompanyIdGroupIds(String companyId, String groupIds, WeiXinMessageValueBean weixinMessage) {
+		MyWeixinCompanyService mycs = BeanFactoryHelper.getBean("MyWeixinCompanyService");
+		{
+			WeiXinCompanySenderBean sender = mycs.loadWeiXinCompanySenderBean(companyId);
+			if (sender == null)
+				return "9090";
+			message.setSender(sender);
+		}
+		{
+			if (weixinMessage == null)
+				return "9080";
+			message.setMessage(weixinMessage);
+		}
+		{
+			WeiXinCompanyGroupReceverListBean recever = new WeiXinCompanyGroupReceverListBean();
+			recever.setRecevers(StringUtils.commaDelimitedListToStringArray(groupIds));
+			message.setRecever(recever);
+		}
+
+		umss.send(message);
+		return ZERO;
+	}
+
+	/**
+	 * 企业信息发送给个人
+	 * 
+	 * @param companyId
+	 *            企业ID
+	 * @param userId
+	 *            个人ID
+	 * @param message
+	 * @return
+	 */
+	public String sendToCompanyIdUserIds(String companyId, String userIds, WeiXinMessageValueBean weixinMessage) {
+		MyWeixinCompanyService mycs = BeanFactoryHelper.getBean("MyWeixinCompanyService");
+		{
+			WeiXinCompanySenderBean sender = mycs.loadWeiXinCompanySenderBean(companyId);
+			if (sender == null)
+				return "9090";
+			message.setSender(sender);
+		}
+		{
+			if (weixinMessage == null)
+				return "9080";
+			message.setMessage(weixinMessage);
+		}
+		{
+			WeiXinCompanyGroupUserReceverListBean recever = new WeiXinCompanyGroupUserReceverListBean();
+			recever.setRecevers(StringUtils.commaDelimitedListToStringArray(userIds));
+			message.setRecever(recever);
+		}
+
+		umss.send(message);
+		return ZERO;
+	}
 }

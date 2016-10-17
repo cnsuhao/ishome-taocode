@@ -27,7 +27,7 @@ import org.springframework.stereotype.Service;
  * @version 3.3.1.20160825
  * 
  */
-@Service("MyWeixinUserService")
+@Service("MyWeixinCompanyGroupUserService")
 public class MyWeixinCompanyGroupUserService implements ISFrameworkConstants {
 
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
