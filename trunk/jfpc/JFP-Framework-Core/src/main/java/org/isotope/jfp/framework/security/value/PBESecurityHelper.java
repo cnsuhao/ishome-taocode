@@ -8,7 +8,8 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.PBEParameterSpec;
 
-import org.springframework.security.crypto.codec.Base64;
+import org.apache.commons.codec.binary.Base64;
+import org.isotope.jfp.framework.utils.token.BusinessTokenHelper;
 
 /**
  * 加密解密工具类
@@ -16,9 +17,19 @@ import org.springframework.security.crypto.codec.Base64;
  * @author Spook
  * @since 0.1.0
  * @version 0.1.0 2014/2/8
+ * @version 3.3.1 2016/10/26
  */
 public class PBESecurityHelper {
 	private final static int ITERATIONS = 20;
+	public static final String ENCODE_DEFAULT = "UTF-8";
+	/**
+	 * 获得企业加密Key
+	 * 
+	 * @return
+	 */
+	public static String loadSecurityKey(String CompanyId, String version, String ipAdress) {
+		return BusinessTokenHelper.getBizTokenData(CompanyId , version, ipAdress.replace(".", "")).substring(0,8);
+	}
 
 	/**
 	 * 加密
@@ -45,9 +56,9 @@ public class PBESecurityHelper {
 			PBEParameterSpec paramSpec = new PBEParameterSpec(salt, ITERATIONS);
 			Cipher cipher = Cipher.getInstance("PBEWithMD5AndDES");
 			cipher.init(Cipher.ENCRYPT_MODE, skey, paramSpec);
-			byte[] cipherText = cipher.doFinal(plainText.getBytes());
-			String saltString = new String(Base64.encode(salt));
-			String ciphertextString = new String(Base64.encode(cipherText));
+			byte[] cipherText = cipher.doFinal(plainText.getBytes(ENCODE_DEFAULT));
+			String saltString = new String(Base64.encodeBase64(salt));
+			String ciphertextString = new String(Base64.encodeBase64(cipherText));
 			return saltString + ciphertextString;
 		} catch (Exception e) {
 			throw new Exception("Encrypt Text Error:" + e.getMessage(), e);
@@ -69,8 +80,8 @@ public class PBESecurityHelper {
 		try {
 			String salt = encryptTxt.substring(0, saltLength);
 			String ciphertext = encryptTxt.substring(saltLength, encryptTxt.length());
-			byte[] saltarray = Base64.decode(salt.getBytes());
-			byte[] ciphertextArray = Base64.decode(ciphertext.getBytes());
+			byte[] saltarray = Base64.decodeBase64(salt.getBytes());
+			byte[] ciphertextArray = Base64.decodeBase64(ciphertext.getBytes());
 			PBEKeySpec keySpec = new PBEKeySpec(key.toCharArray());
 			SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("PBEWithMD5AndDES");
 			SecretKey skey = keyFactory.generateSecret(keySpec);
@@ -78,7 +89,7 @@ public class PBESecurityHelper {
 			Cipher cipher = Cipher.getInstance("PBEWithMD5AndDES");
 			cipher.init(Cipher.DECRYPT_MODE, skey, paramSpec);
 			byte[] plaintextArray = cipher.doFinal(ciphertextArray);
-			return new String(plaintextArray);
+			return new String(plaintextArray,ENCODE_DEFAULT);
 		} catch (Exception e) {
 			throw new Exception(e);
 		}
@@ -89,13 +100,13 @@ public class PBESecurityHelper {
 	 */
 	public static void main(String[] args) {
 		String encryptTxt = "";
-		String plainTxt = "http://163.com?t今天我们去工作oken=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHwhttp://163.com?token=PUJaRS4EaW32rHw";
+		String plainTxt = "{\"from\":0,\"paramValue\":\"瑞安市伟力光学有限公司\",\"size\":0}";
 		try {
-			//System.out.println(plainTxt);
-			encryptTxt = encrypt("mypassword01mypassword01mypassword01mypassword01", plainTxt);
-			plainTxt = decrypt("mypassword01mypassword01mypassword01mypassword01", encryptTxt);
-			//System.out.println(encryptTxt);
-			//System.out.println(plainTxt);
+			System.out.println(plainTxt);
+			encryptTxt = encrypt("12345678", plainTxt);
+			System.out.println(encryptTxt);
+			plainTxt = decrypt("12345678", encryptTxt);
+			System.out.println(plainTxt);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.exit(-1);

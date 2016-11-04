@@ -292,6 +292,15 @@ public class DateHelper {
     public static String getDate(String date, String formatType) throws Exception {
         return customTime(getDate(date), formatType);
     }
+    
+    public static int getDaysBetween(Date fDate, Date oDate) {
+        Calendar aCalendar = Calendar.getInstance();
+        aCalendar.setTime(fDate);
+        int day1 = aCalendar.get(Calendar.DAY_OF_YEAR);
+        aCalendar.setTime(oDate);
+        int day2 = aCalendar.get(Calendar.DAY_OF_YEAR);
+        return day2 - day1;
+     }
 
     public static void main(String[] args) throws Exception {
 //        //System.out.println(getDate("20150619", "yyyy/MM/dd"));

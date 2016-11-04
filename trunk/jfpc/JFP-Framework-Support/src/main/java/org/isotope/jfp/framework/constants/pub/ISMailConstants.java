@@ -9,8 +9,8 @@ package org.isotope.jfp.framework.constants.pub;
  */
 public interface ISMailConstants {
 
-	public final static String Mail_SEND_SUCCESS = "发送成功";
-	public final static String Mail_SEND_FAIL = "发送失败";
+	public final static String Mail_SEND_SUCCESS = ISPushConstant.SEND_SUCCESS;
+	public final static String Mail_SEND_FAIL = ISPushConstant.SEND_FAIL;
 	// 发送状态
 	public final static String SEND_STATUS_WAIT = "0";// 等待发送
 	public final static String SEND_STATUS_ALREADY = "1";// 已发送

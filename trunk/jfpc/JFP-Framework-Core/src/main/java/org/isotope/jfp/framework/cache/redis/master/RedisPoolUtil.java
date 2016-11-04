@@ -35,7 +35,7 @@ public class RedisPoolUtil {
 			try {
 				jedis = jedisPool.getResource();
 			} catch (Exception e) {
-				e.printStackTrace();
+				//e.printStackTrace();
 				try {
 					switch (failedNum) {
 					case 0:

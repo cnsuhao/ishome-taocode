@@ -1,35 +1,39 @@
 package org.isotope.jfp.framework.net;
 
-import org.apache.http.client.config.CookieSpecs;
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
+import java.util.HashMap;
+
+import org.isotope.jfp.framework.utils.HttpServiceHelper;
 
 public class AAAA {
 
 	public static void main(String[] args) throws Exception {
-		RequestConfig globalConfig = RequestConfig.custom().setCookieSpec(CookieSpecs.BEST_MATCH).build();
-
-		CloseableHttpClient client = HttpClients.custom().setDefaultRequestConfig(globalConfig).build();
-
-		RequestConfig localConfig = RequestConfig.copy(globalConfig).setCookieSpec(CookieSpecs.BROWSER_COMPATIBILITY).build();
+		String rs = "";
+		HashMap<String, String> param = new HashMap<String, String>();
 		{
-			HttpGet get = new HttpGet("http://www.creditchina.gov.cn/search_all#keyword=&searchtype=0&departmentId=&creditType=&areas=&objectType=2&page=1");
-			get.setConfig(localConfig);
-			CloseableHttpResponse response = client.execute(get);
-			String weatherDetail = EntityUtils.toString(response.getEntity());
-			//System.out.println(weatherDetail);
+			for(int i=0;i<100;i++){
+				param.clear();
+				param.put("agentId", "24");	
+				param.put("message", "微信消息通知测试100次，第"+i+"次");	
+				param.put("mediaType", "text");	
+				rs = HttpServiceHelper.doHttpPOST("http://127.0.0.1:8668/weixin/message/users/123456789?userIds=28,29,30,58,59&token=1222813_64_15_06_27_68_19_5__4__4__0__9",param);
+				Thread.sleep(1000);
+			}
 		}
 		{
-			HttpGet get = new HttpGet("http://www.creditchina.gov.cn/search_all#keyword=&searchtype=0&departmentId=&creditType=&areas=&objectType=2&page=1");
-			get.setConfig(localConfig);
-			CloseableHttpResponse response = client.execute(get);
-			String weatherDetail = EntityUtils.toString(response.getEntity());
-			System.out.println(weatherDetail);
+			param.clear();
+			param.put("companyName", "9");
+			param.put("configKey", "CAPTURE:CONFIG:330000");
+			//rs = HttpServiceHelper.doHttpPOST("http://127.0.0.1:8080/captureOL/companyinto/fcy001745",param);
 		}
+		{
+			param.clear();
+			param.put("index", "9");
+			param.put("configKey", "CAPTURE:CONFIG:330000");
+//			rs = HttpServiceHelper.doHttpPOST("http://127.0.0.1:8080/captureMR/config/getSystemConfig",param);
+		}
+		
+		
+		System.out.println(rs);
 	}
 
 }

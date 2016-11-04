@@ -2,6 +2,7 @@ package org.isotope.jfp.framework.support;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -32,7 +33,17 @@ public class MySqlSessionFactorySupport extends SqlSessionFactoryBean {
 		}
 		super.setMapperLocations(mapperLocations);
 	}
-
+	
+	/**
+	 * 允许手动指定DBO来源
+	 * @param dboLocations
+	 * @throws Exception 
+	 */
+	public void setDBOLocations(List<String> dboLocations) throws Exception {
+		for (String dbo : dboLocations) {
+			typeAliasesList.add(Class.forName(dbo));
+		}
+	}
 	private ArrayList<Class<?>> typeAliasesList = new ArrayList<Class<?>> ();
 	
 	/**
@@ -61,7 +72,8 @@ public class MySqlSessionFactorySupport extends SqlSessionFactoryBean {
 			else if(uri.indexOf("classes/")>0)
 				uri = uri.substring(uri.indexOf("classes/") + 8);
 			uri = uri.replace(".xml", "DBO").replaceAll("/", ".");
-			typeAliasesList.add(Class.forName(uri));			
+			if(uri.indexOf("DBO")>0)
+				typeAliasesList.add(Class.forName(uri));			
 		} catch (Exception e) {
 			//System.out.println("Can't load class ==>>>"+e.getMessage());
 		}
