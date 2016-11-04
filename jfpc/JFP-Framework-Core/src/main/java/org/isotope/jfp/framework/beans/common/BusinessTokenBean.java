@@ -1,4 +1,4 @@
-package org.isotope.jfp.framework.beans.common;
+﻿package org.isotope.jfp.framework.beans.common;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,7 +24,7 @@ public class BusinessTokenBean extends TokenBean implements ISFrameworkConstants
 	 * @return
 	 */
 	public static String loginTime() {
-		SimpleDateFormat format = new SimpleDateFormat("MMddHHmm");
+		SimpleDateFormat format = new SimpleDateFormat("YYMMddHHmmss");
 		return format.format(new Date());
 	}
 

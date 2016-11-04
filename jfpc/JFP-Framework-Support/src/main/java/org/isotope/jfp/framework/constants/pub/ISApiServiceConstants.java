@@ -8,7 +8,7 @@ package org.isotope.jfp.framework.constants.pub;
  * @since 2.0.0 2015/2/3
  *
  */
-public interface ISServiceConstants {
+public interface ISApiServiceConstants {
 
 	//****************************↓↓↓↓接口配置文件关键字↓↓↓↓↓↓*************************************
 	public static final String System_Default_Version = "911";

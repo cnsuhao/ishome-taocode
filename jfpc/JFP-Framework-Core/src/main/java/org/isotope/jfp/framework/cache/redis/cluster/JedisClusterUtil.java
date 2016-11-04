@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 
 import redis.clients.jedis.HostAndPort;
 import redis.clients.jedis.JedisCluster;
+import redis.clients.jedis.exceptions.JedisConnectionException;
 
 /**
  * Redis操作工具类
@@ -128,8 +129,10 @@ public class JedisClusterUtil implements IJedisSupport, ISFrameworkConstants {
 				jd.rpush(newKey, value);
 
 			}
+		} catch (JedisConnectionException e) {
+			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
-
+			logger.error(e.getMessage());
 		} finally {
 			close(jd);
 		}
@@ -159,8 +162,10 @@ public class JedisClusterUtil implements IJedisSupport, ISFrameworkConstants {
 				newJedisCluster.rpush(newKey, value);
 
 			}
+		} catch (JedisConnectionException e) {
+			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
-
+			logger.error(e.getMessage());
 		} finally {
 			close(oldJedisCluster);
 			close(newJedisCluster);
@@ -172,6 +177,8 @@ public class JedisClusterUtil implements IJedisSupport, ISFrameworkConstants {
 		String value = null;
 		try {
 			value = jedisCluster.get(key);
+		} catch (JedisConnectionException e) {
+			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
 			logger.error("get value from redis error[key:" + key + "]", e);
 		} finally {
@@ -186,6 +193,8 @@ public class JedisClusterUtil implements IJedisSupport, ISFrameworkConstants {
 		try {
 			value = jedisCluster.get(key);
 			jedisCluster.del(key);
+		} catch (JedisConnectionException e) {
+			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
 			logger.error("get value from redis error[key:" + key + "]", e);
 		} finally {
@@ -215,6 +224,8 @@ public class JedisClusterUtil implements IJedisSupport, ISFrameworkConstants {
 					break;
 				Thread.sleep(100);
 			}
+		} catch (JedisConnectionException e) {
+			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
 			logger.error("get value from redis error[key:" + key + "]", e);
 		} finally {
@@ -231,6 +242,8 @@ public class JedisClusterUtil implements IJedisSupport, ISFrameworkConstants {
 		JedisCluster jedisCluster = getJedisCluster();
 		try {
 			return jedisCluster.hgetAll(key);
+		} catch (JedisConnectionException e) {
+			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
 			logger.error("hgetall from redis error[key:" + key + "]", e);
 		} finally {
@@ -246,6 +259,8 @@ public class JedisClusterUtil implements IJedisSupport, ISFrameworkConstants {
 			value = jedisCluster.hget(rkey, mkey);
 			jedisCluster.hdel(rkey, mkey);
 			return value;
+		} catch (JedisConnectionException e) {
+			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
 			logger.error("hdel from redis error[rkey:" + rkey + "],[mkey:" + mkey + "]", e);
 		} finally {
@@ -258,6 +273,8 @@ public class JedisClusterUtil implements IJedisSupport, ISFrameworkConstants {
 		JedisCluster jedisCluster = getJedisCluster();
 		try {
 			return jedisCluster.hget(rkey, mkey);
+		} catch (JedisConnectionException e) {
+			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
 			logger.error("hget from redis error[rkey:" + rkey + "],[mkey:" + mkey + "]", e);
 		} finally {
@@ -270,6 +287,8 @@ public class JedisClusterUtil implements IJedisSupport, ISFrameworkConstants {
 		JedisCluster jedisCluster = getJedisCluster();
 		try {
 			jedisCluster.hset(rkey, mkey, value);
+		} catch (JedisConnectionException e) {
+			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
 			logger.error("hset from redis error[rkey:" + rkey + "],[mkey:" + mkey + "]", e);
 		} finally {
@@ -296,6 +315,8 @@ public class JedisClusterUtil implements IJedisSupport, ISFrameworkConstants {
 				jedisCluster.set(key, value);
 				if (expireTime > 0)
 					jedisCluster.expire(key, expireTime);
+			} catch (JedisConnectionException e) {
+				throw new RuntimeException("The Redis Server can't connect ......");
 			} catch (Exception e) {
 				logger.error("add key[" + key + "] to redis error[" + failedNum + "] ", e);
 				add(key, value, expireTime, failedNum++);
@@ -309,6 +330,8 @@ public class JedisClusterUtil implements IJedisSupport, ISFrameworkConstants {
 		JedisCluster jedisCluster = getJedisCluster();
 		try {
 			jedisCluster.rpush(key, value);
+		} catch (JedisConnectionException e) {
+			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
 			logger.error("listAdd from redis error[key:" + key + "]", e);
 		} finally {
@@ -323,6 +346,8 @@ public class JedisClusterUtil implements IJedisSupport, ISFrameworkConstants {
 			if (list != null && list.size() == 2) {
 				return list.get(1);
 			}
+		} catch (JedisConnectionException e) {
+			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
 			logger.error("blistPop from redis error[key:" + key + "]", e);
 		} finally {
@@ -335,6 +360,8 @@ public class JedisClusterUtil implements IJedisSupport, ISFrameworkConstants {
 		JedisCluster jedisCluster = getJedisCluster();
 		try {
 			return jedisCluster.lpop(key);
+		} catch (JedisConnectionException e) {
+			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
 			logger.error("listPop from redis error[key:" + key + "]", e);
 		} finally {
@@ -347,6 +374,8 @@ public class JedisClusterUtil implements IJedisSupport, ISFrameworkConstants {
 		JedisCluster jedisCluster = getJedisCluster();
 		try {
 			return jedisCluster.lrange(key, 0, -1);
+		} catch (JedisConnectionException e) {
+			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
 			logger.error("listAll from redis error[key:" + key + "]", e);
 		} finally {
@@ -360,6 +389,8 @@ public class JedisClusterUtil implements IJedisSupport, ISFrameworkConstants {
 		long value = 0;
 		try {
 			value = jedisCluster.llen(key);
+		} catch (JedisConnectionException e) {
+			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
 			logger.error("get value from redis error[key:" + key + "]", e);
 		} finally {
@@ -374,6 +405,8 @@ public class JedisClusterUtil implements IJedisSupport, ISFrameworkConstants {
 		long value = 0;
 		try {
 			value = jedisCluster.hlen(key);
+		} catch (JedisConnectionException e) {
+			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
 			logger.error("get value from redis error[key:" + key + "]", e);
 		} finally {
@@ -392,6 +425,8 @@ public class JedisClusterUtil implements IJedisSupport, ISFrameworkConstants {
 				list.add(jedisCluster.lpop(key));
 			}
 			return list;
+		} catch (JedisConnectionException e) {
+			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
 			logger.error("listPopAll from redis error[key:" + key + "]", e);
 		} finally {
@@ -412,6 +447,8 @@ public class JedisClusterUtil implements IJedisSupport, ISFrameworkConstants {
 		JedisCluster jedisCluster = getJedisCluster();
 		try {
 			return jedisCluster.lrem(key, count, value);
+		} catch (JedisConnectionException e) {
+			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
 			logger.error("listDel from redis error[key:" + key + "]", e);
 		} finally {
@@ -426,6 +463,8 @@ public class JedisClusterUtil implements IJedisSupport, ISFrameworkConstants {
 			long len = jedisCluster.llen(key);
 			for (int i = 0; i < len; i++)
 				jedisCluster.rpop(key);
+		} catch (JedisConnectionException e) {
+			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
 			logger.error("listDelAll from redis error[key:" + key + "]", e);
 		} finally {
@@ -443,6 +482,8 @@ public class JedisClusterUtil implements IJedisSupport, ISFrameworkConstants {
 		JedisCluster jedisCluster = getJedisCluster();
 		try {
 			return jedisCluster.sadd(key, value);
+		} catch (JedisConnectionException e) {
+			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
 			logger.error("setAdd from redis error[key:" + key + "]", e);
 		} finally {
@@ -461,6 +502,8 @@ public class JedisClusterUtil implements IJedisSupport, ISFrameworkConstants {
 		JedisCluster jedisCluster = getJedisCluster();
 		try {
 			return jedisCluster.srem(key, value);
+		} catch (JedisConnectionException e) {
+			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
 			logger.error("setDel from redis error[key:" + key + "]", e);
 		} finally {
@@ -476,6 +519,8 @@ public class JedisClusterUtil implements IJedisSupport, ISFrameworkConstants {
 			for (int i = 0; i < total; i++) {
 				jedisCluster.spop(key);
 			}
+		} catch (JedisConnectionException e) {
+			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
 			logger.error("setDelAll from redis error[key:" + key + "]", e);
 		} finally {
@@ -487,6 +532,8 @@ public class JedisClusterUtil implements IJedisSupport, ISFrameworkConstants {
 		JedisCluster jedisCluster = getJedisCluster();
 		try {
 			return jedisCluster.scard(key);
+		} catch (JedisConnectionException e) {
+			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
 			logger.error("setCount from redis error[key:" + key + "]", e);
 		} finally {
@@ -499,6 +546,8 @@ public class JedisClusterUtil implements IJedisSupport, ISFrameworkConstants {
 		JedisCluster jedisCluster = getJedisCluster();
 		try {
 			return jedisCluster.smembers(key);
+		} catch (JedisConnectionException e) {
+			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
 			logger.error("setAll from redis error[key:" + key + "]", e);
 		} finally {
@@ -511,6 +560,8 @@ public class JedisClusterUtil implements IJedisSupport, ISFrameworkConstants {
 		JedisCluster jedisCluster = getJedisCluster();
 		try {
 			jedisCluster.expire(key, seconds);
+		} catch (JedisConnectionException e) {
+			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
 			logger.error("expire from redis error[key:" + key + "]", e);
 		} finally {
@@ -541,6 +592,8 @@ public class JedisClusterUtil implements IJedisSupport, ISFrameworkConstants {
 		String value = null;
 		try {
 			value = jedisCluster.lindex(key, index);
+		} catch (JedisConnectionException e) {
+			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
 			logger.error("get value from redis error[key:" + key + "]", e);
 		} finally {
@@ -556,6 +609,8 @@ public class JedisClusterUtil implements IJedisSupport, ISFrameworkConstants {
 		try {
 			rs = jedisCluster.setnx(key, stringToRedis);
 			jedisCluster.expire(key, waitTime);
+		} catch (JedisConnectionException e) {
+			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
 			logger.error("get value from redis error[key:" + key + "]", e);
 		} finally {
@@ -569,6 +624,8 @@ public class JedisClusterUtil implements IJedisSupport, ISFrameworkConstants {
 		JedisCluster jedisCluster = getJedisCluster();
 		try {
 			jedisCluster.del(key);
+		} catch (JedisConnectionException e) {
+			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
 			logger.error("get value from redis error[key:" + key + "]", e);
 		} finally {

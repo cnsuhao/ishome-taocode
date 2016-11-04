@@ -15,7 +15,7 @@ import org.isotope.jfp.framework.support.IJedisSupport;
  * @version 2.4.1 2015/11/9
  * @version 2.3.0 2015/6/11
  * @since 2.3.0
- * @see RedisChannelConfigBean
+ * @see <RedisChannelConfigBean><MyMaps>
  */
 public class MapMasterUtil implements IJedisSupport {
 	HashMap<String, String> cache = new HashMap<String, String>();

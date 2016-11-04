@@ -113,9 +113,9 @@ public interface ISFrameworkConstants {
 	public final static String COMMA  = ",";
 	public static final String DOWN_LINE = "_";// backslash
 	public static final char DOWN_LINE2 = '_';// backslash
-
+	
 	/* 数据基本操作 */
-	public enum DB_MANAGER_TYPE {
+	public enum DBManagerType {
 		CREAT, INIT, BUILD, NONE;
 	}
 }

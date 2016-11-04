@@ -1,6 +1,7 @@
 package org.isotope.jfp.framework.utils;
 
 import java.util.List;
+import java.util.Map;
 
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 
@@ -50,8 +51,11 @@ public class EmptyHelper implements ISFrameworkConstants{
 		return (array == null || array.length == 0);
 	}
 	
-	public static boolean isEmpty(List<Object> array) {
+	public static boolean isEmpty(List<?> array) {
 		return (array == null || array.size() == 0);
+	}
+	public static boolean isEmpty(Map<?,?> map) {
+		return (map == null || map.size() == 0);
 	}
 	/**
 	 * Check whether the given String is empty.
@@ -151,8 +155,10 @@ public class EmptyHelper implements ISFrameworkConstants{
 	public static boolean isNotEmpty(String str) {
         return !isEmpty(str);
     }
-	public static boolean isNotEmpty(List<Object> array) {
+	public static boolean isNotEmpty(List<?> array) {
         return !isEmpty(array);
     }
-	
+	public static boolean isNotEmpty(Map<?,?> map) {
+		return !isEmpty(map);
+	}	
 }
