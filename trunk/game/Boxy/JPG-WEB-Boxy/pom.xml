@@ -105,18 +105,8 @@
 		</dependency>
 		<dependency>
 			<groupId>Isotope</groupId>
-			<artifactId>JFP-Framework-ElasticSearch</artifactId>
-			<version>${jfp.version}-RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>Isotope</groupId>
-			<artifactId>JFP-Framework-Proxy</artifactId>
-			<version>${jfp.version}-RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>com.upg</groupId>
-			<artifactId>zx-dwc</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<artifactId>JPG-Boxy-Server</artifactId>
+			<version>0.0.1-RELEASE</version>
 		</dependency>
     </dependencies>
     
