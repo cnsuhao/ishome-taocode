@@ -38,6 +38,11 @@
 	</bean>	
 	
 	<bean id='myElasticsearchPool' class='org.isotope.jfp.framework.search.ElasticsearchPool' >
+		<!-- 连接时间 -->
+		<property name='connTimeout' value='30000'/>  
+		<!-- 读取时间 -->
+		<property name='readTimeout' value='30000'/>  
+		<!-- 服务器地址 -->
 		<constructor-arg index="0">
 			<list>
         		<!-- <value>http://127.0.0.1:9200</value> -->
