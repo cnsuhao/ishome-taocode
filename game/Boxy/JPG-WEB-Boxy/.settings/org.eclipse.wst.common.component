@@ -4,19 +4,7 @@
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
-        <dependent-module archiveName="JFP-Framework-Support-3.1.2-RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/JFP-Framework-Support/JFP-Framework-Support">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="JFP-Framework-Core-3.1.2-RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/JFP-Framework-Core/JFP-Framework-Core">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="JFP-Framework-ElasticSearch-3.1.2-RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/JFP-Framework-ElasticSearch/JFP-Framework-ElasticSearch">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="JFP-Framework-Proxy-3.1.2-RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/JFP-Framework-Proxy/JFP-Framework-Proxy">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="zx-dwc-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/zx-dwc/zx-dwc">
+        <dependent-module archiveName="JPG-Boxy-Server-0.0.1-RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/JPG-Boxy-Server/JPG-Boxy-Server">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <property name="java-output-path" value="/HS-MED-Service-HDS-Job/target/classes"/>
