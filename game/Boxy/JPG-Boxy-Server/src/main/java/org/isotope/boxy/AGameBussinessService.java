@@ -1,7 +1,8 @@
 package org.isotope.boxy;
 
 import org.isotope.boxy.common.entity.CommonEntityDBO;
-import org.isotope.jfp.framework.support.ABussinessThreadService;
+import org.isotope.jfp.framework.beans.common.RESTResultBean;
+import org.isotope.jfp.framework.support.sync.ABussinessThreadService;
 
 import com.alibaba.fastjson.JSONObject;
 
@@ -66,11 +67,12 @@ public abstract class AGameBussinessService extends ABussinessThreadService impl
 			paramBean = JSONObject.parseObject(getParamValue(), CommonEntityDBO.class);
 		return init;
 	}
-	
+
 	public boolean doSave() throws Exception {
 		// 开启加密
 		//token.setEncryType(ISecuritySupport.ENCRYPTION);
 		// 保存Token
-		return super.doSave();
+		//return super.doSave();
+		return false;
 	}
 }

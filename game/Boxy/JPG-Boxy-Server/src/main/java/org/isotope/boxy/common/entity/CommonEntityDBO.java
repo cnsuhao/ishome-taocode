@@ -4,7 +4,7 @@ import javax.inject.Named;
 
 import org.isotope.jfp.framework.support.MyDataBaseObjectSupport2;
 
-@Named
+
 /** 数据存储 */
 public class CommonEntityDBO extends MyDataBaseObjectSupport2 {
 	
