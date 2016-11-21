@@ -1,4 +1,4 @@
-﻿package org.isotope.jfp.framework.beans.common;
+package org.isotope.jfp.framework.beans.common;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -18,22 +18,45 @@ import org.isotope.jfp.framework.utils.token.BusinessTokenHelper;
  */
 public class BusinessTokenBean extends TokenBean implements ISFrameworkConstants {
 
-	/**
-	 * MMddHHmm
-	 * 
-	 * @return
-	 */
-	public static String loginTime() {
-		SimpleDateFormat format = new SimpleDateFormat("YYMMddHHmmss");
-		return format.format(new Date());
-	}
-
 	public static void main(String[] args) {
 		System.out.println(build("1212403_84_25_46_27_08_49_5"));
 	}
 
-	public static String getBizToken(BusinessTokenBean loginer) {
-		return BusinessTokenHelper.getBizTokenData("" + loginer.getSchoolId(), "" + loginer.getUserId(), loginer.getUserType() + loginTime());
+	/**
+	 * 获得业务请求Key
+	 * 
+	 * @param companyId
+	 * @param userId
+	 * @param bizName
+	 * @param encryType
+	 *            E:加密,D:解密
+	 * @param clientTimestamp
+	 * @return
+	 */
+	public static String getBizToken(String companyId, String userId, String bizName, String encryType, String clientTimestamp) {
+		return BusinessTokenHelper.getBizTokenData(companyId, userId, bizName + encryType + clientTimestamp);
+	}
+
+	/**
+	 * 根据企业ID获得用户ID
+	 * 
+	 * @param userToken
+	 * @return
+	 */
+	public static String[] getBizTokenData(String userToken) {
+		// not login in
+		if (EmptyHelper.isEmpty(userToken)) {
+			return new String[] { "", "", "", "", "" };
+		}
+		String[] token = BusinessTokenHelper.getBizTokenData(userToken);
+		String userId = token[0];
+		String companyId = token[1];
+
+		String t = token[2];
+		String bizName = t.substring(0, 8);
+		String encryType = t.substring(8, 9);
+		String rRequestDateTime = t.substring(9);
+		return new String[] { userId.toString(), companyId.toString(), bizName, encryType, rRequestDateTime };
 	}
 
 	//
@@ -42,77 +65,107 @@ public class BusinessTokenBean extends TokenBean implements ISFrameworkConstants
 	// -----------------/{bizName} 8
 	// ---------------------------/{encryType} 1
 	// ---------------------------------------/{clientTimestamp} 8 (MMDDH24)
+	/**
+	 * 获得 一个Token
+	 * 
+	 * @return tonkenString(企业ID+用户ID+[业务标识+加密模式+请求时间])
+	 */
 	public static BusinessTokenBean build(String bizToken) {
 		BusinessTokenBean tokenBean = new BusinessTokenBean();
-		String[] ds = BusinessTokenHelper.getBizTokenData(bizToken);
-		tokenBean.setSchoolId(Long.parseLong(ds[0]));
-		tokenBean.setUserId(Long.parseLong(ds[1]));
-		try {
-			tokenBean.setUserType(ds[2].substring(0, 1));
-			tokenBean.setLoginTime(ds[2].substring(1));
-			return tokenBean;
-		} catch (Exception e) {
-
-		}
-		tokenBean.setLoginTime(ds[2]);
+		String[] ds = getBizTokenData(bizToken);
+		tokenBean.setCompanyId(ds[0]);
+		tokenBean.setUserId(ds[1]);
+		tokenBean.setBizName(ds[2]);
+		tokenBean.setEncryType(ds[3]);
+		tokenBean.setClientTimestamp(ds[4]);
 		return tokenBean;
+	}
+
+	/**
+	 * 交叉混淆，可以正序或者倒序，可以奇数和偶数
+	 * 
+	 * @param userid
+	 *            用户ID
+	 * @param companyid
+	 *            企业ID
+	 * @return tonkenString
+	 */
+	public static String getBizToken(BusinessTokenBean bizTokenBean) {
+		return BusinessTokenHelper.getBizTokenData(bizTokenBean.getUserId(), bizTokenBean.getCompanyId(), bizTokenBean.getBizName() + bizTokenBean.getEncryType() + bizTokenBean.getClientTimestamp());
 	}
 
 	public String getToken() {
 		if (EmptyHelper.isEmpty(token))
-			token = BusinessTokenHelper.getBizTokenData("" + schoolId, "" + userId, userType + loginTime);
+			token = BusinessTokenHelper.getBizTokenData(companyId, userId, bizName + encryType + clientTimestamp);
 		return token;
 	}
 
-	/**
-	 * 登录用户Id
-	 */
-	Long userId;
+	///////////////////////////////////////////////////////////////////////////////////////////////////
 	/**
 	 * 企业ID
 	 */
-	Long schoolId;
+	private String companyId;
 	/**
-	 * 用户分类,用于区分数据来源<br>
-	 * 1:教师,2:家长,3:学生
+	 * 用户ID
 	 */
-	String userType;
+	private String userId;
 	/**
-	 * 最后请求时间
+	 * 请求时间
 	 */
-	String loginTime = loginTime();
+	private String clientTimestamp;
+	/**
+	 * 业务标识
+	 */
+	private String bizName;
+	/**
+	 * 加密模式
+	 */
+	private String encryType;
 
-	// String loginTime = DateHelper.currentTimeMillisCN1();
-	public Long getUserId() {
+	public String getCompanyId() {
+		return companyId;
+	}
+
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
+	}
+
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(Long userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
-	public Long getSchoolId() {
-		return schoolId;
+	public String getClientTimestamp() {
+		return clientTimestamp;
 	}
 
-	public void setSchoolId(Long schoolId) {
-		this.schoolId = schoolId;
+	public void setClientTimestamp(String clientTimestamp) {
+		this.clientTimestamp = clientTimestamp;
 	}
 
-	public String getUserType() {
-		return userType;
+	public String getBizName() {
+		return bizName;
 	}
 
-	public void setUserType(String userType) {
-		this.userType = userType;
+	public void setBizName(String bizName) {
+		this.bizName = bizName;
 	}
 
-	public String getLoginTime() {
-		return loginTime;
+	public String getEncryType() {
+		return encryType;
 	}
 
-	public void setLoginTime(String logintime) {
-		this.loginTime = logintime;
+	public void setEncryType(String encryType) {
+		this.encryType = encryType;
 	}
 
+	/////////////////////////////////////////////
+	//TODO
+	public void chageToken() {
+		SimpleDateFormat format = new SimpleDateFormat("YYMMddHHmmss");
+		clientTimestamp = format.format(new Date());
+	}
 }

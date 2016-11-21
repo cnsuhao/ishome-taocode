@@ -61,7 +61,7 @@ public class MyDataBaseObjectSupport extends FrameworkDataBean implements ISDBCo
 	/**
 	 * 创建者
 	 */
-	private Long creator = null;
+	private String creator = null;
 
 	/**
 	 * 更新时间
@@ -71,7 +71,7 @@ public class MyDataBaseObjectSupport extends FrameworkDataBean implements ISDBCo
 	/**
 	 * 最后更新者
 	 */
-	private Long updator = null;
+	private String updator = null;
 
 	/**
 	 * 获取创建时间
@@ -87,7 +87,7 @@ public class MyDataBaseObjectSupport extends FrameworkDataBean implements ISDBCo
 	 *
 	 * @return Creator 创建者
 	 */
-	public Long getCreator() {
+	public String getCreator() {
 		return this.creator;
 	}
 
@@ -105,7 +105,7 @@ public class MyDataBaseObjectSupport extends FrameworkDataBean implements ISDBCo
 	 *
 	 * @return Updator 最后更新者
 	 */
-	public Long getUpdator() {
+	public String getUpdator() {
 		return this.updator;
 	}
 
@@ -125,7 +125,7 @@ public class MyDataBaseObjectSupport extends FrameworkDataBean implements ISDBCo
 	 * @param Creator
 	 *            创建者
 	 */
-	public void setCreator(Long creator) {
+	public void setCreator(String creator) {
 		this.creator = creator;
 	}
 
@@ -145,7 +145,7 @@ public class MyDataBaseObjectSupport extends FrameworkDataBean implements ISDBCo
 	 * @param Updator
 	 *            最后更新者
 	 */
-	public void setUpdator(Long updator) {
+	public void setUpdator(String updator) {
 		this.updator = updator;
 	}
 }
