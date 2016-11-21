@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>Isotope</groupId>
     <artifactId>JFP-Framework-Support</artifactId>
-    <version>3.3.1-RELEASE</version>
+    <version>4.0.1-RELEASE</version>
   
     <properties>
 
@@ -344,11 +344,11 @@
 	<distributionManagement>  
 	  <repository>  
 	    <id>Releases</id>  
-	    <url>http://121.43.186.82:8081/nexus/content/repositories/releases/</url>  
+	    <url>http://106.14.45.167:8081/nexus/content/repositories/releases/</url>  
 	  </repository>  
 	  <snapshotRepository>  
 	    <id>Snapshots</id>  
-	    <url>http://121.43.186.82:8081/nexus/content/repositories/snapshots/</url>  
+	    <url>http://106.14.45.167:8081/nexus/content/repositories/snapshots/</url>  
 	  </snapshotRepository>  
 	</distributionManagement>
 

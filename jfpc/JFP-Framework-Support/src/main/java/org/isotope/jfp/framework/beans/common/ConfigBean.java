@@ -11,7 +11,7 @@ import org.isotope.jfp.framework.beans.ObjectBean;
  * @version 0.1
  * @since 0.1.0 2014/2/8
  */
-@Named
+
 public class ConfigBean extends ObjectBean {
 	/**
 	 * 配置使用关键字
