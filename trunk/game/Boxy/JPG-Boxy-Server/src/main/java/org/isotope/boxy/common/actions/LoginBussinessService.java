@@ -8,8 +8,14 @@ public class LoginBussinessService extends AGameBussinessService {
 	
 	@Override
 	public boolean doGameAction() throws Exception {
-		paramBean.updateUuu();
+		//paramBean.updateUuu();
 		return true;
+	}
+
+	@Override
+	public boolean doCheck() throws Exception {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
