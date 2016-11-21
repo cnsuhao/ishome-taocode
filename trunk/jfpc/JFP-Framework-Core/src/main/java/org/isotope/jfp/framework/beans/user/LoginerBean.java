@@ -1,7 +1,5 @@
 package org.isotope.jfp.framework.beans.user;
 
-import javax.inject.Named;
-
 import org.isotope.jfp.framework.beans.common.BusinessTokenBean;
 
 /**
@@ -13,7 +11,7 @@ import org.isotope.jfp.framework.beans.common.BusinessTokenBean;
  * @version 0.1.0 2014/5/30
  * @since 0.1.0 2014/5/30
  */
-@Named
+
 public class LoginerBean extends BusinessTokenBean {
 
 	/**

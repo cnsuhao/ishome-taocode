@@ -75,11 +75,8 @@ public class MyServiceSupport implements ISFrameworkConstants, ISDBConstants {
 		return loginer;
 	}
 
-	protected Long getLoginerId() {
-		getLoginer();
-		if(loginer != null)
-			return loginer.getUserId();
-		return null;
+	protected String getLoginerId() {
+		return getLoginer().getUserId();
 	}
 
 	/////////////////////////
@@ -298,7 +295,7 @@ public class MyServiceSupport implements ISFrameworkConstants, ISDBConstants {
 		// 有效标记、创建者、创建时间、更新者、更新时间
 		// Timestamp d = new Timestamp(System.currentTimeMillis());
 		String t = DateHelper.currentTimeMillis2();
-		Long loginId = getLoginerId();
+		String loginId = getLoginerId();
 		if (EmptyHelper.isEmpty(formParamBean.getCreateTime()))
 			formParamBean.setCreateTime(t);
 		if (EmptyHelper.isEmpty(formParamBean.getCreator()))
@@ -321,7 +318,7 @@ public class MyServiceSupport implements ISFrameworkConstants, ISDBConstants {
 		changeTable(formParamBean, DB_UPDATE);
 		// 更新者、更新时间
 		String t = DateHelper.currentTimeMillis4();
-		Long loginId = getLoginerId();
+		String loginId = getLoginerId();
 
 		if (EmptyHelper.isEmpty(formParamBean.getUpdateTime()))
 			formParamBean.setUpdateTime(t);
@@ -334,7 +331,7 @@ public class MyServiceSupport implements ISFrameworkConstants, ISDBConstants {
 		changeTable(formParamBean, DB_UPDATE);
 		// 更新者、更新时间
 		String t = DateHelper.currentTimeMillis4();
-		Long loginId = getLoginerId();
+		String loginId = getLoginerId();
 
 		if (EmptyHelper.isEmpty(formParamBean.getUpdateTime()))
 			formParamBean.setUpdateTime(t);

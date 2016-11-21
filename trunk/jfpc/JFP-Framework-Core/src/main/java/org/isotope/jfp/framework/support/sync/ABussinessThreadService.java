@@ -13,6 +13,33 @@ import org.isotope.jfp.framework.biz.common.ISSave;
  */
 public abstract class ABussinessThreadService extends MyBusinessSupport implements ISProcess, ISInit, ISCheck, ISSave, Runnable {
 
+
+	/**
+	 * 业务请求版本号
+	 */
+	protected String version;
+
+	public String getVersion() {
+		return version;
+	}
+
+	public void setVersion(String version) {
+		this.version = version;
+	}
+
+	/**
+	 * 用户请求参数
+	 */
+	protected String paramValue;
+
+	public String getParamValue() {
+		return paramValue;
+	}
+
+	public void setParamValue(String paramValue) {
+		this.paramValue = paramValue;
+	}
+	
 	@Override
 	public void run() {
 		try {
@@ -79,4 +106,44 @@ public abstract class ABussinessThreadService extends MyBusinessSupport implemen
 	//
 	// return super.checkToken();
 	// }
+	
+	
+	
+	
+	
+	
+	
+	
+/////////////////////////////////////
+
+//public String getBizName() {
+//if (EmptyHelper.isEmpty(token))
+//return this.getClass().getSimpleName().replace("BussinessService", "");
+//return token.getBizName();
+//}
+
+/////////////////////////////////////
+
+//@Override
+//public boolean checkToken() throws Exception {
+//try{
+//String tokenCatch = (String) myCacheService.getObject(token.getUserId(),false);
+//if (logger.isDebugEnabled())
+//logger.debug("    doCheck.checkToken()=====tokenCatch>>>>>"+tokenCatch);
+//if(getToken().equals(tokenCatch))
+//return true;
+//}catch(Exception r){
+//
+//}
+//return false;
+//}
+//
+///**
+//* @see waitTimeSecond
+//*/
+//@Override
+//public boolean saveToken() throws Exception {
+//return myCacheService.putObject(token.getUserId(),getToken(),waitTimeSecond,false);
+//}
+
 }
