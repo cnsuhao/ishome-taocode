@@ -11,7 +11,7 @@ import org.isotope.jfp.framework.beans.common.FrameworkDataBean;
  * @version 0.1
  * @since 0.1.0 2014/2/8
  */
-@Named
+
 public class VersionBean extends FrameworkDataBean {
 	/**
 	 * 客户端名称

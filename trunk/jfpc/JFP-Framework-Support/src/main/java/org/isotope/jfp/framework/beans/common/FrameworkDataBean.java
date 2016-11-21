@@ -12,7 +12,7 @@ import org.isotope.jfp.framework.constants.ISFrameworkConstants;
  * @version 0.1
  * @since 0.1.0 2014/2/8
  */
-@Named
+
 public class FrameworkDataBean extends ObjectBean implements ISFrameworkConstants {
 
 	/**

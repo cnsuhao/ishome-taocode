@@ -18,7 +18,7 @@
 		<!-- maven编译版本 -->
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding> 
 		<!-- 内部框架版本 -->
-        <jfp.version>3.1.2</jfp.version>
+        <jfp.version>3.4.1</jfp.version>
         
 	</properties>
 	
@@ -40,17 +40,7 @@
 			<version>2.2.1</version>
 		</dependency> -->
 		
-   	    <dependency>
-			<groupId>io.searchbox</groupId>
-			<artifactId>jest</artifactId>
-			<version>2.0.1</version>
-		</dependency>
    	    
-   		<dependency>
-   			<groupId>Isotope</groupId>
-   			<artifactId>JFP-Framework-Support</artifactId>
-   			<version>${jfp.version}-RELEASE</version>
-   		</dependency>
    		<dependency>
    			<groupId>Isotope</groupId>
    			<artifactId>JFP-Framework-Core</artifactId>
