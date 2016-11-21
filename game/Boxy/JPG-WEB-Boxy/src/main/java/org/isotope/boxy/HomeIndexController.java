@@ -8,6 +8,7 @@ import org.isotope.jfp.framework.cache.ICacheService;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.utils.BeanFactoryHelper;
 import org.isotope.jfp.framework.utils.DateHelper;
+import org.isotope.jfp.framework.utils.token.BusinessTokenHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,7 +40,7 @@ public class HomeIndexController implements ISFrameworkConstants {
 	@ResponseBody
 	public RESTResultBean doProcess(@PathVariable String token, String paramValue) throws Exception {
 		RESTResultBean result = new RESTResultBean();
-		BusinessTokenBean btb = result.getToken(token);
+		BusinessTokenBean btb = BusinessTokenBean.build(token);
 		try {
 			AGameBussinessService asgbs = BeanFactoryHelper.getBean(btb.getBizName());
 			asgbs.setMyCacheService(myCacheService);
@@ -47,15 +48,13 @@ public class HomeIndexController implements ISFrameworkConstants {
 			asgbs.setToken(btb);
 			asgbs.doProcess();
 			// 设定返回值
-			result.setCode(asgbs.getReturnCode());
-			result.setMessage(asgbs.getReturnMessage());
-			result.setResult(asgbs.getReturnObject());
-			result.setToken(asgbs.getToken());
+			result = asgbs.getResult();
+			//result.setToken(asgbs.getToken());
 		} catch (Exception e) {
 			result.setMessage("蛋仔的世界：" + MESSAGE_ERROR_SYNC);
 			result.setCode(ONE);
-			btb.chageToken();
-			result.setToken(BusinessTokenBean.getBizToken(btb));
+			//btb.chageToken();
+			//result.setToken(BusinessTokenBean.getBizToken(btb));
 		}
 
 		return result;
