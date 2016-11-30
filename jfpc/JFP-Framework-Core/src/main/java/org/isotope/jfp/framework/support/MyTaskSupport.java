@@ -36,6 +36,7 @@ public class MyTaskSupport extends MyWorkSupport implements ISJobConstants, ISPr
 	 * @throws InterruptedException
 	 */
 	protected boolean startLock() {
+		myCacheService.init();
 		myCacheService.putObject(jobKey, JOB_FLAG_RUNNING, waitTimeSecond, false);
 		return true;
 	}
@@ -46,6 +47,7 @@ public class MyTaskSupport extends MyWorkSupport implements ISJobConstants, ISPr
 	 * @param jobName
 	 */
 	protected boolean checkLock() {
+		myCacheService.init();
 		return EmptyHelper.isEmpty(myCacheService.getObject(jobKey, false));
 	}
 
@@ -55,6 +57,7 @@ public class MyTaskSupport extends MyWorkSupport implements ISJobConstants, ISPr
 	 * @param jobName
 	 */
 	protected boolean errorLock() {
+		myCacheService.init();
 		myCacheService.putObject(jobKey, JOB_FLAG_ERROR, waitTimeSecond, false);
 		return true;
 	}
@@ -65,6 +68,7 @@ public class MyTaskSupport extends MyWorkSupport implements ISJobConstants, ISPr
 	 * @param jobName
 	 */
 	protected boolean endLock() {
+		myCacheService.init();
 		myCacheService.putObject(jobKey, JOB_FLAG_SUCCESS, waitTimeSecond, false);
 		return true;
 	}
