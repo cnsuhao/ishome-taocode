@@ -1,6 +1,0 @@
-E:\fpm\10source\FPM\FPM.Common\bin\Debug\FPM.Common.dll
-E:\fpm\10source\FPM\FPM.Common\bin\Debug\FPM.Common.pdb
-E:\fpm\10source\FPM\FPM.Common\obj\Debug\FPM.Common.Properties.Resources.resources
-E:\fpm\10source\FPM\FPM.Common\obj\Debug\FPM.Common.csproj.GenerateResource.Cache
-E:\fpm\10source\FPM\FPM.Common\obj\Debug\FPM.Common.dll
-E:\fpm\10source\FPM\FPM.Common\obj\Debug\FPM.Common.pdb
