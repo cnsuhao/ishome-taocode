@@ -1,5 +1,8 @@
 package org.isotope.jfp.framework.support;
 
+import org.isotope.jfp.framework.beans.token.TokenBusinessBean;
+import org.isotope.jfp.framework.beans.user.UserBean;
+import org.isotope.jfp.framework.cache.session.SessionHelper;
 import org.isotope.jfp.framework.constants.ISDBConstants;
 import org.isotope.jfp.framework.utils.DateHelper;
 import org.isotope.jfp.framework.utils.EmptyHelper;
@@ -13,31 +16,48 @@ import org.isotope.jfp.framework.utils.EmptyHelper;
  */
 public class MyDataBaseObjectSupport2 extends MyDataBaseObjectSupport implements ISDBConstants {
 	/**
+	 * 当前登录用户
+	 */
+	protected TokenBusinessBean loginer;
+
+	public TokenBusinessBean getLoginer() {
+		if (loginer == null) {
+			loginer = SessionHelper.getSessionAttribute();
+		}
+		return loginer;
+	}
+	
+	/**
 	 * 拦截创建信息
 	 */
-	public void prepareCreator(String creator) {
+	@Override
+	public void prepareCreator() {
+		UserBean creator = getLoginer();
 		// Timestamp d = new Timestamp(System.currentTimeMillis());
 		String t = DateHelper.currentTimeMillis2();
 		if (EmptyHelper.isEmpty(getCc1()))
 			setCc1(t);
 		if (EmptyHelper.isEmpty(getCc2()))
-			setCc2(creator);
+			setCc2(creator.getUserId());
 	}
 
 	/**
 	 * 拦截更新信息
 	 */
-	public void prepareUpdator(String updator) {
+	@Override
+	public void prepareUpdator() {
+		UserBean updator = getLoginer();
 		String t = DateHelper.currentTimeMillis2();
 		if (EmptyHelper.isEmpty(getUu1()))
 			setUu1(t);
 		if (EmptyHelper.isEmpty(getUu2()))
-			setUu2(updator);
+			setUu2(updator.getUserId());
 	}
 
 	/**
 	 * 拦截有效标记信息
 	 */
+	@Override
 	public void prepareDeleteFlag(boolean del) {
 		// 有效标记、创建者、创建时间
 		if (del && EmptyHelper.isEmpty(getDdd()))
@@ -47,6 +67,7 @@ public class MyDataBaseObjectSupport2 extends MyDataBaseObjectSupport implements
 	/**
 	 * 拦截组织信息
 	 */
+	@Override
 	public void prepareGroup(boolean sys) {
 		// 数据所属系统
 		if (sys && EmptyHelper.isEmpty(getGgg()))
