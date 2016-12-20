@@ -5,12 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>Isotope</groupId>
     <artifactId>JFP-Framework-Support</artifactId>
-    <version>4.0.1-RELEASE</version>
+    <version>4.1.2-RELEASE</version>
   
     <properties>
 
 		<!-- Generic properties -->
-		<java-version>1.7</java-version>
+		<java-version>1.8</java-version>
 		<!-- 项目编译版本 -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<!-- 项目导出版本 -->
@@ -351,6 +351,5 @@
 	    <url>http://106.14.45.167:8081/nexus/content/repositories/snapshots/</url>  
 	  </snapshotRepository>  
 	</distributionManagement>
-
 
 </project>
