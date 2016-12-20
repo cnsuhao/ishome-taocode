@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
  * @version 0.2.1 2014/11/05
  * @version 0.1.0 2014/2/8
  */
-public class MyDataBaseOperateSupport implements ISFrameworkConstants, ISDBConstants {
+public class MyDataBaseOperateSupport<T> implements ISFrameworkConstants, ISDBConstants {
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	/**
@@ -62,10 +62,11 @@ public class MyDataBaseOperateSupport implements ISFrameworkConstants, ISDBConst
 	/////////////////////////
 	/**
 	 * 获得数据库操作对象
-	 * 
+	 * @deprecated
 	 * @return
 	 */
-	public IDatabaseSupport getDao() {
+	@SuppressWarnings("unchecked")
+	public IDatabaseSupport<T> getDao() {
 		return getMySqlSession().getMapper(IDatabaseSupport.class);
 	}
 
@@ -94,7 +95,7 @@ public class MyDataBaseOperateSupport implements ISFrameworkConstants, ISDBConst
 	 * @param formParamPageModel
 	 * @return
 	 */
-	public PageVOSupport doSelectPage(PageVOSupport formParamPageModel) {
+	public PageVOSupport<T> doSelectPage(PageVOSupport<T> formParamPageModel) {
 		return doSelectPage(formParamPageModel, true, true);
 	}
 
@@ -105,7 +106,7 @@ public class MyDataBaseOperateSupport implements ISFrameworkConstants, ISDBConst
 	 * @param ppp
 	 * @return
 	 */
-	public PageVOSupport doSelectPage(PageVOSupport formParamPageModel, boolean ppp) {
+	public PageVOSupport<T> doSelectPage(PageVOSupport<T> formParamPageModel, boolean ppp) {
 		return doSelectPage(formParamPageModel, ppp, true);
 	}
 
@@ -116,7 +117,7 @@ public class MyDataBaseOperateSupport implements ISFrameworkConstants, ISDBConst
 	 * @param ppp
 	 * @return
 	 */
-	public PageVOSupport doSelectPage(PageVOSupport formParamPageModel, boolean ppp, boolean ddd) {
+	public PageVOSupport<T> doSelectPage(PageVOSupport<T> formParamPageModel, boolean ppp, boolean ddd) {
 		FrameworkDataBean formParamBean = formParamPageModel.getFormParamBean();
 		// 查询数据
 		changeTable((MyDataBaseObjectSupport) formParamBean, DB_SELECT);
@@ -131,7 +132,7 @@ public class MyDataBaseOperateSupport implements ISFrameworkConstants, ISDBConst
 	 * @param formParamPageModel
 	 * @return
 	 */
-	public List<? extends FrameworkDataBean> doSelectData(MyDataBaseObjectSupport formParamBean) {
+	public List<T> doSelectData(MyDataBaseObjectSupport formParamBean) {
 		return doSelectData(formParamBean, true, true);
 	}
 
@@ -141,7 +142,7 @@ public class MyDataBaseOperateSupport implements ISFrameworkConstants, ISDBConst
 	 * @param formParamPageModel
 	 * @return
 	 */
-	public List<? extends FrameworkDataBean> doSelectData(MyDataBaseObjectSupport formParamBean, boolean ppp) {
+	public List<T> doSelectData(MyDataBaseObjectSupport formParamBean, boolean ppp) {
 		return doSelectData(formParamBean, ppp, true);
 	}
 
@@ -151,7 +152,7 @@ public class MyDataBaseOperateSupport implements ISFrameworkConstants, ISDBConst
 	 * @param formParamPageModel
 	 * @return
 	 */
-	public List<? extends FrameworkDataBean> doSelectData(MyDataBaseObjectSupport formParamBean, boolean ppp, boolean ddd) {
+	public List<T> doSelectData(MyDataBaseObjectSupport formParamBean, boolean ppp, boolean ddd) {
 		changeTable((MyDataBaseObjectSupport) formParamBean, DB_SELECT);
 		formParamBean.prepareGroup(ppp);
 		formParamBean.prepareDeleteFlag(ddd);

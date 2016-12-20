@@ -24,7 +24,7 @@ import org.springframework.stereotype.Component;
 @Component
 // @Scope("prototype")
 @Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
-public class PageVOSupport extends ObjectBean {
+public class PageVOSupport<T> extends ObjectBean {
 	/**
 	 * 当前页码
 	 */
@@ -46,7 +46,7 @@ public class PageVOSupport extends ObjectBean {
 	/**
 	 * 页面一览数据
 	 */
-	protected List<? extends FrameworkDataBean> pageListData;
+	protected List<T> pageListData;
 
 	/**
 	 * 页面检索参数
@@ -93,11 +93,11 @@ public class PageVOSupport extends ObjectBean {
 		this.resultCount = resultCount;
 	}
 
-	public List<? extends FrameworkDataBean> getPageListData() {
+	public List<T> getPageListData() {
 		return pageListData;
 	}
 
-	public void setPageListData(List<? extends FrameworkDataBean> objectData) {
+	public void setPageListData(List<T> objectData) {
 		this.pageListData = objectData;
 	}
 

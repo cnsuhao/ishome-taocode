@@ -2,7 +2,6 @@ package org.isotope.jfp.framework.support;
 
 import java.util.List;
 
-import org.isotope.jfp.framework.beans.common.FrameworkDataBean;
 import org.isotope.jfp.framework.beans.page.PageVOSupport;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 
@@ -14,7 +13,7 @@ import org.isotope.jfp.framework.constants.ISFrameworkConstants;
  * @version 0.1.0 2014/2/8
  * @see <ISFrameworkConstants>
  */
-public interface IDatabaseSupport extends ISFrameworkConstants {
+public interface IDatabaseSupport<T> extends ISFrameworkConstants {
 	/**
 	 * 分页查询
 	 * @param formParam
@@ -27,13 +26,13 @@ public interface IDatabaseSupport extends ISFrameworkConstants {
 	 * @param formParam
 	 * @return
 	 */
-	List<? extends FrameworkDataBean> doSelectPage(PageVOSupport formParam);
+	List<T> doSelectPage(PageVOSupport<T> formParam);
 	/**
 	 * 全体查询
 	 * @param formParam
 	 * @return
 	 */
-	List<? extends FrameworkDataBean> doSelectPage(MyDataBaseObjectSupport paramBean);
+	List<T> doSelectPage(MyDataBaseObjectSupport paramBean);
 	/////////////////// 增删改查（CRUD）///////////////////
 
 	/**
