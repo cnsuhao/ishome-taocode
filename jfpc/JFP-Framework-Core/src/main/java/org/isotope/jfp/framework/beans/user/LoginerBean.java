@@ -1,7 +1,5 @@
 package org.isotope.jfp.framework.beans.user;
 
-import org.isotope.jfp.framework.beans.common.BusinessTokenBean;
-
 /**
  * 系统用户登录信息
  * 
@@ -12,7 +10,7 @@ import org.isotope.jfp.framework.beans.common.BusinessTokenBean;
  * @since 0.1.0 2014/5/30
  */
 
-public class LoginerBean extends BusinessTokenBean {
+public class LoginerBean extends TokenBean {
 
 	/**
 	 * 密码
@@ -31,7 +29,7 @@ public class LoginerBean extends BusinessTokenBean {
 	/**
 	 * 登录来源类别（0APP1网页2手机3微信4支付宝）
 	 */
-	Integer clientType;
+	String clientType;
 
 	/**
 	 * IP地址
@@ -78,11 +76,11 @@ public class LoginerBean extends BusinessTokenBean {
 		this.securityCode = securityCode;
 	}
 
-	public Integer getClientType() {
+	public String getClientType() {
 		return clientType;
 	}
 
-	public void setClientType(Integer clientType) {
+	public void setClientType(String clientType) {
 		this.clientType = clientType;
 	}
 

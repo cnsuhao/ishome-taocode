@@ -7,8 +7,10 @@ import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
  * 
  * @author Spook
  * @since 0.1.0
+ * @version 4.1.1 2016/12/20
  * @version 3.2.1 2016/8/9
  * @version 0.1.0 2014/2/8
+ * @see <PasswordHelper>
  */
 public class MD5SecurityHelper {
 
@@ -22,7 +24,6 @@ public class MD5SecurityHelper {
 	 */
 	public static String encrypt(String plainText) throws Exception {
 		return new Md5PasswordEncoder().encodePassword(plainText, null);
-//		return PasswordHelper.getPassword(plainText);
 	}
 
 }

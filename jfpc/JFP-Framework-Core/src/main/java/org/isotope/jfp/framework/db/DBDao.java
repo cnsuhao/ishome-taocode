@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 import org.apache.ibatis.session.SqlSession;
 import org.isotope.jfp.framework.constants.ISDBConstants;
-import org.isotope.jfp.framework.support.sync.MyServiceSupport;
+import org.isotope.jfp.framework.support.MyDataBaseOperateSupport;
 import org.isotope.jfp.framework.utils.EmptyHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +27,7 @@ import org.springframework.core.io.Resource;
  * @version 0.1
  */
 // @Repository
-public class DBDao extends MyServiceSupport implements ISDBConstants {
+public class DBDao extends MyDataBaseOperateSupport implements ISDBConstants {
 
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 	
