@@ -9,7 +9,6 @@ import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.PBEParameterSpec;
 
 import org.apache.commons.codec.binary.Base64;
-import org.isotope.jfp.framework.utils.token.BusinessTokenHelper;
 
 /**
  * 加密解密工具类
@@ -22,14 +21,6 @@ import org.isotope.jfp.framework.utils.token.BusinessTokenHelper;
 public class PBESecurityHelper {
 	private final static int ITERATIONS = 20;
 	public static final String ENCODE_DEFAULT = "UTF-8";
-	/**
-	 * 获得企业加密Key
-	 * 
-	 * @return
-	 */
-	public static String loadSecurityKey(String CompanyId, String version, String ipAdress) {
-		return BusinessTokenHelper.getBizTokenData(CompanyId , version, ipAdress.replace(".", "")).substring(0,8);
-	}
 
 	/**
 	 * 加密
@@ -89,7 +80,7 @@ public class PBESecurityHelper {
 			Cipher cipher = Cipher.getInstance("PBEWithMD5AndDES");
 			cipher.init(Cipher.DECRYPT_MODE, skey, paramSpec);
 			byte[] plaintextArray = cipher.doFinal(ciphertextArray);
-			return new String(plaintextArray,ENCODE_DEFAULT);
+			return new String(plaintextArray, ENCODE_DEFAULT);
 		} catch (Exception e) {
 			throw new Exception(e);
 		}
