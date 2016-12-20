@@ -9,7 +9,7 @@
 	<properties>
 
 		<!-- Generic properties -->
-		<java-version>1.7</java-version>
+		<java-version>1.8</java-version>
 		<!-- 项目编译版本 -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<!-- 项目导出版本 -->
@@ -17,7 +17,7 @@
 		<!-- maven编译版本 -->
 		<maven.compiler.encoding>UTF-8</maven.compiler.encoding>
 		<!-- 内部框架版本 -->
-		<jfp.version>4.1.1</jfp.version>
+		<jfp.version>4.1.2</jfp.version>
 
 	</properties>
 
