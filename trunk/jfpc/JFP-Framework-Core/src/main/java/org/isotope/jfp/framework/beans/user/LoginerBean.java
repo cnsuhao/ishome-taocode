@@ -4,9 +4,9 @@ package org.isotope.jfp.framework.beans.user;
  * 系统用户登录信息
  * 
  * @author Spook
- * @version 2.0.1 2015/7/7
+ * @version 2.0.1 2015/07/07
  * @version 1.1.0 2014/12/15
- * @version 0.1.0 2014/5/30
+ * @version 0.1.0 2014/05/30
  * @since 0.1.0 2014/5/30
  */
 
