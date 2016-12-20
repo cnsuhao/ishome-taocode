@@ -1,7 +1,6 @@
 package org.isotope.jfp.framework.support;
 
 import org.isotope.jfp.framework.beans.common.FrameworkDataBean;
-import org.isotope.jfp.framework.beans.user.LoginerBean;
 import org.isotope.jfp.framework.constants.ISDBConstants;
 import org.isotope.jfp.framework.utils.DateHelper;
 import org.isotope.jfp.framework.utils.EmptyHelper;
@@ -80,13 +79,13 @@ public class MyDataBaseObjectSupport extends FrameworkDataBean implements ISDBCo
 	/**
 	 * 拦截创建信息
 	 */
-	public void prepareCreator(LoginerBean loginer) {
+	public void prepareCreator() {
 	}
 
 	/**
 	 * 拦截更新信息
 	 */
-	public void prepareUpdator(LoginerBean loginer) {
+	public void prepareUpdator() {
 	}
 
 	/**

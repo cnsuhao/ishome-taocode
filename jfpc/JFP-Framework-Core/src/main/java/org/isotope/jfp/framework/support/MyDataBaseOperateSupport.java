@@ -7,11 +7,8 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.isotope.jfp.framework.beans.common.FrameworkDataBean;
 import org.isotope.jfp.framework.beans.page.PageVOSupport;
-import org.isotope.jfp.framework.beans.user.LoginerBean;
 import org.isotope.jfp.framework.constants.ISDBConstants;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
-import org.isotope.jfp.framework.support.IDatabaseSupport;
-import org.isotope.jfp.framework.support.MyDataBaseObjectSupport;
 import org.isotope.jfp.framework.utils.BeanFactoryHelper;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.SqlSessionUtils;
@@ -60,19 +57,6 @@ public class MyDataBaseOperateSupport implements ISFrameworkConstants, ISDBConst
 	protected Connection getConnection() throws SQLException {
 		SqlSessionTemplate st = (SqlSessionTemplate) getMySqlSession();
 		return SqlSessionUtils.getSqlSession(st.getSqlSessionFactory(), st.getExecutorType(), st.getPersistenceExceptionTranslator()).getConnection();
-	}
-
-	/**
-	 * 当前登录用户
-	 */
-	private LoginerBean loginer;
-
-	public LoginerBean getLoginer() {
-		if (loginer == null) {
-			loginer = new LoginerBean();
-			// loginer = SessionHelper.getSessionAttribute();
-		}
-		return loginer;
 	}
 
 	/////////////////////////
@@ -263,9 +247,8 @@ public class MyDataBaseOperateSupport implements ISFrameworkConstants, ISDBConst
 		changeTable(formParamBean, DB_INSERT);
 
 		// 有效标记、创建者、创建时间、更新者、更新时间
-		LoginerBean loginer = getLoginer();
-		formParamBean.prepareCreator(loginer);
-		formParamBean.prepareUpdator(loginer);
+		formParamBean.prepareCreator();
+		formParamBean.prepareUpdator();
 
 		return getDao().doInsert(formParamBean);
 	}
@@ -279,16 +262,14 @@ public class MyDataBaseOperateSupport implements ISFrameworkConstants, ISDBConst
 	public int doUpdate(MyDataBaseObjectSupport formParamBean) {
 		changeTable(formParamBean, DB_UPDATE);
 		// 更新者、更新时间
-		LoginerBean loginer = getLoginer();
-		formParamBean.prepareUpdator(loginer);
+		formParamBean.prepareUpdator();
 		return getDao().doUpdate(formParamBean);
 	}
 
 	public void doUpdateAll(MyDataBaseObjectSupport formParamBean) {
 		changeTable(formParamBean, DB_UPDATE);
 		// 更新者、更新时间
-		LoginerBean loginer = getLoginer();
-		formParamBean.prepareUpdator(loginer);
+		formParamBean.prepareUpdator();
 		getDao().doUpdateAll(formParamBean);
 	}
 
