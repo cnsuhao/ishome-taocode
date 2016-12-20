@@ -126,11 +126,6 @@ public class FileCacheHelper {
 	 * @param args
 	 */
 	public static void main(String[] args) throws Exception {
-		FileCacheHelper f = new FileCacheHelper();
-		FrameworkDataBean oha= new FrameworkDataBean();
-		oha.setPuk("5bb35\r\n6bdee934\r\n4a49e9c50\r\n7478384561");
-		//System.out.println(f.save("1", "f", oha));
-		//System.out.println(f.load("1", "f"));
-
+		
 	}
 }

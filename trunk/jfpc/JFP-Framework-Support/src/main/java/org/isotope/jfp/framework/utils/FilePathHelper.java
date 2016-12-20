@@ -79,7 +79,7 @@ public class FilePathHelper implements ISFrameworkConstants {
 	 */
 	public static void main(String[] args) {
 		String[] s = makeFilePath("spook.jpg");
-		// System.out.println("=="+(s[0]));
+		 System.out.println("=="+(s[0]));
 		// System.out.println("=="+(s[1]));
 		// System.out.println("=="+(s[2]));
 		// System.out.println("=="+(s[3]));

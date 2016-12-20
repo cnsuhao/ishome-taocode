@@ -17,7 +17,7 @@ public class PKHelper implements ISFrameworkConstants {
 		try {
 			for (int i = 0; i < 5; i++) {
 				String puk = creatPUKey();
-				//System.out.println("puk=="+puk.length());
+				System.out.println("puk=="+puk.length());
 				//System.out.println(UUID.randomUUID());
 			}
 		} catch (Exception e) {

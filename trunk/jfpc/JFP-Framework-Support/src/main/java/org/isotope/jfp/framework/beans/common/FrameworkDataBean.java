@@ -1,7 +1,5 @@
 package org.isotope.jfp.framework.beans.common;
 
-import javax.inject.Named;
-
 import org.isotope.jfp.framework.beans.ObjectBean;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 
@@ -12,7 +10,6 @@ import org.isotope.jfp.framework.constants.ISFrameworkConstants;
  * @version 0.1
  * @since 0.1.0 2014/2/8
  */
-
 public class FrameworkDataBean extends ObjectBean implements ISFrameworkConstants {
 
 	/**
