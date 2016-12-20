@@ -16,7 +16,7 @@ public class MyWorkSupport implements ISFrameworkConstants {
 	/**
 	 * 数据安全
 	 */
-	ISecuritySupport mySecuritySupport;
+	protected ISecuritySupport mySecuritySupport;
 	
 	public ISecuritySupport getMySecuritySupport() {
 		return mySecuritySupport;

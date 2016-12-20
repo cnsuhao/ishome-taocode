@@ -1,4 +1,4 @@
-package org.isotope.jfp.framework.support.sync;
+package org.isotope.jfp.framework.support;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -7,15 +7,12 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.isotope.jfp.framework.beans.common.FrameworkDataBean;
 import org.isotope.jfp.framework.beans.page.PageVOSupport;
-import org.isotope.jfp.framework.beans.user.UserBean;
-import org.isotope.jfp.framework.cache.session.SessionHelper;
+import org.isotope.jfp.framework.beans.user.LoginerBean;
 import org.isotope.jfp.framework.constants.ISDBConstants;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.support.IDatabaseSupport;
 import org.isotope.jfp.framework.support.MyDataBaseObjectSupport;
 import org.isotope.jfp.framework.utils.BeanFactoryHelper;
-import org.isotope.jfp.framework.utils.DateHelper;
-import org.isotope.jfp.framework.utils.EmptyHelper;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.SqlSessionUtils;
 import org.slf4j.Logger;
@@ -29,7 +26,7 @@ import org.slf4j.LoggerFactory;
  * @version 0.2.1 2014/11/05
  * @version 0.1.0 2014/2/8
  */
-public class MyServiceSupport implements ISFrameworkConstants, ISDBConstants {
+public class MyDataBaseOperateSupport implements ISFrameworkConstants, ISDBConstants {
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	/**
@@ -68,15 +65,14 @@ public class MyServiceSupport implements ISFrameworkConstants, ISDBConstants {
 	/**
 	 * 当前登录用户
 	 */
-	private UserBean loginer;
-	public UserBean getLoginer() {
-		if(loginer == null)
-			loginer = SessionHelper.getSessionAttribute();
-		return loginer;
-	}
+	private LoginerBean loginer;
 
-	protected String getLoginerId() {
-		return getLoginer().getUserId();
+	public LoginerBean getLoginer() {
+		if (loginer == null) {
+			loginer = new LoginerBean();
+			// loginer = SessionHelper.getSessionAttribute();
+		}
+		return loginer;
 	}
 
 	/////////////////////////
@@ -137,14 +133,7 @@ public class MyServiceSupport implements ISFrameworkConstants, ISDBConstants {
 	 * @return
 	 */
 	public PageVOSupport doSelectPage(PageVOSupport formParamPageModel, boolean ppp, boolean ddd) {
-		// 设定企业ID
 		FrameworkDataBean formParamBean = formParamPageModel.getFormParamBean();
-		// if (ppp && StringUtils.isEmpty(formParamBean.getPpp()))
-		// formParamBean.setPpp(getCompanyId());
-		//
-		// if (ddd && StringUtils.isEmpty(formParamBean.getDdd()))
-		// formParamBean.setDdd("0");
-
 		// 查询数据
 		changeTable((MyDataBaseObjectSupport) formParamBean, DB_SELECT);
 		formParamPageModel.setPageListData(getDao().doSelectPage(formParamPageModel));
@@ -179,12 +168,9 @@ public class MyServiceSupport implements ISFrameworkConstants, ISDBConstants {
 	 * @return
 	 */
 	public List<? extends FrameworkDataBean> doSelectData(MyDataBaseObjectSupport formParamBean, boolean ppp, boolean ddd) {
-		// 设定企业ID
-		// if (ppp && StringUtils.isEmpty(formParamBean.getPpp()))
-		// formParamBean.setPpp(getCompanyId());
-		// if (ddd && StringUtils.isEmpty(formParamBean.getDdd()))
-		// formParamBean.setDdd("0");
 		changeTable((MyDataBaseObjectSupport) formParamBean, DB_SELECT);
+		formParamBean.prepareGroup(ppp);
+		formParamBean.prepareDeleteFlag(ddd);
 		return getDao().doSelectPage(formParamBean);
 	}
 
@@ -276,38 +262,14 @@ public class MyServiceSupport implements ISFrameworkConstants, ISDBConstants {
 	public int doInsert(MyDataBaseObjectSupport formParamBean) {
 		changeTable(formParamBean, DB_INSERT);
 
-		// 主键ID
-		// if (StringUtils.isEmpty(formParamBean.getPuk()))
-		// formParamBean.setPuk(PKHelper.creatPUKey());
-
-		// // 数据所属系统
-		// if (EmptyHelper.isEmpty(formParamBean.getGgg()))
-		// formParamBean.setGgg("SYSTEM");
-		//
-		// // 企业ID
-		// if (EmptyHelper.isEmpty(formParamBean.getPpp()))
-		// formParamBean.setPpp(getCompanyId());
-		//
-		// // 有效标识
-		// if (EmptyHelper.isEmpty(formParamBean.getDdd()))
-		// formParamBean.setDdd("0");
-
 		// 有效标记、创建者、创建时间、更新者、更新时间
-		// Timestamp d = new Timestamp(System.currentTimeMillis());
-		String t = DateHelper.currentTimeMillis2();
-		String loginId = getLoginerId();
-		if (EmptyHelper.isEmpty(formParamBean.getCreateTime()))
-			formParamBean.setCreateTime(t);
-		if (EmptyHelper.isEmpty(formParamBean.getCreator()))
-			formParamBean.setCreator(loginId);
-		if (EmptyHelper.isEmpty(formParamBean.getUpdateTime()))
-			formParamBean.setUpdateTime(t);
-		if (EmptyHelper.isEmpty(formParamBean.getUpdator()))
-			formParamBean.setUpdator(loginId);
+		LoginerBean loginer = getLoginer();
+		formParamBean.prepareCreator(loginer);
+		formParamBean.prepareUpdator(loginer);
 
 		return getDao().doInsert(formParamBean);
 	}
-	
+
 	/**
 	 * 更新数据
 	 * 
@@ -317,26 +279,16 @@ public class MyServiceSupport implements ISFrameworkConstants, ISDBConstants {
 	public int doUpdate(MyDataBaseObjectSupport formParamBean) {
 		changeTable(formParamBean, DB_UPDATE);
 		// 更新者、更新时间
-		String t = DateHelper.currentTimeMillis4();
-		String loginId = getLoginerId();
-
-		if (EmptyHelper.isEmpty(formParamBean.getUpdateTime()))
-			formParamBean.setUpdateTime(t);
-		if (EmptyHelper.isEmpty(formParamBean.getUpdator()))
-			formParamBean.setUpdator(loginId);
+		LoginerBean loginer = getLoginer();
+		formParamBean.prepareUpdator(loginer);
 		return getDao().doUpdate(formParamBean);
 	}
 
 	public void doUpdateAll(MyDataBaseObjectSupport formParamBean) {
 		changeTable(formParamBean, DB_UPDATE);
 		// 更新者、更新时间
-		String t = DateHelper.currentTimeMillis4();
-		String loginId = getLoginerId();
-
-		if (EmptyHelper.isEmpty(formParamBean.getUpdateTime()))
-			formParamBean.setUpdateTime(t);
-		if (EmptyHelper.isEmpty(formParamBean.getUpdator()))
-			formParamBean.setUpdator(loginId);
+		LoginerBean loginer = getLoginer();
+		formParamBean.prepareUpdator(loginer);
 		getDao().doUpdateAll(formParamBean);
 	}
 
@@ -360,9 +312,6 @@ public class MyServiceSupport implements ISFrameworkConstants, ISDBConstants {
 	 */
 	public FrameworkDataBean doRead(MyDataBaseObjectSupport formParamBean, boolean ddd) {
 		changeTable(formParamBean, DB_SELECT);
-		// 有效标记、创建者、创建时间
-		// if (ddd && StringUtils.isEmpty(formParamBean.getDdd()))
-		// formParamBean.setDdd("0");
 		return getDao().doRead(formParamBean);
 	}
 }
