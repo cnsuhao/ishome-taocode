@@ -1,7 +1,5 @@
 package org.isotope.jfp.framework.beans.common;
 
-import javax.inject.Named;
-
 import org.isotope.jfp.framework.beans.ObjectBean;
 
 /**
