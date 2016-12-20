@@ -8,7 +8,7 @@ import org.isotope.jfp.framework.utils.EmptyHelper;
  * 
  * @author Spook
  * @since 2.3.1
- * @version 3.2.1 2018/8/8
+ * @version 3.2.1 2016/8/8
  * @version 2.3.1 2015/6/23
  * @see TokenBusinessBean
  */
@@ -24,10 +24,10 @@ public class TokenBusinessHelper implements ISFrameworkConstants {
 	/**
 	 * 交叉混淆，可以正序或者倒序，可以奇数和偶数
 	 * 
-	 * @param userid
-	 *            用户ID
 	 * @param companyid
 	 *            企业ID
+	 * @param userid
+	 *            用户ID
 	 * @param logintime
 	 *            混淆数据穿
 	 * @return tonkenString
