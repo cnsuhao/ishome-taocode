@@ -1,5 +1,6 @@
 package org.isotope.jfp.framework.support;
 
+import org.isotope.jfp.framework.beans.user.UserBean;
 import org.isotope.jfp.framework.constants.ISDBConstants;
 import org.isotope.jfp.framework.utils.DateHelper;
 import org.isotope.jfp.framework.utils.EmptyHelper;
@@ -13,28 +14,45 @@ import org.isotope.jfp.framework.utils.EmptyHelper;
  */
 public class MyDataBaseObjectSupport3 extends MyDataBaseObjectSupport implements ISDBConstants {
 	/**
+	 * 当前登录用户
+	 */
+	protected UserBean loginer;
+
+	public UserBean getLoginer() {
+		if (loginer == null) {
+			loginer = new UserBean();
+			// loginer = SessionHelper.getSessionAttribute();
+		}
+		return loginer;
+	}
+	
+	/**
 	 * 拦截创建信息
 	 */
-	public void prepareCreator(String creator) {
+	@Override	
+	public void prepareCreator() {
+		UserBean creator = getLoginer();
 		// Timestamp d = new Timestamp(System.currentTimeMillis());
 		String t = DateHelper.currentTimeMillis2();
 		if (EmptyHelper.isEmpty(getCreateTime()))
 			setCreateTime(t);
 		if (EmptyHelper.isEmpty(getCreator()))
-			setCreator(creator);
+			setCreator(creator.getUserId());
 	}
 
 	/**
 	 * 拦截更新信息
 	 */
-	public void prepareUpdator(String updator) {
+	@Override
+	public void prepareUpdator() {
+		UserBean updator = getLoginer();
 		String t = DateHelper.currentTimeMillis2();
 		if (EmptyHelper.isEmpty(getUpdateTime()))
 			setUpdateTime(t);
 		if (EmptyHelper.isEmpty(getUpdator()))
-			setUpdator(updator);
+			setUpdator(updator.getUserId());
 	}
-	
+
 	/**
 	 * 创建时间
 	 */

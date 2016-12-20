@@ -1,7 +1,7 @@
 package org.isotope.jfp.framework.support;
 
 import org.isotope.jfp.framework.beans.token.TokenBusinessBean;
-import org.isotope.jfp.framework.support.MyDataBaseOperateSupport;
+import org.isotope.jfp.framework.cache.session.SessionHelper;
 
 /**
  * 数据持久层超类
@@ -11,7 +11,7 @@ import org.isotope.jfp.framework.support.MyDataBaseOperateSupport;
  * @version 0.2.1 2014/11/05
  * @version 0.1.0 2014/2/8
  */
-public class MyDataBaseOperateSupport2 extends MyDataBaseOperateSupport {
+public class MyDataBaseOperateSupport2<T> extends MyDataBaseOperateSupport<T> {
 
 	/**
 	 * 当前登录用户
@@ -20,11 +20,7 @@ public class MyDataBaseOperateSupport2 extends MyDataBaseOperateSupport {
 
 	public TokenBusinessBean getLoginer() {
 		if (loginer == null) {
-			loginer = new TokenBusinessBean();
-			loginer.setCompanyId("99999");
-			loginer.setUserId("11111");
-			loginer.setClientType("1");
-			// loginer = SessionHelper.getSessionAttribute();
+			loginer = SessionHelper.getSessionAttribute();
 		}
 		return loginer;
 	}

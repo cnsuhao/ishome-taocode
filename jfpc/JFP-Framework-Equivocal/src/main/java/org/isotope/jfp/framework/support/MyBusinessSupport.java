@@ -45,8 +45,9 @@ public class MyBusinessSupport extends MyWorkSupport implements ISFrameworkConst
 	 * 获得企业加密Key
 	 * 
 	 * @return
+	 * @throws Exception 
 	 */
-	public static String loadSecurityKey(String CompanyId, String version, String ipAdress) {
+	public static String loadSecurityKey(String CompanyId, String version, String ipAdress) throws Exception {
 		return TokenBusinessHelper.getBizTokenData(CompanyId , version, ipAdress.replace(".", "")).substring(0,8);
 	}
 }
