@@ -82,10 +82,10 @@ public class TokenBusinessBean extends UserBean implements ISFrameworkConstants 
 
 	//
 	/// {serverId} 8
-	// -----------------/{bizName} 7
+	// -----------------/{bizName} 8
 	// ---------------------------/{encryType} 1
-	// --------/{userId} 16
-	// ---------------------------------------/{clientTimestamp} 16 (DDH24mmSS)
+	// --------/{userId} 17
+	// ---------------------------------------/{clientTimestamp} 17 (DDH24mmSS)
 	/**
 	 * 获得 一个authorizer_refresh_token（58位）
 	 * 
