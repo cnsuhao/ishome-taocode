@@ -303,6 +303,7 @@ public class DateHelper {
      }
 
     public static void main(String[] args) throws Exception {
+    	 System.out.println(currentTimeMillisCN1());
 //        //System.out.println(getDate("20150619", "yyyy/MM/dd"));
 //        //System.out.println(getDate("2015/6/19", "yyyy/MM/dd"));
 //        //System.out.println(getDate("2015-6-19", "yyyy/MM/dd"));
