@@ -1,9 +1,9 @@
 package org.isotope.jfp.framework.security;
 
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
-import org.isotope.jfp.framework.security.value.MD5SecurityHelper;
 import org.isotope.jfp.framework.security.value.PBESecurityHelper;
 import org.isotope.jfp.framework.support.ISecuritySupport;
+import org.isotope.jfp.framework.utils.TokenBusinessHelper;
 
 /**
  * 数据加密与解密处理
@@ -11,37 +11,31 @@ import org.isotope.jfp.framework.support.ISecuritySupport;
  * @author fucy
  * 
  */
-public class MySecuritySupport implements ISecuritySupport,ISFrameworkConstants {
+public class MySecuritySupport implements ISecuritySupport, ISFrameworkConstants {
+
 	/**
-	 * @param args
+	 * 获得企业加密Key
+	 * 
+	 * @return
+	 * @throws Exception
 	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	public static String loadSecurityKey(String CompanyId, String version, String ipAdress) throws Exception {
+		return TokenBusinessHelper.getBizTokenData(CompanyId, version, ipAdress.replace(".", "")).substring(0, 8);
 	}
-	
-	private String getKey(String companyId, String currentTimestamp, String companyKey, String companyToken ) throws Exception{
-		StringBuffer sb = new  StringBuffer();
-		sb.append(companyId);
-		sb.append(currentTimestamp);
-		sb.append(companyKey);
-		sb.append(companyToken);
-		
-		return MD5SecurityHelper.encrypt(sb.toString());
-	}
-	
+
 	@Override
-	public String decryption(String companyId, String data) {
+	public String decryption(String token, String data) {
 		try {
-			return PBESecurityHelper.decrypt(companyId, data);
+			return PBESecurityHelper.decrypt(token, data);
 		} catch (Exception e) {
 			return data;
 		}
 	}
-	
+
 	@Override
-	public String encryption(String companyId, String data) {
+	public String encryption(String token, String data) {
 		try {
-			return PBESecurityHelper.encrypt(getKey(companyId,null,null,null), data);
+			return PBESecurityHelper.encrypt(token, data);
 		} catch (Exception e) {
 			return data;
 		}
