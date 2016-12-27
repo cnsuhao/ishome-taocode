@@ -20,7 +20,7 @@ public class MyDataBaseObjectSupport2 extends MyDataBaseObjectSupport implements
 	 */
 	protected TokenBusinessBean loginer;
 
-	public TokenBusinessBean getLoginer() {
+	private TokenBusinessBean getLoginer() {
 		if (loginer == null) {
 			loginer = SessionHelper.getSessionAttribute();
 		}

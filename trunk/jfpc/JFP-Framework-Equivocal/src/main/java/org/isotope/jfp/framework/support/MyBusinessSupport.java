@@ -1,10 +1,11 @@
 package org.isotope.jfp.framework.support;
 
+import java.util.List;
+
 import org.isotope.jfp.framework.beans.common.RESTResultBean;
 import org.isotope.jfp.framework.beans.token.TokenBusinessBean;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.constants.pub.ISModelConstants;
-import org.isotope.jfp.framework.utils.TokenBusinessHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,27 +28,22 @@ public class MyBusinessSupport extends MyWorkSupport implements ISFrameworkConst
 	public void setResult(RESTResultBean result) {
 		this.result = result;
 	}
-
+	public void setResult(List<? extends MyDataBaseObjectSupport> list) {
+		this.result = new RESTResultBean();
+		this.result.setResult(list);
+	}
+	
+	public void setResult(MyDataBaseObjectSupport data) {
+		this.result = new RESTResultBean();
+		this.result.setResult(data);
+	}
+	
 	/**
 	 * 用户令牌
 	 */
 	protected TokenBusinessBean tokenBean;
 
-	public TokenBusinessBean getTokenBean() {
-		return tokenBean;
-	}
-
 	public void setTokenBean(TokenBusinessBean tokenBean) {
 		this.tokenBean = tokenBean;
-	}
-	
-	/**
-	 * 获得企业加密Key
-	 * 
-	 * @return
-	 * @throws Exception 
-	 */
-	public static String loadSecurityKey(String CompanyId, String version, String ipAdress) throws Exception {
-		return TokenBusinessHelper.getBizTokenData(CompanyId , version, ipAdress.replace(".", "")).substring(0,8);
 	}
 }

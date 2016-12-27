@@ -1,10 +1,8 @@
 package org.isotope.jfp.framework.beans.token;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import org.isotope.jfp.framework.beans.user.UserBean;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
+import org.isotope.jfp.framework.utils.DateHelper;
 import org.isotope.jfp.framework.utils.EmptyHelper;
 import org.isotope.jfp.framework.utils.TokenBusinessHelper;
 
@@ -21,16 +19,20 @@ public class TokenBusinessBean extends UserBean implements ISFrameworkConstants 
 
 	}
 
-	public TokenBusinessBean(String serverId, String bizName, String encryType, String userId, String clientTimestamp) {
+	public TokenBusinessBean(String serverId, String bizId, String encryType, String userId) {
+		this(serverId, bizId, encryType, userId, DateHelper.currentTimeMillis0() + "13");
+	}
+
+	public TokenBusinessBean(String serverId, String bizId, String encryType, String userId, String clientTimestamp) {
 		this.serverId = serverId;
-		this.bizName = bizName;
+		this.bizId = bizId;
 		this.encryType = encryType;
 		this.setUserId(userId);
 		this.clientTimestamp = clientTimestamp;
 	}
 
 	public static void main(String[] args) throws Exception {
-		String token = getBizToken("12345678", "2223334", "1", "1234567890123456", "6543210987654321");
+		String token = getBizToken("12345678", "22233344", "1", "12345678901234567", "76543210987654321");
 		System.out.println((token));
 		System.out.println(build(token));
 	}
@@ -40,15 +42,15 @@ public class TokenBusinessBean extends UserBean implements ISFrameworkConstants 
 	 * 
 	 * @param serverId
 	 * @param userId
-	 * @param bizName
+	 * @param bizId
 	 * @param encryType
 	 *            E:加密,D:解密
 	 * @param clientTimestamp
 	 * @return
 	 * @throws Exception
 	 */
-	public static String getBizToken(String serverId, String bizName, String encryType, String userId, String clientTimestamp) throws Exception {
-		return TokenBusinessHelper.getBizTokenData(serverId + bizName + encryType, userId, clientTimestamp);
+	public static String getBizToken(String serverId, String bizId, String encryType, String userId, String clientTimestamp) throws Exception {
+		return TokenBusinessHelper.getBizTokenData(serverId + bizId + encryType, userId, clientTimestamp);
 	}
 
 	/**
@@ -66,23 +68,23 @@ public class TokenBusinessBean extends UserBean implements ISFrameworkConstants 
 
 		String t = token[0];
 		String serverId = t.substring(0, 8);
-		String bizName = t.substring(8, 15);
-		String encryType = t.substring(15);
+		String bizId = t.substring(8, 16);
+		String encryType = t.substring(16);
 
 		String userId = token[1];
 		String requestDateTime = token[2];
 
-//		System.out.println(serverId);
-//		System.out.println(bizName);
-//		System.out.println(encryType);
-//		System.out.println(userId);
-//		System.out.println(requestDateTime);
-		return new String[] { serverId, bizName, encryType, userId, requestDateTime };
+		// System.out.println(serverId);
+		// System.out.println(bizId);
+		// System.out.println(encryType);
+		// System.out.println(userId);
+		// System.out.println(requestDateTime);
+		return new String[] { serverId, bizId, encryType, userId, requestDateTime };
 	}
 
 	//
 	/// {serverId} 8
-	// -----------------/{bizName} 8
+	// -----------------/{bizId} 8
 	// ---------------------------/{encryType} 1
 	// --------/{userId} 17
 	// ---------------------------------------/{clientTimestamp} 17 (DDH24mmSS)
@@ -96,7 +98,7 @@ public class TokenBusinessBean extends UserBean implements ISFrameworkConstants 
 		TokenBusinessBean tokenBean = new TokenBusinessBean();
 		String[] ds = getBizTokenData(bizToken);
 		tokenBean.setServerId(ds[0]);
-		tokenBean.setBizName(ds[1]);
+		tokenBean.setBizId(ds[1]);
 		tokenBean.setEncryType(ds[2]);
 		tokenBean.setUserId(ds[3]);
 		tokenBean.setClientTimestamp(ds[4]);
@@ -114,7 +116,7 @@ public class TokenBusinessBean extends UserBean implements ISFrameworkConstants 
 	 * @throws Exception
 	 */
 	public static String getBizToken(TokenBusinessBean bizTokenBean) throws Exception {
-		return TokenBusinessHelper.getBizTokenData(bizTokenBean.getServerId(), bizTokenBean.getUserId(), bizTokenBean.getBizName() + bizTokenBean.getEncryType(), bizTokenBean.getClientTimestamp());
+		return TokenBusinessHelper.getBizTokenData(bizTokenBean.getServerId() + bizTokenBean.getBizId() + bizTokenBean.getEncryType(), bizTokenBean.getUserId(), bizTokenBean.getClientTimestamp());
 	}
 
 	public void setToken(String token) {
@@ -124,18 +126,11 @@ public class TokenBusinessBean extends UserBean implements ISFrameworkConstants 
 	public String getToken() {
 		if (EmptyHelper.isEmpty(token))
 			try {
-				token = TokenBusinessHelper.getBizTokenData(serverId, getUserId(), bizName + encryType, clientTimestamp);
+				token = TokenBusinessHelper.getBizTokenData(serverId + bizId + encryType, getUserId(), clientTimestamp);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		return token;
-	}
-
-	/////////////////////////////////////////////
-	// TODO
-	public void chageToken() {
-		SimpleDateFormat format = new SimpleDateFormat("YYMMddHHmmss");
-		clientTimestamp = format.format(new Date());
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -146,7 +141,7 @@ public class TokenBusinessBean extends UserBean implements ISFrameworkConstants 
 	/**
 	 * 业务标识
 	 */
-	private String bizName;
+	private String bizId;
 	/**
 	 * 加密模式
 	 */
@@ -164,12 +159,12 @@ public class TokenBusinessBean extends UserBean implements ISFrameworkConstants 
 		this.serverId = serverId;
 	}
 
-	public String getBizName() {
-		return bizName;
+	public String getBizId() {
+		return bizId;
 	}
 
-	public void setBizName(String bizName) {
-		this.bizName = bizName;
+	public void setBizId(String bizId) {
+		this.bizId = bizId;
 	}
 
 	public String getEncryType() {
