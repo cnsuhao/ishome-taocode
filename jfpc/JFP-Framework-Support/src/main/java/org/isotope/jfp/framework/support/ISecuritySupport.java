@@ -10,11 +10,12 @@ public interface ISecuritySupport {
 	/**
 	 * 加密
 	 */
-	public static final String ENCRYPTION = "E";
+	public static final String ENCRYPTION = "1";
+	
 	/**
-	 * 解密
+	 * 未加密
 	 */
-	public static final String DECRYPTION= "D";
+	public static final String DECRYPTION= "0";
 	
 	/**
 	 * 数据解密
