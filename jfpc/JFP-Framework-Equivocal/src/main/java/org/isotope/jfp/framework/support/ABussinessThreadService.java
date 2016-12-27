@@ -7,13 +7,15 @@ import org.isotope.jfp.framework.biz.common.ISSave;
 import org.isotope.jfp.framework.biz.common.ISToken;
 import org.isotope.jfp.framework.utils.EmptyHelper;
 
+import com.alibaba.fastjson.JSON;
+
 /**
  * 异步线程处理父类
  * 
  * @author 001745
  *
  */
-public abstract class ABussinessThreadService extends MyBusinessSupport implements ISToken,ISProcess, ISInit, ISCheck, ISSave, Runnable {
+public abstract class ABussinessThreadService extends MyBusinessSupport implements ISToken, ISProcess, ISInit, ISCheck, ISSave, Runnable {
 	/**
 	 * 业务请求版本号
 	 */
@@ -39,7 +41,7 @@ public abstract class ABussinessThreadService extends MyBusinessSupport implemen
 	public void setParamValue(String paramValue) {
 		this.paramValue = paramValue;
 	}
-	
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////
 	@Override
 	public void run() {
@@ -83,12 +85,12 @@ public abstract class ABussinessThreadService extends MyBusinessSupport implemen
 		return true;
 	}
 
-//	public boolean doSave() throws Exception {
-//		// 变更Token
-//		chageToken();
-//		// 保存Token
-//		return saveToken();
-//	}
+	public boolean doSave() throws Exception {
+		// 变更Token
+		chageToken();
+		// 保存Token
+		return saveToken();
+	}
 
 	@Override
 	public boolean doCheck() throws Exception {
@@ -106,43 +108,47 @@ public abstract class ABussinessThreadService extends MyBusinessSupport implemen
 		return checkToken();
 	}
 
-	/////////////////////////////////////
-//
-//	public String getBizName() {
-//		if (EmptyHelper.isEmpty(token))
-//			return this.getClass().getSimpleName().replace("BussinessService", "");
-//		return token.getBizName();
-//	}
-//
-	////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	@Override
 	public boolean checkToken() throws Exception {
 		try {
+			//获得历史Token
 			String tokenCatch = (String) myCacheService.getObject(tokenBean.getUserId(), false);
 			if (logger.isDebugEnabled())
 				logger.debug(" doCheck.checkToken()=====tokenCatch>>>>>" + tokenCatch);
-			if (getToken().equals(tokenCatch))
+			//是否需要支持可变Token
+			if (EmptyHelper.isNotEmpty(tokenCatch)){
+				chageToken();
 				return true;
+			}
 		} catch (Exception r) {
 
 		}
 		return false;
 	}
-
 	/**
 	 * @see waitTimeSecond
 	 */
 	@Override
 	public boolean saveToken() throws Exception {
-		return myCacheService.putObject(tokenBean.getUserId(), getToken(), waitTimeSecond, false);
-	}/**
+		return myCacheService.putObject(tokenBean.getUserId(), JSON.toJSONString(tokenBean), waitTimeSecond, false);
+	}
+
+	/**
 	 * 更新Token令牌内容
 	 */
-	public boolean chageToken() throws Exception{return true;}
+	public boolean chageToken() throws Exception {
+		
+		
+		return saveToken();
+	}
+
 	/**
-	 *  返回加密后Token令牌内容
+	 * 返回Token令牌内容
 	 */
-	public String getToken() throws Exception{return "";}
+	public String getToken() throws Exception {
+		return tokenBean.getToken();
+	}
 
 }
