@@ -25,23 +25,23 @@ public class HttpRequestHelper {
 	 * @return
 	 */
 	public static String getServerLocalIPAddr() {
-		InetAddress addr = null;
-		try {
-			addr = InetAddress.getLocalHost();
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		}
-		byte[] ipAddr = addr.getAddress();
 		String ipAddrStr = "";
-		for (int i = 0; i < ipAddr.length; i++) {
-			if (i > 0) {
-				ipAddrStr += ".";
+		try {
+			InetAddress addr = InetAddress.getLocalHost();
+			byte[] ipAddr = addr.getAddress();
+			for (int i = 0; i < ipAddr.length; i++) {
+				if (i > 0) {
+					ipAddrStr += ".";
+				}
+				ipAddrStr += ipAddr[i] & 0xFF;
 			}
-			ipAddrStr += ipAddr[i] & 0xFF;
+		} catch (Exception e) {
+			e.printStackTrace();
+			ipAddrStr = "127.0.0.1";
 		}
-		// System.out.println(ipAddrStr);
 		return ipAddrStr;
 	}
+	
 	/**
 	 * 获得远程客户端IP地址
 	 * @param request
