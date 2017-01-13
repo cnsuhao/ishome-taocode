@@ -159,7 +159,7 @@ public class JedisMasterUtil implements IJedisSupport {
 		} catch (JedisConnectionException e) {
 			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			logger.warn(e.getMessage());
 		} finally {
 			close(jd);
 		}
@@ -187,7 +187,7 @@ public class JedisMasterUtil implements IJedisSupport {
 		} catch (JedisConnectionException e) {
 			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			logger.warn(e.getMessage());
 		} finally {
 			close(oldJedis);
 			close(newJedis);
@@ -209,7 +209,7 @@ public class JedisMasterUtil implements IJedisSupport {
 		} catch (JedisConnectionException e) {
 			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
-			logger.error("get value from redis error[key:" + key + "]", e);
+			logger.warn("get value from redis error[key:" + key + "] : " + e.getMessage());
 		} finally {
 			close(jedis);
 		}
@@ -237,7 +237,7 @@ public class JedisMasterUtil implements IJedisSupport {
 		} catch (JedisConnectionException e) {
 			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
-			logger.error("get value from redis error[key:" + key + "]", e);
+			logger.warn("get value from redis error[key:" + key + "] : " + e.getMessage());
 		} finally {
 			close(jedis);
 		}
@@ -269,7 +269,7 @@ public class JedisMasterUtil implements IJedisSupport {
 		} catch (JedisConnectionException e) {
 			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
-			logger.error("get value from redis error[key:" + key + "]", e);
+			logger.warn("get value from redis error[key:" + key + "] : " + e.getMessage());
 		} finally {
 			close(jedis);
 		}
@@ -302,7 +302,7 @@ public class JedisMasterUtil implements IJedisSupport {
 		} catch (JedisConnectionException e) {
 			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
-			logger.error("hgetall key from redis error[key:" + key + "]", e);
+			logger.warn("hgetall key from redis error[key:" + key + "] : " + e.getMessage());
 		} finally {
 			close(jedis);
 		}
@@ -327,7 +327,7 @@ public class JedisMasterUtil implements IJedisSupport {
 		} catch (JedisConnectionException e) {
 			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
-			logger.error("hdel key from redis error[key:" + rkey + "],[" + mkey + "]", e);
+			logger.warn("hdel key from redis error[key:" + rkey + "],[" + mkey + "] : " + e.getMessage());
 		} finally {
 			close(jedis);
 		}
@@ -349,7 +349,7 @@ public class JedisMasterUtil implements IJedisSupport {
 		} catch (JedisConnectionException e) {
 			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
-			logger.error("hget key from redis error[key:" + rkey + "],[" + mkey + "]", e);
+			logger.warn("hget key from redis error[key:" + rkey + "],[" + mkey + "] : " + e.getMessage());
 		} finally {
 			close(jedis);
 		}
@@ -371,7 +371,7 @@ public class JedisMasterUtil implements IJedisSupport {
 		} catch (JedisConnectionException e) {
 			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
-			logger.error("hset key from redis error[key:" + rkey + "],[" + mkey + "]", e);
+			logger.warn("hset key from redis error[key:" + rkey + "],[" + mkey + "] : " + e.getMessage());
 		} finally {
 			close(jedis);
 		}
@@ -408,7 +408,7 @@ public class JedisMasterUtil implements IJedisSupport {
 			} catch (JedisConnectionException e) {
 				throw new RuntimeException("The Redis Server can't connect ......");
 			} catch (Exception e) {
-				logger.error("add key[" + key + "] to redis error[" + failedNum + "] ", e);
+				logger.warn("add key[" + key + "] to redis error[" + failedNum + "]  : " + e.getMessage());
 				add(key, value, expireTime, ++failedNum);
 			} finally {
 				close(jedis);
@@ -442,7 +442,7 @@ public class JedisMasterUtil implements IJedisSupport {
 			} catch (JedisConnectionException e) {
 				throw new RuntimeException("The Redis Server can't connect ......");
 			} catch (Exception e) {
-				logger.error("publish message[" + message + "] to channel[" + channel + "] error[" + failedNum + "] : " + e.getMessage());
+				logger.warn("publish message[" + message + "] to channel[" + channel + "] error[" + failedNum + "] : " + e.getMessage());
 
 				publish(channel, message, failedNum++);
 			} finally {
@@ -480,7 +480,7 @@ public class JedisMasterUtil implements IJedisSupport {
 			} catch (JedisConnectionException e) {
 				throw new RuntimeException("The Redis Server can't connect ......");
 			} catch (Exception e) {
-				logger.error("queuePublish message[" + message + "] to channel[" + channel + "] error[" + failedNum + "] : " + e.getMessage());
+				logger.warn("queuePublish message[" + message + "] to channel[" + channel + "] error[" + failedNum + "] : " + e.getMessage());
 
 				queuePublish(key, channel, message, failedNum++);
 			} finally {
@@ -504,7 +504,7 @@ public class JedisMasterUtil implements IJedisSupport {
 		} catch (JedisConnectionException e) {
 			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
-			logger.error("subscribe from redis error[channel:" + channel + "]", e);
+			logger.warn("subscribe from redis error[channel:" + channel + "] : " + e.getMessage());
 		} finally {
 			close(jedis);
 		}
@@ -524,7 +524,7 @@ public class JedisMasterUtil implements IJedisSupport {
 		} catch (JedisConnectionException e) {
 			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
-			logger.error("listAdd from redis error[key:" + key + "]", e);
+			logger.warn("listAdd from redis error[key:" + key + "] : " + e.getMessage());
 		} finally {
 			close(jedis);
 		}
@@ -548,7 +548,7 @@ public class JedisMasterUtil implements IJedisSupport {
 		} catch (JedisConnectionException e) {
 			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
-			logger.error("blistPop from redis error[key:" + key + "]", e);
+			logger.warn("blistPop from redis error[key:" + key + "] : " + e.getMessage());
 		} finally {
 			close(jedis);
 		}
@@ -569,7 +569,7 @@ public class JedisMasterUtil implements IJedisSupport {
 		} catch (JedisConnectionException e) {
 			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
-			logger.error("listPop from redis error[key:" + key + "]", e);
+			logger.warn("listPop from redis error[key:" + key + "] : " + e.getMessage());
 		} finally {
 			close(jedis);
 		}
@@ -590,7 +590,7 @@ public class JedisMasterUtil implements IJedisSupport {
 		} catch (JedisConnectionException e) {
 			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
-			logger.error("listAll from redis error[key:" + key + "]", e);
+			logger.warn("listAll from redis error[key:" + key + "] : " + e.getMessage());
 		} finally {
 			close(jedis);
 		}
@@ -612,7 +612,7 @@ public class JedisMasterUtil implements IJedisSupport {
 		} catch (JedisConnectionException e) {
 			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
-			logger.error("get value from redis error[key:" + key + "]", e);
+			logger.warn("The [key:" + key + "] is not exist : " + e.getMessage());
 		} finally {
 			close(jedis);
 		}
@@ -635,7 +635,7 @@ public class JedisMasterUtil implements IJedisSupport {
 		} catch (JedisConnectionException e) {
 			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
-			logger.error("get value from redis error[key:" + key + "]", e);
+			logger.warn("get value from redis error[key:" + key + "] : " + e.getMessage());
 		} finally {
 			close(jedis);
 		}
@@ -663,7 +663,7 @@ public class JedisMasterUtil implements IJedisSupport {
 		} catch (JedisConnectionException e) {
 			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
-			logger.error("listPopAll from redis error[key:" + key + "]", e);
+			logger.warn("listPopAll from redis error[key:" + key + "] : " + e.getMessage());
 		} finally {
 			close(jedis);
 		}
@@ -684,7 +684,7 @@ public class JedisMasterUtil implements IJedisSupport {
 		} catch (JedisConnectionException e) {
 			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
-			logger.error("listDel from redis error[key:" + key + "]", e);
+			logger.warn("listDel from redis error[key:" + key + "] : " + e.getMessage());
 		} finally {
 			close(jedis);
 		}
@@ -708,7 +708,7 @@ public class JedisMasterUtil implements IJedisSupport {
 		} catch (JedisConnectionException e) {
 			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
-			logger.error("listDel from redis error[key:" + key + "]", e);
+			logger.warn("listDel from redis error[key:" + key + "] : " + e.getMessage());
 		} finally {
 			close(jedis);
 		}
@@ -728,7 +728,7 @@ public class JedisMasterUtil implements IJedisSupport {
 		} catch (JedisConnectionException e) {
 			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
-			logger.error("setAdd from redis error[key:" + key + "]", e);
+			logger.warn("setAdd from redis error[key:" + key + "] : " + e.getMessage());
 		} finally {
 			close(jedis);
 		}
@@ -749,7 +749,7 @@ public class JedisMasterUtil implements IJedisSupport {
 		} catch (JedisConnectionException e) {
 			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
-			logger.error("setDel from redis error[key:" + key + "]", e);
+			logger.warn("setDel from redis error[key:" + key + "] : " + e.getMessage());
 		} finally {
 			close(jedis);
 		}
@@ -774,7 +774,7 @@ public class JedisMasterUtil implements IJedisSupport {
 		} catch (JedisConnectionException e) {
 			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
-			logger.error("setDelAll from redis error[key:" + key + "]", e);
+			logger.warn("setDelAll from redis error[key:" + key + "] : " + e.getMessage());
 		} finally {
 			close(jedis);
 		}
@@ -795,7 +795,7 @@ public class JedisMasterUtil implements IJedisSupport {
 		} catch (JedisConnectionException e) {
 			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
-			logger.error("setCount from redis error[key:" + key + "]", e);
+			logger.warn("setCount from redis error[key:" + key + "] : " + e.getMessage());
 		} finally {
 			close(jedis);
 		}
@@ -816,7 +816,7 @@ public class JedisMasterUtil implements IJedisSupport {
 		} catch (JedisConnectionException e) {
 			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
-			logger.error("setAll from redis error[key:" + key + "]", e);
+			logger.warn("setAll from redis error[key:" + key + "] : " + e.getMessage());
 		} finally {
 			close(jedis);
 		}
@@ -837,7 +837,7 @@ public class JedisMasterUtil implements IJedisSupport {
 		} catch (JedisConnectionException e) {
 			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
-			logger.error("expire from redis error[key:" + key + "]", e);
+			logger.warn("expire from redis error[key:" + key + "] : " + e.getMessage());
 		} finally {
 			close(jedis);
 		}
@@ -857,7 +857,7 @@ public class JedisMasterUtil implements IJedisSupport {
 		} catch (JedisConnectionException e) {
 			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
-			logger.error("setnx from redis error[key:" + key + "]", e);
+			logger.warn("setnx from redis error[key:" + key + "] : " + e.getMessage());
 		} finally {
 			close(jedis);
 		}
@@ -902,7 +902,7 @@ public class JedisMasterUtil implements IJedisSupport {
 		} catch (JedisConnectionException e) {
 			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
-			logger.error("get value from redis error[key:" + key + "]", e);
+			logger.warn("get value from redis error[key:" + key + "] : " + e.getMessage());
 		} finally {
 			close(jedis);
 		}
@@ -919,7 +919,7 @@ public class JedisMasterUtil implements IJedisSupport {
 		} catch (JedisConnectionException e) {
 			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
-			logger.error("get value from redis error[key:" + key + "]", e);
+			logger.warn("get value from redis error[key:" + key + "] : " + e.getMessage());
 		} finally {
 			close(jedis);
 		}
@@ -934,7 +934,7 @@ public class JedisMasterUtil implements IJedisSupport {
 		} catch (JedisConnectionException e) {
 			throw new RuntimeException("The Redis Server can't connect ......");
 		} catch (Exception e) {
-			logger.error("get value from redis error[key:" + key + "]", e);
+			logger.warn("get value from redis error[key:" + key + "] : " + e.getMessage());
 		} finally {
 			close(jedis);
 		}
