@@ -29,6 +29,16 @@ public class MyTaskSupport extends MyWorkSupport implements ISJobConstants, ISPr
 		this.jobKey = jobKey;
 	}
 
+	int index = 0;
+
+	public int getIndex() {
+		return index;
+	}
+
+	public void setIndex(int index) {
+		this.index = index;
+	}
+
 	/**
 	 * 设置任务为执行状态
 	 * 
@@ -36,8 +46,9 @@ public class MyTaskSupport extends MyWorkSupport implements ISJobConstants, ISPr
 	 * @throws InterruptedException
 	 */
 	protected boolean startLock() {
-		myCacheService.init();
+		myCacheService.selectDB(index);
 		myCacheService.putObject(jobKey, JOB_FLAG_RUNNING, waitTimeSecond, false);
+		myCacheService.init();
 		return true;
 	}
 
@@ -47,8 +58,10 @@ public class MyTaskSupport extends MyWorkSupport implements ISJobConstants, ISPr
 	 * @param jobName
 	 */
 	protected boolean checkLock() {
+		myCacheService.selectDB(index);
+		Object o = myCacheService.getObject(jobKey, false);
 		myCacheService.init();
-		return EmptyHelper.isEmpty(myCacheService.getObject(jobKey, false));
+		return EmptyHelper.isEmpty(o);
 	}
 
 	/**
@@ -57,8 +70,9 @@ public class MyTaskSupport extends MyWorkSupport implements ISJobConstants, ISPr
 	 * @param jobName
 	 */
 	protected boolean errorLock() {
-		myCacheService.init();
+		myCacheService.selectDB(index);
 		myCacheService.putObject(jobKey, JOB_FLAG_ERROR, waitTimeSecond, false);
+		myCacheService.init();
 		return true;
 	}
 
@@ -77,7 +91,7 @@ public class MyTaskSupport extends MyWorkSupport implements ISJobConstants, ISPr
 		// 防止并发，随机休眠
 		{
 			Random rd = new Random();
-			Thread.sleep((long) (100 + rd.nextDouble() * 1000));
+			Thread.sleep(rd.nextInt(10) * 1000);
 		}
 
 		if (checkLock() == false)
