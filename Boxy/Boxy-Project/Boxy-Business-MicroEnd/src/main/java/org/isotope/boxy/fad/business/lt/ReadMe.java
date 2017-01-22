@@ -1,8 +1,8 @@
-package org.isotope.boxy.fad.raw.plus;
+package org.isotope.boxy.fad.business.lt;
 
 /**
- * 加成设定数据<br>
- * Raw-Prop
+ * 幸运树<br>
+ * Lucky Tree
  * @author fucy
  * @version 0.0.1
  * @since 3.1.2 2017/01/20

@@ -1,8 +1,8 @@
-package org.isotope.boxy.fad.business.life;
+package org.isotope.boxy.fad.business.ts;
 
 /**
- * 生活技能<br>
- * Business-Life
+ * 温泉泡点<br>
+ * thermal spring
  * @author fucy
  * @version 0.0.1
  * @since 3.1.2 2017/01/20

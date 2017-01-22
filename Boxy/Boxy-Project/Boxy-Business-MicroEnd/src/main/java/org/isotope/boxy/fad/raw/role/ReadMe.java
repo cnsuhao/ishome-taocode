@@ -1,4 +1,4 @@
-package org.isotope.boxy.fad.role;
+package org.isotope.boxy.fad.raw.role;
 
 /**
  * 全局，模拟沙盘游戏

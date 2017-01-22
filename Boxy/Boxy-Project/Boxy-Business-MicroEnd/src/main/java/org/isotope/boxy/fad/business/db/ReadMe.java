@@ -1,8 +1,8 @@
-package org.isotope.boxy.fad.business.activity;
+package org.isotope.boxy.fad.business.db;
 
 /**
- * 系统活动<br>
- * Business-Activity
+ * 漂流瓶<br>
+ * drift bottle
  * @author fucy
  * @version 0.0.1
  * @since 3.1.2 2017/01/20

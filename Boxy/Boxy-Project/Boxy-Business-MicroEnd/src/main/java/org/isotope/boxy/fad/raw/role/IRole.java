@@ -1,4 +1,4 @@
-package org.isotope.boxy.fad.role;
+package org.isotope.boxy.fad.raw.role;
 
 /**
  * 玩家角色
