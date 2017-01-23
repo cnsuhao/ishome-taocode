@@ -4,10 +4,10 @@ import java.util.HashMap;
 
 import javax.annotation.Resource;
 
+import org.isotope.boxy.bean.MessageBean;
 import org.isotope.boxy.common.AGameBussinessService;
 import org.isotope.boxy.fad.bean.FADPlayerRoleBean;
 import org.isotope.boxy.fad.bean.item.FADBottleBean;
-import org.isotope.boxy.fad.bean.item.FADMessageBean;
 import org.isotope.boxy.fad.business.common.FADBottleSeaServiceImpl;
 import org.isotope.boxy.fad.business.role.FADPlayerRoleServiceImpl;
 import org.isotope.jfp.framework.beans.common.RESTResultBean;
@@ -24,7 +24,7 @@ import com.alibaba.fastjson.JSONObject;
  *
  */
 @Service("DriftBottle")
-public class DriftBottleServiceImpl extends AGameBussinessService {
+public class FADDriftBottleServiceImpl extends AGameBussinessService {
 	@Resource
 	FADPlayerRoleServiceImpl PlayerRoleServiceImpl_;
 	@Resource
@@ -61,13 +61,14 @@ public class DriftBottleServiceImpl extends AGameBussinessService {
 			bottle.setSendTime(DateHelper.currentTimeMillis2());
 
 			// 设定消息信息
-			FADMessageBean message = new FADMessageBean();
+			MessageBean message = new MessageBean();
 			message.setMessage("" + paramData.get("message"));
 			message.setSendTime(DateHelper.currentTimeMillis2());
+			message.setSender(role.getRoleID());
 			bottle.addMessages(message);
 			
 			// 保存瓶子
-			BottleSeaServiceImpl_.addRoleBottles(role, bottle);
+			BottleSeaServiceImpl_.addRoleBottle(role, bottle);
 			// 保存数据计算结果
 			role.setCastNum(castNum);
 			role.setVigour(vigour);
@@ -110,7 +111,7 @@ public class DriftBottleServiceImpl extends AGameBussinessService {
 			// 设定接收者
 			bottle.setReceiver(role.getRoleID());
 			// 保存瓶子
-			role.addRoleBottles(bottle);
+			role.addRoleBottle(bottle);
 			// 保存数据计算结果
 			role.setPickUp(pickUp);
 			role.setVigour(vigour);

@@ -1,11 +1,11 @@
-package org.isotope.boxy.fad.business.ww;
+package org.isotope.boxy.fad.business.lt;
 
 import javax.annotation.Resource;
 
 import org.isotope.boxy.common.AGameBussinessService;
 import org.isotope.boxy.fad.bean.FADPlayerRoleBean;
-import org.isotope.boxy.fad.bean.item.FADCardBean;
-import org.isotope.boxy.fad.business.common.FADCardWallServiceImpl;
+import org.isotope.boxy.fad.bean.item.FADLotteryBean;
+import org.isotope.boxy.fad.business.common.FADLotteryTicketServiceImpl;
 import org.isotope.boxy.fad.business.role.FADPlayerRoleServiceImpl;
 import org.isotope.jfp.framework.beans.common.RESTResultBean;
 import org.isotope.jfp.framework.utils.DateHelper;
@@ -13,29 +13,26 @@ import org.isotope.jfp.framework.utils.PKHelper;
 import org.springframework.stereotype.Service;
 
 /**
- * 许愿墙<br>
- * Wishing Wall
+ * 幸运树
  * 
  * @author 001745
- * @version 0.0.1
- * @since 3.1.2 2017/01/20
  *
  */
-@Service("WishingWall")
-public class FADWishingWallServiceImpl extends AGameBussinessService {
+@Service("LuckyTree")
+public class FADLuckyTreeServiceImpl extends AGameBussinessService {
 	@Resource
 	FADPlayerRoleServiceImpl PlayerRoleServiceImpl_;
-	@Resource
-	FADCardWallServiceImpl FADCardWallServiceImpl_;
-
+@Resource
+	FADLotteryTicketServiceImpl FADLotteryTicketServiceImpl_;
 	/**
 	 * 扔瓶子(玩家扔掉)
 	 */
-	public boolean castCard(String roleID) throws Exception {// 获得当前角色
+	public boolean lotteryDraw(String roleID) throws Exception {
+		// 获得当前角色
 		FADPlayerRoleBean role = PlayerRoleServiceImpl_.loadRole(roleID);
 		// 获得扔瓶子次数
-		int wishNum = role.getWishNum() - 1;
-		if (wishNum < 0) {
+		int lotteryNum = role.getLotteryNum() - 1;
+		if (lotteryNum < 0) {
 			result.setCode(ONE);
 			result.setMessage("已经达到最大次数");
 			return false;
@@ -49,20 +46,20 @@ public class FADWishingWallServiceImpl extends AGameBussinessService {
 		}
 		{
 			// 获得一个瓶子
-			FADCardBean card = new FADCardBean();
-			card.setCardID(PKHelper.creatBarCodeKey());
+			FADLotteryBean bottle = new FADLotteryBean();
+			bottle.setLotteryID(PKHelper.creatBarCodeKey());
 			// 设定发送者
-			card.setSender(role.getRoleID());
+			bottle.setPurchaser(role.getRoleID());
 			// 设定开始时间
-			card.setSendTime(DateHelper.currentTimeMillis2());
-
-			// 设定消息信息
-			card.setMessage("" + paramData.get("message"));
-
-			// 保存许愿卡
-			FADCardWallServiceImpl_.addRoleCard(role, card);
+			bottle.setBuyingTime(DateHelper.currentTimeMillis2());
+			// TODO 设定中奖号码
+			bottle.setLotteryNumber(FADLotteryTicketServiceImpl_.loadLotteryNumber());
+			
+			
+			// 保存彩票
+			BottleSeaServiceImpl_.addRoleBottle(role, bottle);
 			// 保存数据计算结果
-			role.setWishNum(wishNum);
+			role.setLotteryNum(lotteryNum);
 			role.setVigour(vigour);
 			// 保存最终结果,保存玩家数据
 			PlayerRoleServiceImpl_.updateRole(role);
@@ -72,12 +69,14 @@ public class FADWishingWallServiceImpl extends AGameBussinessService {
 		return true;
 	}
 
+
 	@Override
 	public boolean doGameAction() throws Exception {
 		result = new RESTResultBean();
-		if ("castCard".equals(tokenBean.getBizId())) {
-			return castCard(tokenBean.getUserId());
-		}
+		if ("lotteryDraw".equals(tokenBean.getBizId())) {
+			return lotteryDraw(tokenBean.getUserId());
+		} 
+
 		return false;
 	}
 

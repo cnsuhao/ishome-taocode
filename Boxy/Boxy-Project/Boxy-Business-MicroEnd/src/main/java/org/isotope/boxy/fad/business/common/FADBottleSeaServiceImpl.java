@@ -31,9 +31,9 @@ public class FADBottleSeaServiceImpl {
 		return seaBottles.pop();
 	}
 
-	public void addRoleBottles(FADPlayerRoleBean role, FADBottleBean bottle) {
+	public void addRoleBottle(FADPlayerRoleBean role, FADBottleBean bottle) {
 		//保存到当前玩家信息
-		role.addRoleBottles(bottle);
+		role.addRoleBottle(bottle);
 		//TODO 保存到公共区域
 		seaBottles.add(bottle);
 	}

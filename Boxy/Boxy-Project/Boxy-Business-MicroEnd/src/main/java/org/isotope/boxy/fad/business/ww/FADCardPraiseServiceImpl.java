@@ -1,39 +1,36 @@
-package org.isotope.boxy.fad.business.db;
+package org.isotope.boxy.fad.business.ww;
 
 import javax.annotation.Resource;
 
 import org.isotope.boxy.bean.MessageBean;
 import org.isotope.boxy.common.AGameBussinessService;
 import org.isotope.boxy.fad.bean.FADPlayerRoleBean;
-import org.isotope.boxy.fad.bean.item.FADBottleBean;
+import org.isotope.boxy.fad.bean.item.FADCardBean;
 import org.isotope.boxy.fad.business.role.FADPlayerRoleServiceImpl;
 import org.isotope.jfp.framework.utils.DateHelper;
 import org.springframework.stereotype.Service;
 
 /**
- * 基于漂流瓶聊天
+ * 基于许愿卡点赞
  * 
  * @author 001745
  *
  */
-@Service("BottleChat")
-public class FADBottleChatServiceImpl extends AGameBussinessService {
+@Service("CardPraise")
+public class FADCardPraiseServiceImpl extends AGameBussinessService {
 
 	@Resource
 	FADPlayerRoleServiceImpl PlayerRoleServiceImpl_;
 
-	public void chat(String roleID, String bottleID) throws Exception{
+	public void Praise(String roleID, String cardID) throws Exception{
 		// 获得当前角色
 		FADPlayerRoleBean senderRole = PlayerRoleServiceImpl_.loadRole(roleID);
-		FADBottleBean senderBottle = senderRole.getRoleBottles().get(bottleID);
+		FADCardBean senderCard = senderRole.getRoleCards().get(cardID);
 		
 		
 		
-		// 设定消息信息
-		MessageBean message = new MessageBean();
-		message.setMessage("" + paramData.get("message"));
-		message.setSendTime(DateHelper.currentTimeMillis2());
-		senderBottle.addMessages(message);
+		// 设定点赞次数
+		senderCard.doPraise();
 	}
 
 

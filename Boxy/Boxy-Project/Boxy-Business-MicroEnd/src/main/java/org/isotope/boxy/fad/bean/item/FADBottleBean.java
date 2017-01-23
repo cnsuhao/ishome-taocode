@@ -2,6 +2,8 @@ package org.isotope.boxy.fad.bean.item;
 
 import java.util.ArrayList;
 
+import org.isotope.boxy.bean.MessageBean;
+
 /**
  * 角色瓶子信息
  * 
@@ -9,17 +11,17 @@ import java.util.ArrayList;
  *
  */
 public class FADBottleBean {
-	ArrayList<FADMessageBean> messages = new ArrayList<FADMessageBean>();
+	ArrayList<MessageBean> messages = new ArrayList<MessageBean>();
 
-	public ArrayList<FADMessageBean> getMessages() {
+	public ArrayList<MessageBean> getMessages() {
 		return messages;
 	}
 
-	public void setMessages(ArrayList<FADMessageBean> messages) {
+	public void setMessages(ArrayList<MessageBean> messages) {
 		this.messages = messages;
 	}
 
-	public void addMessages(FADMessageBean message) {
+	public void addMessages(MessageBean message) {
 		this.messages.add(message);
 	}
 
@@ -34,9 +36,9 @@ public class FADBottleBean {
 	}
 
 	String bottleID;
-	String sender;
-	String receiver;
-	String sendTime;
+	String sender;//发送者
+	String receiver;//接受者
+	String sendTime;//发生时间
 
 	public String getBottleID() {
 		return bottleID;
