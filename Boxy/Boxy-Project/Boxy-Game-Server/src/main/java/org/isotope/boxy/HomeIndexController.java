@@ -1,7 +1,6 @@
 package org.isotope.boxy;
 
 import java.util.HashMap;
-import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -34,7 +33,7 @@ import com.alibaba.fastjson.JSON;
 public class HomeIndexController implements ISFrameworkConstants {
 
 	@Resource
-	protected ICacheService myCacheService;
+	ICacheService myCacheService;
 
 	@Resource
 	CommonEntityService CommonEntityService_;
@@ -56,9 +55,9 @@ public class HomeIndexController implements ISFrameworkConstants {
 	
 	@RequestMapping(value = "/{clientTimestamp}", method = RequestMethod.GET)
 	@ResponseBody
-	public RESTResultBean doProcess3(@PathVariable String  clientTimestamp, String  userId,  String serverId,
+	public RESTResultBean doProcess3(@PathVariable String  clientTimestamp, String  roleId,  String serverId,
 			 String  bizId, String  encryType,String paramValue) throws Exception {
-		TokenBusinessBean btb = new TokenBusinessBean(serverId, bizId, encryType, userId,clientTimestamp);
+		TokenBusinessBean btb = new TokenBusinessBean(serverId, bizId, encryType, roleId,clientTimestamp);
 		return doprocess(btb,paramValue);
 	}
 
@@ -77,12 +76,22 @@ public class HomeIndexController implements ISFrameworkConstants {
 		return doprocess(btb,paramValue);
 	}
 	
-	@RequestMapping(value = "/{userId}/{serverId}/{bizId}/{encryType}", method = RequestMethod.POST)
+	/**
+	 * 接口请求
+	 * @param roleId 玩家角色ID
+	 * @param serverId 业务模块ID(类标识)
+	 * @param bizId    功能识别ID
+	 * @param encryType 加密标识
+	 * @param paramValue 具体参数
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/{roleId}/{serverId}/{bizId}/{encryType}", method = RequestMethod.POST)
 	@ResponseBody
 	public RESTResultBean doProcess2(
-			@PathVariable String  userId, @PathVariable String serverId,
+			@PathVariable String  roleId, @PathVariable String serverId,
 			@PathVariable String  bizId,@PathVariable String  encryType,String paramValue) throws Exception {
-		TokenBusinessBean btb = new TokenBusinessBean(serverId, bizId, encryType, userId);
+		TokenBusinessBean btb = new TokenBusinessBean(serverId, bizId, encryType, roleId);
 		return doprocess(btb,paramValue);
 	}
 	
@@ -91,7 +100,7 @@ public class HomeIndexController implements ISFrameworkConstants {
 		SessionHelper.loadTestSession();
 		RESTResultBean result;
 		try {
-			AGameBussinessService asgbs = BeanFactoryHelper.getBean(btb.getBizId());
+			AGameBussinessService asgbs = BeanFactoryHelper.getBean(btb.getServerId());
 			asgbs.setMyCacheService(myCacheService);
 			asgbs.setParamValue(paramValue);
 			asgbs.setTokenBean(btb);
@@ -114,7 +123,7 @@ public class HomeIndexController implements ISFrameworkConstants {
 			result.setMessage("蛋仔的世界：" + MESSAGE_ERROR_SYNC);
 			result.setCode(ONE);
 		}
-		System.out.println(JSON.toJSONString(result));
+		System.out.println("====>>>>>>>>>"+JSON.toJSONString(result));
 		return result;
 	}
 }
