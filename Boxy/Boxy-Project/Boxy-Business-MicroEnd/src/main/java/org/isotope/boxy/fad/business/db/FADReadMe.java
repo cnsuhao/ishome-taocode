@@ -7,7 +7,7 @@ package org.isotope.boxy.fad.business.db;
  * @version 0.0.1
  * @since 3.1.2 2017/01/20
  */
-public class ReadMe {
+public class FADReadMe {
 	/*
 	 * 公共组件工程
 	 */
