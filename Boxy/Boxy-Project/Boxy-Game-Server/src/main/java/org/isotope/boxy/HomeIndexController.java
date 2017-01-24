@@ -13,6 +13,7 @@ import org.isotope.jfp.framework.cache.session.SessionHelper;
 import org.isotope.jfp.framework.constants.ISFrameworkConstants;
 import org.isotope.jfp.framework.utils.BeanFactoryHelper;
 import org.isotope.jfp.framework.utils.DateHelper;
+import org.isotope.jfp.framework.utils.PKHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,6 +50,7 @@ public class HomeIndexController implements ISFrameworkConstants {
 		
 		ModelAndView model = new ModelAndView("index");
 		model.addObject("DDD", "欢迎来到蛋仔的世界：" + DateHelper.currentTimeMillis2());
+		model.addObject("userID", PKHelper.creatBarCodeKey());
 		
 		return model;
 	}
