@@ -35,8 +35,8 @@
    	<dependencies>
    		<dependency>
    			<groupId>Isotope</groupId>
-   			<artifactId>Boxy-DataModel-Persistence</artifactId>
-   			<version>0.0.1-RELEASE</version>
+   			<artifactId>JFP-Framework-Equivocal</artifactId>
+   			<version>4.1.3-RELEASE</version>
    		</dependency>
    	</dependencies>
 </project>
