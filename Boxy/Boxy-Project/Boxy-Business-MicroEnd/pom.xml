@@ -17,7 +17,6 @@
 		<!-- maven编译版本 -->
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding> 
 		<!-- 内部框架版本 -->
-        <jfp.version>3.4.1</jfp.version>
         
 	</properties>
 	
@@ -32,11 +31,11 @@
 	  </snapshotRepository>  
 	</distributionManagement>
 	
-   	<artifactId>Boxy-Business-Role</artifactId>
+   	<artifactId>Boxy-Business-MicroEnd</artifactId>
    	<dependencies>
    		<dependency>
    			<groupId>Isotope</groupId>
-   			<artifactId>Boxy-Server-Security</artifactId>
+   			<artifactId>Boxy-Service-Middleware</artifactId>
    			<version>0.0.1-RELEASE</version>
    		</dependency>
    	</dependencies>
