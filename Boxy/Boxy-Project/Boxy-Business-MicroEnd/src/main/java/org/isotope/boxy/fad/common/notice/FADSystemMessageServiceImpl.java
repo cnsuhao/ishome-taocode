@@ -5,7 +5,7 @@ package org.isotope.boxy.fad.common.notice;
  * @author 001745
  *
  */
-public class SystemMessageServiceImpl {
+public class FADSystemMessageServiceImpl {
 	//温泉一览
 	//漂流瓶一览
 	//许愿墙查看

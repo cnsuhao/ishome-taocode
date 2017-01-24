@@ -21,7 +21,7 @@ import org.springframework.stereotype.Service;
  * @since 3.1.2 2017/01/20
  *
  */
-@Service("WishingWall")
+@Service("10301234")
 public class FADWishingWallServiceImpl extends AGameBussinessService {
 	@Resource
 	FADPlayerRoleServiceImpl PlayerRoleServiceImpl_;
@@ -29,7 +29,7 @@ public class FADWishingWallServiceImpl extends AGameBussinessService {
 	FADCardWallServiceImpl FADCardWallServiceImpl_;
 
 	/**
-	 * 扔瓶子(玩家扔掉)
+	 * 许愿(玩家写卡)
 	 */
 	public boolean castCard(String roleID) throws Exception {// 获得当前角色
 		FADPlayerRoleBean role = PlayerRoleServiceImpl_.loadRole(roleID);
@@ -48,7 +48,7 @@ public class FADWishingWallServiceImpl extends AGameBussinessService {
 			return false;
 		}
 		{
-			// 获得一个瓶子
+			// 创建一个许愿卡
 			FADCardBean card = new FADCardBean();
 			card.setCardID(PKHelper.creatBarCodeKey());
 			// 设定发送者
@@ -75,7 +75,7 @@ public class FADWishingWallServiceImpl extends AGameBussinessService {
 	@Override
 	public boolean doGameAction() throws Exception {
 		result = new RESTResultBean();
-		if ("castCard".equals(tokenBean.getBizId())) {
+		if ("10301000".equals(tokenBean.getBizId())) {
 			return castCard(tokenBean.getUserId());
 		}
 		return false;

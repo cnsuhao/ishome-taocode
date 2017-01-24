@@ -18,14 +18,15 @@ import org.springframework.stereotype.Service;
  * @author 001745
  *
  */
-@Service("LuckyStar")
+@Service("10401234")
 public class FADLuckyStarServiceImpl extends AGameBussinessService {
 	@Resource
 	FADPlayerRoleServiceImpl PlayerRoleServiceImpl_;
-@Resource
+	@Resource
 	FADLotteryTicketServiceImpl FADLotteryTicketServiceImpl_;
+
 	/**
-	 * 扔瓶子(玩家扔掉)
+	 * 购买彩票(玩家开奖)
 	 */
 	public boolean lotteryDraw(String roleID) throws Exception {
 		// 获得当前角色
@@ -45,7 +46,7 @@ public class FADLuckyStarServiceImpl extends AGameBussinessService {
 			return false;
 		}
 		{
-			// 获得一个瓶子
+			// 获得一个彩票
 			FADLotteryBean bottle = new FADLotteryBean();
 			bottle.setLotteryID(PKHelper.creatBarCodeKey());
 			// 设定发送者
@@ -53,11 +54,11 @@ public class FADLuckyStarServiceImpl extends AGameBussinessService {
 			// 设定开始时间
 			bottle.setBuyingTime(DateHelper.currentTimeMillis2());
 			// 设定中奖号码
-			bottle.setLotteryNumber(FADLotteryTicketServiceImpl_.loadLotteryNumber());			
-			
+			bottle.setLotteryNumber(FADLotteryTicketServiceImpl_.loadLotteryNumber());
+
 			// 兑奖
 			FADLotteryTicketServiceImpl_.checkLottery(role, bottle);
-			
+
 			// 保存数据计算结果
 			role.setLotteryNum(lotteryNum);
 			role.setVigour(vigour);
@@ -69,13 +70,12 @@ public class FADLuckyStarServiceImpl extends AGameBussinessService {
 		return true;
 	}
 
-
 	@Override
 	public boolean doGameAction() throws Exception {
 		result = new RESTResultBean();
-		if ("lotteryDraw".equals(tokenBean.getBizId())) {
+		if ("10401000".equals(tokenBean.getBizId())) {
 			return lotteryDraw(tokenBean.getUserId());
-		} 
+		}
 
 		return false;
 	}

@@ -1,5 +1,7 @@
 package org.isotope.boxy.fad.business.ts;
 
+import java.util.ArrayList;
+
 import javax.annotation.Resource;
 
 import org.isotope.boxy.common.AGameBussinessService;
@@ -11,13 +13,16 @@ import org.springframework.stereotype.Service;
 /**
  * 温泉泡点
  * 
- * @author 001745
+ * @author fucy
+ * @version 0.0.1
+ * @since 3.1.2 2017/01/20
  *
  */
-@Service("ThermalSpring")
+@Service("10101234")
 public class FADThermalSpringServiceImpl extends AGameBussinessService {
 	@Resource
 	FADPlayerRoleServiceImpl PlayerRoleServiceImpl_;
+	ArrayList<String> thermalRoles = new ArrayList<String>();
 
 	int timeSplit = 60 * 1000;
 
@@ -29,6 +34,40 @@ public class FADThermalSpringServiceImpl extends AGameBussinessService {
 	public int loadVigour() {
 		// TODO
 		return 1;
+	}
+
+	/**
+	 * 进入温泉
+	 * 
+	 * @param roleID
+	 * @return
+	 * @throws Exception
+	 */
+	public boolean joinTherma(String roleID) throws Exception {
+		// 获得当前角色
+		FADPlayerRoleBean role = PlayerRoleServiceImpl_.loadRole(roleID);
+		if (role != null)
+			thermalRoles.add(role.getRoleID());
+		else
+			return false;
+		return true;
+	}
+
+	/**
+	 * 离开温泉
+	 * 
+	 * @param roleID
+	 * @return
+	 * @throws Exception
+	 */
+	public boolean leaveTherma(String roleID) throws Exception {
+		// 获得当前角色
+		FADPlayerRoleBean role = PlayerRoleServiceImpl_.loadRole(roleID);
+		if (role != null)
+			thermalRoles.remove(role.getRoleID());
+		else
+			return false;
+		return true;
 	}
 
 	/**
@@ -75,10 +114,14 @@ public class FADThermalSpringServiceImpl extends AGameBussinessService {
 	@Override
 	public boolean doGameAction() throws Exception {
 		result = new RESTResultBean();
-		if("addVigour".equals(tokenBean.getBizId())){
+		if ("10109000".equals(tokenBean.getBizId())) {
 			return addVigour(tokenBean.getUserId());
+		} else if ("10101000".equals(tokenBean.getBizId())) {
+			return joinTherma(tokenBean.getUserId());
+		} else if ("10102000".equals(tokenBean.getBizId())) {
+			return leaveTherma(tokenBean.getUserId());
 		}
-		
+
 		return false;
 	}
 

@@ -15,15 +15,13 @@ import org.isotope.jfp.framework.utils.DateHelper;
 import org.isotope.jfp.framework.utils.PKHelper;
 import org.springframework.stereotype.Service;
 
-import com.alibaba.fastjson.JSONObject;
-
 /**
  * 漂流瓶
  * 
  * @author 001745
  *
  */
-@Service("DriftBottle")
+@Service("10201234")
 public class FADDriftBottleServiceImpl extends AGameBussinessService {
 	@Resource
 	FADPlayerRoleServiceImpl PlayerRoleServiceImpl_;
@@ -143,18 +141,21 @@ public class FADDriftBottleServiceImpl extends AGameBussinessService {
 	@Override
 	public boolean doGameAction() throws Exception {
 		result = new RESTResultBean();
-		if ("castBottle".equals(tokenBean.getBizId())) {
+		if ("10201000".equals(tokenBean.getBizId())) {
 			return castBottle(tokenBean.getUserId());
-		} else if ("pickUpBottle".equals(tokenBean.getBizId())) {
+		} else if ("10202000".equals(tokenBean.getBizId())) {
 			return pickUpBottle(tokenBean.getUserId());
-		} else if ("loadBottle".equals(tokenBean.getBizId())) {
+		} else if ("10203000".equals(tokenBean.getBizId())) {
 			result = new RESTResultBean();
 			result.setResult(loadBottle(tokenBean.getUserId()));
 			return true;
-		} else if ("loadBottleInfo".equals(tokenBean.getBizId())) {
+		} else if ("10203010".equals(tokenBean.getBizId())) {
 			result = new RESTResultBean();
 			result.setResult(loadBottleInfo(tokenBean.getUserId(), "" + paramData.get("bottleID")));
 			return true;
+		}else if ("10204000".equals(tokenBean.getBizId())) {
+		}else if ("10205000".equals(tokenBean.getBizId())) {
+		}else if ("10206000".equals(tokenBean.getBizId())) {
 		}
 
 		return false;

@@ -16,26 +16,36 @@ public class FADPlayerRoleServiceImpl {
 
 	HashMap<String, FADPlayerRoleBean> PlayerRoleCache = new HashMap<String, FADPlayerRoleBean>();
 
-	public FADPlayerRoleBean loadRole(String roleID) {
+	public FADPlayerRoleBean addRole(String roleID) throws Exception {
 		FADPlayerRoleBean role = PlayerRoleCache.get(roleID);
-		if(role==null)
+		if (role == null)
 			role = new FADPlayerRoleBean();
 		role.setRoleID(roleID);
 		return role;
 	}
 
-	public void updateRole(FADPlayerRoleBean role) {
+	public FADPlayerRoleBean loadRole(String roleID) throws Exception {
+		FADPlayerRoleBean role = PlayerRoleCache.get(roleID);
+		if (role == null){
+			throw new RuntimeException("该用户不存在，非法操作");
+		}
+		return role;
+	}
+
+	public void updateRole(FADPlayerRoleBean role) throws Exception {
 		PlayerRoleCache.put(role.getRoleID(), role);
 	}
+
 	//////////////////////////////////////////////////////////
 	/**
 	 * 频次统计增加<br>
 	 * 每隔15分钟运行一次
+	 * 
 	 * @see <FrequencyTimeTaskJobServiceImpl>
 	 */
 	public void statisticalTime() {
-		//漂流瓶:5分钟增加一次
-		//许愿墙\幸运星\种树:15分钟增加一次
+		// 漂流瓶:5分钟增加一次
+		// 许愿墙\幸运星\种树:15分钟增加一次
 	}
 
 	///////////////////////////////// 活力vigour/////////////////////////////////
