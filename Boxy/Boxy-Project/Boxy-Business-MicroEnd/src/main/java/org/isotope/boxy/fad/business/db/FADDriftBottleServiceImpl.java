@@ -73,7 +73,7 @@ public class FADDriftBottleServiceImpl extends AGameBussinessService {
 			// 保存最终结果,保存玩家数据
 			PlayerRoleServiceImpl_.updateRole(role);
 
-			result.setMessage("OK");
+			result.setMessage("成功丢出一个瓶子");
 		}
 		return true;
 	}
@@ -117,7 +117,7 @@ public class FADDriftBottleServiceImpl extends AGameBussinessService {
 			PlayerRoleServiceImpl_.updateRole(role);
 //			paramData = new JSONObject();
 //			paramData.put("bottleID", bottle.getBottleID());
-			result.setMessage("OK");
+			result.setMessage("获得一个瓶子");
 			result.setResult(bottle);
 		}
 		return true;
@@ -147,10 +147,12 @@ public class FADDriftBottleServiceImpl extends AGameBussinessService {
 			return pickUpBottle(tokenBean.getUserId());
 		} else if ("10203000".equals(tokenBean.getBizId())) {
 			result = new RESTResultBean();
+			result.setMessage("加载成功");
 			result.setResult(loadBottle(tokenBean.getUserId()));
 			return true;
 		} else if ("10203010".equals(tokenBean.getBizId())) {
 			result = new RESTResultBean();
+			result.setMessage("加载成功");
 			result.setResult(loadBottleInfo(tokenBean.getUserId(), "" + paramData.get("bottleID")));
 			return true;
 		}else if ("10204000".equals(tokenBean.getBizId())) {

@@ -28,6 +28,7 @@ public class FADPlayerUserServiceImpl extends AGameBussinessService {
 	 */
 	public boolean addRole(String roleID) throws Exception {
 		PlayerRoleServiceImpl_.addRole(roleID);
+		result.setMessage("创建成功");
 		return true;
 	}
 

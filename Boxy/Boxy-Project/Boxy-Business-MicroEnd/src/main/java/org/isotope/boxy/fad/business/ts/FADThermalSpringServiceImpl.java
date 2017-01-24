@@ -50,6 +50,7 @@ public class FADThermalSpringServiceImpl extends AGameBussinessService {
 			thermalRoles.add(role.getRoleID());
 		else
 			return false;
+		result.setMessage("进入温泉");
 		return true;
 	}
 
@@ -67,6 +68,7 @@ public class FADThermalSpringServiceImpl extends AGameBussinessService {
 			thermalRoles.remove(role.getRoleID());
 		else
 			return false;
+		result.setMessage("已经离开");
 		return true;
 	}
 

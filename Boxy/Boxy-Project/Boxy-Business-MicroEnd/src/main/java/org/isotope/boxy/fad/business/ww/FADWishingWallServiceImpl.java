@@ -68,7 +68,7 @@ public class FADWishingWallServiceImpl extends AGameBussinessService {
 			// 保存最终结果,保存玩家数据
 			PlayerRoleServiceImpl_.updateRole(role);
 
-			result.setMessage("OK");
+			result.setMessage("许愿成功");
 		}
 		return true;
 	}
@@ -86,7 +86,14 @@ public class FADWishingWallServiceImpl extends AGameBussinessService {
 			return castCard(tokenBean.getUserId());
 		}else if ("10302000".equals(tokenBean.getBizId())) {
 			result = new RESTResultBean();
-			result.setResult(loadCard(tokenBean.getUserId()));
+			FADCardBean card = loadCard(tokenBean.getUserId());
+			if(card==null){
+				result.setCode(TWO);
+				result.setMessage("暂时没有人许愿");
+			}else{
+				result.setMessage("许愿成功");
+				result.setResult(card);
+			}
 			return true;
 		}
 		return false;

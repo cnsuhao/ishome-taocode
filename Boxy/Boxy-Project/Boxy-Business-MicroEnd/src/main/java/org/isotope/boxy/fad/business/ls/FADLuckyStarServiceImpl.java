@@ -57,15 +57,17 @@ public class FADLuckyStarServiceImpl extends AGameBussinessService {
 			bottle.setLotteryNumber(FADLotteryTicketServiceImpl_.loadLotteryNumber());
 
 			// 兑奖
-			FADLotteryTicketServiceImpl_.checkLottery(role, bottle);
-
+			boolean lottery = FADLotteryTicketServiceImpl_.checkLottery(role, bottle);
+			if(lottery){
+				result.setMessage("恭喜中奖，获得奖励！！");				
+			}else{
+				result.setMessage("很遗憾，未中奖！");				
+			}
 			// 保存数据计算结果
 			role.setLotteryNum(lotteryNum);
 			role.setVigour(vigour);
 			// 保存最终结果,保存玩家数据
 			PlayerRoleServiceImpl_.updateRole(role);
-
-			result.setMessage("OK");
 		}
 		return true;
 	}

@@ -33,8 +33,9 @@ public class FADLotteryTicketServiceImpl {
 	 * 兑奖
 	 * @param bottle
 	 */
-	public void checkLottery(FADPlayerRoleBean role , FADLotteryBean bottle) {
+	public boolean checkLottery(FADPlayerRoleBean role , FADLotteryBean bottle) {
 		// TODO Auto-generated method stub
 		
+		return false;
 	}
 }
