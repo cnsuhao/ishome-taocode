@@ -31,7 +31,8 @@ public class FADWishingWallServiceImpl extends AGameBussinessService {
 	/**
 	 * 许愿(玩家写卡)
 	 */
-	public boolean castCard(String roleID) throws Exception {// 获得当前角色
+	public boolean castCard(String roleID) throws Exception {
+		// 获得当前角色
 		FADPlayerRoleBean role = PlayerRoleServiceImpl_.loadRole(roleID);
 		// 获得扔瓶子次数
 		int wishNum = role.getWishNum() - 1;
@@ -72,11 +73,21 @@ public class FADWishingWallServiceImpl extends AGameBussinessService {
 		return true;
 	}
 
+	private FADCardBean loadCard(String roleID) throws Exception {
+		// 获得当前角色
+		PlayerRoleServiceImpl_.loadRole(roleID);
+		return FADCardWallServiceImpl_.loadBottle();
+	}
+
 	@Override
 	public boolean doGameAction() throws Exception {
 		result = new RESTResultBean();
 		if ("10301000".equals(tokenBean.getBizId())) {
 			return castCard(tokenBean.getUserId());
+		}else if ("10302000".equals(tokenBean.getBizId())) {
+			result = new RESTResultBean();
+			result.setResult(loadCard(tokenBean.getUserId()));
+			return true;
 		}
 		return false;
 	}
