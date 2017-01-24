@@ -62,6 +62,19 @@ public class FADPlayerRoleBean {
 
 	///////////////////////////////////////////////////////////////////////
 	/**
+	 * 频次最后更新时间
+	 */
+	long frequencyTime = System.currentTimeMillis();
+	
+	public long getFrequencyTime() {
+		return frequencyTime;
+	}
+
+	public void setFrequencyTime(long frequencyTime) {
+		this.frequencyTime = frequencyTime;
+	}
+
+	/**
 	 * 扔瓶子次数
 	 */
 	int castNum = 15;
@@ -143,5 +156,19 @@ public class FADPlayerRoleBean {
 
 	public void setLotteryNum(int lotteryNum) {
 		this.lotteryNum = lotteryNum;
+	}
+
+	///////////////////////////////////////////////////////////////////////
+	/**
+	 * 浇水次数
+	 */
+	int wateringNum = 3;
+
+	public int getWateringNum() {
+		return wateringNum;
+	}
+
+	public void setWateringNum(int wateringNum) {
+		this.wateringNum = wateringNum;
 	}
 }

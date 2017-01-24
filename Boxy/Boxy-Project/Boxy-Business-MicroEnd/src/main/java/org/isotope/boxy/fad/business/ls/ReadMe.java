@@ -1,4 +1,4 @@
-package org.isotope.boxy.fad.business.lt;
+package org.isotope.boxy.fad.business.ls;
 
 /**
  * 幸运树<br>

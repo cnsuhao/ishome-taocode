@@ -1,4 +1,4 @@
-package org.isotope.boxy.fad.business.lt;
+package org.isotope.boxy.fad.business.ls;
 
 import javax.annotation.Resource;
 
@@ -18,8 +18,8 @@ import org.springframework.stereotype.Service;
  * @author 001745
  *
  */
-@Service("LuckyTree")
-public class FADLuckyTreeServiceImpl extends AGameBussinessService {
+@Service("LuckyStar")
+public class FADLuckyStarServiceImpl extends AGameBussinessService {
 	@Resource
 	FADPlayerRoleServiceImpl PlayerRoleServiceImpl_;
 @Resource
@@ -52,12 +52,12 @@ public class FADLuckyTreeServiceImpl extends AGameBussinessService {
 			bottle.setPurchaser(role.getRoleID());
 			// 设定开始时间
 			bottle.setBuyingTime(DateHelper.currentTimeMillis2());
-			// TODO 设定中奖号码
-			bottle.setLotteryNumber(FADLotteryTicketServiceImpl_.loadLotteryNumber());
+			// 设定中奖号码
+			bottle.setLotteryNumber(FADLotteryTicketServiceImpl_.loadLotteryNumber());			
 			
+			// 兑奖
+			FADLotteryTicketServiceImpl_.checkLottery(role, bottle);
 			
-			// 保存彩票
-			BottleSeaServiceImpl_.addRoleBottle(role, bottle);
 			// 保存数据计算结果
 			role.setLotteryNum(lotteryNum);
 			role.setVigour(vigour);

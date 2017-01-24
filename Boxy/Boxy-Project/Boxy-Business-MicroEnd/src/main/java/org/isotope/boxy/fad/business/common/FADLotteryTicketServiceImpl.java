@@ -4,6 +4,7 @@ import java.util.ArrayDeque;
 
 import org.isotope.boxy.fad.bean.FADPlayerRoleBean;
 import org.isotope.boxy.fad.bean.item.FADCardBean;
+import org.isotope.boxy.fad.bean.item.FADLotteryBean;
 import org.springframework.stereotype.Service;
 
 /**
@@ -26,5 +27,14 @@ public class FADLotteryTicketServiceImpl {
 	public String loadLotteryNumber() {
 		// TODO Auto-generated method stub
 		return "1";
+	}
+
+	/**
+	 * 兑奖
+	 * @param bottle
+	 */
+	public void checkLottery(FADPlayerRoleBean role , FADLotteryBean bottle) {
+		// TODO Auto-generated method stub
+		
 	}
 }
