@@ -6,7 +6,7 @@ import javax.annotation.Resource;
 
 import org.isotope.boxy.common.AGameBussinessService;
 import org.isotope.boxy.fad.bean.FADPlayerRoleBean;
-import org.isotope.boxy.fad.business.role.FADPlayerRoleServiceImpl;
+import org.isotope.boxy.fad.business.role.FADPlayerRoleService;
 import org.isotope.jfp.framework.beans.common.RESTResultBean;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +21,7 @@ import org.springframework.stereotype.Service;
 @Service("10101234")
 public class FADThermalSpringServiceImpl extends AGameBussinessService {
 	@Resource
-	FADPlayerRoleServiceImpl PlayerRoleServiceImpl_;
+	FADPlayerRoleService PlayerRoleServiceImpl_;
 	ArrayList<String> thermalRoles = new ArrayList<String>();
 
 	int timeSplit = 60 * 1000;

@@ -12,20 +12,23 @@ import org.springframework.stereotype.Service;
  *
  */
 @Service("PlayerRole")
-public class FADPlayerRoleServiceImpl {
+public class FADPlayerRoleService {
 
-	HashMap<String, FADPlayerRoleBean> PlayerRoleCache = new HashMap<String, FADPlayerRoleBean>();
+	HashMap<String, FADPlayerRoleBean> PlayerRoleCache_ = new HashMap<String, FADPlayerRoleBean>();
 
 	public FADPlayerRoleBean addRole(String roleID) throws Exception {
-		FADPlayerRoleBean role = PlayerRoleCache.get(roleID);
+		FADPlayerRoleBean role = PlayerRoleCache_.get(roleID);
+		//创建用户
 		if (role == null)
 			role = new FADPlayerRoleBean();
 		role.setRoleID(roleID);
+		//缓存用户
+		PlayerRoleCache_.put(roleID, role);
 		return role;
 	}
 
 	public FADPlayerRoleBean loadRole(String roleID) throws Exception {
-		FADPlayerRoleBean role = PlayerRoleCache.get(roleID);
+		FADPlayerRoleBean role = PlayerRoleCache_.get(roleID);
 		if (role == null){
 			throw new RuntimeException("该用户不存在，非法操作");
 		}
@@ -33,7 +36,7 @@ public class FADPlayerRoleServiceImpl {
 	}
 
 	public void updateRole(FADPlayerRoleBean role) throws Exception {
-		PlayerRoleCache.put(role.getRoleID(), role);
+		PlayerRoleCache_.put(role.getRoleID(), role);
 	}
 
 	//////////////////////////////////////////////////////////

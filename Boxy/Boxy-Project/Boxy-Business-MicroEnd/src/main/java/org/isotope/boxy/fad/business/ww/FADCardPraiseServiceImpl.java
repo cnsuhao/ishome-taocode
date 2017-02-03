@@ -5,7 +5,7 @@ import javax.annotation.Resource;
 import org.isotope.boxy.common.AGameBussinessService;
 import org.isotope.boxy.fad.bean.FADPlayerRoleBean;
 import org.isotope.boxy.fad.bean.item.FADCardBean;
-import org.isotope.boxy.fad.business.role.FADPlayerRoleServiceImpl;
+import org.isotope.boxy.fad.business.role.FADPlayerRoleService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 public class FADCardPraiseServiceImpl extends AGameBussinessService {
 
 	@Resource
-	FADPlayerRoleServiceImpl PlayerRoleServiceImpl_;
+	FADPlayerRoleService PlayerRoleServiceImpl_;
 
 	public void Praise(String roleID, String cardID) throws Exception {
 		// 获得当前角色

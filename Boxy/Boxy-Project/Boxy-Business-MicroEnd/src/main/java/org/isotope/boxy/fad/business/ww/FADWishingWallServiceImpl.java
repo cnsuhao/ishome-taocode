@@ -6,7 +6,7 @@ import org.isotope.boxy.common.AGameBussinessService;
 import org.isotope.boxy.fad.bean.FADPlayerRoleBean;
 import org.isotope.boxy.fad.bean.item.FADCardBean;
 import org.isotope.boxy.fad.business.common.FADCardWallServiceImpl;
-import org.isotope.boxy.fad.business.role.FADPlayerRoleServiceImpl;
+import org.isotope.boxy.fad.business.role.FADPlayerRoleService;
 import org.isotope.jfp.framework.beans.common.RESTResultBean;
 import org.isotope.jfp.framework.utils.DateHelper;
 import org.isotope.jfp.framework.utils.PKHelper;
@@ -24,7 +24,7 @@ import org.springframework.stereotype.Service;
 @Service("10301234")
 public class FADWishingWallServiceImpl extends AGameBussinessService {
 	@Resource
-	FADPlayerRoleServiceImpl PlayerRoleServiceImpl_;
+	FADPlayerRoleService PlayerRoleServiceImpl_;
 	@Resource
 	FADCardWallServiceImpl FADCardWallServiceImpl_;
 

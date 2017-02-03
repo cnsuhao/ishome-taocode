@@ -6,7 +6,7 @@ import org.isotope.boxy.bean.MessageBean;
 import org.isotope.boxy.common.AGameBussinessService;
 import org.isotope.boxy.fad.bean.FADPlayerRoleBean;
 import org.isotope.boxy.fad.bean.item.FADBottleBean;
-import org.isotope.boxy.fad.business.role.FADPlayerRoleServiceImpl;
+import org.isotope.boxy.fad.business.role.FADPlayerRoleService;
 import org.isotope.jfp.framework.utils.DateHelper;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
 public class FADBottleChatServiceImpl extends AGameBussinessService {
 
 	@Resource
-	FADPlayerRoleServiceImpl PlayerRoleServiceImpl_;
+	FADPlayerRoleService PlayerRoleServiceImpl_;
 
 	public void chat(String roleID, String bottleID) throws Exception{
 		// 获得当前角色

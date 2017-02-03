@@ -3,7 +3,7 @@ package org.isotope.boxy.fad.raw.player;
 import javax.annotation.Resource;
 
 import org.isotope.boxy.common.AGameBussinessService;
-import org.isotope.boxy.fad.business.role.FADPlayerRoleServiceImpl;
+import org.isotope.boxy.fad.business.role.FADPlayerRoleService;
 import org.isotope.jfp.framework.beans.common.RESTResultBean;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 public class FADPlayerUserServiceImpl extends AGameBussinessService {
 
 	@Resource
-	FADPlayerRoleServiceImpl PlayerRoleServiceImpl_;
+	FADPlayerRoleService PlayerRoleServiceImpl_;
 
 	/**
 	 * 创建角色
