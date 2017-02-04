@@ -19,7 +19,7 @@
 		'>
 
 	<!-- 注解探测器 -->
-	<context:component-scan base-package='org.isotope.boxy' />
+	<context:component-scan base-package='org.isotope.jfp,org.isotope.boxy' />
 	
 	<!--数据库连接配置信息 -->
 	<bean id='mysqlDataSource' class='org.apache.commons.dbcp.BasicDataSource' destroy-method='close'>
@@ -75,15 +75,4 @@
 	    <constructor-arg index="4" value="fcy001745@" type="String" />
 	</bean>
 	
-	<!--全文检索连接配置信息 -->	
-<!-- 	<bean id='myElasticsearchPool' class='org.isotope.jfp.framework.search.ElasticsearchPool' >
-		<constructor-arg index="0">
-			<list>
-			    <value>http://10.50.86.21:9200</value>
-        		 <value>http://10.50.85.30:9200</value>
-        		<value>http://10.50.85.31:9200</value>
-        		<value>http://10.50.85.32:9200</value>
-            </list>
-		</constructor-arg>
-	</bean>	 -->
 </beans>
