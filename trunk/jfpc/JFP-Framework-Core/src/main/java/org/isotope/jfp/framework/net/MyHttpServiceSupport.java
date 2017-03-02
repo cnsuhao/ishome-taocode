@@ -36,6 +36,7 @@ import org.apache.http.protocol.HttpContext;
 import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.http.ssl.TrustStrategy;
 import org.apache.http.util.EntityUtils;
+import org.isotope.jfp.framework.utils.EmptyHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -58,12 +59,22 @@ public class MyHttpServiceSupport {
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	public MyHttpServiceSupport() {
-		currentHeaders.put("Accept", "text/plain, */*; q=0.01");
-		currentHeaders.put("Accept-Language", "Accept-Language:zh-CN,zh;q=0.8");
-		currentHeaders.put("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.80 Safari/537.36 QQBrowser/9.3.6874.400");
-		currentHeaders.put("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+		this("","");
 	}
-
+	public MyHttpServiceSupport(String host) {
+		this(host,"");
+	}
+	public MyHttpServiceSupport(String host,String encode) {
+		currentHeaders.put("Accept-Encoding", "gzip, deflate");
+		currentHeaders.put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
+		currentHeaders.put("Accept-Language", "Accept-Language:zh-CN,zh;q=0.8");
+		currentHeaders.put("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.104 Safari/537.36 Core/1.53.2372.400 QQBrowser/9.5.10548.400");
+		currentHeaders.put("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+		if(EmptyHelper.isNotEmpty(host))
+			currentHeaders.put("Host", host);
+		if(EmptyHelper.isNotEmpty(encode))
+			currentEncode = encode;
+	}
 	private int waitTimeMinute = 15;
 
 	public int getWaitTimeMinute() {
@@ -84,6 +95,13 @@ public class MyHttpServiceSupport {
 		return currentHttpHost;
 	}
 
+	//public static final String currentEncode = "UTF-8";
+	public String currentEncode = "UTF-8";
+
+	public void setCurrentEncode(String currentEncode) {
+		this.currentEncode = currentEncode;
+	}
+	
 	/**
 	 * get请求
 	 * 
@@ -158,8 +176,6 @@ public class MyHttpServiceSupport {
 	 * JOSN字符串形式发送参数名的常量定义
 	 */
 	public final String POST_PARAM = "jsonData";
-
-	public static final String ENCODE_DEFAULT = "UTF-8";
 
 	public boolean loadCookieByWebClient(String serviceURL) {
 		BrowserVersion bv = BrowserVersion.CHROME;
@@ -253,7 +269,7 @@ public class MyHttpServiceSupport {
 			if (status >= 200 && status < 300) {
 				HttpEntity entity = response.getEntity();
 				if (entity != null)
-					return EntityUtils.toString(entity, ENCODE_DEFAULT);
+					return EntityUtils.toString(entity, currentEncode);
 			} else {
 				throw new Exception("服务请求异常: " + status + ",【URL=" + serviceURL + "】");
 			}
@@ -303,7 +319,7 @@ public class MyHttpServiceSupport {
 			nvps.add(new BasicNameValuePair(POST_PARAM, jsonString));
 
 			// 设定传输编码
-			httpPost.setEntity(new UrlEncodedFormEntity(nvps, ENCODE_DEFAULT));
+			httpPost.setEntity(new UrlEncodedFormEntity(nvps, currentEncode));
 			CloseableHttpResponse response;
 			// 创建上下文环境
 			HttpContext context = getHttpContext();
@@ -314,7 +330,7 @@ public class MyHttpServiceSupport {
 			if (status >= 200 && status < 300) {
 				HttpEntity entity = response.getEntity();
 				if (entity != null)
-					return EntityUtils.toString(entity, ENCODE_DEFAULT);
+					return EntityUtils.toString(entity, currentEncode);
 			} else {
 				throw new Exception("服务请求异常: " + status + ",【URL=" + serviceURL + "】");
 			}
@@ -365,7 +381,7 @@ public class MyHttpServiceSupport {
 			}
 
 			// 设定传输编码
-			httpPost.setEntity(new UrlEncodedFormEntity(nvps, ENCODE_DEFAULT));
+			httpPost.setEntity(new UrlEncodedFormEntity(nvps, currentEncode));
 
 			CloseableHttpResponse response;
 			// 创建上下文环境
@@ -379,7 +395,7 @@ public class MyHttpServiceSupport {
 			if (status >= 200 && status < 300) {
 				HttpEntity entity = response.getEntity();
 				if (entity != null)
-					return EntityUtils.toString(entity, ENCODE_DEFAULT);
+					return EntityUtils.toString(entity, currentEncode);
 			} else {
 				throw new Exception("服务请求异常: " + status + ",【URL=" + serviceURL + "】");
 			}
