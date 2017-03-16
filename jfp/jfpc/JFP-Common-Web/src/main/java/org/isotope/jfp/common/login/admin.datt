@@ -1,0 +1,5 @@
+show variables like 'max_connections';
+show global variables like 'wait_timeout';  
+set global wait_timeout=28800;
+set GLOBAL max_connections=1000 ;
+INSERT INTO `mssuu` VALUES ('0', 'SYSTEM', '0', 'admin', 'e10adc3949ba59abbe56e057f20f883e', '管理员', '0', '0', '0', '0', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 'SYSTEM', 'SYSTEM', '0', '2014/2/8', 'SYSTEM', null, null);
