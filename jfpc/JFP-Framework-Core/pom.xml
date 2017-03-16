@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>Isotope</groupId>
 	<artifactId>JFP-Framework-Core</artifactId>
-	<version>4.1.3-RELEASE</version>
+	<version>4.2.1-RELEASE</version>
 
 	<properties>
 
@@ -17,7 +17,7 @@
 		<!-- maven编译版本 -->
 		<maven.compiler.encoding>UTF-8</maven.compiler.encoding>
 		<!-- 内部框架版本 -->
-		<jfp.version>4.1.3</jfp.version>
+		<jfp.version>4.2.1</jfp.version>
 
 	</properties>
 
@@ -37,11 +37,11 @@
 	<distributionManagement>  
 	  <repository>  
 	    <id>Releases</id>  
-	    <url>http://106.14.45.167:8081/nexus/content/repositories/releases/</url>  
+	    <url>http://192.168.11.46:8081/nexus/content/repositories/releases/</url>  
 	  </repository>  
 	  <snapshotRepository>  
 	    <id>Snapshots</id>  
-	    <url>http://106.14.45.167:8081/nexus/content/repositories/snapshots/</url>  
+	    <url>http://192.168.11.46:8081/nexus/content/repositories/snapshots/</url>  
 	  </snapshotRepository>  
 	</distributionManagement>
 </project>
