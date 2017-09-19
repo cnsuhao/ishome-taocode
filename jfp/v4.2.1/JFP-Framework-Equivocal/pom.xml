@@ -1,0 +1,61 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>Isotope</groupId>
+	<version>4.2.1-RELEASE</version>
+	<artifactId>JFP-Framework-Equivocal</artifactId>
+
+	<properties>
+
+		<!-- Generic properties -->
+		<java-version>1.8</java-version>
+		<!-- 项目编译版本 -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!-- 项目导出版本 -->
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<!-- maven编译版本 -->
+		<maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+		<!-- 内部框架版本 -->
+		<jfp.version>4.2.1</jfp.version>
+
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>Isotope</groupId>
+			<artifactId>JFP-Framework-Core</artifactId>
+			<version>${jfp.version}-RELEASE</version>
+		</dependency>
+		<dependency>
+		  <groupId>com.aliyun.oss</groupId>
+		  <artifactId>aliyun-sdk-oss</artifactId>
+		  <version>2.5.0</version>
+		</dependency>
+	</dependencies>
+
+	<repositories>
+         <repository>
+             <id>nexus</id>
+             <name>Repository</name>
+             <url>http://192.168.10.36:8081/nexus/content/groups/public</url>
+         </repository>
+     </repositories>
+ 	<pluginRepositories>
+         <pluginRepository>
+             <id>nexus</id>
+             <name>Repository</name>
+             <url>http://192.168.10.36:8081/nexus/content/groups/public</url>
+         </pluginRepository>
+     </pluginRepositories>
+	<distributionManagement>  
+	  	<repository>  
+	    	<id>Releases</id>  
+	    	<url>http://192.168.10.36:8081/nexus/content/repositories/releases/</url>  
+	  	</repository>  
+	  	<snapshotRepository>  
+	    	<id>Snapshots</id>  
+	    	<url>http://192.168.10.36:8081/nexus/content/repositories/snapshots/</url>  
+	  	</snapshotRepository>  
+	</distributionManagement>
+</project>
